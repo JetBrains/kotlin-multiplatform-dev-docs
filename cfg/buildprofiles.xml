@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildprofiles>
+    <variables>
+        <web-root>https://www.jetbrains.com/help</web-root>
+        <web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
+        <download-page/>
+        <fallback-url/>
+        <config-feedbackRequireEmail>false</config-feedbackRequireEmail>
+        <config-showDownloadButton>true</config-showDownloadButton>
+        <config-disqus-id>jetbrains</config-disqus-id>
+        <config-disqus-show>false</config-disqus-show>
+        <config-feedback-url>https://forms-service.jetbrains.com/feedback</config-feedback-url>
+        <config-feedback-enabled>true</config-feedback-enabled>
+        <config-feedback-widget>true</config-feedback-widget>
+        <config-webmaster>webmaster@jetbrains.com</config-webmaster>
+        <config-feedback-support>https://www.jetbrains.com/support/</config-feedback-support>
+        <config-sideblocks>true</config-sideblocks>
+        <config-search-scopes-provider>https://data.services.jetbrains.com/search/</config-search-scopes-provider>
+        <og-twitter>@jetbrains</og-twitter>
+        <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
+        <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
+    </variables>
+    <build-profile product="mpd"/>
+</buildprofiles>

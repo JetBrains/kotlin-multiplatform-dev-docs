@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ihp
+        SYSTEM "https://resources.jetbrains.com/stardust/ihp.dtd">
+
+<ihp version="2.0">
+
+    <module name="kotlin-multiplatform-docs"/>
+
+    <topics dir="topics"/>
+    <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform/"
+            version="1.0"/>
+
+    <product src="mpd.tree"
+             version="1.0"
+             keymaps-mode="generated" />
+
+</ihp>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/stardust/html-entities.dtd">
+
+<topic xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/topic.v2.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       title="What's new In Multiplatform"
+       id="WhatIsNew">
+
+    <p><img src="app.general.warning.svg" alt="This is just a warning"/>Start writing here.
+    </p>
+
+</topic>

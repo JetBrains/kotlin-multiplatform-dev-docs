@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product-profile
+        SYSTEM "https://resources.jetbrains.com/stardust/product-profile.dtd">
+
+<!--
+    Auto-generated tree file. Manual changes are not guaranteed to remain between updates.
+-->
+
+<product-profile id="mpd"
+                 name="Kotlin Multiplatform"
+                 status="eap"
+                 start-page="WhatIsNew.xml">
+    <toc-element id="WhatIsNew.xml"/>
+
+</product-profile>
