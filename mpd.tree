@@ -7,7 +7,7 @@
 -->
 
 <product-profile id="mpd"
-                 name="Kotlin Multiplatform"
+                 name="Multiplatform Development"
                  status="eap"
                  start-page="WhatIsNew.xml">
     <toc-element id="WhatIsNew.xml"/>
