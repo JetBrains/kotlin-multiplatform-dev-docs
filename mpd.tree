@@ -2,14 +2,23 @@
 <!DOCTYPE product-profile
         SYSTEM "https://resources.jetbrains.com/stardust/product-profile.dtd">
 
-<!--
-    Auto-generated tree file. Manual changes are not guaranteed to remain between updates.
--->
 
 <product-profile id="mpd"
                  name="Multiplatform Development"
                  status="eap"
-                 start-page="WhatIsNew.xml">
-    <toc-element id="WhatIsNew.xml"/>
+                 start-page="overview.md">
+    <toc-element title="Solution overview">
+        <toc-element id="overview.md"/>
+        <toc-element title="Thinking in a multiplatform way"/>
+        <toc-element title="Supported platforms"/>
+        <toc-element title="Case studies"/>
+        <toc-element title="FAQ"/>
+        <toc-element title="Roadmap"/>
+    </toc-element>
+
+    <toc-element title="Get started">
+        <toc-element title="Get started"/>
+        <toc-element title="Set up an environment"/>
+    </toc-element>
 
 </product-profile>
