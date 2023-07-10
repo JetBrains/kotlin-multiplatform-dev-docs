@@ -1,8 +1,8 @@
 [//]: # (title: Multiplatform Development solution overview)
 
-// Placeholder
+// Draft
 
-The Multiplatform Development solution combines all technologies and products created by [JetBrains](https://www.jetbrains.com/) for multiplatform development in [Kotlin](https://kotlinlang.org/).
+The Multiplatform Development solution combines all technologies and products created by [JetBrains](https://www.jetbrains.com/) for cross-platform development in [Kotlin](https://kotlinlang.org/).
 
 It includes:
 * **Kotlin Multiplatform**, a technology that allows sharing code across different platforms, including Android, iOS, backend, desktop (macOS, Windows, and Linux), web, and others
@@ -17,7 +17,7 @@ This approach considerably reduces the number of lines of code to write, test, a
 Thanks to flexible sharing provided by the JetBrains solution, you can switch to multiplatform development at any stage of your project without the risk of losing your Kotlin-written code.
 You have the freedom to decide how much and when to share. This enables incremental adoption for existing projects and is especially beneficial for projects with complex logic.
 
-Flexibility extends beyond logic to UI. If you want to save time and use a shared UI that might not appear native on all platforms, Compose Multiplatform is your best bet.
+Flexibility extends beyond logic to UI. If you want to save time and use a common UI that might not appear native on all platforms, Compose Multiplatform is your best bet.
 If your preference is a UI native for each platform, we support that too. The choice is yours!
 
 Kotlin Multiplatform is already used in production by many companies, including Philips, Netflix, Leroy Merlin, and VMWare. 
@@ -32,7 +32,7 @@ and this way increase your market value.
 
 If you're just considering Kotlin, it's an ideal choice no matter whether you decide to become a cross-platform or single-platform developer. 
 Developed by JetBrains and open-source contributors, Kotlin is popular in mobile, backend, multiplatform, and desktop development. 
-You decide what to develop! [Start with the Kotlin tour](https://kotlinlang.org/docs/kotlin-tour-welcome.html)
+You decide what to develop! Start learning Kotlin with [the Kotlin tour](https://kotlinlang.org/docs/kotlin-tour-welcome.html)
 
 **Get started with Multiplatform Development**
 
