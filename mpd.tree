@@ -9,16 +9,16 @@
                  start-page="overview.md">
     <toc-element title="Solution overview">
         <toc-element id="overview.md"/>
-        <toc-element title="Thinking in a multiplatform way"/>
-        <toc-element title="Supported platforms"/>
-        <toc-element title="Case studies"/>
-        <toc-element title="FAQ"/>
-        <toc-element title="Roadmap"/>
+        <toc-element id="thinking-in-multiplatform-way.md"/>
+        <toc-element id="supported-platforms.md"/>
+        <toc-element id="case-studies.md"/>
+        <toc-element id="faq.md"/>
+        <toc-element id="roadmap.md"/>
     </toc-element>
 
     <toc-element title="Get started">
-        <toc-element title="Get started"/>
-        <toc-element title="Set up an environment"/>
+        <toc-element id="get-started.md"/>
+        <toc-element id="set-up-environment.md"/>
     </toc-element>
 
 </product-profile>
