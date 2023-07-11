@@ -7,7 +7,7 @@
                  name="Multiplatform Development"
                  status="eap"
                  start-page="overview.md">
-    <toc-element title="Solution overview">
+    <toc-element toc-title="Solution overview">
         <toc-element id="overview.md"/>
         <toc-element id="thinking-in-multiplatform-way.md"/>
         <toc-element id="supported-platforms.md"/>
@@ -16,9 +16,15 @@
         <toc-element id="roadmap.md"/>
     </toc-element>
 
-    <toc-element title="Get started">
+    <toc-element toc-title="Get started">
         <toc-element id="get-started.md"/>
         <toc-element id="set-up-environment.md"/>
+    </toc-element>
+
+    <toc-element toc-title="Create an app with shared logic and UI">
+        <toc-element id="create-first-app-shared-logic-ui.md"/>
+        <toc-element toc-title="Understand the multiplatform project"/>
+        <toc-element toc-title="Add dependencies"/>
     </toc-element>
 
 </product-profile>
