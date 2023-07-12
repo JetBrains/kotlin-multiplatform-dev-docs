@@ -7,7 +7,7 @@
     <module name="kotlin-multiplatform-docs"/>
 
     <topics dir="topics"/>
-    <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform/"
+    <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform/structure/"
             version="1.0"/>
 
     <product src="mpd.tree"
