@@ -2,4 +2,4 @@
 
 // TODO
 
-Describe how to update and share more complex logic with more dependencies
+Migrate content from the [article at kotlinlang.org](https://kotlinlang.org/docs/multiplatform-mobile-upgrade-app.html) with some improvements.
