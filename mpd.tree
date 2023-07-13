@@ -8,7 +8,7 @@
                  status="eap"
                  start-page="overview.md">
     <toc-element toc-title="Multiplatform development overview">
-        <toc-element id="overview.md" toc-title="What's Multiplatform development?"/>
+        <toc-element id="overview.md" toc-title="What's multiplatform development?"/>
         <toc-element id="thinking-in-multiplatform-way.md"/>
         <toc-element id="supported-platforms.md"/>
         <toc-element id="case-studies.md"/>
@@ -21,19 +21,20 @@
         <toc-element id="set-up-environment.md"/>
     </toc-element>
 
-    <toc-element toc-title="Create an app with shared logic and UI">
-        <toc-element id="create-first-app-shared-logic-ui.md"/>
-        <toc-element id="understand-project-shared-logic-ui.md"/>
-        <toc-element id="add-dependencies-shared-logic-ui.md"/>
-        <toc-element id="upgrade-app-shared-logic-ui.md"/>
-        <toc-element id="wrap-up-shared-logic-ui.md"/>
+    <toc-element toc-title="Create an app with shared logic and native UI">
+        <toc-element id="create-first-app-shared-logic-native-ui.md"/>
+        <toc-element id="update-ui-shared-logic-native-ui.md"/>
+        <toc-element id="add-dependencies-shared-logic-native-ui.md"/>
+        <toc-element id="share-more-code-shared-logic-native-ui.md"/>
+        <toc-element id="next-steps-shared-logic-native-ui.md"/>
     </toc-element>
 
-    <toc-element toc-title="Create an app with shared logic and native UI">
-        <toc-element toc-title="Create your first cross-platform app with native UI"/>
-        <toc-element toc-title="Update native UI"/>
-        <toc-element toc-title="Add dependencies"/>
-        <toc-element toc-title="Share more logic"/>
+    <toc-element toc-title="Create an app with shared logic and UI">
+        <toc-element id="create-first-app-shared-logic-ui.md"/>
+        <toc-element id="update-ui-shared-logic-ui.md"/>
+        <toc-element id="add-dependencies-shared-logic-ui.md"/>
+        <toc-element id="share-more-code-shared-logic-native-ui.md"/>
+        <toc-element id="next-steps-shared-logic-native-ui.md"/>
     </toc-element>
 
     <toc-element id="make-android-app-work-on-ios.md" toc-title="Migrate to Multiplatform"/>

@@ -4,7 +4,7 @@
 
 Remind to [set up the environment](set-up-environment.md).
 
-Describe:
-* how to create a basic fully multiplatform app that works on Android and iOS using a web wizard
-* how to run the app on Android and iOS
+Describe how to:
+* create a basic fully multiplatform app that works on Android and iOS using a web wizard
+* run the app on Android and iOS
 * add other targets if necessary (provide links to the corresponding content)
