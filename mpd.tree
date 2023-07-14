@@ -8,7 +8,7 @@
                  status="eap"
                  start-page="overview.md">
     <toc-element toc-title="Multiplatform development overview">
-        <toc-element id="overview.md" toc-title="What's multiplatform development?"/>
+        <toc-element id="overview.md" toc-title="Solution overview"/>
         <toc-element id="thinking-in-multiplatform-way.md"/>
         <toc-element id="supported-platforms.md"/>
         <toc-element id="case-studies.md"/>
@@ -33,8 +33,8 @@
         <toc-element id="create-first-app-shared-logic-ui.md"/>
         <toc-element id="update-ui-shared-logic-ui.md"/>
         <toc-element id="add-dependencies-shared-logic-ui.md"/>
-        <toc-element id="share-more-code-shared-logic-native-ui.md"/>
-        <toc-element id="next-steps-shared-logic-native-ui.md"/>
+        <toc-element id="share-more-code-shared-logic-ui.md"/>
+        <toc-element id="next-steps-shared-logic-ui.md"/>
     </toc-element>
 
     <toc-element id="make-android-app-work-on-ios.md" toc-title="Migrate to Multiplatform"/>
