@@ -2,4 +2,4 @@
 
 // TODO
 
-In a new tutorial, specify which library to use (KMP-NativeCoroutines) and demonstrate how to do this.
+In a new tutorial, demonstrate how to use the library `KMP-NativeCoroutines`.

@@ -3,4 +3,4 @@
 
 // TODO
 
-In a new tutorial, demonstrate how to add a multiplatform module to a project
+In a new tutorial, demonstrate how to add a multiplatform module to a project.

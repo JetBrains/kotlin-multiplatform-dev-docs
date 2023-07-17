@@ -2,4 +2,4 @@
 
 // TODO
 
-Describe how to update the native UI
+Describe how to update the native UI.

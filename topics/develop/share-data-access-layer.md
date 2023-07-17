@@ -2,4 +2,4 @@
 
 // TODO
 
-Migrate content from the [article at kotlinlang.org](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html).
+Migrate content from the [article on kotlinlang.org](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html).
