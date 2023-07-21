@@ -5,6 +5,6 @@
 Remind to [set up the environment](set-up-environment-shared-logic-ui.md).
 
 Describe how to:
-* create a basic fully multiplatform app that works on Android and iOS using a web wizard
-* run the app on Android and iOS
-* add other targets if necessary (provide links to the corresponding content)
+* create a basic fully multiplatform app that works on Android and Desktop
+* run the app on Android and your desktop platform
+* add iOS

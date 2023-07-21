@@ -11,14 +11,13 @@ This approach considerably reduces the number of lines of code to write, test, a
 * **Compose Multiplatform**, a declarative framework for sharing UIs across diverse platforms
 * **Tooling** that streamlines and makes multiplatform development enjoyable
 
-Flexible sharing capabilities allow you to transition to multiplatform development at any stage of your project without jeopardizing existing Kotlin code and seamless integration with platform-specific SDKs.
-You have the freedom to decide how much and when to share. This enables incremental adoption for existing projects and is especially beneficial for projects with complex logic.
-
+Flexible sharing capabilities allow you to transition to multiplatform development at any stage of your project, preserving your existing Kotlin code and ensuring seamless integration with platform-specific SDKs. 
+You have the freedom to decide how much and when to share and incrementally adopt Kotlin Multiplatform at your own pace. This approach is especially beneficial for projects with complex logic.
 ![Flexible sharing with JetBrains Multiplatform](flexible-sharing.png){width=800}
 
-Flexibility extends beyond logic to UI. If you want to save time and use a common UI that might not appear native on all platforms, Compose Multiplatform is your best bet.
-The UI can be as close to native as you want thanks to an ability to mix Compose and native components even on a single screen. 
-If your preference is a UI completely native for each platform, we support that too. The choice is yours!
+Flexibility extends beyond logic to UI. If you're looking to save time and use a common UI, which might not appear entirely native on all platforms, Compose Multiplatform is your go-to. 
+Native interoperability enables the mixing of Compose and native components, even within a single screen, helping you achieve a UI as close to native as you desire. 
+If your preference is a completely native UI for each platform, we support that too. The choice is entirely yours!
 
 Kotlin Multiplatform is already used in production by many companies, including Philips, Netflix, Leroy Merlin, and VMWare. 
 Other companies, such as Instabee and SpeedNet, have already started experimenting with Compose Multiplatform in their 

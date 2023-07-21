@@ -1,4 +1,4 @@
-[//]: # (title: Set up an environment for multiplatform development)
+[//]: # (title: Set up an environment)
 
 // TODO
 

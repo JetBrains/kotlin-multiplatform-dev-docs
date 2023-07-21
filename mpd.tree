@@ -60,7 +60,7 @@
 
     <toc-element toc-title="Publish and distribute">
         <toc-element id="publish-mobile-apps.md"/>
-        <toc-element toc-title="Distribute desktop apps">
+        <toc-element toc-title="Distribute Compose-based desktop apps">
             <toc-element id="distribute-desktop-apps.md"/>
             <toc-element id="sign-distributions-for-macos.md"/>
         </toc-element>
