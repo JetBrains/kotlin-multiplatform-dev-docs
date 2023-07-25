@@ -44,8 +44,6 @@
         <toc-element id="add-multiplatform-module.md"/>
         <toc-element id="share-data-access-layer.md"/>
         <toc-element id="cook-mvvm.md"/>
-        <toc-element id="use-flow.md"/>
-        <toc-element id="di.md"/>
         <toc-element toc-title="Integrate platform code">
             <toc-element id="use-native-code.md"/>
             <toc-element id="use-swift-objc-code.md"/>
