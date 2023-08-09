@@ -1,5 +1,5 @@
 
-[//]: # (title: Work with native code)
+[//]: # (title: Use platform-specific APIs)
 
 // TODO
 
