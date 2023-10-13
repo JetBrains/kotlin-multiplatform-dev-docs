@@ -3,8 +3,8 @@
 
 <topic xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/topic.v2.xsd"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       title="get-started.xml"
-       id="get-started">
+       title="Get started with multiplatform development"
+       id="getting-started">
 
      <section-starting-page>
          <title>Get started with Kotlin Multiplatform</title>

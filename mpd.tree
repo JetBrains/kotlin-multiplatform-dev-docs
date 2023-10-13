@@ -15,7 +15,7 @@
         <toc-element id="roadmap.md"/>
     </toc-element>
 
-    <toc-element toc-title="Get started (new)" id="get-started.xml"/>
+    <toc-element toc-title="Get started (new)" id="getting-started.xml"/>
 
     <toc-element toc-title="Get started (old)" id="get-started.md"/>
 
