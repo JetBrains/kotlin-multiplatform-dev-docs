@@ -13,12 +13,23 @@
              You choose how much to share starting from a tiny piece of logic to 100% of code including UI.
          </description>
          <tip-group>
-         <title>Get started</title>
+         <title>Get started from scratch</title>
              <a href="create-first-app-shared-logic-native-ui.md"
                 description="Create your first KMP app for Android and iOS with native UI (requires macOS)" type="start">Create a multiplatform app with *native UI*</a>
              <a href="create-first-app-shared-logic-ui.md"
                             description="Create your first KMP app with UI shared across Android, iOS, and/or desktop using Compose Multiplatform" type="start">Create a multiplatform app with *shared UI*</a>
          </tip-group>
+         <main-group>
+            <title>Migrate your app</title>
+            <a href="make-android-app-work-on-ios.md" description="Learn how to migrate your Android app to iOS while keeping UI native (requires macOS)">Migrate Android app to iOS</a>
+        </main-group>
+
+        <highlighted-group>
+            <title>More resources</title>
+            <a href="samples.md" description="Walk through real-life samples with Kotlin and Compose Multiplatform">Samples</a>
+            <a href="case-studies.md" description="Learn how other companies adopted Kotlin Multiplatform in production">Case studies</a>
+            <a href="faq.md" description="Want to get an answer to your question about multiplatform development with Kotlin? Check our FAQ! ">FAQ</a>
+        </highlighted-group>
 
      </section-starting-page>
  </topic>
