@@ -2,14 +2,11 @@
 <!DOCTYPE product-profile
         SYSTEM "https://resources.jetbrains.com/stardust/product-profile.dtd">
 
-<!--
-    Auto-generated tree file. Manual changes are not guaranteed to remain between updates.
--->
 
 <product-profile id="mpd"
-                 name="Multiplatform Development"
+                 name="Kotlin Multiplatform Development"
                  status="eap"
-                 start-page="WhatIsNew.xml">
-    <toc-element id="WhatIsNew.xml"/>
+                 start-page="get-started.xml">
+    <toc-element id="get-started.xml"/>
 
 </product-profile>
