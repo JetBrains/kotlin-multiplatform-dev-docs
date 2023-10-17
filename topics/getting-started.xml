@@ -9,6 +9,7 @@
      <section-starting-page>
          <title>Get started with Kotlin Multiplatform</title>
          <description>
+            Share the UI with Compose Multiplatform or keep it native? Start from scratch or migrate an existing Android app? Choose your way!
 
          </description>
          <tip-group>
@@ -25,7 +26,7 @@
         <highlighted-group>
             <title>More resources</title>
             <a href="samples.md" description="Walk through real-life samples with Kotlin and Compose Multiplatform">Samples</a>
-            <a href="case-studies.md" description="Learn from an experience of other companies that adopted Kotlin Multiplatform in production">Case studies</a>
+            <a href="case-studies.md" description="Learn from the experience of other companies that adopted Kotlin Multiplatform in production">Case studies</a>
             <a href="faq.md" description="Have a question about multiplatform development? Check out our FAQ!">FAQ</a>
         </highlighted-group>
 
