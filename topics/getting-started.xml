@@ -9,17 +9,17 @@
      <section-starting-page>
          <title>Get started with Kotlin Multiplatform</title>
          <description>
-             You choose how much to share starting from a tiny piece of logic to 100% of code including UI.
+
          </description>
          <tip-group>
-             <a href="create-first-app-shared-logic-native-ui.md"
-                description="Create your first KMP app for Android and iOS with native UI (requires macOS)" type="start">Create a multiplatform app with native UI</a>
-             <a href="create-first-app-shared-logic-ui.md"
-                            description="Create your first KMP app with UI shared across Android, iOS, and/or desktop using Compose Multiplatform" type="start">Create a multiplatform app with shared UI</a>
+             <a href="set-up-environment-shared-logic-native-ui.md"
+                description="Create your first Kotlin Multiplatform app with native UI for Android (Jetpack Compose UI) and iOS (SwiftUI) (requires macOS)" type="turn-on">Shared logic + SwiftUI and Jetpack Compose UI</a>
+             <a href="set-up-environment-shared-logic-ui.md"
+                            description="Create your first Kotlin Multiplatform app with UI shared across Android, iOS, and/or desktop using Compose Multiplatform" type="cross-platform">Shared logic + Compose Multiplatform UI</a>
          </tip-group>
          <main-group>
-            <title>Migration of existing applications</title>
-            <a href="make-android-app-work-on-ios.md" description="Learn how to migrate your existing Android app to iOS while keeping UI native (requires macOS)">Migrate Android app to iOS</a>
+            <title>Migration</title>
+            <a href="make-android-app-work-on-ios.md" description="Learn how to make your existing Android app work on iOS with SwiftUI (requires macOS)">Migrate an existing Android app to iOS</a>
         </main-group>
 
         <highlighted-group>
