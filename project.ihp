@@ -5,10 +5,11 @@
 <ihp version="2.0">
 
     <module name="kotlin-multiplatform-docs"/>
-
     <topics dir="topics"/>
+    <snippets src="snippets"/>
     <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform/"
             version="1.0"/>
+    <vars src="v.list"/>
 
     <product src="mpd.tree"
              keymaps-mode="generated" />
