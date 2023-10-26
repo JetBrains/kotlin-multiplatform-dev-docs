@@ -27,17 +27,17 @@ additional cross-platform mobile development tasks:
      <list>
         <li><a href="multiplatform-run-tests.md">Add tests to your Kotlin Multiplatform project</a></li>
         <li><a href="multiplatform-publish-apps.md">Publish your mobile application to app stores</a></li>
-        <li><a href="multiplatform-mobile-introduce-your-team.md">Introduce cross-platform mobile development to your team</a></li>
+        <li><a href="https://kotlinlang.org/docs/multiplatform-mobile-introduce-your-team.html">Introduce cross-platform mobile development to your team</a></li>
         <li><a href="https://github.com/terrakok/kmm-awesome">Check out the list of useful tools and libraries</a></li>
      </list>
    </td>
     <td>
      <list>
-        <li><a href="multiplatform-mobile-understand-project-structure.md">Kotlin Multiplatform project structure</a></li>
-        <li><a href="native-objc-interop.md">Interoperability with Objective-C frameworks and libraries</a></li>
-        <li><a href="multiplatform-add-dependencies.md">Adding dependencies on multiplatform libraries</a></li>        
-        <li><a href="multiplatform-mobile-android-dependencies.md">Adding Android dependencies</a></li>
-        <li><a href="multiplatform-mobile-ios-dependencies.md">Adding iOS dependencies</a></li>
+        <li><a href="https://kotlinlang.org/docs/multiplatform-discover-project.html">Kotlin Multiplatform project structure</a></li>
+        <li><a href="https://kotlinlang.org/docs/native-objc-interop.html">Interoperability with Objective-C frameworks and libraries</a></li>
+        <li><a href="https://kotlinlang.org/docs/multiplatform-add-dependencies.html">Adding dependencies on multiplatform libraries</a></li>        
+        <li><a href="https://kotlinlang.org/docs/multiplatform-mobile-android-dependencies.html">Adding Android dependencies</a></li>
+        <li><a href="https://kotlinlang.org/docs/multiplatform-mobile-ios-dependencies.html">Adding iOS dependencies</a></li>
      </list>
    </td>
    </tr>
@@ -51,10 +51,10 @@ additional cross-platform mobile development tasks:
    <tr>
    <td>
      <list>
-        <li><a href="multiplatform-mobile-integrate-in-existing-app.md">Make your Android app cross-platform</a></li>
-        <li><a href="multiplatform-mobile-ktor-sqldelight.md">Create a multiplatform app using Ktor and SQLDelight</a></li>
+        <li><a href="multiplatform-integrate-in-existing-app.md">Make your Android app cross-platform</a></li>
+        <li><a href="multiplatform-ktor-sqldelight.md">Create a multiplatform app using Ktor and SQLDelight</a></li>
         <li><a href="https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme">Share UIs between iOS and Android using Compose Multiplatform</a></li>
-        <li><a href="multiplatform-mobile-samples.md">See the curated list of sample projects</a></li>
+        <li><a href="multiplatform-samples.md">See the curated list of sample projects</a></li>
      </list>
    </td>
     <td>

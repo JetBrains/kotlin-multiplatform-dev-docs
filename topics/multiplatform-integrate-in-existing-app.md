@@ -34,7 +34,7 @@ for entering a username and password. The credentials are validated and saved to
 
 3. Switch to the **Project** view.
 
-   ![Project view](project-view-for-integrate.png){width=200}
+   ![Project view](select-project-view.png){width=200}
 
 ## Make your code cross-platform
 

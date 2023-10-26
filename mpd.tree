@@ -30,7 +30,7 @@
         <toc-element id="compose-multiplatform-modify-project.md"/>
         <toc-element id="compose-multiplatform-new-project.md"/>
     </toc-element>
-    <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Migrate to multiplatform"/>
+    <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Migrate your project"/>
     <toc-element toc-title="Develop with Kotlin Multiplatform">
         <toc-element id="multiplatform-connect-to-apis.md"/>
         <toc-element id="multiplatform-project-configuration.md" toc-title="Choose project configuration"/>

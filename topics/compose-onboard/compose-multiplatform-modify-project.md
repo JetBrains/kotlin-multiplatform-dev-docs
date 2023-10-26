@@ -16,7 +16,7 @@ platform.
 ## Add new dependency
 
 You could retrieve the date using platform-specific libraries
-and [expected and actual declarations](multiplatform-expect-actual.md). But we recommend that you use this approach only
+and [expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html). But we recommend that you use this approach only
 when there's no Kotlin Multiplatform library available. In this case, you can rely on
 the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library.
 

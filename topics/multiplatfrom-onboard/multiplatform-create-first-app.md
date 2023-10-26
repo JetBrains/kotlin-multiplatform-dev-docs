@@ -31,7 +31,7 @@ Here you will learn how to create and run your first Kotlin Multiplatform applic
    > has fewer installation issues.
    >
    > For more complex projects, you might need the CocoaPods dependency manager that helps handle library dependencies.
-   > To learn more about CocoaPods and how to set up an environment for them, see [CocoaPods overview and setup](native-cocoapods.md).
+   > To learn more about CocoaPods and how to set up an environment for them, see [CocoaPods overview and setup](https://kotlinlang.org/docs/native-cocoapods.html).
    >
    {type="tip"}
 
@@ -49,11 +49,11 @@ To view the full structure of your multiplatform project, switch the view from *
 Each Kotlin Multiplatform project includes three modules:
 
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
-  between platforms. It uses [Gradle](gradle.md) as the build system to help automate your build process.
+  between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
 * _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The _androidApp_ module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
-  framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](native-cocoapods.md),
+  framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods.html),
   based on what you've chosen in the previous step in **iOS framework distribution**. In this tutorial, it's a regular
   framework dependency.
 
@@ -312,7 +312,7 @@ In the next part of the tutorial, you'll learn how to update the UI elements usi
 ### See also
 
 * See how to [create and run multiplatform tests](multiplatform-run-tests.md) to check that the code works correctly.
-* Learn more about the [project structure](multiplatform-mobile-understand-project-structure.md).
+* Learn more about the [project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
 ## Get help
 

@@ -155,7 +155,7 @@ library.
 
 In the next part of the tutorial, you'll add a dependency to the project and modify the user interface.
 
-**[Proceed to the next part](compose-multiplatform-update-ui.md)**
+**[Proceed to the next part](compose-multiplatform-modify-project.md)**
 
 ## Get help
 
