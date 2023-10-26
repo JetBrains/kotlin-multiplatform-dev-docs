@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildprofiles>
     <variables>
+        <header-logo>kotlin-multiplatform-logo.svg</header-logo>
+        <primary-color>frozen</primary-color>
         <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/docs/</browser-edits-url>
         <web-root>https://www.jetbrains.com/help</web-root>
         <web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
@@ -21,8 +23,6 @@
         <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
         <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
     </variables>
-    <header-logo>kotlin-multiplatform-logo.svg</header-logo>
-    <primary-color>FROZEN</primary-color>
     <footer>
         <social type="twitter" href="https://twitter.com/kotlin">X (former twitter)</social>
         <social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
