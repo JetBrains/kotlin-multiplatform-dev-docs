@@ -1,4 +1,4 @@
-[//]: # (title: Get started with Compose Multiplatform)
+[//]: # (title: Get started with Compose Multiplatform — tutorial)
 
 With [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
 code-sharing capabilities of Kotlin Multiplatform beyond application logic. You can implement the user interface once

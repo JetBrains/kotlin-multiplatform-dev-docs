@@ -33,7 +33,7 @@ additional cross-platform mobile development tasks:
    </td>
     <td>
      <list>
-        <li><a href="multiplatform-mobile-understand-project-structure.md">Kotlin Multiplatform for mobile project structure</a></li>
+        <li><a href="multiplatform-mobile-understand-project-structure.md">Kotlin Multiplatform project structure</a></li>
         <li><a href="native-objc-interop.md">Interoperability with Objective-C frameworks and libraries</a></li>
         <li><a href="multiplatform-add-dependencies.md">Adding dependencies on multiplatform libraries</a></li>        
         <li><a href="multiplatform-mobile-android-dependencies.md">Adding Android dependencies</a></li>
