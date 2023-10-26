@@ -57,7 +57,7 @@ Each Kotlin Multiplatform project includes three modules:
   based on what you've chosen in the previous step in **iOS framework distribution**. In this tutorial, it's a regular
   framework dependency.
 
-![Basic Multiplatform project structure](basic-project-structure.png){width=500}
+![Basic Multiplatform project structure](basic-project-structure.svg){width=500}
 
 The shared module consists of three source sets: `androidMain`, `commonMain`, and `iosMain`. _Source set_ is a Gradle
 concept for a number of files logically grouped together where each group has its own dependencies.
