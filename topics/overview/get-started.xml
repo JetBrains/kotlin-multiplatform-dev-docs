@@ -12,9 +12,9 @@
             Share a UI with Compose Multiplatform or keep it native? Start from scratch or migrate from an existing Android app? Do it your way!
         </description>
         <tip-group>
-            <a href="multiplatform-setup.md"
+            <a href="multiplatform-getting-started.md"
                description="Create your first Kotlin Multiplatform app with a native UI for Android (Jetpack Compose UI) and iOS (SwiftUI)" type="turn-on">Share logic and keep UI native</a>
-            <a href="compose-multiplatform-setup.md"
+            <a href="compose-multiplatform-getting-started.md"
                description="Create your first Kotlin Multiplatform app with a shared UI across Android, iOS, and desktop using Compose Multiplatform" type="cross-platform">Share both logic and UI</a>
         </tip-group>
         <main-group>

@@ -53,7 +53,7 @@ additional cross-platform mobile development tasks:
      <list>
         <li><a href="multiplatform-integrate-in-existing-app.md">Make your Android app cross-platform</a></li>
         <li><a href="multiplatform-ktor-sqldelight.md">Create a multiplatform app using Ktor and SQLDelight</a></li>
-        <li><a href="https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme">Share UIs between iOS and Android using Compose Multiplatform</a></li>
+        <li><a href="compose-multiplatform-getting-started.md">Share UIs between iOS and Android using Compose Multiplatform</a></li>
         <li><a href="multiplatform-samples.md">See the curated list of sample projects</a></li>
      </list>
    </td>

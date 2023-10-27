@@ -438,7 +438,7 @@ code to load and display them:
 
 We encourage you to explore multiplatform development further and try out more projects:
 
-* [Make your Android app cross-platform](https://kotlinlang.org/docs/multiplatform-mobile-integrate-in-existing-app.html)
-* [Create a multiplatform app using Ktor and SQLDelight](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html)
-* [Share UIs between iOS and Android using Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme)
-* [See the curated list of sample projects](https://kotlinlang.org/docs/multiplatform-mobile-samples.html)
+* [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
+* [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
+* [Share buisiness logic between iOS and Android keeping the UI native](multiplatform-getting-started.md)
+* [See the curated list of sample projects](multiplatform-samples.md)

@@ -12,9 +12,9 @@ functionality and more. For more information, see [this curated list](https://gi
 
 ## Expected and actual functions and properties
 
-> The mechanism of expected and actual declarations is in [Beta](https://kotlinlang.org/docs/components-stability.html).
-> It is almost stable, but migration steps may be required in the future.
-> We'll do our best to minimize any changes you’ll have to make.
+> The expected and actual functions are in [Beta](https://kotlinlang.org/docs/components-stability.html).
+> They are almost stable, but migration steps may be required in the future.
+> We'll do our best to minimize any changes you'll have to make.
 >
 {type="warning"}
 

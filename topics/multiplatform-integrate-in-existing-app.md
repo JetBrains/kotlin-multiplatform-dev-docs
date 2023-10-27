@@ -142,7 +142,7 @@ This is necessary for reusing the code for both Android and iOS.
    ![Warnings about platform-dependent code](warnings-android-specific-code.png){width=450}
 
 4. Remove Android-specific code by replacing it with cross-platform Kotlin code or connecting to Android-specific APIs
-   using [`expect` and `actual` declarations](multiplatform-connect-to-apis.md). See the following sections for details:
+   using [expected and actual declarations](multiplatform-connect-to-apis.md). See the following sections for details:
 
 #### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed"}
 
