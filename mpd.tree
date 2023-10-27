@@ -9,7 +9,7 @@
 
     <toc-element toc-title="Kotlin Multiplatform overview">
         <toc-element toc-title="Get started" id="get-started.xml"/>
-        <toc-element id="supported-platforms.md"/>
+        <toc-element id="supported-platforms.md" toc-title="Supported platforms"/>
         <toc-element id="case-studies.md"/>
         <toc-element id="faq.md"/>
     </toc-element>
@@ -24,11 +24,11 @@
     </toc-element>
     <toc-element toc-title="Create an app with shared logic and UI">
         <toc-element id="compose-multiplatform-getting-started.md"/>
-        <toc-element id="compose-multiplatform-setup.md"/>
-        <toc-element id="compose-multiplatform-create-first-app.md"/>
-        <toc-element id="compose-multiplatform-explore-composables.md"/>
-        <toc-element id="compose-multiplatform-modify-project.md"/>
-        <toc-element id="compose-multiplatform-new-project.md"/>
+        <toc-element id="compose-multiplatform-setup.md" toc-title="1. Set up an environment"/>
+        <toc-element id="compose-multiplatform-create-first-app.md" toc-title="2. Create your multiplatform project"/>
+        <toc-element id="compose-multiplatform-explore-composables.md" toc-title="3. Explore composable code"/>
+        <toc-element id="compose-multiplatform-modify-project.md" toc-title="4. Modify the project"/>
+        <toc-element id="compose-multiplatform-new-project.md" toc-title="5. Create your own application"/>
     </toc-element>
     <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Migrate your project"/>
     <toc-element toc-title="Develop with Kotlin Multiplatform">

@@ -1,7 +1,7 @@
 [//]: # (title: Compatibility and versions)
 
 Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose releases. This page contains information
-about Compose Multiplatform releases, the compatibility of different releases, and their release cycles.
+about Compose Multiplatform releases, the compatibility between different releases, and the release cycles.
 
 ## Supported platforms
 
@@ -64,7 +64,7 @@ plugin:
 * [Use the Jetpack Compose compiler](#use-a-jetpack-compose-compiler)
 * [Use a compiler version for a different version of Kotlin](#use-a-compiler-for-a-different-version-of-kotlin)
 
-> With these approaches, stability isn’t guaranteed, and you should use them at your own risk. Even if
+> With these approaches, stability isn’t guaranteed, so use them at your own risk. Even if
 > compilation is successful, there can be hidden runtime errors. We don’t recommend
 > upgrading to the latest version of Kotlin in production until it is officially supported by
 > Compose Multiplatform.
@@ -73,7 +73,7 @@ plugin:
 
 ### Use a developer version of Compose Multiplatform compiler
 
-If there isn’t a stable version of Compose Multiplatform that supports the version of Kotlin that you want to use, you
+If there isn’t a stable Compose Multiplatform version that supports the Kotlin version that you want to use, you
 can try a developer (`dev`) version of the Compose Multiplatform compiler.
 `-dev` versions of Compose Multiplatform, such as `1.5.0-dev1084`, contain actual version mappings from Kotlin to the
 Compose Multiplatform compiler. This includes Beta and RC (Release Candidate) versions of Kotlin.
@@ -112,8 +112,8 @@ compose {
 ```
 
 > Early access versions of the Compose Multiplatform compiler plugin, like `1.5.2.1-rc01`,
->  are not available in [Maven Central](https://central.sonatype.com/). To use early access versions,
-> add [`maven`]("https://maven.pkg.jetbrains.space/public/p/compose/dev")` to your list of repositories.
+> are not available in [Maven Central](https://central.sonatype.com/). To use early access versions,
+> add [`maven`](https://maven.pkg.jetbrains.space/public/p/compose/dev) to your list of repositories.
 >
 {type="note"}
 
@@ -125,7 +125,7 @@ compose {
 
 If there is no suitable developer version of the Compose Multiplatform compiler plugin, you can try using a Jetpack
 Compose compiler plugin. Check the [pre-release Kotlin compatibility](https://developer.android.com/jetpack/androidx/releases/compose-kotlin#pre-release_kotlin_compatibility)
-table from Android to find a compatible compiler version. Then in your `build.gradle.kts` file, set it in
+table from Android to find a compatible compiler version. Then, in your `build.gradle.kts` file, set it in
 the `kotlinCompilerPlugin.set` parameter:
 
 ```kotlin
@@ -134,7 +134,7 @@ compose {
 }
 ```
 
-In this example, Jetpack Compose compiler version `1.5.3` corresponds to the Kotlin release 1.9.10.
+In this example, Jetpack Compose compiler version `1.5.3` corresponds to Kotlin 1.9.10.
 
 > The Jetpack Compose compiler plugin works for Kotlin/JVM targets, including both desktop and Android platforms.
 > However, its reliability may not extend to Kotlin/JS and Kotlin/Native targets. For these scenarios, we recommend
@@ -173,7 +173,7 @@ When a new version of Jetpack Compose is released, we:
 * Stabilize all platforms.
 * Release a new version of Compose Multiplatform.
 
-The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1-3 months.
+The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1–3 months.
 
 When you build your application for Android, the artifacts published by Google are used. For example, if you apply the
 Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
