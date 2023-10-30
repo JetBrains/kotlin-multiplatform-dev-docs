@@ -141,11 +141,3 @@ device & TV), and Amazon Fire TV.
 In both of Chalk.com's mobile apps, Kotlin Multiplatform is used for networking, offline caching, and business logic.
 The UI for each of the apps is native to the platform, but other than that, almost everything else in their apps can be
 shared with Kotlin Multiplatform.
-
-Don’t add to the first version of the page:
-
-![Leroy Merlin](leroy-merlin.svg){width=200}
-
-Leroy Merlin adopted Kotlin Multiplatform to prevent the duplication of business logic, all while maintaining the
-performance and safety of a native UI. By sharing business logic in Kotlin, they accelerated feature development by
-150%.
