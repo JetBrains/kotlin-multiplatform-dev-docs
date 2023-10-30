@@ -56,7 +56,7 @@ In the end, your application should look like this:
 
 ![ComposeView](compose-view.png){width=300}
 
-In addition, you can use Compose Multiplatform in different sizes and combine it with other SwiftUI views.
+In addition, you can use this `ComposeView` in any SwiftUI view hierarchy and control its size from within SwiftUI code.
 
 If you want to embed Compose Multiplatform into your existing applications, use the `ComposeView` structure in any place
 where SwiftUI is used. For an example, see
@@ -90,17 +90,18 @@ With this code, your application should look like this:
 
 ![UIKit](uikit.png){width=300}
 
-Explore the code for this example in
+Explore the code for the example in
 this [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
 
 ## Use UIKit inside Compose Multiplatform
 
-To use UIKit elements inside Compose Multiplatform, add the UIKit elements that you want to use to Compose
-Multiplatform's [UIKitView](https://github.com/JetBrains/compose-multiplatform-core/blob/47c012bfe2d4570fb08432253298b8e2b6e38ade/compose/ui/ui/src/uikitMain/kotlin/androidx/compose/ui/interop/UIKitView.uikit.kt).
+To use UIKit elements inside Compose Multiplatform, add the UIKit elements that you want to use to
+[UIKitView](https://github.com/JetBrains/compose-multiplatform-core/blob/47c012bfe2d4570fb08432253298b8e2b6e38ade/compose/ui/ui/src/uikitMain/kotlin/androidx/compose/ui/interop/UIKitView.uikit.kt)
+from Compose Multiplatform.
 
 You can write this code purely in Kotlin or use Swift as well. In this example,
 UIKit's [`MKMapView`](https://developer.apple.com/documentation/mapkit/mkmapview) component is displayed in Compose
-Multiplatform. Set the size by using `Modifier.size(...)` or `Modifier.fillMaxSize()` functions from Compose
+Multiplatform. Set the component size by using the `Modifier.size(...)` or `Modifier.fillMaxSize()` functions from Compose
 Multiplatform:
 
 ```kotlin

@@ -77,7 +77,7 @@ Let's run the application and then examine the code in depth.
 You can run the application on Android, iOS, and desktop. You don't have to run the applications in any particular
 order, so start with whichever platform you are most familiar with.
 
-> You don't need to use Gradle build tasks. In a multiplatform application, this will build debug and release versions
+> You don't need to use the Gradle build task. In a multiplatform application, this will build debug and release versions
 > of all the supported targets. Depending on the platforms selected in the Multiplatform wizard, this can take some time.
 > Using run configurations is much faster; only the selected target is built in this case.
 >
