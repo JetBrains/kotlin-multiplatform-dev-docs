@@ -3,6 +3,7 @@
     <variables>
         <header-logo>kotlin-multiplatform-logo.svg</header-logo>
         <primary-color>frozen</primary-color>
+        <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/docs/</browser-edits-url>
         <web-root>https://www.jetbrains.com/help</web-root>
         <web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
@@ -22,6 +23,46 @@
         <og-twitter>@kotlin</og-twitter>
         <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
         <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
+        <custom-favicons>
+            <![CDATA[
+        <link rel="shortcut icon" href="https://resources.jetbrains.com/storage/ui/favicons/favicon.ico"
+              type="image/x-icon"
+              sizes="16x16 32x32"/>
+        <link rel="apple-touch-icon" sizes="57x57"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png"/>
+        <link rel="apple-touch-icon" sizes="60x60"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-60x60.png"/>
+        <link rel="apple-touch-icon" sizes="72x72"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="76x76"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-76x76.png"/>
+        <link rel="apple-touch-icon" sizes="114x114"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-114x114.png"/>
+        <link rel="apple-touch-icon" sizes="120x120"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-120x120.png"/>
+        <link rel="apple-touch-icon" sizes="144x144"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-144x144.png"/>
+        <link rel="apple-touch-icon" sizes="152x152"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-152x152.png"/>
+        <link rel="apple-touch-icon" sizes="180x180"
+              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png"/>
+        <link rel="mask-icon" href="https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg"
+              color="black"/>
+        <meta name="msapplication-TileColor" content="#000000"/>
+        <meta name="msapplication-TileImage"
+              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"/>
+        <meta name="msapplication-square70x70logo"
+              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"/>
+        <meta name="msapplication-square150x150logo"
+              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"/>
+        <meta name="msapplication-wide310x150logo"
+              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"/>
+        <meta name="msapplication-square310x310logo"
+              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"/>
+        <style>[data-test="theme-switcher"]{display: none}</style>
+        ]]>
+        </custom-favicons>
+        <generate-canonicals>true</generate-canonicals>
     </variables>
     <footer>
         <social type="twitter" href="https://twitter.com/kotlin">X (former twitter)</social>
