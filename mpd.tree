@@ -6,9 +6,8 @@
                  name="Kotlin Multiplatform Development"
                  status="release"
                  start-page="get-started.xml">
-
+    <toc-element toc-title="Get started" id="get-started.xml"/>
     <toc-element toc-title="Kotlin Multiplatform overview">
-        <toc-element toc-title="Get started" id="get-started.xml"/>
         <toc-element id="supported-platforms.md" toc-title="Supported platforms"/>
         <toc-element id="case-studies.md"/>
         <toc-element id="faq.md"/>

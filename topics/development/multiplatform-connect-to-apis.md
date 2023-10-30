@@ -12,12 +12,6 @@ functionality and more. For more information, see [this curated list](https://gi
 
 ## Expected and actual functions and properties
 
-> The expected and actual functions are in [Beta](https://kotlinlang.org/docs/components-stability.html).
-> They are almost stable, but migration steps may be required in the future.
-> We'll do our best to minimize any changes you'll have to make.
->
-{type="warning"}
-
 Kotlin provides a language mechanism to access platform-specific APIs while developing common logic:
 [expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html).
 
@@ -81,7 +75,7 @@ declarations and generates a single `randomUUID()` function with its actual Andr
 process is repeated for iOS.
 
 For simplicity, this and the following examples use the simplified source set names "common", "ios", and "android".
-Typically, this it implies `commonMain`, `iosMain`, and `androidMain`, and similar logic can be defined in the test source
+Typically, this implies `commonMain`, `iosMain`, and `androidMain`, and similar logic can be defined in the test source
 sets `commonTest`, `iosTest`, and `androidTest`.
 
 Similar to expected and actual functions, expected and actual properties allow you to use different values on
@@ -211,7 +205,7 @@ applications, but this is where you can call the specific functionality of your 
 
 Providing the right implementations with expected and actual functions or directly through entry points works well for
 simple scenarios. However, if you use a dependency injection framework in your project,
-we recommend using it in simple cases, as well, to ensure consistency.
+we recommend using it in simple cases to ensure consistency.
 
 ### Dependency injection framework
 
@@ -259,7 +253,7 @@ When you use a DI framework, you inject all of the dependencies through this fra
 platform dependencies. We recommend continuing to use DI if you already have it in your project, rather than using the expected
 and actual functions manually. This way, you can avoid mixing two different ways of injecting dependencies.
 
-However, you don't have to implement the common interface in Kotlin. You can do it in another language, like
+You also don't have to always implement the common interface in Kotlin. You can do it in another language, like
 Swift, in a different _platform module_. If you choose this approach, you should then provide the implementation from the iOS platform module using the DI
 framework:
 
