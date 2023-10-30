@@ -22,7 +22,7 @@ Android-specific behavior. Here are some examples of parts of the Android-only A
   and [`LocalConfiguration`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/platform/AndroidCompositionLocals.android.kt)
   variables
 * [`android.graphics.BitmapFactory`](https://developer.android.com/reference/android/graphics/BitmapFactory)
-  and [android.graphics.Bitmap`](https://developer.android.com/reference/android/graphics/Bitmap) classes
+  and [`android.graphics.Bitmap`](https://developer.android.com/reference/android/graphics/Bitmap) classes
 * [`ImageBitmap.asAndroidBitmap()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap#(androidx.compose.ui.graphics.ImageBitmap).asAndroidBitmap())
   function
 * [`android.app.Activity`](https://developer.android.com/reference/android/app/Activity) class
@@ -53,7 +53,7 @@ in their signatures, but their behavior is applicable for other platforms as wel
 * [Paging](https://developer.android.com/jetpack/compose/libraries#paging) library.
 * [`ConstraintLayout`](https://developer.android.com/jetpack/compose/layouts/constraintlayout) layout.
 * [Maps](https://developer.android.com/jetpack/compose/libraries#maps) library.
-* [Preview](https://developer.android.com/jetpack/compose/libraries#maps)tool.
+* [Preview](https://developer.android.com/jetpack/compose/libraries#maps) tool.
   ([Desktop support](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)).
 * [`WebView`](https://developer.android.com/reference/android/webkit/WebView) class.
 * Other Jetpack Compose libraries that haven't been ported to Compose Multiplatform.

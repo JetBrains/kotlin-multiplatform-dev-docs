@@ -88,7 +88,7 @@ Multiplatform, there are two options:
 
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
-| 1.9.20-RC      | `1.5.2.1-rc01`                         |
+| 1.9.20-RC2     | `1.5.3-rc02`                           |
 | 1.9.20-Beta2   | `1.5.2.1-Beta3`                        |
 | 1.9.20-Beta    | `1.5.2.1-Beta2`                        |
 | 1.9.10         | `1.5.2`                                |
