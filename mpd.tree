@@ -29,24 +29,18 @@
         <toc-element id="compose-multiplatform-modify-project.md" toc-title="4. Modify the project"/>
         <toc-element id="compose-multiplatform-new-project.md" toc-title="5. Create your own application"/>
     </toc-element>
-    <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Migrate your project"/>
+    <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Make your app multiplatform"/>
     <toc-element toc-title="Develop with Kotlin Multiplatform">
         <toc-element id="multiplatform-connect-to-apis.md"/>
         <toc-element id="multiplatform-project-configuration.md" toc-title="Choose project configuration"/>
         <toc-element id="multiplatform-ktor-sqldelight.md" toc-title="Share data access layer"/>
     </toc-element>
     <toc-element id="multiplatform-run-tests.md" toc-title="Test your multiplatform app"/>
-    <toc-element toc-title="Publish and distribute">
-        <toc-element id="multiplatform-publish-apps.md"/>
-        <toc-element toc-title="Distribute Compose-based desktop apps" href="https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution"/>
-    </toc-element>
+    <toc-element id="multiplatform-publish-apps.md"/>
     <toc-element id="multiplatform-samples.md"/>
     <toc-element toc-title="Compose Multiplatform UI framework">
         <toc-element id="compose-navigation-routing.md"/>
-        <toc-element toc-title="Integration with other UI frameworks">
-            <toc-element toc-title="iOS UI frameworks" id="compose-ios-ui-integration.md"/>
-            <toc-element toc-title="Swing (desktop)" href="https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Swing_Integration"/>
-        </toc-element>
+        <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with other UI frameworks"/>
         <toc-element id="compose-android-only-components.md"/>
         <toc-element id="compose-compatibility-and-versioning.md"/>
         <toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>

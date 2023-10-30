@@ -1,4 +1,4 @@
-[//]: # (title: Integration with iOS UI frameworks)
+[//]: # (title: Integration with the UIKit and SwiftUI frameworks)
 
 Compose Multiplatform is interoperable with both [UIKit](https://developer.apple.com/documentation/uikit)
 and [SwiftUI](https://developer.apple.com/xcode/swiftui/) frameworks. You can embed Compose Multiplatform within an iOS
