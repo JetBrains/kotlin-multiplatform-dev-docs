@@ -85,7 +85,7 @@ For example, in mobile applications, shared code written in Kotlin is compiled t
 Kotlin/JVM and to native binaries for iOS with Kotlin/Native. It makes the integration with Kotlin Multiplatform
 seamless on both platforms.
 
-![Kotlin/Native and Kotlin/JVM binaries](kotlin-native-and-jvm-binaries.png)
+![Kotlin/Native and Kotlin/JVM binaries](kotlin-native-and-jvm-binaries.png){width=350}
 
 ### How can I speed up my Kotlin Multiplatform module compilation for native platforms (iOS, macOS, Linux)?
 
@@ -193,7 +193,9 @@ iOS components into your screen, updates may affect their appearance.
 
 ## Future plans
 
-### When will Compose Multiplatform become Stable? Compose Multiplatform is Stable for Android and desktop, while the iOS and web platform support is not Stable yet. The iOS platform support is in Alpha, and web is Experimental.
+### When will Compose Multiplatform become Stable?
+
+Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Alpha, and web is Experimental.
 
 We are planning to promote Compose Multiplatform for iOS to Beta and Compose Multiplatform for web to Alpha in 2024.
 There are no specific dates for stabilizing support for these platforms.
