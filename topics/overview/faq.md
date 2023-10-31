@@ -25,7 +25,7 @@ about [supported platforms](supported-platforms.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Get started with Kotlin Multiplatform](get-started.xml) tutorial provides step-by-step
+The [Get started with Kotlin Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
@@ -129,7 +129,7 @@ You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ
 Developer Advocate Sebastian Aigner.
 
 ### Can I play with a demo application? Where can I find it?
-
+ 
 You can play with our [samples](multiplatform-samples.md).
 
 ### Does Compose Multiplatform come with widgets?
@@ -174,7 +174,7 @@ them.
 ### Can I integrate Compose screens into an existing iOS app?
 
 Yes. Compose Multiplatform supports different integration scenarios. For more information on integration with iOS UI frameworks,
-see [Integration with SwiftUI and UIKit](compose-ios-ui-integration.md).
+see [Integration with the UIKit and SwiftUI frameworks](compose-ios-ui-integration.md).
 
 ### Can I integrate UIKit or SwiftUI components into a Compose screen?
 
@@ -206,7 +206,7 @@ For more information on stability statuses, see [Supported platforms](supported-
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
 
 We're currently focusing resources on WebAssembly (Wasm), which shows great potential. You can experiment with our new
-[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
+[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for web](https://kotl.in/wasm-compose-example) powered by Wasm.
 
 As for the JS target, the Kotlin/JS backend has already reached Stable status. In Compose Multiplatform, due to resource
 constraints, we've shifted our focus from JS Canvas to Wasm, which we believe holds more promise.
