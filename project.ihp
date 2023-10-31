@@ -7,7 +7,7 @@
     <module name="kotlin-multiplatform-docs"/>
     <topics dir="topics"/>
     <snippets src="snippets"/>
-    <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform/"
+    <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform-dev/"
             version="1.0"/>
     <vars src="v.list"/>
 
