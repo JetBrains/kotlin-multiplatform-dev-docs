@@ -4,14 +4,14 @@
 
 ### What is Kotlin Multiplatform?
 
-Kotlin Multiplatform is an open-source technology by JetBrains for flexible cross-platform development. It allows you to
+[Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/) is an open-source technology by JetBrains for flexible cross-platform development. It allows you to
 create applications for various platforms and efficiently reuse code across them while retaining the benefits of native
 programming. With Kotlin Multiplatform, you can develop apps for Android, iOS, desktop, web, server-side, and other
 platforms.
 
 ### Can I share UIs with Kotlin Multiplatform?
 
-Yes, you can share UIs using Compose Multiplatform, JetBrains' declarative UI framework based on Kotlin
+Yes, you can share UIs using [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), JetBrains' declarative UI framework based on Kotlin
 and [Jetpack Compose](https://developer.android.com/jetpack/compose). This framework allows you to create shared UI
 components for platforms like iOS, Android, desktop, and web, helping you to maintain a consistent user interface across
 different devices and platforms.
@@ -25,7 +25,7 @@ about [supported platforms](supported-platforms.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Get started with Kotlin Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
+The [Get started with Kotlin Multiplatform](get-started.xml) tutorial provides step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
@@ -33,7 +33,7 @@ UI.
 
 The [Make your Android application work on iOS](multiplatform-integrate-in-existing-app.md) step-by-step tutorial
 explains how to make your Android application work on iOS with a native UI.
-If you also want to share the UI with Compose Multiplatform, see the [corresponding answer](#i-have-an-existing-android-application-that-uses-jetpack-compose-what-should-i-do-to-migrate-it-to-other-platforms)
+If you also want to share the UI with Compose Multiplatform, see the [corresponding answer](#i-have-an-existing-android-application-that-uses-jetpack-compose-what-should-i-do-to-migrate-it-to-other-platforms).
 
 ### Where can I get complete examples to play with?
 
@@ -59,13 +59,13 @@ systems, such as Microsoft Windows or Linux.
 
 You can still use coroutines and flows to write asynchronous code in your Kotlin Multiplatform projects. How you call
 this code depends on where you call the code from. Calling suspending functions and flows from Kotlin code is widely
-documented, especially for the Android scenario. Calling them from Swift code requires a little more work because they
+documented, especially for the Android scenario. [Calling them from Swift code](https://kotlinlang.org/docs/native-ios-integration.html#completion-handlers) requires a little more work because they
 are not Objective-C or Swift constructs.
 
 The best approach right now for calling suspending functions and flows from Swift is to use plugins and libraries like
-KMP-NativeCoroutines (https://github.com/rickclephas/KMP-NativeCoroutines) or SKIE (https://skie.touchlab.co/) together
-with Swift's async/await or libraries like Combine and RxSwift. At the moment, KMP-NativeCoroutines is the more
-tried-and-tested solution, and it supports async/await, Combine, and RxSwift approaches to concurrency. SKIE is easier
+[KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) or [SKIE](https://skie.touchlab.co/) together
+with Swift's `async`/`await` or libraries like Combine and RxSwift. At the moment, KMP-NativeCoroutines is the more
+tried-and-tested solution, and it supports `async`/`await`, Combine, and RxSwift approaches to concurrency. SKIE is easier
 to set up and less verbose. For instance, it maps Kotlin `Flow` to Swift `AsyncSequence` directly. Both these libraries
 support the proper cancellation of coroutines.
 
@@ -95,7 +95,7 @@ See these tips for improving Kotlin/Native compilation times.
 
 ### What is Compose Multiplatform?
 
-Compose Multiplatform is a modern declarative and reactive UI framework developed by JetBrains that provides a simple
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) is a modern declarative and reactive UI framework developed by JetBrains that provides a simple
 way to build user interfaces with a small amount of Kotlin code. It also allows you to write your UI once and run it on
 any of the supported platforms – iOS, Android, desktop (Windows, macOS, Linux), and web.
 
@@ -118,12 +118,12 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 The Android and Desktop targets of Compose Multiplatform are Stable. You can use them in production.
 The iOS target is in Alpha, which means that it’s in active development. You can use it with caution and expect
 migration issues.
-The version of Compose Multiplatform for web that is based on WebAssembly is Experimental.You can try it in your pet projects.
+The version of Compose Multiplatform for web that is based on WebAssembly is Experimental. You can try it in your pet projects.
 It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
-The [Get started with Compose Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
+The [Get started with Compose Multiplatform](compose-multiplatform-getting-started.md) tutorial provides step-by-step
 instructions for creating a Kotlin Multiplatform project with Compose Multiplatform for Android, iOS, and desktop.
 You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by the Kotlin
 Developer Advocate Sebastian Aigner.
@@ -156,7 +156,7 @@ supported. However, some APIs work only in the Android target; they might be And
 other platforms yet. For instance, resource handling is Android-specific, so you would need to migrate to the Compose
 Multiplatform resource library or use a community solution. The
 Android [Navigation library](https://developer.android.com/jetpack/androidx/releases/navigation) is also
-Android-specific, but there are many community alternatives available. For more information, see the
+Android-specific, but there are [community alternatives](compose-navigation-routing.md) available. For more information on components available only for Android, see the
 current [list of Android-only API](compose-android-only-components.md).
 
 You need to [migrate the business logic to Kotlin Multiplatform](multiplatform-integrate-in-existing-app.md). When you
@@ -173,18 +173,20 @@ them.
 
 ### Can I integrate Compose screens into an existing iOS app?
 
-Yes. Compose Multiplatform supports different integration scenarios. For more information,
-see [Choosing a configuration for your Kotlin Multiplatform project](multiplatform-project-configuration.md)
+Yes. Compose Multiplatform supports different integration scenarios. For more information on integration with iOS UI frameworks,
+see [Integration with SwiftUI and UIKit](compose-ios-ui-integration.md).
 
 ### Can I integrate UIKit or SwiftUI components into a Compose screen?
 
 Yes, you can. [Learn how](compose-ios-ui-integration.md).
 
+<!-- Need to revise
 ### What happens when my mobile OS updates and introduces new platform capabilities?
 
 You can use them in platform-specific parts of your codebase once Kotlin supports them. We do our best to support them
 in the upcoming Kotlin version. All new Android capabilities provide Kotlin or Java APIs, and wrappers over iOS APIs are
 generated automatically.
+-->
 
 ### What happens when my mobile OS updates and changes the visual style of the system components or their behavior?
 
@@ -204,7 +206,7 @@ For more information on stability statuses, see [Supported platforms](supported-
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
 
 We're currently focusing resources on WebAssembly (Wasm), which shows great potential. You can experiment with our new
-Kotlin/Wasm backend and Compose Multiplatform for web powered by Wasm.
+[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
 
 As for the JS target, the Kotlin/JS backend has already reached Stable status. In Compose Multiplatform, due to resource
 constraints, we've shifted our focus from JS Canvas to Wasm, which we believe holds more promise.
