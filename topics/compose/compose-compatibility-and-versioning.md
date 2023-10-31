@@ -88,7 +88,7 @@ Multiplatform, there are two options:
 
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
-| 1.9.20-RC2     | `1.5.3-rc02`                           |
+| 1.9.20-RC      | `1.5.3-rc01`                           |
 | 1.9.20-Beta2   | `1.5.2.1-Beta3`                        |
 | 1.9.20-Beta    | `1.5.2.1-Beta2`                        |
 | 1.9.10         | `1.5.2`                                |
@@ -144,7 +144,7 @@ In this example, Jetpack Compose compiler version `1.5.3` corresponds to Kotlin 
 
 ### Use a compiler for a different version of Kotlin
 
-If there is no compatible Kotlin version for Compose Multiplatform or Jetpack Compose compiler plugins (or you
+If there is no compatible Compose Multiplatform or Jetpack Compose compiler for your Kotlin version (or you
 encountered errors), you can try to use a compiler for a different version of Kotlin. If you do this, you **must**
 disable the Kotlin version compatibility check. This approach can work if you upgrade to a minor version of Kotlin, but
 probably won't work if you upgrade to a major version of Kotlin.

@@ -5,6 +5,8 @@ Discover how they leverage Kotlin Multiplatform for cross-platform development, 
 strategies: from integrating into existing apps and sharing a portion of app logic, to building new applications based
 on Kotlin Multiplatform and Compose Multiplatform.
 
+## 
+
 ![McDonald's](mcdonalds.svg){width=200}
 
 McDonald's leverages Kotlin Multiplatform for their Global Mobile App, enabling them to build a codebase that can be

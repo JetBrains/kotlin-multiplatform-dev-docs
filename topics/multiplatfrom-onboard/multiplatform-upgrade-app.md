@@ -531,8 +531,9 @@ framework rather than a dependency that needs to be added as a CocoaPod or SPM f
 [other features](https://skie.touchlab.co/features/).
 
 The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS. It's a more tried-and-tested
-option and maybe a more stable solution at the moment. KMP-NativeCoroutines supports the `async`/`await`, Combine,
-and RxSwift approaches to concurrency, while SKIE supports `async`/`await` only.
+option and maybe a more stable solution at the moment. KMP-NativeCoroutines directly supports the `async`/`await`, Combine,
+and RxSwift approaches to concurrency, while SKIE supports `async`/`await` directly and Combine
+with RxSwift through adapters.
 
 #### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
 
