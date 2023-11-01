@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/stardust/html-entities.dtd">
+
+<topic xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/topic.v2.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       title="get-started.xml"
+       id="get-started">
+
+    <section-starting-page>
+        <title>Get started with Kotlin Multiplatform</title>
+        <description>
+            Share a UI with Compose Multiplatform or keep it native? Start from scratch or migrate from an existing Android app? Do it your way!
+        </description>
+        <tip-group>
+            <a href="multiplatform-getting-started.md"
+               description="Create your first Kotlin Multiplatform app with a native UI for Android (Jetpack Compose UI) and iOS (SwiftUI)" type="turn-on">Share logic and keep UI native</a>
+            <a href="compose-multiplatform-getting-started.md"
+               description="Create your first Kotlin Multiplatform app with a shared UI across Android, iOS, and desktop using Compose Multiplatform" type="cross-platform">Share both logic and UI</a>
+        </tip-group>
+        <main-group>
+            <title>Migration</title>
+            <a href="multiplatform-integrate-in-existing-app.md" description="Learn how to make your existing Android app work on iOS with SwiftUI">Migrate an existing Android app to iOS</a>
+        </main-group>
+        <highlighted-group>
+            <title>More resources</title>
+            <a href="multiplatform-samples.md" description="Walk through real-life examples with Kotlin and Compose Multiplatform">Samples</a>
+            <a href="case-studies.md" description="Learn from other companies that adopted Kotlin Multiplatform in production">Case studies</a>
+            <a href="faq.md" description="Have a question about multiplatform development? Check out our FAQ!">FAQ</a>
+        </highlighted-group>
+    </section-starting-page>
+</topic>
