@@ -1,6 +1,5 @@
 [//]: # (title: Case studies)
 
-Explore Kotlin Multiplatform's real-world success stories with major companies like McDonald's, Netflix, and Philips.
 Discover how they leverage Kotlin Multiplatform for cross-platform development, applying different code-sharing
 strategies: from integrating into existing apps and sharing a portion of app logic, to building new applications based
 on Kotlin Multiplatform and Compose Multiplatform.
@@ -21,7 +20,7 @@ needs. [Read the full story](https://netflixtechblog.com/netflix-android-and-ios
 
 9GAG opted for Kotlin Multiplatform after trying both Flutter and React Native. They gradually adopted the technology
 and now ship features faster, while providing a consistent experience to their
-users. [Read the full story](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc).
+users. [Read the full story](https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04).
 
 ![Quizlet](quizlet.svg){width=200}
 

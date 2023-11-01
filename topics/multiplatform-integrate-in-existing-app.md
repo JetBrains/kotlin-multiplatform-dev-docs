@@ -79,7 +79,7 @@ it to your existing Android application and your future iOS application.
 
 The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create files with
 classes that demonstrate the benefits of Kotlin Multiplatform.
-You can learn more about the [project structure](https://kotlinlang.org/docs/multiplatform--understand-project-structure.md).
+You can learn more about the [project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
 ### Add a dependency on the shared module to your Android application
 
