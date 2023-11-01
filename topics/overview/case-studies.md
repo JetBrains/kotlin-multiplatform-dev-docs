@@ -1,6 +1,6 @@
 [//]: # (title: Case studies)
 
-Discover how they leverage Kotlin Multiplatform for cross-platform development, applying different code-sharing
+Discover how major companies leverage Kotlin Multiplatform for cross-platform development, applying different code-sharing
 strategies: from integrating into existing apps and sharing a portion of app logic, to building new applications based
 on Kotlin Multiplatform and Compose Multiplatform.
 
