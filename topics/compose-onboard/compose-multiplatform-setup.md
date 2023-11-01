@@ -13,11 +13,6 @@
 Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
 development.
 
-> To write iOS-specific code and run an iOS application on a simulated or real device, you'll need a Mac with macOS.
-> This cannot be performed on other operating systems, such as Microsoft Windows. This is an Apple requirement.
->
-{type="warning"}
-
 ## Install the necessary tools
 
 We recommend that you install the latest stable versions for compatibility and better performance.
@@ -32,7 +27,10 @@ We recommend that you install the latest stable versions for compatibility and b
         <td>You will use Android Studio to create your multiplatform applications and run them on simulated or hardware devices.</td>
     </tr>
     <tr>
-        <td><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></td>
+        <td>
+          <p><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></p>
+          <p>Xcode is required if you have a Mac with macOS and want to write iOS-specific code and run an iOS application. If you use a different operating system, skip this tool.</p>
+        </td>
         <td>
           <p>Launch Xcode in a separate window to accept its license terms and allow it to perform some necessary initial tasks.</p>
           <p>Most of the time, Xcode will work in the background. You will use it to add Swift or Objective-C code to your iOS application.</p>
@@ -49,7 +47,7 @@ We recommend that you install the latest stable versions for compatibility and b
             lang="bash">java -version</code></td>
    </tr>
    <tr>
-        <td><a href="https://kotlinlang.org/docs/multiplatform-releases.html#update-to-a-new-release">Kotlin plugin</a></td>
+        <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
         <td>
             <p>The Kotlin plugin is bundled with each Android Studio release. However, it still needs to be updated to the latest version to avoid compatibility issues.</p> 
             <p>To update the plugin, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin. You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
@@ -61,7 +59,7 @@ We recommend that you install the latest stable versions for compatibility and b
 
 To make sure everything works as expected, install and run the KDoctor tool:
 
-> KDoctor works on macOS only.
+> KDoctor works on macOS only. If you use a different operating system, skip this step.
 >
 {type="note"}
 
