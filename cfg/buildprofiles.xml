@@ -5,7 +5,7 @@
         <product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
         <primary-color>frozen</primary-color>
         <enable-browser-edits>true</enable-browser-edits>
-        <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/docs/</browser-edits-url>
+        <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</browser-edits-url>
         <web-root>https://www.jetbrains.com/help</web-root>
         <web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
         <download-page/>
