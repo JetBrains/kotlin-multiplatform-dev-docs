@@ -442,4 +442,35 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
         </list>
     </td>
   </tr>
+
+  <tr>
+      <td>
+          <strong><a href="https://github.com/msasikanth/twine">Twine - RSS Reader</a></strong>
+      </td>
+      <td>Twine is a multiplatform RSS reader app built using Kotlin and Compose Multiplatform. It features a nice user interface and experience to browse through the feeds and supports Material 3 content-based dynamic theming.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>Data Storage</li>
+              <li>UI</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>ktor-client</code></li>
+              <li><code>multiplatform-settings</code></li>
+              <li><code>napier</code></li>
+              <li><code>decompose</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android and iOS</li>
+          </list>
+      </td>
+  </tr>
 </table>
