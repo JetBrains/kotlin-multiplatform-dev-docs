@@ -56,6 +56,7 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
         <li>Model</li>
         <li>Networking</li>
         <li>Data storage</li>
+        <li>Navigation</li>
       </list>
     </td>
     <td>
@@ -63,7 +64,7 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
   <li><code>kotlinx-serialization</code></li>
   <li><code>kotlinx-datetime</code></li>
   <li><code>kotlinx-coroutines</code></li>
-  <li><code>kmm-viewmodel</code></li>
+  <li><code>decompose</code></li>
   <li><code>koin</code></li>
   <li><code>jsonpathkt-kotlinx</code></li>
   <li><code>horologist</code></li>
