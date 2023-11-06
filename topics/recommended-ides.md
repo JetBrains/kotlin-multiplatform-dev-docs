@@ -7,10 +7,10 @@ If you want to get the best Kotlin Multiplatform development experience, we reco
 It supports testing and debugging your code on all the platforms your project targets and navigating between Kotlin
 Multiplatform code and the code written in other languages interoperable with Kotlin.
 
-See the [Fleet for Multiplatform development](fleet.md) tutorial to get started.
+See the [Use Fleet for Multiplatform development](fleet.md) tutorial to get started.
 
 The Kotlin Multiplatform support in Fleet is still in the early stages of development. You may face issues and
-limitations, but we're committed to fixing them based on [your feedback](fleet.md#participating-in-fleet).
+limitations, but we're committed to fixing them based on [your feedback](fleet.md#leave-feedback).
 
 ## Android Studio
 

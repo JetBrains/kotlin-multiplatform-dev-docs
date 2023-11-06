@@ -50,7 +50,7 @@
     <toc-element toc-title="Kotlin Multiplatform technology" href="https://kotlinlang.org/docs/multiplatform.html"/>
     <toc-element toc-title="IDEs">
         <toc-element id="recommended-ides.md"/>
-        <toc-element id="fleet.md"/>
+        <toc-element id="fleet.md"  toc-title="Fleet"/>
     </toc-element>
     <toc-element toc-title="Multiplatform Gradle DSL reference" href="https://kotlinlang.org/docs/multiplatform-dsl-reference.html"/>
 
