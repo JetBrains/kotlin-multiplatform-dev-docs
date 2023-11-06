@@ -462,7 +462,6 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
               <li><code>kotlinx-serialization</code></li>
               <li><code>kotlinx-datetime</code></li>
               <li><code>ktor-client</code></li>
-              <li><code>multiplatform-settings</code></li>
               <li><code>napier</code></li>
               <li><code>decompose</code></li>
           </list>
