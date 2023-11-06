@@ -6,7 +6,7 @@ for example, only the data model and algorithms. To get started with a new Kotli
 we recommend using the [web wizard](https://kmp.jetbrains.com).
 
 You can find even more sample projects on GitHub, see the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
-See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository).
+See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
 to add your Kotlin Multiplatform project to this topic and help the community.
 
 <table>
