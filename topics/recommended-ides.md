@@ -4,7 +4,7 @@
 
 If you want to get the best Kotlin Multiplatform development experience, we recommend using [JetBrains Fleet](https://www.jetbrains.com/fleet/).
 
-It supports testing and debugging your code on all the platforms your project targets and navigating between Kotlin
+It supports testing and debugging your code on all the platforms your project targets. You can also navigate between Kotlin
 Multiplatform code and the code written in other languages interoperable with Kotlin.
 
 See the [Use Fleet for Multiplatform development](fleet.md) tutorial to get started.
@@ -14,7 +14,7 @@ limitations, but we're committed to fixing them based on [your feedback](fleet.m
 
 ## Android Studio
 
-If you prefer a more stable solution, you can use [Android Studio](https://developer.android.com/studio),
+As a more stable solution, you can use [Android Studio](https://developer.android.com/studio),
 although its support for Kotlin Multiplatform is limited.
 
 With Android Studio, you can also install a [special plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile)
