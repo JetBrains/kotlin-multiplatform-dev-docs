@@ -23,6 +23,11 @@ To learn more, see the [Compose Multiplatform](#compose-multiplatform) section.
 Kotlin Multiplatform supports Android, iOS, desktop, web, server-side, and other platforms. Learn more
 about [supported platforms](supported-platforms.md).
 
+### In which IDE should I work on my cross-platform app?
+
+We recommend using JetBrains Fleet or Android Studio depending on your project needs and expectations.
+Learn more about which one to choose in [Recommended IDEs](recommended-ides.md).
+
 ### How do I create a new Kotlin Multiplatform project?
 
 The [Get started with Kotlin Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
@@ -128,6 +133,11 @@ instructions for creating a Kotlin Multiplatform project with Compose Multiplatf
 You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by the Kotlin
 Developer Advocate Sebastian Aigner.
 
+### What IDE should I use for building apps with Compose Multiplatform?
+
+We recommend using JetBrains Fleet or Android Studio depending on your project needs and expectations.
+Learn more about which one to choose in [Recommended IDEs](recommended-ides.md).
+
 ### Can I play with a demo application? Where can I find it?
  
 You can play with our [samples](multiplatform-samples.md).
@@ -216,8 +226,11 @@ working with the DOM in Kotlin/JS, and it's not intended for sharing UIs across 
 
 ### Are there any plans to improve tooling for multiplatform development?
 
-Yes. We're acutely aware of the current challenges with multiplatform tooling and are actively working on enhancements
+Yes, we're acutely aware of the current challenges with multiplatform tooling and are actively working on enhancements
 in several areas.
+
+We've already launched previews of the [Kotlin Multiplatform support in Fleet](fleet.md).
+Try it yourself and leave feedback!
 
 ### Are you going to provide a Swift interop?
 
