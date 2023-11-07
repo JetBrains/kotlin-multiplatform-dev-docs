@@ -288,7 +288,7 @@ Xcode installed to open and run both apps after making changes to the common cod
   <tr>
   <td>
     <list>
-       <li>Both Android and iOS team members can easily edit Kotlin Multiplatform code, ensuring that creating and maintaining shared code is a shared responsibility. This helps prevent siloes breaks teams' isolation and encourages collaboration.</li>
+       <li>Both Android and iOS team members can easily edit Kotlin Multiplatform code, ensuring that creating and maintaining shared code is a shared responsibility. This helps prevent teams' isolation and encourages collaboration.</li>
        <li>This approach doesn't require separate versioning and publishing of the shared code.</li>
        <li>The development workflow is quicker, as iOS team members don't have to wait for artifacts to be created and published.</li>
    </list>
