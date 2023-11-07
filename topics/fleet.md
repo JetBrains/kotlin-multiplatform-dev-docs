@@ -34,7 +34,7 @@ maintain the native parts of your application as well.
    ```
 
 5. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
-   so that you can run your app on an Android and iOS emulator or device.
+   so that you can run your app on Android and iOS simulators.
    
    See [Set up an environment](compose-multiplatform-setup.md) for more details on these prerequisites and
    information on how to use the KDoctor tool to verify your setup.
@@ -43,7 +43,7 @@ maintain the native parts of your application as well.
       to reopen Android Studio and Xcode following an update.
     * To run and debug Android applications on the current machine, you'll need to create
       a [virtual device in Android Studio](https://developer.android.com/studio/run/managing-avds#createavd).
-    * If you experience problems running an iOS project on either a simulator or a real device, verify that you can run
+    * If you experience problems running an iOS project, verify that you can run
       the embedded project in the `iosApp` folder from Xcode on this destination. Then restart Fleet.
 
 ## Get started with Fleet
