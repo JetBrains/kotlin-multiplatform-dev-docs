@@ -102,7 +102,7 @@ controller, and on desktop by a window. Let's examine each of them.
 
 ### On Android
 
-For Android, open the `MainActivity.k ` file in `composeApp/src/androidMain/kotlin`:
+For Android, open the `MainActivity.kt ` file in `composeApp/src/androidMain/kotlin`:
 
 ```kotlin
 class MainActivity : ComponentActivity() {
