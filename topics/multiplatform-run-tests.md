@@ -146,7 +146,7 @@ You can execute the test by running:
 * The test file using its context menu.
 * The `GrepTest` test class using the **Run** icon in the gutter.
 
-There's also a handy <shortcut layout="macOS">⌃Ctrl ⇧Shift R</shortcut>/<shortcut layout="Windows">Ctrl+Shift+F10</shortcut> shortcut.
+There's also a handy <shortcut>⌃ ⇧ F10</shortcut>/<shortcut>Ctrl+Shift+F10</shortcut> shortcut.
 Regardless of the option you choose, you'll see a list of targets to run the test on:
 
 ![Run test task](run-test-tasks.png){width=300}

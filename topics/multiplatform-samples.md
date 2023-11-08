@@ -1,9 +1,13 @@
 [//]: # (title: Kotlin Multiplatform samples)
 
 This is a curated list of cross-platform projects created with Kotlin Multiplatform. Some share almost all their
-functionality using Compose Multiplatform for the user interface. Others use native code for the user interface, and share
-(for example) only the data model and algorithms. Please note that the best way to get started with a new Kotlin Multiplatform
-application is by using the [web wizard](https://kmp.jetbrains.com/).
+functionality using Compose Multiplatform for the user interface. Others use native code for the user interface and share,
+for example, only the data model and algorithms. To get started with a new Kotlin Multiplatform application,
+we recommend using the [web wizard](https://kmp.jetbrains.com).
+
+You can find even more sample projects on GitHub, see the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
+See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
+to add your Kotlin Multiplatform project to this topic and help the community.
 
 <table>
   <tr>
@@ -56,6 +60,7 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
         <li>Model</li>
         <li>Networking</li>
         <li>Data storage</li>
+        <li>Navigation</li>
       </list>
     </td>
     <td>
@@ -63,7 +68,7 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
   <li><code>kotlinx-serialization</code></li>
   <li><code>kotlinx-datetime</code></li>
   <li><code>kotlinx-coroutines</code></li>
-  <li><code>kmm-viewmodel</code></li>
+  <li><code>decompose</code></li>
   <li><code>koin</code></li>
   <li><code>jsonpathkt-kotlinx</code></li>
   <li><code>horologist</code></li>
@@ -442,7 +447,6 @@ application is by using the [web wizard](https://kmp.jetbrains.com/).
         </list>
     </td>
   </tr>
-
   <tr>
       <td>
           <strong><a href="https://github.com/msasikanth/twine">Twine - RSS Reader</a></strong>

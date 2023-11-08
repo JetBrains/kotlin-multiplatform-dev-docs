@@ -23,7 +23,7 @@ The `androidApp` module contains an Android application, defines its main activi
 Make some changes and see how they are reflected in the UI:
 
 1. Navigate to the `MainActivity.kt` file in `androidApp`.
-2. Find the `Greeting` class invocation. Select the `greet()` function and use the **Cmd + B** shortcut.
+2. Find the `Greeting` class invocation. Select the `greet()` function and use the <shortcut>⌘ B</shortcut> shortcut.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
 3. In `Greeting.kt`, update the `greet()` function:
 
@@ -82,7 +82,7 @@ Implement the same changes as in the Android app:
 
 1. Launch Xcode. Select **Open a project or file**.
 2. Navigate to your project, for example **KotlinMultiplatformSandbox**, and select the `iosApp` folder. Click **Open**.
-3. In the `ContentView.swift` file, select the `greet()` function and use the **⌃ + Cmd** shortcut.
+3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘</shortcut> shortcut.
 
    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
