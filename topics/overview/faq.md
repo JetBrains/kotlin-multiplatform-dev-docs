@@ -163,8 +163,8 @@ Migration of the app consists of two parts: migrating the UI and migrating the l
 depends on the complexity of your application and the amount of Android-specific libraries you use.
 You can migrate most of your screens to Compose Multiplatform without changes. All of the Jetpack Compose widgets are
 supported. However, some APIs work only in the Android target – they might be Android-specific or have yet to be ported to
-other platforms. For instance, resource handling is Android-specific, so you would need to migrate to the Compose
-Multiplatform resource library or use a community solution. The
+other platforms. For instance, resource handling is Android-specific, so you would need to migrate to the [Compose
+Multiplatform resource library](compose-images-resources.md) or use a community solution. The
 Android [Navigation library](https://developer.android.com/jetpack/androidx/releases/navigation) is also
 Android-specific, but there are [community alternatives](compose-navigation-routing.md) available. For more information on components available only for Android, see the
 current [list of Android-only APIs](compose-android-only-components.md).

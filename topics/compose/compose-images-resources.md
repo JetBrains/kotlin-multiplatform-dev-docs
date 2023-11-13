@@ -1,23 +1,24 @@
 [//]: # (title: Images and resources)
 
 Compose Multiplatform provides a special library for accessing resources in a common way for all platforms. Resources
-are static data (such as images, fonts, and strings) that you can use from your application.
+are static data that you can use from your application. It could be images, fonts, and strings.
 
 > The library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > Its API may be changed in the future.
+> 
 > Currently, the library supports accessing resources as raw data and as images. The JetBrains team is planning to extend
 > this functionality.
 >
 {type="note"}
+
+## Configuration
 
 To access resources in your multiplatform projects:
 
 * For common code, store your resource files in the `resources` directory of the `commonMain` source set.
 * For platform-specific source sets, use the `resources` directory of the corresponding source set.
 
-![Compose resources project structure](compose-resources-structure.png){width=500}
-
-## Configuration
+![Compose resources project structure](compose-resources-structure.png){width=250}
 
 Deployment of resources differs on each platform:
 
@@ -74,11 +75,10 @@ It takes a resource path and returns a `Painter` value. The function works synch
 web. For the web target, it returns an empty painter for the first recomposition that will be replaced with the loaded
 image on subsequent recompositions.
 
-`painterResource()` loads either a `BitmapPainter` for rasterized image formats, like `.png`, `.jpg`, `.bmp`, `.webp`,
-or a `VectorPainter` for XML Vector Drawable formats, like `.xml`.
-
-XML Vector Drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
-except that they don't support external references to Android resources.
+* `painterResource()` loads either a `BitmapPainter` for raster image formats, like `.png`, `.jpg`, `.bmp`, `.webp`,
+  or a `VectorPainter` for XML Vector Drawable formats, like `.xml`.
+* XML Vector Drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
+  except that they don't support external references to Android resources.
 
 In its turn, the Android target also has the `painterResource()` function with similar semantics. It accepts resource
 references as identifiers of the `R` class generated only for the Android target. For example:
@@ -110,7 +110,11 @@ By design, resources are accessed asynchronously to not block the main UI thread
 to read your resource synchronously, either:
 
 * Call `readBytes()` in a coroutine or in the `LaunchedEffect` block.
-* Use the `runBlocking()` function. Note that the `runBlocking()` function is not available for the web target.
+* Use the `runBlocking()` function.
+  
+  > The `runBlocking()` function is not available for the web target.
+  >
+  {type="note"}  
 
 Here is an example of how to load a resource asynchronously and convert it into a string:
 
