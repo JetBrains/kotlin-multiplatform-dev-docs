@@ -1,7 +1,7 @@
 [//]: # (title: Create your multiplatform project)
 
 <microformat>
-   <p>This is the second part of the <strong>Getting started with Compose Multiplatform for Android, iOS, and desktop</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
+   <p>This is the second part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Create your multiplatform project</strong><br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Explore composable code<br/>      

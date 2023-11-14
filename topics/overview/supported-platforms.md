@@ -9,7 +9,7 @@ stability level.
 
 ## Core Kotlin Multiplatform technology stability levels
 
-Here's a quick guide to platform stability levels for the Core Kotlin Multiplatform technology and their meaning:
+Here's a quick guide to platform stability levels for the core Kotlin Multiplatform technology and their meaning:
 
 **Experimental** means "for trial use only":
 
@@ -25,7 +25,7 @@ Here's a quick guide to platform stability levels for the Core Kotlin Multiplatf
 
 * It's done. We will be evolving it according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
 
-### Current platform stability levels for Core Kotlin Multiplatform technology
+### Current platform stability levels for the core Kotlin Multiplatform technology
 
 | Platform                 | Stability level |
 |--------------------------|-----------------|

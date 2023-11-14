@@ -2,14 +2,14 @@
 
 ## Fleet
 
-If you want to get the best Kotlin Multiplatform development experience, we recommend using [JetBrains Fleet](https://www.jetbrains.com/fleet/).
+If you want the best Kotlin Multiplatform development experience, we recommend using [JetBrains Fleet](https://www.jetbrains.com/fleet/).
 
-It supports testing and debugging your code on all the platforms your project targets. You can also navigate between Kotlin
-Multiplatform code and the code written in other languages interoperable with Kotlin.
+It supports testing and debugging your code on all of the platforms your project targets. You can also navigate between Kotlin
+Multiplatform code and code written in other languages interoperable with Kotlin.
 
 See the [Use Fleet for Multiplatform development](fleet.md) tutorial to get started.
 
-The Kotlin Multiplatform support in Fleet is still in the early stages of development. You may face issues and
+Kotlin Multiplatform support in Fleet is still in the early stages of development. You may face issues and
 limitations, but we're committed to fixing them based on [your feedback](fleet.md#leave-feedback).
 
 ## Android Studio
@@ -23,9 +23,9 @@ that provides minimal launching and debugging capabilities for iOS apps.
 ## Other IDEs
 
 If basic Kotlin Multiplatform support is enough for you, you can use any IDE that supports Kotlin, including [IntelliJ IDEA](https://www.jetbrains.com/idea/).
-It provides opening, browsing, and building multiplatform projects.
+It supports opening, browsing, and building multiplatform projects.
 
 > If you're targeting iOS in your Kotlin Multiplatform project, you'll also need [Xcode](https://developer.apple.com/xcode/)
-> installed on your machine to write iOS-specific code and run an iOS application.
+> installed on your machine to write iOS-specific code and run iOS applications.
 >
 {type="note"}

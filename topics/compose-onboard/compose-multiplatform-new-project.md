@@ -1,6 +1,6 @@
 [//]: # (title: Create your own application)
 <microformat>
-   <p>This is the fourth part of the <strong>Getting started with Compose Multiplatform for Android, iOS, and desktop</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+   <p>This is the fourth part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>

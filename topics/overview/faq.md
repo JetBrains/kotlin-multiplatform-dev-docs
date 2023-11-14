@@ -64,8 +64,8 @@ systems, such as Microsoft Windows or Linux.
 
 You can still use coroutines and flows to write asynchronous code in your Kotlin Multiplatform projects. How you call
 this code depends on where you call the code from. Calling suspending functions and flows from Kotlin code is widely
-documented, especially for Android. [Calling them from Swift code](https://kotlinlang.org/docs/native-ios-integration.html#completion-handlers) requires a little more work because they
-are not Objective-C or Swift constructs.
+documented, especially for Android. [Calling them from Swift code](https://kotlinlang.org/docs/native-ios-integration.html#calling-kotlin-suspending-functions)
+requires a little more work, see [KT-47610](https://youtrack.jetbrains.com/issue/KT-47610) for more details.
 
 The best current approach for calling suspending functions and flows from Swift is to use plugins and libraries like
 [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) or [SKIE](https://skie.touchlab.co/) together
@@ -94,7 +94,7 @@ seamless on both platforms.
 
 ### How can I speed up my Kotlin Multiplatform module compilation for native platforms (iOS, macOS, Linux)?
 
-See these tips for improving Kotlin/Native compilation times.
+See these [tips for improving Kotlin/Native compilation times](https://kotlinlang.org/docs/native-improving-compilation-time.html).
 
 ## Compose Multiplatform
 
