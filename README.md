@@ -22,7 +22,7 @@ This repository is the source for [https://www.jetbrains.com/help/kotlin-multipl
 You can contribute to the documentation by submitting a pull request.
 Please follow the provided [style and formatting guidelines](https://docs.google.com/document/d/1mUuxK4xwzs3jtDGoJ5_zwYLaSEl13g_SuhODdFuh2Dc/edit?usp=sharing).
 
-You can also [create a YouTrack issue](https://youtrack.jetbrains.com/newIssue?project=KT) to discuss your suggestion with the Kotlin Technical Writing team.
+You can also [create a YouTrack issue](https://youtrack.jetbrains.com/newIssue?project=KT&c=Subsystems+Docs+%26+Examples) to discuss your suggestion with the Kotlin Technical Writing team.
 
 ## Feedback and issues
 
