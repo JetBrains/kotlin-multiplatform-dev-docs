@@ -13,10 +13,6 @@
 Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
 development.
 
-```yaml
-
-```
-
 ## Install the necessary tools
 
 We recommend that you install the latest stable versions for compatibility and better performance.
