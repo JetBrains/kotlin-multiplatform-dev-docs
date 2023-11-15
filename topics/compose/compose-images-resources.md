@@ -80,16 +80,7 @@ image on subsequent recompositions.
 * XML Vector Drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
   except that they don't support external references to Android resources.
 
-In its turn, the Android target also has the `painterResource()` function with similar semantics. It accepts resource
-references as identifiers of the `R` class generated only for the Android target. For example:
-
-```kotlin
-// In your compose code:
-Image(
-    painterResource("compose-multiplatform.xml"),
-    null // description
-)
-```
+Note that the configuration differs from the standard Android resource management.
 
 ## Accessing arbitrary resources as raw data
 
@@ -106,17 +97,9 @@ public function that converts your resource into a byte array:
 suspend fun readBytes(): ByteArray
 ```
 
-By design, resources are accessed asynchronously to not block the main UI thread while a resource is loaded. If you want
-to read your resource synchronously, either:
-
-* Call `readBytes()` in a coroutine or in the `LaunchedEffect` block.
-* Use the `runBlocking()` function.
-  
-  > The `runBlocking()` function is not available for the web target.
-  >
-  {type="note"}  
-
-Here is an example of how to load a resource asynchronously and convert it into a string:
+By design, resources are accessed asynchronously to not block the main UI thread while a resource is loaded.
+To access resources this way, you can call the [`readBytes()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/read-bytes.html)
+method in a coroutine or in the `LaunchedEffect` block. Here's how you can load a resource asynchronously and convert it into a string:
 
 ```kotlin
 @OptIn(ExperimentalResourceApi::class)
@@ -135,13 +118,18 @@ fun App() {
 }
 ```
 
-You can then implement synchronous access to resources like this:
+If you want read your resource synchronously, use the `runBlocking()` function.
+You can implement synchronous access to resources like this:
 
 ```kotlin
 val byteArray = runBlocking {
     resource("welcome.txt").readBytes()
 }
 ```
+
+> The `runBlocking()` function is not available for the web target.
+>
+{type="note"}
 
 ## Accessing fonts and strings resources
 
