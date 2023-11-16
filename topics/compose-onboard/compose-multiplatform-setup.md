@@ -1,7 +1,7 @@
 [//]: # (title: Set up an environment)
 
 <microformat>
-   <p>This is the first part of the <strong>Getting started with Compose Multiplatform for Android, iOS, and desktop</strong> tutorial:</p>
+   <p>This is the first part of the <strong>Getting started with Compose Multiplatform</strong> tutorial:</p>
    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Set up an environment</strong><br/>
       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Create your multiplatform project<br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Explore composable code<br/>      
@@ -36,7 +36,7 @@ We recommend that you install the latest stable versions for compatibility and b
           <p>Most of the time, Xcode will work in the background. You will use it to add Swift or Objective-C code to your iOS application.</p>
             <note>
               <p>
-                We generally recommend using the latest stable versions for all tools. However, Kotlin/Native sometimes doesn't support the newest Xcode right away. If that's your case, <a href="https://developer.apple.com/download/all/?q=Xcode">install an earlier version of Xcode</a>.
+                We generally recommend using the latest stable versions for all tools. However, Kotlin/Native sometimes doesn't support the newest Xcode right away. You can check supported versions in the <a href="https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility">compatibility guide</a>, and if necessary, <a href="https://developer.apple.com/download/all/?q=Xcode">install an earlier version of Xcode</a>.
               </p>
             </note>   
       </td>

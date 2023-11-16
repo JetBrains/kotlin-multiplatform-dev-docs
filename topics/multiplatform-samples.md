@@ -173,7 +173,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
     </td>
   </tr><tr>
     <td>
-      <strong><a href="https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer">KMM RSS Reader</a></strong>
+      <strong><a href="https://github.com/Kotlin/kmm-production-sample">KMM RSS Reader</a></strong>
     </td>
     <td>A sample application for consuming RSS feeds designed to show how Kotlin Multiplatform can be used in production. The UI is implemented natively, but there is an experimental branch showing how Compose Multiplatform could be used on iOS and desktop. Networking is accomplished using the <a href="https://ktor.io/docs/create-client.html">Ktor HTTP Client</a>, while XML parsing is implemented natively. The Redux architecture is used for sharing UI State.</td>
     <td>

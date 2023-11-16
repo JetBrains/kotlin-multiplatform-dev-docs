@@ -3,14 +3,14 @@
 This article shows the basics of working with Kotlin Multiplatform projects
 in [JetBrains Fleet](https://www.jetbrains.com/fleet/).
 
-Fleet is a modern IDE platform designed for collaborative development. It strives to provide a superior experience for
+Fleet is a modern IDE designed for collaborative development. It strives to provide a superior experience for
 Kotlin Multiplatform. As the first step, Fleet brings Kotlin Multiplatform to macOS.
 
-With Fleet, you can quickly open and run multiplatform projects targeting the Android, iOS, and desktop platforms. The
+With Fleet, you can quickly open and run multiplatform projects targeting Android, iOS, and desktop platforms.
 Fleet's Smart Mode selects the appropriate code-processing engine.
 
-When targeting iOS, navigation, refactoring, and debugging are all available across languages used in the project. That
-helps manage a mixed-language codebase with ease. Fleet has full support for Swift, so you can easily extend and
+When targeting iOS, navigation, refactoring, and debugging are all available across languages used in the project. This
+makes it easier to manage a mixed-language codebase. Fleet has full support for Swift, so you can easily extend and
 maintain the native parts of your application as well.
 
 ## Prepare your development environment
@@ -19,32 +19,32 @@ maintain the native parts of your application as well.
 >
 {type="note"}
 
-1. Install the [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) app.
+1. Install [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) app.
 
    The Toolbox app provides an easy upgrade path to new versions as they become available. You can also manage multiple
    versions of JetBrains products, working with stable releases while exploring experimental ones.
 
-2. Log into the Toolbox with your [JetBrains account](https://account.jetbrains.com/login).
+2. Log into Toolbox with your [JetBrains account](https://account.jetbrains.com/login).
 3. Click **Install** next to the **Fleet** icon.
 4. Check your version of the JDK. Currently, Fleet requires the Java Development Kit 17.0 and later to be installed for
    Kotlin Multiplatform development. To do that, run the following command in your command-line tool:
 
-   ```bash 
+   ```bash
    java -version
    ```
 
 5. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
    so that you can run your app on Android and iOS simulators.
-   
+
    See [Set up an environment](compose-multiplatform-setup.md) for more details on these prerequisites and
    information on how to use the KDoctor tool to verify your setup.
 
-    * To ensure the installation is complete, open both Android Studio and Xcode at least once. It may also be necessary
-      to reopen Android Studio and Xcode following an update.
-    * To run and debug Android applications on the current machine, you'll need to create
-      a [virtual device in Android Studio](https://developer.android.com/studio/run/managing-avds#createavd).
-    * If you experience problems running an iOS project, verify that you can run
-      the embedded project in the `iosApp` folder from Xcode on this destination. Then restart Fleet.
+   * To ensure the installation is complete, open both Android Studio and Xcode at least once. It may also be necessary
+     to reopen Android Studio and Xcode following an update.
+   * To run and debug Android applications on the current machine, you'll need to create
+     a [virtual device in Android Studio](https://developer.android.com/studio/run/managing-avds#createavd).
+   * If you experience problems running an iOS project, verify that you can run
+     the embedded project in the `iosApp` folder from Xcode on this destination. Then restart Fleet.
 
 ## Get started with Fleet
 
@@ -66,7 +66,7 @@ In this tutorial, you'll create a new project with the web wizard:
 
 ![Kotlin Multiplatform wizard](fleet-web-wizard.png){width=450}
 
-### Enable the Smart Mode
+### Enable Smart Mode
 
 1. Launch Fleet.
 2. On the welcome screen, click **Open File or Folder** or select **File | Open** in the editor.
@@ -76,29 +76,29 @@ In this tutorial, you'll create a new project with the web wizard:
 
    Fleet detects the project type and opens it for you.
 
-4. When opening a folder with a build file, Fleets gives you an option to enable
-   the [Smart Mode](https://www.jetbrains.com/help/fleet/smart-mode.html). Click **Trust and Open**:
+4. When opening a folder with a build file, Fleets gives you the option to enable
+   [Smart Mode](https://www.jetbrains.com/help/fleet/smart-mode.html). Click **Trust and Open**:
 
    ![Smart mode in Fleet](fleet-project-wizard-2.png){width=700}
 
-    At the top of the window, you'll see messages from Fleet as the project is imported and indexed.
+   At the top of the window, you'll see messages from Fleet as the project is imported and indexed.
 
-When the Smart Mode is enabled, Fleet operates as an IDE, with all the code completion, navigation, debugging, and
+When Smart Mode is enabled, Fleet operates as an IDE, with all of the code completion, navigation, debugging, and
 refactoring features available. When it's disabled, Fleet works as a simple file editor. You can quickly open files and
 make changes, but most of the productivity features won't be available.
 
-Under the hood, Fleet chooses which backend to use to process code. When the Smart Mode is enabled, the backend for
-Kotlin is the same code-processing engine used by IntelliJ IDEA. So, the functionality you might be already familiar with
+Under the hood, Fleet chooses which backend to use to process code. When Smart Mode is enabled, the backend for
+Kotlin is the same code-processing engine used by IntelliJ IDEA, so the functionality you might be already familiar with
 is retained.
 
-To check the Smart Mode status, click the lightning bolt icon at the top:
+To check Smart Mode status, click the lightning bolt icon at the top:
 
 ![Enabling Smart Mode in Fleet](fleet-smart-mode.png){width=300}
 
 ### Run your project
 
 When opening a project, Fleet creates [run configurations](https://www.jetbrains.com/help/fleet/run-configs.html) for
-the targets found in the build file. To access run configurations, you can either:
+the targets found in the build file. To access run configurations, you can:
 
 * Use the <shortcut>⌘ R</shortcut> shortcut.
 * Select **Run** | **Run & Debug** in the main menu.
@@ -115,7 +115,7 @@ In the build window, you'll see how the application has been compiled and launch
 
 ## Work with multiplatform code
 
-The sample code generated by the web wizard provides a useful starting point for exploring the Fleet functionality:
+The sample code generated by the web wizard provides a useful starting point for exploring Fleet functionality:
 code navigation, editing, refactoring, and debugging in multiplatform projects.
 
 For a detailed explanation of the sample code, see
@@ -123,11 +123,11 @@ the [Get started with the Compose Multiplatform](compose-multiplatform-explore-c
 
 ### Navigating code
 
-Let's see how the cross-language navigation works in Fleet using the example of navigating from Kotlin to Swift:
+Let's see how cross-language navigation works in Fleet using the example of navigating from Kotlin to Swift:
 
 1. Open the `composeApp/src/commonMain/kotlin/App.kt` file. Here's the `App` composable, the center of the sample code.
-2. Select the `App()` function and run the **Usages** action form the context menu or with the <shortcut>⌘ U</shortcut> shortcut. You
-   can see it is invoked in three files:
+2. Select the `App()` function and run the **Usages** action form the context menu or with the <shortcut>⌘ U</shortcut>
+   shortcut. You can see it is invoked in three files:
 
    ![Function show usages](fleet-show-usages.png){width=700}
 
@@ -145,7 +145,7 @@ Let's see how the cross-language navigation works in Fleet using the example of 
 
 Since the `ContentView.swift` file is already open, you can explore Fleet support for editing Swift code:
 
-1. Add a new function to the `ComposeView` type. Fleet will provide all the expected coding assistance:
+1. Add a new function to the `ComposeView` type. Fleet will provide all of the expected coding assistance:
 
    ```swift
    struct ComposeView: UIViewControllerRepresentable {
@@ -234,8 +234,9 @@ and Kotlin code.
 1. In the `ContentView.swift` file, set a breakpoint on the return expression of the `sumArray()` function on line 17.
 2. In `App.kt`, set a breakpoint in the `App` composable on line 22.
 3. Open the **Run & Debug** menu and click **Debug** next to the `iosApp` configuration.
-4. When the breakpoint on line 17 of `ContentView.swift` is reached, in the **Debug** menu, use **Step Out** to move to line 7.
-5. To move into the `MainSwiftUIViewController()` Kotlin function, use **Step Into**. 
+4. When the breakpoint on line 17 of `ContentView.swift` is reached, in the **Debug** menu, use **Step Out** to move to
+   line 7.
+5. To move into the `MainSwiftUIViewController()` Kotlin function, use **Step Into**.
 6. Click **Resume** to move on to the breakpoint on line 22 of `App.kt`.
 
    ![Refactoring across multiple languages in Fleet](fleet-debug.png){width=700}
@@ -248,7 +249,7 @@ We encourage you to try out Fleet with your multiplatform projects, share your e
 feedback on the features that matter to you. Since the Kotlin Multiplatform support in Fleet is Experimental, your
 feedback and comments will impact how the product grows and matures.
 
-You can leave comments in [YouTrack](https://youtrack.jetbrains.com/issues/FL) or in
+You can leave comments on [YouTrack](https://youtrack.jetbrains.com/issues/FL) or in
 the [#fleet channel in Slack](https://app.slack.com/client/T09229ZC6/C063G2ZBF8V).
 
 ## What's next?
