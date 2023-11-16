@@ -8,11 +8,11 @@
                  start-page="get-started.xml">
     <toc-element toc-title="Get started" id="get-started.xml"/>
     <toc-element toc-title="Kotlin Multiplatform overview">
-        <toc-element  toc-title="Why Kotlin Multiplatform" href="https://www.jetbrains.com/kotlin-multiplatform/"/>
+        <toc-element toc-title="Why Kotlin Multiplatform" href="https://www.jetbrains.com/kotlin-multiplatform/"/>
         <toc-element id="supported-platforms.md" toc-title="Supported platforms"/>
         <toc-element id="case-studies.md"/>
         <toc-element id="faq.md"/>
-        <toc-element id="roadmap.md"/>
+        <toc-element toc-title="Roadmap" href="https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/"/>
     </toc-element>
     <toc-element toc-title="Create an app with shared logic and native UI">
         <toc-element id="multiplatform-getting-started.md"/>
