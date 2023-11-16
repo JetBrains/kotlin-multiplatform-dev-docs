@@ -205,6 +205,12 @@ iOS components into your screen, updates may affect their appearance.
 
 ## Future plans
 
+### What are the plans for the Kotlin Multiplatform evolution?
+
+We at JetBrains are investing much to provide the best experience for multiplatform development and eliminate existing pains of multiplatform users.
+We have plans for improving the core Kotlin Multiplatform technology, integration with the Apple ecosystem, tooling, and our Compose Multiplatform UI framework. 
+[Check out our roadmap](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/).
+
 ### When will Compose Multiplatform become Stable?
 
 Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Alpha, and web is Experimental.
