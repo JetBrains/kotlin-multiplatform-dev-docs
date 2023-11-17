@@ -4,8 +4,8 @@ Amper is a new tool for project configuration created by JetBrains. It helps con
 publishing, and more. The goal of Amper is to allow developers to spend less time dealing with build systems and focus
 on solving actual business tasks instead.
 
-With Amper, you can create Kotlin Multiplatform applications for JVM, Android, iOS, macOS, and Linux, as well as Kotlin
-Multiplatform libraries for all supported targets.
+With Amper, you can create configuration files for Kotlin Multiplatform applications that work on JVM, Android, iOS,
+macOS, and Linux, as well as for multiplatform libraries that work with all supported targets.
 
 > Amper is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
@@ -15,36 +15,37 @@ Multiplatform libraries for all supported targets.
 
 ## How Amper works
 
-Amper is currently using Gradle as the backend and YAML as the frontend that forms the project configuration. It
+Amper currently uses Gradle as the backend and YAML as the frontend that designs the project configuration. It
 supports custom tasks, library publishing to Maven, CocoaPods, and packaging desktop apps through the Gradle interop.
-With Amper, you can take a shared Kotlin library or a platform-specific application and configure it in a module
+
+With Amper, you declare modules that can be platform-specific applications or shared Kotlin libraries in a `.yaml` module
 manifest file using a special declarative DSL.
 
 The core concept of this DSL is Kotlin Multiplatform. Amper allows you to configure Kotlin Multiplatform projects
 quickly and easily without having to dive deep into complex Gradle concepts. The Amper's DSL offers a special syntax to
 deal with multiplatform configuration: dependencies, settings, and so on.
 
-Here is an example of Amper's manifest file for Kotlin Multiplatform shared library which can be used with JVM, Android,
-and iOS applications:
+Here is an example of Amper's manifest file for a Kotlin Multiplatform shared library which can be used with JVM,
+Android, and iOS applications:
 
 ```yaml
 product:
   type: lib
   platforms: [ jvm, android, iosArm64, iosSimulatorArm64, iosX64 ]
 
-# Shared Compose dependencies:
+# Shared Compose Multiplatform dependencies:
 dependencies:
   - org.jetbrains.compose.foundation:foundation:1.5.0-rc01: exported
   - org.jetbrains.compose.material3:material3:1.5.0-rc01: exported
 
 # Android-only dependencies  
 dependencies@android:
-  # integration compose with activities
+  # Integration compose with activities
   - androidx.activity:activity-compose:1.7.2: exported
   - androidx.appcompat:appcompat:1.6.1: exported
 
 # iOS-only dependencies with a dependency on a CocoaPod
-# Note that CocoaPods dependencies are not yet implemented in the prototype     
+# Note that CocoaPods dependencies are not yet implemented in the prototype
 dependencies@ios:
   - pod: 'FirebaseCore'
     version: '~> 6.6'
@@ -59,8 +60,8 @@ settings:
 ```
 
 * The `product` section defines the project type and the list of targeted platforms.
-* The `dependencies` section allows not only Kotlin and Maven dependencies, but platform-specific package managers, such
-  as CocoaPods, Swift Package Manager.
+* The `dependencies` section adds not only Kotlin and Maven dependencies, as well as platform-specific package managers,
+  such as CocoaPods, Swift Package Manager.
 * The `@platform` qualifier marks platform-specific code, including platform dependencies and settings.
 
 ## Try Amper
@@ -89,6 +90,3 @@ shape the future of Amper.
   questions.
 * Read [Amper documentation](https://github.com/JetBrains/amper/tree/main/docs/Documentation.md) that covers different
   aspects of Amper's design and functionality.
-
-
-
