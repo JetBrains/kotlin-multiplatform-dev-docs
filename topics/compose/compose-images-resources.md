@@ -80,7 +80,14 @@ image on subsequent recompositions.
 * XML Vector Drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
   except that they don't support external references to Android resources.
 
-Note that the configuration differs from the standard Android resource management.
+Here's how you can access images in your compose code:
+
+```kotlin
+Image(
+   painterResource("compose-multiplatform.xml"),
+   null // description
+)
+```
 
 ## Accessing arbitrary resources as raw data
 
