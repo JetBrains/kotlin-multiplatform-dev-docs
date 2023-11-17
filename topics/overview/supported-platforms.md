@@ -1,11 +1,11 @@
 [//]: # (title: Stability of supported platforms)
 
-Kotlin Multiplatform allows you to create applications for various platforms and share code across them, allowing you to
+Kotlin Multiplatform allows you to create applications for various platforms and share code across them so that you can
 reach users on their favorite devices. Different platforms may have varying levels of stability based on their support
-from the core Kotlin Multiplatform technology for code-sharing and the Compose Multiplatform UI framework.
+by the core Kotlin Multiplatform technology for code sharing and by the Compose Multiplatform UI framework.
 
-This page contains information to help you identify which platforms align with your project needs, based on their
-stability level.
+This page contains information to help you identify which platforms align with your project needs, along with details of
+their stability level.
 
 ## Core Kotlin Multiplatform technology stability levels
 
@@ -14,16 +14,16 @@ Here's a quick guide to platform stability levels for the core Kotlin Multiplatf
 **Experimental** means "for trial use only":
 
 * We are just trying out an idea and want some users to play with it and give feedback. If it doesn't work out, we may
-  drop it any minute.
+  drop it at any minute.
 
 **Best effort** means "it is safe to use in most scenarios":
 
 * There might be unexpected breaking changes.
 * You may experience issues during migration.
 
-**Stable** means "use it even in most conservative scenarios":
+**Stable** means "you can use it even in the most conservative of scenarios":
 
-* It's done. We will be evolving it according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
+* It's done. We will be developing it according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
 
 ### Current platform stability levels for the core Kotlin Multiplatform technology
 
@@ -51,19 +51,20 @@ Here's a quick guide to platform stability levels for the Compose Multiplatform 
 **Experimental** means "it's under development":
 
 * Some features might not be available yet and those features that are present might have performance issues or bugs.
-* There might be changes in the future, and breaking changes can occur often.
+* There might be changes in the future, and breaking changes may occur frequently.
 
 **Alpha** means "use at your own risk, expect migration issues":
 
-* We have decided to productize the platform support but it hasn't reached its final shape yet.
+* We have decided to productize platform support but it hasn't taken its final shape yet.
 
-**Beta** means "you can use it, we'll do our best to minimize migration issues for you":
+**Beta** means "you can use it, and we'll do our best to minimize migration issues for you":
 
-* It's almost done, user feedback is especially important now.
-* Still, it's not 100% finished, so changes are possible (including ones based on your own feedback).
-  We collectively refer to **Experimental**, **Alpha** and **Beta** as **pre-stable** levels.
+* It's almost done, so user feedback is especially important now.
+* It's not 100% finished yet, so changes are possible (including ones based on your own feedback).
 
-**Stable** means "use it even in most conservative scenarios":
+We refer to **Experimental**, **Alpha**, and **Beta** collectively as **pre-stable** levels.
+
+**Stable** means "you can use it even in the most conservative of scenarios":
 
 * The framework provides a comprehensive API surface that allows you to write beautiful, production-ready applications,
   without encountering performance or other issues in the framework itself.
@@ -78,4 +79,7 @@ Here's a quick guide to platform stability levels for the Compose Multiplatform 
 | Desktop (JVM)            | Stable          |
 | Web based on Kotlin/Wasm | Experimental    |
 
-<!-- Learn more about which IDE we recommend for your code-sharing scenario across different combinations of platforms. -->
+## What's next?
+
+See [Recommended IDEs](recommended-ides.md) to learn which IDE is better for your code-sharing scenario across different
+combinations of platforms.
