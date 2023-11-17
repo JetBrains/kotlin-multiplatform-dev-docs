@@ -143,7 +143,7 @@ and within the customer's home. [Read the full story](https://kotlinlang.org/lp/
 
 Mirego uses Kotlin Multiplatform to run the same business logic on the web, iOS (iPhone and iPad), tvOS, Android (device
 and TV), and Amazon Fire TV. Mirego works with clients to design and develop new digital
-products. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/netvirta/).
+products. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/mirego/).
 
 ![Chalk.com](chalk-com.svg){width=200}
 
