@@ -62,7 +62,7 @@ settings:
 * The `product` section defines the project type and the list of targeted platforms.
 * The `dependencies` section adds not only Kotlin and Maven dependencies, but also platform-specific package managers,
   such as CocoaPods, Swift Package Manager.
-* The `@platform` qualifier marks platform-specific ыусешщты, including dependencies and settings.
+* The `@platform` qualifier marks platform-specific sections, including dependencies and settings.
 
 ## Try Amper
 

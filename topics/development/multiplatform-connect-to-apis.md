@@ -100,6 +100,7 @@ interface Platform {
 ```kotlin
 // In the androidMain source set:
 import android.os.Build
+
 class AndroidPlatform : Platform {
     override val name: String = "Android ${Build.VERSION.SDK_INT}"
 }
@@ -108,6 +109,7 @@ class AndroidPlatform : Platform {
 ```kotlin
 // In the iosMain source set:
 import platform.UIKit.UIDevice
+
 class IOSPlatform : Platform {
     override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
 }
