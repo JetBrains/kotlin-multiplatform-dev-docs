@@ -1,8 +1,8 @@
 [//]: # (title: Project configuration with Amper)
 
-Amper is a new tool for project configuration created by JetBrains. It helps configure projects for building, packaging,
-publishing, and more. The goal of Amper is to allow developers to spend less time dealing with build systems and focus
-on solving actual business tasks instead.
+[Amper](https://github.com/JetBrains/amper/tree/main) is a new tool for project configuration created by JetBrains.
+It helps configure projects for building, packaging, publishing, and more. The goal of Amper is to allow developers
+to spend less time dealing with build systems and focus on solving actual business tasks instead.
 
 With Amper, you can create configuration files for Kotlin Multiplatform applications that work on JVM, Android, iOS,
 macOS, and Linux, as well as for multiplatform libraries that work with all supported targets.
@@ -15,15 +15,15 @@ macOS, and Linux, as well as for multiplatform libraries that work with all supp
 
 ## How Amper works
 
-Amper currently uses Gradle as the backend and YAML as the frontend that designs the project configuration. It
+Amper currently uses Gradle as the backend and YAML as the frontend that defines the project configuration. It
 supports custom tasks, library publishing to Maven, CocoaPods, and packaging desktop apps through the Gradle interop.
 
-With Amper, you declare modules that can be platform-specific applications or shared Kotlin libraries in a `.yaml` module
-manifest file using a special declarative DSL.
+With Amper, you can set up a configuration for platform-specific applications and shared Kotlin libraries.
+They are declared as modules in a `.yaml` module manifest file using a special declarative DSL.
 
 The core concept of this DSL is Kotlin Multiplatform. Amper allows you to configure Kotlin Multiplatform projects
 quickly and easily without having to dive deep into complex Gradle concepts. The Amper's DSL offers a special syntax to
-deal with multiplatform configuration: dependencies, settings, and so on.
+work with multiplatform configuration: dependencies, settings, and so on.
 
 Here is an example of Amper's manifest file for a Kotlin Multiplatform shared library which can be used with JVM,
 Android, and iOS applications:
@@ -60,9 +60,9 @@ settings:
 ```
 
 * The `product` section defines the project type and the list of targeted platforms.
-* The `dependencies` section adds not only Kotlin and Maven dependencies, as well as platform-specific package managers,
+* The `dependencies` section adds not only Kotlin and Maven dependencies, but also platform-specific package managers,
   such as CocoaPods, Swift Package Manager.
-* The `@platform` qualifier marks platform-specific code, including platform dependencies and settings.
+* The `@platform` qualifier marks platform-specific ыусешщты, including dependencies and settings.
 
 ## Try Amper
 
