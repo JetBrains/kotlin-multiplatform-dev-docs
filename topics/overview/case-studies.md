@@ -22,16 +22,23 @@ needs. [Read the full story](https://netflixtechblog.com/netflix-android-and-ios
 and now ship features faster, while providing a consistent experience to their
 users. [Read the full story](https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04).
 
+![Cash App](cash-app.svg){width=200}{width=200}
+
+Cash App, with 30 million users and 50 engineers, gradually transitioned from shared JavaScript to Kotlin Multiplatform
+in 2018. This move streamlined collaboration between Android and iOS engineering teams and successfully addressed
+code-sharing issues previously encountered with
+JavaScript. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app).
+
 ![Quizlet](quizlet.svg){width=200}
 
 Kotlin Multiplatform drives global learning platform Quizlet's web and mobile apps, which boast a combined 100 million
-active installations. By transitioning their shared code from JavaScript to Kotlin, they significantly improved the
+active installs. By transitioning their shared code from JavaScript to Kotlin, they significantly improved the
 performance of both their Android and iOS
 applications. [Read the full story](https://quizlet.com/blog/shared-code-kotlin-multiplatform).
 
 ![Philips](philips.svg){width=200}
 
-Philips utilizes Kotlin Multiplatform to develop the HealthSuite Digital Platform mobile SDK. With Kotlin Multiplatform,
+Philips utilizes Kotlin Multiplatform in its HealthSuite Digital Platform mobile SDK. With Kotlin Multiplatform,
 they not only accelerated the implementation of new features but also fostered increased collaboration between Android
 and iOS developers. [Watch the full video](https://www.youtube.com/watch?v=hZPL8QqiLi8).
 
@@ -39,19 +46,18 @@ and iOS developers. [Watch the full video](https://www.youtube.com/watch?v=hZPL8
 
 Baidu, the world's largest Chinese-language search engine, uses Kotlin Multiplatform to unify the business logic of
 multiple modules in its Wonder App, covering multiple core business scenarios while retaining the excellent user
-experience of the native
-UI. [Read the full story](https://medium.com/@yuanguozheng/kmm-in-wonder-app-from-baidu-d5073caf8156).
+experience of the native UI. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/baidu/).
 
 ![Instabee](instabee.svg){width=200}
 
 Instabee migrated their Android application logic and UI to Kotlin Multiplatform with Compose Multiplatform. Thanks to
-that, they were able to release an iOS application in a short period of time by leveraging the Android
+that, they were able to release their iOS application in a short period of time by leveraging the Android
 codebase. [Watch the full video](https://www.youtube.com/watch?v=YsQ-2lQYQ8M).
 
 ![Autodesk](autodesk.svg){width=200}
 
 Autodesk uses Kotlin Multiplatform to ship a single source of truth for offline synchronization logic and data models on
-three platforms: iOS, Android, and Windows.
+three platforms: iOS, Android, and Windows. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/autodesk).
 
 ![Meetup](meetup.svg){width=200}
 
@@ -75,21 +81,21 @@ features. [Read the full story](https://medium.com/@xiang.j9501/case-studies-kua
 
 ![Worldline](worldline.svg){width=200}
 
-Worldline embraced Kotlin Multiplatform in a strategic move to revamp The Eroski app. Transitioning from Java and
+Worldline embraced Kotlin Multiplatform in a strategic move to revamp their Eroski app. Transitioning from Java and
 Objective-C, the team smoothly migrated each of the app's 50 screens. Their efforts led to a high-quality app with over
-99% crash-free users among 800K active
+99% crash-free users among 800,000 active
 users. [Read the full story](https://blog.worldline.tech/2022/01/26/kotlin_multiplatform.html).
 
 ![Memrise](memrise.svg){width=150}
 
 Memrise, one of the world's most popular language learning apps, has incrementally migrated the logic of their iOS,
-Android, and Web apps to Kotlin Multiplatform. This allows them to avoid duplicating the code in three different
+Android, and web apps to Kotlin Multiplatform. This allows them to avoid duplicating the code in three different
 programming languages, while still offering a full offline and native UI experience to their
 users. [Read the full story](https://engineering.memrise.com/kotlin-multiplatform-memrise-3764b5a4a0db).
 
 ![VMware](vmware.svg){width=200}
 
-VMware uses Kotlin Multiplatform in various modules to enable different use cases in a consistent, cross-platform way
+VMware uses Kotlin Multiplatform in various modules to enable different use cases in a consistent, cross-platform way right
 across their Workspace ONE productivity app
 portfolio. [Read the full story](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0).
 
@@ -98,12 +104,13 @@ portfolio. [Read the full story](https://medium.com/vmware-end-user-computing/ad
 Down Dog uses a "maximum shared Kotlin" strategy for their application, which brings a studio-like yoga experience to
 mobile devices. They share various helpers between clients and servers, and most of the client code with Kotlin
 Multiplatform. Their team managed to significantly increase the app's development speed by keeping native-only views.
+[Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/down-dog/).
 
 ![Touchlab](touchlab.svg){width=200}
 
 From startups to multinationals with tens of millions of MAU, Touchlab helps clients put Kotlin Multiplatform in production.
 In addition to client work, they are trusted contributors to the open-source ecosystem, with several critical tools used
-by many teams for their production apps. [Learn more about Touchlab](https://touchlab.co/page/tlcasestudy).
+by many teams for their production apps. [Learn more about Touchlab](https://touchlab.co/).
 
 ![IceRock](ice-rock.svg){width=200}
 
@@ -122,21 +129,24 @@ app. [Watch the full video](https://www.youtube.com/watch?v=DcO9psUh4LI&source_v
 ![Fastwork](fastwork.svg){width=200}
 
 Fastwork uses Kotlin Multiplatform for their domain and data layers to help them share their business logic and API
-service between the iOS and Android platforms.
+service between iOS and Android platforms. Fastwork offers all-in-one business administration and management software to
+help users meet business needs, anytime,
+anywhere. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/fastwork/).
 
 ![NetVirta](net-virta.svg){width=200}
 
 NetVirta uses Kotlin Multiplatform to share data, business, and presentation logic between their apps. Their app
 portfolio offers an array of solutions, including full-body, foot, and head scanning apps that are used both in stores
-and within the customer's home.
+and within the customer's home. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/netvirta/).
 
 ![Mirego](mirego.svg){width=200}
 
-Mirego uses Kotlin Multiplatform to run the same business logic on the web, iOS (iPhone and iPad), tvOS, Android (
-device & TV), and Amazon Fire TV.
+Mirego uses Kotlin Multiplatform to run the same business logic on the web, iOS (iPhone and iPad), tvOS, Android (device
+and TV), and Amazon Fire TV. Mirego works with clients to design and develop new digital
+products. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/mirego/).
 
 ![Chalk.com](chalk-com.svg){width=200}
 
 In both of Chalk.com's mobile apps, Kotlin Multiplatform is used for networking, offline caching, and business logic.
 The UI for each of the apps is native to the platform, but other than that, almost everything else in their apps can be
-shared with Kotlin Multiplatform.
+shared with Kotlin Multiplatform. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/chalk/).
