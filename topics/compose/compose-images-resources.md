@@ -20,8 +20,6 @@ To access resources in your multiplatform projects:
 
 ![Compose resources project structure](compose-resources-structure.png){width=250}
 
-## Configuration
-
 The deployment of resources differs per platform:
 
 * On Android, resources are stored in the `.apk` files.
