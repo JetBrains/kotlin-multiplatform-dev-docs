@@ -95,8 +95,11 @@ To make sure everything works as expected, install and run the KDoctor tool:
 ## Possible issues and solutions
 
 <deflist collapsible="true">
-   <def title="Android Studio">
-      Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a>
+   <def title="Kotlin and Android Studio">
+      <list>
+         <li>Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a></li>
+         <li>You may encounter the <code>Kotlin not configured</code> error. It's a known issue in Android Studio Giraffe 2022.3 that doesn't affect building and running projects. To avoid the error, click <strong>Ignore</strong> or upgrade to Android Studio Hedgehog 2023.1.</li>
+      </list>
    </def>
    <def title="Java and JDK">
          <list>
