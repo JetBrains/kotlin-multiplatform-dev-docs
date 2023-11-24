@@ -35,6 +35,26 @@ There are two ways you can connect the shared Kotlin module to the iOS project:
   See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project)
   to learn how to add the framework directly in Xcode.
 
+### Configure the iOS application
+
+You can configure basic properties that affect the resulting app without Xcode:
+
+* To change the [`BUNDLE_ID`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion),
+  which uniquely identifies your app in the operating system, update it in the `iosApp/Configuration/Config.xcconfig` file in Android Studio.
+
+* To configure the `APP_NAME` option, which sets the target executable and application bundle name, open `Config.xcconfig` in any
+  text editor _before opening_ the project in Android Studio, and specify the desired name.
+
+  If you need to change the `APP_NAME` option after you open the project in Android Studio, do the following:
+
+  1. Close the project in Android Studio.
+  2. In your terminal, run `./cleanup.sh`.
+  3. Change the `APP_NAME` option.
+  4. Re-open the project in Android Studio.
+
+If you need to configure other settings, use Xcode. After opening the project in Android Studio,
+open the `iosApp/iosApp.xcworkspace` file in Xcode and make changes there.
+
 ### Symbolicating crash reports
 
 To help developers make their apps better, iOS provides a means for analyzing app crashes. For detailed crash analysis,
