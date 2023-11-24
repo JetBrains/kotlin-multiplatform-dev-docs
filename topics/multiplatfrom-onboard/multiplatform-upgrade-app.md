@@ -255,7 +255,7 @@ suspending functions return.
         delay(1.seconds)
         emit("Guess what it is! > ${platform.name.reversed()}")
         delay(1.seconds)
-        emit(daysPhrase())
+        emit(daysPhrase)
         emit(rocketComponent.launchPhrase())
    }
    ```
@@ -273,8 +273,7 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jetbrains.simplelogin.kotlinmultiplatformsandbox" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
 ```
@@ -386,10 +385,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -405,7 +404,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     val greetings = mainViewModel.greetingList.collectAsStateWithLifecycle()
                     GreetingView(phrases = greetings.value)
