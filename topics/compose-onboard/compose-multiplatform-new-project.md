@@ -10,15 +10,15 @@
 </microformat>
 
 Now that you've explored and enhanced the sample project created by the wizard, you can create your own application from
-scratch, using concepts you already know and introducing new ones.
+scratch, using concepts you already know and introducing some new ones.
 
 You'll create a "Local time application" where users can enter their country and city, and the app will display the time
-in the capital city of that country. All the functionality of your Compose Multiplatform will be implemented in common
+in the capital city of that country. All the functionality of your Compose Multiplatform app will be implemented in common
 code using multiplatform libraries. It'll load and display images within a dropdown menu, use events, styles, themes,
 modifiers, and layouts.
 
 At each stage you can run the application on iOS, Android, and desktop, but you can focus on the platforms that best
-match your needs.
+suit your needs.
 
 ## Lay the foundation
 
@@ -51,13 +51,13 @@ To get started, implement a new `App` composable:
 
 2. Run the application on Android and iOS:
 
-    ![New Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-3.png){width=500}
+   ![New Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-3.png){width=500}
 
-    When you run your application and click the button, the hardwired time is displayed.
+   When you run your application and click the button, the hardcoded time is displayed.
 
 3. Run the application on the desktop. It works, but the window is clearly too large for the UI:
 
-    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
+   ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
 4. To fix this, in `composeApp/src/desktopMain/kotlin`, update the `main.kt` file as follows:
 
@@ -77,13 +77,13 @@ To get started, implement a new `App` composable:
     }
     ```
 
-    Here you set the title of the window and use the `WindowState` type to give the window an initial size and position on
+    Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
     the screen.
 
-5. Follow the IDE’s instructions to import the missing dependencies.
+5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the desktop application again. Its appearance should improve:
 
-    ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
+   ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
 
 ## Support the user input
 
@@ -117,19 +117,19 @@ a `TextField` composable:
     The new code adds both the `TextField` and a `location` property. As the user types into the text field, the value of
     the property is incrementally updated using the `onValueChange` event handler.
 
-2. Follow the IDE’s instructions to import the missing dependencies.
+2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application across the different platforms:
 
-    ![User input in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-4.png){width=500}
-    
-    ![User input in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-5.png){width=350}
+   ![User input in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-4.png){width=500}
+
+   ![User input in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-5.png){width=350}
 
 ## Calculate time
 
 The next step is to use the given input to calculate time. To do this, create a `currentTimeAt()` function:
 
 1. Return to the `App.kt` file and add the following function:
-    
+
     ```kotlin
     fun currentTimeAt(location: String): String? {
         fun LocalTime.formatted() = "$hour:$minute:$second"
@@ -145,9 +145,9 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-    This function is similar to `todaysDate()` you created earlier, and which is now no longer required.
+    This function is similar to `todaysDate()` that you created earlier, and which is now no longer required.
 
-2. Follow the IDE’s instructions to import the missing dependencies.
+2. Follow the IDE's instructions to import the missing dependencies.
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
 
     ```kotlin
@@ -175,9 +175,9 @@ The next step is to use the given input to calculate time. To do this, create a 
 4. Run the application again and enter a valid timezone.
 5. Press the button, you should see the correct time:
 
-    ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
-    
-    ![Time display in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-6.png){width=350}
+   ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
+
+   ![Time display in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-6.png){width=350}
 
 ## Improve the style
 
@@ -227,12 +227,12 @@ time message could be rendered more prominently.
     * The `Text` composable fills the available horizontal space and centers its content.
     * The `style` parameter customizes the content of the `Text`.
 
-2. Follow the IDE’s instructions to import the missing dependencies.
+2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application to see how the appearance has improved:
 
-    ![Improved style of the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-6.png){width=500}
-    
-    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
+   ![Improved style of the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-6.png){width=500}
+
+   ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
 ## Refactor the design
 
@@ -306,26 +306,26 @@ The application works, but is prone to users' typos. It would be preferable to a
    * There is a `Country` type, consisting of a name and a timezone.
    * The `currentTimeAt()` function takes a `TimeZone` as its second parameter.
    * The `App` now requires a list of countries as a parameter. The `countries()` function provides the list.
-   * `DropdownMenu`replaced the `TextField`. The value of a `showCountries` property determines the visibility
+   * `DropdownMenu`replaced the `TextField`. The value of the `showCountries` property determines the visibility
      of `DropdownMenu`. There is a `DropdownMenuItem` for each country.
 
-2. Follow the IDE’s instructions to import the missing dependencies.
+2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application to see the redesigned version:
 
-    ![The country list in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-7.png){width=500}
-    
-    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
+   ![The country list in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-7.png){width=500}
 
-> You can further improve the design by using a Dependency injection framework, such as [Koin](https://insert-koin.io/),
-> to build and inject the table of locations. If the data was stored externally,
-> the [Ktor](https://ktor.io/docs/create-client.html) library could be used to fetch it over the network, or
+   ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
+
+> You can further improve the design by using a dependency injection framework, such as [Koin](https://insert-koin.io/),
+> to build and inject the table of locations. If the data is stored externally,
+> you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network, or
 > the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
 >
 {type="tip"}
 
 ## Introduce images
 
-The list of country names works, but it’s not visually appealing. You can improve it by replacing the names with images
+The list of country names works, but it's not visually appealing. You can improve it by replacing the names with images
 of national flags.
 
 Compose Multiplatform provides a library for accessing resources in a common way across all platforms. The Kotlin
@@ -344,10 +344,10 @@ code to load and display them:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
-    > Each platform-specific source set can also have its own resources folder. So you could have different images for each
-    > platform, if needed.
-    >
-    {type="tip"}
+   > Each platform-specific source set can also have its own resources folder. So you could have different images for each
+   > platform, if needed.
+   >
+   {type="tip"}
 
 3. Change the codebase to support images:
 
@@ -427,12 +427,12 @@ code to load and display them:
     * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` that contains country names.
     * Each `Image` requires a `Painter` object to fetch the data.
 
-4. Follow the IDE’s instructions to import the missing dependencies and annotations.
+4. Follow the IDE's instructions to import the missing dependencies and annotations.
 5. Run the application to see the new behavior:
 
-    ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
-    
-    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
+   ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
+
+   ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
 ## What's next
 
@@ -440,5 +440,5 @@ We encourage you to explore multiplatform development further and try out more p
 
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-* [Share buisiness logic between iOS and Android keeping the UI native](multiplatform-getting-started.md)
+* [Share business logic between iOS and Android keeping the UI native](multiplatform-getting-started.md)
 * [See the curated list of sample projects](multiplatform-samples.md)

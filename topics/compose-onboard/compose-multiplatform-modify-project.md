@@ -32,7 +32,7 @@ To use this library:
            implementation(compose.material)
            @OptIn(ExperimentalComposeLibrary::class)
            implementation(compose.components.resources)
-  
+
            implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
        }
    }
@@ -59,7 +59,7 @@ To use this library:
        return now.toLocalDateTime(zone).format()
    }
    ```
-  
+
    It builds a string containing the current date.
 
 2. Modify the `App` composable to include the `Text` composable that invokes this function and displays the result:
@@ -95,7 +95,7 @@ To use this library:
    }
    ```
 
-3. Follow IDE's suggestions to import missing dependencies.
+3. Follow the IDE's suggestions to import missing dependencies.
 
 ## Rerun the application
 
