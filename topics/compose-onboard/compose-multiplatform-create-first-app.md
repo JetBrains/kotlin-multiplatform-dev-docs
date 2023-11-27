@@ -128,6 +128,43 @@ If you want to run your application on a simulated device, you can add a new run
 
 6. Click **Run** to run your application on the new simulated device.
 
+#### Run on a real iOS device {initial-collapse-state="collapsed"}
+
+You can run your multiplatform application on a real iOS device. To do so, you'll need the following:
+
+* The iOS device registered in Xcode
+* The `TEAM_ID` associated with your [Apple ID](https://support.apple.com/en-us/HT204316)
+
+##### Find your Team ID {initial-collapse-state="collapsed"}
+
+In the terminal, run `kdoctor --team-ids` to find your Team ID.
+KDoctor will list all Team IDs currently configured on your system, for example:
+
+```text
+3ABC246XYZ (Max Sample)
+ZABCW6SXYZ (SampleTech Inc.)
+```
+
+If KDoctor doesn't work for you, try this alternative method:
+
+1. In Android Studio, run the `iosApp` configuration with the selected real device. The build should fail.
+2. Go to Xcode and select **Open a project or file**.
+3. Navigate to the `iosApp/iosApp.xcworkspace` file of your project.
+4. In the left-hand menu, select `iosApp`.
+5. Navigate to **Signing & Capabilities**.
+6. In the **Team** list, select your team.
+
+If you haven't set up your team yet, use the **Add account** option and follow the steps.
+
+##### Run the app
+
+1. Connect a real iPhone device.
+2. In the `iosApp/Configuration/Config.xcconfig` file, set your `TEAM_ID`.
+3. Re-open the project in Android Studio. It should show the registered iOS device in the `iosApp` run configuration.
+4. Click **Run** to run your application on the iPhone device.
+
+For more information, see the [official Apple documentation](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device/).
+
 ### Run your application on desktop
 
 You can run the application on the desktop as follows:
