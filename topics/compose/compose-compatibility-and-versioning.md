@@ -35,6 +35,7 @@ version of Compose Multiplatform:
 
 | Kotlin version | Min. Compose Multiplatform version | Notes                                                    |
 |----------------|------------------------------------|----------------------------------------------------------|
+| 1.9.21         | 1.5.11                             |
 | 1.9.20         | 1.5.10                             |
 | 1.9.10         | 1.5.1                              |
 | 1.9.0          | 1.4.3                              |
@@ -89,6 +90,8 @@ Multiplatform, there are two options:
 
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
+| 2.0.0-Beta1    | `1.5.4-dev1-kt2.0.0-Beta1`             |
+| 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
 | 1.9.20-RC      | `1.5.3-rc01`                           |
 | 1.9.20-Beta2   | `1.5.2.1-Beta3`                        |
@@ -132,11 +135,11 @@ the `kotlinCompilerPlugin.set` parameter:
 
 ```kotlin
 compose {
-    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.3")
+    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.4")
 }
 ```
 
-In this example, Jetpack Compose compiler version `1.5.3` corresponds to Kotlin 1.9.10.
+In this example, Jetpack Compose compiler version `1.5.4` corresponds to Kotlin 1.9.21.
 
 > The Jetpack Compose compiler plugin works for Kotlin/JVM targets, including both desktop and Android platforms.
 > However, its reliability may not extend to Kotlin/JS and Kotlin/Native targets. For these scenarios, we recommend
@@ -185,6 +188,7 @@ which version of Jetpack Compose artifact is used:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.5.11](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.11) | 1.5.4                   | 1.1.2                             |
 | [1.5.10](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.10) | 1.5.4                   | 1.1.2                             |
 | [1.5.1](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.1)   | 1.5.0                   | 1.1.1                             |
 | [1.5.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.0)   | 1.5.0                   | 1.1.1                             |
