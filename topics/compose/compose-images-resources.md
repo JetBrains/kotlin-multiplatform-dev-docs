@@ -1,12 +1,12 @@
 [//]: # (title: Images and resources)
 
-Compose Multiplatform provides a special library for accessing resources in a common way for all supported platforms.
+Compose Multiplatform provides a special library for accessing resources in common code across all supported platforms.
 Resources are static data, such as images, fonts, strings, that you can use from your application.
 
 > The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > Its API may change in the future.
 >
-> Currently, the library supports accessing resources as raw data and images. The JetBrains team plans to extend
+> Currently, the library supports accessing resources as raw data and images. We plan to extend
 > this functionality in the future.
 >
 {type="note"}
@@ -38,7 +38,7 @@ android {
 }
 ```
 
-Note that the configuration differs from the standard Android resource configuration.
+Note that this configuration differs from the standard Android resource configuration.
 
 ### iOS
 
@@ -139,12 +139,12 @@ val byteArray = runBlocking {
 >
 {type="note"}
 
-## Access fonts and strings resources
+## Access fonts and string resources
 
-Currently, the library doesn't support fonts and strings resources. You also can't group your image resources by
+Currently, the library doesn't support fonts and string resources. You also can't group your image resources by
 resolution. The JetBrains team is planning to implement this functionality in future releases.
 
-Meanwhile, as a (partial) workaround for these issues, you can use the following third-party Compose Multiplatform
+Meanwhile, as a partial workaround for these issues, you can use the following third-party Compose Multiplatform
 libraries for accessing resources:
 
 * [Moko resources](https://github.com/icerockdev/moko-resources)
