@@ -442,8 +442,8 @@ and you can share it if your mobile applications should have the same presentati
 Once you've made your Android application cross-platform, you can move on and:
 
 * [Add dependencies on multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
-* [Add Android dependencies](https://kotlinlang.org/docs/multiplatform-mobile-android-dependencies.html)
-* [Add iOS dependencies](https://kotlinlang.org/docs/multiplatform-mobile-ios-dependencies.html)
+* [Add Android dependencies](https://kotlinlang.org/docs/multiplatform-android-dependencies.html)
+* [Add iOS dependencies](https://kotlinlang.org/docs/multiplatform-ios-dependencies.html)
 
 You can also check out community resources:
 

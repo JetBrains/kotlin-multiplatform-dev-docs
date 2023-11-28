@@ -105,8 +105,8 @@ In the next part of the tutorial, you'll add more dependencies and more complex 
 
 * Discover how to work with multiplatform dependencies of all
   kinds: [Kotlin libraries, Kotlin Multiplatform libraries, and other multiplatform projects](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
-* Learn how to [add Android dependencies](https://kotlinlang.org/docs/multiplatform-mobile-android-dependencies.html)
-  and [iOS dependencies with or without CocoaPods](https://kotlinlang.org/docs/multiplatform-mobile-ios-dependencies.html) for use in
+* Learn how to [add Android dependencies](https://kotlinlang.org/docs/multiplatform-android-dependencies.html)
+  and [iOS dependencies with or without CocoaPods](https://kotlinlang.org/docs/multiplatform-ios-dependencies.html) for use in
   platform-specific source sets.
 * Check out the examples of [how to use Android and iOS libraries](multiplatform-samples.md) in sample projects.
 

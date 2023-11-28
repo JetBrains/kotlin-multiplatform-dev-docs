@@ -20,7 +20,7 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 2. On the **New project** tab, change the project name to "ComposeDemo".
 3. Select the **Android** and **Desktop** options.
-4. If you use Mac, add **iOS** as well. Make sure that **Share UI** option is selected.
+4. If you use Mac, add **iOS** as well. Make sure that the **Share UI** option is selected.
 5. Click the download button and unpack the resulting archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard.png){width=450}
@@ -32,7 +32,7 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 3. Navigate to the unpacked "ComposeDemo" folder and click **Open**.
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
-  
+
    If you didn't select iOS in the wizard, you won't have the folders whose names begin with "ios" or "apple".
 
 4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
@@ -51,18 +51,18 @@ The project contains two modules:
   ![Compose Multiplatform project structure](compose-project-structure.png){width=350}
 
 The **composeApp** module consists of four source sets: `androidMain`, `commonMain`, `desktopMain`, and `iosMain`.
-_Source set_ is a Gradle concept for a number of files logically grouped together where each group has its own
+A _source set_ is a Gradle concept for a number of files logically grouped together where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
 The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
 target. Kotlin/JVM is used for `androidMain` and `desktopMain`. Kotlin/Native is used for `iosMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
-into an iOS framework, common Kotlin gets treated as Kotlin/Native:
+into an iOS framework, common Kotlin code gets treated as Kotlin/Native:
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png){width=700}
 
-In general, you want to write your implementation as common code whenever possible instead of duplicating functionality
+In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
 In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
@@ -79,7 +79,7 @@ order, so start with whichever platform you are most familiar with.
 
 > You don't need to use the Gradle build task. In a multiplatform application, this will build debug and release versions
 > of all the supported targets. Depending on the platforms selected in the Multiplatform wizard, this can take some time.
-> Using run configurations is much faster; only the selected target is built in this case.
+> Using a run configuration is much faster; only the selected target is built in this case.
 >
 {type="tip"}
 
@@ -158,4 +158,3 @@ platform.
 * **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
 * **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
-

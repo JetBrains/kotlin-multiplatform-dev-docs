@@ -1,18 +1,19 @@
 [//]: # (title: Get started with Compose Multiplatform — tutorial)
 
-With [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
+With the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
 code-sharing capabilities of Kotlin Multiplatform beyond application logic. You can implement the user interface once
 and then use it for all the platforms you target – iOS, Android, desktop, and web.
 
 In this tutorial, you will build a sample application that runs on Android, iOS, and desktop. To create a user
-interface, you will use the Compose Multiplatform framework and learn its basics: composable functions, themes, layouts,
+interface, you will use the Compose Multiplatform framework and learn about its basics: composable functions, themes, layouts,
 events, and modifiers.
 
-* No previous experience of Compose Multiplatform, Android, or iOS is required for this tutorial. It would be best if
-  you were already comfortable with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html).
+* No previous experience of Compose Multiplatform, Android, or iOS is required for this tutorial. We recommend that
+  you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting
+  this tutorial.
 * To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
   and desktop. For iOS, you need a macOS machine with XCode installed. This is a general limitation of iOS development.
-* You can choose only the platforms interesting to you and omit others.
+* You can choose only the platforms of interest to you and omit the others.
 
 Get to know Compose Multiplatform by completing these steps:
 

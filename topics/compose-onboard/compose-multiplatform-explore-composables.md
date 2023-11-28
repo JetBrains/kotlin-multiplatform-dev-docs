@@ -9,7 +9,7 @@
   </p>
 </microformat>
 
-Let's examine closer the sample composable created by the Kotlin Multiplatform wizard. First, there is the
+Let's examine closely the sample composable created by the Kotlin Multiplatform wizard. First, there is the
 composable `App()` function that implements the common UI and can be used on all platforms. Second, there is the
 platform-specific code that launches this UI on each platform.
 
@@ -46,7 +46,8 @@ fun App() {
 }
 ```
 
-This is a regular Kotlin function annotated with `@Composable`. These kinds of functions are referred to as _composable
+The `App()` function is a regular Kotlin function annotated with `@Composable`. These kinds of functions are referred to
+as _composable
 functions_ or just _composables_. They are the building blocks of a UI based on Compose Multiplatform.
 
 A composable function has the following general structure:
@@ -56,7 +57,7 @@ A composable function has the following general structure:
 * The `Column` composable controls the layout of the application. Here, it displays a `Button` above
   the `AnimatedVisibility` composable.
 * The `Button` contains the `Text` composable, which renders some text.
-* The `AnimatedVisibility` shows and hides the `Image` using animation.
+* The `AnimatedVisibility` shows and hides the `Image` using an animation.
 * The `painterResource` loads a vector icon stored in an XML resource.
 
 The `horizontalAlignment` parameter of the `Column` centers its content. But for this to have any effect, the column
@@ -67,7 +68,7 @@ behavior of composables in the UI. Modifiers are created using methods of the `M
 methods, each call can change the `Modifier` returned from the previous call, making the order significant.
 See [JetPack Compose documention](https://developer.android.com/jetpack/compose/modifiers) for more details.
 
-### Managing state
+### Managing the state
 
 The final aspect of the sample composable is how the state is managed. There are two properties in the `App`
 composable, `greetingText` and `showImage`. They are built using the `mutableStateOf()` function, which means they are
@@ -92,8 +93,8 @@ of the platform to the `greetingText` property.
 
 The changes occur when:
 
-1. The button is redrawn because the nested `Text` composable observes `greetingText`.
-2. The image is shown or hidden because the parent `AnimatedVisibility` composable observes `showImage`.
+* The button is redrawn because the nested `Text` composable observes `greetingText`.
+* The image is shown or hidden because the parent `AnimatedVisibility` composable observes `showImage`.
 
 ## Launching UI on different platforms
 
@@ -108,7 +109,7 @@ For Android, open the `MainActivity.kt ` file in `composeApp/src/androidMain/kot
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      
+
         setContent {
             App()
         }

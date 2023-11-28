@@ -1003,4 +1003,4 @@ You can also check out these additional learning materials:
 
 * [Use the Ktor HTTP client in multiplatform projects](https://ktor.io/docs/http-client-engines.html#mpp-config)
 * [Make your Android application work on iOS](multiplatform-integrate-in-existing-app.md)
-* [Introduce your team to Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform-mobile-introduce-your-team.html)
+* [Introduce your team to Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform-introduce-your-team.html)
