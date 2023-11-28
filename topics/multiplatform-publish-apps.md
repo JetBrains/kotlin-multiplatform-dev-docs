@@ -35,7 +35,7 @@ There are two ways you can connect the shared Kotlin module to the iOS project:
   See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project)
   to learn how to add the framework directly in Xcode.
 
-### Configure the iOS application
+### Configure your iOS application
 
 You can configure basic properties that affect the resulting app without Xcode:
 

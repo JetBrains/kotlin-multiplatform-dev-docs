@@ -135,7 +135,7 @@ You can run your multiplatform application on a real iOS device. To do so, you'l
 * The iOS device registered in Xcode
 * The `TEAM_ID` associated with your [Apple ID](https://support.apple.com/en-us/HT204316)
 
-##### Find your Team ID {initial-collapse-state="collapsed"}
+##### How to find your Team ID {initial-collapse-state="collapsed"}
 
 In the terminal, run `kdoctor --team-ids` to find your Team ID.
 KDoctor will list all Team IDs currently configured on your system, for example:
