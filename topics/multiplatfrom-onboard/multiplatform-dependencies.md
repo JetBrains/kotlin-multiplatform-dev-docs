@@ -75,7 +75,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    }
    ```
 
-6. In `Greeting.kt`, update the `greet()` function to see the result:
+6. In `Greeting.kt`, update the `Greeting` class to see the result:
     
     ```kotlin
     class Greeting {

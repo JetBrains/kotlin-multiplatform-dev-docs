@@ -335,7 +335,7 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
 
     ```kotlin
    import androidx.lifecycle.viewModelScope
-   import com.example.kotlinmultiplatformsandbox.Greeting
+   import com.jetbrains.simplelogin.kotlinmultiplatformsandbox.Greeting
    import kotlinx.coroutines.launch
    
     class MainViewModel : ViewModel() {

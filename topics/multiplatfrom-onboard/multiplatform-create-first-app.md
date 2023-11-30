@@ -51,7 +51,7 @@ Each Kotlin Multiplatform project includes three modules:
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
   between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
 * _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
-  The _androidApp_ module depends on and uses the shared module as a regular Android library.
+  The androidApp module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods.html),
   based on what you've chosen in the previous step in **iOS framework distribution**. In this tutorial, it's a regular
@@ -242,9 +242,10 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
 ### Run your application on Android
 
-1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
-2. In the list of run configurations, select **androidApp**.
-3. Choose your Android virtual device and click **Run**.
+1. In the list of run configurations, select **androidApp**.
+2. Choose an Android virtual device next to the list of configurations and click **Run**.
+
+   If you don't have a virtual device on the list, create a [new Android virtual device](#run-on-a-new-ios-simulated-device).
 
    ![Run multiplatform app on Android](run-android.png){width=400}
 
