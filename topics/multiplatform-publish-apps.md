@@ -37,19 +37,25 @@ There are two ways you can connect the shared Kotlin module to the iOS project:
 
 ### Configure your iOS application
 
-You can configure basic properties that affect the resulting app without Xcode:
+You can configure basic properties that affect the resulting app without Xcode.
 
-* To change the [`BUNDLE_ID`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion),
-  which uniquely identifies your app in the operating system, update it in the `iosApp/Configuration/Config.xcconfig` file in Android Studio.
+#### Bundle ID
 
-* To configure the `APP_NAME` option, which sets the target executable and application bundle name, open `Config.xcconfig` in any
-  text editor _before opening_ the project in Android Studio, and specify the desired name.
+The [bundle ID](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion)
+uniquely identifies your app in the operating system. To change it,
+open the `iosApp/Configuration/Config.xcconfig` file in Android Studio and update the `BUNDLE_ID`.
 
-  If you need to change the `APP_NAME` option after you open the project in Android Studio, do the following:
+#### App name
+
+The app name sets the target executable and application bundle name. To change your app name:
+
+* If you have _not_ opened the project in Android Studio yet, you can change the `APP_NAME` option in `Config.xcconfig`
+  directly in any text editor.
+* If you've already opened the project in Android Studio, do the following:
 
   1. Close the project in Android Studio.
   2. In your terminal, run `./cleanup.sh`.
-  3. Change the `APP_NAME` option.
+  3. In any text editor, change the `APP_NAME` option.
   4. Re-open the project in Android Studio.
 
 If you need to configure other settings, use Xcode. After opening the project in Android Studio,
