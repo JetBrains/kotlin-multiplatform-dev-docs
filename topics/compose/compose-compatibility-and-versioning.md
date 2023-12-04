@@ -23,7 +23,7 @@ The following limitations apply to all Compose Multiplatform releases:
 * Only JDK 17 or later is supported for packaging native distributions due
   to [`jpackage`](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html) limitations.
 
-There is a known [issue](https://github.com/JetBrains/compose-jb/issues/940) with OpenJDK 11.0.12 when switching
+There is a known [issue](https://github.com/JetBrains/compose-multiplatform/issues/940) with OpenJDK 11.0.12 when switching
 keyboard layouts on macOS. This issue isn't reproducible in OpenJDK 11.0.15.
 
 ## Kotlin compatibility
