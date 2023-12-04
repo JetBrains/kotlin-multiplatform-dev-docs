@@ -253,7 +253,7 @@ suspending functions return.
    fun greet(): Flow<String> = flow {
         emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
         delay(1.seconds)
-        emit("Guess what it is! > ${platform.name.reversed()}")
+        emit("Guess what this is! > ${platform.name.reversed()}")
         delay(1.seconds)
         emit(daysPhrase)
         emit(rocketComponent.launchPhrase())
@@ -588,7 +588,7 @@ with RxSwift through adapters.
 
 ##### Import the library using SPM in XCode
 
-1. In Xcode, right-click the `iosApp` project in the left-hand project menu and select **Add packages**.
+1. In Xcode, right-click the `iosApp` project in the left-hand project menu and select **Add Package Dependencies**.
 2. In the search bar, enter the package name:
 
      ```none

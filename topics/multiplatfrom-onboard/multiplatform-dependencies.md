@@ -85,7 +85,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    
         fun greet(): List<String> = buildList {
             add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-            add("Guess what it is! > ${platform.name.reversed()}!")
+            add("Guess what this is! > ${platform.name.reversed()}!")
             add(daysPhrase)
         }
     }

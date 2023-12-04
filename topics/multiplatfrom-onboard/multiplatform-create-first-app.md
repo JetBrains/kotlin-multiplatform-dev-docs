@@ -86,14 +86,16 @@ the IDE will show a warning:
    
    fun greet(): String {
        val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   
+       return firstWord
    }
    ```
 
    Android Studio highlights that the `Random` class is unresolved because you can't call specific Java functions from the common Kotlin code.
 2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
-   The code should now compile successfully.
-3. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
+3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
+4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
    from the Kotlin standard library to reverse the text:
 
     ```kotlin
@@ -105,7 +107,7 @@ the IDE will show a warning:
         fun greet(): String {
             val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
 
-            return "$firstWord\nGuess what it is! > ${platform.name.reversed()}!"
+            return "$firstWord Guess what this is! > ${platform.name.reversed()}!"
         }
     }
     ```
@@ -135,12 +137,10 @@ and generates a single declaration with actual implementations.
    You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
     
     ```kotlin
-    // Platform.kt in androidMain module:
-    import android.os.Build
-    
+    // Platform.kt in androidMain module:    
     class AndroidPlatform: Platform {
         override val name: String =
-            "Android ${Build.VERSION.SDK_INT}"
+            "Android ${android.os.Build.VERSION.SDK_INT}"
     }
     ```
    
@@ -231,7 +231,7 @@ such as properties and classes. Let's implement an expected property:
    fun greet(): String {
        val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
   
-       return "$firstWord [$num]\nGuess what it is! > ${platform.name.reversed()}!"
+       return "$firstWord [$num] Guess what this is! > ${platform.name.reversed()}!"
    }
    ```
 
@@ -273,7 +273,7 @@ Learn how to [configure and connect a hardware device and run your application o
 
 #### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
 
-If you want to run your application on a simulated device, you can add a new run configuration.
+If you want to run your application on another simulated device, you can add a new run configuration.
 
 1. In the list of run configurations, click **Edit Configurations**.
 

@@ -23,14 +23,14 @@ The `androidApp` module contains an Android application, defines its main activi
 Make some changes and see how they are reflected in the UI:
 
 1. Navigate to the `MainActivity.kt` file in `androidApp`.
-2. Find the `Greeting` class invocation. Select the `greet()` function and use the <shortcut>⌘ B</shortcut> shortcut.
+2. Find the `Greeting` class invocation. Select the `greet()` function and use the <shortcut>⌘ B</shortcut> shortcut to go to the function's declaration.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
 3. In `Greeting.kt`, update the `greet()` function:
 
    ```kotlin
    fun greet(): List<String> = buildList {
        add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-       add("Guess what it is! > ${platform.name.reversed()}!")
+       add("Guess what this is! > ${platform.name.reversed()}!")
    }
    ```
 
@@ -80,9 +80,9 @@ framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
 
-1. Launch Xcode. Select **Open a project or file**.
+1. Launch Xcode. Select **Open Existing Project**.
 2. Navigate to your project, for example **KotlinMultiplatformSandbox**, and select the `iosApp` folder. Click **Open**.
-3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘</shortcut> shortcut.
+3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut to jump to the function's definition.
 
    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
