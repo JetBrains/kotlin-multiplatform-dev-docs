@@ -49,14 +49,13 @@ open the `iosApp/Configuration/Config.xcconfig` file in Android Studio and updat
 
 The app name sets the target executable and application bundle name. To change your app name:
 
-* If you have _not_ opened the project in Android Studio yet, you can change the `APP_NAME` option in `Config.xcconfig`
-  directly in any text editor.
+* If you have _not_ opened the project in Android Studio yet, you can change the `APP_NAME` option in the
+  `iosApp/Configuration/Config.xcconfig` file directly in any text editor.
 * If you've already opened the project in Android Studio, do the following:
 
-  1. Close the project in Android Studio.
-  2. In your terminal, run `./cleanup.sh`.
-  3. In any text editor, change the `APP_NAME` option.
-  4. Re-open the project in Android Studio.
+  1. Close the project.
+  2. In any text editor, change the `APP_NAME` option in the `iosApp/Configuration/Config.xcconfig` file.
+  3. Re-open the project in Android Studio.
 
 If you need to configure other settings, use Xcode. After opening the project in Android Studio,
 open the `iosApp/iosApp.xcworkspace` file in Xcode and make changes there.
