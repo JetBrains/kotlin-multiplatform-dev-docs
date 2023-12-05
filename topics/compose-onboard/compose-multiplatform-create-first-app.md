@@ -131,7 +131,7 @@ If you want to run your application on a simulated device, you can add a new run
 #### Run on a real iOS device {initial-collapse-state="collapsed"}
 
 You can run your multiplatform application on a real iOS device. Before you start,
-you'll need to set the TEAM ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316). 
+you'll need to set the Team ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316). 
 
 ##### Set your Team ID
 
@@ -142,8 +142,8 @@ For KDoctor:
 1. In Android Studio, run the following command in the terminal:
 
    ```none
-    kdoctor --team-ids 
-    ```
+   kdoctor --team-ids 
+   ```
     
    KDoctor will list all Team IDs currently configured on your system, for example:
     
@@ -164,7 +164,7 @@ Alternatively, choose the team in Xcode:
 
    If you haven't set up your team yet, use the **Add an Account** option in the **Team** list and follow Xcode instructions.
 
-6. Make sure that the Bundle ID is unique.
+6. Make sure that the Bundle Identifier is unique and the Signing Certificate is successfully assigned.
 
 ##### Run the app
 
