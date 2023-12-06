@@ -78,21 +78,21 @@ dependency (`ktor-client-core`) in the common source set, you also need to:
 val ktorVersion = "%ktorVersion%"
 
 sourceSets {
-    val commonMain by getting {
+    commonMain {
         dependencies {
             // ...
+            
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
         }
     }
-    val androidMain by getting {
+    androidMain {
         dependencies {
             implementation("io.ktor:ktor-client-android:$ktorVersion")
         }
     }
-    val iosMain by getting {
-        // ...
+    iosMain {
         dependencies {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
         }
