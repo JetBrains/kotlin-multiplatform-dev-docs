@@ -35,8 +35,7 @@ line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
 sourceSets {
-    val commonMain by getting {
-        dependencies {
+    commonMain.dependencies {
             // ...
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
         }
@@ -78,24 +77,18 @@ dependency (`ktor-client-core`) in the common source set, you also need to:
 val ktorVersion = "%ktorVersion%"
 
 sourceSets {
-    commonMain {
-        dependencies {
+    commonMain.dependencies {
             // ...
             
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-        }
     }
-    androidMain {
-        dependencies {
+    androidMain.dependencies {
             implementation("io.ktor:ktor-client-android:$ktorVersion")
-        }
     }
-    iosMain {
-        dependencies {
+    iosMain.dependencies {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-        }
     }
 }
 ```
@@ -175,6 +168,7 @@ data class RocketLaunch (
 
    ```kotlin
    import io.ktor.client.request.*
+   import io.ktor.client.call.*
 
    private suspend fun getDateOfLastSuccessfulLaunch(): String {
        val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
@@ -189,8 +183,6 @@ data class RocketLaunch (
 5. Update the function again to find the last successful launch in the list:
 
    ```kotlin
-   import io.ktor.client.call.*
-   
    private suspend fun getDateOfLastSuccessfulLaunch(): String {
        val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
        val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
@@ -212,6 +204,7 @@ data class RocketLaunch (
        val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
        val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
            .toLocalDateTime(TimeZone.currentSystemDefault())
+       
        return "${date.month} ${date.dayOfMonth}, ${date.year}"
    }
    ```
@@ -236,7 +229,7 @@ You can use flows instead of suspending functions. They emit a sequence of value
 suspending functions return.
 
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
-2. Add a `rocketComponent` property, which will get the message with the last successful launch date:
+2. Add a `rocketComponent` property to the `Greeting` class. The property will store the message with the last successful launch date:
 
    ```kotlin
    private val rocketComponent = RocketComponent()
@@ -275,6 +268,7 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
+    ...
 </manifest>
 ```
 
@@ -303,7 +297,7 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
     }
     ```
 
-2. In `androidApp/src/main/java`, create a new `MainViewModel` class in the project directory:
+2. In `androidApp/src/main/java`, create a new `MainViewModel` Kotlin class in the project directory:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -338,16 +332,17 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
    import com.jetbrains.simplelogin.kotlinmultiplatformsandbox.Greeting
    import kotlinx.coroutines.launch
    
-    class MainViewModel : ViewModel() {
-        // ...
-
-        init {
-            viewModelScope.launch {
-                Greeting().greet().collect { phrase ->
+   class MainViewModel : ViewModel() {
+       private val _greetingList = MutableStateFlow<List<String>>(listOf())
+       val greetingList: StateFlow<List<String>> get() = _greetingList
+       
+       init {
+           viewModelScope.launch {
+               Greeting().greet().collect { phrase ->
                     //...
-                }
-            }
-        }
+               }
+           }
+       }
     }
     ```
 
@@ -558,15 +553,16 @@ with RxSwift through adapters.
     }
     ```
 
-3. Synchronize the Gradle files by clicking **Sync Now** in the notification.
-4. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
+3. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
     kotlin.sourceSets.all {
         languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
     }
     ```
-   
+
+4. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+
 ##### Mark the flow with KMP-NativeCoroutines
 
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
@@ -690,11 +686,13 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-    id("co.touchlab.skie") version "0.4.19"
+    id("co.touchlab.skie") version "0.5.6"
 }
 ```
 
 ##### Consume the flow using SKIE
+
+Return to Xcode and update the code using the library:
 
 1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
    property every time the flow emits a value.
@@ -730,8 +728,10 @@ plugins {
         }
     }
     ```
+4. In the `gradle.properties` file at the root of your project change the option `org.gradle.configuration-cache` to `false`,
+as SKIE does not support this feature.
 
-4. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
+5. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade.png){width=500}
 
