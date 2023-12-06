@@ -729,7 +729,7 @@ Return to Xcode and update the code using the library:
     }
     ```
 4. In the `gradle.properties` file at the root of your project change the option `org.gradle.configuration-cache` to `false`,
-as SKIE does not support this feature.
+as SKIE does not support this feature yet.
 
 5. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
 
