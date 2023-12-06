@@ -71,6 +71,8 @@ multiplatform support, is the most convenient way to work with dates in your sha
        val closestNewYear = LocalDate(today.year + 1, 1, 1)
        return today.daysUntil(closestNewYear)
    }
+   
+   fun daysPhrase(): String = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
    ```
 
 6. In `Greeting.kt`, update the `Greeting` class to see the result:
@@ -79,12 +81,10 @@ multiplatform support, is the most convenient way to work with dates in your sha
     class Greeting {
         private val platform: Platform = getPlatform()
    
-        val daysPhrase = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
-   
         fun greet(): List<String> = buildList {
             add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-            add("Guess what this is! > ${platform.name.reversed()}!")
-            add(daysPhrase)
+            add("Guess what it is! > ${platform.name.reversed()}!")
+            add(daysPhrase())
         }
     }
     ```
