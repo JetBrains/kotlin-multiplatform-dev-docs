@@ -255,7 +255,7 @@ suspending functions return.
         delay(1.seconds)
         emit("Guess what it is! > ${platform.name.reversed()}")
         delay(1.seconds)
-        emit(daysPhrase)
+        emit(daysPhrase())
         emit(rocketComponent.launchPhrase())
    }
    ```
@@ -677,7 +677,10 @@ with RxSwift through adapters.
 
     ![Final results](multiplatform-mobile-upgrade.png){width=500}
 
-<!-- You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp). -->
+
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
+> 
+{type="tip"}
 
 #### Option 2. Configure SKIE {initial-collapse-state="collapsed"}
 
@@ -735,7 +738,9 @@ plugins {
 
    ![Final results](multiplatform-mobile-upgrade.png){width=500}
 
-<!-- You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp). -->
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/skie/step4).
+>
+{type="tip"}
 
 ## Next step
 
