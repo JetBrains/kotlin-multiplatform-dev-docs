@@ -128,6 +128,62 @@ If you want to run your application on a simulated device, you can add a new run
 
 6. Click **Run** to run your application on the new simulated device.
 
+#### Run on a real iOS device {initial-collapse-state="collapsed"}
+
+You can run your multiplatform application on a real iOS device. Before you start,
+you'll need to set the Team ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316). 
+
+##### Set your Team ID
+
+To set the Team ID in your project, you can either use the KDoctor tool in Android Studio or choose your team in Xcode.
+
+For KDoctor:
+
+1. In Android Studio, run the following command in the terminal:
+
+   ```none
+   kdoctor --team-ids 
+   ```
+    
+   KDoctor will list all Team IDs currently configured on your system, for example:
+    
+   ```text
+   3ABC246XYZ (Max Sample)
+   ZABCW6SXYZ (SampleTech Inc.)
+   ```
+
+2. In Android Studio, open the `iosApp/Configuration/Config.xcconfig` and specify your Team ID.
+
+Alternatively, choose the team in Xcode:
+
+1. Go to Xcode and select **Open a project or file**.
+2. Navigate to the `iosApp/iosApp.xcworkspace` file of your project.
+3. In the left-hand menu, select `iosApp`.
+4. Navigate to **Signing & Capabilities**.
+5. In the **Team** list, select your team.
+
+   If you haven't set up your team yet, use the **Add an Account** option in the **Team** list and follow Xcode instructions.
+
+6. Make sure that the Bundle Identifier is unique and the Signing Certificate is successfully assigned.
+
+##### Run the app
+
+Connect your iPhone with a cable. If you already have the device registered in Xcode, Android Studio should show it
+in the list of run configurations. Run the corresponding `iosApp` configuration.
+
+If you haven't registered your iPhone in Xcode yet, follow [Apple recommendations](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device/).
+In short, you should:
+
+1. Connect your iPhone with a cable.
+2. On your iPhone, enable the developer mode in **Settings** | **Developer**.
+3. In Xcode, go to the top menu and choose **Window** | **Devices and Simulators**.
+4. Click on the plus sign. Select your connected iPhone and click **Add**.
+5. Sign in with your Apple ID to enable development capabilities on the device.
+6. Follow the on-screen instructions to complete the pairing process.
+
+Once you've registered your iPhone in Xcode, [create a new run configuration](#run-on-a-new-ios-simulated-device)
+in Android Studio and select your device in the **Execution target** list. Run the corresponding `iosApp` configuration.
+
 ### Run your application on desktop
 
 You can run the application on the desktop as follows:
