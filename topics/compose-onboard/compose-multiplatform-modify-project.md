@@ -25,16 +25,13 @@ To use this library:
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 
    ```kotlin
-   val commonMain by getting {
-       dependencies {
-           implementation(compose.runtime)
-           implementation(compose.foundation)
-           implementation(compose.material)
-           @OptIn(ExperimentalComposeLibrary::class)
-           implementation(compose.components.resources)
-
-           implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-       }
+   commonMain.dependencies {
+       implementation(compose.runtime)
+       implementation(compose.foundation)
+       implementation(compose.material)
+       @OptIn(ExperimentalComposeLibrary::class)
+       implementation(compose.components.resources)
+       implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
    }
    ```
 

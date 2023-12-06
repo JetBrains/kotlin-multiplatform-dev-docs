@@ -48,10 +48,8 @@ multiplatform support, is the most convenient way to work with dates in your sha
    ```kotlin
    kotlin {
        sourceSets {
-           val commonMain by getting {
-               dependencies {
-                   implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-               }
+           commonMain.dependencies {
+               implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
            } 
        }
    }
