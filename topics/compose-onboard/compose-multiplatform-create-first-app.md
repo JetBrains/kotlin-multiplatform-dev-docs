@@ -97,11 +97,10 @@ order, so start with whichever platform you are most familiar with.
 
 1. Launch Xcode in a separate window to complete the initial setup. If it is the first time you ever launch Xcode, you 
 may also need to accept its license terms and allow it to perform some necessary initial tasks.
-2. Return to Android Studio.
-3. In the list of run configurations, select **iosApp** and click **Run**.
+2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
 
 If you don't have an available iOS configuration in the list, add
-a [new iOS simulated device](#run-on-a-new-ios-simulated-device).
+a [new run configuration](#run-on-a-new-ios-simulated-device).
 
 ![Run Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 

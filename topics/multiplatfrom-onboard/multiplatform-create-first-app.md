@@ -265,7 +265,7 @@ Learn how to [configure and connect a hardware device and run your application o
    Xcode to perform some necessary initial tasks.
 2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
 
-   If you don't have an available iOS configuration in the list, add a [new iOS simulated device](#run-on-a-new-ios-simulated-device).
+   If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
    ![Run multiplatform app on iOS](run-ios.png){width=450}
 
@@ -273,7 +273,7 @@ Learn how to [configure and connect a hardware device and run your application o
 
 #### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
 
-If you want to run your application on another simulated device, you can add a new run configuration.
+If you want to run your application on a simulated device, you can add a new run configuration. 
 
 1. In the list of run configurations, click **Edit Configurations**.
 
