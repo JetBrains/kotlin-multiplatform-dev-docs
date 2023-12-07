@@ -33,7 +33,7 @@ Here's a quick guide to platform stability levels for the core Kotlin Multiplatf
 | iOS                      | Stable          |
 | Desktop (JVM)            | Stable          |
 | Server-side (JVM)        | Stable          |
-| Web based on Kotlin/Wasm | Experimental    |
+| Web based on Kotlin/Wasm | Alpha           |
 | Web based on Kotlin/JS   | Stable          |
 | watchOS                  | Best effort     |
 | tvOS                     | Best effort     |
@@ -77,7 +77,7 @@ We refer to **Experimental**, **Alpha**, and **Beta** collectively as **pre-stab
 | Android                  | Stable          |
 | iOS                      | Alpha           |
 | Desktop (JVM)            | Stable          |
-| Web based on Kotlin/Wasm | Experimental    |
+| Web based on Kotlin/Wasm | Alpha    |
 
 ## What's next?
 
