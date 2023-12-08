@@ -73,11 +73,9 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
    a source set for testing the common code. Within its declaration, there's a dependency on the `kotlin.test` library:
 
     ```kotlin
-    val commonTest by getting {
-        dependencies {
-            implementation(kotlin("test"))
+    commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
-    }
     ```
 
    Each multiplatform project has a `commonTest` source set by default. This is where the common tests are stored.
@@ -189,8 +187,8 @@ version is optional. When the version is present, you only need the number at th
     }
     ```
 
-3. In the `commonTest` folder, create a new `org.kmp.testing` directory.
-4. In this directory, create the `CurrentRuntimeTest.kt` and update it with the following platform and framework-agnostic test:
+3. In the `commonTest/kotlin` folder, create a new `org.kmp.testing` directory.
+4. In this directory, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
 
     ```kotlin
     import kotlin.test.Test
@@ -245,8 +243,8 @@ As well as implementing this function on each platform, you should provide tests
 
 #### For Android
 
-1. In the `androidMain/kotlin` folder, create a new `org.kmp.testing` directory.
-2. In this directory, create the `AndroidRuntime.kt` file and update it with the actual implementation of the expected
+1. In the `androidMain/kotlin` folder, create a new `org.kmp.testing` package.
+2. In this package, create the `AndroidRuntime.kt` file and update it with the actual implementation of the expected
    `determineCurrentRuntime()` function:
 
     ```kotlin
@@ -263,8 +261,8 @@ As well as implementing this function on each platform, you should provide tests
 
    ![Creating Android test directory](create-android-test-dir.png){width=300}
 
-4. In the `kotlin` folder, create a new `org.kmp.testing` directory.
-5. In this directory, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
+4. In the `kotlin` folder, create a new `org.kmp.testing` package.
+5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
 
     ```kotlin
     import kotlin.test.Test
