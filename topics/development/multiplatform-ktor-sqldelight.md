@@ -807,7 +807,7 @@ First, you'll create a `RocketLaunchRow` SwiftUI view for displaying an item fro
 and `VStack` views. There will be extensions on the `RocketLaunchRow` structure with useful helpers for displaying the
 data.
 
-1. Launch your Xcode app and select **Open a project or file**.
+1. Launch your Xcode app and select **Open Existing Project**.
 2. Navigate to your project and select the `iosApp` folder. Click **Open**.
 3. In your Xcode project, create a new Swift file with the type **SwiftUI View**, name it `RocketLaunchRow`, and update
    it with the following code:

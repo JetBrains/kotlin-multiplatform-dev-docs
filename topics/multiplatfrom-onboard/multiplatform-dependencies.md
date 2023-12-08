@@ -48,10 +48,8 @@ multiplatform support, is the most convenient way to work with dates in your sha
    ```kotlin
    kotlin {
        sourceSets {
-           val commonMain by getting {
-               dependencies {
-                   implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-               }
+           commonMain.dependencies {
+               implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
            } 
        }
    }
@@ -77,7 +75,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    fun daysPhrase(): String = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
    ```
 
-6. In `Greeting.kt`, update the `greet()` function to see the result:
+6. In `Greeting.kt`, update the `Greeting` class to see the result:
     
     ```kotlin
     class Greeting {

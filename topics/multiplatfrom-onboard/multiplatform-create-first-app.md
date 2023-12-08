@@ -51,13 +51,13 @@ Each Kotlin Multiplatform project includes three modules:
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
   between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
 * _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
-  The _androidApp_ module depends on and uses the shared module as a regular Android library.
+  The androidApp module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods.html),
   based on what you've chosen in the previous step in **iOS framework distribution**. In this tutorial, it's a regular
   framework dependency.
 
-![Basic Multiplatform project structure](basic-project-structure.svg){width=500}
+![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
 
 The shared module consists of three source sets: `androidMain`, `commonMain`, and `iosMain`. _Source set_ is a Gradle
 concept for a number of files logically grouped together where each group has its own dependencies.
@@ -86,14 +86,16 @@ the IDE will show a warning:
    
    fun greet(): String {
        val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   
+       return firstWord
    }
    ```
 
    Android Studio highlights that the `Random` class is unresolved because you can't call specific Java functions from the common Kotlin code.
 2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
-   The code should now compile successfully.
-3. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
+3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
+4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
    from the Kotlin standard library to reverse the text:
 
     ```kotlin
@@ -105,7 +107,7 @@ the IDE will show a warning:
         fun greet(): String {
             val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
 
-            return "$firstWord\nGuess what it is! > ${platform.name.reversed()}!"
+            return "$firstWord Guess what this is! > ${platform.name.reversed()}!"
         }
     }
     ```
@@ -135,12 +137,10 @@ and generates a single declaration with actual implementations.
    You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
     
     ```kotlin
-    // Platform.kt in androidMain module:
-    import android.os.Build
-    
+    // Platform.kt in androidMain module:    
     class AndroidPlatform: Platform {
         override val name: String =
-            "Android ${Build.VERSION.SDK_INT}"
+            "Android ${android.os.Build.VERSION.SDK_INT}"
     }
     ```
    
@@ -231,7 +231,7 @@ such as properties and classes. Let's implement an expected property:
    fun greet(): String {
        val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
   
-       return "$firstWord [$num]\nGuess what it is! > ${platform.name.reversed()}!"
+       return "$firstWord [$num] Guess what this is! > ${platform.name.reversed()}!"
    }
    ```
 
@@ -242,9 +242,10 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
 ### Run your application on Android
 
-1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
-2. In the list of run configurations, select **androidApp**.
-3. Choose your Android virtual device and click **Run**.
+1. In the list of run configurations, select **androidApp**.
+2. Choose an Android virtual device next to the list of configurations and click **Run**.
+
+   If you don't have a virtual device on the list, create a [new Android virtual device](#run-on-a-new-ios-simulated-device).
 
    ![Run multiplatform app on Android](run-android.png){width=400}
 
@@ -264,7 +265,7 @@ Learn how to [configure and connect a hardware device and run your application o
    Xcode to perform some necessary initial tasks.
 2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
 
-   If you don't have an available iOS configuration in the list, add a [new iOS simulated device](#run-on-a-new-ios-simulated-device).
+   If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
    ![Run multiplatform app on iOS](run-ios.png){width=450}
 
@@ -272,7 +273,7 @@ Learn how to [configure and connect a hardware device and run your application o
 
 #### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
 
-If you want to run your application on a simulated device, you can add a new run configuration.
+If you want to run your application on a simulated device, you can add a new run configuration. 
 
 1. In the list of run configurations, click **Edit Configurations**.
 
