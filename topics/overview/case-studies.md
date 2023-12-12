@@ -108,9 +108,10 @@ Multiplatform. Their team managed to significantly increase the app's developmen
 
 ![Touchlab](touchlab.svg){width=200}
 
-From startups to multinationals with tens of millions of MAU, Touchlab helps clients put Kotlin Multiplatform in production.
-In addition to client work, they are trusted contributors to the open-source ecosystem, with several critical tools used
-by many teams for their production apps. [Learn more about Touchlab](https://touchlab.co/).
+Touchlab works with organizations adopting and scaling Kotlin Multiplatform. From startups to multinationals with tens
+of millions of MAU, Touchlab’s services accelerate and de-risk implementing KMP in production. They are also trusted
+open-source contributors, building crucial tools used widely in production apps.
+[Learn more about Touchlab](https://touchlab.co/).
 
 ![IceRock](ice-rock.svg){width=200}
 
