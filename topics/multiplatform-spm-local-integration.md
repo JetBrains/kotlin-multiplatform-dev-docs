@@ -1,5 +1,6 @@
 [//]: # (title: Use Kotlin from local Swift packages)
 
+### Prerequisites
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up environment and create a cross-platform application from scratch](multiplatform-setup.md)
 > first.
@@ -25,16 +26,10 @@ dependencyResolutionManagement {
 }
 ```
 
-### Connect the framework to your Xcode project
-
-> Note that integrating into `swift build` is currently not supported
->
-{type="note"}
-
-1. If you're migrating from other integration approach, please remove it first:
+If you're migrating from other integration approach, please remove it first:
 
 
-#### CocoaPods plugin {initial-collapse-state="collapsed"}
+###### CocoaPods plugin {initial-collapse-state="collapsed"}
 
 > If you have dependencies to other pods in `cocoapods` block, you have to stay on CocoaPods integration approach
 >
@@ -44,7 +39,7 @@ dependencyResolutionManagement {
 2. Remove `cocoapods` block from `build.gradle(.kts)` files
 3. Remove `.podspec`, `Podfile` files
 
-#### Direct integration through embedAndSignAppleFrameworkForXcode {initial-collapse-state="collapsed"}
+###### Direct integration through embedAndSignAppleFrameworkForXcode {initial-collapse-state="collapsed"}
 
 1. In Xcode, open the iOS project settings by double-clicking the project name.
 
@@ -67,7 +62,11 @@ dependencyResolutionManagement {
 
    ![Linker flag](xcode-add-flag.png){width=700}
 
-####
+### Connect the framework to your Xcode project
+
+> Note that integrating into `swift build` is currently not supported
+>
+{type="note"}
 
 2. Make sure that frameworks are declared for all targets corresponding the Xcode project platforms, for instance: 
 ```kotlin
