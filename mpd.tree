@@ -36,6 +36,7 @@
         <toc-element id="compose-multiplatform-new-project.md" toc-title="5. Create your own application"/>
     </toc-element>
     <toc-element id="multiplatform-integrate-in-existing-app.md" toc-title="Make your app multiplatform"/>
+    <toc-element id="multiplatform-spm-local-integration.md" toc-title="Local integration with SPM"/>
     <toc-element toc-title="Develop with Kotlin Multiplatform">
         <toc-element id="multiplatform-connect-to-apis.md"/>
         <toc-element id="multiplatform-project-configuration.md" toc-title="Choose project configuration"/>
