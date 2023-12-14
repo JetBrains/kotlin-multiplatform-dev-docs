@@ -390,32 +390,6 @@ to add your Kotlin Multiplatform project to this topic and help the community.
         </list>
     </td>
   </tr>
-<tr>
-    <td>
-      <strong><a href="https://github.com/realm/realm-kotlin-samples/tree/main/Bookshelf">Bookshelf</a></strong>
-    </td>
-    <td>A demonstration of how to use the Realm database in a Kotlin Multiplatform application.</td>
-    <td>
-      <list>
-        <li>Model</li>
-        <li>Networking</li>
-        <li>Data storage</li>
-      </list>
-    </td>
-    <td>
-        <list>
-  <li><code>ktor-client</code></li>
-  <li><code>kotlinx.serialization</code></li>
-  <li><code>realm-kotlin</code></li>
-</list>
-    </td>
-    <td>
-        <list>
-            <li>Jetpack Compose on Android</li>
-            <li>SwiftUI on iOS</li>
-        </list>
-    </td>
-  </tr>
 
 <tr>
     <td>
