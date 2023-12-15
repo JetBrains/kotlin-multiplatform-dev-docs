@@ -8,12 +8,12 @@ In this tutorial, you will build a sample application that runs on Android, iOS,
 interface, you will use the Compose Multiplatform framework and learn about its basics: composable functions, themes, layouts,
 events, and modifiers.
 
-* No previous experience of Compose Multiplatform, Android, or iOS is required for this tutorial. We recommend that
+* No previous experience with Compose Multiplatform, Android, or iOS is required for this tutorial. We recommend that
   you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting
   this tutorial.
 * To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
   and desktop. For iOS, you need a macOS machine with XCode installed. This is a general limitation of iOS development.
-* You can choose only the platforms of interest to you and omit the others.
+* If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
 
 Get to know Compose Multiplatform by completing these steps:
 
@@ -35,10 +35,10 @@ Start by setting up an environment for multiplatform development.
 
 ## Join the community
 
-* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: get
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
   an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
-* ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: subscribe to
+* ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
   the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
-* ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: subscribe and watch videos
+* ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
   about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)

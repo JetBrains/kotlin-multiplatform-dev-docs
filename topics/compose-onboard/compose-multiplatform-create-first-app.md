@@ -20,16 +20,16 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 2. On the **New project** tab, change the project name to "ComposeDemo".
 3. Select the **Android** and **Desktop** options.
-4. If you use Mac, add **iOS** as well. Make sure that the **Share UI** option is selected.
-5. Click the download button and unpack the resulting archive.
+4. If you’re using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
+5. Click the **Download** button and unpack the resulting archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard.png){width=450}
 
 ## Examine the project structure
 
 1. Launch Android Studio.
-2. On the welcome screen, click **Open** or select **File | Open** in the editor.
-3. Navigate to the unpacked "ComposeDemo" folder and click **Open**.
+2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
+3. Navigate to the unpacked "ComposeDemo" folder and then click **Open**.
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
 
@@ -42,8 +42,8 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 
 The project contains two modules:
 
-* _composeApp_ is a Kotlin module that contains the logic common for Android, desktop, and iOS applications – the code
-  you share between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
+* _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, and iOS applications – the code
+  you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
   you automate your build process.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
@@ -51,7 +51,7 @@ The project contains two modules:
   ![Compose Multiplatform project structure](compose-project-structure.png){width=350}
 
 The **composeApp** module consists of four source sets: `androidMain`, `commonMain`, `desktopMain`, and `iosMain`.
-A _source set_ is a Gradle concept for a number of files logically grouped together where each group has its own
+A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
 The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
@@ -66,7 +66,7 @@ In general, write your implementation as common code whenever possible instead o
 in platform-specific source sets.
 
 In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
-minimalist but complete Compose Multiplatform UI:
+minimalistic but complete Compose Multiplatform UI:
 
 ![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
 
@@ -87,22 +87,21 @@ order, so start with whichever platform you are most familiar with.
 
 1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 2. In the list of run configurations, select **composeApp**.
-3. Choose your Android virtual device and click **Run**.
+3. Choose your Android virtual device and then click **Run**.
 
-![Run Compose Multiplatform app on Android](compose-run-android.png){width=350}
+![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
 
 ![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=300}
 
 ### Run your application on iOS
 
-1. Launch Xcode in a separate window to complete the initial setup. If it is the first time you ever launch Xcode, you 
-may also need to accept its license terms and allow it to perform some necessary initial tasks.
+1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
+   may also need to accept its license terms and allow it to perform some necessary initial tasks.
 2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
 
-If you don't have an available iOS configuration in the list, add
-a [new run configuration](#run-on-a-new-ios-simulated-device).
+If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
-![Run Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
+![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 
 ![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=300}
 
@@ -114,15 +113,15 @@ If you want to run your application on a simulated device, you can add a new run
 
    ![Edit run configurations](ios-edit-configurations.png){width=450}
 
-2. Click the **+** button above the list of configurations and select **iOS Application**.
+2. Click the **+** button above the list of configurations and then select **iOS Application**.
 
    ![New run configuration for iOS application](ios-new-configuration.png)
 
 3. Name your configuration.
-4. Select the **Xcode project file**. To do so, navigate to your project, for example **KotlinMultiplatformSandbox**,
-   open the`iosApp` folder, and select the `.xcodeproj` file.
+4. Select the **Xcode project file**. To do so, navigate to your project, for example, **KotlinMultiplatformSandbox**,
+   open the `iosApp` folder, and then select the `.xcodeproj` file.
 
-5. In the **Execution target** list, select a simulated device and click **OK**.
+5. In the **Execution target** list, select a simulated device and then click **OK**.
 
    ![New run configuration with iOS simulator](ios-new-simulator.png)
 
@@ -131,7 +130,7 @@ If you want to run your application on a simulated device, you can add a new run
 #### Run on a real iOS device {initial-collapse-state="collapsed"}
 
 You can run your multiplatform application on a real iOS device. Before you start,
-you'll need to set the Team ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316). 
+you'll need to set the Team ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316).
 
 ##### Set your Team ID
 
@@ -144,9 +143,9 @@ For KDoctor:
    ```none
    kdoctor --team-ids 
    ```
-    
+
    KDoctor will list all Team IDs currently configured on your system, for example:
-    
+
    ```text
    3ABC246XYZ (Max Sample)
    ZABCW6SXYZ (SampleTech Inc.)
@@ -200,7 +199,7 @@ You can run the application on the desktop as follows:
 Once you run your desktop application, a new **Run Configuration** is created. You can use it from now on to run the
 desktop application:
 
-![Run Compose Multiplatform app on iOS](compose-run-desktop.png){width=350}
+![Run the Compose Multiplatform app on iOS](compose-run-desktop.png){width=350}
 
 ## Next step
 
