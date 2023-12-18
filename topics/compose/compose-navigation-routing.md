@@ -1,7 +1,7 @@
 [//]: # (title: Navigation and routing)
 
 Navigation is a key part of modern UI applications that allows users to navigate between different application screens.
-Unfortunately, the [Navigation component](https://developer.android.com/guide/navigation) from Jetpack Compose’s suite
+Unfortunately, the [Navigation component](https://developer.android.com/guide/navigation) from Jetpack Compose's suite
 of libraries is currently unavailable in Compose Multiplatform. However, there are other third-party alternatives that
 you can choose from:
 

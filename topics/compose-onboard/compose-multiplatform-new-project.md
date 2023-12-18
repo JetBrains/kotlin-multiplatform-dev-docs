@@ -14,11 +14,11 @@ scratch, using concepts you already know and introducing some new ones.
 
 You'll create a "Local time application" where users can enter their country and city, and the app will display the time
 in the capital city of that country. All the functionality of your Compose Multiplatform app will be implemented in common
-code using multiplatform libraries. It'll load and display images within a dropdown menu, use events, styles, themes,
+code using multiplatform libraries. It'll load and display images within a dropdown menu and will use events, styles, themes,
 modifiers, and layouts.
 
-At each stage you can run the application on iOS, Android, and desktop, but you can focus on the platforms that best
-suit your needs.
+At each stage, you can run the application on all three platforms (iOS, Android, and desktop), or you can focus on the
+specific platforms that best suit your needs.
 
 ## Lay the foundation
 
@@ -27,7 +27,7 @@ To get started, implement a new `App` composable:
 1. In `composeApp/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
    composable:
 
-     ```kotlin
+   ```kotlin
      @Composable
      fun App() {
          MaterialTheme {
@@ -43,9 +43,9 @@ To get started, implement a new `App` composable:
          }
      }
      ```
-    
-     * The layout is a column, containing two composables. The first is a `Text` composable, and the second is a `Button`.
-     * The two composables are linked by a single piece of shared state, namely the `timeAtLocation` property. The `Text`
+
+     * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
+     * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
        composable is an observer of this state.
      * The `Button` composable changes the state using the `onClick` event handler.
 
@@ -85,9 +85,9 @@ To get started, implement a new `App` composable:
 
    ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
 
-## Support the user input
+## Support user input
 
-Now let users enter the name of the city to see the time at this location. The simplest way to achieve this is by adding
+Now let users enter the name of a city to see the time at that location. The simplest way to achieve this is by adding
 a `TextField` composable:
 
 1. Replace the current implementation of `App` with the one below:
@@ -118,7 +118,7 @@ a `TextField` composable:
     the property is incrementally updated using the `onValueChange` event handler.
 
 2. Follow the IDE's instructions to import the missing dependencies.
-3. Run the application across the different platforms:
+3. Run the application on each platform you're targeting:
 
    ![User input in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-4.png){width=500}
 
@@ -145,7 +145,7 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-    This function is similar to `todaysDate()` that you created earlier, and which is now no longer required.
+    This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
 
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
@@ -173,7 +173,7 @@ The next step is to use the given input to calculate time. To do this, create a 
     ```
 
 4. Run the application again and enter a valid timezone.
-5. Press the button, you should see the correct time:
+5. Click the button. You should see the correct time:
 
    ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
 
@@ -184,7 +184,7 @@ The next step is to use the given input to calculate time. To do this, create a 
 The application is working, but there are issues with its appearance. The composables could be spaced better, and the
 time message could be rendered more prominently.
 
-1. To address these issues, use this following version of the `App` composable:
+1. To address these issues, use the following version of the `App` composable:
 
     ```kotlin
     @Composable
@@ -222,10 +222,10 @@ time message could be rendered more prominently.
         }
     }
     ```
-    
-    * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and `TextField`.
+
+    * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and the `TextField`.
     * The `Text` composable fills the available horizontal space and centers its content.
-    * The `style` parameter customizes the content of the `Text`.
+    * The `style` parameter customizes the appearance of the `Text`.
 
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application to see how the appearance has improved:
@@ -236,7 +236,9 @@ time message could be rendered more prominently.
 
 ## Refactor the design
 
-The application works, but is prone to users' typos. It would be preferable to ask users to select an item from a list.
+The application works, but it's susceptible to users' typos. For example, if the user enters "Franse" instead of "France",
+the app won't be able to process that input. It would be preferable to ask users to select the country from a predefined
+list.
 
 1. To achieve this, change the design in the `App` composable:
 
@@ -306,8 +308,8 @@ The application works, but is prone to users' typos. It would be preferable to a
    * There is a `Country` type, consisting of a name and a timezone.
    * The `currentTimeAt()` function takes a `TimeZone` as its second parameter.
    * The `App` now requires a list of countries as a parameter. The `countries()` function provides the list.
-   * `DropdownMenu`replaced the `TextField`. The value of the `showCountries` property determines the visibility
-     of `DropdownMenu`. There is a `DropdownMenuItem` for each country.
+   * `DropdownMenu` has replaced the `TextField`. The value of the `showCountries` property determines the visibility
+     of the `DropdownMenu`. There is a `DropdownMenuItem` for each country.
 
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application to see the redesigned version:
@@ -316,9 +318,9 @@ The application works, but is prone to users' typos. It would be preferable to a
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
-> You can further improve the design by using a dependency injection framework, such as [Koin](https://insert-koin.io/),
+> You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
-> you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network, or
+> you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network or
 > the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
 >
 {type="tip"}
@@ -328,9 +330,9 @@ The application works, but is prone to users' typos. It would be preferable to a
 The list of country names works, but it's not visually appealing. You can improve it by replacing the names with images
 of national flags.
 
-Compose Multiplatform provides a library for accessing resources in a common way across all platforms. The Kotlin
-Multiplatform wizard has already added and configured this library, so you don't need to modify the build file to start
-loading resources.
+Compose Multiplatform provides a library for accessing resources through common code across all platforms. The Kotlin
+Multiplatform wizard has already added and configured this library, so you can start loading resources without having to
+modify the build file.
 
 To support images in your project, you'll need to download image files, store them in the correct directory, and add
 code to load and display them:
@@ -340,12 +342,12 @@ code to load and display them:
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
 
-2. Place the images to `src/commonMain/resources`, so that the same flags can be available on all platforms:
+2. Move the images to `src/commonMain/resources` so that the same flags are available on all platforms:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
-   > Each platform-specific source set can also have its own resources folder. So you could have different images for each
-   > platform, if needed.
+   > Each platform-specific source set can also have its own resources folder. This allows you to use different images on different
+   > platforms, if needed.
    >
    {type="tip"}
 
@@ -421,10 +423,10 @@ code to load and display them:
         }
     }
     ```
-    
+
     * The `Country` type stores the path to the associated image.
-    * The list of countries passed to `App` includes these paths.
-    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` that contains country names.
+    * The list of countries passed to the `App` includes these paths.
+    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` composable that contains country names.
     * Each `Image` requires a `Painter` object to fetch the data.
 
 4. Follow the IDE's instructions to import the missing dependencies and annotations.
@@ -440,5 +442,5 @@ We encourage you to explore multiplatform development further and try out more p
 
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-* [Share business logic between iOS and Android keeping the UI native](multiplatform-getting-started.md)
+* [Share business logic between iOS and Android while keeping the UI native](multiplatform-getting-started.md)
 * [See the curated list of sample projects](multiplatform-samples.md)

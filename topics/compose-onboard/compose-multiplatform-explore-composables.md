@@ -66,7 +66,7 @@ should take up the full width of its container. This is achieved using the `modi
 Modifiers are a key component of Compose Multiplatform. This is a primary mechanism you use to adjust the appearance or
 behavior of composables in the UI. Modifiers are created using methods of the `Modifier` type. When you chain these
 methods, each call can change the `Modifier` returned from the previous call, making the order significant.
-See [JetPack Compose documention](https://developer.android.com/jetpack/compose/modifiers) for more details.
+See the [JetPack Compose documentation](https://developer.android.com/jetpack/compose/modifiers) for more details.
 
 ### Managing the state
 
@@ -75,14 +75,14 @@ composable, `greetingText` and `showImage`. They are built using the `mutableSta
 state objects that can be observed.
 
 These state objects are wrapped in a call to the `remember()` function, meaning that they are built once and then
-retained by the framework. For example, when you perform the declaration:
+retained by the framework. Take the following declaration, for example:
 
 ```kotlin
 var showImage by remember { mutableStateOf(false) }
 ```
 
-You're creating a property whose value is a state object containing a boolean. The framework caches this state object so
-composables can observe it.
+By performing it, you're creating a property whose value is a state object containing a boolean. The framework caches
+this state object so composables can observe it.
 
 When the value of the state changes, any composables that observe it are re-invoked. This allows any of the widgets they
 produce to be redrawn. This is called a _recomposition_.
@@ -103,7 +103,7 @@ controller, and on desktop by a window. Let's examine each of them.
 
 ### On Android
 
-For Android, open the `MainActivity.kt ` file in `composeApp/src/androidMain/kotlin`:
+For Android, open the `MainActivity.kt` file in `composeApp/src/androidMain/kotlin`:
 
 ```kotlin
 class MainActivity : ComponentActivity() {
@@ -129,7 +129,7 @@ fun MainViewController() = ComposeUIViewController { App() }
 ```
 
 This is a [view controller](https://developer.apple.com/documentation/uikit/view_controllers) that performs the same
-role as an activity on Android. Notice that both iOS and Android types simply invoke the `App` composable.
+role as an activity on Android. Notice that both the iOS and Android types simply invoke the `App` composable.
 
 ### On desktop
 
@@ -144,13 +144,12 @@ fun main() = application {
 ```
 
 * Here, the `application()` function launches a new desktop application.
-* This function takes a lambda, where you initialize the UI. Typically, you create a `Window` with properties and
-  instructions on how to react when the window is closing. In this case, the whole application shuts down.
+* This function takes a lambda, where you initialize the UI. Typically, you create a `Window` and specify properties and
+  instructions that dictate how the program should react when the window is closed. In this case, the whole application shuts down.
 * Inside this window, you can place your content. As with Android and iOS, the only content is the `App()` function.
 
-Currently, the `App` function doesn't declare any parameters. In a larger application, you typically use parameters to
-pass to platform-specific dependencies. These dependencies could be created by hand or using a dependency injection
-library.
+Currently, the `App` function doesn't declare any parameters. In a larger application, you typically pass parameters to
+platform-specific dependencies. These dependencies could be created by hand or using a dependency injection library.
 
 ## Next step
 

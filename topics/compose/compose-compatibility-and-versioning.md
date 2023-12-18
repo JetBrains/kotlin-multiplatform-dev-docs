@@ -66,8 +66,8 @@ plugin:
 * [Use the Jetpack Compose compiler](#use-a-jetpack-compose-compiler)
 * [Use a compiler version for a different version of Kotlin](#use-a-compiler-for-a-different-version-of-kotlin)
 
-> With these approaches, stability isn’t guaranteed, so use them at your own risk. Even if
-> compilation is successful, there can be hidden runtime errors. We don’t recommend
+> With these approaches, stability isn't guaranteed, so use them at your own risk. Even if
+> compilation is successful, there can be hidden runtime errors. We don't recommend
 > upgrading to the latest version of Kotlin in production until it is officially supported by
 > Compose Multiplatform.
 >
@@ -75,7 +75,7 @@ plugin:
 
 ### Use a developer version of Compose Multiplatform compiler
 
-If there isn’t a stable Compose Multiplatform version that supports the Kotlin version that you want to use, you
+If there isn't a stable Compose Multiplatform version that supports the Kotlin version that you want to use, you
 can try a developer (`dev`) version of the Compose Multiplatform compiler.
 `-dev` versions of Compose Multiplatform, such as `1.5.0-dev1084`, contain actual version mappings from Kotlin to the
 Compose Multiplatform compiler. This includes Beta and RC (Release Candidate) versions of Kotlin.
