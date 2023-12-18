@@ -20,7 +20,7 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 2. On the **New project** tab, change the project name to "ComposeDemo".
 3. Select the **Android** and **Desktop** options.
-4. If you’re using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
+4. If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
 5. Click the **Download** button and unpack the resulting archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard.png){width=450}

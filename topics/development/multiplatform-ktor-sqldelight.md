@@ -520,7 +520,7 @@ public class.
 
     * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
       returns cached values or loads the data from the internet and then updates the cache with the results. If there is
-      no cached data, it loads the data from the internet independently of the `forceReload` flag’s value.
+      no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
     * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
       allow the user to use the pull-to-refresh gesture.
     * To handle exceptions produced by the Ktor client in Swift, the function is marked with the `@Throws` annotation.

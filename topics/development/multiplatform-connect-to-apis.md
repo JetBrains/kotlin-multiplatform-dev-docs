@@ -25,7 +25,7 @@ annotations. This section focuses on using expected and actual functions and pro
 
 ![Using expected and actual functions and properties](expect-functions-properties.svg){width=700}
 
-In this example, you’ll define an expected `platform()` function in the common source set and provide the actual
+In this example, you'll define an expected `platform()` function in the common source set and provide the actual
 implementations in the platform source sets. While generating the code for a specific platform, the Kotlin compiler merges
 the expected and actual declarations. It generates one `platform()` function with its actual implementation. The expected and
 actual declarations should be defined in the same package and merged into _one declaration_ in the resulting
@@ -262,7 +262,7 @@ framework:
 ![Using dependency injection framework](expect-di-framework.svg){width=700}
 
 This approach only works if you put the implementations in the platform modules. It isn't very scalable, as your Kotlin
-Multiplatform module can't be self-sufficient and you’ll need to implement the common interface in a different module.
+Multiplatform module can't be self-sufficient and you'll need to implement the common interface in a different module.
 
 <!-- If you're interested in having this functionality expanded to a shared module, please vote for this issue in Youtrack and describe your use case. -->
 
