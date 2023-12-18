@@ -1,5 +1,6 @@
 # Kotlin multiplatform development documentation 
-[![Official project][project-badge]][project-url]
+[![Official project](https://jb.gg/badges/official.svg)](https://github.com/JetBrains#jetbrains-on-github)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This repository is the source for [https://www.jetbrains.com/help/kotlin-multiplatform-dev](https://www.jetbrains.com/help/kotlin-multiplatform-dev).
 
@@ -32,5 +33,3 @@ You have several options for providing feedback or reporting issues:
 * **Kotlin public Slack**: Share feedback in the [#multiplatform](https://kotl.in/gamt3a) channel in our Kotlin public Slack.
 * **Feedback widget**: Use the feedback widget located at the end of each documentation page.
 
-[project-url]: https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub
-[project-badge]: https://jb.gg/badges/official.svg
