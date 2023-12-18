@@ -1,5 +1,5 @@
 # Kotlin multiplatform development documentation 
-![Official project][project-badge]][project-url]
+[![Official project][project-badge]][project-url]
 
 This repository is the source for [https://www.jetbrains.com/help/kotlin-multiplatform-dev](https://www.jetbrains.com/help/kotlin-multiplatform-dev).
 
