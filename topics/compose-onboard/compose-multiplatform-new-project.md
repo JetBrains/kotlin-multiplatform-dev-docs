@@ -145,7 +145,7 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-    This function is similar to `todaysDate()`, which you created earlier and is no longer required.
+    This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
 
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
@@ -236,7 +236,7 @@ time message could be rendered more prominently.
 
 ## Refactor the design
 
-The application works, but it's susceptible to users' typos. For example, if the user enters "Tokio" instead of "Tokyo",
+The application works, but it's susceptible to users' typos. For example, if the user enters "Franse" instead of "France",
 the app won't be able to process that input. It would be preferable to ask users to select the country from a predefined
 list.
 
