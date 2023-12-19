@@ -18,7 +18,7 @@ Studio.
 To begin, create a sample project. This is best achieved with the Kotlin Multiplatform web wizard:
 
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-2. On the **New project** tab, change the project name to "ComposeDemo".
+2. On the **New project** tab, change the project name to "ComposeDemo" and the project ID to "kmp.project.demo".
 3. Select the **Android** and **Desktop** options.
 4. If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
 5. Click the **Download** button and unpack the resulting archive.
@@ -190,7 +190,7 @@ You can run the application on the desktop as follows:
 1. Go to `composeApp/src/desktopMain/kotlin`.
 2. Open the `main.kt` file and find the `main()` function:
 
-   ![Compose Multiplatform desktop app](first-compose-project-on-desktop-main.png){width=350}
+   ![Compose Multiplatform desktop app](first-compose-project-on-desktop-main.png){width=700}
 
 3. Click the green run icon in the gutter next to the `main()` function:
 

@@ -51,7 +51,7 @@ maintain the native parts of your application as well.
 When using Fleet, you can create a Multiplatform project by:
 
 * Using the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com/).
-* Cloning an [existing Git repository](https://www.jetbrains.com/help/fleet/workspace.html#clone-project)
+* [Cloning an existing Git repository](https://www.jetbrains.com/help/fleet/workspace.html#clone-project)
   with the **Clone from Git** option on the Fleet welcome screen.
 
 ### Create a project
@@ -184,23 +184,17 @@ Since the `ContentView.swift` file is already open, you can explore Fleet suppor
    @Composable
    fun App(text: String? = null) {
        MaterialTheme {
-           var greetingText by remember { mutableStateOf(GREETING) }
-           var showImage by remember { mutableStateOf(false) }
-           Column(
-               Modifier.fillMaxWidth(),
-               horizontalAlignment = Alignment.CenterHorizontally
-           ) {
-               Button(onClick = {
-                   greetingText = "${getPlatformName()}: $GREETING"
-                   showImage = !showImage
-               }) {
-                   Text(text ?: greetingText)
+           var showContent by remember { mutableStateOf(false) }
+           val greeting = remember { Greeting().greet() }
+           Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+               Button(onClick = { showContent = !showContent }) {
+                   Text(text ?: greeting)
                }
-               AnimatedVisibility(showImage) {
-                   Image(
-                       painterResource("compose-multiplatform.xml"),
-                       null
-                   )
+               AnimatedVisibility(showContent) {
+                   Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                       Image(painterResource("compose-multiplatform.xml"), null)
+                       Text("Compose: $greeting")
+                   }
                }
            }
        }
@@ -232,12 +226,12 @@ One more example of cross-language functionality is debugging. The Fleet debugge
 and Kotlin code.
 
 1. In the `ContentView.swift` file, set a breakpoint on the return expression of the `sumArray()` function on line 17.
-2. In `App.kt`, set a breakpoint in the `App` composable on line 22.
+2. In `App.kt`, set a breakpoint in the `App` composable on line 23.
 3. Open the **Run & Debug** menu and click **Debug** next to the `iosApp` configuration.
 4. When the breakpoint on line 17 of `ContentView.swift` is reached, in the **Debug** menu, use **Step Out** to move to
    line 7.
 5. To move into the `MainSwiftUIViewController()` Kotlin function, use **Step Into**.
-6. Click **Resume** to move on to the breakpoint on line 22 of `App.kt`.
+6. Click **Resume** to move on to the breakpoint on line 23 of `App.kt`.
 
    ![Refactoring across multiple languages in Fleet](fleet-debug.png){width=700}
 

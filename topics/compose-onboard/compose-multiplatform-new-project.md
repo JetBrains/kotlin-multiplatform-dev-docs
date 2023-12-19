@@ -34,9 +34,7 @@ To get started, implement a new `App` composable:
              var timeAtLocation by remember { mutableStateOf("No location selected") }
              Column {
                  Text(timeAtLocation)
-                 Button(onClick = {
-                     timeAtLocation = "13:30"
-                 }) {
+                 Button(onClick = { timeAtLocation = "13:30" }) {
                      Text("Show Time At Location")
                  }
              }
@@ -67,11 +65,7 @@ To get started, implement a new `App` composable:
             size = DpSize(400.dp, 250.dp),
             position = WindowPosition(300.dp, 300.dp)
         )
-        Window(
-            title = "Local Time App",
-            onCloseRequest = ::exitApplication,
-            state = state
-        ) {
+        Window(title = "Local Time App", onCloseRequest = ::exitApplication, state = state) {
             App()
         }
     }
@@ -101,12 +95,8 @@ a `TextField` composable:
     
             Column {
                 Text(timeAtLocation)
-                TextField(value = location, onValueChange = {
-                    location = it
-                })
-                Button(onClick = {
-                    timeAtLocation = "Time at $location is 13:30"
-                }) {
+                TextField(value = location, onValueChange = { location = it })
+                Button(onClick = { timeAtLocation = "13:30" }) {
                     Text("Show Time At Location")
                 }
             }
@@ -159,12 +149,8 @@ The next step is to use the given input to calculate time. To do this, create a 
     
             Column {
                 Text(timeAtLocation)
-                TextField(value = location, onValueChange = {
-                    location = it
-                })
-                Button(onClick = {
-                    timeAtLocation = currentTimeAt(location) ?: "Invalid Location"
-                }) {
+                TextField(value = location, onValueChange = { location = it })
+                Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" })
                     Text("Show Time At Location")
                 }
             }
@@ -186,42 +172,31 @@ time message could be rendered more prominently.
 
 1. To address these issues, use the following version of the `App` composable:
 
-    ```kotlin
-    @Composable
-    fun App() {
-        MaterialTheme {
-            var location by remember { mutableStateOf("Europe/Paris") }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
-            Column(modifier = Modifier.padding(20.dp)) {
-                Text(
-                    timeAtLocation,
-                    style = TextStyle(fontSize = 20.sp),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                        .align(Alignment.CenterHorizontally)
-                )
-    
-                TextField(
-                    value = location,
-                    modifier = Modifier.padding(top = 10.dp),
-                    onValueChange = {
-                        location = it
-                    }
-                )
-    
-                Button(
-                    modifier = Modifier.padding(top = 10.dp),
-                    onClick = {
-                        timeAtLocation = currentTimeAt(location) ?: "Invalid Location"
-                    }
-                ) {
-                    Text("Show Time")
-                }
-            }
-        }
-    }
-    ```
+   ```kotlin
+   @Composable
+   fun App() {
+       MaterialTheme {
+           var location by remember { mutableStateOf("Europe/Paris") }
+           var timeAtLocation by remember { mutableStateOf("No location selected") }
+   
+           Column {
+               Text(
+                   timeAtLocation,
+                   style = TextStyle(fontSize = 20.sp),
+                   textAlign = TextAlign.Center,
+                   modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
+               )
+               TextField(value = location,
+                   modifier = Modifier.padding(top = 10.dp),
+                   onValueChange = { location = it })
+               Button(modifier = Modifier.padding(top = 10.dp),
+                   onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+                   Text("Show Time")
+               }
+           }
+       }
+   }
+   ```
 
     * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and the `TextField`.
     * The `Text` composable fills the available horizontal space and centers its content.
@@ -273,15 +248,14 @@ list.
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                        .align(Alignment.CenterHorizontally)
+                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
                 )
                 Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                     DropdownMenu(
                         expanded = showCountries,
                         onDismissRequest = { showCountries = false }
                     ) {
-                        countries.forEach { (name, zone) ->
+                        countries().forEach { (name, zone) ->
                             DropdownMenuItem(
                                 onClick = {
                                     timeAtLocation = currentTimeAt(name, zone)
@@ -294,10 +268,8 @@ list.
                     }
                 }
     
-                Button(
-                    modifier = Modifier.padding(start = 20.dp, top = 10.dp),
-                    onClick = { showCountries = !showCountries }
-                ) {
+                Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
+                    onClick = { showCountries = !showCountries }) {
                     Text("Select Location")
                 }
             }
@@ -385,8 +357,7 @@ code to load and display them:
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                        .align(Alignment.CenterHorizontally)
+                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
                 )
                 Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                     DropdownMenu(
@@ -413,10 +384,8 @@ code to load and display them:
                     }
                 }
     
-                Button(
-                    modifier = Modifier.padding(start = 20.dp, top = 10.dp),
-                    onClick = { showCountries = !showCountries }
-                ) {
+                Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
+                    onClick = { showCountries = !showCountries }) {
                     Text("Select Location")
                 }
             }
