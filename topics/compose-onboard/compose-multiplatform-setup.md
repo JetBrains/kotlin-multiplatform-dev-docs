@@ -47,6 +47,10 @@ We recommend that you install the latest stable versions for compatibility and b
             lang="bash">java -version</code></td>
    </tr>
    <tr>
+        <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform Mobile plugin</a></td>
+        <td>In Android Studio, select <strong>Settings/Preferences | Plugins</strong>, search <strong>Marketplace</strong> for <i>Kotlin Multiplatform Mobile</i>, and then install it.</td>
+   </tr>
+   <tr>
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
         <td>
             <p>The Kotlin plugin is bundled with each Android Studio release. However, it still needs to be updated to the latest version to avoid compatibility issues.</p> 
@@ -117,9 +121,20 @@ To make sure everything works as expected, install and run the KDoctor tool:
          </li>
       </list>
    </def>
-   <def title="Kotlin plugin">
+   <def title="Kotlin plugins">
+         <chunk>
+            <p><strong>Kotlin Multiplatform Mobile plugin</strong></p>
+               <list>
+                  <li>Make sure that the Kotlin Mobile Multiplatform plugin is installed and enabled. On the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Verify that you have the plugin enabled. If it's not in the <strong>Installed</strong> list, search <strong>Marketplace</strong> for it and install the plugin.</li>
+                  <li>If the plugin is outdated, click <strong>Update</strong> next to the plugin name. You can do the same in the <strong>Settings/Preferences | Tools | Plugins</strong> section.</li>
+                  <li>Check the compatibility of the Kotlin Multiplatform Mobile plugin with your version of Kotlin in the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">Release details</a> table.</li>
+               </list>
+         </chunk>
+         <chunk>
+            <p><strong>Kotlin plugin</strong></p>
             <p>Make sure that the Kotlin plugin is updated to the latest version. To do that, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin.</p>
             <p>You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
+         </chunk>
    </def>
    <def title="Command line">
             <p>Make sure you have all the necessary tools installed:</p>

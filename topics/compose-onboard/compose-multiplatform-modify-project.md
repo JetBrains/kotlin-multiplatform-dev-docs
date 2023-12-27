@@ -28,6 +28,7 @@ To use this library:
        implementation(compose.runtime)
        implementation(compose.foundation)
        implementation(compose.material)
+       implementation(compose.ui)
        @OptIn(ExperimentalComposeLibrary::class)
        implementation(compose.components.resources)
        implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
@@ -59,37 +60,34 @@ To use this library:
    It builds a string containing the current date.
 
 2. Modify the `App` composable to include the `Text` composable that invokes this function and displays the result:
-
-   ```kotlin
-   @OptIn(ExperimentalResourceApi::class)
-   @Composable
-   fun App() {
-       MaterialTheme {
-           var greetingText by remember { mutableStateOf(GREETING) }
-           var showImage by remember { mutableStateOf(false) }
-           Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-               Text(
-                   text = "Today's date is ${todaysDate()}",
-                   modifier = Modifier.padding(20.dp),
-                   fontSize = 24.sp,
-                   textAlign = TextAlign.Center
-               )
-               Button(onClick = {
-                   greetingText = "${getPlatformName()}: $GREETING"
-                   showImage = !showImage
-               }) {
-                   Text(greetingText)
-               }
-               AnimatedVisibility(showImage) {
-                   Image(
-                       painterResource("compose-multiplatform.xml"),
-                       null
-                   )
-               }
-           }
-       }
-   }
-   ```
+   
+    ```kotlin
+    @OptIn(ExperimentalResourceApi::class)
+    @Composable
+    fun App() {
+        MaterialTheme {
+            var showContent by remember { mutableStateOf(false) }
+            val greeting = remember { Greeting().greet() }
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = "Today's date is ${todaysDate()}",
+                    modifier = Modifier.padding(20.dp),
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
+                Button(onClick = { showContent = !showContent }) {
+                    Text("Click me!")
+                }
+                AnimatedVisibility(showContent) {
+                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Image(painterResource("compose-multiplatform.xml"), null)
+                        Text("Compose: $greeting")
+                    }
+                }
+            }
+        }
+    }
+    ```
 
 3. Follow the IDE's suggestions to import the missing dependencies.
 
