@@ -23,34 +23,29 @@ that requires tests both for common and platform-specific code.
 
 ### Create your project
 
-1. Prepare your environment for multiplatform
-   development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
-2. In Android Studio, select **File** | **New** | **New Project**.
-3. Select **Kotlin Multiplatform App** in the list of project templates, and click **Next**.
+1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
+2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
+3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
+4. For iOS, choose the **Do not share UI** option. It's not necessary for this tutorial.
+5. Click the **Download** button and unpack the resulting archive.
 
-   ![Mobile Multiplatform project template](multiplatform-mobile-project-wizard-1.png){width=700}
-
-4. Name your application and click **Next**.
-
-   ![Mobile Multiplatform project - general settings](multiplatform-mobile-project-wizard-2.png){width=700}
-
-5. Leave the **Add sample tests for Shared Module** option unchecked.
-
-   This option adds extra source sets and sample code to assist you with testing your code. However, to understand how to
-   create and configure tests better, you'll add them manually in this tutorial.
-
-   ![Mobile Multiplatform project. Additional settings](multiplatform-mobile-project-wizard-3.png){width=700}
-
-6. Keep all other options default values. Click **Finish**.
+![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
 
 ### Write code
 
-1. To view the complete structure of your multiplatform project, switch the view from **Android** to **Project**:
+1. Launch Android Studio.
+2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
+3. Navigate to the unpacked project folder and then click **Open**.
 
-   ![Select the Project view](select-project-view.png){width=200}
+   Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
 
-2. In `shared/src/commonMain/kotlin`, create a new `common.example.search` directory.
-3. In this directory, create a Kotlin file, `Grep.kt`, and add the following function:
+4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
+   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
+
+   ![Select the project view](select-project-view.png){width=200}
+
+5. In `shared/src/commonMain/kotlin`, create a new `common.example.search` directory.
+6. In this directory, create a Kotlin file, `Grep.kt`, and add the following function:
 
     ```kotlin
     fun grep(lines: List<String>, pattern: String, action: (String) -> Unit) {
@@ -69,25 +64,34 @@ that requires tests both for common and platform-specific code.
 Now, let's test the common code. An essential part will be a source set for common tests,
 which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API library as a dependency.
 
-1. In the `shared` directory, open the `build.gradle.kts` file. You'll see that this template project already has
-   a source set for testing the common code. Within its declaration, there's a dependency on the `kotlin.test` library:
+1. In the `shared` directory, open the `build.gradle.kts` file. Add a source set for testing the common code with
+   a dependency on the `kotlin.test` library:
 
     ```kotlin
-    commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-    ```
+   sourceSets {
+       commonMain.dependencies {
+           // put your Multiplatform dependencies here
+       }
+       commonTest.dependencies {
+           implementation(libs.kotlin.test)
+       }
+   }
+   ```
+   
+2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
 
-   Each multiplatform project has a `commonTest` source set by default. This is where the common tests are stored.
-   All you need to do is to create a corresponding folder in your project, which must have the same name.
+   ![Synchronize Gradle files](gradle-sync.png)
 
-2. Create a new directory in `shared/src`. Choose the `commonTest/kotlin` folder
+3. The `commonTest` source set stores all common tests. Now you also need to create a corresponding folder in your project,
+   which must have the same name.
+
+   Create a new directory in `shared/src`. Choose the `commonTest/kotlin` folder
    from the list of standard options provided by the IDE:
 
-   ![Creating common test directory](create-common-test-dir.png){width=300}
+   ![Creating common test directory](create-common-test-dir.png){width=350}
 
-3. In the `kotlin` folder, create a new `common.example.search` directory.
-4. In this directory, create the `Grep.kt` file and update it with the following unit test:
+4. In the `kotlin` folder, create a new `common.example.search` directory.
+5. In this directory, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
     import kotlin.test.Test
@@ -259,7 +263,7 @@ As well as implementing this function on each platform, you should provide tests
 
 3. Use the IDE's suggestions to create the `androidUnitTest/kotlin` directory:
 
-   ![Creating Android test directory](create-android-test-dir.png){width=300}
+   ![Creating Android test directory](create-android-test-dir.png){width=350}
 
 4. In the `kotlin` folder, create a new `org.kmp.testing` package.
 5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
@@ -283,8 +287,7 @@ It may seem strange that an Android-specific test is run on a local JVM. This is
 tests on the current machine. As described in the [Android Studio documentation](https://developer.android.com/studio/test/test-in-android-studio),
 these tests differ from instrumented tests, which run on a device or an emulator.
 
-The **Kotlin Multiplatform App** template project is not configured to support these tests by default. However, it's
-possible to add additional dependencies and folders. To learn about adding support for instrumented tests, see this [Touchlab guide](https://touchlab.co/understanding-and-configuring-your-kmm-test-suite/).
+You can add other types of tests to your project. To learn about instrumented tests, see this [Touchlab guide](https://touchlab.co/understanding-and-configuring-your-kmm-test-suite/).
 
 #### For iOS
 
@@ -293,6 +296,7 @@ possible to add additional dependencies and folders. To learn about adding suppo
    `determineCurrentRuntime()` function:
 
     ```kotlin
+    import kotlin.experimental.ExperimentalNativeApi
     import kotlin.native.Platform
     
     actual fun determineCurrentRuntime(): CurrentRuntime {
@@ -303,7 +307,7 @@ possible to add additional dependencies and folders. To learn about adding suppo
 
 3. Use the IDE's suggestions to create the `iosTest/kotlin` directory:
 
-   ![Creating iOS test directory](create-ios-test-dir.png){width=300}
+   ![Creating iOS test directory](create-ios-test-dir.png){width=350}
 
 4. In the `kotlin` folder, create a new `org.kmp.testing` directory.
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:

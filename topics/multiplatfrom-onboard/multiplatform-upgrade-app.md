@@ -262,7 +262,7 @@ suspending functions return.
 To access the internet, the Android application needs the appropriate permission. Since all network requests are made from the
 shared module, it makes sense to add the internet access permission to its manifest.
 
-Update your `androidApp/src/main/AndroidManifest.xml` file with the access permission:
+Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the access permission:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -284,20 +284,21 @@ As both the shared module and the Android application are written in Kotlin, usi
 
 #### Introduce a view model
 
-Now that the application is becoming more complex, it's time to introduce a view model to your `MainActivity` class.
-The view model will manage the data from `Activity` and won't disappear when `Activity` undergoes a lifecycle change.
+Now that the application is becoming more complex, it's time to introduce a view model to the [Android activity](https://developer.android.com/guide/components/activities/intro-activities)
+called `MainActivity`. It invokes the `App()` function that implements the UI.
+The view model will manage the data from the activity and won't disappear when the activity undergoes a lifecycle change.
 
-1. Add the following dependencies to your `androidApp/build.gradle.kts` file:
+1. Add the following dependencies to your `composeApp/build.gradle.kts` file:
 
     ```kotlin
-    dependencies {
+    androidMain.dependencies {
         // ...
-        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
     }
     ```
 
-2. In `androidApp/src/main/java`, create a new `MainViewModel` Kotlin class in the project directory:
+2. In `composeApp/src/androidMain/kotlin`, create a new `MainViewModel` Kotlin class:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -329,7 +330,6 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
 
     ```kotlin
    import androidx.lifecycle.viewModelScope
-   import com.jetbrains.simplelogin.kotlinmultiplatformsandbox.Greeting
    import kotlinx.coroutines.launch
    
    class MainViewModel : ViewModel() {
@@ -365,76 +365,41 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
    
     The `update()` function will update the value automatically.
 
-#### Use the view model's flow from the main activity
+#### Use the view model's flow
 
-In `androidApp/src/main/java`, locate the `MainActivity.kt` file and update the following class, replacing the previous
-implementation:
+1. In `composeApp/src/androidMain/kotlin`, locate the `App.kt` file and update it, replacing the previous implementation:
 
-```kotlin
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-
-class MainActivity : ComponentActivity() {
-    private val mainViewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val greetings = mainViewModel.greetingList.collectAsStateWithLifecycle()
-                    GreetingView(phrases = greetings.value)
+    ```kotlin
+    import androidx.lifecycle.compose.collectAsStateWithLifecycle
+    import androidx.compose.runtime.getValue
+    import androidx.lifecycle.viewmodel.compose.viewModel
+    
+    @Composable
+    fun App(mainViewModel: MainViewModel = viewModel()) {
+        MaterialTheme {
+            val greetings by mainViewModel.greetingList.collectAsStateWithLifecycle()
+    
+            Column(
+                modifier = Modifier.padding(all = 20.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                greetings.forEach { greeting ->
+                    Text(greeting)
+                    Divider()
                 }
             }
         }
     }
-}
+    ```
+    
+    * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
+      and represent it as a composable state in a lifecycle-aware manner.
+    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
+      arranged vertically and separated by dividers.
 
-@Composable
-fun GreetingView(phrases: List<String>) {
-    LazyColumn(
-        contentPadding = PaddingValues(20.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        items(phrases) { phrase ->
-            Text(phrase)
-            Divider()
-        }
-    }
-}
+2. To see the results, re-run your **composeApp** configuration in Android Studio:
 
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView(listOf("Hello, Android!"))
-    }
-}
-```
-
-* The `collectAsStateWithLifecycle()` function calls on `greetingsList()` to collect the value from the view model's flow
-  and represent it as a composable state in a lifecycle-aware manner.
-* When a new flow is created, the compose state will change and cause a recomposition of every composable using `greetings.value`,
-  namely `GreetingView`. It's a scrollable `LazyColumn` with phrases arranged vertically and separated by dividers.
+    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
 ### iOS app
 
@@ -442,7 +407,7 @@ For the iOS part of the project, you'll make use of the [Model–view–viewmode
 pattern again to connect the UI to the shared module, which contains all the business logic.
 
 The module is already connected to the iOS project — the Android Studio plugin wizard has completed the configuration. The module
-is already imported and used in `ContentView.swift` with `import shared`.
+is already imported and used in `ContentView.swift` with `import Shared`.
 
 > If you see errors in Xcode regarding the shared module or when updating your code, run **iosApp** from Android Studio.
 >
@@ -468,7 +433,7 @@ is already imported and used in `ContentView.swift` with `import shared`.
 
     ```Swift
     import SwiftUI
-    import shared
+    import Shared
     
     struct ContentView: View {
         @ObservedObject private(set) var viewModel: ViewModel
@@ -540,8 +505,8 @@ with RxSwift through adapters.
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins` block:
 
     ```kotlin
-    id("com.google.devtools.ksp").version("1.8.22-1.0.11").apply(false)
-    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-12").apply(false)
+    id("com.google.devtools.ksp").version("1.9.20-1.0.14").apply(false)
+    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-21").apply(false)
     ```
 
 2. In the _shared_ `build.gradle.kts` file, configure the KMP-NativeCoroutines plugin:
@@ -556,8 +521,10 @@ with RxSwift through adapters.
 3. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
-    kotlin.sourceSets.all {
-        languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+    sourceSets{
+        all {
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
     }
     ```
 
@@ -584,7 +551,7 @@ with RxSwift through adapters.
 
 ##### Import the library using SPM in XCode
 
-1. In Xcode, right-click the `iosApp` project in the left-hand project menu and select **Add Package Dependencies**.
+1. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
 2. In the search bar, enter the package name:
 
      ```none
@@ -669,12 +636,11 @@ with RxSwift through adapters.
     }
     ```
 
-4. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
+4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
-    ![Final results](multiplatform-mobile-upgrade.png){width=500}
+    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 > 
 {type="tip"}
 
@@ -689,7 +655,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-    id("co.touchlab.skie") version "0.5.6"
+    id("co.touchlab.skie") version "0.6.1"
 }
 ```
 
@@ -734,11 +700,11 @@ Return to Xcode and update the code using the library:
 4. In the `gradle.properties` file at the root of your project change the option `org.gradle.configuration-cache` to `false`,
 as SKIE does not support this feature yet.
 
-5. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
+5. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
-   ![Final results](multiplatform-mobile-upgrade.png){width=500}
+   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/skie/step4).
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5_skie).
 >
 {type="tip"}
 
