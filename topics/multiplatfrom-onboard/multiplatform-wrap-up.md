@@ -10,7 +10,7 @@
        <img src="icon-6.svg" width="20" alt="Sixth step"/> <strong>Wrap up your project</strong></p>
 </microformat>
 
-You've created your first Multiplatform Mobile app that works both on iOS and Android! Now you know how
+You've created your first Kotlin Multiplatform app that works both on iOS and Android! Now you know how
 to set up an environment for cross-platform mobile development, create a project in Android Studio, run your app on devices,
 and expand its functionality.
 

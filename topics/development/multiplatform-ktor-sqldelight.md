@@ -1,7 +1,7 @@
 [//]: # (title: Create a multiplatform app using Ktor and SQLDelight – tutorial)
 
 This tutorial demonstrates how to use Android Studio to create a mobile application for iOS and Android using Kotlin
-Multiplatform Mobile with Ktor and SQLDelight.
+Multiplatform with Ktor and SQLDelight.
 
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
@@ -27,40 +27,19 @@ You will use the following multiplatform libraries in the project:
 >
 {type="note"}
 
-## Before you start
+### Create your project
 
-1. Download and install [Android Studio](https://developer.android.com/studio/).
-2. Search for the [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile)
-   in the Android Studio Marketplace and install it.
+1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
+2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
+3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
+4. For iOS, choose the **Do not share UI** option. It's not necessary for this tutorial.
+5. Click the **Download** button and unpack the resulting archive.
 
-   ![Kotlin Multiplatform Mobile plugin](multiplatform-marketplace.png){width=700}
+![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
 
-3. Download and install [Xcode](https://developer.apple.com/xcode/).
-
-For more details, see the [Set up the environment](multiplatform-setup.md) section.
-
-## Create a Multiplatform project
-
-1. In Android Studio, select **File** | **New** | **New Project**. In the list of project templates, select **Kotlin
-   Multiplatform App** and then click **Next**.
-
-   ![Kotlin Multiplatform Mobile plugin wizard](multiplatform-mobile-project-wizard-1.png){width=700}
-
-2. Name your application and click **Next**.
-3. Select **Regular framework** in the list of **iOS framework distribution** options.
-
-   ![Kotlin Multiplatform Mobile plugin wizard. Final step](multiplatform-mobile-project-wizard-3.png){width=700}
-
-4. Keep all other options default. Click **Finish**.
-5. To view the complete structure of the multiplatform mobile project, switch the view from **Android** to **Project**.
-
-   ![Project view](select-project-view.png){width=200}
-
-For more on project features and how to use them, see [Understand the project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
-
-> You can find the configured project [on the `master` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage).
+<!-- You can find the configured project [on the `master` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage).
 >
-{type="note"}
+{type="note"} -->
 
 ## Add dependencies to the multiplatform library
 
@@ -69,7 +48,18 @@ libraries to the `dependencies` block of the relevant source sets in the `build.
 
 Both the `kotlinx.serialization` and SQLDelight libraries also require additional configurations.
 
-1. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
+1. Launch Android Studio.
+2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
+3. Navigate to the unpacked project folder and then click **Open**.
+
+   Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
+
+4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
+   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
+
+   ![Select the project view](select-project-view.png){width=200}
+
+5. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
 
     ```kotlin
     val coroutinesVersion = "%coroutinesVersion%"
@@ -78,28 +68,21 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
     val dateTimeVersion = "%dateTimeVersion%"
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
-            }
+        commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+            implementation("io.ktor:ktor-client-core:$ktorVersion")
+            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+            implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
         }
-        androidMain {
-            dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
-            }
+        androidMain.dependencies {
+            implementation("io.ktor:ktor-client-android:$ktorVersion")
+            implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
         }
-        iosMain {
-            // ...
-            dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
-            }
+        iosMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+            implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
         }
     }
     ```
@@ -109,7 +92,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
     * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
       `kotlinx.serialization` for processing network requests and responses.
 
-2. At the very beginning of the `build.gradle.kts` file in the same `shared` directory, add the following lines to the
+6. At the very beginning of the `build.gradle.kts` file in the same `shared` directory, add the following lines to the
    `plugins` block:
 
    ```kotlin
@@ -120,13 +103,11 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    }
    ```
 
-3. Sync the Gradle project.
+7. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
+
+   ![Synchronize Gradle files](gradle-sync.png)
 
 Learn more about adding [dependencies on multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
-
-> You can find this state of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
 
 ## Create an application data model
 
@@ -151,10 +132,6 @@ serializer through the annotation argument.
 
 However, you don't need to do that in this case. The `@SerialName` annotation allows you to redefine field names, which helps
 to declare properties in data classes with more easily readable names.
-
-> You can find the state of the project after this section [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
 
 ## Configure SQLDelight and implement cache logic
 
@@ -401,10 +378,6 @@ a `Database` class, which will wrap the `AppDatabase` class and contain the cach
 
 The `Database` class instance will be created later, along with the SDK facade class.
 
-> You can find the state of the project after this section [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
-
 ## Implement an API service
 
 To retrieve data over the internet, you'll need the [SpaceX public API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs)
@@ -462,7 +435,7 @@ Create a class that will connect the application to the API:
 To access the internet, the Android application needs the appropriate permission. Since all network requests are made
 from the shared module, adding the internet access permission to this module's manifest makes sense.
 
-In the `androidApp/src/main/AndroidManifest.xml` file, add the following permission to the manifest:
+In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the following permission to the manifest:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -472,11 +445,7 @@ In the `androidApp/src/main/AndroidManifest.xml` file, add the following permiss
 </manifest>
 ```
 
-> You can find the state of the project after this section [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
-
-# Build an SDK
+## Build an SDK
 
 Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
 public class.
@@ -529,29 +498,25 @@ public class.
    exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
    classes.
 
-> You can find the state of the project after this section [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
-
 ## Create the Android application
 
-The Kotlin Multiplatform Mobile plugin for Android Studio has already handled the configuration for you, so the Kotlin
+The Kotlin Multiplatform wizard has already handled the configuration for you, so the Kotlin
 Multiplatform shared module is already connected to your Android application.
 
 Before implementing the UI and the presentation logic, add all the required dependencies to
-the `androidApp/build.gradle.kts`:
+the `composeApp/build.gradle.kts`:
 
 ```kotlin
 // ...
-dependencies {
-    implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.9.0")
+commonMain.dependencies {
+    implementation(projects.shared)
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.recyclerview:recyclerview:1.3.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.core:core-ktx:1.12.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
 }
 // ...
@@ -559,7 +524,7 @@ dependencies {
 
 ### Implement the UI: display the list of rocket launches
 
-1. To implement the UI, create the `layout/activity_main.xml` file in `androidApp/src/main/res`.
+1. To implement the UI, create the `layout/activity_main.xml` file in `composeApp/src/androidMain/res`.
 
    The screen is based on the `ConstraintLayout` with the `SwipeRefreshLayout` inside it, which contains `RecyclerView`
    and `FrameLayout` with a background with a `ProgressBar` across its center:
@@ -568,7 +533,7 @@ dependencies {
    ```
    {src="multiplatform-tutorial/activity_main.xml" initial-collapse-state="collapsed" collapsed-title="androidx.constraintlayout.widget.ConstraintLayout xmlns:android" lines="1-26"}
 
-2. In `androidApp/src/main/java`, replace the implementation of the `MainActivity` class, adding the properties for the
+2. In `composeApp/src/androidMain/kotlin/kmp.project.demo`, replace the implementation of the `MainActivity` class, adding the properties for the
    UI elements:
 
    ```kotlin
@@ -617,13 +582,13 @@ dependencies {
    }
    ```
 
-4. Create an `item_launch.xml` resource file in `androidApp/src/main/res/layout/` with the items view layout:
+4. Create an `item_launch.xml` resource file in `composeApp/src/androidMain/res/layout` with the items view layout:
 
    ```xml
    ```
    {src="multiplatform-tutorial/item_launch.xml" initial-collapse-state="collapsed" collapsed-title="androidx.cardview.widget.CardView xmlns:android" lines="1-28"}
 
-5. In `androidApp/src/main/res/values/`, either create your appearance of the app or copy the following styles:
+5. In `composeApp/src/androidMain/res/values`, either create your appearance of the app or copy the following styles:
 
    <tabs>
    <tab title="colors.xml">
@@ -782,18 +747,13 @@ dependencies {
    }
    ```
 
-3. Select **androidApp** from the run configurations menu, choose an emulator, and click the run button:
+3. Select **composeApp** from the run configurations menu, choose an emulator, and click the run button:
 
 ![Android application](android-application.png){width=350}
 
-You've just created an Android application that has its business logic implemented in the Kotlin Multiplatform Mobile
-module.
+You've just created an Android application that has its business logic implemented in the Kotlin Multiplatform module.
 
-> You can find the state of the project after this section [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
->
-{type="note"}
-
-# Create the iOS application
+## Create the iOS application
 
 For the iOS part of the project, you'll make use of [SwiftUI](https://developer.apple.com/xcode/swiftui/) to build the user
 interface and the "Model View View-Model" pattern to connect the UI to the shared module, which contains all the business logic.
@@ -814,7 +774,7 @@ data.
 
    ```swift
    import SwiftUI
-   import shared
+   import Shared
    
    struct RocketLaunchRow: View {
        var rocketLaunch: RocketLaunch
@@ -972,7 +932,7 @@ library.
 
    ```swift
    import SwiftUI
-   import shared
+   import Shared
    
    @main
    struct iOSApp: App {
@@ -989,9 +949,9 @@ library.
 
 ![iOS Application](ios-application.png){width=350}
 
-> You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
+<!-- You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
 >
-{type="note"}
+{type="note"} -->
 
 ## What's next?
 
@@ -1003,4 +963,4 @@ You can also check out these additional learning materials:
 
 * [Use the Ktor HTTP client in multiplatform projects](https://ktor.io/docs/http-client-engines.html#mpp-config)
 * [Make your Android application work on iOS](multiplatform-integrate-in-existing-app.md)
-* [Introduce your team to Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform-introduce-your-team.html)
+* [Learn more about multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
