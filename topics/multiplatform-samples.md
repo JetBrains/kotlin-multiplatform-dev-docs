@@ -475,6 +475,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
               <li><code>kotlinx-serialization</code></li>
               <li><code>ktor-client</code></li>
               <li><code>datastore</code></li>
+              <li><code>koin</code></li>
               <li><code>precompose</code></li>
               <li><code>image-loader</code></li>
           </list>
