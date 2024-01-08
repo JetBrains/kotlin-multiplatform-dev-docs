@@ -15,11 +15,12 @@ Here you will learn how to create and run your first Kotlin Multiplatform applic
 ## Create the project with a wizard
 
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-2. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-3. For iOS, choose the **Do not share UI** option to keep the UI native.
-4. Click the **Download** button and unpack the resulting archive.
+2. On the **New project** tab, change the project name to "GreetingKMP" and the project ID to "com.jetbrains.greeting".
+3. Ensure that the **Android** and **iOS** options are selected.
+4. For iOS, choose the **Do not share UI** option to keep the UI native.
+5. Click the **Download** button and unpack the resulting archive.
 
-![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
+![Kotlin Multiplatform wizard](multiplatform-web-wizard-1.png){width=450}
 
 ## Examine the project structure
 
@@ -241,13 +242,7 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
    ![First mobile multiplatform app on Android](first-multiplatform-project-on-android-1.png){width=300}
 
-#### Run on a different Android simulated device {initial-collapse-state="collapsed"}
-
-Learn how to [configure the Android Emulator and run your application on a different simulated device](https://developer.android.com/studio/run/emulator#runningapp).
-
-#### Run on a real Android device {initial-collapse-state="collapsed"}
-
-Learn how to [configure and connect a hardware device and run your application on it](https://developer.android.com/studio/run/device).
+<include src="compose-multiplatform-create-first-app.md" include-id="run_android_other_devices"/>
 
 ### Run your application on iOS
 
@@ -261,38 +256,7 @@ Learn how to [configure and connect a hardware device and run your application o
 
    ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
-#### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
-
-If you want to run your application on a simulated device, you can add a new run configuration. 
-
-1. In the list of run configurations, click **Edit Configurations**.
-
-   ![Edit run configurations](ios-edit-configurations.png){width=450}
-
-2. Click the **+** button above the list of configurations and select **iOS Application**.
-
-   ![New run configuration for iOS application](ios-new-configuration.png)
-
-3. Name your configuration.
-4. Select the **Xcode project file**. To do so, navigate to your project, for example **KotlinMultiplatformSandbox**,
-   open the`iosApp` folder, and select the `.xcodeproj` file.
-
-5. In the **Execution target** list, select a simulated device and click **OK**.
-
-   ![New run configuration with iOS simulator](ios-new-simulator.png)
-
-6. Click **Run** to run your application on the new simulated device.
-
-#### Run on a real iOS device {initial-collapse-state="collapsed"}
-
-1. Connect a real iPhone device to Xcode.
-2. Make sure to code sign your app. For more information, see the [official Apple documentation](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device/).
-3. [Create a run configuration](#run-on-a-new-ios-simulated-device) by selecting an iPhone in the **Execution target** list.
-4. Click **Run** to run your application on the iPhone device.
-
-> If your build fails, follow the workaround described in [this issue](https://youtrack.jetbrains.com/issue/KT-40907).
->
-{type="note"}
+<include src="compose-multiplatform-create-first-app.md" include-id="run_ios_other_devices"/>
 
 ## Next step
 

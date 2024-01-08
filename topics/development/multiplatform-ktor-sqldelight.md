@@ -27,7 +27,7 @@ You will use the following multiplatform libraries in the project:
 >
 {type="note"}
 
-### Create your project
+## Create your project
 
 1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
 2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
@@ -214,6 +214,12 @@ directory. The generator will create an interface named `AppDatabase`, as specif
 To initialize `AppDatabase`, pass an `SqlDriver` instance to it. SQLDelight provides multiple platform-specific
 implementations of the SQLite driver, so you need to create them for each platform separately. You can do this by using
 [expected and actual declarations](multiplatform-connect-to-apis.md).
+
+> Expected and actual classes are in [Beta](components-stability.md).
+> They are almost stable, but migration steps may be required in the future.
+> We'll do our best to minimize any further changes for you to make.
+>
+{type="warning"}
 
 1. Create an abstract factory for database drivers. To do this, in `shared/src/commonMain/kotlin`, create
    the `com.jetbrains.handson.kmm.shared.cache` package and the `DatabaseDriverFactory` class inside it:

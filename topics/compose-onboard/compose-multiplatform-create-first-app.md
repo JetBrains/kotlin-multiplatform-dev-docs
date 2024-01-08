@@ -93,6 +93,18 @@ order, so start with whichever platform you are most familiar with.
 
 ![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=300}
 
+<chunk id="run_android_other_devices">
+
+#### Run on a different Android simulated device {initial-collapse-state="collapsed"}
+
+Learn how to [configure the Android Emulator and run your application on a different simulated device](https://developer.android.com/studio/run/emulator#runningapp).
+
+#### Run on a real Android device {initial-collapse-state="collapsed"}
+
+Learn how to [configure and connect a hardware device and run your application on it](https://developer.android.com/studio/run/device).
+
+</chunk>
+
 ### Run your application on iOS
 
 1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
@@ -104,6 +116,8 @@ If you don't have an available iOS configuration in the list, add a [new run con
 ![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 
 ![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=300}
+
+<chunk id="run_ios_other_devices">
 
 #### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
 
@@ -182,6 +196,8 @@ In short, you should:
 
 Once you've registered your iPhone in Xcode, [create a new run configuration](#run-on-a-new-ios-simulated-device)
 in Android Studio and select your device in the **Execution target** list. Run the corresponding `iosApp` configuration.
+
+</chunk>
 
 ### Run your application on desktop
 
