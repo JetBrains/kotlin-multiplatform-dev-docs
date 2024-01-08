@@ -215,7 +215,7 @@ To initialize `AppDatabase`, pass an `SqlDriver` instance to it. SQLDelight prov
 implementations of the SQLite driver, so you need to create them for each platform separately. You can do this by using
 [expected and actual declarations](multiplatform-connect-to-apis.md).
 
-> Expected and actual classes are in [Beta](components-stability.md).
+> Expected and actual classes are in [Beta](https://kotlinlang.org/docs/components-stability.html#current-stability-of-kotlin-components).
 > They are almost stable, but migration steps may be required in the future.
 > We'll do our best to minimize any further changes for you to make.
 >
