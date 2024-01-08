@@ -21,25 +21,18 @@ Take a look at the `App()` function in `composeApp/src/commonMain/kotlin`:
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
-    MaterialTheme {  // [1]
-        var greetingText by remember { mutableStateOf(GREETING) }
-        var showImage by remember { mutableStateOf(false) }
-
-        Column(
-            Modifier.fillMaxWidth(),  // [2]
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(onClick = {  // [3]
-                greetingText = "${getPlatformName()}: $GREETING"
-                showImage = !showImage
-            }) {
-                Text(greetingText)
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        val greeting = remember { Greeting().greet() }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
             }
-            AnimatedVisibility(showImage) {  // [4]
-                Image(
-                    painterResource("compose-multiplatform.xml"), // [5]
-                    null
-                )
+            AnimatedVisibility(showContent) {
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource("compose-multiplatform.xml"), null)
+                    Text("Compose: $greeting")
+                }
             }
         }
     }
@@ -70,31 +63,24 @@ See the [JetPack Compose documentation](https://developer.android.com/jetpack/co
 
 ### Managing the state
 
-The final aspect of the sample composable is how the state is managed. There are two properties in the `App`
-composable, `greetingText` and `showImage`. They are built using the `mutableStateOf()` function, which means they are
-state objects that can be observed.
-
-These state objects are wrapped in a call to the `remember()` function, meaning that they are built once and then
-retained by the framework. Take the following declaration, for example:
+The final aspect of the sample composable is how the state is managed. The `showContent` property in the `App`
+composable is built using the `mutableStateOf()` function, which means it's a state object that can be observed:
 
 ```kotlin
-var showImage by remember { mutableStateOf(false) }
+var showContent by remember { mutableStateOf(false) }
 ```
 
-By performing it, you're creating a property whose value is a state object containing a boolean. The framework caches
-this state object so composables can observe it.
+The state object is wrapped in a call to the `remember()` function, meaning that it's built once and then
+retained by the framework. By executing this, you create a property whose value is a state object containing a boolean.
+The framework caches this state object, allowing composables to observe it.
 
 When the value of the state changes, any composables that observe it are re-invoked. This allows any of the widgets they
 produce to be redrawn. This is called a _recomposition_.
 
-In your application, the only place where the state is changed is in the click event of the button. This event changes
-the value of both properties. The `onClick` event handler flips the value of the `showImage` property and adds the name
-of the platform to the `greetingText` property.
+In your application, the only place where the state is changed is in the click event of the button. The `onClick` event
+handler flips the value of the `showContent` property and invokes the `greeting` property with the platform name.
 
-The changes occur when:
-
-* The button is redrawn because the nested `Text` composable observes `greetingText`.
-* The image is shown or hidden because the parent `AnimatedVisibility` composable observes `showImage`.
+The changes occur when the image is shown or hidden because the parent `AnimatedVisibility` composable observes `showContent`.
 
 ## Launching UI on different platforms
 
@@ -137,7 +123,7 @@ For desktop, look again at the `main()` function in `composeApp/src/desktopMain/
 
 ```kotlin
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(onCloseRequest = ::exitApplication, title = "ComposeDemo") {
         App()
     }
 }
