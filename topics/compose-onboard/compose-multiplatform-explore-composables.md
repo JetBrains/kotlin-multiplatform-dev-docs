@@ -71,8 +71,8 @@ var showContent by remember { mutableStateOf(false) }
 ```
 
 The state object is wrapped in a call to the `remember()` function, meaning that it's built once and then
-retained by the framework. By performing it, you're creating a property whose value is a state object containing a boolean.
-The framework caches this state object so composables can observe it.
+retained by the framework. By executing this, you create a property whose value is a state object containing a boolean.
+The framework caches this state object, allowing composables to observe it.
 
 When the value of the state changes, any composables that observe it are re-invoked. This allows any of the widgets they
 produce to be redrawn. This is called a _recomposition_.
