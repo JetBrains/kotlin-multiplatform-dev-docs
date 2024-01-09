@@ -453,7 +453,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
   
   <tr>
       <td>
-          <strong><a href="https://github.com/razaghimahdi/Shoping-By-KMP">Shopping By KMP</a></strong>
+          <strong><a href="https://github.com/razaghimahdi/Shopping-By-KMP">Shopping By KMP</a></strong>
       </td>
       <td>A cross-platform application that is built using Jetpack Compose Multiplatform, a declarative framework for sharing UIs across multiple platforms with Kotlin. The application allows users to browse, search, and purchase products from a shopping catalog on Android, iOS.</td>
       <td>
@@ -467,6 +467,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
               <li>Navigation</li>
               <li>UI state</li>
               <li>Use Case</li>
+              <li>Unit Test</li>
           </list>
       </td>
       <td>
@@ -477,7 +478,8 @@ to add your Kotlin Multiplatform project to this topic and help the community.
               <li><code>datastore</code></li>
               <li><code>koin</code></li>
               <li><code>precompose</code></li>
-              <li><code>image-loader</code></li>
+              <li><code>Coil</code></li>
+              <li><code>Kotest</code></li>
           </list>
       </td>
       <td>
