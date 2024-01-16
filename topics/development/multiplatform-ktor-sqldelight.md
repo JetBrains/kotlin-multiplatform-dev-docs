@@ -23,7 +23,7 @@ You will use the following multiplatform libraries in the project:
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
-> on the corresponding GitHub repository.
+> in the corresponding GitHub repository.
 >
 {type="note"}
 

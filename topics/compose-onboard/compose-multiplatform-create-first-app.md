@@ -10,10 +10,10 @@
   </p>
 </microformat>
 
-Here, you'll learn how to create and run your first Compose Multiplatform application using a web wizard and Android
-Studio.
+Here, you'll learn how to create and run your first Compose Multiplatform application using the Kotlin Multiplatform
+web wizard and Android Studio.
 
-## Create the project with a wizard
+## Create a project using the wizard
 
 To begin, create a sample project. This is best achieved with the Kotlin Multiplatform web wizard:
 
