@@ -42,25 +42,37 @@ Let's now go back to the app and make the greeting a little more festive. In add
 function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
 multiplatform support, is the most convenient way to work with dates in your shared code.
 
-1. Navigate to the `build.gradle.kts` file in the `shared` directory.
-2. Add the following dependency to the `commonMain` source set dependencies:
+1. Navigate to the `libs.versions.toml` file in the `gradle` directory.
+2. Add two entries about the library, in the `[version]` block and in the `[libraries]` block:
+
+   ```toml
+   [versions]
+   ...
+   kotlinxDatetime = "0.4.1"
+   
+   [libraries]
+   ...
+   kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+   ```
+3. Navigate to the `build.gradle.kts` file in the `shared` directory.
+4. Add the following dependency to the `commonMain` source set dependencies:
 
    ```kotlin
    kotlin {
        sourceSets {
            commonMain.dependencies {
-               implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+               implementation(libs.kotlinx.datetime)
            } 
        }
    }
    ```
 
-3. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+5. Synchronize the Gradle files by clicking **Sync Now** in the notification.
 
    ![Synchronize the Gradle files](gradle-sync.png)
 
-4. In `shared/src/commonMain/kotlin`, create a new file `NewYear.kt` in the project directory.
-5. Update the file with a short function that calculates
+6. In `shared/src/commonMain/kotlin`, create a new file `NewYear.kt` in the project directory.
+7. Update the file with a short function that calculates
    the number of days from today until the New Year using the `date-time` date arithmetic:
    
    ```kotlin
@@ -75,7 +87,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    fun daysPhrase(): String = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
    ```
 
-6. In `Greeting.kt`, update the `Greeting` class to see the result:
+8. In `Greeting.kt`, update the `Greeting` class to see the result:
     
     ```kotlin
     class Greeting {
@@ -89,7 +101,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
     }
     ```
 
-7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
+9. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
