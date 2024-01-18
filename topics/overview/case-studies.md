@@ -4,6 +4,12 @@ Discover how major companies leverage Kotlin Multiplatform for cross-platform de
 strategies: from integrating into existing apps and sharing a portion of app logic to building new applications based
 on Kotlin Multiplatform and Compose Multiplatform.
 
+[![Forbes](forbes.svg){width=200}](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/)
+
+By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms,
+keeping the flexibility to withhold or customize features based on the specific platform. This allows the team to
+innovate and respond to market needs faster than by developing separately for each OS.
+
 [![McDonald's](mcdonalds.svg){width=200}](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc)
 
 McDonald's leverages Kotlin Multiplatform for their Global Mobile App, enabling them to build a codebase that can be
