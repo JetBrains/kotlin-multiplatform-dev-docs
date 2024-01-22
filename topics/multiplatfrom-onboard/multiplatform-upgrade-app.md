@@ -34,12 +34,14 @@ To add `kotlinx.coroutines` to your project, specify a dependency in the common 
 line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
-sourceSets {
-    commonMain.dependencies {
-            // ...
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-        }
-    }
+kotlin {
+   // ... 
+   sourceSets {
+       commonMain.dependencies {
+           // ...
+           implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+       }
+   }
 }
 ```
 
@@ -74,21 +76,24 @@ dependency (`ktor-client-core`) in the common source set, you also need to:
   (`ktor-client-android`, `ktor-client-darwin`).
 
 ```kotlin
-val ktorVersion = "%ktorVersion%"
+kotlin {
+    // ...
+    val ktorVersion = "%ktorVersion%"
 
-sourceSets {
-    commonMain.dependencies {
+    sourceSets {
+        commonMain.dependencies {
             // ...
-            
+
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    }
-    androidMain.dependencies {
+        }
+        androidMain.dependencies {
             implementation("io.ktor:ktor-client-android:$ktorVersion")
-    }
-    iosMain.dependencies {
+        }
+        iosMain.dependencies {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+        }
     }
 }
 ```
@@ -100,7 +105,7 @@ Synchronize the Gradle files by clicking **Sync Now** in the notification.
 You'll need the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data, and you'll use a single method to
 get the list of all launches from the **v4/launches** endpoint.
 
-### Add data model
+### Add a data model
 
 In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file in the project directory
 and add a data class which stores data from the SpaceX API:
@@ -295,6 +300,7 @@ The view model will manage the data from the activity and won't disappear when t
         // ...
         implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
         implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     }
     ```
 
@@ -354,10 +360,14 @@ The view model will manage the data from the activity and won't disappear when t
     ```kotlin
     import kotlinx.coroutines.flow.update
    
-    init {
-        viewModelScope.launch {
-            Greeting().greet().collect { phrase ->
-                _greetingList.update { list -> list + phrase }
+    class MainViewModel : ViewModel() {
+        //...
+   
+        init {
+            viewModelScope.launch {
+                Greeting().greet().collect { phrase ->
+                    _greetingList.update { list -> list + phrase }
+                }
             }
         }
     }
@@ -391,7 +401,7 @@ The view model will manage the data from the activity and won't disappear when t
         }
     }
     ```
-    
+
     * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
       and represent it as a composable state in a lifecycle-aware manner.
     * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
@@ -505,14 +515,18 @@ with RxSwift through adapters.
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins` block:
 
     ```kotlin
-    id("com.google.devtools.ksp").version("1.9.20-1.0.14").apply(false)
-    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-21").apply(false)
+    plugins {
+        // ...
+        id("com.google.devtools.ksp").version("1.9.21-1.0.16").apply(false)
+        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-23").apply(false)
+    }
     ```
 
 2. In the _shared_ `build.gradle.kts` file, configure the KMP-NativeCoroutines plugin:
 
     ```kotlin
     plugins {
+        // ...
         id("com.google.devtools.ksp")
         id("com.rickclephas.kmp.nativecoroutines")
     }
@@ -521,9 +535,13 @@ with RxSwift through adapters.
 3. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
-    sourceSets{
-        all {
-            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+    kotlin {
+        // ...
+        sourceSets{
+            all {
+                languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+            }
+            // ...
         }
     }
     ```
@@ -566,7 +584,7 @@ with RxSwift through adapters.
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 
-    This will install the KMP-NativeCoroutines packages necessary to work with the `async/await` mechanism.
+This should install the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
 ##### Consume the flow using the KMP-NativeCoroutines library
 
@@ -697,14 +715,12 @@ Return to Xcode and update the code using the library:
         }
     }
     ```
-4. In the `gradle.properties` file at the root of your project change the option `org.gradle.configuration-cache` to `false`,
-as SKIE does not support this feature yet.
 
-5. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5_skie).
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
 >
 {type="tip"}
 
