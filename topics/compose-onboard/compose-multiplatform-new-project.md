@@ -150,7 +150,7 @@ The next step is to use the given input to calculate time. To do this, create a 
             Column {
                 Text(timeAtLocation)
                 TextField(value = location, onValueChange = { location = it })
-                Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" })
+                Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
                     Text("Show Time At Location")
                 }
             }
