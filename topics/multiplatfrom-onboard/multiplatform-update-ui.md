@@ -71,8 +71,8 @@ framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
 
-1. Launch Xcode. Select **Open Existing Project**.
-2. Navigate to your project, for example **KotlinMultiplatformSandbox**, and select the `iosApp` folder. Click **Open**.
+1. Navigate to the `iosApp` folder in the Project window.
+2. Right-click the `iosApp.xcodeproj` folder and select **Open In** | **Xcode**.
 3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut to jump to the function's definition.
 
    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
@@ -80,7 +80,7 @@ Implement the same changes as in the Android app:
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
-4. If you try running the project, the build will fail. The Swift code that uses the `greet()` function doesn't compile
+4. If you try to run the project, the build will fail. The Swift code that uses the `greet()` function doesn't compile
    because its declaration is now different. Change the SwiftUI code to display a list of items:
 
    ```Swift
