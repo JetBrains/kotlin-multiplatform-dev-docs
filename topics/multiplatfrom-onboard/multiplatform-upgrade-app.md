@@ -487,8 +487,8 @@ Now the view model will emit signals whenever this property changes.
 
 #### Choose a library to consume flows from iOS
 
-In this tutorial, you can choose between the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
-and [SKIE](https://github.com/touchlab/SKIE/) libraries to help you work with flows in iOS. Both are open-source solutions
+In this tutorial, you can choose between the [SKIE](https://github.com/touchlab/SKIE/)
+and [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) libraries to help you work with flows in iOS. Both are open-source solutions
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
 The SKIE library augments the Objective-C API produced by the Kotlin compiler.
@@ -504,7 +504,69 @@ option and maybe a more stable solution at the moment. KMP-NativeCoroutines dire
 and RxSwift approaches to concurrency, while SKIE supports `async`/`await` directly and Combine
 with RxSwift through adapters.
 
-#### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
+#### Option 1. Configure SKIE {initial-collapse-state="collapsed"}
+
+> We recommend using the latest version of the library.
+> Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
+>
+{type="note"}
+
+To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync** button.
+
+```kotlin
+plugins {
+    id("co.touchlab.skie") version "0.6.1"
+}
+```
+
+##### Consume the flow using SKIE
+
+Return to Xcode and update the code using the library:
+
+1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
+   property every time the flow emits a value.
+2. To support concurrency, wrap the asynchronous operation in a `Task`:
+
+    ```Swift
+    func startObserving() {
+        Task {
+            for await phrase in Greeting().greet() {
+                self.greetings.append(phrase)
+            }
+        }
+    }
+    ```
+
+3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
+   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
+
+    ```Swift
+    // ...
+    extension ContentView {
+        @MainActor
+        class ViewModel: ObservableObject {
+            @Published var greetings: [String] = []
+            
+            func startObserving() {
+                Task {
+                    for await phrase in Greeting().greet() {
+                        self.greetings.append(phrase)
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+
+   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
+>
+{type="tip"}
+
+#### Option 2. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
@@ -672,68 +734,6 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 > 
-{type="tip"}
-
-#### Option 2. Configure SKIE {initial-collapse-state="collapsed"}
-
-> We recommend using the latest version of the library.
-> Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
->
-{type="note"}
-
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync** button.
-
-```kotlin
-plugins {
-    id("co.touchlab.skie") version "0.6.1"
-}
-```
-
-##### Consume the flow using SKIE
-
-Return to Xcode and update the code using the library:
-
-1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
-   property every time the flow emits a value.
-2. To support concurrency, wrap the asynchronous operation in a `Task`:
-
-    ```Swift
-    func startObserving() {
-        Task {
-            for await phrase in Greeting().greet() {
-                self.greetings.append(phrase)
-            }
-        }
-    }
-    ```
-
-3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
-   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
-
-    ```Swift
-    // ...
-    extension ContentView {
-        @MainActor
-        class ViewModel: ObservableObject {
-            @Published var greetings: [String] = []
-            
-            func startObserving() {
-                Task {
-                    for await phrase in Greeting().greet() {
-                        self.greetings.append(phrase)
-                    }
-                }
-            }
-        }
-    }
-    ```
-
-4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
-
-   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
->
 {type="tip"}
 
 ## Next step
