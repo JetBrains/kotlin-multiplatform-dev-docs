@@ -88,6 +88,43 @@ to add your Kotlin Multiplatform project to this topic and help the community.
   </tr>
 <tr>
     <td>
+      <strong><a href="https://github.com/hlnstepanova/kmpizza-repo">KMPizza</a></strong>
+    </td>
+    <td>The project demonstrates how to develop a Kotlin Multiplatform app from scratch to a cloud-deployed powerhouse of pizza-making: the final app stores and displays pizza recipes. Integrated under the hood with Jetpack Compose, Ktor, PostgreSQL, Docker, and a number of other tools, this sample is an adventure in KMP experience. The step-by-step guide for making an app like that is available at <a href="https://hlnstepanova.github.io/kmpizza/">the author's blog</a>.</td>
+    <td>
+      <list>
+        <li>UI</li>
+        <li>Model</li>
+        <li>Networking</li>
+        <li>Data storage</li>
+        <li>Navigation</li>
+      </list>
+    </td>
+    <td>
+        <list>
+  <li><code>kotlinx-serialization</code></li>
+  <li><code>kotlinx-datetime</code></li>
+  <li><code>kotlinx-coroutines</code></li>
+  <li><code>decompose</code></li>
+  <li><code>koin</code></li>
+  <li><code>jsonpathkt-kotlinx</code></li>
+  <li><code>horologist</code></li>
+  <li><code>google-cloud</code></li>
+  <li><code>firebase</code></li>
+  <li><code>bare-graphql</code></li>
+  <li><code>apollo</code></li>
+  <li><code>accompanist</code></li>
+</list>
+    </td>
+    <td>
+        <list>
+            <li>Jetpack Compose on Android, Auto, and Wear</li>
+            <li>Compose Multiplatform on iOS and desktop</li>
+        </list>
+    </td>
+  </tr>
+<tr>
+    <td>
       <strong><a href="https://github.com/xxfast/NYTimes-KMP">NYTimes KMP</a></strong>
     </td>
     <td>A Compose Multiplatform based version of the New York Times application. Allows the user to browse and read articles. Note that to build and run the application, you will need an <a href="https://developer.nytimes.com/">API key from the New York Times</a>.</td>
