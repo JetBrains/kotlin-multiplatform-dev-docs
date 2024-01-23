@@ -15,7 +15,7 @@ to third-party libraries, which is necessary for building successful cross-platf
 
 ## Dependency types
 
-There are two types of dependencies that you can use in Multiplatform Mobile projects:
+There are two types of dependencies that you can use in Kotlin Multiplatform projects:
 
 * _Multiplatform dependencies_. These are multiplatform libraries that support multiple targets and can be used in the
   common source set, `commonMain`.
@@ -83,15 +83,19 @@ multiplatform support, is the most convenient way to work with dates in your sha
    
         fun greet(): List<String> = buildList {
             add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-            add("Guess what it is! > ${platform.name.reversed()}!")
+            add("Guess what this is! > ${platform.name.reversed()}!")
             add(daysPhrase())
         }
     }
     ```
 
-7. To see the results, re-run your **androidApp** and **iosApp** configurations from Android Studio:
+7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
+
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
+>
+{type="tip"}
 
 ## Next step
 
