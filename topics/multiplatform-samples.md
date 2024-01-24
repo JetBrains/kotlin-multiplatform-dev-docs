@@ -103,23 +103,19 @@ to add your Kotlin Multiplatform project to this topic and help the community.
     <td>
         <list>
   <li><code>kotlinx-serialization</code></li>
-  <li><code>kotlinx-datetime</code></li>
   <li><code>kotlinx-coroutines</code></li>
-  <li><code>decompose</code></li>
+  <li><code>ktor</code></li>
   <li><code>koin</code></li>
-  <li><code>jsonpathkt-kotlinx</code></li>
-  <li><code>horologist</code></li>
-  <li><code>google-cloud</code></li>
-  <li><code>firebase</code></li>
-  <li><code>bare-graphql</code></li>
-  <li><code>apollo</code></li>
-  <li><code>accompanist</code></li>
+  <li><code>exposed</code></li>  
+  <li><code>postgresql</code></li>
+  <li><code>sqldelight</code></li>
+  <li><code>awssdk</code></li>
 </list>
     </td>
     <td>
         <list>
-            <li>Jetpack Compose on Android, Auto, and Wear</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Jetpack Compose on Android</li>
+            <li>SwiftUI on iOS</li>
         </list>
     </td>
   </tr>
