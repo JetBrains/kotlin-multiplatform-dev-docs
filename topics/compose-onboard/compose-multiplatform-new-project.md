@@ -179,7 +179,7 @@ time message could be rendered more prominently.
            var location by remember { mutableStateOf("Europe/Paris") }
            var timeAtLocation by remember { mutableStateOf("No location selected") }
    
-           Column {
+           Column(modifier = Modifier.padding(20.dp)) {
                Text(
                    timeAtLocation,
                    style = TextStyle(fontSize = 20.sp),
