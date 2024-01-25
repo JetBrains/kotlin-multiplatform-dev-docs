@@ -523,7 +523,7 @@ including bridging various Kotlin types to Swift equivalents, and doesn’t requ
 
 The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating necessary
 wrappers. KMP-NativeCoroutines supports Swift `async`/`await` functionality, as well as Combine and RxSwift. It has been
-available longer than SKIE and thus may encounter fewer edge cases today. Using KMP-NativeCoroutines requires
+available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
 adding a Cocoapod or SPM dependency in iOS projects.
 
 #### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
