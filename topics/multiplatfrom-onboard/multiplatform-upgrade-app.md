@@ -491,18 +491,15 @@ In this tutorial, you can choose between the [SKIE](https://github.com/touchlab/
 and [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) libraries to help you work with flows in iOS. Both are open-source solutions
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
-The SKIE library augments the Objective-C API produced by the Kotlin compiler.
-SKIE transforms flows into an equivalent of Swift's `AsyncSequence` structure.
-Rather than using a wrapper, it behaves like any other Swift library when you call it from Swift.
+The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
+Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bi-directional
+cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
+including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
-Using SKIE is less verbose as it doesn't use wrappers around flows. It's also easier to set up because it will be part of the
-framework rather than a dependency that needs to be added as a CocoaPod or SPM file. In addition to flows, SKIE also supports
-[other features](https://skie.touchlab.co/features/).
-
-The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS. It's a more tried-and-tested
-option and maybe a more stable solution at the moment. KMP-NativeCoroutines directly supports the `async`/`await`, Combine,
-and RxSwift approaches to concurrency, while SKIE supports `async`/`await` directly and Combine
-with RxSwift through adapters.
+The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating necessary
+wrappers. KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift. It has been
+available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
+adding a Cocoapod or SPM dependency in iOS projects.
 
 #### Option 1. Configure SKIE {initial-collapse-state="collapsed"}
 
