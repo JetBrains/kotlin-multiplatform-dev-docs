@@ -516,7 +516,7 @@ In this tutorial, you can choose between the [KMP-NativeCoroutines](https://gith
 and [SKIE](https://github.com/touchlab/SKIE/) libraries to help you work with flows in iOS. Both are open-source solutions
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
-The SKIE library augments the Objective-C API produced by the Kotlin compiler. It transforms flows into an equivalent of
+The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
 Swift’s `AsyncSequence`. SKIE directly supports Swift `async`/`await`, without thread restriction, and with automatic bi-directional
 cancelation. Combine and RxSwift require adapters. SKIE offers other features to produce a Swift-friendly API from Kotlin,
 including bridging various Kotlin types to Swift equivalents, and doesn’t require adding additional dependencies in iOS projects.
