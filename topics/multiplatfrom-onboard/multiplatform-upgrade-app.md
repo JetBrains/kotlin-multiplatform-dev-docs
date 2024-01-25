@@ -522,7 +522,7 @@ cancellation (Combine and RxSwift require adapters). SKIE offers other features 
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
 The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating necessary
-wrappers. KMP-NativeCoroutines supports Swift `async`/`await` functionality, as well as Combine and RxSwift. It has been
+wrappers. KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift. It has been
 available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
 adding a Cocoapod or SPM dependency in iOS projects.
 
