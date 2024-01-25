@@ -517,7 +517,7 @@ and [SKIE](https://github.com/touchlab/SKIE/) libraries to help you work with fl
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
 The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
-Swift’s `AsyncSequence`. SKIE directly supports Swift `async`/`await`, without thread restriction, and with automatic bi-directional
+Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bi-directional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
