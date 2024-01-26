@@ -135,8 +135,11 @@ Developer Advocate Sebastian Aigner.
 
 ### What IDE should I use for building apps with Compose Multiplatform?
 
-We recommend using JetBrains Fleet or Android Studio, depending on your project needs and expectations.
-Learn more about which one to choose in [Recommended IDEs](recommended-ides.md).
+We recommend using JetBrains Fleet or Android Studio, depending on your project needs and expectations. To try
+a new multiplatform experience without juggling different IDEs and switching to Xcode for writing Swift code,
+try out [JetBrains Fleet tutorial](fleet.md) for getting started with multiplatform development.
+
+For more details on which one to choose, see [Recommended IDEs](recommended-ides.md).
 
 ### Can I play with a demo application? Where can I find it?
 

@@ -28,6 +28,8 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 ## Examine the project structure
 
 1. Launch Android Studio.
+   * To try a new multiplatform experience without juggling different IDEs and switching to
+     Xcode for writing Swift code, try out JetBrains Fleet following [a similar tutorial](fleet.md).
 2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
 3. Navigate to the unpacked "ComposeDemo" folder and then click **Open**.
 

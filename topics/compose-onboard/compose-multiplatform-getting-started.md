@@ -13,6 +13,8 @@ events, and modifiers.
   this tutorial.
 * To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
   and desktop. For iOS, you need a macOS machine with XCode installed. This is a general limitation of iOS development.
+  * To try a new multiplatform experience without juggling different IDEs and switching to
+  Xcode for writing Swift code, try out [JetBrains Fleet for multiplatform development](fleet.md).
 * If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
 
 Get to know Compose Multiplatform by completing these steps:

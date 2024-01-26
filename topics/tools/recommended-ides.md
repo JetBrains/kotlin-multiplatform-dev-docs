@@ -4,7 +4,7 @@
 
 If you want the best Kotlin Multiplatform development experience, we recommend using [JetBrains Fleet](https://www.jetbrains.com/fleet/).
 
-It supports testing and debugging your code on all of the platforms your project targets. You can also navigate between Kotlin
+It supports testing and debugging your code on all the platforms your project targets. You can also navigate between Kotlin
 Multiplatform code and code written in other languages interoperable with Kotlin.
 
 See the [Use Fleet for Multiplatform development](fleet.md) tutorial to get started.
