@@ -137,7 +137,7 @@ Developer Advocate Sebastian Aigner.
 
 We recommend using JetBrains Fleet or Android Studio, depending on your project needs and expectations. To try
 a new multiplatform experience without juggling different IDEs and switching to Xcode for writing Swift code,
-try out [JetBrains Fleet tutorial](fleet.md) for getting started with multiplatform development.
+try out [JetBrains Fleet tutorial](fleet.md).
 
 For more details on which one to choose, see [Recommended IDEs](recommended-ides.md).
 
