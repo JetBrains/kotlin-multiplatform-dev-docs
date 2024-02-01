@@ -410,6 +410,7 @@ code to load and display them:
 We encourage you to explore multiplatform development further and try out more projects:
 
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
+* [Try JetBrains Fleet for a new multiplatform experience without switching between IDEs](fleet.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
 * [Share business logic between iOS and Android while keeping the UI native](multiplatform-getting-started.md)
 * [See the curated list of sample projects](multiplatform-samples.md)
