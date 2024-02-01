@@ -145,6 +145,13 @@ To make sure everything works as expected, install and run the KDoctor tool:
               <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
               <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
+   </def>
+   <def title="Subpar multiplatform development experience">
+            <p>If the setup seems complicated, try JetBrains Fleet: it smoothly integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
+            <list>
+              <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
+              <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
+           </list>
     </def>
 </deflist>
 
