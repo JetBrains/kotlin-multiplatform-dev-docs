@@ -439,4 +439,5 @@ Once you've made your Android application cross-platform, you can move on and:
 
 You can also check out community resources:
 
+* [Video: How to migrate an Android project to Kotlin Multiplatform](https://www.youtube.com/watch?v=vb-Pt8SdfEE&t=1s)
 * [Video: 3 ways to get your Kotlin JVM code ready for Kotlin Multiplatform](https://www.youtube.com/watch?v=X6ckI1JWjqo)
