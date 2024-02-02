@@ -44,6 +44,7 @@
         <toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
         <toc-element id="compose-images-resources.md"/>
         <toc-element id="compose-navigation-routing.md"/>
+        <toc-element id="compose-test.md"/>
         <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with other UI frameworks"/>
         <toc-element id="compose-android-only-components.md"/>
         <toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
