@@ -1,12 +1,17 @@
 [//]: # (title: Images and resources)
 
+> This page describes the new revamped version of the resource library available since Compose Multiplatform 1.6.0.
+> 
+{type="note"}
+
 Compose Multiplatform provides a special library and a Gradle plugin support for accessing resources in common code
-across all supported platforms. Resources are static data, such as images, fonts, strings, that you can use from your application.
+across all supported platforms. Resources are static data, such as images, fonts, and strings, that you can use from
+your application.
 
 > The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > Its API may change in the future.
 >
-{type="note"}
+{type="warning"}
 
 When working with resources in Compose Multiplatform, consider the current conditions:
 
@@ -16,7 +21,7 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
   read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
 * Multimodule projects are not supported yet. Store all resources in the main application module.
-* Publication of compose libraries with resources is not supported yet.
+* The publication of Compose Multiplatform libraries with resources is not supported yet.
 
 ## Configuration
 
@@ -58,7 +63,7 @@ names using a dash:
 
 The library supports (in the order of priority) language, theme, and density qualifiers.
 
-### Language and region qualifiers
+### Language and regional qualifiers
 
 The language is defined by a two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
 language code.
@@ -66,7 +71,7 @@ language code.
 You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) regional code
 to your language code. In this case, the regional code must have a lowercase `r` prefix.
 
-The language and region codes are not case-sensitive.
+The language and regional codes are not case-sensitive.
 
 ### Theme qualifier
 
@@ -86,14 +91,14 @@ You can use the following density qualifiers:
 The resource is selected depending on a screen density defined in the system.
 
 Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
-English language in the United States region suitable for 160 DPI screens in the dark theme.
+English language in the United States region, suitable for 160 DPI screens in the dark theme.
 
 If a resource with the requested qualifier doesn't exist, a default resource without a qualifier is used instead.
 
 ## Resource usage
 
 After importing a project, a special `Res` class that provides access to resources is generated.
-To force run the `Res` class generation, you can run the "generateComposeResClass" Gradle task.
+To force run the `Res` class generation, use the `generateComposeResClass` Gradle task.
 
 ### Images
 
@@ -129,7 +134,7 @@ You can access drawable resources as simple images, rasterized images, and XML v
   fun vectorResource(resource: DrawableResource): ImageVector {...}
   ```
 
-Here's an example of how you can access images in your compose code:
+Here's an example of how you can access images in your Compose Multiplatform code:
 
 ```kotlin
 Image(
@@ -188,7 +193,7 @@ For example:
 
 ```kotlin
 coroutineScope.launch {
-val appName = getString(Res.string.app_name)
+    val appName = getString(Res.string.app_name)
 }
 ```
 
@@ -272,9 +277,13 @@ coroutineScope.launch {
 
 Only files that are a part of the application are considered as resources.
 
-You can also load remote files from the internet using a URL.
-To load them, use special libraries:
+You can also load remote files from the internet using their URL. To load them, use special libraries:
 
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
+
+## What's next?
+
+Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
+that shows how resources can be handled in a Compose Multiplatform project targeting iOS, Android, and desktop.
