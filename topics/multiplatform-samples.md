@@ -1,12 +1,15 @@
 [//]: # (title: Kotlin Multiplatform samples)
 
 This is a curated list of cross-platform projects created with Kotlin Multiplatform. Some share almost all their
-functionality using Compose Multiplatform for the user interface. Others use native code for the user interface and share,
+functionality using Compose Multiplatform for the user interface. Others use native code for the user interface and
+share,
 for example, only the data model and algorithms. To get started with a new Kotlin Multiplatform application,
 we recommend using the [web wizard](https://kmp.jetbrains.com).
 
-You can find even more sample projects on GitHub, see the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
-See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
+You can find even more sample projects on GitHub, see
+the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
+See
+the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
 to add your Kotlin Multiplatform project to this topic and help the community.
 
 <table>
@@ -447,6 +450,28 @@ to add your Kotlin Multiplatform project to this topic and help the community.
       <td>
           <list>
               <li>Compose Multiplatform on Android and iOS</li>
+          </list>
+      </td>
+  </tr>
+  <tr>
+      <td>
+          <strong><a href="https://github.com/SEAbdulbasit/TravelApp-KMP">Travel App</a></strong>
+      </td>
+      <td>Travel App KMP is a multiplatform app build on top of KMP and Compose Multiplatfrom, where you can see different countries and their famous destinations</td>
+      <td>
+          <list>
+              <li>Data</li>
+              <li>UI</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>Compose Resources</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, Web and Desktop</li>
           </list>
       </td>
   </tr>
