@@ -17,11 +17,12 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 * All resource types (except raw files) are read synchronously in the caller thread. JS is the only platform
   where resources are downloaded asynchronously.
-* It's expected that resources are relatively small files, like icons and texts, that you load and use as part of the UI.
 * Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
   read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
-* Multimodule projects are not supported yet. Store all resources in the main application module.
-* The publication of Compose Multiplatform libraries with resources is not supported yet.
+* Multimodule projects are not supported yet. The JetBrains team is working on adding this functionality in future releases.
+  For now, store all resources in the main application module.
+* The publication of Compose Multiplatform libraries with resources is not supported yet. The JetBrains team is working
+  on adding this functionality in future releases.
 
 ## Configuration
 
@@ -33,7 +34,7 @@ To access resources in your multiplatform projects:
    kotlin {
        sourceSets {
            commonMain.dependencies {
-               implementation("compose.components.resources")
+               implementation(compose.components.resources)
            }
        }
    }
@@ -61,7 +62,12 @@ names using a dash:
 
 ![Qualifiers in compose resources](compose-resources-qualifiers.png){width=250}
 
-The library supports (in the order of priority) language, theme, and density qualifiers.
+The library supports (in the order of priority) [language](#language-and-regional-qualifiers), [theme](#theme-qualifier),
+and [density](#density-qualifier) qualifiers.
+
+* Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
+  English language in the United States region, suitable for 160 DPI screens in the dark theme.
+* If a resource with the requested qualifier doesn't exist, a default resource without a qualifier is used instead.
 
 ### Language and regional qualifiers
 
@@ -89,11 +95,6 @@ You can use the following density qualifiers:
 * “xxxhdpi” − 640dpi, 4x density
 
 The resource is selected depending on a screen density defined in the system.
-
-Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
-English language in the United States region, suitable for 160 DPI screens in the dark theme.
-
-If a resource with the requested qualifier doesn't exist, a default resource without a qualifier is used instead.
 
 ## Resource usage
 
@@ -200,7 +201,15 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-Strings with arguments currently have basic support:
+You can use special symbols in string resources:
+ 
+* `\n` — for a new line 
+* `\t` — for a tab symbol
+* `\uXXXX` — for a custom Unicode symbol
+
+#### Strings with arguments
+
+Currently, arguments have basic support in string resources:
 
 ```XML
 <!-- strings.xml -->
@@ -217,7 +226,7 @@ Text(stringResource(Res.string.str_template, "User_name", 100))
 
 ### Fonts
 
-Store custom fonts in the `composeResources/font` directory as `*.ttf` files.
+Store custom fonts in the `composeResources/font` directory as `*.ttf` or `*.otf` files.
 
 To load a font as a `Font` type, use the `Font()` function:
 
@@ -238,7 +247,7 @@ val fontAwesome = FontFamily(Font(Res.font.font_awesome))
 
 ### Raw files
 
-To load any file as a byte array, use the `Res.readBytes()` function:
+To load any file as a byte array, use the `Res.readBytes(path)` function:
 
 ```kotlin
 suspend fun readBytes(path: String): ByteArray
@@ -277,7 +286,7 @@ coroutineScope.launch {
 
 Only files that are a part of the application are considered as resources.
 
-You can also load remote files from the internet using their URL. To load them, use special libraries:
+You can also load remote files from the internet using their URL. To load remote files, use special libraries:
 
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
