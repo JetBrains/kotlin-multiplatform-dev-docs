@@ -226,7 +226,7 @@ Create the test source set:
                 Button(
                     onClick = { text = "Compose" },
                     modifier = Modifier.testTag("button")
-                ){
+                ) {
                     Text("Click me")
                 }
             }
