@@ -126,12 +126,19 @@ To run tests:
 
 Click the green run icon in the gutter next to the `myTest()` function and choose **Run...&nbsp;|&nbsp;iosSimulatorArm64**.
 
-Or, run the following command in the terminal: `./gradlew :composeApp:iosSimulatorArm64Test`
+Or, run the following command in the terminal:
+
+```shell
+./gradlew :composeApp:iosSimulatorArm64Test
+```
 
 </tab>
 <tab title="Android Emulator">
 
-Run the command `./gradlew :composeApp:connectedAndroidTest`
+Run this command:
+```shell
+./gradlew :composeApp:connectedAndroidTest
+```
 
 Currently, you cannot run common Compose Multiplatform tests on an Android emulator using Android Studio or Fleet GUI
 (gutter icons offer only local Android run configurations that don't work for Compose Multiplatform).
@@ -144,12 +151,20 @@ article on the Android for Developers portal.
 
 Click the green run icon in the gutter next to the `myTest()` function and choose **Run...&nbsp;|&nbsp;desktop**.
 
-Or, run the following command in the terminal: `./gradlew :composeApp:desktopTest`
+Or, run the following command in the terminal:
+
+```shell
+./gradlew :composeApp:desktopTest
+```
 
 </tab>
 <tab title="Wasm (headless browser)">
 
-Run the command `./gradlew :composeApp:wasmJsTest`
+Run this command:
+
+```shell
+./gradlew :composeApp:wasmJsTest
+```
 
 </tab>
 </tabs>
@@ -226,4 +241,7 @@ Create the test source set:
     ```
 
 4. To run the test, click the run icon in the gutter next to the `myTest` function
-or run the following command in the terminal: `./gradlew desktopTest`
+or run the following command in the terminal:
+   ```shell
+   ./gradlew desktopTest
+   ```
