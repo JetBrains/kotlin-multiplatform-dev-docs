@@ -4,6 +4,9 @@ UI testing in Compose Multiplatform is implemented using the same finders, asser
 as the Jetpack Compose testing API. If you're not familiar with them, we highly recommend reading the [Jetpack Compose guide](https://developer.android.com/jetpack/compose/testing)
 before you continue with this article.
 
+For an overview of tests in a Kotlin Multiplatform project structure, see [Understand basic project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html#integration-with-tests)
+and the [Test your multiplatform app](multiplatform-run-tests.md) tutorial.
+
 ## How Compose Multiplatform testing is different from Jetpack  
 
 Compose Multiplatform test API does not rely on JUnit's `TestRule` class. Instead, you call the `runComposeUiTest` function and invoke
