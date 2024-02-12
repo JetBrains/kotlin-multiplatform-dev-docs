@@ -216,7 +216,7 @@ Create the test source set:
     
         @Test
         fun myTest(){
-            // Declare the UI state that will be tested
+            // Declare the UI to test
             rule.setContent {
                 var text by remember { mutableStateOf("Hello") }
                 Text(
