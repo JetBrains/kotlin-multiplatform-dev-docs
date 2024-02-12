@@ -645,18 +645,6 @@ Return to Xcode and update the code using the library:
 
 This should install the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
-###### If the import did not work ("No such module KMPNativeCoroutinesAsync") {initial-collapse-state="collapsed"}
-1. Select `iosApp` in the left-hand menu.
-2. Click on `iosApp` in the **Targets** block and select the **Build phases** tab.
-3. Click the plus button and select **New Link Binary With Libraries Phase**.
-4. Open the **Target Dependencies** section.
-5. Click the plus button and add the libraries selected earlier: `KMPNativeCoroutinesCore` and `KMPNativeCoroutinesAsync`.
-6. In the **Link Binary With Libraries** section, click the plus button and add the same libraries,
-`KMPNativeCoroutinesCore` and `KMPNativeCoroutinesAsync`.
-
-   Xcode may not reflect changes immediately, in that case, restart the IDE and reopen the project.
-   Make sure that both libraries are present in the **Link Binary With Libraries** section.
-
 ##### Consume the flow using the KMP-NativeCoroutines library
 
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using KMP-NativeCoroutine's
