@@ -205,10 +205,13 @@ You can create a run configuration for running the desktop application as follow
 
 1. Select the **Run | Edit Configurations** menu item.
 2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste the command `desktopRun -DmainClass=MainKt --quiet`
+3. In the **Tasks and arguments** field, paste this command:
+   ```shell
+   desktopRun -DmainClass=MainKt --quiet
+   ```
 4. Click **OK**.
 
-You can use the configuration to run the desktop app:
+Now, you can use this configuration to run the desktop app:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
 
