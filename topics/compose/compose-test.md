@@ -124,7 +124,7 @@ To run tests:
 <tabs>
 <tab title="iOS Simulator">
 
-Click the green run icon in the gutter next to the `myTest()` function and choose **Run... | iosSimulatorArm64**.
+Click the green run icon in the gutter next to the `myTest()` function and choose **Run...&nbsp;|&nbsp;iosSimulatorArm64**.
 
 Or, run the following command in the terminal: `./gradlew :composeApp:iosSimulatorArm64Test`
 
@@ -142,7 +142,7 @@ article on the Android for Developers portal.
 </tab>
 <tab title="Desktop">
 
-Click the green run icon in the gutter next to the `myTest()` function and choose **Run...** | **Desktop**.
+Click the green run icon in the gutter next to the `myTest()` function and choose **Run...&nbsp;|&nbsp;desktop**.
 
 Or, run the following command in the terminal: `./gradlew :composeApp:desktopTest`
 
