@@ -95,8 +95,8 @@ class ExampleTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun myTest() = runComposeUiTest {
-        // Declare the UI state that will be tested, calling your code as necessary
-        // Here we provide only static examples to demonstrate API calls
+        // Declaration of a mock UI to demonstrate API calls
+        // Add your own declarations as needed
         setContent {
             var text by remember { mutableStateOf("Hello") }
             Text(
@@ -111,7 +111,7 @@ class ExampleTest {
             }
         }
 
-        // Describe assertions and actions with the declared UI which should succeed for the test to pass
+        // Assertions and actions with the declared UI which should succeed for the test to pass
         onNodeWithTag("text").assertTextEquals("Hello")
         onNodeWithTag("button").performClick()
         onNodeWithTag("text").assertTextEquals("Compose")
@@ -216,7 +216,8 @@ Create the test source set:
     
         @Test
         fun myTest(){
-            // Declare the UI state that will be tested
+            // Declaration of a mock UI to demonstrate API calls
+            // Add your own declarations as needed
             rule.setContent {
                 var text by remember { mutableStateOf("Hello") }
                 Text(
@@ -231,7 +232,7 @@ Create the test source set:
                 }
             }
     
-            // Describe assertions and actions with the declared UI which should succeed for the test to pass
+            // Assertions and actions with the declared UI which should succeed for the test to pass
             rule.onNodeWithTag("text").assertTextEquals("Hello")
             rule.onNodeWithTag("button").performClick()
             rule.onNodeWithTag("text").assertTextEquals("Compose")
