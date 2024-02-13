@@ -201,21 +201,19 @@ in Android Studio and select your device in the **Execution target** list. Run t
 
 ### Run your application on desktop
 
-You can run the application on the desktop as follows:
+You can create a run configuration for running the desktop application as follows:
 
-1. Go to `composeApp/src/desktopMain/kotlin`.
-2. Open the `main.kt` file and find the `main()` function:
+1. Select the **Run | Edit Configurations** menu item.
+2. Click the plus button and choose **Gradle** from the dropdown list.
+3. In the **Tasks and arguments** field, paste this command:
+   ```shell
+   desktopRun -DmainClass=MainKt --quiet
+   ```
+4. Click **OK**.
 
-   ![Compose Multiplatform desktop app](first-compose-project-on-desktop-main.png){width=700}
+Now, you can use this configuration to run the desktop app:
 
-3. Click the green run icon in the gutter next to the `main()` function:
-
-   ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=400}
-
-Once you run your desktop application, a new **Run Configuration** is created. You can use it from now on to run the
-desktop application:
-
-![Run the Compose Multiplatform app on iOS](compose-run-desktop.png){width=350}
+![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
 
 ## Next step
 
