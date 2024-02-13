@@ -1,11 +1,11 @@
 [//]: # (title: Images and resources)
 
-> This page describes the new revamped version of the resource library available since Compose Multiplatform 1.6.0.
+> This page describes the new revamped version of the resource library available since Compose Multiplatform 1.6.0-beta01.
 > 
 {type="note"}
 
 Compose Multiplatform provides a special library and a Gradle plugin support for accessing resources in common code
-across all supported platforms. Resources are static data, such as images, fonts, and strings, that you can use from
+across all supported platforms. Resources are static content, such as images, fonts, and strings, that you can use from
 your application.
 
 > The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
@@ -15,8 +15,8 @@ your application.
 
 When working with resources in Compose Multiplatform, consider the current conditions:
 
-* All resource types (except raw files) are read synchronously in the caller thread. JS is the only platform
-  where resources are downloaded asynchronously.
+* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files and resources on
+  the JS platform that are read asynchronously.
 * Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
   read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
 * Multimodule projects are not supported yet. The JetBrains team is working on adding this functionality in future releases.
@@ -24,7 +24,7 @@ When working with resources in Compose Multiplatform, consider the current condi
 * The publication of Compose Multiplatform libraries with resources is not supported yet. The JetBrains team is working
   on adding this functionality in future releases.
 
-## Configuration
+## Setup
 
 To access resources in your multiplatform projects:
 
@@ -44,7 +44,7 @@ To access resources in your multiplatform projects:
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
-3. Organize the `composeResources` directory structure accordingly:
+3. Organize the `composeResources` directory structure following these rules:
 
    * Images should be in the `drawable` directory.
    * Fonts should be in the `font` directory.
@@ -81,7 +81,8 @@ The language and regional codes are not case-sensitive.
 
 ### Theme qualifier
 
-You can use "light" or "dark" qualifiers. The resource is selected depending on the current system theme.
+You can add "light" or "dark" qualifiers. Compose Multiplatform then selects the necessary resource depending on the
+current system theme.
 
 ### Density qualifier
 
@@ -92,14 +93,14 @@ You can use the following density qualifiers:
 * "hdpi" − 240 DPI, 1.5x density
 * "xhdpi" − 320 DPI, 2x density
 * "xxhdpi" − 480 DPI, 3x density
-* “xxxhdpi” − 640dpi, 4x density
+* "xxxhdpi" − 640dpi, 4x density
 
 The resource is selected depending on a screen density defined in the system.
 
 ## Resource usage
 
 After importing a project, a special `Res` class that provides access to resources is generated.
-To force run the `Res` class generation, use the `generateComposeResClass` Gradle task.
+To manually generate the `Res` class, run the `generateComposeResClass` Gradle task.
 
 ### Images
 
@@ -205,9 +206,9 @@ You can use special symbols in string resources:
  
 * `\n` — for a new line 
 * `\t` — for a tab symbol
-* `\uXXXX` — for a custom Unicode symbol
+* `\uXXXX` — for a specific Unicode character
 
-#### Strings with arguments
+#### String templates
 
 Currently, arguments have basic support in string resources:
 
@@ -218,7 +219,8 @@ Currently, arguments have basic support in string resources:
 </resources>
 ```
 
-There is no difference between `%...s` and `%...d `, for example:
+There is no difference between `%...s` and `%...d ` when using string templates with arguments from composable code,
+for example:
 
 ```kotlin
 Text(stringResource(Res.string.str_template, "User_name", 100))
@@ -247,13 +249,13 @@ val fontAwesome = FontFamily(Font(Res.font.font_awesome))
 
 ### Raw files
 
-To load any file as a byte array, use the `Res.readBytes(path)` function:
+To load any raw file as a byte array, use the `Res.readBytes(path)` function:
 
 ```kotlin
 suspend fun readBytes(path: String): ByteArray
 ```
 
-You can place such files in the `composeResources/files` directory and create any hierarchy inside it.
+You can place raw files in the `composeResources/files` directory and create any hierarchy inside it.
 
 For example, to access raw files:
 
