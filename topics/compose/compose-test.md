@@ -27,10 +27,9 @@ Create the test source set:
    kotlin {
       //...
       sourceSets {
-         // Add a variable for the desktopTest source set 
          val desktopTest by getting
    
-         // Add common test dependencies
+         // Adds common test dependencies
          commonTest.dependencies {
             implementation(kotlin("test"))
             
@@ -38,7 +37,7 @@ Create the test source set:
             implementation(compose.uiTest)
          }
    
-         // Add the desktop test dependency
+         // Adds the desktop test dependency
          desktopTest.dependencies { 
             implementation(compose.desktop.currentOs)
          }
@@ -96,7 +95,7 @@ class ExampleTest {
     @Test
     fun myTest() = runComposeUiTest {
         // Declares a mock UI to demonstrate API calls
-        // Add your own declarations as needed
+        // Replace with your own declarations to test the code in your project
         setContent {
             var text by remember { mutableStateOf("Hello") }
             Text(
@@ -111,7 +110,7 @@ class ExampleTest {
             }
         }
 
-        // Describes assertions and actions with the declared UI which should succeed for the test to pass
+        // Calls API methods to test assertions and perform actions with the declared UI
         onNodeWithTag("text").assertTextEquals("Hello")
         onNodeWithTag("button").performClick()
         onNodeWithTag("text").assertTextEquals("Compose")
@@ -140,8 +139,8 @@ Run this command:
 ./gradlew :composeApp:connectedAndroidTest
 ```
 
-Currently, you cannot run common Compose Multiplatform tests on an Android emulator using Android Studio or Fleet GUI
-(gutter icons offer only local Android run configurations that don't work for Compose Multiplatform).
+Currently, you cannot run common Compose Multiplatform tests in the Android Emulator using gutter icons in the IDE:
+they offer only local Android run configurations that don't work for Compose Multiplatform.
 
 For more advanced usage of Android Studio tests, including automation, see the [Test your app](https://developer.android.com/studio/test)
 article on the Android for Developers portal.
@@ -168,8 +167,6 @@ Run this command:
 
 </tab>
 </tabs>
-
-
 
 ## Running JUnit-based tests with Compose for Desktop
 
@@ -217,7 +214,7 @@ Create the test source set:
         @Test
         fun myTest(){
             // Declares a mock UI to demonstrate API calls
-            // Add your own declarations as needed
+            // Replace with your own declarations to test the code in your project
             rule.setContent {
                 var text by remember { mutableStateOf("Hello") }
                 Text(
@@ -232,7 +229,7 @@ Create the test source set:
                 }
             }
     
-            // Describes assertions and actions with the declared UI which should succeed for the test to pass
+            // Calls API methods to test assertions and perform actions with the declared UI
             rule.onNodeWithTag("text").assertTextEquals("Hello")
             rule.onNodeWithTag("button").performClick()
             rule.onNodeWithTag("text").assertTextEquals("Compose")
