@@ -15,8 +15,8 @@ your application.
 
 When working with resources in Compose Multiplatform, consider the current conditions:
 
-* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files and resources on
-  the JS platform that are read asynchronously.
+* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files,
+  plus all the resources on the JS platform which are read asynchronously.
 * Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
   read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
 * Multimodule projects are not supported yet. The JetBrains team is working on adding this functionality in future releases.
