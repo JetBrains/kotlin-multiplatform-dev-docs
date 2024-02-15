@@ -23,6 +23,11 @@ When working with resources in Compose Multiplatform, consider the current condi
   For now, store all resources in the main application module.
 * The publication of Compose Multiplatform libraries with resources is not supported yet. The JetBrains team is working
   on adding this functionality in future releases.
+* Currently, accessors are generated for the `commonMain` source set only. The JetBrains team is working on expanding
+  this functionality in future releases.
+
+  However, you can still store platform-specific resources in a platform `composeResources` directory and read them as a
+  byte array. All resources will be included in the final app.
 
 ## Setup
 
@@ -49,7 +54,7 @@ To access resources in your multiplatform projects:
    * Images should be in the `drawable` directory.
    * Fonts should be in the `font` directory.
    * Strings (`strings.xml`) should be in the `values` directory.
-   * Other files with any hierarchy should be in `files` directory.
+   * Other files with any hierarchy should be in the `files` directory.
 
 ## Qualifiers
 
