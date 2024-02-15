@@ -13,6 +13,11 @@
 Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
 development.
 
+> To try a new multiplatform experience without juggling different IDEs and switching to
+> Xcode for writing Swift code, try out JetBrains Fleet following [a similar tutorial](fleet.md).
+>
+{type="tip"}
+
 ## Install the necessary tools
 
 We recommend that you install the latest stable versions for compatibility and better performance.
@@ -142,6 +147,10 @@ To make sure everything works as expected, install and run the KDoctor tool:
               <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
               <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
+   </def>
+   <def title="Still having trouble?">
+            <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
+            <p>For a smoother multiplatform experience, you can also try JetBrains Fleet: it integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
     </def>
 </deflist>
 
