@@ -192,7 +192,7 @@ Since the `ContentView.swift` file is already open, you can explore Fleet suppor
                }
                AnimatedVisibility(showContent) {
                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                       Image(painterResource("compose-multiplatform.xml"), null)
+                       Image(painterResource(Res.drawable.compose_multiplatform), null)
                        Text("Compose: $greeting")
                    }
                }

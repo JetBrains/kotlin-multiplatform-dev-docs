@@ -314,44 +314,39 @@ code to load and display them:
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
 
-2. Move the images to `src/commonMain/resources` so that the same flags are available on all platforms:
-
-   ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
-
-   > Each platform-specific source set can also have its own resources folder. This allows you to use different images on different
-   > platforms, if needed.
-   >
-   {type="tip"}
+2. Move the images to `src/commonMain/composeResources/drawable` so that the same flags are available on all platforms:
 
 3. Change the codebase to support images:
 
     ```kotlin
-    data class Country(val name: String, val zone: TimeZone, val image: String)
-    
+    @OptIn(ExperimentalResourceApi::class)
+    data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
+
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
-    
+
         val time = Clock.System.now()
         val localTime = time.toLocalDateTime(zone).time
-    
+
         return "The time in $location is ${localTime.formatted()}"
     }
-    
-    fun countries() = listOf(
-        Country("Japan", TimeZone.of("Asia/Tokyo"), "jp.png"),
-        Country("France", TimeZone.of("Europe/Paris"), "fr.png"),
-        Country("Mexico", TimeZone.of("America/Mexico_City"), "mx.png"),
-        Country("Indonesia", TimeZone.of("Asia/Jakarta"), "id.png"),
-        Country("Egypt", TimeZone.of("Africa/Cairo"), "eg.png")
+
+    @OptIn(ExperimentalResourceApi::class)
+    val defaultCountries = listOf(
+        Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
+        Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
+        Country("Mexico", TimeZone.of("America/Mexico_City"), Res.drawable.mx),
+        Country("Indonesia", TimeZone.of("Asia/Jakarta"), Res.drawable.id),
+        Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
     )
-    
+
     @OptIn(ExperimentalResourceApi::class)
     @Composable
-    fun App(countries: List<Country> = countries()) {
+    fun App(countries: List<Country> = defaultCountries) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
+
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(
                     timeAtLocation,
@@ -383,7 +378,7 @@ code to load and display them:
                         }
                     }
                 }
-    
+
                 Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
                     onClick = { showCountries = !showCountries }) {
                     Text("Select Location")

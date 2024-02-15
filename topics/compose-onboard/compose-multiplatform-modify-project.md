@@ -80,7 +80,7 @@ To use this library:
                 }
                 AnimatedVisibility(showContent) {
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(painterResource("compose-multiplatform.xml"), null)
+                        Image(painterResource(Res.drawable.compose_multiplatform), null)
                         Text("Compose: $greeting")
                     }
                 }
