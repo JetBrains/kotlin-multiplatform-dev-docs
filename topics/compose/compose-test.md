@@ -7,7 +7,7 @@ before you continue with this article.
 For an overview of tests in a Kotlin Multiplatform project structure, see [Understand basic project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html#integration-with-tests)
 and the [Test your multiplatform app](multiplatform-run-tests.md) tutorial.
 
-## How Compose Multiplatform testing is different from Jetpack  
+## How Compose Multiplatform testing is different from Jetpack
 
 Compose Multiplatform test API does not rely on JUnit's `TestRule` class. Instead, you call the `runComposeUiTest` function and invoke
 the test functions on the `ComposeUiTest` receiver.
@@ -23,55 +23,60 @@ to change `composeApp` in paths and commands to the name of the module you are t
 Create the test source set:
 1. Create a directory for the test source set: `composeApp/src/commonTest/kotlin`
 2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
-   ```kotlin
-   kotlin {
-      //...
-      sourceSets {
-         val desktopTest by getting
+
+    ```kotlin
+    kotlin {
+        //...
+        sourceSets { 
+            val desktopTest by getting
    
-         // Adds common test dependencies
-         commonTest.dependencies {
-            implementation(kotlin("test"))
+            // Adds common test dependencies
+            commonTest.dependencies {
+                implementation(kotlin("test"))
             
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.uiTest)
-         }
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.uiTest)
+            }
    
-         // Adds the desktop test dependency
-         desktopTest.dependencies { 
-            implementation(compose.desktop.currentOs)
-         }
-      }
+            // Adds the desktop test dependency
+            desktopTest.dependencies { 
+                implementation(compose.desktop.currentOs)
+            }
+        }
    }
    ```
+   
 3. If you need to run instrumented (emulator) tests for Android, you have to amend your Gradle configuration further:
    1. Add the following code to the `androidTarget` block, and follow IDE's suggestions to add missing imports:
+   
       ```kotlin
-      kotlin { 
-         //...
-         androidTarget { 
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
-            instrumentedTestVariant { 
-               sourceSetTree.set(KotlinSourceSetTree.test)
+      kotlin {
+          //...
+          androidTarget { 
+              @OptIn(ExperimentalKotlinGradlePluginApi::class)
+              instrumentedTestVariant { 
+                  sourceSetTree.set(KotlinSourceSetTree.test)
       
-               dependencies {
-                  implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
-                  debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
-               }
-            }
-           //...
-         }
-         //... 
+                  dependencies {
+                      implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
+                      debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+                  }
+              }
+              //...
+          }
+          //... 
       }
       ```
+      
    2. Add the following line to the `android.defaultConfig` block:
+      
       ```kotlin
       android {
-         //...
-         defaultConfig {
-            //...
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-         }
+          //...
+          defaultConfig {
+              //...
+              testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+          }
       }
       ```
 
@@ -99,17 +104,17 @@ class ExampleTest {
         setContent {
             var text by remember { mutableStateOf("Hello") }
             Text(
-                text = text,
+                text = text, 
                 modifier = Modifier.testTag("text")
             )
             Button(
-                onClick = { text = "Compose" },
+                onClick = { text = "Compose" }, 
                 modifier = Modifier.testTag("button")
-            ) {
+            ) { 
                 Text("Click me")
             }
         }
-
+    
         // Tests the declared UI with assertions and actions of the Compose Multiplatform Test API
         onNodeWithTag("text").assertTextEquals("Hello")
         onNodeWithTag("button").performClick()
@@ -136,6 +141,7 @@ Or, run the following command in the terminal:
 <tab title="Android Emulator">
 
 Run this command:
+
 ```shell
 ./gradlew :composeApp:connectedAndroidTest
 ```
@@ -181,18 +187,19 @@ Create the test source set:
 
 1. Create a directory for tests: `composeApp/src/desktopTest/kotlin`
 2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
+
    ```kotlin
-   kotlin {
-      //...
-      sourceSets {
-         //...
-         val desktopTest by getting {
-            dependencies {
-               implementation(compose.desktop.uiTestJUnit4)
-               implementation(compose.desktop.currentOs)
-            }
-         }
-      }
+   kotlin { 
+       //...
+       sourceSets { 
+           //...
+           val desktopTest by getting { 
+               dependencies {
+                   implementation(compose.desktop.uiTestJUnit4)
+                   implementation(compose.desktop.currentOs)
+               }
+           }
+       }
    }
    ```
 
@@ -218,6 +225,7 @@ Create the test source set:
             // Replace with your own declarations to test the code in your project
             rule.setContent {
                 var text by remember { mutableStateOf("Hello") }
+   
                 Text(
                     text = text,
                     modifier = Modifier.testTag("text")
@@ -236,11 +244,11 @@ Create the test source set:
             rule.onNodeWithTag("text").assertTextEquals("Compose")
         }
     }
-    
     ```
 
 4. To run the test, click the run icon in the gutter next to the `myTest` function
-or run the following command in the terminal:
+   or run the following command in the terminal:
+
    ```shell
    ./gradlew desktopTest
    ```
