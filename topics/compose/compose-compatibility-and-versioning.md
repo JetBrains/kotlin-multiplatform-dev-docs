@@ -92,7 +92,7 @@ Multiplatform, there are two options:
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
 | 2.0.0-Beta1    | `1.5.4-dev1-kt2.0.0-Beta1`             |
-| 1.9.22         | `1.5.8`                                |
+| 1.9.22         | `1.5.8.1`                              |
 | 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
 | 1.9.20-RC      | `1.5.3-rc01`                           |
@@ -190,6 +190,7 @@ which version of Jetpack Compose artifact is used:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.6.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.0)   | 1.6.1                   | 1.2.0                             |
 | [1.5.12](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.12) | 1.5.4                   | 1.1.2                             |
 | [1.5.11](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.11) | 1.5.4                   | 1.1.2                             |
 | [1.5.10](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.10) | 1.5.4                   | 1.1.2                             |
