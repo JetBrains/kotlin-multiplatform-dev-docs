@@ -5,9 +5,9 @@ functionality using Compose Multiplatform for the user interface. Others use nat
 for example, only the data model and algorithms. To get started with a new Kotlin Multiplatform application,
 we recommend using the [web wizard](https://kmp.jetbrains.com).
 
-You can find even more sample projects on GitHub, see the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
+You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic. To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
 See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
-to add your Kotlin Multiplatform project to this topic and help the community.
+to add your Kotlin Multiplatform project to these topics and help the community.
 
 <table>
   <tr>
