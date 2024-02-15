@@ -45,10 +45,10 @@ Create the test source set:
         }
    }
    ```
-   
+
 3. If you need to run instrumented (emulator) tests for Android, you have to amend your Gradle configuration further:
    1. Add the following code to the `androidTarget` block, and follow IDE's suggestions to add missing imports:
-   
+
       ```kotlin
       kotlin {
           //...
@@ -67,9 +67,9 @@ Create the test source set:
           //... 
       }
       ```
-      
+
    2. Add the following line to the `android.defaultConfig` block:
-      
+
       ```kotlin
       android {
           //...
@@ -104,17 +104,17 @@ class ExampleTest {
         setContent {
             var text by remember { mutableStateOf("Hello") }
             Text(
-                text = text, 
+                text = text,
                 modifier = Modifier.testTag("text")
             )
             Button(
-                onClick = { text = "Compose" }, 
+                onClick = { text = "Compose" },
                 modifier = Modifier.testTag("button")
-            ) { 
+            ) {
                 Text("Click me")
             }
         }
-    
+
         // Tests the declared UI with assertions and actions of the Compose Multiplatform Test API
         onNodeWithTag("text").assertTextEquals("Hello")
         onNodeWithTag("button").performClick()
