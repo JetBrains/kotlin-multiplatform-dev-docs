@@ -18,8 +18,14 @@ By default, the iOS accessibility tree is synchronized with the UI only when the
 no accessibility logs are written. You can customize this behavior, for example, when you want to debug interactions:
 set the option to always synchronize the accessibility tree, so that the tree is rewritten every time the UI updates.
 
-Compose Multiplatform provides an API to allow this: you can configure the tree sync behavior
-by modifying `accessibilitySyncOptions` inside the `configure` block of a `ComposeUIViewController` call:
+> Always synchronizing the tree can be quite handy for debugging and testing, but be aware that there is a significant
+> overhead associated with this. Synchronizing the tree with the UI regardless of Accessibility Services can degrade
+> the performance of the app.
+>
+> {type="tip"}
+
+Compose Multiplatform provides an API to configure the tree sync behavior: modify `accessibilitySyncOptions` inside
+the `configure` block of a `ComposeUIViewController` call:
 
 ```kotlin
  ComposeUIViewController(configure = {
@@ -36,12 +42,6 @@ by modifying `accessibilitySyncOptions` inside the `configure` block of a `Compo
     // your @Composable content
  }
 ```
-
-> AccessibilitySyncOptions.Always can be quite handy for debugging and testing, but be aware that there is a significant
-> overhead associated with it. Synchronizing the tree with the UI regardless of Accessibility Services can degrade
-> the performance of the app.
->
-> {type="tip"}
 
 ## Accessibility APIs
 
