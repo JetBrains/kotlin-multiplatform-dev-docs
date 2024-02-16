@@ -5,7 +5,7 @@ The Compose Multiplatform %composeVersion% release is out. Here are the highligh
 * [New and improved Resources API](#improved-resources-api-all-platforms)
 * [Basic support for iOS accessibility features](#ios-accessibility-support)
 * [UI testing API](#ui-testing-api-experimental-all-platforms)
-* Jetpack Compose 1.6.1 was merged into Compose Multiplatform. Here is a [summary of changes](#jetpack-compose-161-merged-all-platforms)
+* Jetpack Compose 1.6.1 was merged into Compose Multiplatform. Here is a [summary of changes](#jetpack-compose-1-6-1-merged-all-platforms)
 with comments on what this means for CMP consumers.
 * [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-experimental-on-desktop)
 * [Compose Multiplatform for Web (Wasm) artifacts are now available in Maven Central](#compose-multiplatform-for-web-wasm-in-maven-central) 
