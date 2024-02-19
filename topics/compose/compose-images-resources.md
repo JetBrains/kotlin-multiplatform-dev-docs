@@ -27,7 +27,7 @@ When working with resources in Compose Multiplatform, consider the current condi
   this functionality in future releases.
 
   However, you can still store platform-specific resources in a platform `composeResources` directory and read them as a
-  byte array. All resources will be included in the final app.
+  byte array. All resources will be included in each final app.
 
 ## Setup
 
@@ -123,7 +123,7 @@ You can access drawable resources as simple images, rasterized images, and XML v
   replaced with the loaded image in subsequent recompositions.
     
   * `painterResource()` loads either a `BitmapPainter` for rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`,
-    or a `VectorPainter` for XML vector drawable formats like `.xml`.
+    or a `VectorPainter` for the Android XML vector drawable format.
   * XML vector drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
     except that they don't support external references to Android resources.
 
