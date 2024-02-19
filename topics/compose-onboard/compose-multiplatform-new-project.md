@@ -316,6 +316,8 @@ code to load and display them:
 
 2. Move the images to `src/commonMain/composeResources/drawable` so that the same flags are available on all platforms:
 
+   ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
+
 3. Change the codebase to support images:
 
     ```kotlin
