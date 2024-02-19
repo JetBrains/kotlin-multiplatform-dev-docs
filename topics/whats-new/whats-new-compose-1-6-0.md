@@ -1,6 +1,6 @@
 [//]: # (title: Compose Multiplatform 1.6.0)
 
-The Compose Multiplatform %composeVersion% release is out. Here are the highlights:
+The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 
 * [New and improved Resources API](#improved-resources-api-all-platforms)
 * [Basic support for iOS accessibility features](#ios-accessibility-support)
@@ -26,7 +26,8 @@ This version of Compose Multiplatform is based on the following Jetpack Compose 
 ### Padding for text with lineHeight set is trimmed by default
 
 With the added support for [LineHeightStyle.Trim](https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle.Trim)
-Compose Multiplatform aligns the padding trimming behavior with Android. See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/897) for details.
+Compose Multiplatform aligns with Android in the way text padding is trimmed.
+See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/897) for details.
 
 ### Using fontSize in MaterialTheme now needs lineHeight as well
 
@@ -47,11 +48,29 @@ should be stored in the project folders to be available to the project code.
 
 ### Improved Resources API (all platforms)
 
-TBD: from the blog draft
+The new experimental API adds support for strings and fonts, and allows you to more comfortably share and access resources
+in common Kotlin: 
+
+* Resources can be organized according to specific settings or constraints they are designed for, supporting:
+  * locales,
+  * image resolutions,
+  * dark and light themes.
+* Compose Multiplatform tooling now generates a `Res` object for each project to provide straightforward resource access.
+
+For a closer look at resource qualifiers, as well as a more in-depth overview of the new resources API,
+see [the documentation page](compose-images-resources.md).
 
 ### UI testing API (experimental, all platforms)
 
-TBD: from the blog draft
+The experimental API for UI testing with Compose Multiplatform allows you to write common tests that
+validate the behavior of your application's UI across platforms supported by the framework. The API uses the same 
+finders, assertions, actions, and matchers as Jetpack Compose on Android.
+
+> JUnit-based tests are supported only for Compose Multiplatform for Desktop.
+> 
+{type="note"}
+
+See the setup instructions and test examples in the documentation (TODO link).
 
 ### Jetpack Compose 1.6.1 merged (all platforms)
 
@@ -163,7 +182,13 @@ FontFamily(SystemFont("Webdings"))
 
 ### iOS accessibility support
 
-TBD: from the blog draft
+Compose Multiplatform for iOS now allows people with disabilities to interact with Compose UI with the same level of comfort
+as with native UIs:
+
+* Screen readers and VoiceOver can access the content of the Compose UI.
+* Compose UI supports the same gestures as the native UIs for navigation and interaction.
+
+For details on implementation and customization API, see Support for iOS accessibility features (TODO link).
 
 ### Changing opacity for Compose view
 
@@ -178,16 +203,27 @@ val viewController = ComposeUIViewController(
 )
 ```
 
-### Allow selecting Text in SelectionContainer by double and triple tap iOS
-https://github.com/JetBrains/compose-multiplatform-core/pull/984
+### Allow selecting Text in SelectionContainer by double and triple tap
+
+Previously, Compose Multiplatform for iOS allowed users to use multiple tap for selecting text only in text input fields.
+Now, double and triple tap gestures also work for selecting text displayed in `Text` components.
+
+(TODO screenshot?) https://github.com/JetBrains/compose-multiplatform-core/pull/984
 
 ### Introduce @Composable fun UIKitViewController
 
-https://github.com/JetBrains/compose-multiplatform-core/pull/882
+Some native APIs that are not implemented as `UIView`, for example, `UITabBarController`, or `UINavigationController` could not
+be embedded into a Compose Multiplatform UI using [the existing interop mechanism](compose-ios-ui-integration.md#use-uikit-inside-compose-multiplatform).
+
+Now, CMP implements the `UIKitViewController` function that allows you to embed native view controllers.
+
+TODO: update the linked article
 
 ### Native-like caret behavior by long/single taps in text fields
-https://github.com/JetBrains/compose-multiplatform-core/pull/913
-https://github.com/JetBrains/compose-multiplatform-core/pull/858
+
+Compose Multiplatform for iOS is now closer to the native behavior of a caret in a text field:
+* The position of the caret after a single tap in a text field is determined with more precision.
+* Long tap and drag in a text field leads to moving the cursor, not entering selection mode like on Android.
 
 ## Web
 
@@ -204,7 +240,9 @@ the `compose.ui` dependency directly, without having to add JetBrains Maven repo
 
 ### Missing dependencies
 
-#### org.jetbrains.compose.annotation-internal:annotation or org.jetbrains.compose.collection-internal:collection
+#### "Could not find org.jetbrains.compose.annotation-internal:annotation"
+
+Same issue can occur with the `org.jetbrains.compose.collection-internal:collection` dependency.
 
 This can happen if a library depends on Compose Multiplatform 1.6.0-beta02, which isn't binary compatible with 1.6.0.
 To figure out which library that is, run this command (replace `shared` with the name of your main module):
