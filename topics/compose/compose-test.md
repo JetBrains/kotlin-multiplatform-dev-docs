@@ -18,7 +18,7 @@ before you continue with this article.
 Compose Multiplatform test API does not rely on JUnit's `TestRule` class. Instead, you call the `runComposeUiTest` function and invoke
 the test functions on the `ComposeUiTest` receiver.
 
-JUnit-based API is available for desktop targets, however. See [Running JUnit-based tests with Compose Multiplatform for Desktop](#running-junit-based-tests-with-compose-multiplatform-for-desktop).
+However, JUnit-based API is available for [desktop targets](#running-junit-based-tests-with-compose-multiplatform-for-desktop).
 
 ## Writing and running tests with Compose Multiplatform
 
