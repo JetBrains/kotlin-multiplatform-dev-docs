@@ -80,7 +80,7 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-   2. Add the following line to the `android.defaultConfig` block:
+   2. Add the following line to the `android.defaultConfig {}` block:
 
       ```kotlin
       android {
