@@ -213,7 +213,7 @@ Create the test source set and add the necessary dependencies:
    }
    ```
 
-3. Now, create a test file called `ExampleTest.kt`, and copy the following code into it:
+3. Create a test file called `ExampleTest.kt` and copy the following code into it:
 
     ```kotlin
     import androidx.compose.material.*
