@@ -31,7 +31,7 @@ To provide concrete examples, the instructions on this page follow the project s
 [Kotlin Multiplatform Wizard](https://kmp.jetbrains.com/). If you are adding tests to an existing project, you may have
 to change `composeApp` in paths and commands to the name of the module you are testing (`shared`, for example).
 
-Create a common test source set and add necessary dependencies:
+Create a common test source set and add the necessary dependencies:
 
 1. Create a directory for the common test source set: `composeApp/src/commonTest/kotlin`
 2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
