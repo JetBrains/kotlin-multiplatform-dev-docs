@@ -22,7 +22,7 @@ However, JUnit-based API is available for [desktop targets](#running-junit-based
 
 ## Writing and running tests with Compose Multiplatform
 
-First, add the source set for tests and necessary dependencies to the module. Then, write and run the example test
+First, add the source set for tests and the necessary dependencies to the module. Then, write and run the example test
 and try to customize it.
 
 ### Create the test source set and add the testing library to dependencies
