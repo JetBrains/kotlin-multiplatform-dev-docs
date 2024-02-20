@@ -33,7 +33,7 @@ to change `composeApp` in paths and commands to the name of the module you are t
 
 Create a common test source set and add the necessary dependencies:
 
-1. Create a directory for the common test source set: `composeApp/src/commonTest/kotlin`
+1. Create a directory for the common test source set: `composeApp/src/commonTest/kotlin`.
 2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
 
     ```kotlin
