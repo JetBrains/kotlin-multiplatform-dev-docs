@@ -34,8 +34,8 @@ fun main() = singleWindowApplication {
 }
 ```
 
-`painterResource()` supports rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`, and XML vector drawable
-formats. You can also use images stored in the device memory, load images from the network, or draw them yourself
+`painterResource()` supports rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`, and the Android XML vector
+drawable format. You can also use images stored in the device memory, load images from the network, or draw them yourself
 using `Canvas()`.
 
 With Compose Multiplatform, you can set the application window icon and the application tray icon as well.
@@ -99,19 +99,44 @@ tutorial.
 The context menu is supported by default for the `TextField` composable (and the `Text` composable, if it's selectable):
 
 ```kotlin
+import androidx.compose.foundation.ContextMenuDataProvider
+import androidx.compose.foundation.ContextMenuItem
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.singleWindowApplication
 
 fun main() = singleWindowApplication(title = "Context menu") {
     val text = remember { mutableStateOf("Hello!") }
-    TextField(
-        value = text.value,
-        onValueChange = { text.value = it },
-        label = { Text(text = "Input") }
-    )
+    Column {
+        ContextMenuDataProvider(
+            items = {
+            listOf(
+                ContextMenuItem("User-defined Action") {/*do something here*/ },
+                ContextMenuItem("Another user-defined action") {/*do something else*/ }
+            )
+        }
+        ) {
+            TextField(
+                value = text.value,
+                onValueChange = { text.value = it },
+                label = { Text(text = "Input") }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            SelectionContainer {
+                Text("Hello World!")
+            } 
+        }
+    }
 }
 ```
 {initial-collapse-state="collapsed"}
@@ -676,7 +701,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed"}
 
-You can also make a non-focusable component focusable, customize the order of tabbing navigation, and put components in
+You can also make a non-focusable component focusable, customize the order of tabbing navigation, and put components into
 focus.
 
 For more information, see the [Tabbing navigation and keyboard focus](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tab_Navigation)
@@ -688,5 +713,5 @@ tutorial.
   tutorial.
 * Learn how to [create unit tests for your Compose Multiplatform desktop project](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/UI_Testing).
 * Learn how to [create native distributions, installers, and packages for desktop platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution).
-* Set up [interoperability with Swing and migrate Swing applications to Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Swing_Integration).
+* Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Swing_Integration).
 * Learn about [accessibility support on different platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Accessibility).
