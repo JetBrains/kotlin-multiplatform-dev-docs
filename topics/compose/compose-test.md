@@ -92,7 +92,7 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-Now you are ready to write and run common tests for a Compose Multiplatform UI.
+Now, you are ready to write and run common tests for the Compose Multiplatform UI.
 
 ### Write and run common tests
 
