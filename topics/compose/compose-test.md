@@ -55,8 +55,8 @@ Create a common test source set and add necessary dependencies:
                 implementation(compose.desktop.currentOs)
             }
         }
-   }
-   ```
+    }
+    ```
 
 3. If you need to run instrumented (emulator) tests for Android, you have to amend your Gradle configuration further:
    1. Add the following code to the `androidTarget` block, and follow IDE's suggestions to add missing imports:
