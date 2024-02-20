@@ -185,7 +185,7 @@ Run this command:
 </tab>
 </tabs>
 
-### Running JUnit-based tests with Compose Multiplatform for Desktop
+### Running JUnit-based tests for desktop targets
 
 JUnit-based test API is only available for desktop Compose Multiplatform targets.
 
