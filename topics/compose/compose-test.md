@@ -195,7 +195,7 @@ and commands to the name of the module you are testing (`shared`, for example).
 
 Create the test source set and add the necessary dependencies:
 
-1. Create a directory for tests: `composeApp/src/desktopTest/kotlin`
+1. Create a directory for tests: `composeApp/src/desktopTest/kotlin`.
 2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
 
    ```kotlin
