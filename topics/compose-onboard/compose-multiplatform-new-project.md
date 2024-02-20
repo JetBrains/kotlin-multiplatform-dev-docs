@@ -314,7 +314,7 @@ code to load and display them:
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
 
-2. Move the images to `src/commonMain/composeResources/drawable` so that the same flags are available on all platforms:
+2. Move the images to `composeApp/src/commonMain/composeResources/drawable` so that the same flags are available on all platforms:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
