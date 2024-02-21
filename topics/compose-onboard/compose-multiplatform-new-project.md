@@ -28,24 +28,24 @@ To get started, implement a new `App` composable:
    composable:
 
    ```kotlin
-     @Composable
-     fun App() {
-         MaterialTheme {
-             var timeAtLocation by remember { mutableStateOf("No location selected") }
-             Column {
-                 Text(timeAtLocation)
-                 Button(onClick = { timeAtLocation = "13:30" }) {
-                     Text("Show Time At Location")
-                 }
-             }
-         }
-     }
-     ```
+   @Composable
+   fun App() {
+       MaterialTheme {
+           var timeAtLocation by remember { mutableStateOf("No location selected") }
+           Column {
+               Text(timeAtLocation)
+               Button(onClick = { timeAtLocation = "13:30" }) { 
+                   Text("Show Time At Location")
+               }
+           }
+       }
+   }
+   ```
 
-     * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
-     * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
-       composable is an observer of this state.
-     * The `Button` composable changes the state using the `onClick` event handler.
+   * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
+   * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
+     composable is an observer of this state.
+   * The `Button` composable changes the state using the `onClick` event handler.
 
 2. Run the application on Android and iOS:
 
