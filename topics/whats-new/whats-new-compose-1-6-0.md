@@ -31,7 +31,7 @@ See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/p
 
 ### Using fontSize in MaterialTheme now needs lineHeight as well
 
-If you set the `fontSize` attribute for a `Text` component in MaterialTheme but don't include `lineHeight`, actual line
+If you set the `fontSize` attribute for a `Text` component in `MaterialTheme` but don't include `lineHeight`, actual line
 height will not be modified to match the font. Now, you have to explicitly specify the `lineHeight` attribute every time you
 set the corresponding `fontSize`.
 
