@@ -7,8 +7,8 @@ The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 * [UI testing API](#ui-testing-api-experimental-all-platforms)
 * Jetpack Compose 1.6.1 was merged into Compose Multiplatform. Here is a [summary of changes](#jetpack-compose-1-6-1-merged-all-platforms)
 with comments on what this means for CMP consumers.
-* [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-experimental-on-desktop)
-* [Compose Multiplatform for Web (Wasm) artifacts are now available in Maven Central](#compose-multiplatform-for-web-wasm-in-maven-central) 
+* [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-experimental-on-desktop).
+* [Compose Multiplatform for Web (Wasm) artifacts are now available with the stable version of the framework](#compose-multiplatform-for-web-wasm-in-maven-central).
 
 ## Dependencies
 
@@ -187,6 +187,8 @@ as with native UIs:
 
 * Screen readers and VoiceOver can access the content of the Compose UI.
 * Compose UI supports the same gestures as the native UIs for navigation and interaction.
+
+This also means that you can make the Compose semantic data available to Accessibility Services and the XCTest framework.
 
 For details on implementation and customization API, see Support for iOS accessibility features (TODO link).
 
