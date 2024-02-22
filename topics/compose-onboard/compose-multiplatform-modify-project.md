@@ -100,6 +100,10 @@ and desktop:
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
 
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+>
+{type="tip"}
+
 ## Next step
 
 In the next part of the tutorial, you'll learn new Compose Multiplatform concepts and create your own application from

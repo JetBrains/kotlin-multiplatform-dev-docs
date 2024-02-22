@@ -209,6 +209,10 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
+>
+{type="tip"}
+
 ## Refactor the design
 
 The application works, but it's susceptible to users' typos. For example, if the user enters "Franse" instead of "France",
@@ -290,12 +294,16 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+>
+{type="tip"}
+
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
 > you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network or
 > the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
 >
-{type="tip"}
+{type="note"}
 
 ## Introduce images
 
@@ -401,6 +409,10 @@ code to load and display them:
    ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
+
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+>
+{type="tip"}
 
 ## What's next
 
