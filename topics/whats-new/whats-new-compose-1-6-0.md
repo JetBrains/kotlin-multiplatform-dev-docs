@@ -5,10 +5,10 @@ The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 * [New and improved Resources API](#improved-resources-api-all-platforms)
 * [Basic support for iOS accessibility features](#ios-accessibility-support)
 * [UI testing API](#ui-testing-api-experimental-all-platforms)
-* Jetpack Compose 1.6.1 was merged into Compose Multiplatform. Here is a [summary of changes](#jetpack-compose-1-6-1-merged-all-platforms)
-with comments on what this means for CMP consumers.
-* [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-experimental-on-desktop).
-* [Compose Multiplatform for Web (Wasm) artifacts are now available with the stable version of the framework](#compose-multiplatform-for-web-wasm-in-maven-central).
+* [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop).
+* Jetpack Compose 1.6.1 and Material 3 1.2.0 were merged into Compose Multiplatform. Here is a [summary of changes](#changes-from-jetpack-compose-and-material-3-all-platforms)
+with comments on what this means for Compose Multiplatform consumers.
+* [Compose Multiplatform for Web (Wasm) artifacts are available with the stable version of the framework](#compose-multiplatform-for-web-wasm-artifacts-are-available-with-the-stable-version-of-the-framework).
 
 ## Dependencies
 
@@ -29,14 +29,25 @@ With the added support for [LineHeightStyle.Trim](https://developer.android.com/
 Compose Multiplatform aligns with Android in the way text padding is trimmed.
 See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/897) for details.
 
+
+
+TODO mention the includeFontPadding
+
 ### Using fontSize in MaterialTheme now needs lineHeight as well
+
+> This affects only `material` components. `material3` already had this restriction.
+>
+{type="note"}
 
 If you set the `fontSize` attribute for a `Text` component in `MaterialTheme` but don't include `lineHeight`, actual line
 height will not be modified to match the font. Now, you have to explicitly specify the `lineHeight` attribute every time you
 set the corresponding `fontSize`.
 
-See the [issue](https://issuetracker.google.com/issues/321872412) for an example of code that breaks the visual presentation
-now, as well as for comments with advanced recommendations on managing font size.
+Jetpack Compose now [recommends](https://issuetracker.google.com/issues/321872412) not setting the font size directly:
+
+>To support non-standard text sizes, we encourage users to follow the Material design system and use a different [type scale](https://m2.material.io/design/typography/the-type-system.html#type-scale)
+> rather than changing the font size directly. Alternatively, users can overwrite the line height like so:
+> `style = LocalTextStyle.current.copy(lineHeight = TextUnit.Unspecified)`, or create a custom `Typography` entirely.
 
 ### New approach to resource organization
 
@@ -70,9 +81,11 @@ finders, assertions, actions, and matchers as Jetpack Compose on Android.
 > 
 {type="note"}
 
-See the setup instructions and test examples in the documentation (TODO link).
+See the setup instructions and test examples in [the API documentation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html).
 
-### Jetpack Compose 1.6.1 merged (all platforms)
+### Changes from Jetpack Compose and Material 3 (all platforms)
+
+#### Jetpack Compose 1.6.1
 
 Merging the latest release of Jetpack Compose positively affects performance on all platforms. For details,
 see [the announcement on the Android Developers Blog](https://android-developers.googleblog.com/2024/01/whats-new-in-jetpack-compose-january-24-release.html).
@@ -91,7 +104,19 @@ right now. For Desktop, you can use an existing API, `Modifier.onExternalDrag`.
 
 The JetBrains team is working on adopting these features in upcoming versions of Compose Multiplatform.
 
-### Separate platform views for popups, dialogs, and dropdowns (iOS, experimental on Desktop)
+#### Compose Material 3 1.2.0
+
+Release highlights:
+* New experimental component `Segmented Button`, with single and multiple selection.
+* Expanded color set with more surface options to make it easier to emphasize information in your UI.
+  * Implementation note: the `ColorScheme` object is now immutable. If your code currently modifies the colors in `ColorScheme` directly,
+  you will need to make use of the [copy](https://developer.android.com/reference/kotlin/androidx/compose/material3/ColorScheme#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)) method now to change colors.
+  * Instead of a single surface value, there are now several options for surface color and surface container, for more
+  flexible color management.
+
+For more details on changes in Material 3, see [the release post on the Material Design Blog](https://material.io/blog/material-3-compose-1-2).
+
+### Separate platform views for popups, dialogs, and dropdowns (iOS, Desktop)
 
 Sometimes it’s important that popup elements (for example, tooltips and dropdown menus) are not limited by initial
 Compose canvas or the app window. This becomes especially relevant if the Compose view is not occupying the full screen,
@@ -99,7 +124,24 @@ but needs to spawn an alert dialog. In 1.6.0 there is a way to reliably achieve 
 
 Note that popups and dialogs are still unable to draw anything out of their own bounds (for example, a shadow of the topmost container).
 
-On iOS, the feature is available by default. To use the feature with Compose Multiplatform for Desktop, set the `compose.layers.type`
+#### iOS (stable)
+
+On iOS, the feature is active by default.
+To switch back to the old behavior, set the `platformLayers` parameter to `false`:
+
+```kotlin
+ComposeUIViewController(
+    configure = {
+        platformLayers = false
+    }
+    ) {
+        // your Compose code
+    }
+```
+
+#### Desktop (experimental)
+
+To use the feature with Compose Multiplatform for Desktop, set the `compose.layers.type`
 system property. Supported values:
 * `COMPONENT`, for creating `Popup` or `Dialog` as a separate Swing component in the same window. ??? It might work only with offscreen rendering.
 * `WINDOW`, for creating `Popup` and `Dialog` components as separate undecorated windows.
@@ -146,6 +188,8 @@ fun ComposeContent() {
 
 Compose Multiplatform now allows setting underline styles for text using the `PlatformTextStyle` class:
 
+TODO We need to mention that this code is platform-specific and not available in common sourceset
+
 ```kotlin
 Text(
     "Hello, Compose",
@@ -161,7 +205,7 @@ Text(
 You can use solid, double-width solid, dotted, dashed, and wavy line style. All available options can be found in
 [the source code](https://github.com/JetBrains/compose-multiplatform-core/blob/jb-main/compose/ui/ui-text/src/skikoMain/kotlin/androidx/compose/ui/text/TextDecorationLineStyle.kt#L21).
 
-### Add a way to use fonts installed on the system (Desktop, Web)
+### Add a way to use fonts installed on the system (Desktop, Web, iOS)
 
 > The feature will be supported on iOS in future releases, no plans for Android support.
 > 
@@ -176,6 +220,14 @@ import androidx.compose.ui.text.platform.SystemFont
 FontFamily(SystemFont("Menlo", weight = 700))
 FontFamily(SystemFont("Times New Roman", FontWeight.Bold))
 FontFamily(SystemFont("Webdings"))
+```
+
+On desktop, you can use this function to load all possible font styles by specifying a font family name only
+(see [the code sample](https://github.com/JetBrains/compose-multiplatform-core/tree/jb-main/compose/desktop/desktop/samples/src/jvmMain/kotlin/androidx/compose/desktop/examples/fonts)
+for an extensive example):
+
+```kotlin
+FontFamily("Menlo")
 ```
 
 ## iOS
@@ -195,8 +247,13 @@ For details on implementation and customization API, see Support for iOS accessi
 ### Changing opacity for Compose view
 
 The `ComposeUIViewController` class has one more configuration option now, to change the opacity of the view's background.
-Now, instead of the default white color, you can set the background to be transparent:
+Now, instead of the default white color, you can set the background to be transparent.
 
+> Please note that transparent background negatively affects performance as it leads to an additional blending step.
+> 
+{type="note"}
+
+Sample code:
 ```kotlin
 val viewController = ComposeUIViewController(
     // Makes the Compose scene background transparent
@@ -204,6 +261,8 @@ val viewController = ComposeUIViewController(
     content = ::SomeComposeNode
 )
 ```
+
+TODO screenshots with opaque true and false
 
 ### Allow selecting Text in SelectionContainer by double and triple tap
 
@@ -229,10 +288,10 @@ Compose Multiplatform for iOS is now closer to the native behavior of a caret in
 
 ## Web
 
-### Compose Multiplatform for Web (Wasm) in Maven Central
+### Compose Multiplatform for Web (Wasm) artifacts are available with the stable version of the framework
 
-Compose Multiplatform for Web supports Kotlin/Wasm targets now, and is available in Maven Central. So you can add
-the `compose.ui` dependency directly, without having to add JetBrains Maven repository to your `settings.gradle.kts` file.
+Stable version of Compose Multiplatform for Web supports Kotlin/Wasm targets now. After you switch to 1.6.0, you don't
+have to specify a particular `dev-wasm` version of the `compose-ui` library in your list of dependencies.
 
 > To build Compose Multiplatform with a Wasm target, you need to have a Kotlin version no older than 1.9.22.
 > 
