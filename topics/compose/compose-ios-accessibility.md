@@ -25,8 +25,8 @@ Slack channel, or as an issue in the [Compose Multiplatform GitHub repo](https:/
 ## Customize accessibility tree synchronization
 
 By default, the iOS accessibility tree is synchronized with the UI only when Accessibility Services are running;
-by default, no accessibility logs are written. You can customize this behavior, for example, when you want to debug
-events and interactions:
+by default, no accessibility logs are written.
+You can customize this behavior, for example, when you want to debug events and interactions:
 activate the option to always synchronize the accessibility tree, so that the tree is rewritten every time the UI updates.
 
 > Always synchronizing the tree can be quite useful for debugging and testing, but be aware that there is a significant
