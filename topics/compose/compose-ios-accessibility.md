@@ -1,30 +1,32 @@
 [//]: # (title: Support for iOS accessibility features)
 
-Compose Multiplatform for iOS allows people with disabilities to interact with Compose UI with the same level of comfort
-as with native UIs:
-* Screen readers and VoiceOver can access the content of the Compose UI.
-* Compose UI supports the same gestures as the native UIs for navigation and interaction. 
+Compose Multiplatform accessibility support for iOS allows people with disabilities to interact with Compose Multiplatform UI
+as comfortably as with native UIs:
+* Screen readers and VoiceOver can access the content of the Compose Multiplatform UI.
+* Compose Multiplatform UI supports the same gestures as the native UIs for navigation and interaction.
 
-This is possible because semantics data produced by Compose APIs is now mapped to native accessibility objects and properties
+This is possible because semantics data produced by Compose APIs is now mapped to native objects and properties
 that are consumed by iOS Accessibility Services. For most interfaces built with Material widgets, this should happen
 automatically.
 
 You can also use this semantic data in testing and other automation: properties such as `testTag` will correctly map
-to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose available
+to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform available
 to Accessibility Services and XCTest framework.
 
-Notable limitations of the current accessibility support in Compose Multiplatform:
+Notable limitations of the current accessibility support:
 * Live regions (announcements about content changes in a specific area) are not supported yet.
-* [UIKit elements inside Compose Multiplatform UI] are not currently covered by the Compose accessibility API. 
+* [UIKit elements inside Compose Multiplatform UI](compose-ios-ui-integration.md#use-uikit-inside-compose-multiplatform)
+are not currently covered by the Compose accessibility API. 
 
 iOS accessibility support is in the early stages of development. If you have trouble with this feature,
 we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
-Slack channel, or an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
+Slack channel, or as an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
 
 ## Customize accessibility tree synchronization
 
 By default, the iOS accessibility tree is synchronized with the UI only when Accessibility Services are running;
-no accessibility logs are written. You can customize this behavior, for example, when you want to debug events and interactions:
+by default, no accessibility logs are written. You can customize this behavior, for example, when you want to debug
+events and interactions:
 activate the option to always synchronize the accessibility tree, so that the tree is rewritten every time the UI updates.
 
 > Always synchronizing the tree can be quite useful for debugging and testing, but be aware that there is a significant
@@ -34,7 +36,7 @@ activate the option to always synchronize the accessibility tree, so that the tr
 > {type="tip"}
 
 Compose Multiplatform [provides APIs](#accessibility-apis) to configure the tree sync behavior:
-modify `accessibilitySyncOptions` inside the `configure` block of a `ComposeUIViewController` call:
+modify the `accessibilitySyncOptions` parameter inside the `configure` block of a `ComposeUIViewController` call:
 
 ```kotlin
  ComposeUIViewController(configure = {
@@ -81,16 +83,24 @@ The `AccessibilitySyncOptions` class contains available options for synchronizin
 @ExperimentalComposeApi
 sealed class AccessibilitySyncOptions {
     
-    // Option to never synchronize the accessibility tree.
+    // Option to never synchronize the accessibility tree
     object Never: AccessibilitySyncOptions
 
-    // Option to synchronize the tree only when Accessibility Services are running.
-    // You can include an AccessibilityDebugLogger to log interactions and tree syncing events.
+    // Option to synchronize the tree only when Accessibility Services are running
+    //
+    // You can include an AccessibilityDebugLogger to log interactions and tree syncing events
     class WhenRequiredByAccessibilityServices(debugLogger: AccessibilityDebugLogger?)
 
-    // Option to synchronize the tree only when Accessibility Services are running.
-    // You can include an AccessibilityDebugLogger to log interactions and tree syncing events.
+    // Option to always synchronize the accessibility tree
+    //
+    // You can include an AccessibilityDebugLogger to log interactions and tree syncing events
     class Always(debugLogger: AccessibilityDebugLogger?)
 }
 ```
 
+## What's next?
+
+Try out the project generated by [the Kotlin Multiplatform wizard](https://kmp.jetbrains.com/) in your usual iOS accessibility workflow.
+
+Compose Multiplatform also supports [recourse qualifiers](compose-images-resources.md) that will be helpful when adapting
+a UI to a particular situation.
