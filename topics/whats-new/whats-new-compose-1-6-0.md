@@ -7,7 +7,7 @@ The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 * [UI testing API](#ui-testing-api-experimental-all-platforms)
 * [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop).
 * Jetpack Compose 1.6.1 and Material 3 1.2.0 were merged into Compose Multiplatform. Here is a [summary of changes](#changes-from-jetpack-compose-and-material-3-all-platforms)
-with comments on what this means for Compose Multiplatform consumers.
+  with comments on what this means for Compose Multiplatform consumers.
 * [Compose Multiplatform for Web (Wasm) artifacts are available with the stable version of the framework](#compose-multiplatform-for-web-wasm-artifacts-are-available-with-the-stable-version-of-the-framework).
 
 ## Dependencies
@@ -60,7 +60,7 @@ should be stored in the project folders to be available to the project code.
 ### Improved Resources API (all platforms)
 
 The new experimental API adds support for strings and fonts, and allows you to more comfortably share and access resources
-in common Kotlin: 
+in common Kotlin:
 
 * Resources can be organized according to specific settings or constraints they are designed for, supporting:
   * locales,
@@ -74,11 +74,11 @@ see [the documentation page](compose-images-resources.md).
 ### UI testing API (experimental, all platforms)
 
 The experimental API for UI testing with Compose Multiplatform allows you to write common tests that
-validate the behavior of your application's UI across platforms supported by the framework. The API uses the same 
+validate the behavior of your application's UI across platforms supported by the framework. The API uses the same
 finders, assertions, actions, and matchers as Jetpack Compose on Android.
 
 > JUnit-based tests are supported only for Compose Multiplatform for Desktop.
-> 
+>
 {type="note"}
 
 See the setup instructions and test examples in [the API documentation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html).
@@ -92,7 +92,7 @@ see [the announcement on the Android Developers Blog](https://android-developers
 
 Other notable features from this release:
 * The change to default font padding came into effect only for Android targets. However, make sure to take into account
-a [side effect](#using-fontsize-in-materialtheme-now-needs-lineheight-as-well) of this change.
+  a [side effect](#using-fontsize-in-materialtheme-now-needs-lineheight-as-well) of this change.
 * Mouse selection was already supported in Compose Multiplatform for other targets. With 1.6.0, this includes Android, too.
 
 Jetpack Compose features that are not ported to Compose Multiplatform yet:
@@ -100,7 +100,7 @@ Jetpack Compose features that are not ported to Compose Multiplatform yet:
 * [Support for nonlinear font scaling](https://github.com/JetBrains/compose-multiplatform/issues/4305)
 * [MultiParagraph.fillBoundingBoxes](https://github.com/JetBrains/compose-multiplatform/issues/4236)
 * [Multiplatform Drag and drop](https://github.com/JetBrains/compose-multiplatform/issues/4235). Works only for Android
-right now. For Desktop, you can use an existing API, `Modifier.onExternalDrag`.
+  right now. For Desktop, you can use an existing API, `Modifier.onExternalDrag`.
 
 The JetBrains team is working on adopting these features in upcoming versions of Compose Multiplatform.
 
@@ -110,9 +110,9 @@ Release highlights:
 * New experimental component `Segmented Button`, with single and multiple selection.
 * Expanded color set with more surface options to make it easier to emphasize information in your UI.
   * Implementation note: the `ColorScheme` object is now immutable. If your code currently modifies the colors in `ColorScheme` directly,
-  you will need to make use of the [copy](https://developer.android.com/reference/kotlin/androidx/compose/material3/ColorScheme#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)) method now to change colors.
+    you will need to make use of the [copy](https://developer.android.com/reference/kotlin/androidx/compose/material3/ColorScheme#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)) method now to change colors.
   * Instead of a single surface value, there are now several options for surface color and surface container, for more
-  flexible color management.
+    flexible color management.
 
 For more details on changes in Material 3, see [the release post on the Material Design Blog](https://material.io/blog/material-3-compose-1-2).
 
@@ -131,20 +131,23 @@ To switch back to the old behavior, set the `platformLayers` parameter to `false
 
 ```kotlin
 ComposeUIViewController(
-    configure = {
-        platformLayers = false
-    }
-    ) {
-        // your Compose code
-    }
+  configure = {
+    platformLayers = false
+  }
+) {
+  // your Compose code
+}
 ```
 
 #### Desktop (experimental)
 
 To use the feature with Compose Multiplatform for Desktop, set the `compose.layers.type`
 system property. Supported values:
-* `COMPONENT`, for creating `Popup` or `Dialog` as a separate Swing component in the same window. ??? It might work only with offscreen rendering.
 * `WINDOW`, for creating `Popup` and `Dialog` components as separate undecorated windows.
+* `COMPONENT`, for creating `Popup` or `Dialog` as a separate Swing component in the same window. It works only with offscreen
+  rendering: `compose.swing.render.on.graphics` set to `true`, see the [Enhanced Swing interop](https://blog.jetbrains.com/kotlin/2023/08/compose-multiplatform-1-5-0-release/#enhanced-swing-interop)
+  section of the 1.5.0 Compose Multiplatform release notes. Note that offscreen rendering only works for `ComposePanel`,
+  not for full window Compose applications.
 
 Example (TODO check and screenshot):
 
@@ -186,9 +189,13 @@ fun ComposeContent() {
 
 ### Support for text decoration line styles (iOS, Desktop, Web)
 
-Compose Multiplatform now allows setting underline styles for text using the `PlatformTextStyle` class:
+Compose Multiplatform now allows setting underline styles for text using the `PlatformTextStyle` class.
 
-TODO We need to mention that this code is platform-specific and not available in common sourceset
+> The class is not available in the common source set and needs to be called in platform-specific code.
+>
+{type="warning"}
+
+Example of setting a dotted underline style:
 
 ```kotlin
 Text(
@@ -207,8 +214,8 @@ You can use solid, double-width solid, dotted, dashed, and wavy line style. All 
 
 ### Add a way to use fonts installed on the system (Desktop, Web, iOS)
 
-> The feature will be supported on iOS in future releases, no plans for Android support.
-> 
+> The feature will be supported on iOS in the next release. There are no plans for Android support.
+>
 {type="note"}
 
 You can now access fonts installed on the system from your Compose Multiplatform app: use the `SystemFont` class to load
@@ -222,8 +229,8 @@ FontFamily(SystemFont("Times New Roman", FontWeight.Bold))
 FontFamily(SystemFont("Webdings"))
 ```
 
-On desktop, you can use this function to load all possible font styles by specifying a font family name only
-(see [the code sample](https://github.com/JetBrains/compose-multiplatform-core/tree/jb-main/compose/desktop/desktop/samples/src/jvmMain/kotlin/androidx/compose/desktop/examples/fonts)
+On desktop, you can use the `FontFamily` function to load all possible font styles by specifying a font family name only
+(see [the code sample](https://github.com/JetBrains/compose-multiplatform-core/blob/jb-main/compose/desktop/desktop/samples/src/jvmMain/kotlin/androidx/compose/desktop/examples/fonts/Fonts.jvm.kt)
 for an extensive example):
 
 ```kotlin
@@ -250,7 +257,7 @@ The `ComposeUIViewController` class has one more configuration option now, to ch
 Now, instead of the default white color, you can set the background to be transparent.
 
 > Please note that transparent background negatively affects performance as it leads to an additional blending step.
-> 
+>
 {type="note"}
 
 Sample code:
@@ -267,9 +274,7 @@ TODO screenshots with opaque true and false
 ### Allow selecting Text in SelectionContainer by double and triple tap
 
 Previously, Compose Multiplatform for iOS allowed users to use multiple tap for selecting text only in text input fields.
-Now, double and triple tap gestures also work for selecting text displayed in `Text` components.
-
-(TODO screenshot?) https://github.com/JetBrains/compose-multiplatform-core/pull/984
+Now, double and triple tap gestures also work for selecting text displayed in `Text` components inside a `SelectionContainer`.
 
 ### Introduce @Composable fun UIKitViewController
 
@@ -294,38 +299,38 @@ Stable version of Compose Multiplatform for Web supports Kotlin/Wasm targets now
 have to specify a particular `dev-wasm` version of the `compose-ui` library in your list of dependencies.
 
 > To build Compose Multiplatform with a Wasm target, you need to have a Kotlin version no older than 1.9.22.
-> 
+>
 {type="warning"}
 
 ## Known issues and solutions
 
 ### Missing dependencies
 
-#### "Could not find org.jetbrains.compose.annotation-internal:annotation"
+There are a couple of libraries that can be missing with a default project configuration:
 
-Same issue can occur with the `org.jetbrains.compose.collection-internal:collection` dependency.
+* `org.jetbrains.compose.annotation-internal:annotation` or `org.jetbrains.compose.collection-internal:collection`
 
-This can happen if a library depends on Compose Multiplatform 1.6.0-beta02, which isn't binary compatible with 1.6.0.
-To figure out which library that is, run this command (replace `shared` with the name of your main module):
+  These may be missing if a library depends on Compose Multiplatform 1.6.0-beta02, which isn't binary compatible with 1.6.0.
+  To figure out which library that is, run this command (replace `shared` with the name of your main module):
 
-```shell
-./gradlew shared:dependencies
-```
+  ```shell
+  ./gradlew shared:dependencies
+  ```
 
-Downgrade the library to a version depending on Compose Multiplatform 1.5.12, or ask the library author to upgrade it
-to CMP 1.6.0.
+  Downgrade the library to a version depending on Compose Multiplatform 1.5.12, or ask the library author to upgrade it
+  to Compose Multiplatform 1.6.0.
 
-#### androidx.annotation:annotation:... or androidx.collection:collection:...
+* `androidx.annotation:annotation:...` or `androidx.collection:collection:...`
 
-Compose Multiplatform 1.6.0 depends on [collection](https://developer.android.com/jetpack/androidx/releases/collection)
-and [annotation](https://developer.android.com/jetpack/androidx/releases/annotation) libraries that are available only
-in the Google Maven repository.
+  Compose Multiplatform 1.6.0 depends on [collection](https://developer.android.com/jetpack/androidx/releases/collection)
+  and [annotation](https://developer.android.com/jetpack/androidx/releases/annotation) libraries that are available only
+  in the Google Maven repository.
 
-To make this repository available to your project, add the following line to your `build.gradle.kts` file:
+  To make this repository available to your project, add the following line to the `build.gradle.kts` file of the module:
 
-```kotlin
-repositories {
-    //...
-    google()
-}
-```
+  ```kotlin
+  repositories {
+      //...
+      google()
+  }
+  ```
