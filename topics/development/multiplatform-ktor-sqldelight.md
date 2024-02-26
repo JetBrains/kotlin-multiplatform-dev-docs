@@ -6,9 +6,10 @@ Multiplatform with Ktor and SQLDelight.
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
 
-The output will be an app that retrieves data over the internet from the
-public [SpaceX API](https://docs.spacexdata.com/?version=latest), saves it in a local database, and displays a list of
-SpaceX rocket launches together with the launch date, results, and a detailed description of the launch:
+In the end, you will create an app that:
+* retrieves data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest),
+* saves the date in a local database,
+* and displays a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
 
 ![Emulator and Simulator](android-and-ios.png){width=600}
 
@@ -32,8 +33,8 @@ You will use the following multiplatform libraries in the project:
 1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
 2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. It's not necessary for this tutorial.
-5. Click the **Download** button and unpack the resulting archive.
+4. For iOS, choose the **Do not share UI** option. Shared UI is not necessary for this tutorial.
+5. Click the **Download** button and unpack the downloaded archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
 
@@ -46,7 +47,7 @@ You will use the following multiplatform libraries in the project:
 To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`) for all
 libraries to the `dependencies` block of the relevant source sets in the `build.gradle.kts` file.
 
-Both the `kotlinx.serialization` and SQLDelight libraries also require additional configurations.
+Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
 1. Launch Android Studio.
 2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
@@ -62,37 +63,40 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
 5. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
 
     ```kotlin
-    val coroutinesVersion = "%coroutinesVersion%"
-    val ktorVersion = "%ktorVersion%"
-    val sqlDelightVersion = "%sqlDelightVersion%"
-    val dateTimeVersion = "%dateTimeVersion%"
+    kotlin {
+        // ...
+        val coroutinesVersion = "%coroutinesVersion%"
+        val ktorVersion = "%ktorVersion%"
+        val sqlDelightVersion = "%sqlDelightVersion%"
+        val dateTimeVersion = "%dateTimeVersion%"
 
-    sourceSets {
-        commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
-            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-            implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
-        }
-        androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:$ktorVersion")
-            implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
-        }
-        iosMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-            implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+        sourceSets {
+            commonMain.dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+            }
+            androidMain.dependencies {
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+            }
+            iosMain.dependencies {
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+            }
         }
     }
     ```
 
-    * Each library requires a core artifact in the common source set.
-    * Both the SQLDelight and Ktor libraries need platform drivers in the iOS and Android source sets, as well.
-    * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
-      `kotlinx.serialization` for processing network requests and responses.
+   * Each library requires a core artifact in the common source set.
+   * Both the SQLDelight and Ktor libraries need platform drivers in the iOS and Android source sets, as well.
+   * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
+     `kotlinx.serialization` for processing network requests and responses.
 
-6. At the very beginning of the `build.gradle.kts` file in the same `shared` directory, add the following lines to the
+6. At the very beginning of the same `build.gradle.kts` file in the `shared` directory, add the following lines to the
    `plugins` block:
 
    ```kotlin
@@ -118,7 +122,8 @@ The application data model will have three entity classes with:
 * A URL to external information
 * Information about the rocket
 
-1. In `shared/src/commonMain/kotlin`, add the `com.jetbrains.handson.kmm.shared.entity` package.
+Create the necessary data classes: 
+1. In `shared/src/commonMain/kotlin`, create the `com.jetbrains.handson.kmm.shared.entity` directory.
 2. Create the `Entity.kt` file inside the package.
 3. Declare all the data classes for basic entities:
 
@@ -145,15 +150,15 @@ the end of the `build.gradle.kts` file. The block will contain a list of databas
 
 ```kotlin
 sqldelight {
-    database("AppDatabase") {
-        packageName = "com.jetbrains.handson.kmm.shared.cache"
-    }
+   database("AppDatabase") {
+      packageName = "com.jetbrains.handson.kmm.shared.cache"
+   }
 }
 ```
 
 The `packageName` parameter specifies the package name for the generated Kotlin sources.
 
-> Consider installing the official [SQLite plugin](https://cashapp.github.io/sqldelight/multiplatform_sqlite/intellij_plugin/)
+> Consider installing the official [SQLDelight plugin](https://cashapp.github.io/sqldelight/multiplatform_sqlite/intellij_plugin/)
 > for working with `.sq` files.
 >
 {type="tip"}
@@ -285,7 +290,7 @@ So far, you have added platform database drivers and an `AppDatabase` class to p
 a `Database` class, which will wrap the `AppDatabase` class and contain the caching logic.
 
 1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
-   the `com.jetbrains.handson.kmm.shared.cache` package. It will be common to both platform logics.
+   the `com.jetbrains.handson.kmm.shared.cache` package. It will be common to the logic of both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` to the `Database` class constructor:
 
@@ -417,13 +422,13 @@ Create a class that will connect the application to the API:
    }
    ```
 
-    * This class executes network requests and deserializes JSON responses into entities from the `entity` package.
-      The Ktor `HttpClient` instance initializes and stores the `httpClient` property.
-    * This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
-      to deserialize the `GET` request result. The plugin processes the request and the response payload as JSON,
-      serializing and deserializing them using a special serializer.
+   * This class executes network requests and deserializes JSON responses into entities from the `entity` package.
+     The Ktor `HttpClient` instance initializes and stores the `httpClient` property.
+   * This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
+     to deserialize the `GET` request result. The plugin processes the request and the response payload as JSON,
+     serializing and deserializing them using a special serializer.
 
-2. Declare the data retrieval function that will return the list of `RocketLaunch`es:
+2. Declare the data retrieval function that will return the list of rocket launches:
 
    ```kotlin
    suspend fun getAllLaunches(): List<RocketLaunch> {
@@ -431,10 +436,10 @@ Create a class that will connect the application to the API:
    }
    ```
 
-    * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `get()`,
-      which includes an asynchronous operation to retrieve data over the internet and can only be called from a
-      coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-    * The URL is defined inside the `get()` function to send requests.
+   * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `get()`,
+     which includes an asynchronous operation to retrieve data over the internet and can only be called from a
+     coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
+   * The URL is defined inside the `get()` function to send requests.
 
 ### Add internet access permission
 
@@ -446,8 +451,8 @@ In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the following 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET" />
-    
+   <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
 ```
 
@@ -471,38 +476,39 @@ public class.
    }
    ```
 
-   This class will be the facade over the `Database` and `SpaceXApi` classes.
+   This class will be the facade for the `Database` and `SpaceXApi` classes.
 
 2. To create a `Database` class instance, you'll need to provide the `DatabaseDriverFactory` platform instance to it, so
    you'll inject it from the platform code through the `SpaceXSDK` class constructor.
 
    ```kotlin
-   import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
-   
-   @Throws(Exception::class)
-   suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
-       val cachedLaunches = database.getAllLaunches()
-       return if (cachedLaunches.isNotEmpty() && !forceReload) {
-           cachedLaunches
-       } else {
-           api.getAllLaunches().also {
-               database.clearDatabase()
-               database.createLaunches(it)
-           }
-       }
+    import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
+    
+    class SpaceXSDK (databaseDriverFactory: DatabaseDriverFactory) {
+    // ...
+        @Throws(Exception::class)
+        suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
+            val cachedLaunches = database.getAllLaunches()
+            return if (cachedLaunches.isNotEmpty() && !forceReload) {
+                cachedLaunches
+            } else {
+                api.getAllLaunches().also { 
+                    database.clearDatabase()
+                    database.createLaunches(it) 
+                }
+            }
+        }
    }
    ```
 
-    * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
-      returns cached values or loads the data from the internet and then updates the cache with the results. If there is
-      no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
-    * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
-      allow the user to use the pull-to-refresh gesture.
-    * To handle exceptions produced by the Ktor client in Swift, the function is marked with the `@Throws` annotation.
-
-   All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
-   exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
-   classes.
+   * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
+     returns cached values or loads the data from the internet and then updates the cache with the results. If there is
+     no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
+   * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
+     allow the user to use the pull-to-refresh gesture.
+   * All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
+     exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
+     classes.
 
 ## Create the Android application
 
@@ -515,15 +521,15 @@ the `composeApp/build.gradle.kts`:
 ```kotlin
 // ...
 commonMain.dependencies {
-    implementation(projects.shared)
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("androidx.core:core-ktx:1.12.1")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.cardview:cardview:1.0.0")
+   implementation(projects.shared)
+   implementation("com.google.android.material:material:1.11.0")
+   implementation("androidx.appcompat:appcompat:1.6.1")
+   implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+   implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+   implementation("androidx.core:core-ktx:1.12.1")
+   implementation("androidx.recyclerview:recyclerview:1.3.2")
+   implementation("androidx.cardview:cardview:1.0.0")
 }
 // ...
 ```
@@ -838,10 +844,10 @@ data.
    }
    ```
 
-    * The [Combine framework](https://developer.apple.com/documentation/combine) connects the view model (`ContentView.ViewModel`)
-      with the view (`ContentView`).
-    * `ContentView.ViewModel` is declared as an `ObservableObject` and `@Published` wrapper is used for the `launches`
-      property, so the view model will emit signals whenever this property changes.
+   * The [Combine framework](https://developer.apple.com/documentation/combine) connects the view model (`ContentView.ViewModel`)
+     with the view (`ContentView`).
+   * `ContentView.ViewModel` is declared as an `ObservableObject` and `@Published` wrapper is used for the `launches`
+     property, so the view model will emit signals whenever this property changes.
 
 5. Implement the body of the `ContentView` file and display the list of launches:
 
@@ -928,11 +934,11 @@ library.
    }
    ```
 
-    * When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
-      are available in it as Swift's `async`/`await` mechanism.
-    * Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation, any exceptions that are
-      instances of the `Exception` class or its subclass will be propagated as `NSError`. Therefore, all such errors can
-      be caught by the `loadLaunches()` function.
+   * When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
+     are available in it as Swift's `async`/`await` mechanism.
+   * Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation, any exceptions that are
+     instances of the `Exception` class or its subclass will be propagated as `NSError`. Therefore, all such errors can
+     be caught by the `loadLaunches()` function.
 
 3. Go to the entry point of the app, `iOSApp.swift`, and initialize the SDK, view, and view model:
 
