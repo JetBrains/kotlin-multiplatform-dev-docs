@@ -29,8 +29,6 @@ With the added support for [LineHeightStyle.Trim](https://developer.android.com/
 Compose Multiplatform aligns with Android in the way text padding is trimmed.
 See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/897) for details.
 
-
-
 TODO mention the includeFontPadding
 
 ### Using fontSize in MaterialTheme now needs lineHeight as well
@@ -262,14 +260,16 @@ Now, instead of the default white color, you can set the background to be transp
 
 Sample code:
 ```kotlin
-val viewController = ComposeUIViewController(
-    // Makes the Compose scene background transparent
-    configure = { opaque = false },
-    content = ::SomeComposeNode
-)
+val appController = ComposeUIViewController(configure = {
+  this.opaque = false
+}) {
+  App()
+}
 ```
 
-TODO screenshots with opaque true and false
+An example of what a transparent background can help you achieve:
+
+![Compose opaque = false demo](compose-opaque-property.png)
 
 ### Allow selecting Text in SelectionContainer by double and triple tap
 
