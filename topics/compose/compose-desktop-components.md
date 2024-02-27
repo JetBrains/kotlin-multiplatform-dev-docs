@@ -7,7 +7,7 @@ overview of the desktop-specific components and events. Each section includes a 
 
 * [Images and icons](#images-and-icons)
 * [Windows and dialogs](#windows-and-dialogs)
-* [Context menu](#context-menu)
+* [Context menus](#context-menus)
 * [The system tray](#the-system-tray)
 * [Menu bar](#menu-bar)
 * [Scrollbars](#scrollbars)
@@ -35,20 +35,20 @@ fun main() = singleWindowApplication {
 ```
 
 `painterResource()` supports rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`, and the Android XML vector
-drawable format. You can also use images stored in the device memory, load images from the network, or draw them yourself
-using `Canvas()`.
+drawable format. You can also use images stored in the device memory, load images from the network,
+or create them in your project using `Canvas()`.
 
 With Compose Multiplatform, you can set the application window icon and the application tray icon as well.
 
 * For more information on working with images using Compose Multiplatform in desktop projects, see
-  the [Image and in-app icons manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
+  the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
 * For more information on using resources in Compose Multiplatform projects, see [Images and resources](compose-images-resources.md).
 
 ### Windows and dialogs
 
 You can use the `Window` composable to create a regular window and the `DialogWindow` composable for a modal window that
-locks its parent window until the user closes the modal window:
+locks its parent until the user closes the modal window:
 
 ```kotlin
 import androidx.compose.material.Button
@@ -84,19 +84,18 @@ fun main() = application {
         }
     }
 }
-
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="Window(onCloseRequest = ::exitApplication,) { "}
 
 Compose Multiplatform provides various features for windows. You can adapt the window size, change its state (size,
 position), hide it in the tray, make the window draggable, transparent, and so on.
 
-For more information, see the [Top level windows management](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Window_API_new)
+For more information, see the [Top-level window management](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Window_API_new)
 tutorial.
 
-### Context menu
+### Context menus
 
-The context menu is supported by default for the `TextField` composable (and the `Text` composable, if it's selectable):
+Context menus are supported by default for the `TextField` composable (and the `Text` composable, if it's selectable):
 
 ```kotlin
 import androidx.compose.foundation.ContextMenuDataProvider
@@ -139,17 +138,17 @@ fun main() = singleWindowApplication(title = "Context menu") {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
 
 Default context menu options are copy, cut, paste, and select all. You can add more menu items, customize style and
 texts, and so on.
 
-For more information, see the [Context Menu in Compose for Desktop](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
+For more information, see the [Context menu in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
 tutorial.
 
 ### The system tray
 
-You can use the `Tray` composable to send notifications to the user using the system tray:
+You can use the `Tray` composable to send notifications to users in the system tray:
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
@@ -240,7 +239,7 @@ object TrayIcon : Painter() {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="Tray(state = trayState, icon = TrayIcon, menu = { Item( "}
 
 There are three types of notifications:
 
@@ -250,7 +249,7 @@ There are three types of notifications:
 
 You can also add an application icon to the system tray.
 
-For more information, see the [Menu, tray, notifications](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tray_Notifications_MenuBar_new#tray)
+For more information, see the [Menu, tray, and notifications](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tray_Notifications_MenuBar_new#tray)
 tutorial.
 
 ### Menu bar
@@ -334,9 +333,9 @@ object AboutIcon : Painter() {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="Window(MenuBar { Menu( "}
 
-For more information, see the [Menu, tray, notifications](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tray_Notifications_MenuBar_new#menubar)
+For more information, see the [Menu, tray, and notifications](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tray_Notifications_MenuBar_new#menubar)
 tutorial.
 
 ### Scrollbars
@@ -425,7 +424,7 @@ fun TextBox(text: String = "Item") {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
 
 For example, you can attach the `VerticalScrollbar` composable to the `Modifier.verticalScroll` and `LazyColumn`
 components and the `HorizontalScrollbar` composable to the `Modifier.horizontalScroll` and `LazyRow` components.
@@ -500,7 +499,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="TooltipArea(tooltip = { Surface( "}
 
 The main parameters of the `TooltipArea` composable are:
 
@@ -520,8 +519,7 @@ tutorial.
 
 ### Mouse event listeners
 
-You can install mouse event listeners on the components in your desktop project. These could be click, move, enter, and
-scroll mouse listeners.
+You can listen to various mouse events in your desktop project: clicking, moving, scrolling, entering, and exiting.
 
 For example, here is how to set up click listeners with `onClick`, `onDoubleClick`, and `onLongClick` modifiers:
 
@@ -572,7 +570,7 @@ fun main() = singleWindowApplication {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.combinedClickable(onClick = { text ="}
 
 For more information, see the [Mouse events](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Mouse_Events)
 tutorial.
@@ -636,12 +634,12 @@ fun main() = singleWindowApplication {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title=" TextField(modifier = Modifier.onPreviewKeyEvent { "}
 
 You can also define keyboard event handlers that are always active in the current window for
 the `Window`, `singleWindowApplication`, and `Dialog` composables.
 
-For more information, see the [Keyboard events handling](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Keyboard)
+For more information, see the [Keyboard event handling](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Keyboard)
 tutorial.
 
 ### Tabbing navigation between components
@@ -649,8 +647,8 @@ tutorial.
 You can set up navigation between components with the <shortcut>Tab</shortcut> keyboard shortcut for the next component
 and <shortcut>⇧ + Tab</shortcut> for the previous one.
 
-By default, the tabbed navigation moves between focusable components in the order of their appearance. Focusable
-components are the `TextField`, `OutlinedTextField`, and `BasicTextField` composables and components that
+By default, the tabbed navigation allows you to move between focusable components in the order of their appearance.
+Focusable components are the `TextField`, `OutlinedTextField`, and `BasicTextField` composables and components that
 use `Modifier.clickable` (like `Button`, `IconButton`, and `MenuItem`).
 
 For example, here's a window where users can navigate between five text fields using standard shortcuts:
@@ -699,7 +697,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsed-title="Column() { for (x in 1..5) { OutlinedTextField("}
 
 You can also make a non-focusable component focusable, customize the order of tabbing navigation, and put components into
 focus.
