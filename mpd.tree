@@ -44,6 +44,7 @@
         <toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
         <toc-element id="compose-images-resources.md"/>
         <toc-element id="compose-navigation-routing.md"/>
+        <toc-element id="compose-test.md"/>
         <toc-element toc-title="iOS specific features">
             <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with UIKit and SwiftUI"/>
             <toc-element id="compose-ios-accessibility.md" toc-title="iOS accessibility support"/>
