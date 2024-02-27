@@ -1,9 +1,9 @@
 [//]: # (title: Support for iOS accessibility features)
 
-Compose Multiplatform accessibility support for iOS allows people with disabilities to interact with Compose Multiplatform UI
-as comfortably as with native UIs:
+Compose Multiplatform accessibility support allows people with disabilities to interact with the Compose Multiplatform UI
+as comfortably as with the native iOS UI:
 * Screen readers and VoiceOver can access the content of the Compose Multiplatform UI.
-* Compose Multiplatform UI supports the same gestures as the native UIs for navigation and interaction.
+* The Compose Multiplatform UI supports the same gestures as the native iOS UI for navigation and interaction.
 
 This is possible because semantics data produced by Compose APIs is now mapped to native objects and properties
 that are consumed by iOS Accessibility Services. For most interfaces built with Material widgets, this should happen
@@ -20,7 +20,7 @@ are not currently covered by the Compose accessibility API.
 
 iOS accessibility support is in the early stages of development. If you have trouble with this feature,
 we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
-Slack channel, or as an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
+Slack channel or as an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
 
 ## Customize accessibility tree synchronization
 
@@ -36,7 +36,7 @@ activate the option to always synchronize the accessibility tree, so that the tr
 > {type="tip"}
 
 Compose Multiplatform [provides APIs](#accessibility-apis) to configure the tree sync behavior:
-modify the `accessibilitySyncOptions` parameter inside the `configure` block of a `ComposeUIViewController` call:
+modify the `accessibilitySyncOptions` parameter inside the `configure {}` block of a `ComposeUIViewController` call:
 
 ```kotlin
  ComposeUIViewController(configure = {
@@ -56,7 +56,7 @@ modify the `accessibilitySyncOptions` parameter inside the `configure` block of 
 
 ## Accessibility APIs
 
-The following APIs provided by Compose Multiplatform help you customize iOS accessibility behavior.
+Compose Multiplatform provides the following APIs to help you customize iOS accessibility behavior.
 
 ### AccessibilityDebugLogger
 
