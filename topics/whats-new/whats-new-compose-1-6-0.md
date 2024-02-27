@@ -29,7 +29,12 @@ With the added support for [LineHeightStyle.Trim](https://developer.android.com/
 Compose Multiplatform aligns with Android in the way text padding is trimmed.
 See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/897) for details.
 
-TODO mention the includeFontPadding
+This is in line with `compose.material` changes from [the 1.6.0-alpha01 release](https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.0-alpha01):
+* The `includeFontPadding` parameter became `false` by default in Material 2.
+  For a deeper understanding of this change, see [the discussion on not implementing this flag in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/issues/2477#issuecomment-1825716543).
+* The default line height style has been changed to `Trim.None` and `Alignment.Center`. Compose Multiplatform now supports
+  `LineHeightStyle.Trim` and implements `Trim.None` as the default value.
+* Explicit `lineHeight` have been added to `TextStyle` of `Typography`, which led to the [next breaking change](#using-fontsize-in-materialtheme-now-needs-lineheight-as-well).
 
 ### Using fontSize in MaterialTheme now needs lineHeight as well
 
@@ -183,9 +188,9 @@ fun ComposeContent() {
     }
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title=" val window = JFrame()"}
+{initial-collapse-state="collapsed"  collapsed-title="val window = JFrame()"}
 
-The `Dialog` is drawn in full, regardless of the bounds of the parent `ComposePanel`:
+The `Dialog` (yellow) is drawn in full, regardless of the bounds of the parent `ComposePanel` (green):
 
 ![Dialog outside the bounds of the parent panel](compose-desktop-separate-dialog.png)
 
@@ -275,17 +280,18 @@ An example of what a transparent background can help you achieve:
 
 ![Compose opaque = false demo](compose-opaque-property.png)
 
-### Allow selecting Text in SelectionContainer by double and triple tap
+### Selecting text in SelectionContainer by double and triple tap
 
 Previously, Compose Multiplatform for iOS allowed users to use multiple tap for selecting text only in text input fields.
 Now, double and triple tap gestures also work for selecting text displayed in `Text` components inside a `SelectionContainer`.
 
-### Introduce @Composable fun UIKitViewController
+### Interop with UIViewController
 
 Some native APIs that are not implemented as `UIView`, for example, `UITabBarController`, or `UINavigationController` could not
 be embedded into a Compose Multiplatform UI using [the existing interop mechanism](compose-ios-ui-integration.md#use-uikit-inside-compose-multiplatform).
 
-Now, CMP implements the `UIKitViewController` function that allows you to embed native view controllers.
+Now, Compose Multiplatform implements the `UIKitViewController` function that allows you to embed native iOS view controllers
+in your Compose UI.
 
 TODO: update the linked article
 
