@@ -76,7 +76,7 @@ In this tutorial, you'll create a new project with the web wizard:
 
    Fleet detects the project type and opens it for you.
 
-4. When opening a folder with a build file, Fleets gives you the option to enable
+4. When opening a folder with a build file, Fleet gives you the option to enable
    [Smart Mode](https://www.jetbrains.com/help/fleet/smart-mode.html). Click **Trust and Open**:
 
    ![Smart mode in Fleet](fleet-project-wizard-2.png){width=700}
