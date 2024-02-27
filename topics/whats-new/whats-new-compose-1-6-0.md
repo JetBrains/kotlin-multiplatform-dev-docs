@@ -79,7 +79,7 @@ finders, assertions, actions, and matchers as Jetpack Compose on Android.
 >
 {type="note"}
 
-See the setup instructions and test examples in [the API documentation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html).
+See the setup instructions and test examples in [the API documentation](compose-test.md).
 
 ### Changes from Jetpack Compose and Material 3 (all platforms)
 
@@ -143,11 +143,11 @@ To use the feature with Compose Multiplatform for Desktop, set the `compose.laye
 system property. Supported values:
 * `WINDOW`, for creating `Popup` and `Dialog` components as separate undecorated windows.
 * `COMPONENT`, for creating `Popup` or `Dialog` as a separate Swing component in the same window. It works only with offscreen
-  rendering: `compose.swing.render.on.graphics` set to `true`, see the [Enhanced Swing interop](https://blog.jetbrains.com/kotlin/2023/08/compose-multiplatform-1-5-0-release/#enhanced-swing-interop)
-  section of the 1.5.0 Compose Multiplatform release notes. Note that offscreen rendering only works for `ComposePanel`,
-  not for full window Compose applications.
+  rendering, with `compose.swing.render.on.graphics` set to `true` (see the [Enhanced Swing interop](https://blog.jetbrains.com/kotlin/2023/08/compose-multiplatform-1-5-0-release/#enhanced-swing-interop)
+  section of the 1.5.0 Compose Multiplatform release notes). Note that offscreen rendering only works for `ComposePanel`
+  components, not for full window Compose applications.
 
-Example (TODO check and screenshot):
+Example of the code that uses the `COMPONENT` property:
 
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
@@ -182,8 +182,12 @@ fun ComposeContent() {
         }
     }
 }
-
 ```
+{initial-collapse-state="collapsed"  collapsed-title=" val window = JFrame()"}
+
+The `Dialog` is drawn in full, regardless of the bounds of the parent `ComposePanel`:
+
+![Dialog outside the bounds of the parent panel](compose-desktop-separate-dialog.png)
 
 ### Support for text decoration line styles (iOS, Desktop, Web)
 
@@ -247,7 +251,7 @@ as with native UIs:
 
 This also means that you can make the Compose semantic data available to Accessibility Services and the XCTest framework.
 
-For details on implementation and customization API, see Support for iOS accessibility features (TODO link).
+For details on implementation and customization API, see [Support for iOS accessibility features]().
 
 ### Changing opacity for Compose view
 
