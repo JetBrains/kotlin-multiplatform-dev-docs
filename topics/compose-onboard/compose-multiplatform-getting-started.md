@@ -8,12 +8,17 @@ In this tutorial, you will build a sample application that runs on Android, iOS,
 interface, you will use the Compose Multiplatform framework and learn about its basics: composable functions, themes, layouts,
 events, and modifiers.
 
-* No previous experience with Compose Multiplatform, Android, or iOS is required for this tutorial. We recommend that
-  you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting
-  this tutorial.
+Things to keep in mind for this tutorial:
+* No previous experience with Compose Multiplatform, Android, or iOS is required. We do recommend that
+  you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting.
 * To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
-  and desktop. For iOS, you need a macOS machine with XCode installed. This is a general limitation of iOS development.
+  and desktop. For iOS, you'll need a macOS machine with Xcode installed. This is a general limitation of iOS development.
 * If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
+
+> To try a new multiplatform experience without juggling different IDEs and switching to
+> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
+>
+{type="tip"}
 
 Get to know Compose Multiplatform by completing these steps:
 
