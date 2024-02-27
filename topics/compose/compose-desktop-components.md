@@ -1,6 +1,6 @@
 [//]: # (title: Desktop-specific components and events)
 
-You can use Compose for Multiplatform for desktop applications for macOS, Linux, and Windows. This page gives a short
+You can use Compose Multiplatform for desktop applications for macOS, Linux, and Windows. This page gives a short
 overview of the desktop-specific components and events. Each section includes a link to a detailed tutorial.
 
 ## Components
@@ -47,7 +47,7 @@ With Compose Multiplatform, you can set the application window icon and the appl
 
 ### Windows and dialogs
 
-You can use the `Window` composable to create a regular window and the `DialogWindow` composable for the modal type that
+You can use the `Window` composable to create a regular window and the `DialogWindow` composable for a modal window that
 locks its parent window until the user closes the modal window:
 
 ```kotlin
@@ -89,7 +89,7 @@ fun main() = application {
 {initial-collapse-state="collapsed"}
 
 Compose Multiplatform provides various features for windows. You can adapt the window size, change its state (size,
-position), hide it int the tray, make the window draggable, transparent, and so on.
+position), hide it in the tray, make the window draggable, transparent, and so on.
 
 For more information, see the [Top level windows management](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Window_API_new)
 tutorial.
@@ -141,7 +141,7 @@ fun main() = singleWindowApplication(title = "Context menu") {
 ```
 {initial-collapse-state="collapsed"}
 
-Standard context menu options are copy, cut, paste, and select all. You can add more menu items, customize style and
+Default context menu options are copy, cut, paste, and select all. You can add more menu items, customize style and
 texts, and so on.
 
 For more information, see the [Context Menu in Compose for Desktop](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
@@ -149,7 +149,7 @@ tutorial.
 
 ### The system tray
 
-You can use the `Tray` composable to send user notifications using the system tray:
+You can use the `Tray` composable to send notifications to the user using the system tray:
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
