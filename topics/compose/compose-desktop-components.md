@@ -1,11 +1,11 @@
 [//]: # (title: Desktop-specific components and events)
 
-You can use Compose Multiplatform for desktop applications for macOS, Linux, and Windows. This page gives a short
+You can use Compose Multiplatform the macOS, Linux, and Windows desktop applications. This page gives a short
 overview of the desktop-specific components and events. Each section includes a link to a detailed tutorial.
 
 ## Components
 
-* [Images and icons](#images-and-icons)
+<!-- * [Images and icons](#images-and-icons) -->
 * [Windows and dialogs](#windows-and-dialogs)
 * [Context menus](#context-menus)
 * [The system tray](#the-system-tray)
@@ -13,7 +13,7 @@ overview of the desktop-specific components and events. Each section includes a 
 * [Scrollbars](#scrollbars)
 * [Tooltips](#tooltips)
 
-### Images and icons
+<!-- ### Images and icons
 
 You can use the `Image` composable and the `painterResource()` function to display images stored as resources in your
 application:
@@ -43,7 +43,7 @@ With Compose Multiplatform, you can set the application window icon and the appl
 * For more information on working with images using Compose Multiplatform in desktop projects, see
   the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
-* For more information on using resources in Compose Multiplatform projects, see [Images and resources](compose-images-resources.md).
+* For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-images-resources.md). -->
 
 ### Windows and dialogs
 
@@ -140,7 +140,7 @@ fun main() = singleWindowApplication(title = "Context menu") {
 ```
 {initial-collapse-state="collapsed" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
 
-Default context menu options are copy, cut, paste, and select all. You can add more menu items, customize style and
+Default context menu options include copy, cut, paste, and select all. You can add more menu items, customize style and
 texts, and so on.
 
 For more information, see the [Context menu in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
@@ -648,8 +648,8 @@ You can set up navigation between components with the <shortcut>Tab</shortcut> k
 and <shortcut>⇧ + Tab</shortcut> for the previous one.
 
 By default, the tabbed navigation allows you to move between focusable components in the order of their appearance.
-Focusable components are the `TextField`, `OutlinedTextField`, and `BasicTextField` composables and components that
-use `Modifier.clickable` (like `Button`, `IconButton`, and `MenuItem`).
+Focusable components include `TextField`, `OutlinedTextField`, and `BasicTextField` composables, as well as components that
+use `Modifier.clickable`, such as `Button`, `IconButton`, and `MenuItem`.
 
 For example, here's a window where users can navigate between five text fields using standard shortcuts:
 
