@@ -138,11 +138,11 @@ To switch back to the old behavior, set the `platformLayers` parameter to `false
 
 ```kotlin
 ComposeUIViewController(
-  configure = {
-    platformLayers = false
-  }
+    configure = {
+        platformLayers = false
+    }
 ) {
-  // your Compose code
+    // your Compose code
 }
 ```
 
@@ -210,13 +210,13 @@ An example of setting a dotted underline style:
 
 ```kotlin
 Text(
-    "Hello, Compose",
-    style = TextStyle(
-        textDecoration = TextDecoration.Underline,
-        platformStyle = PlatformTextStyle (
-            textDecorationLineStyle = TextDecorationLineStyle.Dotted
-        )
+  "Hello, Compose",
+  style = TextStyle(
+    textDecoration = TextDecoration.Underline,
+    platformStyle = PlatformTextStyle (
+      textDecorationLineStyle = TextDecorationLineStyle.Dotted
     )
+  )
 )
 ```
 
@@ -269,7 +269,7 @@ to be transparent.
 
 ```kotlin
 val appController = ComposeUIViewController(configure = {
-    this.opaque = false
+      this.opaque = false
 }) {
     App()
 }
