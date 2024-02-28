@@ -1,9 +1,5 @@
 [//]: # (title: Images and resources)
 
-> This page describes the new revamped version of the resource library available since Compose Multiplatform 1.6.0-beta01.
-> 
-{type="note"}
-
 Compose Multiplatform provides a special library and a Gradle plugin support for accessing resources in common code
 across all supported platforms. Resources are static content, such as images, fonts, and strings, that you can use from
 your application.
