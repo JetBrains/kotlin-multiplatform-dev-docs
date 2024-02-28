@@ -91,17 +91,12 @@ Multiplatform, there are two options:
 
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
-| 2.0.0-Beta1    | `1.5.4-dev1-kt2.0.0-Beta1`             |
-| 1.9.22         | `1.5.8`                                |
+| 2.0.0-Beta4    | `1.5.9-kt-2.0.0-Beta4`                 |
+| 1.9.22         | `1.5.8.1`                              |
 | 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
-| 1.9.20-RC      | `1.5.3-rc01`                           |
-| 1.9.20-Beta2   | `1.5.2.1-Beta3`                        |
-| 1.9.20-Beta    | `1.5.2.1-Beta2`                        |
 | 1.9.10         | `1.5.2`                                |
 | 1.9.0          | `1.5.1`                                |
-| 1.9.0-RC       | `1.4.8-beta`                           |
-| 1.9.0-Beta     | `1.4.7.1-beta`                         |
 | 1.8.22         | `1.4.8`                                |
 | 1.8.21         | `1.4.7`                                |
 | 1.8.20         | `1.4.5`                                |
@@ -190,6 +185,7 @@ which version of Jetpack Compose artifact is used:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.6.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.0)   | 1.6.1                   | 1.2.0                             |
 | [1.5.12](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.12) | 1.5.4                   | 1.1.2                             |
 | [1.5.11](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.11) | 1.5.4                   | 1.1.2                             |
 | [1.5.10](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.10) | 1.5.4                   | 1.1.2                             |
