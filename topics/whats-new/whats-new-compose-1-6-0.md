@@ -4,11 +4,11 @@ The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 
 * [Breaking changes](#breaking-changes)
 * [New and improved Resources API](#improved-resources-api-all-platforms)
-* [Basic support for iOS accessibility features](#ios-accessibility-support)
+* [Basic support for iOS accessibility features](#accessibility-support)
 * [UI testing API for all platforms](#ui-testing-api-experimental-all-platforms)
 * [Separate platform views for popups, dialogs, and dropdowns](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop).
 * [Merged changes from Jetpack Compose and Material 3](#changes-from-jetpack-compose-and-material-3-all-platforms)
-* [Kotlin/Wasm artifacts in stable versions](#compose-multiplatform-for-web-wasm-artifacts-are-available-with-the-stable-version-of-the-framework)
+* [Kotlin/Wasm artifacts in stable versions](#kotlin-wasm-artifacts-available-in-stable-versions-of-the-framework)
 * [Known issues: missing dependencies](#known-issues-missing-dependencies)
 
 ## Dependencies
@@ -35,7 +35,7 @@ This is in line with `compose.material` changes from [the 1.6.0-alpha01 release]
   For a deeper understanding of this change, see [the discussion on not implementing this flag in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/issues/2477#issuecomment-1825716543).
 * The default line height style has been changed to `Trim.None` and `Alignment.Center`. Compose Multiplatform now supports
   `LineHeightStyle.Trim` and implements `Trim.None` as the default value.
-* Explicit `lineHeight` have been added to `TextStyle` of `Typography`, which led to the [next breaking change](#using-fontsize-in-materialtheme-now-needs-lineheight-as-well).
+* Explicit `lineHeight` have been added to `TextStyle` of `Typography`, which led to the [next breaking change](#using-fontsize-in-materialtheme-requires-lineheight).
 
 ### Using fontSize in MaterialTheme requires lineHeight
 
@@ -99,7 +99,7 @@ see [the announcement on the Android Developers Blog](https://android-developers
 
 Other notable features from this release:
 * The change to default font padding came into effect only for Android targets. However, make sure to take into account
-  a [side effect](#using-fontsize-in-materialtheme-now-needs-lineheight-as-well) of this change.
+  a [side effect](#using-fontsize-in-materialtheme-requires-lineheight) of this change.
 * Mouse selection was already supported in Compose Multiplatform for other targets. With 1.6.0, this includes Android, too.
 
 Jetpack Compose features that are not ported to Compose Multiplatform yet:
