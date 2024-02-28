@@ -29,7 +29,7 @@ With default settings:
 
 You can customize these settings with the new Compose Multiplatform API.
 
-### Adjust tree synchronization behavior
+### Choose the tree synchronization option
 
 To debug and test events and interactions, you can change the synchronization mode:
 * to never sync the tree with UI (for example, to temporarily disable accessibility mapping),
@@ -40,7 +40,17 @@ To debug and test events and interactions, you can change the synchronization mo
 >
 {type="note"}
 
-The `AccessibilitySyncOptions` class contains available options:
+An example of enabling the option to always synchronize the accessibility tree:
+
+```kotlin
+ComposeUIViewController(configure = {
+    accessibilitySyncOptions = AccessibilitySyncOptions.Always(debugLogger = null)
+}) {
+    // your @Composable content
+}
+```
+
+The `AccessibilitySyncOptions` class contains all available options:
 
 ```kotlin
 // package androidx.compose.ui.platform
@@ -68,24 +78,8 @@ sealed class AccessibilitySyncOptions {
 You can implement the `AccessibilityDebugLogger` interface to write custom messages to an output of your choosing:
 
 ```kotlin
-// package androidx.compose.ui.platform
-
-@ExperimentalComposeApi
-interface AccessibilityDebugLogger {
-
-    // Logs the message to the debug logger, or null as a separator of log blobs
-    fun log(message: Any?)
-}
-```
-
-### Sample customization code
-
-Compose Multiplatform provides APIs to configure the tree sync behavior:
-modify the `accessibilitySyncOptions` parameter inside the `configure {}` block of a `ComposeUIViewController` call:
-
-```kotlin
 ComposeUIViewController(configure = {
-    accessibilitySyncOptions = AccessibilitySyncOptions.Always(object: AccessibilityDebugLogger {
+    accessibilitySyncOptions = AccessibilitySyncOptions.WhenRequiredByAccessibilityServices(object: AccessibilityDebugLogger {
          override fun log(message: Any?) {
              if (message == null) {
                  println()
