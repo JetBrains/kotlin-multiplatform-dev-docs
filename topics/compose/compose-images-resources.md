@@ -1,11 +1,7 @@
 [//]: # (title: Images and resources)
 
-> This page describes the new revamped version of the resource library available since Compose Multiplatform 1.6.0-beta01.
-> 
-{type="note"}
-
-Compose Multiplatform provides a special library and a Gradle plugin support for accessing resources in common code
-across all supported platforms. Resources are static content, such as images, fonts, and strings, that you can use from
+Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
+across all supported platforms. Resources are static content, such as images, fonts, and strings, which you can use from
 your application.
 
 > The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
@@ -15,8 +11,8 @@ your application.
 
 When working with resources in Compose Multiplatform, consider the current conditions:
 
-* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files,
-  plus all the resources on the JS platform which are read asynchronously.
+* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
+  and all of the resources on the JS platform that are read asynchronously.
 * Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
   read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
 * Multimodule projects are not supported yet. The JetBrains team is working on adding this functionality in future releases.
@@ -49,7 +45,7 @@ To access resources in your multiplatform projects:
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
-3. Organize the `composeResources` directory structure following these rules:
+3. Organize the `composeResources` directory structure according to these rules:
 
    * Images should be in the `drawable` directory.
    * Fonts should be in the `font` directory.
@@ -59,20 +55,20 @@ To access resources in your multiplatform projects:
 ## Qualifiers
 
 Sometimes, the same resource should be presented in different ways depending on the environment, such as locale,
-screen density, or an interface theme. For example, you might need to localize texts for different languages or adjust
+screen density, or interface theme. For example, you might need to localize texts for different languages or adjust
 images for the dark theme. For that, the library provides special qualifiers.
 
 All resource types (except for raw files in the `files` directory) support qualifiers. Apply qualifiers to directory
-names using a dash:
+names using a hyphen:
 
 ![Qualifiers in compose resources](compose-resources-qualifiers.png){width=250}
 
-The library supports (in the order of priority) [language](#language-and-regional-qualifiers), [theme](#theme-qualifier),
-and [density](#density-qualifier) qualifiers.
+The library supports (in the order of priority) the following qualifiers: [language](#language-and-regional-qualifiers),
+[theme](#theme-qualifier), and [density](#density-qualifier).
 
 * Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
   English language in the United States region, suitable for 160 DPI screens in the dark theme.
-* If a resource with the requested qualifier doesn't exist, a default resource without a qualifier is used instead.
+* If a resource with the requested qualifier doesn't exist, the default resource without a qualifier is used instead.
 
 ### Language and regional qualifiers
 
@@ -100,16 +96,16 @@ You can use the following density qualifiers:
 * "xxhdpi" − 480 DPI, 3x density
 * "xxxhdpi" − 640dpi, 4x density
 
-The resource is selected depending on a screen density defined in the system.
+The resource is selected depending on the screen density defined in the system.
 
 ## Resource usage
 
-After importing a project, a special `Res` class that provides access to resources is generated.
+After importing a project, a special `Res` class is generated which provides access to resources.
 To manually generate the `Res` class, run the `generateComposeResClass` Gradle task.
 
 ### Images
 
-You can access drawable resources as simple images, rasterized images, and XML vectors:
+You can access drawable resources as simple images, rasterized images, or XML vectors:
 
 * To access drawable resources as `Painter` images, use the `painterResource()` function:
 
@@ -117,11 +113,11 @@ You can access drawable resources as simple images, rasterized images, and XML v
   @Composable
   fun painterResource(resource: DrawableResource): Painter {...}
   ```
-    
+
   The `painterResource()` function takes a resource path and returns a `Painter` value. The function works synchronously
-  on all targets, except for web. For the web target, it returns an empty `Painter` for the first recomposition that is
+  on all targets except for web. For the web target, it returns an empty `Painter` for the first recomposition that is
   replaced with the loaded image in subsequent recompositions.
-    
+
   * `painterResource()` loads either a `BitmapPainter` for rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`,
     or a `VectorPainter` for the Android XML vector drawable format.
   * XML vector drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
@@ -163,7 +159,7 @@ Store all string resources in the `strings.xml` file in the `composeResources/va
 
 A static accessor is generated for each item in the `strings.xml` file.
 
-To get string resources as a `String`:
+To get string resources as a `String`, use the following code:
 
 <tabs>
 <tab title= "From composable code">
@@ -186,7 +182,7 @@ Text(stringResource(Res.string.app_name))
 ```
 
 </tab>
-<tab title= "From a non-composable code">
+<tab title= "From non-composable code">
 
 ```kotlin
 suspend fun getString(resource: StringResource): String
@@ -208,8 +204,8 @@ coroutineScope.launch {
 </tabs>
 
 You can use special symbols in string resources:
- 
-* `\n` — for a new line 
+
+* `\n` — for a new line
 * `\t` — for a tab symbol
 * `\uXXXX` — for a specific Unicode character
 
@@ -220,7 +216,7 @@ Currently, arguments have basic support in string resources:
 ```XML
 <!-- strings.xml -->
 <resources>
-	<string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
+    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
 </resources>
 ```
 
@@ -262,7 +258,7 @@ suspend fun readBytes(path: String): ByteArray
 
 You can place raw files in the `composeResources/files` directory and create any hierarchy inside it.
 
-For example, to access raw files:
+For example, to access raw files, use the following code:
 
 <tabs>
 <tab title= "From composable code">
@@ -278,7 +274,7 @@ Text(bytes.decodeToString())
 ```
 
 </tab>
-<tab title= "From a non-composable code">
+<tab title= "From non-composable code">
 
 ```kotlin
 coroutineScope.launch {
@@ -291,7 +287,7 @@ coroutineScope.launch {
 
 ### Remote files
 
-Only files that are a part of the application are considered as resources.
+Only files that are part of the application are considered resources.
 
 You can also load remote files from the internet using their URL. To load remote files, use special libraries:
 

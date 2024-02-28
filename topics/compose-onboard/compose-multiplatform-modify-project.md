@@ -80,7 +80,7 @@ To use this library:
                 }
                 AnimatedVisibility(showContent) {
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(painterResource("compose-multiplatform.xml"), null)
+                        Image(painterResource(Res.drawable.compose_multiplatform), null)
                         Text("Compose: $greeting")
                     }
                 }
@@ -99,6 +99,10 @@ and desktop:
 ![First Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-2.png){width=500}
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
+
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+>
+{type="tip"}
 
 ## Next step
 
