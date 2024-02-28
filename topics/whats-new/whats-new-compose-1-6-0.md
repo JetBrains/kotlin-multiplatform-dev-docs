@@ -4,7 +4,7 @@ The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
 
 * [New and improved Resources API](#improved-resources-api-all-platforms)
 * [Basic support for iOS accessibility features](#ios-accessibility-support)
-* [UI testing API](#ui-testing-api-experimental-all-platforms)
+* [UI testing API for all platforms](#ui-testing-api-experimental-all-platforms)
 * [Popup, Dialog, and DropdownMenu components are now placed in separate platform views](#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop).
 * Jetpack Compose 1.6.1 and Material 3 1.2.0 were merged into Compose Multiplatform. Here is a [summary of changes](#changes-from-jetpack-compose-and-material-3-all-platforms)
   with comments on what this means for Compose Multiplatform consumers.
@@ -76,11 +76,12 @@ see [the documentation page](compose-images-resources.md).
 
 ### UI testing API (experimental, all platforms)
 
-The experimental API for UI testing with Compose Multiplatform allows you to write common tests that
-validate the behavior of your application's UI across platforms supported by the framework. The API uses the same
-finders, assertions, actions, and matchers as Jetpack Compose on Android.
+The experimental API for UI testing with Compose Multiplatform, which was already available for desktop and Android,
+now supports all platforms. You can write and run common tests that validate the behavior of your application's UI
+across platforms supported by the framework. The API uses the same finders, assertions, actions, and matchers as
+Jetpack Compose.
 
-> JUnit-based tests are supported only for Compose Multiplatform for Desktop.
+> JUnit-based tests are supported only by Compose Multiplatform for Desktop.
 >
 {type="note"}
 

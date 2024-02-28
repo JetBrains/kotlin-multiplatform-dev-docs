@@ -37,7 +37,7 @@ function can call other composable functions, for example, `Text()`.
 >
 {type="tip"}
 
-Next, you need a structure that represents Compose Multiplatform in SwiftUI. Create the following `ComposeView`structure
+Next, you need a structure that represents Compose Multiplatform in SwiftUI. Create the following `ComposeView` structure
 that converts `UIViewController` to a SwiftUI view:
 
 ```swift
@@ -50,7 +50,8 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 ```
 
-Now you can use the `ComposeView` structure in other SwiftUI structures.
+Now you can use the `ComposeView` structure in other SwiftUI structures. `Main_iosKt.MainViewController` is a generated
+name, you can learn more about name translation from Swift on the Kotlin [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#top-level-functions-and-properties) page.
 
 In the end, your application should look like this:
 
@@ -161,17 +162,12 @@ this [sample project](https://github.com/JetBrains/compose-multiplatform/tree/ma
 
 ## Use SwiftUI inside Compose Multiplatform
 
-> The best approach to use SwiftUI inside Compose Multiplatform is currently a work in
-> progress. In the future, our recommendations may change, so we suggest that you take note of
-> where you have used SwiftUI inside Compose Multiplatform to help you migrate later.
->
-{type="warning"}
-
 To use SwiftUI inside Compose Multiplatform, add your Swift code to an
-intermediate [`UIView`](https://developer.apple.com/documentation/uikit/uiview/). Currently, you can't write SwiftUI
-structures directly in Kotlin. Instead, you have to write it in Swift and pass it to a Kotlin function.
+intermediate [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller/).
+Currently, you can't write SwiftUI structures directly in Kotlin. Instead, you have to write them in Swift
+and pass them to a Kotlin function.
 
-To begin with, add an argument to create `ComposeUIViewController`:
+To start, add an argument to your entry point function to create a `ComposeUIViewController` component:
 
 ```kotlin
 fun ComposeEntryPointWithUIView(createUIView: () -> UIView): UIViewController =
@@ -183,53 +179,23 @@ fun ComposeEntryPointWithUIView(createUIView: () -> UIView): UIViewController =
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("How to use SwiftUI inside Compose Multiplatform")
-            UIKitView(
-                factory = createUIView,
-                modifier = Modifier
-                    .size(300.dp)
-                    .border(2.dp, Color.Blue),
-            )
+            UIKitViewController(
+                factory = createUIViewController,
+                modifier = Modifier.size(300.dp).border(2.dp, Color.Blue),
+                )
         }
     }
 ```
 
-Then, pass `createUIView` to your Swift code like this:
+Then, pass the created `createUIViewController` to your Swift code. You can use a `UIHostingController` to wrap
+SwiftUI views like this:
 
 ```swift
-Main_iosKt.ComposeEntryPointWithUIView(createUIView: { () -> UIView in
-    UIView() // An empty view for example
-})
-```
-
-To create an intermediate `UIView` that allows you to interoperate between SwiftUI and UIKit, create the
-following `SwiftUIInUIView` class:
-
-```swift
-class SwiftUIInUIView<Content: View>: UIView {
-    init(content: Content) {
-        super.init(frame: CGRect())
-        let hostingController = UIHostingController(rootView: content)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(hostingController.view)
-        NSLayoutConstraint.activate([
-            hostingController.view.topAnchor.constraint(equalTo: topAnchor),
-            hostingController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-}
-```
-
-You can then use it in SwiftUI and add it to any Swift code inside:
-
-```swift
-Main_iosKt.ComposeWithUIKitView(createUIView: { () -> UIView in
-    SwiftUIInUIView(
-        content: VStack {
-            Text("SwiftUI in Compose Multiplatform")
-        }
-    )
+Main_iosKt.ComposeEntryPointWithUIViewController(createUIViewController: { () -> UIViewController in
+   let swiftUIView = VStack {
+       Text("SwiftUI in Compose Multiplatform")
+   }
+   return UIHostingController(rootView: swiftUIView)
 })
 ```
 
@@ -238,4 +204,4 @@ In the end, your application should look like this:
 ![UIView](uiview.png){width=300}
 
 Explore the code for this example in
-this [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-swiftui-in-compose).
+the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-swiftui-in-compose).
