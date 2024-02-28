@@ -1,4 +1,4 @@
-[//]: # (title: Testing Compose UI)
+[//]: # (title: Testing Compose Multiplatform UI)
 
 UI testing in Compose Multiplatform is implemented using the same finders, assertions, actions, and matchers
 as the Jetpack Compose testing API. If you're not familiar with them, read the [Jetpack Compose guide](https://developer.android.com/jetpack/compose/testing)
