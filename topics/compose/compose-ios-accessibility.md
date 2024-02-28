@@ -31,9 +31,9 @@ You can customize these settings with the new Compose Multiplatform API.
 
 ### Choose the tree synchronization option
 
-To debug and test events and interactions, you can change the synchronization mode:
-* to never sync the tree with UI (for example, to temporarily disable accessibility mapping),
-* to always sync the tree, so that it is rewritten every time the UI updates (to thoroughly test the accessibility integration).
+To debug and test events and interactions, you can change the synchronization mode to:
+* Never synchronize the tree with UI, for example, to temporarily disable accessibility mapping.
+* Always synchronize the tree so that it is rewritten every time the UI updates to test the accessibility integration thoroughly.
 
 > Remember that synchronizing the tree after each UI event can be quite useful for debugging and testing but can degrade
 > the performance of your app.
