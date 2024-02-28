@@ -48,7 +48,10 @@
         <toc-element id="compose-images-resources.md"/>
         <toc-element id="compose-navigation-routing.md"/>
         <toc-element id="compose-test.md"/>
-        <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with other UI frameworks"/>
+        <toc-element toc-title="iOS-specific features">
+            <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with UIKit and SwiftUI"/>
+            <toc-element id="compose-ios-accessibility.md" toc-title="iOS accessibility support"/>
+        </toc-element>
         <toc-element id="compose-android-only-components.md"/>
         <toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
         <toc-element id="compose-compatibility-and-versioning.md"/>

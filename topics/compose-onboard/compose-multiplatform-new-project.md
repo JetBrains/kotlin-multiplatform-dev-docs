@@ -28,24 +28,24 @@ To get started, implement a new `App` composable:
    composable:
 
    ```kotlin
-     @Composable
-     fun App() {
-         MaterialTheme {
-             var timeAtLocation by remember { mutableStateOf("No location selected") }
-             Column {
-                 Text(timeAtLocation)
-                 Button(onClick = { timeAtLocation = "13:30" }) {
-                     Text("Show Time At Location")
-                 }
-             }
-         }
-     }
-     ```
+   @Composable
+   fun App() {
+       MaterialTheme {
+           var timeAtLocation by remember { mutableStateOf("No location selected") }
+           Column {
+               Text(timeAtLocation)
+               Button(onClick = { timeAtLocation = "13:30" }) { 
+                   Text("Show Time At Location")
+               }
+           }
+       }
+   }
+   ```
 
-     * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
-     * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
-       composable is an observer of this state.
-     * The `Button` composable changes the state using the `onClick` event handler.
+   * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
+   * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
+     composable is an observer of this state.
+   * The `Button` composable changes the state using the `onClick` event handler.
 
 2. Run the application on Android and iOS:
 
@@ -209,6 +209,10 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
+>
+{type="tip"}
+
 ## Refactor the design
 
 The application works, but it's susceptible to users' typos. For example, if the user enters "Franse" instead of "France",
@@ -290,12 +294,16 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+>
+{type="tip"}
+
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
 > you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network or
 > the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
 >
-{type="tip"}
+{type="note"}
 
 ## Introduce images
 
@@ -314,44 +322,41 @@ code to load and display them:
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
 
-2. Move the images to `src/commonMain/resources` so that the same flags are available on all platforms:
+2. Move the images to the `composeApp/src/commonMain/composeResources/drawable` directory so that the same flags are available on all platforms:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
-
-   > Each platform-specific source set can also have its own resources folder. This allows you to use different images on different
-   > platforms, if needed.
-   >
-   {type="tip"}
 
 3. Change the codebase to support images:
 
     ```kotlin
-    data class Country(val name: String, val zone: TimeZone, val image: String)
-    
+    @OptIn(ExperimentalResourceApi::class)
+    data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
+
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
-    
+
         val time = Clock.System.now()
         val localTime = time.toLocalDateTime(zone).time
-    
+
         return "The time in $location is ${localTime.formatted()}"
     }
-    
-    fun countries() = listOf(
-        Country("Japan", TimeZone.of("Asia/Tokyo"), "jp.png"),
-        Country("France", TimeZone.of("Europe/Paris"), "fr.png"),
-        Country("Mexico", TimeZone.of("America/Mexico_City"), "mx.png"),
-        Country("Indonesia", TimeZone.of("Asia/Jakarta"), "id.png"),
-        Country("Egypt", TimeZone.of("Africa/Cairo"), "eg.png")
+
+    @OptIn(ExperimentalResourceApi::class)
+    val defaultCountries = listOf(
+        Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
+        Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
+        Country("Mexico", TimeZone.of("America/Mexico_City"), Res.drawable.mx),
+        Country("Indonesia", TimeZone.of("Asia/Jakarta"), Res.drawable.id),
+        Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
     )
-    
+
     @OptIn(ExperimentalResourceApi::class)
     @Composable
-    fun App(countries: List<Country> = countries()) {
+    fun App(countries: List<Country> = defaultCountries) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
+
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(
                     timeAtLocation,
@@ -383,7 +388,7 @@ code to load and display them:
                         }
                     }
                 }
-    
+
                 Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
                     onClick = { showCountries = !showCountries }) {
                     Text("Select Location")
@@ -404,6 +409,10 @@ code to load and display them:
    ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
+
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+>
+{type="tip"}
 
 ## What's next
 
