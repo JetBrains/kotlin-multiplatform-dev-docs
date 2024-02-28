@@ -256,7 +256,7 @@ as with the native iOS UI:
 
 This also means that you can make the Compose Multiplatform semantic data available to Accessibility Services and the XCTest framework.
 
-For details on implementation and customization API, see [Support for iOS accessibility features](). TODO link
+For details on implementation and customization API, see [Support for iOS accessibility features](compose-ios-accessibility.md).
 
 ### Changing opacity for composable view
 
