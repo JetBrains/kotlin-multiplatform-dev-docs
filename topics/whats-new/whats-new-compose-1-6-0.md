@@ -170,23 +170,23 @@ fun main() = SwingUtilities.invokeLater {
     val composePanel = ComposePanel()
     composePanel.setBounds(200, 200, 200, 200)
     composePanel.setContent {
-        ComposeContent()
+      ComposeContent()
     }
     composePanel.windowContainer = contentPane  // Use the full window for dialogs
     contentPane.add(composePanel)
-    
+
     window.contentPane.add(contentPane)
     window.setSize(800, 600)
     window.isVisible = true
-}
+  }
 
 @Composable
 fun ComposeContent() {
-    Box(Modifier.fillMaxSize().background(Color.Green)) {
-        Dialog(onDismissRequest = {}) {
-            Box(Modifier.size(100.dp).background(Color.Yellow))
-        }
+  Box(Modifier.fillMaxSize().background(Color.Green)) {
+    Dialog(onDismissRequest = {}) {
+      Box(Modifier.size(100.dp).background(Color.Yellow))
     }
+  }
 }
 ```
 {initial-collapse-state="collapsed"  collapsed-title="val window = JFrame()"}
@@ -207,13 +207,13 @@ Example of setting a dotted underline style:
 
 ```kotlin
 Text(
-    "Hello, Compose",
-    style = TextStyle(
-        textDecoration = TextDecoration.Underline,
-        platformStyle = PlatformTextStyle(
-            textDecorationLineStyle = TextDecorationLineStyle.Dotted
-        )
+  "Hello, Compose",
+  style = TextStyle(
+    textDecoration = TextDecoration.Underline,
+    platformStyle = PlatformTextStyle(
+      textDecorationLineStyle = TextDecorationLineStyle.Dotted
     )
+  )
 )
 ```
 
@@ -301,6 +301,32 @@ TODO: update the linked article
 Compose Multiplatform for iOS is now closer to the native behavior of a caret in a text field:
 * The position of the caret after a single tap in a text field is determined with more precision.
 * Long tap and drag in a text field leads to moving the cursor, not entering selection mode like on Android.
+
+## Desktop
+
+### Experimental support of improved interop blending
+
+In the past, the interop view implemented using the `SwingPanel` wrapper was always rectangular, and always
+in the foreground, on top of any Compose Multiplatform components. This made any popup elements
+(dropdown menus, toast notifications) challenging to use. With a new implementation, this issue is resolved,
+and you can now rely on Swing in the following use cases:
+
+* Clipping. You're not limited by a rectangular shape: clip and shadow modifiers work correctly with SwingPanel now.
+  
+    ```kotlin
+    SwingPanel(
+       modifier = Modifier.clip(RoundedCornerShape(6.dp))
+       //...
+    )
+    ```
+  
+  ![Correct clipping with SwingPanel](compose-swingpanel-clipping.png)
+* Overlapping. It is possible to draw any Compose Multiplatform content on top of a `SwingPanel` and interact with it as usual.
+  Here, "Snackbar" is on top of the Swing panel with a clickable **OK** button:
+  
+  ![Correct overlapping with SwingPanel](compose-swingpanel-overlapping.png)
+
+You can find additional details on implementation in [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/915).
 
 ## Web
 
