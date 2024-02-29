@@ -315,6 +315,8 @@ and you can now rely on Swing in the following use cases:
         //...
     )
     ```
+  
+  You can see the way a `JButton` is clipped without this feature on the left, and the experimental blending on the right:
 
   ![Correct clipping with SwingPanel](compose-swingpanel-clipping.png)
 * Overlapping. It is possible to draw any Compose Multiplatform content on top of a `SwingPanel` and interact with it as usual.
