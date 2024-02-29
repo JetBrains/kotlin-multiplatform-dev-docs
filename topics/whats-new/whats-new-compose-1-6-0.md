@@ -310,6 +310,9 @@ and you can now rely on Swing in the following use cases:
 * Clipping. You're not limited by a rectangular shape: clip and shadow modifiers work correctly with SwingPanel now.
 
     ```kotlin
+    // Flag necessary to enable the experimental blending 
+    System.setProperty("compose.interop.blending", "true")
+  
     SwingPanel(
         modifier = Modifier.clip(RoundedCornerShape(6.dp))
         //...
@@ -324,7 +327,7 @@ and you can now rely on Swing in the following use cases:
 
   ![Correct overlapping with SwingPanel](compose-swingpanel-overlapping.png)
 
-You can find additional details on implementation in [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/915).
+See known limitations and additional details in [the description of the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/915).
 
 ## Web
 
