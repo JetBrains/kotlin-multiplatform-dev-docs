@@ -120,7 +120,7 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 
 ### Can I use Compose Multiplatform in production?
 
-The Android and Desktop targets of Compose Multiplatform are Stable. You can use them in production.
+The Android and desktop targets of Compose Multiplatform are Stable. You can use them in production.
 The iOS target is in Alpha, which means that it's in active development. You can use it with caution and expect
 migration issues.
 The version of Compose Multiplatform for web that is based on WebAssembly is Experimental. You can try it in your pet projects.
