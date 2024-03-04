@@ -44,7 +44,7 @@ that requires tests both for common and platform-specific code.
 
    ![Select the project view](select-project-view.png){width=200}
 
-5. In `shared/src/commonMain/kotlin`, create a new `common.example.search` directory.
+5. In the `shared/src/commonMain/kotlin` directory, create a new `common.example.search` directory.
 6. In this directory, create a Kotlin file, `Grep.kt`, and add the following function:
 
     ```kotlin
@@ -69,9 +69,7 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 
     ```kotlin
    sourceSets {
-       commonMain.dependencies {
-           // put your Multiplatform dependencies here
-       }
+       //...
        commonTest.dependencies {
            implementation(libs.kotlin.test)
        }
@@ -85,16 +83,18 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 3. The `commonTest` source set stores all common tests. Now you also need to create a corresponding folder in your project,
    which must have the same name.
 
-   Create a new directory in `shared/src`. Choose the `commonTest/kotlin` folder
-   from the list of standard options provided by the IDE:
+   Create a new directory in the `shared/src` folder.
+   Choose the path `commonTest/kotlin` from the list provided by the IDE:
 
    ![Creating common test directory](create-common-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `common.example.search` directory.
+4. In the `commonTest/kotlin` folder, create a new `common.example.search` directory.
 5. In this directory, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
-    import kotlin.test.Test
+   package common.example.search 
+   
+   import kotlin.test.Test
     import kotlin.test.assertContains
     import kotlin.test.assertEquals
     
@@ -191,8 +191,8 @@ version is optional. When the version is present, you only need the number at th
     }
     ```
 
-3. In the `commonTest/kotlin` folder, create a new `org.kmp.testing` directory.
-4. In this directory, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
+3. In the `commonTest/kotlin` folder, create a new `org.kmp.testing` package.
+4. In this package, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
 
     ```kotlin
     import kotlin.test.Test
@@ -261,7 +261,8 @@ As well as implementing this function on each platform, you should provide tests
     }
     ```
 
-3. Use the IDE's suggestions to create the `androidUnitTest/kotlin` directory:
+3. Create a new directory in the `shared/src` folder.
+   Choose the path `androidUnitTest/kotlin` from the list provided by the IDE:
 
    ![Creating Android test directory](create-android-test-dir.png){width=350}
 
@@ -299,13 +300,15 @@ You can add other types of tests to your project. To learn about instrumented te
     import kotlin.experimental.ExperimentalNativeApi
     import kotlin.native.Platform
     
+    @OptIn(ExperimentalNativeApi::class)
     actual fun determineCurrentRuntime(): CurrentRuntime {
         val name = Platform.osFamily.name.lowercase()
         return CurrentRuntime(name, null)
     }
     ```
 
-3. Use the IDE's suggestions to create the `iosTest/kotlin` directory:
+3. Create a new directory in the `shared/src` folder.
+   Choose the path `iosTest/kotlin` from the list provided by the IDE:
 
    ![Creating iOS test directory](create-ios-test-dir.png){width=350}
 
@@ -313,6 +316,8 @@ You can add other types of tests to your project. To learn about instrumented te
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:
 
     ```kotlin
+    package org.kmp.testing 
+   
     import kotlin.test.Test
     import kotlin.test.assertEquals
     
@@ -339,7 +344,7 @@ example, if you run the `allTests` Gradle task, every test in your project will 
 ![Gradle test tasks](gradle-alltests.png){width=700}
 
 When you run tests, in addition to the output in your IDE, HTML reports are generated. You can find them in
-the `shared/build/tests` directory:
+the `shared/build/reports/tests` directory:
 
 ![HTML reports for multiplatform tests](shared-tests-folder-reports.png){width=300}
 
