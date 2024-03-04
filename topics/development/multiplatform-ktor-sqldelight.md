@@ -1,16 +1,17 @@
 [//]: # (title: Create a multiplatform app using Ktor and SQLDelight – tutorial)
 
 This tutorial demonstrates how to use Android Studio to create a mobile application for iOS and Android using Kotlin
-Multiplatform with Ktor and SQLDelight.
+Multiplatform.
+This application is going to:
+
+* retrieve data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest) using Ktor,
+* save the data in a local database using SQLDelight,
+* and display a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
 
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
 
-In the end, you will create an app that:
-* retrieves data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest),
-* saves the date in a local database,
-* and displays a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
-
+TODO change screenshot
 ![Emulator and Simulator](android-and-ios.png){width=600}
 
 You will use the following multiplatform libraries in the project:
@@ -21,10 +22,11 @@ You will use the following multiplatform libraries in the project:
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines) to write asynchronous code.
 * [SQLDelight](https://github.com/cashapp/sqldelight) to generate Kotlin code from SQL queries and create a type-safe
   database API.
+* [Koin](https://insert-koin.io/) to inject dependencies and avoid using expect/actual mechanism for database drivers. (TODO check wording)
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
-> in the corresponding GitHub repository.
+> in the corresponding GitHub repository. (TODO check links)
 >
 {type="note"}
 
@@ -33,19 +35,19 @@ You will use the following multiplatform libraries in the project:
 1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
 2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. Shared UI is not necessary for this tutorial.
+4. For iOS, choose the **Do not share UI** option. You will implement native UI for both platforms.
 5. Click the **Download** button and unpack the downloaded archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
 
 <!-- You can find the configured project [on the `master` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage).
->
+> TODO check link and uncomment this
 {type="note"} -->
 
 ## Add dependencies to the multiplatform library
 
-To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`) for all
-libraries to the `dependencies` block of the relevant source sets in the `build.gradle.kts` file.
+To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`)
+to the `dependencies` block of the relevant source sets in the `build.gradle.kts` file.
 
 Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
@@ -53,14 +55,65 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
 2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
 3. Navigate to the unpacked project folder and then click **Open**.
 
-   Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
+   Android Studio detects that the folder contains a Gradle build file, opens the folder as a new project,
+   and starts the initial Gradle Sync.
 
 4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
    which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
 
    ![Select the project view](select-project-view.png){width=200}
 
-5. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
+5. Change or add lines to the version catalog in the `gradle/libs.versions/toml` file to reflect all needed dependencies:
+
+   ```Ini
+   [versions]
+   agp = "8.2.2"
+   ...
+   coroutinesVersion = "1.7.3"
+   dateTimeVersion = "0.4.1"
+   koinAndroidxCompose = "3.5.3"
+   ktor = "2.3.7"
+   sqlDelight = "2.0.1"
+   lifecycleViewmodelCompose = "2.7.0"
+   material3 = "1.2.0"
+   
+   [libraries]
+   ...
+   android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+   koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+   kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+   kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTimeVersion" }
+   ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+   ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+   ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+   ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+   ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+   native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+   runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+   androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+   androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
+   
+   [plugins]
+   ...
+   kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+   sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+   ```
+   {initial-collapse-state="collapsed"}
+   (TODO collapsed title)
+
+6. Run a Gradle Sync, as prompted by the IDE. (TODO is this necessary?)
+7. At the very beginning of the `build.gradle.kts` file in the `shared` directory, add the following lines to the
+   `plugins` block:
+
+   ```kotlin
+       plugins {
+       // ...
+       alias(libs.plugins.kotlinxSerialization)
+       alias(libs.plugins.sqldelight)
+   }
+   ```
+
+8. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
 
     ```kotlin
     kotlin {
@@ -96,16 +149,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
      `kotlinx.serialization` for processing network requests and responses.
 
-6. At the very beginning of the same `build.gradle.kts` file in the `shared` directory, add the following lines to the
-   `plugins` block:
 
-   ```kotlin
-       plugins {
-       // ...
-       kotlin("plugin.serialization").version("%kotlinVersion%")
-       id("com.squareup.sqldelight").version("%sqlDelightVersion%")
-   }
-   ```
 
 7. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
 
