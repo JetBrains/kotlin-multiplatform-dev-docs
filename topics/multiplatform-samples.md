@@ -474,6 +474,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
           <list>
               <li><code>kotlinx-coroutines</code></li>
               <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
               <li><code>ktor-client</code></li>
               <li><code>datastore</code></li>
               <li><code>koin</code></li>
