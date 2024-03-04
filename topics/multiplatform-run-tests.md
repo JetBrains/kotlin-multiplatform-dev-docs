@@ -348,10 +348,12 @@ the `shared/build/reports/tests` directory:
 
 ![HTML reports for multiplatform tests](shared-tests-folder-reports.png){width=300}
 
-Run the `allTests` task and examine its report. You'll see that:
+Run the `allTests` task and examine the reports it generated:
 
-* Android and iOS tests depend on common tests.
-* Common tests always run before platform-specific ones.
+* The `allTests/report.html` file contains combined reports for common and iOS tests
+  (iOS tests depend on common tests and are run after them).
+* The `testDebugUnitTest` and `testReleaseUnitTest` folders contain reports for both default Android build flavors.
+  (Currently, Android test reports are not automatically merged with the `allTests` report.)
 
 ![HTML report for multiplatform tests](multiplatform-test-report.png){width=700}
 
