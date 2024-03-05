@@ -113,32 +113,28 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    }
    ```
 
-8. In the `shared` directory, specify the dependencies on all the required libraries in the `build.gradle.kts` file:
+8. In the same `build.gradle.kts` file, specify all the required dependencies: 
 
     ```kotlin
     kotlin {
         // ...
-        val coroutinesVersion = "%coroutinesVersion%"
-        val ktorVersion = "%ktorVersion%"
-        val sqlDelightVersion = "%sqlDelightVersion%"
-        val dateTimeVersion = "%dateTimeVersion%"
-
+   
         sourceSets {
             commonMain.dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.runtime)
+                implementation(libs.kotlinx.datetime)
             }
             androidMain.dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.android)
+                implementation(libs.android.driver)
             }
             iosMain.dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.darwin)
+                implementation(libs.native.driver)
             }
         }
     }
@@ -149,13 +145,13 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
      `kotlinx.serialization` for processing network requests and responses.
 
-
-
 7. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
 
    ![Synchronize Gradle files](gradle-sync.png)
 
-Learn more about adding [dependencies on multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
+> For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
+> 
+{type="tip"}
 
 ## Create an application data model
 
@@ -163,12 +159,11 @@ The Kotlin Multiplatform app will contain the public `SpaceXSDK` class, the faca
 The application data model will have three entity classes with:
 
 * General information about the launch
-* A URL to external information
-* Information about the rocket
+* Patches and article URLs associated with the launch
 
 Create the necessary data classes: 
-1. In `shared/src/commonMain/kotlin`, create the `com.jetbrains.handson.kmm.shared.entity` directory.
-2. Create the `Entity.kt` file inside the package.
+1. In the `shared/src/commonMain/kotlin` directory, create the `com.jetbrains.spacetutorial` directory.
+2. Inside, create the `entity` directory, and the `Entity.kt` file inside that.
 3. Declare all the data classes for basic entities:
 
    ```kotlin
@@ -177,9 +172,9 @@ Create the necessary data classes:
 
 Each serializable class must be marked with the `@Serializable` annotation. The `kotlinx.serialization` plugin
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
-serializer through the annotation argument.
+serializer in the annotation argument.
 
-However, you don't need to do that in this case. The `@SerialName` annotation allows you to redefine field names, which helps
+However, you don't need to do that in this case. (TODO what don't you need to do?) The `@SerialName` annotation allows you to redefine field names, which helps
 to declare properties in data classes with more easily readable names.
 
 ## Configure SQLDelight and implement cache logic
@@ -189,37 +184,43 @@ to declare properties in data classes with more easily readable names.
 The SQLDelight library allows you to generate a type-safe Kotlin database API from SQL queries. During compilation, the
 generator validates the SQL queries and turns them into Kotlin code that can be used in the shared module.
 
-The library is already in the project. To configure it, go to the `shared` directory and add the `sqldelight` block to
-the end of the `build.gradle.kts` file. The block will contain a list of databases and their parameters:
+The SQLDelight dependency is already included in the project. To configure the library, open the `shared/build.gradle.kts` file
+and add the `sqldelight` block in the end. This block contains a list of databases and their parameters:
 
 ```kotlin
 sqldelight {
-   database("AppDatabase") {
-      packageName = "com.jetbrains.handson.kmm.shared.cache"
+   databases {
+      create("AppDatabase") {
+         packageName.set("com.jetbrains.spacetutorial.cache")
+      }
    }
 }
 ```
 
 The `packageName` parameter specifies the package name for the generated Kotlin sources.
 
-> Consider installing the official [SQLDelight plugin](https://cashapp.github.io/sqldelight/multiplatform_sqlite/intellij_plugin/)
-> for working with `.sq` files.
+Sync the Gradle project files when prompted.
+
+> Consider installing the official [SQLDelight plugin](https://plugins.jetbrains.com/plugin/8191-sqldelight)
+> to work with `.sq` files.
 >
 {type="tip"}
 
 ### Generate the database API
 
-First, create the `.sq` file, which will contain all the needed SQL queries. By default, the SQLDelight plugin reads
-`.sq` from the `sqldelight` folder:
+First, create the `.sq` file with all the necessary SQL queries. By default, the SQLDelight plugin looks for
+`.sq` files in the `sqldelight` folder of the source set:
 
-1. In `shared/src/commonMain`, create a new `sqldelight` directory and add
-   the `com.jetbrains.handson.kmm.shared.cache` package.
-2. Inside the package, create an `.sq` file with the name of the database, `AppDatabase.sq`. All the SQL queries for
-   the application will be in this file.
+1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory and inside it, create
+   the `com.jetbrains.spacetutorial.cache` package directory.
+2. Inside the package directory, create an `.sq` file with the name of the database, `AppDatabase.sq`.
+   All the SQL queries for the application will be stored in this file.
 3. The database will contain a table with data about launches. To create the table, add the following
    code to the `AppDatabase.sq` file:
 
    ```text
+   import kotlin.Boolean;
+   
    CREATE TABLE Launch (
        flightNumber INTEGER NOT NULL,
        missionName TEXT NOT NULL,
@@ -256,77 +257,61 @@ First, create the `.sq` file, which will contain all the needed SQL queries. By 
    ```
 
 After the project is compiled, the generated Kotlin code will be stored in the `shared/build/generated/sqldelight`
-directory. The generator will create an interface named `AppDatabase`, as specified in `build.gradle.kts`.
+directory. The generator will create an interface named `AppDatabase`, which you specified in `build.gradle.kts`.
 
 ### Create platform database drivers
 
-To initialize `AppDatabase`, pass an `SqlDriver` instance to it. SQLDelight provides multiple platform-specific
-implementations of the SQLite driver, so you need to create them for each platform separately. You can do this by using
-[expected and actual declarations](multiplatform-connect-to-apis.md).
+To initialize the `AppDatabase` interface, you need to pass an `SqlDriver` instance to it. SQLDelight provides multiple platform-specific
+implementations of the SQLite driver, so you need to create them for each platform separately. In this project, we will use
+[Koin](https://insert-koin.io/), the dependency injection framework. (TODO explain what we get from this: no expect/actual stuff)
 
-> Expected and actual classes are in [Beta](https://kotlinlang.org/docs/components-stability.html#current-stability-of-kotlin-components).
-> They are almost stable, but migration steps may be required in the future.
-> We'll do our best to minimize any further changes for you to make.
->
-{type="warning"}
-
-1. Create an abstract factory for database drivers. To do this, in `shared/src/commonMain/kotlin`, create
-   the `com.jetbrains.handson.kmm.shared.cache` package and the `DatabaseDriverFactory` class inside it:
+1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
+   the `com.jetbrains.spacetutorial` directory.
+2. In the `com.jetbrains.spacetutorial` directory, create the `cache` directory, and then the `DatabaseDriverFactory` interface inside it:
 
    ```kotlin
-   package com.jetbrains.handson.kmm.shared.cache
+   package com.jetbrains.spacetutorial.cache
    
-   import com.squareup.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.db.SqlDriver
 
-   expect class DatabaseDriverFactory {
+   interface DatabaseDriverFactory {
        fun createDriver(): SqlDriver
    }
    ```
 
-   Now provide `actual` implementations for this expected class.
-
-2. On Android, the `AndroidSqliteDriver` class implements the SQLite driver. Pass the database information and the link
-   to the context to the `AndroidSqliteDriver` class constructor.
-
-   For this, in the `shared/src/androidMain/kotlin` directory, create the `com.jetbrains.handson.kmm.shared.cache`
-   package and a `DatabaseDriverFactory` class inside it with the actual implementation:
+3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
+   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside it. 
+4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
+   pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
    ```kotlin
-   package com.jetbrains.handson.kmm.shared.cache
-   
    import android.content.Context
-   import com.squareup.sqldelight.android.AndroidSqliteDriver
-   import com.squareup.sqldelight.db.SqlDriver
-   
-   actual class DatabaseDriverFactory(private val context: Context) {
-       actual fun createDriver(): SqlDriver {
-           return AndroidSqliteDriver(AppDatabase.Schema, context, "test.db")
-       }
+   import app.cash.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+
+   class AndroidDatabaseDriverFactory(private val context: Context) : DatabaseDriverFactory {
+      override fun createDriver(): SqlDriver {
+          return AndroidSqliteDriver(AppDatabase.Schema, context, "launch.db")
+      }
    }
    ```
 
-3. On iOS, the SQLite driver implementation is the `NativeSqliteDriver` class. In the `shared/src/iosMain/kotlin`
-   directory, create a `com.jetbrains.handson.kmm.shared.cache` package and a `DatabaseDriverFactory` class inside it with
-   the actual implementation:
+5. For iOS, in the `shared/src/iosMain/kotlin` directory, create the `com.jetbrains.spacetutorial` directory.
+6. Inside the `shared/src/iosMain/kotlin/com.jetbrains.spacetutorial` directory, create the `cache` directory,
+   then the `DatabaseDriverFactory.kt` file inside that:
 
    ```kotlin
-   package com.jetbrains.handson.kmm.shared.cache
-   
-   import com.squareup.sqldelight.db.SqlDriver
-   import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+   import app.cash.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
-   actual class DatabaseDriverFactory {
-       actual fun createDriver(): SqlDriver {
-           return NativeSqliteDriver(AppDatabase.Schema, "test.db")
+   class IOSDatabaseDriverFactory : DatabaseDriverFactory {
+       override fun createDriver(): SqlDriver {
+           return NativeSqliteDriver(AppDatabase.Schema, "launch.db")
        }
    }
    ```
 
-Instances of these factories will be created later in the code of your Android and iOS projects.
-
-You can navigate through the `expect` declarations and `actual` implementations by clicking the handy gutter icon:
-
-![Expect/Actual gutter](expect-actual-gutter-sql.png){width=500}
+Instances of these factories will be created later in the platform-specific code of your project.
 
 ### Implement cache
 
