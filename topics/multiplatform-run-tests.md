@@ -80,21 +80,18 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 
    ![Synchronize Gradle files](gradle-sync.png)
 
-3. The `commonTest` source set stores all common tests. Now you also need to create a corresponding folder in your project,
-   which must have the same name.
+3. The `commonTest` source set stores all common tests. Now you also need to create a directory with the same name in your project:
 
-   Create a new directory in the `shared/src` folder.
-   Choose the path `commonTest/kotlin` from the list provided by the IDE:
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
 
-   ![Creating common test directory](create-common-test-dir.png){width=350}
+      ![Creating common test directory](create-common-test-dir.png){width=350}
 
-4. In the `commonTest/kotlin` folder, create a new `common.example.search` directory.
-5. In this directory, create the `Grep.kt` file and update it with the following unit test:
+4. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
+5. In this package, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
-   package common.example.search 
-   
-   import kotlin.test.Test
+    import kotlin.test.Test
     import kotlin.test.assertContains
     import kotlin.test.assertEquals
     
@@ -261,12 +258,14 @@ As well as implementing this function on each platform, you should provide tests
     }
     ```
 
-3. Create a new directory in the `shared/src` folder.
-   Choose the path `androidUnitTest/kotlin` from the list provided by the IDE:
+3. Create a directory for tests inside the `shared/src` directory:
+ 
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `androidUnitTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating Android test directory](create-android-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `org.kmp.testing` package.
+4. In the `kotlin` directory, create a new `org.kmp.testing` package.
 5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
 
     ```kotlin
@@ -292,7 +291,7 @@ You can add other types of tests to your project. To learn about instrumented te
 
 #### For iOS
 
-1. In the `iosMain/kotlin` folder, create a new `org.kmp.testing` directory.
+1. In the `iosMain/kotlin` directory, create a new `org.kmp.testing` directory.
 2. In this directory, create the `IOSRuntime.kt` file and update it with the actual implementation of the expected
    `determineCurrentRuntime()` function:
 
@@ -307,12 +306,14 @@ You can add other types of tests to your project. To learn about instrumented te
     }
     ```
 
-3. Create a new directory in the `shared/src` folder.
-   Choose the path `iosTest/kotlin` from the list provided by the IDE:
+3. Create a new directory in the `shared/src` directory:
+   
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `iosTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating iOS test directory](create-ios-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `org.kmp.testing` directory.
+4. In the `iosTest/kotlin` directory, create a new `org.kmp.testing` directory.
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:
 
     ```kotlin
