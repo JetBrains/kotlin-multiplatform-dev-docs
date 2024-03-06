@@ -168,7 +168,7 @@ For example, it might have the values "OpenJDK" and "17.0" for Android unit test
 An instance of `CurrentRuntime` should be created with the name and version of the platform as strings, where the
 version is optional. When the version is present, you only need the number at the start of the string, if available.
 
-1. In the `commonMain/kotlin` folder, create a new `org.kmp.testing` directory.
+1. In the `commonMain/kotlin` directory, create a new `org.kmp.testing` directory.
 2. In this directory, create the `CurrentRuntime.kt` file and update it with the following implementation:
 
     ```kotlin
@@ -188,7 +188,7 @@ version is optional. When the version is present, you only need the number at th
     }
     ```
 
-3. In the `commonTest/kotlin` folder, create a new `org.kmp.testing` package.
+3. In the `commonTest/kotlin` directory, create a new `org.kmp.testing` package.
 4. In this package, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
 
     ```kotlin
@@ -244,7 +244,7 @@ As well as implementing this function on each platform, you should provide tests
 
 #### For Android
 
-1. In the `androidMain/kotlin` folder, create a new `org.kmp.testing` package.
+1. In the `androidMain/kotlin` directory, create a new `org.kmp.testing` package.
 2. In this package, create the `AndroidRuntime.kt` file and update it with the actual implementation of the expected
    `determineCurrentRuntime()` function:
 
