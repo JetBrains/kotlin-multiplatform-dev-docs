@@ -44,7 +44,7 @@ that requires tests both for common and platform-specific code.
 
    ![Select the project view](select-project-view.png){width=200}
 
-5. In `shared/src/commonMain/kotlin`, create a new `common.example.search` directory.
+5. In the `shared/src/commonMain/kotlin` directory, create a new `common.example.search` directory.
 6. In this directory, create a Kotlin file, `Grep.kt`, and add the following function:
 
     ```kotlin
@@ -69,9 +69,7 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 
     ```kotlin
    sourceSets {
-       commonMain.dependencies {
-           // put your Multiplatform dependencies here
-       }
+       //...
        commonTest.dependencies {
            implementation(libs.kotlin.test)
        }
@@ -82,16 +80,15 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 
    ![Synchronize Gradle files](gradle-sync.png)
 
-3. The `commonTest` source set stores all common tests. Now you also need to create a corresponding folder in your project,
-   which must have the same name.
+3. The `commonTest` source set stores all common tests. Now you also need to create a directory with the same name in your project:
 
-   Create a new directory in `shared/src`. Choose the `commonTest/kotlin` folder
-   from the list of standard options provided by the IDE:
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
 
-   ![Creating common test directory](create-common-test-dir.png){width=350}
+      ![Creating common test directory](create-common-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `common.example.search` directory.
-5. In this directory, create the `Grep.kt` file and update it with the following unit test:
+4. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
+5. In this package, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
     import kotlin.test.Test
@@ -171,7 +168,7 @@ For example, it might have the values "OpenJDK" and "17.0" for Android unit test
 An instance of `CurrentRuntime` should be created with the name and version of the platform as strings, where the
 version is optional. When the version is present, you only need the number at the start of the string, if available.
 
-1. In the `commonMain/kotlin` folder, create a new `org.kmp.testing` directory.
+1. In the `commonMain/kotlin` directory, create a new `org.kmp.testing` directory.
 2. In this directory, create the `CurrentRuntime.kt` file and update it with the following implementation:
 
     ```kotlin
@@ -191,8 +188,8 @@ version is optional. When the version is present, you only need the number at th
     }
     ```
 
-3. In the `commonTest/kotlin` folder, create a new `org.kmp.testing` directory.
-4. In this directory, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
+3. In the `commonTest/kotlin` directory, create a new `org.kmp.testing` package.
+4. In this package, create the `CurrentRuntimeTest.kt` file and update it with the following platform and framework-agnostic test:
 
     ```kotlin
     import kotlin.test.Test
@@ -247,7 +244,7 @@ As well as implementing this function on each platform, you should provide tests
 
 #### For Android
 
-1. In the `androidMain/kotlin` folder, create a new `org.kmp.testing` package.
+1. In the `androidMain/kotlin` directory, create a new `org.kmp.testing` package.
 2. In this package, create the `AndroidRuntime.kt` file and update it with the actual implementation of the expected
    `determineCurrentRuntime()` function:
 
@@ -261,11 +258,14 @@ As well as implementing this function on each platform, you should provide tests
     }
     ```
 
-3. Use the IDE's suggestions to create the `androidUnitTest/kotlin` directory:
+3. Create a directory for tests inside the `shared/src` directory:
+ 
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `androidUnitTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating Android test directory](create-android-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `org.kmp.testing` package.
+4. In the `kotlin` directory, create a new `org.kmp.testing` package.
 5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
 
     ```kotlin
@@ -291,7 +291,7 @@ You can add other types of tests to your project. To learn about instrumented te
 
 #### For iOS
 
-1. In the `iosMain/kotlin` folder, create a new `org.kmp.testing` directory.
+1. In the `iosMain/kotlin` directory, create a new `org.kmp.testing` directory.
 2. In this directory, create the `IOSRuntime.kt` file and update it with the actual implementation of the expected
    `determineCurrentRuntime()` function:
 
@@ -299,20 +299,26 @@ You can add other types of tests to your project. To learn about instrumented te
     import kotlin.experimental.ExperimentalNativeApi
     import kotlin.native.Platform
     
+    @OptIn(ExperimentalNativeApi::class)
     actual fun determineCurrentRuntime(): CurrentRuntime {
         val name = Platform.osFamily.name.lowercase()
         return CurrentRuntime(name, null)
     }
     ```
 
-3. Use the IDE's suggestions to create the `iosTest/kotlin` directory:
+3. Create a new directory in the `shared/src` directory:
+   
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   2. Start typing the `iosTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating iOS test directory](create-ios-test-dir.png){width=350}
 
-4. In the `kotlin` folder, create a new `org.kmp.testing` directory.
+4. In the `iosTest/kotlin` directory, create a new `org.kmp.testing` directory.
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:
 
     ```kotlin
+    package org.kmp.testing 
+   
     import kotlin.test.Test
     import kotlin.test.assertEquals
     
@@ -339,14 +345,16 @@ example, if you run the `allTests` Gradle task, every test in your project will 
 ![Gradle test tasks](gradle-alltests.png){width=700}
 
 When you run tests, in addition to the output in your IDE, HTML reports are generated. You can find them in
-the `shared/build/tests` directory:
+the `shared/build/reports/tests` directory:
 
 ![HTML reports for multiplatform tests](shared-tests-folder-reports.png){width=300}
 
-Run the `allTests` task and examine its report. You'll see that:
+Run the `allTests` task and examine the reports it generated:
 
-* Android and iOS tests depend on common tests.
-* Common tests always run before platform-specific ones.
+* The `allTests/report.html` file contains combined reports for common and iOS tests
+  (iOS tests depend on common tests and are run after them).
+* The `testDebugUnitTest` and `testReleaseUnitTest` folders contain reports for both default Android build flavors.
+  (Currently, Android test reports are not automatically merged with the `allTests` report.)
 
 ![HTML report for multiplatform tests](multiplatform-test-report.png){width=700}
 
