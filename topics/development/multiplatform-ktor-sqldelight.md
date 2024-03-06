@@ -113,7 +113,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    }
    ```
 
-8. In the same `build.gradle.kts` file, specify all the required dependencies: 
+8. In the same `build.gradle.kts` file, specify all the required dependencies:
 
     ```kotlin
     kotlin {
@@ -150,7 +150,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    ![Synchronize Gradle files](gradle-sync.png)
 
 > For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
-> 
+>
 {type="tip"}
 
 ## Create an application data model
@@ -161,7 +161,7 @@ The application data model will have three entity classes with:
 * General information about the launch
 * Patches and article URLs associated with the launch
 
-Create the necessary data classes: 
+Create the necessary data classes:
 1. In the `shared/src/commonMain/kotlin` directory, create the `com.jetbrains.spacetutorial` directory.
 2. Inside, create the `entity` directory, and the `Entity.kt` file inside that.
 3. Declare all the data classes for basic entities:
@@ -280,7 +280,7 @@ implementations of the SQLite driver, so you need to create them for each platfo
    ```
 
 3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
-   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside it. 
+   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside it.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
