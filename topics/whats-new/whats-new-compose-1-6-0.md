@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Compose Multiplatform 1.6.0)
 
-The Compose Multiplatform 1.6.0 release is out. Here are the highlights:
+Here are the highlights of the Compose Multiplatform 1.6.0 release:
 
 * [Breaking changes](#breaking-changes)
 * [New and improved Resources API](#improved-resources-api-all-platforms)
