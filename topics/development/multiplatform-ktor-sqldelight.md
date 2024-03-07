@@ -1,4 +1,4 @@
-[//]: # (title: Create a multiplatform app using Ktor and SQLDelight – tutorial)
+[//]: # (title: Create a multiplatform app using Ktor and SQLDelight)
 
 This tutorial demonstrates how to use Android Studio to create a mobile application for iOS and Android using Kotlin
 Multiplatform.
@@ -22,7 +22,7 @@ You will use the following multiplatform libraries in the project:
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines) to write asynchronous code.
 * [SQLDelight](https://github.com/cashapp/sqldelight) to generate Kotlin code from SQL queries and create a type-safe
   database API.
-* [Koin](https://insert-koin.io/) to inject dependencies and avoid using expect/actual mechanism for database drivers. (TODO check wording)
+* [Koin](https://insert-koin.io/) to use dependency injection for platform-specific database drivers. (TODO check wording)
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
@@ -71,7 +71,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    ...
    coroutinesVersion = "1.7.3"
    dateTimeVersion = "0.4.1"
-   koinAndroidxCompose = "3.5.3"
+   koin = "3.5.3"
    ktor = "2.3.7"
    sqlDelight = "2.0.1"
    lifecycleViewmodelCompose = "2.7.0"
@@ -80,7 +80,8 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    [libraries]
    ...
    android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-   koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+   koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+   koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
    kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTimeVersion" }
    ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
@@ -101,7 +102,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    {initial-collapse-state="collapsed"}
    (TODO collapsed title)
 
-6. Run a Gradle Sync, as prompted by the IDE. (TODO is this necessary?)
+6. Run a Gradle Sync, as prompted by the IDE. (TODO is this necessary here, not later?)
 7. At the very beginning of the `build.gradle.kts` file in the `shared` directory, add the following lines to the
    `plugins` block:
 
@@ -127,6 +128,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.runtime)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.koin.core)
             }
             androidMain.dependencies {
                 implementation(libs.ktor.client.android)
@@ -142,12 +144,14 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
 
    * Each library requires a core artifact in the common source set.
    * Both the SQLDelight and Ktor libraries need platform drivers in the iOS and Android source sets, as well.
-   * In addition, Ktor needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
+   * Ktor also needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
      `kotlinx.serialization` for processing network requests and responses.
 
-7. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
-
+9. Once the dependencies are added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
+   (TODO if this also needs to be done after we're done with lib.versions.toml, put these instructions there.)
    ![Synchronize Gradle files](gradle-sync.png)
+
+After the Gradle Sync is complete, you are done with project configuration and can start writing code.
 
 > For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
 >
@@ -211,11 +215,14 @@ Sync the Gradle project files when prompted.
 First, create the `.sq` file with all the necessary SQL queries. By default, the SQLDelight plugin looks for
 `.sq` files in the `sqldelight` folder of the source set:
 
-1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory and inside it, create
-   the `com.jetbrains.spacetutorial.cache` package directory.
-2. Inside the package directory, create an `.sq` file with the name of the database, `AppDatabase.sq`.
-   All the SQL queries for the application will be stored in this file.
-3. The database will contain a table with data about launches. To create the table, add the following
+1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory.
+2. Right-click the `sqldelight` directory and select **New | Directory**, then select
+   the `com/jetbrains/spacetutorial/cache` option in the suggested list. This will create the `com.jetbrains.spacetutorial.cache`
+   package.
+3. Inside the package, create the `AppDatabase.sq` file (with the same name as the database you specified
+   in the `build.gradle.kts` file).
+   All the SQL queries for your application will be stored in this file.
+4. The database will contain a table with data about launches. To create the table, add the following
    code to the `AppDatabase.sq` file:
 
    ```text
@@ -233,7 +240,7 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
    );
    ```
 
-4. To insert data into the tables, declare an SQL insert function:
+5. To insert data into the tables, add the `insertLaunch` function:
 
    ```text
    insertLaunch:
@@ -241,14 +248,14 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
    VALUES(?, ?, ?, ?, ?, ?, ?, ?);
    ```
 
-5. To clear data in the tables, declare an SQL delete function:
+6. To clear data in the tables, add the `removeAllLaunches` function:
 
    ```text
    removeAllLaunches:
    DELETE FROM Launch;
    ```
 
-6. In the same way, declare a function to retrieve data:
+7. Finally, declare the `selectAllLaunchesInfo` function to retrieve data:
 
    ```text
    selectAllLaunchesInfo:
@@ -256,10 +263,12 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
    FROM Launch;
    ```
 
-After the project is compiled, the generated Kotlin code will be stored in the `shared/build/generated/sqldelight`
-directory. The generator will create an interface named `AppDatabase`, which you specified in `build.gradle.kts`.
+(TODO: we need to actually run the generation, or the Database class later won't be able to access the code.)
+The generated Kotlin code is stored in the `shared/build/generated/sqldelight` directory.
+The important part of this code is the interface named `AppDatabase` which you will initialize with database drivers later on.
 
-### Create platform database drivers
+
+### Create factories for platform-specific database drivers
 
 To initialize the `AppDatabase` interface, you need to pass an `SqlDriver` instance to it. SQLDelight provides multiple platform-specific
 implementations of the SQLite driver, so you need to create them for each platform separately. In this project, we will use
@@ -296,9 +305,8 @@ implementations of the SQLite driver, so you need to create them for each platfo
    }
    ```
 
-5. For iOS, in the `shared/src/iosMain/kotlin` directory, create the `com.jetbrains.spacetutorial` directory.
-6. Inside the `shared/src/iosMain/kotlin/com.jetbrains.spacetutorial` directory, create the `cache` directory,
-   then the `DatabaseDriverFactory.kt` file inside that:
+5. For iOS, in the `shared/src/iosMain/kotlin` directory, create the `com.jetbrains.spacetutorial.cache` directory.
+6. Inside this directory, create the `DatabaseDriverFactory.kt` file and add this code:
 
    ```kotlin
    import app.cash.sqldelight.db.SqlDriver
@@ -311,24 +319,20 @@ implementations of the SQLite driver, so you need to create them for each platfo
    }
    ```
 
-Instances of these factories will be created later in the platform-specific code of your project.
+You will program creating instances of these drivers later, in the platform-specific code of your project.
 
 ### Implement cache
 
-So far, you have added platform database drivers and an `AppDatabase` class to perform database operations. Now create
-a `Database` class, which will wrap the `AppDatabase` class and contain the caching logic.
+So far, you have added factories for platform database drivers and an `AppDatabase` class to perform database operations.
+Now create a `Database` class, which will wrap the `AppDatabase` class and contain the caching logic.
 
 1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
-   the `com.jetbrains.handson.kmm.shared.cache` package. It will be common to the logic of both platforms.
+   the `com.jetbrains.tutorial.cache` directory. It will contain logic common to both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` to the `Database` class constructor:
 
    ```kotlin
-   package com.jetbrains.handson.kmm.shared.cache
-   
-   import com.jetbrains.handson.kmm.shared.entity.Links
-   import com.jetbrains.handson.kmm.shared.entity.Patch
-   import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
+   package com.jetbrains.spacetutorial.cache
 
    internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
        private val database = AppDatabase(databaseDriverFactory.createDriver())
@@ -339,18 +343,9 @@ a `Database` class, which will wrap the `AppDatabase` class and contain the cach
    This class's [visibility](https://kotlinlang.org/docs/visibility-modifiers.html#class-members) is set to internal, which means it is only
    accessible from within the multiplatform module.
 
-3. Inside the `Database` class, implement some data handling operations. Add a function to clear all the tables in the
-   database in a single SQL transaction:
-
-   ```kotlin
-   internal fun clearDatabase() {
-       dbQuery.transaction {
-           dbQuery.removeAllLaunches()
-       }
-    }
-   ```
-
-4. Create a function to get a list of all the rocket launches:
+3. Inside the `Database` class, implement some data handling operations. 
+   First, create the `getAllLaunches` function to return a list of all the rocket launches.
+   The `mapLaunchSelecting` function is used to map the result of the database query to `RocketLaunch` objects:
 
    ```kotlin
    import com.jetbrains.handson.kmm.shared.entity.Links
@@ -360,7 +355,7 @@ a `Database` class, which will wrap the `AppDatabase` class and contain the cach
    internal fun getAllLaunches(): List<RocketLaunch> {
        return dbQuery.selectAllLaunchesInfo(::mapLaunchSelecting).executeAsList()
    }
-   
+
    private fun mapLaunchSelecting(
        flightNumber: Long,
        missionName: String,
@@ -388,35 +383,27 @@ a `Database` class, which will wrap the `AppDatabase` class and contain the cach
    }
    ```
 
-   The argument passed to `selectAllLaunchesInfo` is a function that maps the database entity class to another type,
-   which in this case is the `RocketLaunch` data model class.
-
-5. Add a function to insert data into the database:
+4. Add the `clearAndCreateLaunches` function to clear the database and insert the data:
 
     ```kotlin
-    internal fun createLaunches(launches: List<RocketLaunch>) {
+    internal fun clearAndCreateLaunches(launches: List<RocketLaunch>) {
         dbQuery.transaction {
+            dbQuery.removeAllLaunches()
             launches.forEach { launch ->
-                insertLaunch(launch)
+                dbQuery.insertLaunch(
+                    flightNumber = launch.flightNumber.toLong(),
+                    missionName = launch.missionName,
+                    details = launch.details,
+                    launchSuccess = launch.launchSuccess ?: false,
+                    launchDateUTC = launch.launchDateUTC,
+                    patchUrlSmall = launch.links.patch?.small,
+                    patchUrlLarge = launch.links.patch?.large,
+                    articleUrl = launch.links.article
+                )
             }
         }
     }
-    
-    private fun insertLaunch(launch: RocketLaunch) {
-        dbQuery.insertLaunch(
-            flightNumber = launch.flightNumber.toLong(),
-            missionName = launch.missionName,
-            details = launch.details,
-            launchSuccess = launch.launchSuccess ?: false,
-            launchDateUTC = launch.launchDateUTC,
-            patchUrlSmall = launch.links.patch?.small,
-            patchUrlLarge = launch.links.patch?.large,
-            articleUrl = launch.links.article
-        )
-    }
     ```
-
-The `Database` class instance will be created later, along with the SDK facade class.
 
 ## Implement an API service
 
@@ -425,18 +412,13 @@ and a single method to retrieve the list of all launches from the `v5/launches` 
 
 Create a class that will connect the application to the API:
 
-1. In the common source set `shared/src/commonMain/kotlin`, create the `com.jetbrains.handson.kmm.shared.network`
+1. In the common source set `shared/src/commonMain/kotlin`, create the `com.jetbrains.spacetutorial.network`
    package and the `SpaceXApi` class inside it:
 
    ```kotlin
-   package com.jetbrains.handson.kmm.shared.network
-
-   import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
-   import io.ktor.client.*
-   import io.ktor.client.call.*
-   import io.ktor.client.plugins.contentnegotiation.*
-   import io.ktor.client.request.*
-   import io.ktor.serialization.kotlinx.json.*
+   import io.ktor.client.HttpClient
+   import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+   import io.ktor.serialization.kotlinx.json.json
    import kotlinx.serialization.json.Json
 
    class SpaceXApi {
@@ -451,13 +433,13 @@ Create a class that will connect the application to the API:
    }
    ```
 
-   * This class executes network requests and deserializes JSON responses into entities from the `entity` package.
+   * This class executes network requests and deserializes JSON responses into entities from the `com.jetbrains.spacetutorial.entity` package.
      The Ktor `HttpClient` instance initializes and stores the `httpClient` property.
    * This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
-     to deserialize the `GET` request result. The plugin processes the request and the response payload as JSON,
-     serializing and deserializing them using a special serializer.
+     to deserialize the result of a `GET` request. The plugin processes the request and the response payload as JSON,
+     serializing and deserializing them as needed.
 
-2. Declare the data retrieval function that will return the list of rocket launches:
+2. Declare the data retrieval function that returns the list of rocket launches:
 
    ```kotlin
    suspend fun getAllLaunches(): List<RocketLaunch> {
@@ -465,23 +447,23 @@ Create a class that will connect the application to the API:
    }
    ```
 
-   * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `get()`,
-     which includes an asynchronous operation to retrieve data over the internet and can only be called from a
+   * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`,
+     The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
      coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-   * The URL is defined inside the `get()` function to send requests.
+   * The URL to send a GET request to is passed as an argument to the `get()` function.
 
 ### Add internet access permission
 
-To access the internet, the Android application needs the appropriate permission. Since all network requests are made
-from the shared module, adding the internet access permission to this module's manifest makes sense.
+To access the internet, an Android application needs the appropriate permission. All network requests are made
+from the shared module, so it makes sense to add the internet access permission to this module's manifest.
 
-In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the following permission to the manifest:
+In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-permission>` line:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <uses-permission android:name="android.permission.INTERNET" />
-
+   <!--...-->
 </manifest>
 ```
 
