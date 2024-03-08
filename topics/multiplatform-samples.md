@@ -468,6 +468,7 @@ to add your Kotlin Multiplatform project to this topic and help the community.
               <li>UI state</li>
               <li>Use Case</li>
               <li>Unit Test</li>
+              <li>UI Test</li>
           </list>
       </td>
       <td>
