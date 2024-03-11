@@ -299,9 +299,9 @@ implementations of the SQLite driver, so you need to create them for each platfo
    import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 
    class AndroidDatabaseDriverFactory(private val context: Context) : DatabaseDriverFactory {
-      override fun createDriver(): SqlDriver {
-          return AndroidSqliteDriver(AppDatabase.Schema, context, "launch.db")
-      }
+       override fun createDriver(): SqlDriver {
+           return AndroidSqliteDriver(AppDatabase.Schema, context, "launch.db")
+       }
    }
    ```
 
@@ -343,7 +343,7 @@ Now create a `Database` class, which will wrap the `AppDatabase` class and conta
    This class's [visibility](https://kotlinlang.org/docs/visibility-modifiers.html#class-members) is set to internal, which means it is only
    accessible from within the multiplatform module.
 
-3. Inside the `Database` class, implement some data handling operations. 
+3. Inside the `Database` class, implement some data handling operations.
    First, create the `getAllLaunches` function to return a list of all the rocket launches.
    The `mapLaunchSelecting` function is used to map the result of the database query to `RocketLaunch` objects:
 
@@ -452,6 +452,85 @@ Create a class that will connect the application to the API:
      coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
    * The URL to send a GET request to is passed as an argument to the `get()` function.
 
+## Build an SDK
+
+Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
+public class.
+
+1. In the `com.jetbrains.spacetutorial` directory of the common source set, create the `SpaceXSDK` class.
+   This class will be the facade for the `Database` and `SpaceXApi` classes.
+
+   To create a `Database` class instance, you'll need to provide a `DatabaseDriverFactory` instance:
+
+   ```kotlin
+   package com.jetbrains.spacetutorial
+   
+   import com.jetbrains.spacetutorial.cache.Database
+   import com.jetbrains.spacetutorial.cache.DatabaseDriverFactory
+   import com.jetbrains.spacetutorial.network.SpaceXApi
+
+   class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) { 
+       private val database = Database(databaseDriverFactory)
+   }
+   ```
+
+   You will inject the correct database driver in the platform-specific code through the `SpaceXSDK` class constructor.
+
+2. Add the `getLaunches` function, which makes use of the created database and the API to get the launches list:
+
+   ```kotlin
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    
+    class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) {
+        // ...
+        suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
+            val cachedLaunches = database.getAllLaunches()
+            return if (cachedLaunches.isNotEmpty() && !forceReload) {
+                cachedLaunches
+            } else {
+                api.getAllLaunches().also {
+                    database.clearAndCreateLaunches(it)
+                }
+            }
+        }
+   }
+   ```
+
+To sum up:
+
+* The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
+  returns cached values or loads the data from the internet and then updates the cache with the results. If there is
+  no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
+* Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
+  allow the user to use the pull-to-refresh gesture.
+* (TODO we don't use this annotation anymore?) All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
+  exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
+  classes.
+
+## Create the Android application
+
+The Kotlin Multiplatform wizard has already handled the configuration for you, so the `shared` module is already connected
+to your Android application.
+
+Before implementing the UI and the presentation logic, add all the required dependencies to
+the `composeApp/build.gradle.kts` file:
+
+```kotlin
+kotlin {
+// ...
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.compose.material3)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+        }
+        // ...
+    }
+}
+```
+
+Sync the Gradle project files when prompted.
+
 ### Add internet access permission
 
 To access the internet, an Android application needs the appropriate permission. All network requests are made
@@ -467,85 +546,9 @@ In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-per
 </manifest>
 ```
 
-## Build an SDK
-
-Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
-public class.
-
-1. In the `com.jetbrains.handson.kmm.shared` package of the common source set, create the `SpaceXSDK` class:
-
-   ```kotlin
-   package com.jetbrains.handson.kmm.shared
-   
-   import com.jetbrains.handson.kmm.shared.cache.Database
-   import com.jetbrains.handson.kmm.shared.cache.DatabaseDriverFactory
-   import com.jetbrains.handson.kmm.shared.network.SpaceXApi
-
-   class SpaceXSDK (databaseDriverFactory: DatabaseDriverFactory) {
-       private val database = Database(databaseDriverFactory)
-       private val api = SpaceXApi()
-   }
-   ```
-
-   This class will be the facade for the `Database` and `SpaceXApi` classes.
-
-2. To create a `Database` class instance, you'll need to provide the `DatabaseDriverFactory` platform instance to it, so
-   you'll inject it from the platform code through the `SpaceXSDK` class constructor.
-
-   ```kotlin
-    import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
-    
-    class SpaceXSDK (databaseDriverFactory: DatabaseDriverFactory) {
-    // ...
-        @Throws(Exception::class)
-        suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
-            val cachedLaunches = database.getAllLaunches()
-            return if (cachedLaunches.isNotEmpty() && !forceReload) {
-                cachedLaunches
-            } else {
-                api.getAllLaunches().also { 
-                    database.clearDatabase()
-                    database.createLaunches(it) 
-                }
-            }
-        }
-   }
-   ```
-
-   * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
-     returns cached values or loads the data from the internet and then updates the cache with the results. If there is
-     no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
-   * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
-     allow the user to use the pull-to-refresh gesture.
-   * All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
-     exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
-     classes.
-
-## Create the Android application
-
-The Kotlin Multiplatform wizard has already handled the configuration for you, so the Kotlin
-Multiplatform shared module is already connected to your Android application.
-
-Before implementing the UI and the presentation logic, add all the required dependencies to
-the `composeApp/build.gradle.kts`:
-
-```kotlin
-// ...
-commonMain.dependencies {
-   implementation(projects.shared)
-   implementation("com.google.android.material:material:1.11.0")
-   implementation("androidx.appcompat:appcompat:1.6.1")
-   implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-   implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-   implementation("androidx.core:core-ktx:1.12.1")
-   implementation("androidx.recyclerview:recyclerview:1.3.2")
-   implementation("androidx.cardview:cardview:1.0.0")
-}
-// ...
-```
-
 ### Implement the UI: display the list of rocket launches
+
+You will implement the Android UI using Jetpack Compose and Material 3:
 
 1. To implement the UI, create the `layout/activity_main.xml` file in `composeApp/src/androidMain/res`.
 
