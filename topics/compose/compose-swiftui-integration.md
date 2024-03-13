@@ -27,23 +27,24 @@ fun MainViewController(): UIViewController =
 ```
 
 [`ComposeUIViewController()`](https://github.com/JetBrains/compose-multiplatform-core/blob/5b487914cc20df24187f9ddf54534dfec30f6752/compose/ui/ui/src/uikitMain/kotlin/androidx/compose/ui/window/ComposeWindow.uikit.kt)
-is a library function from Compose Multiplatform that accepts another function passed using the `content` argument. This
-function can call other composable functions, for example, `Text()`.
+is a Compose Multiplatform library function that accepts a composable function as the `content` argument.
+The function passed in this way can call other composable functions, for example, `Text()`.
 
 > Composable functions are functions that have the `@Composable` annotation.
 >
 {type="tip"}
 
-Next, you need a structure that represents Compose Multiplatform in SwiftUI. Create the following `ComposeView` structure
-that converts `UIViewController` to a SwiftUI view:
+Next, you need a structure that represents Compose Multiplatform in SwiftUI.
+Create the following structure that converts a `UIViewController` instance to a SwiftUI view:
 
 ```swift
-struct ComposeView: UIViewControllerRepresentable {
+struct ComposeViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        Main_iosKt.MainViewController()
+        return Main_iosKt.MainViewController()
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    }
 }
 ```
 
