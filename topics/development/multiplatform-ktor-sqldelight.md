@@ -483,6 +483,7 @@ public class.
     
     class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) {
         // ...
+        @Throws(Exception::class)
         suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
             val cachedLaunches = database.getAllLaunches()
             return if (cachedLaunches.isNotEmpty() && !forceReload) {
@@ -503,8 +504,8 @@ To sum up:
   no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
 * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
   allow the user to use the pull-to-refresh gesture.
-* (TODO we don't use this annotation anymore?) All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
-  exceptions, Kotlin functions should be marked with the `@Throws` annotation specifying a list of potential exception
+* All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
+  exceptions, Kotlin functions (TODO should it be "called from Swift" here? clearly not ALL Kotlin functions are marked) should be marked with the `@Throws` annotation specifying a list of potential exception
   classes.
 
 ## Create the Android application
