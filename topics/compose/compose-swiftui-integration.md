@@ -115,4 +115,4 @@ the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/mas
 
 ## What's next
 
-You can also explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-uikit-integration).
+You can also explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-uikit-integration.md).

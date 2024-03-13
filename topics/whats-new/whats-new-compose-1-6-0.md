@@ -287,7 +287,7 @@ Now, double and triple tap gestures also work for selecting text displayed in `T
 ### Interop with UIViewController
 
 Some native APIs that are not implemented as `UIView`, for example, `UITabBarController`, or `UINavigationController` could not
-be embedded into a Compose Multiplatform UI using [the existing interop mechanism](compose-ios-ui-integration.md#use-uikit-inside-compose-multiplatform).
+be embedded into a Compose Multiplatform UI using [the existing interop mechanism](compose-uikit-integration.md).
 
 Now, Compose Multiplatform implements the `UIKitViewController` function that allows you to embed native iOS view controllers
 in your Compose UI.

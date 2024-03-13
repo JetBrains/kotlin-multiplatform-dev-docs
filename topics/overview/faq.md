@@ -187,11 +187,11 @@ them.
 ### Can I integrate Compose screens into an existing iOS app?
 
 Yes. Compose Multiplatform supports different integration scenarios. For more information on integration with iOS UI frameworks,
-see [Integration with the UIKit and SwiftUI frameworks](compose-ios-ui-integration.md).
+see [Integration with SwiftUI](compose-swiftui-integration.md) and [Integration with UIKit](compose-uikit-integration.md).
 
 ### Can I integrate UIKit or SwiftUI components into a Compose screen?
 
-Yes, you can. [Learn how](compose-ios-ui-integration.md).
+Yes, you can. See [Integration with SwiftUI](compose-swiftui-integration.md) and [Integration with UIKit](compose-uikit-integration.md).
 
 <!-- Need to revise
 ### What happens when my mobile OS updates and introduces new platform capabilities?
