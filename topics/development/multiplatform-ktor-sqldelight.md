@@ -519,14 +519,14 @@ the `composeApp/build.gradle.kts` file:
 ```kotlin
 kotlin {
 // ...
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
-        }
-        // ...
-    }
+   sourceSets {
+      androidMain.dependencies {
+         implementation(libs.androidx.compose.material3)
+         implementation(libs.koin.androidx.compose)
+         implementation(libs.androidx.lifecycle.viewmodel.compose)
+      }
+      // ...
+   }
 }
 ```
 
@@ -547,20 +547,166 @@ In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-per
 </manifest>
 ```
 
+### Add dependency injection
+
+You need to declare a Koin module that will contain all of the components to be used for the Android app. Then you will
+start Koin with that module from your instance of the `Application` class.
+
+1. In the `composeApp/src/androidMain/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
+
+   In that file, declare the module as two singletons, for the `SpaceXApi` class and for the `SpaceXSDK` class:
+
+   ```kotlin
+   import com.jetbrains.spacetutorial.cache.AndroidDatabaseDriverFactory
+   import com.jetbrains.spacetutorial.network.SpaceXApi
+   import org.koin.android.ext.koin.androidContext
+   import org.koin.dsl.module
+   
+   val appModule = module { 
+       single<SpaceXApi> { SpaceXApi() }
+       single<SpaceXSDK> {
+           SpaceXSDK(
+               databaseDriverFactory = AndroidDatabaseDriverFactory(
+                   androidContext()
+               ), api = get()
+           )
+       }
+   }
+   ```
+
+   The `SpaceXSDK` class constructor is injected with the platform-specific `AndroidDatabaseDriverFactory` class.
+
+2. Create a custom `Application` class which will start the Koin module. Next to the `AppModule.kt` file,
+   create the `Application.kt` file with the following code, specifying the module you declared in the `modules()` function call:
+
+   ```kotlin
+   import android.app.Application
+   import org.koin.android.ext.koin.androidContext
+   import org.koin.core.context.GlobalContext.startKoin
+    
+   class MainApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+    
+           startKoin {
+               androidContext(this@MainApplication)
+               modules(appModule)
+           }
+       }
+   }
+   ```
+
+3. Specify the custom `Application` class you created in the `<application>` tag of you `AndroidManifest.xml` file:
+
+   ```xml
+   <!--...-->
+   <application
+       ...
+       android:name="com.jetbrains.spacetutorial.MainApplication">
+   ```
+
+Now you are ready to implement the UI that will use information provided by the platform-specific database driver.
+
+
 ### Implement the UI: display the list of rocket launches
 
-You will implement the Android UI using Jetpack Compose and Material 3:
+You will implement the Android UI using Jetpack Compose and Material 3. First, you'll create the view model that makes
+use of the SDK to get the list of launches. Then you'll set up the Material theme, and finally, write the composable
+function that brings it all together.
 
-1. To implement the UI, create the `layout/activity_main.xml` file in `composeApp/src/androidMain/res`.
+1. Create the `RocketLaunchViewModel.kt` file in the `com.jetbrains.spacetutorial` package of your `composeApp` module:
+
+   ```kotlin
+   import androidx.compose.runtime.State
+   import androidx.compose.runtime.mutableStateOf
+   import androidx.lifecycle.ViewModel
+   import com.jetbrains.spacetutorial.entity.RocketLaunch
+    
+   class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+       private val _state = mutableStateOf(RocketLaunchScreenState())
+       val state: State<RocketLaunchScreenState> = _state
+    
+   }
+    
+   data class RocketLaunchScreenState(
+       val isLoading: Boolean = false,
+       val launches: List<RocketLaunch> = emptyList()
+   )
+   ```
+
+   A `RocketLaunchScreenState` instance will store data received from the SDK and the current state of the request.
+
+2. Add the `loadLaunches` function that will call the `getLaunches` function of the SDK in a coroutine scope of this view model:
+
+   ```kotlin
+   import androidx.lifecycle.viewModelScope
+   import kotlinx.coroutines.launch
+   
+   class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+   //...
+       fun loadLaunches() {
+           viewModelScope.launch { 
+               _state.value = _state.value.copy(isLoading = true, launches = emptyList())
+               try {
+                   val launches = sdk.getLaunches(forceReload = true)
+                   _state.value = _state.value.copy(isLoading = false, launches = launches)
+               } catch (e: Exception) {
+                   _state.value = _state.value.copy(isLoading = false, launches = emptyList())
+               }
+           }
+       }
+   }
+   ```
+   
+3. Then add a `loadLaunches()` call to the `init{}` block of the class:
+
+    ```kotlin
+    init {
+        loadLaunches()
+    }
+    ```
+   
+   Your view model is ready to go. Now, add a Material Theme.
+
+4. You can generate a color theme for your Compose app
+   using the [Material Theme Builder](https://m3.material.io/theme-builder#/custom).
+   When you're done picking colors, click **Export** in the top right corner and select the **Jetpack Compose (Theme.kt)**
+   option.
+5. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
+   directory.
+6. Finally, create the `App.kt` file in the `com.jetbrains.spacetutorial` package and add the `App()` composable function:
+
+    ```kotlin
+    import androidx.compose.material3.ExperimentalMaterial3Api
+    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+    import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.getValue
+    import androidx.compose.runtime.remember
+    import org.koin.androidx.compose.koinViewModel
+    
+    @OptIn(
+        ExperimentalMaterial3Api::class
+    )
+    @Composable
+    fun App() {
+        val viewModel = koinViewModel<RocketLaunchViewModel>()
+        val state by remember { viewModel.state }
+        val pullToRefreshState = rememberPullToRefreshState()
+        if (pullToRefreshState.isRefreshing) {
+            viewModel.loadLaunches()
+            pullToRefreshState.endRefresh()
+        }
+    }
+    ```
+   
+   The `viewModel` field instantiates the Koin-based view model which you created earlier.
+11. 
+12. To implement the UI, create the `layout/activity_main.xml` file in `composeApp/src/androidMain/res`.
 
    The screen is based on the `ConstraintLayout` with the `SwipeRefreshLayout` inside it, which contains `RecyclerView`
    and `FrameLayout` with a background with a `ProgressBar` across its center:
 
-   ```xml
-   ```
-   {src="multiplatform-tutorial/activity_main.xml" initial-collapse-state="collapsed" collapsed-title="androidx.constraintlayout.widget.ConstraintLayout xmlns:android" lines="1-26"}
-
-2. In `composeApp/src/androidMain/kotlin/kmp.project.demo`, replace the implementation of the `MainActivity` class, adding the properties for the
+8. In `composeApp/src/androidMain/kotlin/kmp.project.demo`, replace the implementation of the `MainActivity` class, adding the properties for the
    UI elements:
 
    ```kotlin
@@ -582,7 +728,7 @@ You will implement the Android UI using Jetpack Compose and Material 3:
    }
    ```
 
-3. For the `RecyclerView` element to work, you need to create an adapter (as a subclass of `RecyclerView.Adapter`) that
+9. For the `RecyclerView` element to work, you need to create an adapter (as a subclass of `RecyclerView.Adapter`) that
    will convert raw data into list item views. To do this, create a separate `LaunchesRvAdapter` class:
 
    ```kotlin
@@ -609,129 +755,129 @@ You will implement the Android UI using Jetpack Compose and Material 3:
    }
    ```
 
-4. Create an `item_launch.xml` resource file in `composeApp/src/androidMain/res/layout` with the items view layout:
+10. Create an `item_launch.xml` resource file in `composeApp/src/androidMain/res/layout` with the items view layout:
 
-   ```xml
-   ```
-   {src="multiplatform-tutorial/item_launch.xml" initial-collapse-state="collapsed" collapsed-title="androidx.cardview.widget.CardView xmlns:android" lines="1-28"}
+    ```xml
+    ```
+    {src="multiplatform-tutorial/item_launch.xml" initial-collapse-state="collapsed" collapsed-title="androidx.cardview.widget.CardView xmlns:android" lines="1-28"}
 
-5. In `composeApp/src/androidMain/res/values`, either create your appearance of the app or copy the following styles:
+11. In `composeApp/src/androidMain/res/values`, either create your appearance of the app or copy the following styles:
 
-   <tabs>
-   <tab title="colors.xml">
+    <tabs>
+    <tab title="colors.xml">
 
-   ```xml
-   <?xml version="1.0" encoding="utf-8"?>
-   <resources>
-       <color name="colorPrimary">#37474f</color>
-       <color name="colorPrimaryDark">#102027</color>
-       <color name="colorAccent">#62727b</color>
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <color name="colorPrimary">#37474f</color>
+        <color name="colorPrimaryDark">#102027</color>
+        <color name="colorAccent">#62727b</color>
    
-       <color name="colorSuccessful">#4BB543</color>
-       <color name="colorUnsuccessful">#FC100D</color>
-       <color name="colorNoData">#615F5F</color>
-   </resources>
-   ```
+        <color name="colorSuccessful">#4BB543</color>
+        <color name="colorUnsuccessful">#FC100D</color>
+        <color name="colorNoData">#615F5F</color>
+    </resources>
+    ```
 
-   </tab>
-   <tab title="strings.xml">
+    </tab>
+    <tab title="strings.xml">
 
-   ```xml
-   <?xml version="1.0" encoding="utf-8"?>
-   <resources>
-       <string name="app_name">SpaceLaunches</string>
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <string name="app_name">SpaceLaunches</string>
    
-       <string name="successful">Successful</string>
-       <string name="unsuccessful">Unsuccessful</string>
-       <string name="no_data">No data</string>
+        <string name="successful">Successful</string>
+        <string name="unsuccessful">Unsuccessful</string>
+        <string name="no_data">No data</string>
    
-       <string name="launch_year_field">Launch year: %s</string>
-       <string name="mission_name_field">Launch name: %s</string>
-       <string name="launch_success_field">Launch success: %s</string>
-       <string name="details_field">Launch details: %s</string>
-   </resources>
-   ```
+        <string name="launch_year_field">Launch year: %s</string>
+        <string name="mission_name_field">Launch name: %s</string>
+        <string name="launch_success_field">Launch success: %s</string>
+        <string name="details_field">Launch details: %s</string>
+    </resources>
+    ```
 
-   </tab>
-   <tab title="styles.xml">
+    </tab>
+    <tab title="styles.xml">
 
-   ```xml
-   <resources>
-       <!-- Base application theme. -->
-       <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-           <!-- Customize your theme here. -->
-           <item name="colorPrimary">@color/colorPrimary</item>
-           <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-           <item name="colorAccent">@color/colorAccent</item>
-       </style>
-   </resources>
-   ```
+    ```xml
+    <resources>
+        <!-- Base application theme. -->
+        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            <!-- Customize your theme here. -->
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="colorAccent">@color/colorAccent</item>
+        </style>
+    </resources>
+    ```
 
-   </tab>
-   </tabs>
+    </tab>
+    </tabs>
 
-6. Complete the implementation of the `RecyclerView.Adapter`:
+12. Complete the implementation of the `RecyclerView.Adapter`:
 
-   ```kotlin
-   class LaunchesRvAdapter(var launches: List<RocketLaunch>) : RecyclerView.Adapter<LaunchesRvAdapter.LaunchViewHolder>() {
-       // ...
-       inner class LaunchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-           private val missionNameTextView = itemView.findViewById<TextView>(R.id.missionName)
-           private val launchYearTextView = itemView.findViewById<TextView>(R.id.launchYear)
-           private val launchSuccessTextView = itemView.findViewById<TextView>(R.id.launchSuccess)
-           private val missionDetailsTextView = itemView.findViewById<TextView>(R.id.details)
+    ```kotlin
+    class LaunchesRvAdapter(var launches: List<RocketLaunch>) : RecyclerView.Adapter<LaunchesRvAdapter.LaunchViewHolder>() {
+        // ...
+        inner class LaunchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            private val missionNameTextView = itemView.findViewById<TextView>(R.id.missionName)
+            private val launchYearTextView = itemView.findViewById<TextView>(R.id.launchYear)
+            private val launchSuccessTextView = itemView.findViewById<TextView>(R.id.launchSuccess)
+            private val missionDetailsTextView = itemView.findViewById<TextView>(R.id.details)
 
-           fun bindData(launch: RocketLaunch) {
-               val ctx = itemView.context
-               missionNameTextView.text = ctx.getString(R.string.mission_name_field, launch.missionName)
-               launchYearTextView.text = ctx.getString(R.string.launch_year_field, launch.launchYear.toString())
-               missionDetailsTextView.text = ctx.getString(R.string.details_field, launch.details ?: "")
-               val launchSuccess = launch.launchSuccess
-               if (launchSuccess != null ) {
-                   if (launchSuccess) {
-                       launchSuccessTextView.text = ctx.getString(R.string.successful)
-                       launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorSuccessful)))
-                   } else {
-                       launchSuccessTextView.text = ctx.getString(R.string.unsuccessful)
-                       launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorUnsuccessful)))
-                   }
-               } else {
-                   launchSuccessTextView.text = ctx.getString(R.string.no_data)
-                   launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorNoData)))
-               }
-           }
-       }
-   }
-   ```
+            fun bindData(launch: RocketLaunch) {
+                val ctx = itemView.context
+                missionNameTextView.text = ctx.getString(R.string.mission_name_field, launch.missionName)
+                launchYearTextView.text = ctx.getString(R.string.launch_year_field, launch.launchYear.toString())
+                missionDetailsTextView.text = ctx.getString(R.string.details_field, launch.details ?: "")
+                val launchSuccess = launch.launchSuccess
+                if (launchSuccess != null ) {
+                    if (launchSuccess) {
+                        launchSuccessTextView.text = ctx.getString(R.string.successful)
+                        launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorSuccessful)))
+                    } else {
+                        launchSuccessTextView.text = ctx.getString(R.string.unsuccessful)
+                        launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorUnsuccessful)))
+                    }
+                } else {
+                    launchSuccessTextView.text = ctx.getString(R.string.no_data)
+                    launchSuccessTextView.setTextColor((ContextCompat.getColor(itemView.context, R.color.colorNoData)))
+                }
+            }
+        }
+    }
+    ```
 
-7. Update the `MainActivity` class as follows:
+13. Update the `MainActivity` class as follows:
 
-   ```kotlin
-   class MainActivity : AppCompatActivity() {
-       // ...
-       private val launchesRvAdapter = LaunchesRvAdapter(listOf())
+    ```kotlin
+    class MainActivity : AppCompatActivity() {
+        // ...
+        private val launchesRvAdapter = LaunchesRvAdapter(listOf())
    
-       override fun onCreate(savedInstanceState: Bundle?) {
-           // ...
-           launchesRecyclerView.adapter = launchesRvAdapter
-           launchesRecyclerView.layoutManager = LinearLayoutManager(this)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            // ...
+            launchesRecyclerView.adapter = launchesRvAdapter
+            launchesRecyclerView.layoutManager = LinearLayoutManager(this)
    
-           swipeRefreshLayout.setOnRefreshListener {
-               swipeRefreshLayout.isRefreshing = false
-               displayLaunches(true)
-           }
+            swipeRefreshLayout.setOnRefreshListener {
+                swipeRefreshLayout.isRefreshing = false
+                displayLaunches(true)
+            }
    
-           displayLaunches(false)
-       }
+            displayLaunches(false)
+        }
    
-       private fun displayLaunches(needReload: Boolean) {
-           // TODO: Presentation logic
-       }
-   }
-   ```
+        private fun displayLaunches(needReload: Boolean) {
+            // TODO: Presentation logic
+        }
+    }
+    ```
 
-   Here you create an instance of `LaunchesRvAdapter`, configure the `RecyclerView` component, and implement all the
-   `LaunchesListView` interface functions. To catch the screen refresh gesture, you add a listener to the `SwipeRefreshLayout`.
+    Here you create an instance of `LaunchesRvAdapter`, configure the `RecyclerView` component, and implement all the
+    `LaunchesListView` interface functions. To catch the screen refresh gesture, you add a listener to the `SwipeRefreshLayout`.
 
 ### Implement the presentation logic
 
