@@ -22,7 +22,7 @@ anotherViewController.title = "UIKit"
 // Set up the UITabBarController
 let tabBarController = UITabBarController()
 tabBarController.viewControllers = [
-    // Wrap them in a UINavigationController for the titles
+    // Wrap the created ViewControllers in a UINavigationController to set titles
     UINavigationController(rootViewController: composeViewController),
     UINavigationController(rootViewController: anotherViewController)
 ]
@@ -34,8 +34,8 @@ With this code, your application should look like this:
 
 ![UIKit](uikit.png){width=300}
 
-Explore the code for the example in
-this [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
+Explore this code in
+the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
 
 ## Use UIKit inside Compose Multiplatform
 
@@ -44,11 +44,14 @@ To use UIKit elements inside Compose Multiplatform, add the UIKit elements that 
 from Compose Multiplatform. You can write this code purely in Kotlin or use Swift as well.
 
 In this example, UIKit's [`MKMapView`](https://developer.apple.com/documentation/mapkit/mkmapview) component is displayed
-in Compose Multiplatform. Set the component size by using the `Modifier.size(...)` or `Modifier.fillMaxSize()` functions
+in Compose Multiplatform. Set the component size by using the `Modifier.size()` or `Modifier.fillMaxSize()` functions
 from Compose Multiplatform:
 
 ```kotlin
-UIKitView(modifier = Modifier.size(300.dp), factory = { MKMapView() })
+UIKitView(
+    factory = { MKMapView() },
+    modifier = Modifier.size(300.dp),
+)
 ```
 
 With this code, your application should look like this:
@@ -59,36 +62,39 @@ Now, let's look at an advanced example. This code wraps
 UIKit's [`UITextField`](https://developer.apple.com/documentation/uikit/uitextfield/) in Compose Multiplatform:
 
 ```kotlin
-var message by remember { mutableStateOf("Hello, World!") }
-
-UIKitView(
-    factory = {
-        val textField = object : UITextField(CGRectMake(0.0, 0.0, 0.0, 0.0)) {
-            @ObjCAction
-            fun editingChanged() {
-                message = text ?: ""
+@OptIn(ExperimentalForeignApi::class)
+@Composable
+fun UseUITextField(modifier: Modifier = Modifier) {
+    var message by remember { mutableStateOf("Hello, World!") }
+    UIKitView(
+        factory = {
+            val textField = object : UITextField(CGRectMake(0.0, 0.0, 0.0, 0.0)) {
+                @ObjCAction
+                fun editingChanged() {
+                    message = text ?: ""
+                }
             }
+            textField.addTarget(
+                target = textField,
+                action = NSSelectorFromString(textField::editingChanged.name),
+                forControlEvents = UIControlEventEditingChanged
+            )
+            textField
+        },
+        modifier = modifier.fillMaxWidth().height(30.dp),
+        update = { textField ->
+            textField.text = message
         }
-        textField.addTarget(
-            target = textField,
-            action = NSSelectorFromString(textField::editingChanged.name),
-            forControlEvents = UIControlEventEditingChanged
-        )
-        textField
-    },
-    modifier = modifier.fillMaxWidth().height(30.dp),
-    update = { textField ->
-        textField.text = message
-    }
-)
+    )
+}
 ```
 
-The factory parameter contains the `editingChanged()` function and the `textField.addTarget()`listener to detect any
+The factory parameter contains the `editingChanged()` function and the `textField.addTarget()` listener to detect any
 changes to `UITextField`. The `editingChanged()` function is annotated with `@ObjCAction` so that it can interoperate
-with Objective-C code. The later `action` parameter passes the name of the function that should be called in response to
-a `UIControlEventEditingChanged` event.
+with Objective-C code. The `action` parameter of the `addTarget()` function later on passes the name of the `editingChanged()` function,
+so it would be called in response to a `UIControlEventEditingChanged` event.
 
-The next interesting part is the `update` parameter:
+The `update` parameter of `UIKitView()` is called when the observable message state changes its value:
 
 ```kotlin
 update = { textField ->
@@ -96,8 +102,7 @@ update = { textField ->
 }
 ```
 
-This function is called when the observable message state changes its value. The function updates the internal state of
-the `UITextField` so that the user sees the updated value.
+The function updates the `text` attribute of the `UITextField` so that the user sees the updated value.
 
 Explore the code for this example in
 this [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-uikit-in-compose).

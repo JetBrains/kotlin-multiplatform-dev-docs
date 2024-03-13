@@ -49,7 +49,8 @@
         <toc-element id="compose-navigation-routing.md"/>
         <toc-element id="compose-test.md"/>
         <toc-element toc-title="iOS-specific features">
-            <toc-element id="compose-ios-ui-integration.md" toc-title="Integration with UIKit and SwiftUI"/>
+            <toc-element id="compose-swiftui-integration.md" toc-title="Integration with SwiftUI"/>
+            <toc-element id="compose-uikit-integration.md" toc-title="Integration with UIKit"/>
             <toc-element id="compose-ios-accessibility.md" toc-title="iOS accessibility support"/>
         </toc-element>
         <toc-element id="compose-android-only-components.md"/>

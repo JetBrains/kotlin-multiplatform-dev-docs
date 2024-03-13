@@ -14,8 +14,8 @@ Compose Multiplatform UI. This page provides examples of how you can do this:
 ## Use Compose Multiplatform inside a SwiftUI application
 
 To use Compose Multiplatform inside a SwiftUI application, create a Kotlin function `MainViewController()` that
-returns [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller/) from UIKit and contains
-the following Compose Multiplatform code inside:
+returns [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller/) from UIKit
+and contains Compose Multiplatform code:
 
 ```kotlin
 fun MainViewController(): UIViewController =
@@ -27,7 +27,7 @@ fun MainViewController(): UIViewController =
 ```
 
 [`ComposeUIViewController()`](https://github.com/JetBrains/compose-multiplatform-core/blob/5b487914cc20df24187f9ddf54534dfec30f6752/compose/ui/ui/src/uikitMain/kotlin/androidx/compose/ui/window/ComposeWindow.uikit.kt)
-is a library function from Compose Multiplatform that accepts another function passed using the _content_ argument. This
+is a library function from Compose Multiplatform that accepts another function passed using the `content` argument. This
 function can call other composable functions, for example, `Text()`.
 
 > Composable functions are functions that have the `@Composable` annotation.
@@ -47,18 +47,21 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 ```
 
-Now you can use the `ComposeView` structure in other SwiftUI structures. `Main_iosKt.MainViewController` is a generated
-name, you can learn more about name translation from Swift on the Kotlin [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#top-level-functions-and-properties) page.
+Now you can use the `ComposeView` structure in other SwiftUI code.
+
+`Main_iosKt.MainViewController` is a generated
+name. You can learn more about accessing Kotlin code from Swift on the [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#top-level-functions-and-properties)
+page.
 
 In the end, your application should look like this:
 
 ![ComposeView](compose-view.png){width=300}
 
-In addition, you can use this `ComposeView` in any SwiftUI view hierarchy and control its size from within SwiftUI code.
+You can use this `ComposeView` in any SwiftUI view hierarchy and control its size from within SwiftUI code.
 
-If you want to embed Compose Multiplatform into your existing applications, use the `ComposeView` structure in any place
-where SwiftUI is used. For an example, see
-our [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-swiftui).
+If you want to embed Compose Multiplatform into your existing applications, use the `ComposeView` structure wherever
+SwiftUI is used.
+For an example, see our [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-swiftui).
 
 ## Use SwiftUI inside Compose Multiplatform
 
@@ -70,7 +73,10 @@ and pass them to a Kotlin function.
 To start, add an argument to your entry point function to create a `ComposeUIViewController` component:
 
 ```kotlin
-fun ComposeEntryPointWithUIView(createUIView: () -> UIView): UIViewController =
+@OptIn(ExperimentalForeignApi::class)
+fun ComposeEntryPointWithUIViewController(
+    createUIViewController: () -> UIViewController
+): UIViewController =
     ComposeUIViewController {
         Column(
             Modifier
@@ -87,15 +93,15 @@ fun ComposeEntryPointWithUIView(createUIView: () -> UIView): UIViewController =
     }
 ```
 
-Then, pass the created `createUIViewController` to your Swift code. You can use a `UIHostingController` to wrap
-SwiftUI views like this:
+In your Swift code, pass the `createUIViewController` to your entry point function code.
+You can use a `UIHostingController` instance to wrap SwiftUI views:
 
 ```swift
 Main_iosKt.ComposeEntryPointWithUIViewController(createUIViewController: { () -> UIViewController in
-   let swiftUIView = VStack {
-       Text("SwiftUI in Compose Multiplatform")
-   }
-   return UIHostingController(rootView: swiftUIView)
+    let swiftUIView = VStack {
+        Text("SwiftUI in Compose Multiplatform")
+    }
+    return UIHostingController(rootView: swiftUIView)
 })
 ```
 
@@ -108,4 +114,4 @@ the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/mas
 
 ## What's next
 
-You can also explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-ios-uikit-integration.md).
+You can also explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-uikit-integration).
