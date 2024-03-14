@@ -12,7 +12,7 @@ Here are the highlights of changes related to Kotlin Multiplatform support in Je
 JetBrains Fleet now allows you to build previews for composable functions annotated with `@Preview`.
 For now, Fleet does not rebuild previews automatically, click the icon again to see the updated version:
 
-![Compose Preview tool window in JetBrains Fleet](fleet-compose-preview.png)
+![Compose Preview tool window in JetBrains Fleet](fleet-compose-preview-light.png){width="700"}
 
 > The previews currently work for common code as well as for desktop source sets.
 > Android native UI previews are not supported yet.
