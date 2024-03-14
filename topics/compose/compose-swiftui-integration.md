@@ -2,10 +2,8 @@
 
 Compose Multiplatform is interoperable with the [SwiftUI](https://developer.apple.com/xcode/swiftui/) framework.
 You can embed Compose Multiplatform within a SwiftUI application as well as embed native SwiftUI components within
-Compose Multiplatform UI. This page provides examples of how you can do this:
-
-* [Use Compose Multiplatform inside a SwiftUI application](#use-compose-multiplatform-inside-a-swiftui-application)
-* [Use SwiftUI inside Compose Multiplatform](#use-swiftui-inside-compose-multiplatform)
+Compose Multiplatform UI. This page provides examples both for using Compose Multiplatform inside SwiftUI
+and for embedding SwiftUI inside a Compose Multiplatform app.
 
 > In our templates, we use a SwiftUI wrapper that helps us write robust code.
 >

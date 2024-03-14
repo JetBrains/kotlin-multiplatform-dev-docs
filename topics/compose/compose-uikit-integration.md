@@ -1,11 +1,8 @@
 [//]: # (title: Integration with the UIKit framework)
 
 Compose Multiplatform is interoperable with the [UIKit](https://developer.apple.com/documentation/uikit) framework. You can embed Compose Multiplatform within an UIKit
-application as well as embed native UIKit components within Compose Multiplatform. This page provides examples of how
-you can do this:
-
-* [Use Compose Multiplatform inside a UIKit application](#use-compose-multiplatform-inside-a-uikit-application)
-* [Use UIKit inside Compose Multiplatform](#use-uikit-inside-compose-multiplatform)
+application as well as embed native UIKit components within Compose Multiplatform. This page provides examples both
+for using Compose Multiplatform inside a UIKit application and for embedding UIKit components inside Compose Multiplatform UI.
 
 ## Use Compose Multiplatform inside a UIKit application
 
