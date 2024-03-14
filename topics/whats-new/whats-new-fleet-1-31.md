@@ -41,7 +41,7 @@ output, click the line "Connected to process ... on device ...". This will open 
 
 In the **Logcat** tab, you can see continuous device logs, filter text and set the minimum log level:
 
-![Logcat tool window in JetBrains Fleet](fleet-logcat-window.png){width="700"}
+![Logcat tool window in JetBrains Fleet](fleet-logcat-window-light.png){width="700"}
 
 ## Various improvements in Swift support
 
