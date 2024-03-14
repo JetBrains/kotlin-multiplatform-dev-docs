@@ -5,10 +5,6 @@ You can embed Compose Multiplatform within a SwiftUI application as well as embe
 Compose Multiplatform UI. This page provides examples both for using Compose Multiplatform inside SwiftUI
 and for embedding SwiftUI inside a Compose Multiplatform app.
 
-> In our templates, we use a SwiftUI wrapper that helps us write robust code.
->
-{type="tip"}
-
 ## Use Compose Multiplatform inside a SwiftUI application
 
 To use Compose Multiplatform inside a SwiftUI application, create a Kotlin function `MainViewController()` that
