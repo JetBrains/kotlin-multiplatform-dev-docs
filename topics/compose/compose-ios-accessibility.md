@@ -15,7 +15,7 @@ to Accessibility Services and XCTest framework.
 
 The Compose accessibility API doesn't currently support:
 * Live regions (announcements about content changes in a specific area).
-* [UIKit elements inside Compose Multiplatform UI](compose-ios-ui-integration.md#use-uikit-inside-compose-multiplatform). 
+* [UIKit elements inside Compose Multiplatform UI](compose-uikit-integration.md#use-uikit-inside-compose-multiplatform). 
 
 iOS accessibility support is in the early stages of development. If you have trouble with this feature,
 we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
