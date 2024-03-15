@@ -7,10 +7,10 @@ Here are the highlights of changes related to Kotlin Multiplatform support in Je
 * [Logcat support](#logcat-support)
 * [Improvements in Swift support](#various-improvements-in-swift-support)
 
-## Compose Multiplatform @Preview annotation support
+## Support for Compose Multiplatform @Preview annotation
 
 JetBrains Fleet now allows you to build previews for composable functions annotated with `@Preview`.
-For now, Fleet does not rebuild previews automatically, click the icon again to see the updated version:
+Currently, Fleet does not rebuild previews automatically, so click the icon again to see the updated version:
 
 ![Compose Preview tool window in JetBrains Fleet](fleet-compose-preview-light.png){width="700"}
 
@@ -29,17 +29,17 @@ is supported in Fleet.
 
 The IDE:
 
-* autocompletes resources calls,
-* allows navigation to resources referenced in code,
-* clearly reports generation errors and their possible source,
-* monitors file system changes to promptly regenerate the accessor class.
+* Autocompletes resources calls
+* Allows navigation to resources referenced in code
+* Clearly reports generation errors and their possible source
+* Monitors file system changes to regenerate the accessor class promptly
 
 ## Logcat support
 
 JetBrains Fleet now allows you to see device logs for Android run configurations. In the run configuration 
 output, click the line "Connected to process ... on device ...". This will open the Logcat tool window.
 
-In the **Logcat** tab, you can see continuous device logs, filter text and set the minimum log level:
+In the **Logcat** tab, you can see continuous device logs, filter text, and set the minimum log level:
 
 ![Logcat tool window in JetBrains Fleet](fleet-logcat-window-light.png){width="700"}
 
