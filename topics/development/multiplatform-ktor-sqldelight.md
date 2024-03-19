@@ -876,6 +876,52 @@ interface and the "Model View View-Model" pattern to connect the UI to the share
 The shared module is already connected to the iOS project because the Android Studio plugin wizard has done all the configuration.
 You can import it the same way you would regular iOS dependencies: `import shared`.
 
+### Prepare the Koin code for iOS dependency injection
+
+To use Koin classes and functions in Swift code, you need to create a special `KoinComponent` class and declare the Koin
+module for iOS.
+
+1. In the `shared/src/iosMain/kotlin/com.jetbrains.spacetutorial` directory, create the `KoinHelper.kt` file.
+2. Add the `KoinHelper` class which will wrap the `SpaceXSDK` class:
+
+    ```kotlin
+    import org.koin.core.component.KoinComponent
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import org.koin.core.component.inject
+
+    class KoinHelper : KoinComponent {
+        private val sdk: SpaceXSDK by inject<SpaceXSDK>()
+
+        suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
+            return sdk.getLaunches(forceReload = forceReload)
+        }
+    }
+    ```
+
+3. Then add the `initKoin` function, which you will use in Swift to initialize the iOS Koin module:
+
+    ```kotlin
+    import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
+    import com.jetbrains.spacetutorial.network.SpaceXApi
+    import org.koin.core.context.startKoin
+    import org.koin.dsl.module
+   
+    fun initKoin() {
+        startKoin {
+            modules(module {
+                single<SpaceXApi> { SpaceXApi() }
+                single<SpaceXSDK> {
+                    SpaceXSDK(
+                        databaseDriverFactory = IOSDatabaseDriverFactory(), api = get()
+                    )
+                }
+            })
+        }
+    }
+    ```
+
+Now you can use the Koin module in your iOS app to request the list of launches using the native database driver.
+
 ### Implement the UI
 
 First, you'll create a `RocketLaunchRow` SwiftUI view for displaying an item from the list. It will be based on the `HStack`
@@ -883,8 +929,8 @@ and `VStack` views. There will be extensions on the `RocketLaunchRow` structure 
 data.
 
 1. Right-click the `iosApp/iosApp.xcodeproj` directory and choose **Open In | Xcode**.
-3. In your Xcode project, create a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
-4. Update the `RocketLaunchRow.swift` file with the following code:
+2. In your Xcode project, create a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
+3. Update the `RocketLaunchRow.swift` file with the following code:
 
    ```swift
    import SwiftUI
@@ -896,10 +942,10 @@ data.
        var body: some View {
            HStack() {
                VStack(alignment: .leading, spacing: 10.0) {
-                   Text("Launch name: \(rocketLaunch.missionName)")
+                   Text("\(rocketLaunch.missionName) - \(String(rocketLaunch.launchYear))").font(.system(size: 18)).bold()
                    Text(launchText).foregroundColor(launchColor)
                    Text("Launch year: \(String(rocketLaunch.launchYear))")
-                   Text("Launch details: \(rocketLaunch.details ?? "")")
+                   Text("\(rocketLaunch.details ?? "")")
                }
                Spacer()
            }
@@ -925,7 +971,7 @@ data.
    }
    ```
 
-   The list of launches will be displayed in the `ContentView`, which the project wizard has already created.
+   The list of launches will be displayed in the `ContentView` view, which is already included in the project.
 
 4. Create a `ViewModel` class for the `ContentView`, which will prepare and manage the data. Declare it as an extension
    to the `ContentView`, as they are closely connected, and then add the following code to `ContentView.swift`:
@@ -948,14 +994,15 @@ data.
 
    * The [Combine framework](https://developer.apple.com/documentation/combine) connects the view model (`ContentView.ViewModel`)
      with the view (`ContentView`).
-   * `ContentView.ViewModel` is declared as an `ObservableObject` and `@Published` wrapper is used for the `launches`
+   * `ContentView.ViewModel` is declared as an `ObservableObject` and the `@Published` wrapper is used for the `launches`
      property, so the view model will emit signals whenever this property changes.
 
-5. Implement the body of the `ContentView` file and display the list of launches:
+5. Implement the body of the `ContentView` file and display the list of launches. The `@ObservedObject` property wrapper
+   is used to subscribe to the view model:
 
-   ```swift
-   struct ContentView: View {
-    @ObservedObject private(set) var viewModel: ViewModel
+    ```swift
+    struct ContentView: View {
+        @ObservedObject private(set) var viewModel: ViewModel
    
         var body: some View {
             NavigationView {
@@ -981,13 +1028,11 @@ data.
             }
         }
     }
-   ```
+    ```
 
-   The `@ObservedObject` property wrapper is used to subscribe to the view model.
-
-6. To make it compile, the `RocketLaunch` class needs to confirm the `Identifiable` protocol, as it is used as a
-   parameter for initializing the `List` Swift UIView. The `RocketLaunch` class already has a property named `id`, so
-   add the following to the bottom of `ContentView.swift`:
+6. The `RocketLaunch` class is used as a parameter for initializing the `List` View (in the `AnyView(List(launches)` line).
+   So the `RocketLaunch` class needs to [conform to the `Identifiable` protocol](https://developer.apple.com/documentation/swift/identifiable).
+   The class already has a property named `id`, so all you need to do is add the following to the bottom of `ContentView.swift`:
 
    ```Swift
    extension RocketLaunch: Identifiable { }
@@ -995,8 +1040,8 @@ data.
 
 ### Load the data
 
-To retrieve the data about the rocket launches in the view model, you'll need an instance of `SpaceXSDK` from the Multiplatform
-library.
+To retrieve the data about the rocket launches in the view model, you'll need an instance of `KoinHelper` from the Multiplatform
+library. It will allow you to call the SDK function with the correct database driver.
 
 1. In `ContentView.swift`, pass it in through the constructor:
 
@@ -1005,11 +1050,10 @@ library.
        // ...
        @MainActor
        class ViewModel: ObservableObject {
-           let sdk: SpaceXSDK
+           let helper: KoinHelper = KoinHelper()
            @Published var launches = LoadableLaunches.loading
    
-           init(sdk: SpaceXSDK) {
-               self.sdk = sdk
+           init() {
                self.loadLaunches(forceReload: false)
            }
    
@@ -1020,14 +1064,15 @@ library.
    }
    ```
 
-2. Call the `getLaunches()` function from the `SpaceXSDK` class and save the result in the `launches` property:
+2. Call the `getLaunches()` function from the `KoinHelper` class (which wraps the `SpaceXSDK` call) and save the result
+   in the `launches` property:
 
    ```Swift
    func loadLaunches(forceReload: Bool) {
        Task {
            do {
                self.launches = .loading
-               let launches = try await sdk.getLaunches(forceReload: forceReload)
+               let launches = try await helper.getLaunches(forceReload: forceReload)
                self.launches = .result(launches)
            } catch {
                self.launches = .error(error.localizedDescription)
@@ -1037,12 +1082,12 @@ library.
    ```
 
    * When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
-     are available in it as Swift's `async`/`await` mechanism.
-   * Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation, any exceptions that are
-     instances of the `Exception` class or its subclass will be propagated as `NSError`. Therefore, all such errors can
-     be caught by the `loadLaunches()` function.
+     can be called using the Swift's `async`/`await` mechanism.
+   * Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation in Kotlin, any exceptions
+     that are instances of the `Exception` class or its subclass will be propagated to Swift as `NSError`.
+     Therefore, all such exceptions can be caught by the `loadLaunches()` function.
 
-3. Go to the entry point of the app, `iOSApp.swift`, and initialize the SDK, view, and view model:
+3. Go to the entry point of the app, `iOSApp.swift`, and initialize the Koin module, the view, and the view model:
 
    ```swift
    import SwiftUI
@@ -1050,7 +1095,10 @@ library.
    
    @main
    struct iOSApp: App {
-       let sdk = SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory())
+       init() {
+           KoinHelperKt.doInitKoin()
+       }
+   
        var body: some Scene {
            WindowGroup {
                ContentView(viewModel: .init(sdk: sdk))
