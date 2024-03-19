@@ -657,7 +657,7 @@ function that brings it all together.
        }
    }
    ```
-   
+
 3. Then add a `loadLaunches()` call to the `init{}` block of the class:
 
     ```kotlin
@@ -665,8 +665,8 @@ function that brings it all together.
         loadLaunches()
     }
     ```
-   
-   Your view model is ready to go. 
+
+   Your view model is ready to go.
 
 4. Add the view model to the Koin module declared in the `AppModule.kt` file:
 
@@ -681,7 +681,7 @@ function that brings it all together.
 
 ### Build the Material Theme
 
-You will build your main `App()` composable around the `AppTheme` function supplied by a Material Theme:  
+You will build your main `App()` composable around the `AppTheme` function supplied by a Material Theme:
 
 1. You can generate a theme for your Compose app
    using the [Material Theme Builder](https://m3.material.io/theme-builder#/custom).
@@ -702,7 +702,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
     val app_theme_unsuccessful = Color(0xffFC100D)
     ```
 
-### Implement the presentation logic 
+### Implement the presentation logic
 
 You need to create the main `App()` composable for your application, and call on it from a `ComponentActivity` class.
 
@@ -852,7 +852,7 @@ You need to create the main `App()` composable for your application, and call on
        App()
    }
    ```
-    
+
 4. Finally, reference the `MainActivity` class in the Android manifest:
 
    ```xml
@@ -1107,7 +1107,29 @@ library. It will allow you to call the SDK function with the correct database dr
    }
    ```
 
-4. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
+4. Before you run the app, make sure your iOS target is linked with libraries dynamically: in the `build.gradle.kts` file find
+   the `iosTarget.binaries.framework` block and change the `isStatic` flag to `false`:
+
+    ```kotlin
+    kotlin {
+        // ...
+   
+        listOf(
+            iosX64(),
+            iosArm64(),
+            iosSimulatorArm64()
+        ).forEach { iosTarget ->
+            iosTarget.binaries.framework {
+                baseName = "Shared"
+                isStatic = false
+            }
+        }
+   
+        //...
+    } 
+    ```
+
+5. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
 
 ![iOS Application](ios-application.png){width=350}
 
@@ -1124,5 +1146,6 @@ see the [Coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html).
 You can also check out these additional learning materials:
 
 * [Use the Ktor HTTP client in multiplatform projects](https://ktor.io/docs/http-client-engines.html#mpp-config)
+* [Read about Koin and dependency injection](https://insert-koin.io/docs/setup/why)
 * [Make your Android application work on iOS](multiplatform-integrate-in-existing-app.md)
 * [Learn more about multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
