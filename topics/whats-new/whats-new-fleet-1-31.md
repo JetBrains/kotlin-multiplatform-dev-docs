@@ -2,7 +2,7 @@
 
 Here are the highlights of changes related to Kotlin Multiplatform support in JetBrains Fleet 1.31:
 
-* [Compose Multiplatform @Preview annotation support](#compose-multiplatform-preview-annotation-support)
+* [Compose Multiplatform @Preview annotation support](#support-for-compose-multiplatform-preview-annotation)
 * [Support for Compose Multiplatform resources API](#support-for-compose-multiplatform-resources-api)
 * [Logcat support](#logcat-support)
 * [Improvements in Swift support](#various-improvements-in-swift-support)
