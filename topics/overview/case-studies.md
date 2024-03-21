@@ -157,3 +157,11 @@ products. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-stu
 In both of Chalk.com's mobile apps, Kotlin Multiplatform is used for networking, offline caching, and business logic.
 The UI for each of the apps is native to the platform, but other than that, almost everything else in their apps can be
 shared with Kotlin Multiplatform. [Read the full story](https://kotlinlang.org/lp/multiplatform/case-studies/chalk/).
+
+[![Collective Idea](collectiveidea.svg){width=200}](https://collectiveidea.com/)
+Collective Idea leveraged Kotlin Multiplatform to deliver the [Farmish](https://getfarmish.com) native iOS and Android
+apps. A common Kotlin shared code library powers both apps, fostering code reuse and improving time-to-market. Around 85%
+of the total functionality is shared and includes core features such as networking, data parsing, database integration,
+resources (fonts / localized strings / images), view models, user navigation, and algorithms/business logic. The remaining
+code is platform specific native UI; SwiftUI for the iOS app (iPhone/iPad adaptive layout), and Compose for Android.
+[Learn more about Collective Idea](https://collectiveidea.com/).
