@@ -73,16 +73,16 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-            implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+            implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
         }
         androidMain.dependencies {
             implementation("io.ktor:ktor-client-android:$ktorVersion")
-            implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+            implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
         }
         iosMain.dependencies {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-            implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+            implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
         }
     }
     ```
@@ -99,7 +99,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
        plugins {
        // ...
        kotlin("plugin.serialization").version("%kotlinVersion%")
-       id("com.squareup.sqldelight").version("%sqlDelightVersion%")
+       id("app.cash.sqldelight").version("%sqlDelightVersion%")
    }
    ```
 
@@ -145,8 +145,10 @@ the end of the `build.gradle.kts` file. The block will contain a list of databas
 
 ```kotlin
 sqldelight {
-    database("AppDatabase") {
-        packageName = "com.jetbrains.handson.kmm.shared.cache"
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.jetbrains.handson.kmm.shared.cache")
+        }
     }
 }
 ```
@@ -227,7 +229,7 @@ implementations of the SQLite driver, so you need to create them for each platfo
    ```kotlin
    package com.jetbrains.handson.kmm.shared.cache
    
-   import com.squareup.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.db.SqlDriver
 
    expect class DatabaseDriverFactory {
        fun createDriver(): SqlDriver
@@ -246,8 +248,8 @@ implementations of the SQLite driver, so you need to create them for each platfo
    package com.jetbrains.handson.kmm.shared.cache
    
    import android.content.Context
-   import com.squareup.sqldelight.android.AndroidSqliteDriver
-   import com.squareup.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.android.AndroidSqliteDriver
+   import app.cash.sqldelight.db.SqlDriver
    
    actual class DatabaseDriverFactory(private val context: Context) {
        actual fun createDriver(): SqlDriver {
@@ -263,8 +265,8 @@ implementations of the SQLite driver, so you need to create them for each platfo
    ```kotlin
    package com.jetbrains.handson.kmm.shared.cache
    
-   import com.squareup.sqldelight.db.SqlDriver
-   import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+   import app.cash.sqldelight.db.SqlDriver
+   import app.cash.sqldelight.drivers.native.NativeSqliteDriver
 
    actual class DatabaseDriverFactory {
        actual fun createDriver(): SqlDriver {
