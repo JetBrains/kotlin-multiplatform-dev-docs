@@ -11,7 +11,6 @@ This application is going to:
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
 
-TODO change screenshot
 ![Emulator and Simulator](android-and-ios.png){width=600}
 
 You will use the following multiplatform libraries in the project:
@@ -22,11 +21,11 @@ You will use the following multiplatform libraries in the project:
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines) to write asynchronous code.
 * [SQLDelight](https://github.com/cashapp/sqldelight) to generate Kotlin code from SQL queries and create a type-safe
   database API.
-* [Koin](https://insert-koin.io/) to use dependency injection for platform-specific database drivers. (TODO check wording)
+* [Koin](https://insert-koin.io/) to employ platform-specific database drivers via dependency injection.
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
-> in the corresponding GitHub repository. (TODO check links)
+> in our GitHub repository.
 >
 {type="note"}
 
@@ -40,11 +39,7 @@ You will use the following multiplatform libraries in the project:
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
 
-<!-- You can find the configured project [on the `master` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage).
-> TODO check link and uncomment this
-{type="note"} -->
-
-## Add dependencies to the multiplatform library
+## Add Gradle dependencies
 
 To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`)
 to the `dependencies` block of the relevant source sets in the `build.gradle.kts` file.
@@ -99,8 +94,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```
-   {initial-collapse-state="collapsed"}
-   (TODO collapsed title)
+   {initial-collapse-state="collapsed" collapsed-title="[versions]"}
 
 6. Run a Gradle Sync, as prompted by the IDE. (TODO is this necessary here, not later?)
 7. At the very beginning of the `build.gradle.kts` file in the `shared` directory, add the following lines to the
@@ -178,8 +172,8 @@ Each serializable class must be marked with the `@Serializable` annotation. The 
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
 serializer in the annotation argument.
 
-However, you don't need to do that in this case. (TODO what don't you need to do?) The `@SerialName` annotation allows you to redefine field names, which helps
-to declare properties in data classes with more easily readable names.
+The `@SerialName` annotation allows you to redefine field names, which helps to access properties in data classes
+using more readable names.
 
 ## Configure SQLDelight and implement cache logic
 
@@ -271,8 +265,10 @@ The important part of this code is the interface named `AppDatabase` which you w
 ### Create factories for platform-specific database drivers
 
 To initialize the `AppDatabase` interface, you need to pass an `SqlDriver` instance to it. SQLDelight provides multiple platform-specific
-implementations of the SQLite driver, so you need to create them for each platform separately. In this project, we will use
-[Koin](https://insert-koin.io/), the dependency injection framework. (TODO explain what we get from this: no expect/actual stuff)
+implementations of the SQLite driver, so you need to create them for each platform separately.
+
+While you can achieve this using [expect and actual interfaces](https://kotlinlang.org/docs/multiplatform-expect-actual.html),
+in this project, we will use [Koin](https://insert-koin.io/), to illustrate using a dependency injection framework in Kotlin Multiplatform.
 
 1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
    the `com.jetbrains.spacetutorial` directory.
@@ -504,9 +500,9 @@ To sum up:
   no cached data, it loads the data from the internet independently of the `forceReload` flag's value.
 * Clients of your SDK could use a `forceReload` flag to load the latest information about the launches, which would
   allow the user to use the pull-to-refresh gesture.
-* All Kotlin exceptions are unchecked, while Swift has only checked errors. Thus, to make your Swift code aware of expected
-  exceptions, Kotlin functions (TODO should it be "called from Swift" here? clearly not ALL Kotlin functions are marked) should be marked with the `@Throws` annotation specifying a list of potential exception
-  classes.
+* All Kotlin exceptions are unchecked, while Swift has only checked errors (see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#errors-and-exceptions)
+  for details). Thus, to make your Swift code aware of expected exceptions, Kotlin functions called from Swift
+  should be marked with the `@Throws` annotation specifying a list of potential exception classes.
 
 ## Create the Android application
 
