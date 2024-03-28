@@ -92,7 +92,7 @@ Multiplatform, there are two options:
 
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
-| 2.0.0-Beta4    | `1.5.9-kt-2.0.0-Beta4`                 |
+| 2.0.0-Beta5    | `1.5.11-kt-2.0.0-Beta5`                |
 | 1.9.22         | `1.5.8.1`                              |
 | 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
