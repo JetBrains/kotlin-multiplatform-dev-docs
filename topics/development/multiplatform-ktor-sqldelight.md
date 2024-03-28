@@ -918,7 +918,7 @@ You need to create the main `App()` composable for your application, and call on
    The app automatically runs the API request and displays the list of launches (the background color depends on
    the Material Theme you generated):
 
-    ![Android application](android-application.png){width=350}
+   ![Android application](android-application.png){width=350}
 
 You've just created an Android application that has its business logic implemented in the Kotlin Multiplatform module,
 and its UI made using native Jetpack Compose.
@@ -931,15 +931,46 @@ interface and the "Model View View-Model" pattern to connect the UI to the share
 The shared module is already connected to the iOS project because the Android Studio plugin wizard has done all the configuration.
 You can import it the same way you would regular iOS dependencies: `import shared`.
 
-### Prepare the Koin code for iOS dependency injection
+### Turn off static linking
+
+The Kotlin Multiplatform wizard generates projects which are set up for static linking of iOS frameworks.
+To use the SQLDelight library, allow the iOS framework to link dynamically. 
+
+To do that, open the `shared/build.gradle.kts` file and change the `isStatic` property of the `iosTarget.binaries.framework`
+block to `false`:
+
+```kotlin
+kotlin {
+   // ...
+
+   listOf(
+      iosX64(),
+      iosArm64(),
+      iosSimulatorArm64()
+   ).forEach { iosTarget ->
+      iosTarget.binaries.framework {
+         baseName = "Shared"
+         isStatic = false
+      }
+   }
+
+   //...
+}
+```
+{initial-collapse-state="collapsed" collapsed-title="isStatic = false"}
+
+### Prepare the Koin class for iOS dependency injection
 
 To use Koin classes and functions in Swift code, you need to create a special `KoinComponent` class and declare the Koin
 module for iOS.
 
-1. In the `shared/src/iosMain/kotlin/com.jetbrains.spacetutorial` directory, create the `KoinHelper.kt` file.
+1. In the `shared/src/iosMain/kotlin/` source set, create a file with the name `com/jetbrains/spacetutorial/KoinHelper.kt`
+   (it will appear next to the `cache` folder).
 2. Add the `KoinHelper` class which will wrap the `SpaceXSDK` class:
 
     ```kotlin
+    package com.jetbrains.spacetutorial
+   
     import org.koin.core.component.KoinComponent
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     import org.koin.core.component.inject
@@ -975,7 +1006,7 @@ module for iOS.
     }
     ```
 
-Now you can use the Koin module in your iOS app to request the list of launches using the native database driver.
+Now you can start the Koin module in your iOS app to request the list of launches using the native database driver.
 
 ### Implement the UI
 
@@ -984,7 +1015,7 @@ and `VStack` views. There will be extensions on the `RocketLaunchRow` structure 
 data.
 
 1. Right-click the `iosApp/iosApp.xcodeproj` directory and choose **Open In | Xcode**.
-2. In your Xcode project, create a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
+2. In your Xcode project, select a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
 3. Update the `RocketLaunchRow.swift` file with the following code:
 
    ```swift
@@ -1028,8 +1059,8 @@ data.
 
    The list of launches will be displayed in the `ContentView` view, which is already included in the project.
 
-4. Create a `ViewModel` class for the `ContentView`, which will prepare and manage the data. Declare it as an extension
-   to the `ContentView`, as they are closely connected, and then add the following code to `ContentView.swift`:
+4. Create an extension to the `ContentView` class with a `ViewModel` class which will prepare and manage the data.
+   Add the following code to the `ContentView.swift` file:
 
    ```swift
    // ...
@@ -1047,13 +1078,17 @@ data.
    }
    ```
 
-   * The [Combine framework](https://developer.apple.com/documentation/combine) connects the view model (`ContentView.ViewModel`)
-     with the view (`ContentView`).
-   * `ContentView.ViewModel` is declared as an `ObservableObject` and the `@Published` wrapper is used for the `launches`
-     property, so the view model will emit signals whenever this property changes.
+   * The view model (`ContentView.ViewModel`) connects with the view (`ContentView`) via the [Combine framework](https://developer.apple.com/documentation/combine):
+     * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
+     * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
+       property changes.
 
-5. Implement the body of the `ContentView` file and display the list of launches. The `@ObservedObject` property wrapper
-   is used to subscribe to the view model:
+5. Remove the `ContentView_Previews` structure: you won't be implementing a preview that would be compatible with
+   your view model.
+
+6. Update the body of the `ContentView` class to display the list of launches and add the reload functionality.
+   * The `viewModel` property is marked with the `@ObservedObject` attribute to subscribe to the view model.
+   * This is the UI groundwork: you will implement the `loadLaunches` function in the next phase of the tutorial.
 
     ```swift
     struct ContentView: View {
@@ -1085,9 +1120,9 @@ data.
     }
     ```
 
-6. The `RocketLaunch` class is used as a parameter for initializing the `List` View (in the `AnyView(List(launches)` line).
-   So the `RocketLaunch` class needs to [conform to the `Identifiable` protocol](https://developer.apple.com/documentation/swift/identifiable).
-   The class already has a property named `id`, so all you need to do is add the following to the bottom of `ContentView.swift`:
+7. The `RocketLaunch` class is used as a parameter for initializing the `List` view, so it needs to
+   [conform to the `Identifiable` protocol](https://developer.apple.com/documentation/swift/identifiable).
+   The class already has a property named `id`. All you need to do is add this extension to the bottom of `ContentView.swift`:
 
    ```Swift
    extension RocketLaunch: Identifiable { }
@@ -1095,10 +1130,11 @@ data.
 
 ### Load the data
 
-To retrieve the data about the rocket launches in the view model, you'll need an instance of `KoinHelper` from the Multiplatform
-library. It will allow you to call the SDK function with the correct database driver.
+To retrieve the data about the rocket launches in the view model, you'll need an instance of `KoinHelper`
+from the Multiplatform library.
+It will allow you to call the SDK function with the correct database driver.
 
-1. In `ContentView.swift`, pass it in through the constructor:
+1. In `ContentView.swift`, expand the `ViewModel` class to create a `KoinHelper` object and the `loadLaunches` function:
 
    ```swift
    extension ContentView {
@@ -1119,7 +1155,7 @@ library. It will allow you to call the SDK function with the correct database dr
    }
    ```
 
-2. Call the `getLaunches()` function from the `KoinHelper` class (which wraps the `SpaceXSDK` call) and save the result
+2. Using the `KoinHelper` object (which wraps the `SpaceXSDK` calls), call the `getLaunches()` function and save the result
    in the `launches` property:
 
    ```Swift
@@ -1156,39 +1192,17 @@ library. It will allow you to call the SDK function with the correct database dr
    
        var body: some Scene {
            WindowGroup {
-               ContentView(viewModel: .init(sdk: sdk))
+               ContentView(viewModel: .init())
            }
        }
    }
    ```
 
-4. Before you run the app, make sure your iOS target is linked with libraries dynamically: in the `build.gradle.kts` file find
-   the `iosTarget.binaries.framework` block and change the `isStatic` flag to `false`:
-
-    ```kotlin
-    kotlin {
-        // ...
-   
-        listOf(
-            iosX64(),
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
-            iosTarget.binaries.framework {
-                baseName = "Shared"
-                isStatic = false
-            }
-        }
-   
-        //...
-    } 
-    ```
-
-5. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
+4. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
 
 ![iOS Application](ios-application.png){width=350}
 
-<!-- You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
+<!-- TODO uncomment You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
 >
 {type="note"} -->
 
