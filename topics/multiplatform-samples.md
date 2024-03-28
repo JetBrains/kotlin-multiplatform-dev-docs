@@ -483,4 +483,32 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+
+   <tr>
+      <td>
+          <strong><a href="https://github.com/VitaliyBelyaev/WishApp">Wishapp</a></strong>
+      </td>
+      <td>Android and iOS multiplatfrom app for tracking wishes with features to share wish list with other person in text/PDF format and group/share wishes by labels.</td>
+      <td>
+          <list>
+              <li>Data Storage</li>
+              <li>Model</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>SQLDelight</code></li>
+              <li><code>KMP-NativeCoroutines</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>Koin</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Jetpack Compose on Android</li>
+              <li>SwiftUI on iOS</li>
+          </list>
+      </td>
+  </tr>
 </table>
