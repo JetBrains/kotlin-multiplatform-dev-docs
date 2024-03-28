@@ -351,7 +351,7 @@ the `shared/build/reports/tests` directory:
 
 Run the `allTests` task and examine the reports it generated:
 
-* The `allTests/report.html` file contains combined reports for common and iOS tests
+* The `allTests/index.html` file contains combined reports for common and iOS tests
   (iOS tests depend on common tests and are run after them).
 * The `testDebugUnitTest` and `testReleaseUnitTest` folders contain reports for both default Android build flavors.
   (Currently, Android test reports are not automatically merged with the `allTests` report.)
