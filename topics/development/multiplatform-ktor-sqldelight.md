@@ -54,7 +54,7 @@ You will use the following multiplatform libraries in the project:
 ## Add Gradle dependencies
 
 To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`)
-to the `dependencies` block of the relevant source sets in the `build.gradle.kts` file.
+to the `dependencies{}` block of the relevant source sets in the `build.gradle.kts` file.
 
 Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
@@ -195,7 +195,7 @@ The SQLDelight library allows you to generate a type-safe Kotlin database API fr
 generator validates the SQL queries and turns them into Kotlin code that can be used in the shared module.
 
 The SQLDelight dependency is already included in the project. To configure the library, open the `shared/build.gradle.kts` file
-and add the `sqldelight` block in the end. This block contains a list of databases and their parameters:
+and add the `sqldelight{}` block in the end. This block contains a list of databases and their parameters:
 
 ```kotlin
 sqldelight {
