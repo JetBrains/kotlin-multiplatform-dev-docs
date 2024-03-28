@@ -37,7 +37,19 @@ You will use the following multiplatform libraries in the project:
 4. For iOS, choose the **Do not share UI** option. You will implement native UI for both platforms.
 5. Click the **Download** button and unpack the downloaded archive.
 
-![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
+   ![Kotlin Multiplatform wizard](ktor-wizard.png){width=450}
+
+6. Launch Android Studio.
+7. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
+8. Navigate to the unpacked project folder and then click **Open**.
+
+   Android Studio detects that the folder contains a Gradle build file, opens the folder as a new project,
+   and starts the initial Gradle Sync.
+
+9. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
+   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
+
+   ![Select the project view](select-project-view.png){width=200}
 
 ## Add Gradle dependencies
 
@@ -46,19 +58,9 @@ to the `dependencies` block of the relevant source sets in the `build.gradle.kts
 
 Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
-1. Launch Android Studio.
-2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
-3. Navigate to the unpacked project folder and then click **Open**.
+Change or add lines in the version catalog in the `gradle/libs.versions/toml` file to reflect all needed dependencies:
 
-   Android Studio detects that the folder contains a Gradle build file, opens the folder as a new project,
-   and starts the initial Gradle Sync.
-
-4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
-   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
-
-   ![Select the project view](select-project-view.png){width=200}
-
-5. Change or add lines to the version catalog in the `gradle/libs.versions/toml` file to reflect all needed dependencies:
+1. In the `[versions]` block, check the AGP version and add the rest:
 
    ```Ini
    [versions]
@@ -71,7 +73,12 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    sqlDelight = "2.0.1"
    lifecycleViewmodelCompose = "2.7.0"
    material3 = "1.2.0"
-   
+   ```
+   {initial-collapse-state="collapsed" collapsed-title="[versions]"}
+
+2. In the `[libraries]` block, add the following library references:
+
+   ```Ini
    [libraries]
    ...
    android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
@@ -88,17 +95,23 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
    androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
    androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
-   
+   ```
+   {initial-collapse-state="collapsed" collapsed-title="[libraries]"}
+
+3. In the `[plugins]` block, specify the necessary Gradle plugins:
+   ```Ini
    [plugins]
    ...
    kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```
-   {initial-collapse-state="collapsed" collapsed-title="[versions]"}
 
-6. Run a Gradle Sync, as prompted by the IDE. (TODO is this necessary here, not later?)
-7. At the very beginning of the `build.gradle.kts` file in the `shared` directory, add the following lines to the
-   `plugins` block:
+4. Once the dependencies are added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
+
+   ![Synchronize Gradle files](gradle-sync.png)
+
+5. At the very beginning of the `build.gradle.kts` file in the `shared` directory, add the following lines to the
+   `plugins{}` block:
 
    ```kotlin
        plugins {
@@ -108,7 +121,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    }
    ```
 
-8. In the same `build.gradle.kts` file, specify all the required dependencies:
+6. In the same `build.gradle.kts` file, specify all the required dependencies:
 
     ```kotlin
     kotlin {
@@ -141,9 +154,7 @@ Both the `kotlinx.serialization` and SQLDelight libraries also require additiona
    * Ktor also needs the [serialization feature](https://ktor.io/docs/serialization-client.html) to use
      `kotlinx.serialization` for processing network requests and responses.
 
-9. Once the dependencies are added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
-   (TODO if this also needs to be done after we're done with lib.versions.toml, put these instructions there.)
-   ![Synchronize Gradle files](gradle-sync.png)
+7. Once the dependencies are added, click **Sync Now** to synchronize Gradle files once again.
 
 After the Gradle Sync is complete, you are done with project configuration and can start writing code.
 
@@ -160,8 +171,9 @@ The application data model will have three entity classes with:
 * Patches and article URLs associated with the launch
 
 Create the necessary data classes:
-1. In the `shared/src/commonMain/kotlin` directory, create the `com.jetbrains.spacetutorial` directory.
-2. Inside, create the `entity` directory, and the `Entity.kt` file inside that.
+1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
+   to make nested package folders.
+2. Inside the `com.jetbrains.spacetutorial` directory, create the `entity` directory, and the `Entity.kt` file inside that.
 3. Declare all the data classes for basic entities:
 
    ```kotlin
@@ -210,9 +222,8 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
 `.sq` files in the `sqldelight` folder of the source set:
 
 1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory.
-2. Right-click the `sqldelight` directory and select **New | Directory**, then select
-   the `com/jetbrains/spacetutorial/cache` option in the suggested list. This will create the `com.jetbrains.spacetutorial.cache`
-   package.
+2. Inside the `sqldelight` directory, create a new directory with the name `com/jetbrains/spacetutorial/cache`
+   to create nested directories for the package.
 3. Inside the package, create the `AppDatabase.sq` file (with the same name as the database you specified
    in the `build.gradle.kts` file).
    All the SQL queries for your application will be stored in this file.
@@ -256,10 +267,14 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
    SELECT Launch.*
    FROM Launch;
    ```
+8. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
+   To do that, run the following command in the terminal:
 
-(TODO: we need to actually run the generation, or the Database class later won't be able to access the code.)
-The generated Kotlin code is stored in the `shared/build/generated/sqldelight` directory.
-The important part of this code is the interface named `AppDatabase` which you will initialize with database drivers later on.
+   ```shell
+   ./gradlew generateCommonMainAppDatabaseInterface
+   ```
+
+   The generated Kotlin code is stored in the `shared/build/generated/sqldelight` directory.
 
 
 ### Create factories for platform-specific database drivers
@@ -271,8 +286,8 @@ While you can achieve this using [expect and actual interfaces](https://kotlinla
 in this project, we will use [Koin](https://insert-koin.io/), to illustrate using a dependency injection framework in Kotlin Multiplatform.
 
 1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
-   the `com.jetbrains.spacetutorial` directory.
-2. In the `com.jetbrains.spacetutorial` directory, create the `cache` directory, and then the `DatabaseDriverFactory` interface inside it:
+   a directory with the name `com/jetbrains/spacetutorial/cache`, to add the `cache` directory to the package.
+2. Create the `DatabaseDriverFactory` interface inside the `cache` directory:
 
    ```kotlin
    package com.jetbrains.spacetutorial.cache
@@ -290,6 +305,8 @@ in this project, we will use [Koin](https://insert-koin.io/), to illustrate usin
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
    ```kotlin
+   package com.jetbrains.spacetutorial.cache
+   
    import android.content.Context
    import app.cash.sqldelight.db.SqlDriver
    import app.cash.sqldelight.driver.android.AndroidSqliteDriver
@@ -301,10 +318,12 @@ in this project, we will use [Koin](https://insert-koin.io/), to illustrate usin
    }
    ```
 
-5. For iOS, in the `shared/src/iosMain/kotlin` directory, create the `com.jetbrains.spacetutorial.cache` directory.
+5. For iOS, in the `shared/src/iosMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial/cache`.
 6. Inside this directory, create the `DatabaseDriverFactory.kt` file and add this code:
 
    ```kotlin
+   package com.jetbrains.spacetutorial.cache
+   
    import app.cash.sqldelight.db.SqlDriver
    import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
@@ -343,59 +362,68 @@ Now create a `Database` class, which will wrap the `AppDatabase` class and conta
    First, create the `getAllLaunches` function to return a list of all the rocket launches.
    The `mapLaunchSelecting` function is used to map the result of the database query to `RocketLaunch` objects:
 
-   ```kotlin
-   import com.jetbrains.handson.kmm.shared.entity.Links
-   import com.jetbrains.handson.kmm.shared.entity.Patch
-   import com.jetbrains.handson.kmm.shared.entity.RocketLaunch
-
-   internal fun getAllLaunches(): List<RocketLaunch> {
-       return dbQuery.selectAllLaunchesInfo(::mapLaunchSelecting).executeAsList()
-   }
-
-   private fun mapLaunchSelecting(
-       flightNumber: Long,
-       missionName: String,
-       details: String?,
-       launchSuccess: Boolean?,
-       launchDateUTC: String,
-       patchUrlSmall: String?,
-       patchUrlLarge: String?,
-       articleUrl: String?
-   ): RocketLaunch {
-       return RocketLaunch(
-           flightNumber = flightNumber.toInt(),
-           missionName = missionName,
-           details = details,
-           launchDateUTC = launchDateUTC,
-           launchSuccess = launchSuccess,
-           links = Links(
-               patch = Patch(
-                   small = patchUrlSmall,
-                   large = patchUrlLarge
-               ),
-               article = articleUrl
-           )
-       )
-   }
-   ```
+    ```kotlin
+    import com.jetbrains.spacetutorial.entity.Links
+    import com.jetbrains.spacetutorial.entity.Patch
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    
+    internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
+        // ...
+    
+        internal fun getAllLaunches(): List<RocketLaunch> {
+            return dbQuery.selectAllLaunchesInfo(::mapLaunchSelecting).executeAsList()
+        }
+    
+        private fun mapLaunchSelecting(
+            flightNumber: Long,
+            missionName: String,
+            details: String?,
+            launchSuccess: Boolean?,
+            launchDateUTC: String,
+            patchUrlSmall: String?,
+            patchUrlLarge: String?,
+            articleUrl: String?
+        ): RocketLaunch {
+            return RocketLaunch(
+                flightNumber = flightNumber.toInt(),
+                missionName = missionName,
+                details = details,
+                launchDateUTC = launchDateUTC,
+                launchSuccess = launchSuccess,
+                links = Links(
+                    patch = Patch(
+                        small = patchUrlSmall,
+                        large = patchUrlLarge
+                    ),
+                    article = articleUrl
+                )
+            )
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsed-title="internal fun getAllLaunches()"}
 
 4. Add the `clearAndCreateLaunches` function to clear the database and insert the data:
 
     ```kotlin
-    internal fun clearAndCreateLaunches(launches: List<RocketLaunch>) {
-        dbQuery.transaction {
-            dbQuery.removeAllLaunches()
-            launches.forEach { launch ->
-                dbQuery.insertLaunch(
-                    flightNumber = launch.flightNumber.toLong(),
-                    missionName = launch.missionName,
-                    details = launch.details,
-                    launchSuccess = launch.launchSuccess ?: false,
-                    launchDateUTC = launch.launchDateUTC,
-                    patchUrlSmall = launch.links.patch?.small,
-                    patchUrlLarge = launch.links.patch?.large,
-                    articleUrl = launch.links.article
-                )
+    internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
+        // ...
+    
+        internal fun clearAndCreateLaunches(launches: List<RocketLaunch>) {
+            dbQuery.transaction {
+                dbQuery.removeAllLaunches()
+                launches.forEach { launch ->
+                    dbQuery.insertLaunch(
+                        flightNumber = launch.flightNumber.toLong(),
+                        missionName = launch.missionName,
+                        details = launch.details,
+                        launchSuccess = launch.launchSuccess ?: false,
+                        launchDateUTC = launch.launchDateUTC,
+                        patchUrlSmall = launch.links.patch?.small,
+                        patchUrlLarge = launch.links.patch?.large,
+                        articleUrl = launch.links.article
+                    )
+                }
             }
         }
     }
@@ -408,10 +436,12 @@ and a single method to retrieve the list of all launches from the `v5/launches` 
 
 Create a class that will connect the application to the API:
 
-1. In the common source set `shared/src/commonMain/kotlin`, create the `com.jetbrains.spacetutorial.network`
-   package and the `SpaceXApi` class inside it:
+1. In the common source set `shared/src/commonMain/kotlin`, create a directory with the name `com/jetbrains/spacetutorial/network`.
+2. Inside the `network` directory, create the `SpaceXApi` class:
 
    ```kotlin
+   package com.jetbrains.spacetutorial.network
+
    import io.ktor.client.HttpClient
    import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
    import io.ktor.serialization.kotlinx.json.json
@@ -435,13 +465,17 @@ Create a class that will connect the application to the API:
      to deserialize the result of a `GET` request. The plugin processes the request and the response payload as JSON,
      serializing and deserializing them as needed.
 
-2. Declare the data retrieval function that returns the list of rocket launches:
+3. Declare the data retrieval function that returns the list of rocket launches:
 
-   ```kotlin
-   suspend fun getAllLaunches(): List<RocketLaunch> {
-       return httpClient.get("https://api.spacexdata.com/v5/launches").body()
-   }
-   ```
+    ```kotlin
+    class SpaceXApi {
+        // ...
+        
+        suspend fun getAllLaunches(): List<RocketLaunch> {
+            return httpClient.get("https://api.spacexdata.com/v5/launches").body()
+        }
+    }
+    ```
 
    * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`,
      The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
@@ -453,7 +487,8 @@ Create a class that will connect the application to the API:
 Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
 public class.
 
-1. In the `com.jetbrains.spacetutorial` directory of the common source set, create the `SpaceXSDK` class.
+1. In the common source set `shared/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` directory, create
+   the `SpaceXSDK` class.
    This class will be the facade for the `Database` and `SpaceXApi` classes.
 
    To create a `Database` class instance, you'll need to provide a `DatabaseDriverFactory` instance:
@@ -479,6 +514,7 @@ public class.
     
     class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) {
         // ...
+   
         @Throws(Exception::class)
         suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
             val cachedLaunches = database.getAllLaunches()
@@ -553,6 +589,8 @@ start Koin with that module from your instance of the `Application` class.
    In that file, declare the module as two singletons, for the `SpaceXApi` class and for the `SpaceXSDK` class:
 
    ```kotlin
+   package com.jetbrains.spacetutorial
+   
    import com.jetbrains.spacetutorial.cache.AndroidDatabaseDriverFactory
    import com.jetbrains.spacetutorial.network.SpaceXApi
    import org.koin.android.ext.koin.androidContext
@@ -576,6 +614,8 @@ start Koin with that module from your instance of the `Application` class.
    create the `Application.kt` file with the following code, specifying the module you declared in the `modules()` function call:
 
    ```kotlin
+   package com.jetbrains.spacetutorial
+   
    import android.app.Application
    import org.koin.android.ext.koin.androidContext
    import org.koin.core.context.GlobalContext.startKoin
@@ -600,7 +640,7 @@ start Koin with that module from your instance of the `Application` class.
        ...
        android:name="com.jetbrains.spacetutorial.MainApplication">
    ```
-
+TODO make XML more complete, like in the other example
 Now you are ready to implement the UI that will use information provided by the platform-specific database driver.
 
 
@@ -610,9 +650,12 @@ You will implement the Android UI using Jetpack Compose and Material 3. First, y
 use of the SDK to get the list of launches. Then you'll set up the Material theme, and finally, write the composable
 function that brings it all together.
 
-1. Create the `RocketLaunchViewModel.kt` file in the `com.jetbrains.spacetutorial` package of your `composeApp` module:
+1. In the `composeApp/src/androidMain` source set, in the `com.jetbrains.spacetutorial` package, create
+   the `RocketLaunchViewModel.kt` file:
 
    ```kotlin
+   package com.jetbrains.spacetutorial
+   
    import androidx.compose.runtime.State
    import androidx.compose.runtime.mutableStateOf
    import androidx.lifecycle.ViewModel
@@ -639,7 +682,8 @@ function that brings it all together.
    import kotlinx.coroutines.launch
    
    class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
-   //...
+       //...
+       
        fun loadLaunches() {
            viewModelScope.launch { 
                _state.value = _state.value.copy(isLoading = true, launches = emptyList())
@@ -657,14 +701,16 @@ function that brings it all together.
 3. Then add a `loadLaunches()` call to the `init{}` block of the class:
 
     ```kotlin
-    init {
-        loadLaunches()
+    class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+        // ...
+
+        init {
+            loadLaunches()
+        }
     }
     ```
 
-   Your view model is ready to go.
-
-4. Add the view model to the Koin module declared in the `AppModule.kt` file:
+4. Now, in the `AppModule.kt` file, specify the view model in the Koin module:
 
     ```kotlin
     import org.koin.androidx.viewmodel.dsl.viewModel
@@ -684,7 +730,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
    When you're done picking colors, click **Export** in the top right corner and select the **Jetpack Compose (Theme.kt)**
    option.
 2. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
-   directory.
+   directory. TODO make a screenshot here to be safe
 3. In each file of the theme, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to your package:
 
     ```kotlin
@@ -702,9 +748,12 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
 You need to create the main `App()` composable for your application, and call on it from a `ComponentActivity` class.
 
-1. Create the `App.kt` file in the `com.jetbrains.spacetutorial` package and add the `App()` composable function:
+1. Create the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
+   and add the `App()` composable function:
 
     ```kotlin
+    package com.jetbrains.spacetutorial
+   
     import androidx.compose.material3.ExperimentalMaterial3Api
     import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
     import androidx.compose.runtime.Composable
@@ -734,7 +783,6 @@ You need to create the main `App()` composable for your application, and call on
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     import com.jetbrains.spacetutorial.theme.app_theme_successful
     import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
-   
     import androidx.compose.material3.HorizontalDivider
     import androidx.compose.material3.MaterialTheme
     import androidx.compose.material3.Scaffold
@@ -820,8 +868,8 @@ You need to create the main `App()` composable for your application, and call on
     ```
    {initial-collapse-state="collapsed" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
-3. Add the `MainActivity.kt` file along with other files of the Android implementation to the
-   `com.jetbrains.spacetutorial` package in the `composeApp/src/androidMain/kotlin` directory:
+3. Modify the `MainActivity.kt` in the `com.jetbrains.spacetutorial` package in the `composeApp/src/androidMain/kotlin`
+   source set:
 
    ```kotlin
    package com.jetbrains.spacetutorial
@@ -849,17 +897,28 @@ You need to create the main `App()` composable for your application, and call on
    }
    ```
 
-4. Finally, reference the `MainActivity` class in the Android manifest:
+4. Finally, reference the `MainActivity` class in the `AndroidManifest.xml` file:
 
-   ```xml
-   <activity
-       ...
-       android:name="com.jetbrains.spacetutorial.MainActivity">
-   ```
+    ```xml
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+        ...
+    
+        <application
+            ...
+            <activity
+                ...
+                android:name="com.jetbrains.spacetutorial.MainActivity">
+                ...
+            </activity>
+        </application>
+    </manifest>
+    ```
 
-5. Select **composeApp** from the run configurations menu, choose an emulator, and click the run button:
+5. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
+   The app automatically runs the API request and displays the list of launches (the background color depends on
+   the Material Theme you generated):
 
-![Android application](android-application.png){width=350}
+    ![Android application](android-application.png){width=350}
 
 You've just created an Android application that has its business logic implemented in the Kotlin Multiplatform module,
 and its UI made using native Jetpack Compose.
