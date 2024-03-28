@@ -12,6 +12,6 @@
     <vars src="v.list"/>
 
     <product src="mpd.tree" id="kotlin-multiplatform-dev"
-             keymaps-mode="generated" />
+             keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
 </ihp>
