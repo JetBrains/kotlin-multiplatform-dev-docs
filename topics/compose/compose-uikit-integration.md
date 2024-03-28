@@ -4,6 +4,10 @@ Compose Multiplatform is interoperable with the [UIKit](https://developer.apple.
 application as well as embed native UIKit components within Compose Multiplatform. This page provides examples both
 for using Compose Multiplatform inside a UIKit application and for embedding UIKit components inside Compose Multiplatform UI.
 
+> To learn about SwiftUI interoperability, see the [](compose-swiftui-integration.md) article.
+>
+{type="tip"}
+
 ## Use Compose Multiplatform inside a UIKit application
 
 To use Compose Multiplatform inside a UIKit application, add your Compose Multiplatform code to
