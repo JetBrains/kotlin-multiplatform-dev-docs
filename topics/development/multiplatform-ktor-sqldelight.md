@@ -21,7 +21,7 @@ You will use the following multiplatform libraries in the project:
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines) to write asynchronous code.
 * [SQLDelight](https://github.com/cashapp/sqldelight) to generate Kotlin code from SQL queries and create a type-safe
   database API.
-* [Koin](https://insert-koin.io/) to employ platform-specific database drivers via dependency injection.
+* [Koin](https://insert-koin.io/) to provide platform-specific database drivers via dependency injection.
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
@@ -632,15 +632,19 @@ start Koin with that module from your instance of the `Application` class.
    }
    ```
 
-3. Specify the custom `Application` class you created in the `<application>` tag of you `AndroidManifest.xml` file:
+3. Specify the `MainApplication` and class you created in the `<application>` tag of you `AndroidManifest.xml` file:
 
-   ```xml
-   <!--...-->
-   <application
-       ...
-       android:name="com.jetbrains.spacetutorial.MainApplication">
-   ```
-TODO make XML more complete, like in the other example
+    ```xml
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+        ...
+        <application
+            ...
+            android:name="com.jetbrains.spacetutorial.MainApplication">
+            ...
+        </application>
+    </manifest>
+    ```
+
 Now you are ready to implement the UI that will use information provided by the platform-specific database driver.
 
 
@@ -730,7 +734,10 @@ You will build your main `App()` composable around the `AppTheme` function suppl
    When you're done picking colors, click **Export** in the top right corner and select the **Jetpack Compose (Theme.kt)**
    option.
 2. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
-   directory. TODO make a screenshot here to be safe
+   directory.
+   
+   ![theme directory location](theme-directory.png){width=299}
+
 3. In each file of the theme, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to your package:
 
     ```kotlin
@@ -934,7 +941,7 @@ You can import it the same way you would regular iOS dependencies: `import share
 ### Turn off static linking
 
 The Kotlin Multiplatform wizard generates projects which are set up for static linking of iOS frameworks.
-To use the SQLDelight library, allow the iOS framework to link dynamically. 
+To use the SQLDelight library, allow the iOS framework to link dynamically.
 
 To do that, open the `shared/build.gradle.kts` file and change the `isStatic` property of the `iosTarget.binaries.framework`
 block to `false`:
@@ -1079,9 +1086,9 @@ data.
    ```
 
    * The view model (`ContentView.ViewModel`) connects with the view (`ContentView`) via the [Combine framework](https://developer.apple.com/documentation/combine):
-     * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
-     * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
-       property changes.
+      * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
+      * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
+        property changes.
 
 5. Remove the `ContentView_Previews` structure: you won't be implementing a preview that would be compatible with
    your view model.
@@ -1202,9 +1209,9 @@ It will allow you to call the SDK function with the correct database driver.
 
 ![iOS Application](ios-application.png){width=350}
 
-<!-- TODO uncomment You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
+> You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
 >
-{type="note"} -->
+{type="note"}
 
 ## What's next?
 
