@@ -333,6 +333,14 @@ Connect your framework to the iOS project manually:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
+   > This may require restarting your Gradle daemon, if you built the project without disabling sandboxing first.
+   > Stop the Gradle daemon process that might have been sandboxed:
+   > ```shell
+   > ./gradlew --stop
+   > ```
+   >
+   > {type="tip"}
+   
 7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
