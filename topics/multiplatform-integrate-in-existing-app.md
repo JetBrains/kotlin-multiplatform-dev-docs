@@ -337,7 +337,7 @@ Connect your framework to the iOS project manually:
    >
    {type="note"}
    
-8. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
