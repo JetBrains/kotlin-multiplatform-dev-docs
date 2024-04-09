@@ -54,14 +54,6 @@ If you're migrating from other integration approach, please remove it first:
 
    ![Framework search path](xcode-add-framework-search-path.png){width=700}
 
-4. On the **Build Settings** tab, remove the following from **Other Linker flags** property:
-
-   ```text
-   $(inherited) -framework shared
-   ```
-
-   ![Linker flag](xcode-add-flag.png){width=700}
-
 ### Connect the framework to your Xcode project
 
 > Note that integrating into `swift build` is currently not supported
