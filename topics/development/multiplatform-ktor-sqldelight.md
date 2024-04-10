@@ -66,11 +66,11 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    [versions]
    agp = "8.2.2"
    ...
-   coroutinesVersion = "1.7.3"
-   dateTimeVersion = "0.4.1"
-   koin = "3.5.3"
-   ktor = "2.3.7"
-   sqlDelight = "2.0.1"
+   coroutinesVersion = "%coroutinesVersion%"
+   dateTimeVersion = "%dateTimeVersion%"
+   koin = "%koinVersion%"
+   ktor = "%ktorVersion%"
+   sqlDelight = "%sqlDelightVersion%"
    lifecycleViewmodelCompose = "2.7.0"
    material3 = "1.2.0"
    ```
@@ -99,6 +99,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    {initial-collapse-state="collapsed" collapsed-title="[libraries]"}
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
+
    ```Ini
    [plugins]
    ...
@@ -344,7 +345,7 @@ So far, you have added factories for platform database drivers and an `AppDataba
 Now, create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
 
 1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
-   the `com.jetbrains.tutorial.cache` directory. It will contain logic common to both platforms.
+   the `com.jetbrains.spacetutorial.cache` directory. It will contain logic common to both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` instance to the `Database`
    class constructor:
@@ -512,7 +513,7 @@ public class, `SpaceXSDK`.
 
 2. Add the `getLaunches` function, which uses the created database and the API to get the launches list:
 
-   ```kotlin
+    ```kotlin
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     
     class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) {
@@ -529,8 +530,8 @@ public class, `SpaceXSDK`.
                 }
             }
         }
-   }
-   ```
+    }
+    ```
 
 
 * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
