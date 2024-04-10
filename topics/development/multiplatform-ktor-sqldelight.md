@@ -172,6 +172,12 @@ The application data model will have three entity classes with:
 * Links to images of mission patches
 * URLs of articles related to the launch
 
+> Not all of this data will end up in the UI by the end of this tutorial.
+> We're using the data model to showcase serialization.
+> But you can play around with links and patches to extend the example into something more informative!
+> 
+{type="note"}
+
 Create the necessary data classes:
 1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
    to make nested package folders.
