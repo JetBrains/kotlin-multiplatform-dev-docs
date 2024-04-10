@@ -4,9 +4,9 @@ This tutorial demonstrates how to use Android Studio to create an advanced mobil
 Kotlin Multiplatform.
 This application is going to:
 
-* retrieve data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest) using Ktor,
-* save the data in a local database using SQLDelight,
-* and display a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
+* Retrieve data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest) using Ktor
+* Save the data in a local database using SQLDelight.
+* Display a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
 
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
@@ -156,7 +156,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 7. Once the dependencies are added, click **Sync Now** to synchronize Gradle files once again.
 
-After the Gradle Sync is complete, you are done with project configuration and can start writing code.
+After the Gradle sync, you are done with the project configuration and can start writing code.
 
 > For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
 >
@@ -174,7 +174,7 @@ The application data model will have three entity classes with:
 Create the necessary data classes:
 1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
    to make nested package folders.
-2. Inside the `com.jetbrains.spacetutorial` directory, create the `entity` directory, and the `Entity.kt` file inside that.
+2. In the `com.jetbrains.spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside.
 3. Declare all the data classes for basic entities:
 
    ```kotlin
@@ -261,7 +261,7 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
    DELETE FROM Launch;
    ```
 
-7. Finally, declare the `selectAllLaunchesInfo` function for retrieving data:
+7. Declare the `selectAllLaunchesInfo` function for retrieving data:
 
    ```text
    selectAllLaunchesInfo:
@@ -284,8 +284,8 @@ To initialize the `AppDatabase` interface, you will pass an `SqlDriver` instance
 SQLDelight provides multiple platform-specific implementations of the SQLite driver, so you need to create these instances
 separately for each platform.
 
-While you can achieve this using [expect and actual interfaces](https://kotlinlang.org/docs/multiplatform-expect-actual.html),
-in this project, you will use [Koin](https://insert-koin.io/), to try using a dependency injection framework in Kotlin Multiplatform.
+While you can achieve this with [expected and actual interfaces](https://kotlinlang.org/docs/multiplatform-expect-actual.html),
+in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
 1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
    a directory with the name `com/jetbrains/spacetutorial/cache`(this will add the `cache` directory to the package).
@@ -302,7 +302,7 @@ in this project, you will use [Koin](https://insert-koin.io/), to try using a de
    ```
 
 3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
-   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside it.
+   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
@@ -336,12 +336,12 @@ in this project, you will use [Koin](https://insert-koin.io/), to try using a de
    }
    ```
 
-You will program creating instances of these drivers later, in the platform-specific code of your project.
+You will implement instances of these drivers later in the platform-specific code of your project.
 
 ### Implement cache
 
 So far, you have added factories for platform database drivers and an `AppDatabase` interface to perform database operations.
-Now create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
+Now, create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
 
 1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
    the `com.jetbrains.tutorial.cache` directory. It will contain logic common to both platforms.
@@ -483,7 +483,7 @@ Create a class that will connect the application to the API:
    * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`.
      The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
      coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-   * The URL to send a GET request to is passed as an argument to the `get()` function.
+   * The URL for sending a GET request is passed as an argument to the `get()` function.
 
 ## Build an SDK
 
@@ -510,7 +510,7 @@ public class, `SpaceXSDK`.
 
    You will inject the correct database driver in the platform-specific code through the `SpaceXSDK` class constructor.
 
-2. Add the `getLaunches` function, which makes use of the created database and the API to get the launches list:
+2. Add the `getLaunches` function, which uses the created database and the API to get the launches list:
 
    ```kotlin
     import com.jetbrains.spacetutorial.entity.RocketLaunch
@@ -532,7 +532,6 @@ public class, `SpaceXSDK`.
    }
    ```
 
-To sum up:
 
 * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
   returns cached values or loads the data from the internet and then updates the cache with the results. If there is
@@ -582,17 +581,17 @@ In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-per
 
 ### Add dependency injection
 
-The Koin dependency injection works by letting you declare modules (sets of components) to be used in different
+The Koin dependency injection lets you declare modules (sets of components) that you can use in different
 contexts.
-In this project, you will create two modules: one for the Android application, and another for the iOS app.
-Then you will start Koin for each native UI using the corresponding module.
+In this project, you will create two modules: one for the Android application and another for the iOS app.
+Then, you will start Koin for each native UI using the corresponding module.
 
 Declare a Koin module that will contain the components for the Android app:
 
 1. In the `composeApp/src/androidMain/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
 
    In that file, declare the module as two [singletons](https://insert-koin.io/docs/reference/koin-core/definitions#defining-a-singleton),
-   for the `SpaceXApi` class and for the `SpaceXSDK` class:
+   one for the `SpaceXApi` class and one for the `SpaceXSDK` class:
 
    ```kotlin
    package com.jetbrains.spacetutorial
@@ -615,10 +614,10 @@ Declare a Koin module that will contain the components for the Android app:
    ```
 
    The `SpaceXSDK` class constructor is injected with the platform-specific `AndroidDatabaseDriverFactory` class.
-   The `get()` function resolves dependencies within the module: in place of the `api` parameter for `SpaceXSDK()`
+   The `get()` function resolves dependencies within the module: in place of the `api` parameter for `SpaceXSDK()`,
    Koin will pass the `SpaceXApi` singleton declared earlier.
 
-2. Create a custom `Application` class which will start the Koin module.
+2. Create a custom `Application` class, which will start the Koin module.
 
    Next to the `AppModule.kt` file, create the `Application.kt` file with the following code, specifying the module
    you declared in the `modules()` function call:
@@ -642,7 +641,7 @@ Declare a Koin module that will contain the components for the Android app:
    }
    ```
 
-3. Specify the `MainApplication` class you created in the `<application>` tag of you `AndroidManifest.xml` file:
+3. Specify the `MainApplication` class you created in the `<application>` tag of your `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -655,12 +654,12 @@ Declare a Koin module that will contain the components for the Android app:
     </manifest>
     ```
 
-Now you are ready to implement the UI that will use information provided by the platform-specific database driver.
+Now, you are ready to implement the UI that will use the information provided by the platform-specific database driver.
 
 ### Prepare the view model with the list of launches
 
-You will implement the Android UI using Jetpack Compose and Material 3. First, you'll create the view model that makes
-use of the SDK to get the list of launches. Then you'll set up the Material theme, and finally, write the composable
+You will implement the Android UI using Jetpack Compose and Material 3. First, you'll create the view model that
+uses the SDK to get the list of launches. Then, you'll set up the Material theme, and finally, you'll write the composable
 function that brings it all together.
 
 1. In the `composeApp/src/androidMain` source set, in the `com.jetbrains.spacetutorial` package, create
@@ -711,7 +710,7 @@ function that brings it all together.
    }
    ```
 
-3. Then add a `loadLaunches()` call to the `init{}` block of the class, to request data from the API as soon as
+3. Then add a `loadLaunches()` call to the `init{}` block of the class to request data from the API as soon as
    the `RocketLaunchViewModel` object is created:
 
     ```kotlin
@@ -748,7 +747,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
    ![theme directory location](theme-directory.png){width=299}
 
-3. In each file of the theme, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to refer
+3. In each theme file, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to refer
    to your package:
 
     ```kotlin
@@ -794,7 +793,7 @@ Create the main `App()` composable for your application, and call it from a `Com
     }
     ```
 
-   Here you are making use of [the Koin ViewModel API](https://insert-koin.io/docs/reference/koin-compose/compose#viewmodel-for-composable)
+   Here, you are using the [Koin ViewModel API](https://insert-koin.io/docs/reference/koin-compose/compose#viewmodel-for-composable)
    to refer to the `viewModel` you declared in the Android Koin module.
 
 2. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
@@ -923,13 +922,13 @@ and its UI made using native Jetpack Compose.
 For the iOS part of the project, you'll make use of [SwiftUI](https://developer.apple.com/xcode/swiftui/) to build the user
 interface and the [Model View View-Model](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
 
-The Kotlin Multiplatform wizard generates an iOS project that already connected to the shared module. The Kotlin module
+The Kotlin Multiplatform wizard generates an iOS project that is already connected to the shared module. The Kotlin module
 is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
 using a regular `import` statement: `import Shared`.
 
 ### Turn off static linking
 
-The Kotlin Multiplatform wizard generates projects which are set up for static linking of iOS frameworks.
+The Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
 To use the SQLDelight library, allow the iOS framework to link dynamically.
 
 To do that, open the `shared/build.gradle.kts` file and change the `isStatic` property of the `iosTarget.binaries.framework`
@@ -960,7 +959,7 @@ module for iOS.
 
 1. In the `shared/src/iosMain/kotlin/` source set, create a file with the name `com/jetbrains/spacetutorial/KoinHelper.kt`
    (it will appear next to the `cache` folder).
-2. Add the `KoinHelper` class which will wrap the `SpaceXSDK` class with a lazy Koin injection:
+2. Add the `KoinHelper` class, which will wrap the `SpaceXSDK` class with a lazy Koin injection:
 
     ```kotlin
     package com.jetbrains.spacetutorial
@@ -1000,7 +999,7 @@ module for iOS.
     }
     ```
 
-Now you can start the Koin module in your iOS app to use the native database driver with the common `SpaceXSDK` class.
+Now, you can start the Koin module in your iOS app to use the native database driver with the common `SpaceXSDK` class.
 
 ### Implement the UI
 
@@ -1076,7 +1075,7 @@ data.
         * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
         property changes.
 
-5. Remove the `ContentView_Previews` structure: you won't be implementing a preview that would be compatible with
+5. Remove the `ContentView_Previews` structure: you won't need to implement a preview that should be compatible with
    your view model.
 
 6. Update the body of the `ContentView` class to display the list of launches and add the reload functionality.
@@ -1171,7 +1170,7 @@ It will allow you to call the SDK function with the correct database driver.
      that are instances of the `Exception` class or its subclass will be propagated to Swift as `NSError`.
      Therefore, all such exceptions can be caught by the `loadLaunches()` function.
 
-3. Go to the entry point of the app, the `iOSApp.swift` file, and initialize the Koin module, the view, and the view model:
+3. Go to the app's entry point, the `iOSApp.swift` file, and initialize the Koin module, the view, and the view model:
 
     ```Swift
     import SwiftUI
