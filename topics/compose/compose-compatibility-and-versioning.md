@@ -187,6 +187,7 @@ which version of Jetpack Compose artifact is used:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.6.2](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.2)   | 1.6.4                   | 1.2.1                             |
 | [1.6.1](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.1)   | 1.6.3                   | 1.2.1                             |
 | [1.6.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.0)   | 1.6.1                   | 1.2.0                             |
 | [1.5.12](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.5.12) | 1.5.4                   | 1.1.2                             |
