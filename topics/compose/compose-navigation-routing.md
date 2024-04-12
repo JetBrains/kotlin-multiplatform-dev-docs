@@ -18,7 +18,8 @@ Just as with Jetpack Compose, to set up navigation, you should:
      `NavController.createGraph()` function.
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/MatkovIvan/nav_cupcake)
-which was converted from the [Navigate between screens with Compose] Android codelab.
+which was converted from the [Navigate between screens with Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0)
+Android codelab.
 
 Current limitations of navigation in Compose Multiplatform, compared to Jetpack Compose:
 * [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported.
