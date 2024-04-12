@@ -17,17 +17,29 @@ Just as with Jetpack Compose, to set up navigation, you should:
    2. Create a navigation graph, either directly, as part of adding the `NavHost`, or programmatically, using the
      `NavController.createGraph()` function.
 
+Each back stack entry (each navigation route included in the graph) implements the `LifecycleOwner` interface.
+See the [Lifecycle](compose-lifecycle.md) page for details on the current lifecycle implementation in Compose Multiplatform. 
+
+## Sample project
+
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/MatkovIvan/nav_cupcake)
 which was converted from the [Navigate between screens with Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0)
 Android codelab.
+
+Things to note:
+* [The composable expect function](https://github.com/MatkovIvan/nav_cupcake/blob/master/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt)
+  for creating `ViewModel`s that is necessary because there is no binary compatible overload on Android yet.
+* [The ViewModel factory](https://github.com/MatkovIvan/nav_cupcake/blob/master/composeApp/src/jbMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.jb.kt)
+  that allows creating `ViewModel`s of the correct type on iOS and web.
+* Compose Multiplatform string resources used in place of Jetpack Compose resources.
+
+## Limitations
 
 Current limitations of navigation in Compose Multiplatform, compared to Jetpack Compose:
 * [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported.
 * The [BackHandler](https://developer.android.com/develop/ui/compose/libraries#handling_the_system_back_button) function
   and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
   are also not supported.
-
-<!-- In navigation, each back stack entry (each navigation route) also implements the `LifecycleOwner` interface. -->
 
 <!-- A switch between different screens of the app makes it change its state from Resumed to Started. "Resumed" is also described
 as "settled": the act of navigation is considered finished when the new screen is prepared and active. -->
