@@ -18,6 +18,8 @@ Just as with Jetpack Compose, to set up navigation, you should:
      `NavController.createGraph()` function.
 
 Each back stack entry (each navigation route included in the graph) implements the `LifecycleOwner` interface.
+A switch between different screens of the app makes it change its state from `RESUMED` to `STARTED` and back.
+`RESUMED` is also described as "settled": the act of navigation is considered finished when the new screen is prepared and active.
 See the [Lifecycle](compose-lifecycle.md) page for details on the current lifecycle implementation in Compose Multiplatform. 
 
 ## Sample project
@@ -27,10 +29,10 @@ which was converted from the [Navigate between screens with Compose](https://dev
 Android codelab.
 
 Things to note:
-* [The composable expect function](https://github.com/MatkovIvan/nav_cupcake/blob/master/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt)
-  for creating `ViewModel`s that is necessary because there is no binary compatible overload on Android yet.
-* [The ViewModel factory](https://github.com/MatkovIvan/nav_cupcake/blob/master/composeApp/src/jbMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.jb.kt)
-  that allows creating `ViewModel`s of the correct type on iOS and web.
+* [The ViewModel factory](https://github.com/MatkovIvan/nav_cupcake/blob/1dc15b6ef68f68ba358a32501802142967f6494b/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt#L18)
+  allows creating `ViewModel` entities of the correct type ob iOS and web.
+* The [ComposeViewModelStoreOwner](https://github.com/MatkovIvan/nav_cupcake/blob/1dc15b6ef68f68ba358a32501802142967f6494b/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt#L27)
+  class implements the `ViewModelStoreOwner` interface to provide a fallback for platforms other than Android and desktop.
 * Compose Multiplatform string resources used in place of Jetpack Compose resources.
 
 ## Limitations
@@ -39,10 +41,7 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
 * [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported.
 * The [BackHandler](https://developer.android.com/develop/ui/compose/libraries#handling_the_system_back_button) function
   and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
-  are also not supported.
-
-<!-- A switch between different screens of the app makes it change its state from Resumed to Started. "Resumed" is also described
-as "settled": the act of navigation is considered finished when the new screen is prepared and active. -->
+  are not supported on any platform besides Android.
 
 ## Third-party alternatives
 
