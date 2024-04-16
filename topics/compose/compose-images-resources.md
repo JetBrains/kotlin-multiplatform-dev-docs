@@ -25,6 +25,15 @@ When working with resources in Compose Multiplatform, consider the current condi
   However, you can still store platform-specific resources in a platform `composeResources` directory and read them as a
   byte array. All resources will be included in each final app.
 
+> Since the version 1.6.10-beta01, limitations on resource placement have been lifted:
+> you can store resources in any Gradle module and any source set, as well as publish projects and libraries
+> with resources included.
+> 
+> To use the multimodule functionality, you'll need a 2.0.0 Beta or RC version of the [Kotlin Gradle plugin](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android)
+> and Gradle 7.6 or newer.
+>
+{type="tip"}
+
 ## Setup
 
 To access resources in your multiplatform projects:
@@ -51,6 +60,29 @@ To access resources in your multiplatform projects:
    * Fonts should be in the `font` directory.
    * Strings (`strings.xml`) should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
+
+4. > Available starting with 1.6.10-beta01.
+   >
+   {type="warning"}
+   
+   If necessary, you can alter the default settings for Compose Multiplatform resources by adding a `compose.resources{}`
+   block to the `build.gradle.kts` file:
+
+    ```kotlin
+    compose.resources {
+        publicResClass = true
+        packageOfResClass = "me.sample.library.resources"
+        generateResClass = always
+    }
+    ```
+
+   * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [private](https://kotlinlang.org/docs/visibility-modifiers.html).
+   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (for access within the code
+     as well as for isolation in a final artifact.) By default, Compose Multiplatform uses the
+     `{group name}.{module name}.generated.resources` package.
+   * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
+     when the resource library is only available transitively. By default, the `auto` value is used: generate the `Res`
+     class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ## Qualifiers
 
@@ -208,6 +240,16 @@ You can use special symbols in string resources:
 * `\n` — for a new line
 * `\t` — for a tab symbol
 * `\uXXXX` — for a specific Unicode character
+
+#### Plurals
+
+> Plurals are available in Compose Multiplatform starting with version 1.6.10-beta01.
+> 
+{type="warning"}
+
+You can define plurals ([quantity strings](https://developer.android.com/guide/topics/resources/string-resource#Plurals) in Android)
+among your string resources. To 
+
 
 #### String templates
 
