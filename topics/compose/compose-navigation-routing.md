@@ -1,5 +1,7 @@
 [//]: # (title: Navigation and routing)
 
+> The Navigation library is available in Compose Multiplatform starting with version 1.6.10-beta01.
+> 
 > The navigation library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > You're welcome to try it in your Compose Multiplatform projects.
 > We would appreciate your feedback on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).

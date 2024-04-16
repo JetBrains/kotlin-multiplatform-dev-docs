@@ -1,5 +1,9 @@
 [//]: # (title: Lifecycle)
 
+> The Lifecycle library is available in Compose Multiplatform starting with version 1.6.10-beta01.
+>
+{type="warning"}
+
 Lifecycle of components in Compose Multiplatform is adopted from the Jetpack Compose [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 concept. Lifecycle-aware components can react to changes in the lifecycle status of other components and help you
 produce better-organized, and often lighter code, that is easier to maintain.
