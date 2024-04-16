@@ -1,7 +1,5 @@
 [//]: # (title: Navigation and routing)
 
-> The Navigation library is available in Compose Multiplatform starting with version 1.6.10-beta01.
-> 
 > The navigation library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > You're welcome to try it in your Compose Multiplatform projects.
 > We would appreciate your feedback on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
@@ -23,6 +21,24 @@ Each back stack entry (each navigation route included in the graph) implements t
 A switch between different screens of the app makes it change its state from `RESUMED` to `STARTED` and back.
 `RESUMED` is also described as "settled": the act of navigation is considered finished when the new screen is prepared and active.
 See the [Lifecycle](compose-lifecycle.md) page for details on the current lifecycle implementation in Compose Multiplatform. 
+
+## Setup
+
+To use the navigation library, add the following dependency to your common source set:
+
+```kotlin
+kotlin {
+    ...
+    sourceSets {
+        ...
+        commonMain.dependencies {
+            ...
+            implementation(libs.androidx.navigation.compose)
+        }
+        ...
+    }
+}
+```
 
 ## Sample project
 
