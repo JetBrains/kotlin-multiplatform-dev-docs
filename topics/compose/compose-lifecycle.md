@@ -1,8 +1,8 @@
 [//]: # (title: Lifecycle)
 
-Lifecycle of components in Compose Multiplatform is adopted from the Jetpack Compose [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
+Lifecycle of components in Compose Multiplatform is adopted from the Jetpack Compose [lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 concept. Lifecycle-aware components can react to changes in the lifecycle status of other components and help you
-produce better-organized, and often lighter code, that is easier to maintain.
+produce better-organized, and often lighter, code that is easier to maintain.
 
 Lifecycle functionality on Android originally was represented by [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
 Android Jetpack introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
@@ -23,17 +23,19 @@ The flow of lifecycle states and events
 
 ### iOS
 
-| Native event/notification | Lifecycle event | Lifecycle state change |
-|---------------------------|-----------------|------------------------|
-| `viewDidDisappear`        | `ON_STOP`       | `STARTED` → `CREATED`  |
-| `viewWillAppear`          | `ON_START`      | `CREATED` → `STARTED`  |
-| `didEnterBackground`      | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
-| `willEnterForeground`     | `ON_RESUME`     | `STARTED` → `RESUMED`  |
+| Native events and&nbsp;notifications | Lifecycle event | Lifecycle state change |
+|--------------------------------------|-----------------|------------------------|
+| `viewDidDisappear`                   | `ON_STOP`       | `STARTED` → `CREATED`  |
+| `viewWillAppear`                     | `ON_START`      | `CREATED` → `STARTED`  |
+| `didEnterBackground`                 | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `willEnterForeground`                | `ON_RESUME`     | `STARTED` → `RESUMED`  |
 
 ### Web
 
-Due to limitations of the Wasm target, lifecycles skip the `CREATED` state as the application is always attached to the page,
-and never reach the `DESTROYED` state as web pages are usually terminated only when the user closes the tab.
+Due to limitations of the Wasm target, lifecycles:
+
+* skip the `CREATED` state as the application is always attached to the page,
+* never reach the `DESTROYED` state as web pages are usually terminated only when the user closes the tab.
 
 | Native event | Lifecycle event | Lifecycle state change |
 |--------------|-----------------|------------------------|
@@ -76,13 +78,13 @@ approach to building UI can now be implemented in common code, with a couple of 
 
 * Current `ViewModel` implementation is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
   * For this reason, Compose Multiplatform does not yet implement a common `ViewModelStoreOwner` interface. Such an
-    implementation is planned for a future version of the library. You can, however, implement it yourself for your app.
-  * `ViewModelStoreOwner` is, however, currently implemented in the scope needed for the experimental [navigation library](compose-navigation-routing.md).
+    implementation is planned for a future version of the library. You can implement it yourself for your project.
+  * `ViewModelStoreOwner` is, however, currently implemented in the scope needed for the [navigation library](compose-navigation-routing.md).
 * The `ViewModel` class works out of the box only for Android and desktop, where objects of the needed class can be created
-  through class reflection. For iOS and web targets, you have to implement factories that create new `ViewModel` instances when
-  needed.
+  through class reflection. For iOS and web targets, you have to implement factories that explicitly create
+  new `ViewModel` instances.
 
-To use the view-model library, add the following dependency to your common source set:
+To use the multiplatform `ViewModel` implementation, add the following dependency to your `commonMain` source set:
 
 ```kotlin
 kotlin {
