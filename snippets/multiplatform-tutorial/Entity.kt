@@ -1,4 +1,4 @@
-package com.jetbrains.handson.kmm.shared.entity
+package com.jetbrains.spacetutorial.entity
 
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
