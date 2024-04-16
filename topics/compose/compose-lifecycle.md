@@ -4,48 +4,49 @@ Lifecycle of components in Compose Multiplatform is adopted from the Jetpack Com
 concept. Lifecycle-aware components can react to changes in the lifecycle status of other components and help you
 produce better-organized, and often lighter code, that is easier to maintain.
 
-## Multiplatform lifecycle
-
 Lifecycle functionality on Android originally was represented by [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
 Android Jetpack introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
 with the `Lifecycle` class to observe activity states.
 
-### States and events
+Compose Multiplatform provides a common `LifecycleOwner` implementation,
+which allows extending this functionality to other platforms and observing lifecycle states in common code
+
+## States and events
 
 The flow of lifecycle states and events:
 
 ![Lifecycle diagram](lifecycle-states.svg){width="700"}
 
-### Mapping Android lifecycle to other platforms
+## Mapping Android lifecycle to other platforms
 
-#### iOS
+### iOS
 
 | Native event/notification | Lifecycle event | Lifecycle state change |
 |---------------------------|-----------------|------------------------|
-| viewDidDisappear          | ON_STOP         | STARTED → CREATED      |
-| viewWillAppear            | ON_START        | CREATED → STARTED      |
-| didEnterBackground        | ON_PAUSE        | RESUMED → STARTED      |
-| willEnterForeground       | ON_RESUME       | STARTED → RESUMED      |
+| `viewDidDisappear`        | `ON_STOP`       | `STARTED` → `CREATED`  |
+| `viewWillAppear`          | `ON_START`      | `CREATED` → `STARTED`  |
+| `didEnterBackground`      | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `willEnterForeground`     | `ON_RESUME`     | `STARTED` → `RESUMED`  |
 
-#### Web
+### Web
 
 Due to limitations of the Wasm target, lifecycles skip the `CREATED` state as the application is always attached to the page,
 and never reach the `DESTROYED` state as web pages are usually terminated only when the user closes the tab.
 
 | Native event | Lifecycle event | Lifecycle state change |
 |--------------|-----------------|------------------------|
-| blur         | ON_PAUSE        | RESUMED → STARTED      |
-| focus        | ON_RESUME       | STARTED → RESUMED      |
+| `blur`       | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `focus`      | `ON_RESUME`     | `STARTED` → `RESUMED`  |
 
-#### Desktop
+### Desktop
 
-| Swing listener callbacks | Lifecycle event | Lifecycle state change |
-|--------------------------|-----------------|------------------------|
-| windowIconified          | ON_STOP         | STARTED → CREATED      |
-| windowDeiconified        | ON_START        | CREATED → STARTED      |
-| windowGainedFocus        | ON_PAUSE        | RESUMED → STARTED      |
-| windowLostFocus          | ON_RESUME       | STARTED → RESUMED      |
-| dispose                  | ON_DESTROY      | CREATED → DESTROYED    |
+| Swing listener callbacks | Lifecycle event | Lifecycle state change  |
+|--------------------------|-----------------|-------------------------|
+| `windowIconified`        | `ON_STOP`       | `STARTED` → `CREATED`   |
+| `windowDeiconified`      | `ON_START`      | `CREATED` → `STARTED`   |
+| `windowGainedFocus`      | `ON_PAUSE`      | `RESUMED` → `STARTED`   |
+| `windowLostFocus`        | `ON_RESUME`     | `STARTED` → `RESUMED`   |
+| `dispose`                | `ON_DESTROY`    | `CREATED` → `DESTROYED` |
 
 
 ## Lifecycle implementation
