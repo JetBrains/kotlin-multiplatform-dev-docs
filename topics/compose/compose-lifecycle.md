@@ -5,12 +5,8 @@ concept.
 Lifecycle-aware components can react to changes in the lifecycle state of other components and help you
 produce better-organized, and often lighter, code that is easier to maintain.
 
-Lifecycle functionality on Android originally consisted of [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
-Jetpack Compose introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
-with the `Lifecycle` class to observe activity states.
-
-Compose Multiplatform provides a common `LifecycleOwner` implementation,
-which allows extending this functionality to other platforms and observing lifecycle states in common code.
+Compose Multiplatform provides a common `LifecycleOwner` implementation, which extends the original Jetpack Compose
+functionality to other platforms and helps observe lifecycle states in common code.
 
 ## States and events
 
@@ -18,7 +14,6 @@ The flow of lifecycle states and events
 (same as for the [Jetpack lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)):
 
 ![Lifecycle diagram](lifecycle-states.svg){width="700"}
-
 
 ## Mapping Android lifecycle to other platforms
 
@@ -77,14 +72,6 @@ For details on how lifecycle works in navigation components, see [Navigation and
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can now be implemented in common code, with a couple of restrictions:
 
-* Current `ViewModel` implementation is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
-  * For this reason, Compose Multiplatform does not yet implement a common `ViewModelStoreOwner` interface. Such an
-    implementation is planned for a future version of the library. You can implement it yourself for your project.
-  * `ViewModelStoreOwner` is, however, currently implemented in the scope needed for the [navigation library](compose-navigation-routing.md).
-* The `ViewModel` class works out of the box only for Android and desktop, where objects of the needed class can be created
-  through class reflection. For iOS and web targets, you have to implement factories that explicitly create
-  new `ViewModel` instances.
-
 To use the multiplatform `ViewModel` implementation, add the following dependency to your `commonMain` source set:
 
 ```kotlin
@@ -94,9 +81,22 @@ kotlin {
         // ...
         commonMain.dependencies {
             // ...
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-alpha01")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%")
         }
         // ...
     }
 }
 ```
+
+Keep in mind the current limitations of the library:
+
+* Current `ViewModel` implementation is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+  
+  That's why the `ViewModelStoreOwner` interface is currently implemented only in the scope of the [navigation library](compose-navigation-routing.md).
+  We plan to add a common implementation of the interface to Compose Multiplatform in future releases.
+  However, you can implement it yourself for your specific project.
+
+* The `ViewModel` class works out of the box only for Android and desktop, where objects of the needed class can be created
+  through class reflection. For iOS and web targets, you have to implement factories that explicitly create
+  new `ViewModel` instances.
+

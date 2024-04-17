@@ -20,7 +20,7 @@ kotlin {
         // ...
         commonMain.dependencies {
             // ...
-            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha01")
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%")
         }
         // ...
     }
@@ -49,7 +49,7 @@ A switch between different screens of the app makes it change its state from `RE
 `RESUMED` is also described as "settled": navigation is considered finished when the new screen is prepared and active.
 See the [Lifecycle](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
 
-Things to note:
+Consider the following implementation aspects:
 * [The ViewModel factory](https://github.com/MatkovIvan/nav_cupcake/blob/1dc15b6ef68f68ba358a32501802142967f6494b/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt#L18)
   allows creating `ViewModel` entities of the correct type on iOS and web.
 * The [ComposeViewModelStoreOwner](https://github.com/MatkovIvan/nav_cupcake/blob/1dc15b6ef68f68ba358a32501802142967f6494b/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt#L27)
