@@ -61,10 +61,10 @@ To access resources in your multiplatform projects:
    * Strings (`strings.xml`) should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. > Available starting with 1.6.10-beta01.
+4. > Available starting with Compose Multiplatform 1.6.10-beta01.
    >
-   {type="warning"}
-   
+   {type="warning"} 
+
    If necessary, you can alter the default settings for Compose Multiplatform resources by adding a `compose.resources{}`
    block to the `build.gradle.kts` file:
 
@@ -243,13 +243,36 @@ You can use special symbols in string resources:
 
 #### Plurals
 
-> Plurals are available in Compose Multiplatform starting with version 1.6.10-beta01.
-> 
+> Available starting with Compose Multiplatform 1.6.10-beta01.
+>
 {type="warning"}
 
-You can define plurals ([quantity strings](https://developer.android.com/guide/topics/resources/string-resource#Plurals) in Android)
-among your string resources. To 
+When your UI displays quantities of something, you might want to support grammatical agreement for different numbers
+of the same thing (1 _book_, many _books_ and so on) without creating programmatically unrelated strings.
 
+The concept and base implementation in Compose Multiplatform is the same as for [quantity strings](https://developer.android.com/guide/topics/resources/string-resource#Plurals)
+on Android (follow the link to read more about nuances and best practices of using plurals in your project).
+
+* The supported variants are `zero`, `one`, `two`, `few`, `many`, and `other`. Note that not all variants are even 
+  considered for every language: for example, `zero` is ignored for English, because it is the same as any other plural
+  except 1. Rely on a language specialist to know what distinctions the language actually insists upon.
+* It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1".
+  If this doesn't worsen the user experience, 
+
+To define a plural, add a `<plurals>` element to any .xml file in your `composeResources/values` directory.
+A `plurals` collection is a simple resource referenced using the name attribute (not the name of the XML file).
+As such, you can combine `plurals` resources with other simple resources in the one XML file, under one `<resources>` element:
+
+```xml
+<resources>
+    <string name="app_name">Compose Resources App</string>
+    <string name="hello">😊 Hello world!</string>
+    <plurals name="new_message">
+        <item quantity="one">%1$d new message</item>
+        <item quantity="other">%1$d new messages</item>
+    </plurals>
+</resources>
+```
 
 #### String templates
 
