@@ -375,6 +375,7 @@ val uri = Res.getUri("files/my_video.mp4")
 ```
 
 The `uri` variable will contain the precise platform-specific path to the file that the path points to.
+External libraries can use that path to access the file in a manner that suits them.
 
 ## What's next?
 
