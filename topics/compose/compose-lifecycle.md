@@ -15,7 +15,7 @@ which allows extending this functionality to other platforms and observing lifec
 ## States and events
 
 The flow of lifecycle states and events
-(diagram borrowed from the [Jetpack lifecycle documentation](https://developer.android.com/topic/libraries/architecture/lifecycle)):
+(same as for the [Jetpack lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)):
 
 ![Lifecycle diagram](lifecycle-states.svg){width="700"}
 
