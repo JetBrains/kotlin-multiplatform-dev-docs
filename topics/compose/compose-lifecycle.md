@@ -1,10 +1,11 @@
 [//]: # (title: Lifecycle)
 
 Lifecycle of components in Compose Multiplatform is adopted from the Jetpack Compose [lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-concept. Lifecycle-aware components can react to changes in the lifecycle status of other components and help you
+concept.
+Lifecycle-aware components can react to changes in the lifecycle state of other components and help you
 produce better-organized, and often lighter, code that is easier to maintain.
 
-Lifecycle functionality on Android originally was represented by [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
+Lifecycle functionality on Android originally consisted of [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
 Android Jetpack introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
 with the `Lifecycle` class to observe activity states.
 
