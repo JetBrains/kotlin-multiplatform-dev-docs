@@ -6,11 +6,11 @@ Lifecycle-aware components can react to changes in the lifecycle state of other 
 produce better-organized, and often lighter, code that is easier to maintain.
 
 Lifecycle functionality on Android originally consisted of [a set of callbacks](https://developer.android.com/guide/components/activities/activity-lifecycle).
-Android Jetpack introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
+Jetpack Compose introduced [the dedicated library](https://developer.android.com/reference/kotlin/androidx/lifecycle/package-summary.html)
 with the `Lifecycle` class to observe activity states.
 
 Compose Multiplatform provides a common `LifecycleOwner` implementation,
-which allows extending this functionality to other platforms and observing lifecycle states in common code
+which allows extending this functionality to other platforms and observing lifecycle states in common code.
 
 ## States and events
 
@@ -35,8 +35,8 @@ The flow of lifecycle states and events
 
 Due to limitations of the Wasm target, lifecycles:
 
-* skip the `CREATED` state as the application is always attached to the page,
-* never reach the `DESTROYED` state as web pages are usually terminated only when the user closes the tab.
+* Skip the `CREATED` state, as the application is always attached to the page.
+* Never reach the `DESTROYED` state, as web pages are usually terminated only when the user closes the tab.
 
 | Native event | Lifecycle event | Lifecycle state change |
 |--------------|-----------------|------------------------|
@@ -58,19 +58,19 @@ Due to limitations of the Wasm target, lifecycles:
 
 > The lifecycle implementation is available in Compose Multiplatform starting with 1.6.10-beta01.
 >
-{type="warning"}
+{type="note"}
 
 Composables generally don't need unique lifecycles: there is usually a common `LifecycleOwner` which provides a lifecycle
 for all interconnected entities. All composables created by Compose Multiplatform share the same lifecycle
-by default: they can subscribe to its events, refer to the lifecycle state, and so on.
+: they can subscribe to its events, refer to the lifecycle state, and so on.
 
 > The `LifecycleOwner` object is provided as a [CompositionLocal](https://developer.android.com/reference/kotlin/androidx/compose/runtime/CompositionLocal).
-> If you would like to manage a lifecycle separately for a particular composable subtree, you [create your own](https://developer.android.com/topic/libraries/architecture/lifecycle#implementing-lco)
+> If you would like to manage a lifecycle separately for a particular composable subtree, you can [create your own](https://developer.android.com/topic/libraries/architecture/lifecycle#implementing-lco)
 > `LifecycleOwner` implementation.
 >
 {type="tip"}
 
-For details on how lifecycle is used in navigation components, see [Navigation and routing](compose-navigation-routing.md).
+For details on how lifecycle works in navigation components, see [Navigation and routing](compose-navigation-routing.md).
 
 ## ViewModel implementation
 
@@ -89,14 +89,14 @@ To use the multiplatform `ViewModel` implementation, add the following dependenc
 
 ```kotlin
 kotlin {
-    ...
+    // ...
     sourceSets {
-        ...
+        // ...
         commonMain.dependencies {
-            ...
+            // ...
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-alpha01")
         }
-        ...
+        // ...
     }
 }
 ```
