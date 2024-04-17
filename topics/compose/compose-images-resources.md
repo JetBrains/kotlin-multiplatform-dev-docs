@@ -58,15 +58,11 @@ To access resources in your multiplatform projects:
 
    * Images should be in the `drawable` directory.
    * Fonts should be in the `font` directory.
-   * Strings (`strings.xml`) should be in the `values` directory.
+   * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. > Available starting with Compose Multiplatform 1.6.10-beta01.
-   >
-   {type="warning"} 
-
-   If necessary, you can alter the default settings for Compose Multiplatform resources by adding a `compose.resources{}`
-   block to the `build.gradle.kts` file:
+4. Starting with Compose Multiplatform 1.6.10-beta01, you can alter the default settings for Compose Multiplatform
+   resources by adding a `compose.resources{}` block to the `build.gradle.kts` file:
 
     ```kotlin
     compose.resources {
@@ -190,6 +186,11 @@ Store all string resources in the `strings.xml` file in the `composeResources/va
 ```
 
 A static accessor is generated for each item in the `strings.xml` file.
+
+> Starting with Compose Multiplatform 1.6.10-beta01, there is no need to constrain yourself to `strings.xml`:
+> accessors for strings are going to be correctly generated for all XML files in the `values` directory.
+>
+{type="warning"}
 
 To get string resources as a `String`, use the following code:
 
@@ -359,6 +360,21 @@ You can also load remote files from the internet using their URL. To load remote
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
+
+### Accessing resources from external libraries
+
+> Available starting with Compose Multiplatform 1.6.10-beta01.
+>
+{type="warning"}
+
+If you would like to make Compose Multiplatform resources available to other libraries used in your project, you
+can call the `Res.getUri()` function with the general path of the resource:
+
+```kotlin
+val uri = Res.getUri("files/my_video.mp4")
+```
+
+The `uri` variable will contain the precise platform-specific path to the file that the path points to.
 
 ## What's next?
 
