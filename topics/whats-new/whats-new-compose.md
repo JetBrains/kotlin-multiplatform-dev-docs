@@ -1,4 +1,60 @@
-[//]: # (title: What's new in Compose Multiplatform 1.6.0)
+[//]: # (title: What's new in Compose Multiplatform)
+
+The latest stable feature release is [1.6.0](#1-6-0), and the latest EAP feature release is [1.6.10](#1-6-10-beta01).
+
+## 1.6.10-beta01
+
+Here are the highlights for this EAP feature release:
+
+* [Support for multimodule projects with Compose Multiplatform resources](#support-for-multimodule-projects-with-compose-multiplatform-resources)
+* [Experimental navigation library](#experimental-navigation-library)
+* [Lifecycle library with experimental common ViewModel](#lifecycle-library)
+* [Known issues: bugs](#known-issues-bugs)
+
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-beta01-april-2024).
+
+### Support for multimodule projects with Compose Multiplatform resources
+
+In 1.6.10-beta01, you can store resources in any Gradle module and any source set, as well as publish projects and libraries
+with resources included.
+
+This functionality requires Kotlin version 2.0.0-Beta5 or newer, as well as Gradle 7.6 or newer.
+
+### Experimental navigation library
+
+The common navigation library based on Jetpack Compose is now available, see [the docs](compose-navigation-routing.md)
+for details and an example of navigation adopted from an Android app.
+
+Notable limitations in this version:
+* [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported yet.
+* The [BackHandler](https://developer.android.com/develop/ui/compose/libraries#handling_the_system_back_button) function
+  and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
+  are supported only on Android.
+
+### Lifecycle library
+
+The common lifecycle library based on Jetpack lifecycle is now available, see [the docs](compose-lifecycle.md)
+for details.
+
+Although primarily implemented to support the common navigation functionality, the library provides an experimental
+cross-platform `ViewModel` implementation and exposes the common `LifecycleOwner` interface you can implement in your
+own projects.
+
+A notable limitation of this version: Compose Multiplatform does not provide a general `ViewModelStoreOwner` implementation.
+To use it beyond a `NavHost` you'll need to provide your own implementation. This is going to be remedied in the stable version.
+
+### Known issues: bugs
+
+* A crash at startup on devices with iOS version older than 17 due to a [bug](https://github.com/JetBrains/compose-multiplatform/issues/4644).
+* `inline fun <reified VM> viewModel(...)` is not available in common code due to a [compiler bug](https://github.com/JetBrains/compose-multiplatform/issues/3147).
+
+  You can use this overload instead:
+
+    ```kotlin
+    fun <VM> viewModel(KClass, ...)
+    ```
+
+## 1.6.0
 
 Here are the highlights of the Compose Multiplatform 1.6.0 release:
 
@@ -11,7 +67,7 @@ Here are the highlights of the Compose Multiplatform 1.6.0 release:
 * [Kotlin/Wasm artifacts in stable versions](#kotlin-wasm-artifacts-available-in-stable-versions-of-the-framework)
 * [Known issues: missing dependencies](#known-issues-missing-dependencies)
 
-## Dependencies
+### Dependencies
 
 This version of Compose Multiplatform is based on the following Jetpack Compose libraries:
 
@@ -22,9 +78,9 @@ This version of Compose Multiplatform is based on the following Jetpack Compose 
 * [Material 1.6.1](https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.1)
 * [Material3 1.2.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.2.0)
 
-## Breaking changes
+### Breaking changes
 
-### Padding for text with lineHeight set trimmed by default
+#### Padding for text with lineHeight set trimmed by default
 
 With the added support for [LineHeightStyle.Trim](https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle.Trim),
 Compose Multiplatform aligns with Android in the way text padding is trimmed.
@@ -37,7 +93,7 @@ This is in line with `compose.material` changes from [the 1.6.0-alpha01 release]
   `LineHeightStyle.Trim` and implements `Trim.None` as the default value.
 * Explicit `lineHeight` have been added to `TextStyle` of `Typography`, which led to the [next breaking change](#using-fontsize-in-materialtheme-requires-lineheight).
 
-### Using fontSize in MaterialTheme requires lineHeight
+#### Using fontSize in MaterialTheme requires lineHeight
 
 > This affects only `material` components. `material3` already had this restriction.
 >
@@ -55,15 +111,15 @@ Jetpack Compose now [recommends](https://issuetracker.google.com/issues/32187241
 >
 {type="tip"}
 
-### New approach to resource organization
+#### New approach to resource organization
 
 If you have been using the resources API in preview versions of Compose Multiplatform 1.6.0, familiarize yourself with
 [the documentation for the current version](compose-images-resources.md): 1.6.0-beta01 changed the way resource files
 should be stored in the project folders to be available to the project code.
 
-## Across platforms
+### Across platforms
 
-### Improved resources API (all platforms)
+#### Improved resources API (all platforms)
 
 The new experimental API adds support for strings and fonts and allows you to share and access resources
 in common Kotlin more comfortably:
@@ -77,7 +133,7 @@ in common Kotlin more comfortably:
 For a closer look at resource qualifiers, as well as a more in-depth overview of the new resources API,
 see [Images and resources](compose-images-resources.md).
 
-### UI testing API (Experimental, all platforms)
+#### UI testing API (Experimental, all platforms)
 
 The experimental API for UI testing with Compose Multiplatform, which was already available for desktop and Android,
 now supports all platforms. You can write and run common tests that validate the behavior of your application's UI
@@ -90,9 +146,9 @@ Jetpack Compose.
 
 For the setup instructions and test examples, see [Testing Compose Multiplatform UI](compose-test.md).
 
-### Changes from Jetpack Compose and Material 3 (all platforms)
+#### Changes from Jetpack Compose and Material 3 (all platforms)
 
-#### Jetpack Compose 1.6.1
+##### Jetpack Compose 1.6.1
 
 Merging the latest release of Jetpack Compose positively affects performance on all platforms. For details,
 see [the announcement on the Android Developers Blog](https://android-developers.googleblog.com/2024/01/whats-new-in-jetpack-compose-january-24-release.html).
@@ -111,7 +167,7 @@ Jetpack Compose features that are not ported to Compose Multiplatform yet:
 
 The JetBrains team is working on adopting these features in upcoming versions of Compose Multiplatform.
 
-#### Compose Material 3 1.2.0
+##### Compose Material 3 1.2.0
 
 Release highlights:
 * A new experimental component `Segmented Button`, with single and multiple selection.
@@ -123,7 +179,7 @@ Release highlights:
 
 For more details on changes in Material 3, see [the release post on the Material Design Blog](https://material.io/blog/material-3-compose-1-2).
 
-### Separate platform views for popups, dialogs, and dropdowns (iOS, desktop)
+#### Separate platform views for popups, dialogs, and dropdowns (iOS, desktop)
 
 Sometimes, it's important that popup elements (for example, tooltips and dropdown menus) are not limited by the initial
 composable canvas or the app window. This becomes especially relevant if the composable view does not occupy the full screen
@@ -131,22 +187,22 @@ but needs to spawn an alert dialog. In 1.6.0, there is a way to achieve that rel
 
 Note that popups and dialogs are still unable to draw anything out of their own bounds (for example, a shadow of the topmost container).
 
-#### iOS (Stable)
+##### iOS (Stable)
 
 On iOS, the feature is active by default.
 To switch back to the old behavior, set the `platformLayers` parameter to `false`:
 
 ```kotlin
 ComposeUIViewController(
-    configure = {
-        platformLayers = false
-    }
+  configure = {
+    platformLayers = false
+  }
 ) {
-    // your Compose code
+  // your Compose code
 }
 ```
 
-#### Desktop (Experimental)
+##### Desktop (Experimental)
 
 To use the feature on desktop, set the `compose.layers.type`
 system property. Supported values:
@@ -185,11 +241,11 @@ fun main() = SwingUtilities.invokeLater {
 
 @Composable
 fun ComposeContent() {
-    Box(Modifier.fillMaxSize().background(Color.Green)) {
-        Dialog(onDismissRequest = {}) {
-            Box(Modifier.size(100.dp).background(Color.Yellow))
-        }
+  Box(Modifier.fillMaxSize().background(Color.Green)) {
+    Dialog(onDismissRequest = {}) {
+      Box(Modifier.size(100.dp).background(Color.Yellow))
     }
+  }
 }
 ```
 {initial-collapse-state="collapsed"  collapsed-title="val window = JFrame()"}
@@ -198,7 +254,7 @@ The `Dialog` (yellow) is drawn in full, regardless of the bounds of the parent `
 
 ![Dialog outside the bounds of the parent panel](compose-desktop-separate-dialog.png){width=700}
 
-### Support for text decoration line styles (iOS, desktop, web)
+#### Support for text decoration line styles (iOS, desktop, web)
 
 Compose Multiplatform now allows setting underline styles for text using the `PlatformTextStyle` class.
 
@@ -223,7 +279,7 @@ Text(
 You can use solid, double-width solid, dotted, dashed, and wavy line styles. See all available options in
 [the source code](https://github.com/JetBrains/compose-multiplatform-core/blob/jb-main/compose/ui/ui-text/src/skikoMain/kotlin/androidx/compose/ui/text/TextDecorationLineStyle.kt#L21).
 
-### Accessing fonts installed on the system (iOS, desktop, web)
+#### Accessing fonts installed on the system (iOS, desktop, web)
 
 You can now access fonts installed on the system from your Compose Multiplatform app: use the `SystemFont` class to load
 fonts with appropriate font styles and font weights:
@@ -244,9 +300,9 @@ for an extensive example):
 FontFamily("Menlo")
 ```
 
-## iOS
+### iOS
 
-### Accessibility support
+#### Accessibility support
 
 Compose Multiplatform for iOS now allows people with disabilities to interact with Compose UI with the same level of comfort
 as with the native iOS UI:
@@ -258,7 +314,7 @@ This also means that you can make the Compose Multiplatform semantic data availa
 
 For details on implementation and customization API, see [Support for iOS accessibility features](compose-ios-accessibility.md).
 
-### Changing opacity for composable view
+#### Changing opacity for composable view
 
 The `ComposeUIViewController` class has one more configuration option now, changing the opacity of a view's background
 to be transparent.
@@ -269,9 +325,9 @@ to be transparent.
 
 ```kotlin
 val appController = ComposeUIViewController(configure = {
-      this.opaque = false
+  this.opaque = false
 }) {
-    App()
+  App()
 }
 ```
 
@@ -279,12 +335,12 @@ An example of what a transparent background can help you achieve:
 
 ![Compose opaque = false demo](compose-opaque-property.png){width=700}
 
-### Selecting text in SelectionContainer by double and triple tap
+#### Selecting text in SelectionContainer by double and triple tap
 
 Previously, Compose Multiplatform for iOS allowed users to use multiple tap for selecting text only in text input fields.
 Now, double and triple tap gestures also work for selecting text displayed in `Text` components inside a `SelectionContainer`.
 
-### Interop with UIViewController
+#### Interop with UIViewController
 
 Some native APIs that are not implemented as `UIView`, for example, `UITabBarController`, or `UINavigationController` could not
 be embedded into a Compose Multiplatform UI using [the existing interop mechanism](compose-uikit-integration.md).
@@ -292,15 +348,15 @@ be embedded into a Compose Multiplatform UI using [the existing interop mechanis
 Now, Compose Multiplatform implements the `UIKitViewController` function that allows you to embed native iOS view controllers
 in your Compose UI.
 
-### Native-like caret behavior by long/single taps in text fields
+#### Native-like caret behavior by long/single taps in text fields
 
 Compose Multiplatform is now closer to the native iOS behavior of a caret in a text field:
 * The position of the caret after a single tap in a text field is determined with more precision.
 * Long tap and drag in a text field leads to moving the cursor, not entering selection mode like on Android.
 
-## Desktop
+### Desktop
 
-### Experimental support of improved interop blending
+#### Experimental support of improved interop blending
 
 In the past, the interop view implemented using the `SwingPanel` wrapper was always rectangular, and always
 in the foreground, on top of any Compose Multiplatform components. This made any popup elements
@@ -318,7 +374,7 @@ and you can now rely on Swing in the following use cases:
         //...
     )
     ```
-  
+
   You can see the way a `JButton` is clipped without this feature on the left, and the experimental blending on the right:
 
   ![Correct clipping with SwingPanel](compose-swingpanel-clipping.png)
@@ -329,9 +385,9 @@ and you can now rely on Swing in the following use cases:
 
 See known limitations and additional details in [the description of the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/915).
 
-## Web
+### Web
 
-### Kotlin/Wasm artifacts available in stable versions of the framework
+#### Kotlin/Wasm artifacts available in stable versions of the framework
 
 Stable versions of Compose Multiplatform support Kotlin/Wasm targets now. After you switch to 1.6.0, you don't
 have to specify a particular `dev-wasm` version of the `compose-ui` library in your list of dependencies.
@@ -340,7 +396,7 @@ have to specify a particular `dev-wasm` version of the `compose-ui` library in y
 >
 {type="warning"}
 
-## Known issues: missing dependencies
+### Known issues: missing dependencies
 
 There are a couple of libraries that can be missing with a default project configuration:
 
