@@ -37,7 +37,8 @@ cross-platform `ViewModel` implementation and exposes the common `LifecycleOwner
 own projects.
 
 A notable limitation of this version: Compose Multiplatform does not provide a general `ViewModelStoreOwner` implementation.
-To use it beyond a `NavHost` you'll need to provide your own implementation. This is going to be remedied in the stable version.
+To use it beyond a `NavHost` you'll need to provide your own implementation. This is going to be remedied in the stable
+1.6.10 release.
 
 ## Known issues: bugs
 
