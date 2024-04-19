@@ -71,5 +71,11 @@
         <toc-element id="amper.md" toc-title="Amper configuration tool"/>
     </toc-element>
     <toc-element toc-title="Multiplatform Gradle DSL reference" href="https://kotlinlang.org/docs/multiplatform-dsl-reference.html"/>
+    <toc-element toc-title="Multiplatform journal">
+        <toc-element toc-title="Cross-platform mobile development" id="cross-platform-mobile-development.md"/>
+        <toc-element toc-title="Native and cross-platform mobile development" id="native-and-cross-platform.md"/>
+        <toc-element toc-title="The six best cross-platform app development frameworks" id="cross-platform-frameworks.md"/>
+        <toc-element id="multiplatform-introduce-your-team.md"/>
+    </toc-element>
 
 </product-profile>
