@@ -44,8 +44,8 @@ Due to limitations of the Wasm target, lifecycles:
 |--------------------------|-----------------|-------------------------|
 | `windowIconified`        | `ON_STOP`       | `STARTED` → `CREATED`   |
 | `windowDeiconified`      | `ON_START`      | `CREATED` → `STARTED`   |
-| `windowGainedFocus`      | `ON_PAUSE`      | `RESUMED` → `STARTED`   |
-| `windowLostFocus`        | `ON_RESUME`     | `STARTED` → `RESUMED`   |
+| `windowLostFocus`        | `ON_PAUSE`      | `RESUMED` → `STARTED`   |
+| `windowGainedFocus`      | `ON_RESUME`     | `STARTED` → `RESUMED`   |
 | `dispose`                | `ON_DESTROY`    | `CREATED` → `DESTROYED` |
 
 
