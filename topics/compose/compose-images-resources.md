@@ -1,4 +1,4 @@
-[//]: # (title: Images and resources)
+[//]: # (title: Multiplatform resources)
 
 Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
 across all supported platforms. Resources are static content, such as images, fonts, and strings, which you can use from
@@ -13,8 +13,9 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 * Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
   and all of the resources on the JS platform that are read asynchronously.
-* Reading big raw files, like long videos, as a stream is not supported yet. Use separate files on the user device and
-  read them with the file system API, for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
+* Reading big raw files, like long videos, as a stream is not supported yet.
+  Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
+  for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
 * Multimodule projects are generally not supported yet, but resources in the top-level application module are available. The JetBrains team is working on adding this functionality in future releases.
   For now, store all resources in the main application module.
 * The publication of Compose Multiplatform libraries with resources is not supported yet. The JetBrains team is working
@@ -25,11 +26,11 @@ When working with resources in Compose Multiplatform, consider the current condi
   However, you can still store platform-specific resources in a platform `composeResources` directory and read them as a
   byte array. All resources will be included in each final app.
 
-> Since the version 1.6.10-beta01, limitations on resource placement have been lifted:
+> Since the version %composeEapVersion%-beta01, limitations on resource placement have been lifted:
 > you can store resources in any Gradle module and any source set, as well as publish projects and libraries
 > with resources included.
 > 
-> To use the multimodule functionality, you'll need a 2.0.0 Beta or RC version of the [Kotlin Gradle plugin](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android)
+> To use the multimodule functionality, you'll need a 2.0.0-Beta5 or newer version of the [Kotlin Gradle plugin](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android)
 > and Gradle 7.6 or newer.
 >
 {type="tip"}
@@ -61,7 +62,7 @@ To access resources in your multiplatform projects:
    * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. Starting with Compose Multiplatform 1.6.10-beta01, you can alter the default settings for Compose Multiplatform
+4. Starting with Compose Multiplatform %composeEapVersion%-beta01, you can alter the default settings for Compose Multiplatform
    resources by adding a `compose.resources{}` block to the `build.gradle.kts` file:
 
     ```kotlin
@@ -72,7 +73,7 @@ To access resources in your multiplatform projects:
     }
     ```
 
-   * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [private](https://kotlinlang.org/docs/visibility-modifiers.html).
+   * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
    * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (for access within the code
      as well as for isolation in a final artifact.) By default, Compose Multiplatform uses the
      `{group name}.{module name}.generated.resources` package.
@@ -176,7 +177,17 @@ Image(
 
 ### Strings
 
-Store all string resources in the `strings.xml` file in the `composeResources/values` directory, for example:
+Store all string resources in the `strings.xml` file in the `composeResources/values` directory.
+A static accessor is generated for each item in the `strings.xml` file.
+
+> Starting with Compose Multiplatform %composeEapVersion%-beta01,
+> accessors for strings are correctly generated for all XML files in the `values` directory.
+>
+{type="warning"}
+
+#### Simple strings
+
+To store a simple string, add a `<string>` element to your XML:
 
 ```XML
 <resources>
@@ -184,13 +195,6 @@ Store all string resources in the `strings.xml` file in the `composeResources/va
     <string name="title">Some title</string>
 </resources>
 ```
-
-A static accessor is generated for each item in the `strings.xml` file.
-
-> Starting with Compose Multiplatform 1.6.10-beta01, there is no need to constrain yourself to `strings.xml`:
-> accessors for strings are going to be correctly generated for all XML files in the `values` directory.
->
-{type="warning"}
 
 To get string resources as a `String`, use the following code:
 
@@ -236,15 +240,89 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
+> Starting with Compose Multiplatform %composeEapVersion%-beta01, string arrays are a separate resource type.
+>
+{type="note"}
+
 You can use special symbols in string resources:
 
 * `\n` — for a new line
 * `\t` — for a tab symbol
 * `\uXXXX` — for a specific Unicode character
 
+#### String templates
+
+Currently, arguments have basic support in string resources:
+
+```XML
+<!-- strings.xml -->
+<resources>
+    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
+</resources>
+```
+
+There is no difference between `%...s` and `%...d ` when using string templates with arguments from composable code,
+for example:
+
+```kotlin
+Text(stringResource(Res.string.str_template, "User_name", 100))
+```
+
+#### String arrays
+
+> Starting with Compose Multiplatform %composeEapVersion%-beta01, string arrays are a separate string resource type.
+>
+{type="note"}
+
+You can group related strings into an array and automatically access them as a `List<String>` object:
+
+```XML
+<resources>
+    <string-array name="str_arr">
+        <item>item \u2605</item>
+        <item>item \u2318</item>
+        <item>item \u00BD</item>
+    </string-array>
+</resources>
+```
+
+To get the corresponding list, use the following code:
+
+<tabs>
+<tab title= "From composable code">
+
+```kotlin
+@Composable
+fun stringArrayResource(resource: StringArrayResource): List<String> {...}
+```
+
+For example:
+
+```kotlin
+Text(stringArrayResource(Res.string.str_arr))
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+suspend fun getStringArray(resource: StringArrayResource): List<String>
+```
+
+For example:
+
+```kotlin
+coroutineScope.launch {
+    val appName = getStringArray(Res.string.str_arr)
+}
+```
+
+</tab>
+</tabs>
+
 #### Plurals
 
-> Available starting with Compose Multiplatform 1.6.10-beta01.
+> Available starting with Compose Multiplatform %composeEapVersion%-beta01.
 >
 {type="warning"}
 
@@ -275,23 +353,44 @@ As such, you can combine `plurals` resources with other simple resources in the 
 </resources>
 ```
 
-#### String templates
+To access a plural as a `String`, use the following code:
 
-Currently, arguments have basic support in string resources:
-
-```XML
-<!-- strings.xml -->
-<resources>
-    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
-</resources>
-```
-
-There is no difference between `%...s` and `%...d ` when using string templates with arguments from composable code,
-for example:
+<tabs>
+<tab title= "From composable code">
 
 ```kotlin
-Text(stringResource(Res.string.str_template, "User_name", 100))
+@Composable
+fun pluralStringResource(resource: PluralStringResource, quantity: Int): String {...}
+
+@Composable
+fun pluralStringResource(resource: PluralStringResource, quantity: Int, vararg formatArgs: Any): String {...}
 ```
+
+For example:
+
+```kotlin
+Text(pluralStringResource(Res.string.new_message, 1))
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+suspend fun getPluralString(resource: PluralStringResource, quantity: Int): String
+
+suspend fun getPluralString(resource: PluralStringResource, quantity: Int, vararg formatArgs: Any): String
+```
+
+For example:
+
+```kotlin
+coroutineScope.launch {
+    val appName = getPluralString(Res.string.new_message, 1)
+}
+```
+
+</tab>
+</tabs>
 
 ### Fonts
 
@@ -363,7 +462,7 @@ You can also load remote files from the internet using their URL. To load remote
 
 ### Accessing resources from external libraries
 
-> Available starting with Compose Multiplatform 1.6.10-beta01.
+> Available starting with Compose Multiplatform %composeEapVersion%-beta01.
 >
 {type="warning"}
 
@@ -376,6 +475,13 @@ val uri = Res.getUri("files/my_video.mp4")
 
 The `uri` variable will contain the precise platform-specific path to the file that the path points to.
 External libraries can use that path to access the file in a manner that suits them.
+
+## Publication
+
+Starting with Compose Multiplatform %composeEapVersion%-beta01, all necessary resources are included in the publication
+package, regardless of module and source set hierarchy.
+
+To enable this functionality, your project needs to use Kotlin 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
 
 ## What's next?
 
