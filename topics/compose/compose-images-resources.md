@@ -27,12 +27,9 @@ When working with resources in Compose Multiplatform, consider the current condi
   byte array. All resources will be included in each final app.
 
 > Since the version %composeEapVersion%-beta01, limitations on resource placement have been lifted:
-> you can store resources in any Gradle module and any source set, as well as publish projects and libraries
+> you can store resources in any Gradle module and any source set, as well as [publish projects and libraries](#publication)
 > with resources included.
 > 
-> To use the multimodule functionality, you'll need a 2.0.0-Beta5 or newer version of the [Kotlin Gradle plugin](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android)
-> and Gradle 7.6 or newer.
->
 {type="tip"}
 
 ## Setup
