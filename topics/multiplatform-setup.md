@@ -1,22 +1,7 @@
 [//]: # (title: Set up an environment)
 
-<microformat>
-    <p>This is the first part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial:</p>
-    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Set up an environment</strong><br/>
-       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Create your first cross-platform app<br/>
-       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Update the user interface<br/>       
-       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Add dependencies<br/>
-       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Share more logic<br/>
-       <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
-</microformat>
-
 Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
 development.
-
-> To write iOS-specific code and run an iOS application on a simulated or real device, you'll need a Mac with macOS.
-> This cannot be performed on other operating systems, such as Microsoft Windows. This is an Apple requirement.
->
-{type="warning"}
 
 ## Install the necessary tools
 
@@ -32,7 +17,10 @@ We recommend that you install the latest stable versions for compatibility and b
         <td>You will use Android Studio to create your multiplatform applications and run them on simulated or hardware devices.</td>
     </tr>
     <tr>
-        <td><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></td>
+        <td>
+          <p><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></p>
+          <p>Xcode is required if you have a Mac with macOS and want to write iOS-specific code and run an iOS application on a simulated or real device. If you use a different operating system, skip this tool.</p>
+        </td>
         <td>
           <p>Launch Xcode in a separate window to accept its license terms and allow it to perform some necessary initial tasks.</p>
           <p>Most of the time, Xcode will work in the background. You will use it to add Swift or Objective-C code to your iOS application.</p>
@@ -65,7 +53,7 @@ We recommend that you install the latest stable versions for compatibility and b
 
 To make sure everything works as expected, install and run the KDoctor tool:
 
-> KDoctor works on macOS only.
+> KDoctor works on macOS only. If you use a different operating system, skip this step.
 >
 {type="note"}
 
@@ -148,13 +136,11 @@ To make sure everything works as expected, install and run the KDoctor tool:
               <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
     </def>
+   <def title="Still having trouble?">
+            <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
+            <p>For a smoother multiplatform experience, you can also try <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html">JetBrains Fleet</a>: it integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
+   </def>
 </deflist>
-
-## Next step
-
-In the next part of the tutorial, you'll create your first cross-platform mobile application.
-
-**[Proceed to the next part](multiplatform-create-first-app.md)**
 
 ## Get help
 

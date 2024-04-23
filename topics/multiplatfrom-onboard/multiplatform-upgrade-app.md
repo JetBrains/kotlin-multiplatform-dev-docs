@@ -1,13 +1,13 @@
 [//]: # (title: Share more logic between iOS and Android)
 
 <microformat>
-    <p>This is the fifth part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-      <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-      <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-      <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
-      <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Share more logic</strong><br/>
-      <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the fourth part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+      <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
+      <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
+      <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Share more logic</strong><br/>
+      <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 Now that you've implemented common logic using external dependencies, you can start adding more complex logic. Network

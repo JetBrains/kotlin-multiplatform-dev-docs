@@ -30,7 +30,7 @@ Learn more about which one to choose in [Recommended IDEs](recommended-ides.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Get started with Kotlin Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
+The [Create a Kotlin Multiplatform app with shared logic and native UI](multiplatform-create-first-app.md) tutorial provides step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
@@ -128,7 +128,7 @@ It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
-The [Get started with Compose Multiplatform](compose-multiplatform-getting-started.md) tutorial provides step-by-step
+The [Create a Compose Multiplatform app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial provides step-by-step
 instructions for creating a Kotlin Multiplatform project with Compose Multiplatform for Android, iOS, and desktop.
 You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by Kotlin
 Developer Advocate Sebastian Aigner.

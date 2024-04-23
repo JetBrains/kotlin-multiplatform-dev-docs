@@ -1,16 +1,28 @@
 [//]: # (title: Create your first cross-platform app)
 
 <microformat>
-    <p>This is the second part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Create your first cross-platform app</strong><br/>
-       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Update the user interface<br/>       
-       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Add dependencies<br/>
-       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Share more logic<br/>
-       <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p> 
+    <p>Before proceeding, make sure you've <a href="multiplatform-setup.md">set up an environment</a>.</p>
+    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your first cross-platform app</strong><br/>
+       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
+       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies<br/>       
+       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
+       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 Here you will learn how to create and run your first Kotlin Multiplatform application using Android Studio.
+
+Kotlin Multiplatform technology simplifies the development of cross-platform projects.
+The Kotlin applications will work on different operating systems like iOS, Android, macOS, Windows, Linux, watchOS, and others.
+
+One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
+You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.
+
+> To try a new multiplatform experience without juggling different IDEs and switching to
+> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
+>
+{type="tip"}
 
 ## Create the project with a wizard
 
@@ -268,6 +280,7 @@ In the next part of the tutorial, you'll learn how to update the UI elements usi
 
 * See how to [create and run multiplatform tests](multiplatform-run-tests.md) to check that the code works correctly.
 * Learn more about the [project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+* If you want to convert your existing Android project into a cross-platform app, [complete this tutorial to make your Android app cross-platform](multiplatform-integrate-in-existing-app.md).
 
 ## Get help
 

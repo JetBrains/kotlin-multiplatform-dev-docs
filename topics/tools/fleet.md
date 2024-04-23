@@ -36,7 +36,7 @@ maintain the native parts of your application as well.
 5. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
    so that you can run your app on Android and iOS simulators.
 
-   See [Set up an environment](compose-multiplatform-setup.md) for more details on these prerequisites and
+   See [Set up an environment](multiplatform-setup.md) for more details on these prerequisites and
    information on how to use the KDoctor tool to verify your setup.
 
    * To ensure the installation is complete, open both Android Studio and Xcode at least once. It may also be necessary

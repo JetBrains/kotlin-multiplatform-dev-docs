@@ -1,11 +1,10 @@
 [//]: # (title: Create your own application)
 <microformat>
-   <p>This is the fourth part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
-       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
-       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
-       <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
-       <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Create your own application</strong><br/>
+   <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
+       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
+       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
+       <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Create your own application</strong><br/>
   </p>
 </microformat>
 
@@ -420,5 +419,15 @@ We encourage you to explore multiplatform development further and try out more p
 
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-* [Share business logic between iOS and Android while keeping the UI native](multiplatform-getting-started.md)
+* [Share business logic between iOS and Android while keeping the UI native](multiplatform-create-first-app.md)
 * [See the curated list of sample projects](multiplatform-samples.md)
+
+Join the community:
+
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
+  an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
+* ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
+  the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
+* ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
+  about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)
