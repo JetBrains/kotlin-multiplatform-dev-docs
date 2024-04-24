@@ -4,11 +4,6 @@ Compose Multiplatform provides a special library and Gradle plugin support for a
 across all supported platforms. Resources are static content, such as images, fonts, and strings, which you can use from
 your application.
 
-> The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
-> Its API may change in the future.
->
-{type="warning"}
-
 When working with resources in Compose Multiplatform, consider the current conditions:
 
 * Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
@@ -16,21 +11,8 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Reading big raw files, like long videos, as a stream is not supported yet.
   Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
   for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
-* Multimodule projects are generally not supported yet, but resources in the top-level application module are available. The JetBrains team is working on adding this functionality in future releases.
-  For now, store all resources in the main application module.
-* The publication of Compose Multiplatform libraries with resources is not supported yet. The JetBrains team is working
-  on adding this functionality in future releases.
-* Currently, accessors are generated for the `commonMain` source set only. The JetBrains team is working on expanding
-  this functionality in future releases.
-
-  However, you can still store platform-specific resources in a platform `composeResources` directory and read them as a
-  byte array. All resources will be included in each final app.
-
-> Since the version %composeEapVersion%-beta01, limitations on resource placement have been lifted:
-> you can store resources in any Gradle module and any source set, as well as [publish projects and libraries](#publication)
-> with resources included.
-> 
-{type="tip"}
+* Starting with %composeEapVersion%-beta01, you can place resources in any module or source set,
+  as long as you are using Kotlin 2.0.0-Beta5 or newer, and Gradle 7.6 or newer.
 
 ## Setup
 
@@ -48,7 +30,7 @@ To access resources in your multiplatform projects:
    }
    ```
 
-2. Create a new directory `composeResources` in the `commonMain` directory:
+2. Create a new directory `composeResources` in a source set directory (for example, `commonMain`):
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
@@ -59,8 +41,8 @@ To access resources in your multiplatform projects:
    * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. Starting with Compose Multiplatform %composeEapVersion%-beta01, you can alter the default settings for Compose Multiplatform
-   resources by adding a `compose.resources{}` block to the `build.gradle.kts` file:
+4. You can alter the default settings for Compose Multiplatform resources by adding a `compose.resources{}` block
+   to the `build.gradle.kts` file:
 
     ```kotlin
     compose.resources {
@@ -71,11 +53,11 @@ To access resources in your multiplatform projects:
     ```
 
    * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
-   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (for access within the code
-     as well as for isolation in a final artifact.) By default, Compose Multiplatform uses the
-     `{group name}.{module name}.generated.resources` package.
+   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code
+     as well as for isolation in a final artifact.) By default, Compose Multiplatform assigns the
+     `{group name}.{module name}.generated.resources` package to the class.
    * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-     when the resource library is only available transitively. By default, the `auto` value is used: generate the `Res`
+     when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
      class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ## Qualifiers
@@ -174,13 +156,8 @@ Image(
 
 ### Strings
 
-Store all string resources in the `strings.xml` file in the `composeResources/values` directory.
-A static accessor is generated for each item in the `strings.xml` file.
-
-> Starting with Compose Multiplatform %composeEapVersion%-beta01,
-> accessors for strings are correctly generated for all XML files in the `values` directory.
->
-{type="warning"}
+Store all string resources in XML files in `composeResources/values` directories.
+A static accessor is generated for each item in each file.
 
 #### Simple strings
 
@@ -204,9 +181,6 @@ fun stringResource(resource: StringResource): String {...}
 
 @Composable
 fun stringResource(resource: StringResource, vararg formatArgs: Any): String {...}
-
-@Composable
-fun stringArrayResource(resource: StringResource): List<String> {...}
 ```
 
 For example:
@@ -222,8 +196,6 @@ Text(stringResource(Res.string.app_name))
 suspend fun getString(resource: StringResource): String
 
 suspend fun getString(resource: StringResource, vararg formatArgs: Any): String
-
-suspend fun getStringArray(resource: StringResource): List<String>
 ```
 
 For example:
@@ -237,10 +209,6 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-> Starting with Compose Multiplatform %composeEapVersion%-beta01, string arrays are a separate resource type.
->
-{type="note"}
-
 You can use special symbols in string resources:
 
 * `\n` — for a new line
@@ -252,7 +220,6 @@ You can use special symbols in string resources:
 Currently, arguments have basic support in string resources:
 
 ```XML
-<!-- strings.xml -->
 <resources>
     <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
 </resources>
@@ -267,14 +234,12 @@ Text(stringResource(Res.string.str_template, "User_name", 100))
 
 #### String arrays
 
-> Starting with Compose Multiplatform %composeEapVersion%-beta01, string arrays are a separate string resource type.
->
-{type="note"}
-
 You can group related strings into an array and automatically access them as a `List<String>` object:
 
 ```XML
 <resources>
+    <string name="app_name">My awesome app</string>
+    <string name="title">Some title</string>
     <string-array name="str_arr">
         <item>item \u2605</item>
         <item>item \u2318</item>
@@ -319,10 +284,6 @@ coroutineScope.launch {
 
 #### Plurals
 
-> Available starting with Compose Multiplatform %composeEapVersion%-beta01.
->
-{type="warning"}
-
 When your UI displays quantities of something, you might want to support grammatical agreement for different numbers
 of the same thing (1 _book_, many _books_ and so on) without creating programmatically unrelated strings.
 
@@ -341,8 +302,8 @@ As such, you can combine `plurals` resources with other simple resources in the 
 
 ```xml
 <resources>
-    <string name="app_name">Compose Resources App</string>
-    <string name="hello">😊 Hello world!</string>
+    <string name="app_name">My awesome app</string>
+    <string name="title">Some title</string>
     <plurals name="new_message">
         <item quantity="one">%1$d new message</item>
         <item quantity="other">%1$d new messages</item>
@@ -458,10 +419,6 @@ You can also load remote files from the internet using their URL. To load remote
 * [Ktor client](https://ktor.io/)
 
 ### Accessing resources from external libraries
-
-> Available starting with Compose Multiplatform %composeEapVersion%-beta01.
->
-{type="warning"}
 
 If you would like to make Compose Multiplatform resources available to other libraries used in your project, you
 can call the `Res.getUri()` function with the general path of the resource:
