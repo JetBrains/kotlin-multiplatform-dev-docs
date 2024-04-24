@@ -61,6 +61,7 @@
         <toc-element id="compose-android-only-components.md" toc-title="Android-specific components"/>
         <toc-element id="compose-desktop-components.md" toc-title="Desktop-specific components"/>
         <toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
+        <toc-element id="compose-compiler.md" toc-title="Compose compiler"/>
         <toc-element id="compose-compatibility-and-versioning.md"/>
         <toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
     </toc-element>

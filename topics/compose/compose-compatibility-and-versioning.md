@@ -65,7 +65,7 @@ Use one of the following approaches to try the latest Kotlin release by manually
 plugin:
 
 * [Use a developer version of the Compose Multiplatform compiler](#use-a-developer-version-of-compose-multiplatform-compiler)
-* [Use the Jetpack Compose compiler](#use-a-jetpack-compose-compiler)
+* [Use the Jetpack Compose compiler](#use-a-jetpack-or-kotlin-compose-compiler)
 * [Use a compiler version for a different version of Kotlin](#use-a-compiler-for-a-different-version-of-kotlin)
 
 > With these approaches, stability isn't guaranteed, so use them at your own risk. Even if
@@ -93,7 +93,7 @@ Multiplatform, there are two options:
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
 | 2.0.0-RC1      | `1.5.11-kt-2.0.0-RC1`                  |
-| 1.9.23         | `1.5.10.1`                              |
+| 1.9.23         | `1.5.10.1`                             |
 | 1.9.22         | `1.5.8.1`                              |
 | 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
@@ -121,24 +121,30 @@ compose {
 >
 {type="note"}
 
-### Use a Jetpack Compose compiler
+### Use a Jetpack or Kotlin Compose compiler
 
-> The Jetpack Compose compiler is not officially supported by JetBrains.
->
-{type="warning"}
+If there is no suitable developer version of the Compose Multiplatform compiler plugin, you can try using
+[the Kotlin Compose compiler plugin](compose-compiler.md) or Jetpack Compose compiler (for older Kotlin versions).
 
-If there is no suitable developer version of the Compose Multiplatform compiler plugin, you can try using a Jetpack
-Compose compiler plugin. Check the [pre-release Kotlin compatibility](https://developer.android.com/jetpack/androidx/releases/compose-kotlin#pre-release_kotlin_compatibility)
-table from Android to find a compatible compiler version. Then, in your `build.gradle.kts` file, set it in
-the `kotlinCompilerPlugin.set` parameter:
+To use the Kotlin Compose compiler, specify its ID in the `kotlinCompilerPlugin.set` parameter in your `build.gradle.kts` file:
 
 ```kotlin
 compose {
-    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.4")
+    kotlinCompilerPlugin.set("org.jetbrains.kotlin:kotlin-compose-compiler-plugin:2.0.0")
 }
 ```
 
-In this example, Jetpack Compose compiler version `1.5.4` corresponds to Kotlin 1.9.21.
+The Kotlin Compose compiler version should match the Kotlin version you are using.
+
+To use the Jetpack Compose compiler, specify its ID in the `kotlinCompilerPlugin.set` parameter in your `build.gradle.kts` file:
+
+```kotlin
+compose {
+    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.12")
+}
+```
+
+In this example, Jetpack Compose compiler version 1.5.12 corresponds to Kotlin 1.9.23.
 
 > The Jetpack Compose compiler plugin works for Kotlin/JVM targets, including both desktop and Android platforms.
 > However, its reliability may not extend to Kotlin/JS and Kotlin/Native targets. For these scenarios, we recommend
