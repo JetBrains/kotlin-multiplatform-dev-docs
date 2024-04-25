@@ -50,11 +50,9 @@ of `kotlinx.coroutines`.
 
 ### kotlinx.serialization
 
-For `kotlinx.serialization`, you need the plugin required by the build system. The Kotlin serialization plugin ships
-with the Kotlin compiler distribution, and the IntelliJ IDEA plugin is bundled into the Kotlin plugin.
-
-You can set up the serialization plugin with the Kotlin plugin using the Gradle plugin DSL. To do so, add the following line to
-the existing `plugins` block at the very beginning of the `build.gradle.kts` file in the shared module:
+To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
+To do that, add the following line to the existing `plugins{}` block at the very beginning of the `build.gradle.kts` file
+in the shared module:
 
 ```kotlin
 plugins {
@@ -65,10 +63,10 @@ plugins {
 
 ### Ktor
 
-You can add Ktor in the same way you added the `kotlinx.coroutines` library earlier. In addition to specifying the core
-dependency (`ktor-client-core`) in the common source set, you also need to:
+You need to add the core dependency (`ktor-client-core`) to the common source set of the shared module.
+You also need to add supporting dependencies:
 
-* Add the ContentNegotiation functionality (`ktor-client-content-negotiation`), which is responsible for serializing/deserializing
+* Add the `ContentNegotiation` functionality (`ktor-client-content-negotiation`), which allows serializing and deserializing
   the content in a specific format.
 * Add the `ktor-serialization-kotlinx-json` dependency to instruct Ktor to use the JSON format and `kotlinx.serialization`
   as a serialization library. Ktor will expect JSON data and deserialize it into a data class when receiving responses.
@@ -416,10 +414,10 @@ The view model will manage the data from the activity and won't disappear when t
 For the iOS part of the project, you'll make use of the [Model–view–viewmodel](https://en.wikipedia.org/wiki/Model–view–viewmodel)
 pattern again to connect the UI to the shared module, which contains all the business logic.
 
-The module is already connected to the iOS project — the Android Studio plugin wizard has completed the configuration. The module
-is already imported and used in `ContentView.swift` with `import Shared`.
+The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-> If you see errors in Xcode regarding the shared module or when updating your code, run **iosApp** from Android Studio.
+> If you see errors in Xcode regarding the shared module or when updating your code, run the **iosApp** configuration
+> from Android Studio.
 >
 {type="tip"}
 
@@ -571,7 +569,7 @@ Return to Xcode and update the code using the library:
 {type="note"}
 
 1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
-   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins` block:
+   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins{}` block:
 
     ```kotlin
     plugins {
