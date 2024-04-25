@@ -28,7 +28,7 @@ keyboard layouts on macOS. This issue isn't reproducible in OpenJDK 11.0.15.
 
 ## Kotlin compatibility
 
-> [The Kotlin Compose compiler](compose-compiler.md) will be supported in the 1.6.10 Compose Multiplatform release.
+> [The Compose compiler](compose-compiler.md) will be supported in the 1.6.10 Compose Multiplatform release.
 > This will simplify the Compose plugins setup.
 > 
 {type="note"}
