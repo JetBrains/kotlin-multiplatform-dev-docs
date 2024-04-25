@@ -36,8 +36,7 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 To access resources in your multiplatform projects:
 
-1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the source set you add resources to
-   (`commonMain` in this example):
+1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
 
    ```kotlin
    kotlin {
@@ -49,7 +48,8 @@ To access resources in your multiplatform projects:
    }
    ```
 
-2. Create a new directory `composeResources` in the source set directory:
+2. Create a new directory `composeResources` in the source set directory you want to add the resources to
+   (`commonMain` in this example):
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
