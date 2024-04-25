@@ -1,28 +1,18 @@
 [//]: # (title: Compose compiler)
 
 <!-- this tip should be moved lower and possibly reworded after the 2.0.0 release -->
-> The Jetpack Compose compiler [is merged into the Kotlin repository]() (TODO link to Google) as of Kotlin version 2.0.0-RC2.
-> This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously with Kotlin and
-> will always be compatible with Kotlin of the same version.
+> The Compose compiler [is merged into the Kotlin repository]() (TODO link to Google) as of Kotlin version 2.0.0-RC2.
+> This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously
+> with Kotlin from now on and will always be compatible with Kotlin of the same version.
 >
 {type="tip"}
 
-The new Compose compiler is supplemented by the new Compose compiler Gradle plugin, which simplifies setup and offers easier access
-to compiler options.
+The new Compose compiler is supplemented by the new Compose compiler Gradle plugin, which simplifies setup and offers
+easier access to compiler options.
+When applied together with the Android Gradle plugin, this Compose compiler plugin will override the coordinates
+of the Compose compiler supplied automatically by AGP.
 
-To use it in your project, add the plugin to the `plugins{}` block in your `build.gradle.kts` file:
-
-```kotlin
-plugins {
-   //...
-   id("org.jetbrains.kotlin.plugin.compose")
-}
-```
-
-When applied together with the Android Gradle plugin, the Compose compiler Gradle plugin will override the coordinates of the
-Compose compiler supplied automatically by AGP.
-
-More details below:
+To use it in your project, apply the plugin for each module that uses Compose. See the migration instructions below:
 
 * [Migrating a Compose Multiplatform project](#migrating-a-compose-multiplatform-project)
 * [Migrating a Jetpack Compose project](#migrating-a-jetpack-compose-project)
@@ -34,9 +24,51 @@ Compose Multiplatform is going to support the Compose compiler plugin in the %co
 to be released soon after Kotlin 2.0.0-RC2.
 
 Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` plugin to each
-module that uses the `org.jetbrains.compose` plugin.
+module that uses the `org.jetbrains.compose` plugin:
 
-To try Compose compiler 2.0.0 with the stable version of Compose Multiplatform, use this configuration:
+1. Add the Compose compiler plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
+
+    ```Ini
+    [versions]
+    # ...
+    kotlin = "2.0.0-RC2"
+    
+    [plugins]
+    # ...
+    jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+    kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+    compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+    ```
+
+2. Add the plugin to the root `build.gradle.kts` file:
+
+    ```kotlin
+    plugins {
+        // ...
+        alias(libs.plugins.jetbrainsCompose) apply false
+        alias(libs.plugins.compose.compiler) apply false
+    }
+    ```
+
+3. Apply the plugin to every module that uses Compose Multiplatform:
+
+    ```kotlin
+    plugins {
+        // ...
+        alias(libs.plugins.jetbrainsCompose)
+        alias(libs.plugins.compose.compiler)
+    }
+    ```
+
+4. If you are using compiler options for the Jetpack Compose compiler, they should now be set in the `composeCompiler{}` block.
+   See [Compose Compiler options DSL](#compose-compiler-options-dsl) for reference.
+
+   > The plugin provides defaults for several compiler options that were only specified manually before.
+   > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
+   >
+   {type="warning"}
+
+To try Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
 
 ```kotlin
 compose {
@@ -58,7 +90,7 @@ For Android modules that do not rely on Compose Multiplatform:
     ```Ini
     [versions]
     # ...
-    kotlin = "2.0.0"
+    kotlin = "2.0.0-RC2"
     
     [plugins]
     # ...
@@ -90,8 +122,13 @@ For Android modules that do not rely on Compose Multiplatform:
    * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
    * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
 
-5. If you are using compiler options for the Jetpack Compose compiler, they can now be set in the `composeCompiler{}` block.
+5. If you are using compiler options for the Jetpack Compose compiler, they should now be set in the `composeCompiler{}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
+
+   > The plugin provides defaults for several compiler options that were only specified manually before.
+   > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
+   >
+   {type="warning"}
 
 ## Compose compiler options DSL
 
@@ -108,12 +145,14 @@ composeCompiler {
 ### generateFunctionKeyMetaClasses
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, generate function key meta classes with annotations indicating the functions and their group keys.
 
 ### includeSourceInformation
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, include source information in generated code.
 
@@ -141,6 +180,7 @@ Generally used in conjunction with the [metricsDestination](#metricsdestination)
 ### enableIntrinsicRemember
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, enable intrinsic remember performance optimization.
 
@@ -151,6 +191,7 @@ This results in fewer slots being used and fewer comparisons being done at runti
 ### enableNonSkippingGroupOptimization
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, remove groups around non-skipping composable functions.
 
@@ -164,6 +205,7 @@ This feature is considered experimental and is thus disabled by default.
 ### enableStrongSkippingMode
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, enable strong skipping mode.
 
@@ -185,6 +227,7 @@ in Jetpack Compose documentation.
 ### includeTraceMarkers
 
 Type: `Property<Boolean>`
+Default: `false`
 
 If `true`, include composition trace markers in the generated code.
 
@@ -222,4 +265,4 @@ composeCompiler {
 
 ## What's next
 
-TODO
+If you are using Jetpack Compose to build an Android app, check out [our guide on how to make it multiplatform](multiplatform-integrate-in-existing-app.md).
