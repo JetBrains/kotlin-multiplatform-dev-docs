@@ -7,7 +7,7 @@
 >
 {type="tip"}
 
-The new Compose compiler is supplemented by a new Gradle plugin, which simplifies setup and offers easier access
+The new Compose compiler is supplemented by the new Compose compiler Gradle plugin, which simplifies setup and offers easier access
 to compiler options.
 
 To use it in your project, add the plugin to the `plugins{}` block in your `build.gradle.kts` file:
@@ -19,7 +19,7 @@ plugins {
 }
 ```
 
-When applied together with the Android Gradle plugin, the Kotlin Compose compiler plugin will override the coordinates of the
+When applied together with the Android Gradle plugin, the Compose compiler Gradle plugin will override the coordinates of the
 Compose compiler supplied automatically by AGP.
 
 More details below:
@@ -30,7 +30,7 @@ More details below:
 
 ## Migrating a Compose Multiplatform project
 
-Compose Multiplatform is going to support the Kotlin Compose compiler plugin in the %composeEapVersion%-beta03 release,
+Compose Multiplatform is going to support the Compose compiler plugin in the %composeEapVersion%-beta03 release,
 to be released soon after Kotlin 2.0.0-RC2.
 
 Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` plugin to each
@@ -53,7 +53,7 @@ compose {
 
 For Android modules that do not rely on Compose Multiplatform: 
 
-1. Add the plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
+1. Add the Compose compiler plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
     ```Ini
     [versions]
@@ -90,13 +90,14 @@ For Android modules that do not rely on Compose Multiplatform:
    * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
    * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
 
-5. If you are using compiler options for the Jetpack Compose compiler, they can be set in the `composeCompiler{}` block.
+5. If you are using compiler options for the Jetpack Compose compiler, they can now be set in the `composeCompiler{}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-## Compose Compiler options DSL
+## Compose compiler options DSL
 
-The Kotlin Compose compiler offers an options DSL. You can use it to configure the compiler in the `composeCompiler{}`
-block of a `build.gradle.kts` file, for example:
+The Compose compiler Gradle plugin offers an options DSL.
+You can use it to configure the compiler in the `composeCompiler{}` block of the `build.gradle.kts` file for the module
+you're applying the plugin to, for example:
 
 ```kotlin
 composeCompiler {
