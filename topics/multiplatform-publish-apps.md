@@ -19,8 +19,14 @@ in the [Android developer documentation](https://developer.android.com/studio/pu
 The iOS app from a Kotlin Multiplatform project is built from a typical Xcode project, so the main stages involved in publishing it are
 the same as described in the [iOS developer documentation](https://developer.apple.com/ios/submit/).
 
+> With Spring'24 changes to App Store policy, missing or incomplete privacy manifests may lead to warnings or even rejection
+> for your app.
+> For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](https://kotlinlang.org/docs/apple-privacy-manifest.html). 
+>
+{type="note"}
+
 What is specific to Kotlin Multiplatform projects is compiling the shared Kotlin module into a framework and linking it to the Xcode project.
-Generally, all integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform Mobile plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile).
+Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform Mobile plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile).
 However, if you don't use the plugin, bear in mind the following when building and bundling the iOS project in Xcode:
 
 * The shared Kotlin library compiles down to the native framework.
