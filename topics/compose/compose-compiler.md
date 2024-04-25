@@ -1,7 +1,7 @@
 [//]: # (title: Compose compiler)
 
 <!-- this tip should be moved lower and possibly reworded after the 2.0.0 release -->
-> The Compose compiler [is merged into the Kotlin repository]() (TODO link to Google) as of Kotlin version 2.0.0-RC2.
+> The Compose compiler is merged into the Kotlin repository as of Kotlin version 2.0.0-RC2.
 > This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously
 > with Kotlin from now on and will always be compatible with Kotlin of the same version.
 >
