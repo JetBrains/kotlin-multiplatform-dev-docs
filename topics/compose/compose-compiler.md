@@ -2,12 +2,15 @@
 
 <!-- this tip should be moved lower and possibly reworded after the 2.0.0 release -->
 > The Jetpack Compose compiler [is merged into the Kotlin repository]() (TODO link to Google) as of Kotlin version 2.0.0-RC2.
-> This helps with smoother releases of the Compose compiler, as it will ship simultaneously with Kotlin and
+> This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously with Kotlin and
 > will always be compatible with Kotlin of the same version.
 >
 {type="tip"}
 
-To use the Kotlin Compose compiler in your project, add it to the `plugins{}` block in your `build.gradle.kts` file:
+The new Compose compiler is supplemented by a new Gradle plugin, which simplifies setup and offers easier access
+to compiler options.
+
+To use it in your project, add the plugin to the `plugins{}` block in your `build.gradle.kts` file:
 
 ```kotlin
 plugins {
@@ -16,19 +19,41 @@ plugins {
 }
 ```
 
-When applied together with the Android Gradle plugin, the Kotlin Compose plugin will override the coordinates of the
+When applied together with the Android Gradle plugin, the Kotlin Compose compiler plugin will override the coordinates of the
 Compose compiler supplied automatically by AGP.
+
+More details below:
+
+* [Migrating a Compose Multiplatform project](#migrating-a-compose-multiplatform-project)
+* [Migrating a Jetpack Compose project](#migrating-a-jetpack-compose-project)
+* [Compose Compiler options DSL](#compose-compiler-options-dsl)
 
 ## Migrating a Compose Multiplatform project
 
-Compose Multiplatform is going to support the Kotlin Compose compiler in the 1.6.10 release. Until then, no changes
-to your projects are necessary as Compose Multiplatform manages the compiler on its own by default.
+Compose Multiplatform is going to support the Kotlin Compose compiler plugin in the %composeEapVersion%-beta03 release,
+to be released soon after Kotlin 2.0.0-RC2.
+
+Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` plugin to each
+module that uses the `org.jetbrains.compose` plugin.
+
+To try Compose compiler 2.0.0 with the stable version of Compose Multiplatform, use this configuration:
+
+```kotlin
+compose {
+    kotlinCompilerPlugin = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:2.0.0-RC2"
+}
+```
+
+> This configuration will be deprecated with the stable 1.6.10 release:
+> you will have to apply the `org.jetbrains.kotlin.plugin.compose` plugin instead.
+> 
+{type="note"}
 
 ## Migrating a Jetpack Compose project
 
 For Android modules that do not rely on Compose Multiplatform: 
 
-1. Add the plugin to the Gradle version catalog:
+1. Add the plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
     ```Ini
     [versions]
@@ -66,9 +91,9 @@ For Android modules that do not rely on Compose Multiplatform:
    * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
 
 5. If you are using compiler options for the Jetpack Compose compiler, they can be set in the `composeCompiler{}` block.
-   See [Compiler options](#compiler-options) for reference.
+   See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-## Compiler options
+## Compose Compiler options DSL
 
 The Kotlin Compose compiler offers an options DSL. You can use it to configure the compiler in the `composeCompiler{}`
 block of a `build.gradle.kts` file, for example:
@@ -195,3 +220,5 @@ composeCompiler {
 ```
 
 ## What's next
+
+TODO
