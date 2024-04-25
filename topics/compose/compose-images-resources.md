@@ -36,7 +36,8 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 To access resources in your multiplatform projects:
 
-1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
+1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the source set you add resources to
+   (`commonMain` in this example):
 
    ```kotlin
    kotlin {
@@ -48,7 +49,7 @@ To access resources in your multiplatform projects:
    }
    ```
 
-2. Create a new directory `composeResources` in the `commonMain` directory:
+2. Create a new directory `composeResources` in the source set directory:
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
@@ -127,11 +128,15 @@ The resource is selected depending on the screen density defined in the system.
 ## Resource usage
 
 After importing a project, a special `Res` class is generated which provides access to resources.
-To manually generate the `Res` class, run the `generateComposeResClass` Gradle task.
+To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in IDE.
 
 ### Images
 
-You can access drawable resources as simple images, rasterized images, or XML vectors:
+You can access drawable resources as simple images, rasterized images, or XML vectors.
+
+> Starting with 1.6.10-beta01, Compose Multiplatform also supports SVG images on all platforms **except** Android.
+> 
+{type="note"}
 
 * To access drawable resources as `Painter` images, use the `painterResource()` function:
 
