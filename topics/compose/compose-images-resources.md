@@ -481,7 +481,7 @@ External libraries can use that path to access the file in a manner that suits t
 ## Publication
 
 Starting with Compose Multiplatform %composeEapVersion%-beta01, all necessary resources are included in the publication
-package, regardless of module and source set hierarchy.
+maven artifacts.
 
 To enable this functionality, your project needs to use Kotlin 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
 
