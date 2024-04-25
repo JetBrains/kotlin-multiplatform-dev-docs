@@ -158,15 +158,17 @@ If `true`, include source information in generated code.
 
 Records source information that can be used for tooling to determine the source location of the corresponding composable function.
 This option does not affect the presence of symbols or line information normally added by the Kotlin compiler;
-it only controls source information added by the Kotlin Compose compiler.
+it only controls source information added by the Compose compiler.
 
 ### metricsDestination
 
 Type: `DirectoryProperty`
 
 When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
-They can be useful for optimizing your application's runtime performance:
+They can be useful for debugging and optimizing your application's runtime performance:
 the metrics show which of your composable functions are skippable, which are restartable, which are readonly, etc.
+
+The [reportsDestination](#reportsdestination) option allows dumping descriptive reports as well.
 
 For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
@@ -174,8 +176,13 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 Type: `DirectoryProperty`
 
-When a directory is specified, the Compose compiler will use the directory to write an overall compiler metrics report.
-Generally used in conjunction with the [metricsDestination](#metricsdestination) option.
+When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics reports](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
+They can be useful for optimizing your application's runtime performance:
+the reports show which of your composable functions are skippable, which are restartable, which are readonly, etc.
+
+The [metricsDestination](#metricsdestination) option allows dumping raw metrics.
+
+For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
 ### enableIntrinsicRemember
 
