@@ -11,7 +11,7 @@
             version="1.0"/>
     <vars src="v.list"/>
 
-    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="eap"
+    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="Early access"
              keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
 </ihp>
