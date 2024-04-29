@@ -94,8 +94,8 @@ fun TextBox(text: String = "Item") {
 
 ![Scrollbar](compose-desktop-scrollbar.gif){width=289}
 
-Scrollbars can be moved by dragging the bars and using the mouse wheel or the touchpad. Horizontal scrolling with the 
-mouse wheel can be performed by side-clicking the wheel or by holding down <shortcut>Shift</shortcut>.
+You can move scrollbars by dragging the bars and using the mouse wheel or the touchpad. To move horizontal scrollbars with the mouse, 
+side-click the wheel or hold down <shortcut>Shift</shortcut>.
 
 ## Lazy scrollable components
 
@@ -177,6 +177,6 @@ fun TextBox(text: String = "Item") {
 
 ![Lazy scrollbar](compose-desktop-lazy-scrollbar.gif){width=289}
 
-## What's Next?
+## What's next?
 
-You can also explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Desktop_Components).
+You can also explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
