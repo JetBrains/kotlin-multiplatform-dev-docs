@@ -28,6 +28,11 @@ keyboard layouts on macOS. This issue isn't reproducible in OpenJDK 11.0.15.
 
 ## Kotlin compatibility
 
+> [The Compose compiler](compose-compiler.md) will be supported in the 1.6.10 Compose Multiplatform release.
+> This will simplify the Compose plugins setup.
+> 
+{type="note"}
+
 Compose Multiplatform needs a compatible version of Kotlin to work correctly. Starting from Compose Multiplatform 1.2.0,
 Compose Multiplatform supports multiple versions of Kotlin. Earlier versions of Compose Multiplatform can only be used
 with one specific version of Kotlin. See the following table for a list of Kotlin releases and the minimum supported
@@ -93,7 +98,7 @@ Multiplatform, there are two options:
 | Kotlin version | Compose Multiplatform compiler version |
 |----------------|----------------------------------------|
 | 2.0.0-RC1      | `1.5.11-kt-2.0.0-RC1`                  |
-| 1.9.23         | `1.5.10.1`                              |
+| 1.9.23         | `1.5.10.1`                             |
 | 1.9.22         | `1.5.8.1`                              |
 | 1.9.21         | `1.5.4`                                |
 | 1.9.20         | `1.5.3`                                |
@@ -107,11 +112,11 @@ Multiplatform, there are two options:
 | 1.7.20         | `1.3.2.2`                              |
 | 1.7.10         | `1.3.0`                                |
 
-For example, to use Kotlin 1.9.20-RC, you need Compose Multiplatform compiler version `1.5.2.1-rc01`:
+For example, to use Kotlin 1.9.23, you need Compose Multiplatform compiler version `1.5.2.10`:
 
 ```kotlin
 compose {
-    kotlinCompilerPlugin.set("1.5.2.1-rc01")
+    kotlinCompilerPlugin.set("1.5.2.10")
 }
 ```
 
@@ -123,10 +128,6 @@ compose {
 
 ### Use a Jetpack Compose compiler
 
-> The Jetpack Compose compiler is not officially supported by JetBrains.
->
-{type="warning"}
-
 If there is no suitable developer version of the Compose Multiplatform compiler plugin, you can try using a Jetpack
 Compose compiler plugin. Check the [pre-release Kotlin compatibility](https://developer.android.com/jetpack/androidx/releases/compose-kotlin#pre-release_kotlin_compatibility)
 table from Android to find a compatible compiler version. Then, in your `build.gradle.kts` file, set it in
@@ -134,11 +135,11 @@ the `kotlinCompilerPlugin.set` parameter:
 
 ```kotlin
 compose {
-    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.4")
+    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.12")
 }
 ```
 
-In this example, Jetpack Compose compiler version `1.5.4` corresponds to Kotlin 1.9.21.
+In this example, Jetpack Compose compiler version 1.5.12 corresponds to Kotlin 1.9.23.
 
 > The Jetpack Compose compiler plugin works for Kotlin/JVM targets, including both desktop and Android platforms.
 > However, its reliability may not extend to Kotlin/JS and Kotlin/Native targets. For these scenarios, we recommend
