@@ -1,15 +1,15 @@
 [//]: # (title: Compose compiler)
 
 <!-- this tip should be moved lower and possibly reworded after the 2.0.0 release -->
-> The Compose compiler is merged into the Kotlin repository as of Kotlin version 2.0.0-RC2.
+> The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0.0-RC2.
 > This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously
 > with Kotlin from now on and will always be compatible with Kotlin of the same version.
 >
 {type="tip"}
 
-The new Compose compiler is supplemented by the new Compose compiler Gradle plugin, which simplifies setup and offers
+The Compose compiler is supplemented by a Gradle plugin, which simplifies setup and offers
 easier access to compiler options.
-When applied together with the Android Gradle plugin, this Compose compiler plugin will override the coordinates
+When applied with the Android Gradle plugin (AGP), this Compose compiler plugin will override the coordinates
 of the Compose compiler supplied automatically by AGP.
 
 To use it in your project, apply the plugin for each module that uses Compose. See the migration instructions below:
@@ -21,7 +21,7 @@ To use it in your project, apply the plugin for each module that uses Compose. S
 ## Migrating a Compose Multiplatform project
 
 Compose Multiplatform is going to support the Compose compiler plugin in the %composeEapVersion%-beta03 release,
-to be released soon after Kotlin 2.0.0-RC2.
+which will be released soon after Kotlin 2.0.0-RC2.
 
 Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` plugin to each
 module that uses the `org.jetbrains.compose` plugin:
@@ -60,7 +60,7 @@ module that uses the `org.jetbrains.compose` plugin:
     }
     ```
 
-4. If you are using compiler options for the Jetpack Compose compiler, they should now be set in the `composeCompiler{}` block.
+4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compose Compiler options DSL](#compose-compiler-options-dsl) for reference.
 
    > The plugin provides defaults for several compiler options that were only specified manually before.
@@ -68,7 +68,7 @@ module that uses the `org.jetbrains.compose` plugin:
    >
    {type="warning"}
 
-To try Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
+To try the Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
 
 ```kotlin
 compose {
@@ -116,13 +116,13 @@ For Android modules that do not rely on Compose Multiplatform:
     }
     ```
 
-4. If you use the Android build feature in your Gradle configuration (`android.buildFeatures.compose = true`),
+4. If you use the Android build feature in your Gradle configuration (`android.buildFeatures.compose = true`)
    or directly reference the old Maven artifacts, you'll need to update these references:
 
    * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
    * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
 
-5. If you are using compiler options for the Jetpack Compose compiler, they should now be set in the `composeCompiler{}` block.
+5. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
    > The plugin provides defaults for several compiler options that were only specified manually before.
@@ -133,7 +133,7 @@ For Android modules that do not rely on Compose Multiplatform:
 ## Compose compiler options DSL
 
 The Compose compiler Gradle plugin offers an options DSL.
-You can use it to configure the compiler in the `composeCompiler{}` block of the `build.gradle.kts` file for the module
+You can use it to configure the compiler in the `composeCompiler {}` block of the `build.gradle.kts` file for the module
 you're applying the plugin to, for example:
 
 ```kotlin
@@ -166,7 +166,7 @@ Type: `DirectoryProperty`
 
 When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
 They can be useful for debugging and optimizing your application's runtime performance:
-the metrics show which of your composable functions are skippable, which are restartable, which are readonly, etc.
+the metrics show which composable functions are skippable, restartable, read-only, and so on.
 
 The [reportsDestination](#reportsdestination) option allows dumping descriptive reports as well.
 
@@ -178,7 +178,7 @@ Type: `DirectoryProperty`
 
 When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics reports](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
 They can be useful for optimizing your application's runtime performance:
-the reports show which of your composable functions are skippable, which are restartable, which are readonly, etc.
+the reports show which composable functions are skippable, restartable, read-only, and so on.
 
 The [metricsDestination](#metricsdestination) option allows dumping raw metrics.
 
@@ -191,9 +191,9 @@ Default: `false`
 
 If `true`, enable intrinsic remember performance optimization.
 
-Intrinsic remember is an optimization mode which inlines `remember` invocations and replaces `.equals` comparison for keys
+Intrinsic remember is an optimization mode which inlines `remember` invocations and replaces `.equals` comparisons for keys
 with comparisons of the `$changed` meta parameter when possible.
-This results in fewer slots being used and fewer comparisons being done at runtime.
+This results in fewer slots being used and fewer comparisons being made at runtime.
 
 ### enableNonSkippingGroupOptimization
 
@@ -202,25 +202,25 @@ Default: `false`
 
 If `true`, remove groups around non-skipping composable functions.
 
-This is an experimental optimization that improves the runtime performance of your application by skipping
+This optimization improves the runtime performance of your application by skipping
 unnecessary groups around composables which do not skip (and thus do not require a group).
 This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
 and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
 
-This feature is considered experimental and is thus disabled by default.
+This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
 
 ### enableStrongSkippingMode
 
 Type: `Property<Boolean>`
 Default: `false`
 
-If `true`, enable strong skipping mode.
+If `true`, enable Strong Skipping mode.
 
-Strong Skipping is an experimental mode that improves the runtime performance of your application by skipping unnecessary
+Strong Skipping is an [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) mode that improves the runtime performance of your application by skipping unnecessary
 invocations of composable functions whose parameters have not changed.
-For example, composables with unstable parameters become skippable and lambdas with unstable captures will be memoized.
+For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
-For details, see the [description for Strong Skipping Mode](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/strong-skipping.md)
+For details, see the [description of Strong Skipping mode](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/strong-skipping.md)
 in Androidx GitHub repo.
 
 ### stabilityConfigurationFile
@@ -229,7 +229,7 @@ Type: `RegularFileProperty`
 
 Path to the stability configuration file.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
-in Jetpack Compose documentation.
+in the Jetpack Compose documentation.
 
 ### includeTraceMarkers
 
@@ -238,7 +238,7 @@ Default: `false`
 
 If `true`, include composition trace markers in the generated code.
 
-Compose compiler can inject additional tracing information into the bytecode, which allows showing composable functions
+The Compose compiler can inject additional tracing information into the bytecode, which allows it to show composable functions
 in the Android Studio system trace profiler.
 
 For details, see this [Android Developers blog post](https://medium.com/androiddevelopers/jetpack-compose-composition-tracing-9ec2b3aea535).
@@ -250,7 +250,7 @@ Type: `SetProperty<KotlinPlatformType>`
 Indicates Kotlin platforms to which the Compose compiler plugin should be applied.
 By default, the plugin is applied to all Kotlin platforms.
 
-To enable only one specific Kotlin platform (for example, Kotlin/JVM):
+To enable only one specific Kotlin platform, for example, Kotlin/JVM:
 
 ```kotlin
 composeCompiler {
@@ -258,7 +258,7 @@ composeCompiler {
 }
 ```
 
-To disable the plugin for one or more Kotlin platforms (for example, Kotlin/Native and Kotlin/JS):
+To disable the plugin for one or more Kotlin platforms, for example, Kotlin/Native and Kotlin/JS:
 
 ```kotlin
 composeCompiler {
