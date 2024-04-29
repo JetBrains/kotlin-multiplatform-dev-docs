@@ -20,13 +20,13 @@ To use it in your project, apply the plugin for each module that uses Compose. S
 
 ## Migrating a Compose Multiplatform project
 
-Compose Multiplatform is going to support the Compose compiler plugin in the %composeEapVersion%-beta03 release,
+Compose Multiplatform is going to support the Compose compiler Gradle plugin in the %composeEapVersion%-beta03 release,
 which will be released soon after Kotlin 2.0.0-RC2.
 
-Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` plugin to each
+Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
 module that uses the `org.jetbrains.compose` plugin:
 
-1. Add the Compose compiler plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
+1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
     ```Ini
     [versions]
@@ -40,7 +40,7 @@ module that uses the `org.jetbrains.compose` plugin:
     compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
     ```
 
-2. Add the plugin to the root `build.gradle.kts` file:
+2. Add the Gradle plugin to the root `build.gradle.kts` file:
 
     ```kotlin
     plugins {
@@ -63,10 +63,12 @@ module that uses the `org.jetbrains.compose` plugin:
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compose Compiler options DSL](#compose-compiler-options-dsl) for reference.
 
-   > The plugin provides defaults for several compiler options that were only specified manually before.
+   > The Gradle plugin provides defaults for several compiler options that were only specified manually before.
    > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
    >
    {type="warning"}
+
+### Test with the stable Compose Multiplatform 
 
 To try the Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
 
@@ -85,7 +87,7 @@ compose {
 
 For Android modules that do not rely on Compose Multiplatform: 
 
-1. Add the Compose compiler plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
+1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
     ```Ini
     [versions]
@@ -98,7 +100,7 @@ For Android modules that do not rely on Compose Multiplatform:
     compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
     ```
 
-2. Add the plugin to the root `build.gradle.kts` file:
+2. Add the Gradle plugin to the root `build.gradle.kts` file:
 
     ```kotlin
     plugins {
@@ -125,14 +127,14 @@ For Android modules that do not rely on Compose Multiplatform:
 5. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-   > The plugin provides defaults for several compiler options that were only specified manually before.
+   > The Gradle plugin provides defaults for several compiler options that were only specified manually before.
    > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
    >
    {type="warning"}
 
 ## Compose compiler options DSL
 
-The Compose compiler Gradle plugin offers an options DSL.
+The Compose compiler Gradle plugin offers a DSL for various compiler options.
 You can use it to configure the compiler in the `composeCompiler {}` block of the `build.gradle.kts` file for the module
 you're applying the plugin to, for example:
 
@@ -144,15 +146,17 @@ composeCompiler {
 
 ### generateFunctionKeyMetaClasses
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, generate function key meta classes with annotations indicating the functions and their group keys.
 
 ### includeSourceInformation
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, include source information in generated code.
 
@@ -162,7 +166,7 @@ it only controls source information added by the Compose compiler.
 
 ### metricsDestination
 
-Type: `DirectoryProperty`
+**Type**: `DirectoryProperty`
 
 When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
 They can be useful for debugging and optimizing your application's runtime performance:
@@ -174,7 +178,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 ### reportsDestination
 
-Type: `DirectoryProperty`
+**Type**: `DirectoryProperty`
 
 When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics reports](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#reports-breakdown).
 They can be useful for optimizing your application's runtime performance:
@@ -186,8 +190,9 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 ### enableIntrinsicRemember
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, enable intrinsic remember performance optimization.
 
@@ -197,8 +202,9 @@ This results in fewer slots being used and fewer comparisons being made at runti
 
 ### enableNonSkippingGroupOptimization
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, remove groups around non-skipping composable functions.
 
@@ -207,12 +213,15 @@ unnecessary groups around composables which do not skip (and thus do not require
 This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
 and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
 
-This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
+> This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
+> 
+{type="warning"}
 
 ### enableStrongSkippingMode
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, enable Strong Skipping mode.
 
@@ -225,7 +234,7 @@ in Androidx GitHub repo.
 
 ### stabilityConfigurationFile
 
-Type: `RegularFileProperty`
+**Type**: `RegularFileProperty`
 
 Path to the stability configuration file.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
@@ -233,8 +242,9 @@ in the Jetpack Compose documentation.
 
 ### includeTraceMarkers
 
-Type: `Property<Boolean>`
-Default: `false`
+**Type**: `Property<Boolean>`
+
+**Default**: `false`
 
 If `true`, include composition trace markers in the generated code.
 
@@ -245,9 +255,9 @@ For details, see this [Android Developers blog post](https://medium.com/androidd
 
 ### targetKotlinPlatforms
 
-Type: `SetProperty<KotlinPlatformType>`
+**Type**: `SetProperty<KotlinPlatformType>`
 
-Indicates Kotlin platforms to which the Compose compiler plugin should be applied.
+Indicates Kotlin platforms to which the Compose compiler Gradle plugin should be applied.
 By default, the plugin is applied to all Kotlin platforms.
 
 To enable only one specific Kotlin platform, for example, Kotlin/JVM:
@@ -258,7 +268,7 @@ composeCompiler {
 }
 ```
 
-To disable the plugin for one or more Kotlin platforms, for example, Kotlin/Native and Kotlin/JS:
+To disable the Gradle plugin for one or more Kotlin platforms, for example, Kotlin/Native and Kotlin/JS:
 
 ```kotlin
 composeCompiler {
