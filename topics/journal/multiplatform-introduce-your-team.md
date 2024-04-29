@@ -67,7 +67,7 @@ No matter how detailed your pitch is, your team will have a lot of questions. Li
 
 A: The Apple Store has strict guidelines for publishing applications. One of the limitations is that apps may not download, install, or execute code that introduces or changes any features or functionality of the app ([App Store Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements)). This is relevant for some cross-platform technologies, but not for Kotlin Multiplatform. Shared Kotlin code compiles to native binaries with Kotlin/Native, bundles a regular iOS framework into your app, and doesn't provide the ability for dynamic code execution.
 
-### Q: Multiplatform projects are built with Gradle, and Gradle has an extremely steep learning curve. Does this mean that I now need to spend a lot of time trying to configure my project?
+### Q: Multiplatform projects are built with Gradle, and Gradle has an extremely steep learning curve. Does this mean that I now need to spend a lot of time trying to configure my project? {id="gradle-time-spent"}
 
 A: There's actually no need. There are various ways to organize the work process around building Kotlin mobile applications. First, only Android developers could be responsible for the builds, in which case the iOS team would only write code or even only consume the resulting artifact. You can also organize some workshops or practice pair programming when dealing with tasks that require working with Gradle, which would increase your team's Gradle skills. You can explore different ways of organizing teamwork for multiplatform projects and choose the one that's most appropriate for your team.
 
