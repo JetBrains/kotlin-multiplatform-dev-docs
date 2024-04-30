@@ -23,8 +23,10 @@ The flow of lifecycle states and events
 |--------------------------------------|-----------------|------------------------|
 | `viewDidDisappear`                   | `ON_STOP`       | `STARTED` → `CREATED`  |
 | `viewWillAppear`                     | `ON_START`      | `CREATED` → `STARTED`  |
-| `didEnterBackground`                 | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
-| `willEnterForeground`                | `ON_RESUME`     | `STARTED` → `RESUMED`  |
+| `willResignActive`                   | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `didBecomeActive`                    | `ON_RESUME`     | `STARTED` → `RESUMED`  |
+| `didEnterBackground`                 | `ON_STOP`       | `STARTED` → `CREATED`  |
+| `willEnterForeground`                | `ON_START`      | `CREATED` → `STARTED`  |
 
 ### Web
 
