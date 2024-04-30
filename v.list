@@ -22,8 +22,8 @@
 
     <var name="koinVersion" value="3.5.3" type="string"/>
 
-    <var name="composeNavigationVersion" value="2.8.0-alpha01" type="string"/>
+    <var name="composeNavigationVersion" value="2.7.0-alpha03" type="string"/>
 
-    <var name="composeViewmodelVersion" value="2.8.0-alpha01" type="string"/>
+    <var name="composeViewmodelVersion" value="2.8.0-beta02" type="string"/>
 
 </vars>
