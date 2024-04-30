@@ -282,4 +282,5 @@ composeCompiler {
 
 ## What's next
 
-If you are using Jetpack Compose to build an Android app, check out [our guide on how to make it multiplatform](multiplatform-integrate-in-existing-app.md).
+* See the [Google's announcement](https://android-developers.googleblog.com/2024/04/jetpack-compose-compiler-moving-to-kotlin-repository.html) about Compose compiler moving to the Kotlin repository.
+* If you are using Jetpack Compose to build an Android app, check out [our guide on how to make it multiplatform](multiplatform-integrate-in-existing-app.md).
