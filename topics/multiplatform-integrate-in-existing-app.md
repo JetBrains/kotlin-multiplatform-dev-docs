@@ -316,20 +316,7 @@ Connect your framework to the iOS project manually:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-5. On the **Build Settings** tab, switch to **All** build settings and specify the **Framework Search Path** under
-   **Search Paths**:
-
-   ```text
-   $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
-   ```
-
-   ![Framework search path](xcode-add-framework-search-path.png){width=700}
-
-   > This path is valid when your app is run on a simulated device.
-   >
-   {type="note"}
-
-6. On the **Build Settings** tab, disable the **User Script Sandboxing** under **Build Options**:
+5. On the **Build Settings** tab, disable the **User Script Sandboxing** under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -341,7 +328,7 @@ Connect your framework to the iOS project manually:
    >
    > {type="tip"}
    
-7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+6. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
