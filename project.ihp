@@ -11,7 +11,7 @@
             version="1.6.10"/>
     <vars src="v.list"/>
 
-    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="1.6.10"
+    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="%composeEapVersion%"
              keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
 </ihp>
