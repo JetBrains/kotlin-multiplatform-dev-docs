@@ -79,7 +79,7 @@ At the end of 2023, JetBrains introduced [Amper](https://blog.jetbrains.com/blog
 
 A: In November 2023, we announced that Kotlin Multiplatform is now [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/), which means it's now fully ready for you to use in production.
 
-### Q: There are not enough multiplatform libraries to implement my app's business logic, and it's much easier to find native alternatives. Why should I choose Kotlin Multiplatform?
+### Q: There are not enough multiplatform libraries to implement my app's business logic, and it's much easier to find native alternatives. Why should I choose Kotlin Multiplatform? {id="not-enough-libraries"}
 
 A: The Kotlin Multiplatform ecosystem is thriving and is being cultivated by many Kotlin developers around the world. Just take a look at how fast the number of KMP libraries has been growing over the years.
 
