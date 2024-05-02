@@ -8,10 +8,10 @@
     <topics dir="topics"/>
     <snippets src="snippets"/>
     <images dir="images" web-path="https://resources.jetbrains.com/help/img/kotlin-multiplatform-dev/"
-            version="1.6.2 (Stable)"/>
+            version="Compose Multiplatform 1.6.2"/>
     <vars src="v.list"/>
 
-    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="1.6.2 (Stable)"
+    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="Compose Multiplatform 1.6.2"
              keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
 </ihp>
