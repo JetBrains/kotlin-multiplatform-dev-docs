@@ -1,13 +1,13 @@
 [//]: # (title: Add dependencies to your project)
 
 <microformat>
-    <p>This is the fourth part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-        <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Add dependencies</strong><br/>
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Share more logic<br/>
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
+        <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add dependencies</strong><br/>
+        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
+        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 You've already created your first cross-platform Kotlin Multiplatform project! Now let's learn how to add dependencies

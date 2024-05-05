@@ -14,7 +14,7 @@ that requires tests both for common and platform-specific code.
 
 > This tutorial assumes that you are familiar with:
 > * The layout of a Kotlin Multiplatform project. If this is not the case,
-    complete [this tutorial](multiplatform-getting-started.md) before you begin.
+    complete [this tutorial](multiplatform-create-first-app.md) before you begin.
 > * The basics of popular unit testing frameworks, such as [JUnit](https://junit.org/junit5/).
 >
 {type="tip"}
