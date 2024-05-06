@@ -20,15 +20,16 @@ Take a look at the `App()` function in `composeApp/src/commonMain/kotlin`:
 ```kotlin
 @OptIn(ExperimentalResourceApi::class)
 @Composable
+@Preview
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        val greeting = remember { Greeting().greet() }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
@@ -84,8 +85,8 @@ The changes occur when the image is shown or hidden because the parent `Animated
 
 ## Launching UI on different platforms
 
-The `App()` function execution is different for each platform. On Android, it's managed by an activity, on iOS by a view
-controller, and on desktop by a window. Let's examine each of them.
+The `App()` function execution is different for each platform. On Android, it's managed by an activity; on iOS, by a view 
+controller; on the desktop, by a window; and on the web, by a container. Let's examine each of them.
 
 ### On Android
 
@@ -119,7 +120,7 @@ role as an activity on Android. Notice that both the iOS and Android types simpl
 
 ### On desktop
 
-For desktop, look again at the `main()` function in `composeApp/src/desktopMain/kotlin`:
+For desktop, look at the `main()` function in `composeApp/src/desktopMain/kotlin`:
 
 ```kotlin
 fun main() = application {
@@ -136,6 +137,33 @@ fun main() = application {
 
 Currently, the `App` function doesn't declare any parameters. In a larger application, you typically pass parameters to
 platform-specific dependencies. These dependencies could be created by hand or using a dependency injection library.
+
+### On the web
+
+For the web, look again at the `main()` function in `composeApp/src/wasmJsMain/kotlin`. The function has two variants:
+
+```kotlin
+// First variant:
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+    ComposeViewport(viewportContainerId = document.body!!) { App() }
+}
+
+
+//Second variant:
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+    ComposeViewport(viewportContainerId = "composeApplication") { App() }
+}
+```
+
+* In the first variant, the web app is inserted into the value assigned to the `viewportContainerId` parameter.
+  The `viewportContainerId` parameter uses the entire body of the HTML document as the container for rendering the UI.
+* In the second variant, `composeApplication` is the ID of the container added in your `index.html` file, where the UI is rendered.
+* In both variants, the `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as 
+  experimental and may change in future releases.
+* The `ComposeViewport` function sets up the Compose environment for the application.
+* The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
 ## Next step
 
