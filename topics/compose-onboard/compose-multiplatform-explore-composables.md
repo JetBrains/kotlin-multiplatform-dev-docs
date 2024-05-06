@@ -146,7 +146,7 @@ For the web, look again at the `main()` function in `composeApp/src/wasmJsMain/k
 // First variant:
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(viewportContainerId = document.body!!) { App() }
+    ComposeViewport(viewportContainer = document.body!!) { App() }
 }
 
 
@@ -157,8 +157,8 @@ fun main() {
 }
 ```
 
-* In the first variant, the web app is inserted into the value assigned to the `viewportContainerId` parameter.
-  The `viewportContainerId` parameter uses the entire body of the HTML document as the container for rendering the UI.
+* In the first variant, the web app is inserted into the container assigned to the `viewportContainer` parameter.
+  The `viewportContainer` parameter uses the entire body of the HTML document as the container for rendering the UI.
 * In the second variant, `composeApplication` is the ID of the container added in your `index.html` file, where the UI is rendered.
 * In both variants, the `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as 
   experimental and may change in future releases.

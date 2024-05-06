@@ -62,7 +62,7 @@ When the shared module is built into an Android library, common Kotlin code gets
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
 Kotlin code gets treated as Kotlin/Wasm.
 
-![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png){width=700}
+![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.png){width=700}
 
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
