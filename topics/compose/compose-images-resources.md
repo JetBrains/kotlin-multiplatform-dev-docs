@@ -42,24 +42,26 @@ To access resources in your multiplatform projects:
    * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
-   to the `build.gradle.kts` file:
+## Configuration
 
-    ```kotlin
-    compose.resources {
-        publicResClass = true
-        packageOfResClass = "me.sample.library.resources"
-        generateResClass = always
-    }
-    ```
+You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
+to the `build.gradle.kts` file:
 
-   * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
-   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
-     as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
-     `{group name}.{module name}.generated.resources` package to the class.
-   * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-     when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
-     class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
+```kotlin
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "me.sample.library.resources"
+    generateResClass = always
+}
+```
+
+* `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
+* `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
+  as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
+  `{group name}.{module name}.generated.resources` package to the class.
+* `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
+  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ## Qualifiers
 
@@ -84,8 +86,9 @@ The library supports (in the order of priority) the following qualifiers: [langu
 The language is defined by a two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
 language code.
 
-You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) regional code
-to your language code. In this case, the regional code must have a lowercase `r` prefix.
+You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or a three-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+regional code to your language code.
+In this case, the regional code must have a lowercase `r` prefix.
 
 The language and regional codes are case-sensitive.
 
