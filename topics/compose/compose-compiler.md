@@ -68,6 +68,16 @@ module that uses the `org.jetbrains.compose` plugin:
    >
    {type="warning"}
 
+#### Possible issue: Missing resource with path
+
+When switching from Kotlin 1.9 to 2.0, or from 2.0 to 1.9, you may encounter the following error:
+
+```
+org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...
+```
+
+To resolve this, delete all of the `build` directories in your project, in the root of your project and in each of the modules. 
+
 ### Test with the stable Compose Multiplatform 
 
 To try the Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
