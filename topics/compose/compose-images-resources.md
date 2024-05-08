@@ -41,7 +41,7 @@ To access resources in your multiplatform projects:
    * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. You can alter the default settings for Compose Multiplatform resources by adding a `compose.resources{}` block
+4. You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
    to the `build.gradle.kts` file:
 
     ```kotlin
@@ -53,8 +53,8 @@ To access resources in your multiplatform projects:
     ```
 
    * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
-   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code
-     as well as for isolation in a final artifact.) By default, Compose Multiplatform assigns the
+   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
+     as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
      `{group name}.{module name}.generated.resources` package to the class.
    * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
      when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
@@ -109,7 +109,7 @@ The resource is selected depending on the screen density defined in the system.
 ## Resource usage
 
 After importing a project, a special `Res` class is generated which provides access to resources.
-To manually generate the `Res` class, run the `generateComposeResClass` Gradle task.
+To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in IDE.
 
 ### Images
 
@@ -285,20 +285,22 @@ coroutineScope.launch {
 #### Plurals
 
 When your UI displays quantities of something, you might want to support grammatical agreement for different numbers
-of the same thing (1 _book_, many _books_ and so on) without creating programmatically unrelated strings.
+of the same thing (one _book_, many _books_, and so on) without creating programmatically unrelated strings.
 
-The concept and base implementation in Compose Multiplatform is the same as for [quantity strings](https://developer.android.com/guide/topics/resources/string-resource#Plurals)
-on Android (follow the link to read more about nuances and best practices of using plurals in your project).
+The concept and base implementation in Compose Multiplatform are the same as for quantity strings
+on Android.
+See [the Android documentation](https://developer.android.com/guide/topics/resources/string-resource#Plurals) for more
+about best practices and nuances of using plurals in your project.
 
 * The supported variants are `zero`, `one`, `two`, `few`, `many`, and `other`. Note that not all variants are even 
-  considered for every language: for example, `zero` is ignored for English, because it is the same as any other plural
+  considered for every language: for example, `zero` is ignored for English because it is the same as any other plural
   except 1. Rely on a language specialist to know what distinctions the language actually insists upon.
 * It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1".
   If this doesn't worsen the user experience, 
 
 To define a plural, add a `<plurals>` element to any .xml file in your `composeResources/values` directory.
 A `plurals` collection is a simple resource referenced using the name attribute (not the name of the XML file).
-As such, you can combine `plurals` resources with other simple resources in the one XML file, under one `<resources>` element:
+As such, you can combine `plurals` resources with other simple resources in one XML file under one `<resources>` element:
 
 ```xml
 <resources>
