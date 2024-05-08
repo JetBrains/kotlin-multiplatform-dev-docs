@@ -30,7 +30,8 @@ To access resources in your multiplatform projects:
    }
    ```
 
-2. Create a new directory `composeResources` in a source set directory (for example, `commonMain`):
+2. Create a new directory `composeResources` in the source set directory you want to add the resources to
+   (`commonMain` in this example):
 
    ![Compose resources project structure](compose-resources-structure.png){width=250}
 
@@ -113,7 +114,8 @@ To manually generate the `Res` class and all the resource accessors, build the p
 
 ### Images
 
-You can access drawable resources as simple images, rasterized images, or XML vectors:
+You can access drawable resources as simple images, rasterized images or XML vectors.
+SVG images are supported on all platforms **except** Android.
 
 * To access drawable resources as `Painter` images, use the `painterResource()` function:
 
@@ -435,7 +437,7 @@ External libraries can use that path to access the file in a manner that suits t
 ## Publication
 
 Starting with Compose Multiplatform %composeEapVersion%-beta01, all necessary resources are included in the publication
-package, regardless of module and source set hierarchy.
+maven artifacts.
 
 To enable this functionality, your project needs to use Kotlin 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
 
