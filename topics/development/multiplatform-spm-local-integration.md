@@ -1,0 +1,124 @@
+[//]: # (title: Using Kotlin from local Swift packages)
+
+
+
+## Set up the project
+
+This tutorial uses a special Kotlin version, `2.0.0-ux1` from the `https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository.
+
+You can add the repository, for instance, in your `settings.gradle.kts`:
+
+```kotlin
+pluginManagement {
+    repositories {
+        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
+        //...
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
+        //...
+    }
+}
+```
+
+> If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
+> and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
+>
+{type="tip"}
+
+## Remove previous integration
+
+If you're migrating your project from another integration approach, remove it first:
+
+#### CocoaPods plugin {initial-collapse-state="collapsed"}
+
+> If you have dependencies on other Pods in the `cocoapods` block, you have to keep to the CocoaPods integration approach.
+>
+{type="warning"}
+
+To remove the CocoaPods plugin from your project:
+
+1. In the directory with `Podfile`, run:
+
+    ```none
+   pod deintegrate
+   ```
+
+2. Remove the `cocoapods{ }` block from your `build.gradle(.kts)` files.
+3. Remove `.podspec` and `Podfile` files.
+
+#### Direct integration through embedAndSignAppleFrameworkForXcode {initial-collapse-state="collapsed"}
+
+To remove the direct integration that was set up with the  `embedAndSignAppleFrameworkForXcode` task:
+
+1. In Xcode, open the iOS project settings by double-clicking the project name.
+2. Remove the  `Run Script` build phase from your  Xcode project:
+
+   ![Add the script](xcode-add-run-phase-2.png){width=700}
+
+3. On the **Build Settings** tab, remove the following from **Framework Search Path** property:
+
+   ```text
+   $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+   ```
+
+   ![Framework search path](xcode-add-framework-search-path.png){width=700}
+
+## Connect the framework to your Xcode project
+
+> The integration into `swift build` is currently not supported.
+>
+{type="note"}
+
+1. Ensure that frameworks are declared for all targets corresponding to the Xcode project platforms, for instance:
+
+   ```kotlin
+   listOf(
+       iosX64(),
+       iosArm64(),
+       iosSimulatorArm64(),
+   ).forEach {
+       it.binaries.framework {
+           baseName = "shared"
+       }
+   }
+   ```
+   
+   You can learn more about declaring final binaries in the [Kotlin documentation](multiplatform-build-native-binaries.md).
+
+2. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
+
+   ![Edit scheme](xcode-edit-schemes.png){width=700}
+
+3. Select **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
+
+   ![New run script action](xcode-new-run-script-action.png){width=700}
+
+4. Add the following script and replace `:shared` with your Gradle project name:
+
+   ```bash
+   cd "$SRCROOT/.."
+   ./gradlew :shared:embedAndSignAppleFrameworkForXcode
+   ```
+5. Choose your app's target in the **Provide build settings from** section:
+
+   ![Filled run script action](xcode-filled-run-script-action.png){width=700}
+
+6. Use the code from Kotlin in the local Swift (SPM) package added to your Xcode project:
+
+   ![SPM usage](xcode-spm-usage.png){width=700}
+
+7. Build the project in Xcode. If everything is set up correctly, the project build will be successfully.
+
+> If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
+> tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
+>
+{type="note"}
+
+## What’s next
+
+* [Choose your project configuration](multiplatform-project-configuration.md)
+* [Learn how to set up Swift package export](https://kotlinlang.org/docs/native-spm.html)
