@@ -70,7 +70,7 @@ module that uses the `org.jetbrains.compose` plugin:
 
 #### Possible issue: "Missing resource with path"
 
-When switching from Kotlin 1.9 to 2.0, or from 2.0 to 1.9, you may encounter the following error:
+When switching from Kotlin 1.9.0 to 2.0.0, or from 2.0.0 to 1.9.0, you may encounter the following error:
 
 ```
 org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...
