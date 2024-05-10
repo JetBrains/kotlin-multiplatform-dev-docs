@@ -139,7 +139,7 @@ In this release:
 
 Compose Multiplatform selection containers on iOS now emulate the native magnifying tool.
 
-![Screenshot of iPhone chat app with the text magnifier active](compose-1610-ios-magnifier.png)
+![Screenshot of iPhone chat app with the text magnifier active](compose-1610-ios-magnifier.png){width=390}
 
 
 ### Software keyboard inset for Dialog centering
@@ -189,6 +189,5 @@ You can now create uber JARs (complex packages with JARs of the application and 
 Gradle tasks.
 
 See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
-
 
 <!--TODO add link to the GitHub tutorial mentioned in PR when it's updated  -->
