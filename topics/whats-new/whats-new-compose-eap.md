@@ -133,13 +133,14 @@ In this release:
 * interop views created using `UIKitView` and `UIKitViewController` are now reachable by Accessibility Services,
 * `LiveRegion` semantics are supported by the accessibility API,
 * [accessibility scrolling](https://github.com/JetBrains/compose-multiplatform-core/pull/1169) is supported,
-* `HapticFeedback` is supported,
+* `HapticFeedback` is supported.
 
 ### Selection container magnifier for iOS 17 and higher
 
 Compose Multiplatform selection containers on iOS now emulate the native magnifying tool.
 
-<!--TODO screenshot-->
+![Screenshot of iPhone chat app with the text magnifier active](compose-1610-ios-magnifier.png)
+
 
 ### Software keyboard inset for Dialog centering
 
@@ -163,14 +164,30 @@ To resolve this, delete the `build` directories in your project: this includes f
 
 ## Gradle plugin
 
-### Add possibility to modify the macOS minimum version
+### Possibility to modify the macOS minimum version
 
-TODO https://github.com/JetBrains/compose-multiplatform/pull/4271
+In previous versions, it wasn't possible to upload a macOS app to the App Store without including an Intel version. 
+You can now set a minimum macOS version for your app among platform-specific Compose Multiplatform options:
 
-### Make desktop preview task fully configuration cache compliant
+```kotlin
+compose.desktop {
+    application {
+        nativeDistributions {
+            macOS {
+              minimumSystemVersion = "12.0"
+            }
+        }
+    }
+}
+```
 
-TODO https://github.com/JetBrains/compose-multiplatform/pull/4410
+See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4271) for details.
 
-### Option to pack jars as uber JAR, support Proguard for uber JAR
+### Option to create uber JARs with Proguard support
 
-TODO https://github.com/JetBrains/compose-multiplatform/pull/4136
+You can now create uber JARs (complex packages with JARs of the application and all dependencies) using ProGuard
+Gradle tasks.
+
+See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
+
+<!-- TODO add link to GitHub when it's updated https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation -->
