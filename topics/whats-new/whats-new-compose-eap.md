@@ -5,7 +5,7 @@ Here are the highlights for this EAP feature release:
 * [Support for multimodule projects with Compose Multiplatform resources](#support-for-multimodule-projects-with-compose-multiplatform-resources)
 * [Experimental navigation library](#experimental-navigation-library)
 * [Lifecycle library with experimental common ViewModel](#lifecycle-library)
-* [Known issues: bugs](#known-issues)
+* [Known issues](#known-issues)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-beta01-april-2024).
 
