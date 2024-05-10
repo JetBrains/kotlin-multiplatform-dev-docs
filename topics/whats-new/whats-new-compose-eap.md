@@ -190,4 +190,5 @@ Gradle tasks.
 
 See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
 
-<!-- TODO add link to GitHub when it's updated https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation -->
+
+<!--TODO add link to the GitHub tutorial mentioned in PR when it's updated  -->
