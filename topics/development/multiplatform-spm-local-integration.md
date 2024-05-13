@@ -1,6 +1,6 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
-In this tutorial, you'll learn how to add a Kotlin module as a local package in the Swift package manager.
+In this tutorial, you'll learn how to add a Kotlin module to a local package in the Swift package manager.
 This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several native iOS modules
 in your Xcode project.
 
@@ -68,13 +68,16 @@ To remove the direct integration that was set up with the `embedAndSignAppleFram
 
    ![Framework search path](xcode-add-framework-search-path.png){width=700}
 
-## Connect the framework to your Xcode project
+## Connect the framework to your project
 
 > The integration into `swift build` is currently not supported.
 >
 {type="note"}
 
-1. Ensure that frameworks are declared for all targets corresponding to the Xcode project platforms, for instance:
+To connect the Kotlin framework to your Xcode project and use the Kotlin code in a local Swift package:
+
+1. In your Kotlin Multiplatform project, ensure that frameworks are declared for all the targets corresponding to the Xcode
+   project platforms, for instance:
 
    ```kotlin
    listOf(
@@ -88,7 +91,7 @@ To remove the direct integration that was set up with the `embedAndSignAppleFram
    }
    ```
    
-   You can learn more about declaring final binaries in the [Kotlin documentation](multiplatform-build-native-binaries.md).
+   You can learn more about declaring final binaries in the [Kotlin documentation](https://kotlinlang.org/docs/multiplatform-build-native-binaries.html).
 
 2. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
 
@@ -108,7 +111,7 @@ To remove the direct integration that was set up with the `embedAndSignAppleFram
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-6. Use the code from Kotlin in the local Swift (SPM) package added to your Xcode project:
+6. Use the code from Kotlin in the local Swift package added to your Xcode project:
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
