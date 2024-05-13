@@ -62,9 +62,9 @@ We recommend that you install the latest stable versions for compatibility and b
         <td>
             <p>To run multiplatform applications in a browser, you need a browser supporting the <a href="https://github.com/WebAssembly/gc">Wasm Garbage Collection (GC) feature</a>.</p>
             <list>
-                <li><strong>Chrome and Chromium-based:</strong> works by default from version 119 and subsequent versions.</li>
-                <li><strong>Firefox:</strong> works by default from version 120 and subsequent versions.</li>
-                <li><strong>Safari/WebKit:</strong> Wasm GC support is currently under <a href="https://bugs.webkit.org/show_bug.cgi?id=247394">active development.</a></li>
+                <li><strong>Chrome and Chromium-based:</strong> works by default starting from version 119.</li>
+                <li><strong>Firefox:</strong> works by default starting from version 120.</li>
+                <li><strong>Safari/WebKit:</strong> Wasm GC support is currently under <a href="https://bugs.webkit.org/show_bug.cgi?id=247394">active development</a>.</li>
             </list>
         </td>
     </tr>
@@ -155,7 +155,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
            </list>
    </def>
    <def title="Browsers">
-      Make sure that your browser version supports the new <a href="https://github.com/WebAssembly/gc">WasmGC</a> by default. If you are working with older browser versions, you need to <a href="https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions">configure the environment</a>.
+      Make sure that your browser version supports the new <a href="https://github.com/WebAssembly/gc">WasmGC</a> by default. If you are working with older browser versions, <a href="https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions">configure the environment</a>.
    </def>
    <def title="Still having trouble?">
             <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>

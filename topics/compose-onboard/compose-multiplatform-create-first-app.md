@@ -50,7 +50,7 @@ The project contains two modules:
 
   ![Compose Multiplatform project structure](compose-project-structure.png){width=350}
 
-The **composeApp** module consists of five source sets: `androidMain`, `commonMain`, `desktopMain`, `iosMain`, and `wasmJsMain`.
+The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `desktopMain`, `iosMain`, and `wasmJsMain`.
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
@@ -205,7 +205,7 @@ in Android Studio and select your device in the **Execution target** list. Run t
 
 You can create a run configuration for running the desktop application as follows:
 
-1. Select the **Run | Edit Configurations** menu item.
+1. Select **Run | Edit Configurations** from the main menu.
 2. Click the plus button and choose **Gradle** from the dropdown list.
 3. In the **Tasks and arguments** field, paste this command:
    ```shell
@@ -217,11 +217,11 @@ Now, you can use this configuration to run the desktop app:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
 
-### Run your application on the web
+### Run your web application
 
-Similar to running the desktop application, you need to create a run configuration to run the web application:
+Create a run configuration to run the web application:
 
-1. Select the **Run | Edit Configurations** menu item.
+1. Select **Run | Edit Configurations** from the main menu.
 2. Click the plus button and choose **Gradle** from the dropdown list.
 3. In the **Tasks and arguments** field, paste this command:
 
@@ -240,7 +240,7 @@ The web application opens automatically in your browser. Alternatively, you can 
 ```shell
    http://localhost:8080/
 ```
-> The port number can vary because the 8080 port may be unavailable. You can find the actual port number printed in the 
+> The port number can vary because the 8080 port may be unavailable. You can find the actual port number in the 
 > Gradle build console.
 >
 {type="tip"}

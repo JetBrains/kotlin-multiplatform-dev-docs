@@ -100,9 +100,9 @@ and desktop:
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >
-{type="tip"}
+{type="tip"} -->
 
 ## Next step
 

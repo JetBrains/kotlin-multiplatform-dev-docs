@@ -77,7 +77,7 @@ symbolication in binaries produced from Kotlin modules, see the [Kotlin/Native d
 
 ## Web app
 
-To publish your web application, you first need to create the artifacts containing the compiled files 
+To publish your web application, create the artifacts containing the compiled files 
 and resources that make up your application. These artifacts are necessary to deploy your application to a web hosting platform like GitHub Pages.
 
 ### Generate artifacts
@@ -98,16 +98,16 @@ Now, you can use this configuration to run the task:
 
 ![Run the Wasm distribution task](compose-run-wasm-distribution-task.png){width=350}
 
-Once the application task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
+Once the task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
 directory:
 
 ![Artifacts directory](compose-web-artifacts.png){width=600}
 
 ### Publish your application on GitHub Pages
 
-With the artifacts ready, you can deploy your application on a web hosting platform. In this example, we use GitHub Pages:
+With the artifacts ready, you can deploy your application on the web hosting platform:
 
-1. Copy all the contents in your `productionExecutable` directory into the repository where you want to create a site.
+1. Copy the contents in your `productionExecutable` directory into the repository where you want to create a site.
 2. Follow GitHub's instructions for [creating your site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site).
 
    > It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub.
@@ -123,5 +123,5 @@ With the artifacts ready, you can deploy your application on a web hosting platf
 ### Debug your web application
 
 You can debug your web application in your browser out of the box, without additional configurations. To learn how to debug
-your web application, see the [Debug in your browser](https://kotlinlang.org/docs/wasm-debugging.html#debug-in-your-browser)
+in the browser, see the [Debug in your browser](https://kotlinlang.org/docs/wasm-debugging.html#debug-in-your-browser)
 guide in Kotlin docs.
