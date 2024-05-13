@@ -41,7 +41,7 @@ Each Kotlin Multiplatform project includes three modules:
   between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
 * _composeApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The composeApp module depends on and uses the shared module as a regular Android library.
-* _iosApp_ is an Xcode project that builds into an iOS application It depends on and uses the shared module as an iOS
+* _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods.html).
   By default, the Kotlin Multiplatform wizard creates projects that use the regular framework dependency.
 
