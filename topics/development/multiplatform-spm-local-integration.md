@@ -1,12 +1,13 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
-
+In this tutorial, you'll learn how to add a Kotlin module as a local package in the Swift package manager.
+This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several native iOS modules
+in your Xcode project.
 
 ## Set up the project
 
-This tutorial uses a special Kotlin version, `2.0.0-ux1` from the `https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository.
-
-You can add the repository, for instance, in your `settings.gradle.kts`:
+This tutorial uses a special Kotlin version, `2.0.0-ux1`, from the `https://packages.jetbrains.team/maven/p/mpp/dev`
+Maven repository. You can add it, for example, in your `settings.gradle.kts` file:
 
 ```kotlin
 pluginManagement {
@@ -41,25 +42,25 @@ If you're migrating your project from another integration approach, remove it fi
 
 To remove the CocoaPods plugin from your project:
 
-1. In the directory with `Podfile`, run:
+1. In the directory with `Podfile`, run the following command:
 
     ```none
    pod deintegrate
    ```
 
 2. Remove the `cocoapods{ }` block from your `build.gradle(.kts)` files.
-3. Remove `.podspec` and `Podfile` files.
+3. Delete the `.podspec` and `Podfile` files.
 
 #### Direct integration through embedAndSignAppleFrameworkForXcode {initial-collapse-state="collapsed"}
 
-To remove the direct integration that was set up with the  `embedAndSignAppleFrameworkForXcode` task:
+To remove the direct integration that was set up with the `embedAndSignAppleFrameworkForXcode` task:
 
 1. In Xcode, open the iOS project settings by double-clicking the project name.
-2. Remove the  `Run Script` build phase from your  Xcode project:
+2. Remove the `Run Script` build phase from your Xcode project:
 
    ![Add the script](xcode-add-run-phase-2.png){width=700}
 
-3. On the **Build Settings** tab, remove the following from **Framework Search Path** property:
+3. On the **Build Settings** tab, remove the following line from the **Framework Search Path** property:
 
    ```text
    $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
@@ -111,14 +112,14 @@ To remove the direct integration that was set up with the  `embedAndSignAppleFra
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-7. Build the project in Xcode. If everything is set up correctly, the project build will be successfully.
+7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
 
 > If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
 >
 {type="note"}
 
-## What’s next
+## What's next
 
 * [Choose your project configuration](multiplatform-project-configuration.md)
 * [Learn how to set up Swift package export](https://kotlinlang.org/docs/native-spm.html)
