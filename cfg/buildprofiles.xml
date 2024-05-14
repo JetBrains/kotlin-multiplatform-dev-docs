@@ -82,7 +82,8 @@
         <generate-canonicals>true</generate-canonicals>
     </variables>
     <footer>
-        <social type="twitter" href="https://twitter.com/kotlin">X (former twitter)</social>
+        <link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
+        <social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
         <social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
         <social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
         <!-- Custom CSS will replace rss type -->
