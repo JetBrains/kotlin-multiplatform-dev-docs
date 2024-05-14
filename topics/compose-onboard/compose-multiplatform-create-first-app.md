@@ -188,7 +188,7 @@ If you haven't registered your iPhone in Xcode yet, follow [Apple recommendation
 In short, you should:
 
 1. Connect your iPhone with a cable.
-2. On your iPhone, enable the developer mode in **Settings** | **Developer**.
+2. On your iPhone, enable the developer mode in **Settings** | **Privacy & Security**.
 3. In Xcode, go to the top menu and choose **Window** | **Devices and Simulators**.
 4. Click on the plus sign. Select your connected iPhone and click **Add**.
 5. Sign in with your Apple ID to enable development capabilities on the device.
