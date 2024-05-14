@@ -107,7 +107,7 @@ directory:
 
 With the artifacts ready, you can deploy your application on the web hosting platform:
 
-1. Copy the contents in your `productionExecutable` directory into the repository where you want to create a site.
+1. Copy the contents of your `productionExecutable` directory into the repository where you want to create a site.
 2. Follow GitHub's instructions for [creating your site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site).
 
    > It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub.
