@@ -523,4 +523,41 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+   <tr>
+      <td>
+          <strong><a href="https://github.com/SaeedNoshadi89/NoteByKMP">Note KMP</a></strong>
+      </td>
+      <td>A cross-platform TaskManager application built using Compose Multiplatform, Navigation, Jetpack ViewModel, and Room. It allows you to create a Task based on a category and DateTime with the                 ability to Bookmark, complete, and edit a Task across desktops (macOS), Android, and iOS.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Data Storage</li>
+              <li>Navigation</li>
+              <li>UI</li>
+              <li>ViewModel</li>
+              <li>UI state</li>
+              <li>Custom Calendar</li>
+              <li>Use Case</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>Jetpack room</code></li>
+              <li><code>sqLite</code></li>
+              <li><code>koin</code></li>
+              <li><code>Compose Navigation</code></li>
+              <li><code>Jetpack viewModel</code></li>
+              <li><code>Napier</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Jetpack Compose on Android</li>
+              <li>Compose Multiplatform on desktop</li>  
+          </list>
+      </td>
+  </tr>
 </table>
