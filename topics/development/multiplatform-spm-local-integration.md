@@ -1,29 +1,13 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
-In this tutorial, you'll learn how to add a Kotlin module to a local package in the Swift package manager.
-This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several native iOS modules
+> The feature is available starting with 2.0.0-Beta2. To try it out, [install the Kotlin EAP plugin](https://kotlinlang.org/docs/install-eap-plugin.html)
+> if you create a new project or [adjust your build](https://kotlinlang.org/docs/configure-build-for-eap.html) for an existing project.
+> 
+{type="note"}
+
+In this tutorial, you'll learn how to add a dependency on a Kotlin framework in a local package in the Swift package manager.
+This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several SPM modules
 in your Xcode project.
-
-## Set up the project
-
-This tutorial uses a special Kotlin version, `2.0.0-ux1`, from the `https://packages.jetbrains.team/maven/p/mpp/dev`
-Maven repository. You can add it, for example, in your `settings.gradle.kts` file:
-
-```kotlin
-pluginManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-
-dependencyResolutionManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-```
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
 > and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
@@ -36,7 +20,8 @@ If you're migrating your project from another integration approach, remove it fi
 
 #### CocoaPods plugin {initial-collapse-state="collapsed"}
 
-> If you have dependencies on other Pods in the `cocoapods` block, you have to keep to the CocoaPods integration approach.
+> If you have dependencies on other Pods in the `cocoapods` block, you have to resort to the CocoaPods integration approach.
+> Currently, it's impossible to both have dependencies on Pods and on the Kotlin framework in a multimodal SPM project. 
 >
 {type="warning"}
 
