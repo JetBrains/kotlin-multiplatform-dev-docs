@@ -12,14 +12,14 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 ## Dependencies
 
 * Gradle plugin `org.jetbrains.compose`, version 1.6.10-rc01. Based on Jetpack Compose libraries:
-  * [Compiler 1.5.11](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.8)
-  * [Runtime 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.6.1)
-  * [UI 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.6.1)
-  * [Foundation 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.6.1)
-  * [Material 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.1)
-  * [Material3 1.2.1](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.2.0)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0-rc01`. Based on [Jetpack Lifecycle 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0-rc01).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha04`. Based on [Jetpack Navigation 2.7.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.7.7).
+  * [Compiler 1.5.13](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.13)
+  * [Runtime 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.6.7)
+  * [UI 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.6.7)
+  * [Foundation 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.6.7)
+  * [Material 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.7)
+  * [Material3 1.2.1](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.2.1)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0-rc02`. Based on [Jetpack Lifecycle 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0-rc01).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha05`. Based on [Jetpack Navigation 2.7.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.7.7).
 
 ## Breaking changes
 
@@ -39,7 +39,7 @@ The bulk of [the resource library API](compose-images-resources.md) is now consi
 
 #### Support for multimodule projects with Compose Multiplatform resources
 
-Starting with Compose Multiplatform %composeEapVersion%-beta01,
+Starting with Compose Multiplatform 1.6.10-beta01,
 you can store resources in any Gradle module and in any source set, as well as publish projects and libraries
 with resources included.
 
@@ -101,7 +101,7 @@ Compose Multiplatform also provides a general `ViewModelStoreOwner` implementati
 
 ### Support for Kotlin 2.0.0-RC2
 
-Kotlin 2.0-RC2 came out along with the new Gradle plugin for the Compose compiler.
+Kotlin 2.0.0-RC2 came out along with the new Gradle plugin for the Compose compiler.
 To use Compose Multiplatform with the latest compiler version, apply the plugin to the modules in your project
 (see [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project) for details).
 
@@ -114,7 +114,7 @@ Use it if your project absolutely requires it, or to test it out, but keep in mi
 For example, `BasicTextField2` does not support IME events right now, so you won't be able to use virtual keyboards
 for Chinese, Japanese, and Korean. 
 
-Full support and support for other platforms is planned for the 1.7.0 release of Compose Multiplatform.
+Full support for the component and support for other platforms is planned in the Compose Multiplatform 1.7.0 release.
 
 ### alwaysOnTop flag for DialogWindow
 
@@ -159,7 +159,7 @@ The web target for Compose Multiplatform now has basic support for virtual (IME)
 ### MissingResourceException
 
 You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
-after changing your Kotlin version from 1.9 to 2.0 (or the other way around).
+after changing your Kotlin version from 1.9.x to 2.0.0 (or the other way around).
 To resolve this, delete the `build` directories in your project: this includes folders located in the root and module folders of your project.
 
 ## Gradle plugin
@@ -174,7 +174,7 @@ compose.desktop {
     application {
         nativeDistributions {
             macOS {
-              minimumSystemVersion = "12.0"
+                minimumSystemVersion = "12.0"
             }
         }
     }
