@@ -199,7 +199,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 **Type**: `Property<Boolean>`
 
-**Default**: `false`
+**Default**: `true`
 
 If `true`, enable intrinsic remember performance optimization.
 
