@@ -83,12 +83,12 @@ The library supports (in the order of priority) the following qualifiers: [langu
 
 ### Language and regional qualifiers
 
-The language is defined by a two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
-language code.
-
-You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or a three-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+You can combine language and region qualifiers:
+* The language is defined by a two-letter (ISO 639-1)
+or a three-letter (ISO 639-2) [language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
+* You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 regional code to your language code.
-In this case, the regional code must have a lowercase `r` prefix.
+The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`
 
 The language and regional codes are case-sensitive.
 
