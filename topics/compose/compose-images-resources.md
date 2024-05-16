@@ -11,7 +11,7 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Reading big raw files, like long videos, as a stream is not supported yet.
   Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
   for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
-* Starting with %composeEapVersion%-beta01, you can place resources in any module or source set,
+* Starting with 1.6.10-beta01, you can place resources in any module or source set,
   as long as you are using Kotlin 2.0.0-Beta5 or newer, and Gradle 7.6 or newer.
 
 ## Setup
@@ -42,24 +42,26 @@ To access resources in your multiplatform projects:
    * Strings should be in the `values` directory.
    * Other files with any hierarchy should be in the `files` directory.
 
-4. You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
-   to the `build.gradle.kts` file:
+## Configuration
 
-    ```kotlin
-    compose.resources {
-        publicResClass = true
-        packageOfResClass = "me.sample.library.resources"
-        generateResClass = always
-    }
-    ```
+You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
+to the `build.gradle.kts` file:
 
-   * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
-   * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
-     as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
-     `{group name}.{module name}.generated.resources` package to the class.
-   * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-     when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
-     class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
+```kotlin
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "me.sample.library.resources"
+    generateResClass = always
+}
+```
+
+* `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
+* `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
+  as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
+  `{group name}.{module name}.generated.resources` package to the class.
+* `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
+  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ## Qualifiers
 
@@ -81,11 +83,12 @@ The library supports (in the order of priority) the following qualifiers: [langu
 
 ### Language and regional qualifiers
 
-The language is defined by a two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
-language code.
-
-You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) regional code
-to your language code. In this case, the regional code must have a lowercase `r` prefix.
+You can combine language and region qualifiers:
+* The language is defined by a two-letter (ISO 639-1)
+or a three-letter (ISO 639-2) [language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
+* You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+regional code to your language code.
+The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`
 
 The language and regional codes are case-sensitive.
 
@@ -436,7 +439,7 @@ External libraries can use that path to access the file in a manner that suits t
 
 ## Publication
 
-Starting with Compose Multiplatform %composeEapVersion%-beta01, all necessary resources are included in the publication
+Starting with Compose Multiplatform 1.6.10-beta01, all necessary resources are included in the publication
 maven artifacts.
 
 To enable this functionality, your project needs to use Kotlin 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
