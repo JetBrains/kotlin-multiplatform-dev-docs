@@ -75,7 +75,7 @@ You can try out two functions that allow fetching fonts and images as byte array
 `getDrawableResourceBytes` and `getFontResourceBytes`.
 These functions are aimed to help with accessing multiplatform resources from third-party libraries.
 
-See details in [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4651).
+See details in the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4651).
 
 ### Experimental navigation library
 
@@ -121,7 +121,7 @@ Full support for the component and support for other platforms is planned in the
 To avoid your dialog windows being overwritten, you can now use the `alwaysOnTop` flag for a `DialogWindow`
 composable.
 
-See [the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1120) for details.
+See the [pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1120) for details.
 
 ## iOS
 
@@ -173,14 +173,14 @@ compose.desktop {
 }
 ```
 
-See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4271) for details.
+See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4271) for details.
 
 ### Option to create uber JARs with Proguard support
 
 You can now create uber JARs (complex packages with JARs of the application and all dependencies) using ProGuard
 Gradle tasks.
 
-See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
+See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
 
 <!--TODO add link to the GitHub tutorial mentioned in PR when it's updated  -->
 
@@ -200,4 +200,4 @@ iOS compilation might fail for some projects with the following error:
 org.jetbrains.kotlin.backend.konan.llvm.NativeCodeGeneratorException: Exception during generating code for following declaration: private fun $init_global()
 ```
 
-Follow [the GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4809) for details. 
+Follow the [GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4809) for details. 
