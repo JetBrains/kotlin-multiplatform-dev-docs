@@ -14,11 +14,9 @@ in your Xcode project.
 >
 {type="tip"}
 
-## Remove previous integration
+The tutorial assumes that your project is using [direct integration](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-project-configuration.html#connect-a-kotlin-multiplatform-module-to-an-ios-app) approach. If you're connecting a Kotlin framework through CocoaPods plugin, please migrate first.
 
-If you're migrating your project from another integration approach, remove it first:
-
-#### CocoaPods plugin {initial-collapse-state="collapsed"}
+### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
 > If you have dependencies on other Pods in the `cocoapods` block, you have to resort to the CocoaPods integration approach.
 > Currently, it's impossible to both have dependencies on Pods and on the Kotlin framework in a multimodal SPM project. 
@@ -36,22 +34,7 @@ To remove the CocoaPods plugin from your project:
 2. Remove the `cocoapods{ }` block from your `build.gradle(.kts)` files.
 3. Delete the `.podspec` and `Podfile` files.
 
-#### Direct integration through embedAndSignAppleFrameworkForXcode {initial-collapse-state="collapsed"}
-
-To remove the direct integration that was set up with the `embedAndSignAppleFrameworkForXcode` task:
-
-1. In Xcode, open the iOS project settings by double-clicking the project name.
-2. Remove the `Run Script` build phase from your Xcode project:
-
-   ![Add the script](xcode-add-run-phase-2.png){width=700}
-
-3. On the **Build Settings** tab, remove the following line from the **Framework Search Path** property:
-
-   ```text
-   $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
-   ```
-
-   ![Framework search path](xcode-add-framework-search-path.png){width=700}
+Then follow the steps descibed [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project).
 
 ## Connect the framework to your project
 
@@ -61,46 +44,29 @@ To remove the direct integration that was set up with the `embedAndSignAppleFram
 
 To connect the Kotlin framework to your Xcode project and use the Kotlin code in a local Swift package:
 
-1. In your Kotlin Multiplatform project, ensure that frameworks are declared for all the targets corresponding to the Xcode
-   project platforms, for instance:
-
-   ```kotlin
-   listOf(
-       iosX64(),
-       iosArm64(),
-       iosSimulatorArm64(),
-   ).forEach {
-       it.binaries.framework {
-           baseName = "shared"
-       }
-   }
-   ```
-   
-   You can learn more about declaring final binaries in the [Kotlin documentation](https://kotlinlang.org/docs/multiplatform-build-native-binaries.html).
-
-2. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
+1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or gick the schemes icon in the top bar and select **Edit scheme**:
 
    ![Edit scheme](xcode-edit-schemes.png){width=700}
 
-3. Select **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
+2. Select **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
 
    ![New run script action](xcode-new-run-script-action.png){width=700}
 
-4. Add the following script and replace `:shared` with your Gradle project name:
+3. Add the following script and replace `:shared` with your Gradle project name:
 
    ```bash
    cd "$SRCROOT/.."
    ./gradlew :shared:embedAndSignAppleFrameworkForXcode
    ```
-5. Choose your app's target in the **Provide build settings from** section:
+4. Choose your app's target in the **Provide build settings from** section:
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-6. Use the code from Kotlin in the local Swift package added to your Xcode project:
+5. Use the code from Kotlin in the local Swift package added to your Xcode project:
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+6. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
 
 > If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
