@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.6.10-rc01)
+[//]: # (title: What's new in Compose Multiplatform 1.6.10-rc02)
 
 Here are the highlights for this EAP feature release:
 
