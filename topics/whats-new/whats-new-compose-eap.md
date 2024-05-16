@@ -99,7 +99,7 @@ projects.
 
 Compose Multiplatform also provides a general `ViewModelStoreOwner` implementation.
 
-### Support for Kotlin 2.0.0-RC2
+### Support for Kotlin 2.0.0
 
 Kotlin 2.0.0-RC2 came out along with the new Gradle plugin for the Compose compiler.
 To use Compose Multiplatform with the latest compiler version, apply the plugin to the modules in your project
@@ -112,7 +112,7 @@ To use Compose Multiplatform with the latest compiler version, apply the plugin 
 The `BasicTextField2` Compose component is now supported on a base level for desktop targets.
 Use it if your project absolutely requires it, or to test it out, but keep in mind that there may be uncovered edge cases.
 For example, `BasicTextField2` does not support IME events right now, so you won't be able to use virtual keyboards
-for Chinese, Japanese, and Korean. 
+for Chinese, Japanese, or Korean.
 
 Full support for the component and support for other platforms is planned in the Compose Multiplatform 1.7.0 release.
 
@@ -154,14 +154,6 @@ There is an option to disable this, with the `DialogProperties.useSoftwareKeyboa
 
 The web target for Compose Multiplatform now has basic support for virtual (IME) keyboards.
 
-## Known issues
-
-### MissingResourceException
-
-You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
-after changing your Kotlin version from 1.9.x to 2.0.0 (or the other way around).
-To resolve this, delete the `build` directories in your project: this includes folders located in the root and module folders of your project.
-
 ## Gradle plugin
 
 ### Possibility to modify the macOS minimum version
@@ -191,3 +183,21 @@ Gradle tasks.
 See [the pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
 
 <!--TODO add link to the GitHub tutorial mentioned in PR when it's updated  -->
+
+## Known issues
+
+### MissingResourceException
+
+You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
+after changing your Kotlin version from 1.9.x to 2.0.0 (or the other way around).
+To resolve this, delete the `build` directories in your project: this includes folders located in the root and module folders of your project.
+
+### NativeCodeGeneratorException
+
+iOS compilation might fail for some projects with the following error:
+
+```
+org.jetbrains.kotlin.backend.konan.llvm.NativeCodeGeneratorException: Exception during generating code for following declaration: private fun $init_global()
+```
+
+Follow [the GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4809) for details. 
