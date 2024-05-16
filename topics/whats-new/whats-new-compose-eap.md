@@ -23,7 +23,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 
 ## Breaking changes
 
-### New Compose compiler Gradle pliugin is required for Kotlin 2.0
+### New Compose compiler Gradle plugin is required for Kotlin 2.0
 
 Starting with Kotlin 2.0.0-RC2, Compose Multiplatform requires the new Compose compiler Gradle plugin.
 See [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project)
