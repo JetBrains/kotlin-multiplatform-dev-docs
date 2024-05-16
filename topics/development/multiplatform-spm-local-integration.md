@@ -1,10 +1,5 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
-> The feature is available starting with 2.0.0-Beta2. To try it out, [install the Kotlin EAP plugin](https://kotlinlang.org/docs/install-eap-plugin.html)
-> if you create a new project or [adjust your build](https://kotlinlang.org/docs/configure-build-for-eap.html) for an existing project.
-> 
-{type="note"}
-
 In this tutorial, you'll learn how to add a dependency on a Kotlin framework in a local package in the Swift package manager.
 This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several SPM modules
 in your Xcode project.
@@ -14,7 +9,33 @@ in your Xcode project.
 >
 {type="tip"}
 
-The tutorial assumes that your project is using [direct integration](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-project-configuration.html#connect-a-kotlin-multiplatform-module-to-an-ios-app) approach. If you're connecting a Kotlin framework through CocoaPods plugin, please migrate first.
+## Set up the project
+
+The feature is available starting with Kotlin 2.0.0-Beta2.
+
+If you still haven't upgraded to Kotlin 2.0, you can use a special Kotlin version, `1.9.24-spm` from the
+`https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository. You can add the repository, for instance,
+in your `settings.gradle.kts`:
+
+```kotlin
+pluginManagement {
+    repositories {
+        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
+        //...
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
+        //...
+    }
+}
+```
+
+The tutorial assumes that your project is using [direct integration](multiplatform-project-configuration.md#connect-a-kotlin-multiplatform-module-to-an-ios-app)
+approach with the `embedAndSignAppleFrameworkForXcode` task. If you're connecting a Kotlin framework through CocoaPods
+plugin, migrate first.
 
 ### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
@@ -23,7 +44,7 @@ The tutorial assumes that your project is using [direct integration](https://www
 >
 {type="warning"}
 
-To remove the CocoaPods plugin from your project:
+To migrate from the CocoaPods plugin:
 
 1. In the directory with `Podfile`, run the following command:
 
@@ -33,8 +54,7 @@ To remove the CocoaPods plugin from your project:
 
 2. Remove the `cocoapods{ }` block from your `build.gradle(.kts)` files.
 3. Delete the `.podspec` and `Podfile` files.
-
-Then follow the steps descibed [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project).
+4. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
 ## Connect the framework to your project
 
