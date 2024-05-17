@@ -37,10 +37,10 @@ line to the `build.gradle.kts` file of the shared module:
 kotlin {
    // ... 
    sourceSets {
-       commonMain.dependencies {
-           // ...
-           implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-       }
+      commonMain.dependencies {
+         // ...
+         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+      }
    }
 }
 ```
@@ -56,8 +56,8 @@ in the shared module:
 
 ```kotlin
 plugins {
-    // ...
-    kotlin("plugin.serialization") version "%kotlinVersion%"
+   // ...
+   kotlin("plugin.serialization") version "%kotlinVersion%"
 }
 ```
 
@@ -75,24 +75,24 @@ You also need to add supporting dependencies:
 
 ```kotlin
 kotlin {
-    // ...
-    val ktorVersion = "%ktorVersion%"
+   // ...
+   val ktorVersion = "%ktorVersion%"
 
-    sourceSets {
-        commonMain.dependencies {
-            // ...
+   sourceSets {
+      commonMain.dependencies {
+         // ...
 
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
-            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-        }
-        androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:$ktorVersion")
-        }
-        iosMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-        }
-    }
+         implementation("io.ktor:ktor-client-core:$ktorVersion")
+         implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+         implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+      }
+      androidMain.dependencies {
+         implementation("io.ktor:ktor-client-android:$ktorVersion")
+      }
+      iosMain.dependencies {
+         implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+      }
+   }
 }
 ```
 
@@ -114,14 +114,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RocketLaunch (
-    @SerialName("flight_number")
-    val flightNumber: Int,
-    @SerialName("name")
-    val missionName: String,
-    @SerialName("date_utc")
-    val launchDateUTC: String,
-    @SerialName("success")
-    val launchSuccess: Boolean?,
+   @SerialName("flight_number")
+   val flightNumber: Int,
+   @SerialName("name")
+   val missionName: String,
+   @SerialName("date_utc")
+   val launchDateUTC: String,
+   @SerialName("success")
+   val launchSuccess: Boolean?,
 )
 ```
 
@@ -211,7 +211,7 @@ data class RocketLaunch (
        return "${date.month} ${date.dayOfMonth}, ${date.year}"
    }
    ```
-   
+
    The date will be in the "MMMM DD, YYYY" format, for example, OCTOBER 5, 2022.
 
 7. Add another suspending function, `launchPhrase()`, which will create a message using the `getDateOfLastSuccessfulLaunch()`
@@ -270,8 +270,8 @@ Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the acces
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    ...
+   <uses-permission android:name="android.permission.INTERNET"/>
+   ...
 </manifest>
 ```
 
@@ -312,7 +312,7 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-    This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
+   This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
 
 3. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
    type and its backing property:
@@ -326,9 +326,9 @@ The view model will manage the data from the activity and won't disappear when t
         val greetingList: StateFlow<List<String>> get() = _greetingList
     }
     ```
-    
-    * `StateFlow` here extends the `Flow` interface but has a single value or state.
-    * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
+
+   * `StateFlow` here extends the `Flow` interface but has a single value or state.
+   * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
 
 4. In the `init` function of the View Model, collect all the strings from the `Greeting().greet()` flow:
 
@@ -350,8 +350,8 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-    Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
-    This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
+   Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
+   This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
 
 5. Inside the `collect` trailing lambda, update the value of `_greetingList` to append the collected `phrase` to the list of phrases in `list`:
 
@@ -370,8 +370,8 @@ The view model will manage the data from the activity and won't disappear when t
         }
     }
     ```
-   
-    The `update()` function will update the value automatically.
+
+   The `update()` function will update the value automatically.
 
 #### Use the view model's flow
 
@@ -400,14 +400,14 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-    * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
-      and represent it as a composable state in a lifecycle-aware manner.
-    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
-      arranged vertically and separated by dividers.
+   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
+     and represent it as a composable state in a lifecycle-aware manner.
+   * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
+     arranged vertically and separated by dividers.
 
 2. To see the results, re-run your **composeApp** configuration in Android Studio:
 
-    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
+   ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
 ### iOS app
 
@@ -448,7 +448,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
     
         var body: some View {
             ListView(phrases: viewModel.greetings)
-                .onAppear { self.viewModel.startObserving() }
+                .task { await self.viewModel.startObserving() }
         }
     }
     
@@ -473,13 +473,13 @@ The module is already imported in the `ContentView.swift` file with the `import 
         }
     }
     ```
-    
-    * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
-    * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-      SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
-    * `ContentView.ViewModel` is declared as an `ObservableObject`.
-    * The `@Published` wrapper is used for the `greetings` property.
-    * The `@ObservedObject` property wrapper is used to subscribe to the view model.
+
+   * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
+   * `ViewModel` has a `greetings` property that is an array of `String` phrases.
+     SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
+   * `ContentView.ViewModel` is declared as an `ObservableObject`.
+   * The `@Published` wrapper is used for the `greetings` property.
+   * The `@ObservedObject` property wrapper is used to subscribe to the view model.
 
 Now the view model will emit signals whenever this property changes.
 
@@ -510,7 +510,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-    id("co.touchlab.skie") version "0.6.1"
+   id("co.touchlab.skie") version "0.6.2"
 }
 ```
 
@@ -520,19 +520,7 @@ Return to Xcode and update the code using the library:
 
 1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
    property every time the flow emits a value.
-2. To support concurrency, wrap the asynchronous operation in a `Task`:
-
-    ```Swift
-    func startObserving() {
-        Task {
-            for await phrase in Greeting().greet() {
-                self.greetings.append(phrase)
-            }
-        }
-    }
-    ```
-
-3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
+2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
    `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
 
     ```Swift
@@ -543,17 +531,15 @@ Return to Xcode and update the code using the library:
             @Published var greetings: [String] = []
             
             func startObserving() {
-                Task {
-                    for await phrase in Greeting().greet() {
-                        self.greetings.append(phrase)
-                    }
+                for await phrase in Greeting().greet() {
+                    self.greetings.append(phrase)
                 }
             }
         }
     }
     ```
 
-4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
@@ -574,8 +560,8 @@ Return to Xcode and update the code using the library:
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("1.9.21-1.0.16").apply(false)
-        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-23").apply(false)
+        id("com.google.devtools.ksp").version("1.9.22-1.0.17").apply(false)
+        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-25").apply(false)
     }
     ```
 
@@ -610,7 +596,7 @@ Return to Xcode and update the code using the library:
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
 2. Add the `@NativeCoroutines` annotation to the `greet()` function. This will ensure that the plugin generates the right
    code to support correct flow handling on iOS:
-  
+
    ```kotlin
     import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
     
@@ -647,7 +633,7 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
 
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using KMP-NativeCoroutine's
    `asyncSequence()` function for the `Greeting().greet()` function:
-   
+
     ```Swift
     func startObserving() {
         do {
@@ -661,27 +647,10 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
     }
     ```
 
-    The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
-    every time the flow emits a value.
-    
-2. To support concurrency, wrap the asynchronous operation in `Task`:
+   The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
+   every time the flow emits a value.
 
-    ```Swift
-    func startObserving() {
-        Task {
-            do {
-                let sequence = asyncSequence(for: Greeting().greet())
-                for try await phrase in sequence {
-                    self.greetings.append(phrase)
-                }
-            } catch {
-                print("Failed with error: \(error)")
-            }
-        }
-    }
-    ```
-
-3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
+2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
    `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
 
     ```Swift
@@ -696,27 +665,25 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
             @Published var greetings: Array<String> = []
             
             func startObserving() {
-                Task {
-                    do {
-                        let sequence = asyncSequence(for: Greeting().greet())
-                        for try await phrase in sequence {
-                            self.greetings.append(phrase)
-                        }
-                    } catch {
-                        print("Failed with error: \(error)")
+                do {
+                    let sequence = asyncSequence(for: Greeting().greet())
+                    for try await phrase in sequence {
+                        self.greetings.append(phrase)
                     }
+                } catch {
+                    print("Failed with error: \(error)")
                 }
             }
         }
     }
     ```
 
-4. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
-    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
-> 
+>
 {type="tip"}
 
 ## Next step
