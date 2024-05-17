@@ -52,7 +52,7 @@ To migrate from the CocoaPods plugin:
    pod deintegrate
    ```
 
-2. Remove the `cocoapods{ }` block from your `build.gradle(.kts)` files.
+2. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
 3. Delete the `.podspec` and `Podfile` files.
 4. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
@@ -64,11 +64,11 @@ To migrate from the CocoaPods plugin:
 
 To connect the Kotlin framework to your Xcode project and use the Kotlin code in a local Swift package:
 
-1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or gick the schemes icon in the top bar and select **Edit scheme**:
+1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
 
    ![Edit scheme](xcode-edit-schemes.png){width=700}
 
-2. Select **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
+2. Select the **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
 
    ![New run script action](xcode-new-run-script-action.png){width=700}
 
