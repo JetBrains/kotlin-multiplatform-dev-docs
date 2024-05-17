@@ -42,6 +42,7 @@
     <toc-element toc-title="Develop with Kotlin Multiplatform">
         <toc-element id="multiplatform-connect-to-apis.md"/>
         <toc-element id="multiplatform-project-configuration.md" toc-title="Choose project configuration"/>
+        <toc-element id="multiplatform-spm-local-integration.md" toc-title="Local integration with SPM" hidden="true"/>
         <toc-element id="multiplatform-ktor-sqldelight.md" toc-title="Share data access layer"/>
     </toc-element>
     <toc-element id="multiplatform-run-tests.md" toc-title="Test your multiplatform app"/>
