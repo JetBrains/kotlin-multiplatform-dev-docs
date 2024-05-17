@@ -68,7 +68,7 @@ The Kotlin Multiplatform plugin provides a special wizard for creating such modu
 In your Android project, create a Kotlin Multiplatform shared module for your cross-platform code. Later you'll connect
 it to your existing Android application and your future iOS application.
 
-1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option. 
+1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section. 
 2. Select the **File** | **New** | **New Module** menu item.
 3. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared`, and select
    the **Regular framework** in the list of iOS framework distribution options.
