@@ -71,7 +71,7 @@ it to your existing Android application and your future iOS application.
 1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section. 
 2. Select the **File** | **New** | **New Module** menu item.
 3. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared`, and select
-   the **Regular framework** in the list of iOS framework distribution options.
+   **Regular framework** in the list of iOS framework distribution options.
    This is required for connecting the shared module to the iOS application.
 
    ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
