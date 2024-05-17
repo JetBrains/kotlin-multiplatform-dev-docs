@@ -22,7 +22,7 @@ The `composeApp` module contains an Android application, defines its main activi
 
 Make some changes and see how they are reflected in the UI:
 
-1. Navigate to the `App.kt` file in `composeApp/src/androidMain/kotlin`.
+1. Navigate to the `App.kt` file in `composeApp/src/commonMain/kotlin`.
 2. Find the `Greeting` class invocation. Select the `greet()` function and use the <shortcut>⌘ B</shortcut> shortcut to go to the function's declaration.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
 3. In `Greeting.kt`, update the `greet()` function:
