@@ -57,6 +57,17 @@ We recommend that you install the latest stable versions for compatibility and b
             <p>To update the plugin, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin. You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
             <p>The Kotlin plugin should be compatible with the Kotlin Multiplatform Mobile plugin. Refer to the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">compatibility table</a>.</p></td>
    </tr>
+    <tr>
+        <td>Browsers</td>
+        <td>
+            <p>To run multiplatform applications in a browser, you need a browser supporting the <a href="https://github.com/WebAssembly/gc">Wasm Garbage Collection (GC) feature</a>.</p>
+            <list>
+                <li><strong>Chrome and Chromium-based:</strong> works by default starting from version 119.</li>
+                <li><strong>Firefox:</strong> works by default starting from version 120.</li>
+                <li><strong>Safari/WebKit:</strong> Wasm GC support is currently under <a href="https://bugs.webkit.org/show_bug.cgi?id=247394">active development</a>.</li>
+            </list>
+        </td>
+    </tr>
 </table>
 
 ## Check your environment
@@ -142,6 +153,9 @@ To make sure everything works as expected, install and run the KDoctor tool:
               <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
               <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
+   </def>
+   <def title="Browsers">
+      Make sure that your browser version supports the new <a href="https://github.com/WebAssembly/gc">WasmGC</a> by default. If you are working with older browser versions, <a href="https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions">configure the environment</a>.
    </def>
    <def title="Still having trouble?">
             <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
