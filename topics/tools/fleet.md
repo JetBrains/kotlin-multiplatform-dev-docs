@@ -3,15 +3,16 @@
 This article shows the basics of working with Kotlin Multiplatform projects
 in [JetBrains Fleet](https://www.jetbrains.com/fleet/).
 
-Fleet is a modern IDE designed for collaborative development. It strives to provide a superior experience for
-Kotlin Multiplatform. As the first step, Fleet brings Kotlin Multiplatform to macOS.
+Fleet is a code editor for any language that can transform into a powerful development tool for any language. 
+It strives to provide a superior experience for Kotlin Multiplatform.
+As the first step, Fleet brings Kotlin Multiplatform to macOS.
 
-With Fleet, you can quickly open and run multiplatform projects targeting Android, iOS, and desktop platforms.
-Fleet's Smart Mode selects the appropriate code-processing engine.
+With Fleet, you can quickly open and run multiplatform projects targeting Android, iOS, web, and desktop platforms.
+Fleet's Smart Mode automatically selects the appropriate code-processing engine.
 
-When targeting iOS, navigation, refactoring, and debugging are all available across languages used in the project. This
-makes it easier to manage a mixed-language codebase. Fleet has full support for Swift, so you can easily extend and
-maintain the native parts of your application as well.
+When targeting iOS, navigation, refactoring, and debugging are available across all languages used in the project.
+This makes it easier to manage a mixed-language codebase.
+Fleet fully supports Swift out of the box, so you can extend and maintain the native parts of your application.
 
 ## Prepare your development environment
 
@@ -83,9 +84,9 @@ In this tutorial, you'll create a new project with the web wizard:
 
    At the top of the window, you'll see messages from Fleet as the project is imported and indexed.
 
-When Smart Mode is enabled, Fleet operates as an IDE, with all of the code completion, navigation, debugging, and
-refactoring features available. When it's disabled, Fleet works as a simple file editor. You can quickly open files and
-make changes, but most of the productivity features won't be available.
+When Smart Mode is enabled, Fleet operates as a _polyglot code editor_, that offers language-related features such as code completion,
+navigation, debugging, and refactoring. When Smart Mode is disabled, Fleet works as a simple code editor. 
+You can quickly open files and make changes, but without most of the advanced language-related features.
 
 Under the hood, Fleet chooses which backend to use to process code. When Smart Mode is enabled, the backend for
 Kotlin is the same code-processing engine used by IntelliJ IDEA, so the functionality you might be already familiar with
@@ -126,7 +127,7 @@ the [Get started with the Compose Multiplatform](compose-multiplatform-explore-c
 Let's see how cross-language navigation works in Fleet using the example of navigating from Kotlin to Swift:
 
 1. Open the `composeApp/src/commonMain/kotlin/App.kt` file. Here's the `App` composable, the center of the sample code.
-2. Select the `App()` function and run the **Usages** action form the context menu or with the <shortcut>⌘ U</shortcut>
+2. Select the `App()` function and run the **Usages** action from the context menu or with the <shortcut>⌘ U</shortcut>
    shortcut. You can see it is invoked in three files:
 
    ![Function show usages](fleet-show-usages.png){width=700}
@@ -145,7 +146,7 @@ Let's see how cross-language navigation works in Fleet using the example of navi
 
 Since the `ContentView.swift` file is already open, you can explore Fleet support for editing Swift code:
 
-1. Add a new function to the `ComposeView` type. Fleet will provide all of the expected coding assistance:
+1. Add a new function to the `ComposeView` type. Fleet will provide all the expected coding assistance:
 
    ```swift
    struct ComposeView: UIViewControllerRepresentable {
