@@ -8,8 +8,7 @@ Here are the highlights for this feature release:
 * [Lifecycle library with experimental common ViewModel](#lifecycle-library)
 * [Known issue: MissingResourceException](#known-issue-missingresourceexception)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-may-2024).
-<!-- TODO check correct github link -->
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-may-2024). 
 
 ## Dependencies
 
@@ -141,7 +140,6 @@ Compose Multiplatform selection containers on iOS now emulate the native magnify
 
 ![Screenshot of iPhone chat app with the text magnifier active](compose-1610-ios-magnifier.png){width=390}
 
-
 ### Software keyboard inset for Dialog centering
 
 Behavior of `Dialog` composables is now aligned with Android: when a software keyboard appears on screen, dialogs
@@ -149,6 +147,17 @@ are centered considering the effective height of the application window.
 There is an option to disable this, with the `DialogProperties.useSoftwareKeyboardInset` property.
 
 ## Web
+
+### Kotlin/Wasm support in Alpha
+
+The experimental Compose Multiplatform for Web is now in Alpha:
+
+* Most of the Web functionality mirrors Compose Multiplatform for Desktop.
+* The team is committed to bringing the Web platform to release.
+* Next step, a thorough browser adaptation of most components.
+
+Follow the [first app tutorial](compose-multiplatform-setup.md) to see how to set up and run a web app
+with shared UI code.
 
 ### Basic IME keyboard support
 
