@@ -2,9 +2,11 @@
 
 Here are the highlights for this feature release:
 
+* [Breaking change: new Compose compiler Gradle plugin](#breaking-change-new-compose-compiler-gradle-plugin)
 * [Support for multimodule projects with Compose Multiplatform resources](#support-for-multimodule-projects-with-compose-multiplatform-resources)
 * [Experimental navigation library](#experimental-navigation-library)
 * [Lifecycle library with experimental common ViewModel](#lifecycle-library)
+* [Known issue: MissingResourceException](#known-issue-missingresourceexception)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-may-2024).
 <!-- TODO check correct github link -->
@@ -180,3 +182,10 @@ Gradle tasks.
 
 See the [minification and obfuscation tutorial](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation)
 for details.
+
+## Known issue: MissingResourceException
+
+You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
+after switching from Kotlin 1.9.x to 2.0.0 (or the other way around).
+To resolve this, delete the `build` directories in your project.
+This includes folders located in the root and module folders of your project.
