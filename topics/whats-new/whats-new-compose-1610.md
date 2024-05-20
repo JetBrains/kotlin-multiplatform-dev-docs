@@ -1,32 +1,30 @@
-[//]: # (title: What's new in Compose Multiplatform 1.6.10-rc02)
+[//]: # (title: What's new in Compose Multiplatform 1.6.10)
 
-Here are the highlights for this EAP feature release:
+Here are the highlights for this feature release:
 
 * [Support for multimodule projects with Compose Multiplatform resources](#support-for-multimodule-projects-with-compose-multiplatform-resources)
 * [Experimental navigation library](#experimental-navigation-library)
 * [Lifecycle library with experimental common ViewModel](#lifecycle-library)
-* [Known issues](#known-issues)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-beta01-april-2024).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#1610-may-2024).
+<!-- TODO check correct github link -->
 
 ## Dependencies
 
-* Gradle plugin `org.jetbrains.compose`, version 1.6.10-rc01. Based on Jetpack Compose libraries:
-  * [Compiler 1.5.13](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.13)
+* Gradle plugin `org.jetbrains.compose`, version 1.6.10. Based on Jetpack Compose libraries:
+  * [Compiler 1.5.14](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.14)
   * [Runtime 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.6.7)
   * [UI 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.6.7)
   * [Foundation 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.6.7)
   * [Material 1.6.7](https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.7)
   * [Material3 1.2.1](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.2.1)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0-rc02`. Based on [Jetpack Lifecycle 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0-rc01).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha05`. Based on [Jetpack Navigation 2.7.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.7.7).
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0`. Based on [Jetpack Lifecycle 2.8.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha07`. Based on [Jetpack Navigation 2.7.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.7.7).
 
-## Breaking changes
+## Breaking change: new Compose compiler Gradle plugin
 
-### New Compose compiler Gradle plugin is required for Kotlin 2.0.0
-
-Starting with Kotlin 2.0.0-RC2, Compose Multiplatform requires the new Compose compiler Gradle plugin.
-See [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project)
+Starting with Kotlin 2.0.0, Compose Multiplatform requires the new Compose compiler Gradle plugin.
+See [the migration guide](compose-compiler.md#migrating-a-compose-multiplatform-project)
 for details.
 
 ## Across platforms
@@ -39,7 +37,7 @@ The bulk of [the resource library API](compose-images-resources.md) is now consi
 
 #### Support for multimodule projects with Compose Multiplatform resources
 
-Starting with Compose Multiplatform 1.6.10-beta01,
+Starting with Compose Multiplatform 1.6.10,
 you can store resources in any Gradle module and in any source set, as well as publish projects and libraries
 with resources included.
 
@@ -101,7 +99,7 @@ Compose Multiplatform also provides a general `ViewModelStoreOwner` implementati
 
 ### Support for Kotlin 2.0.0
 
-Kotlin 2.0.0-RC2 came out along with the new Gradle plugin for the Compose compiler.
+Kotlin 2.0.0 came out along with the new Gradle plugin for the Compose compiler.
 To use Compose Multiplatform with the latest compiler version, apply the plugin to the modules in your project
 (see [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project) for details).
 
@@ -180,24 +178,5 @@ See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4
 You can now create uber JARs (complex packages with JARs of the application and all dependencies) using ProGuard
 Gradle tasks.
 
-See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4136) for details.
-
-<!--TODO add link to the GitHub tutorial mentioned in PR when it's updated  -->
-
-## Known issues
-
-### MissingResourceException
-
-You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
-after changing your Kotlin version from 1.9.x to 2.0.0 (or the other way around).
-To resolve this, delete the `build` directories in your project: this includes folders located in the root and module folders of your project.
-
-### NativeCodeGeneratorException
-
-iOS compilation might fail for some projects with the following error:
-
-```
-org.jetbrains.kotlin.backend.konan.llvm.NativeCodeGeneratorException: Exception during generating code for following declaration: private fun $init_global()
-```
-
-Follow the [GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4809) for details. 
+See the [minification and obfuscation tutorial](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation)
+for details.

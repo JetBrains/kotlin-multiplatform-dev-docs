@@ -13,10 +13,6 @@ You can also use this semantic data in testing and other automation: properties 
 to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform available
 to Accessibility Services and XCTest framework.
 
-The Compose accessibility API doesn't currently support:
-* Live regions (announcements about content changes in a specific area).
-* [UIKit elements inside Compose Multiplatform UI](compose-uikit-integration.md#use-uikit-inside-compose-multiplatform). 
-
 iOS accessibility support is in the early stages of development. If you have trouble with this feature,
 we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
 Slack channel or as an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
