@@ -196,5 +196,5 @@ for details.
 
 You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
 after switching from Kotlin 1.9.x to 2.0.0 (or the other way around).
-To resolve this, delete the `build` directories in your project.
-This includes folders located in the root and module folders of your project.
+To resolve this, delete all of the `build` directories in your project.
+This includes directories located in the root and module directories of your project.
