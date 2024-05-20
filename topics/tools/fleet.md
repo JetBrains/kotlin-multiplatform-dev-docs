@@ -84,7 +84,7 @@ In this tutorial, you'll create a new project with the web wizard:
 
    At the top of the window, you'll see messages from Fleet as the project is imported and indexed.
 
-When Smart Mode is enabled, Fleet operates as a _polyglot code editor_, that offers language-related features such as code completion,
+When Smart Mode is enabled, Fleet offers language-related features such as code completion,
 navigation, debugging, and refactoring. When Smart Mode is disabled, Fleet works as a simple code editor. 
 You can quickly open files and make changes, but without most of the advanced language-related features.
 
