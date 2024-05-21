@@ -75,3 +75,4 @@ there are third-party alternatives that you can choose from:
 | [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection |
 | [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                             |
 | [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation           |
+| [Tiamat](https://github.com/ComposeGears/Tiamat)    | Simple Multiplatform Compose based navigation library                                                    |
