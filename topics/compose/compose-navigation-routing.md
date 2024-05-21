@@ -49,11 +49,6 @@ A switch between different screens of the app makes it change its state from `RE
 `RESUMED` is also described as "settled": navigation is considered finished when the new screen is prepared and active.
 See the [Lifecycle](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
 
-Consider the following implementation aspects:
-* The [ComposeViewModelStoreOwner](https://github.com/MatkovIvan/nav_cupcake/blob/1dc15b6ef68f68ba358a32501802142967f6494b/composeApp/src/commonMain/kotlin/com/matkovivan/nav_cupcake/ViewModels.kt#L27)
-  class implements the `ViewModelStoreOwner` interface to provide a fallback for platforms other than Android and desktop.
-* Compose Multiplatform string resources are used in place of Jetpack Compose resources.
-
 ## Limitations
 
 Current limitations of navigation in Compose Multiplatform, compared to Jetpack Compose:
