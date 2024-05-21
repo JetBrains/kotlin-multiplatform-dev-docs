@@ -21,7 +21,7 @@
 <!--        <config-feedback-support>https://kotl.in/issue</config-feedback-support>-->
         <config-sideblocks>true</config-sideblocks>
         <config-search-scopes-provider>https://data.services.jetbrains.com/search/</config-search-scopes-provider>
-        <config-versions-switcher>https://data.services.jetbrains.com/help-versions</config-versions-switcher>
+<!--        <config-versions-switcher>https://data.services.jetbrains.com/help-versions</config-versions-switcher>-->
         <og-twitter>@kotlin</og-twitter>
         <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
         <noindex-content-in-deprecated>false</noindex-content-in-deprecated>
