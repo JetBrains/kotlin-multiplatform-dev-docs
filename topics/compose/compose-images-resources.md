@@ -303,7 +303,7 @@ about best practices and nuances of using plurals in your project.
 * It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1".
   If this doesn't worsen the user experience, 
 
-To define a plural, add a `<plurals>` element to any .xml file in your `composeResources/values` directory.
+To define a plural, add a `<plurals>` element to any `.xml` file in your `composeResources/values` directory.
 A `plurals` collection is a simple resource referenced using the name attribute (not the name of the XML file).
 As such, you can combine `plurals` resources with other simple resources in one XML file under one `<resources>` element:
 
@@ -427,7 +427,7 @@ You can also load remote files from the internet using their URL. To load remote
 
 ### Accessing resources from external libraries
 
-If you would like to make Compose Multiplatform resources available to other libraries used in your project, you
+If you want to make Compose Multiplatform resources available to other libraries used in your project, you
 can call the `Res.getUri()` function with the general path of the resource:
 
 ```kotlin
@@ -439,10 +439,10 @@ External libraries can use that path to access the file in a manner that suits t
 
 ## Publication
 
-Starting with Compose Multiplatform 1.6.10-beta01, all necessary resources are included in the publication
+Starting with Compose Multiplatform 1.6.10, all necessary resources are included in the publication
 maven artifacts.
 
-To enable this functionality, your project needs to use Kotlin 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
+To enable this functionality, your project needs to use Kotlin 2.0.0 or newer and Gradle 7.6 or newer.
 
 ## What's next?
 

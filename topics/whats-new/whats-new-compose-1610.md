@@ -42,7 +42,7 @@ Starting with Compose Multiplatform 1.6.10,
 you can store resources in any Gradle module and in any source set, as well as publish projects and libraries
 with resources included.
 
-To enable multimodule support, update your project to Kotlin version 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
+To enable multimodule support, update your project to Kotlin version 2.0.0 or newer and Gradle 7.6 or newer.
 
 #### Configuration DSL for multiplatform resources
 
@@ -71,7 +71,7 @@ codes for locales.
 #### Experimental byte array functions for images and fonts
 
 You can try out two functions that allow fetching fonts and images as byte arrays:
-`getDrawableResourceBytes` and `getFontResourceBytes`.
+`getDrawableResourceBytes()` and `getFontResourceBytes()`.
 These functions are aimed to help with accessing multiplatform resources from third-party libraries.
 
 See details in the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4651).
@@ -79,7 +79,7 @@ See details in the [pull request](https://github.com/JetBrains/compose-multiplat
 ### Experimental navigation library
 
 The common navigation library, based on Jetpack Compose, is now available.
-For details, see [the documentation](compose-navigation-routing.md).
+For details, see the [documentation](compose-navigation-routing.md).
 
 Key limitations in this version:
 * [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported yet.
@@ -89,8 +89,8 @@ Key limitations in this version:
 
 ### Lifecycle library
 
-The common lifecycle library based on Jetpack lifecycle is now available, see [the docs](compose-lifecycle.md)
-for details.
+The common lifecycle library based on Jetpack lifecycle is now available, see the [docs
+for details](compose-lifecycle.md).
 
 The library was primarily introduced to support common navigation functionality, but it also offers an experimental
 cross-platform `ViewModel` implementation, and includes a common `LifecycleOwner` interface you can implement for your
