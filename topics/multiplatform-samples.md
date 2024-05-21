@@ -362,7 +362,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     </td>
     <td>
         <list>
-            <li>Android XML layouts</li>
+            <li>Jetpack Compose on Android</li>
             <li>SwiftUI</li>
         </list>
     </td>
