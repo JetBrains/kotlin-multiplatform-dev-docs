@@ -192,7 +192,7 @@ Gradle tasks.
 See the [minification and obfuscation tutorial](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation)
 for details.
 
-## Known issue: MissingResourceException
+### Known issue: MissingResourceException
 
 You may experience the `org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...` error
 after switching from Kotlin 1.9.x to 2.0.0 (or the other way around).
