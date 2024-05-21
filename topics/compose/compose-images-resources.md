@@ -11,8 +11,8 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Reading big raw files, like long videos, as a stream is not supported yet.
   Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
   for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
-* Starting with 1.6.10-beta01, you can place resources in any module or source set,
-  as long as you are using Kotlin 2.0.0-Beta5 or newer, and Gradle 7.6 or newer.
+* Starting with 1.6.10, you can place resources in any module or source set,
+  as long as you are using Kotlin 2.0.0 or newer, and Gradle 7.6 or newer.
 
 ## Setup
 

@@ -20,7 +20,7 @@ To use it in your project, apply the plugin for each module that uses Compose. S
 
 ## Migrating a Compose Multiplatform project
 
-Starting with 1.6.10-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
+Starting with 1.6.10, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
 module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
