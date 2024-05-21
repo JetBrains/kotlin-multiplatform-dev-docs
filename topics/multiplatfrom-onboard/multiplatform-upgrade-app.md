@@ -51,7 +51,7 @@ of `kotlinx.coroutines`.
 ### kotlinx.serialization
 
 To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
-To do that, add the following line to the existing `plugins{}` block at the very beginning of the `build.gradle.kts` file
+To do that, add the following line to the existing `plugins {}` block at the very beginning of the `build.gradle.kts` file
 in the shared module:
 
 ```kotlin
@@ -569,7 +569,7 @@ Return to Xcode and update the code using the library:
 {type="note"}
 
 1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
-   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins{}` block:
+   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
 
     ```kotlin
     plugins {

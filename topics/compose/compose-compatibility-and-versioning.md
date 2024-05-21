@@ -28,11 +28,6 @@ keyboard layouts on macOS. This issue isn't reproducible in OpenJDK 11.0.15.
 
 ## Kotlin compatibility
 
-> [The Compose compiler](compose-compiler.md) will be supported in the 1.6.10 Compose Multiplatform release.
-> This will simplify the Compose plugins setup.
-> 
-{type="note"}
-
 Compose Multiplatform needs a compatible version of Kotlin to work correctly. Starting from Compose Multiplatform 1.2.0,
 Compose Multiplatform supports multiple versions of Kotlin. Earlier versions of Compose Multiplatform can only be used
 with one specific version of Kotlin. See the following table for a list of Kotlin releases and the minimum supported

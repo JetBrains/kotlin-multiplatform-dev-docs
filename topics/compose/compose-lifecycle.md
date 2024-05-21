@@ -53,10 +53,6 @@ Due to limitations of the Wasm target, lifecycles:
 
 ## Lifecycle implementation
 
-> The lifecycle implementation is available in Compose Multiplatform starting with 1.6.10-beta01.
->
-{type="note"}
-
 Composables generally don't need unique lifecycles: a common `LifecycleOwner` usually provides a lifecycle
 for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle:
 they can subscribe to its events, refer to the lifecycle state, and so on.

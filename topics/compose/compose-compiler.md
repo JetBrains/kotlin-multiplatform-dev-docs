@@ -20,10 +20,7 @@ To use it in your project, apply the plugin for each module that uses Compose. S
 
 ## Migrating a Compose Multiplatform project
 
-Compose Multiplatform is going to support the Compose compiler Gradle plugin in the %composeEapVersion%-beta03 release,
-which will be released soon after Kotlin 2.0.0-RC2.
-
-Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
+Starting with 1.6.10, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
 module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
