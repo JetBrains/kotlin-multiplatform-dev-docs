@@ -3,31 +3,57 @@
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
 
+> Support for the common `ViewModel` in Compose Multiplatform is currently considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+>
+{type="warning"}
+
+## Adding the common ViewModel to your project
+
 To use the multiplatform `ViewModel` implementation, add the following dependency to your `commonMain` source set:
 
 ```kotlin
 kotlin {
+  // ...
+  sourceSets {
     // ...
-    sourceSets {
-        // ...
-        commonMain.dependencies {
-            // ...
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%")
-        }
-        // ...
+    commonMain.dependencies {
+      // ...
+      implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%")
     }
+    // ...
+  }
 }
 ```
 
-To create a ViewModel, you need to pass it an object that implements the `ViewModelStoreOwner` interface.
-Compose Multiplatform offers a common `ViewModelStoreOwner` which you can implement in your common code to use ViewModels
-to build your UI. Common `ViewModelStoreOwner` doesn't work for desktop
+## Using ViewModel in common code
 
-Keep in mind the limitations of the library:
+Compose Multiplatform implements the common `ViewModelStoreOwner` interface, so in general using the `ViewModel` class
+in common code is not much different from Android best practices.
 
-* The  `ViewModel` implementation is currently considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
-* The `ViewModel` class works out of the box only for Android and desktop, where objects of the needed class can be created
-  through class reflection. For iOS and web targets, you have to implement factories that explicitly create
-  new `ViewModel` instances.
-* 
-* **You can't call viewModel() without args on non-JVM targets**
+Using the [navigation example](https://github.com/JetBrains/compose-multiplatform/tree/0e38f58b42d23ff6d0ad30b119d34fa1cd6ccedb/examples/nav_cupcake):
+
+1. Declare the ViewModel class:
+
+    ```kotlin
+    class OrderViewModel : ViewModel() {
+        private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
+        val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+   
+        // ...
+    }
+    ```
+
+2. Add the ViewModel to your composable function:
+
+    ```kotlin
+    @Composable
+    fun CupcakeApp(
+        viewModel: OrderViewModel = viewModel { OrderViewModel() },
+    ) {
+    // ...
+    }
+    ```
+   
+   On non-JDK platforms objects cannot be instantiated using type reflection. This means that in common code you cannot call
+the `viewModel()` function without parameters: every time a ViewModel is created, you should pass at least an initializer
+as an argument.
