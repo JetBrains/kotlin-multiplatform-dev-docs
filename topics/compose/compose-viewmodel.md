@@ -3,7 +3,7 @@
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
 
-> Support for the common `ViewModel` in Compose Multiplatform is currently considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+> Support for the common `ViewModel` in Compose Multiplatform is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 >
 {type="warning"}
 
@@ -13,15 +13,15 @@ To use the multiplatform `ViewModel` implementation, add the following dependenc
 
 ```kotlin
 kotlin {
-  // ...
-  sourceSets {
     // ...
-    commonMain.dependencies {
-      // ...
-      implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%")
+    sourceSets {
+        // ...
+        commonMain.dependencies {
+            // ...
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%")
+        }
+        // ...
     }
-    // ...
-  }
 }
 ```
 
@@ -53,11 +53,11 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
         // ...
     }
     ```
-   
-On non-JDK platforms objects cannot be instantiated using type reflection.
-So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` is created,
+
+On non-JVM platforms, objects cannot be instantiated using type reflection.
+So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,
 you need to provide at least an initializer as an argument.
 
 If only an initializer is provided, the library creates a default factory under the hood.
 But you can implement your own factories and call more explicit versions of the common `viewModel(...)` function,
-just like with Jetpack Compose.
+just like [with Jetpack Compose](https://developer.android.com/topic/libraries/architecture/viewmodel#jetpack-compose).
