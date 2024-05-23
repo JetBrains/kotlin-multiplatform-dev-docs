@@ -1,4 +1,4 @@
-[//]: # (title: Common ViewModel)
+[//]: # (title: ViewModel)
 
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
