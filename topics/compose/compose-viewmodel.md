@@ -50,7 +50,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
     fun CupcakeApp(
         viewModel: OrderViewModel = viewModel { OrderViewModel() },
     ) {
-    // ...
+        // ...
     }
     ```
    
@@ -59,5 +59,5 @@ So in common code you cannot call the `viewModel()` function without parameters:
 you need to provide at least an initializer as an argument.
 
 If only an initializer is provided, the library creates a default factory under the hood.
-But you can implement your own factories and call more explicit versions of the common `viewModel()` function,
+But you can implement your own factories and call more explicit versions of the common `viewModel(...)` function,
 just like with Jetpack Compose.
