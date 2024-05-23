@@ -27,9 +27,14 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 >
 {type="tip"}
 
-For details on how lifecycle works in navigation components, see [Navigation and routing](compose-navigation-routing.md).
+When using the Lifecycle library with Compose Multiplatform for Desktop, remember to add the `kotlinx-coroutines-swing`
+dependency, for example:
 
-To learn about the multiplatform ViewModel implementation, see the [](compose-viewmodel.md) page.
+```kotlin
+implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
+```
+
+For details on how lifecycle works in navigation components, see [Navigation and routing](compose-navigation-routing.md).
 
 ## Mapping Android lifecycle to other platforms
 
