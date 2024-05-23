@@ -75,9 +75,9 @@ We refer to **Experimental**, **Alpha**, and **Beta** collectively as **pre-stab
 | Platform                 | Stability level |
 |--------------------------|-----------------|
 | Android                  | Stable          |
-| iOS                      | Alpha           |
+| iOS                      | Beta            |
 | Desktop (JVM)            | Stable          |
-| Web based on Kotlin/Wasm | Experimental    |
+| Web based on Kotlin/Wasm | Alpha           |
 
 ## What's next?
 
