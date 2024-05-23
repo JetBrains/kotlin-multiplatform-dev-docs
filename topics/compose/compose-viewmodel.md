@@ -54,6 +54,10 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
     }
     ```
    
-   On non-JDK platforms objects cannot be instantiated using type reflection. This means that in common code you cannot call
-the `viewModel()` function without parameters: every time a ViewModel is created, you should pass at least an initializer
-as an argument.
+On non-JDK platforms objects cannot be instantiated using type reflection.
+So in common code you cannot call the `viewModel()` function without parameters: every time a ViewModel is created,
+you need to provide at least an initializer as an argument.
+
+If only an initializer is provided, Compose Multiplatform creates a default factory under the hood.
+But you can implement your own factories and call more explicit versions of the common `viewModel()` function,
+just like with Jetpack Compose.
