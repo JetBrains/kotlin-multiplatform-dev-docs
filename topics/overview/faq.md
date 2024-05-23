@@ -121,10 +121,13 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 ### Can I use Compose Multiplatform in production?
 
 The Android and desktop targets of Compose Multiplatform are Stable. You can use them in production.
-The iOS target is in Alpha, which means that it's in active development. You can use it with caution and expect
-migration issues.
-The version of Compose Multiplatform for web that is based on WebAssembly is Experimental. You can try it in your pet projects.
-It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
+
+The iOS target is in Beta, which means that it's feature complete. You can use it in production
+and expect minimal migration issues, but watch out for changes and deprecation warnings.
+
+The version of Compose Multiplatform for Web that is based on WebAssembly is in Alpha, which means that it's in active development.
+You can use it with caution and expect migration issues.
+It has the same UI as Compose Multiplatform for iOS, Android, and Desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
@@ -216,16 +219,16 @@ We have plans for improving the core Kotlin Multiplatform technology, integratio
 
 ### When will Compose Multiplatform become Stable?
 
-Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Alpha, and web is Experimental.
+Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Beta, and web is in Alpha.
 
-We are planning to promote Compose Multiplatform for iOS to Beta and Compose Multiplatform for web to Alpha in 2024.
+We are planning to promote Compose Multiplatform for iOS to Stable and Compose Multiplatform for web to Beta in 2025.
 There are no specific dates for stabilizing support for these platforms.
 For more information on stability statuses, see [Supported platforms](supported-platforms.md).
 
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
 
 We're currently focusing resources on WebAssembly (Wasm), which shows great potential. You can experiment with our new
-[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for web](https://kotl.in/wasm-compose-example) powered by Wasm.
+[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
 
 As for the JS target, the Kotlin/JS backend has already reached Stable status. In Compose Multiplatform, due to resource
 constraints, we've shifted our focus from JS Canvas to Wasm, which we believe holds more promise.
