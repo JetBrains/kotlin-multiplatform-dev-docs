@@ -125,8 +125,7 @@ For Android modules that do not rely on Compose Multiplatform:
     }
     ```
 
-4. If you use the Android build feature in your Gradle configuration (`android.buildFeatures.compose = true`)
-   or directly reference the old Maven artifacts, you'll need to update these references:
+4. If you reference the old Maven artifacts directly, you'll need to update these references:
 
    * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
    * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
