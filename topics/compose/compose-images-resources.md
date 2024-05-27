@@ -334,7 +334,7 @@ fun pluralStringResource(resource: PluralStringResource, quantity: Int, vararg f
 For example:
 
 ```kotlin
-Text(pluralStringResource(Res.string.new_message, 1))
+Text(pluralStringResource(Res.string.new_message, 1, 1))
 ```
 
 </tab>
