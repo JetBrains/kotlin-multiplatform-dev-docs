@@ -30,7 +30,7 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 When working with coroutines in multiplatform lifecycles,
 remember that the `Lifecycle.coroutineScope` value is tied to the `Dispatchers.Main.immediate` value
 which might be unavailable on desktop targets by default.
-To make lifecycle coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
+To make coroutines and flows in lifecycles work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
 See [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
 Learn more:
