@@ -57,7 +57,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
 > When running coroutines in a `ViewModel`, remember that the `ViewModel.viewModelScope` value is tied to the `Dispatchers.Main.immediate` value
 > which might be unavailable on Desktop by default.
 > To make ViewModel coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
-> See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
+> See [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 > 
 {type="tip"}
 
