@@ -17,8 +17,8 @@ The flow of lifecycle states and events
 
 ## Lifecycle implementation
 
-Composables generally don't need unique lifecycles: a common `LifecycleOwner` usually provides a lifecycle
-for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle:
+Composables usually don't need unique lifecycles: a common `LifecycleOwner` provides a lifecycle
+for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle —
 they can subscribe to its events, refer to the lifecycle state, and so on.
 
 > The `LifecycleOwner` object is provided as a [CompositionLocal](https://developer.android.com/reference/kotlin/androidx/compose/runtime/CompositionLocal).
@@ -27,8 +27,9 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 >
 {type="tip"}
 
-When using the Lifecycle library with Compose Multiplatform for Desktop, remember to add the `kotlinx-coroutines-swing`
-dependency, for example:
+When using the Lifecycle library with Compose Multiplatform for Desktop,
+you might need to add the `kotlinx-coroutines-swing` dependency (see the [related GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4835)),
+for example:
 
 ```kotlin
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
