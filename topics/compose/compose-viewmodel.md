@@ -54,13 +54,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
     }
     ```
 
-3. When using the ViewModel library with Compose Multiplatform for Desktop,
-   you might need to add the `kotlinx-coroutines-swing` dependency (see the [related GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4835)),
-   for example:
-
-    ```kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
-    ```
+3. `ViewModel.viewModelScope` is bound to `Dispatchers.Main.immediate` which might be unavailable on Desktop by default. To make it work correctly with Compose Multiplatform please add the `kotlinx-coroutines-swing` dependency. See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,

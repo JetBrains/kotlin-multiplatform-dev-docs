@@ -27,13 +27,7 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 >
 {type="tip"}
 
-When using the Lifecycle library with Compose Multiplatform for Desktop,
-you might need to add the `kotlinx-coroutines-swing` dependency (see the [related GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4835)),
-for example:
-
-```kotlin
-implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
-```
+`Lifecycle.coroutineScope` is bound to `Dispatchers.Main.immediate` which might be unavailable on Desktop by default. To make it work correctly with Compose Multiplatform please add the `kotlinx-coroutines-swing` dependency. See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
 For details on how lifecycle works in navigation components, see [](compose-navigation-routing.md).
 
