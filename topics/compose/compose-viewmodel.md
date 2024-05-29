@@ -61,6 +61,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
     ```kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
     ```
+
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,
 you need to provide at least an initializer as an argument.
