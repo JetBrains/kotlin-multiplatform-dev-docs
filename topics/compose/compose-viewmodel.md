@@ -54,6 +54,13 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
     }
     ```
 
+3. When using the ViewModel library with Compose Multiplatform for Desktop,
+   you might need to add the `kotlinx-coroutines-swing` dependency (see the [related GitHub issue](https://github.com/JetBrains/compose-multiplatform/issues/4835)),
+   for example:
+
+    ```kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
+    ```
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,
 you need to provide at least an initializer as an argument.
