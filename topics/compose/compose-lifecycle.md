@@ -27,11 +27,15 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 >
 {type="tip"}
 
-`Lifecycle.coroutineScope` is bound to `Dispatchers.Main.immediate` which might be unavailable on Desktop by default. To make it work correctly with Compose Multiplatform please add the `kotlinx-coroutines-swing` dependency. See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
+When working with coroutines and multiplatform lifecycles,
+remember that the `Lifecycle.coroutineScope` value is tied to the `Dispatchers.Main.immediate` value
+which might be unavailable on desktop targets by default.
+To make lifecycle coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
+See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
-For details on how lifecycle works in navigation components, see [](compose-navigation-routing.md).
-
-To learn about the multiplatform ViewModel implementation, see the [](compose-viewmodel.md) page.
+Learn more:
+* about the way lifecycle works in navigation components in [](compose-navigation-routing.md).
+* about the multiplatform ViewModel implementation in [](compose-viewmodel.md) page.
 
 ## Mapping Android lifecycle to other platforms
 
