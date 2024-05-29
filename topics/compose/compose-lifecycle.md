@@ -35,7 +35,9 @@ for example:
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
 ```
 
-For details on how lifecycle works in navigation components, see [Navigation and routing](compose-navigation-routing.md).
+For details on how lifecycle works in navigation components, see [](compose-navigation-routing.md).
+
+To learn about the multiplatform ViewModel implementation, see the [](compose-viewmodel.md) page.
 
 ## Mapping Android lifecycle to other platforms
 
