@@ -59,7 +59,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
 > To make ViewModel coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
 > See [`Dispatchers.Main` docs](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 > 
-{type="note"}
+{type="tip"}
 
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,
