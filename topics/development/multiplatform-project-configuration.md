@@ -41,7 +41,7 @@ You can add a dependency on a Kotlin Multiplatform module framework to the iOS p
   scripts manually.
 
 * **Using SPM**. You connect a framework using the Swift package manager (SPM), an Apple tool for managing the
-  distribution of Swift code. We're [working on official support for SPM](https://youtrack.jetbrains.com/issue/KT-53877/Support-Swift-Package-Manager-in-Kotlin-Multiplatform).
+  distribution of Swift code. We're [working on official support for SPM](https://youtrack.jetbrains.com/issue/KT-53877).
   Currently, you can set up a dependency on a Swift package using XCFrameworks. For more information,
   see [Swift package export setup](https://kotlinlang.org/docs/native-spm.html).
 
