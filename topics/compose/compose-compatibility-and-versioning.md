@@ -16,11 +16,11 @@ Compose Multiplatform %composeVersion% supports the following platforms:
 
 > All Compose Multiplatform releases support only 64-bit platforms. 
 > 
-{type="tip"}
+{type="note"}
 
-## Limitations of Compose Multiplatform for Desktop releases
+## Limitations of Compose Multiplatform for desktop releases
 
-Compose Multiplatform for Desktop has the following limitations: 
+Compose Multiplatform for desktop has the following limitations: 
 
 * Only JDK 11 or later is supported due to the memory management scheme used in [Skia](https://skia.org/) bindings.
 * Only JDK 17 or later is supported for packaging native distributions due
