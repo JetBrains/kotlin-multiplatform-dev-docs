@@ -263,7 +263,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on desktop</li>
+            <li>Compose Multiplatform on iOS and desktop</li>
         </list>
     </td>
   </tr>
@@ -294,7 +294,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
         <list>
             <li>Jetpack Compose on Android</li>
             <li>Compose Multiplatform on iOS, desktop, and web</li>
-            <li>SwiftUI on iOS, macOS, and watchOSS</li>
+            <li>SwiftUI on iOS, macOS, and watchOS</li>
         </list>
     </td>
   </tr>
