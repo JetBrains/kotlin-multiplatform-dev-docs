@@ -17,8 +17,8 @@ The flow of lifecycle states and events
 
 ## Lifecycle implementation
 
-Composables generally don't need unique lifecycles: a common `LifecycleOwner` usually provides a lifecycle
-for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle:
+Composables usually don't need unique lifecycles: a common `LifecycleOwner` provides a lifecycle
+for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle —
 they can subscribe to its events, refer to the lifecycle state, and so on.
 
 > The `LifecycleOwner` object is provided as a [CompositionLocal](https://developer.android.com/reference/kotlin/androidx/compose/runtime/CompositionLocal).
@@ -27,9 +27,14 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 >
 {type="tip"}
 
-For details on how lifecycle works in navigation components, see [Navigation and routing](compose-navigation-routing.md).
+When working with coroutines in multiplatform lifecycles,
+remember that the `Lifecycle.coroutineScope` value is tied to the `Dispatchers.Main.immediate` value,
+which might be unavailable on desktop targets by default.
+To make coroutines and flows in lifecycles work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
+See [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
-To learn about the multiplatform ViewModel implementation, see the [](compose-viewmodel.md) page.
+* Learn how the lifecycle works in navigation components in [](compose-navigation-routing.md).
+* Learn more about the multiplatform ViewModel implementation on the [](compose-viewmodel.md) page.
 
 ## Mapping Android lifecycle to other platforms
 

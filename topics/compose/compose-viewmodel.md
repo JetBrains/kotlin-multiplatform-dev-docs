@@ -1,4 +1,4 @@
-[//]: # (title: ViewModel)
+[//]: # (title: Common ViewModel)
 
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
@@ -53,6 +53,13 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
         // ...
     }
     ```
+
+> When running coroutines in a `ViewModel`, remember that the `ViewModel.viewModelScope` value is tied to the `Dispatchers.Main.immediate` value,
+> which might be unavailable on desktop by default.
+> To make ViewModel coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
+> See the [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
+> 
+{type="tip"}
 
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,
