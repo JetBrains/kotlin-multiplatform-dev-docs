@@ -219,10 +219,8 @@ We have plans for improving the core Kotlin Multiplatform technology, integratio
 
 ### When will Compose Multiplatform become Stable?
 
-Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Beta, and web is in Alpha.
+Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Beta, and web is in Alpha. We are working towards a stable release for both iOS and web platforms, with exact dates to be announced.
 
-We are planning to promote Compose Multiplatform for iOS to Stable and Compose Multiplatform for web to Beta in 2025.
-There are no specific dates for stabilizing support for these platforms.
 For more information on stability statuses, see [Supported platforms](supported-platforms.md).
 
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
