@@ -717,7 +717,7 @@ function that brings it all together.
    }
    ```
 
-3. Then add a `loadLaunches()` call to the `init{}` block of the class to request data from the API as soon as
+3. Then add a `loadLaunches()` call to the `init {}` block of the class to request data from the API as soon as
    the `RocketLaunchViewModel` object is created:
 
     ```kotlin
