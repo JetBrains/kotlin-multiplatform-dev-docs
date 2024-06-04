@@ -39,7 +39,7 @@ plugin, migrate first.
 
 ### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
-> If you have dependencies on other Pods in the `cocoapods` block, you have to resort to the CocoaPods integration approach.
+> If you have dependencies on other Pods in the `cocoapods {}` block, you have to resort to the CocoaPods integration approach.
 > Currently, it's impossible to both have dependencies on Pods and on the Kotlin framework in a multimodal SPM project. 
 >
 {type="warning"}
