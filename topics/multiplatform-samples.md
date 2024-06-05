@@ -353,7 +353,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
   </tr>
 <tr>
     <td>
-      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Mobile Sample</a></strong>
+      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Sample</a></strong>
     </td>
     <td>A simple calculator application. Showing how to integrate Kotlin and native code using expected and actual declarations.</td>
     <td><p>Algorithms</p>
