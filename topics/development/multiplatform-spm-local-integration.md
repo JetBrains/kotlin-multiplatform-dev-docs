@@ -11,9 +11,9 @@ in your Xcode project.
 
 ## Set up the project
 
-The feature is available starting with Kotlin 2.0.0-Beta2.
+The feature is available starting with Kotlin 2.0.0.
 
-If you still haven't upgraded to Kotlin 2.0, you can use a special Kotlin version, `1.9.24-spm` from the
+If you still haven't upgraded to Kotlin 2.0.0, you can use a special Kotlin version, `1.9.24-spm` from the
 `https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository. You can add the repository, for instance,
 in your `settings.gradle.kts`:
 
