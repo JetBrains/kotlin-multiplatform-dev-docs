@@ -40,6 +40,7 @@ Make some changes and see how they are reflected in the UI:
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            val greeting = remember { Greeting().greet() }
