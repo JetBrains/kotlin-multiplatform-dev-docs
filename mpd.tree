@@ -16,7 +16,7 @@
     </toc-element>
     <toc-element toc-title="What's new in Kotlin Multiplatform">
         <toc-element toc-title="What's new in Compose Multiplatform">
-            <toc-element id="whats-new-compose-1610.md"/>
+            <toc-element id="whats-new-compose-1610.md" accepts-web-file-names="whats-new-compose-eap.html"/>
             <toc-element id="whats-new-compose.md" accepts-web-file-names="whats-new-compose-1-6-0.html"/>
         </toc-element>
             <toc-element id="whats-new-fleet-1-31.md"/>
