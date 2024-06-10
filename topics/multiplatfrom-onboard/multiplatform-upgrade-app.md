@@ -35,13 +35,13 @@ line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
 kotlin {
-   // ... 
-   sourceSets {
-      commonMain.dependencies {
-         // ...
-         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-      }
-   }
+    // ... 
+    sourceSets {
+        commonMain.dependencies { 
+            // ...
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+        }
+    }
 }
 ```
 
@@ -56,8 +56,8 @@ in the shared module:
 
 ```kotlin
 plugins {
-   // ...
-   kotlin("plugin.serialization") version "%kotlinVersion%"
+    // ...
+    kotlin("plugin.serialization") version "%kotlinVersion%"
 }
 ```
 
@@ -75,24 +75,24 @@ You also need to add supporting dependencies:
 
 ```kotlin
 kotlin {
-   // ...
-   val ktorVersion = "%ktorVersion%"
+    // ...
+    val ktorVersion = "%ktorVersion%"
 
-   sourceSets {
-      commonMain.dependencies {
-         // ...
+    sourceSets {
+        commonMain.dependencies {
+            // ...
 
-         implementation("io.ktor:ktor-client-core:$ktorVersion")
-         implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-         implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-      }
-      androidMain.dependencies {
-         implementation("io.ktor:ktor-client-android:$ktorVersion")
-      }
-      iosMain.dependencies {
-         implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-      }
-   }
+            implementation("io.ktor:ktor-client-core:$ktorVersion")
+            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+        }
+        androidMain.dependencies {
+            implementation("io.ktor:ktor-client-android:$ktorVersion")
+        }
+        iosMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+        }
+    }
 }
 ```
 
@@ -114,14 +114,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RocketLaunch (
-   @SerialName("flight_number")
-   val flightNumber: Int,
-   @SerialName("name")
-   val missionName: String,
-   @SerialName("date_utc")
-   val launchDateUTC: String,
-   @SerialName("success")
-   val launchSuccess: Boolean?,
+    @SerialName("flight_number")
+    val flightNumber: Int,
+    @SerialName("name")
+    val missionName: String,
+    @SerialName("date_utc")
+    val launchDateUTC: String,
+    @SerialName("success") 
+    val launchSuccess: Boolean?,
 )
 ```
 
@@ -270,8 +270,8 @@ Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the acces
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-   <uses-permission android:name="android.permission.INTERNET"/>
-   ...
+    <uses-permission android:name="android.permission.INTERNET"/>
+    ...
 </manifest>
 ```
 
@@ -510,7 +510,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-   id("co.touchlab.skie") version "0.6.2"
+    id("co.touchlab.skie") version "0.6.2"
 }
 ```
 

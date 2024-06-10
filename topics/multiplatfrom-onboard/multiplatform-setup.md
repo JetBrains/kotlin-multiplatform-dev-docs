@@ -45,12 +45,12 @@ We recommend that you install the latest stable versions for compatibility and b
    </tr>
    <tr>
         <td><a href="https://www.oracle.com/java/technologies/javase-downloads.html">JDK</a></td>
-        <td>To check whether it's installed, run the following command in the Android Studio terminal or your command line: <code style="block"
+        <td>To check whether Java is installed, run the following command in the Android Studio terminal or your command line: <code style="block"
             lang="bash">java -version</code></td>
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform plugin</a></td>
-        <td>In Android Studio, select <strong>Settings/Preferences | Plugins</strong>, search <strong>Marketplace</strong> for <i>Kotlin Multiplatform</i>, and then install it.</td>
+        <td>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</td>
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
