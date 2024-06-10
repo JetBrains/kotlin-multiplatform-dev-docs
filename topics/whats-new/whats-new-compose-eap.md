@@ -43,7 +43,7 @@ Starting with Compose Multiplatform 1.6.10-beta01,
 you can store resources in any Gradle module and in any source set, as well as publish projects and libraries
 with resources included.
 
-To enable multimodule support, update your project to Kotlin version 2.0.0-Beta5 or newer and Gradle 7.6 or newer.
+To enable multimodule support, update your project to Kotlin version 2.0.0 or newer and Gradle 7.6 or newer.
 
 #### Configuration DSL for multiplatform resources
 
