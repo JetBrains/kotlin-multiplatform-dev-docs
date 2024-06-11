@@ -20,13 +20,13 @@ and display the date of the last successful launch of a SpaceX rocket.
 
 ## Add more dependencies
 
-You'll need the following multiplatform libraries in your project:
+You'll need to add the following multiplatform libraries in your project:
 
-* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), for using coroutines to write asynchronous code,
+* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for asynchronous code,
   which allows simultaneous operations.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), for deserializing JSON responses into objects of entity classes used to process
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses into objects of entity classes used to process
   network operations.
-* [Ktor](https://ktor.io/), a framework as an HTTP client for retrieving data over the internet.
+* [Ktor](https://ktor.io/), a framework to create an HTTP client for retrieving data over the internet.
 
 ### kotlinx.coroutines
 
@@ -35,13 +35,13 @@ line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
 kotlin {
-    // ... 
-    sourceSets {
-        commonMain.dependencies { 
-            // ...
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-        }
-    }
+   // ... 
+   sourceSets {
+      commonMain.dependencies {
+         // ...
+         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+      }
+   }
 }
 ```
 
@@ -56,8 +56,8 @@ in the shared module:
 
 ```kotlin
 plugins {
-    // ...
-    kotlin("plugin.serialization") version "%kotlinVersion%"
+   // ...
+   kotlin("plugin.serialization") version "%kotlinVersion%"
 }
 ```
 
@@ -75,24 +75,24 @@ You also need to add supporting dependencies:
 
 ```kotlin
 kotlin {
-    // ...
-    val ktorVersion = "%ktorVersion%"
+   // ...
+   val ktorVersion = "%ktorVersion%"
 
-    sourceSets {
-        commonMain.dependencies {
-            // ...
+   sourceSets {
+      commonMain.dependencies {
+         // ...
 
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
-            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-        }
-        androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:$ktorVersion")
-        }
-        iosMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-        }
-    }
+         implementation("io.ktor:ktor-client-core:$ktorVersion")
+         implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+         implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+      }
+      androidMain.dependencies {
+         implementation("io.ktor:ktor-client-android:$ktorVersion")
+      }
+      iosMain.dependencies {
+         implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+      }
+   }
 }
 ```
 
@@ -105,8 +105,7 @@ get the list of all launches from the **v4/launches** endpoint.
 
 ### Add a data model
 
-In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file in the project directory
-and add a data class which stores data from the SpaceX API:
+In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file and add a data class which stores data from the SpaceX API:
 
 ```kotlin
 import kotlinx.serialization.SerialName
@@ -114,14 +113,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RocketLaunch (
-    @SerialName("flight_number")
-    val flightNumber: Int,
-    @SerialName("name")
-    val missionName: String,
-    @SerialName("date_utc")
-    val launchDateUTC: String,
-    @SerialName("success") 
-    val launchSuccess: Boolean?,
+        @SerialName("flight_number")
+        val flightNumber: Int,
+        @SerialName("name")
+        val missionName: String,
+        @SerialName("date_utc")
+        val launchDateUTC: String,
+        @SerialName("success")
+        val launchSuccess: Boolean?,
 )
 ```
 
@@ -132,7 +131,7 @@ data class RocketLaunch (
 
 ### Connect HTTP client
 
-1. In `shared/src/commonMain/kotlin`, create a new `RocketComponent` class in the project directory.
+1. In `shared/src/commonMain/kotlin`, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -270,12 +269,12 @@ Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the acces
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    ...
+   <uses-permission android:name="android.permission.INTERNET"/>
+   ...
 </manifest>
 ```
 
-## Update Android and iOS apps
+## Update native Android and iOS UI
 
 You've already updated the API of the shared module by changing the return type of the `greet()` function to `Flow`.
 Now you need to update native (iOS, Android) parts of the project so that they can properly handle the result of calling
@@ -510,7 +509,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-    id("co.touchlab.skie") version "0.6.2"
+   id("co.touchlab.skie") version "0.6.2"
 }
 ```
 
@@ -621,8 +620,7 @@ Return to Xcode and update the code using the library:
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. Keep the default options, "Branch" for **Dependency Rule**, and "master" for **Version Rule**, and then click
-   the **Add Package** button.
+3. Keep the default options ("Branch" and "master" for **Dependency Rule**), then click the **Add Package** button.
 4. In the next window, select "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore", and then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
@@ -635,7 +633,7 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
    `asyncSequence()` function for the `Greeting().greet()` function:
 
     ```Swift
-    func startObserving() {
+    func startObserving() async {
         do {
             let sequence = asyncSequence(for: Greeting().greet())
             for try await phrase in sequence {
@@ -648,7 +646,7 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
     ```
 
    The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
-   every time the flow emits a value.
+every time the flow emits a value.
 
 2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
    `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
@@ -663,8 +661,8 @@ This should install the KMP-NativeCoroutines package necessary to work with the 
         @MainActor
         class ViewModel: ObservableObject {
             @Published var greetings: Array<String> = []
-            
-            func startObserving() {
+    
+            func startObserving() async {
                 do {
                     let sequence = asyncSequence(for: Greeting().greet())
                     for try await phrase in sequence {
