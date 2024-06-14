@@ -29,6 +29,7 @@ To get started, implement a new `App` composable:
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var timeAtLocation by remember { mutableStateOf("No location selected") }
@@ -88,6 +89,7 @@ a `TextField` composable:
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -142,6 +144,7 @@ The next step is to use the given input to calculate time. To do this, create a 
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -174,6 +177,7 @@ time message could be rendered more prominently.
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var location by remember { mutableStateOf("Europe/Paris") }
@@ -242,6 +246,7 @@ list.
     )
     
     @Composable
+    @Preview
     fun App(countries: List<Country> = countries()) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
@@ -329,7 +334,6 @@ code to load and display them:
 3. Change the codebase to support images:
 
     ```kotlin
-    @OptIn(ExperimentalResourceApi::class)
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
@@ -341,7 +345,6 @@ code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     val defaultCountries = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
@@ -350,8 +353,8 @@ code to load and display them:
         Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
     )
 
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
+    @Preview
     fun App(countries: List<Country> = defaultCountries) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
