@@ -39,10 +39,13 @@ plugin or through Swift package with `binaryTarget`, migrate first.
 
 ### Migrate from SPM binaryTarget integration to local direct integration {initial-collapse-state="collapsed"}
 
-1. Clean your Xcode project (Clean Build Folder or `Cmd + Shift + K` in Xcode)
-2. Remove dependencies to package with a Kotlin framework inside from all the `Package.swift` files. Also, remove dependencies to the products from removed packages.
-3. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
+To migrate from the SPM integration with `binaryTarget`:
 
+1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
+   <shortcut>Cmd + Shift + K</shortcut> shortcut.
+2. In every `Package.swift` file, remove both dependencies to the package with a Kotlin framework inside and target
+   dependencies to the products.
+3. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
 ### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
@@ -53,7 +56,8 @@ plugin or through Swift package with `binaryTarget`, migrate first.
 
 To migrate from the CocoaPods plugin:
 
-1. Clean your Xcode project (Clean Build Folder or `Cmd + Shift + K` in Xcode)
+1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
+   <shortcut>Cmd + Shift + K</shortcut> shortcut.
 2. In the directory with `Podfile`, run the following command:
 
     ```none
