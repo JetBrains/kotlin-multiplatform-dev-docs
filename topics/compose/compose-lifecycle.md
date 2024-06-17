@@ -40,14 +40,15 @@ See [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.corout
 
 ### iOS
 
-| Native events and&nbsp;notifications | Lifecycle event | Lifecycle state change |
-|--------------------------------------|-----------------|------------------------|
-| `viewDidDisappear`                   | `ON_STOP`       | `STARTED` → `CREATED`  |
-| `viewWillAppear`                     | `ON_START`      | `CREATED` → `STARTED`  |
-| `willResignActive`                   | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
-| `didBecomeActive`                    | `ON_RESUME`     | `STARTED` → `RESUMED`  |
-| `didEnterBackground`                 | `ON_STOP`       | `STARTED` → `CREATED`  |
-| `willEnterForeground`                | `ON_START`      | `CREATED` → `STARTED`  |
+| Native events and&nbsp;notifications    | Lifecycle event | Lifecycle state change  |
+|-----------------------------------------|-----------------|-------------------------|
+| `viewDidDisappear`                      | `ON_STOP`       | `STARTED` → `CREATED`   |
+| `viewWillAppear`                        | `ON_START`      | `CREATED` → `STARTED`   |
+| `willResignActive`                      | `ON_PAUSE`      | `RESUMED` → `STARTED`   |
+| `didBecomeActive`                       | `ON_RESUME`     | `STARTED` → `RESUMED`   |
+| `didEnterBackground`                    | `ON_STOP`       | `STARTED` → `CREATED`   |
+| `willEnterForeground`                   | `ON_START`      | `CREATED` → `STARTED`   |
+| `viewControllerDidLeaveWindowHierarchy` | `ON_DESTROY`    | `CREATED` → `DESTROYED` |
 
 ### Web
 
