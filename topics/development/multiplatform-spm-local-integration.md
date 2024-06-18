@@ -13,7 +13,7 @@ in your Xcode project.
 
 The feature is available starting with Kotlin 2.0.0.
 
-If you still haven't upgraded to Kotlin 2.0.0, you can use a special Kotlin version, `1.9.24-spm` from the
+If you still haven't upgraded to Kotlin 2.0.0, you can use a special Kotlin version, `1.9.24-spm2` from the
 `https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository. You can add the repository, for instance,
 in your `settings.gradle.kts`:
 
@@ -34,8 +34,18 @@ dependencyResolutionManagement {
 ```
 
 The tutorial assumes that your project is using [direct integration](multiplatform-project-configuration.md#connect-a-kotlin-multiplatform-module-to-an-ios-app)
-approach with the `embedAndSignAppleFrameworkForXcode` task. If you're connecting a Kotlin framework through CocoaPods
-plugin, migrate first.
+approach with the `embedAndSignAppleFrameworkForXcode` task in the project's build phase. If you're connecting a Kotlin framework through CocoaPods
+plugin or through Swift package with `binaryTarget`, migrate first.
+
+### Migrate from SPM binaryTarget integration to local direct integration {initial-collapse-state="collapsed"}
+
+To migrate from the SPM integration with `binaryTarget`:
+
+1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
+   <shortcut>Cmd + Shift + K</shortcut> shortcut.
+2. In every `Package.swift` file, remove both dependencies to the package with a Kotlin framework inside and target
+   dependencies to the products.
+3. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
 ### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
@@ -46,15 +56,17 @@ plugin, migrate first.
 
 To migrate from the CocoaPods plugin:
 
-1. In the directory with `Podfile`, run the following command:
+1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
+   <shortcut>Cmd + Shift + K</shortcut> shortcut.
+2. In the directory with `Podfile`, run the following command:
 
     ```none
    pod deintegrate
    ```
 
-2. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
-3. Delete the `.podspec` and `Podfile` files.
-4. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
+3. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
+4. Delete the `.podspec` and `Podfile` files. 
+5. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
 ## Connect the framework to your project
 
