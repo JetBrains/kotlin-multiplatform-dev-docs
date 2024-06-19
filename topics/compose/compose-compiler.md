@@ -111,8 +111,8 @@ For Android modules that do not rely on Compose Multiplatform:
 
 4. If you reference the old Maven artifacts directly, you'll need to update these references:
 
-   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
-   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
+   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin-embeddable`
+   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin`
 
 5. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
