@@ -35,13 +35,13 @@ line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
 kotlin {
-   // ... 
-   sourceSets {
-      commonMain.dependencies {
-         // ...
-         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-      }
-   }
+    // ... 
+    sourceSets {
+        commonMain.dependencies {
+           // ...
+           implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+        }
+    }
 }
 ```
 
@@ -56,8 +56,8 @@ in the shared module:
 
 ```kotlin
 plugins {
-   // ...
-   kotlin("plugin.serialization") version "%kotlinVersion%"
+    // ...
+    kotlin("plugin.serialization") version "%kotlinVersion%"
 }
 ```
 
@@ -75,24 +75,24 @@ You also need to add supporting dependencies:
 
 ```kotlin
 kotlin {
-   // ...
-   val ktorVersion = "%ktorVersion%"
+    // ...
+    val ktorVersion = "%ktorVersion%"
 
-   sourceSets {
-      commonMain.dependencies {
-         // ...
+    sourceSets {
+        commonMain.dependencies {
+            // ...
 
-         implementation("io.ktor:ktor-client-core:$ktorVersion")
-         implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-         implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-      }
-      androidMain.dependencies {
-         implementation("io.ktor:ktor-client-android:$ktorVersion")
-      }
-      iosMain.dependencies {
-         implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-      }
-   }
+            implementation("io.ktor:ktor-client-core:$ktorVersion")
+            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+        }
+        androidMain.dependencies {
+            implementation("io.ktor:ktor-client-android:$ktorVersion")
+        }
+        iosMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+        }
+    }
 }
 ```
 
@@ -113,14 +113,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RocketLaunch (
-        @SerialName("flight_number")
-        val flightNumber: Int,
-        @SerialName("name")
-        val missionName: String,
-        @SerialName("date_utc")
-        val launchDateUTC: String,
-        @SerialName("success")
-        val launchSuccess: Boolean?,
+    @SerialName("flight_number")
+    val flightNumber: Int,
+    @SerialName("name")
+    val missionName: String,
+    @SerialName("date_utc")
+    val launchDateUTC: String,
+    @SerialName("success")
+    val launchSuccess: Boolean?,
 )
 ```
 
@@ -269,8 +269,8 @@ Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the acces
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-   <uses-permission android:name="android.permission.INTERNET"/>
-   ...
+    <uses-permission android:name="android.permission.INTERNET"/>
+    ...
 </manifest>
 ```
 
@@ -436,7 +436,8 @@ The module is already imported in the `ContentView.swift` file with the `import 
    }
    ```
 
-3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it:
+3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
+   You'll call the `startObserving()` function within a `task()` call to support concurrency:
 
     ```Swift
     import SwiftUI
@@ -559,8 +560,8 @@ Return to Xcode and update the code using the library:
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("1.9.22-1.0.17").apply(false)
-        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-25").apply(false)
+        id("com.google.devtools.ksp").version("2.0.0-1.0.22").apply(false)
+        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-31").apply(false)
     }
     ```
 

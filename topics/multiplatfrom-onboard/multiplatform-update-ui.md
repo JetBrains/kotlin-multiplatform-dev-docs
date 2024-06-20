@@ -77,7 +77,7 @@ Implement the same changes as in the Android app:
 3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut,
    or right-click the function name and select **Jump to Definition**.
 
-   You'll see the Objective-C declarations for the Kotlin functions defined in the `Shared` module. Kotlin types are
+   You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
