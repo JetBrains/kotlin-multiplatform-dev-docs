@@ -140,7 +140,7 @@ platform-specific dependencies. These dependencies could be created by hand or u
 
 ### On web
 
-For web, look again at the `main()` function in `composeApp/src/wasmJsMain/kotlin`. The function has two variants:
+For web, look at the `main()` function in `composeApp/src/wasmJsMain/kotlin`. The function has two variants:
 
 ```kotlin
 // First variant:

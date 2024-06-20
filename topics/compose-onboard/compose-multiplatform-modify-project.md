@@ -25,12 +25,7 @@ To use this library:
 
    ```kotlin
    commonMain.dependencies {
-       implementation(compose.runtime)
-       implementation(compose.foundation)
-       implementation(compose.material)
-       implementation(compose.ui)
-       @OptIn(ExperimentalComposeLibrary::class)
-       implementation(compose.components.resources)
+       // ...
        implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
    }
    ```
@@ -62,8 +57,8 @@ To use this library:
 2. Modify the `App` composable to include the `Text` composable that invokes this function and displays the result:
    
     ```kotlin
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var showContent by remember { mutableStateOf(false) }

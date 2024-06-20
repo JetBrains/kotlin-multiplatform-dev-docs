@@ -22,6 +22,10 @@
 
     <var name="koinVersion" value="3.5.3" type="string"/>
 
+    <var name="skieVersion" value="0.6.2" type="string"/>
+
+    <var name="kmpncVersion" value="1.0.0-ALPHA-31" type="string"/>
+
     <var name="composeNavigationVersion" value="2.7.0-alpha07" type="string"/>
 
     <var name="composeViewmodelVersion" value="2.8.0" type="string"/>
