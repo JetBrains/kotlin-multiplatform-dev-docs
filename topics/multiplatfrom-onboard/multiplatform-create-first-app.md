@@ -223,10 +223,10 @@ such as properties and classes. Let's implement an expected property:
        return "$firstWord [$num] Guess what this is! > ${platform.name.reversed()}!"
    }
    ```
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Run your application
 

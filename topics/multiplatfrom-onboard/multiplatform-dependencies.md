@@ -91,10 +91,10 @@ multiplatform support, is the most convenient way to work with dates in your sha
 7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Next step
 

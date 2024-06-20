@@ -213,9 +213,10 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Refactor the design
 
@@ -299,9 +300,9 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+<!--> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
-{type="tip"}
+{type="tip"}-->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
