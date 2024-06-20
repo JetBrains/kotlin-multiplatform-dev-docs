@@ -437,7 +437,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
    ```
 
 3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
-   You'll call the `startObserving()` function within a `task()` call to support concurrency:
+   Call the `startObserving()` function within a `task()` call to support concurrency:
 
     ```Swift
     import SwiftUI

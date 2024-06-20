@@ -82,7 +82,7 @@ Implement the same changes as in the Android app:
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
-4. If you run the app now, it will simply display an array of strings: the Swift code that uses the `greet()` function
+4. If you run the app, it will display an array of strings: the Swift code that uses the `greet()` function
    doesn't take into account its changed declaration. Update the SwiftUI code to display a list of items:
 
    ```Swift
