@@ -510,7 +510,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-   id("co.touchlab.skie") version "0.6.2"
+   id("co.touchlab.skie") version "%skieVersion%"
 }
 ```
 
@@ -561,7 +561,7 @@ Return to Xcode and update the code using the library:
     plugins {
         // ...
         id("com.google.devtools.ksp").version("2.0.0-1.0.22").apply(false)
-        id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-31").apply(false)
+        id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```
 

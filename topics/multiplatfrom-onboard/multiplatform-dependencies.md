@@ -37,7 +37,7 @@ For both types of dependencies, you can use local and external repositories.
 >
 {type="tip"}
 
-Let's go back to the app now and make the greeting a little more festive. In addition to the device information, add a
+Let's go back to the app and make the greeting a little more festive. In addition to the device information, add a
 function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
 multiplatform support, is the most convenient way to work with dates in your shared code.
 
