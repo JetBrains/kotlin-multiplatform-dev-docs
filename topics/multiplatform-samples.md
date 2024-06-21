@@ -523,4 +523,25 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+ <td>
+      <strong><a href="https://github.com/TheChance101/AAY-chart">AAY-Chart Library</a></strong>
+    </td>
+    <td>A comprehensive Compose Multiplatform library that includes several types of charts. It supports iOS, Android, desktop, and web platforms, providing extensive capabilities for data visualization.</td>
+    <td>
+      <list>
+        <li>UI</li>
+        <li>Model</li>
+      </list>
+    </td>
+    <td>
+      <list>
+      </list>
+    </td>
+    <td>
+      <list>
+        <li>Compose Multiplatform on iOS,Android,desktop,and web</li>
+      </list>
+    </td>
+  </tr>
 </table>
+
