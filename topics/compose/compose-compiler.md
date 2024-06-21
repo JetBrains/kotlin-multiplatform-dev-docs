@@ -6,7 +6,7 @@ When applied with the Android Gradle plugin (AGP), this Compose compiler plugin 
 of the Compose compiler supplied automatically by AGP.
 
 > The Compose compiler has been merged into the Kotlin repository since Kotlin %kotlinVersion%.
-> This helps smooth the migration of your projects to Kotlin %kotlinVersion%, as the Compose compiler ships simultaneously
+> This helps smooth the migration of your projects to Kotlin %kotlinVersion%, as the Compose compiler ships
 > simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
 >
 {type="tip"}
