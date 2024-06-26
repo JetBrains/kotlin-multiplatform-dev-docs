@@ -28,11 +28,15 @@ To use this library:
        // ...
        implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
    }
+   wasmJsMain.dependencies {
+       implementation(npm("@js-joda/timezone", "2.3.0"))
+   }
    ```
 
-   * The dependency is added to the section that configures the common code source set. With a multiplatform library, you
-     don't need to modify platform-specific source sets.
+   * The main dependency is added to the section that configures the common code source set.
    * For simplicity, the version number is included directly instead of being added to the version catalog.
+   * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
+     dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
 

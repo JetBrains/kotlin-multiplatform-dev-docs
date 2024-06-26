@@ -140,31 +140,32 @@ platform-specific dependencies. These dependencies could be created by hand or u
 
 ### On web
 
-For web, look at the `main()` function in `composeApp/src/wasmJsMain/kotlin`. The function has two variants:
+For web, look at the `main()` function in `composeApp/src/wasmJsMain/kotlin`:
 
 ```kotlin
-// First variant:
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(viewportContainer = document.body!!) { App() }
+    ComposeViewport(document.body!!) { App() }
 }
+```
 
+* The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
+  experimental and may change in future releases.
+* The `ComposeViewport()` function sets up the Compose environment for the application.
+* The web app is inserted into the container assigned to the `document.body` parameter.
+  The entire document's body works as the container for rendering the UI.
+* The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
-// Second variant:
+Alternatively, you can try another version of the `ComposeViewport` function which accepts a string with the ID of the container:
+
+```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     ComposeViewport(viewportContainerId = "composeApplication") { App() }
 }
 ```
 
-* In the first variant, the web app is inserted into the container assigned to the `viewportContainer` parameter.
-  The `viewportContainer` parameter stores the entire body of the HTML document. The entire document's body works as the container for rendering the UI.
-* In the second variant, the web app is inserted into a container added in your `index.html` file, where the UI is rendered.
-  The `composeApplication` element corresponds to the ID of this container and is assigned to the `viewportContainerId` parameter.
-* In both variants, the `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as 
-  experimental and may change in future releases.
-* The `ComposeViewport()` function sets up the Compose environment for the application.
-* The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
+<!-- TODO: explain where to get the "composeApplication" part -->
 
 ## Next step
 

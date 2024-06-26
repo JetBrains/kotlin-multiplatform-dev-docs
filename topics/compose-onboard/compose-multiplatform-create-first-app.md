@@ -72,7 +72,7 @@ minimalistic but complete Compose Multiplatform UI:
 
 ![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
 
-Let's run the application and then examine the code in depth.
+Let's run the application on all supported platforms.
 
 ## Run your application
 
@@ -216,6 +216,8 @@ You can create a run configuration for running the desktop application as follow
 Now, you can use this configuration to run the desktop app:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
+
+![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
 
 ### Run your web application
 
