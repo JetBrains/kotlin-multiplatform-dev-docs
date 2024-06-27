@@ -398,7 +398,7 @@ var bytes by remember {
     mutableStateOf(ByteArray(0))
 }
 LaunchedEffect(Unit) {
-    bytes = Res.readFileBytes("files/myDir/someFile.bin")
+    bytes = Res.readBytes("files/myDir/someFile.bin")
 }
 Text(bytes.decodeToString())
 ```
@@ -408,7 +408,7 @@ Text(bytes.decodeToString())
 
 ```kotlin
 coroutineScope.launch {
-    val bytes = Res.readFileBytes("files/myDir/someFile.bin")
+    val bytes = Res.readBytes("files/myDir/someFile.bin")
 }
 ```
 
