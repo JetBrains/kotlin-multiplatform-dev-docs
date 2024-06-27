@@ -88,7 +88,7 @@ To use this library:
     }
     ```
 
-3. Switch the web app from using the entire HTML `<body>` to a specific container:
+3. Switch the web app from using an `Element` as a container to the HTML tag with an externally specified `id`:
 
    1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element:
 
@@ -98,7 +98,7 @@ To use this library:
       </body>
       ```
    2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
-   pointing at the ID you specified in the HTML file:
+   pointing to the ID you specified in the HTML file:
 
       ```kotlin
       ComposeViewport(viewportContainerId = "composeApplication") {
