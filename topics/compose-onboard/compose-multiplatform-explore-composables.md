@@ -156,17 +156,6 @@ fun main() {
   The entire document's body works as the container for rendering the UI.
 * The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
-Alternatively, you can try another version of the `ComposeViewport` function which accepts a string with the ID of the container:
-
-```kotlin
-@OptIn(ExperimentalComposeUiApi::class)
-fun main() {
-    ComposeViewport(viewportContainerId = "composeApplication") { App() }
-}
-```
-
-<!-- TODO: explain where to get the "composeApplication" part -->
-
 ## Next step
 
 In the next part of the tutorial, you'll add a dependency to the project and modify the user interface.
