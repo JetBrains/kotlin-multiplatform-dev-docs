@@ -88,7 +88,25 @@ To use this library:
     }
     ```
 
-3. Follow the IDE's suggestions to import the missing dependencies.
+3. Switch the web app from using the entire HTML `<body>` to a specific container:
+
+   1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element:
+
+      ```html
+      <body>
+      <div id="composeApplication" style="width:400px; height: 500px;"></div>
+      </body>
+      ```
+   2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
+   pointing at the ID you specified in the HTML file:
+
+      ```kotlin
+      ComposeViewport(viewportContainerId = "composeApplication") {
+          App()
+      }
+      ```
+
+4. Follow the IDE's suggestions to import the missing dependencies.
 
 ## Rerun the application
 
