@@ -23,7 +23,7 @@ This repository is the source for [https://www.jetbrains.com/help/kotlin-multipl
 You can contribute to the documentation by submitting a pull request.
 Please follow the provided [style and formatting guidelines](https://docs.google.com/document/d/1mUuxK4xwzs3jtDGoJ5_zwYLaSEl13g_SuhODdFuh2Dc/edit?usp=sharing).
 
-The [Samples](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html) page aims to show robust and unique applications of Kotlin Multiplatform and is therefore heavily curated. Please, don't suggest edits to this page directly. To mark your project as an example of Kotlin Multiplatform applied, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) GitHub topic, and to show that your project is related to Kotlin Multiplatform in general, use the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
+The [Samples](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html) page aims to show robust and unique applications of Kotlin Multiplatform and is heavily curated. Please don't suggest edits to this page directly. To feature your project as an example of Kotlin Multiplatform, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic on GitHub. For projects related to Kotlin Multiplatform in general, use the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
 
 You can also [create a YouTrack issue](https://youtrack.jetbrains.com/newIssue?project=KT&c=Subsystems+Docs+%26+Examples) to discuss your suggestion with the Kotlin Technical Writing team.
 
