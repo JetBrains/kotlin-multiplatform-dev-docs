@@ -23,15 +23,22 @@ To use this library:
 
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 
-   ```kotlin
-   commonMain.dependencies {
-       // ...
-       implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-   }
-   wasmJsMain.dependencies {
-       implementation(npm("@js-joda/timezone", "2.3.0"))
-   }
-   ```
+```kotlin
+kotlin {
+    // ...
+    sourceSets {
+        // ...
+        commonMain.dependencies {
+            // ...
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+        }
+        wasmJsMain.dependencies {
+            implementation(npm("@js-joda/timezone", "2.3.0"))
+        }
+    }
+}
+
+```
 
    * The main dependency is added to the section that configures the common code source set.
    * For simplicity, the version number is included directly instead of being added to the version catalog.
@@ -44,7 +51,7 @@ To use this library:
 
 ## Enhance the user interface
 
-1. Open the `App.kt` file and add the following function:
+1. In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file and add the following function:
 
    ```kotlin
    fun todaysDate(): String {
@@ -110,12 +117,13 @@ To use this library:
 
 ## Rerun the application
 
-You can now rerun the application using the same run configurations for Android, iOS,
-and desktop:
+You can now rerun the application using the same run configurations for Android, iOS, desktop, and web:
 
 ![First Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-2.png){width=500}
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
+
+![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
 
 <!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >

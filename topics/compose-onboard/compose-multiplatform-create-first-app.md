@@ -67,10 +67,31 @@ Kotlin code gets treated as Kotlin/Wasm.
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
-In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
-![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
+```kotlin
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="fun App()"}
 
 Let's run the application on all supported platforms.
 
