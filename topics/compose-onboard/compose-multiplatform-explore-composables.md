@@ -152,8 +152,8 @@ fun main() {
 * The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
   experimental and may change in future releases.
 * The `ComposeViewport()` function sets up the Compose environment for the application.
-* The web app is inserted into the container specified as a parameter for the `ComposeViewport` function:
-  in the example, the entire document's body works as the container.
+* The web app is inserted into the container specified as a parameter for the `ComposeViewport` function.
+  In the example, the entire document's body works as the container.
 * The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
 ## Next step
