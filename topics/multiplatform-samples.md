@@ -523,4 +523,32 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+  
+  <tr>
+      <td>
+          <strong><a href="https://github.com/tidal-music/networktime">networktime</a></strong>
+      </td>
+      <td>SNTP client for JVM, Android, native Apple and Kotlin Multiplatform hosts. Available on Maven Central and via SwiftPM.</td>
+      <td>
+          <list>
+              <li>UI</li>
+              <li>Business</li>
+              <li>Persistence</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>Compose</code></li>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>okio</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS and JVM</li>
+          </list>
+      </td>
+  </tr>
 </table>
