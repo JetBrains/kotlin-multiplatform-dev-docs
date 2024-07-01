@@ -9,6 +9,11 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
 See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
 to add your Kotlin Multiplatform project to these topics and help the community.
 
+> This page aims to show robust and unique applications of Kotlin Multiplatform and is heavily curated. We currently don't accept edits to this page directly.
+> To feature your project as an example of Kotlin Multiplatform, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic on GitHub.
+> 
+{type="note"}
+
 <table>
   <tr>
     <td>Name</td>
