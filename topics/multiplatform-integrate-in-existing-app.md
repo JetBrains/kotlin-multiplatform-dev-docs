@@ -151,7 +151,7 @@ To make your code work well on both Android and iOS, replace all JVM dependencie
 moved `data` directory wherever possible.
 
 1. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
-   `IOException` is not available in Kotlin.
+   `IOException` is not available in Kotlin/JVM.
 
     ```kotlin
     // Before
@@ -218,7 +218,7 @@ You can learn more about [connecting to platform-specific APIs](multiplatform-co
     expect fun randomUUID(): String
     ```
 
-3. Create the `Utils.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/androidMain`
+3. Create the `Utils.android.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/androidMain`
    directory and provide the `actual` implementation for `randomUUID()` in Android:
 
     ```kotlin
