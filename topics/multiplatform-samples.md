@@ -523,4 +523,38 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+  <tr>
+      <td>
+          <strong><a href="https://github.com/TheChance101/beep-beep">Beep Beep Apps</a></strong>
+      </td>
+      <td>Beep Beep is the largest open-source Kotlin Multiplatform project, showcasing Kotlin's capabilities for food delivery and taxi ordering. It includes 6 apps for Android, iOS, and desktop, with a shared UI and logic built using Compose Multiplatform. The backend microservices are entirely built with Kotlin using the Ktor framework.
+  </td>
+  <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>Data Storage</li>
+              <li>UI</li>
+          </list>
+  </td>
+  <td>
+          <list>
+              <li><code>Ktor(Client - Server)</code></li>
+              <li><code>Koin</code></li>
+              <li><code>voyager</code></li>
+              <li><code>realm db</code></li>
+              <li><code>AAY Chart</code></li>
+              <li><code>Webview</code></li>
+              <li><code>Firebase Messaging</code></li>
+              <li><code>Moko Resources</code></li>
+              <li><code>Kotlinx Datetime</code></li>
+              <li><code>Coroutines</code></li>
+          </list>
+      </td>
+       <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, and Desktop</li>
+          </list>
+      </td>
+  </tr>
 </table>
