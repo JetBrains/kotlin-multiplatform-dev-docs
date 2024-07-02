@@ -523,4 +523,30 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+<tr>
+      <td>
+          <strong><a href="https://github.com/SEAbdulbasit/MusicApp-KMP">Music App KMP</a></strong>
+      </td>
+      <td>An Application to showcase how to interact with native APIs like MediaPlayer on different Platforms. It uses Spotify API to fetch data. </td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>UI</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>ktor-client</code></li>
+              <li><code>decompose</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+          </list>
+      </td>
+  </tr>
 </table>
