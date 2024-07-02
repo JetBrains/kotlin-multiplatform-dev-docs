@@ -219,8 +219,8 @@ Strong Skipping is an [Experimental](supported-platforms.md#core-kotlin-multipla
 invocations of composable functions whose parameters have not changed.
 For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
-For details, see the [description of Strong Skipping mode](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/strong-skipping.md)
-in Androidx GitHub repo.
+For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/9d5df3d66f4210e21fd4bee373b6718cd4b2b118/plugins/compose/design/strong-skipping.md)
+in the Kotlin GitHub repo.
 
 ### stabilityConfigurationFile
 
