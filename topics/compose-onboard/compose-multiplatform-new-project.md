@@ -161,8 +161,18 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-4. Run the application again and enter a valid timezone.
-5. Click the button. You should see the correct time:
+4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
+   support for web:
+
+    ```kotlin
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    ```
+
+5. Run the application again and enter a valid timezone.
+6. Click the button. You should see the correct time:
 
    ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
 

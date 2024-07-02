@@ -67,12 +67,33 @@ Kotlin code gets treated as Kotlin/Wasm.
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
-In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
-![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
+```kotlin
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="fun App()"}
 
-Let's run the application and then examine the code in depth.
+Let's run the application on all supported platforms.
 
 ## Run your application
 
@@ -216,6 +237,10 @@ You can create a run configuration for running the desktop application as follow
 Now, you can use this configuration to run the desktop app:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
+
+The app launches in its own OS window:
+
+![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
 
 ### Run your web application
 
