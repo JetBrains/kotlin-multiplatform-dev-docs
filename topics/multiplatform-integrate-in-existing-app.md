@@ -78,7 +78,7 @@ You will create a shared module and later connect it to both the existing Androi
    ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
 
 6. Click **Finish**.
-7. The wizard will create the Kotlin Multiplatform shared module and update the configuration files, and create sample code
+7. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
    that shows the benefits of Kotlin Multiplatform. You'll have to add these lines to the root `build.gradle.kts` file for
    Gradle to resolve the added plugins successfully:
 
@@ -87,20 +87,20 @@ You will create a shared module and later connect it to both the existing Androi
     alias(libs.plugins.androidLibrary) apply false
     ```
 
-You can learn more about the [structure of a Kotlin Multiplatform project](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
 ### Add a dependency on the shared module to your Android application
 
 To use cross-platform code in your Android application, connect the shared module to it, move the business logic code
 there, and make this code cross-platform.
 
-1. In the `build.gradle.kts` file of the shared module, ensure that `compileSdk` and `minSdk` are the same as those in
-   the `build.gradle.kts` of your Android application in the `app` module.
+1. In the `shared/build.gradle.kts` file, ensure that `compileSdk` and `minSdk` are the same as those in
+   the `app/build.gradle.kts` config of your Android application.
 
-   If they're different, update them in the `build.gradle.kts` of the shared module. Otherwise, you'll encounter a
-   compile error.
+   If they're different, update them in the `shared/build.gradle.kts` file. Otherwise, you'll encounter a
+   compile error about a version mismatch.
 
-2. Add a dependency on the shared module to the `build.gradle.kts` file of your Android application.
+2. Add a dependency on the shared module to the `app/build.gradle.kts` file:
 
     ```kotlin
     dependencies {
@@ -201,7 +201,7 @@ moved `data` directory wherever possible.
     }
     ```
 
-4. Remove the import directive for `Patters`:
+4. And remove the import directive for the `Patterns` class:
 
     ```kotlin
     import android.util.Patterns
@@ -249,7 +249,7 @@ You can learn more about [connecting to platform-specific APIs](multiplatform-co
     actual fun randomUUID() = UUID.randomUUID().toString()
     ```
 
-4. Create the `Utils.kt` file in the `com.jetbrains.simplelogin.shared` of the `shared/src/iosMain` directory and
+4. Create the `Utils.ios.kt` file in the `com.jetbrains.simplelogin.shared` of the `shared/src/iosMain` directory and
    provide the `actual` implementation for `randomUUID()` in iOS:
 
     ```kotlin
@@ -260,7 +260,7 @@ You can learn more about [connecting to platform-specific APIs](multiplatform-co
     actual fun randomUUID(): String = NSUUID().UUIDString()
     ```
 
-5. All it's left to do is to explicitly import `randomUUID` in the `LoginDataSource.kt` file of the `shared/src/commonMain`
+5. All that is left to do is to explicitly import `randomUUID` in the `LoginDataSource.kt` file of the `shared/src/commonMain`
    directory:
 
    ```kotlin
