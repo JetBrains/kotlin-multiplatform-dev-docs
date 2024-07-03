@@ -383,13 +383,13 @@ Connect your framework to the iOS project manually:
 
    ![Greeting from the shared module](xcode-iphone-hello.png){width=300}
 
-3. In the `ContentView.swift` file, write code for using data from the shared module and rendering the application UI:
+4. In the `ContentView.swift` file, write code for using data from the shared module and rendering the application UI:
 
    ```kotlin
    ```
    {src="android-ios-tutorial/ContentView.swift" initial-collapse-state="collapsed"}
 
-4. In `simpleLoginIOSApp.swift`, import the `shared` module and specify the arguments for the `ContentView()` function:
+5. In `simpleLoginIOSApp.swift`, import the `shared` module and specify the arguments for the `ContentView()` function:
 
     ```swift
     import SwiftUI
@@ -405,7 +405,7 @@ Connect your framework to the iOS project manually:
     }
     ```
    
-5. Run the Xcode project to see that the iOS app shows the login form and validates the input using the shared code:
+6. Run the Xcode project to see that the iOS app shows the login form and validates the input using the shared code:
 
     ![Simple login application](xcode-iphone-login.png){width=300}
 
@@ -447,7 +447,7 @@ and iOS.
 
 3. Run both the iOS and Android applications from Android Studio to see the changes:
 
-   ![iOS run configuration](ios-run-configuration-simplelogin.png){width=200}
+   ![iOS run configuration](ios-run-configuration-simplelogin.png){width=269}
 
    ![iOS application password error](iphone-password-error.png){width=300}
 
