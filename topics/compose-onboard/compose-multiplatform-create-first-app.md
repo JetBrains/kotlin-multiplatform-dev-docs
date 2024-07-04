@@ -236,11 +236,9 @@ You can create a run configuration for running the desktop application as follow
    ```
 4. Click **OK**.
 
-Now, you can use this configuration to run the desktop app:
+Now, you can use this configuration to run the desktop app in its own OS window:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
-
-The app launches in its own OS window:
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
 
