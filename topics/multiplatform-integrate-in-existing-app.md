@@ -362,14 +362,14 @@ Connect your framework to the iOS project manually:
 1. In Xcode, open the `ContentView.swift` file and import the `shared` module:
 
    ```swift
-   import shared
+   import Shared
    ```
 
 2. To check that it is properly connected, use the `greet()` function from the shared module of your cross-platform app:
 
    ```swift
    import SwiftUI
-   import shared
+   import Shared
    
    struct ContentView: View {
        var body: some View {
@@ -393,7 +393,7 @@ Connect your framework to the iOS project manually:
 
     ```swift
     import SwiftUI
-    import shared
+    import Shared
     
     @main
     struct SimpleLoginIOSApp: App {
