@@ -77,10 +77,9 @@ You will create a shared module and later connect it to both the existing Androi
 
    ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
 
-6. Click **Finish**.
-7. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
-   that shows the benefits of Kotlin Multiplatform. You'll have to add these lines to the root `build.gradle.kts` file for
-   Gradle to resolve the added plugins successfully:
+6. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
+   that shows the benefits of Kotlin Multiplatform.
+7. Add the following lines to the root `build.gradle.kts` file for Gradle to resolve the added plugins successfully:
 
     ```kotlin
     alias(libs.plugins.kotlinMultiplatform) apply false
@@ -302,9 +301,10 @@ In Android Studio, you'll get the following structure:
 
 ![iOS project in Android Studio](ios-project-in-as.png){width=194}
 
-You can close Xcode and rename the `simpleLoginIOS` directory to `iosApp` for consistency with other top-level directories of your
-cross-platform project. If you rename the folder with Xcode open, you will get a warning about this: simply choose to close
-Xcode and not to re-save the project.
+You can rename the `simpleLoginIOS` directory to `iosApp` for consistency with other top-level directories of your
+cross-platform project.
+To do that, close Xcode and then rename the `simpleLoginIOS` directory to `iosApp`.
+If you rename the folder with Xcode open, you'll get a warning and may corrupt your project.
 
 ![Renamed iOS project directory in Android Studio](ios-directory-renamed-in-as.png){width=194}
 
@@ -447,7 +447,7 @@ and iOS.
 
 3. Run both the iOS and Android applications from Android Studio to see the changes:
 
-   ![iOS run configuration](ios-run-configuration-simplelogin.png){width=269}
+   ![iOS run configuration](ios-run-configuration-simplelogin.png)
 
    ![iOS application password error](iphone-password-error.png){width=300}
 
