@@ -437,7 +437,7 @@ and iOS.
 
    1. Select **Run | Edit configurations** in the main menu.
 
-   2. Add new configuration by clicking the plus sign and choose **iOS Application**.
+   2. To add a new configuration, click the plus sign and choose **iOS Application**.
    
    3. Name the configuration "SimpleLoginIOS".
 
