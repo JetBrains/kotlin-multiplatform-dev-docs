@@ -181,7 +181,6 @@ Since the `ContentView.swift` file is already open, you can explore Fleet suppor
 4. Adjust the `App` composable as well:
 
    ```kotlin
-   @OptIn(ExperimentalResourceApi::class)
    @Composable
    fun App(text: String? = null) {
        MaterialTheme {

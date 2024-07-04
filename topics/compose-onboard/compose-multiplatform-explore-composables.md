@@ -15,10 +15,9 @@ platform-specific code that launches this UI on each platform.
 
 ## Implementing composable functions
 
-Take a look at the `App()` function in `composeApp/src/commonMain/kotlin`:
+In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()` function:
 
 ```kotlin
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
 fun App() {
@@ -140,7 +139,7 @@ platform-specific dependencies. These dependencies could be created by hand or u
 
 ### On web
 
-For web, look at the `main()` function in `composeApp/src/wasmJsMain/kotlin`:
+In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, take a look at the `main()` function:
 
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
