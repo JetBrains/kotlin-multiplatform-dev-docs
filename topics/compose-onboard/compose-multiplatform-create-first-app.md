@@ -110,7 +110,8 @@ order, so start with whichever platform you are most familiar with.
 
 1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 2. In the list of run configurations, select **composeApp**.
-3. Choose your Android virtual device and then click **Run**.
+3. Choose your Android virtual device and then click **Run**: Android Studio will start the selected virtual device if it
+   is powered down, and run the app.
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
 
