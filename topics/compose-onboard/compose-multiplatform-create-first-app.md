@@ -133,7 +133,8 @@ Learn how to [configure and connect a hardware device and run your application o
 
 1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
    may also need to accept its license terms and allow it to perform some necessary initial tasks.
-2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
+2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**. By default, the run configuration
+   will start a simulated device available in Xcode and run the app there.
 
 If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
