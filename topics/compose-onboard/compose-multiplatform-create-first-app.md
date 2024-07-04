@@ -67,12 +67,33 @@ Kotlin code gets treated as Kotlin/Wasm.
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
-In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
-![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
+```kotlin
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="fun App()"}
 
-Let's run the application and then examine the code in depth.
+Let's run the application on all supported platforms.
 
 ## Run your application
 
@@ -89,7 +110,8 @@ order, so start with whichever platform you are most familiar with.
 
 1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 2. In the list of run configurations, select **composeApp**.
-3. Choose your Android virtual device and then click **Run**.
+3. Choose your Android virtual device and then click **Run**: Android Studio will start the selected virtual device if it
+   is powered down, and run the app.
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
 
@@ -111,9 +133,8 @@ Learn how to [configure and connect a hardware device and run your application o
 
 1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
    may also need to accept its license terms and allow it to perform some necessary initial tasks.
-2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
-
-If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**. By default, the run configuration
+   will start a simulated device available in Xcode and run the app there. If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
 ![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 
@@ -213,9 +234,11 @@ You can create a run configuration for running the desktop application as follow
    ```
 4. Click **OK**.
 
-Now, you can use this configuration to run the desktop app:
+Now, you can use this configuration to run the desktop app in its own OS window:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
+
+![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
 
 ### Run your web application
 
