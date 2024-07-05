@@ -15,10 +15,9 @@ platform-specific code that launches this UI on each platform.
 
 ## Implementing composable functions
 
-Take a look at the `App()` function in `composeApp/src/commonMain/kotlin`:
+In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()` function:
 
 ```kotlin
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
 fun App() {
@@ -140,30 +139,20 @@ platform-specific dependencies. These dependencies could be created by hand or u
 
 ### On web
 
-For web, look at the `main()` function in `composeApp/src/wasmJsMain/kotlin`. The function has two variants:
+In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, take a look at the `main()` function:
 
 ```kotlin
-// First variant:
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(viewportContainer = document.body!!) { App() }
-}
-
-
-// Second variant:
-@OptIn(ExperimentalComposeUiApi::class)
-fun main() {
-    ComposeViewport(viewportContainerId = "composeApplication") { App() }
+    ComposeViewport(document.body!!) { App() }
 }
 ```
 
-* In the first variant, the web app is inserted into the container assigned to the `viewportContainer` parameter.
-  The `viewportContainer` parameter stores the entire body of the HTML document. The entire document's body works as the container for rendering the UI.
-* In the second variant, the web app is inserted into a container added in your `index.html` file, where the UI is rendered.
-  The `composeApplication` element corresponds to the ID of this container and is assigned to the `viewportContainerId` parameter.
-* In both variants, the `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as 
+* The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
   experimental and may change in future releases.
 * The `ComposeViewport()` function sets up the Compose environment for the application.
+* The web app is inserted into the container specified as a parameter for the `ComposeViewport` function.
+  In the example, the entire document's body works as the container.
 * The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
 ## Next step
