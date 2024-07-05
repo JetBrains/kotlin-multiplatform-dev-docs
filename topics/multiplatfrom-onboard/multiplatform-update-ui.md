@@ -23,7 +23,7 @@ The `composeApp` module contains an Android application, defines its main activi
 Make some changes and see how they are reflected in the UI:
 
 1. Navigate to the `App.kt` file in `composeApp/src/androidMain/kotlin`.
-2. Find the `Greeting` class invocation. Select the `greet()` function and use the <shortcut>⌘ B</shortcut> shortcut to go to the function's declaration.
+2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it and select the **Go To** | **Declaration or Usages** menu item.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
 3. In `Greeting.kt`, update the `greet()` function:
 
@@ -40,6 +40,7 @@ Make some changes and see how they are reflected in the UI:
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            val greeting = remember { Greeting().greet() }
@@ -57,10 +58,10 @@ Make some changes and see how they are reflected in the UI:
    }
    ```
 
-   Here the `Column` composable shows each of the `Text` items, adds padding around the content, and adds a space between the list items.
+   Here the `Column` composable shows each of the `Text` items, adding padding around them and space between them.
 
 5. Follow Android Studio's suggestions to import the missing dependencies.
-6. Now you can run the Android app to ensure it displays the list:
+6. Now you can run the Android app to see how it displays the list:
 
    ![Updated UI of Android multiplatform app](first-multiplatform-project-on-android-2.png){width=300}
 
@@ -71,17 +72,18 @@ framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
 
-1. Navigate to the `iosApp` folder in the Project window.
-2. Right-click the `iosApp.xcodeproj` folder and select **Open In** | **Xcode**.
-3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut to jump to the function's definition.
+1. Find the `iosApp` folder at the root of your project in the **Project** tool window.
+2. Inside `iosApp`, right-click the `iosApp.xcodeproj` folder and select **Open In** | **Xcode**.
+3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut,
+   or right-click the function name and select **Jump to Definition**.
 
    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
-4. If you try to run the project, the build will fail. The Swift code that uses the `greet()` function doesn't compile
-   because its declaration is now different. Change the SwiftUI code to display a list of items:
+4. If you run the app, it will display an array of strings: the Swift code that uses the `greet()` function
+   doesn't take into account its changed declaration. Update the SwiftUI code to display a list of items:
 
    ```Swift
    struct ContentView: View {
@@ -101,10 +103,10 @@ Implement the same changes as in the Android app:
 5. Run the app to see the changes:
 
    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step3).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Next step
 

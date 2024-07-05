@@ -1,4 +1,4 @@
-[//]: # (title: Get started with Kotlin Multiplatform — tutorial)
+[//]: # (title: Create a Kotlin Multiplatform app — tutorial)
 [//]: # (description: Simplify cross-platform app development with Kotlin Multiplatform. Create a single codebase
 for the business logic of your iOS and Android apps.)
 
@@ -44,7 +44,6 @@ If you want to convert your existing Android project into a cross-platform app, 
 
 ## Join the community
 
-* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: get an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
 * ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: subscribe to the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
 * ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: subscribe and watch videos about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)

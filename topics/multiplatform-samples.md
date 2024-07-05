@@ -263,7 +263,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on desktop</li>
+            <li>Compose Multiplatform on iOS and desktop</li>
         </list>
     </td>
   </tr>
@@ -294,7 +294,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
         <list>
             <li>Jetpack Compose on Android</li>
             <li>Compose Multiplatform on iOS, desktop, and web</li>
-            <li>SwiftUI on iOS, macOS, and watchOSS</li>
+            <li>SwiftUI on iOS, macOS, and watchOS</li>
         </list>
     </td>
   </tr>
@@ -353,7 +353,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
   </tr>
 <tr>
     <td>
-      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Mobile Sample</a></strong>
+      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Sample</a></strong>
     </td>
     <td>A simple calculator application. Showing how to integrate Kotlin and native code using expected and actual declarations.</td>
     <td><p>Algorithms</p>
@@ -362,7 +362,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     </td>
     <td>
         <list>
-            <li>Android XML layouts</li>
+            <li>Jetpack Compose on Android</li>
             <li>SwiftUI</li>
         </list>
     </td>
@@ -523,6 +523,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+
    <tr>
       <td>
           <strong><a href="https://github.com/SaeedNoshadi89/NoteByKMP">Note KMP</a></strong>
@@ -560,4 +561,36 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+  
+  <tr>
+        <td>
+            <strong><a href="https://github.com/fethij/Rijksmuseum">Rijksmuseum</a></strong>
+        </td>
+        <td>Rijksmuseum is a multimodular Kotlin and Compose Multiplatform app that offers an immersive way to explore the art collection of the renowned Rijksmuseum in Amsterdam. It utilizes the Rijksmuseum API to fetch and display detailed information about various artworks, including images and descriptions.</td>
+        <td>
+          <list>
+            <li>UI</li>
+            <li>Model</li>
+            <li>Networking</li>
+            <li>Navigation</li>
+            <li>ViewModel</li>
+          </list>
+        </td>
+        <td>
+          <list>
+            <li><code>kotlinx-coroutines</code></li>
+            <li><code>kotlinx-serialization</code></li>
+            <li><code>ktor-client</code></li>
+            <li><code>koin</code></li>
+            <li><code>Compose Navigation</code></li>
+            <li><code>Coil</code></li>
+            <li><code>Jetpack ViewModel</code></li>
+          </list>
+        </td>
+        <td>
+            <list>
+                <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+            </list>
+        </td>
+    </tr>
 </table>

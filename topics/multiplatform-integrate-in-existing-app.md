@@ -68,14 +68,15 @@ The Kotlin Multiplatform plugin provides a special wizard for creating such modu
 In your Android project, create a Kotlin Multiplatform shared module for your cross-platform code. Later you'll connect
 it to your existing Android application and your future iOS application.
 
-1. In Android Studio, click **File** | **New** | **New Module**.
-2. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared`, and select
-   the **Regular framework** in the list of iOS framework distribution options.  
+1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section. 
+2. Select the **File** | **New** | **New Module** menu item.
+3. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared`, and select
+   **Regular framework** in the list of iOS framework distribution options.
    This is required for connecting the shared module to the iOS application.
 
    ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
 
-3. Click **Finish**.
+4. Click **Finish**.
 
 The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create files with
 classes that demonstrate the benefits of Kotlin Multiplatform.
@@ -316,20 +317,7 @@ Connect your framework to the iOS project manually:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-5. On the **Build Settings** tab, switch to **All** build settings and specify the **Framework Search Path** under
-   **Search Paths**:
-
-   ```text
-   $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
-   ```
-
-   ![Framework search path](xcode-add-framework-search-path.png){width=700}
-
-   > This path is valid when your app is run on a simulated device.
-   >
-   {type="note"}
-
-6. On the **Build Settings** tab, disable the **User Script Sandboxing** under **Build Options**:
+5. On the **Build Settings** tab, disable the **User Script Sandboxing** under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -341,7 +329,7 @@ Connect your framework to the iOS project manually:
    >
    > {type="tip"}
    
-7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+6. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.

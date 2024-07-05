@@ -19,7 +19,7 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 2. On the **New project** tab, change the project name to "ComposeDemo" and the project ID to "kmp.project.demo".
-3. Select the **Android** and **Desktop** options.
+3. Select the **Android**, **Desktop**, and **Web** options.
 4. If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
 5. Click the **Download** button and unpack the resulting archive.
 
@@ -42,7 +42,7 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 
 The project contains two modules:
 
-* _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, and iOS applications – the code
+* _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, iOS, and web applications – the code
   you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
   you automate your build process.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
@@ -50,31 +50,54 @@ The project contains two modules:
 
   ![Compose Multiplatform project structure](compose-project-structure.png){width=350}
 
-The **composeApp** module consists of four source sets: `androidMain`, `commonMain`, `desktopMain`, and `iosMain`.
+The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `desktopMain`, `iosMain`, and `wasmJsMain`.
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
 The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
-target. Kotlin/JVM is used for `androidMain` and `desktopMain`. Kotlin/Native is used for `iosMain`.
+target. Kotlin/JVM is used for `androidMain` and `desktopMain`. Kotlin/Native is used for `iosMain`. On the other hand, Kotlin/Wasm is 
+used for `wasmJsMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
-into an iOS framework, common Kotlin code gets treated as Kotlin/Native:
+into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
+Kotlin code gets treated as Kotlin/Wasm.
 
-![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png){width=700}
+![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.png){width=700}
 
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
-In `composeApp/src/commonMain/kotlin`, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
-![Compose Multiplatform UI app](compose-multiplatform-ui-app.png){width=700}
+```kotlin
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="fun App()"}
 
-Let's run the application and then examine the code in depth.
+Let's run the application on all supported platforms.
 
 ## Run your application
 
-You can run the application on Android, iOS, and desktop. You don't have to run the applications in any particular
+You can run the application on Android, iOS, desktop, and web. You don't have to run the applications in any particular
 order, so start with whichever platform you are most familiar with.
 
 > You don't need to use the Gradle build task. In a multiplatform application, this will build debug and release versions
@@ -87,7 +110,8 @@ order, so start with whichever platform you are most familiar with.
 
 1. Create an [Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 2. In the list of run configurations, select **composeApp**.
-3. Choose your Android virtual device and then click **Run**.
+3. Choose your Android virtual device and then click **Run**: Android Studio will start the selected virtual device if it
+   is powered down, and run the app.
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
 
@@ -109,9 +133,8 @@ Learn how to [configure and connect a hardware device and run your application o
 
 1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
    may also need to accept its license terms and allow it to perform some necessary initial tasks.
-2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
-
-If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**. By default, the run configuration
+   will start a simulated device available in Xcode and run the app there. If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
 ![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 
@@ -203,7 +226,7 @@ in Android Studio and select your device in the **Execution target** list. Run t
 
 You can create a run configuration for running the desktop application as follows:
 
-1. Select the **Run | Edit Configurations** menu item.
+1. Select **Run | Edit Configurations** from the main menu.
 2. Click the plus button and choose **Gradle** from the dropdown list.
 3. In the **Tasks and arguments** field, paste this command:
    ```shell
@@ -211,9 +234,41 @@ You can create a run configuration for running the desktop application as follow
    ```
 4. Click **OK**.
 
-Now, you can use this configuration to run the desktop app:
+Now, you can use this configuration to run the desktop app in its own OS window:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
+
+![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
+
+### Run your web application
+
+Create a run configuration to run the web application:
+
+1. Select **Run | Edit Configurations** from the main menu.
+2. Click the plus button and choose **Gradle** from the dropdown list.
+3. In the **Tasks and arguments** field, paste this command:
+
+   ```shell
+   wasmJsBrowserRun -t --quiet
+   ```
+
+4. Click **OK**.
+
+Now, you can use this configuration to run the web app:
+
+![Run the Compose Multiplatform app on desktop](compose-run-web.png){width=350}
+
+The web application opens automatically in your browser. Alternatively, you can type the following URL in your browser when the run is finished:
+
+```shell
+   http://localhost:8080/
+```
+> The port number can vary because the 8080 port may be unavailable. You can find the actual port number in the 
+> Gradle build console.
+>
+{type="tip"}
+
+![Compose web application](first-compose-project-on-web.png){width=550}
 
 ## Next step
 

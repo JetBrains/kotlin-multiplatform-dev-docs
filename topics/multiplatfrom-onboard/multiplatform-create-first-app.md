@@ -51,7 +51,7 @@ The shared module consists of three source sets: `androidMain`, `commonMain`, an
 concept for a number of files logically grouped together where each group has its own dependencies.
 In Kotlin Multiplatform, different source sets in a shared module can target different platforms.
 
-The common source set uses common Kotlin code, and platform source sets use Kotlin code specific to each target.
+The common source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
 ![Source sets and modules structure](basic-project-structure-2.png){width=200}
@@ -103,7 +103,7 @@ the IDE will show a warning:
 Writing the code only in common Kotlin has obvious limitations because it can't use any platform specifics.
 Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.
 
-### Add platform-specific implementations
+### Check out platform-specific implementations
 
 The common source set can define an interface or an expected declaration. Then each platform source set,
 in this case `androidMain` and `iosMain`, has to provide actual platform-specific implementations for the expected
@@ -112,7 +112,8 @@ declarations from the common source set.
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 and generates a single declaration with actual implementations.
 
-1. When creating a project in Android Studio, you get a template with the `Platform.kt` file in the `commonMain` module:
+1. When creating a project with the web wizard or using the Kotlin Multiplatform plugin in Android Studio,
+   you get a template with the `Platform.kt` file in the `commonMain` module:
 
     ```kotlin
     interface Platform {
@@ -121,6 +122,7 @@ and generates a single declaration with actual implementations.
     ```
 
    It's a common `Platform` interface with information about the platform.
+
 2. Switch between the `androidMain` and the `iosMain` modules.
    You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
     
@@ -176,7 +178,7 @@ That's why expected and actual declarations should be defined in the same packag
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
 calls a correct actual implementation.
 
-Now you can run the apps to ensure everything works.
+Now you can run the apps and see all of this in action.
 
 #### Explore the expect/actual mechanism (optional) {initial-collapse-state="collapsed"}
 
@@ -221,10 +223,10 @@ such as properties and classes. Let's implement an expected property:
        return "$firstWord [$num] Guess what this is! > ${platform.name.reversed()}!"
    }
    ```
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Run your application
 

@@ -1,16 +1,15 @@
 [//]: # (title: Compose compiler)
 
-<!-- this tip should be moved lower and possibly reworded after the 2.0.0 release -->
-> The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0.0-RC2.
-> This helps smooth the migration of your projects to Kotlin 2.0, as the Compose compiler will ship simultaneously
-> with Kotlin from now on and will always be compatible with Kotlin of the same version.
->
-{type="tip"}
-
 The Compose compiler is supplemented by a Gradle plugin, which simplifies setup and offers
 easier access to compiler options.
 When applied with the Android Gradle plugin (AGP), this Compose compiler plugin will override the coordinates
 of the Compose compiler supplied automatically by AGP.
+
+> The Compose compiler has been merged into the Kotlin repository since Kotlin %kotlinVersion%.
+> This helps smooth the migration of your projects to Kotlin %kotlinVersion%, as the Compose compiler ships
+> simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
+>
+{type="tip"}
 
 To use it in your project, apply the plugin for each module that uses Compose. See the migration instructions below:
 
@@ -20,18 +19,15 @@ To use it in your project, apply the plugin for each module that uses Compose. S
 
 ## Migrating a Compose Multiplatform project
 
-Compose Multiplatform is going to support the Compose compiler Gradle plugin in the %composeEapVersion%-beta03 release,
-which will be released soon after Kotlin 2.0.0-RC2.
-
-Starting with %composeEapVersion%-beta03, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
+Starting with Compose Multiplatform 1.6.10, you should apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin to each
 module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```Ini
+    ```toml
     [versions]
     # ...
-    kotlin = "2.0.0-RC2"
+    kotlin = "%kotlinVersion%"
     
     [plugins]
     # ...
@@ -76,22 +72,7 @@ When switching from Kotlin 1.9.0 to 2.0.0, or from 2.0.0 to 1.9.0, you may encou
 org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: ...
 ```
 
-To resolve this, delete all of the `build` directories: at the root of your project and in each of the modules. 
-
-### Test with the stable Compose Multiplatform 
-
-To try the Compose compiler 2.0.0 with the stable version of Compose Multiplatform (1.6.2 or older), use this configuration:
-
-```kotlin
-compose {
-    kotlinCompilerPlugin = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:2.0.0-RC2"
-}
-```
-
-> This configuration will be deprecated with the stable 1.6.10 release:
-> you will have to apply the `org.jetbrains.kotlin.plugin.compose` plugin instead.
-> 
-{type="note"}
+To resolve this, delete all of the `build` directories: at the root of your project and in each of the modules.
 
 ## Migrating a Jetpack Compose project
 
@@ -99,10 +80,10 @@ For Android modules that do not rely on Compose Multiplatform:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```Ini
+    ```toml
     [versions]
     # ...
-    kotlin = "2.0.0-RC2"
+    kotlin = "%kotlinVersion%"
     
     [plugins]
     # ...
@@ -128,11 +109,10 @@ For Android modules that do not rely on Compose Multiplatform:
     }
     ```
 
-4. If you use the Android build feature in your Gradle configuration (`android.buildFeatures.compose = true`)
-   or directly reference the old Maven artifacts, you'll need to update these references:
+4. If you reference the old Maven artifacts directly, you'll need to update these references:
 
-   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
-   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
+   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin-embeddable`
+   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin`
 
 5. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
@@ -202,7 +182,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 **Type**: `Property<Boolean>`
 
-**Default**: `false`
+**Default**: `true`
 
 If `true`, enable intrinsic remember performance optimization.
 
@@ -239,8 +219,8 @@ Strong Skipping is an [Experimental](supported-platforms.md#core-kotlin-multipla
 invocations of composable functions whose parameters have not changed.
 For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
-For details, see the [description of Strong Skipping mode](https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/strong-skipping.md)
-in Androidx GitHub repo.
+For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/9d5df3d66f4210e21fd4bee373b6718cd4b2b118/plugins/compose/design/strong-skipping.md)
+in the Kotlin GitHub repo.
 
 ### stabilityConfigurationFile
 

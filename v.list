@@ -4,11 +4,11 @@
 
 <vars>
 
-    <var name="composeVersion" value="1.6.2" type="string"/>
+    <var name="composeVersion" value="1.6.11" type="string"/>
 
     <var name="composeEapVersion" value="1.6.10" type="string"/>
 
-    <var name="kotlinVersion" value="1.9.23" type="string"/>
+    <var name="kotlinVersion" value="2.0.0" type="string"/>
 
     <var name="coroutinesVersion" value="1.7.3" type="string"/>
 
@@ -18,12 +18,16 @@
 
     <var name="ktorVersion" value="2.3.7" type="string"/>
 
-    <var name="dateTimeVersion" value="0.4.1" type="string"/>
+    <var name="dateTimeVersion" value="0.6.0" type="string"/>
 
     <var name="koinVersion" value="3.5.3" type="string"/>
 
-    <var name="composeNavigationVersion" value="2.7.0-alpha03" type="string"/>
+    <var name="skieVersion" value="0.6.2" type="string"/>
 
-    <var name="composeViewmodelVersion" value="2.8.0-beta02" type="string"/>
+    <var name="kmpncVersion" value="1.0.0-ALPHA-31" type="string"/>
+
+    <var name="composeNavigationVersion" value="2.7.0-alpha07" type="string"/>
+
+    <var name="composeViewmodelVersion" value="2.8.0" type="string"/>
 
 </vars>

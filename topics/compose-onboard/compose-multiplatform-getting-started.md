@@ -1,4 +1,4 @@
-[//]: # (title: Get started with Compose Multiplatform — tutorial)
+[//]: # (title: Create a Compose Multiplatform app — tutorial)
 
 With the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
 code-sharing capabilities of Kotlin Multiplatform beyond application logic. You can implement the user interface once
@@ -40,6 +40,7 @@ Start by setting up an environment for multiplatform development.
 
 ## Join the community
 
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
   an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
