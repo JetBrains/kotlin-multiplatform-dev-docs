@@ -30,6 +30,10 @@ Compose Multiplatform for desktop has the following limitations:
 
 ## Kotlin compatibility
 
+As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 2.0.0 or higher, Compose Multiplatform is 
+compatible with Kotlin. There is no need to manually align their versions.
+Remember that using an EAP version of either product is still potentially unstable.
+
 Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 

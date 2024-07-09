@@ -334,7 +334,7 @@ fun pluralStringResource(resource: PluralStringResource, quantity: Int, vararg f
 For example:
 
 ```kotlin
-Text(pluralStringResource(Res.string.new_message, 1, 1))
+Text(pluralStringResource(Res.plurals.new_message, 1, 1))
 ```
 
 </tab>
@@ -350,7 +350,7 @@ For example:
 
 ```kotlin
 coroutineScope.launch {
-    val appName = getPluralString(Res.string.new_message, 1)
+    val appName = getPluralString(Res.plurals.new_message, 1, 1)
 }
 ```
 
@@ -398,7 +398,7 @@ var bytes by remember {
     mutableStateOf(ByteArray(0))
 }
 LaunchedEffect(Unit) {
-    bytes = Res.readFileBytes("files/myDir/someFile.bin")
+    bytes = Res.readBytes("files/myDir/someFile.bin")
 }
 Text(bytes.decodeToString())
 ```
@@ -408,7 +408,7 @@ Text(bytes.decodeToString())
 
 ```kotlin
 coroutineScope.launch {
-    val bytes = Res.readFileBytes("files/myDir/someFile.bin")
+    val bytes = Res.readBytes("files/myDir/someFile.bin")
 }
 ```
 
