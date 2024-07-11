@@ -2,7 +2,7 @@
 
 This is a curated list of projects that aims to show robust and unique applications of Kotlin Multiplatform.
 
-> We currently don't accept edits to this page directly.
+> We are not currently accepting contributions to this page.
 > To feature your project as a sample of Kotlin Multiplatform, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic on GitHub.
 > See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
 to learn how to feature your project in topics.
