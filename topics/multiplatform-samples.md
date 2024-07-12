@@ -1,13 +1,19 @@
 [//]: # (title: Kotlin Multiplatform samples)
 
-This is a curated list of cross-platform projects created with Kotlin Multiplatform. Some share almost all their
-functionality using Compose Multiplatform for the user interface. Others use native code for the user interface and share,
-for example, only the data model and algorithms. To get started with a new Kotlin Multiplatform application,
-we recommend using the [web wizard](https://kmp.jetbrains.com).
+This is a curated list of projects that aims to show robust and unique applications of Kotlin Multiplatform.
+
+> We are not currently accepting contributions to this page.
+> To feature your project as a sample of Kotlin Multiplatform, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic on GitHub.
+> See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
+to learn how to feature your project in topics.
+>
+{type="note"}
+
+Some projects share almost all their code using Compose Multiplatform for the user interface.
+Others use native code for the user interface and share, for example, only the data model and algorithms.
+To create your own brand new Kotlin Multiplatform application, we recommend using the [web wizard](https://kmp.jetbrains.com).
 
 You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic. To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
-See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
-to add your Kotlin Multiplatform project to these topics and help the community.
 
 <table>
   <tr>
