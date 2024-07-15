@@ -51,7 +51,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
@@ -88,7 +88,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
     <td>
         <list>
             <li>Jetpack Compose on Android, Auto, and Wear</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
@@ -206,7 +206,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
             <li>SwiftUI on iOS</li>
         </list>
     </td>
@@ -353,7 +353,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
