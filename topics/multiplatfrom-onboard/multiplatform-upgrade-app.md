@@ -510,7 +510,7 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 
 ```kotlin
 plugins {
-   id("co.touchlab.skie") version "%skieVersion%"
+   id("co.touchlab.skie") version "0.8.2"
 }
 ```
 
@@ -530,7 +530,7 @@ Return to Xcode and update the code using the library:
         class ViewModel: ObservableObject {
             @Published var greetings: [String] = []
             
-            func startObserving() {
+            func startObserving() async {
                 for await phrase in Greeting().greet() {
                     self.greetings.append(phrase)
                 }
