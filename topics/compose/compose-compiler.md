@@ -59,11 +59,6 @@ module that uses the `org.jetbrains.compose` plugin:
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compose Compiler options DSL](#compose-compiler-options-dsl) for reference.
 
-   > The Gradle plugin provides defaults for several compiler options that were only specified manually before.
-   > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
-   >
-   {type="warning"}
-
 #### Possible issue: "Missing resource with path"
 
 When switching from Kotlin 1.9.0 to 2.0.0, or from 2.0.0 to 1.9.0, you may encounter the following error:
@@ -109,18 +104,16 @@ For Android modules that do not rely on Compose Multiplatform:
     }
     ```
 
-4. If you reference the old Maven artifacts directly, you'll need to update these references:
-
-   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin-embeddable`
-   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:compose-compiler-gradle-plugin`
-
-5. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
+4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-   > The Gradle plugin provides defaults for several compiler options that were only specified manually before.
-   > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
-   >
-   {type="warning"}
+> If you are not using Gradle and thus unable to enjoy Gradle plugins, you should update the direct references to old Maven
+> artifacts:
+> 
+>   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
+>   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
+>
+{type="note"}
 
 ## Compose compiler options DSL
 
@@ -133,6 +126,11 @@ composeCompiler {
    enableStrongSkippingMode = true
 }
 ```
+
+> The Gradle plugin provides defaults for several Compose compiler options that were only specified manually before.
+> If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
+>
+{type="warning"}
 
 ### generateFunctionKeyMetaClasses
 
