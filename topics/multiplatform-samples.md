@@ -587,4 +587,39 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
             </list>
         </td>
     </tr>
+    <tr>
+    <td>
+      <strong><a href="https://github.com/KhubaibKhan4/Youtube-Clone-KMP">YouTube Clone KMP</a></strong>
+    </td>
+    <td>
+      YouTube Clone KMP is a sophisticated project developed using Kotlin Multiplatform (KMP), enabling the creation of versatile applications across Android, iOS, Web, and Desktop platforms with shared code. This comprehensive YouTube clone mirrors the functionalities of the official YouTube app, offering a seamless user experience across various devices.
+    </td>
+    <td>
+      <list>
+        <li>Model</li>
+        <li>Networking</li>
+        <li>UI</li>
+        <li>Navigation</li>
+        <li>ViewModel</li>
+        <li>Media Handling</li>
+        <li>Database/Storage</li>
+      </list>
+    </td>
+    <td>
+      <list>
+        <li><code>kotlinx-coroutines</code></li>
+        <li><code>kotlinx-serialization</code></li>
+        <li><code>ktor-client</code></li>
+        <li><code>koin</code></li>
+        <li><code>Voyager Navigation</code></li>
+        <li><code>sql-delight</code></li>
+        <li><code>JavaFX</code></li>
+      </list>
+    </td>
+    <td>
+      <list>
+        <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+      </list>
+    </td>
+  </tr>
 </table>
