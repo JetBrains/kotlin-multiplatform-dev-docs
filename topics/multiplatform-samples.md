@@ -533,7 +533,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
       <td>
           <strong><a href="https://github.com/SEAbdulbasit/MusicApp-KMP">Music App KMP</a></strong>
       </td>
-      <td>An Application to showcase how to interact with native APIs like MediaPlayer on different Platforms. It uses Spotify API to fetch data. </td>
+      <td>An application showcasing how to interact with native APIs like MediaPlayer on different platforms. It uses Spotify API to fetch data.</td>
       <td>
           <list>
               <li>Model</li>
