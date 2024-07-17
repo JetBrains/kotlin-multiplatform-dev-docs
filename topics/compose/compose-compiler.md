@@ -5,13 +5,19 @@ easier access to compiler options.
 When applied with the Android Gradle plugin (AGP), this Compose compiler plugin will override the coordinates
 of the Compose compiler supplied automatically by AGP.
 
-> The Compose compiler has been merged into the Kotlin repository since Kotlin %kotlinVersion%.
-> This helps smooth the migration of your projects to Kotlin %kotlinVersion%, as the Compose compiler ships
-> simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
->
-{type="tip"}
+The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0.0.
+This helps smooth the migration of your projects to Kotlin 2.0.0 and newer, as the Compose compiler ships
+simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
 
-To use it in your project, apply the plugin for each module that uses Compose. See the migration instructions below:
+> When your Compose app is compiled with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
+> the older dependencies may cause additional (or endless) recompositions on non-JVM targets.
+>
+> To prevent this, update your dependencies to versions built with a newer Compose compiler.
+>
+{type="warning"}
+
+To use the new Compose compiler plugin in your project, apply it for each module that uses Compose.
+See the migration instructions below:
 
 * [Migrating a Compose Multiplatform project](#migrating-a-compose-multiplatform-project)
 * [Migrating a Jetpack Compose project](#migrating-a-jetpack-compose-project)

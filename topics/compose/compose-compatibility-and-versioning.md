@@ -37,6 +37,13 @@ Remember that using an EAP version of either product is still potentially unstab
 Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
+> When your Compose app is compiled with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
+> the older dependencies may cause additional (or endless) recompositions on non-JVM targets.
+> 
+> To prevent this, update your dependencies to versions built with a newer Compose compiler. 
+> 
+{type="warning"}
+
 ## Jetpack Compose and Compose Multiplatform release cycles
 
 Compose Multiplatform shares a lot of code with [Jetpack Compose](https://developer.android.com/jetpack/compose) for
