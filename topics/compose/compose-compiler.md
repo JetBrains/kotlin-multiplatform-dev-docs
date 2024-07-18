@@ -107,8 +107,8 @@ For Android modules that do not rely on Compose Multiplatform:
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-> If you are not using Gradle plugins to manage the Compose compiler, you should update the direct references to old Maven
-> artifacts:
+> If you are not using Gradle plugins to manage the Compose compiler, update any direct references to old Maven
+> artifacts in your project:
 > 
 >   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
 >   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
