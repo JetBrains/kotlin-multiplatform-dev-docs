@@ -72,7 +72,7 @@ To resolve this, delete all of the `build` directories: at the root of your proj
 ## Migrating a Jetpack Compose project
 
 When migrating to Kotlin 2.0.0 or newer from 1.9, you should adjust your project configuration depending on the way you deal with
-the Compose compiler now.
+the Compose compiler now. We recommend using the Kotlin Gradle plugin and the Compose compiler Gradle plugin for best results. 
 
 ### Managing the Compose compiler with Gradle plugins
 
@@ -111,6 +111,9 @@ For Android modules that do not rely on Compose Multiplatform:
 
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
+
+5. If you reference Compose compiler artifacts directly, you can remove these references and let the Gradle plugins
+   take care of things.
 
 ### Using Compose compiler without Gradle plugins
 
