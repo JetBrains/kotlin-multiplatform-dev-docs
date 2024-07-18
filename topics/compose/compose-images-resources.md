@@ -113,7 +113,7 @@ The resource is selected depending on the screen density defined in the system.
 ## Resource usage
 
 After importing a project, a special `Res` class is generated which provides access to resources.
-To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in IDE.
+To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
 ### Images
 
