@@ -71,6 +71,8 @@ To resolve this, delete all of the `build` directories: at the root of your proj
 
 ## Migrating a Jetpack Compose project
 
+### Managing the Compose compiler with Gradle plugins
+
 For Android modules that do not rely on Compose Multiplatform: 
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
@@ -107,13 +109,13 @@ For Android modules that do not rely on Compose Multiplatform:
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compiler options](#compose-compiler-options-dsl) for reference.
 
-> If you are not using Gradle plugins to manage the Compose compiler, update any direct references to old Maven
-> artifacts in your project:
-> 
->   * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
->   * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
->
-{type="note"}
+### Using Compose compiler without Gradle plugins
+
+If you are not using Gradle plugins to manage the Compose compiler, update any direct references to old Maven
+artifacts in your project:
+
+  * Change `androidx.compose.compiler:compiler` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable`
+  * Change `androidx.compose.compiler:compiler-hosted` to `org.jetbrains.kotlin:kotlin-compose-compiler-plugin`
 
 ## Compose compiler options DSL
 
