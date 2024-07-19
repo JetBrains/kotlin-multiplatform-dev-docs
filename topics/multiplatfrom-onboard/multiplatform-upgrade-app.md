@@ -560,7 +560,7 @@ Return to Xcode and update the code using the library:
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("2.0.0-1.0.22").apply(false)
+        id("com.google.devtools.ksp").version("%kspVersion%").apply(false)
         id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```

@@ -103,10 +103,10 @@ Implement the same changes as in the Android app:
 5. Run the app to see the changes:
 
    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
-<!--
+
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step3).
 >
-{type="tip"}-->
+{type="tip"}
 
 ## Next step
 
