@@ -506,7 +506,7 @@ adding a Cocoapod or SPM dependency in iOS projects.
 >
 {type="note"}
 
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync** button.
+To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Now** button.
 
 ```kotlin
 plugins {
