@@ -530,7 +530,7 @@ Return to Xcode and update the code using the library:
         class ViewModel: ObservableObject {
             @Published var greetings: [String] = []
             
-            func startObserving() {
+            func startObserving() async {
                 for await phrase in Greeting().greet() {
                     self.greetings.append(phrase)
                 }
