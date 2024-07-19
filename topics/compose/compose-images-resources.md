@@ -266,7 +266,7 @@ fun stringArrayResource(resource: StringArrayResource): List<String> {...}
 For example:
 
 ```kotlin
-Text(stringArrayResource(Res.string.str_arr))
+Text(stringArrayResource(Res.array.str_arr))
 ```
 
 </tab>
@@ -280,7 +280,7 @@ For example:
 
 ```kotlin
 coroutineScope.launch {
-    val appName = getStringArray(Res.string.str_arr)
+    val appName = getStringArray(Res.array.str_arr)
 }
 ```
 
