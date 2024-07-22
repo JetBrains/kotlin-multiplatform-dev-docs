@@ -3,11 +3,11 @@
 Here are the highlights for this feature release:
 
 * [Breaking change: Android Gradle plugin minimum version raised to 8.1.0](#breaking-change-minimum-android-gradle-plugin-version-is-8-1-0)
-* [Type safe navigation is here](#lifecycle-library)
-* [Shared element transitions in Compose Multiplatform](#experimental-navigation-library)
-* [Compose Multiplatform resources are now packed into Android assets](#support-for-multimodule-projects-with-compose-multiplatform-resources)
-* [The new BasicTextField is stable](#experimental-navigation-library)
-* [Known issue: MissingResourceException](#known-issue-missingresourceexception)
+* [Type safe navigation is here](#type-safe-navigation)
+* [Shared element transitions in Compose Multiplatform](#shared-element-transitions)
+* [Compose Multiplatform resources are now packed into Android assets](#multiplatform-resources-are-now-packed-into-android-assets)
+* [The new BasicTextField is stable](#basictextfield2-stabilized-and-renamed-into-basictextfield)
+* [Known issue: MissingResourceException](#known-issues)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-august-2024). 
 
@@ -63,7 +63,7 @@ plugin for XML-based navigation.
 
 For details, see the [Navigation docs](https://developer.android.com/guide/navigation/design/type-safety).
 
-### BasicTextField
+### BasicTextField2 stabilized and renamed into BasicTextField
 
 The `BasicTextField2` component, introduced in Compose Multiplatform 1.6.0, is out of its transitional status and is renamed
 into `BasicTextField`, replacing the old component.
