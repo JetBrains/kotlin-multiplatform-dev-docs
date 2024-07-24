@@ -98,4 +98,9 @@ between input and changes in the UI by enabling vertical synchronization. Screen
 
 ## Gradle plugin
 
+### strongSkippingMode is enabled for Compose Multiplatform
+
+The strong skipping mode was already available for user code, and with Compose Multiplatform 1.7.0 it is enabled for
+the core of the framework as well.
+
 ### Known issues
