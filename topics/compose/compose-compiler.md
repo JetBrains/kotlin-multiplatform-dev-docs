@@ -9,10 +9,12 @@ The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0
 This helps smooth the migration of your projects to Kotlin 2.0.0 and newer, as the Compose compiler ships
 simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
 
-> When your Compose app is compiled with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
-> the older dependencies may cause additional (or endless) recompositions on non-JVM targets.
->
-> To prevent this, update your dependencies to versions built with a newer Compose compiler.
+> It is strongly recommended to update your Compose app made for Kotlin 2.0.0 to the 2.0.10 version or newer to avoid
+> unnecessary (or endless) recomposition issues on non-JVM targets.
+> 
+> If your app is built with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
+> these older dependencies may still cause recomposition issues.
+> To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 >
 {type="warning"}
 
