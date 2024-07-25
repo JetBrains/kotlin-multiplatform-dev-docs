@@ -89,15 +89,16 @@ To migrate from the CocoaPods plugin:
 
 To connect the iOS part of your Kotlin Multiplatform project to your Xcode project and use the Kotlin code in a local Swift package:
 
-1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
+1. In Xcode, open your iOS project and the local SPM module you want to use for integration with the Kotlin framework.  
+2. Go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
 
    ![Edit scheme](xcode-edit-schemes.png){width=700}
 
-2. Select the **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
+3. Select the **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
 
    ![New run script action](xcode-new-run-script-action.png){width=700}
 
-3. Adjust the following script and add it as an action:
+4. Adjust the following script and add it as an action:
 
    ```bash
    cd "<Path to the root of the multiplatform project>"
@@ -107,15 +108,15 @@ To connect the iOS part of your Kotlin Multiplatform project to your Xcode proje
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
   
-4. Choose your app's target in the **Provide build settings from** section:
+5. Choose your app's target in the **Provide build settings from** section:
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-5. Now you can use Kotlin code inside your local Swift package:
+6. Now you can use Kotlin code inside your local Swift package:
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-6. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
    
 There's a couple more factors worth considering: 
 
