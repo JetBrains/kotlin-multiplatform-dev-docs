@@ -587,4 +587,73 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
             </list>
         </td>
     </tr>
+    <tr>
+      <td>
+          <strong><a href="https://github.com/Coding-Meet/Gemini-AI-KMP-App">Gemini AI KMP App</a></strong>
+      </td>
+      <td>Gemini AI KMP App is a Kotlin Compose Multiplatform project designed to target Android, iOS, Windows, macOS, Linux, and Web platforms. It is an application by Gemini AI where you can retrieve information from text and images in a conversational format. Additionally, it allows storing chats group-wise using SQLDelight and KStore, and facilitates changing the Gemini API key.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>Data Storage</li>
+              <li>UI</li>
+              <li>ViewModel</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>ktor</code></li>
+              <li><code>PreCompose</code></li>
+              <li><code>koin</code></li>
+              <li><code>BuildKonfig</code></li>
+              <li><code>multiplatform-settings</code></li>
+              <li><code>kermit</code></li>
+              <li><code>kstore</code></li>
+              <li><code>SQLDelight</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+          </list>
+      </td>
+  </tr>
+   <tr>
+      <td>
+          <strong><a href="https://github.com/Coding-Meet/News-KMP-App">News KMP App</a></strong>
+      </td>
+      <td>News KMP App is a Kotlin Compose Multiplatform (KMP) project that aims to provide a consistent news reading experience across multiple platforms, including Android, iOS, Windows, macOS, and Linux. This project leverages Kotlin's multiplatform capabilities to share code and logic while using Compose for UI, ensuring a seamless and native experience on each platform.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>Data Storage</li>
+              <li>Navigation</li>
+              <li>UI</li>
+              <li>ViewModel</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>ktor</code></li>
+              <li><code>koin</code></li>
+              <li><code>BuildKonfig</code></li>
+              <li><code>Compose Navigation</code></li>
+              <li><code>kermit</code></li>
+              <li><code>Room</code></li>
+              <li><code>DataStore</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, desktop</li>
+          </list>
+      </td>
+  </tr>
 </table>
