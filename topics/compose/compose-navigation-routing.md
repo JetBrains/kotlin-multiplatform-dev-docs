@@ -2,7 +2,7 @@
 
 > The navigation library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > You're welcome to try it in your Compose Multiplatform projects.
-> We would appreciate your feedback on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
+> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
 >
 {type="warning"}
 

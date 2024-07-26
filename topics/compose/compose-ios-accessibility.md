@@ -15,7 +15,7 @@ to Accessibility Services and XCTest framework.
 
 iOS accessibility support is in the early stages of development. If you have trouble with this feature,
 we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
-Slack channel or as an issue in the [Compose Multiplatform GitHub repo](https://github.com/JetBrains/compose-multiplatform/issues). 
+Slack channel or as an issue in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP). 
 
 ## Customize synchronization of the accessibility tree 
 
