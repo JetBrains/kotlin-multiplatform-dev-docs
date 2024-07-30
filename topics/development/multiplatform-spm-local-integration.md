@@ -8,6 +8,8 @@ This is a local integration method that can work for you if:
 * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
 * You have local SPM modules in a separate iOS project in Xcode.
 
+![Direct integration diagram](direct-integration-scheme.svg){width="700"}
+
 In contrast with a standard direct integration method used in project wizards, here you'll add the
 `embedAndSignAppleFrameworkForXcode` task not to the build phase but as a pre-action in your project's build settings.
 
