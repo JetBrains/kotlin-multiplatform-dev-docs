@@ -5,8 +5,8 @@ package in the Swift package manager.
 
 This is a local integration method that can work for you if:
 
+* You have an iOS app with local SPM modules.
 * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
-* You have local SPM modules in a separate iOS project in Xcode.
 
 ![Direct integration diagram](direct-integration-scheme.svg){width="700"}
 
@@ -28,27 +28,9 @@ The feature is available starting with Kotlin 2.0.0.
 > To check the Kotlin version, navigate to the `build.gradle(.kts)` file in the root of your Kotlin Multiplatform project.
 > You'll see the current version in the `plugins {}` block at the top of the file.
 > 
+> Alternatively, check the version catalog in the `gradle/libs.versions.toml` file.
+> 
 {type="tip"}
-
-If you still haven't upgraded to Kotlin 2.0.0, you can use a special Kotlin version, `1.9.24-spm2` from the
-`https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository. You can add the repository, for instance,
-in your `settings.gradle.kts`:
-
-```kotlin
-pluginManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-
-dependencyResolutionManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-```
 
 The tutorial assumes that your project is using [direct integration](multiplatform-project-configuration.md#connect-a-kotlin-multiplatform-module-to-an-ios-app)
 approach with the `embedAndSignAppleFrameworkForXcode` task in the project's build phase. If you're connecting a Kotlin framework through CocoaPods
@@ -89,18 +71,18 @@ To migrate from the CocoaPods plugin:
 >
 {type="note"}
 
-To connect the iOS part of your Kotlin Multiplatform project to your Xcode project and use the Kotlin code in a local Swift package:
+To be able to use Kotlin code in a local Swift package, now connect the Kotlin framework generated from the multiplatform
+project to your Xcode project:
 
-1. In Xcode, open your iOS project and the local SPM module you want to use for integration with the Kotlin framework.  
-2. Go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
+1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
 
    ![Edit scheme](xcode-edit-schemes.png){width=700}
 
-3. Select the **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
+2. Select the **Build** | **Pre-actions** item, then click **+** | **New Run Script Action**:
 
    ![New run script action](xcode-new-run-script-action.png){width=700}
 
-4. Adjust the following script and add it as an action:
+3. Adjust the following script and add it as an action:
 
    ```bash
    cd "<Path to the root of the multiplatform project>"
@@ -110,15 +92,15 @@ To connect the iOS part of your Kotlin Multiplatform project to your Xcode proje
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
   
-5. Choose your app's target in the **Provide build settings from** section:
+4. Choose your app's target in the **Provide build settings from** section:
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-6. Now you can use Kotlin code inside your local Swift package:
+5. Now you can use Kotlin code inside your local Swift package:
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+6. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
    
 There's a couple more factors worth considering: 
 
