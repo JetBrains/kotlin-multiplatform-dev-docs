@@ -89,18 +89,49 @@ project to your Xcode project:
    ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode 
    ```
 
-   * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`
+   * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
   
 4. Choose your app's target in the **Provide build settings from** section:
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-5. Now you can use Kotlin code inside your local Swift package:
+5. You can now import the shared module into your local Swift package and use Kotlin code. For example, define the following function:
+
+   ```Swift
+   import Shared
+   
+   public func greetingsFromSpmLocalPackage() -> String {
+       return Greeting.greet()
+   }
+   ```
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-6. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+6. In the `ContentView.swift` file of your iOS project, you can now use this function by importing the local package:
+
+   ```Swift
+   import SwiftUI
+   import SpmLocalPackage
+   
+   struct ContentView: View {
+       var body: some View {
+           Vstack {
+               Image(systemName: "globe")
+                   .imageScale(.large)
+                   .foregroundStyle(.tint)
+               Text(greetingsFromSpmLocalPackage())
+           }
+           .padding()
+       }
+   }
+   
+   #Preview {
+       ContentView()
+   }
+   ```
+   
+7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
    
 There's a couple more factors worth considering: 
 
