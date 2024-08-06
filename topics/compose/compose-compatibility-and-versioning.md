@@ -37,10 +37,10 @@ Remember that using an EAP version of either product is still potentially unstab
 Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
-> It is strongly recommended to update your Compose app made for Kotlin 2.0.0 to the 2.0.10 version or newer to avoid
+> It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later to avoid
 > unnecessary (or endless) recomposition issues on non-JVM targets.
 >
-> If your app is built with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
+> If your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
 > these older dependencies may still cause recomposition issues.
 > To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 >
