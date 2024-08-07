@@ -230,7 +230,7 @@ You can create a run configuration for running the desktop application as follow
 2. Click the plus button and choose **Gradle** from the dropdown list.
 3. In the **Tasks and arguments** field, paste this command:
    ```shell
-   desktopRun -DmainClass=MainKt --quiet
+   composeApp:run
    ```
 4. Click **OK**.
 
