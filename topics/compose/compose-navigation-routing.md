@@ -68,4 +68,4 @@ there are third-party alternatives that you can choose from:
 | [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
 | [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
 | [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
-| [Circuit](hhttps://slackhq.github.io/circuit/)      | A lightweight and extensible Compose framework for building Kotlin applications. It uses a custom Compose-based backstack implementation for navigable contents |
+| [Circuit](https://slackhq.github.io/circuit/)      | A lightweight and extensible Compose framework for building Kotlin applications, with a Compose-based backstack for navigation |
