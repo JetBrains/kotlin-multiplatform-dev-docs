@@ -1,6 +1,6 @@
 [//]: # (title: Desktop-specific components and events)
 
-You can use Compose Multiplatform the macOS, Linux, and Windows desktop applications. This page gives a short
+You can use Compose Multiplatform to create macOS, Linux, and Windows desktop applications. This page gives a short
 overview of the desktop-specific components and events. Each section includes a link to a detailed tutorial.
 
 ## Components
