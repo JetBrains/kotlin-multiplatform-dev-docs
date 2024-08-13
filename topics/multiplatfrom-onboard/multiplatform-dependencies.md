@@ -22,12 +22,11 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
 
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
   [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/).
-* _Native dependencies_. These are regular libraries from relevant ecosystems. You usually work with them in native iOS
-   projects using CocoaPods or another dependency manager and in Android projects using Gradle.
-
-When you work with a shared module, you can also depend on native dependencies and use them in the native source sets,
-`androidMain` and `iosMain`. Typically, you'll need these dependencies when you want to work with platform APIs,
-for example, security storage, and there is common logic.
+* _Native dependencies_. These are regular libraries from relevant ecosystems. In native projects you usually work with them
+  using Gradle for Android and using CocoaPods or another dependency manager for iOS. 
+  
+  When you work with a shared module, typically, you still need native dependencies when you want to use platform APIs
+  such as security storage. You can add native dependencies to the native source sets, `androidMain` and `iosMain`.
 
 For both types of dependencies, you can use local and external repositories.
 
@@ -38,18 +37,18 @@ For both types of dependencies, you can use local and external repositories.
 >
 {type="tip"}
 
-Let's now go back to the app and make the greeting a little more festive. In addition to the device information, add a
+Let's go back to the app and make the greeting a little more festive. In addition to the device information, add a
 function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
 multiplatform support, is the most convenient way to work with dates in your shared code.
 
-1. Navigate to the `build.gradle.kts` file in the `shared` directory.
+1. Open the `build.gradle.kts` file located in the `shared` directory.
 2. Add the following dependency to the `commonMain` source set dependencies:
 
    ```kotlin
    kotlin {
        sourceSets {
            commonMain.dependencies {
-               implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+               implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
            } 
        }
    }
@@ -92,10 +91,10 @@ multiplatform support, is the most convenient way to work with dates in your sha
 7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Next step
 

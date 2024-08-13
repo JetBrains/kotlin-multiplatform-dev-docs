@@ -22,21 +22,27 @@ To use this library:
 
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 
-   ```kotlin
-   commonMain.dependencies {
-       implementation(compose.runtime)
-       implementation(compose.foundation)
-       implementation(compose.material)
-       implementation(compose.ui)
-       @OptIn(ExperimentalComposeLibrary::class)
-       implementation(compose.components.resources)
-       implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-   }
-   ```
+```kotlin
+kotlin {
+    // ...
+    sourceSets {
+        // ...
+        commonMain.dependencies {
+            // ...
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+        }
+        wasmJsMain.dependencies {
+            implementation(npm("@js-joda/timezone", "2.3.0"))
+        }
+    }
+}
 
-   * The dependency is added to the section that configures the common code source set. With a multiplatform library, you
-     don't need to modify platform-specific source sets.
+```
+
+   * The main dependency is added to the section that configures the common code source set.
    * For simplicity, the version number is included directly instead of being added to the version catalog.
+   * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
+     dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
 
@@ -44,7 +50,7 @@ To use this library:
 
 ## Enhance the user interface
 
-1. Open the `App.kt` file and add the following function:
+1. In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file and add the following function:
 
    ```kotlin
    fun todaysDate(): String {
@@ -61,8 +67,8 @@ To use this library:
 2. Modify the `App` composable to include the `Text` composable that invokes this function and displays the result:
    
     ```kotlin
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var showContent by remember { mutableStateOf(false) }
@@ -88,20 +94,39 @@ To use this library:
     }
     ```
 
-3. Follow the IDE's suggestions to import the missing dependencies.
+3. Switch the web app from using an `Element` as a container to the HTML tag with an externally specified `id`:
+
+   1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element:
+
+      ```html
+      <body>
+      <div id="composeApplication" style="width:400px; height: 500px;"></div>
+      </body>
+      ```
+   2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
+   pointing to the ID you specified in the HTML file:
+
+      ```kotlin
+      ComposeViewport(viewportContainerId = "composeApplication") {
+          App()
+      }
+      ```
+
+4. Follow the IDE's suggestions to import the missing dependencies.
 
 ## Rerun the application
 
-You can now rerun the application using the same run configurations for Android, iOS,
-and desktop:
+You can now rerun the application using the same run configurations for Android, iOS, desktop, and web:
 
 ![First Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-2.png){width=500}
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
+
+<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >
-{type="tip"}
+{type="tip"} -->
 
 ## Next step
 

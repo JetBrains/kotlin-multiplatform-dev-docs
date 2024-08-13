@@ -67,7 +67,7 @@ No matter how detailed your pitch is, your team will have a lot of questions. Li
 
 A: The Apple Store has strict guidelines for publishing applications. One of the limitations is that apps may not download, install, or execute code that introduces or changes any features or functionality of the app ([App Store Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements)). This is relevant for some cross-platform technologies, but not for Kotlin Multiplatform. Shared Kotlin code compiles to native binaries with Kotlin/Native, bundles a regular iOS framework into your app, and doesn't provide the ability for dynamic code execution.
 
-### Q: Multiplatform projects are built with Gradle, and Gradle has an extremely steep learning curve. Does this mean that I now need to spend a lot of time trying to configure my project?
+### Q: Multiplatform projects are built with Gradle, and Gradle has an extremely steep learning curve. Does this mean that I now need to spend a lot of time trying to configure my project? {id="gradle-time-spent"}
 
 A: There's actually no need. There are various ways to organize the work process around building Kotlin mobile applications. First, only Android developers could be responsible for the builds, in which case the iOS team would only write code or even only consume the resulting artifact. You can also organize some workshops or practice pair programming when dealing with tasks that require working with Gradle, which would increase your team's Gradle skills. You can explore different ways of organizing teamwork for multiplatform projects and choose the one that's most appropriate for your team.
 
@@ -79,7 +79,7 @@ At the end of 2023, JetBrains introduced [Amper](https://blog.jetbrains.com/blog
 
 A: In November 2023, we announced that Kotlin Multiplatform is now [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/), which means it's now fully ready for you to use in production.
 
-### Q: There are not enough multiplatform libraries to implement my app's business logic, and it's much easier to find native alternatives. Why should I choose Kotlin Multiplatform?
+### Q: There are not enough multiplatform libraries to implement my app's business logic, and it's much easier to find native alternatives. Why should I choose Kotlin Multiplatform? {id="not-enough-libraries"}
 
 A: The Kotlin Multiplatform ecosystem is thriving and is being cultivated by many Kotlin developers around the world. Just take a look at how fast the number of KMP libraries has been growing over the years.
 
@@ -101,8 +101,7 @@ Here are some tips on how you can support your team at this stage:
    * [Getting Started With KMP: Build Apps for iOS and Android With Shared Logic and Native UIs](https://www.youtube.com/live/zE2LIAUisRI?si=V1cn1Pr-0Sjmjzeu) 
    * [Build Apps for iOS, Android, and Desktop With Compose Multiplatform](https://www.youtube.com/live/IGuVIRZzVTk?si=WFI3GelN7UDjfP97) 
    * [iOS Development With Kotlin Multiplatform: Tips and Tricks](https://www.youtube.com/watch?v=eFzy1BRtHps) 
-   * [Kotlin Multiplatform Mobile for Teams by Kevin Galligan](https://www.youtube.com/watch?v=-tJvCOfJesk)
-
+   * [Kotlin Multiplatform for Teams by Kevin Galligan](https://www.youtube.com/watch?v=-tJvCOfJesk)
 
 The reality is that you probably will not change people's hearts and minds in a day or even a week. But patience and attentiveness to the needs of your colleagues will undoubtedly bring results. 
 

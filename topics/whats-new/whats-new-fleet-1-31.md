@@ -20,14 +20,14 @@ Currently, Fleet does not rebuild previews automatically, so click the icon agai
 {type="note"}
 
 For more about the feature, see [Getting started with Kotlin Multiplatform](https://www.jetbrains.com/help/fleet/getting-started-with-kotlin-multiplatform.html#b65b852e_76)
-in Fleet documentation.
+in the Fleet documentation.
 
 ## Support for Compose Multiplatform resources API
 
 The latest version of the [images and resources access API](compose-images-resources.md), revamped in Compose Multiplatform 1.6.0,
 is supported in Fleet.
 
-The IDE:
+Starting with this version, JetBrains Fleet:
 
 * Autocompletes resources calls
 * Allows navigation to resources referenced in code

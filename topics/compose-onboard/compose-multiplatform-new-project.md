@@ -28,6 +28,7 @@ To get started, implement a new `App` composable:
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var timeAtLocation by remember { mutableStateOf("No location selected") }
@@ -87,6 +88,7 @@ a `TextField` composable:
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -141,6 +143,7 @@ The next step is to use the given input to calculate time. To do this, create a 
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -157,8 +160,18 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-4. Run the application again and enter a valid timezone.
-5. Click the button. You should see the correct time:
+4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
+   support for web:
+
+    ```kotlin
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    ```
+
+5. Run the application again and enter a valid timezone.
+6. Click the button. You should see the correct time:
 
    ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
 
@@ -173,6 +186,7 @@ time message could be rendered more prominently.
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var location by remember { mutableStateOf("Europe/Paris") }
@@ -208,9 +222,10 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Refactor the design
 
@@ -241,6 +256,7 @@ list.
     )
     
     @Composable
+    @Preview
     fun App(countries: List<Country> = countries()) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
@@ -293,9 +309,9 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+<!--> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
-{type="tip"}
+{type="tip"}-->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -328,7 +344,6 @@ code to load and display them:
 3. Change the codebase to support images:
 
     ```kotlin
-    @OptIn(ExperimentalResourceApi::class)
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
@@ -340,7 +355,6 @@ code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     val defaultCountries = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
@@ -349,8 +363,8 @@ code to load and display them:
         Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
     )
 
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
+    @Preview
     fun App(countries: List<Country> = defaultCountries) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
@@ -409,9 +423,9 @@ code to load and display them:
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
-{type="tip"}
+{type="tip"} -->
 
 ## What's next
 

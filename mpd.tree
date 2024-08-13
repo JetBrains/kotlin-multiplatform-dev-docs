@@ -16,8 +16,8 @@
     </toc-element>
     <toc-element toc-title="What's new in Kotlin Multiplatform">
         <toc-element toc-title="What's new in Compose Multiplatform">
-            <toc-element id="whats-new-compose.md"/>
-            <toc-element id="whats-new-compose-eap.md"/>
+            <toc-element id="whats-new-compose-1610.md" accepts-web-file-names="whats-new-compose-eap.html"/>
+            <toc-element id="whats-new-compose.md" accepts-web-file-names="whats-new-compose-1-6-0.html"/>
         </toc-element>
             <toc-element id="whats-new-fleet-1-31.md"/>
     </toc-element>
@@ -41,6 +41,7 @@
     <toc-element toc-title="Develop with Kotlin Multiplatform">
         <toc-element id="multiplatform-connect-to-apis.md"/>
         <toc-element id="multiplatform-project-configuration.md" toc-title="Choose project configuration"/>
+        <toc-element id="multiplatform-spm-local-integration.md" toc-title="Local integration with SPM" hidden="true"/>
         <toc-element id="multiplatform-ktor-sqldelight.md" toc-title="Share data access layer"/>
     </toc-element>
     <toc-element id="multiplatform-run-tests.md" toc-title="Test your multiplatform app"/>
@@ -50,6 +51,7 @@
         <toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
         <toc-element id="compose-images-resources.md"/>
         <toc-element id="compose-lifecycle.md"/>
+        <toc-element id="compose-viewmodel.md"/>
         <toc-element id="compose-navigation-routing.md"/>
         <toc-element id="compose-test.md"/>
         <toc-element toc-title="iOS-specific features">
@@ -60,13 +62,14 @@
         <toc-element id="compose-android-only-components.md" toc-title="Android-specific components"/>
         <toc-element id="compose-desktop-components.md" toc-title="Desktop-specific components"/>
         <toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
+        <toc-element id="compose-compiler.md"/>
         <toc-element id="compose-compatibility-and-versioning.md"/>
         <toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
     </toc-element>
     <toc-element toc-title="Kotlin Multiplatform technology" href="https://kotlinlang.org/docs/multiplatform.html"/>
-    <toc-element toc-title="IDEs and tools">
+    <toc-element toc-title="Tooling">
         <toc-element id="recommended-ides.md"/>
-        <toc-element id="fleet.md" toc-title="Fleet IDE"/>
+        <toc-element id="fleet.md" toc-title="Fleet code editor"/>
         <toc-element id="amper.md" toc-title="Amper configuration tool"/>
     </toc-element>
     <toc-element toc-title="Multiplatform Gradle DSL reference" href="https://kotlinlang.org/docs/multiplatform-dsl-reference.html"/>
