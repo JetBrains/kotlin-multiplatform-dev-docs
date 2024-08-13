@@ -438,6 +438,7 @@ We encourage you to explore multiplatform development further and try out more p
 
 Join the community:
 
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
   an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
