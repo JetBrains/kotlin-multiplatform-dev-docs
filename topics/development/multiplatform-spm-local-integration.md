@@ -1,7 +1,7 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
 In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
-package in the Swift package manager.
+package using the Swift package manager.
 
 This is a local integration method that can work for you if:
 
@@ -71,7 +71,7 @@ To migrate from the CocoaPods plugin:
 >
 {type="note"}
 
-To be able to use Kotlin code in a local Swift package, now connect the Kotlin framework generated from the multiplatform
+To be able to use Kotlin code in a local Swift package, connect the Kotlin framework generated from the multiplatform
 project to your Xcode project:
 
 1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
@@ -133,7 +133,7 @@ project to your Xcode project:
    
 7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
    
-There's a couple more factors worth considering: 
+There are a couple more factors worth considering: 
 
 * If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
   tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
