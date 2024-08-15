@@ -141,10 +141,10 @@ you're applying the plugin to.
 
 There are two kinds of options you can specify:
 
-   * Settings for various metadata, for example, reports folders or source information.
-   * Feature flags that turn certain compiler features on or off.
-     Feature flags are separated into their own set to avoid churn of top-level properties
-     and help roll out (or deprecate) features and defaults.
+   * General compiler settings.
+   * Feature flags enabling or disabling new and experimental features which eventually should become baseline.
+     Feature flags are separated into their own set to avoid churn of top-level properties as new flags
+     are rolled out and deprecated continuously.
 
 An example of such a configuration:
 
@@ -164,7 +164,7 @@ composeCompiler {
 >
 {type="warning"}
 
-### Metadata settings
+### General settings
 
 #### generateFunctionKeyMetaClasses
 
