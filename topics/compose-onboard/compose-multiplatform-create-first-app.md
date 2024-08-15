@@ -18,7 +18,7 @@ web wizard and Android Studio.
 To begin, create a sample project. This is best achieved with the Kotlin Multiplatform web wizard:
 
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-2. On the **New project** tab, change the project name to "ComposeDemo" and the project ID to "kmp.project.demo".
+2. On the **New project** tab, change the project name to "ComposeDemo" and the project ID to "compose.project.demo".
 3. Select the **Android**, **Desktop**, and **Web** options.
 4. If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
 5. Click the **Download** button and unpack the resulting archive.
