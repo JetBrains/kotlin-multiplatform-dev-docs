@@ -176,7 +176,7 @@ If `true`, generate function key meta classes with annotations indicating the fu
 
 **Type**: `Property<Boolean>`
 
-**Default**: `false`
+**Default**: `false` (`true` for Android)
 
 If `true`, include source information in generated code.
 
@@ -220,7 +220,7 @@ in the Jetpack Compose documentation.
 
 **Type**: `Property<Boolean>`
 
-**Default**: `false`
+**Default**: `true`
 
 If `true`, include composition trace markers in the generated code.
 
