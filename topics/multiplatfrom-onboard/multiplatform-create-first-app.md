@@ -14,7 +14,7 @@
 Here you will learn how to create and run your first Kotlin Multiplatform application using Android Studio.
 
 Kotlin Multiplatform technology simplifies the development of cross-platform projects.
-The Kotlin applications will work on different operating systems like iOS, Android, macOS, Windows, Linux, watchOS, and others.
+Kotlin Multiplatform applications can work on a variety of platforms like iOS, Android, macOS, Windows, Linux, web, and others.
 
 One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
 You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.

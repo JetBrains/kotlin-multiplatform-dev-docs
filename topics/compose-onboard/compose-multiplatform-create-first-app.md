@@ -15,9 +15,9 @@ web wizard and Android Studio.
 
 With the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
 code-sharing capabilities of Kotlin Multiplatform beyond application logic. You can implement the user interface once
-and then use it for all the platforms you target – iOS, Android, desktop, and web.
+and then use it for all the platforms supported by Compose Multiplatform.
 
-In this tutorial, you will build a sample application that runs on Android, iOS, and desktop. To create a user
+In this tutorial, you will build a sample application that runs on Android, iOS, desktop, and web. To create a user
 interface, you will use the Compose Multiplatform framework and learn about its basics: composable functions, themes, layouts,
 events, and modifiers.
 

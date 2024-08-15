@@ -19,7 +19,7 @@ We recommend that you install the latest stable versions for compatibility and b
     <tr>
         <td>
           <p><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></p>
-          <p>Xcode is required if you have a Mac with macOS and want to write iOS-specific code and run an iOS application on a simulated or real device. If you use a different operating system, skip this tool.</p>
+          <p>Xcode is required if you want to run iOS applications on a simulated or real device. If you use a different operating system, skip this tool.</p>
         </td>
         <td>
           <p>Launch Xcode in a separate window to accept its license terms and allow it to perform some necessary initial tasks.</p>

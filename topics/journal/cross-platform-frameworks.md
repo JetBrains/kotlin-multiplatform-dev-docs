@@ -151,7 +151,7 @@ It's important to be sure that the maintainer of the framework will continue to 
 
 Depending on how crucial the user interface is for your future app, you may need to know how easily you can customize the UI using a particular framework. For example, Kotlin Multiplatform offers full code-sharing flexibility with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains. It enables developers to share UIs across Android, iOS, web, and desktop (via the JVM) and is based on Kotlin and Jetpack Compose.
 
-> [Compose Multiplatform: Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
+> [Compose Multiplatform: create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
 >
 {type="note"}
 

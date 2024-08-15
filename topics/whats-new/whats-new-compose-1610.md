@@ -156,7 +156,7 @@ The experimental Compose Multiplatform for Web is now in Alpha:
 * The team is committed to bringing the Web platform to release.
 * Next step, a thorough browser adaptation of most components.
 
-Follow the [first app tutorial](compose-multiplatform-setup.md) to see how to set up and run a web app
+Follow the [first app tutorial](multiplatform-setup.md) to see how to set up and run a web app
 with shared UI code.
 
 ### Basic IME keyboard support
