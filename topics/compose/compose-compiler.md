@@ -9,7 +9,7 @@ The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0
 This helps smooth the migration of your projects to Kotlin 2.0.0 and later, as the Compose compiler ships
 simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
 
-> It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
+> It is strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
 > compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects with
 > non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
 >
@@ -86,7 +86,7 @@ to automate configuration management.
 
 ### Managing the Compose compiler with Gradle plugins
 
-For Android modules that do not rely on Compose Multiplatform: 
+For Android modules that don't rely on Compose Multiplatform: 
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
@@ -120,7 +120,7 @@ For Android modules that do not rely on Compose Multiplatform:
     ```
 
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
-   See [Compiler options](#compose-compiler-options-dsl) for reference.
+   See [the list of compiler options](#compose-compiler-options-dsl) for reference.
 
 5. If you reference Compose compiler artifacts directly, you can remove these references and let the Gradle plugins
    take care of things.
@@ -137,11 +137,25 @@ artifacts in your project:
 
 The Compose compiler Gradle plugin offers a DSL for various compiler options.
 You can use it to configure the compiler in the `composeCompiler {}` block of the `build.gradle.kts` file for the module
-you're applying the plugin to, for example:
+you're applying the plugin to.
+
+There are two kinds of options you can specify:
+
+   * Settings for various metadata, for example, reports folders or source information.
+   * Feature flags that turn certain compiler features on or off.
+     Feature flags are separated into their own set to avoid churn of top-level properties
+     and help roll out (or deprecate) features and defaults.
+
+An example of such a configuration:
 
 ```kotlin
 composeCompiler {
-   enableStrongSkippingMode = true
+   includeSourceInformation = true
+
+   featureFlags = setOf(
+           ComposeFeatureFlag.StrongSkipping.disabled(),
+           ComposeFeatureFlag.OptimizeNonSkippingGroups
+   )
 }
 ```
 
@@ -150,7 +164,9 @@ composeCompiler {
 >
 {type="warning"}
 
-### generateFunctionKeyMetaClasses
+### Metadata settings
+
+#### generateFunctionKeyMetaClasses
 
 **Type**: `Property<Boolean>`
 
@@ -158,7 +174,7 @@ composeCompiler {
 
 If `true`, generate function key meta classes with annotations indicating the functions and their group keys.
 
-### includeSourceInformation
+#### includeSourceInformation
 
 **Type**: `Property<Boolean>`
 
@@ -170,7 +186,7 @@ Records source information that can be used for tooling to determine the source 
 This option does not affect the presence of symbols or line information normally added by the Kotlin compiler;
 it only controls source information added by the Compose compiler.
 
-### metricsDestination
+#### metricsDestination
 
 **Type**: `DirectoryProperty`
 
@@ -182,7 +198,7 @@ The [reportsDestination](#reportsdestination) option allows dumping descriptive 
 
 For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
-### reportsDestination
+#### reportsDestination
 
 **Type**: `DirectoryProperty`
 
@@ -194,51 +210,7 @@ The [metricsDestination](#metricsdestination) option allows dumping raw metrics.
 
 For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
-### enableIntrinsicRemember
-
-**Type**: `Property<Boolean>`
-
-**Default**: `true`
-
-If `true`, enable intrinsic remember performance optimization.
-
-Intrinsic remember is an optimization mode which inlines `remember` invocations and replaces `.equals` comparisons for keys
-with comparisons of the `$changed` meta parameter when possible.
-This results in fewer slots being used and fewer comparisons being made at runtime.
-
-### enableNonSkippingGroupOptimization
-
-**Type**: `Property<Boolean>`
-
-**Default**: `false`
-
-If `true`, remove groups around non-skipping composable functions.
-
-This optimization improves the runtime performance of your application by skipping
-unnecessary groups around composables which do not skip (and thus do not require a group).
-This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
-and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
-
-> This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
-> 
-{type="warning"}
-
-### enableStrongSkippingMode
-
-**Type**: `Property<Boolean>`
-
-**Default**: `false`
-
-If `true`, enable Strong Skipping mode.
-
-Strong Skipping is an [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) mode that improves the runtime performance of your application by skipping unnecessary
-invocations of composable functions whose parameters have not changed.
-For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
-
-For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/9d5df3d66f4210e21fd4bee373b6718cd4b2b118/plugins/compose/design/strong-skipping.md)
-in the Kotlin GitHub repo.
-
-### stabilityConfigurationFile
+#### stabilityConfigurationFile
 
 **Type**: `RegularFileProperty`
 
@@ -246,7 +218,7 @@ Path to the stability configuration file.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
 
-### includeTraceMarkers
+#### includeTraceMarkers
 
 **Type**: `Property<Boolean>`
 
@@ -259,7 +231,7 @@ in the Android Studio system trace profiler.
 
 For details, see this [Android Developers blog post](https://medium.com/androiddevelopers/jetpack-compose-composition-tracing-9ec2b3aea535).
 
-### targetKotlinPlatforms
+#### targetKotlinPlatforms
 
 **Type**: `SetProperty<KotlinPlatformType>`
 
@@ -285,6 +257,58 @@ composeCompiler {
     )
 }
 ```
+
+### Feature flags
+
+To enable a feature flag that is disabled by default, specify it in the set, for example:
+
+```kotlin
+featureFlags = setOf(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+```
+
+To disable a feature flag that is enabled by default, call the `disabled()` function for it, for example:
+
+```kotlin
+featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
+```
+
+#### IntrinsicRemember
+
+**Default**: enabled
+
+If enabled, turns on intrinsic remember performance optimization.
+
+Intrinsic remember is an optimization mode which inlines `remember` invocations and replaces `.equals` comparisons for keys
+with comparisons of the `$changed` meta parameter when possible.
+This results in fewer slots being used and fewer comparisons being made at runtime.
+
+#### OptimizeNonSkippingGroups
+
+**Default**: disabled
+
+If enabled, remove groups around non-skipping composable functions.
+
+This optimization improves the runtime performance of your application by skipping
+unnecessary groups around composables which do not skip (and thus do not require a group).
+This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
+and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
+
+> This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
+>
+{type="warning"}
+
+#### StrongSkipping
+
+**Default**: enabled
+
+If enabled, turns on Strong Skipping mode.
+
+Strong Skipping mode improves the runtime performance of your application by skipping unnecessary invocations
+of composable functions whose parameters haven't changed.
+For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
+
+For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md)
+in the Kotlin GitHub repo.
 
 ## What's next
 
