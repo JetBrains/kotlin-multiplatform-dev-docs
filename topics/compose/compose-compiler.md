@@ -9,7 +9,7 @@ The Compose compiler has been merged into the Kotlin repository since Kotlin 2.0
 This helps smooth the migration of your projects to Kotlin 2.0.0 and later, as the Compose compiler ships
 simultaneously with Kotlin and will always be compatible with Kotlin of the same version.
 
-> It is strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
+> It is strongly recommended that you update your multiplatform Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
 > compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects with
 > non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
 >
@@ -304,7 +304,7 @@ and functions that are implicitly not skippable (inline functions and functions 
 
 If enabled, turns on Strong Skipping mode.
 
-Strong Skipping mode improves the runtime performance of your application by skipping unnecessary invocations
+Strong Skipping mode improves the runtime performance of your application by applying optimizations previously reserved only for stable values.
 of composable functions whose parameters haven't changed.
 For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
