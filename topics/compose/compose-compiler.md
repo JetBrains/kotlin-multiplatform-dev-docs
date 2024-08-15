@@ -143,8 +143,6 @@ There are two kinds of options you can specify:
 
    * General compiler settings.
    * Feature flags enabling or disabling new and experimental features which eventually should become baseline.
-     Feature flags are separated into their own set to avoid churn of top-level properties as new flags
-     are rolled out and deprecated continuously.
 
 An example of such a configuration:
 
@@ -259,6 +257,9 @@ composeCompiler {
 ```
 
 ### Feature flags
+
+Feature flags are separated into their own set to avoid churn of top-level properties as new flags
+are rolled out and deprecated continuously.
 
 To enable a feature flag that is disabled by default, specify it in the set, for example:
 
