@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<buildprofiles>
+<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
+	<sitemap priority="0.35" change-frequency="monthly"/>
 	<variables>
+		# newly added tags
+		<analytics-head-script-file>thirdparty/dpk-gtm-analytics.html</analytics-head-script-file>
+		<include-in-head>thirdparty/favicons.html</include-in-head>
+		<website-title>%instance% Documentation</website-title>
+		<automaticLinkSummaries>false</automaticLinkSummaries>
+		# old tags
 		<header-logo>kotlin-multiplatform-logo.svg</header-logo>
 		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
 		<primary-color>frozen</primary-color>
@@ -28,57 +35,6 @@
 		<noindex-content-in-eap>false</noindex-content-in-eap>
 		<noindex-content-in-release>false</noindex-content-in-release>
 		<property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
-		<custom-favicons>
-<![CDATA[
-        <link rel="shortcut icon" href="https://resources.jetbrains.com/storage/ui/favicons/favicon.ico"
-              type="image/x-icon"
-              sizes="16x16 32x32"/>
-        <link rel="apple-touch-icon" sizes="57x57"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png"/>
-        <link rel="apple-touch-icon" sizes="60x60"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-60x60.png"/>
-        <link rel="apple-touch-icon" sizes="72x72"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-72x72.png"/>
-        <link rel="apple-touch-icon" sizes="76x76"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-76x76.png"/>
-        <link rel="apple-touch-icon" sizes="114x114"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-114x114.png"/>
-        <link rel="apple-touch-icon" sizes="120x120"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-120x120.png"/>
-        <link rel="apple-touch-icon" sizes="144x144"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-144x144.png"/>
-        <link rel="apple-touch-icon" sizes="152x152"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-152x152.png"/>
-        <link rel="apple-touch-icon" sizes="180x180"
-              href="https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png"/>
-        <link rel="mask-icon" href="https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg"
-              color="black"/>
-        <meta name="msapplication-TileColor" content="#000000"/>
-        <meta name="msapplication-TileImage"
-              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"/>
-        <meta name="msapplication-square70x70logo"
-              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"/>
-        <meta name="msapplication-square150x150logo"
-              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"/>
-        <meta name="msapplication-wide310x150logo"
-              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"/>
-        <meta name="msapplication-square310x310logo"
-              content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"/>
-        <!-- Add extra slack icon --><style>
-        [data-test="footer-socials"] [data-test="button"][title*="Slack"]{position:relative;}
-        [data-test="footer-socials"] [data-test="button"][title*="Slack"] svg{visibility:hidden;}
-        [data-test="footer-socials"] [data-test="button"][title*="Slack"]::before{
-          display:block;content:"";position:absolute;top:0;bottom:0;left:0;right:0;
-          background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="%23fff"><path d="M9.586 6.601h1.9v-1.9a1.837 1.837 0 00-1.9-1.9 1.9 1.9 0 000 3.8zm1.9 7.6v4.7a1.837 1.837 0 01-1.9 1.9 1.9 1.9 0 01-1.9-1.9v-4.7a1.899 1.899 0 011.9-1.9 1.837 1.837 0 011.9 1.9zm-5.864 1.773a1.839 1.839 0 01-.737.127 1.9 1.9 0 010-3.8h1.9v1.9a1.839 1.839 0 01-1.163 1.773zm3.963-4.673h-4.7a1.9 1.9 0 010-3.8h4.7a1.838 1.838 0 011.9 1.9 1.9 1.9 0 01-1.9 1.9zm11.4-1.9a1.967 1.967 0 00-1.9-1.9 1.899 1.899 0 00-1.9 1.9v1.9h1.9a1.9 1.9 0 001.9-1.9zm-5.862 1.773a1.839 1.839 0 01-.738.127 1.9 1.9 0 01-1.9-1.9v-4.7a1.839 1.839 0 011.9-1.9 1.898 1.898 0 011.9 1.9v4.7a1.837 1.837 0 01-1.162 1.773zm-.738 9.628a1.839 1.839 0 001.9-1.9 1.9 1.9 0 00-1.9-1.9h-1.9v1.9a1.899 1.899 0 001.9 1.9zm4.7-4.7h-4.7a1.9 1.9 0 110-3.8h4.7a1.836 1.836 0 011.9 1.9 1.9 1.9 0 01-1.9 1.9z"/></svg>') no-repeat center;
-          background-size:20px 20px;}
-        </style>
-        <!-- There is a bug in vertical aligning for socials + 0 links case -->
-        <style>[data-test="footer-socials"]+.jb-footer__legal{flex-basis:100%;margin-top:8px;}</style>
-        <!-- Drop any switches and set default theme -->
-        <style>.wh-header__switchers{display:none!important}</style>
-        <script>document.cookie="wh_theme=light;expires="+(new Date(Date.now()+500000000).toUTCString())+"; path=/;";</script>
-        ]]>			
-		</custom-favicons>
 		<generate-canonicals>true</generate-canonicals>
 	</variables>
 	<footer>
