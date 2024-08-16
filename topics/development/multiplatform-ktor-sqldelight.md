@@ -62,7 +62,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 1. In the `[versions]` block, check the AGP version and add the rest:
 
-   ```toml
+   ```
    [versions]
    agp = "8.2.2"
    ...
@@ -78,7 +78,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 2. In the `[libraries]` block, add the following library references:
 
-   ```toml
+   ```
    [libraries]
    ...
    android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
@@ -100,7 +100,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
-   ```toml
+   ```
    [plugins]
    ...
    kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

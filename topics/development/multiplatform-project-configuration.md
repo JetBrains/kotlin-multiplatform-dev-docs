@@ -173,6 +173,7 @@ samples and tutorials. In this case, the repository contains both Android and iO
 several modules, including the umbrella module:
 
 ![Monorepo configuration](monorepo-configuration-1.svg){width=700}
+
 ![Monorepo configuration](monorepo-configuration-2.svg){width=700}
 
 Typically, the iOS app consumes the Kotlin Multiplatform shared module as a regular framework by using direct or CocoaPods
