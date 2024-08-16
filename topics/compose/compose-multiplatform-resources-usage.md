@@ -209,7 +209,7 @@ coroutineScope.launch {
 #### Plurals
 
 When your UI displays quantities of something, you might want to support grammatical agreement for different numbers
-of the same thing (one _book_, many _books_, and so on) without creating programmatically unrelated strings.
+of the same thing (one _book_, many _books_, and so on) without creating programmatically unrelated strings
 
 The concept and base implementation in Compose Multiplatform are the same as for quantity strings
 on Android.

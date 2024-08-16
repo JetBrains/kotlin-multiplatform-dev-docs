@@ -1,0 +1,5 @@
+html .article .emphasis, html .article__em, html .article__i {
+    color: inherit;
+    font-weight: 510;
+    font-style: normal
+}

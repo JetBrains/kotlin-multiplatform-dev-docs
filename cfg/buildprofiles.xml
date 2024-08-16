@@ -7,6 +7,7 @@
 		<include-in-head>thirdparty/favicons.html</include-in-head>
 		<website-title>%instance% Documentation</website-title>
 		<automaticLinkSummaries>false</automaticLinkSummaries>
+		<custom-css>custom.css</custom-css>
 		# old tags
 		<header-logo>kotlin-multiplatform-logo.svg</header-logo>
 		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
