@@ -306,7 +306,7 @@ If enabled, turns on strong skipping mode.
 Strong skipping mode improves the runtime performance of your application by applying optimizations previously reserved only for stable values of composable functions whose parameters haven't changed.
 For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
-For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md)
+For details, see the [description of strong skipping mode](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md)
 in the Kotlin GitHub repository.
 
 ## What's next
