@@ -142,9 +142,9 @@ you're applying the plugin to.
 There are two kinds of options you can specify:
 
    * General compiler settings.
-   * Feature flags enabling or disabling new and experimental features which eventually should become baseline.
+   * Feature flags that enable or disable new and experimental features, which should eventually become part of the baseline.
 
-An example of such a configuration:
+Here's an example configuration:
 
 ```kotlin
 composeCompiler {
@@ -258,8 +258,8 @@ composeCompiler {
 
 ### Feature flags
 
-Feature flags are separated into their own set to avoid churn of top-level properties as new flags
-are rolled out and deprecated continuously.
+Feature flags are organized into a separate set to minimize changes to top-level properties as new flags
+are continuously rolled out and deprecated.
 
 To enable a feature flag that is disabled by default, specify it in the set, for example:
 
@@ -267,7 +267,7 @@ To enable a feature flag that is disabled by default, specify it in the set, for
 featureFlags = setOf(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 ```
 
-To disable a feature flag that is enabled by default, call the `disabled()` function for it, for example:
+To disable a feature flag that is enabled by default, call the `disabled()` function on it, for example:
 
 ```kotlin
 featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
@@ -279,8 +279,7 @@ featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
 
 If enabled, turns on intrinsic remember performance optimization.
 
-Intrinsic remember is an optimization mode which inlines `remember` invocations and replaces `.equals` comparisons for keys
-with comparisons of the `$changed` meta parameter when possible.
+Intrinsic remember is an optimization mode that inlines `remember` invocations and, where possible, replaces `.equals` comparisons for keys with comparisons of the `$changed` meta parameter.
 This results in fewer slots being used and fewer comparisons being made at runtime.
 
 #### OptimizeNonSkippingGroups
@@ -294,7 +293,7 @@ unnecessary groups around composables which do not skip (and thus do not require
 This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
 and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
 
-> This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is thus disabled by default.
+> This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is disabled by default.
 >
 {type="warning"}
 
@@ -304,12 +303,11 @@ and functions that are implicitly not skippable (inline functions and functions 
 
 If enabled, turns on Strong Skipping mode.
 
-Strong Skipping mode improves the runtime performance of your application by applying optimizations previously reserved only for stable values.
-of composable functions whose parameters haven't changed.
+Strong Skipping mode improves the runtime performance of your application by applying optimizations previously reserved only for stable values of composable functions whose parameters haven't changed.
 For example, composables with unstable parameters become skippable, and lambdas with unstable captures are memoized.
 
 For details, see the [description of Strong Skipping mode](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md)
-in the Kotlin GitHub repo.
+in the Kotlin GitHub repository.
 
 ## What's next
 
