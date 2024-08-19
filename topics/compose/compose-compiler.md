@@ -279,7 +279,7 @@ featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
 
 If enabled, turns on intrinsic remember performance optimization.
 
-Intrinsic remember is an optimization mode that inlines `remember` invocations and, where possible, replaces `.equals` comparisons for keys with comparisons of the `$changed` meta parameter.
+Intrinsic remember is an optimization mode that inlines `remember` invocations and, where possible, replaces `.equals()` comparisons for keys with comparisons of the `$changed` meta parameter.
 This results in fewer slots being used and fewer comparisons being made at runtime.
 
 #### OptimizeNonSkippingGroups
