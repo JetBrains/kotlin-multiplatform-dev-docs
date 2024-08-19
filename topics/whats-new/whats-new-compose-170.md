@@ -6,7 +6,7 @@ Here are the highlights for this feature release:
 * [Shared element transitions in Compose Multiplatform](#shared-element-transitions)
 * [Compose Multiplatform resources are now packed into Android assets](#multiplatform-resources-are-now-packed-into-android-assets)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-august-2024). 
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-august-2024).
 
 ## Dependencies
 
@@ -19,10 +19,14 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0`. Based on [Jetpack Lifecycle 2.8.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0).
 * Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha08`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
 
-## Breaking change: minimum Android Gradle plugin version is 8.1.0
+## Breaking change: minimum AGP version raised to 8.1.0
 
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are used by Compose Multiplatform 1.7.0, supports AGP 7.
-So updating to the latest Compose Multiplatform will involve upgrading AGP as well.
+So when you update to Compose Multiplatform 1.7.0 you may have to upgrade AGP as well.
+
+> If that is a factor for you, note that previews for Android composables in Android Studio require at least AGP 8.5.2.
+> 
+{type="note"}
 
 ## Across platforms
 
@@ -44,10 +48,12 @@ For details, see the [Google’s Navigation docs about type safety](https://deve
 
 ### Resources
 
-#### Multiplatform resources are now packed into Android assets
+#### Android Studio generates previews for Compose Multiplatform composables on Android
 
 Multiplatform resources are now packed into Android assets, which helps Android Studio generate previews for Compose Multiplatform
 composables in Android source sets.
+
+This feature requires one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
 
 Packing Android assets also fixes rendering multiplatform resources in WebViews and media player components.
 
@@ -56,22 +62,27 @@ Packing Android assets also fixes rendering multiplatform resources in WebViews 
 With the new `customDirectory` setting in the configuration DSL you can associate a custom directory with a specific source
 set. This allows, for example, using downloaded files as resources.
 
+#### Multiplatform font cache
+
+Compose Multiplatform brings the Android font cache functionality to other platforms, too,
+to avoid excessive byte-reading of `Font` resources.
+
 ### BasicTextField2 stabilized and renamed into BasicTextField
 
 The `BasicTextField2` component, introduced in Compose Multiplatform 1.6.0, is out of its transitional status and is renamed
 into `BasicTextField`, replacing the old component.
 
 The new `BasicTextField`:
-* allows managing state more reliably
-* offers new `TextFieldBuffer` API for programmatic changes to the text field content 
-* contains several new APIs for visual transformations and styling
-* gives access to `UndoState` with the return to previous states of the field.
+* allows managing state more reliably,
+* offers the new `TextFieldBuffer` API for programmatic changes to the text field content,
+* contains several new APIs for visual transformations and styling,
+* provides access to `UndoState` with the ability to return to previous states of the field.
 
 ### GraphicsLayer: new drawing API
 
 The new drawing layer added in Jetpack Compose 1.7.0 is available in Compose Multiplatform.
 
-Unlike `Modifier.graphicsLayer`, the new GraphicsLayer class allows for rendering of Composable content anywhere
+Unlike `Modifier.graphicsLayer`, the new `GraphicsLayer` class allows for rendering of Composable content anywhere
 and is useful in animated use cases where content is expected to be rendered in different scenes.
 
 See the [reference documentation](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer)
@@ -80,7 +91,10 @@ for a more detailed description and example usage.
 ### LocalLifecycleOwner moved out of Compose UI
 
 The `LocalLifecycleOwner` class is moved from the Compose UI package to the Lifecycle package.
+
 This allows you to access the class and call its Compose-based helper APIs independently of a Compose UI.
+But keep in mind that without the Compose UI bindings a `LocalLifecycleOwner` instance will have no platform integration
+and thus no platform-specific events to listen to.
 
 ## iOS
 
@@ -90,25 +104,28 @@ In this release, the touch handling on iOS interop views becomes more sophistica
 Compose Multiplatform now tries to detect whether a touch is meant for an interop view or should be processed by Compose.
 This gives you a chance to process a touch event that happens in a UIKit area inside your Compose Multiplatform app.
 
-This introduces a small delay (150 ms) in UI response, however.
+However, this implementation introduces a small delay (150 ms) in UI response.
 If you’re certain you won’t need to process these touches in Compose, you can turn this behavior off with the new `areTouchesDelayed`
 parameter of `UIKitView` and `UIKitViewController` APIs.
 
 ## Desktop
 
-### Implemented drag and drop
+### Drag and drop implemented
 
-When your want to provide to your users an ability to move things between composables, you can use the `dragAndDropSource`
-`dragAndDropTarget` modifiers to specify potential sources and destinations for drag operations.
+The drag and drop mechanism, allowing for dragging content into or out of your Compose application,
+is implemented in Compose Multiplatform for desktop.
+You can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify potential sources and destinations for drag operations.
 
-For details see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
-article about the corresponding modifiers in Jetpack Compose documentation.
+> While these modifiers are available in common code, for now they will only work in desktop and Android source sets.
+> Stay tuned for future releases.
+> 
+{type="note"}
+
+For common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
+article in Jetpack Compose documentation.
 
 ### Render settings for ComposePanel
 
 By specifying the new `RenderSettings` parameter in the `ComposePanel` constructor you can enable vertical synchronization
 and thus try to reduce visual latency between input and changes in the UI.
 Screen tearing is a potential side effect.
-
-## iOS
-
