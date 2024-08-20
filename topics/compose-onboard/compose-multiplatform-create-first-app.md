@@ -1,17 +1,43 @@
 [//]: # (title: Create your multiplatform project)
 
 <microformat>
-   <p>This is the second part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
-      <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Create your multiplatform project</strong><br/>
-      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Explore composable code<br/>      
-      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Modify the project<br/>
-      <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Create your own application<br/>
+   <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
+   <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your multiplatform project</strong><br/>
+      <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
+      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
+      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application <br/>
   </p>
 </microformat>
 
 Here, you'll learn how to create and run your first Compose Multiplatform application using the Kotlin Multiplatform
 web wizard and Android Studio.
+
+With the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework, you can push the
+code-sharing capabilities of Kotlin Multiplatform beyond application logic. You can implement the user interface once
+and then use it for all the platforms supported by Compose Multiplatform.
+
+In this tutorial, you will build a sample application that runs on Android, iOS, desktop, and web. To create a user
+interface, you will use the Compose Multiplatform framework and learn about its basics: composable functions, themes, layouts,
+events, and modifiers.
+
+Things to keep in mind for this tutorial:
+* No previous experience with Compose Multiplatform, Android, or iOS is required. We do recommend that
+  you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting.
+* To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
+  and desktop. For iOS, you'll need a macOS machine with Xcode installed. This is a general limitation of iOS development.
+* If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
+
+> To try a new multiplatform experience without juggling different IDEs and switching to
+> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
+>
+{type="tip"}
+
+## Set up an environment
+
+Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
+if you haven’t already.
+
+The following instructions assume that you have all software necessary for the platforms you're aiming at.
 
 ## Create a project using the wizard
 

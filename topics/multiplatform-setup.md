@@ -1,17 +1,6 @@
 [//]: # (title: Set up an environment)
 
-<microformat>
-   <p>This is the first part of the <strong>Getting started with Compose Multiplatform</strong> tutorial:</p>
-   <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Set up an environment</strong><br/>
-      <img src="icon-2-todo.svg" width="20" alt="Second step"/> Create your multiplatform project<br/>
-      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Explore composable code<br/>      
-      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Modify the project<br/>
-      <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Create your own application<br/>
-  </p>
-</microformat>
-
-Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
-development.
+Before you create your first Kotlin Multiplatform application, you need to set up an environment for KMP development.
 
 ## Install the necessary tools
 
@@ -29,7 +18,7 @@ We recommend that you install the latest stable versions for compatibility and b
     <tr>
         <td>
           <p><a href="https://apps.apple.com/us/app/xcode/id497799835">Xcode</a></p>
-          <p>Xcode is required if you have a Mac with macOS and want to write iOS-specific code and run an iOS application. If you use a different operating system, skip this tool.</p>
+          <p>Xcode is required if you want to run iOS applications on a simulated or real device. If you use a different operating system, skip this tool.</p>
         </td>
         <td>
           <p>Launch Xcode in a separate window to accept its license terms and allow it to perform some necessary initial tasks.</p>
@@ -43,12 +32,12 @@ We recommend that you install the latest stable versions for compatibility and b
    </tr>
    <tr>
         <td><a href="https://www.oracle.com/java/technologies/javase-downloads.html">JDK</a></td>
-        <td>To check whether it's installed, run the following command in the Android Studio terminal or your command line: <code style="block"
+        <td>To check whether Java is installed, run the following command in the Android Studio terminal or your command line: <code style="block"
             lang="bash">java -version</code></td>
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform plugin</a></td>
-        <td>In Android Studio, select <strong>Settings/Preferences | Plugins</strong>, search <strong>Marketplace</strong> for <i>Kotlin Multiplatform</i>, and then install it.</td>
+        <td>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</td>
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
@@ -57,17 +46,6 @@ We recommend that you install the latest stable versions for compatibility and b
             <p>To update the plugin, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin. You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
             <p>The Kotlin plugin should be compatible with the Kotlin Multiplatform plugin. Refer to the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">compatibility table</a>.</p></td>
    </tr>
-    <tr>
-        <td>Browsers</td>
-        <td>
-            <p>To run multiplatform applications in a browser, you need a browser supporting the <a href="https://github.com/WebAssembly/gc">Wasm Garbage Collection (GC) feature</a>.</p>
-            <list>
-                <li><strong>Chrome and Chromium-based:</strong> works by default starting from version 119.</li>
-                <li><strong>Firefox:</strong> works by default starting from version 120.</li>
-                <li><strong>Safari/WebKit:</strong> Wasm GC support is currently under <a href="https://bugs.webkit.org/show_bug.cgi?id=247394">active development</a>.</li>
-            </list>
-        </td>
-    </tr>
 </table>
 
 ## Check your environment
@@ -85,7 +63,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
     ```
 
    If you don't have Homebrew yet, [install it](https://brew.sh/) or see the KDoctor [README](https://github.com/Kotlin/kdoctor#installation) for other ways to install it.
-2. After the installation is completed, call KDoctor in the console:
+2. After the installation is completed, call KDoctor in the console: 
 
     ```bash
     kdoctor
@@ -93,9 +71,9 @@ To make sure everything works as expected, install and run the KDoctor tool:
 
 3. If KDoctor diagnoses any problems while checking your environment, review the output for issues and possible solutions:
 
-    * Fix any failed checks (`[x]`). You can find problem descriptions and potential solutions after the `*` symbol.
-    * Check the warnings (`[!]`) and successful messages (`[v]`). They may contain useful notes and tips, as well.
-
+   * Fix any failed checks (`[x]`). You can find problem descriptions and potential solutions after the `*` symbol.
+   * Check the warnings (`[!]`) and successful messages (`[v]`). They may contain useful notes and tips, as well.
+   
    > You may ignore KDoctor's warnings regarding the CocoaPods installation. In your first project, you will use a
    > different iOS framework distribution option.
    >
@@ -104,8 +82,11 @@ To make sure everything works as expected, install and run the KDoctor tool:
 ## Possible issues and solutions
 
 <deflist collapsible="true">
-   <def title="Android Studio">
-      Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a>
+   <def title="Kotlin and Android Studio">
+      <list>
+         <li>Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a></li>
+         <li>You may encounter the <code>Kotlin not configured</code> error. It's a known issue in Android Studio Giraffe 2022.3 that doesn't affect building and running projects. To avoid the error, click <strong>Ignore</strong> or upgrade to Android Studio Hedgehog 2023.1.</li>
+      </list>
    </def>
    <def title="Java and JDK">
          <list>
@@ -153,21 +134,12 @@ To make sure everything works as expected, install and run the KDoctor tool:
               <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
               <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
-   </def>
-   <def title="Browsers">
-      Make sure that your browser version supports the new <a href="https://github.com/WebAssembly/gc">WasmGC</a> by default. If you are working with older browser versions, <a href="https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions">configure the environment</a>.
-   </def>
+    </def>
    <def title="Still having trouble?">
             <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
             <p>For a smoother multiplatform experience, you can also try <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html">JetBrains Fleet</a>: it integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
-    </def>
+   </def>
 </deflist>
-
-## Next step
-
-In the next part of the tutorial, you'll create and run your first Compose Multiplatform application.
-
-**[Proceed to the next part](compose-multiplatform-create-first-app.md)**
 
 ## Get help
 
