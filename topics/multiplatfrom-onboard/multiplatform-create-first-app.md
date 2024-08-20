@@ -1,8 +1,7 @@
 [//]: # (title: Create your first cross-platform app)
 
 <microformat>
-    <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p> 
-    <p>Before proceeding, make sure you've <a href="multiplatform-setup.md">set up an environment</a>.</p>
+    <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
     <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your first cross-platform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
        <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies<br/>       
@@ -24,12 +23,19 @@ You can share application logic between iOS and Android apps and write platform-
 >
 {type="tip"}
 
+## Set up the environment
+
+Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
+if you haven’t already.
+
+The following instructions assume that you have all software necessary for the platforms you're aiming at.
+
 ## Create the project with a wizard
 
 1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 2. On the **New project** tab, change the project name to "GreetingKMP" and the project ID to "com.jetbrains.greeting".
 3. Ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option to keep the UI native.
+4. For iOS, select the **Do not share UI** option to keep the UI native.
 5. Click the **Download** button and unpack the resulting archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard-1.png){width=450}

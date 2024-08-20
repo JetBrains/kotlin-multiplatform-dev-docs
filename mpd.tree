@@ -23,7 +23,7 @@
     </toc-element>
     <toc-element id="multiplatform-setup.md" accepts-web-file-names="compose-multiplatform-setup.html"/>
     <toc-element toc-title="Create an app with shared logic and native UI">
-        <toc-element id="multiplatform-create-first-app.md" toc-title="1. Create your first cross-platform app"
+        <toc-element id="multiplatform-create-first-app.md" toc-title="1. Create your first KMP app"
             accepts-web-file-names="multiplatform-getting-started.html"/>
         <toc-element id="multiplatform-update-ui.md" toc-title="2. Update UI"/>
         <toc-element id="multiplatform-dependencies.md" toc-title="3. Add dependencies"/>

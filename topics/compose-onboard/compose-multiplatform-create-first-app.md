@@ -1,8 +1,7 @@
 [//]: # (title: Create your multiplatform project)
 
 <microformat>
-   <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p> 
-   <p>Before proceeding, make sure you've <a href="multiplatform-setup.md">set up an environment</a>.</p>
+   <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your multiplatform project</strong><br/>
       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
@@ -32,6 +31,13 @@ Things to keep in mind for this tutorial:
 > Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
 >
 {type="tip"}
+
+## Set up an environment
+
+Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
+if you haven’t already.
+
+The following instructions assume that you have all software necessary for the platforms you're aiming at.
 
 ## Create a project using the wizard
 

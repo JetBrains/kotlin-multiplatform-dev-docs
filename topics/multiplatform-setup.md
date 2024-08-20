@@ -1,7 +1,6 @@
 [//]: # (title: Set up an environment)
 
-Before you create your first application that works on both iOS and Android, you'll need to set up an environment for Kotlin Multiplatform
-development.
+Before you create your first Kotlin Multiplatform application, you need to set up an environment for KMP development.
 
 ## Install the necessary tools
 
