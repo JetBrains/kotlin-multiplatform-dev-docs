@@ -57,7 +57,8 @@
         <toc-element toc-title="iOS-specific features">
             <toc-element id="compose-swiftui-integration.md" toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html"/>
             <toc-element id="compose-uikit-integration.md" toc-title="Integration with UIKit"/>
-            <toc-element id="compose-ios-accessibility.md" toc-title="iOS accessibility support"/>
+            <toc-element id="compose-ios-touch.md" toc-title="Handling touch with native UI elements"/>
+            <toc-element id="compose-ios-accessibility.md" toc-title="Accessibility support"/>
         </toc-element>
         <toc-element id="compose-android-only-components.md" toc-title="Android-specific components"/>
         <toc-element id="compose-desktop-components.md" toc-title="Desktop-specific components"/>
