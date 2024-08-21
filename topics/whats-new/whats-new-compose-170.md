@@ -17,7 +17,8 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
   * [Material 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0)
   * [Material3 1.3.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0`. Based on [Jetpack Lifecycle 2.8.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha08`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha09`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-alpha01`. Based on [Jetpack Material3 Adaptive 1.0.0-beta04](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0-beta04)
 
 ## Breaking change: minimum AGP version raised to 8.1.0
 
