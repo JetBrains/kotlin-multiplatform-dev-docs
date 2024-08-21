@@ -8,13 +8,15 @@ This is a local integration method that can work for you if:
 * You have an iOS app with local SPM modules.
 * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
 
-![Direct integration diagram](direct-integration-scheme.svg){width="700"}
+![Direct integration diagram](direct-integration-scheme.svg){width=700}
 
-In contrast with a standard direct integration method used in project wizards, here you'll add the
-`embedAndSignAppleFrameworkForXcode` task not to the build phase but as a pre-action in your project's build settings.
+To set up the integration, you'll add the `embedAndSignAppleFrameworkForXcode` script as a pre-action in your project's
+build settings. To see the changes made in common code reflected in your Xcode project, you'll only need to rebuild the
+Kotlin Multiplatform project.
 
-This way, you don't need to build both the Kotlin Multiplatform and the iOS project to see the changes made in the common
-code. These changes will be reflected instantly, so you can easily use Kotlin code in the local Swift package.
+This way, you can easily use Kotlin code in local Swift packages, compared to a regular direct integration method,
+that adds the script to the build phase and requires rebuilding both the Kotlin Multiplatform and the iOS project to get
+the changes from the common code.
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
 > and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
