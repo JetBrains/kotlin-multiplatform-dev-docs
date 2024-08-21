@@ -13,8 +13,7 @@ that the area:
 * doesn't react to their touch when they want to scroll the parent container.
 
 To solve this, Compose Multiplatform implements behavior inspired by [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview).
-When the touch is first detected, there is a short delay that lets the parent element decide whether to forward
-the touch further:
+When the touch is first detected, there is a short delay that lets the app decide whether to make the container aware of it:
 
 * If there is movement detected within this time, the user likely wants to scroll without activating the child element.
 * If not, the touch is likely intended for the underlying element and should be forwarded.
