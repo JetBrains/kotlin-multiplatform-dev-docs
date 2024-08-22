@@ -2,11 +2,11 @@
 <labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/labels.xsd">
 
-    <label short-name="EAP" full-name="Compose Multiplatform EAP" color="frozen">
+    <label short-name="EAP" full-name="Compose Multiplatform EAP">
         This functionality is limited to the current EAP (beta or RC) version.
     </label>
 
-    <annotation short-name="Beta" full-name="Early Access Program" color="frozen"/>
+    <annotation short-name="Beta" full-name="Early Access Program"/>
 
     <annotation short-name="Information" full-name="Info" color="blue"/>
     <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
