@@ -3,7 +3,7 @@
     <variables>
         <header-logo>kotlin-multiplatform-logo.svg</header-logo>
         <product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
-        <primary-color>purple</primary-color>
+        <primary-color>iris</primary-color>
         <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</browser-edits-url>
         <web-root>https://www.jetbrains.com/help</web-root>
