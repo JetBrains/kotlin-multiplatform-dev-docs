@@ -6,6 +6,8 @@
         This functionality is limited to the current EAP (beta or RC) version.
     </label>
 
+    <annotation short-name="Beta" full-name="Early Access Program" color="frozen"/>
+
     <annotation short-name="Information" full-name="Info" color="blue"/>
     <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
     <annotation short-name="Warning" full-name="Warning" color="yellow"/>
