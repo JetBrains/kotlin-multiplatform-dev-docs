@@ -22,6 +22,6 @@ When the touch is first detected, there is a short delay that lets the app decid
 
 TODO Right now, in the (EAP version) there is no option to customize this behavior, but an API is coming in future releases.
 
-## What's next?
+## What's next? {label="EAP"}
 
 Learn more about UIKit and SwiftUI integration in Compose Multiplatform.
