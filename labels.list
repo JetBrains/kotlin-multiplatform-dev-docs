@@ -6,7 +6,10 @@
         This functionality is limited to the current EAP (beta or RC) version.
     </label>
 
-    <annotation short-name="Beta" full-name="Early Access Program"/>
+    <annotation short-name="Desktop" full-name="Implemented in Compose Multiplatform for desktop"/>
+    <annotation short-name="iOS" full-name="Implemented in Compose Multiplatform for iOS"/>
+    <annotation short-name="Android" full-name="Implemented in Compose Multiplatform for iOS"/>
+    <annotation short-name="Web" full-name="Implemented in Compose Multiplatform for web"/>
 
     <annotation short-name="Information" full-name="Info" color="blue"/>
     <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
