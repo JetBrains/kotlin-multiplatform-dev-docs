@@ -1,6 +1,7 @@
 [//]: # (title: Handling touch events with interop on iOS)
 
-<title label="EAP">Handling touch events with interop on iOS</title>
+<title label="EAP" annotation="Beta">Handling touch events with interop on iOS</title>
+
 
 On iOS, Compose Multiplatform can integrate with the native UIKit and SwiftUI frameworks. In particular,
 a Compose Multiplatform app can include native UI elements. One of the challenges of such integration is handling touches:
