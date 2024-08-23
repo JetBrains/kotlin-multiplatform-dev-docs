@@ -1,8 +1,6 @@
 [//]: # (title: Handling touch events with interop on iOS)
 
-<title label="EAP">Handling touch events with interop on iOS</title>
-{annotation="Beta"}
-
+<title annotation="Beta">Handling touch events with interop on iOS</title>
 
 On iOS, Compose Multiplatform can integrate with the native UIKit and SwiftUI frameworks. In particular,
 a Compose Multiplatform app can include native UI elements. One of the challenges of such integration is handling touches:
@@ -24,7 +22,6 @@ When the touch is first detected, there is a short delay that lets the app decid
 
 TODO Right now, in the (EAP version) there is no option to customize this behavior, but an API is coming in future releases.
 
-## What's next? {label="EAP"}
-{annotation="Beta"}
+## What's next? {annotation="Beta"}
 
 Learn more about UIKit and SwiftUI integration in Compose Multiplatform.
