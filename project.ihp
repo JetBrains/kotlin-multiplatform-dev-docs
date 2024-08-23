@@ -14,4 +14,8 @@
     <product src="mpd.tree" id="kotlin-multiplatform-dev" version="stable"
              keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
+    <settings>
+        <supernova-builder location="version:2.1.1226"/>
+    </settings>
+
 </ihp>
