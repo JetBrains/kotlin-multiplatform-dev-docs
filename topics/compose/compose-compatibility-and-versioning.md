@@ -47,6 +47,47 @@ See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for detail
 >
 {type="warning"}
 
+### Older versions of Kotlin
+
+To use Compose Multiplatform with a Kotlin version earlier than 2.0.0, you can manually specify the `kotlinCompilerPlugin` version
+in your `build.gradle.kts` file.
+
+Find the right version in the following table:
+
+| Kotlin version | Compose Multiplatform compiler version |
+|----------------|----------------------------------------|
+| 1.9.25         | `1.5.14`                               |
+| 1.9.24         | `1.5.14`                               |
+| 1.9.23         | `1.5.10.1`                             |
+| 1.9.22         | `1.5.8.1`                              |
+| 1.9.21         | `1.5.4`                                |
+| 1.9.20         | `1.5.3`                                |
+| 1.9.10         | `1.5.2`                                |
+| 1.9.0          | `1.5.1`                                |
+| 1.8.22         | `1.4.8`                                |
+| 1.8.21         | `1.4.7`                                |
+| 1.8.20         | `1.4.5`                                |
+| 1.8.10         | `1.4.2`                                |
+| 1.8.0          | `1.4.0`                                |
+| 1.7.20         | `1.3.2.2`                              |
+| 1.7.10         | `1.3.0`                                |
+
+For example, to use Kotlin 1.9.24, you need Compose Multiplatform compiler version `1.5.14`:
+
+```kotlin
+compose {
+    kotlinCompilerPlugin.set("1.5.14")
+}
+```
+
+Early access versions of the Compose Multiplatform compiler plugin, like `1.7.0-alpha03`,
+are not available in [Maven Central](https://central.sonatype.com/).
+To use early access versions, add this line to your list of repositories:
+
+```kotlin
+maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+```
+
 ## Jetpack Compose and Compose Multiplatform release cycles
 
 Compose Multiplatform shares a lot of code with [Jetpack Compose](https://developer.android.com/jetpack/compose) for
