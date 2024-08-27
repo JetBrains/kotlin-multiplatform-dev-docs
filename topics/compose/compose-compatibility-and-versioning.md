@@ -30,7 +30,7 @@ Compose Multiplatform for desktop has the following limitations:
 
 ## Kotlin compatibility
 
-As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 2.0.0 or higher, Compose Multiplatform is 
+As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 1.7.10 or higher, Compose Multiplatform is 
 compatible with Kotlin. There is no need to manually align their versions.
 Remember that using an EAP version of either product is still potentially unstable.
 
@@ -47,47 +47,6 @@ See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for detail
 >
 {type="warning"}
 
-### Older versions of Kotlin
-
-To use Compose Multiplatform with a Kotlin version earlier than 2.0.0, you can manually specify the `kotlinCompilerPlugin` version
-in your `build.gradle.kts` file.
-
-Find the right version in the following table:
-
-| Kotlin version | Compose Multiplatform compiler version |
-|----------------|----------------------------------------|
-| 1.9.25         | `1.5.14`                               |
-| 1.9.24         | `1.5.14`                               |
-| 1.9.23         | `1.5.10.1`                             |
-| 1.9.22         | `1.5.8.1`                              |
-| 1.9.21         | `1.5.4`                                |
-| 1.9.20         | `1.5.3`                                |
-| 1.9.10         | `1.5.2`                                |
-| 1.9.0          | `1.5.1`                                |
-| 1.8.22         | `1.4.8`                                |
-| 1.8.21         | `1.4.7`                                |
-| 1.8.20         | `1.4.5`                                |
-| 1.8.10         | `1.4.2`                                |
-| 1.8.0          | `1.4.0`                                |
-| 1.7.20         | `1.3.2.2`                              |
-| 1.7.10         | `1.3.0`                                |
-
-For example, to use Kotlin 1.9.24, you need Compose Multiplatform compiler version `1.5.14`:
-
-```kotlin
-compose {
-    kotlinCompilerPlugin.set("1.5.14")
-}
-```
-
-Early access versions of the Compose Multiplatform compiler plugin, like `1.7.0-alpha03`,
-are not available in [Maven Central](https://central.sonatype.com/).
-To use early access versions, add this line to your list of repositories:
-
-```kotlin
-maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-```
-
 ## Jetpack Compose and Compose Multiplatform release cycles
 
 Compose Multiplatform shares a lot of code with [Jetpack Compose](https://developer.android.com/jetpack/compose) for
@@ -103,11 +62,24 @@ When a new version of Jetpack Compose is released, we:
 
 The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1–3 months.
 
-When you build your application for Android, the artifacts published by Google are used. For example, if you apply the
-Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
+### Early access versions of Compose Multiplatform
+
+Early access versions of the Compose Multiplatform compiler plugin, like `1.7.0-alpha03`,
+are not available in [Maven Central](https://central.sonatype.com/).
+To use early access versions, add this line to your list of repositories:
+
+```kotlin
+maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+```
+
+### Jetpack Compose artifacts used
+
+When you build your application for Android, Compose Multiplatform uses artifacts published by Google.
+For example, if you apply the Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
 project will use the `androidx.compose.material3:material3:1.1.1` artifact in the Android target (
-but `org.jetbrains.compose.material3:material3:1.5.0` in other targets). See the following table to find out exactly
-which version of Jetpack Compose artifact is used:
+but `org.jetbrains.compose.material3:material3:1.5.0` in other targets).
+
+The following table lists Jetpack Compose artifact versions used by each version of Compose Multiplatform:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
