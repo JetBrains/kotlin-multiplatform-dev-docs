@@ -2,7 +2,7 @@
 <labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/labels.xsd">
 
-    <label short-name="CMP-EAP" full-name="Compose Multiplatform 1.7.0-beta01">
+    <label short-name="EAP" full-name="Compose Multiplatform 1.7.0-beta01">
         This functionality is available only in the EAP version.
     </label>
 
