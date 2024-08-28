@@ -52,7 +52,7 @@ Quizlet, a popular educational platform that aids learning and practice through 
 The Quizlet team experimented with technologies like JavaScript, React Native, C++, Rust, and Go, but faced various challenges, including performance, stability, and varying implementations across platforms. Finally, they opted for Kotlin Multiplatform for Android, iOS, and web. Here's how using KMP benefitted the Quizlet team.
 
 * More type-safe APIs when marshaling objects.
-* 25% faster grading algorithm on iOS compared to JavaScript.
+* 25%\\ faster grading algorithm on iOS compared to JavaScript.
 * Reduced Android app size from 18 MB to 10 MB.
 * Enhanced developer experience.
 * Increased interest from team members, including Android, iOS, backend, and web developers, in writing shared code.
@@ -73,7 +73,7 @@ In the world of programming languages, Kotlin stands out for its pragmatic appro
 
 * **Safety and tooling over soundness.** Kotlin enables developers to catch errors early, ensuring that your program doesn't fall into an invalid state. By detecting issues during compilation or while writing code in IDEs, Kotlin enhances software reliability, minimizing the risk of runtime errors.
 
-We conduct annual Kotlin surveys to help us learn about users' experiences with the language. This year, 92% of respondents reported having a positive experience, a notable increase from 86% a year earlier.
+We conduct annual Kotlin surveys to help us learn about users' experiences with the language. This year, 92%\\ of respondents reported having a positive experience, a notable increase from 86% a year earlier.
 
 ![Kotlin satisfaction rate for 2023 and 2024](kotlin-satisfaction-rate.png){width=700}
 
@@ -147,10 +147,10 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 
 Kotlin and Kotlin Multiplatform have a very supportive community. Here are a few places where you can find answers to any questions you might have.
 
-* [**Kotlinlang Slack workspace.**](https://slack-chats.kotlinlang.org/) This workspace has about 60,000 members and a few relevant channels dedicated to cross-platform development, like [#multiplatform](https://slack-chats.kotlinlang.org/c/multiplatform), [#compose](https://slack-chats.kotlinlang.org/c/compose), and [#compose-ios](https://slack-chats.kotlinlang.org/c/compose-ios).
-* [**Kotlin X.**](https://twitter.com/kotlin) Here, you’ll find quick expert insights and the latest news, including myriad multiplatform tips.
-* [**Kotlin YouTube.**](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw) Our YouTube channel provides practical tutorials, livestreams with experts, and other excellent educational content for visual learners.
-* [**Kotlin Roundup.**](https://lp.jetbrains.com/subscribe-to-kotlin-news/) If you want to stay in the loop with the latest updates across the dynamic Kotlin and Kotlin Multiplatform ecosystems, subscribe to our regular newsletter!
+* [Kotlinlang Slack workspace.](https://slack-chats.kotlinlang.org/) This workspace has about 60,000 members and a few relevant channels dedicated to cross-platform development, like [#multiplatform](https://slack-chats.kotlinlang.org/c/multiplatform), [#compose](https://slack-chats.kotlinlang.org/c/compose), and [#compose-ios](https://slack-chats.kotlinlang.org/c/compose-ios).
+* [Kotlin X.](https://twitter.com/kotlin) Here, you’ll find quick expert insights and the latest news, including myriad multiplatform tips.
+* [Kotlin YouTube.](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw) Our YouTube channel provides practical tutorials, livestreams with experts, and other excellent educational content for visual learners.
+* [Kotlin Roundup.](https://lp.jetbrains.com/subscribe-to-kotlin-news/) If you want to stay in the loop with the latest updates across the dynamic Kotlin and Kotlin Multiplatform ecosystems, subscribe to our regular newsletter!
 
 The Kotlin Multiplatform ecosystem is thriving. It’s enthusiastically nurtured by numerous Kotlin developers globally. Below, you’ll find a diagram showing the number of Kotlin Multiplatform libraries created per year. As you can see, there was a definite uptick in 2021, and the number of libraries hasn’t stopped growing since.
 
