@@ -62,11 +62,13 @@ When a new version of Jetpack Compose is released, we:
 
 The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1–3 months.
 
-### Early access versions of Compose Multiplatform
+### Development versions of Compose Multiplatform
 
-Early access versions of the Compose Multiplatform compiler plugin, like `1.7.0-alpha03`,
-are not available in [Maven Central](https://central.sonatype.com/).
-To use early access versions, add this line to your list of repositories:
+Development versions of the Compose Multiplatform compiler plugin (for example, `1.7.0-dev1776`) are built without a set schedule,
+to test updates between formal releases.
+
+These builds are not available in [Maven Central](https://central.sonatype.com/).
+To access them, add this line to your list of repositories:
 
 ```kotlin
 maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
