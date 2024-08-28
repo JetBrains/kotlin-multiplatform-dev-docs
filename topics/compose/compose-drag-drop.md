@@ -1,14 +1,14 @@
 [//]: # (title: Drag and drop operations)
 
-<title label="EAP" annotations="Android,Desktop">Drag and drop operations</title>
-
-> Currently, the drag and drop operations are only supported for Android and desktop, but the support will be extended
-> to iOS and web in future releases.
->
-{type="note"}
+<title label="EAP" annotations="Desktop">Drag and drop operations</title>
 
 To allow users to drag files and objects in or out of your Compose Multiplatform app,
 you can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify potential sources or destinations for drag operations.
+
+> Currently, drag and drop operations are only supported in Compose Multiplatform for desktop.
+> The support will be extended to iOS and web in future releases.
+>
+{type="note"}
 
 To prepare a composable to be a drag source:
 1. Choose the trigger for the drag event with the `detectDragGestures()` function (for example, `onDragStart`).
