@@ -1,13 +1,13 @@
 [//]: # (title: Add dependencies to your project)
 
 <microformat>
-    <p>This is the fourth part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-        <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Add dependencies</strong><br/>
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Share more logic<br/>
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
+        <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add dependencies</strong><br/>
+        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
+        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 You've already created your first cross-platform Kotlin Multiplatform project! Now let's learn how to add dependencies
@@ -15,19 +15,18 @@ to third-party libraries, which is necessary for building successful cross-platf
 
 ## Dependency types
 
-There are two types of dependencies that you can use in Multiplatform Mobile projects:
+There are two types of dependencies that you can use in Kotlin Multiplatform projects:
 
 * _Multiplatform dependencies_. These are multiplatform libraries that support multiple targets and can be used in the
   common source set, `commonMain`.
 
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
   [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/).
-* _Native dependencies_. These are regular libraries from relevant ecosystems. You usually work with them in native iOS
-   projects using CocoaPods or another dependency manager and in Android projects using Gradle.
-
-When you work with a shared module, you can also depend on native dependencies and use them in the native source sets,
-`androidMain` and `iosMain`. Typically, you'll need these dependencies when you want to work with platform APIs,
-for example, security storage, and there is common logic.
+* _Native dependencies_. These are regular libraries from relevant ecosystems. In native projects you usually work with them
+  using Gradle for Android and using CocoaPods or another dependency manager for iOS. 
+  
+  When you work with a shared module, typically, you still need native dependencies when you want to use platform APIs
+  such as security storage. You can add native dependencies to the native source sets, `androidMain` and `iosMain`.
 
 For both types of dependencies, you can use local and external repositories.
 
@@ -38,18 +37,18 @@ For both types of dependencies, you can use local and external repositories.
 >
 {type="tip"}
 
-Let's now go back to the app and make the greeting a little more festive. In addition to the device information, add a
+Let's go back to the app and make the greeting a little more festive. In addition to the device information, add a
 function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
 multiplatform support, is the most convenient way to work with dates in your shared code.
 
-1. Navigate to the `build.gradle.kts` file in the `shared` directory.
+1. Open the `build.gradle.kts` file located in the `shared` directory.
 2. Add the following dependency to the `commonMain` source set dependencies:
 
    ```kotlin
    kotlin {
        sourceSets {
            commonMain.dependencies {
-               implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+               implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
            } 
        }
    }
@@ -83,15 +82,19 @@ multiplatform support, is the most convenient way to work with dates in your sha
    
         fun greet(): List<String> = buildList {
             add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-            add("Guess what it is! > ${platform.name.reversed()}!")
+            add("Guess what this is! > ${platform.name.reversed()}!")
             add(daysPhrase())
         }
     }
     ```
 
-7. To see the results, re-run your **androidApp** and **iosApp** configurations from Android Studio:
+7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
+<!--
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
+>
+{type="tip"}-->
 
 ## Next step
 

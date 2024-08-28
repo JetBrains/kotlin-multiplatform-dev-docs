@@ -1,16 +1,16 @@
 [//]: # (title: Wrap up your project)
 
 <microformat>
-    <p>This is final part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-       <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
-       <img src="icon-5-done.svg" width="20" alt="Fifth step"/> <a href="multiplatform-upgrade-app.md">Share more logic</a><br/>
-       <img src="icon-6.svg" width="20" alt="Sixth step"/> <strong>Wrap up your project</strong></p>
+    <p>This is the final part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
+       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
+       <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-upgrade-app.md">Share more logic</a><br/>
+       <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Wrap up your project</strong><br/>
+    </p>
 </microformat>
 
-You've created your first Multiplatform Mobile app that works both on iOS and Android! Now you know how
+You've created your first Kotlin Multiplatform app that works both on iOS and Android! Now you know how
 to set up an environment for cross-platform mobile development, create a project in Android Studio, run your app on devices,
 and expand its functionality.
 
@@ -53,7 +53,7 @@ additional cross-platform mobile development tasks:
      <list>
         <li><a href="multiplatform-integrate-in-existing-app.md">Make your Android app cross-platform</a></li>
         <li><a href="multiplatform-ktor-sqldelight.md">Create a multiplatform app using Ktor and SQLDelight</a></li>
-        <li><a href="compose-multiplatform-getting-started.md">Share UIs between iOS and Android using Compose Multiplatform</a></li>
+        <li><a href="compose-multiplatform-create-first-app.md">Share UIs between iOS and Android using Compose Multiplatform</a></li>
         <li><a href="multiplatform-samples.md">See the curated list of sample projects</a></li>
      </list>
    </td>

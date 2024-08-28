@@ -1,13 +1,13 @@
 [//]: # (title: Share more logic between iOS and Android)
 
 <microformat>
-    <p>This is the fifth part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-      <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-      <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-      <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
-      <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Share more logic</strong><br/>
-      <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the fourth part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+      <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
+      <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
+      <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Share more logic</strong><br/>
+      <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 Now that you've implemented common logic using external dependencies, you can start adding more complex logic. Network
@@ -20,13 +20,13 @@ and display the date of the last successful launch of a SpaceX rocket.
 
 ## Add more dependencies
 
-You'll need the following multiplatform libraries in your project:
+You'll need to add the following multiplatform libraries in your project:
 
-* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), for using coroutines to write asynchronous code,
+* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for asynchronous code,
   which allows simultaneous operations.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), for deserializing JSON responses into objects of entity classes used to process
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses into objects of entity classes used to process
   network operations.
-* [Ktor](https://ktor.io/), a framework as an HTTP client for retrieving data over the internet.
+* [Ktor](https://ktor.io/), a framework to create an HTTP client for retrieving data over the internet.
 
 ### kotlinx.coroutines
 
@@ -34,10 +34,12 @@ To add `kotlinx.coroutines` to your project, specify a dependency in the common 
 line to the `build.gradle.kts` file of the shared module:
 
 ```kotlin
-sourceSets {
-    commonMain.dependencies {
-            // ...
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+kotlin {
+    // ... 
+    sourceSets {
+        commonMain.dependencies {
+           // ...
+           implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
         }
     }
 }
@@ -48,11 +50,9 @@ of `kotlinx.coroutines`.
 
 ### kotlinx.serialization
 
-For `kotlinx.serialization`, you need the plugin required by the build system. The Kotlin serialization plugin ships
-with the Kotlin compiler distribution, and the IntelliJ IDEA plugin is bundled into the Kotlin plugin.
-
-You can set up the serialization plugin with the Kotlin plugin using the Gradle plugin DSL. To do so, add the following line to
-the existing `plugins` block at the very beginning of the `build.gradle.kts` file in the shared module:
+To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
+To do that, add the following line to the existing `plugins {}` block at the very beginning of the `build.gradle.kts` file
+in the shared module:
 
 ```kotlin
 plugins {
@@ -63,10 +63,10 @@ plugins {
 
 ### Ktor
 
-You can add Ktor in the same way you added the `kotlinx.coroutines` library earlier. In addition to specifying the core
-dependency (`ktor-client-core`) in the common source set, you also need to:
+You need to add the core dependency (`ktor-client-core`) to the common source set of the shared module.
+You also need to add supporting dependencies:
 
-* Add the ContentNegotiation functionality (`ktor-client-content-negotiation`), which is responsible for serializing/deserializing
+* Add the `ContentNegotiation` functionality (`ktor-client-content-negotiation`), which allows serializing and deserializing
   the content in a specific format.
 * Add the `ktor-serialization-kotlinx-json` dependency to instruct Ktor to use the JSON format and `kotlinx.serialization`
   as a serialization library. Ktor will expect JSON data and deserialize it into a data class when receiving responses.
@@ -74,21 +74,24 @@ dependency (`ktor-client-core`) in the common source set, you also need to:
   (`ktor-client-android`, `ktor-client-darwin`).
 
 ```kotlin
-val ktorVersion = "%ktorVersion%"
+kotlin {
+    // ...
+    val ktorVersion = "%ktorVersion%"
 
-sourceSets {
-    commonMain.dependencies {
+    sourceSets {
+        commonMain.dependencies {
             // ...
-            
+
             implementation("io.ktor:ktor-client-core:$ktorVersion")
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    }
-    androidMain.dependencies {
+        }
+        androidMain.dependencies {
             implementation("io.ktor:ktor-client-android:$ktorVersion")
-    }
-    iosMain.dependencies {
+        }
+        iosMain.dependencies {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+        }
     }
 }
 ```
@@ -100,10 +103,9 @@ Synchronize the Gradle files by clicking **Sync Now** in the notification.
 You'll need the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data, and you'll use a single method to
 get the list of all launches from the **v4/launches** endpoint.
 
-### Add data model
+### Add a data model
 
-In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file in the project directory
-and add a data class which stores data from the SpaceX API:
+In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file and add a data class which stores data from the SpaceX API:
 
 ```kotlin
 import kotlinx.serialization.SerialName
@@ -129,7 +131,7 @@ data class RocketLaunch (
 
 ### Connect HTTP client
 
-1. In `shared/src/commonMain/kotlin`, create a new `RocketComponent` class in the project directory.
+1. In `shared/src/commonMain/kotlin`, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -208,7 +210,7 @@ data class RocketLaunch (
        return "${date.month} ${date.dayOfMonth}, ${date.year}"
    }
    ```
-   
+
    The date will be in the "MMMM DD, YYYY" format, for example, OCTOBER 5, 2022.
 
 7. Add another suspending function, `launchPhrase()`, which will create a message using the `getDateOfLastSuccessfulLaunch()`
@@ -262,7 +264,7 @@ suspending functions return.
 To access the internet, the Android application needs the appropriate permission. Since all network requests are made from the
 shared module, it makes sense to add the internet access permission to its manifest.
 
-Update your `androidApp/src/main/AndroidManifest.xml` file with the access permission:
+Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the access permission:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -272,7 +274,7 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 </manifest>
 ```
 
-## Update Android and iOS apps
+## Update native Android and iOS UI
 
 You've already updated the API of the shared module by changing the return type of the `greet()` function to `Flow`.
 Now you need to update native (iOS, Android) parts of the project so that they can properly handle the result of calling
@@ -284,20 +286,22 @@ As both the shared module and the Android application are written in Kotlin, usi
 
 #### Introduce a view model
 
-Now that the application is becoming more complex, it's time to introduce a view model to your `MainActivity` class.
-The view model will manage the data from `Activity` and won't disappear when `Activity` undergoes a lifecycle change.
+Now that the application is becoming more complex, it's time to introduce a view model to the [Android activity](https://developer.android.com/guide/components/activities/intro-activities)
+called `MainActivity`. It invokes the `App()` function that implements the UI.
+The view model will manage the data from the activity and won't disappear when the activity undergoes a lifecycle change.
 
-1. Add the following dependencies to your `androidApp/build.gradle.kts` file:
+1. Add the following dependencies to your `composeApp/build.gradle.kts` file:
 
     ```kotlin
-    dependencies {
+    androidMain.dependencies {
         // ...
-        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     }
     ```
 
-2. In `androidApp/src/main/java`, create a new `MainViewModel` Kotlin class in the project directory:
+2. In `composeApp/src/androidMain/kotlin`, create a new `MainViewModel` Kotlin class:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -307,7 +311,7 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
     }
     ```
 
-    This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
+   This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
 
 3. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
    type and its backing property:
@@ -321,15 +325,14 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
         val greetingList: StateFlow<List<String>> get() = _greetingList
     }
     ```
-    
-    * `StateFlow` here extends the `Flow` interface but has a single value or state.
-    * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
+
+   * `StateFlow` here extends the `Flow` interface but has a single value or state.
+   * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
 
 4. In the `init` function of the View Model, collect all the strings from the `Greeting().greet()` flow:
 
     ```kotlin
    import androidx.lifecycle.viewModelScope
-   import com.jetbrains.simplelogin.kotlinmultiplatformsandbox.Greeting
    import kotlinx.coroutines.launch
    
    class MainViewModel : ViewModel() {
@@ -346,105 +349,74 @@ The view model will manage the data from `Activity` and won't disappear when `Ac
     }
     ```
 
-    Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
-    This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
+   Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
+   This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
 
 5. Inside the `collect` trailing lambda, update the value of `_greetingList` to append the collected `phrase` to the list of phrases in `list`:
 
     ```kotlin
     import kotlinx.coroutines.flow.update
    
-    init {
-        viewModelScope.launch {
-            Greeting().greet().collect { phrase ->
-                _greetingList.update { list -> list + phrase }
-            }
-        }
-    }
-    ```
+    class MainViewModel : ViewModel() {
+        //...
    
-    The `update()` function will update the value automatically.
-
-#### Use the view model's flow from the main activity
-
-In `androidApp/src/main/java`, locate the `MainActivity.kt` file and update the following class, replacing the previous
-implementation:
-
-```kotlin
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-
-class MainActivity : ComponentActivity() {
-    private val mainViewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val greetings = mainViewModel.greetingList.collectAsStateWithLifecycle()
-                    GreetingView(phrases = greetings.value)
+        init {
+            viewModelScope.launch {
+                Greeting().greet().collect { phrase ->
+                    _greetingList.update { list -> list + phrase }
                 }
             }
         }
     }
-}
+    ```
 
-@Composable
-fun GreetingView(phrases: List<String>) {
-    LazyColumn(
-        contentPadding = PaddingValues(20.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        items(phrases) { phrase ->
-            Text(phrase)
-            Divider()
+   The `update()` function will update the value automatically.
+
+#### Use the view model's flow
+
+1. In `composeApp/src/androidMain/kotlin`, locate the `App.kt` file and update it, replacing the previous implementation:
+
+    ```kotlin
+    import androidx.lifecycle.compose.collectAsStateWithLifecycle
+    import androidx.compose.runtime.getValue
+    import androidx.lifecycle.viewmodel.compose.viewModel
+    
+    @Composable
+    fun App(mainViewModel: MainViewModel = viewModel()) {
+        MaterialTheme {
+            val greetings by mainViewModel.greetingList.collectAsStateWithLifecycle()
+    
+            Column(
+                modifier = Modifier.padding(all = 20.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                greetings.forEach { greeting ->
+                    Text(greeting)
+                    Divider()
+                }
+            }
         }
     }
-}
+    ```
 
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView(listOf("Hello, Android!"))
-    }
-}
-```
+   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
+     and represent it as a composable state in a lifecycle-aware manner.
+   * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
+     arranged vertically and separated by dividers.
 
-* The `collectAsStateWithLifecycle()` function calls on `greetingsList()` to collect the value from the view model's flow
-  and represent it as a composable state in a lifecycle-aware manner.
-* When a new flow is created, the compose state will change and cause a recomposition of every composable using `greetings.value`,
-  namely `GreetingView`. It's a scrollable `LazyColumn` with phrases arranged vertically and separated by dividers.
+2. To see the results, re-run your **composeApp** configuration in Android Studio:
+
+   ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
 ### iOS app
 
 For the iOS part of the project, you'll make use of the [Model–view–viewmodel](https://en.wikipedia.org/wiki/Model–view–viewmodel)
 pattern again to connect the UI to the shared module, which contains all the business logic.
 
-The module is already connected to the iOS project — the Android Studio plugin wizard has completed the configuration. The module
-is already imported and used in `ContentView.swift` with `import shared`.
+The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-> If you see errors in Xcode regarding the shared module or when updating your code, run **iosApp** from Android Studio.
+> If you see errors in Xcode regarding the shared module or when updating your code, run the **iosApp** configuration
+> from Android Studio.
 >
 {type="tip"}
 
@@ -464,18 +436,19 @@ is already imported and used in `ContentView.swift` with `import shared`.
    }
    ```
 
-3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it:
+3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
+   Call the `startObserving()` function within a `task()` call to support concurrency:
 
     ```Swift
     import SwiftUI
-    import shared
+    import Shared
     
     struct ContentView: View {
         @ObservedObject private(set) var viewModel: ViewModel
     
         var body: some View {
             ListView(phrases: viewModel.greetings)
-                .onAppear { self.viewModel.startObserving() }
+                .task { await self.viewModel.startObserving() }
         }
     }
     
@@ -500,36 +473,81 @@ is already imported and used in `ContentView.swift` with `import shared`.
         }
     }
     ```
-    
-    * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
-    * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-      SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
-    * `ContentView.ViewModel` is declared as an `ObservableObject`.
-    * The `@Published` wrapper is used for the `greetings` property.
-    * The `@ObservedObject` property wrapper is used to subscribe to the view model.
+
+   * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
+   * `ViewModel` has a `greetings` property that is an array of `String` phrases.
+     SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
+   * `ContentView.ViewModel` is declared as an `ObservableObject`.
+   * The `@Published` wrapper is used for the `greetings` property.
+   * The `@ObservedObject` property wrapper is used to subscribe to the view model.
 
 Now the view model will emit signals whenever this property changes.
 
 #### Choose a library to consume flows from iOS
 
-In this tutorial, you can choose between the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
-and [SKIE](https://github.com/touchlab/SKIE/) libraries to help you work with flows in iOS. Both are open-source solutions
+In this tutorial, you can choose between the [SKIE](https://github.com/touchlab/SKIE/)
+and [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) libraries to help you work with flows in iOS. Both are open-source solutions
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
-The SKIE library augments the Objective-C API produced by the Kotlin compiler.
-SKIE transforms flows into an equivalent of Swift's `AsyncSequence` structure.
-Rather than using a wrapper, it behaves like any other Swift library when you call it from Swift.
+The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
+Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bi-directional
+cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
+including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
-Using SKIE is less verbose as it doesn't use wrappers around flows. It's also easier to set up because it will be part of the
-framework rather than a dependency that needs to be added as a CocoaPod or SPM file. In addition to flows, SKIE also supports
-[other features](https://skie.touchlab.co/features/).
+The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating necessary
+wrappers. KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift. It has been
+available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
+adding a Cocoapod or SPM dependency in iOS projects.
 
-The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS. It's a more tried-and-tested
-option and maybe a more stable solution at the moment. KMP-NativeCoroutines directly supports the `async`/`await`, Combine,
-and RxSwift approaches to concurrency, while SKIE supports `async`/`await` directly and Combine
-with RxSwift through adapters.
+#### Option 1. Configure SKIE {initial-collapse-state="collapsed"}
 
-#### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
+> We recommend using the latest version of the library.
+> Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
+>
+{type="note"}
+
+To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Now** button.
+
+```kotlin
+plugins {
+   id("co.touchlab.skie") version "%skieVersion%"
+}
+```
+
+##### Consume the flow using SKIE
+
+Return to Xcode and update the code using the library:
+
+1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
+   property every time the flow emits a value.
+2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
+   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
+
+    ```Swift
+    // ...
+    extension ContentView {
+        @MainActor
+        class ViewModel: ObservableObject {
+            @Published var greetings: [String] = []
+            
+            func startObserving() async {
+                for await phrase in Greeting().greet() {
+                    self.greetings.append(phrase)
+                }
+            }
+        }
+    }
+    ```
+
+3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+
+   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
+>
+{type="tip"}
+
+#### Option 2. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
@@ -537,17 +555,21 @@ with RxSwift through adapters.
 {type="note"}
 
 1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
-   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins` block:
+   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
 
     ```kotlin
-    id("com.google.devtools.ksp").version("1.8.22-1.0.11").apply(false)
-    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-12").apply(false)
+    plugins {
+        // ...
+        id("com.google.devtools.ksp").version("2.0.0-1.0.22").apply(false)
+        id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
+    }
     ```
 
 2. In the _shared_ `build.gradle.kts` file, configure the KMP-NativeCoroutines plugin:
 
     ```kotlin
     plugins {
+        // ...
         id("com.google.devtools.ksp")
         id("com.rickclephas.kmp.nativecoroutines")
     }
@@ -556,8 +578,14 @@ with RxSwift through adapters.
 3. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
-    kotlin.sourceSets.all {
-        languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+    kotlin {
+        // ...
+        sourceSets{
+            all {
+                languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+            }
+            // ...
+        }
     }
     ```
 
@@ -568,7 +596,7 @@ with RxSwift through adapters.
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
 2. Add the `@NativeCoroutines` annotation to the `greet()` function. This will ensure that the plugin generates the right
    code to support correct flow handling on iOS:
-  
+
    ```kotlin
     import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
     
@@ -584,7 +612,7 @@ with RxSwift through adapters.
 
 ##### Import the library using SPM in XCode
 
-1. In Xcode, right-click the `iosApp` project in the left-hand project menu and select **Add Package Dependencies**.
+1. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
 2. In the search bar, enter the package name:
 
      ```none
@@ -593,21 +621,20 @@ with RxSwift through adapters.
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. Keep the default options, "Branch" for **Dependency Rule**, and "master" for **Version Rule**, and then click
-   the **Add Package** button.
+3. Keep the default options ("Branch" and "master" for **Dependency Rule**), then click the **Add Package** button.
 4. In the next window, select "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore", and then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 
-    This will install the KMP-NativeCoroutines packages necessary to work with the `async/await` mechanism.
+This should install the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
 ##### Consume the flow using the KMP-NativeCoroutines library
 
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using KMP-NativeCoroutine's
    `asyncSequence()` function for the `Greeting().greet()` function:
-   
+
     ```Swift
-    func startObserving() {
+    func startObserving() async {
         do {
             let sequence = asyncSequence(for: Greeting().greet())
             for try await phrase in sequence {
@@ -619,27 +646,10 @@ with RxSwift through adapters.
     }
     ```
 
-    The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
-    every time the flow emits a value.
-    
-2. To support concurrency, wrap the asynchronous operation in `Task`:
+   The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
+every time the flow emits a value.
 
-    ```Swift
-    func startObserving() {
-        Task {
-            do {
-                let sequence = asyncSequence(for: Greeting().greet())
-                for try await phrase in sequence {
-                    self.greetings.append(phrase)
-                }
-            } catch {
-                print("Failed with error: \(error)")
-            }
-        }
-    }
-    ```
-
-3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
+2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
    `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
 
     ```Swift
@@ -652,93 +662,26 @@ with RxSwift through adapters.
         @MainActor
         class ViewModel: ObservableObject {
             @Published var greetings: Array<String> = []
-            
-            func startObserving() {
-                Task {
-                    do {
-                        let sequence = asyncSequence(for: Greeting().greet())
-                        for try await phrase in sequence {
-                            self.greetings.append(phrase)
-                        }
-                    } catch {
-                        print("Failed with error: \(error)")
-                    }
-                }
-            }
-        }
-    }
-    ```
-
-4. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
-
-    ![Final results](multiplatform-mobile-upgrade.png){width=500}
-
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
-> 
-{type="tip"}
-
-#### Option 2. Configure SKIE {initial-collapse-state="collapsed"}
-
-> We recommend using the latest version of the library.
-> Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
->
-{type="note"}
-
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync** button.
-
-```kotlin
-plugins {
-    id("co.touchlab.skie") version "0.5.6"
-}
-```
-
-##### Consume the flow using SKIE
-
-Return to Xcode and update the code using the library:
-
-1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
-   property every time the flow emits a value.
-2. To support concurrency, wrap the asynchronous operation in a `Task`:
-
-    ```Swift
-    func startObserving() {
-        Task {
-            for await phrase in Greeting().greet() {
-                self.greetings.append(phrase)
-            }
-        }
-    }
-    ```
-
-3. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
-   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
-
-    ```Swift
-    // ...
-    extension ContentView {
-        @MainActor
-        class ViewModel: ObservableObject {
-            @Published var greetings: [String] = []
-            
-            func startObserving() {
-                Task {
-                    for await phrase in Greeting().greet() {
+    
+            func startObserving() async {
+                do {
+                    let sequence = asyncSequence(for: Greeting().greet())
+                    for try await phrase in sequence {
                         self.greetings.append(phrase)
                     }
+                } catch {
+                    print("Failed with error: \(error)")
                 }
             }
         }
     }
     ```
-4. In the `gradle.properties` file at the root of your project change the option `org.gradle.configuration-cache` to `false`,
-as SKIE does not support this feature yet.
 
-5. Re-run both the **androidApp** and **iosApp** configurations from Android Studio to make sure your app's logic is synced:
+3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
 
-   ![Final results](multiplatform-mobile-upgrade.png){width=500}
+   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/skie/step4).
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 >
 {type="tip"}
 

@@ -1,170 +1,450 @@
-[//]: # (title: Images and resources)
+[//]: # (title: Multiplatform resources)
 
-Compose Multiplatform provides a special library for accessing resources in common code across all supported platforms.
-Resources are static data, such as images, fonts, strings, that you can use from your application.
+Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
+across all supported platforms. Resources are static content, such as images, fonts, and strings, which you can use from
+your application.
 
-> The library is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
-> Its API may change in the future.
->
-> Currently, the library supports accessing resources as raw data and images. We plan to extend
-> this functionality in the future.
->
-{type="note"}
+When working with resources in Compose Multiplatform, consider the current conditions:
 
-## Configuration
+* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
+  and all of the resources on the JS platform that are read asynchronously.
+* Reading big raw files, like long videos, as a stream is not supported yet.
+  Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
+  for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
+* Starting with 1.6.10, you can place resources in any module or source set,
+  as long as you are using Kotlin 2.0.0 or newer, and Gradle 7.6 or newer.
+
+## Setup
 
 To access resources in your multiplatform projects:
 
-* For common code, store your resource files in the `resources` directory of the `commonMain` source set.
-* For platform-specific code, store your resource files in the `resources` directory of the corresponding source set.
+1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
 
-![Compose resources project structure](compose-resources-structure.png){width=250}
+   ```kotlin
+   kotlin {
+       sourceSets {
+           commonMain.dependencies {
+               implementation(compose.components.resources)
+           }
+       }
+   }
+   ```
 
-The deployment of resources differs from platform to platform:
+2. Create a new directory `composeResources` in the source set directory you want to add the resources to
+   (`commonMain` in this example):
 
-* On Android, resources are stored in `.apk` files.
-* On iOS, resources are included in the resulting application bundle as simple files.
-* On desktop, resources are stored in `.jar` files.
+   ![Compose resources project structure](compose-resources-structure.png){width=250}
 
-### Android
+3. Organize the `composeResources` directory structure according to these rules:
 
-To make your resources accessible from the resource library, use the following configuration in your `build.gradle.kts`
-file:
+   * Images should be in the `drawable` directory.
+   * Fonts should be in the `font` directory.
+   * Strings should be in the `values` directory.
+   * Other files with any hierarchy should be in the `files` directory.
+
+## Configuration
+
+You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
+to the `build.gradle.kts` file:
 
 ```kotlin
-android {
-    // …
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "me.sample.library.resources"
+    generateResClass = always
 }
 ```
 
-Note that this configuration differs from the standard Android resource configuration.
+* `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
+* `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
+  as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
+  `{group name}.{module name}.generated.resources` package to the class.
+* `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
+  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
-### iOS
+## Qualifiers
 
-For iOS, the Compose Multiplatform Gradle plugin handles resource deployment.
-The plugin stores resource files in the `compose-resources` directory of the resulting application bundle.
+Sometimes, the same resource should be presented in different ways depending on the environment, such as locale,
+screen density, or interface theme. For example, you might need to localize texts for different languages or adjust
+images for the dark theme. For that, the library provides special qualifiers.
 
-> Currently, the plugin doesn't support deployment of resources on iOS in multimodule projects. This limitation will
-> be removed in future releases.
->
-{type="note"}
+All resource types (except for raw files in the `files` directory) support qualifiers. Apply qualifiers to directory
+names using a hyphen:
 
-To add a dependency on the resource library, use the following configuration in your `build.gradle.kts` file:
+![Qualifiers in compose resources](compose-resources-qualifiers.png){width=250}
 
-```kotlin
-val commonMain by getting {
-    dependencies {
-        // Your dependencies
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-        implementation(compose.components.resources)
-    }
-}
-```
+The library supports (in the order of priority) the following qualifiers: [language](#language-and-regional-qualifiers),
+[theme](#theme-qualifier), and [density](#density-qualifier).
 
-## Access images
+* Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
+  English language in the United States region, suitable for 160 DPI screens in the dark theme.
+* If a resource with the requested qualifier doesn't exist, the default resource without a qualifier is used instead.
 
-To access resources as images, use the `painterResource()` function:
+### Language and regional qualifiers
 
-```kotlin
-@Composable
-fun painterResource(res: String): Painter
-```
+You can combine language and region qualifiers:
+* The language is defined by a two-letter (ISO 639-1)
+or a three-letter (ISO 639-2) [language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
+* You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+regional code to your language code.
+The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`
 
-The `painterResource()` function takes a resource path and returns a `Painter` value. The function works synchronously
-on all targets, except for web. For the web target, it returns an empty `Painter` for the first recomposition that is
-replaced with the loaded image in subsequent recompositions.
+The language and regional codes are case-sensitive.
 
-* `painterResource()` loads either a `BitmapPainter` for rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`,
-  or a `VectorPainter` for XML vector drawable formats like `.xml`.
-* XML vector drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
-  except that they don't support external references to Android resources.
+### Theme qualifier
 
-Here's an example of how you can access images in your compose code:
+You can add "light" or "dark" qualifiers. Compose Multiplatform then selects the necessary resource depending on the
+current system theme.
+
+### Density qualifier
+
+You can use the following density qualifiers:
+
+* "ldpi" − 120 DPI, 0.75x density
+* "mdpi" − 160 DPI, 1x density
+* "hdpi" − 240 DPI, 1.5x density
+* "xhdpi" − 320 DPI, 2x density
+* "xxhdpi" − 480 DPI, 3x density
+* "xxxhdpi" − 640dpi, 4x density
+
+The resource is selected depending on the screen density defined in the system.
+
+## Resource usage
+
+After importing a project, a special `Res` class is generated which provides access to resources.
+To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
+
+### Images
+
+You can access drawable resources as simple images, rasterized images or XML vectors.
+SVG images are supported on all platforms **except** Android.
+
+* To access drawable resources as `Painter` images, use the `painterResource()` function:
+
+  ```kotlin
+  @Composable
+  fun painterResource(resource: DrawableResource): Painter {...}
+  ```
+
+  The `painterResource()` function takes a resource path and returns a `Painter` value. The function works synchronously
+  on all targets except for web. For the web target, it returns an empty `Painter` for the first recomposition that is
+  replaced with the loaded image in subsequent recompositions.
+
+  * `painterResource()` loads either a `BitmapPainter` for rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`,
+    or a `VectorPainter` for the Android XML vector drawable format.
+  * XML vector drawables have the same format as [Android](https://developer.android.com/reference/android/graphics/drawable/VectorDrawable),
+    except that they don't support external references to Android resources.
+
+* To access drawable resources as an `ImageBitmap` rasterized image, use the `imageResource()` function:
+
+  ```kotlin
+  @Composable
+  fun imageResource(resource: DrawableResource): ImageBitmap {...}
+  ```
+
+* To access drawable resources as an `ImageVector` XML vector, use the `vectorResource()` function:
+
+  ```kotlin
+  @Composable
+  fun vectorResource(resource: DrawableResource): ImageVector {...}
+  ```
+
+Here's an example of how you can access images in your Compose Multiplatform code:
 
 ```kotlin
 Image(
-    painterResource("compose-multiplatform.xml"),
-    null // description
+    painter = painterResource(Res.drawable.my_icon),
+    contentDescription = null
 )
 ```
 
-## Access arbitrary resources as raw data
+### Strings
 
-To access an arbitrary resource as raw data, use the `resource()` function:
+Store all string resources in XML files in `composeResources/values` directories.
+A static accessor is generated for each item in each file.
 
-```kotlin
-fun resource(path: String): Resource
+#### Simple strings
+
+To store a simple string, add a `<string>` element to your XML:
+
+```XML
+<resources>
+    <string name="app_name">My awesome app</string>
+    <string name="title">Some title</string>
+</resources>
 ```
 
-The `resource()` function takes a resource path and returns an instance of an abstract `Resource` type. The type has only a suspended
-public function that converts your resource into a byte array:
+To get string resources as a `String`, use the following code:
+
+<tabs>
+<tab title= "From composable code">
 
 ```kotlin
-suspend fun readBytes(): ByteArray
-```
-
-By design, resources are accessed asynchronously to avoid blocking the main UI thread while a resource is loaded.
-To access resources this way, you can call the [`readBytes()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/read-bytes.html)
-method in a coroutine or in the `LaunchedEffect` block.
-
-Here's an example of how you can load a resource asynchronously and convert it into a string:
-
-```kotlin
-@OptIn(ExperimentalResourceApi::class)
 @Composable
-fun App() {
-    var text: String? by remember { mutableStateOf(null) }
+fun stringResource(resource: StringResource): String {...}
 
-    LaunchedEffect(Unit) {
-        text = String(resource("welcome.txt").readBytes())
-    }
-
-    text?.let {
-        Text(it)
-    }
-}
+@Composable
+fun stringResource(resource: StringResource, vararg formatArgs: Any): String {...}
 ```
 
-If you want to read your resource synchronously, use the `runBlocking()` function.
-You can implement asynchronous access to resources like this:
+For example:
 
 ```kotlin
-val byteArray = runBlocking {
-    resource("welcome.txt").readBytes()
+Text(stringResource(Res.string.app_name))
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+suspend fun getString(resource: StringResource): String
+
+suspend fun getString(resource: StringResource, vararg formatArgs: Any): String
+```
+
+For example:
+
+```kotlin
+coroutineScope.launch {
+    val appName = getString(Res.string.app_name)
 }
 ```
 
-> The `runBlocking()` function is not available for the web target.
->
-{type="note"}
+</tab>
+</tabs>
 
-## Access fonts and string resources
+You can use special symbols in string resources:
 
-Currently, the library doesn't support fonts and string resources. You also can't group your image resources by
-resolution. The JetBrains team is planning to implement this functionality in future releases.
+* `\n` — for a new line
+* `\t` — for a tab symbol
+* `\uXXXX` — for a specific Unicode character
 
-Meanwhile, as a partial workaround for these issues, you can use the following third-party Compose Multiplatform
-libraries for accessing resources:
+#### String templates
 
-* [Moko resources](https://github.com/icerockdev/moko-resources)
-* [Skeptick/libres](https://github.com/Skeptick/libres)
+Currently, arguments have basic support in string resources:
 
-Both libraries support localized string resources. The Moko resources library also supports fonts and colors and allows
-you to group images by resolution.
+```XML
+<resources>
+    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
+</resources>
+```
 
-> The Compose Multiplatform resource library can't be used simultaneously with third-party libraries on iOS. Each
-> library uses its own Gradle plugin to deploy resources on iOS. Plugins work differently, so using more than one
-> causes them to conflict with each other.
->
-{type="note"}
+There is no difference between `%...s` and `%...d ` when using string templates with arguments from composable code,
+for example:
 
-## Load images from the internet
+```kotlin
+Text(stringResource(Res.string.str_template, "User_name", 100))
+```
 
-To load an image from the internet, you can use the following third-party Compose Multiplatform libraries:
+#### String arrays
+
+You can group related strings into an array and automatically access them as a `List<String>` object:
+
+```XML
+<resources>
+    <string name="app_name">My awesome app</string>
+    <string name="title">Some title</string>
+    <string-array name="str_arr">
+        <item>item \u2605</item>
+        <item>item \u2318</item>
+        <item>item \u00BD</item>
+    </string-array>
+</resources>
+```
+
+To get the corresponding list, use the following code:
+
+<tabs>
+<tab title= "From composable code">
+
+```kotlin
+@Composable
+fun stringArrayResource(resource: StringArrayResource): List<String> {...}
+```
+
+For example:
+
+```kotlin
+Text(stringArrayResource(Res.array.str_arr)[0])
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+suspend fun getStringArray(resource: StringArrayResource): List<String>
+```
+
+For example:
+
+```kotlin
+coroutineScope.launch {
+    val appName = getStringArray(Res.array.str_arr)
+}
+```
+
+</tab>
+</tabs>
+
+#### Plurals
+
+When your UI displays quantities of something, you might want to support grammatical agreement for different numbers
+of the same thing (one _book_, many _books_, and so on) without creating programmatically unrelated strings.
+
+The concept and base implementation in Compose Multiplatform are the same as for quantity strings
+on Android.
+See [the Android documentation](https://developer.android.com/guide/topics/resources/string-resource#Plurals) for more
+about best practices and nuances of using plurals in your project.
+
+* The supported variants are `zero`, `one`, `two`, `few`, `many`, and `other`. Note that not all variants are even 
+  considered for every language: for example, `zero` is ignored for English because it is the same as any other plural
+  except 1. Rely on a language specialist to know what distinctions the language actually insists upon.
+* It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1".
+  If this doesn't worsen the user experience, 
+
+To define a plural, add a `<plurals>` element to any `.xml` file in your `composeResources/values` directory.
+A `plurals` collection is a simple resource referenced using the name attribute (not the name of the XML file).
+As such, you can combine `plurals` resources with other simple resources in one XML file under one `<resources>` element:
+
+```xml
+<resources>
+    <string name="app_name">My awesome app</string>
+    <string name="title">Some title</string>
+    <plurals name="new_message">
+        <item quantity="one">%1$d new message</item>
+        <item quantity="other">%1$d new messages</item>
+    </plurals>
+</resources>
+```
+
+To access a plural as a `String`, use the following code:
+
+<tabs>
+<tab title= "From composable code">
+
+```kotlin
+@Composable
+fun pluralStringResource(resource: PluralStringResource, quantity: Int): String {...}
+
+@Composable
+fun pluralStringResource(resource: PluralStringResource, quantity: Int, vararg formatArgs: Any): String {...}
+```
+
+For example:
+
+```kotlin
+Text(pluralStringResource(Res.plurals.new_message, 1, 1))
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+suspend fun getPluralString(resource: PluralStringResource, quantity: Int): String
+
+suspend fun getPluralString(resource: PluralStringResource, quantity: Int, vararg formatArgs: Any): String
+```
+
+For example:
+
+```kotlin
+coroutineScope.launch {
+    val appName = getPluralString(Res.plurals.new_message, 1, 1)
+}
+```
+
+</tab>
+</tabs>
+
+### Fonts
+
+Store custom fonts in the `composeResources/font` directory as `*.ttf` or `*.otf` files.
+
+To load a font as a `Font` type, use the `Font()` function:
+
+```kotlin
+@Composable
+fun Font(
+    resource: FontResource,
+    weight: FontWeight = FontWeight.Normal,
+    style: FontStyle = FontStyle.Normal
+): Font
+```
+
+For example:
+
+```kotlin
+val fontAwesome = FontFamily(Font(Res.font.font_awesome))
+```
+
+### Raw files
+
+To load any raw file as a byte array, use the `Res.readBytes(path)` function:
+
+```kotlin
+suspend fun readBytes(path: String): ByteArray
+```
+
+You can place raw files in the `composeResources/files` directory and create any hierarchy inside it.
+
+For example, to access raw files, use the following code:
+
+<tabs>
+<tab title= "From composable code">
+
+```kotlin
+var bytes by remember {
+    mutableStateOf(ByteArray(0))
+}
+LaunchedEffect(Unit) {
+    bytes = Res.readBytes("files/myDir/someFile.bin")
+}
+Text(bytes.decodeToString())
+```
+
+</tab>
+<tab title= "From non-composable code">
+
+```kotlin
+coroutineScope.launch {
+    val bytes = Res.readBytes("files/myDir/someFile.bin")
+}
+```
+
+</tab>
+</tabs>
+
+### Remote files
+
+Only files that are part of the application are considered resources.
+
+You can also load remote files from the internet using their URL. To load remote files, use special libraries:
 
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
+* [Ktor client](https://ktor.io/)
 
-They handle networking for downloading your images from the internet and image caching, so you don't need to download
-the same image multiple times.
+### Accessing resources from external libraries
+
+If you want to make Compose Multiplatform resources available to other libraries used in your project, you
+can call the `Res.getUri()` function with the general path of the resource:
+
+```kotlin
+val uri = Res.getUri("files/my_video.mp4")
+```
+
+The `uri` variable will contain the precise platform-specific path to the file that the path points to.
+External libraries can use that path to access the file in a manner that suits them.
+
+## Publication
+
+Starting with Compose Multiplatform 1.6.10, all necessary resources are included in the publication
+maven artifacts.
+
+To enable this functionality, your project needs to use Kotlin 2.0.0 or newer and Gradle 7.6 or newer.
+
+## What's next?
+
+Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
+that shows how resources can be handled in a Compose Multiplatform project targeting iOS, Android, and desktop.

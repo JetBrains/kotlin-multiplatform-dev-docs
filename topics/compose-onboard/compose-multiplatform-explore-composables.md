@@ -1,11 +1,10 @@
 [//]: # (title: Explore composable code)
 <microformat>
-   <p>This is the third part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
-      <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
-      <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Explore composable code</strong><br/>      
-      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Modify the project<br/>
-      <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Create your own application<br/>
+   <p>This is the second part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
+      <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Explore composable code</strong><br/>
+      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project<br/>      
+      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application<br/>
   </p>
 </microformat>
 
@@ -15,22 +14,22 @@ platform-specific code that launches this UI on each platform.
 
 ## Implementing composable functions
 
-Take a look at the `App()` function in `composeApp/src/commonMain/kotlin`:
+In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()` function:
 
 ```kotlin
-@OptIn(ExperimentalResourceApi::class)
 @Composable
+@Preview
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        val greeting = remember { Greeting().greet() }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource("compose-multiplatform.xml"), null)
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
                 }
             }
@@ -84,8 +83,8 @@ The changes occur when the image is shown or hidden because the parent `Animated
 
 ## Launching UI on different platforms
 
-The `App()` function execution is different for each platform. On Android, it's managed by an activity, on iOS by a view
-controller, and on desktop by a window. Let's examine each of them.
+The `App()` function execution is different for each platform. On Android, it's managed by an activity; on iOS, by a view 
+controller; on the desktop, by a window; and on the web, by a container. Let's examine each of them.
 
 ### On Android
 
@@ -119,7 +118,7 @@ role as an activity on Android. Notice that both the iOS and Android types simpl
 
 ### On desktop
 
-For desktop, look again at the `main()` function in `composeApp/src/desktopMain/kotlin`:
+For desktop, look at the `main()` function in `composeApp/src/desktopMain/kotlin`:
 
 ```kotlin
 fun main() = application {
@@ -136,6 +135,24 @@ fun main() = application {
 
 Currently, the `App` function doesn't declare any parameters. In a larger application, you typically pass parameters to
 platform-specific dependencies. These dependencies could be created by hand or using a dependency injection library.
+
+### On web
+
+In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, take a look at the `main()` function:
+
+```kotlin
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+    ComposeViewport(document.body!!) { App() }
+}
+```
+
+* The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
+  experimental and may change in future releases.
+* The `ComposeViewport()` function sets up the Compose environment for the application.
+* The web app is inserted into the container specified as a parameter for the `ComposeViewport` function.
+  In the example, the entire document's body works as the container.
+* The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
 
 ## Next step
 

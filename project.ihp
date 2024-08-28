@@ -11,7 +11,10 @@
             version="1.0"/>
     <vars src="v.list"/>
 
-    <product src="mpd.tree" id="kotlin-multiplatform-dev"
-             keymaps-mode="generated" />
+    <product src="mpd.tree" id="kotlin-multiplatform-dev" version="stable"
+             keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
+    <settings>
+        <supernova-builder location="version:2.1.1226"/>
+    </settings>
 </ihp>
