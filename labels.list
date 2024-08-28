@@ -6,10 +6,11 @@
         This functionality is available only in the EAP version.
     </label>
 
-    <annotation short-name="CMP-Android" full-name="Available in Compose Multiplatform for Android"/>
-    <annotation short-name="CMP-Desktop" full-name="Available in Compose Multiplatform for desktop"/>
-    <annotation short-name="CMP-iOS" full-name="Available in Compose Multiplatform for iOS"/>
-    <annotation short-name="CMP-Web" full-name="Available in Compose Multiplatform for web"/>
+    <annotation short-name="Experimental" full-name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
+    <annotation short-name="Android" full-name="Available in Compose Multiplatform for Android"/>
+    <annotation short-name="Desktop" full-name="Available in Compose Multiplatform for desktop"/>
+    <annotation short-name="iOS" full-name="Available in Compose Multiplatform for iOS"/>
+    <annotation short-name="Web" full-name="Available in Compose Multiplatform for web"/>
 
     <annotation short-name="Information" full-name="Info" color="blue"/>
     <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
