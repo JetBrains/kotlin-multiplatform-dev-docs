@@ -30,7 +30,7 @@ Compose Multiplatform for desktop has the following limitations:
 
 ## Kotlin compatibility
 
-As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 2.0.0 or higher, Compose Multiplatform is 
+As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 1.7.10 or higher, Compose Multiplatform is 
 compatible with Kotlin. There is no need to manually align their versions.
 Remember that using an EAP version of either product is still potentially unstable.
 
@@ -62,11 +62,26 @@ When a new version of Jetpack Compose is released, we:
 
 The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1–3 months.
 
-When you build your application for Android, the artifacts published by Google are used. For example, if you apply the
-Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
+### Development versions of Compose Multiplatform
+
+Development versions of the Compose Multiplatform compiler plugin (for example, `1.7.0-dev1776`) are built without a set schedule,
+to test updates between formal releases.
+
+These builds are not available in [Maven Central](https://central.sonatype.com/).
+To access them, add this line to your list of repositories:
+
+```kotlin
+maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+```
+
+### Jetpack Compose artifacts used
+
+When you build your application for Android, Compose Multiplatform uses artifacts published by Google.
+For example, if you apply the Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
 project will use the `androidx.compose.material3:material3:1.1.1` artifact in the Android target (
-but `org.jetbrains.compose.material3:material3:1.5.0` in other targets). See the following table to find out exactly
-which version of Jetpack Compose artifact is used:
+but `org.jetbrains.compose.material3:material3:1.5.0` in other targets).
+
+The following table lists Jetpack Compose artifact versions used by each version of Compose Multiplatform:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
