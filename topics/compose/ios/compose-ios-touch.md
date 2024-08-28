@@ -10,7 +10,7 @@ all touches are processed entirely by the native UI, with Compose not being awar
 Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
 Changes are described in the following sections; consider trying them out with the %composeEapVersion% version.
 
-## New approach to handling touches in interop UI {label="EAP"}
+## New approach to handling touches in interop UI {label="CMP-EAP"}
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
 it is impossible for the container composable to react to the same touch as well.
