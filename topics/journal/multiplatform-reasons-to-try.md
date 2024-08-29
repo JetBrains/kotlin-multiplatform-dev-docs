@@ -1,10 +1,10 @@
-[//]: # (title: 10 reasons to adopt Kotlin Multiplatform and supercharge your projects)
+[//]: # (title: Ten reasons to adopt Kotlin Multiplatform and supercharge your projects)
 
-[//]: # (description: Discover 10 reasons why you should use Kotlin Multiplatform in your projects. See real-life examples from companies and start using this technology in your multiplatform development.)
+[//]: # (description: Discover ten reasons why you should use Kotlin Multiplatform in your projects. See real-life examples from companies and start using this technology in your multiplatform development.)
 
 In today's diverse tech landscape, developers face the challenge of building applications that can seamlessly operate across various platforms, while optimizing development time and increasing user productivity. Kotlin Multiplatform (KMP) offers a solution that allows you to create apps for multiple platforms, facilitating code reuse across them while maintaining the advantages of native programming.
 
-In this article, we’ll explore 10 reasons why developers should consider using Kotlin Multiplatform in their existing or new projects and why KMP continues to gain a lot of traction.
+In this article, we’ll explore ten reasons why developers should consider using Kotlin Multiplatform in their existing or new projects and why KMP continues to gain a lot of traction.
 
 ## Why you should try Kotlin Multiplatform in your projects
 

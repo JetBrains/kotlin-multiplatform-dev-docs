@@ -78,6 +78,7 @@
         <toc-element toc-title="Native and cross-platform mobile development" id="native-and-cross-platform.md"/>
         <toc-element toc-title="The six best cross-platform app development frameworks" id="cross-platform-frameworks.md"/>
         <toc-element id="multiplatform-introduce-your-team.md"/>
+        <toc-element toc-title="Reasons to adopt Kotlin Multiplatform" id="multiplatform-reasons-to-try.md"/>
     </toc-element>
 
 </product-profile>
