@@ -10,16 +10,16 @@ In this article, we’ll explore ten reasons why developers should consider usin
 
 Whether you're seeking efficiency gains or eager to explore new technologies, this article will explain some of the practical benefits that Kotlin Multiplatform brings, from its ability to streamline development efforts to its extensive platform support and robust tooling ecosystem, along with case studies from real companies.
 
-* [1. Kotlin Multiplatform allows you to avoid code duplication](#1-kotlin-multiplatform-allows-you-to-avoid-code-duplication)
-* [2. Kotlin Multiplatform supports an extensive list of platforms](#2-kotlin-multiplatform-supports-an-extensive-list-of-platforms)
-* [3. Kotlin provides simplified code-sharing mechanisms](#3-kotlin-provides-simplified-code-sharing-mechanisms)
-* [4. Kotlin Multiplatform allows for flexible multiplatform development](#4-kotlin-multiplatform-allows-for-flexible-multiplatform-development)
-* [5. With the Kotlin Multiplatform solution, you can share UI code](#5-with-the-kotlin-multiplatform-solution-you-can-share-ui-code)
-* [6. You can use Kotlin Multiplatform in existing and new projects](#6-you-can-use-kotlin-multiplatform-in-existing-and-new-projects)
-* [7. With Kotlin Multiplatform, you can start sharing your code gradually](#7-with-kotlin-multiplatform-you-can-start-sharing-your-code-gradually)
-* [8. Kotlin Multiplatform is already used by global companies](#8-kotlin-multiplatform-is-already-used-by-global-companies)
-* [9. Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
-* [10. Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
+* [Kotlin Multiplatform allows you to avoid code duplication](#1-kotlin-multiplatform-allows-you-to-avoid-code-duplication)
+* [Kotlin Multiplatform supports an extensive list of platforms](#2-kotlin-multiplatform-supports-an-extensive-list-of-platforms)
+* [Kotlin provides simplified code-sharing mechanisms](#3-kotlin-provides-simplified-code-sharing-mechanisms)
+* [Kotlin Multiplatform allows for flexible multiplatform development](#4-kotlin-multiplatform-allows-for-flexible-multiplatform-development)
+* [With the Kotlin Multiplatform solution, you can share UI code](#5-with-the-kotlin-multiplatform-solution-you-can-share-ui-code)
+* [You can use Kotlin Multiplatform in existing and new projects](#6-you-can-use-kotlin-multiplatform-in-existing-and-new-projects)
+* [With Kotlin Multiplatform, you can start sharing your code gradually](#7-with-kotlin-multiplatform-you-can-start-sharing-your-code-gradually)
+* [Kotlin Multiplatform is already used by global companies](#8-kotlin-multiplatform-is-already-used-by-global-companies)
+* [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
+* [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
 
 ### 1. Kotlin Multiplatform allows you to avoid code duplication
 
@@ -52,7 +52,7 @@ Quizlet, a popular educational platform that aids learning and practice through 
 The Quizlet team experimented with technologies like JavaScript, React Native, C++, Rust, and Go, but faced various challenges, including performance, stability, and varying implementations across platforms. Finally, they opted for Kotlin Multiplatform for Android, iOS, and web. Here's how using KMP benefitted the Quizlet team.
 
 * More type-safe APIs when marshaling objects.
-* 25%\\ faster grading algorithm on iOS compared to JavaScript.
+* 25% faster grading algorithm on iOS compared to JavaScript.
 * Reduced Android app size from 18 MB to 10 MB.
 * Enhanced developer experience.
 * Increased interest from team members, including Android, iOS, backend, and web developers, in writing shared code.
@@ -73,7 +73,7 @@ In the world of programming languages, Kotlin stands out for its pragmatic appro
 
 * **Safety and tooling over soundness.** Kotlin enables developers to catch errors early, ensuring that your program doesn't fall into an invalid state. By detecting issues during compilation or while writing code in IDEs, Kotlin enhances software reliability, minimizing the risk of runtime errors.
 
-We conduct annual Kotlin surveys to help us learn about users' experiences with the language. This year, 92%\\ of respondents reported having a positive experience, a notable increase from 86% a year earlier.
+We conduct annual Kotlin surveys to help us learn about users' experiences with the language. This year, 92% of respondents reported having a positive experience, a notable increase from 86% a year earlier.
 
 ![Kotlin satisfaction rate for 2023 and 2024](kotlin-satisfaction-rate.png){width=700}
 
