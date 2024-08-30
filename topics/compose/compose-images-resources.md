@@ -115,7 +115,7 @@ The resource is selected depending on the screen density defined in the system.
 After importing a project, a special `Res` class is generated which provides access to resources.
 To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
-For ease of access, Compose Multiplatform also maps resources with string IDs so that you could access them by using
+For ease of access, Compose Multiplatform also maps resources with string IDs so that you can access them by using
 the filename as the key:
 
 ```kotlin
