@@ -115,6 +115,23 @@ The resource is selected depending on the screen density defined in the system.
 After importing a project, a special `Res` class is generated which provides access to resources.
 To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
+For ease of access, Compose Multiplatform also maps resources with string IDs so that you could access them by using
+the filename as the key:
+
+```kotlin
+val Res.allDrawableResources: Map<String, DrawableResource>
+val Res.allStringResources: Map<String, StringResource>
+val Res.allStringArrayResources: Map<String, StringArrayResource>
+val Res.allPluralStringResources: Map<String, PluralStringResource>
+val Res.allFontResources: Map<String, FontResource>
+```
+
+An example of passing a mapped resource to a composable:
+
+```kotlin
+Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
+```
+
 ### Images
 
 You can access drawable resources as simple images, rasterized images or XML vectors.
