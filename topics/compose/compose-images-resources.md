@@ -484,6 +484,42 @@ You can also load remote files from the internet using their URL. To load remote
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
 
+### Custom resource directories {label="EAP"}
+
+In the `compose.resources {}` block in your `build.gradle.kts` file, you can specify custom resource directories for each source set.
+A simple example is to point to a specific folder:
+
+```kotlin
+compose.resources {
+    customDirectory(
+        sourceSetName = "desktopMain",
+        directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
+    )
+}
+```
+
+You can also set up a folder populated by a Gradle task, for example, with downloaded files:
+
+```kotlin
+abstract class DownloadRemoteFiles : DefaultTask() {
+    @get:Inject
+    abstract val layout: ProjectLayout
+
+    @get:OutputDirectory
+    val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
+
+    @TaskAction
+    fun run() { /* your code for downloading files */ }
+}
+
+compose.resources {
+    customDirectory(
+            sourceSetName = "jvmMain",
+            directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
+    )
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ### Accessing resources from external libraries
 
