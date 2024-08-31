@@ -43,8 +43,8 @@ We recommend that you install the latest stable versions for compatibility and b
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
         <td>
             <p>The Kotlin plugin is bundled with each Android Studio release. However, it still needs to be updated to the latest version to avoid compatibility issues.</p> 
-            <p>To update the plugin, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin. You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
-            <p>The Kotlin plugin should be compatible with the Kotlin Multiplatform plugin. Refer to the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">compatibility table</a>.</p></td>
+            <p>Go to <strong>Plugins | Installed</strong>. If a new version of the plugin is available, the <strong>Update</strong> button appears in the plugin settings. Click it to update the plugin.</p>
+        </td>
    </tr>
 </table>
 
@@ -125,7 +125,6 @@ To make sure everything works as expected, install and run the KDoctor tool:
          <chunk>
             <p><strong>Kotlin plugin</strong></p>
             <p>Make sure that the Kotlin plugin is updated to the latest version. To do that, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin.</p>
-            <p>You can also check the Kotlin version in <strong>Tools | Kotlin | Configure Kotlin Plugin Updates</strong>.</p>
          </chunk>
    </def>
    <def title="Command line">
