@@ -4,7 +4,7 @@ In your desktop project, you can listen to various mouse events, like clicking, 
 
 ## Click listeners
 
-Click listeners are available in both Compose on Android and Compose for Desktop, so your code will work on both platforms.
+Click listeners are available in both Compose Multiplatform on Android and Compose Multiplatform for desktop, so your code will work on both platforms.
 For example, here is how to set up simple click listeners with the `onClick`, `onDoubleClick`, and `onLongClick` modifiers:
 
 ```kotlin
@@ -115,7 +115,7 @@ fun main() = singleWindowApplication (title = "Mouse move listeners") {
 >
 {type="warning"}
 
-Compose for Desktop supports the pointer enter and exit handlers. For example, the following code will change the font style of a line on hover:
+Compose Multiplatform for desktop supports the pointer enter and exit handlers. For example, the following code will change the font style of a line on hover:
 ```kotlin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -461,7 +461,7 @@ fun main() = singleWindowApplication (title = "Drag") {
 >
 {type="warning"}
 
-Compose for Desktop uses Swing underneath and allows to access raw AWT events:
+Compose Multiplatform for desktop uses Swing underneath and allows to access raw AWT events:
 ```kotlin
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
