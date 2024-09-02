@@ -86,8 +86,6 @@ You can also set up a folder populated by a Gradle task, for example, with [down
 
 ```kotlin
 abstract class DownloadRemoteFiles : DefaultTask() {
-    @get:Inject
-    abstract val layout: ProjectLayout
 
     @get:OutputDirectory
     val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
@@ -98,7 +96,7 @@ abstract class DownloadRemoteFiles : DefaultTask() {
 
 compose.resources {
     customDirectory(
-            sourceSetName = "jvmMain",
+            sourceSetName = "iosMain",
             directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
     )
 }
