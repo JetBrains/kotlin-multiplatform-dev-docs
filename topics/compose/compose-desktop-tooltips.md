@@ -16,7 +16,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -26,7 +25,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
@@ -67,7 +66,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsed-title="TooltipArea(tooltip = { Surface( "}
 
-![Tooltips](compose-desktop-tooltips.gif){width=288}
+<img src="compose-desktop-tooltips.png" alt="Tooltips" width="288" animated="true"/>
 
 The main parameters of the `TooltipArea` composable are:
 
