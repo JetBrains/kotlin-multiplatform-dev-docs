@@ -425,14 +425,14 @@ to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Im
 Image(bytes.decodeToImageBitmap(), null)
 
 // bytes = Res.readBytes("files/example.xml")
-Image(bytes.decodeToImageVector(Density(1f, 1f)), null)
+Image(bytes.decodeToImageVector(LocalDensity.current), null)
 ```
 
 On every platform except Android you can also turn an SVG file into a `Painter` object:
 
 ```kotlin
 // bytes = Res.readBytes("files/example.svg")
-Image(bytes.decodeToSvgPainter(Density(1f, 1f)), null)
+Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
 
 ```
 
