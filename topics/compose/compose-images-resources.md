@@ -45,13 +45,18 @@ To access resources in your multiplatform projects:
 ## Configuration
 
 You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
-to the `build.gradle.kts` file:
+to the `build.gradle.kts` file.
+
+### Class generation settings
+
+There are several settings that affect the way the `Res` class is generated for your project.
+An example configuration looks like this:
 
 ```kotlin
 compose.resources {
-    publicResClass = true
+    publicResClass = false
     packageOfResClass = "me.sample.library.resources"
-    generateResClass = always
+    generateResClass = auto
 }
 ```
 
@@ -60,8 +65,43 @@ compose.resources {
   as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
   `{group name}.{module name}.generated.resources` package to the class.
 * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  when the resource library is only available transitively. By default, the `auto` value is used to generate the `Res`
   class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
+
+### Custom resource directories {label="EAP"}
+
+In the `compose.resources {}` block, you can specify custom resource directories for each source set.
+A simple example is to point to a specific folder:
+
+```kotlin
+compose.resources {
+    customDirectory(
+        sourceSetName = "desktopMain",
+        directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
+    )
+}
+```
+
+You can also set up a folder populated by a Gradle task, for example, with downloaded files:
+
+```kotlin
+abstract class DownloadRemoteFiles : DefaultTask() {
+
+    @get:OutputDirectory
+    val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
+
+    @TaskAction
+    fun run() { /* your code for downloading files */ }
+}
+
+compose.resources {
+    customDirectory(
+        sourceSetName = "iosMain",
+        directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
+    )
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ## Qualifiers
 
@@ -443,6 +483,7 @@ You can also load remote files from the internet using their URL. To load remote
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
+
 
 ### Accessing resources from external libraries
 
