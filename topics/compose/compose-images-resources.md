@@ -417,7 +417,7 @@ coroutineScope.launch {
 
 ### Generated maps for resources and string IDs {label="EAP"}
 
-For ease of access, Compose Multiplatform also maps resources with string IDs so that you can access them by using
+For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
 the filename as the key:
 
 ```kotlin
