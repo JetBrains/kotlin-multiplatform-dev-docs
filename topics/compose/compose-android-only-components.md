@@ -92,6 +92,6 @@ In Compose Multiplatform %composeVersion%, the following parts of the API are **
 ## Request to port Android API
 
 For each API that can be ported from Android, there
-is [an open issue](https://github.com/JetBrains/compose-multiplatform/labels/commonization) in the Compose Multiplatform
-repository. If you see that an API can be ported from Android and commonized, and there is no existing issue for
-it, [create one](https://github.com/JetBrains/compose-multiplatform/issues/new?assignees=&labels=submitted%2C+enhancement&projects=&template=enhancement.md&title=).
+is [an open issue](https://youtrack.jetbrains.com/issues/CMP?q=tag:compose-commonization) in the Compose Multiplatform
+YouTrack. If you see that an API can be ported from Android and commonized, and there is no existing issue for
+it, [create one](https://youtrack.jetbrains.com/newIssue?project=CMP).

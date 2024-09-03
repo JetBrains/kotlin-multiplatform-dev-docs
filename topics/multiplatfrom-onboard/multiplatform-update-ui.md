@@ -1,13 +1,13 @@
 [//]: # (title: Update the user interface)
 
 <microformat>
-    <p>This is the third part of the <strong>Getting started with Kotlin Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-setup.md">Set up an environment</a><br/>
-       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
-       <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Update the user interface</strong><br/>       
-       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Add dependencies<br/>
-       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Share more logic<br/>
-       <img src="icon-6-todo.svg" width="20" alt="Sixth step"/> Wrap up your project</p>
+    <p>This is the second part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Update the user interface</strong><br/>
+       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies<br/>       
+       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
+       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
+    </p>
 </microformat>
 
 To build the user interface, you'll use the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) toolkit

@@ -2,7 +2,7 @@
 
 > The navigation library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 > You're welcome to try it in your Compose Multiplatform projects.
-> We would appreciate your feedback on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
+> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
 >
 {type="warning"}
 
@@ -62,9 +62,10 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
 If the Compose Multiplatform navigation components do not solve your problems,
 there are third-party alternatives that you can choose from:
 
-| Name                                                | Description                                                                                              |
-|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                       |
-| [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection |
-| [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                             |
-| [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation           |
+| Name                                                | Description                                                                                                                                                     |
+|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                                                                              |
+| [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
+| [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
+| [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
+| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |

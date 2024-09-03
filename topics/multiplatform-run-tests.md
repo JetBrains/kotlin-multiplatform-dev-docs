@@ -14,7 +14,7 @@ that requires tests both for common and platform-specific code.
 
 > This tutorial assumes that you are familiar with:
 > * The layout of a Kotlin Multiplatform project. If this is not the case,
-    complete [this tutorial](multiplatform-getting-started.md) before you begin.
+    complete [this tutorial](multiplatform-create-first-app.md) before you begin.
 > * The basics of popular unit testing frameworks, such as [JUnit](https://junit.org/junit5/).
 >
 {type="tip"}
@@ -26,7 +26,7 @@ that requires tests both for common and platform-specific code.
 1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
 2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. It's not necessary for this tutorial.
+4. For iOS, choose the **Do not share UI** option. It is not necessary for this tutorial.
 5. Click the **Download** button and unpack the resulting archive.
 
 ![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}

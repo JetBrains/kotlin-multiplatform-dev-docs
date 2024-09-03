@@ -1,6 +1,6 @@
 [//]: # (title: Desktop-specific components and events)
 
-You can use Compose Multiplatform the macOS, Linux, and Windows desktop applications. This page gives a short
+You can use Compose Multiplatform to create macOS, Linux, and Windows desktop applications. This page gives a short
 overview of the desktop-specific components and events. Each section includes a link to a detailed tutorial.
 
 ## Components
@@ -707,7 +707,7 @@ tutorial.
 
 ## What's next
 
-* Complete the [Get started with Compose Multiplatform for desktop](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
+* Complete the [Compose Multiplatform desktop application](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
   tutorial.
 * Learn how to [create unit tests for your Compose Multiplatform desktop project](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/UI_Testing).
 * Learn how to [create native distributions, installers, and packages for desktop platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution).

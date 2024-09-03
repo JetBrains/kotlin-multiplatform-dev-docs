@@ -1,8 +1,22 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
-In this tutorial, you'll learn how to add a dependency on a Kotlin framework in a local package in the Swift package manager.
-This is useful if you want to simultaneously connect your Kotlin Multiplatform module to several SPM modules
-in your Xcode project.
+In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
+package using the Swift package manager (SPM).
+
+This is a local integration method that can work for you if:
+
+* You have an iOS app with local SPM modules.
+* You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
+
+![Direct integration diagram](direct-integration-scheme.svg){width=700}
+
+To set up the integration, you'll add the `embedAndSignAppleFrameworkForXcode` script as a pre-action in your project's
+build settings. To see the changes made in common code reflected in your Xcode project, you'll only need to rebuild the
+Kotlin Multiplatform project.
+
+This way, you can easily use Kotlin code in local Swift packages, compared to a regular direct integration method,
+that adds the script to the build phase and requires rebuilding both the Kotlin Multiplatform and the iOS project to get
+the changes from the common code.
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
 > and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
@@ -13,25 +27,12 @@ in your Xcode project.
 
 The feature is available starting with Kotlin 2.0.0.
 
-If you still haven't upgraded to Kotlin 2.0.0, you can use a special Kotlin version, `1.9.24-spm2` from the
-`https://packages.jetbrains.team/maven/p/mpp/dev` Maven repository. You can add the repository, for instance,
-in your `settings.gradle.kts`:
-
-```kotlin
-pluginManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-
-dependencyResolutionManagement {
-    repositories {
-        maven("https://packages.jetbrains.team/maven/p/mpp/dev")
-        //...
-    }
-}
-```
+> To check the Kotlin version, navigate to the `build.gradle(.kts)` file in the root of your Kotlin Multiplatform project.
+> You'll see the current version in the `plugins {}` block at the top of the file.
+> 
+> Alternatively, check the version catalog in the `gradle/libs.versions.toml` file.
+> 
+{type="tip"}
 
 The tutorial assumes that your project is using [direct integration](multiplatform-project-configuration.md#connect-a-kotlin-multiplatform-module-to-an-ios-app)
 approach with the `embedAndSignAppleFrameworkForXcode` task in the project's build phase. If you're connecting a Kotlin framework through CocoaPods
@@ -45,7 +46,6 @@ To migrate from the SPM integration with `binaryTarget`:
    <shortcut>Cmd + Shift + K</shortcut> shortcut.
 2. In every `Package.swift` file, remove both dependencies to the package with a Kotlin framework inside and target
    dependencies to the products.
-3. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
 
 ### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed"}
 
@@ -65,8 +65,7 @@ To migrate from the CocoaPods plugin:
    ```
 
 3. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
-4. Delete the `.podspec` and `Podfile` files. 
-5. To set up direct integration, follow the steps described in [this tutorial](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project).
+4. Delete the `.podspec` and `Podfile` files.
 
 ## Connect the framework to your project
 
@@ -74,7 +73,8 @@ To migrate from the CocoaPods plugin:
 >
 {type="note"}
 
-To connect the Kotlin framework to your Xcode project and use the Kotlin code in a local Swift package:
+To be able to use Kotlin code in a local Swift package, connect the Kotlin framework generated from the multiplatform
+project to your Xcode project:
 
 1. In Xcode, go to **Product** | **Scheme** | **Edit scheme** or click the schemes icon in the top bar and select **Edit scheme**:
 
@@ -84,26 +84,63 @@ To connect the Kotlin framework to your Xcode project and use the Kotlin code in
 
    ![New run script action](xcode-new-run-script-action.png){width=700}
 
-3. Add the following script and replace `:shared` with your Gradle project name:
+3. Adjust the following script and add it as an action:
 
    ```bash
-   cd "$SRCROOT/.."
-   ./gradlew :shared:embedAndSignAppleFrameworkForXcode
+   cd "<Path to the root of the multiplatform project>"
+   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode 
    ```
+
+   * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
+   * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
+  
 4. Choose your app's target in the **Provide build settings from** section:
 
    ![Filled run script action](xcode-filled-run-script-action.png){width=700}
 
-5. Use the code from Kotlin in the local Swift package added to your Xcode project:
+5. You can now import the shared module into your local Swift package and use Kotlin code. For example, define the following function:
+
+   ```Swift
+   import Shared
+   
+   public func greetingsFromSpmLocalPackage() -> String {
+       return Greeting.greet()
+   }
+   ```
 
    ![SPM usage](xcode-spm-usage.png){width=700}
 
-6. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+6. In the `ContentView.swift` file of your iOS project, you can now use this function by importing the local package:
 
-> If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
-> tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
->
-{type="note"}
+   ```Swift
+   import SwiftUI
+   import SpmLocalPackage
+   
+   struct ContentView: View {
+       var body: some View {
+           Vstack {
+               Image(systemName: "globe")
+                   .imageScale(.large)
+                   .foregroundStyle(.tint)
+               Text(greetingsFromSpmLocalPackage())
+           }
+           .padding()
+       }
+   }
+   
+   #Preview {
+       ContentView()
+   }
+   ```
+   
+7. Build the project in Xcode. If everything is set up correctly, the project build will be successful.
+   
+There are a couple more factors worth considering: 
+
+* If you have a custom build configuration that is different from the default `Debug` or `Release`, on the **Build Settings**
+  tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
+* If you encounter an error with script sandboxing, open the iOS project settings by double-clicking the project name,
+  then on the **Build Settings** tab, disable the **User Script Sandboxing** under **Build Options**.
 
 ## What's next
 
