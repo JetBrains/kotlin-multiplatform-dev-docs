@@ -86,7 +86,6 @@ You can also set up a folder populated by a Gradle task, for example, with downl
 
 ```kotlin
 abstract class DownloadRemoteFiles : DefaultTask() {
-
     @get:OutputDirectory
     val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
 
