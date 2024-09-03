@@ -5,6 +5,11 @@ Here are the highlights for this feature release:
 * [Type safe navigation](#type-safe-navigation)
 * [Shared element transitions](#shared-element-transitions)
 * [Multiplatform resources are now packed into Android assets](#resources-packed-into-android-assets)
+* [Custom resource directories](#custom-resource-directories)
+* [Improved touch interop on iOS](#new-default-behavior-for-processing-touch-in-ios-native-elements)
+* [Material3 `adaptive` now in common code](#material3-adaptive-adaptive)
+* [Drag and drop implemented on desktop](#drag-and-drop-implemented)
+* [`BasicTextField` adopted on desktop](#basictextfield2-stabilized-and-renamed-into-basictextfield)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-september-2024).
 
