@@ -20,7 +20,7 @@ that the area:
 * Reacts to their touch when they want to interact with it.
 * Doesn't react to their touch when they want to scroll the parent container.
 
-To solve this, Compose Multiplatform implements behavior inspired by [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview).
+To solve this, Compose Multiplatform implements behavior inspired by [`UIScrollView`](https://developer.apple.com/documentation/uikit/uiscrollview).
 When the touch is first detected, there is a short delay (150 ms) that lets the app decide whether to make the container aware of it:
 
 * If there is movement detected within this time, the user likely wants to scroll the container. Compose Multiplatform does not
