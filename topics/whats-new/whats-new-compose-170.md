@@ -2,32 +2,55 @@
 
 Here are the highlights for this feature release:
 
-* [Type safe navigation is here](#type-safe-navigation)
-* [Shared element transitions in Compose Multiplatform](#shared-element-transitions)
-* [Compose Multiplatform resources are now packed into Android assets](#multiplatform-resources-are-now-packed-into-android-assets)
+* [Type safe navigation](#type-safe-navigation)
+* [Shared element transitions](#shared-element-transitions)
+* [Multiplatform resources are now packed into Android assets](#resources-packed-into-android-assets)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-august-2024).
 
 ## Dependencies
 
 * Gradle plugin `org.jetbrains.compose`, version 1.7.0-beta01. Based on Jetpack Compose libraries:
-  * [Runtime 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0)
-  * [UI 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0)
-  * [Foundation 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0)
-  * [Material 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0)
-  * [Material3 1.3.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.0`. Based on [Jetpack Lifecycle 2.8.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.0).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.7.0-alpha09`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
-* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-alpha01`. Based on [Jetpack Material3 Adaptive 1.0.0-beta04](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0-beta04)
+  * [Runtime 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0-rc01)
+  * [UI 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0-rc01)
+  * [Foundation 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0-rc01)
+  * [Material 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0-rc01)
+  * [Material3 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0-rc01)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.4`. Based on [Jetpack Lifecycle 2.8.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.4).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha09`. Based on [Jetpack Navigation 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-rc01).
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-rc01`. Based on [Jetpack Material3 Adaptive 1.0.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0-rc01)
 
-## Breaking change: minimum AGP version raised to 8.1.0
+## Breaking changes
+
+### Minimum AGP version raised to 8.1.0
 
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are used by Compose Multiplatform 1.7.0, supports AGP 7.
-So when you update to Compose Multiplatform 1.7.0 you may have to upgrade AGP as well.
+So when you update to Compose Multiplatform 1.7.0, you may have to upgrade your AGP dependency as well.
 
-> If that is a factor for you, note that previews for Android composables in Android Studio require at least AGP 8.5.2.
-> 
+> Previews for Android composables in Android Studio [require one of the latest AGP versions](). TODO
+>
 {type="note"}
+
+### New default behavior for processing touch in iOS native elements
+
+Before, Compose Multiplatform did not (and could not) respond to touch events that landed in interop UI views.
+So interop views handled these touch sequences entirely.
+
+In 1.7.0, Compose Multiplatform implements more sophisticated logic for handling interop touch sequences.
+By default, there is a delay after the initial touch that helps the parent composable understand whether
+the touch sequence was meant to interact with the native view and react accordingly.
+
+See the more detailed explanation in the [iOS section of this page](#touch-interop-between-compose-multiplatform-and-native-ios-is-improved) 
+or read the documentation for this feature TODO link.
+
+### Disabling minimum frame duration on iOS is mandatory
+
+Developers often failed to notice the printed warning about the high refresh rate displays,
+and users were deprived of smooth animations on their 120 Hz displays.
+So we are enforcing this check to be strict: apps build with Compose Multiplatform will now crash
+if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file is absent or set to `false`.
+
+You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
 
 ## Across platforms
 
@@ -47,26 +70,110 @@ plugin for XML-based navigation.
 
 For details, see the [Google’s Navigation docs about type safety](https://developer.android.com/guide/navigation/design/type-safety).
 
-### Resources
+### Multiplatform resources
 
-#### Android Studio generates previews for Compose Multiplatform composables on Android
+#### Resources packed into Android assets
 
-Multiplatform resources are now packed into Android assets, which helps Android Studio generate previews for Compose Multiplatform
-composables in Android source sets.
+All multiplatform resources are now packed into Android assets. This helps Android Studio generate previews for Compose Multiplatform composables in Android source sets.
 
-This feature requires one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
+This also allows direct access to multiplatform resources from WebViews and media player components on Android, since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
 
-Packing Android assets also fixes rendering multiplatform resources in WebViews and media player components.
+> Android Studio previews are available only for composables in an Android source set.
+> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
+>
+{type="note"}
 
 #### Custom resource directories
 
 With the new `customDirectory` setting in the configuration DSL you can associate a custom directory with a specific source
-set. This allows, for example, using downloaded files as resources.
+set. This allows, for example, using downloaded files as resources. TODO link
 
 #### Multiplatform font cache
 
 Compose Multiplatform brings the Android font cache functionality to other platforms, too,
 to avoid excessive byte-reading of `Font` resources.
+
+#### Multiplatform resources available in test source sets
+
+Now you can:
+
+* Add resources to test source sets.
+* Use generated accessors that are available only in corresponding source sets.
+* Pack test resources into the app only for test runs.
+
+#### Resources mapped to string IDs for easy access
+
+Resources of each type are mapped with their file names: for example, you can use the `Res.allDrawableResources` function
+to get the map of all `drawable` resources and access the necessary resource by passing the string ID:
+
+```kotlin
+Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
+```
+
+#### Functions for converting byte arrays into ImageBitmap or ImageVector
+
+There are new functions for converting a `ByteArray` into an image resource:
+
+* `decodeToImageBitmap()` for turning a JPEG, PNG, BMP, or WEBP file into an `ImageBitmap` object.
+* `decodeToImageVector()` for turning an XML vector file into an `ImageVector` object.
+* `decodeToSvgPainter()` for turning an SVG file into a `Painter` object. This function is not available on Android.
+
+See the documentation for details. TODO link
+
+### New common modules
+
+#### material3.adaptive:adaptive*
+
+Material3 adaptive modules are available in common code with Compose Multiplatform.
+You need to explicitly set corresponding dependencies to use them:
+
+```kotlin
+commonMain.dependencies {
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-rc01")
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
+}
+````
+
+#### material3:material3-window-size-class
+
+The `material3-window-size-class` dependency should be explicitly added to the list of common dependencies:
+
+```kotlin
+commonMain.dependencies {
+  implementation("org.jetbrains.compose.material3:material3-window-size-class:1.7.0-beta01")
+}
+```
+
+The `calculateWindowSizeClass` function is not available in common code yet.
+But you can import and call it in platform-specific code, for example:
+
+```kotlin
+// desktopMain/kotlin/main.kt
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+
+// ...
+
+val size = calculateWindowSizeClass()
+```
+
+#### material-navigation
+
+The material-navigation library is available in common code alongside Compose Multiplatform navigation.
+To use it, add these explicit dependencies to your common source set:
+
+```kotlin
+commonMain.dependencies {
+  implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
+  implementation("org.jetbrains.compose.material:material-navigation:1.7.0-beta01")
+}
+```
+
+### Skia updated to Milestone 126
+
+The version of Skia, used by Compose Multiplatform via [Skiko](https://github.com/JetBrains/skiko), has been updated to Milestone 126.
+
+The previous version of Skia used was Milestone 116. You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/main/RELEASE_NOTES.md#milestone-126).
 
 ### BasicTextField2 stabilized and renamed into BasicTextField
 
@@ -103,11 +210,20 @@ and thus no platform-specific events to listen to.
 
 In this release, the touch handling on iOS interop views becomes more sophisticated:
 Compose Multiplatform now tries to detect whether a touch is meant for an interop view or should be processed by Compose.
-This gives you a chance to process a touch event that happens in a UIKit area inside your Compose Multiplatform app.
+This gives you a chance to process a touch event that happens in a UIKit or a SwiftUI area inside your Compose Multiplatform app.
 
-However, this implementation introduces a small delay (150 ms) in UI response.
-If you’re certain you won’t need to process these touches in Compose, you can turn this behavior off with the new `areTouchesDelayed`
-parameter of `UIKitView` and `UIKitViewController` APIs.
+By default, Compose Multiplatform will delay transmitting touch events to interop views by 150 ms:
+
+* If within this time frame there is movement over a minor distance threshold,
+  the parent composable will intercept the touch sequence and not forward it to the interop view.
+* If there is no noticeable movement, Compose will resign from processing the rest of the touch sequence.
+  The rest of the sequence will be processed solely by the interop view.
+
+This behavior aligns with how native [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview) works.
+It helps to avoid situations where a touch sequence that started in the interop view ends up intercepted by the interop view
+without a chance for Compose Multiplatform to process it. This can lead to frustrating user experience, for example,
+when large interop views (such as video players) are used in a scrollable context such as lazy list: it is tricky
+to scroll the list when most of the screen is taken by the interop view that intercepts all touches without Compose Multiplatform being aware of them.
 
 ## Desktop
 
@@ -127,6 +243,8 @@ article in Jetpack Compose documentation.
 
 ### Render settings for ComposePanel
 
-By specifying the new `RenderSettings` parameter in the `ComposePanel` constructor you can enable vertical synchronization
-and thus try to reduce visual latency between input and changes in the UI.
-Screen tearing is a potential side effect.
+By specifying the new `RenderSettings.isVsyncEnabled` parameter in the `ComposePanel` constructor you can hint to the backend
+rendering implementation to disable vertical synchronization.
+This can reduce visual latency between input and changes in the UI but can also lead to screen tearing.
+
+The default behavior stays the same: attempt to synchronize drawable presentations with VSync.
