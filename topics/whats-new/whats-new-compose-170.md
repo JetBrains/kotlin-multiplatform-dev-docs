@@ -27,7 +27,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are used by Compose Multiplatform 1.7.0, supports AGP 7.
 So when you update to Compose Multiplatform 1.7.0, you may have to upgrade your AGP dependency as well.
 
-> Previews for Android composables in Android Studio [require one of the latest AGP versions](). TODO
+> Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
 {type="note"}
 
@@ -175,17 +175,6 @@ The version of Skia, used by Compose Multiplatform via [Skiko](https://github.co
 
 The previous version of Skia used was Milestone 116. You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/main/RELEASE_NOTES.md#milestone-126).
 
-### BasicTextField2 stabilized and renamed into BasicTextField
-
-The `BasicTextField2` component, introduced in Compose Multiplatform 1.6.0, is out of its transitional status and is renamed
-into `BasicTextField`, replacing the old component.
-
-The new `BasicTextField`:
-* allows managing state more reliably,
-* offers the new `TextFieldBuffer` API for programmatic changes to the text field content,
-* contains several new APIs for visual transformations and styling,
-* provides access to `UndoState` with the ability to return to previous states of the field.
-
 ### GraphicsLayer: new drawing API
 
 The new drawing layer added in Jetpack Compose 1.7.0 is available in Compose Multiplatform.
@@ -240,6 +229,18 @@ You can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify
 
 For common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
 article in Jetpack Compose documentation.
+
+### BasicTextField2 stabilized and renamed into BasicTextField
+
+Jetpack Compose stabilized and renamed the `BasicTextField2` component into `BasicTextField`.
+In this release, Compose Multiplatform adopted the change for desktop targets, planning to cover iOS as well
+in the stable 1.7.0 version.
+
+The new `BasicTextField`:
+* Allows managing state more reliably.
+* Offers the new `TextFieldBuffer` API for programmatic changes to the text field content.
+* Contains several new APIs for visual transformations and styling.
+* Provides access to `UndoState` with the ability to return to previous states of the field.
 
 ### Render settings for ComposePanel
 
