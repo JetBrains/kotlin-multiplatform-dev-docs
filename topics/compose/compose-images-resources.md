@@ -415,6 +415,25 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
+### Generated maps for resources and string IDs {label="EAP"}
+
+For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
+the filename as the key:
+
+```kotlin
+val Res.allDrawableResources: Map<String, DrawableResource>
+val Res.allStringResources: Map<String, StringResource>
+val Res.allStringArrayResources: Map<String, StringArrayResource>
+val Res.allPluralStringResources: Map<String, PluralStringResource>
+val Res.allFontResources: Map<String, FontResource>
+```
+
+An example of passing a mapped resource to a composable:
+
+```kotlin
+Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
+```
+
 ### Remote files
 
 Only files that are part of the application are considered resources.
