@@ -79,6 +79,14 @@ You will create a shared module and later connect it to both the existing Androi
 
 6. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
    that shows the benefits of Kotlin Multiplatform.
+7. Add the following lines to the root `build.gradle.kts` file:
+
+    ```kotlin
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    ```
+   
+   It is necessary to avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects. 
 
 If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
