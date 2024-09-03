@@ -418,7 +418,9 @@ coroutineScope.launch {
 #### Convert byte arrays into images {label="EAP"}
 
 If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use the following functions
-to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable:
+to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable.
+
+Access the raw files as shown in the [Raw files](#raw-files) section, then pass the result to a composable:
 
 ```kotlin
 // bytes = Res.readBytes("files/example.png")
@@ -428,12 +430,11 @@ Image(bytes.decodeToImageBitmap(), null)
 Image(bytes.decodeToImageVector(LocalDensity.current), null)
 ```
 
-On every platform except Android you can also turn an SVG file into a `Painter` object:
+On every platform except Android, you can also turn an SVG file into a `Painter` object:
 
 ```kotlin
 // bytes = Res.readBytes("files/example.svg")
 Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
-
 ```
 
 ### Remote files
