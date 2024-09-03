@@ -455,6 +455,28 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
+#### Convert byte arrays into images {label="EAP"}
+
+If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use the following functions
+to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable.
+
+Access the raw files as shown in the [Raw files](#raw-files) section, then pass the result to a composable:
+
+```kotlin
+// bytes = Res.readBytes("files/example.png")
+Image(bytes.decodeToImageBitmap(), null)
+
+// bytes = Res.readBytes("files/example.xml")
+Image(bytes.decodeToImageVector(LocalDensity.current), null)
+```
+
+On every platform except Android, you can also turn an SVG file into a `Painter` object:
+
+```kotlin
+// bytes = Res.readBytes("files/example.svg")
+Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
+```
+
 ### Generated maps for resources and string IDs {label="EAP"}
 
 For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
@@ -483,7 +505,6 @@ You can also load remote files from the internet using their URL. To load remote
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
-
 
 ### Accessing resources from external libraries
 
