@@ -25,7 +25,7 @@ When the touch is first detected, there is a short delay (150 ms) that lets the 
 
 * If there is movement detected within this time, the user likely wants to scroll the container. Compose Multiplatform does not
   make the native UI element aware of this touch sequence.
-* If there is movement detected within this time, the touch is likely intended for the underlying element. For the rest of the touch sequence, Compose Multiplatform
+* If there is no movement detected within this time, the touch is likely intended for the underlying element. For the rest of the touch sequence, Compose Multiplatform
   hands over control to the native UI.
 
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
