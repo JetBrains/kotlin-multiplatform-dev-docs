@@ -82,7 +82,7 @@ compose.resources {
 }
 ```
 
-You can also set up a folder populated by a Gradle task, for example, with [downloaded files](#remote-files):
+You can also set up a folder populated by a Gradle task, for example, with downloaded files:
 
 ```kotlin
 abstract class DownloadRemoteFiles : DefaultTask() {
@@ -96,8 +96,8 @@ abstract class DownloadRemoteFiles : DefaultTask() {
 
 compose.resources {
     customDirectory(
-            sourceSetName = "iosMain",
-            directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
+        sourceSetName = "iosMain",
+        directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
     )
 }
 ```
