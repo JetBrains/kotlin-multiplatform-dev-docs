@@ -50,7 +50,7 @@ to the `build.gradle.kts` file.
 ### Class generation settings
 
 There are several settings that affect the way the `Res` class is generated for your project.
-An example configuration can look like this:
+An example configuration looks like this:
 
 ```kotlin
 compose.resources {
@@ -65,7 +65,7 @@ compose.resources {
   as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
   `{group name}.{module name}.generated.resources` package to the class.
 * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  when the resource library is only available transitively. By default, the `auto` value is used to generate the `Res`
   class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ### Custom resource directories {label="EAP"}
