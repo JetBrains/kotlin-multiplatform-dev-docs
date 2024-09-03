@@ -42,8 +42,7 @@ We recommend that you install the latest stable versions for compatibility and b
    <tr>
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
         <td>
-            <p>The Kotlin plugin is bundled with each Android Studio release. However, it still needs to be updated to the latest version to avoid compatibility issues.</p> 
-            <p>Go to <strong>Plugins | Installed</strong>. If a new version of the plugin is available, the <strong>Update</strong> button appears in the plugin settings. Click it to update the plugin.</p>
+            <p>The Kotlin plugin is bundled and automatically updated with each Android Studio release.</p>
         </td>
    </tr>
 </table>
