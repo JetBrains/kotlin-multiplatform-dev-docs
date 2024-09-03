@@ -417,7 +417,7 @@ coroutineScope.launch {
 
 #### Convert byte arrays into images {label="EAP"}
 
-If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use these functions
+If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use the following functions
 to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable:
 
 ```kotlin
