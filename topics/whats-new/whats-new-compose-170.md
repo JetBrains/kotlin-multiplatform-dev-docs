@@ -6,7 +6,7 @@ Here are the highlights for this feature release:
 * [Shared element transitions](#shared-element-transitions)
 * [Multiplatform resources are now packed into Android assets](#resources-packed-into-android-assets)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-august-2024).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-september-2024).
 
 ## Dependencies
 
@@ -40,14 +40,14 @@ In 1.7.0, Compose Multiplatform implements more sophisticated logic for handling
 By default, there is a delay after the initial touch that helps the parent composable understand whether
 the touch sequence was meant to interact with the native view and react accordingly.
 
-See the more detailed explanation in the [iOS section of this page](#touch-interop-between-compose-multiplatform-and-native-ios-is-improved) 
-or read the documentation for this feature TODO link.
+See the more detailed explanation in the [iOS section of this page](#ios-touch-interop) 
+or read the [documentation for this feature](compose-ios-touch.md).
 
 ### Disabling minimum frame duration on iOS is mandatory
 
 Developers often failed to notice the printed warning about the high refresh rate displays,
-and users were deprived of smooth animations on their 120 Hz displays.
-So we are enforcing this check to be strict: apps build with Compose Multiplatform will now crash
+and users were deprived of smooth animations on their 120-Hz-enabled devices.
+So we are enforcing this check to be strict: apps built with Compose Multiplatform will now crash
 if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file is absent or set to `false`.
 
 You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
@@ -85,8 +85,8 @@ This also allows direct access to multiplatform resources from WebViews and medi
 
 #### Custom resource directories
 
-With the new `customDirectory` setting in the configuration DSL you can associate a custom directory with a specific source
-set. This allows, for example, using downloaded files as resources. TODO link
+With the new `customDirectory` setting in the configuration DSL you can [associate a custom directory](compose-images-resources.md#custom-resource-directories) with a specific source
+set. This allows, for example, using downloaded files as resources.
 
 #### Multiplatform font cache
 
@@ -118,7 +118,7 @@ There are new functions for converting a `ByteArray` into an image resource:
 * `decodeToImageVector()` for turning an XML vector file into an `ImageVector` object.
 * `decodeToSvgPainter()` for turning an SVG file into a `Painter` object. This function is not available on Android.
 
-See the documentation for details. TODO link
+See the [documentation](compose-images-resources.md#convert-byte-arrays-into-images) for details.
 
 ### New common modules
 
@@ -195,7 +195,7 @@ and thus no platform-specific events to listen to.
 
 ## iOS
 
-### Touch interop between Compose Multiplatform and native iOS is improved
+### Touch interop between Compose Multiplatform and native iOS is improved {id="ios-touch-interop"}
 
 In this release, the touch handling on iOS interop views becomes more sophisticated:
 Compose Multiplatform now tries to detect whether a touch is meant for an interop view or should be processed by Compose.
