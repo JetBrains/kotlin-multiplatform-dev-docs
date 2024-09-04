@@ -2,6 +2,16 @@
 <labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/labels.xsd">
 
+    <label short-name="EAP" full-name="Compose Multiplatform 1.7.0-beta01">
+        This functionality is available only in the EAP version.
+    </label>
+
+    <annotation short-name="Experimental" full-name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
+    <annotation short-name="Android" full-name="Available in Compose Multiplatform for Android"/>
+    <annotation short-name="Desktop" full-name="Available in Compose Multiplatform for desktop"/>
+    <annotation short-name="iOS" full-name="Available in Compose Multiplatform for iOS"/>
+    <annotation short-name="Web" full-name="Available in Compose Multiplatform for web"/>
+
     <annotation short-name="Information" full-name="Info" color="blue"/>
     <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
     <annotation short-name="Warning" full-name="Warning" color="yellow"/>

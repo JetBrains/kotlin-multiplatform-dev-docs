@@ -55,28 +55,21 @@ Create a common test source set and add the necessary dependencies:
     ```
 
 3. If you need to run instrumented (emulator) tests for Android, amend your Gradle configuration further:
-   1. Add the following code to the `androidTarget` block and follow IDE's suggestions to add missing imports:
+   1. Add the following code to the `androidTarget {}` block and follow IDE's suggestions to add missing imports:
 
       ```kotlin
       kotlin {
           //...
           androidTarget { 
               @OptIn(ExperimentalKotlinGradlePluginApi::class)
-              instrumentedTestVariant { 
-                  sourceSetTree.set(KotlinSourceSetTree.test)
-      
-                  dependencies {
-                      implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
-                      debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
-                  }
-              }
+              instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
               //...
           }
           //... 
       }
       ```
 
-   2. Add the following line to the `android.defaultConfig {}` block:
+   2. Add the following code to the `android.defaultConfig {}` block:
 
       ```kotlin
       android {
@@ -85,6 +78,16 @@ Create a common test source set and add the necessary dependencies:
               //...
               testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
           }
+      }
+      ```
+
+   3. Add the following code to the config top level:
+
+      ```kotlin
+      //https://developer.android.com/develop/ui/compose/testing#setup
+      dependencies {
+          androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:1.6.8")
+          debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
       }
       ```
 

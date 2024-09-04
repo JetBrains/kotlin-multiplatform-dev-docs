@@ -1,11 +1,10 @@
 [//]: # (title: Create your own application)
 <microformat>
-   <p>This is the fourth part of the <strong>Getting started with Compose Multiplatform</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-setup.md">Set up an environment</a><br/>
-       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
-       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
-       <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
-       <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Create your own application</strong><br/>
+   <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
+       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
+       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
+       <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Create your own application</strong><br/>
   </p>
 </microformat>
 
@@ -29,6 +28,7 @@ To get started, implement a new `App` composable:
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var timeAtLocation by remember { mutableStateOf("No location selected") }
@@ -88,6 +88,7 @@ a `TextField` composable:
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -142,6 +143,7 @@ The next step is to use the given input to calculate time. To do this, create a 
 
     ```kotlin
     @Composable
+    @Preview
     fun App() {
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
@@ -158,8 +160,18 @@ The next step is to use the given input to calculate time. To do this, create a 
     }
     ```
 
-4. Run the application again and enter a valid timezone.
-5. Click the button. You should see the correct time:
+4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
+   support for web:
+
+    ```kotlin
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    ```
+
+5. Run the application again and enter a valid timezone.
+6. Click the button. You should see the correct time:
 
    ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
 
@@ -174,6 +186,7 @@ time message could be rendered more prominently.
 
    ```kotlin
    @Composable
+   @Preview
    fun App() {
        MaterialTheme {
            var location by remember { mutableStateOf("Europe/Paris") }
@@ -209,9 +222,10 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
-{type="tip"}
+{type="tip"}-->
 
 ## Refactor the design
 
@@ -242,6 +256,7 @@ list.
     )
     
     @Composable
+    @Preview
     fun App(countries: List<Country> = countries()) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
@@ -294,9 +309,9 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+<!--> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
-{type="tip"}
+{type="tip"}-->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -329,7 +344,6 @@ code to load and display them:
 3. Change the codebase to support images:
 
     ```kotlin
-    @OptIn(ExperimentalResourceApi::class)
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
@@ -341,7 +355,6 @@ code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     val defaultCountries = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
@@ -350,8 +363,8 @@ code to load and display them:
         Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
     )
 
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
+    @Preview
     fun App(countries: List<Country> = defaultCountries) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
@@ -410,9 +423,9 @@ code to load and display them:
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
-{type="tip"}
+{type="tip"} -->
 
 ## What's next
 
@@ -420,5 +433,16 @@ We encourage you to explore multiplatform development further and try out more p
 
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-* [Share business logic between iOS and Android while keeping the UI native](multiplatform-getting-started.md)
+* [Share business logic between iOS and Android while keeping the UI native](multiplatform-create-first-app.md)
 * [See the curated list of sample projects](multiplatform-samples.md)
+
+Join the community:
+
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
+  an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
+* ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
+  the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
+* ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
+  about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)

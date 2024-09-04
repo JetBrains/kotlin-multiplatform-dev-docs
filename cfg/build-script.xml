@@ -6,7 +6,7 @@
         <product id="mpd" master="project.ihp" family="idea">
             <artifact type="web2" tips-of-the-day="false" platform="primary" local-update="true"
                       local-update-path="kotlin-multiplatform-development"
-                      image-bundle="true" offline-bundle="true"/>
+                      image-bundle="true" offline-bundle="false"/>
         </product>
     </builds>
 </root>
