@@ -82,12 +82,60 @@ For details, see the [Google’s Navigation docs about type safety](https://deve
 
 All multiplatform resources are now packed into Android assets. This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
-This also allows direct access to multiplatform resources from WebViews and media player components on Android, since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
-
 > Android Studio previews are available only for composables in an Android source set.
 > They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
 >
 {type="note"}
+
+This also allows direct access to multiplatform resources from WebViews and media player components on Android,
+since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
+
+An example of an Android composable displaying a resource HTML page with a link to a resource image:
+
+```kotlin
+// androidMain/kotlin/com/example/webview/App.kt
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        val uri = Res.getUri("files/webview/index.html")
+
+        // Adding a WebView inside AndroidView with layout as full screen.
+        AndroidView(factory = {
+            WebView(it).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }, update = {
+            it.loadUrl(uri)
+        })
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
+
+The example works with this simple HTML file:
+
+```html
+<html>
+<header>
+    <title>
+        Cat Resource
+    </title>
+</header>
+<body>
+    <img src="cat.jpg">
+</body>
+</html>
+```
+{initial-collapse-state="collapsed"  collapsed-title="<title>Cat Resource</title>"}
+
+Both resource files in this example are located in the `commonMain` source set:
+
+![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
 #### Custom resource directories
 
