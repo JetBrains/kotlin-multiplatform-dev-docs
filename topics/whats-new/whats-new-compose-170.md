@@ -38,8 +38,8 @@ So when you update to Compose Multiplatform 1.7.0, you may have to upgrade your 
 
 ### New default behavior for processing touch in iOS native elements
 
-Before, Compose Multiplatform did not (and could not) respond to touch events that landed in interop UI views.
-So interop views handled these touch sequences entirely.
+Before 1.7.0, Compose Multiplatform did not (and could not) respond to touch events that landed in interop UI views.
+Therefore, interop views handled these touch sequences entirely.
 
 In 1.7.0, Compose Multiplatform implements more sophisticated logic for handling interop touch sequences.
 By default, there is a delay after the initial touch that helps the parent composable understand whether
@@ -61,14 +61,14 @@ You can disable this behavior by setting the `ComposeUIViewControllerConfigurati
 
 ### Shared element transitions
 
-Compose Multiplatform implements the API for seamless transition between composables that should have consistent elements between them.
-These transitions are often useful in navigation to help users follow their trajectory in the UI.
+Compose Multiplatform implements an API for seamless transitions between composables that share consistent elements.
+These transitions are often useful in navigation, helping users follow their trajectory in the UI.
 
 For a deep dive into the API, see the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/animation/shared-elements).
 
-### Type safe Navigation
+### Type-safe Navigation
 
-The safe Jetpack Compose approach to passing objects along a navigation route is implemented in Compose Multiplatform as well.
+The type-safe Jetpack Compose approach to passing objects along a navigation route is implemented in Compose Multiplatform as well.
 New APIs implemented in Navigation 2.8.0 allow Compose to provide compile-time safety for your navigation graph.
 These APIs achieve the same result as the [Safe Args](https://developer.android.com/guide/navigation/use-graph/pass-data#Safe-args)
 plugin for XML-based navigation.
@@ -79,7 +79,7 @@ For details, see the [Google’s Navigation docs about type safety](https://deve
 
 #### Resources packed into Android assets
 
-All multiplatform resources are now packed into Android assets. This helps Android Studio generate previews for Compose Multiplatform composables in Android source sets.
+All multiplatform resources are now packed into Android assets. This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
 This also allows direct access to multiplatform resources from WebViews and media player components on Android, since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
 
@@ -103,7 +103,7 @@ to avoid excessive byte-reading of `Font` resources.
 Now you can:
 
 * Add resources to test source sets.
-* Use generated accessors that are available only in corresponding source sets.
+* Use generated accessors that are available only in the corresponding source sets.
 * Pack test resources into the app only for test runs.
 
 #### Resources mapped to string IDs for easy access
@@ -130,7 +130,7 @@ See the [documentation](compose-images-resources.md#convert-byte-arrays-into-ima
 #### material3.adaptive:adaptive*
 
 Material3 adaptive modules are available in common code with Compose Multiplatform.
-You need to explicitly set corresponding dependencies to use them:
+You need to explicitly add the corresponding dependencies to use them:
 
 ```kotlin
 commonMain.dependencies {
@@ -150,8 +150,8 @@ commonMain.dependencies {
 }
 ```
 
-The `calculateWindowSizeClass` function is not available in common code yet.
-But you can import and call it in platform-specific code, for example:
+The `calculateWindowSizeClass()` function is not available in common code yet.
+However, you can import and call it in platform-specific code, for example:
 
 ```kotlin
 // desktopMain/kotlin/main.kt
@@ -164,7 +164,7 @@ val size = calculateWindowSizeClass()
 
 #### material-navigation
 
-The material-navigation library is available in common code alongside Compose Multiplatform navigation.
+The `material-navigation` library is available in common code alongside Compose Multiplatform navigation.
 To use it, add these explicit dependencies to your common source set:
 
 ```kotlin
@@ -182,9 +182,9 @@ The previous version of Skia used was Milestone 116. You can see the changes mad
 
 ### GraphicsLayer: new drawing API
 
-The new drawing layer added in Jetpack Compose 1.7.0 is available in Compose Multiplatform.
+The new drawing layer added in Jetpack Compose 1.7.0 is now available in Compose Multiplatform.
 
-Unlike `Modifier.graphicsLayer`, the new `GraphicsLayer` class allows for rendering of Composable content anywhere
+Unlike `Modifier.graphicsLayer`, the new `GraphicsLayer` class allows for the rendering of Composable content anywhere
 and is useful in animated use cases where content is expected to be rendered in different scenes.
 
 See the [reference documentation](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer)
@@ -192,10 +192,10 @@ for a more detailed description and example usage.
 
 ### LocalLifecycleOwner moved out of Compose UI
 
-The `LocalLifecycleOwner` class is moved from the Compose UI package to the Lifecycle package.
+The `LocalLifecycleOwner` class has been moved from the Compose UI package to the Lifecycle package.
 
-This allows you to access the class and call its Compose-based helper APIs independently of a Compose UI.
-But keep in mind that without the Compose UI bindings a `LocalLifecycleOwner` instance will have no platform integration
+This change allows you to access the class and call its Compose-based helper APIs independently of a Compose UI.
+However, keep in mind that without the Compose UI bindings, a `LocalLifecycleOwner` instance will have no platform integration
 and thus no platform-specific events to listen to.
 
 ## iOS
@@ -214,7 +214,7 @@ By default, Compose Multiplatform will delay transmitting touch events to intero
   The rest of the sequence will be processed solely by the interop view.
 
 This behavior aligns with how native [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview) works.
-It helps to avoid situations where a touch sequence that started in the interop view ends up intercepted by the interop view
+It helps to avoid situations where a touch sequence that starts in the interop view is intercepted
 without a chance for Compose Multiplatform to process it. This can lead to frustrating user experience, for example,
 when large interop views (such as video players) are used in a scrollable context such as lazy list: it is tricky
 to scroll the list when most of the screen is taken by the interop view that intercepts all touches without Compose Multiplatform being aware of them.
@@ -227,29 +227,29 @@ The drag and drop mechanism, allowing for dragging content into or out of your C
 is implemented in Compose Multiplatform for desktop.
 You can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify potential sources and destinations for drag operations.
 
-> While these modifiers are available in common code, for now they will only work in desktop and Android source sets.
+> While these modifiers are available in common code, they currently only work in desktop and Android source sets.
 > Stay tuned for future releases.
 > 
 {type="note"}
 
 For common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
-article in Jetpack Compose documentation.
+article in the Jetpack Compose documentation.
 
 ### BasicTextField2 stabilized and renamed into BasicTextField
 
-Jetpack Compose stabilized and renamed the `BasicTextField2` component into `BasicTextField`.
-In this release, Compose Multiplatform adopted the change for desktop targets, planning to cover iOS as well
+Jetpack Compose stabilized and renamed the `BasicTextField2` component to `BasicTextField`.
+In this release, Compose Multiplatform has adopted the change for desktop targets, planning to cover iOS as well
 in the stable 1.7.0 version.
 
 The new `BasicTextField`:
 * Allows managing state more reliably.
 * Offers the new `TextFieldBuffer` API for programmatic changes to the text field content.
-* Contains several new APIs for visual transformations and styling.
+* Includes several new APIs for visual transformations and styling.
 * Provides access to `UndoState` with the ability to return to previous states of the field.
 
 ### Render settings for ComposePanel
 
-By specifying the new `RenderSettings.isVsyncEnabled` parameter in the `ComposePanel` constructor you can hint to the backend
+By specifying the new `RenderSettings.isVsyncEnabled` parameter in the `ComposePanel` constructor, you can hint to the backend
 rendering implementation to disable vertical synchronization.
 This can reduce visual latency between input and changes in the UI but can also lead to screen tearing.
 
