@@ -2,14 +2,15 @@
 
 Here are the highlights for this feature release:
 
-* [Type safe navigation](#type-safe-navigation)
+* [Type safe Navigation](#type-safe-navigation)
 * [Shared element transitions](#shared-element-transitions)
 * [Multiplatform resources are now packed into Android assets](#resources-packed-into-android-assets)
 * [Custom resource directories](#custom-resource-directories)
+* [Support for test multiplatform resources](#support-for-test-multiplatform-resources)
 * [Improved touch interop on iOS](#new-default-behavior-for-processing-touch-in-ios-native-elements)
-* [Material3 `adaptive` now in common code](#material3-adaptive-adaptive)
+* [Material3 `adaptive` and `material3-window-size-class` now in common code](#material3-adaptive-adaptive)
 * [Drag and drop implemented on desktop](#drag-and-drop-implemented)
-* [`BasicTextField` adopted on desktop](#basictextfield2-stabilized-and-renamed-into-basictextfield)
+* [`BasicTextField` adopted on desktop](#basictextfield-renamed-from-basictextfield2-is-adopted-on-desktop)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-september-2024).
 
@@ -98,7 +99,7 @@ set. This allows, for example, using downloaded files as resources.
 Compose Multiplatform brings the Android font cache functionality to other platforms, too,
 to avoid excessive byte-reading of `Font` resources.
 
-#### Multiplatform resources available in test source sets
+#### Support for test multiplatform resources
 
 Now you can:
 
@@ -108,7 +109,7 @@ Now you can:
 
 #### Resources mapped to string IDs for easy access
 
-Resources of each type are mapped with their file names: for example, you can use the `Res.allDrawableResources` function
+Resources of each type are mapped with their filenames. For example, you can use the `Res.allDrawableResources` property
 to get the map of all `drawable` resources and access the necessary resource by passing the string ID:
 
 ```kotlin
@@ -138,7 +139,7 @@ commonMain.dependencies {
   implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
   implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
 }
-````
+```
 
 #### material3:material3-window-size-class
 
@@ -215,17 +216,17 @@ By default, Compose Multiplatform will delay transmitting touch events to intero
 
 This behavior aligns with how native [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview) works.
 It helps to avoid situations where a touch sequence that starts in the interop view is intercepted
-without a chance for Compose Multiplatform to process it. This can lead to frustrating user experience, for example,
-when large interop views (such as video players) are used in a scrollable context such as lazy list: it is tricky
-to scroll the list when most of the screen is taken by the interop view that intercepts all touches without Compose Multiplatform being aware of them.
+without a chance for Compose Multiplatform to process it. This can lead to frustrating user experience.
+For example, imagine a large interop video player used in a scrollable context such as lazy list:
+it is tricky to scroll the list when most of the screen is taken by the video that intercepts all touches without Compose Multiplatform being aware of them.
 
 ## Desktop
 
 ### Drag and drop implemented
 
-The drag and drop mechanism, allowing for dragging content into or out of your Compose application,
-is implemented in Compose Multiplatform for desktop.
-You can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify potential sources and destinations for drag operations.
+The drag and drop mechanism, which enables users to drag content into or out of your Compose application,
+has been implemented in Compose Multiplatform for desktop.
+To specify potential sources and destinations for dragging and dropping, use the `dragAndDropSource` and `dragAndDropTarget` modifiers.
 
 > While these modifiers are available in common code, they currently only work in desktop and Android source sets.
 > Stay tuned for future releases.
@@ -235,7 +236,7 @@ You can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify
 For common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
 article in the Jetpack Compose documentation.
 
-### BasicTextField2 stabilized and renamed into BasicTextField
+### BasicTextField, renamed from BasicTextField2, is adopted on desktop
 
 Jetpack Compose stabilized and renamed the `BasicTextField2` component to `BasicTextField`.
 In this release, Compose Multiplatform has adopted the change for desktop targets, planning to cover iOS as well
