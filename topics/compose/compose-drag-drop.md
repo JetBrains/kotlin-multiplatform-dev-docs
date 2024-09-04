@@ -57,6 +57,11 @@ Box(Modifier
                         transferable = DragAndDropTransferable(
                             StringSelection(exportedText)
                         ),
+                            
+                        // List of actions supported by this drag source. A type of action is passed to the drop target
+                        // together with data.
+                        // The target can use this to reject an inappropriate drop operation or to interpret user's
+                        //  expectations.
                         supportedActions = listOf(
                             DragAndDropTransferAction.Copy,
                             DragAndDropTransferAction.Move,
