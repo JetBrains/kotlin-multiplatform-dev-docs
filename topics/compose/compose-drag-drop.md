@@ -2,8 +2,10 @@
 
 <title label="EAP" annotations="Desktop">Drag and drop operations</title>
 
-To allow users to drag files and objects in or out of your Compose Multiplatform app,
-you can use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify potential sources or destinations for drag operations.
+You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
+or allow users to drag data out of your app.
+To implement this, use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify particular composables
+as potential sources or destinations for drag operations.
 
 > Currently, drag and drop operations are only supported in Compose Multiplatform for desktop.
 > The support will be extended to iOS and web in future releases.
@@ -85,7 +87,7 @@ Box(Modifier
 
 ## Creating a drop target
 
-To prepare a composable to be a drag target:
+To prepare a composable to be a drag and drop target:
 1. Describe the conditions for the composable to be the target of a drop in the `shouldStartDragAndDrop` lambda.
 2. Create (and `remember`) the `DragAndDropTarget` object that will contain your overrides for drag event handlers.
 3. Write the necessary overrides: for example, `onDrop` for parsing the received data, or `onEntered` when a draggable
@@ -110,8 +112,11 @@ val dragAndDropTarget = remember {
         }
 
         override fun onDrop(event: DragAndDropEvent): Boolean {
+            
+            // Prints the type of operation into system output every time a drag and drop action is concluded.
             println("Action at the target: ${event.action}")
-            val result = (targetText == "Drop Here")
+            
+            val result = (targetText == "Drop here")
             
             // Changes the text to the value dropped into the composable.
             targetText = event.awtTransferable.let {
@@ -124,7 +129,7 @@ val dragAndDropTarget = remember {
             // Reverts the text of the drop target to the initial value after 2 seconds.
             coroutineScope.launch {
                 delay(2000)
-                targetText = "Drop Here"
+                targetText = "Drop here"
             }
             return result
         }
@@ -141,11 +146,10 @@ Box(Modifier
             Modifier
     )
     .dragAndDropTarget(
-            
         // With "true" as the value of shouldStartDragAndDrop, drag and drop operations are enabled unconditionally.    
         shouldStartDragAndDrop = { true }, 
         target = dragAndDropTarget
-        )
+    )
 ) {
     Text(targetText, Modifier.align(Alignment.Center))
 }
