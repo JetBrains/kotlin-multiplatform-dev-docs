@@ -68,24 +68,25 @@ The Kotlin Multiplatform plugin for Android Studio provides a wizard for creatin
 You will create a shared module and later connect it to both the existing Android application and your future iOS application:
 
 1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section.
-2. Restart Android Studio for the changes to take effect.
-3. Select the **File** | **New** | **New Module** menu item.
-4. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared` and the package
-   name `com.jetbrains.simplelogin.shared`.
-5. Select **Regular framework** in the **iOS framework distribution** list: this indicates the method you'll use to connect
-   the shared module to the iOS application.
-
-   ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
-
-6. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
-   that shows the benefits of Kotlin Multiplatform.
-7. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
+2. Restart Android Studio for the changes to take effect. 
+3. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
    to the root `build.gradle.kts` file:
 
     ```kotlin
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidLibrary) apply false
     ```
+   
+4. Select the **File** | **New** | **New Module** menu item.
+5. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared` and the package
+   name `com.jetbrains.simplelogin.shared`.
+6. Select **Regular framework** in the **iOS framework distribution** list: this indicates the method you'll use to connect
+   the shared module to the iOS application.
+
+   ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
+
+7. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
+   that shows the benefits of Kotlin Multiplatform.
 
 If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
