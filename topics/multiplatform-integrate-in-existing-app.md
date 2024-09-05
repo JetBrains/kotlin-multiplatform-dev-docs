@@ -79,7 +79,8 @@ You will create a shared module and later connect it to both the existing Androi
 
 6. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
    that shows the benefits of Kotlin Multiplatform.
-7. Add the following lines to the root `build.gradle.kts` file for Gradle to resolve the added plugins successfully:
+7. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
+   to the root `build.gradle.kts` file:
 
     ```kotlin
     alias(libs.plugins.kotlinMultiplatform) apply false
@@ -96,14 +97,14 @@ there, and make this code cross-platform.
 1. In the `shared/build.gradle.kts` file, ensure that `compileSdk` and `minSdk` are the same as those in
    the `app/build.gradle.kts` config of your Android application.
 
-   If they're different, update them in the `shared/build.gradle.kts` file. Otherwise, you'll encounter a
-   compile error about a version mismatch.
+   If they're different, update them in the `shared/build.gradle.kts` file. Otherwise, the compiler will report
+   the version mismatch as an error.
 
 2. Add a dependency on the shared module to the `app/build.gradle.kts` file:
 
     ```kotlin
     dependencies {
-        implementation (project(":shared"))
+        implementation(project(":shared"))
     }
     ```
 
