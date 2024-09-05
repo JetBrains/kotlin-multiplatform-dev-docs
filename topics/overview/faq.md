@@ -30,7 +30,7 @@ Learn more about which one to choose in [Recommended IDEs and code editors](reco
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Create a Kotlin Multiplatform app with shared logic and native UI](multiplatform-create-first-app.md) tutorial provides step-by-step
+The [Create a Kotlin Multiplatform app](get-started.xml) tutorials provide step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
