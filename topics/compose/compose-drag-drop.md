@@ -2,7 +2,7 @@
 
 <title label="EAP" annotations="Desktop">Drag and drop operations</title>
 
-You can enable your Compose Multiplatform app to accept data that users drag into it from other applications,
+You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
 or allow users to drag data out of your app.
 To implement this, use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify particular composables
 as potential sources or destinations for drag operations.
@@ -19,14 +19,14 @@ To prepare a composable to be a drag source:
 2. Call the `startTransfer()` function and describe the drag and drop session with a `DragAndDropTransferData()` call.
 3. Describe the data that is supposed to be dragged to the target with a `DragAndDropTransferable()` call.
 
-Here's an example of a `Box()` composable that allows users to drag a string from it:
+Example of a `Box()` composable that allows users to drag a string from it:
 
 ```kotlin
 val exportedText = "Hello, drag and drop!"
 
 Box(Modifier
     .dragAndDropSource(
-        // Creates a visual representation of data while it is being dragged
+        // Creates a visual representation of the data while it is being dragged
         // (white rectangle with the exportedText string centered on it).
         drawDragDecoration = {
            drawRect(
@@ -89,12 +89,13 @@ Box(Modifier
 ## Creating a drop target
 
 To prepare a composable to be a drag and drop target:
+
 1. Describe the conditions for the composable to be the target of a drop in the `shouldStartDragAndDrop` lambda.
 2. Create (and `remember`) the `DragAndDropTarget` object that will contain your overrides for drag event handlers.
 3. Write the necessary overrides: for example, `onDrop` for parsing the received data, or `onEntered` when a draggable
    object enters the composable.
 
-Here's an example of a `Box()` composable that is ready to display text dropped into it:
+Example of a `Box()` composable that is ready to display text dropped into it:
 
 ```kotlin
 var showTargetBorder by remember { mutableStateOf(false) }
@@ -103,7 +104,7 @@ val coroutineScope = rememberCoroutineScope()
 val dragAndDropTarget = remember {
    object: DragAndDropTarget {
 
-      // Shows the border of a potential drop target
+      // Highlights the border of a potential drop target
       override fun onStarted(event: DragAndDropEvent) {
          showTargetBorder = true
       }
@@ -114,7 +115,7 @@ val dragAndDropTarget = remember {
 
       override fun onDrop(event: DragAndDropEvent): Boolean {
 
-         // Prints the type of operation into system output every time a drag and drop action is concluded.
+         // Prints the type of action into system output every time a drag and drop operation is concluded.
          println("Action at the target: ${event.action}")
 
          val result = (targetText == "Drop here")
@@ -159,4 +160,5 @@ Box(Modifier
 
 ## What's next
 
-For more implementation details and common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) article about the corresponding modifiers in Jetpack Compose documentation.
+For more implementation details and common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) article about the corresponding modifiers
+in the Jetpack Compose documentation.
