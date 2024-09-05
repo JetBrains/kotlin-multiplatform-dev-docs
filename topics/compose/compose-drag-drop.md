@@ -26,7 +26,7 @@ val exportedText = "Hello, drag and drop!"
 
 Box(Modifier
     .dragAndDropSource(
-        // Creates a visual representation of the data while it is being dragged
+        // Creates a visual representation for the data being dragged
         // (white rectangle with the exportedText string centered on it).
         drawDragDecoration = {
            drawRect(
@@ -55,16 +55,17 @@ Box(Modifier
             onDragStart = { offset ->
                 startTransfer(
                     // Defines transferable data and supported transfer actions.
-                    // When an action is concluded, prints the result into system output with onTransferCompleted().    
+                    // When an action is concluded, prints the result into
+                    // system output with onTransferCompleted().    
                     DragAndDropTransferData(
                         transferable = DragAndDropTransferable(
                             StringSelection(exportedText)
                         ),
 
-                        // List of actions supported by this drag source. A type of action is passed to the drop target
-                        // together with data.
-                        // The target can use this to reject an inappropriate drop operation or to interpret user's
-                        // expectations.
+                        // List of actions supported by this drag source. A type of action
+                        // is passed to the drop target together with data.
+                        // The target can use this to reject an inappropriate drop operation
+                        // or to interpret user's expectations.
                         supportedActions = listOf(
                             DragAndDropTransferAction.Copy,
                             DragAndDropTransferAction.Move,
@@ -114,7 +115,8 @@ val dragAndDropTarget = remember {
         }
 
         override fun onDrop(event: DragAndDropEvent): Boolean {
-            // Prints the type of action into system output every time a drag and drop operation is concluded.
+            // Prints the type of action into system output every time
+            // a drag and drop operation is concluded.
             println("Action at the target: ${event.action}")
 
             val result = (targetText == "Drop here")
@@ -127,7 +129,8 @@ val dragAndDropTarget = remember {
                     it.transferDataFlavors.first().humanPresentableName
             }
 
-            // Reverts the text of the drop target to the initial value after 2 seconds.
+            // Reverts the text of the drop target to the initial
+            // value after 2 seconds.
             coroutineScope.launch {
                 delay(2000)
                 targetText = "Drop here"
@@ -147,7 +150,8 @@ Box(Modifier
             Modifier
     )
     .dragAndDropTarget(
-        // With "true" as the value of shouldStartDragAndDrop, drag and drop operations are enabled unconditionally.    
+        // With "true" as the value of shouldStartDragAndDrop,
+        // drag and drop operations are enabled unconditionally.    
         shouldStartDragAndDrop = { true },
         target = dragAndDropTarget
     )
