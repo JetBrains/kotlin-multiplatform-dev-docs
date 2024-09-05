@@ -16,7 +16,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle plugin `org.jetbrains.compose`, version 1.7.0-beta01. Based on Jetpack Compose libraries:
+* Gradle plugin `org.jetbrains.compose`, version %composeEapVersion%. Based on Jetpack Compose libraries:
   * [Runtime 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0-rc01)
   * [UI 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0-rc01)
   * [Foundation 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0-rc01)
@@ -31,7 +31,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 ### Minimum AGP version raised to 8.1.0
 
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are used by Compose Multiplatform 1.7.0, supports AGP 7.
-So when you update to Compose Multiplatform 1.7.0, you may have to upgrade your AGP dependency as well.
+So when you update to Compose Multiplatform %composeEapVersion%, you may have to upgrade your AGP dependency as well.
 
 > Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
@@ -39,10 +39,10 @@ So when you update to Compose Multiplatform 1.7.0, you may have to upgrade your 
 
 ### New default behavior for processing touch in iOS native elements
 
-Before 1.7.0, Compose Multiplatform did not (and could not) respond to touch events that landed in interop UI views.
+Before %composeEapVersion%, Compose Multiplatform could not respond to touch events that landed in interop UI views.
 Therefore, interop views handled these touch sequences entirely.
 
-In 1.7.0, Compose Multiplatform implements more sophisticated logic for handling interop touch sequences.
+In %composeEapVersion%, Compose Multiplatform implements more sophisticated logic for handling interop touch sequences.
 By default, there is a delay after the initial touch that helps the parent composable understand whether
 the touch sequence was meant to interact with the native view and react accordingly.
 
@@ -195,7 +195,7 @@ The `material3-window-size-class` dependency should be explicitly added to the l
 
 ```kotlin
 commonMain.dependencies {
-  implementation("org.jetbrains.compose.material3:material3-window-size-class:1.7.0-beta01")
+  implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeEapVersion%")
 }
 ```
 
@@ -219,7 +219,7 @@ To use it, add these explicit dependencies to your common source set:
 ```kotlin
 commonMain.dependencies {
   implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
-  implementation("org.jetbrains.compose.material:material-navigation:1.7.0-beta01")
+  implementation("org.jetbrains.compose.material:material-navigation:%composeEapVersion%")
 }
 ```
 
