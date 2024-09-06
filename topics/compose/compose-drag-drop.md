@@ -1,13 +1,13 @@
 [//]: # (title: Drag and drop operations)
 
-<title label="EAP" annotations="Desktop">Drag and drop operations</title>
+<title label="EAP" annotations="Desktop">Drag-and-drop operations</title>
 
 You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
 or allow users to drag data out of your app.
 To implement this, use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify particular composables
 as potential sources or destinations for drag operations.
 
-> Currently, drag and drop operations are only supported in Compose Multiplatform for desktop.
+> Currently, drag-and-drop operations are only supported in Compose Multiplatform for desktop.
 > The support will be extended to iOS and web in future releases.
 >
 {type="note"}
@@ -16,7 +16,7 @@ as potential sources or destinations for drag operations.
 
 To prepare a composable to be a drag source:
 1. Choose the trigger for the drag event with the `detectDragGestures()` function (for example, `onDragStart`).
-2. Call the `startTransfer()` function and describe the drag and drop session with a `DragAndDropTransferData()` call.
+2. Call the `startTransfer()` function and describe the drag-and-drop session with a `DragAndDropTransferData()` call.
 3. Describe the data that is supposed to be dragged to the target with a `DragAndDropTransferable()` call.
 
 Example of a `Box()` composable that allows users to drag a string from it:
@@ -29,23 +29,23 @@ Box(Modifier
         // Creates a visual representation of the data being dragged
         // (white rectangle with the exportedText string centered on it).
         drawDragDecoration = {
-           drawRect(
-               color = Color.White, 
-               topLeft = Offset(x = 0f, y = size.height/4),
-               size = Size(size.width, size.height/2)
-           )
-           val textLayoutResult = textMeasurer.measure(
-               text = AnnotatedString(exportedText),
-               layoutDirection = layoutDirection,
-               density = this
-           )
-           drawText(
-               textLayoutResult = textLayoutResult,
-               topLeft = Offset(
-                   x = (size.width - textLayoutResult.size.width) / 2,
-                   y = (size.height - textLayoutResult.size.height) / 2,
-               )
-           )
+            drawRect(
+                color = Color.White, 
+                topLeft = Offset(x = 0f, y = size.height/4),
+                size = Size(size.width, size.height/2)
+            )
+            val textLayoutResult = textMeasurer.measure(
+                text = AnnotatedString(exportedText),
+                layoutDirection = layoutDirection,
+                density = this
+            )
+            drawText(
+                textLayoutResult = textLayoutResult,
+                topLeft = Offset(
+                    x = (size.width - textLayoutResult.size.width) / 2,
+                    y = (size.height - textLayoutResult.size.height) / 2,
+                )
+            )
         }
     )
     .size(200.dp)
@@ -65,7 +65,7 @@ Box(Modifier
                         // List of actions supported by this drag source. A type of action
                         // is passed to the drop target together with data.
                         // The target can use this to reject an inappropriate drop operation
-                        // or to interpret user's expectations.
+                        // or to interpret user expectations.
                         supportedActions = listOf(
                             DragAndDropTransferAction.Copy,
                             DragAndDropTransferAction.Move,
@@ -89,7 +89,7 @@ Box(Modifier
 
 ## Creating a drop target
 
-To prepare a composable to be a drag and drop target:
+To prepare a composable to be a drag-and-drop target:
 
 1. Describe the conditions for the composable to be the target of a drop in the `shouldStartDragAndDrop` lambda.
 2. Create (and `remember`) the `DragAndDropTarget` object that will contain your overrides for drag event handlers.
@@ -116,7 +116,7 @@ val dragAndDropTarget = remember {
 
         override fun onDrop(event: DragAndDropEvent): Boolean {
             // Prints the type of action into system output every time
-            // a drag and drop operation is concluded.
+            // a drag-and-drop operation is concluded.
             println("Action at the target: ${event.action}")
 
             val result = (targetText == "Drop here")
@@ -151,7 +151,7 @@ Box(Modifier
     )
     .dragAndDropTarget(
         // With "true" as the value of shouldStartDragAndDrop,
-        // drag and drop operations are enabled unconditionally.    
+        // drag-and-drop operations are enabled unconditionally.    
         shouldStartDragAndDrop = { true },
         target = dragAndDropTarget
     )
