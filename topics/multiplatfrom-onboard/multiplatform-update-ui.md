@@ -36,7 +36,7 @@ Make some changes and see how they are reflected in the UI:
 
    Now it returns a list of strings.
 
-4. Go back to `App.kt` and update its definition:
+4. Go back to the `App.kt` file and update the `App()` implementation:
 
    ```kotlin
    @Composable
@@ -61,7 +61,7 @@ Make some changes and see how they are reflected in the UI:
    Here the `Column` composable shows each of the `Text` items, adding padding around them and space between them.
 
 5. Follow Android Studio's suggestions to import the missing dependencies.
-6. Now you can run the Android app to see how it displays the list:
+6. Now you can run the Android app to see how it displays the list of strings:
 
    ![Updated UI of Android multiplatform app](first-multiplatform-project-on-android-2.png){width=300}
 
@@ -74,7 +74,8 @@ Implement the same changes as in the Android app:
 
 1. Find the `iosApp` folder at the root of your project in the **Project** tool window.
 2. Inside `iosApp`, right-click the `iosApp.xcodeproj` folder and select **Open In** | **Xcode**.
-3. In the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut,
+3. Open the `ContentView.swift` file.
+4. Find the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut,
    or right-click the function name and select **Jump to Definition**.
 
    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
@@ -82,8 +83,9 @@ Implement the same changes as in the Android app:
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
-4. If you run the app, it will display an array of strings: the Swift code that uses the `greet()` function
-   doesn't take into account its changed declaration. Update the SwiftUI code to display a list of items:
+5. If you run the app now, it will display an array of strings under the image: the Swift code that uses the `greet()` function
+   can still interpret the return value, but needs different UI implementation to use it properly.
+6. Update the SwiftUI code to handle a list of items:
 
    ```Swift
    struct ContentView: View {
@@ -100,13 +102,18 @@ Implement the same changes as in the Android app:
    * The results of the `greet()` call are stored in the `phrases` variable (`let` in Swift is similar to Kotlin's `val`).
    * The `List` function produces a list of `Text` items.
 
-5. Run the app to see the changes:
+   > If the iOS app reports an import error in the `import Shared` line, try clearing up the environment
+   > with the **Product | Clean Build Folder** command.
+   >
+   {type="note"}
+
+7. Run the app to see the changes:
 
    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
-<!--
+
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step3).
 >
-{type="tip"}-->
+{type="tip"}
 
 ## Next step
 
