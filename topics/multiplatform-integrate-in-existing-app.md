@@ -76,8 +76,8 @@ Create a shared module and connect it to both the existing Android application a
     alias(libs.plugins.androidLibrary) apply false
     ```
 
-   This helps to avoid classloader issues when Kotlin Multiplatform Gradle plugin is applied in the shared module
-   you'll create next.
+   This helps to avoid classloader issues when the Kotlin Multiplatform Gradle plugin is applied in the shared module
+   that you'll create next.
 
 4. Select **File** | **New** | **New Module** from the main menu.
 5. In the list of templates, select **Kotlin Multiplatform Shared Module**. Enter the module name `shared` and the package
