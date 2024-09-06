@@ -87,8 +87,8 @@ Create a shared module and connect it to both the existing Android application a
 
    ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
 
-7. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
-   that shows the benefits of Kotlin Multiplatform.
+7. Click **Finish**. The wizard creates the Kotlin Multiplatform shared module, updates the configuration files,
+   and creates sample code that shows the benefits of Kotlin Multiplatform.
 8. Check out the newly created `shared` directory to see the code of the generated module.
 
 If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
@@ -271,7 +271,7 @@ You can learn more about [connecting to platform-specific APIs](multiplatform-co
    import com.jetbrains.simplelogin.shared.randomUUID
    ```
 
-   For Android and iOS, Kotlin will use its different platform-specific implementations.
+   Now, Kotlin will use different platform-specific implementations of UUID for Android and iOS.
 
 ### Run your cross-platform application on Android
 
@@ -355,7 +355,7 @@ Connect your framework to the iOS project manually:
    >
    > {type="tip"}
    
-6. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+6. Build the project in Xcode. If everything is set up correctly, the project will build successfully.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
