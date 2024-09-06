@@ -26,7 +26,7 @@ val exportedText = "Hello, drag and drop!"
 
 Box(Modifier
     .dragAndDropSource(
-        // Creates a visual representation for the data being dragged
+        // Creates a visual representation of the data being dragged
         // (white rectangle with the exportedText string centered on it).
         drawDragDecoration = {
            drawRect(
@@ -93,7 +93,7 @@ To prepare a composable to be a drag and drop target:
 
 1. Describe the conditions for the composable to be the target of a drop in the `shouldStartDragAndDrop` lambda.
 2. Create (and `remember`) the `DragAndDropTarget` object that will contain your overrides for drag event handlers.
-3. Write the necessary overrides: for example, `onDrop` for parsing the received data, or `onEntered` when a draggable
+3. Write the necessary overrides: for example, `onDrop` for parsing the received data or `onEntered` when a draggable
    object enters the composable.
 
 Example of a `Box()` composable that is ready to display text dropped into it:
@@ -163,5 +163,5 @@ Box(Modifier
 
 ## What's next
 
-For more implementation details and common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) article about the corresponding modifiers
+For more details on implementation and common use cases, see the [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) article about the corresponding modifiers
 in the Jetpack Compose documentation.
