@@ -65,11 +65,11 @@ Your future iOS application will use the same logic, so you should make it cross
 The cross-platform code that is used for both iOS and Android will be stored in a shared module.
 The Kotlin Multiplatform plugin for Android Studio provides a wizard for creating such modules.
 
-You will create a shared module and later connect it to both the existing Android application and your future iOS application:
+Create a shared module and connect it to both the existing Android application and your future iOS application:
 
 1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section.
 2. Restart Android Studio for the changes to take effect. 
-3. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
+3. To avoid classloader issues when the Kotlin Multiplatform Gradle plugin is applied in subprojects, add the following lines
    to the root `build.gradle.kts` file:
 
     ```kotlin
@@ -78,7 +78,7 @@ You will create a shared module and later connect it to both the existing Androi
     ```
    
 4. Select the **File** | **New** | **New Module** menu item.
-5. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared` and the package
+5. In the list of templates, select **Kotlin Multiplatform Shared Module**. Enter the module name `shared` and the package
    name `com.jetbrains.simplelogin.shared`.
 6. Select **Regular framework** in the **iOS framework distribution** list: this indicates the method you'll use to connect
    the shared module to the iOS application.
