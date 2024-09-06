@@ -188,7 +188,7 @@ it only controls source information added by the Compose compiler.
 
 **Type**: `DirectoryProperty`
 
-When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics]((https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md#reports-breakdown).
+When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md#reports-breakdown).
 They can be useful for debugging and optimizing your application's runtime performance:
 the metrics show which composable functions are skippable, restartable, read-only, and so on.
 
@@ -200,7 +200,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 **Type**: `DirectoryProperty`
 
-When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics reports]((https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md#reports-breakdown).
+When a directory is specified, the Compose compiler will use the directory to dump [compiler metrics reports](https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md#reports-breakdown).
 They can be useful for optimizing your application's runtime performance:
 the reports show which composable functions are skippable, restartable, read-only, and so on.
 
