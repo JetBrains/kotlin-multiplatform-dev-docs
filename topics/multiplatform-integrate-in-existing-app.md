@@ -67,16 +67,18 @@ The Kotlin Multiplatform plugin for Android Studio provides a wizard for creatin
 
 You will create a shared module and later connect it to both the existing Android application and your future iOS application:
 
-1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section.
+1. In Android Studio settings, select the **Advanced Settings** section and turn on the **Enable experimental Multiplatform IDE features** option.
 2. Restart Android Studio for the changes to take effect. 
-3. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
-   to the root `build.gradle.kts` file:
+3. Add the following lines to the `plugins {}` block of the root `build.gradle.kts` file:
 
     ```kotlin
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidLibrary) apply false
     ```
-   
+
+   This helps to avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in the shared module
+   you'll create next.
+
 4. Select the **File** | **New** | **New Module** menu item.
 5. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared` and the package
    name `com.jetbrains.simplelogin.shared`.
@@ -87,6 +89,7 @@ You will create a shared module and later connect it to both the existing Androi
 
 7. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
    that shows the benefits of Kotlin Multiplatform.
+8. Check out the newly created `shared` directory to see the code of the generated module.
 
 If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
