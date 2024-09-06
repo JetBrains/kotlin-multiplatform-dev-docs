@@ -273,6 +273,12 @@ To disable a feature flag that is enabled by default, call the `disabled()` func
 featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
 ```
 
+If you are configuring Compose compiler directly, use the following syntax to pass feature flags to it:
+
+```
+-P plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=<flag name>
+```
+
 #### IntrinsicRemember
 
 **Default**: enabled
