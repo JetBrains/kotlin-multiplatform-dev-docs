@@ -82,10 +82,7 @@ Implement the same changes as in the Android app:
    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
-
-5. If you run the app now, it will display an array of strings under the image: the Swift code that uses the `greet()` function
-   can still interpret the return value, but needs different UI implementation to use it properly.
-6. Update the SwiftUI code to handle a list of items:
+5. Update the SwiftUI code to display a list of items in the same way as in the Android app:
 
    ```Swift
    struct ContentView: View {
@@ -101,13 +98,15 @@ Implement the same changes as in the Android app:
 
    * The results of the `greet()` call are stored in the `phrases` variable (`let` in Swift is similar to Kotlin's `val`).
    * The `List` function produces a list of `Text` items.
+   * Xcode will report errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
+     This is to be expected – proceed to the next step.
 
-   > If the iOS app reports an import error in the `import Shared` line, try clearing up the environment
+   > If Xcode reports an import error in the `import Shared` line, try clearing up the environment
    > with the **Product | Clean Build Folder** command.
    >
    {type="note"}
 
-7. Run the app to see the changes:
+6. In Android Studio, start the iOS run configuration to see the changes:
 
    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
 
