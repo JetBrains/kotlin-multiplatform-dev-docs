@@ -65,27 +65,31 @@ Your future iOS application will use the same logic, so you should make it cross
 The cross-platform code that is used for both iOS and Android will be stored in a shared module.
 The Kotlin Multiplatform plugin for Android Studio provides a wizard for creating such modules.
 
-You will create a shared module and later connect it to both the existing Android application and your future iOS application:
+Create a shared module and connect it to both the existing Android application and your future iOS application:
 
-1. In Android Studio settings, turn on the **Enable experimental Multiplatform IDE features** option in the **Advanced Settings** section.
-2. Restart Android Studio for the changes to take effect.
-3. Select the **File** | **New** | **New Module** menu item.
-4. In the list of templates, select **Kotlin Multiplatform Shared Module**, enter the module name `shared` and the package
-   name `com.jetbrains.simplelogin.shared`.
-5. Select **Regular framework** in the **iOS framework distribution** list: this indicates the method you'll use to connect
-   the shared module to the iOS application.
-
-   ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
-
-6. Click **Finish**. The wizard will create the Kotlin Multiplatform shared module, update the configuration files, and create sample code
-   that shows the benefits of Kotlin Multiplatform.
-7. To avoid classloader issues when Kotlin Multiplatform Gradle Plugin is applied in subprojects, add the following lines
-   to the root `build.gradle.kts` file:
+1. In Android Studio settings, select the **Advanced Settings** section and turn on the **Enable experimental Multiplatform IDE features** option.
+2. Restart Android Studio for the changes to take effect. 
+3. Add the following lines to the `plugins {}` block of the root `build.gradle.kts` file:
 
     ```kotlin
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidLibrary) apply false
     ```
+
+   This helps to avoid classloader issues when the Kotlin Multiplatform Gradle plugin is applied in the shared module
+   that you'll create next.
+
+4. Select **File** | **New** | **New Module** from the main menu.
+5. In the list of templates, select **Kotlin Multiplatform Shared Module**. Enter the module name `shared` and the package
+   name `com.jetbrains.simplelogin.shared`.
+6. Select **Regular framework** in the **iOS framework distribution** list: this indicates the method you'll use to connect
+   the shared module to the iOS application.
+
+   ![Kotlin Multiplatform shared module](multiplatform-mobile-module-wizard.png){width=700}
+
+7. Click **Finish**. The wizard creates the Kotlin Multiplatform shared module, updates the configuration files,
+   and creates sample code that shows the benefits of Kotlin Multiplatform.
+8. Check out the newly created `shared` directory to see the code of the generated module.
 
 If you want to better understand the layout of the resulting project, see [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
 
@@ -267,7 +271,7 @@ You can learn more about [connecting to platform-specific APIs](multiplatform-co
    import com.jetbrains.simplelogin.shared.randomUUID
    ```
 
-   For Android and iOS, Kotlin will use its different platform-specific implementations.
+   Now, Kotlin will use different platform-specific implementations of UUID for Android and iOS.
 
 ### Run your cross-platform application on Android
 
@@ -351,7 +355,7 @@ Connect your framework to the iOS project manually:
    >
    > {type="tip"}
    
-6. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+6. Build the project in Xcode. If everything is set up correctly, the project will build successfully.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
