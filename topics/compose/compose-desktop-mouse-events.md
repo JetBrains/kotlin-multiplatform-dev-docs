@@ -1,10 +1,10 @@
 [//]: # (title: Mouse event listeners)
 
-In your desktop project, you can listen to various mouse events, like clicking, moving, scrolling, entering, and exiting.
+In your desktop project, you can listen to various mouse events, like clicking, moving, scrolling, or entering and exiting the input region.
 
 ## Click listeners
 
-Click listeners are available in both Compose Multiplatform on Android and Compose Multiplatform for desktop, so your code will work on both platforms.
+Click listeners are available in both Compose Multiplatform for Android and Compose Multiplatform for desktop, so your code will work on both platforms.
 For example, here is how to set up simple click listeners with the `onClick`, `onDoubleClick`, and `onLongClick` modifiers:
 
 ```kotlin
@@ -58,19 +58,20 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 
 <img src="compose-mouse-click-listeners.png" alt="Mouse click listeners" width="600" animated="true"/>
 
-The `combinedClickable` modifier supports only the primary button (Left Mouse Button) and touch events. If you need to handle buttons differently, 
+The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently, 
 see the [`Modifier.onClick`](#experimental-onclick-handlers) section.
 
 ## Move listeners
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes. 
-> For [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
 >
 {type="warning"}
 
-To create a window with a pointer move listener that changes the background color according to the mouse pointer position, 
+To create a pointer move listener that changes the background color of the window according to the mouse pointer position, 
 add the following code:
+
 ```kotlin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -110,11 +111,12 @@ fun main() = singleWindowApplication(title = "Mouse move listeners") {
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
 >
 {type="warning"}
 
-Compose Multiplatform for desktop supports the pointer enter and exit handlers. For example, the following code will change the font style of a line on hover:
+Compose Multiplatform for desktop supports handlers of the pointer entering and exiting the input region. For example, the following code will change the font style of a line on hover:
+
 ```kotlin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -166,11 +168,12 @@ fun main() = singleWindowApplication(title = "Mouse enter listeners") {
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
 >
 {type="warning"}
 
 The following code sample demonstrates how you can increase or decrease the displayed number depending on the mouse scroll direction:
+
 ```kotlin
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -215,8 +218,9 @@ fun main() = singleWindowApplication(title = "Mouse scroll listeners") {
 
 `Modifier.onClick` provides independent callbacks for clicks, double clicks, and long clicks. It handles clicks originating from pointer events only and doesn't handle accessibility `click` events out of the box.
 
-You can configure each `onClick` to target specific pointer events using `matcher: PointerMatcher` and `keyboardModifiers: PointerKeyboardModifiers.() -> Boolean`. 
-With `matcher`, you can choose which mouse button should trigger a click event. While `keyboardModifiers` allows you to filter pointer events that have specified key pressed.
+You can configure each `onClick` to target specific pointer events using `matcher: PointerMatcher` and `keyboardModifiers: PointerKeyboardModifiers.() -> Boolean`:
+* `matcher` allows you to choose which mouse button should trigger a click event. 
+* `keyboardModifiers` allows you to filter pointer events that have specified key pressed.
 
 You can also create a chain of multiple `onClick` modifiers to handle different clicks with different conditions of the matcher and keyboard modifiers. 
 Unlike `clickable`, `onClick` doesn't have default `Modifier.indication` and `Modifier.semantics`, and it doesn't trigger a click event when you press `Enter`. If necessary, add these modifiers separately. 
@@ -255,15 +259,15 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
         Box(modifier = Modifier
             .size(300.dp, 200.dp)
             .background(Color.LightGray)
-            // the most generic click handler (without extra conditions) should be the first one
+            // The most generic click handler (without extra conditions) should be the first one
             .onClick {
-                // it will receive all LMB clicks except when Shift is pressed
+                // Receives all left mouse button clicks except for when Shift is pressed
                 println("Click with primary button")
                 topBoxText = "LMB ${topBoxCount++}"
             }.onClick(
-                keyboardModifiers = { isShiftPressed } // accept clicks only when Shift pressed
+                keyboardModifiers = { isShiftPressed } // Accepts clicks only when Shift is pressed
             ) {
-                // it will receive all LMB clicks when Shift is pressed
+                // Receives all left mouse button clicks when Shift is pressed
                 println("Click with primary button and shift pressed")
                 topBoxCount++
                 topBoxText = "LMB + Shift ${topBoxCount++}"
@@ -287,13 +291,13 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
             .onClick(
                 enabled = true,
                 interactionSource = interactionSource,
-                matcher = PointerMatcher.mouse(PointerButton.Secondary), // Right Mouse Button
-                keyboardModifiers = { isAltPressed }, // accept clicks only when Alt pressed
-                onLongClick = { // optional
+                matcher = PointerMatcher.mouse(PointerButton.Secondary), // Right mouse button
+                keyboardModifiers = { isAltPressed }, // Accepts clicks only when Alt is pressed
+                onLongClick = { // Optional
                     bottomBoxText = "RMB Long Click + Alt ${bottomBoxCount++}"
                     println("Long Click with secondary button and Alt pressed")
                 },
-                onDoubleClick = { // optional
+                onDoubleClick = { // Optional
                     bottomBoxText = "RMB Double Click + Alt ${bottomBoxCount++}"
                     println("Double Click with secondary button and Alt pressed")
                 },
@@ -302,7 +306,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
                     println("Click with secondary button and Alt pressed")
                 }
             )
-            .onClick(interactionSource = interactionSource) { // use default parameters
+            .onClick(interactionSource = interactionSource) { // Uses default parameters
                 bottomBoxText = "LMB Click ${bottomBoxCount++}"
                 println("Click with primary button (mouse left button)")
             }
@@ -332,10 +336,11 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 With `Modifier.onDrag`, you can specify the pointer that should trigger the drag via `matcher: PointerMatcher`. 
 Similar to `onClick`, you can chain together many `onDrag` modifiers.
 
-It is also important to check the state of keyboard modifiers via `LocalWindowInfo.current.keyboardModifier` for cases when keys can alter the behavior of the drag. 
-For example, you should move an item for a simple drag, and copy/paste an item for a drag with `Ctrl` pressed.
+You can also check the state of keyboard modifiers via `LocalWindowInfo.current.keyboardModifier` for cases when keys can alter the behavior of the drag. 
+For example, when you move an item with a simple drag, and copy/paste an item with a drag and `Ctrl` pressed.
 
-The following code sample demonstrates how to handle drag events triggered by left and right mouse buttons, and the keyboard involved:
+The following code sample demonstrates how to handle drag events triggered by left and right mouse buttons, and with the keyboard involved:
+
 ```kotlin
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.PointerMatcher
@@ -374,7 +379,7 @@ fun main() = singleWindowApplication(title = "Drag") {
             }
             .size(200.dp)
             .background(Color.Green)
-            .onDrag { // all default: enabled = true, matcher = PointerMatcher.Primary (left mouse button)
+            .onDrag { // By default: enabled = true, matcher = PointerMatcher.Primary (left mouse button)
                 topBoxOffset += it
             }
         ) {
@@ -390,7 +395,7 @@ fun main() = singleWindowApplication(title = "Drag") {
             .size(200.dp)
             .background(Color.LightGray)
             .onDrag(
-                matcher = PointerMatcher.mouse(PointerButton.Secondary), // right mouse button
+                matcher = PointerMatcher.mouse(PointerButton.Secondary), // Right mouse button
                 onDragStart = {
                     println("Gray Box: drag start")
                 },
@@ -460,17 +465,18 @@ fun main() = singleWindowApplication(title = "Drag") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.pointerInput(Unit) { detectDragGestures("}
+{initial-collapse-state="collapsed" collapsed-title="Modifier.pointerInput(Unit) { detectDragGestures(matcher = PointerMatcher.Primary)"}
 
 ## Accessing raw AWT events with Swing interoperability
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
 >
 {type="warning"}
 
-Compose Multiplatform for desktop uses Swing underneath and allows to access raw AWT events:
+Compose Multiplatform for desktop uses Swing under the hood and allows to access raw AWT events:
+
 ```kotlin
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -508,10 +514,11 @@ fun main() = singleWindowApplication(title = "Raw AWT events") {
 <img src="compose-raw-awt-events.png" alt="Swing interoperability" width="600" animated="true"/>
 
 ## Listening raw events in commonMain via pointerInput
-In the snippets above we use `Modifier.onPointerEvent`, which is a helper function that subscribes to some type of pointer events. It is a new and short variant of `Modifier.pointerInput`. 
-It is currently experimental and desktop-only, so you can't use it in the `commonMain` code.
 
-If you need to subscribe to events in `commonMain` or you need stable API, you can use `Modifier.pointerInput`:
+In the snippets above we use the `Modifier.onPointerEvent` function, which is a helper function that subscribes to a type of pointer events. It is a new and short variant of the `Modifier.pointerInput` function. 
+It is currently experimental and desktop-only, so you can't use it in common code.
+
+If you need to subscribe to events in common code, or if you need a stable API, you can use the `Modifier.pointerInput` function:
 
 ```kotlin
 import androidx.compose.foundation.layout.Column
@@ -535,7 +542,7 @@ fun main() = singleWindowApplication(title = "Raw events via Modifier.pointerInp
                     while (true) {
                         val event = awaitPointerEvent()
                         val position = event.changes.first().position
-                        // on every relayout Compose will send synthetic Move event,
+                        // On each relayout, Compose will send a synthetic Move event,
                         // so we skip it to avoid event spam
                         if (event.type != PointerEventType.Move) {
                             list.add(0, "${event.type} $position")
