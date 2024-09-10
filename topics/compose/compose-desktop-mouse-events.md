@@ -513,7 +513,7 @@ fun main() = singleWindowApplication(title = "Raw AWT events") {
 
 <img src="compose-raw-awt-events.png" alt="Swing interoperability" width="600" animated="true"/>
 
-## Listening raw events in commonMain via pointerInput
+## Listening for raw events in common code via pointerInput
 
 In the snippets above we use the `Modifier.onPointerEvent` function, which is a helper function that subscribes to a type of pointer events. It is a new and short variant of the `Modifier.pointerInput` function. 
 It is currently experimental and desktop-only, so you can't use it in common code.
@@ -563,4 +563,4 @@ fun main() = singleWindowApplication(title = "Raw events via Modifier.pointerInp
 
 ## What's next
 
-You can also explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
+Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
