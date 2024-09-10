@@ -98,6 +98,8 @@ Implement the same changes as in the Android app:
 
     * The results of the `greet()` call are stored in the `phrases` variable (`let` in Swift is similar to Kotlin's `val`).
     * The `List` function produces a list of `Text` items.
+    * Xcode reports errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
+      This is expected – proceed to the next step.
 
 5. In Android Studio, start the iOS run configuration to see the changes:
 
