@@ -34,19 +34,47 @@ As long as you are using Compose Multiplatform 1.6.10 or later and Kotlin 1.7.10
 compatible with Kotlin. There is no need to manually align their versions.
 Remember that using an EAP version of either product is still potentially unstable.
 
-Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
+Compose Multiplatform 1.6.10 or later requires Compose Compiler Gradle plugin applied with the same version as Kotlin.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
-### Instability of Compose apps and libraries built with Kotlin 2.0.0
+#### Compatibility table for earlier versions of Compose Multiplatform {initial-collapse-state="collapsed"}
+
+Earlier versions of Compose Multiplatform were compatible with specific Kotlin versions.
+For example, using Compose Multiplatform 1.3 was incompatible with Kotlin 1.8.20.
+
+Consider updating to at least Compose Multiplatform 1.6.10 to not have to solve this problem anymore.
+If you are unable to update, refer to the table to choose compatible product versions:
+
+| Kotlin version | Min. Compose Multiplatform version | Notes                                                    |
+|----------------|------------------------------------|----------------------------------------------------------|
+| 1.9.23         | 1.6.1                              |
+| 1.9.22         | 1.5.12                             |
+| 1.9.21         | 1.5.11                             |
+| 1.9.20         | 1.5.10                             |
+| 1.9.10         | 1.5.1                              |
+| 1.9.0          | 1.4.3                              |
+| 1.8.22         | 1.4.3                              |
+| 1.8.21         | 1.4.3                              |
+| 1.8.20         | 1.4.0                              |
+| 1.8.10         | 1.3.1                              |
+| 1.8.0          | 1.3.0                              | 1.3.0 is not supported by earlier Kotlin/Native versions |
+| 1.7.20         | 1.2.1                              |
+| 1.7.20         | 1.2.0                              | JavaScript is not supported. (Fixed in release 1.2.1.)   |
+| 1.7.10         | 1.2.0                              |
+| 1.6.20         | 1.1.1                              |
+| 1.5.31         | 1.0.0                              |
+
+
+### Stability issue fixed in Compose compiler 2.0.10
 
 > It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later.
 >
 {type="warning"}
 
-The Compose compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects
+Compose compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects
 with non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
 
-If your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
+Moreover, if your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
 these older dependencies may still cause recomposition issues.
 
 To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
