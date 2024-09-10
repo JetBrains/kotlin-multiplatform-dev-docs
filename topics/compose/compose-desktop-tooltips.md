@@ -1,7 +1,14 @@
 [//]: # (title: Tooltips)
 
 You can add a tooltip to any component using the `TooltipArea` composable. `TooltipArea` is similar to the `Box`
-component that can show a tooltip:
+component and can show a tooltip.
+
+The `TooltipArea` composable has the following main parameters:
+
+* `tooltip`, composable content of the tooltip.
+* `tooltipPlacement`, defines the tooltip position. You can specify an anchor (the mouse cursor or the component),
+  an offset, and an alignment.
+* `delayMillis`, time in milliseconds after which the tooltip is shown. The default value is 500 ms.
 
 ```kotlin
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -67,13 +74,6 @@ fun main() = singleWindowApplication(
 
 <img src="compose-desktop-tooltips.png" alt="Tooltips" width="288" animated="true"/>
 
-The main parameters of the `TooltipArea` composable are:
-
-* `tooltip`, composable content for a tooltip.
-* `tooltipPlacement`, defines the tooltip placement. You can specify an anchor (the mouse cursor or the component),
-  an offset, and an alignment.
-* `delayMillis`, the time in milliseconds after which the tooltip is shown. The default value is 500 ms.
-
 ## What's next?
 
-You can also explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
+Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
