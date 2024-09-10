@@ -1,4 +1,4 @@
-[//]: # (title: Drag and drop operations)
+[//]: # (title: Drag-and-drop operations)
 
 <title label="EAP" annotations="Desktop">Drag-and-drop operations</title>
 
