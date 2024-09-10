@@ -6,7 +6,7 @@ overview of the desktop-specific components and events. Each section includes a 
 ## Components
 
 <!-- * [Images and icons](#images-and-icons) -->
-* [Windows and dialogs](#windows-and-dialogs)
+* [Windows and dialogs](compose-desktop-top-level-windows-management.md)
 * [Context menus](#context-menus)
 * [The system tray](#the-system-tray)
 * [Menu bar](#menu-bar)
@@ -44,54 +44,6 @@ With Compose Multiplatform, you can set the application window icon and the appl
   the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
 * For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-images-resources.md). -->
-
-### Windows and dialogs
-
-You can use the `Window` composable to create a regular window and the `DialogWindow` composable for a modal window that
-locks its parent until the user closes the modal window:
-
-```kotlin
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.window.DialogWindow
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberDialogState
-
-fun main() = application {
-    Window(
-        onCloseRequest = ::exitApplication,
-    ) {
-        var isDialogOpen by remember { mutableStateOf(false) }
-
-        Button(onClick = { isDialogOpen = true }) {
-            Text(text = "Open dialog")
-        }
-
-        if (isDialogOpen) {
-            DialogWindow(
-                onCloseRequest = { isDialogOpen = false },
-                state = rememberDialogState(position = WindowPosition(Alignment.Center))
-            ) {
-                // Dialog's content
-            }
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsed-title="Window(onCloseRequest = ::exitApplication,) { "}
-
-Compose Multiplatform provides various features for windows. You can adapt the window size, change its state (size,
-position), hide it in the tray, make the window draggable, transparent, and so on.
-
-For more information, see the [Top-level window management](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Window_API_new)
-tutorial.
 
 ### Context menus
 
