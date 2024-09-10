@@ -6,8 +6,8 @@ synchronize with each other.
 ## Scroll modifiers
 
 The `verticalScroll` and `horizontalScroll` modifiers provide the simplest way to allow the user to scroll an element when the bounds of its contents are larger than its maximum size constraints.
-You can attach the `VerticalScrollbar` composable to the `Modifier.verticalScroll` component, 
-and the `HorizontalScrollbar` composable to the `Modifier.horizontalScroll`component:
+You can attach the `VerticalScrollbar` composable to a scrollable component with the `verticalScroll` modifier 
+and the `HorizontalScrollbar` composable to a scrollable component with the `horizontalScroll` modifier:
 
 ```kotlin
 import androidx.compose.foundation.HorizontalScrollbar
@@ -92,15 +92,15 @@ fun TextBox(text: String = "Item") {
 ```
 {initial-collapse-state="collapsed" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
 
-<img src="compose-desktop-scrollbar.png" alt="Scrollbar" width="289" animated="true"/>
-
-You can move scrollbars by dragging the bars and using the mouse wheel or the touchpad. To move horizontal scrollbars with the mouse, 
+You can move scrollbars by dragging the bars and using the mouse wheel or the touchpad. To move horizontal scrollbars with the mouse,
 side-click the wheel or hold down <shortcut>Shift</shortcut>.
+
+<img src="compose-desktop-scrollbar.png" alt="Scrollbar" width="289" animated="true"/>
 
 ## Lazy scrollable components
 
 You can also use scrollbars with lazy scrollable components such as `LazyColumn` and `LazyRow`.
-Lazy components are much more efficient since they only compose the items as they're needed.
+Lazy components are much more efficient when you expect a lot of items in the list since they only compose the items as they're needed.
 
 ```kotlin
 import androidx.compose.foundation.VerticalScrollbar
@@ -179,4 +179,4 @@ fun TextBox(text: String = "Item") {
 
 ## What's next?
 
-You can also explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
+Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
