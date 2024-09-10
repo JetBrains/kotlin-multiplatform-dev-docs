@@ -25,12 +25,12 @@ about [supported platforms](supported-platforms.md).
 
 ### In which IDE should I work on my cross-platform app?
 
-We recommend using JetBrains Fleet or Android Studio, depending on your project needs and expectations.
-Learn more about which one to choose in [Recommended IDEs](recommended-ides.md).
+We recommend using JetBrains Fleet code editor or Android Studio IDE, depending on your project needs and expectations.
+Learn more about which one to choose in [Recommended IDEs and code editors](recommended-ides.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Get started with Kotlin Multiplatform](multiplatform-getting-started.md) tutorial provides step-by-step
+The [Create a Kotlin Multiplatform app with shared logic and native UI](multiplatform-create-first-app.md) tutorial provides step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
@@ -121,25 +121,28 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 ### Can I use Compose Multiplatform in production?
 
 The Android and desktop targets of Compose Multiplatform are Stable. You can use them in production.
-The iOS target is in Alpha, which means that it's in active development. You can use it with caution and expect
-migration issues.
-The version of Compose Multiplatform for web that is based on WebAssembly is Experimental. You can try it in your pet projects.
-It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
+
+The iOS target is in Beta, which means that it's feature complete. You can use it in production
+and expect minimal migration issues, but watch out for changes and deprecation warnings.
+
+The version of Compose Multiplatform for Web that is based on WebAssembly is in Alpha, which means that it's in active development.
+You can use it with caution and expect migration issues.
+It has the same UI as Compose Multiplatform for iOS, Android, and Desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
-The [Get started with Compose Multiplatform](compose-multiplatform-getting-started.md) tutorial provides step-by-step
+The [Create a Compose Multiplatform app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial provides step-by-step
 instructions for creating a Kotlin Multiplatform project with Compose Multiplatform for Android, iOS, and desktop.
 You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by Kotlin
 Developer Advocate Sebastian Aigner.
 
 ### What IDE should I use for building apps with Compose Multiplatform?
 
-We recommend using JetBrains Fleet or Android Studio, depending on your project needs and expectations. To try
+We recommend using JetBrains Fleet code editor or Android Studio IDE, depending on your project needs and expectations. To try
 a new multiplatform experience without juggling different IDEs and switching to Xcode for writing Swift code,
 try out [JetBrains Fleet tutorial](fleet.md).
 
-For more details on which one to choose, see [Recommended IDEs](recommended-ides.md).
+For more details on which one to choose, see [Recommended IDEs and code editors](recommended-ides.md).
 
 ### Can I play with a demo application? Where can I find it?
 
@@ -216,16 +219,14 @@ We have plans for improving the core Kotlin Multiplatform technology, integratio
 
 ### When will Compose Multiplatform become Stable?
 
-Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Alpha, and web is Experimental.
+Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Beta, and web is in Alpha. We are working towards a stable release for both iOS and web platforms, with exact dates to be announced.
 
-We are planning to promote Compose Multiplatform for iOS to Beta and Compose Multiplatform for web to Alpha in 2024.
-There are no specific dates for stabilizing support for these platforms.
 For more information on stability statuses, see [Supported platforms](supported-platforms.md).
 
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
 
 We're currently focusing resources on WebAssembly (Wasm), which shows great potential. You can experiment with our new
-[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for web](https://kotl.in/wasm-compose-example) powered by Wasm.
+[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
 
 As for the JS target, the Kotlin/JS backend has already reached Stable status. In Compose Multiplatform, due to resource
 constraints, we've shifted our focus from JS Canvas to Wasm, which we believe holds more promise.

@@ -1,13 +1,19 @@
 [//]: # (title: Kotlin Multiplatform samples)
 
-This is a curated list of cross-platform projects created with Kotlin Multiplatform. Some share almost all their
-functionality using Compose Multiplatform for the user interface. Others use native code for the user interface and share,
-for example, only the data model and algorithms. To get started with a new Kotlin Multiplatform application,
-we recommend using the [web wizard](https://kmp.jetbrains.com).
+This is a curated list of projects that aims to show robust and unique applications of Kotlin Multiplatform.
+
+> We are not currently accepting contributions to this page.
+> To feature your project as a sample of Kotlin Multiplatform, use the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic on GitHub.
+> See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
+to learn how to feature your project in topics.
+>
+{type="note"}
+
+Some projects share almost all their code using Compose Multiplatform for the user interface.
+Others use native code for the user interface and share, for example, only the data model and algorithms.
+To create your own brand new Kotlin Multiplatform application, we recommend using the [web wizard](https://kmp.jetbrains.com).
 
 You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic. To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
-See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
-to add your Kotlin Multiplatform project to these topics and help the community.
 
 <table>
   <tr>
@@ -45,7 +51,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
@@ -82,7 +88,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android, Auto, and Wear</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
@@ -200,7 +206,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
             <li>SwiftUI on iOS</li>
         </list>
     </td>
@@ -263,7 +269,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on desktop</li>
+            <li>Compose Multiplatform on iOS and desktop</li>
         </list>
     </td>
   </tr>
@@ -294,7 +300,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
         <list>
             <li>Jetpack Compose on Android</li>
             <li>Compose Multiplatform on iOS, desktop, and web</li>
-            <li>SwiftUI on iOS, macOS, and watchOSS</li>
+            <li>SwiftUI on iOS, macOS, and watchOS</li>
         </list>
     </td>
   </tr>
@@ -347,13 +353,13 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     <td>
         <list>
             <li>Jetpack Compose on Android</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
 <tr>
     <td>
-      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Mobile Sample</a></strong>
+      <strong><a href="https://github.com/Kotlin/kmm-basic-sample">Kotlin Multiplatform Sample</a></strong>
     </td>
     <td>A simple calculator application. Showing how to integrate Kotlin and native code using expected and actual declarations.</td>
     <td><p>Algorithms</p>
@@ -362,7 +368,7 @@ to add your Kotlin Multiplatform project to these topics and help the community.
     </td>
     <td>
         <list>
-            <li>Android XML layouts</li>
+            <li>Jetpack Compose on Android</li>
             <li>SwiftUI</li>
         </list>
     </td>
@@ -483,4 +489,102 @@ to add your Kotlin Multiplatform project to these topics and help the community.
           </list>
       </td>
   </tr>
+  
+  <tr>
+      <td>
+          <strong><a href="https://github.com/razaghimahdi/Shopping-By-KMP">Shopping By KMP</a></strong>
+      </td>
+      <td>A cross-platform application that is built using Jetpack Compose Multiplatform, a declarative framework for sharing UIs across multiple platforms with Kotlin. The application allows users to browse, search, and purchase products from a shopping catalog on Android, iOS.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>Data Storage</li>
+              <li>UI</li>
+              <li>ViewModel</li>
+              <li>Animation</li>
+              <li>Navigation</li>
+              <li>UI state</li>
+              <li>Use Case</li>
+              <li>Unit Test</li>
+              <li>UI Test</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>kotlinx-datetime</code></li>
+              <li><code>ktor-client</code></li>
+              <li><code>datastore</code></li>
+              <li><code>koin</code></li>
+              <li><code>Compose Navigation</code></li>
+              <li><code>Coil</code></li>
+              <li><code>Kotest</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android and iOS</li>
+          </list>
+      </td>
+  </tr>
+<tr>
+      <td>
+          <strong><a href="https://github.com/SEAbdulbasit/MusicApp-KMP">Music App KMP</a></strong>
+      </td>
+      <td>An application showcasing how to interact with native APIs like MediaPlayer on different platforms. It uses Spotify API to fetch data.</td>
+      <td>
+          <list>
+              <li>Model</li>
+              <li>Networking</li>
+              <li>UI</li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li><code>kotlinx-coroutines</code></li>
+              <li><code>kotlinx-serialization</code></li>
+              <li><code>ktor-client</code></li>
+              <li><code>decompose</code></li>
+          </list>
+      </td>
+      <td>
+          <list>
+              <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+          </list>
+      </td>
+  </tr>
+  
+  <tr>
+        <td>
+            <strong><a href="https://github.com/fethij/Rijksmuseum">Rijksmuseum</a></strong>
+        </td>
+        <td>Rijksmuseum is a multimodular Kotlin and Compose Multiplatform app that offers an immersive way to explore the art collection of the renowned Rijksmuseum in Amsterdam. It utilizes the Rijksmuseum API to fetch and display detailed information about various artworks, including images and descriptions.</td>
+        <td>
+          <list>
+            <li>UI</li>
+            <li>Model</li>
+            <li>Networking</li>
+            <li>Navigation</li>
+            <li>ViewModel</li>
+          </list>
+        </td>
+        <td>
+          <list>
+            <li><code>kotlinx-coroutines</code></li>
+            <li><code>kotlinx-serialization</code></li>
+            <li><code>ktor-client</code></li>
+            <li><code>koin</code></li>
+            <li><code>Compose Navigation</code></li>
+            <li><code>Coil</code></li>
+            <li><code>Jetpack ViewModel</code></li>
+          </list>
+        </td>
+        <td>
+            <list>
+                <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+            </list>
+        </td>
+    </tr>
 </table>

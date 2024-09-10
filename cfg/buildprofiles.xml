@@ -21,6 +21,7 @@
 <!--        <config-feedback-support>https://kotl.in/issue</config-feedback-support>-->
         <config-sideblocks>true</config-sideblocks>
         <config-search-scopes-provider>https://data.services.jetbrains.com/search/</config-search-scopes-provider>
+<!--        <config-versions-switcher>https://data.services.jetbrains.com/help-versions</config-versions-switcher>-->
         <og-twitter>@kotlin</og-twitter>
         <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
         <noindex-content-in-deprecated>false</noindex-content-in-deprecated>
@@ -81,7 +82,8 @@
         <generate-canonicals>true</generate-canonicals>
     </variables>
     <footer>
-        <social type="twitter" href="https://twitter.com/kotlin">X (former twitter)</social>
+        <link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
+        <social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
         <social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
         <social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
         <!-- Custom CSS will replace rss type -->
