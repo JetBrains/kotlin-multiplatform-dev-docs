@@ -98,8 +98,8 @@ Implement the same changes as in the Android app:
 
    * The results of the `greet()` call are stored in the `phrases` variable (`let` in Swift is similar to Kotlin's `val`).
    * The `List` function produces a list of `Text` items.
-   * Xcode will report errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
-     This is to be expected – proceed to the next step.
+   * Xcode reports errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
+     This is expected – proceed to the next step.
 
    > If Xcode reports an import error in the `import Shared` line, try clearing up the environment
    > with the **Product | Clean Build Folder** command.
