@@ -67,6 +67,7 @@
             <toc-element id="compose-desktop-components.md"/>
             <toc-element id="compose-desktop-scrollbars.md"/>
             <toc-element id="compose-desktop-tooltips.md"/>
+            <toc-element id="compose-desktop-mouse-events.md" toc-title="Mouse events"/>
         </toc-element>
         <toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
         <toc-element id="compose-compiler.md"/>
