@@ -45,13 +45,18 @@ To access resources in your multiplatform projects:
 ## Configuration
 
 You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
-to the `build.gradle.kts` file:
+to the `build.gradle.kts` file.
+
+### Class generation settings
+
+There are several settings that affect the way the `Res` class is generated for your project.
+An example configuration looks like this:
 
 ```kotlin
 compose.resources {
-    publicResClass = true
+    publicResClass = false
     packageOfResClass = "me.sample.library.resources"
-    generateResClass = always
+    generateResClass = auto
 }
 ```
 
@@ -60,8 +65,43 @@ compose.resources {
   as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
   `{group name}.{module name}.generated.resources` package to the class.
 * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-  when the resource library is only available transitively. By default, the `auto` value is used, to generate the `Res`
+  when the resource library is only available transitively. By default, the `auto` value is used to generate the `Res`
   class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
+
+### Custom resource directories {label="EAP"}
+
+In the `compose.resources {}` block, you can specify custom resource directories for each source set.
+A simple example is to point to a specific folder:
+
+```kotlin
+compose.resources {
+    customDirectory(
+        sourceSetName = "desktopMain",
+        directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
+    )
+}
+```
+
+You can also set up a folder populated by a Gradle task, for example, with downloaded files:
+
+```kotlin
+abstract class DownloadRemoteFiles : DefaultTask() {
+
+    @get:OutputDirectory
+    val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
+
+    @TaskAction
+    fun run() { /* your code for downloading files */ }
+}
+
+compose.resources {
+    customDirectory(
+        sourceSetName = "iosMain",
+        directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
+    )
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ## Qualifiers
 
@@ -414,6 +454,47 @@ coroutineScope.launch {
 
 </tab>
 </tabs>
+
+#### Convert byte arrays into images {label="EAP"}
+
+If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use the following functions
+to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable.
+
+Access the raw files as shown in the [Raw files](#raw-files) section, then pass the result to a composable:
+
+```kotlin
+// bytes = Res.readBytes("files/example.png")
+Image(bytes.decodeToImageBitmap(), null)
+
+// bytes = Res.readBytes("files/example.xml")
+Image(bytes.decodeToImageVector(LocalDensity.current), null)
+```
+
+On every platform except Android, you can also turn an SVG file into a `Painter` object:
+
+```kotlin
+// bytes = Res.readBytes("files/example.svg")
+Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
+```
+
+### Generated maps for resources and string IDs {label="EAP"}
+
+For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
+the filename as the key:
+
+```kotlin
+val Res.allDrawableResources: Map<String, DrawableResource>
+val Res.allStringResources: Map<String, StringResource>
+val Res.allStringArrayResources: Map<String, StringArrayResource>
+val Res.allPluralStringResources: Map<String, PluralStringResource>
+val Res.allFontResources: Map<String, FontResource>
+```
+
+An example of passing a mapped resource to a composable:
+
+```kotlin
+Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
+```
 
 ### Remote files
 
