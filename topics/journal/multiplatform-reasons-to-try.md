@@ -85,11 +85,11 @@ With Kotlin Multiplatform, developers no longer need to decide between native an
 
 Before Kotlin Multiplatform, developers had to write everything natively.
 
-![Before Kotlin Multiplatform: writing all code natively](before-kotlin-multiplatform.png){width=700}
+![Before Kotlin Multiplatform: writing all code natively](images/before-kotlin-multiplatform.svg){width=700}
 
 Kotlin Multiplatform allows developers to share business logic, presentation logic, or even UI logic, thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), which we’ll tell you more about a little bit later.
 
-![With Kotlin Multiplatform and Compose Multiplatform:  developers can share business logic, presentation logic, or even UI logic](with-compose-multiplatform.png){width=700}
+![With Kotlin Multiplatform and Compose Multiplatform:  developers can share business logic, presentation logic, or even UI logic](images/with-compose-multiplatform.svg){width=700}
 
 Now, you can share almost anything, except for platform-specific code.
 
