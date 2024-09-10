@@ -54,6 +54,7 @@
         <toc-element id="compose-lifecycle.md"/>
         <toc-element id="compose-viewmodel.md"/>
         <toc-element id="compose-navigation-routing.md"/>
+        <toc-element id="compose-drag-drop.md"/>
         <toc-element id="compose-test.md"/>
         <toc-element toc-title="iOS-specific features">
             <toc-element id="compose-swiftui-integration.md" toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html"/>
