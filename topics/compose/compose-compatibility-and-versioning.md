@@ -28,24 +28,28 @@ Compose Multiplatform for desktop has the following limitations:
 * There is a known [issue](https://github.com/JetBrains/compose-multiplatform/issues/940) with OpenJDK 11.0.12 when switching keyboard layouts on macOS.
   This issue isn't reproducible in OpenJDK 11.0.15.
 
-## Kotlin compatibility
+## Compose Multiplatform and Kotlin compatibility
 
-As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 1.7.10 or higher, Compose Multiplatform is 
+As long as you are using Compose Multiplatform 1.6.10 or later and Kotlin 1.7.10 or later, Compose Multiplatform is 
 compatible with Kotlin. There is no need to manually align their versions.
 Remember that using an EAP version of either product is still potentially unstable.
 
 Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
-> It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
-> compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects with
-> non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
->
-> If your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
-> these older dependencies may still cause recomposition issues.
-> To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
+### Instability of Compose apps and libraries built with Kotlin 2.0.0
+
+> It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later.
 >
 {type="warning"}
+
+The Compose compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects
+with non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
+
+If your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
+these older dependencies may still cause recomposition issues.
+
+To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 
 ## Jetpack Compose and Compose Multiplatform release cycles
 
