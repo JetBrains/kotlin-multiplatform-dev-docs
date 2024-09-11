@@ -58,6 +58,14 @@ if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file 
 
 You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
 
+### Breaking changes
+
+The experimental `Modifier.onExternalDrag` and related APIs have been deprecated in favor of the new `Modifier.dragAndDropTarget`.
+The `DragData` interface was moved into the `compose.ui.draganddrop` package.
+
+If you are using the deprecated APIs with Compose Multiplatform 1.7.0, you are going to encounter a deprecation error.
+With 1.8.0 the `onExternalDrag` modifier is going to be removed altogether.
+
 ## Across platforms
 
 ### Shared element transitions
@@ -183,9 +191,9 @@ You need to explicitly add the corresponding dependencies to use them:
 
 ```kotlin
 commonMain.dependencies {
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-rc01")
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-rc01")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
 }
 ```
 
@@ -195,7 +203,7 @@ The `material3-window-size-class` dependency should be explicitly added to the l
 
 ```kotlin
 commonMain.dependencies {
-  implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeEapVersion%")
+    implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeEapVersion%")
 }
 ```
 
@@ -218,8 +226,8 @@ To use it, add these explicit dependencies to your common source set:
 
 ```kotlin
 commonMain.dependencies {
-  implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
-  implementation("org.jetbrains.compose.material:material-navigation:%composeEapVersion%")
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
+    implementation("org.jetbrains.compose.material:material-navigation:%composeEapVersion%")
 }
 ```
 
@@ -258,15 +266,45 @@ This gives you a chance to process a touch event that happens in a UIKit or a Sw
 By default, Compose Multiplatform will delay transmitting touch events to interop views by 150 ms:
 
 * If within this time frame there is movement over a minor distance threshold,
-  the parent composable will intercept the touch sequence and not forward it to the interop view.
+    the parent composable will intercept the touch sequence and not forward it to the interop view.
 * If there is no noticeable movement, Compose will resign from processing the rest of the touch sequence.
-  The rest of the sequence will be processed solely by the interop view.
+    The rest of the sequence will be processed solely by the interop view.
 
 This behavior aligns with how native [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview) works.
 It helps to avoid situations where a touch sequence that starts in the interop view is intercepted
 without a chance for Compose Multiplatform to process it. This can lead to frustrating user experience.
 For example, imagine a large interop video player used in a scrollable context such as lazy list:
 it is tricky to scroll the list when most of the screen is taken by the video that intercepts all touches without Compose Multiplatform being aware of them.
+
+### Native performance improvements
+
+<!-- TODO additional copy editing -->
+
+Compose Multiplatform 1.7.0 brings accumulated performance improvements from the Kotlin/Native team made in Kotlin 2.0.20,
+as well as its own fixes and merged improvements of Jetpack Compose 1.7.0.
+According to our benchmarks, this should help bring the performance of your UI on iOS to the next level.
+We see better results across the board, both in CPU time required for rendering a frame and in the number of dropped frames
+which affect the perceived responsiveness of the app.
+
+When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform 1.7.0-beta02
+paired with Kotlin 2.0.20, we see better results across the board:
+
+* Ourstanding results for `LazyVerticalGrid` scrolling, which is closest to real-life use cases: **~22%** faster on average,
+    with the number of missed frames lowered by **50** (!) times, almost to zero.
+* The VisualEffects benchmark, which tests rendering a lot of randomly placed components, is working almost **4** times faster:
+    average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
+* On top of that, there are noticeable improvements in `AnimatedVisibility` performance (**~6%** faster rendering).
+
+You can check out the benchmarks we're using in the Compose Multiplatform repository:
+
+* [Kotlin/Native performance benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/kn-performance)
+* [iOS JVM versus Native benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/ios/jvm-vs-kotlin-native)
+
+Both benchmarks include the following tests:
+
+* `LazyGrid`, measuring performance during slow and fast scrolling.
+* `AnimatedVisibility`, measuring performance of the component with the same name.
+* `VisualEffects`, which stress-tests the Compose Multiplatform framework with rendering of a multitude random `Box` components. 
 
 ## Desktop
 
