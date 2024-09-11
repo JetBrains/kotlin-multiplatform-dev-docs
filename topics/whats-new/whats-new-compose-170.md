@@ -312,10 +312,10 @@ paired with Kotlin 2.0.20, we see better results across the board:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
 * On top of that, there are noticeable improvements in `AnimatedVisibility` performance (**~6%** faster rendering).
 
-You can check out the benchmarks we're using in the Compose Multiplatform repository:
+You can check out the Compose-specific benchmarks we're using in the Compose Multiplatform repository:
 
 * [Kotlin/Native performance benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/kn-performance)
-* [iOS JVM versus Native benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/ios/jvm-vs-kotlin-native)
+* [Kotlin/JVM versus Kotlin/Native benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/ios/jvm-vs-kotlin-native)
 
 Both benchmarks include the following tests:
 
