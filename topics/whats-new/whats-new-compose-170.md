@@ -304,7 +304,8 @@ Both benchmarks include the following tests:
 
 * `LazyGrid`, measuring performance during slow and fast scrolling.
 * `AnimatedVisibility`, measuring performance of the component with the same name.
-* `VisualEffects`, which stress-tests the Compose Multiplatform framework with rendering of a multitude random `Box` components. 
+* `VisualEffects`, measuring performance of Compose Multiplatform in stress-testing conditions of
+    rendering a multitude of random `Box` components.
 
 ## Desktop
 
