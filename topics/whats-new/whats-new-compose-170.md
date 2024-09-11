@@ -22,7 +22,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
   * [Foundation 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0-rc01)
   * [Material 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0-rc01)
   * [Material3 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0-rc01)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.1`. Based on [Jetpack Lifecycle 2.8.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.4).
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.2`. Based on [Jetpack Lifecycle 2.8.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.4).
 * Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha09`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
 * Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-alpha02`. Based on [Jetpack Material3 Adaptive 1.0.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0-rc01)
 
@@ -36,6 +36,21 @@ So when you update to Compose Multiplatform %composeEapVersion%, you may have to
 > Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
 {type="note"}
+
+### Java resources API is deprecated in favor of the multiplatform resource library
+
+<!-- TODO additional copy editing -->
+
+In this release, we explicitly deprecate the Java resources API available in the `compose.ui` package with the advice
+to go through with the transition.
+
+While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
+the framework: generated accessors, multimodule support, localization and so on.
+Consider transitioning to the [multiplatform resource library](compose-images-resources.md).
+
+If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1457)
+to make sure your code works even after you upgrade to Compose Multiplatform %composeEapVersion% and switch to multiplatform
+resources where possible.
 
 ### New default behavior for processing touch in iOS native elements
 
@@ -59,6 +74,8 @@ if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file 
 You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
 
 ### Deprecated Modifier.onExternalDrag on desktop
+
+<!-- TODO additional copy editing -->
 
 The experimental `Modifier.onExternalDrag` and related APIs have been deprecated in favor of the new `Modifier.dragAndDropTarget`.
 The `DragData` interface was moved into the `compose.ui.draganddrop` package.
