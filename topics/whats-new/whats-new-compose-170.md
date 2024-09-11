@@ -58,7 +58,7 @@ if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file 
 
 You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
 
-### Breaking changes
+### Deprecated Modifier.onExternalDrag on desktop
 
 The experimental `Modifier.onExternalDrag` and related APIs have been deprecated in favor of the new `Modifier.dragAndDropTarget`.
 The `DragData` interface was moved into the `compose.ui.draganddrop` package.
