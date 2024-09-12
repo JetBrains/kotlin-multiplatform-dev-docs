@@ -386,7 +386,7 @@ val uri = Res.getUri("files/my_video.mp4")
 Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
 the file in a manner that suits it.
 
-### Compose Multiplatform resources as Android assets {labels="EAP"}
+### Compose Multiplatform resources as Android assets {label="EAP"}
 
 Starting with Compose Multiplatform %composeEapVersion%, all multiplatform resources are packed into Android assets.
 This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
