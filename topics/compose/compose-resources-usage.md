@@ -371,26 +371,78 @@ An example of passing a mapped resource to a composable:
 Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
 ```
 
-### Accessing resources from external libraries
+## Accessing resources from external libraries
 
-If you want to make Compose Multiplatform resources available to other libraries used in your project, you
-can call the `Res.getUri()` function with the general path of the resource:
+If you want to use multiplatform resources in other libraries included in your project, you can pass the platform-specific
+path to the file to them.
+To get the platform-specific path, call the `Res.getUri()` function with the project path to the resource:
 
 ```kotlin
 val uri = Res.getUri("files/my_video.mp4")
 ```
 
-The `uri` variable will contain the precise platform-specific path to the file that the path points to.
-External libraries can use that path to access the file in a manner that suits them.
+Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
+the file in a manner that suits it.
 
-### TODO Android assets and you: the WebView story
+### Compose Multiplatform resources as Android assets {labels="EAP"}
 
-## Publication
+Starting with Compose Multiplatform %composeEapVersion%, all multiplatform resources are packed into Android assets.
+This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
-Starting with Compose Multiplatform 1.6.10, all necessary resources are included in the publication
-maven artifacts.
+> Android Studio previews are available only for composables in an Android source set.
+> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
+>
+{type="warning"}
 
-To enable this functionality, your project needs to use Kotlin 2.0.0 or newer and Gradle 7.6 or newer.
+Multiplatform resources as Android assets also allow directly accessing them on Android from WebViews and media player components,
+since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
+
+An example of an Android composable displaying a resource HTML page with a link to a resource image:
+
+```kotlin
+// androidMain/kotlin/com/example/webview/App.kt
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        val uri = Res.getUri("files/webview/index.html")
+
+        // Adding a WebView inside AndroidView with layout as full screen.
+        AndroidView(factory = {
+            WebView(it).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }, update = {
+            it.loadUrl(uri)
+        })
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
+
+The example works with this simple HTML file:
+
+```html
+<html>
+<header>
+    <title>
+        Cat Resource
+    </title>
+</header>
+<body>
+    <img src="cat.jpg">
+</body>
+</html>
+```
+{initial-collapse-state="collapsed"  collapsed-title="<title>Cat Resource</title>"}
+
+Both resource files in this example are located in the `commonMain` source set:
+
+![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
 ## What's next?
 
