@@ -50,22 +50,22 @@ You can now fine-tune the `Res` class generation in your project: alter the moda
 the class, as well as choose conditions for generating it: always, never or only with explicit dependency on the
 resource library.
 
-See [the documentation section](compose-images-resources.md#configuration) for details.
+See [the documentation section](compose-resources-usage.md#class-generation-settings) for details.
 
 #### Public function for generating resource URI
 
 The new `getUri()` function allows you to pass platform-dependent URI of a resource to external libraries,
 so that they can access the file directly.
-See [documentation](compose-images-resources.md#accessing-resources-from-external-libraries) for details.
+See [documentation](compose-resources-usage.md#accessing-resources-from-external-libraries) for details.
 
 #### Plurals for string resources
 
 You can now define plurals (quantity strings) along with other multiplatform string resources.
-See [documentation](compose-images-resources.md#plurals) for details.
+See [documentation](compose-resources-usage.md#plurals) for details.
 
 #### Support three-letter locales
 
-[Language qualifiers](compose-images-resources.md#language-and-regional-qualifiers) now support alpha-3 (ISO 639-2)
+[Language qualifiers](compose-resources-setup.md#language-and-regional-qualifiers) now support alpha-3 (ISO 639-2)
 codes for locales. 
 
 #### Experimental byte array functions for images and fonts
