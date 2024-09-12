@@ -307,8 +307,8 @@ it is tricky to scroll the list when most of the screen is taken by the video th
 
 <!-- TODO additional copy editing -->
 
-Compose Multiplatform 1.7.0 brings accumulated performance improvements from the Kotlin/Native team made in Kotlin 2.0.20,
-as well as its own fixes and merged improvements of Jetpack Compose 1.7.0.
+Compose Multiplatform 1.7.0 brings drastically improved performance, enabling the gains that the Kotlin/Native team made
+in Kotlin 2.0.20, supporting these gains with its own fixes and merging general improvements of Jetpack Compose 1.7.0.
 According to our benchmarks, this should help bring the performance of your UI on iOS to the next level.
 We see better results across the board, both in CPU time required for rendering a frame and in the number of dropped frames
 which affect the perceived responsiveness of the app.
@@ -317,7 +317,7 @@ When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose
 paired with Kotlin 2.0.20, we see better results across the board:
 
 * Ourstanding results for `LazyVerticalGrid` scrolling, which is closest to real-life use cases: **~22%** faster on average,
-    with the number of missed frames lowered by **50** (!) times, almost to zero.
+    with the number of missed frames lowered by **50** (!) times.
 * The VisualEffects benchmark, which tests rendering a lot of randomly placed components, is working almost **4** times faster:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
 * On top of that, there are noticeable improvements in `AnimatedVisibility` performance (**~6%** faster rendering).
