@@ -183,9 +183,9 @@ You need to explicitly add the corresponding dependencies to use them:
 
 ```kotlin
 commonMain.dependencies {
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-rc01")
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
-  implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-alpha03")
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-alpha03")
+  implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-alpha03")
 }
 ```
 
