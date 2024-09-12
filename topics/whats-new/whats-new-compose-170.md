@@ -206,9 +206,21 @@ You need to explicitly add the corresponding dependencies to use them:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-rc01")
-    implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-rc01")
-    implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-rc01")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.0.0-alpha03")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.0.0-alpha03")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.0.0-alpha03")
+}
+```
+
+#### material3.material3-adaptive-navigation-suite
+
+Material3 adaptive navigation suite, necessary for [building adaptive navigation](https://developer.android.com/develop/ui/compose/layouts/adaptive/build-adaptive-navigation)
+with Compose, is available in common code with Compose Multiplatform.
+You need to explicitly add the dependency to use it:
+
+```kotlin
+commonMain.dependencies {
+    implementation("org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.7.0-beta02")
 }
 ```
 
