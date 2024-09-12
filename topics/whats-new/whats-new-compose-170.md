@@ -41,7 +41,10 @@ So when you update to Compose Multiplatform %composeEapVersion%, you may have to
 
 <!-- TODO additional copy editing -->
 
-In this release, we explicitly deprecate the Java resources API available in the `compose.ui` package.
+In this release, we explicitly deprecate the Java resources APIs available in the `compose.ui` package
+(the `painterResource()`, `loadImageBitmap()`, `loadSvgPainter()`, and `loadXmlImageVector()` functions, as well as
+the `ClassLoaderResourceLoader` class and functions relying on it).
+
 Consider transitioning to the [multiplatform resource library](compose-images-resources.md).
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
 the framework: generated accessors, multimodule support, localization and so on.
