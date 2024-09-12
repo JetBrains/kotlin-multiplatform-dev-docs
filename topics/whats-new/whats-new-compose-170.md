@@ -318,8 +318,9 @@ from Jetpack Compose 1.7.0.
 When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform 1.7.0-beta02
 paired with Kotlin 2.0.20, we see better results across the board:
 
-* For `LazyVerticalGrid` scrolling, which is closest to real-life use cases, the *LazyGrid* benchmark performs **~22%** faster on average,
-    with the number of missed frames lowered by **50** times.
+* For `LazyVerticalGrid` scrolling, which is closest to real-life use cases, the *LazyGrid* benchmark performs **~22%** faster on average.
+    We also significantly reduced the number of missed frames, which usually make the users perceive the UI as less responsive.
+    Try it out for yourself: apps made with Compose Multiplatform for iOS should feel much smoother.
 * For tests rendering a lot of randomly placed components, the *VisualEffects* benchmark is working almost **4** times faster:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
 * For animation, there are noticeable improvements in the *AnimatedVisibility* benchmark performance (**~6%** faster rendering).
