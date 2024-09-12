@@ -1,5 +1,7 @@
 [//]: # (title: Using multiplatform resources in your app)
 
+<toc-settings structure-elements="chapter" depth="3"/>
+
 When you've [set up the resources for your project](compose-resources-setup.md),
 build the project to generate the special `Res` class which provides access to resources.
 To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.

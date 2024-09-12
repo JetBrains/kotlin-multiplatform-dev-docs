@@ -1,5 +1,7 @@
 [//]: # (title: Setup and configuration for multiplatform resources)
 
+<toc-settings depth="3"/>
+
 To access resources in your multiplatform projects, add the library dependency and organize files within your project directory:
 
 1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
