@@ -41,9 +41,9 @@ So when you update to Compose Multiplatform %composeEapVersion%, you may have to
 
 <!-- TODO additional copy editing -->
 
-In this release, we explicitly deprecate the Java resources APIs available in the `compose.ui` package
-(the `painterResource()`, `loadImageBitmap()`, `loadSvgPainter()`, and `loadXmlImageVector()` functions, as well as
-the `ClassLoaderResourceLoader` class and functions relying on it).
+In this release, we explicitly deprecate the Java resources APIs available in the `compose.ui` package:
+the `painterResource()`, `loadImageBitmap()`, `loadSvgPainter()`, and `loadXmlImageVector()` functions, as well as
+the `ClassLoaderResourceLoader` class and functions relying on it.
 
 Consider transitioning to the [multiplatform resource library](compose-images-resources.md).
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
@@ -205,7 +205,7 @@ See the [documentation](compose-images-resources.md#convert-byte-arrays-into-ima
 #### material3.adaptive:adaptive*
 
 Material3 adaptive modules are available in common code with Compose Multiplatform.
-You need to explicitly add the corresponding dependencies to use them:
+You need to explicitly add the corresponding dependencies to the common source set in the module's `build.gradle.kts` file to use them:
 
 ```kotlin
 commonMain.dependencies {
@@ -219,17 +219,18 @@ commonMain.dependencies {
 
 Material3 adaptive navigation suite, necessary for [building adaptive navigation](https://developer.android.com/develop/ui/compose/layouts/adaptive/build-adaptive-navigation)
 with Compose, is available in common code with Compose Multiplatform.
-You need to explicitly add the dependency to use it:
+You need to explicitly add the dependency to the common source set in the module's `build.gradle.kts` file to use it:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.7.0-beta02")
+    implementation("org.jetbrains.compose.material3:material3-adaptive-navigation-suite:%composeEapVersion%")
 }
 ```
 
 #### material3:material3-window-size-class
 
-The `material3-window-size-class` dependency should be explicitly added to the list of common dependencies:
+You need to explicitly add the `material3-window-size-class` dependency to the common source set in the module's
+`build.gradle.kts` file to use it:
 
 ```kotlin
 commonMain.dependencies {
@@ -252,7 +253,7 @@ val size = calculateWindowSizeClass()
 #### material-navigation
 
 The `material-navigation` library is available in common code alongside Compose Multiplatform navigation.
-To use it, add these explicit dependencies to your common source set:
+To use it, add these explicit dependencies to the common source set in the module's `build.gradle.kts` file:
 
 ```kotlin
 commonMain.dependencies {
