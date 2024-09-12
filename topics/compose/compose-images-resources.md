@@ -1,4 +1,4 @@
-[//]: # (title: Multiplatform resources)
+[//]: # (title: Resources overview)
 
 Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
 across all supported platforms.
@@ -14,6 +14,11 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Starting with 1.6.10, you can place resources in any module or source set,
   as long as you are using Kotlin 2.0.0 or newer, and Gradle 7.6 or newer.
 
+### Set up a project with multiplatform resources
+
 To set up and configure all resources that your app should be able to access, see [](compose-resources-setup.md).
 
-For the reference of automatically generated accessors and various resource use cases, see [](compose-resources-usage.md).
+### Access the available resources in your code
+
+To use the resources in your UI, use the automatically generated accessors.
+For their reference and various resource use cases, see [](compose-resources-usage.md).
