@@ -315,27 +315,20 @@ With Kotlin 2.0.20, the Kotlin/Native team made a lot of progress in making Comp
 Compose Multiplatform %composeEapVersion% release makes use of these optimizations, as well as brings performance improvements
 from Jetpack Compose 1.7.0.
 
-When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform 1.7.0-beta02
+When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform %composeEapVersion%
 paired with Kotlin 2.0.20, we see better results across the board:
 
-* For `LazyVerticalGrid` scrolling, which is closest to real-life use cases, the *LazyGrid* benchmark performs **~22%** faster on average.
-    We also significantly reduced the number of missed frames, which usually make the users perceive the UI as less responsive.
+* The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~22%** faster on average.
+    It also shows significantly reduced number of missed frames, which usually make the users perceive the UI as less responsive.
     Try it out for yourself: apps made with Compose Multiplatform for iOS should feel much smoother.
-* For tests rendering a lot of randomly placed components, the *VisualEffects* benchmark is working almost **4** times faster:
+* The *VisualEffects* benchmark renders a lot of randomly placed components and is working almost **4** times faster:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
-* For animation, there are noticeable improvements in the *AnimatedVisibility* benchmark performance (**~6%** faster rendering).
+* The *AnimatedVisibility* benchmark animates showing and hiding an image and shows **~6%** faster rendering.
 
-You can check out the Compose-specific benchmarks we're using in the Compose Multiplatform repository:
+You can check out the code for these Compose-specific benchmarks in the Compose Multiplatform repository:
 
 * [Kotlin/Native performance benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/kn-performance)
 * [Kotlin/JVM versus Kotlin/Native benchmark](https://github.com/JetBrains/compose-multiplatform/tree/master/benchmarks/ios/jvm-vs-kotlin-native)
-
-Both benchmarks include the following tests:
-
-* `LazyGrid`, measuring performance during slow and fast scrolling.
-* `AnimatedVisibility`, measuring performance of the component with the same name.
-* `VisualEffects`, measuring performance of Compose Multiplatform in stress-testing conditions of
-    rendering a multitude of random `Box` components.
 
 ## Desktop
 
