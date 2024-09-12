@@ -50,7 +50,11 @@
     <toc-element id="multiplatform-samples.md" toc-title="Samples"/>
     <toc-element toc-title="Compose Multiplatform UI framework">
         <toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
-        <toc-element id="compose-images-resources.md"/>
+        <toc-element toc-title="Multiplatform resources">
+            <toc-element id="compose-images-resources.md"/>
+            <toc-element id="compose-resources-setup.md"/>
+            <toc-element id="compose-resources-usage.md"/>
+        </toc-element>
         <toc-element id="compose-lifecycle.md"/>
         <toc-element id="compose-viewmodel.md"/>
         <toc-element id="compose-navigation-routing.md"/>
