@@ -235,8 +235,8 @@ Here's an example of specifying paths to several files:
 ```kotlin
 composeCompiler {
     stabilityConfigurationFiles.addAll(
-        project.layout.file("configuration-file1.conf"),
-        project.layout.file("configuration-file2.conf"),
+        project.layout.projectDirectory.file("configuration-file1.conf"),
+        project.layout.projectDirectory.file("configuration-file2.conf"),
     )
 }
 ```
