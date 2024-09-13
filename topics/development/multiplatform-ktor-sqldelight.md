@@ -933,10 +933,14 @@ The Kotlin Multiplatform wizard generates an iOS project that is already connect
 is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
 using a regular `import` statement: `import Shared`.
 
-### Turn off static linking
+### Linking sqlite
+
+On iOS, the Xcode build tools need to "link" to the system sqlite library. There are two basic ways to do that.
+
+#### Turn off static linking
 
 The Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
-To use the SQLDelight library, allow the iOS framework to link dynamically.
+The pros and cons of static vs dynamic linking are only important for production apps. To make linking simple for now, link your framework dynamically.
 
 To do that, open the `shared/build.gradle.kts` file and change the `isStatic` property of the `iosTarget.binaries.framework`
 block to `false`:
@@ -958,6 +962,12 @@ kotlin {
 }
 ```
 {initial-collapse-state="collapsed" collapsed-title="isStatic = false"}
+
+#### Add the sqlite linker flag to Xode
+
+The first option, "Turn off static linking", is generally simpler. However, to build with a static framework, add the linker flag in Xcode config.
+
+In Xcode, find the project, and open “Build Settings”. Search for "Other Linker Flags", and add `-lsqlite3`.
 
 ### Prepare a Koin class for iOS dependency injection
 
