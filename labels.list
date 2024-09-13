@@ -6,7 +6,7 @@
         This functionality is available only in the EAP version.
     </label>
 
-    <annotation short-name="Deprecated" full-name="Still available, but deprecated." color="gray"/>
+    <annotation short-name="Deprecated" full-name="Still available, but deprecated." color="strawberry"/>
     <annotation short-name="Experimental" full-name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
     <annotation short-name="Android" full-name="Available in Compose Multiplatform for Android"/>
     <annotation short-name="Desktop" full-name="Available in Compose Multiplatform for desktop"/>
