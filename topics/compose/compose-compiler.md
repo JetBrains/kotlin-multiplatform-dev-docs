@@ -208,7 +208,7 @@ The [metricsDestination](#metricsdestination) option allows dumping raw metrics.
 
 For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
-#### stabilityConfigurationFile {annotations="Deprecated"}
+#### stabilityConfigurationFile
 
 > This option is _deprecated_ in Kotlin 2.1.0-Beta1 in favor of [stabilityConfigurationFiles](#stabilityconfigurationfiles),
 > which allows using more than one stability configuration file.
