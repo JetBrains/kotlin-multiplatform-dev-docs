@@ -208,13 +208,38 @@ The [metricsDestination](#metricsdestination) option allows dumping raw metrics.
 
 For a deep dive into the compiler metrics, see this [Composable metrics blog post](https://chrisbanes.me/posts/composable-metrics/).
 
-#### stabilityConfigurationFile
+#### stabilityConfigurationFile {annotations="Deprecated"}
+
+> This option is _deprecated_ in Kotlin 2.1.0-beta01 in favor of [stabilityConfigurationFiles](#stabilityconfigurationfiles),
+> which allows using more than one stability configuration file.
+> 
+{type="warning"}
 
 **Type**: `RegularFileProperty`
 
-Path to the stability configuration file.
+Path to the stability configuration file (file with a list of classes which should be considered stable).
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
+
+#### stabilityConfigurationFiles
+
+**Type**: `ListProperty<RegularFile>`
+
+Paths to stability configuration files to be used for the current module.
+Stability configuration files contain a list of classes which should be considered stable by the compiler.
+For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
+in the Jetpack Compose documentation.
+
+Here's an example of specifying paths to several files:
+
+```kotlin
+composeCompiler {
+    stabilityConfigurationFiles.addAll(
+        project.layout.file("configuration-file1.conf"),
+        project.layout.file("configuration-file2.conf"),
+    )
+}
+```
 
 #### includeTraceMarkers
 
