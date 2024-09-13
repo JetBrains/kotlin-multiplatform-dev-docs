@@ -217,7 +217,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 **Type**: `RegularFileProperty`
 
-Path to the stability configuration file (file with a list of classes which should be considered stable).
+Stability configuration file: a file with a list of classes which should be considered stable.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
 
@@ -225,7 +225,8 @@ in the Jetpack Compose documentation.
 
 **Type**: `ListProperty<RegularFile>`
 
-Paths to stability configuration files to be used for the current module.
+Stability configuration files to be used for the current module.
+
 Stability configuration files contain a list of classes which should be considered stable by the compiler.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
