@@ -49,7 +49,7 @@ Consider transitioning to the [multiplatform resource library](compose-images-re
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
 the framework: generated accessors, multimodule support, localization and so on.
 
-If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1457)
+If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/157)
 to make sure your code works even after you upgrade to Compose Multiplatform %composeEapVersion% and switch to multiplatform
 resources where possible.
 
@@ -109,7 +109,7 @@ For details, see the [Google’s Navigation docs about type safety](https://deve
 All multiplatform resources are now packed into Android assets. This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
 > Android Studio previews are available only for composables in an Android source set.
-> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
+> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha0.
 >
 {type="note"}
 
@@ -321,7 +321,7 @@ paired with Kotlin 2.0.20, we see better results across the board:
 * The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~22%** faster on average.
     It also shows significantly reduced number of missed frames, which usually make the users perceive the UI as less responsive.
     Try it out for yourself: apps made with Compose Multiplatform for iOS should feel much smoother.
-* The *VisualEffects* benchmark renders a lot of randomly placed components and is working almost **4** times faster:
+* The *VisualEffects* benchmark renders a lot of randomly placed components and is working **3.6** times faster:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
 * The *AnimatedVisibility* benchmark animates showing and hiding an image and shows **~6%** faster rendering.
 
