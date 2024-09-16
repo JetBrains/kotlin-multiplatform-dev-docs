@@ -49,7 +49,7 @@ Consider transitioning to the [multiplatform resource library](compose-images-re
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
 the framework: generated accessors, multimodule support, localization and so on.
 
-If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/157)
+If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1457)
 to make sure your code works even after you upgrade to Compose Multiplatform %composeEapVersion% and switch to multiplatform
 resources where possible.
 
@@ -109,7 +109,7 @@ For details, see the [Google’s Navigation docs about type safety](https://deve
 All multiplatform resources are now packed into Android assets. This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
 > Android Studio previews are available only for composables in an Android source set.
-> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha0.
+> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
 >
 {type="note"}
 
