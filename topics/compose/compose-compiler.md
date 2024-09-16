@@ -275,7 +275,7 @@ featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
 
 If you are configuring the Compose compiler directly, use the following syntax to pass feature flags to it:
 
-```
+```none
 -P plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=<flag name>
 ```
 
