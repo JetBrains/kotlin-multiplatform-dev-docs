@@ -2,11 +2,11 @@
 
 Here are the highlights for this feature release:
 
-* [Type safe Navigation](#type-safe-navigation)
+* [Type-safe Navigation](#type-safe-navigation)
 * [Shared element transitions](#shared-element-transitions)
-* [Multiplatform resources are now packed into Android assets](#resources-packed-into-android-assets)
+* [Multiplatform resources packed into Android assets](#resources-packed-into-android-assets)
 * [Custom resource directories](#custom-resource-directories)
-* [Support for test multiplatform resources](#support-for-test-multiplatform-resources)
+* [Support for multiplatform test resources](#support-for-multiplatform-test-resources)
 * [Improved touch interop on iOS](#new-default-behavior-for-processing-touch-in-ios-native-elements)
 * [Material3 `adaptive` and `material3-window-size-class` now in common code](#material3-adaptive-adaptive)
 * [Drag and drop implemented on desktop](#drag-and-drop-implemented)
@@ -62,7 +62,7 @@ Compose Multiplatform %composeEapVersion% implements more sophisticated logic fo
 By default, there is now a delay after the initial touch, which helps the parent composable understand whether
 the touch sequence was meant to interact with the native view and react accordingly.
 
-For more information, see the more detailed explanation in the [iOS section of this page](#ios-touch-interop) 
+For more information, see the explanation in the [iOS section of this page](#ios-touch-interop) 
 or read the [documentation for this feature](compose-ios-touch.md).
 
 ### Disabling minimum frame duration on iOS is mandatory
@@ -89,7 +89,7 @@ With 1.8.0 the `onExternalDrag` modifier is going to be removed altogether.
 ### Shared element transitions
 
 Compose Multiplatform now offers an API for seamless transitions between composables that share consistent elements.
-These transitions are often useful in navigation, helping users follow the changes in the UI.
+These transitions are often useful in navigation, helping users follow the trajectory of changes in the UI.
 
 For a deep dive into the API, see the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/animation/shared-elements).
 
@@ -175,9 +175,7 @@ eliminating excessive byte reading of `Font` resources.
 
 #### Support for multiplatform test resources
 
-The resource library now supports using test resources in your projects:
-
-Now you can:
+The resource library now supports using test resources in your projects, meaning you can:
 
 * Add resources to test source sets.
 * Use generated accessors that are available only in the corresponding source sets.
@@ -233,7 +231,7 @@ commonMain.dependencies {
 
 To use [`WindowSizeClass`](https://developer.android.com/reference/kotlin/androidx/compose/material3/windowsizeclass/package-summary)
 classes, you need to explicitly add the `material3-window-size-class` dependency to the common source set in the module's
-`build.gradle.kts` file :
+`build.gradle.kts` file:
 
 ```kotlin
 commonMain.dependencies {
@@ -293,7 +291,7 @@ and thus no platform-specific events to listen to.
 
 ### Improved touch interop between Compose Multiplatform and native iOS {id="ios-touch-interop"}
 
-This release improves the touch handling for iOS interop views.
+This release improves touch handling for iOS interop views.
 Compose Multiplatform now tries to detect whether a touch is meant for an interop view or should be processed by Compose.
 This makes it possible to process touch events that happen in a UIKit or a SwiftUI area inside your Compose Multiplatform app.
 
@@ -337,7 +335,7 @@ You can check out the code for these Compose-specific benchmarks in the Compose 
 
 ### Drag and drop
 
-The drag and drop mechanism, which enables users to drag content into or out of your Compose application,
+The drag-and-drop mechanism, which enables users to drag content into or out of your Compose application,
 has been implemented in Compose Multiplatform for desktop.
 To specify potential sources and destinations for dragging and dropping, use the `dragAndDropSource` and `dragAndDropTarget` modifiers.
 
