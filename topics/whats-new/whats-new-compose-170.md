@@ -321,7 +321,7 @@ paired with Kotlin 2.0.20, we see better results across the board:
 * The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~22%** faster on average.
     It also shows significantly reduced number of missed frames, which usually make the users perceive the UI as less responsive.
     Try it out for yourself: apps made with Compose Multiplatform for iOS should feel much smoother.
-* The *VisualEffects* benchmark renders a lot of randomly placed components and is working almost **4** times faster:
+* The *VisualEffects* benchmark renders a lot of randomly placed components and is working **3.6** times faster:
     average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
 * The *AnimatedVisibility* benchmark animates showing and hiding an image and shows **~6%** faster rendering.
 
