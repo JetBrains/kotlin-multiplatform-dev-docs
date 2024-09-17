@@ -47,10 +47,7 @@ Box(Modifier
                 )
             )
         }
-    )
-    .size(200.dp)
-    .background(Color.LightGray)
-    {
+    ) {
         detectDragGestures(
             onDragStart = { offset ->
                 startTransfer(
@@ -81,6 +78,8 @@ Box(Modifier
             onDrag = { _, _ -> },
         )
     }
+    .size(200.dp)
+    .background(Color.LightGray)
 ) {
     Text("Drag Me", Modifier.align(Alignment.Center))
 }
