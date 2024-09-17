@@ -9,8 +9,8 @@ Here are the highlights for this feature release:
 * [Support for multiplatform test resources](#support-for-multiplatform-test-resources)
 * [Improved touch interop on iOS](#new-default-behavior-for-processing-touch-in-ios-native-elements)
 * [Material3 `adaptive` and `material3-window-size-class` now in common code](#material3-adaptive-adaptive)
-* [Drag and drop implemented on desktop](#drag-and-drop-implemented)
-* [`BasicTextField` adopted on desktop](#basictextfield-renamed-from-basictextfield2-is-adopted-on-desktop)
+* [Drag and drop implemented on desktop](#drag-and-drop)
+* [`BasicTextField` adopted on desktop](#basictextfield-renamed-from-basictextfield2-adopted-on-desktop)
 
 See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-september-2024).
 
