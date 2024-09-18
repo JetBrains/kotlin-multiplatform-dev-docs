@@ -11,7 +11,7 @@ After that, you can use the generated class to access the configured multiplatfo
 To learn about passing multiplatform resources to external libraries and about using Java resources and remote files
 in Compose Multiplatform, see the [dedicated section](#other-resources-and-external-access).
 
-## Customizing the accessor class generation
+## Customizing accessor class generation
 
 You can customize the generated `Res` class to suit your needs using Gradle settings.
 

@@ -50,13 +50,13 @@ You can now fine-tune the `Res` class generation in your project: alter the moda
 the class, as well as choose conditions for generating it: always, never or only with explicit dependency on the
 resource library.
 
-See [the documentation section](compose-multiplatform-resources-usage.md#class-generation-settings) for details.
+See [the documentation section](compose-multiplatform-resources-usage.md#customizing-accessor-class-generation) for details.
 
 #### Public function for generating resource URI
 
 The new `getUri()` function allows you to pass platform-dependent URI of a resource to external libraries,
 so that they can access the file directly.
-See [documentation](compose-multiplatform-resources-usage.md#accessing-resources-from-external-libraries) for details.
+See [documentation](compose-multiplatform-resources-usage.md#accessing-multiplatform-resources-from-external-libraries) for details.
 
 #### Plurals for string resources
 
