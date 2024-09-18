@@ -20,5 +20,5 @@ To set up and configure all resources that your app should be able to access, se
 
 ### Access the available resources in your code
 
-To use the resources in your UI, use the automatically generated accessors.
-For their reference and various resource use cases, see [](compose-multiplatform-resources-usage).
+To access resources in your UI, use the automatically generated accessors.
+For the reference and various use cases, see [](compose-multiplatform-resources-usage).

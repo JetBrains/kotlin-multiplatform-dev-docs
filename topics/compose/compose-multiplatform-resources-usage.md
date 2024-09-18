@@ -6,9 +6,14 @@ When you've [set up the resources for your project](compose-multiplatform-resour
 build the project to generate the special `Res` class which provides access to resources.
 To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
-You can also customize the generated class to suit your needs using the Gradle settings block.
+After that, you can use the generated class to access the configured multiplatform resources from your code.
 
-## Customizing the Res class generation
+To learn about passing multiplatform resources to external libraries and about using Java resources and remote files
+in Compose Multiplatform, see the [dedicated section](#other-resources-and-external-access).
+
+## Customizing the accessor class generation
+
+You can customize the generated `Res` class to suit your needs using Gradle settings.
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify several settings that affect the way
 the `Res` class is generated for your project.
@@ -383,8 +388,8 @@ This enables Android Studio to generate previews for Compose Multiplatform compo
 >
 {type="warning"}
 
-Multiplatform resources as Android assets also allow directly accessing them on Android from WebViews and media player components,
-since resources can be reached by a simple path, for example `Res.getUri(“files/index.html”)`
+Using Multiplatform resources as Android assets also makes possible direct access from WebViews and media player components
+on Android, since resources can be reached by a simple path, for example `Res.getUri("files/index.html")`.
 
 An example of an Android composable displaying a resource HTML page with a link to a resource image:
 
@@ -461,11 +466,11 @@ You can load remote files from the internet using their URL using specialized li
 ### Using Java resources {label="EAP"}
 
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
-the framework: generated accessors, multimodule support, localization and so on.
+the framework: generated accessors, multimodule support, localization, and so on.
 Consider transitioning fully to the multiplatform resource library to unlock that potential.
 
 With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
-If you have to work with Java resources, copy the following implementation to your project to make sure that your code
+If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
 accessing Java resources works after you upgrade to Compose Multiplatform 1.7.0:
 
 ```kotlin

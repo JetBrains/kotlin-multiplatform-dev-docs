@@ -2,6 +2,15 @@
 
 <toc-settings depth="3"/>
 
+To properly configure the project to use multiplatform resources:
+
+1. Add the library dependency.
+2. Create the necessary directories for each kind of resource.
+3. Create additional directories for qualified resources (for example, different images for the dark UI theme
+    or localized strings).
+
+## Dependency and directories setup
+
 To access resources in your multiplatform projects, add the library dependency and organize files within your project directory:
 
 1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
@@ -28,9 +37,12 @@ To access resources in your multiplatform projects, add the library dependency a
    * Strings should be in the `values` directory.
    * Other files should be in the `files` directory, with any folder hierarchy you may find appropriate.
 
-## Custom resource directories {label="EAP"}
+### Custom resource directories {label="EAP"}
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify custom resource directories for each source set.
+Each of these custom directories should also contain files in same way as the default `composeResources`: with a `drawable` subdirectory
+for images, a `font` subdirectory for fonts, and so on.
+
 A simple example is to point to a specific folder:
 
 ```kotlin
