@@ -43,7 +43,7 @@ With Compose Multiplatform, you can set the application window icon and the appl
 * For more information on working with images using Compose Multiplatform in desktop projects, see
   the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
-* For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-images-resources.md). -->
+* For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-multiplatform-resources.md). -->
 
 ### Windows and dialogs
 

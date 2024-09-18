@@ -51,7 +51,7 @@
     <toc-element toc-title="Compose Multiplatform UI framework">
         <toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
         <toc-element toc-title="Multiplatform resources">
-            <toc-element id="compose-images-resources.md"/>
+            <toc-element id="compose-multiplatform-resources.md" accepts-web-file-names="compose-images-resources.html"/>
             <toc-element id="compose-resources-setup.md"/>
             <toc-element id="compose-resources-usage.md"/>
         </toc-element>
