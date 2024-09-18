@@ -8,7 +8,7 @@ To manually generate the `Res` class and all the resource accessors, build the p
 
 You can also customize the generated class to suit your needs using the Gradle settings block.
 
-## Class generation settings
+## Customizing the Res class generation
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify several settings that affect the way
 the `Res` class is generated for your project.
@@ -354,50 +354,6 @@ On every platform except Android, you can also turn an SVG file into a `Painter`
 Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
 ```
 
-### Using Java resources with Compose Multiplatform
-
-While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
-the framework: generated accessors, multimodule support, localization and so on.
-Consider transitioning fully to the multiplatform resource library to unlock that potential.
-
-With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
-If you have to work with Java resources, copy the following implementation to your project to make sure that your code
-accessing Java resources works after you upgrade to Compose Multiplatform 1.7.0:
-
-```kotlin
-@Composable
-internal fun painterResource(
-    resourcePath: String
-): Painter = when (resourcePath.substringAfterLast(".")) {
-    "svg" -> rememberSvgResource(resourcePath)
-    "xml" -> rememberVectorXmlResource(resourcePath)
-    else -> rememberBitmapResource(resourcePath)
-}
-
-@Composable
-internal fun rememberBitmapResource(path: String): Painter {
-    return remember(path) { BitmapPainter(readResourceBytes(path).decodeToImageBitmap()) }
-}
-
-@Composable
-internal fun rememberVectorXmlResource(path: String): Painter {
-    val density = LocalDensity.current
-    val imageVector = remember(density, path) { readResourceBytes(path).decodeToImageVector(density) }
-    return rememberVectorPainter(imageVector)
-}
-
-@Composable
-internal fun rememberSvgResource(path: String): Painter {
-    val density = LocalDensity.current
-    return remember(density, path) { readResourceBytes(path).decodeToSvgPainter(density) }
-}
-
-private object ResourceLoader
-private fun readResourceBytes(resourcePath: String) =
-    ResourceLoader.javaClass.classLoader.getResourceAsStream(resourcePath).readAllBytes()
-```
-{initial-collapse-state="collapsed" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
-
 ### Generated maps for resources and string IDs {label="EAP"}
 
 For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
@@ -416,19 +372,6 @@ An example of passing a mapped resource to a composable:
 ```kotlin
 Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
 ```
-
-## Accessing resources from external libraries
-
-If you want to use multiplatform resources in other libraries included in your project, you can pass the platform-specific
-path to the file to them.
-To get the platform-specific path, call the `Res.getUri()` function with the project path to the resource:
-
-```kotlin
-val uri = Res.getUri("files/my_video.mp4")
-```
-
-Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
-the file in a manner that suits it.
 
 ### Compose Multiplatform resources as Android assets {label="EAP"}
 
@@ -489,6 +432,75 @@ The example works with this simple HTML file:
 Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
+
+## Other resources and external access
+
+### Accessing multiplatform resources from external libraries
+
+If you want to use multiplatform resources in other libraries included in your project, you can pass the platform-specific
+path to the file to them.
+To get the platform-specific path, call the `Res.getUri()` function with the project path to the resource:
+
+```kotlin
+val uri = Res.getUri("files/my_video.mp4")
+```
+
+Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
+the file in a manner that suits it.
+
+### Remote files
+
+In the context of the resource library, only files that are part of the application are considered resources.
+
+You can load remote files from the internet using their URL using specialized libraries:
+
+* [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
+* [Kamel](https://github.com/Kamel-Media/Kamel)
+* [Ktor client](https://ktor.io/)
+
+### Using Java resources {label="EAP"}
+
+While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
+the framework: generated accessors, multimodule support, localization and so on.
+Consider transitioning fully to the multiplatform resource library to unlock that potential.
+
+With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
+If you have to work with Java resources, copy the following implementation to your project to make sure that your code
+accessing Java resources works after you upgrade to Compose Multiplatform 1.7.0:
+
+```kotlin
+@Composable
+internal fun painterResource(
+    resourcePath: String
+): Painter = when (resourcePath.substringAfterLast(".")) {
+    "svg" -> rememberSvgResource(resourcePath)
+    "xml" -> rememberVectorXmlResource(resourcePath)
+    else -> rememberBitmapResource(resourcePath)
+}
+
+@Composable
+internal fun rememberBitmapResource(path: String): Painter {
+    return remember(path) { BitmapPainter(readResourceBytes(path).decodeToImageBitmap()) }
+}
+
+@Composable
+internal fun rememberVectorXmlResource(path: String): Painter {
+    val density = LocalDensity.current
+    val imageVector = remember(density, path) { readResourceBytes(path).decodeToImageVector(density) }
+    return rememberVectorPainter(imageVector)
+}
+
+@Composable
+internal fun rememberSvgResource(path: String): Painter {
+    val density = LocalDensity.current
+    return remember(density, path) { readResourceBytes(path).decodeToSvgPainter(density) }
+}
+
+private object ResourceLoader
+private fun readResourceBytes(resourcePath: String) =
+    ResourceLoader.javaClass.classLoader.getResourceAsStream(resourcePath).readAllBytes()
+```
+{initial-collapse-state="collapsed" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
 
 ## What's next?
 

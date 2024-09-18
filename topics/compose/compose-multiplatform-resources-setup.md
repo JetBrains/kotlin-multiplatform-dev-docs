@@ -110,16 +110,6 @@ You can use the following density qualifiers:
 
 The resource is selected depending on the screen density defined in the system.
 
-### Remote files
-
-Only files that are part of the application are considered resources.
-
-You can also load remote files from the internet using their URL. To load remote files, use special libraries:
-
-* [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
-* [Kamel](https://github.com/Kamel-Media/Kamel)
-* [Ktor client](https://ktor.io/)
-
 ## Publication
 
 Starting with Compose Multiplatform 1.6.10, all necessary resources are included in the publication
