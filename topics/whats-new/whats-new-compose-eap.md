@@ -57,7 +57,7 @@ See [the documentation section](compose-multiplatform-resources.md#configuration
 
 The new `getUri()` function allows you to pass platform-dependent URI of a resource to external libraries,
 so that they can access the file directly.
-See [documentation](compose-multiplatform-resources.md#accessing-resources-from-external-libraries) for details.
+See [documentation](compose-multiplatform-resources.md#accessing-multiplatform-resources-from-external-libraries) for details.
 
 #### Plurals for string resources
 
