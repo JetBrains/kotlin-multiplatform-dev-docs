@@ -15,6 +15,6 @@
              keymaps-mode="generated" web-path="/kotlin-multiplatform-dev/"/>
 
     <settings>
-        <supernova-builder location="version:2.1.1226"/>
+        <supernova-builder location="version:2.1.1230"/>
     </settings>
 </ihp>
