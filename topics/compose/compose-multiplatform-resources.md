@@ -16,9 +16,9 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 ### Set up a project with multiplatform resources
 
-To set up and configure all resources that your app should be able to access, see [](compose-multiplatform-resources-setup).
+To set up and configure all resources that your app should be able to access, see [](compose-multiplatform-resources-setup.md).
 
 ### Access the available resources in your code
 
 To access resources in your UI, use the automatically generated accessors.
-For the reference and various use cases, see [](compose-multiplatform-resources-usage).
+For the reference and various use cases, see [](compose-multiplatform-resources-usage.md).

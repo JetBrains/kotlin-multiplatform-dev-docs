@@ -46,7 +46,7 @@ in their signatures, but their behavior is applicable for other platforms as wel
 
 * [Resource management](https://developer.android.com/jetpack/compose/resources): `stringResource`, `animatedVectorResource`, `Font`,
   and `*.R` class for resource management.
-  For more information, see [Images and resources](compose-multiplatform-resources).
+  For more information, see [Images and resources](compose-multiplatform-resources.md).
 * [Navigation](https://developer.android.com/jetpack/compose/navigation).
   For more information, see [Navigation and routing](compose-navigation-routing.md).
 * [`ViewModel`](https://developer.android.com/jetpack/compose/libraries#viewmodel) class.

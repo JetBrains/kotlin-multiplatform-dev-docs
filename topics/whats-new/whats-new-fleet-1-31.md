@@ -24,7 +24,7 @@ in the Fleet documentation.
 
 ## Support for Compose Multiplatform resources API
 
-The latest version of the [images and resources access API](compose-images-resources.md), revamped in Compose Multiplatform 1.6.0,
+The latest version of the [images and resources access API](compose-multiplatform-resources.md), revamped in Compose Multiplatform 1.6.0,
 is supported in Fleet.
 
 Starting with this version, JetBrains Fleet:

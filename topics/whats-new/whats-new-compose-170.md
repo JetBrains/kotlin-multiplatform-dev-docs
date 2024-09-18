@@ -139,7 +139,7 @@ Both resource files in this example are located in the `commonMain` source set:
 
 #### Custom resource directories
 
-With the new `customDirectory` setting in the configuration DSL you can [associate a custom directory](compose-resources-setup.md#custom-resource-directories) with a specific source
+With the new `customDirectory` setting in the configuration DSL you can [associate a custom directory](compose-multiplatform-resources-setup.md#custom-resource-directories) with a specific source
 set. This allows, for example, using downloaded files as resources.
 
 #### Multiplatform font cache
@@ -172,7 +172,7 @@ There are new functions for converting a `ByteArray` into an image resource:
 * `decodeToImageVector()` for turning an XML vector file into an `ImageVector` object.
 * `decodeToSvgPainter()` for turning an SVG file into a `Painter` object. This function is not available on Android.
 
-See the [documentation](compose-resources-usage.md#convert-byte-arrays-into-images) for details.
+See the [documentation](compose-multiplatform-resources-usage.md#convert-byte-arrays-into-images) for details.
 
 ### New common modules
 
