@@ -5,7 +5,7 @@ make them draggable, adapt size, change position, and so on.
 
 ## Open and close windows
 
-You can use the `Window` function to create a regular window. To put it in a composable scope, use `Window` in the `application` entry point:
+You can use the `Window()` function to create a regular window. To put it in a composable scope, use `Window()` in the `application` entry point:
 
 ```kotlin
 import androidx.compose.ui.window.Window
@@ -13,13 +13,13 @@ import androidx.compose.ui.window.application
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
-        // Content
+        // Content of the window
     }
 }
 ```
 {initial-collapse-state="collapsed" collapsed-title="application { Window(onCloseRequest = ::exitApplication)"}
 
-As a composable function, `Window` allows you to change its properties declaratively. For example, you can open a window with one title and update it with another title later: 
+As a composable function, `Window()` allows you to change its properties declaratively. For example, you can open a window with one title and change the title later:
 
 ```kotlin
 import androidx.compose.material.Button
@@ -47,7 +47,7 @@ fun main() = application {
 
 ### Add conditions
 
-You can also open and close windows using simple `if` conditions. In the following code sample, the application window is automatically closed after the specified delay:
+You can also open and close windows using simple `if` conditions. In the following code sample, the application window is automatically closed after completing a task:
 
 ```kotlin
 import androidx.compose.material.Text
@@ -64,7 +64,8 @@ fun main() = application {
     var isPerformingTask by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(2000) // Do some heavy lifting
+        // Do some heavy lifting
+        delay(2000) 
         isPerformingTask = false
     }
     if (isPerformingTask) {
@@ -89,8 +90,8 @@ fun main() = application {
 
 <img src="compose-window-condition.png" alt="Windows with conditions" animated="true" width="600"/>
 
-If you want to use custom logic on application exit, such as showing a dialog, you can override the close action using the `onCloseRequest` function.
-When closing the window, do not use the imperative approach (`window.close()`); instead, use a declarative approach and close it in response to the state change (`isOpen = false`).
+If you want to use custom logic on application exit, such as showing a dialog, you can override the close action using the `onCloseRequest` callback.
+In the following code sample, instead of an imperative approach (`window.close()`), we use a declarative approach and close the window in response to the state change (`isOpen = false`).
 
 ```kotlin
 import androidx.compose.material.Button
@@ -209,7 +210,7 @@ For a more complex example, see the [notepad](https://github.com/JetBrains/compo
 
 ## Minimize a window to the system tray
 
-To hide the window instead of closing (for example, to the tray), you can change the `windowState.isVisible` state:
+To hide the window instead of closing it, you can change the `windowState.isVisible` state:
 
 ```kotlin
 import androidx.compose.material.Text
@@ -269,24 +270,24 @@ object TrayIcon : Painter() {
 
 <img src="compose-window-hide-tray.png" alt="Hide instead of closing" animated="true" width="600"/>
 
-## Function `singleWindowApplication`
+## singleWindowApplication() function
 
-`singleWindowApplication` is a function for the simplified creation of a single window application:
+You can create a single window application by calling the `singleWindowApplication()` function.
+
+The `singleWindowApplication()` function is easier to use but has the following limitations:
+* The application can have only one window.
+* You cannot add custom closing logic.
+* You cannot change the attributes of the window in runtime.
 
 ```kotlin
 import androidx.compose.ui.window.singleWindowApplication
 
 fun main() = singleWindowApplication {
-    // Content
+    // Content of the window
 }
 ```
 
-The `singleWindowApplication` function is easier to use but has the following limitations:
-* The application can have only one window.
-* You cannot add custom closing logic.
-* You cannot change the attributes of the window in runtime.
-
-As an alternative, you can use the [`Window` composable](#open-and-close-windows) in the `application` entry point.
+As an alternative, you can use the [`Window()` composable](#open-and-close-windows) in the `application` entry point.
 
 ## Adaptive window size
 
@@ -334,7 +335,7 @@ fun main() = application {
 
 `WindowState` is a separate API class for the window placement, current position, and size. The placement attribute allows you to specify how the window is placed on the screen: 
 floating, maximized/minimized, or fullscreen.
-To change the window state, use callbacks or observe it in composables. Any change of the state triggers automatic recomposition.
+Any change of the state triggers automatic recomposition. To change the window state, use callbacks or observe it in composables:
 
 ```kotlin
 import androidx.compose.foundation.clickable
@@ -415,8 +416,8 @@ fun main() = application {
 
 ## Listen to the window state
 
-If you need to react to the state changes and send a value to another non-composable application level, for example, write it to the database, you can use `snapshotFlow`. 
-The `snapshotFlow` function captures the current value of a composable's state.
+If you need to react to the state changes and send a value to another non-composable application level, for example, write it to the database, you can use the `snapshotFlow()` function. 
+This function captures the current value of a composable's state.
 
 ```kotlin
 import androidx.compose.runtime.LaunchedEffect
@@ -434,8 +435,6 @@ fun main() = application {
     val state = rememberWindowState()
 
     Window(onCloseRequest = ::exitApplication, state) {
-        // Content
-
         LaunchedEffect(state) {
             snapshotFlow { state.size }
                 .onEach(::onWindowResize)
@@ -461,9 +460,9 @@ private fun onWindowRelocate(position: WindowPosition) {
 
 ## Dialogs
 
-You can use the `Window` composable to create a regular window and the `DialogWindow` composable for a modal window that locks its parent until the user closes the modal window.
+You can use the `Window()` composable to create a regular window and the `DialogWindow()` composable for a modal window that locks its parent until the user closes the modal window.
 
-The following code sample demonstrates how to use these composables to combine both regular and modal windows:
+The following code sample demonstrates how to use these composables to combine regular and modal windows:
 
 ```kotlin
 import androidx.compose.material.Button
@@ -494,7 +493,7 @@ fun main() = application {
                 onCloseRequest = { isDialogOpen = false },
                 state = rememberDialogState(position = WindowPosition(Alignment.Center))
             ) {
-                // Content
+                // Content of the window
             }
         }
     }
@@ -504,7 +503,7 @@ fun main() = application {
 
 ## Draggable window area
 
-If you want to add a custom draggable title bar to the undecorated window or make the whole window draggable, you can use the `WindowDraggableArea` composable:
+To add a custom draggable title bar to the undecorated window or make the whole window draggable, you can use the `WindowDraggableArea()` composable:
 
 ```kotlin
 import androidx.compose.foundation.background
@@ -528,7 +527,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsed-title="WindowDraggableArea { Box(Modifier.fillMaxWidth().height(48.dp).background(Color.DarkGray))}"}
 
-`WindowDraggableArea` can be used inside `singleWindowApplication`, `Window`, and `DialogWindow` only. To use it in another composable function, pass `WindowScope` as a receiver:
+`WindowDraggableArea()` can be used inside the `singleWindowApplication()`, `Window()`, and `DialogWindow()` composables only. To call it in another composable function, use a `WindowScope` as a receiver scope:
 
 ```kotlin
 import androidx.compose.foundation.background
@@ -561,7 +560,7 @@ private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {
 
 ## Transparent windows and other customizations
 
-To create a transparent window, pass two parameters to the `Window` function: `transparent=true` and `undecorated=true`. 
+To create a transparent window, pass two parameters to the `Window()` function: `transparent=true` and `undecorated=true`. 
 The window must be undecorated because it is impossible to decorate a transparent window.
 
 The following code sample demonstrates how to combine composables to create a transparent window with rounded corners:
@@ -588,13 +587,15 @@ fun main() = application {
         Window(
             onCloseRequest = { isOpen = false },
             title = "Transparent Window Example",
-            transparent = true,
-            undecorated = true, // Transparent window must be undecorated
+            transparent = true, 
+            // Transparent window must be undecorated
+            undecorated = true, 
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize().padding(5.dp).shadow(3.dp, RoundedCornerShape(20.dp)), 
                 color = Color.Transparent,
-                shape = RoundedCornerShape(20.dp) // Window with rounded corners
+                // Window with rounded corners
+                shape = RoundedCornerShape(20.dp) 
             ) {
                 Text("Hello World!", color = Color.White)
             }
@@ -619,7 +620,7 @@ fun main() = SwingUtilities.invokeLater {
         size = Dimension(300, 300)
         defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         setContent {
-            // Content
+            // Content of the window
         }
         isVisible = true
     }
@@ -627,7 +628,7 @@ fun main() = SwingUtilities.invokeLater {
 ```
 {initial-collapse-state="collapsed" collapsed-title="SwingUtilities.invokeLater { ComposeWindow().apply {"}
 
-You can also access `ComposeWindow` in the composable `Window` scope:
+You can also use the scope of a `Window()` composable. In the following code sample, `window` is a `ComposeWindow` created inside `Window()`:
 
 ```kotlin
 import androidx.compose.runtime.LaunchedEffect
