@@ -198,7 +198,7 @@ There are new functions for converting a `ByteArray` into an image resource:
 * `decodeToImageVector()` turns an XML vector file into an `ImageVector` object.
 * `decodeToSvgPainter()` turns an SVG file into a `Painter` object. This function is not available on Android.
 
-See the [documentation](compose-images-resources.md#convert-byte-arrays-into-images) for details.
+See the [documentation](compose-multiplatform-resources-usage.md#convert-byte-arrays-into-images) for details.
 
 ### New common modules
 

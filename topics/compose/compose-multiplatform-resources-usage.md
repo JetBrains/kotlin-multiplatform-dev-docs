@@ -1,55 +1,19 @@
-[//]: # (title: Multiplatform resources)
+[//]: # (title: Using multiplatform resources in your app)
 
-Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
-across all supported platforms. Resources are static content, such as images, fonts, and strings, which you can use from
-your application.
+<toc-settings structure-elements="chapter" depth="3"/>
 
-When working with resources in Compose Multiplatform, consider the current conditions:
+When you've [set up the resources for your project](compose-multiplatform-resources-setup.md),
+build the project to generate the special `Res` class which provides access to resources.
+To manually generate the `Res` class and all the resource accessors, build or re-import the project in the IDE.
 
-* Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
-  and all of the resources on the JS platform that are read asynchronously.
-* Reading big raw files, like long videos, as a stream is not supported yet.
-  Use the [`getUri()`](#accessing-resources-from-external-libraries) function to pass separate files to a system API,
-  for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
-* Starting with 1.6.10, you can place resources in any module or source set,
-  as long as you are using Kotlin 2.0.0 or newer, and Gradle 7.6 or newer.
+After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
-## Setup
+## Customizing accessor class generation
 
-To access resources in your multiplatform projects:
+You can customize the generated `Res` class to suit your needs using Gradle settings.
 
-1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
-
-   ```kotlin
-   kotlin {
-       sourceSets {
-           commonMain.dependencies {
-               implementation(compose.components.resources)
-           }
-       }
-   }
-   ```
-
-2. Create a new directory `composeResources` in the source set directory you want to add the resources to
-   (`commonMain` in this example):
-
-   ![Compose resources project structure](compose-resources-structure.png){width=250}
-
-3. Organize the `composeResources` directory structure according to these rules:
-
-   * Images should be in the `drawable` directory.
-   * Fonts should be in the `font` directory.
-   * Strings should be in the `values` directory.
-   * Other files with any hierarchy should be in the `files` directory.
-
-## Configuration
-
-You can alter the default settings for Compose Multiplatform resources by adding the `compose.resources {}` block
-to the `build.gradle.kts` file.
-
-### Class generation settings
-
-There are several settings that affect the way the `Res` class is generated for your project.
+In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify several settings that affect the way
+the `Res` class is generated for your project.
 An example configuration looks like this:
 
 ```kotlin
@@ -62,98 +26,13 @@ compose.resources {
 
 * `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
 * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
-  as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
-  `{group name}.{module name}.generated.resources` package to the class.
+    as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
+    `{group name}.{module name}.generated.resources` package to the class.
 * `generateResClass` set to `always` makes the project unconditionally generate the `Res` class. This may be useful
-  when the resource library is only available transitively. By default, the `auto` value is used to generate the `Res`
-  class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
-
-### Custom resource directories {label="EAP"}
-
-In the `compose.resources {}` block, you can specify custom resource directories for each source set.
-A simple example is to point to a specific folder:
-
-```kotlin
-compose.resources {
-    customDirectory(
-        sourceSetName = "desktopMain",
-        directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
-    )
-}
-```
-
-You can also set up a folder populated by a Gradle task, for example, with downloaded files:
-
-```kotlin
-abstract class DownloadRemoteFiles : DefaultTask() {
-
-    @get:OutputDirectory
-    val outputDir = layout.buildDirectory.dir("downloadedRemoteFiles")
-
-    @TaskAction
-    fun run() { /* your code for downloading files */ }
-}
-
-compose.resources {
-    customDirectory(
-        sourceSetName = "iosMain",
-        directoryProvider = tasks.register<DownloadRemoteFiles>("downloadedRemoteFiles").map { it.outputDir.get() }
-    )
-}
-```
-{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
-
-## Qualifiers
-
-Sometimes, the same resource should be presented in different ways depending on the environment, such as locale,
-screen density, or interface theme. For example, you might need to localize texts for different languages or adjust
-images for the dark theme. For that, the library provides special qualifiers.
-
-All resource types (except for raw files in the `files` directory) support qualifiers. Apply qualifiers to directory
-names using a hyphen:
-
-![Qualifiers in compose resources](compose-resources-qualifiers.png){width=250}
-
-The library supports (in the order of priority) the following qualifiers: [language](#language-and-regional-qualifiers),
-[theme](#theme-qualifier), and [density](#density-qualifier).
-
-* Different types of qualifiers can be applied together. For example, "drawable-en-rUS-mdpi-dark" is an image for the
-  English language in the United States region, suitable for 160 DPI screens in the dark theme.
-* If a resource with the requested qualifier doesn't exist, the default resource without a qualifier is used instead.
-
-### Language and regional qualifiers
-
-You can combine language and region qualifiers:
-* The language is defined by a two-letter (ISO 639-1)
-or a three-letter (ISO 639-2) [language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
-* You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-regional code to your language code.
-The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`
-
-The language and regional codes are case-sensitive.
-
-### Theme qualifier
-
-You can add "light" or "dark" qualifiers. Compose Multiplatform then selects the necessary resource depending on the
-current system theme.
-
-### Density qualifier
-
-You can use the following density qualifiers:
-
-* "ldpi" − 120 DPI, 0.75x density
-* "mdpi" − 160 DPI, 1x density
-* "hdpi" − 240 DPI, 1.5x density
-* "xhdpi" − 320 DPI, 2x density
-* "xxhdpi" − 480 DPI, 3x density
-* "xxxhdpi" − 640dpi, 4x density
-
-The resource is selected depending on the screen density defined in the system.
+    when the resource library is only available transitively. By default, Compose Multiplatform uses the `auto` value
+    to generate the `Res` class only if the current project has an explicit `implementation` or `api` dependency on the resource library.
 
 ## Resource usage
-
-After importing a project, a special `Res` class is generated which provides access to resources.
-To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
 ### Images
 
@@ -496,34 +375,136 @@ An example of passing a mapped resource to a composable:
 Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
 ```
 
-### Remote files
+### Compose Multiplatform resources as Android assets {label="EAP"}
 
-Only files that are part of the application are considered resources.
+Starting with Compose Multiplatform %composeEapVersion%, all multiplatform resources are packed into Android assets.
+This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
-You can also load remote files from the internet using their URL. To load remote files, use special libraries:
+> Android Studio previews are available only for composables in an Android source set.
+> They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
+>
+{type="warning"}
 
-* [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
-* [Kamel](https://github.com/Kamel-Media/Kamel)
-* [Ktor client](https://ktor.io/)
+Using Multiplatform resources as Android assets also makes possible direct access from WebViews and media player components
+on Android, since resources can be reached by a simple path, for example `Res.getUri("files/index.html")`.
 
-### Accessing resources from external libraries
+An example of an Android composable displaying a resource HTML page with a link to a resource image:
 
-If you want to make Compose Multiplatform resources available to other libraries used in your project, you
-can call the `Res.getUri()` function with the general path of the resource:
+```kotlin
+// androidMain/kotlin/com/example/webview/App.kt
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        val uri = Res.getUri("files/webview/index.html")
+
+        // Adding a WebView inside AndroidView with layout as full screen.
+        AndroidView(factory = {
+            WebView(it).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }, update = {
+            it.loadUrl(uri)
+        })
+    }
+}
+```
+{initial-collapse-state="collapsed"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
+
+The example works with this simple HTML file:
+
+```html
+<html>
+<header>
+    <title>
+        Cat Resource
+    </title>
+</header>
+<body>
+    <img src="cat.jpg">
+</body>
+</html>
+```
+{initial-collapse-state="collapsed"  collapsed-title="<title>Cat Resource</title>"}
+
+Both resource files in this example are located in the `commonMain` source set:
+
+![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
+
+## Interaction with other libraries and resources
+
+### Accessing multiplatform resources from external libraries
+
+If you want to process multiplatform resources using other libraries included in your project, you can pass platform-specific
+file paths to these other APIs.
+To get a platform-specific path, call the `Res.getUri()` function with the project path to the resource:
 
 ```kotlin
 val uri = Res.getUri("files/my_video.mp4")
 ```
 
-The `uri` variable will contain the precise platform-specific path to the file that the path points to.
-External libraries can use that path to access the file in a manner that suits them.
+Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
+the file in a manner that suits it.
 
-## Publication
+For Android-specific uses, multiplatform resources are also [packed as Android assets](#compose-multiplatform-resources-as-android-assets).
 
-Starting with Compose Multiplatform 1.6.10, all necessary resources are included in the publication
-maven artifacts.
+### Remote files
 
-To enable this functionality, your project needs to use Kotlin 2.0.0 or newer and Gradle 7.6 or newer.
+In the context of the resource library, only files that are part of the application are considered resources.
+
+You can load remote files from the internet using their URL using specialized libraries:
+
+* [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
+* [Kamel](https://github.com/Kamel-Media/Kamel)
+* [Ktor client](https://ktor.io/)
+
+### Using Java resources {label="EAP"}
+
+While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
+the framework: generated accessors, multimodule support, localization, and so on.
+Consider transitioning fully to the multiplatform resource library to unlock that potential.
+
+With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
+If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
+works after you upgrade to Compose Multiplatform 1.7.0:
+
+```kotlin
+@Composable
+internal fun painterResource(
+    resourcePath: String
+): Painter = when (resourcePath.substringAfterLast(".")) {
+    "svg" -> rememberSvgResource(resourcePath)
+    "xml" -> rememberVectorXmlResource(resourcePath)
+    else -> rememberBitmapResource(resourcePath)
+}
+
+@Composable
+internal fun rememberBitmapResource(path: String): Painter {
+    return remember(path) { BitmapPainter(readResourceBytes(path).decodeToImageBitmap()) }
+}
+
+@Composable
+internal fun rememberVectorXmlResource(path: String): Painter {
+    val density = LocalDensity.current
+    val imageVector = remember(density, path) { readResourceBytes(path).decodeToImageVector(density) }
+    return rememberVectorPainter(imageVector)
+}
+
+@Composable
+internal fun rememberSvgResource(path: String): Painter {
+    val density = LocalDensity.current
+    return remember(density, path) { readResourceBytes(path).decodeToSvgPainter(density) }
+}
+
+private object ResourceLoader
+private fun readResourceBytes(resourcePath: String) =
+    ResourceLoader.javaClass.classLoader.getResourceAsStream(resourcePath).readAllBytes()
+```
+{initial-collapse-state="collapsed" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
 
 ## What's next?
 

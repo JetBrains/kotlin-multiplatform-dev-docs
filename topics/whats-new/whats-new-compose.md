@@ -58,7 +58,7 @@ Jetpack Compose now [recommends](https://issuetracker.google.com/issues/32187241
 ### New approach to resource organization
 
 If you have been using the resources API in preview versions of Compose Multiplatform 1.6.0, familiarize yourself with
-[the documentation for the current version](compose-images-resources.md): 1.6.0-beta01 changed the way resource files
+[the documentation for the current version](compose-multiplatform-resources.md): 1.6.0-beta01 changed the way resource files
 should be stored in the project folders to be available to the project code.
 
 ## Across platforms
@@ -75,7 +75,7 @@ in common Kotlin more comfortably:
 * Compose Multiplatform now generates a `Res` object for each project to provide straightforward resource access.
 
 For a closer look at resource qualifiers, as well as a more in-depth overview of the new resources API,
-see [Images and resources](compose-images-resources.md).
+see [Images and resources](compose-multiplatform-resources.md).
 
 ### UI testing API (Experimental, all platforms)
 
