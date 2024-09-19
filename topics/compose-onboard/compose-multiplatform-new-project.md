@@ -216,20 +216,24 @@ time message could be rendered more prominently.
     * The `style` parameter customizes the appearance of the `Text`.
 
 2. Follow the IDE's instructions to import the missing dependencies.
+   
+    * For `TextAlign`, use the `androidx.compose.ui.text.style` version.
+    * For `Alignment`, use the `androidx.compose.ui` version.
+
 3. Run the application to see how the appearance has improved:
 
    ![Improved style of the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-6.png){width=500}
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
-<!--
+
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
-{type="tip"}-->
+{type="tip"}
 
 ## Refactor the design
 
-The application works, but it's susceptible to users' typos. For example, if the user enters "Franse" instead of "France",
+The application works, but it's susceptible to typos. For example, if a user enters "Franse" instead of "France",
 the app won't be able to process that input. It would be preferable to ask users to select the country from a predefined
 list.
 
@@ -309,9 +313,9 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
-<!--> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
-{type="tip"}-->
+{type="tip"}
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -423,9 +427,9 @@ code to load and display them:
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
-<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
-{type="tip"} -->
+{type="tip"}
 
 ## What's next
 

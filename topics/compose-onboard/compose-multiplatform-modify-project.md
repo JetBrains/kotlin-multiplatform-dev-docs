@@ -125,9 +125,9 @@ You can now rerun the application using the same run configurations for Android,
 
 ![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
 
-<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >
-{type="tip"} -->
+{type="tip"}
 
 ## Next step
 
