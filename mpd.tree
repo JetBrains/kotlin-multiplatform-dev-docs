@@ -69,6 +69,7 @@
         <toc-element id="compose-android-only-components.md" toc-title="Android-specific components"/>
         <toc-element toc-title="Desktop-specific components">
             <toc-element id="compose-desktop-components.md"/>
+            <toc-element id="compose-desktop-top-level-windows-management.md"/>
             <toc-element id="compose-desktop-scrollbars.md"/>
             <toc-element id="compose-desktop-tooltips.md"/>
             <toc-element id="compose-desktop-mouse-events.md" toc-title="Mouse events"/>
