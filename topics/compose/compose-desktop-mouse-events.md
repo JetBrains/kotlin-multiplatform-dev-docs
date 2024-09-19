@@ -65,7 +65,7 @@ see the [`Modifier.onClick`](#experimental-onclick-handlers) section.
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes. 
-> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
 {type="warning"}
 
@@ -111,7 +111,7 @@ fun main() = singleWindowApplication(title = "Mouse move listeners") {
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
 {type="warning"}
 
@@ -168,7 +168,7 @@ fun main() = singleWindowApplication(title = "Mouse enter listeners") {
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
 {type="warning"}
 
@@ -471,7 +471,7 @@ fun main() = singleWindowApplication(title = "Drag") {
 
 > The `onPointerEvent` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
-> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-raw-events-in-commonmain-via-pointerinput).
+> For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
 {type="warning"}
 
