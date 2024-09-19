@@ -9,7 +9,7 @@ To properly configure the project to use multiplatform resources:
 3. Create additional directories for qualified resources (for example, different images for the dark UI theme
     or localized strings).
 
-## Dependency and directories setup
+## Dependency and directory setup
 
 To access resources in your multiplatform projects, add the library dependency and organize files within your project directory:
 
@@ -40,7 +40,7 @@ To access resources in your multiplatform projects, add the library dependency a
 ### Custom resource directories {label="EAP"}
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify custom resource directories for each source set.
-Each of these custom directories should also contain files in same way as the default `composeResources`: with a `drawable` subdirectory
+Each of these custom directories should also contain files in the same way as the default `composeResources`: with a `drawable` subdirectory
 for images, a `font` subdirectory for fonts, and so on.
 
 A simple example is to point to a specific folder:
