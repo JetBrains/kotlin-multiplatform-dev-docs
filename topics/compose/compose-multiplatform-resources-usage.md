@@ -4,7 +4,7 @@
 
 When you've [set up the resources for your project](compose-multiplatform-resources-setup.md),
 build the project to generate the special `Res` class which provides access to resources.
-To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
+To manually generate the `Res` class and all the resource accessors, build or re-import the project in the IDE.
 
 After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
@@ -470,7 +470,7 @@ Consider transitioning fully to the multiplatform resource library to unlock tha
 
 With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
 If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
-accessing Java resources works after you upgrade to Compose Multiplatform 1.7.0:
+works after you upgrade to Compose Multiplatform 1.7.0:
 
 ```kotlin
 @Composable
