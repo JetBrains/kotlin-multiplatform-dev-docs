@@ -6,10 +6,7 @@ When you've [set up the resources for your project](compose-multiplatform-resour
 build the project to generate the special `Res` class which provides access to resources.
 To manually generate the `Res` class and all the resource accessors, build the project or re-import the project in the IDE.
 
-After that, you can use the generated class to access the configured multiplatform resources from your code.
-
-To learn about passing multiplatform resources to external libraries and about using Java resources and remote files
-in Compose Multiplatform, see the [dedicated section](#other-resources-and-external-access).
+After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
 ## Customizing accessor class generation
 
@@ -438,13 +435,13 @@ Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
-## Other resources and external access
+## Interaction with other libraries and resources
 
 ### Accessing multiplatform resources from external libraries
 
-If you want to use multiplatform resources in other libraries included in your project, you can pass the platform-specific
-path to the file to them.
-To get the platform-specific path, call the `Res.getUri()` function with the project path to the resource:
+If you want to process multiplatform resources using other libraries included in your project, you can pass platform-specific
+file paths to these other APIs.
+To get a platform-specific path, call the `Res.getUri()` function with the project path to the resource:
 
 ```kotlin
 val uri = Res.getUri("files/my_video.mp4")
@@ -452,6 +449,8 @@ val uri = Res.getUri("files/my_video.mp4")
 
 Now that the `uri` variable contains the absolute path to the file, any external library can use that path to access
 the file in a manner that suits it.
+
+For Android-specific uses, multiplatform resources are also [packed as Android assets](#compose-multiplatform-resources-as-android-assets).
 
 ### Remote files
 
