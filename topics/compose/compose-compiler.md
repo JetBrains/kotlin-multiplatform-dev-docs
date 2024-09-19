@@ -210,11 +210,37 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 #### stabilityConfigurationFile
 
+> _Deprecated_ in Kotlin 2.1.0-Beta1 in favor of [stabilityConfigurationFiles](#stabilityconfigurationfiles),
+> which allows using more than one stability configuration file.
+> 
+{type="warning"}
+
 **Type**: `RegularFileProperty`
 
-Path to the stability configuration file.
+A stability configuration file contains a list of classes, which should be considered stable.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
+
+#### stabilityConfigurationFiles
+
+**Type**: `ListProperty<RegularFile>`
+
+Stability configuration files to be used for the current module.
+
+Stability configuration files contain a list of classes that should be considered stable by the compiler.
+For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
+in the Jetpack Compose documentation.
+
+Here's an example of specifying paths to several files:
+
+```kotlin
+composeCompiler {
+    stabilityConfigurationFiles.addAll(
+        project.layout.projectDirectory.file("configuration-file1.conf"),
+        project.layout.projectDirectory.file("configuration-file2.conf"),
+    )
+}
+```
 
 #### includeTraceMarkers
 
@@ -271,6 +297,12 @@ To disable a feature flag that is enabled by default, call the `disabled()` func
 
 ```kotlin
 featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
+```
+
+If you are configuring the Compose compiler directly, use the following syntax to pass feature flags to it:
+
+```none
+-P plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=<flag name>
 ```
 
 #### IntrinsicRemember
