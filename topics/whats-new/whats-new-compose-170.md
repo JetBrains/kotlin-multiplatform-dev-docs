@@ -45,7 +45,7 @@ In this release, we explicitly deprecate the Java resources APIs available in th
 the `painterResource()`, `loadImageBitmap()`, `loadSvgPainter()`, and `loadXmlImageVector()` functions, as well as
 the `ClassLoaderResourceLoader` class and functions relying on it.
 
-Consider transitioning to the [multiplatform resource library](compose-images-resources.md).
+Consider transitioning to the [multiplatform resource library](compose-multiplatform-resources.md).
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
 the framework: generated accessors, multimodule support, localization and so on.
 
