@@ -165,7 +165,7 @@ Both resource files in this example are located in the `commonMain` source set:
 
 #### Custom resource directories
 
-With the new `customDirectory` setting in the configuration DSL, you can [associate a custom directory](compose-images-resources.md#custom-resource-directories) with a specific source
+With the new `customDirectory` setting in the configuration DSL, you can [associate a custom directory](compose-multiplatform-resources.md#custom-resource-directories) with a specific source
 set. This makes it possible, for example, to use downloaded files as resources.
 
 #### Multiplatform font cache
