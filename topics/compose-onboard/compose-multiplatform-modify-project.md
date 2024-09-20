@@ -22,26 +22,26 @@ To use this library:
 
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 
-```kotlin
-kotlin {
-    // ...
-    sourceSets {
+    ```kotlin
+    kotlin {
         // ...
-        commonMain.dependencies {
+        sourceSets {
             // ...
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-        }
-        wasmJsMain.dependencies {
-            implementation(npm("@js-joda/timezone", "2.3.0"))
+            commonMain.dependencies {
+                // ...
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+            }
+            wasmJsMain.dependencies {
+                implementation(npm("@js-joda/timezone", "2.3.0"))
+            }
         }
     }
-}
+    
+    ```
 
-```
-
-   * The main dependency is added to the section that configures the common code source set.
-   * For simplicity, the version number is included directly instead of being added to the version catalog.
-   * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
+    * The main dependency is added to the section that configures the common code source set.
+    * For simplicity, the version number is included directly instead of being added to the version catalog.
+    * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
      dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
@@ -50,7 +50,7 @@ kotlin {
 
 ## Enhance the user interface
 
-1. In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file and add the following function:
+1. Open the `composeApp/src/commonMain/kotlin/App.kt` file and add the following function which returns a string containing the current date:
 
    ```kotlin
    fun todaysDate(): String {
@@ -62,9 +62,7 @@ kotlin {
    }
    ```
 
-   It builds a string containing the current date.
-
-2. Modify the `App` composable to include the `Text` composable that invokes this function and displays the result:
+2. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
    
     ```kotlin
     @Composable
@@ -94,23 +92,26 @@ kotlin {
     }
     ```
 
-3. Switch the web app from using an `Element` as a container to the HTML tag with an externally specified `id`:
+3. Switch the web app from using an `Element` as a container to an HTML element with an externally specified `id`:
 
-   1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element:
+    1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element within the `<body>`:
 
-      ```html
-      <body>
-      <div id="composeApplication" style="width:400px; height: 500px;"></div>
-      </body>
-      ```
-   2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
-   pointing to the ID you specified in the HTML file:
+        ```html
+        <body>
+        <div id="composeApplication" style="width:400px; height: 500px;"></div>
+        </body>
+        ```
+    2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
+        pointing to the ID you specified in the HTML file:
 
-      ```kotlin
-      ComposeViewport(viewportContainerId = "composeApplication") {
-          App()
-      }
-      ```
+        ```kotlin
+        @OptIn(ExperimentalComposeUiApi::class)
+        fun main() {
+            ComposeViewport(viewportContainerId = "composeApplication") {
+                App()
+            }
+        }
+        ```
 
 4. Follow the IDE's suggestions to import the missing dependencies.
 
@@ -124,9 +125,9 @@ You can now rerun the application using the same run configurations for Android,
 
 ![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
 
-<!-- > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
+> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >
-{type="tip"} -->
+{type="tip"}
 
 ## Next step
 
