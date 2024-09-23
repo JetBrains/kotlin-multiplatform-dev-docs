@@ -50,7 +50,7 @@ To use this library:
 
 3. In the terminal, navigate to your project directory and run:
 
-    ```kotlin
+    ```shell
     ./gradlew kotlinUpgradeYarnLock
     ```
 
