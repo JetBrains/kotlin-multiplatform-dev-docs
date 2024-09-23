@@ -48,14 +48,6 @@ To use this library:
 
    ![Synchronize Gradle files](gradle-sync.png)
 
-3. In the terminal, navigate to your project directory and run:
-
-    ```kotlin
-    ./gradlew kotlinUpgradeYarnLock
-    ```
-
-    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
-
 ## Enhance the user interface
 
 1. Open the `composeApp/src/commonMain/kotlin/App.kt` file and add the following function which returns a string containing the current date:
@@ -100,11 +92,7 @@ To use this library:
     }
     ```
 
-3. Follow the IDE's suggestions to import the missing dependencies.
-
-   ![Unresolved references](compose-unresolved-references.png)
-
-4. Switch the web app from using an `Element` as a container to an HTML element with an externally specified `id`:
+3. Switch the web app from using an `Element` as a container to an HTML element with an externally specified `id`:
 
     1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element within the `<body>`:
 
@@ -124,6 +112,8 @@ To use this library:
             }
         }
         ```
+
+4. Follow the IDE's suggestions to import the missing dependencies.
 
 ## Rerun the application
 
