@@ -6,7 +6,7 @@ starting with 1.7.0.
 ## Compose Multiplatform 1.6.11 to 1.7.0
 
 ### Removed background parameter in UIKitView and UIKitViewController
-ph
+
 Deprecated `UIKitView` and `UIKitViewController` APIs have the `background` parameter, while the new ones don't.
 The parameter was deemed redundant and removed:
 
