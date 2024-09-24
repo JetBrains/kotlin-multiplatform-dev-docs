@@ -1,357 +1,358 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE labels SYSTEM "https://resources.jetbrains.com/writerside/1.0/labels-list.dtd">
 <labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/stardust/labels.xsd">
+        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/labels.xsd">
 
-    <label short-name="EAP" full-name="Compose Multiplatform 1.7.0-beta02">
+    <primary-label id="EAP" short-name="EAP" name="Compose Multiplatform 1.7.0-beta02">
         This functionality is available only in the EAP version.
-    </label>
+    </primary-label>
 
-    <annotation short-name="Deprecated" full-name="Still available, but deprecated." color="strawberry"/>
-    <annotation short-name="Experimental" full-name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
-    <annotation short-name="Android" full-name="Available in Compose Multiplatform for Android"/>
-    <annotation short-name="Desktop" full-name="Available in Compose Multiplatform for desktop"/>
-    <annotation short-name="iOS" full-name="Available in Compose Multiplatform for iOS"/>
-    <annotation short-name="Web" full-name="Available in Compose Multiplatform for web"/>
+    <secondary-label id="Deprecated" name="Still available, but deprecated." color="strawberry"/>
+    <secondary-label id="Experimental" name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
+    <secondary-label id="Android" name="Available in Compose Multiplatform for Android"/>
+    <secondary-label id="Desktop" name="Available in Compose Multiplatform for desktop"/>
+    <secondary-label id="iOS" name="Available in Compose Multiplatform for iOS"/>
+    <secondary-label id="Web" name="Available in Compose Multiplatform for web"/>
 
-    <annotation short-name="Information" full-name="Info" color="blue"/>
-    <annotation short-name="Weak warning" full-name="Info" color="tangerine"/>
-    <annotation short-name="Warning" full-name="Warning" color="yellow"/>
-    <annotation short-name="Error" full-name="Error" color="red"/>
-    <annotation short-name="New" full-name="New" color="green"/>
+    <secondary-label id="Information" name="Info" color="blue"/>
+    <secondary-label id="Weak warning" name="Info" color="tangerine"/>
+    <secondary-label id="Warning" name="Warning" color="red"/>
+    <secondary-label id="Error" name="Error" color="red"/>
+    <secondary-label id="New" name="New" color="tangerine"/>
 
-    <annotation short-name=".ignore (ignorelang)" full-name=".ignore (ignorelang)" color="purple">Multiple means that
+    <secondary-label id=".ignore (ignorelang)" name=".ignore (ignorelang)" color="purple">Multiple means that
         the inspection performs checks on a set of languages, the support of which is determined by inspection
         internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Blade" full-name="Blade" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Blade" name="Blade" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="CSS" full-name="CSS" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="CSS" name="CSS" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Cmake" full-name="Cmake" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Cmake" name="Cmake" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Coffeescript" full-name="Coffeescript" color="purple">Multiple means that the inspection
+    <secondary-label id="Coffeescript" name="Coffeescript" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Commandline" full-name="Commandline" color="purple">Multiple means that the inspection
+    <secondary-label id="Commandline" name="Commandline" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Cython" full-name="Cython" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Cython" name="Cython" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Djangotemplate" full-name="Djangotemplate" color="purple">Multiple means that the inspection
+    <secondary-label id="Djangotemplate" name="Djangotemplate" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Dockerfile" full-name="Dockerfile" color="purple">Multiple means that the inspection
+    <secondary-label id="Dockerfile" name="Dockerfile" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="EJS" full-name="EJS" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="EJS" name="EJS" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="EL" full-name="EL" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="EL" name="EL" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ecmascript 6" full-name="Ecmascript 6" color="purple">Multiple means that the inspection
+    <secondary-label id="Ecmascript 6" name="Ecmascript 6" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Editorconfig" full-name="Editorconfig" color="purple">Multiple means that the inspection
+    <secondary-label id="Editorconfig" name="Editorconfig" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="FTL" full-name="FTL" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="FTL" name="FTL" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Flow js" full-name="Flow js" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Flow js" name="Flow js" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="GQL" full-name="GQL" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="GQL" name="GQL" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Gherkin" full-name="Gherkin" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Gherkin" name="Gherkin" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Gotemplate" full-name="Gotemplate" color="purple">Multiple means that the inspection
+    <secondary-label id="Gotemplate" name="Gotemplate" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Groovy" full-name="Groovy" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Groovy" name="Groovy" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Haml" full-name="Haml" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Haml" name="Haml" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Handlebars" full-name="Handlebars" color="purple">Multiple means that the inspection
+    <secondary-label id="Handlebars" name="Handlebars" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Html" full-name="Html" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Html" name="Html" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Htmlcompatible" full-name="Htmlcompatible" color="purple">Multiple means that the inspection
+    <secondary-label id="Htmlcompatible" name="Htmlcompatible" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Http request" full-name="Http request" color="purple">Multiple means that the inspection
+    <secondary-label id="Http request" name="Http request" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ignorelang" full-name="Ignorelang" color="purple">Multiple means that the inspection
+    <secondary-label id="Ignorelang" name="Ignorelang" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ini" full-name="Ini" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="Ini" name="Ini" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="JVM" full-name="JVM" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="JVM" name="JVM" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Jade" full-name="Jade" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Jade" name="Jade" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Java" full-name="Java" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Java" name="Java" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Javascript" full-name="Javascript" color="purple">Multiple means that the inspection
+    <secondary-label id="Javascript" name="Javascript" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Jpaql" full-name="Jpaql" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Jpaql" name="Jpaql" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Json" full-name="Json" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Json" name="Json" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Json5" full-name="Json5" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Json5" name="Json5" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Jsonpath" full-name="Jsonpath" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Jsonpath" name="Jsonpath" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Jupyter" full-name="Jupyter" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Jupyter" name="Jupyter" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Kotlin" full-name="Kotlin" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Kotlin" name="Kotlin" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Less" full-name="Less" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Less" name="Less" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Makefile" full-name="Makefile" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Makefile" name="Makefile" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Manifest" full-name="Manifest" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Manifest" name="Manifest" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Markdown" full-name="Markdown" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Markdown" name="Markdown" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Mongodb-json" full-name="Mongodb-json" color="purple">Multiple means that the inspection
+    <secondary-label id="Mongodb-json" name="Mongodb-json" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Mongojs" full-name="Mongojs" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Mongojs" name="Mongojs" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Mongojsext" full-name="Mongojsext" color="purple">Multiple means that the inspection
+    <secondary-label id="Mongojsext" name="Mongojsext" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Msbuild" full-name="Msbuild" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Msbuild" name="Msbuild" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Multiple" full-name="Multiple" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Multiple" name="Multiple" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Mysql" full-name="Mysql" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Mysql" name="Mysql" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Mysql based" full-name="Mysql based" color="purple">Multiple means that the inspection
+    <secondary-label id="Mysql based" name="Mysql based" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ocstringsfile" full-name="Ocstringsfile" color="purple">Multiple means that the inspection
+    <secondary-label id="Ocstringsfile" name="Ocstringsfile" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Oracle" full-name="Oracle" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Oracle" name="Oracle" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="PHP" full-name="PHP" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="PHP" name="PHP" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Pointcutexpression" full-name="Pointcutexpression" color="purple">Multiple means that the
+    <secondary-label id="Pointcutexpression" name="Pointcutexpression" color="purple">Multiple means that the
         inspection performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Postcss" full-name="Postcss" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Postcss" name="Postcss" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Properties" full-name="Properties" color="purple">Multiple means that the inspection
+    <secondary-label id="Properties" name="Properties" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Protobuf" full-name="Protobuf" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Protobuf" name="Protobuf" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Pug (ex-jade)" full-name="Pug (ex-jade)" color="purple">Multiple means that the inspection
+    <secondary-label id="Pug (ex-jade)" name="Pug (ex-jade)" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Puppet" full-name="Puppet" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Puppet" name="Puppet" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Python" full-name="Python" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Python" name="Python" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Regexp" full-name="Regexp" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Regexp" name="Regexp" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Rest" full-name="Rest" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Rest" name="Rest" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Roomsql" full-name="Roomsql" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Roomsql" name="Roomsql" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ruby" full-name="Ruby" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Ruby" name="Ruby" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Ruby.rbs" full-name="Ruby.rbs" color="purple">Multiple means that the inspection performs
+    <secondary-label id="Ruby.rbs" name="Ruby.rbs" color="purple">Multiple means that the inspection performs
         checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="SQL" full-name="SQL" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="SQL" name="SQL" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Scss" full-name="Scss" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Scss" name="Scss" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Shell script" full-name="Shell script" color="purple">Multiple means that the inspection
+    <secondary-label id="Shell script" name="Shell script" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Shrinker_config" full-name="Shrinker_config" color="purple">Multiple means that the
+    <secondary-label id="Shrinker_config" name="Shrinker_config" color="purple">Multiple means that the
         inspection performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Spel" full-name="Spel" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Spel" name="Spel" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Spring-mongodb-json" full-name="Spring-mongodb-json" color="purple">Multiple means that the
+    <secondary-label id="Spring-mongodb-json" name="Spring-mongodb-json" color="purple">Multiple means that the
         inspection performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Sqldatetime" full-name="Sqldatetime" color="purple">Multiple means that the inspection
+    <secondary-label id="Sqldatetime" name="Sqldatetime" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Swift" full-name="Swift" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Swift" name="Swift" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Text" full-name="Text" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Text" name="Text" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Thymeleafexpressions" full-name="Thymeleafexpressions" color="purple">Multiple means that
+    <secondary-label id="Thymeleafexpressions" name="Thymeleafexpressions" color="purple">Multiple means that
         the inspection performs checks on a set of languages, the support of which is determined by inspection
         internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Toml" full-name="Toml" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Toml" name="Toml" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Typescript" full-name="Typescript" color="purple">Multiple means that the inspection
+    <secondary-label id="Typescript" name="Typescript" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Uast" full-name="Uast" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Uast" name="Uast" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="VTL" full-name="VTL" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="VTL" name="VTL" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Vue" full-name="Vue" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="Vue" name="Vue" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Vue template" full-name="Vue template" color="purple">Multiple means that the inspection
+    <secondary-label id="Vue template" name="Vue template" color="purple">Multiple means that the inspection
         performs checks on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="XML" full-name="XML" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="XML" name="XML" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Xpath" full-name="Xpath" color="purple">Multiple means that the inspection performs checks
+    <secondary-label id="Xpath" name="Xpath" color="purple">Multiple means that the inspection performs checks
         on a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="Yaml" full-name="Yaml" color="purple">Multiple means that the inspection performs checks on
+    <secondary-label id="Yaml" name="Yaml" color="purple">Multiple means that the inspection performs checks on
         a set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="go" full-name="go" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="go" name="go" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
-    <annotation short-name="vgo" full-name="vgo" color="purple">Multiple means that the inspection performs checks on a
+    <secondary-label id="vgo" name="vgo" color="purple">Multiple means that the inspection performs checks on a
         set of languages, the support of which is determined by inspection internally.
-    </annotation>
+    </secondary-label>
 
 
 </labels>
