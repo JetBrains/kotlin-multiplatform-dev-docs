@@ -90,7 +90,7 @@ fun main() = singleWindowApplication(title = "Context menu") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
 
 Default context menu options include copy, cut, paste, and select all. You can add more menu items, customize style and
 texts, and so on.
@@ -191,7 +191,7 @@ object TrayIcon : Painter() {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Tray(state = trayState, icon = TrayIcon, menu = { Item( "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Tray(state = trayState, icon = TrayIcon, menu = { Item( "}
 
 There are three types of notifications:
 
@@ -285,7 +285,7 @@ object AboutIcon : Painter() {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Window(MenuBar { Menu( "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(MenuBar { Menu( "}
 
 For more information, see the [Menu, tray, and notifications](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Tray_Notifications_MenuBar_new#menubar)
 tutorial.
@@ -356,7 +356,7 @@ fun main() = singleWindowApplication {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title=" TextField(modifier = Modifier.onPreviewKeyEvent { "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title=" TextField(modifier = Modifier.onPreviewKeyEvent { "}
 
 You can also define keyboard event handlers that are always active in the current window for
 the `Window`, `singleWindowApplication`, and `Dialog` composables.
@@ -419,7 +419,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Column() { for (x in 1..5) { OutlinedTextField("}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column() { for (x in 1..5) { OutlinedTextField("}
 
 You can also make a non-focusable component focusable, customize the order of tabbing navigation, and put components into
 focus.

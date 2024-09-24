@@ -53,7 +53,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
 
 > KDoctor works on macOS only. If you use a different operating system, skip this step.
 >
-{type="note"}
+{style="note"}
 
 1. In the Android Studio terminal or your command-line tool, run the following command to install the tool using Homebrew:
 
@@ -76,7 +76,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
    > You may ignore KDoctor's warnings regarding the CocoaPods installation. In your first project, you will use a
    > different iOS framework distribution option.
    >
-   {type="tip"}
+   {style="tip"}
 
 ## Possible issues and solutions
 
@@ -113,18 +113,18 @@ To make sure everything works as expected, install and run the KDoctor tool:
       </list>
    </def>
    <def title="Kotlin plugins">
-         <chunk>
+         <snippet>
             <p><strong>Kotlin Multiplatform plugin</strong></p>
                <list>
                   <li>Make sure that the Kotlin Multiplatform plugin is installed and enabled. On the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Verify that you have the plugin enabled. If it's not in the <strong>Installed</strong> list, search <strong>Marketplace</strong> for it and install the plugin.</li>
                   <li>If the plugin is outdated, click <strong>Update</strong> next to the plugin name. You can do the same in the <strong>Settings/Preferences | Tools | Plugins</strong> section.</li>
                   <li>Check the compatibility of the Kotlin Multiplatform plugin with your version of Kotlin in the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">Release details</a> table.</li>
                </list>
-         </chunk>
-         <chunk>
+         </snippet>
+         <snippet>
             <p><strong>Kotlin plugin</strong></p>
             <p>Make sure that the Kotlin plugin is updated to the latest version. To do that, on the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Click <strong>Update</strong> next to Kotlin.</p>
-         </chunk>
+         </snippet>
    </def>
    <def title="Command line">
             <p>Make sure you have all the necessary tools installed:</p>

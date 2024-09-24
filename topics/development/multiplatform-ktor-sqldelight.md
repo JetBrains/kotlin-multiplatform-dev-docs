@@ -27,7 +27,7 @@ You will use the following multiplatform libraries in the project:
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
 > in our GitHub repository.
 >
-{type="note"}
+{style="note"}
 
 ## Create your project
 
@@ -74,7 +74,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    lifecycleViewmodelCompose = "2.7.0"
    material3 = "1.2.0"
    ```
-   {initial-collapse-state="collapsed" collapsed-title="[versions]"}
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
 
 2. In the `[libraries]` block, add the following library references:
 
@@ -96,7 +96,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
    androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
    ```
-   {initial-collapse-state="collapsed" collapsed-title="[libraries]"}
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[libraries]"}
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
@@ -161,7 +161,7 @@ After the Gradle sync, you are done with the project configuration and can start
 
 > For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
 >
-{type="tip"}
+{style="tip"}
 
 ## Create an application data model
 
@@ -176,7 +176,7 @@ The application data model will have three entity classes with:
 > We're using the data model to showcase serialization.
 > But you can play around with links and patches to extend the example into something more informative!
 > 
-{type="note"}
+{style="note"}
 
 Create the necessary data classes:
 1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
@@ -186,7 +186,7 @@ Create the necessary data classes:
 
    ```kotlin
    ```
-   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsed-title="data class RocketLaunch" lines="3-41" }
+   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" lines="3-41" }
 
 Each serializable class must be marked with the `@Serializable` annotation. The `kotlinx.serialization` plugin
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
@@ -222,7 +222,7 @@ Sync the Gradle project files when prompted.
 > Consider installing the official [SQLDelight plugin](https://plugins.jetbrains.com/plugin/8191-sqldelight)
 > to work with `.sq` files.
 >
-{type="tip"}
+{style="tip"}
 
 ### Generate the database API
 
@@ -411,7 +411,7 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
         }
     }
     ```
-   {initial-collapse-state="collapsed" collapsed-title="internal fun getAllLaunches()"}
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="internal fun getAllLaunches()"}
 
 4. Add the `clearAndCreateLaunches` function to clear the database and insert new data:
 
@@ -893,7 +893,7 @@ Create the main `App()` composable for your application, and call it from a `Com
         }
     }
     ```
-   {initial-collapse-state="collapsed" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
 3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
    the `setContent()` function refers to the `App()` composable you just created in that package.
@@ -957,7 +957,7 @@ kotlin {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="isStatic = false"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="isStatic = false"}
 
 ### Prepare a Koin class for iOS dependency injection
 
@@ -1203,7 +1203,7 @@ It will allow you to call the SDK function with the correct database driver.
 
 > You can find the final version of the project [on the `final` branch](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final).
 >
-{type="note"}
+{style="note"}
 
 ## What's next?
 

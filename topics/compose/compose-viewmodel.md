@@ -5,7 +5,7 @@ approach to building UI can be implemented in common code using Compose Multipla
 
 > Support for the common `ViewModel` in Compose Multiplatform is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
 >
-{type="warning"}
+{style="warning"}
 
 ## Adding the common ViewModel to your project
 
@@ -59,7 +59,7 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
 > To make ViewModel coroutines work correctly with Compose Multiplatform, add the `kotlinx-coroutines-swing` dependency to your project.
 > See the [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 > 
-{type="tip"}
+{style="tip"}
 
 On non-JVM platforms, objects cannot be instantiated using type reflection.
 So in common code you cannot call the `viewModel()` function without parameters: every time a `ViewModel` instance is created,

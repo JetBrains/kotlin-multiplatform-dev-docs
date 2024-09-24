@@ -55,7 +55,7 @@ The experiment turned out to be very successful, resulting in the following:
 
 > [Learn how other global companies use Kotlin Multiplatform in their projects](case-studies.md)
 > 
-{type="tip"}
+{style="tip"}
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
 
@@ -81,7 +81,7 @@ Here's how using KMP benefited the Quizlet team:
 
 > [Discover the full range of capabilities offered by Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
 > 
-{type="tip"}
+{style="tip"}
 
 ### 3. Kotlin provides simplified code-sharing mechanisms
 
@@ -146,7 +146,7 @@ Check this list of [Kotlin Multiplatform and Compose Multiplatform samples](mult
 
 > [Discover Compose Multiplatform, a declarative framework for sharing UI across platforms]((https://www.jetbrains.com/lp/compose-multiplatform/))
 >
-{type="tip"}
+{style="tip"}
 
 ### 6. You can use Kotlin Multiplatform in existing and new projects
 
@@ -202,7 +202,7 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 
 > [Explore Fleet, a single IDE for Kotlin Multiplatform app development](fleet.md)
 > 
-{type="tip"}
+{style="tip"}
 
 ### 10. Kotlin Multiplatform boasts a large and supportive community
 
@@ -251,9 +251,9 @@ If you've already decided to try Kotlin Multiplatform, here are a few tips that 
   If it worked for you, you might want to expand the scope and share even more code.
   If not, you need to understand the reasons why this experiment didn't work out.
 
-> [See Kotlin Multiplatform in action! Get started now](get-started.xml)
+> [See Kotlin Multiplatform in action! Get started now](get-started.topic)
 >
-{type="tip"}
+{style="tip"}
 
 For those who want to help their team get started with Kotlin Multiplatform, we prepared a [detailed guide](multiplatform-introduce-your-team.md) with practical tips.
 

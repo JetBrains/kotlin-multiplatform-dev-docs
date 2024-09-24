@@ -93,7 +93,7 @@ and then you need to configure a framework containing all of the modules, called
 
 > The umbrella framework bundle contains all of the project's shared modules and is imported into the iOS app.
 >
-{type="tip"}
+{style="tip"}
 
 <table>
   <tr>
@@ -135,9 +135,9 @@ and [KT-42250](https://youtrack.jetbrains.com/issue/KT-42250).
 > When you see that an iOS app depends on an umbrella module in the examples below, it means that it also depends on the
 > umbrella framework generated from this module.
 >
-{type="tip"}
+{style="tip"}
 
-#### Why do you need an umbrella framework? {initial-collapse-state="collapsed"}
+#### Why do you need an umbrella framework? {initial-collapse-state="collapsed" collapsible="true"}
 
 While it's possible to include several frameworks generated from different Kotlin Multiplatform shared modules in your
 iOS app, we do not recommend this approach. When a Kotlin Multiplatform module is compiled into a framework, the

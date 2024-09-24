@@ -1,6 +1,6 @@
 [//]: # (title: Wrap up your project)
 
-<microformat>
+<tldr>
     <p>This is the final part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
@@ -8,7 +8,7 @@
        <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-upgrade-app.md">Share more logic</a><br/>
        <img src="icon-5.svg" width="20" alt="Fifth step"/> <strong>Wrap up your project</strong><br/>
     </p>
-</microformat>
+</tldr>
 
 You've created your first Kotlin Multiplatform app that works both on iOS and Android! Now you know how
 to set up an environment for cross-platform mobile development, create a project in Android Studio, run your app on devices,

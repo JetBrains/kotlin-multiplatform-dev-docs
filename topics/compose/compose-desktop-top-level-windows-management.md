@@ -17,7 +17,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="application { Window(onCloseRequest = ::exitApplication)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="application { Window(onCloseRequest = ::exitApplication)"}
 
 As a composable function, `Window()` allows you to change its properties declaratively. For example, you can open a window with one title and change the title later:
 
@@ -41,7 +41,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Window(onCloseRequest = ::exitApplication, title = "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = ::exitApplication, title = "}
 
 <img src="compose-window-properties.png" alt="Window properties: change title" animated="true" width="600"/>
 
@@ -86,7 +86,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="if (isPerformingTask) { Window(onCloseRequest = ::exitApplication,"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isPerformingTask) { Window(onCloseRequest = ::exitApplication,"}
 
 <img src="compose-window-condition.png" alt="Windows with conditions" animated="true" width="600"/>
 
@@ -129,7 +129,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Window(onCloseRequest = { isAskingToClose = true }"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isAskingToClose = true }"}
 
 <img src="compose-window-ask-to-close.png" alt="Close with confirmation" animated="true" width="600"/>
 
@@ -202,7 +202,7 @@ private class MyWindowState(
     fun close() = close(this)
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="MyApplicationState { val windows = mutableStateListOf<MyWindowState>()"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="MyApplicationState { val windows = mutableStateListOf<MyWindowState>()"}
 
 <img src="compose-multiple-windows.png" alt="Multiple windows" animated="true" width="600"/>
 
@@ -266,7 +266,7 @@ object TrayIcon : Painter() {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Window(onCloseRequest = { isVisible = false },"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isVisible = false },"}
 
 <img src="compose-window-hide-tray.png" alt="Hide instead of closing" animated="true" width="600"/>
 
@@ -327,7 +327,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified)"}
 
 <img src="compose-window-adaptive-size.png" alt="Adaptive window size" width="451"/>
 
@@ -410,7 +410,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="val state = rememberWindowState(placement = WindowPlacement.Maximized)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="val state = rememberWindowState(placement = WindowPlacement.Maximized)"}
 
 <img src="compose-window-minimize.png" alt="Changing the state" animated="true" width="600"/>
 
@@ -456,7 +456,7 @@ private fun onWindowRelocate(position: WindowPosition) {
     println("onWindowRelocate $position")
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="LaunchedEffect(state) { snapshotFlow { state.size } .onEach(::onWindowResize)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="LaunchedEffect(state) { snapshotFlow { state.size } .onEach(::onWindowResize)"}
 
 ## Dialogs
 
@@ -499,7 +499,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="if (isDialogOpen) { DialogWindow(onCloseRequest = { isDialogOpen = false },"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow(onCloseRequest = { isDialogOpen = false },"}
 
 ## Draggable window area
 
@@ -525,7 +525,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="WindowDraggableArea { Box(Modifier.fillMaxWidth().height(48.dp).background(Color.DarkGray))}"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="WindowDraggableArea { Box(Modifier.fillMaxWidth().height(48.dp).background(Color.DarkGray))}"}
 
 `WindowDraggableArea()` can be used inside the `singleWindowApplication()`, `Window()`, and `DialogWindow()` composables only. To call it in another composable function, use a `WindowScope` as a receiver scope:
 
@@ -554,7 +554,7 @@ private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {
     Box(Modifier.fillMaxWidth().height(48.dp).background(Color.DarkGray))
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {"}
 
 <img src="compose-window-draggable-area.png" alt="Draggable area" animated="true" width="600"/>
 
@@ -603,7 +603,7 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Modifier.fillMaxSize().padding(5.dp).shadow(3.dp, RoundedCornerShape(20.dp))"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Modifier.fillMaxSize().padding(5.dp).shadow(3.dp, RoundedCornerShape(20.dp))"}
 
 ## Swing interoperability
 
@@ -626,7 +626,7 @@ fun main() = SwingUtilities.invokeLater {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="SwingUtilities.invokeLater { ComposeWindow().apply {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="SwingUtilities.invokeLater { ComposeWindow().apply {"}
 
 You can also use the scope of a `Window()` composable. In the following code sample, `window` is a `ComposeWindow` created inside `Window()`:
 
@@ -653,7 +653,7 @@ fun main() = singleWindowApplication {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="LaunchedEffect(Unit) { window.dropTarget = DropTarget().apply"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="LaunchedEffect(Unit) { window.dropTarget = DropTarget().apply"}
 
 If you need to use a dialog implemented in Swing, you can wrap it into a composable function:
 
@@ -699,7 +699,7 @@ private fun FileDialog(
     dispose = FileDialog::dispose
 )
 ```
-{initial-collapse-state="collapsed" collapsed-title="@Composable private fun FileDialog( parent: Frame? = null, "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="@Composable private fun FileDialog( parent: Frame? = null, "}
 
 ## What's next
 

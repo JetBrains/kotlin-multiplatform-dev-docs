@@ -73,7 +73,7 @@ compose.resources {
     )
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ## Qualifiers
 

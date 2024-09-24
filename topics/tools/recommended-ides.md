@@ -15,7 +15,7 @@ See the [Use Fleet for Multiplatform development](fleet.md) tutorial to get star
 > Kotlin Multiplatform support in Fleet is still in the early stages of development. You may face issues and
 > limitations, but we're committed to fixing them based on [your feedback](fleet.md#leave-feedback).
 >
-{type="note"}
+{style="note"}
 
 ## Android Studio IDE
 
@@ -33,4 +33,4 @@ It supports opening, browsing, and building multiplatform projects.
 > If you're targeting iOS in your Kotlin Multiplatform project, you'll also need [Xcode](https://developer.apple.com/xcode/)
 > installed on your machine to write iOS-specific code and run iOS applications.
 >
-{type="note"}
+{style="note"}

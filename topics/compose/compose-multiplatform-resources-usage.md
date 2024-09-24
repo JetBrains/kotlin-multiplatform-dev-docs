@@ -383,7 +383,7 @@ This enables Android Studio to generate previews for Compose Multiplatform compo
 > Android Studio previews are available only for composables in an Android source set.
 > They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
 >
-{type="warning"}
+{style="warning"}
 
 Using Multiplatform resources as Android assets also makes possible direct access from WebViews and media player components
 on Android, since resources can be reached by a simple path, for example `Res.getUri("files/index.html")`.
@@ -413,7 +413,7 @@ fun App() {
     }
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
 
 The example works with this simple HTML file:
 
@@ -429,7 +429,7 @@ The example works with this simple HTML file:
 </body>
 </html>
 ```
-{initial-collapse-state="collapsed"  collapsed-title="<title>Cat Resource</title>"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="<title>Cat Resource</title>"}
 
 Both resource files in this example are located in the `commonMain` source set:
 
@@ -504,7 +504,7 @@ private object ResourceLoader
 private fun readResourceBytes(resourcePath: String) =
     ResourceLoader.javaClass.classLoader.getResourceAsStream(resourcePath).readAllBytes()
 ```
-{initial-collapse-state="collapsed" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
 
 ## What's next?
 

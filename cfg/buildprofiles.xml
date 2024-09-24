@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildprofiles>
-    <variables>
-        <header-logo>kotlin-multiplatform-logo.svg</header-logo>
-        <product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
-        <primary-color>frozen</primary-color>
-        <enable-browser-edits>true</enable-browser-edits>
-        <browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</browser-edits-url>
-        <web-root>https://www.jetbrains.com/help</web-root>
-        <web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
-        <download-page/>
-        <fallback-url>https://www.jetbrains.com/help/kotlin-multiplatform-dev/</fallback-url>
-        <config-feedbackRequireEmail>false</config-feedbackRequireEmail>
-<!--        <config-showDownloadButton>true</config-showDownloadButton>-->
-        <config-disqus-id>jetbrains</config-disqus-id>
-        <config-disqus-show>false</config-disqus-show>
-        <config-feedback-url>https://forms-service.jetbrains.com/feedback</config-feedback-url>
-        <config-feedback-enabled>true</config-feedback-enabled>
-        <config-feedback-widget>true</config-feedback-widget>
-<!--        <config-webmaster>webmaster@jetbrains.com</config-webmaster>-->
-<!--        <config-feedback-support>https://kotl.in/issue</config-feedback-support>-->
-        <config-sideblocks>true</config-sideblocks>
-        <config-search-scopes-provider>https://data.services.jetbrains.com/search/</config-search-scopes-provider>
-<!--        <config-versions-switcher>https://data.services.jetbrains.com/help-versions</config-versions-switcher>-->
-        <og-twitter>@kotlin</og-twitter>
-        <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
-        <noindex-content-in-deprecated>false</noindex-content-in-deprecated>
-        <noindex-content-in-eap>false</noindex-content-in-eap>
-        <noindex-content-in-release>false</noindex-content-in-release>
-        <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
-        <custom-favicons>
-            <![CDATA[
+	<variables>
+		<header-logo>kotlin-multiplatform-logo.svg</header-logo>
+		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
+		<primary-color>frozen</primary-color>
+		<enable-browser-edits>true</enable-browser-edits>
+		<browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</browser-edits-url>
+		<web-root>https://www.jetbrains.com/help</web-root>
+		<web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
+		<download-page/>
+		<fallback-url>https://www.jetbrains.com/help/kotlin-multiplatform-dev/</fallback-url>
+		<feedbackRequireEmail>false</feedbackRequireEmail>
+		<!--        <showDownloadButton>true</showDownloadButton>-->
+		<disqus-id>jetbrains</disqus-id>
+		<disqus-show>false</disqus-show>
+		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
+		<feedback-enabled>true</feedback-enabled>
+		<feedback-widget>true</feedback-widget>
+		<!--        <webmaster>webmaster@jetbrains.com</webmaster>-->
+		<!--        <feedback-support>https://kotl.in/issue</feedback-support>-->
+		<sideblocks>true</sideblocks>
+		<search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
+		<!--        <versions-switcher>https://data.services.jetbrains.com/help-versions</versions-switcher>-->
+		<og-twitter>@kotlin</og-twitter>
+		<og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
+		<noindex-content-in-deprecated>false</noindex-content-in-deprecated>
+		<noindex-content-in-eap>false</noindex-content-in-eap>
+		<noindex-content-in-release>false</noindex-content-in-release>
+		<property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
+		<custom-favicons>
+<![CDATA[
         <link rel="shortcut icon" href="https://resources.jetbrains.com/storage/ui/favicons/favicon.ico"
               type="image/x-icon"
               sizes="16x16 32x32"/>
@@ -77,17 +77,17 @@
         <!-- Drop any switches and set default theme -->
         <style>.wh-header__switchers{display:none!important}</style>
         <script>document.cookie="wh_theme=light;expires="+(new Date(Date.now()+500000000).toUTCString())+"; path=/;";</script>
-        ]]>
-        </custom-favicons>
-        <generate-canonicals>true</generate-canonicals>
-    </variables>
-    <footer>
-        <link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
-        <social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
-        <social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
-        <social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
-        <!-- Custom CSS will replace rss type -->
-        <social type="rss" href="https://kotl.in/gamt3a">Kotlin Multiplatform Slack</social>
-    </footer>
-    <build-profile product="mpd"/>
+        ]]>			
+		</custom-favicons>
+		<generate-canonicals>true</generate-canonicals>
+	</variables>
+	<footer>
+		<link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
+		<social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
+		<social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
+		<social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
+		<!-- Custom CSS will replace rss type -->
+		<social type="rss" href="https://kotl.in/gamt3a">Kotlin Multiplatform Slack</social>
+	</footer>
+	<build-profile instance="mpd"/>
 </buildprofiles>

@@ -17,7 +17,7 @@ Currently, Fleet does not rebuild previews automatically, so click the icon agai
 > The previews currently work for common code as well as for desktop source sets.
 > Android native UI previews are not supported yet.
 > 
-{type="note"}
+{style="note"}
 
 For more about the feature, see [Getting started with Kotlin Multiplatform](https://www.jetbrains.com/help/fleet/getting-started-with-kotlin-multiplatform.html#b65b852e_76)
 in the Fleet documentation.

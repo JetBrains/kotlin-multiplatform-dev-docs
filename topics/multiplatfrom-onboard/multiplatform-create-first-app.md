@@ -1,6 +1,6 @@
 [//]: # (title: Create your first cross-platform app)
 
-<microformat>
+<tldr>
     <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
     <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your first cross-platform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
@@ -8,7 +8,7 @@
        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
     </p>
-</microformat>
+</tldr>
 
 Here you will learn how to create and run your first Kotlin Multiplatform application using Android Studio.
 
@@ -21,7 +21,7 @@ You can share application logic between iOS and Android apps and write platform-
 > To try a new multiplatform experience without juggling different IDEs and switching to
 > Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
 >
-{type="tip"}
+{style="tip"}
 
 ## Set up the environment
 
@@ -198,7 +198,7 @@ calls a correct actual implementation.
 
 Now you can run the apps and see all of this in action.
 
-#### Explore the expect/actual mechanism (optional) {initial-collapse-state="collapsed"}
+#### Explore the expect/actual mechanism (optional) {initial-collapse-state="collapsed" collapsible="true"}
 
 The template project uses the expect/actual mechanism for functions, but it also works for most Kotlin declarations,
 such as properties and classes. Let's implement an expected property:
@@ -244,7 +244,7 @@ such as properties and classes. Let's implement an expected property:
 
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
 >
-{type="tip"}
+{style="tip"}
 
 ## Run your application
 
@@ -262,7 +262,7 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
    ![First mobile multiplatform app on Android](first-multiplatform-project-on-android-1.png){width=300}
 
-<include src="compose-multiplatform-create-first-app.md" include-id="run_android_other_devices"/>
+<include from="compose-multiplatform-create-first-app.md" element-id="run_android_other_devices"/>
 
 ### Run your application on iOS
 
@@ -276,7 +276,7 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
    ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
-<include src="compose-multiplatform-create-first-app.md" include-id="run_ios_other_devices"/>
+<include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
 
 ## Next step
 

@@ -17,7 +17,7 @@ that requires tests both for common and platform-specific code.
     complete [this tutorial](multiplatform-create-first-app.md) before you begin.
 > * The basics of popular unit testing frameworks, such as [JUnit](https://junit.org/junit5/).
 >
-{type="tip"}
+{style="tip"}
 
 ## Test a simple multiplatform project
 
@@ -123,7 +123,7 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
 As you can see, imported annotations and assertions are neither platform- nor framework-specific.
 When you run this test later, a platform-specific framework will provide the test runner.
 
-#### Explore the `kotlin.test` API {initial-collapse-state="collapsed"}
+#### Explore the `kotlin.test` API {initial-collapse-state="collapsed" collapsible="true"}
 
 The [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) library provides platform-agnostic
 annotations and assertions for you to use in your tests. Annotations, such as `Test`,
@@ -229,7 +229,7 @@ You can run this test using any of the ways [available in the IDE](#run-tests).
 > Here, the [mechanism of expected and actual declarations](multiplatform-connect-to-apis.md)
 > is used for brevity and simplicity. In more complex code, a better approach is to use interfaces and factory functions.
 >
-{type="note"}
+{style="note"}
 
 Now you have experience writing tests for common code, let's explore writing platform-specific tests for Android and iOS.
 
