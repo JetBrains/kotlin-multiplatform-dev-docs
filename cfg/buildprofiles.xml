@@ -18,8 +18,6 @@
 		<download-page/>
 		<fallback-url>https://www.jetbrains.com/help/kotlin-multiplatform-dev/</fallback-url>
 		<feedbackRequireEmail>false</feedbackRequireEmail>
-		<disqus-id>jetbrains</disqus-id>
-		<disqus-show>false</disqus-show>
 		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
 		<feedback-enabled>true</feedback-enabled>
 		<feedback-widget>true</feedback-widget>
