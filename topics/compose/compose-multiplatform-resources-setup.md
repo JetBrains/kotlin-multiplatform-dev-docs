@@ -1,6 +1,6 @@
 [//]: # (title: Setup and configuration for multiplatform resources)
 
-<toc-settings depth="3"/>
+<show-structure depth="3"/>
 
 To properly configure the project to use multiplatform resources:
 
