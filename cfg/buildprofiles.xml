@@ -2,26 +2,21 @@
 <buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
 	<sitemap priority="0.35" change-frequency="monthly"/>
 	<variables>
-		# newly added tags
 		<analytics-head-script-file>thirdparty/dpk-gtm-analytics.html</analytics-head-script-file>
 		<include-in-head>thirdparty/favicons.html</include-in-head>
 		<website-title>%instance% Documentation</website-title>
 		<automaticLinkSummaries>false</automaticLinkSummaries>
-		# old tags
 		<header-logo>kotlin-multiplatform-logo.svg</header-logo>
 		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
 		<primary-color>frozen</primary-color>
 		<enable-contribution>true</enable-contribution>
 		<contribute-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</contribute-url>
 		<web-root>https://www.jetbrains.com/help</web-root>
-		<web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
 		<download-page/>
-		<fallback-url>https://www.jetbrains.com/help/kotlin-multiplatform-dev/</fallback-url>
 		<feedbackRequireEmail>false</feedbackRequireEmail>
 		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
 		<feedback-enabled>true</feedback-enabled>
 		<feedback-widget>true</feedback-widget>
-		<sideblocks>true</sideblocks>
 		<search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
 		<og-twitter>@kotlin</og-twitter>
 		<og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
