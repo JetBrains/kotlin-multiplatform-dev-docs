@@ -6,7 +6,7 @@ starting with 1.7.0.
 ## Compose Multiplatform 1.6.11 to 1.7.0
 
 ### Removed background parameter in UIKitView and UIKitViewController
-
+ph
 Deprecated `UIKitView` and `UIKitViewController` APIs have the `background` parameter, while the new ones don't.
 The parameter was deemed redundant and removed:
 
@@ -27,31 +27,32 @@ The constructor is marked experimental because we ultimately intend to keep the 
 by a single bool flag.
 The behavior described explicitly the `interactionMode` parameter will most likely be derived automatically in the future.
 
-### UIKitView(Controller).accessibilityEnabled moved, renamed, and false by default
+### accessibilityEnabled replaced by isNativeAccessibilityEnabled, and turned off by default
 
-The `accessibilityEnabled` parameter of the old `UIKitView` constructor was moved and renamed to be available as
-the `UIKitInteropProperties.isNativeAccessibilityEnabled` property. It is now set to `false` by default.
+The `accessibilityEnabled` parameter of the old `UIKitView` and `UIKitViewController` constructors was moved and renamed
+to be available as the `UIKitInteropProperties.isNativeAccessibilityEnabled` property.
+It is also set to `false` by default.
 
 The `isNativeAccessibilityEnabled` property taints the merged Compose subtree with native accessibility resolution.
 So it is not recommended to set to true unless you need rich accessibility capabilities of the interop view (such as web views).
 
 For the rationale behind this property and its default value, see the [in-code documentation for the `UIKitInteropProperties` class](https://github.com/JetBrains/compose-multiplatform-core/blob/jb-main/compose/ui/ui/src/uikitMain/kotlin/androidx/compose/ui/viewinterop/UIKitInteropProperties.uikit.kt).
 
-### UIKitView(Controller).onResize parameter removed
+### onResize parameter removed
 
-The parameter set a custom frame based on the `rect` argument, but didn't affect the Compose layout itself,
-so it was not intuitive to use.
+The `onResize` parameter of the old `UIKitView` and `UIKitViewController` constructors set a custom frame based
+on the `rect` argument, but didn't affect the Compose layout itself, so it was not intuitive to use.
 On top of that, the default implementation of the `onResize` parameter needed to properly set the frame of interop view
 and contained some implementation details about properly clipping the view. <!-- TODO: what's wrong with that exactly? -->
 
 How to make do without `onResize`:
 
 * If you need to react to the interop view frame change, you can:
-  * override [`layoutSubviews`](https://developer.apple.com/documentation/uikit/uiview/1622482-layoutsubviews)
+    * override [`layoutSubviews`](https://developer.apple.com/documentation/uikit/uiview/1622482-layoutsubviews)
     of the interop `UIView`,
-  * override [`viewDidLayoutSubviews`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621398-viewdidlayoutsubviews)
-    of the interop `UIViewController`,
-  * or add `onGloballyPositioned` to the `Modifier` chain.
+    * override [`viewDidLayoutSubviews`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621398-viewdidlayoutsubviews)
+      of the interop `UIViewController`,
+    * or add `onGloballyPositioned` to the `Modifier` chain.
 * If you need to set the frame of your interop view, use the corresponding Compose modifiers: `size`, `fillMaxSize`, and so on.
 
 ### Some onReset usage patters were invalidated
