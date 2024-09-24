@@ -3,7 +3,7 @@
 Learn how to make your existing Android application cross-platform so that it works both on Android and iOS.
 You'll be able to write code and test it for both Android and iOS only once, in one place.
 
-This tutorial uses a [sample Android application](https://github.com/Kotlin/kmm-integration-sample) with a single screen
+This tutorial uses a [sample Android application](https://github.com/Kotlin/kmp-integration-sample) with a single screen
 for entering a username and password. The credentials are validated and saved to an in-memory database.
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up environment and create a cross-platform application from scratch](multiplatform-setup.md)
@@ -24,7 +24,7 @@ for entering a username and password. The credentials are validated and saved to
 2. In Android Studio, create a new project from version control:
 
    ```text
-   https://github.com/Kotlin/kmm-integration-sample
+   https://github.com/Kotlin/kmp-integration-sample
    ```
 
    > The `master` branch contains the project's initial state — a simple Android application. To see the final state
@@ -130,8 +130,12 @@ there, and make this code cross-platform.
         // ...
     }
     ```
-6. Follow Android Studio suggestions to import missing classes.
-7. Debug the `app`. On the **Logcat** tab, search for `Hello` in the log, and you'll find the greeting from the shared
+6. Follow Android Studio's suggestions to import missing classes.
+7. In the toolbar, select `app` from the dropdown and click **Debug** ![](debug-android.png){width=20}.
+
+   ![App from list to debug](app-list-android.png){width="300"}
+
+8. On the **Logcat** tab, search for `Hello` in the log, and you'll find the greeting from the shared
    module.
 
    ![Greeting from the shared module](shared-module-greeting.png){width="700"}
@@ -300,7 +304,7 @@ business logic in it.
    ![iOS project settings](ios-project-wizard-2.png){width=700}
 
 4. As the location for your project, select the directory that stores your cross-platform application, for
-   example, `kmm-integration-sample`.
+   example, `kmp-integration-sample`.
 
 In Android Studio, you'll get the following structure:
 
@@ -367,14 +371,14 @@ Connect your framework to the iOS project manually:
 1. In Xcode, open the `ContentView.swift` file and import the `shared` module:
 
    ```swift
-   import Shared
+   import shared
    ```
 
 2. To check that it is properly connected, use the `greet()` function from the shared module of your cross-platform app:
 
    ```swift
    import SwiftUI
-   import Shared
+   import shared
    
    struct ContentView: View {
        var body: some View {
@@ -398,7 +402,7 @@ Connect your framework to the iOS project manually:
 
     ```swift
     import SwiftUI
-    import Shared
+    import shared
     
     @main
     struct SimpleLoginIOSApp: App {
@@ -410,7 +414,8 @@ Connect your framework to the iOS project manually:
     }
     ```
    
-6. Run the Xcode project to see that the iOS app shows the login form and validates the input using the shared code:
+6. Run the Xcode project to see that the iOS app shows the login form. Enter "Jane" for the username and "password" for the password.
+   The app validates the input using the shared code:
 
     ![Simple login application](xcode-iphone-login.png){width=300}
 
@@ -419,7 +424,7 @@ Connect your framework to the iOS project manually:
 Now your application is cross-platform. You can update the business logic in one place and see results on both Android
 and iOS.
 
-1. In Android Studio, change the validation logic for a user's password: "password" should no longer be a valid option.
+1. In Android Studio, change the validation logic for a user's password: "password" shouldn't be a valid option.
    To do that, update the `checkPassword()` function of the `LoginDataValidator` class:
 
    ```kotlin
@@ -438,7 +443,7 @@ and iOS.
    }
    ```
 
-2. Add a run configuration for the iOS app:
+2. In Android Studio, add a run configuration for the iOS app:
 
    1. Select **Run | Edit configurations** in the main menu.
 
@@ -452,19 +457,19 @@ and iOS.
 
 3. Run both the iOS and Android applications from Android Studio to see the changes:
 
-   ![iOS run configuration](ios-run-configuration-simplelogin.png)
+   ![iOS run configuration](ios-run-configuration-simplelogin.png){width=300}
 
    ![iOS application password error](iphone-password-error.png){width=300}
 
    ![Android application password error](android-password-error.png){width=300}
 
-You can review the [final code for this tutorial](https://github.com/Kotlin/kmm-integration-sample/tree/final).
+You can review the [final code for this tutorial](https://github.com/Kotlin/kmp-integration-sample/tree/final).
 
 ## What else to share?
 
 You've shared the business logic of your application, but you can also decide to share other layers of your application.
-For example, the `ViewModel` class code is almost the same for [Android](https://github.com/Kotlin/kmm-integration-sample/blob/final/app/src/main/java/com/jetbrains/simplelogin/androidapp/ui/login/LoginViewModel.kt)
-and [iOS applications](https://github.com/Kotlin/kmm-integration-sample/blob/final/iosApp/SimpleLoginIOS/ContentView.swift#L84),
+For example, the `ViewModel` class code is almost the same for [Android](https://github.com/Kotlin/kmp-integration-sample/blob/final/app/src/main/java/com/jetbrains/simplelogin/androidapp/ui/login/LoginViewModel.kt)
+and [iOS applications](https://github.com/Kotlin/kmp-integration-sample/blob/final/iosApp/SimpleLoginIOS/ContentView.swift#L84),
 and you can share it if your mobile applications should have the same presentation layer.
 
 ## What's next?

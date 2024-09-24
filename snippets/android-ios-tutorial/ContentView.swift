@@ -1,5 +1,5 @@
 import SwiftUI
-import Shared
+import shared
 
 struct ContentView: View {
     @State private var username: String = ""
