@@ -7,12 +7,12 @@
         This functionality is available only in the EAP version.
     </primary-label>
 
-    <secondary-label id="Deprecated" name="Still available, but deprecated." color="strawberry"/>
-    <secondary-label id="Experimental" name="This feature is at the experimental stage of development and can be significantly changed or removed in future releases." color="red"/>
-    <secondary-label id="Android" name="Available in Compose Multiplatform for Android"/>
-    <secondary-label id="Desktop" name="Available in Compose Multiplatform for desktop"/>
-    <secondary-label id="iOS" name="Available in Compose Multiplatform for iOS"/>
-    <secondary-label id="Web" name="Available in Compose Multiplatform for web"/>
+    <secondary-label id="Deprecated" name="Deprecated" color="strawberry">Still available, but deprecated.</secondary-label>
+    <secondary-label id="Experimental" name="Experimental" color="red">This feature is at the experimental stage of development and can be significantly changed or removed in future releases.</secondary-label>
+    <secondary-label id="Android" name="Android">Available in Compose Multiplatform for Android</secondary-label>
+    <secondary-label id="Desktop" name="Desktop">Available in Compose Multiplatform for desktop</secondary-label>
+    <secondary-label id="iOS" name="iOS">Available in Compose Multiplatform for iOS</secondary-label>
+    <secondary-label id="Web" name="Web">Available in Compose Multiplatform for web</secondary-label>
 
     <secondary-label id="Information" name="Info" color="blue"/>
     <secondary-label id="Weak warning" name="Info" color="tangerine"/>

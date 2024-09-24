@@ -10,7 +10,8 @@ all touches are processed entirely by the native UI, with Compose not being awar
 Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
 Changes are described in the following sections. Consider trying them out with the %composeEapVersion% version.
 
-## New approach to handling touches in interop UI {label="EAP"}
+## New approach to handling touches in interop UI
+<primary-label ref="EAP"/>
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
 the container composable can't react to the same touch.
@@ -31,7 +32,8 @@ When the touch is first detected, there is a short delay (150 ms) that lets the 
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
 To do that, call the constructor for a `UIKitView` or a `UIViewController` with the `interactive` parameter set to `false`. 
 
-### Choosing the strategy for touch processing {annotations="Experimental"}
+### Choosing the strategy for touch processing
+<secondary-label ref="Experimental"/>
 
 With Compose Multiplatform %composeEapVersion% you can also try out the experimental API for finer control over interop UI.
 
