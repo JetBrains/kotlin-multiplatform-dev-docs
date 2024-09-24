@@ -7,36 +7,42 @@
 		<include-in-head>thirdparty/favicons.html</include-in-head>
 		<website-title>%instance% Documentation</website-title>
 		<automaticLinkSummaries>false</automaticLinkSummaries>
-<!--		<custom-css>custom.css</custom-css>-->
 		# old tags
 		<header-logo>kotlin-multiplatform-logo.svg</header-logo>
 		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
 		<primary-color>frozen</primary-color>
-		<enable-browser-edits>true</enable-browser-edits>
-		<browser-edits-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</browser-edits-url>
+		<enable-contribution>true</enable-contribution>
+		<contribute-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</contribute-url>
 		<web-root>https://www.jetbrains.com/help</web-root>
 		<web-community-path>Developer Community:https://www.jetbrains.net/devnet/community/idea/kb</web-community-path>
 		<download-page/>
 		<fallback-url>https://www.jetbrains.com/help/kotlin-multiplatform-dev/</fallback-url>
 		<feedbackRequireEmail>false</feedbackRequireEmail>
-		<!--        <showDownloadButton>true</showDownloadButton>-->
 		<disqus-id>jetbrains</disqus-id>
 		<disqus-show>false</disqus-show>
 		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
 		<feedback-enabled>true</feedback-enabled>
 		<feedback-widget>true</feedback-widget>
-		<!--        <webmaster>webmaster@jetbrains.com</webmaster>-->
-		<!--        <feedback-support>https://kotl.in/issue</feedback-support>-->
 		<sideblocks>true</sideblocks>
 		<search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
-		<!--        <versions-switcher>https://data.services.jetbrains.com/help-versions</versions-switcher>-->
 		<og-twitter>@kotlin</og-twitter>
 		<og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
-		<noindex-content-in-deprecated>false</noindex-content-in-deprecated>
-		<noindex-content-in-eap>false</noindex-content-in-eap>
-		<noindex-content-in-release>false</noindex-content-in-release>
+		<noindex-content>false</noindex-content>
 		<property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
 		<generate-canonicals>true</generate-canonicals>
+		<custom-favicons>
+			https://resources.jetbrains.com/storage/ui/favicons/favicon.ico,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-60x60.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-72x72.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-76x76.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-114x114.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-120x120.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-144x144.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-152x152.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png,
+			https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg
+		</custom-favicons>
 	</variables>
 	<footer>
 		<link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
