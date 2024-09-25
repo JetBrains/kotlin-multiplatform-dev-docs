@@ -15,7 +15,6 @@
 		<download-page/>
 		<feedbackRequireEmail>false</feedbackRequireEmail>
 		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
-		<feedback-enabled>true</feedback-enabled>
 		<feedback-widget>true</feedback-widget>
 		<search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
 		<og-twitter>@kotlin</og-twitter>
