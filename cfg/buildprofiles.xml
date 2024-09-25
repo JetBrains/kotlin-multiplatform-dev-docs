@@ -22,7 +22,7 @@
 		<og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
 		<noindex-content>false</noindex-content>
 		<property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
-		<generate-canonicals>true</generate-canonicals>
+<!--		<generate-canonicals>true</generate-canonicals>-->
 		<custom-favicons>
 			https://resources.jetbrains.com/storage/ui/favicons/favicon.ico,
 			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png,
