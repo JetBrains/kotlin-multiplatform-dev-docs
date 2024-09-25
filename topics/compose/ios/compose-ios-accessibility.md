@@ -34,7 +34,7 @@ To debug and test events and interactions, you can change the synchronization mo
 > Remember that synchronizing the tree after each UI event can be quite useful for debugging and testing but can degrade
 > the performance of your app.
 >
-{type="note"}
+{style="note"}
 
 An example of enabling the option to always synchronize the accessibility tree:
 

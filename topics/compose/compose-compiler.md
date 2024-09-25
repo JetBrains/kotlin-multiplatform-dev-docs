@@ -17,7 +17,7 @@ simultaneously with Kotlin and will always be compatible with Kotlin of the same
 > these older dependencies may still cause recomposition issues.
 > To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 >
-{type="warning"}
+{style="warning"}
 
 To use the new Compose compiler plugin in your project, apply it for each module that uses Compose.
 See the migration instructions below:
@@ -33,7 +33,7 @@ module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```toml
+    ```
     [versions]
     # ...
     kotlin = "%kotlinVersion%"
@@ -90,7 +90,7 @@ For Android modules that don't rely on Compose Multiplatform:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```toml
+    ```
     [versions]
     # ...
     kotlin = "%kotlinVersion%"
@@ -160,7 +160,7 @@ composeCompiler {
 > The Gradle plugin provides defaults for several Compose compiler options that were only specified manually before.
 > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
 >
-{type="warning"}
+{style="warning"}
 
 ### General settings
 
@@ -213,7 +213,7 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 > _Deprecated_ in Kotlin 2.1.0-Beta1 in favor of [stabilityConfigurationFiles](#stabilityconfigurationfiles),
 > which allows using more than one stability configuration file.
 > 
-{type="warning"}
+{style="warning"}
 
 **Type**: `RegularFileProperty`
 
@@ -327,7 +327,7 @@ and functions that are implicitly not skippable (inline functions and functions 
 
 > This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is disabled by default.
 >
-{type="warning"}
+{style="warning"}
 
 #### StrongSkipping
 

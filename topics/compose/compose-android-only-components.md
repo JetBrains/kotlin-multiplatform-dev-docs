@@ -9,7 +9,7 @@ other platforms yet. This page summarizes these parts of the Compose Multiplatfo
 > articles created by the community, you may find an API that you can only use in the Android target.
 > If you try to use it in `commonMain` code, your IDE will tell you that this API isn't available.
 >
-{type="note"}
+{style="note"}
 
 ## Android-only API
 

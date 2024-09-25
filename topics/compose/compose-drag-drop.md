@@ -3,7 +3,7 @@
 > Currently, drag-and-drop operations are only supported in Compose Multiplatform for desktop.
 > The support will be extended to iOS and web in future releases.
 >
-{type="note"}
+{style="note"}
 
 You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
 or allow users to drag data out of your app.
@@ -12,7 +12,7 @@ as potential sources or destinations for drag operations.
 
 > Both `dragAndDropSource` and `dragAndDropTarget` modifiers are experimental, subject to change, and require an opt-in annotation.
 > 
-{type="warning"}
+{style="warning"}
 
 ## Creating a drag source
 

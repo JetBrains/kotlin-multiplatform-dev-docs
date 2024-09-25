@@ -35,7 +35,7 @@ So, when you update to Compose Multiplatform %composeEapVersion%, you may have t
 
 > Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
-{type="note"}
+{style="note"}
 
 ### Java resources API is deprecated in favor of the multiplatform resource library
 
@@ -111,7 +111,7 @@ All multiplatform resources are now packed into Android assets. This allows Andr
 > Android Studio previews are available only for composables in Android source sets.
 > They also require one of the latest versions of AGP: 8.5.2, 8.6.0-rc01, or 8.7.0-alpha04.
 >
-{type="note"}
+{style="note"}
 
 This also offers direct access to multiplatform resources from WebViews and media player components on Android,
 since resources can be reached by a simple path, for example, `Res.getUri(“files/index.html”)`.
@@ -141,7 +141,7 @@ fun App() {
     }
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="AndroidView(factory = { WebView(it).apply"}
 
 The example works with this simple HTML file:
 
@@ -157,7 +157,7 @@ The example works with this simple HTML file:
 </body>
 </html>
 ```
-{initial-collapse-state="collapsed"  collapsed-title="<title>Cat Resource</title>"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="<title>Cat Resource</title>"}
 
 Both resource files in this example are located in the `commonMain` source set:
 
@@ -342,7 +342,7 @@ To specify potential sources and destinations for dragging and dropping, use the
 > While these modifiers are available in common code, they currently only work in desktop and Android source sets.
 > Stay tuned for future releases.
 > 
-{type="note"}
+{style="note"}
 
 For common use cases, see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop)
 in the Jetpack Compose documentation.

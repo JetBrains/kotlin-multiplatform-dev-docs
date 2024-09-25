@@ -1,6 +1,6 @@
 [//]: # (title: Setup and configuration for multiplatform resources)
 
-<toc-settings depth="3"/>
+<show-structure depth="3"/>
 
 To properly configure the project to use multiplatform resources:
 
@@ -73,7 +73,7 @@ compose.resources {
     )
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ## Qualifiers
 

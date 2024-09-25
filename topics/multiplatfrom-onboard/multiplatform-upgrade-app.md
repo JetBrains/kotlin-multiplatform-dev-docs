@@ -1,6 +1,6 @@
 [//]: # (title: Share more logic between iOS and Android)
 
-<microformat>
+<tldr>
     <p>This is the fourth part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
@@ -8,7 +8,7 @@
       <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Share more logic</strong><br/>
       <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
     </p>
-</microformat>
+</tldr>
 
 Now that you've implemented common logic using external dependencies, you can start adding more complex logic. Network
 requests and data serialization are the [most popular use cases](https://kotlinlang.org/lp/multiplatform/) for sharing code using Kotlin
@@ -418,7 +418,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
 > If you see errors in Xcode regarding the shared module or when updating your code, run the **iosApp** configuration
 > from Android Studio.
 >
-{type="tip"}
+{style="tip"}
 
 #### Introducing a view model
 
@@ -499,12 +499,12 @@ wrappers. KMP-NativeCoroutines supports Swift's `async`/`await` functionality as
 available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
 adding a Cocoapod or SPM dependency in iOS projects.
 
-#### Option 1. Configure SKIE {initial-collapse-state="collapsed"}
+#### Option 1. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
 >
-{type="note"}
+{style="note"}
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Now** button.
 
@@ -545,14 +545,14 @@ Return to Xcode and update the code using the library:
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
 >
-{type="tip"}
+{style="tip"}
 
-#### Option 2. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed"}
+#### Option 2. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
 >
-{type="note"}
+{style="note"}
 
 1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
@@ -683,7 +683,7 @@ every time the flow emits a value.
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 >
-{type="tip"}
+{style="tip"}
 
 ## Next step
 

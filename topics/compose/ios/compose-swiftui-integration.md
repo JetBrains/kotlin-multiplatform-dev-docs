@@ -7,7 +7,7 @@ and for embedding SwiftUI inside a Compose Multiplatform app.
 
 > To learn about UIKit interoperability, see the [](compose-uikit-integration.md) article.
 > 
-{type="tip"}
+{style="tip"}
 
 ## Use Compose Multiplatform inside a SwiftUI application
 
@@ -30,7 +30,7 @@ The function passed in this way can call other composable functions, for example
 
 > Composable functions are functions that have the `@Composable` annotation.
 >
-{type="tip"}
+{style="tip"}
 
 Next, you need a structure that represents Compose Multiplatform in SwiftUI.
 Create the following structure that converts a `UIViewController` instance to a SwiftUI view:

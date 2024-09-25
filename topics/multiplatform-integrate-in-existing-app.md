@@ -9,7 +9,7 @@ for entering a username and password. The credentials are validated and saved to
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up environment and create a cross-platform application from scratch](multiplatform-setup.md)
 > first.
 >
-{type="tip"}
+{style="tip"}
 
 ## Prepare an environment for development
 
@@ -19,7 +19,7 @@ for entering a username and password. The credentials are validated and saved to
    > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
    > This is due to an Apple requirement.
    >
-   {type="note"}
+   {style="note"}
 
 2. In Android Studio, create a new project from version control:
 
@@ -30,7 +30,7 @@ for entering a username and password. The credentials are validated and saved to
    > The `master` branch contains the project's initial state — a simple Android application. To see the final state
    > with the iOS application and the shared module, switch to the `final` branch.
    >
-   {type="tip"}
+   {style="tip"}
 
 3. Switch to the **Project** view.
 
@@ -157,7 +157,7 @@ This is necessary for reusing the code for both Android and iOS.
 4. Remove Android-specific code by replacing it with cross-platform Kotlin code or connecting to Android-specific APIs
    using [expected and actual declarations](multiplatform-connect-to-apis.md). See the following sections for details:
 
-#### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed"}
+#### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
 
 To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
 moved `data` directory wherever possible.
@@ -211,7 +211,7 @@ moved `data` directory wherever possible.
     import android.util.Patterns
     ```
 
-#### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed"}
+#### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
 
 In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
 the `java.util.UUID` class, which is not available for iOS.
@@ -320,7 +320,7 @@ Once you have the framework, you can connect it to your iOS project manually.
 > An alternative is to [configure integration via CocoaPods](https://kotlinlang.org/docs/native-cocoapods.html), but that integration is beyond the
 > scope of this tutorial.
 >
-{type="note"}
+{style="note"}
 
 Connect your framework to the iOS project manually:
 
@@ -353,14 +353,14 @@ Connect your framework to the iOS project manually:
    > ./gradlew --stop
    > ```
    >
-   > {type="tip"}
+   > {style="tip"}
    
 6. Build the project in Xcode. If everything is set up correctly, the project will build successfully.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
 >
-{type="note"}
+{style="note"}
 
 ### Use the shared module from Swift
 
@@ -392,7 +392,7 @@ Connect your framework to the iOS project manually:
 
    ```kotlin
    ```
-   {src="android-ios-tutorial/ContentView.swift" initial-collapse-state="collapsed"}
+   {src="android-ios-tutorial/ContentView.swift" initial-collapse-state="collapsed" collapsible="true"}
 
 5. In `simpleLoginIOSApp.swift`, import the `shared` module and specify the arguments for the `ContentView()` function:
 

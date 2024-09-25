@@ -41,7 +41,7 @@ This is in line with `compose.material` changes from [the 1.6.0-alpha01 release]
 
 > This affects only `material` components. `material3` already had this restriction.
 >
-{type="note"}
+{style="note"}
 
 If you set the `fontSize` attribute for a `Text` component in `MaterialTheme` but don't include `lineHeight`, the actual line
 height will not be modified to match the font. Now, you have to explicitly specify the `lineHeight` attribute every time you
@@ -53,7 +53,7 @@ Jetpack Compose now [recommends](https://issuetracker.google.com/issues/32187241
 > rather than changing the font size directly. Alternatively, users can overwrite the line height like so:
 > `style = LocalTextStyle.current.copy(lineHeight = TextUnit.Unspecified)`, or create a custom `Typography` entirely.
 >
-{type="tip"}
+{style="tip"}
 
 ### New approach to resource organization
 
@@ -86,7 +86,7 @@ Jetpack Compose.
 
 > JUnit-based tests are supported only in desktop projects.
 >
-{type="note"}
+{style="note"}
 
 For the setup instructions and test examples, see [Testing Compose Multiplatform UI](compose-test.md).
 
@@ -192,7 +192,7 @@ fun ComposeContent() {
     }
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="val window = JFrame()"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="val window = JFrame()"}
 
 The `Dialog` (yellow) is drawn in full, regardless of the bounds of the parent `ComposePanel` (green):
 
@@ -204,7 +204,7 @@ Compose Multiplatform now allows setting underline styles for text using the `Pl
 
 > The class is not available in the common source set and needs to be used in platform-specific code.
 >
-{type="warning"}
+{style="warning"}
 
 An example of setting a dotted underline style:
 
@@ -265,7 +265,7 @@ to be transparent.
 
 > Transparent background negatively affects performance as it leads to an additional blending step.
 >
-{type="note"}
+{style="note"}
 
 ```kotlin
 val appController = ComposeUIViewController(configure = {
@@ -338,7 +338,7 @@ have to specify a particular `dev-wasm` version of the `compose-ui` library in y
 
 > To build a Compose Multiplatform project with a Wasm target, you need to have Kotlin 1.9.22 and later.
 >
-{type="warning"}
+{style="warning"}
 
 ## Known issues: missing dependencies
 

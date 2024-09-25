@@ -16,7 +16,7 @@ This repository is the source for [https://www.jetbrains.com/help/kotlin-multipl
   * [topics](topics) directory contains markdown files.
 * **Variables**: [v.list](v.list) file contains variables used in documentation.
 * **Navigation**: [mpd.tree](mpd.tree) file contains the navigation tree located on the left side of the site.
-* **Configuration**: [cfg](cfg) directory and [project.ihp](project.ihp) file contain configuration for the documentation.
+* **Configuration**: [cfg](cfg) directory and [writerside.cfg](writerside.cfg) file contain configuration for the documentation.
 
 ## Contribution
 

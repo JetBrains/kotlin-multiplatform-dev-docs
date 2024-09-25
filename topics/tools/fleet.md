@@ -18,7 +18,7 @@ Fleet fully supports Swift out of the box, so you can extend and maintain the na
 
 > Currently, Fleet supports Kotlin Multiplatform only on macOS, so you'll need a Mac to complete this tutorial.
 >
-{type="note"}
+{style="note"}
 
 1. Install [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) app.
 

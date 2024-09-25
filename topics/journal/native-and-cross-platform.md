@@ -37,7 +37,7 @@ There are various open-source [frameworks for cross-platform mobile app developm
 
 > [Discover Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/), an open-source technology by JetBrains for flexible multiplatform development.
 > 
-{type="note"}
+{style="note"}
 
 These are just a few of the key advantages of cross-platform app development. You can learn more about its benefits and use cases from global companies in our article about [cross-platform mobile development](cross-platform-mobile-development.md). As for the challenges of the approach – we'll discuss those in the following section.
 
@@ -85,7 +85,7 @@ When choosing between different approaches and frameworks, you need to be confid
 
 > Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.md).
 >
-{type="note"}
+{style="note"}
 
 #### 4. Development cost and your budget
 
@@ -116,9 +116,9 @@ In a nutshell, you should to opt for cross-platform solutions if:
 
 It can be challenging to implement new technologies and tools into an organization. That’s why we created a guide entitled [“How to introduce multiplatform mobile development to your team”](multiplatform-introduce-your-team.md), where you will find a list of action points and best practices to help make the transition to multiplatform as seamless as possible.
 
-> Reuse Kotlin code across Android, iOS, web, desktop, and server-side. [See Kotlin Multiplatform in action](get-started.xml).
+> Reuse Kotlin code across Android, iOS, web, desktop, and server-side. [See Kotlin Multiplatform in action](get-started.topic).
 >
-{type="note"}
+{style="note"}
 
 ## When should you choose native app development?
 

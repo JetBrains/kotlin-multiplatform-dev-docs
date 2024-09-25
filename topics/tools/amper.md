@@ -11,7 +11,7 @@ macOS, and Linux, as well as for multiplatform libraries that work with all of t
 > You're welcome to try it in your Kotlin Multiplatform projects.
 > We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/AMPER).
 >
-{type="warning"}
+{style="warning"}
 
 ## How Amper works
 

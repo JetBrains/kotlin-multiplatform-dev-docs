@@ -58,11 +58,11 @@ However, many modern businesses need to reduce the time to market and the cost o
 > by using Kotlin Multiplatform to write platform-agnostic business logic once in Kotlin 
 > and compiling to a Kotlin library for Android and a native Universal Framework for iOS.
 >
-{type="tip"}
+{style="tip"}
 
 > [Get started with Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
 > 
-{type="note"}
+{style="note"}
 
 ## Is cross-platform mobile development right for you?
 
@@ -158,15 +158,15 @@ Kotlin Multiplatform is an open-source technology built by JetBrains that allows
 
 If your team needs help adopting a new multiplatform technology, we recommend reviewing our guide on [_How to introduce multiplatform development to your team_](multiplatform-introduce-your-team.md).
 
-> [Get started with Kotlin Multiplatform](get-started.xml).
+> [Get started with Kotlin Multiplatform](get-started.topic).
 >
-{type="note"}
+{style="note"}
 
 McDonald's, Netflix, 9GAG, VMware, Cash App, Philips, and many other companies are already capitalizing on Kotlin Multiplatform's ability to be gradually integrated, as well as its low adoption risk. Some of them opt to enhance their app stability by sharing specific, crucial segments of their existing Kotlin code. Others aim to maximize code reuse without compromising app quality and share all application logic across mobile, desktop, web, and TV, while preserving native UIs on each platform. The benefits of this approach are apparent from the stories of the companies that have already adopted it.
 
 > Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.md).
 >
-{type="note"}
+{style="note"}
 
 ## Conclusion
 

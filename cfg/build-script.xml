@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE root
-        SYSTEM "https://resources.jetbrains.com/stardust/build-script.dtd">
+  SYSTEM 'https://resources.jetbrains.com/writerside/1.0/build-script.dtd'>
 <root>
-    <builds>
-        <product id="mpd" master="project.ihp" family="idea">
-            <artifact type="web2" tips-of-the-day="false" platform="primary" local-update="true"
-                      local-update-path="kotlin-multiplatform-development"
-                      image-bundle="true" offline-bundle="false"/>
-        </product>
-    </builds>
+	<builds>
+		<instance id="mpd" master="writerside.cfg" family="idea">
+			<artifact type="web2" tips-of-the-day="false" platform="primary" local-update="true" local-update-path="kotlin-multiplatform-development" image-bundle="true" offline-bundle="false"/>
+		</instance>
+	</builds>
 </root>

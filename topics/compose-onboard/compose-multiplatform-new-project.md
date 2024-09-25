@@ -1,12 +1,12 @@
 [//]: # (title: Create your own application)
-<microformat>
+<tldr>
    <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
        <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Create your own application</strong><br/>
   </p>
-</microformat>
+</tldr>
 
 Now that you've explored and enhanced the sample project created by the wizard, you can create your own application from
 scratch, using concepts you already know and introducing some new ones.
@@ -229,7 +229,7 @@ time message could be rendered more prominently.
 
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
-{type="tip"}
+{style="tip"}
 
 ## Refactor the design
 
@@ -315,14 +315,14 @@ list.
 
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
-{type="tip"}
+{style="tip"}
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
 > you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network or
 > the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
 >
-{type="note"}
+{style="note"}
 
 ## Introduce images
 
@@ -429,7 +429,7 @@ code to load and display them:
 
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
-{type="tip"}
+{style="tip"}
 
 ## What's next
 

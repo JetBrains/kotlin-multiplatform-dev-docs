@@ -7,7 +7,7 @@ This is a curated list of projects that aims to show robust and unique applicati
 > See the [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#adding-topics-to-your-repository)
 to learn how to feature your project in topics.
 >
-{type="note"}
+{style="note"}
 
 Some projects share almost all their code using Compose Multiplatform for the user interface.
 Others use native code for the user interface and share, for example, only the data model and algorithms.

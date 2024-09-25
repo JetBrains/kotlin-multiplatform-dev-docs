@@ -70,7 +70,7 @@ fun main() = singleWindowApplication(
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="TooltipArea(tooltip = { Surface( "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="TooltipArea(tooltip = { Surface( "}
 
 <img src="compose-desktop-tooltips.png" alt="Tooltips" width="288" animated="true"/>
 
