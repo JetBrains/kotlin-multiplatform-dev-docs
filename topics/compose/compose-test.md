@@ -163,6 +163,7 @@ Android Studio, for example, won't be helpful.
 
 </tab>
 <tab title="Desktop">
+
 You have two options:
 * Click the green run icon in the gutter next to the `myTest()` function and choose **Run&nbsp;|&nbsp;desktop**.
 * Run the following command in the terminal:
