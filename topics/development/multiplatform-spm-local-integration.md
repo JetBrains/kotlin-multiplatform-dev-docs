@@ -1,5 +1,7 @@
 [//]: # (title: Using Kotlin from local Swift packages)
 
+<no-index/>
+
 In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
 package using the Swift package manager (SPM).
 
