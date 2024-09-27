@@ -30,7 +30,7 @@ Learn more about which one to choose in [Recommended IDEs and code editors](reco
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Create a Kotlin Multiplatform app](get-started.xml) tutorials provide step-by-step
+The [Create a Kotlin Multiplatform app](get-started.topic) tutorials provide step-by-step
 instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
 UI.
 
@@ -170,7 +170,7 @@ depends on the complexity of your application and the amount of Android-specific
 You can migrate most of your screens to Compose Multiplatform without changes. All of the Jetpack Compose widgets are
 supported. However, some APIs work only in the Android target – they might be Android-specific or have yet to be ported to
 other platforms. For instance, resource handling is Android-specific, so you would need to migrate to the [Compose
-Multiplatform resource library](compose-images-resources.md) or use a community solution. The
+Multiplatform resource library](compose-multiplatform-resources.md) or use a community solution. The
 Android [Navigation library](https://developer.android.com/jetpack/androidx/releases/navigation) is also
 Android-specific, but there are [community alternatives](compose-navigation-routing.md) available. For more information on components available only for Android, see the
 current [list of Android-only APIs](compose-android-only-components.md).

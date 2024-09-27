@@ -1,12 +1,12 @@
 [//]: # (title: Explore composable code)
-<microformat>
+<tldr>
    <p>This is the second part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Explore composable code</strong><br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project<br/>      
       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application<br/>
   </p>
-</microformat>
+</tldr>
 
 Let's examine closely the sample composable created by the Kotlin Multiplatform wizard. First, there is the
 composable `App()` function that implements the common UI and can be used on all platforms. Second, there is the

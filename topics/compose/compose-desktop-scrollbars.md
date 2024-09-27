@@ -90,7 +90,7 @@ fun TextBox(text: String = "Item") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
 
 You can move scrollbars by dragging the bars and using the mouse wheel or the touchpad. To move horizontal scrollbars with the mouse,
 side-click the wheel or hold down <shortcut>Shift</shortcut>.
@@ -173,7 +173,7 @@ fun TextBox(text: String = "Item") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="VerticalScrollbar(modifier = Modifier.align(Alignment.CenterEnd) "}
 
 <img src="compose-desktop-lazy-scrollbar.png" alt="Lazy scrollbar" width="289" animated="true"/>
 

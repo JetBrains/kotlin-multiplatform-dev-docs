@@ -16,7 +16,7 @@ Compose Multiplatform %composeVersion% supports the following platforms:
 
 > All Compose Multiplatform releases support only 64-bit platforms. 
 > 
-{type="note"}
+{style="note"}
 
 ## Limitations of Compose Multiplatform for desktop releases
 
@@ -45,7 +45,7 @@ See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for detail
 > these older dependencies may still cause recomposition issues.
 > To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 >
-{type="warning"}
+{style="warning"}
 
 ## Jetpack Compose and Compose Multiplatform release cycles
 

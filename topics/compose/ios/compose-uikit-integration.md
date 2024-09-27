@@ -6,7 +6,7 @@ for using Compose Multiplatform inside a UIKit application and for embedding UIK
 
 > To learn about SwiftUI interoperability, see the [](compose-swiftui-integration.md) article.
 >
-{type="tip"}
+{style="tip"}
 
 ## Use Compose Multiplatform inside a UIKit application
 

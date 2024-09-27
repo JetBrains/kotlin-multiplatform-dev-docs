@@ -29,7 +29,7 @@ KMP has been widely used in production since its Alpha release. As a result, Jet
 * **Seamless performance** – Shared code written in Kotlin is compiled into different output formats for different targets: Java bytecode for Android and native binaries for iOS. Thus, there is no additional runtime overhead when it comes to executing this code on platforms, and the performance is comparable to [native apps](native-and-cross-platform.md).
 * **Compatibility with legacy code** – No matter how large your project is, your existing code will not prevent you from integrating Kotlin Multiplatform. You can start writing cross-platform code at any moment and connect it to your iOS and Android apps as a regular dependency, or you can use the code you've already written and modify it to be compatible with iOS.
 
-Being able to explain _how_ a technology works is crucial, as nobody likes it when a discussion seems to rely on magic. People might think the worst if anything is unclear to them, so be careful not to make the mistake of thinking something is too obvious to warrant an explanation. Instead, try to explain all the basic concepts before moving on to the next stage. This document on [multiplatform programming](get-started.xml) could help you systemize your knowledge to prepare for this experience.
+Being able to explain _how_ a technology works is crucial, as nobody likes it when a discussion seems to rely on magic. People might think the worst if anything is unclear to them, so be careful not to make the mistake of thinking something is too obvious to warrant an explanation. Instead, try to explain all the basic concepts before moving on to the next stage. This document on [multiplatform programming](get-started.topic) could help you systemize your knowledge to prepare for this experience.
 
 ## Use case studies to demonstrate the value of multiplatform development
 
@@ -46,7 +46,7 @@ Citing case studies of different companies who already use Kotlin Multiplatform 
 
 > Explore the [case studies page](case-studies.md) for inspirational references.
 > 
-{type="note"}
+{style="note"}
 
 ## Offer proof by creating a sample project
 

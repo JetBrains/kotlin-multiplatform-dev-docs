@@ -25,7 +25,7 @@ they can subscribe to its events, refer to the lifecycle state, and so on.
 > If you would like to manage a lifecycle separately for a particular composable subtree, you can [create your own](https://developer.android.com/topic/libraries/architecture/lifecycle#implementing-lco)
 > `LifecycleOwner` implementation.
 >
-{type="tip"}
+{style="tip"}
 
 When working with coroutines in multiplatform lifecycles,
 remember that the `Lifecycle.coroutineScope` value is tied to the `Dispatchers.Main.immediate` value,

@@ -25,7 +25,7 @@ the same as described in the [iOS developer documentation](https://developer.app
 > for your app.
 > For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](https://kotlinlang.org/docs/apple-privacy-manifest.html). 
 >
-{type="note"}
+{style="note"}
 
 What is specific to Kotlin Multiplatform projects is compiling the shared Kotlin module into a framework and linking it to the Xcode project.
 Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile).
@@ -118,7 +118,7 @@ With the artifacts ready, you can deploy your application on the web hosting pla
 
    > It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub.
    >
-   {type="note"}
+   {style="note"}
 
 3. In a browser, navigate to your GitHub pages domain.
 

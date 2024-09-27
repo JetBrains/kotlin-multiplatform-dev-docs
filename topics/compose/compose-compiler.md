@@ -17,7 +17,7 @@ simultaneously with Kotlin and will always be compatible with Kotlin of the same
 > these older dependencies may still cause recomposition issues.
 > To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
 >
-{type="warning"}
+{style="warning"}
 
 To use the new Compose compiler plugin in your project, apply it for each module that uses Compose.
 See the migration instructions below:
@@ -33,7 +33,7 @@ module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```toml
+    ```
     [versions]
     # ...
     kotlin = "%kotlinVersion%"
@@ -90,7 +90,7 @@ For Android modules that don't rely on Compose Multiplatform:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```toml
+    ```
     [versions]
     # ...
     kotlin = "%kotlinVersion%"
@@ -160,7 +160,7 @@ composeCompiler {
 > The Gradle plugin provides defaults for several Compose compiler options that were only specified manually before.
 > If you have any of them set up with `freeCompilerArgs`, for example, Gradle will report a duplicate options error.
 >
-{type="warning"}
+{style="warning"}
 
 ### General settings
 
@@ -210,11 +210,37 @@ For a deep dive into the compiler metrics, see this [Composable metrics blog pos
 
 #### stabilityConfigurationFile
 
+> _Deprecated_ in Kotlin 2.1.0-Beta1 in favor of [stabilityConfigurationFiles](#stabilityconfigurationfiles),
+> which allows using more than one stability configuration file.
+> 
+{style="warning"}
+
 **Type**: `RegularFileProperty`
 
-Path to the stability configuration file.
+A stability configuration file contains a list of classes, which should be considered stable.
 For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
 in the Jetpack Compose documentation.
+
+#### stabilityConfigurationFiles
+
+**Type**: `ListProperty<RegularFile>`
+
+Stability configuration files to be used for the current module.
+
+Stability configuration files contain a list of classes that should be considered stable by the compiler.
+For details, see [Stability configuration file](https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file)
+in the Jetpack Compose documentation.
+
+Here's an example of specifying paths to several files:
+
+```kotlin
+composeCompiler {
+    stabilityConfigurationFiles.addAll(
+        project.layout.projectDirectory.file("configuration-file1.conf"),
+        project.layout.projectDirectory.file("configuration-file2.conf"),
+    )
+}
+```
 
 #### includeTraceMarkers
 
@@ -273,6 +299,12 @@ To disable a feature flag that is enabled by default, call the `disabled()` func
 featureFlags = setOf(ComposeFeatureFlag.StrongSkipping.disabled())
 ```
 
+If you are configuring the Compose compiler directly, use the following syntax to pass feature flags to it:
+
+```none
+-P plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=<flag name>
+```
+
 #### IntrinsicRemember
 
 **Default**: enabled
@@ -295,7 +327,7 @@ and functions that are implicitly not skippable (inline functions and functions 
 
 > This feature is considered [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is disabled by default.
 >
-{type="warning"}
+{style="warning"}
 
 #### StrongSkipping
 

@@ -1,13 +1,13 @@
 [//]: # (title: Create your multiplatform project)
 
-<microformat>
+<tldr>
    <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your multiplatform project</strong><br/>
       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application <br/>
   </p>
-</microformat>
+</tldr>
 
 Here, you'll learn how to create and run your first Compose Multiplatform application using the Kotlin Multiplatform
 web wizard and Android Studio.
@@ -30,7 +30,7 @@ Things to keep in mind for this tutorial:
 > To try a new multiplatform experience without juggling different IDEs and switching to
 > Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
 >
-{type="tip"}
+{style="tip"}
 
 ## Set up an environment
 
@@ -117,7 +117,7 @@ fun App() {
     }
 }
 ```
-{initial-collapse-state="collapsed"  collapsed-title="fun App()"}
+{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="fun App()"}
 
 Let's run the application on all supported platforms.
 
@@ -130,7 +130,7 @@ order, so start with whichever platform you are most familiar with.
 > of all the supported targets. Depending on the platforms selected in the Multiplatform wizard, this can take some time.
 > Using a run configuration is much faster; only the selected target is built in this case.
 >
-{type="tip"}
+{style="tip"}
 
 ### Run your application on Android
 
@@ -143,17 +143,17 @@ order, so start with whichever platform you are most familiar with.
 
 ![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=300}
 
-<chunk id="run_android_other_devices">
+<snippet id="run_android_other_devices">
 
-#### Run on a different Android simulated device {initial-collapse-state="collapsed"}
+#### Run on a different Android simulated device {initial-collapse-state="collapsed" collapsible="true"}
 
 Learn how to [configure the Android Emulator and run your application on a different simulated device](https://developer.android.com/studio/run/emulator#runningapp).
 
-#### Run on a real Android device {initial-collapse-state="collapsed"}
+#### Run on a real Android device {initial-collapse-state="collapsed" collapsible="true"}
 
 Learn how to [configure and connect a hardware device and run your application on it](https://developer.android.com/studio/run/device).
 
-</chunk>
+</snippet>
 
 ### Run your application on iOS
 
@@ -166,9 +166,9 @@ Learn how to [configure and connect a hardware device and run your application o
 
 ![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=300}
 
-<chunk id="run_ios_other_devices">
+<snippet id="run_ios_other_devices">
 
-#### Run on a new iOS simulated device {initial-collapse-state="collapsed"}
+#### Run on a new iOS simulated device {initial-collapse-state="collapsed" collapsible="true"}
 
 If you want to run your application on a simulated device, you can add a new run configuration.
 
@@ -190,7 +190,7 @@ If you want to run your application on a simulated device, you can add a new run
 
 6. Click **Run** to run your application on the new simulated device.
 
-#### Run on a real iOS device {initial-collapse-state="collapsed"}
+#### Run on a real iOS device {initial-collapse-state="collapsed" collapsible="true"}
 
 You can run your multiplatform application on a real iOS device. Before you start,
 you'll need to set the Team ID associated with your [Apple ID](https://support.apple.com/en-us/HT204316).
@@ -246,7 +246,7 @@ In short, you should:
 Once you've registered your iPhone in Xcode, [create a new run configuration](#run-on-a-new-ios-simulated-device)
 in Android Studio and select your device in the **Execution target** list. Run the corresponding `iosApp` configuration.
 
-</chunk>
+</snippet>
 
 ### Run your application on desktop
 
@@ -292,7 +292,7 @@ The web application opens automatically in your browser. Alternatively, you can 
 > The port number can vary because the 8080 port may be unavailable. You can find the actual port number in the 
 > Gradle build console.
 >
-{type="tip"}
+{style="tip"}
 
 ![Compose web application](first-compose-project-on-web.png){width=550}
 

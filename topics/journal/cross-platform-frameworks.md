@@ -79,11 +79,11 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 * Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains, developers have full code-sharing flexibility and the ability to share both the logic and the UI.
 * There's no need to introduce a new language to your codebase when you already use Kotlin for Android. You can reuse your Kotlin code and expertise, which makes migrating to Kotlin Multiplatform less risky compared to other technologies.
 
-Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.xml) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.md) to develop multiplatform apps with a native-like user experience.
+Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.md) to develop multiplatform apps with a native-like user experience.
 
-> Create your first cross-platform mobile app with [Kotlin Multiplatform](get-started.xml).
+> Create your first cross-platform mobile app with [Kotlin Multiplatform](get-started.topic).
 >
-{type="note"}
+{style="note"}
 
 ### Ionic
 
@@ -153,7 +153,7 @@ Depending on how crucial the user interface is for your future app, you may need
 
 > [Compose Multiplatform: create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
 >
-{type="note"}
+{style="note"}
 
 #### 4. Framework maturity
 
@@ -171,7 +171,7 @@ You need to ensure that the multiplatform mobile development framework of your c
 
 #### 7. Educational materials
 
-The volume and quality of available learning resources about a framework can also help you understand how smooth your experience will be when working with it. Comprehensive official [documentation](get-started.xml), online and offline conferences, and educational courses are a good sign that you will be able to find enough essential information about a product when you need it.
+The volume and quality of available learning resources about a framework can also help you understand how smooth your experience will be when working with it. Comprehensive official [documentation](get-started.topic), online and offline conferences, and educational courses are a good sign that you will be able to find enough essential information about a product when you need it.
 
 ## Key takeaways
 

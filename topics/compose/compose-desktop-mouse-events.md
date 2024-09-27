@@ -54,7 +54,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.combinedClickable(onClick = { text ="}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.combinedClickable(onClick = { text ="}
 
 <img src="compose-mouse-click-listeners.png" alt="Mouse click listeners" width="600" animated="true"/>
 
@@ -67,7 +67,7 @@ see the [`Modifier.onClick`](#experimental-onclick-handlers) section.
 > and you should use it only for evaluation purposes. 
 > For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
-{type="warning"}
+{style="warning"}
 
 To create a pointer move listener that changes the background color of the window according to the mouse pointer position, 
 add the following code:
@@ -103,7 +103,7 @@ fun main() = singleWindowApplication(title = "Mouse move listeners") {
     )
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.onPointerEvent(PointerEventType.Move) { color ="}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onPointerEvent(PointerEventType.Move) { color ="}
 
 <img src="compose-mouse-move-listeners.png" alt="Mouse move listeners" width="600" animated="true"/>
 
@@ -113,7 +113,7 @@ fun main() = singleWindowApplication(title = "Mouse move listeners") {
 > and you should use it only for evaluation purposes.
 > For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
-{type="warning"}
+{style="warning"}
 
 Compose Multiplatform for desktop supports handlers of the pointer entering and exiting the input region. For example, the following code will change the font style of a line on hover:
 
@@ -160,7 +160,7 @@ fun main() = singleWindowApplication(title = "Mouse enter listeners") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Text(modifier = Modifier.onPointerEvent(PointerEventType.Enter) { active ="}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Text(modifier = Modifier.onPointerEvent(PointerEventType.Enter) { active ="}
 
 <img src="compose-mouse-enter-listeners.png" alt="Mouse enter listeners" width="600" animated="true"/>
 
@@ -170,7 +170,7 @@ fun main() = singleWindowApplication(title = "Mouse enter listeners") {
 > and you should use it only for evaluation purposes.
 > For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
-{type="warning"}
+{style="warning"}
 
 The following code sample demonstrates how you can increase or decrease the displayed number depending on the mouse scroll direction:
 
@@ -205,7 +205,7 @@ fun main() = singleWindowApplication(title = "Mouse scroll listeners") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Scroll) { number +="}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Scroll) { number +="}
 
 <img src="compose-mouse-scroll-listeners.png" alt="Mouse scroll listeners" width="600" animated="true"/>
 
@@ -214,7 +214,7 @@ fun main() = singleWindowApplication(title = "Mouse scroll listeners") {
 > The `onClick` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) and supported in desktop projects only. Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 `Modifier.onClick` provides independent callbacks for clicks, double clicks, and long clicks. It handles clicks originating from pointer events only and doesn't handle accessibility `click` events out of the box.
 
@@ -322,7 +322,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.onClick {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onClick {"}
 
 <img src="compose-onclick-modifier.png" alt="Modifier.onClick" width="600" animated="true"/>
 
@@ -331,7 +331,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 > The `onDrag` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) and supported in desktop projects only. Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 With `Modifier.onDrag`, you can specify the pointer that should trigger the drag via `matcher: PointerMatcher`. 
 Similar to `onClick`, you can chain together many `onDrag` modifiers.
@@ -415,7 +415,7 @@ fun main() = singleWindowApplication(title = "Drag") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(modifier = Modifier.onDrag {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onDrag {"}
 
 <img src="compose-ondrag-modifier.png" alt="Modifier.onDrag" width="600" animated="true"/>
 
@@ -465,7 +465,7 @@ fun main() = singleWindowApplication(title = "Drag") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Modifier.pointerInput(Unit) { detectDragGestures(matcher = PointerMatcher.Primary)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Modifier.pointerInput(Unit) { detectDragGestures(matcher = PointerMatcher.Primary)"}
 
 ## Accessing raw AWT events with Swing interoperability
 
@@ -473,7 +473,7 @@ fun main() = singleWindowApplication(title = "Drag") {
 > and you should use it only for evaluation purposes.
 > For a [Stable](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) API, see [`Modifier.pointerInput`](#listening-for-raw-events-in-common-code-via-pointerinput).
 >
-{type="warning"}
+{style="warning"}
 
 Compose Multiplatform for desktop uses Swing under the hood and allows to access raw AWT events:
 
@@ -509,7 +509,7 @@ fun main() = singleWindowApplication(title = "Raw AWT events") {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Press) { text ="}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Press) { text ="}
 
 <img src="compose-raw-awt-events.png" alt="Swing interoperability" width="600" animated="true"/>
 
@@ -557,7 +557,7 @@ fun main() = singleWindowApplication(title = "Raw events via Modifier.pointerInp
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Column(Modifier.pointerInput(Unit) { awaitPointerEventScope {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column(Modifier.pointerInput(Unit) { awaitPointerEventScope {"}
 
 <img src="compose-raw-events.png" alt="Raw events via Modifier.pointerInput" width="600" animated="true"/>
 

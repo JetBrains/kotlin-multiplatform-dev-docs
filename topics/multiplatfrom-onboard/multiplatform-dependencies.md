@@ -1,6 +1,6 @@
 [//]: # (title: Add dependencies to your project)
 
-<microformat>
+<tldr>
     <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
         <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
@@ -8,7 +8,7 @@
         <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
         <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
     </p>
-</microformat>
+</tldr>
 
 You've already created your first cross-platform Kotlin Multiplatform project! Now let's learn how to add dependencies
 to third-party libraries, which is necessary for building successful cross-platform applications.
@@ -35,7 +35,7 @@ For both types of dependencies, you can use local and external repositories.
 > If you have experience developing Android apps, adding a multiplatform dependency is similar to adding a
 > Gradle dependency in a regular Android project. The only difference is that you need to specify the source set.
 >
-{type="tip"}
+{style="tip"}
 
 Let's go back to the app and make the greeting a little more festive. In addition to the device information, add a
 function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
@@ -94,7 +94,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
 
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
 >
-{type="tip"}
+{style="tip"}
 
 ## Next step
 

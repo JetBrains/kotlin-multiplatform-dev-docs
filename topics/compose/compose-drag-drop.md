@@ -1,16 +1,18 @@
 [//]: # (title: Drag-and-drop operations)
 
-<title label="EAP" annotations="Desktop">Drag-and-drop operations</title>
+> Currently, drag-and-drop operations are only supported in Compose Multiplatform for desktop.
+> The support will be extended to iOS and web in future releases.
+>
+{style="note"}
 
 You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
 or allow users to drag data out of your app.
 To implement this, use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify particular composables
 as potential sources or destinations for drag operations.
 
-> Currently, drag-and-drop operations are only supported in Compose Multiplatform for desktop.
-> The support will be extended to iOS and web in future releases.
->
-{type="note"}
+> Both `dragAndDropSource` and `dragAndDropTarget` modifiers are experimental, subject to change, and require an opt-in annotation.
+> 
+{style="warning"}
 
 ## Creating a drag source
 
@@ -47,10 +49,7 @@ Box(Modifier
                 )
             )
         }
-    )
-    .size(200.dp)
-    .background(Color.LightGray)
-    {
+    ) {
         detectDragGestures(
             onDragStart = { offset ->
                 startTransfer(
@@ -81,6 +80,8 @@ Box(Modifier
             onDrag = { _, _ -> },
         )
     }
+    .size(200.dp)
+    .background(Color.LightGray)
 ) {
     Text("Drag Me", Modifier.align(Alignment.Center))
 }
