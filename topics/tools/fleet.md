@@ -138,7 +138,7 @@ Let's see how cross-language navigation works in Fleet using the example of navi
 4. Instead of manually browsing to find the Swift file that implements this functionality, navigate to it directly by
    using the **Usages** action again:
 
-   <img src="fleet-navigation.png" alt="Using cross-language navigation in Fleet" width="700" animated="true"/>
+   <img src="fleet-navigation.animated.gif" alt="Using cross-language navigation in Fleet" width="700" preview-src="fleet-navigation.png"/>
 
    Because there is only one usage, Fleet automatically opens the file for you.
 
@@ -216,7 +216,7 @@ You have already seen that the `MainViewController()` function is declared in Ko
 Select the `MainViewController()` function and use the **Rename** | **Refactoring** action to change its name
 to `MainSwiftUIViewController`:
 
-<img src="fleet-refactor-code.png" alt="Refactoring across multiple languages in Fleet" width="700" animated="true"/>
+<img src="fleet-refactor-code.animated.gif" alt="Refactoring across multiple languages in Fleet" width="700" preview-src="fleet-refactor-code.png"/>
 
 The function name is changed in both Kotlin and Swift files.
 
