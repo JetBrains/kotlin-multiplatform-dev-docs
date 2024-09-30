@@ -159,9 +159,9 @@ fun Counter(text: String, counter: MutableState<Int>) {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="composePanel.setContent { ComposeContent() }"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="composePanel.setContent { ComposeContent() }"}
 
-<img src="compose-desktop-swing-composepanel.png" alt="IntegrationWithSwing" animated="true" width="799"/>
+<img src="compose-desktop-swing-composepanel.animated.gif" alt="IntegrationWithSwing" preview-src="compose-desktop-swing-composepanel.png" width="799"/>
 
 ## Using SwingPanel
 
@@ -256,9 +256,9 @@ fun actionButton(
     return button
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="factory = { JPanel().apply { layout = BoxLayout(this, BoxLayout.Y_AXIS)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="factory = { JPanel().apply { layout = BoxLayout(this, BoxLayout.Y_AXIS)"}
 
-<img src="compose-desktop-swingpanel.png" alt="SwingPanel" animated="true" width="600"/>
+<img src="compose-desktop-swingpanel.animated.gif" alt="SwingPanel" preview-src="compose-desktop-swingpanel.png" width="600"/>
 
 ## Keeping Swing components up to date
 
@@ -330,9 +330,9 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="factory = { JPanel().apply { add(swingLabel, BorderLayout.CENTER)} }, update = {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="factory = { JPanel().apply { add(swingLabel, BorderLayout.CENTER)} }, update = {"}
 
-<img src="compose-desktop-swinglabel.png" alt="SwingLabel" animated="true" width="600"/>
+<img src="compose-desktop-swinglabel.animated.gif" alt="SwingLabel" preview-src="compose-desktop-swinglabel.png" width="600"/>
 
 ## Layout with nested SwingPanel and ComposePanel
 
@@ -508,9 +508,9 @@ fun SelectableItem(
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="fun SwingComponent() : JPanel { return JPanel().apply {"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="fun SwingComponent() : JPanel { return JPanel().apply {"}
 
-<img src="compose-desktop-swing-layout.png" alt="Swing layout" animated="true" width="600"/>
+<img src="compose-desktop-swing-layout.animated.gif" alt="Swing layout" preview-src="compose-desktop-swing-layout.png" width="600"/>
 
 ## What's next?
 
