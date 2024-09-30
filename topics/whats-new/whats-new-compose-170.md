@@ -17,14 +17,14 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 ## Dependencies
 
 * Gradle plugin `org.jetbrains.compose`, version %composeEapVersion%. Based on Jetpack Compose libraries:
-  * [Runtime 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0-rc01)
-  * [UI 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0-rc01)
-  * [Foundation 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0-rc01)
-  * [Material 1.7.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0-rc01)
-  * [Material3 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0-rc01)
+  * [Runtime 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0)
+  * [UI 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0)
+  * [Foundation 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0)
+  * [Material 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0)
+  * [Material3 1.3.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.2`. Based on [Jetpack Lifecycle 2.8.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.4).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha09`. Based on [Jetpack Navigation 2.8.0-beta05](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-beta05).
-* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-alpha02`. Based on [Jetpack Material3 Adaptive 1.0.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0-rc01)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha10`. Based on [Jetpack Navigation 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-rc01).
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-rc01`. Based on [Jetpack Material3 Adaptive 1.0.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0)
 
 ## Breaking changes
 
@@ -223,7 +223,7 @@ To use it, explicitly add the dependency to the common source set in the module'
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3:material3-adaptive-navigation-suite:%composeEapVersion%")
+    implementation(compose.material3AdaptiveNavigationSuite)
 }
 ```
 
@@ -367,3 +367,13 @@ rendering implementation to disable vertical synchronization.
 This can reduce visual latency between inputs and changes in the UI but can also lead to screen tearing.
 
 The default behavior stays the same: The `ComposePanel` attempts to synchronize drawable presentations with VSync.
+
+## Web
+
+### skiko.js is redundant for Kotlin/Wasm applications
+<!-- TODO additional copy editing -->
+The `skiko.js` file is now redundant for Kotlin/Wasm applications built with Compose Multiplatform.
+You can remove it from the `index.html` file.
+The file is still necessary for Kotlin/JS applications, however.
+
+`skiko.js` will be removed from the Kotlin/Wasm distribution in future releases.
