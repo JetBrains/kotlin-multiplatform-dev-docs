@@ -57,6 +57,7 @@
 			<toc-element toc-title="Integration with UIKit" topic="compose-uikit-integration.md"/>
 			<toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-ios-accessibility.md"/>
+			<toc-element topic="compose-ios-migration.md"/>
 		</toc-element>
 		<toc-element toc-title="Android-specific components" topic="compose-android-only-components.md"/>
 		<toc-element toc-title="Desktop-specific components">
