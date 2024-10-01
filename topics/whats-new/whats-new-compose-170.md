@@ -371,9 +371,13 @@ The default behavior stays the same: The `ComposePanel` attempts to synchronize 
 ## Web
 
 ### skiko.js is redundant for Kotlin/Wasm applications
-<!-- TODO additional copy editing -->
-The `skiko.js` file is now redundant for Kotlin/Wasm applications built with Compose Multiplatform.
-You can remove it from the `index.html` file.
-The file is still necessary for Kotlin/JS applications, however.
 
-`skiko.js` will be removed from the Kotlin/Wasm distribution in future releases.
+<!-- TODO additional copy editing -->
+
+The `skiko.js` file is now redundant for Kotlin/Wasm applications built with Compose Multiplatform.
+You can remove it from the `index.html` file and improve the load times of your app.
+`skiko.js` will be removed from the Kotlin/Wasm distribution completely in future releases.
+
+> The `skiko.js` file is still necessary for Kotlin/JS applications.
+> 
+{style="note"}
