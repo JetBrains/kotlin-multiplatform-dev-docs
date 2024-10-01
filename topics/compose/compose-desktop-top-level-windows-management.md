@@ -43,7 +43,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = ::exitApplication, title = "}
 
-<img src="compose-window-properties.png" alt="Window properties: change title" animated="true" width="600"/>
+<img src="compose-window-properties.animated.gif" alt="Window properties: change title" preview-src="compose-window-properties.png" width="600"/>
 
 ### Add conditions
 
@@ -88,7 +88,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isPerformingTask) { Window(onCloseRequest = ::exitApplication,"}
 
-<img src="compose-window-condition.png" alt="Windows with conditions" animated="true" width="600"/>
+<img src="compose-window-condition.animated.gif" alt="Windows with conditions" preview-src="compose-window-condition.png" width="600"/>
 
 If you want to use custom logic on application exit, such as showing a dialog, you can override the close action using the `onCloseRequest` callback.
 In the following code sample, instead of an imperative approach (`window.close()`), we use a declarative approach and close the window in response to the state change (`isOpen = false`).
@@ -131,7 +131,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isAskingToClose = true }"}
 
-<img src="compose-window-ask-to-close.png" alt="Close with confirmation" animated="true" width="600"/>
+<img src="compose-window-ask-to-close.animated.gif" alt="Close with confirmation" preview-src="compose-window-ask-to-close.png" width="600"/>
 
 ## Work with multiple windows
 
@@ -204,7 +204,7 @@ private class MyWindowState(
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="MyApplicationState { val windows = mutableStateListOf<MyWindowState>()"}
 
-<img src="compose-multiple-windows.png" alt="Multiple windows" animated="true" width="600"/>
+<img src="compose-multiple-windows.animated.gif" alt="Multiple windows" preview-src="compose-multiple-windows.png" width="600"/>
 
 For a more complex example, see the [notepad](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/notepad) sample.
 
@@ -268,7 +268,7 @@ object TrayIcon : Painter() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isVisible = false },"}
 
-<img src="compose-window-hide-tray.png" alt="Hide instead of closing" animated="true" width="600"/>
+<img src="compose-window-hide-tray.animated.gif" alt="Hide instead of closing" preview-src="compose-window-hide-tray.png" width="600"/>
 
 ## singleWindowApplication() function
 
@@ -412,7 +412,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="val state = rememberWindowState(placement = WindowPlacement.Maximized)"}
 
-<img src="compose-window-minimize.png" alt="Changing the state" animated="true" width="600"/>
+<img src="compose-window-minimize.animated.gif" alt="Changing the state" preview-src="compose-window-minimize.png" width="600"/>
 
 ## Listen to the window state
 
@@ -556,7 +556,7 @@ private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {"}
 
-<img src="compose-window-draggable-area.png" alt="Draggable area" animated="true" width="600"/>
+<img src="compose-window-draggable-area.animated.gif" alt="Draggable area" preview-src="compose-window-draggable-area.png" width="600"/>
 
 ## Transparent windows and other customizations
 

@@ -56,7 +56,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.combinedClickable(onClick = { text ="}
 
-<img src="compose-mouse-click-listeners.png" alt="Mouse click listeners" width="600" animated="true"/>
+<img src="compose-mouse-click-listeners.animated.gif" alt="Mouse click listeners" width="600" preview-src="compose-mouse-click-listeners.png"/>
 
 The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently, 
 see the [`Modifier.onClick`](#experimental-onclick-handlers) section.
@@ -105,7 +105,7 @@ fun main() = singleWindowApplication(title = "Mouse move listeners") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onPointerEvent(PointerEventType.Move) { color ="}
 
-<img src="compose-mouse-move-listeners.png" alt="Mouse move listeners" width="600" animated="true"/>
+<img src="compose-mouse-move-listeners.animated.gif" alt="Mouse move listeners" width="600" preview-src="compose-mouse-move-listeners.png"/>
 
 ## Enter listeners
 
@@ -162,7 +162,7 @@ fun main() = singleWindowApplication(title = "Mouse enter listeners") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Text(modifier = Modifier.onPointerEvent(PointerEventType.Enter) { active ="}
 
-<img src="compose-mouse-enter-listeners.png" alt="Mouse enter listeners" width="600" animated="true"/>
+<img src="compose-mouse-enter-listeners.animated.gif" alt="Mouse enter listeners" width="600" preview-src="compose-mouse-enter-listeners.png"/>
 
 ## Scroll listeners
 
@@ -207,7 +207,7 @@ fun main() = singleWindowApplication(title = "Mouse scroll listeners") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Scroll) { number +="}
 
-<img src="compose-mouse-scroll-listeners.png" alt="Mouse scroll listeners" width="600" animated="true"/>
+<img src="compose-mouse-scroll-listeners.animated.gif" alt="Mouse scroll listeners" width="600" preview-src="compose-mouse-scroll-listeners.png"/>
 
 ## Experimental onClick handlers
 
@@ -324,7 +324,7 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onClick {"}
 
-<img src="compose-onclick-modifier.png" alt="Modifier.onClick" width="600" animated="true"/>
+<img src="compose-onclick-modifier.animated.gif" alt="Modifier.onClick" width="600" preview-src="compose-onclick-modifier.png"/>
 
 ## Experimental onDrag modifier
 
@@ -417,7 +417,7 @@ fun main() = singleWindowApplication(title = "Drag") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.onDrag {"}
 
-<img src="compose-ondrag-modifier.png" alt="Modifier.onDrag" width="600" animated="true"/>
+<img src="compose-ondrag-modifier.animated.gif" alt="Modifier.onDrag" width="600" preview-src="compose-ondrag-modifier.png"/>
 
 There is also a non-modifier way to handle drags using `suspend fun PointerInputScope.detectDragGestures`:
 
@@ -511,7 +511,7 @@ fun main() = singleWindowApplication(title = "Raw AWT events") {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.onPointerEvent(PointerEventType.Press) { text ="}
 
-<img src="compose-raw-awt-events.png" alt="Swing interoperability" width="600" animated="true"/>
+<img src="compose-raw-awt-events.animated.gif" alt="Swing interoperability" width="600" preview-src="compose-raw-awt-events.png"/>
 
 ## Listening for raw events in common code via pointerInput
 
@@ -559,7 +559,7 @@ fun main() = singleWindowApplication(title = "Raw events via Modifier.pointerInp
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column(Modifier.pointerInput(Unit) { awaitPointerEventScope {"}
 
-<img src="compose-raw-events.png" alt="Raw events via Modifier.pointerInput" width="600" animated="true"/>
+<img src="compose-raw-events.animated.gif" alt="Raw events via Modifier.pointerInput" width="600" preview-src="compose-raw-events.png"/>
 
 ## What's next
 
