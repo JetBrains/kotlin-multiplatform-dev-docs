@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.7.0-beta02)
+[//]: # (title: What's new in Compose Multiplatform 1.7.0-rc01)
 
 Here are the highlights for this feature release:
 
