@@ -74,4 +74,4 @@ The `factory` lambda won't be executed because the view is going to be reused, n
 To avoid mistakes this can lead to, it is forbidden to specify an `onReset` value in the constructor.
 Compose will automatically manage the view created by the `factory` storing it internally in the emitted `ReusableComposeNode`.
 If you need to perform callbacks from within the interop view based on the context in which the function emitting it entered the composition,
-consider storing the callback (TODO "it" originally, not sure) inside the view using `update` on `onReset`.
+consider storing the callback inside the view using `update` on `onReset`.
