@@ -27,6 +27,11 @@ You can share application logic between iOS and Android apps and write platform-
 
 Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
 if you haven’t already.
+Make sure that you have:
+
+* Installed the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) for Android Studio.
+* Launched Xcode at least once and accepted the terms of use if you're planning to build iOS apps.
+* Ran Kdoctor to check for any issues in the setup.
 
 The following instructions assume that you have all software necessary for the platforms you're aiming at.
 
