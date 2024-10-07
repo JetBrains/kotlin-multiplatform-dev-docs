@@ -942,7 +942,7 @@ To do that:
 
 1. Right-click the `iosApp/iosApp.xcodeproj` folder in Android Studio and select the **Open In** | **Xcode** menu item.
 2. In Xcode, double-click the project in the Project navigator to open its settings.
-3. Switch to the **Build Settings** tab and search for **Other Linker Flags** field.
+3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
 4. Double-click the value of the field, click **+** and add the `-lsqlite3` string to the list.
 
 ### Prepare a Koin class for iOS dependency injection
