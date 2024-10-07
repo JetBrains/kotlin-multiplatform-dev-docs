@@ -55,9 +55,9 @@ How to make do without `onResize`:
     * or add `onGloballyPositioned` to the `Modifier` chain.
 * If you need to set the frame of your interop view, use the corresponding Compose modifiers: `size`, `fillMaxSize`, and so on.
 
-### Some onReset usage patters were invalidated
+### Some onReset usage patterns were invalidated
 
-It is illegal to call the `UIKitView` constructor with a value assigned to `onReset`. 
+It is incorrect to use a non-null `onReset` lambda along with `remember { UIView() }`.
 
 Consider the following code:
 
@@ -68,10 +68,9 @@ UIKitView(factory = { view }, onReset = { /* ... */ })
 ```
 
 When a `UIKitView` enters the composition, either `factory` or `onReset` is called, never both.
-So as long as `onReset` is not `null`, it is likely that the remembered `view` will actually never be used:
-The `factory` lambda won't be executed because the view is going to be reused, not recreated.
+So as long as `onReset` is not `null`, it is likely that the remembered `view` will actually never be reused:
+The `factory` lambda will be executed only once because the view is going to be reused, not recreated.
 
-To avoid mistakes this can lead to, it is forbidden to specify an `onReset` value in the constructor.
-Compose will automatically manage the view created by the `factory` storing it internally in the emitted `ReusableComposeNode`.
+To avoid mistakes this can lead to, don't specify an `onReset` value in the constructor.
 If you need to perform callbacks from within the interop view based on the context in which the function emitting it entered the composition,
 consider storing the callback inside the view using `update` on `onReset`.
