@@ -258,8 +258,8 @@ To use it, add the following explicit dependencies to the common source set in t
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
-    implementation("org.jetbrains.compose.material:material-navigation:%composeEapVersion%")
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+    implementation("org.jetbrains.compose.material:material-navigation:1.7.0-beta02")
 }
 ```
 
