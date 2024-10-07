@@ -933,31 +933,17 @@ The Kotlin Multiplatform wizard generates an iOS project that is already connect
 is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
 using a regular `import` statement: `import Shared`.
 
-### Turn off static linking
+### Add the dynamic linking flag for SQLDelight
 
 The Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
-To use the SQLDelight library, allow the iOS framework to link dynamically.
+To use the native SQLDelight driver on iOS, add the linker flag that would allow this particular library to be linked dynamically.
 
-To do that, open the `shared/build.gradle.kts` file and change the `isStatic` property of the `iosTarget.binaries.framework`
-block to `false`:
+To do that:
 
-```kotlin
-kotlin {
-    // ...
-    
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "Shared"
-            isStatic = false
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="isStatic = false"}
+1. Right-click the `iosApp/iosApp.xcodeproj` folder in Android Studio and select the **Open In** | **Xcode** menu item.
+2. In Xcode, double-click the project in the Project navigator to open its settings.
+3. Switch to the **Build Settings** tab and search for **Other Linker Flags** field.
+4. Double-click the value of the field, click **+** and add the `-lsqlite3` string to the list.
 
 ### Prepare a Koin class for iOS dependency injection
 
