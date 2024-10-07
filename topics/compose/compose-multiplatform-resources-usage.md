@@ -4,7 +4,7 @@
 
 When you've [set up the resources for your project](compose-multiplatform-resources-setup.md),
 build the project to generate the special `Res` class which provides access to resources.
-To manually generate the `Res` class and all the resource accessors, build or re-import the project in the IDE.
+To regenerate the `Res` class and all the resource accessors, build the project again or re-import the project in the IDE.
 
 After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
