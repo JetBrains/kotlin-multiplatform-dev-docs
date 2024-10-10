@@ -7,7 +7,7 @@
 {style="warning"}
 
 Navigation is a key part of UI applications that allows users to move between different application screens.
-Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design#frameworks).
+Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design).
 
 ## Setup
 
@@ -26,12 +26,23 @@ kotlin {
     }
 }
 ```
+## Type safety in navigation
+
+Compose Multiplatform implements the Jetpack Compose APIs meant to help with type safety when using the Navigation library.
+Base use cases, applicable to common code as well, are described in the [Compose documentation](https://developer.android.com/guide/navigation/design/type-safety). 
+
+Navigation implemented in Compose Multiplatform depends on the Jetpack library: the blog post detailing the nuances and challenges
+of transitioning to the type-safe APIs. TODO link and multiplatform differences.
 
 ## Sample project
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake),
 which was converted from the [Navigate between screens with Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0)
 Android codelab.
+
+> This project does not use the type-safe approach yet, but we are working on it.
+> 
+{style="tip"}
 
 Just as with Jetpack Compose, to implement navigation, you should:
 1. [List routes](https://github.com/JetBrains/compose-multiplatform/blob/a6961385ccf0dee7b6d31e3f73d2c8ef91005f1a/examples/nav_cupcake/composeApp/src/commonMain/kotlin/org/jetbrains/nav_cupcake/CupcakeScreen.kt#L50)
