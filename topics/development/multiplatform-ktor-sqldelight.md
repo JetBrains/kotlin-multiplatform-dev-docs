@@ -936,7 +936,7 @@ using a regular `import` statement: `import Shared`.
 ### Add the dynamic linking flag for SQLDelight
 
 The Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
-To use the native SQLDelight driver on iOS, add the linker flag that would allow this particular library to be linked dynamically.
+To use the native SQLDelight driver on iOS, add the linker flag that would allow Xcode tooling to find the system-provided SQLite binary.
 
 To do that:
 
