@@ -327,7 +327,7 @@ paired with Kotlin 2.0.20, we see better results across the board:
 * The *AnimatedVisibility* composable animates showing and hiding an image and demonstrates **~6%** faster rendering.
 
 On top of that, Kotlin 2.0.20 introduces experimental [support for concurrent marking](https://kotlinlang.org/docs/whatsnew2020.html#concurrent-marking-in-garbage-collector) 
-in the garbage collector (GC). Enabling concurrent marking shortens GC pauses and demonstrates even bigger improvements for all benchmarks.
+in the garbage collector. Enabling concurrent marking shortens garbage collector pauses and leads to even bigger improvements for all benchmarks.
 
 You can check out the code for these Compose-specific benchmarks in the Compose Multiplatform repository:
 
