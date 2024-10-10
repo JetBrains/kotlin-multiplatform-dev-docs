@@ -621,12 +621,13 @@ Return to Xcode and update the code using the library:
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. Keep the default options ("Branch" and "master" for **Dependency Rule**), then click the **Add Package** button.
-4. In the next window, select "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore", and then click **Add Package**:
+3. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `1.0.0-ALPHA-31` version in the adjacent field.
+4. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
+5. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 
-This should install the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
+This should install the parts of the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
 ##### Consume the flow using the KMP-NativeCoroutines library
 
