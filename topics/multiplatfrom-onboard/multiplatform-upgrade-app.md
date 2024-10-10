@@ -560,7 +560,7 @@ Return to Xcode and update the code using the library:
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("2.0.0-1.0.22").apply(false)
+        id("com.google.devtools.ksp").version("2.0.0-1.0.24").apply(false)
         id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```
@@ -621,7 +621,7 @@ Return to Xcode and update the code using the library:
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `1.0.0-ALPHA-31` version in the adjacent field.
+3. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `1.0.0-ALPHA-33` version in the adjacent field.
 4. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
 5. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
