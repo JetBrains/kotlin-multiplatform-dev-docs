@@ -54,7 +54,7 @@ You will use the following multiplatform libraries in the project:
 ## Add Gradle dependencies
 
 To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`)
-to the `dependencies{}` block of the relevant source sets in the `build.gradle.kts` file.
+to the `dependencies {}` block of the relevant source sets in the `build.gradle.kts` file.
 
 Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
@@ -112,7 +112,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ![Synchronize Gradle files](gradle-sync.png)
 
 5. At the very beginning of the `shared/build.gradle.kts` file, add the following lines to the
-   `plugins{}` block:
+   `plugins {}` block:
 
    ```kotlin
    plugins {
@@ -175,7 +175,7 @@ The application data model will have three entity classes with:
 > Not all of this data will end up in the UI by the end of this tutorial.
 > We're using the data model to showcase serialization.
 > But you can play around with links and patches to extend the example into something more informative!
-> 
+>
 {style="note"}
 
 Create the necessary data classes:
@@ -203,15 +203,15 @@ The SQLDelight library allows you to generate a type-safe Kotlin database API fr
 generator validates the SQL queries and turns them into Kotlin code that can be used in the shared module.
 
 The SQLDelight dependency is already included in the project. To configure the library, open the `shared/build.gradle.kts` file
-and add the `sqldelight{}` block in the end. This block contains a list of databases and their parameters:
+and add the `sqldelight {}` block in the end. This block contains a list of databases and their parameters:
 
 ```kotlin
 sqldelight {
-   databases {
-      create("AppDatabase") {
-         packageName.set("com.jetbrains.spacetutorial.cache")
-      }
-   }
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.jetbrains.spacetutorial.cache")
+        }
+    }
 }
 ```
 
@@ -539,7 +539,6 @@ public class, `SpaceXSDK`.
     }
     ```
 
-
 * The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
   returns cached values or loads the data from the internet and then updates the cache with the results. If there is
   no cached data, it loads the data from the internet regardless of the `forceReload` flag's value.
@@ -581,8 +580,8 @@ In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-per
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-   <uses-permission android:name="android.permission.INTERNET" />
-   <!--...-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--...-->
 </manifest>
 ```
 
@@ -935,15 +934,15 @@ using a regular `import` statement: `import Shared`.
 
 ### Add the dynamic linking flag for SQLDelight
 
-The Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
-To use the native SQLDelight driver on iOS, add the linker flag that would allow Xcode tooling to find the system-provided SQLite binary.
+By default, the Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
 
-To do that:
+To use the native SQLDelight driver on iOS, add the dynamic linker flag that allows Xcode tooling to find the
+system-provided SQLite binary:
 
-1. Right-click the `iosApp/iosApp.xcodeproj` folder in Android Studio and select the **Open In** | **Xcode** menu item.
-2. In Xcode, double-click the project in the Project navigator to open its settings.
+1. In Android Studio, right-click the `iosApp/iosApp.xcodeproj` folder and select the **Open In** | **Xcode** option.
+2. In Xcode, double-click the project name to open its settings.
 3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
-4. Double-click the value of the field, click **+** and add the `-lsqlite3` string to the list.
+4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
 
 ### Prepare a Koin class for iOS dependency injection
 
@@ -1066,44 +1065,45 @@ data.
     * The view model (`ContentView.ViewModel`) connects with the view (`ContentView`) via the [Combine framework](https://developer.apple.com/documentation/combine):
         * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
         * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
-        property changes.
+          property changes.
 
 5. Remove the `ContentView_Previews` structure: you won't need to implement a preview that should be compatible with
    your view model.
 
 6. Update the body of the `ContentView` class to display the list of launches and add the reload functionality.
+
    * This is the UI groundwork: you will implement the `loadLaunches` function in the next phase of the tutorial.
    * The `viewModel` property is marked with the `@ObservedObject` attribute to subscribe to the view model.
 
-    ```swift
-    struct ContentView: View {
-        @ObservedObject private(set) var viewModel: ViewModel
+   ```swift
+   struct ContentView: View {
+       @ObservedObject private(set) var viewModel: ViewModel
    
-        var body: some View {
-            NavigationView {
-                listView()
-                .navigationBarTitle("SpaceX Launches")
-                .navigationBarItems(trailing:
-                    Button("Reload") {
-                        self.viewModel.loadLaunches(forceReload: true)
-                })
-            }
-        }
+       var body: some View {
+           NavigationView {
+               listView()
+               .navigationBarTitle("SpaceX Launches")
+               .navigationBarItems(trailing:
+                   Button("Reload") {
+                       self.viewModel.loadLaunches(forceReload: true)
+               })
+           }
+       }
    
-        private func listView() -> AnyView {
-            switch viewModel.launches {
-            case .loading:
-                return AnyView(Text("Loading...").multilineTextAlignment(.center))
-            case .result(let launches):
-                return AnyView(List(launches) { launch in
-                    RocketLaunchRow(rocketLaunch: launch)
-                })
-            case .error(let description):
-                return AnyView(Text(description).multilineTextAlignment(.center))
-            }
-        }
-    }
-    ```
+       private func listView() -> AnyView {
+           switch viewModel.launches {
+           case .loading:
+               return AnyView(Text("Loading...").multilineTextAlignment(.center))
+           case .result(let launches):
+               return AnyView(List(launches) { launch in
+                   RocketLaunchRow(rocketLaunch: launch)
+               })
+           case .error(let description):
+               return AnyView(Text(description).multilineTextAlignment(.center))
+           }
+       }
+   }
+   ```
 
 7. The `RocketLaunch` class is used as a parameter for initializing the `List` view, so it needs to
    [conform to the `Identifiable` protocol](https://developer.apple.com/documentation/swift/identifiable).
@@ -1121,8 +1121,8 @@ It will allow you to call the SDK function with the correct database driver.
 
 1. In the `ContentView.swift` file, expand the `ViewModel` class to include a `KoinHelper` object and the `loadLaunches` function:
 
-    ```Swift
-    extension ContentView {
+   ```Swift
+   extension ContentView {
        // ...
        @MainActor
        class ViewModel: ObservableObject {
@@ -1137,14 +1137,14 @@ It will allow you to call the SDK function with the correct database driver.
                // TODO: retrieve data
            }
        }
-    }
-    ```
+   }
+   ```
 
 2. Call the `KoinHelper.getLaunches()` function (which will proxy the call to the `SpaceXSDK` class) and save the result
    in the `launches` property:
 
-    ```Swift
-    func loadLaunches(forceReload: Bool) {
+   ```Swift
+   func loadLaunches(forceReload: Bool) {
        Task {
            do {
                self.launches = .loading
@@ -1154,8 +1154,8 @@ It will allow you to call the SDK function with the correct database driver.
                self.launches = .error(error.localizedDescription)
            }
        }
-    }
-    ```
+   }
+   ```
 
    * When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
      can be called using the Swift's `async`/`await` mechanism.
