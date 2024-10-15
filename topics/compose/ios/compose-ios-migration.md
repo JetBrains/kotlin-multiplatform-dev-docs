@@ -25,7 +25,7 @@ transfer touches directly to interop views.
 
 The constructor is marked experimental because we ultimately intend to keep the interactability of interop views described
 by a single bool flag.
-The behavior described explicitly the `interactionMode` parameter will most likely be derived automatically in the future.
+The behavior described explicitly in the `interactionMode` parameter will most likely be derived automatically in the future.
 
 ### accessibilityEnabled replaced by isNativeAccessibilityEnabled, and turned off by default
 
@@ -41,7 +41,7 @@ For the rationale behind this property and its default value, see the [in-code d
 ### onResize parameter removed
 
 The `onResize` parameter of the old `UIKitView` and `UIKitViewController` constructors set a custom frame based
-on the `rect` argument, but didn't affect the Compose layout itself, so it was not intuitive to use.
+on the `rect` argument but didn't affect the Compose layout itself, so it was not intuitive to use.
 On top of that, the default implementation of the `onResize` parameter needed to properly set the frame of interop view
 and contained some implementation details about properly clipping the view. <!-- TODO: what's wrong with that exactly? -->
 
