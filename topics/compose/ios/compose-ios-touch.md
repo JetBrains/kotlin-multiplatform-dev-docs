@@ -8,10 +8,9 @@ Currently, Compose Multiplatform has only one strategy for dealing with touch ev
 all touches are processed entirely by the native UI, with Compose not being aware that they occurred at all.
 
 Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
-Changes are described in the following sections. Consider trying them out with the %composeEapVersion% version.
+Changes are described in the following sections. Consider trying them out with the %composeVersion% version.
 
 ## New approach to handling touches in interop UI
-<primary-label ref="EAP"/>
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
 the container composable can't react to the same touch.
@@ -35,7 +34,7 @@ To do that, call the constructor for a `UIKitView` or a `UIViewController` with 
 ### Choosing the strategy for touch processing
 <secondary-label ref="Experimental"/>
 
-With Compose Multiplatform %composeEapVersion% you can also try out the experimental API for finer control over interop UI.
+With Compose Multiplatform %composeVersion% you can also try out the experimental API for finer control over interop UI.
 
 The new constructors for `UIKitView` or a `UIViewController` accept a `UIKitInteropProperties` object as an argument.
 This object allows setting:

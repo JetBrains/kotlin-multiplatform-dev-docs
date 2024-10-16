@@ -334,7 +334,7 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-#### Convert byte arrays into images {label="EAP"}
+#### Convert byte arrays into images
 
 If the file you are reading is a bitmap (JPEG, PNG, BMP, WEBP) or an XML vector image, you can use the following functions
 to convert them into `ImageBitmap` or `ImageVector` objects suitable for the `Image()` composable.
@@ -356,7 +356,7 @@ On every platform except Android, you can also turn an SVG file into a `Painter`
 Image(bytes.decodeToSvgPainter(LocalDensity.current), null)
 ```
 
-### Generated maps for resources and string IDs {label="EAP"}
+### Generated maps for resources and string IDs
 
 For ease of access, Compose Multiplatform also maps resources with string IDs. You can access them by using
 the filename as the key:
@@ -375,9 +375,9 @@ An example of passing a mapped resource to a composable:
 Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null)
 ```
 
-### Compose Multiplatform resources as Android assets {label="EAP"}
+### Compose Multiplatform resources as Android assets
 
-Starting with Compose Multiplatform %composeEapVersion%, all multiplatform resources are packed into Android assets.
+Starting with Compose Multiplatform %composeVersion%, all multiplatform resources are packed into Android assets.
 This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
 > Android Studio previews are available only for composables in an Android source set.
@@ -462,13 +462,13 @@ You can load remote files from the internet using their URL using specialized li
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
 
-### Using Java resources {label="EAP"}
+### Using Java resources
 
 While you can use Java resources with Compose Multiplatform, they don't benefit from extended features provided by
 the framework: generated accessors, multimodule support, localization, and so on.
 Consider transitioning fully to the multiplatform resource library to unlock that potential.
 
-With Compose Multiplatform %composeEapVersion%, the resources API available in the `compose.ui` package is deprecated.
+With Compose Multiplatform %composeVersion%, the resources API available in the `compose.ui` package is deprecated.
 If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
 works after you upgrade to Compose Multiplatform 1.7.0:
 

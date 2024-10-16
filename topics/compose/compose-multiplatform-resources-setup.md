@@ -37,7 +37,7 @@ To access resources in your multiplatform projects, add the library dependency a
    * Strings should be in the `values` directory.
    * Other files should be in the `files` directory, with any folder hierarchy you may find appropriate.
 
-### Custom resource directories {label="EAP"}
+### Custom resource directories
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify custom resource directories for each source set.
 Each of these custom directories should also contain files in the same way as the default `composeResources`: with a `drawable` subdirectory
