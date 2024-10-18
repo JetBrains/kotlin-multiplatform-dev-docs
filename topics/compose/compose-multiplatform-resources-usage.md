@@ -502,7 +502,7 @@ internal fun rememberSvgResource(path: String): Painter {
 
 private object ResourceLoader
 private fun readResourceBytes(resourcePath: String) =
-    ResourceLoader.javaClass.classLoader.getResourceAsStream(resourcePath).readAllBytes()
+    ResourceLoader.javaClass.classLoader?.getResourceAsStream(resourcePath)?.use { it.readBytes() } ?: byteArrayOf()
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="internal fun painterResource(resourcePath: String): Painter"}
 
