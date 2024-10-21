@@ -24,6 +24,9 @@ To access resources in your multiplatform projects, add the library dependency a
        }
    }
    ```
+   
+   > To refer to the library directly, use the fully qualified name from the [artifact page in Maven Central](https://central.sonatype.com/artifact/org.jetbrains.compose.components/components-resources).
+   {style="tip"}
 
 2. Create a new directory `composeResources` in the source set directory you want to add the resources to
    (`commonMain` in this example):
