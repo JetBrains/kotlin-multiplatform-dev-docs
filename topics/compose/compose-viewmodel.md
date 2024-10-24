@@ -34,25 +34,27 @@ Using the [navigation example](https://github.com/JetBrains/compose-multiplatfor
 
 1. Declare the ViewModel class:
 
-    ```kotlin
-    class OrderViewModel : ViewModel() {
-        private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
-        val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
-   
-        // ...
-    }
-    ```
+```kotlin
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+class OrderViewModel : ViewModel() {
+   private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
+   val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+   // ...
+}
+```
 
 2. Add the ViewModel to your composable function:
 
-    ```kotlin
-    @Composable
-    fun CupcakeApp(
-        viewModel: OrderViewModel = viewModel { OrderViewModel() },
-    ) {
-        // ...
-    }
-    ```
+```kotlin
+@Composable
+fun CupcakeApp(
+   viewModel: OrderViewModel = viewModel { OrderViewModel() },
+) {
+   // ...
+}
+```
 
 > When running coroutines in a `ViewModel`, remember that the `ViewModel.viewModelScope` value is tied to the `Dispatchers.Main.immediate` value,
 > which might be unavailable on desktop by default.
