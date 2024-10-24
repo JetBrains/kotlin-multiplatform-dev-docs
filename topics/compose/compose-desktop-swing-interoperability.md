@@ -1,41 +1,56 @@
 [//]: # (title: Swing interoperability)
 
-Here, you'll learn about the Swing and Compose Multiplatform for desktop interop: how to use it in your application, its limitations, potential achievements, and in which scenarios you may use this approach or should avoid it.
+Here, you'll learn about the Swing and Compose Multiplatform for desktop interop: how to use it in your application, its limitations,
+potential achievements, and in which scenarios you may use this approach or should avoid it.
 
 The main goals of interoperability between Compose Multiplatform and Swing include:
 * Simplifying and smoothing the migration process of Swing applications to Compose Multiplatform.
 * Enhancing Compose Multiplatform applications using Swing components when no Compose analogues are available.
 
-In many cases, it's more effective to implement a missing component directly in Compose Multiplatform (and contribute it to the community) rather than using a Swing component within a Compose Multiplatform application.
+In many cases, it's more effective to implement a missing component directly in Compose Multiplatform (and contribute it to the community) 
+rather than using a Swing component within a Compose Multiplatform application.
 
 ## Swing interop use cases and limitations
 
-When integrating Compose Multiplatform with Swing, keep in mind that these two technologies have different approaches to content rendering.
-Compose Multiplatform renders all its content using a single heavyweight Swing component and relies on logical rendering layers, while Swing operates using both heavyweight and lightweight components (`Component`/`JComponent`).
-In Swing logic, Compose Multiplatform is just another heavyweight component, and Swing interacts with it similarly to how it interacts with other Swing components.
+The first use case involves adding a Compose Multiplatform component to a Swing application. 
+You can achieve it using the `ComposePanel` Swing component to render the Compose Multiplatform part of the application. 
+From Swing's perspective, `ComposePanel` is another Swing component, and handles it accordingly.
 
-The first use case involves adding a Compose Multiplatform component to a Swing application. You can achieve it using the `ComposePanel` Swing component to render the Compose Multiplatform part of the application. 
-From Swing's perspective, `ComposePanel` is another Swing component that handles it accordingly.
-Note that all Compose Multiplatform components, including popups, tooltips, and context menus, will be rendered within Swing's `ComposePanel` and positioned and resized inside it. 
-Therefore, consider replacing these components with Swing-based implementations.
+Note that all Compose Multiplatform components, including popups, tooltips, and context menus, are rendered within Swing's `ComposePanel` and positioned and resized inside it. 
+Therefore, consider replacing these components with Swing-based implementations, or try two new experimental features:
+
+[Off-screen rendering](#experimental-off-screen-rendering) 
+: Allows rendering of compose panels directly on Swing components.
+
+[Separate platform views for popups, dialogs, and dropdowns](#experimental-separate-views-for-popups)
+: Popups are no longer limited by the initial composable canvas or the app window.
+
 
 Here are several scenarios for using `ComposePanel`:
 * Embedding animated objects or a whole panel of animated objects into your application (for example, selection of emoticons or a toolbar with animated reactions to events).
 * Implementing an interactive rendering area such as graphics or infographics in your application, which is easier and more convenient to accomplish using Compose Multiplatform.
 * Integrating a complex rendering area (potentially even animated) into your application, which is simpler with Compose Multiplatform.
-* Replacing complex parts of the user interface in your Swing-based application, as Compose Multiplatform provides a convenient component layout system and a wide range of built-in components and options for quickly creating custom components.
+* Replacing complex parts of the user interface in your Swing-based application, as Compose Multiplatform provides a convenient 
+component layout system and a wide range of built-in components and options for quickly creating custom components.
 
 Another use case is when you need to use a component that exists in Swing but has no analog in Compose Multiplatform. 
-If creating its new implementation from scratch is too time-consuming, try `SwingPanel`. The `SwingPanel` function serves as a wrapper that manages the size, position, and rendering of a Swing component placed on top of a Compose Multiplatform component. 
-Note that the Swing component within `SwingPanel` will always be layered above the Compose Multiplatform component, so anything positioned underneath your `SwingPanel` will be clipped by the Swing component. 
-If there is a risk of incorrect rendering, you can redesign the UI accordingly or avoid using `SwingPanel` and try implementing the missing component, contributing to technology development.
+If creating its new implementation from scratch is too time-consuming, try `SwingPanel`. The `SwingPanel` function serves 
+as a wrapper that manages the size, position, and rendering of a Swing component placed on top of a Compose Multiplatform component.
+
+Note that the Swing component within `SwingPanel` will always be layered above the Compose Multiplatform component, 
+so anything positioned underneath your `SwingPanel` will be clipped by the Swing component. To avoid clipping and overlapping issues,
+try [experimental interop blending](#experimental-interop-blending). If there is still a risk of incorrect rendering, 
+you can redesign the UI accordingly or avoid using `SwingPanel` and try implementing the missing component, contributing to technology development.
 
 Here are scenarios for using `SwingPanel`:
 * Your application does not require popups, tooltips, or context menus, or at least they are not inside your `SwingPanel`.
-* `SwingPanel` remains in a fixed position. In this case, you reduce the risk of glitches and artifacts when the Swing component's position changes. However, this condition is not mandatory and should be tested for each particular case.
+* `SwingPanel` remains in a fixed position. In this case, you reduce the risk of glitches and artifacts when the Swing component's position changes. 
+However, this condition is not mandatory and should be tested for each particular case.
   
-Compose Multiplatform and Swing can be combined in both ways, allowing for flexible UI design. You can place a `SwingPanel` inside a `ComposePanel`, which can also be inside another `SwingPanel`. 
-However, before using such nested combinations, consider potential rendering glitches. Refer to [Layout with nested `SwingPanel` and `ComposePanel`](#layout-with-nested-swingpanel-and-composepanel) for a code sample.
+Compose Multiplatform and Swing can be combined in both ways, allowing for flexible UI design. You can place a `SwingPanel` inside a `ComposePanel`, 
+which can also be inside another `SwingPanel`. 
+However, before using such nested combinations, consider potential rendering glitches. 
+Refer to [Layout with nested `SwingPanel` and `ComposePanel`](#layout-with-nested-swingpanel-and-composepanel) for a code sample.
 
 ## Using ComposePanel
 
@@ -163,6 +178,98 @@ fun Counter(text: String, counter: MutableState<Int>) {
 
 <img src="compose-desktop-swing-composepanel.animated.gif" alt="IntegrationWithSwing" preview-src="compose-desktop-swing-composepanel.png" width="799"/>
 
+### Experimental off-screen rendering
+
+The new experimental mode allows rendering compose panels directly on Swing components.
+This prevents transitional rendering issues when panels are shown, hidden, or resized.
+It also enables proper layering when combining Swing components and compose panels: a Swing component can now be shown 
+above or beneath a `ComposePanel`.
+
+> Off-screen rendering is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels),
+> and you should use it only for evaluation purposes.
+>
+{style="warning"}
+
+To enable off-screen rendering, use the `compose.swing.render.on.graphics` system property:
+
+```kotlin
+System.setProperty("compose.swing.render.on.graphics", "true")
+```
+
+### Experimental separate views for popups
+
+It can be important that popup elements such as tooltips and dropdown menus are not limited by the initial composable canvas 
+or the app window. For example, when the composable view does not occupy the full screen but needs to spawn an alert dialog.
+
+> Creating separate views or windows for popups is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels). Opt-in is required (see details below),
+> and you should use it only for evaluation purposes.
+>
+{style="warning"}
+
+To create separate views or windows for popups on desktop, set the `compose.layers.type` system property. Supported values:
+* `WINDOW` creates `Popup` and `Dialog` components as separate undecorated windows.
+* `COMPONENT` creates `Popup` or `Dialog` as a separate Swing component in the same window. The setting only works with off-screen
+  rendering, with `compose.swing.render.on.graphics` set to `true` (see the [Experimental off-screen rendering](#experimental-off-screen-rendering)
+  section). Note that off-screen rendering only works for `ComposePanel` components, not full window applications.
+
+Note that popups and dialogs are still unable to draw anything outside their own bounds (for example, the shadow of the topmost container).
+
+Here is an example of the code that uses the `COMPONENT` property:
+
+```kotlin
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.awt.ComposePanel
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import javax.swing.JFrame
+import javax.swing.JLayeredPane
+import javax.swing.SwingUtilities
+import javax.swing.WindowConstants
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() = SwingUtilities.invokeLater {
+    System.setProperty("compose.swing.render.on.graphics", "true")
+    System.setProperty("compose.layers.type", "COMPONENT")
+
+    val window = JFrame()
+    window.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+
+    val contentPane = JLayeredPane()
+    contentPane.layout = null
+
+    val composePanel = ComposePanel()
+    composePanel.setBounds(200, 200, 200, 200)
+    composePanel.setContent {
+        ComposeContent()
+    }
+    
+    // Use the full window for dialogs
+    composePanel.windowContainer = contentPane
+    contentPane.add(composePanel)
+
+    window.contentPane.add(contentPane)
+    window.setSize(800, 600)
+    window.isVisible = true
+}
+
+@Composable
+fun ComposeContent() {
+    Box(Modifier.fillMaxSize().background(Color.Green)) {
+        Dialog(onDismissRequest = {}) {
+            Box(Modifier.size(100.dp).background(Color.Yellow))
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="@OptIn(ExperimentalComposeUiApi::class) fun main()"}
+
 ## Using SwingPanel
 
 `SwingPanel` allows you to create a UI with Swing within a Compose Multiplatform application.
@@ -260,7 +367,7 @@ fun actionButton(
 
 <img src="compose-desktop-swingpanel.animated.gif" alt="SwingPanel" preview-src="compose-desktop-swingpanel.png" width="600"/>
 
-## Keeping Swing components up to date
+### Keeping Swing components up to date
 
 The following code sample demonstrates how to update a Swing component within a `SwingPanel` whenever the composable state changes. 
 To keep a Swing component up to date, provide an `update: (T) -> Unit` callback, which is invoked whenever the composable state changes or after the layout is inflated.
@@ -334,9 +441,34 @@ fun main() = application {
 
 <img src="compose-desktop-swinglabel.animated.gif" alt="SwingLabel" preview-src="compose-desktop-swinglabel.png" width="600"/>
 
+### Experimental interop blending
+
+By default, the interop view implemented using the `SwingPanel` wrapper is always rectangular and in the foreground, 
+on top of any Compose Multiplatform components. To make popup elements easier to use, we introduced experimental support for 
+interop blending.
+
+> Interop blending is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels),
+> and you should use it only for evaluation purposes.
+>
+{style="warning"}
+
+To enable this experimental feature, use the `compose.interop.blending` system property:
+
+```kotlin
+System.setProperty("compose.interop.blending", "true")
+```
+
+With interop blending enabled, you can rely on Swing in the following use cases:
+
+* **Clipping**. You're no longer limited by a rectangular shape: the `clip` and `shadow` modifiers work correctly with `SwingPanel`.
+* **Overlapping**. It is possible to draw any Compose Multiplatform content on top of a `SwingPanel` and interact with it as usual.
+
+For details and known limitations, see the [description on GitHub](https://github.com/JetBrains/compose-multiplatform-core/pull/915).
+
 ## Layout with nested SwingPanel and ComposePanel
 
-The following code sample demonstrates how Swing and Compose Multiplatform for desktop can be combined in both ways, placing a `SwingPanel` inside a `ComposePanel` which is also inside another `SwingPanel`.
+The following code sample demonstrates how Swing and Compose Multiplatform for desktop can be combined in both ways, 
+placing a `SwingPanel` inside a `ComposePanel` which is also inside another `SwingPanel`.
 
 ```kotlin
 import androidx.compose.foundation.*
