@@ -151,7 +151,7 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
     <td>
         <list>
             <li>Jetpack Compose on Android and Wear</li>
-            <li>Compose Multiplatform on iOS and desktop</li>
+            <li>Compose Multiplatform on iOS, desktop, and web</li>
         </list>
     </td>
   </tr>
