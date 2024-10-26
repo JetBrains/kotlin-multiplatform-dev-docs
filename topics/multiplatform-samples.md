@@ -555,7 +555,6 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
           </list>
       </td>
   </tr>
-  
   <tr>
         <td>
             <strong><a href="https://github.com/fethij/Rijksmuseum">Rijksmuseum</a></strong>
@@ -579,6 +578,39 @@ You can find even more sample projects on GitHub via the [kotlin-multiplatform-s
             <li><code>Compose Navigation</code></li>
             <li><code>Coil</code></li>
             <li><code>Jetpack ViewModel</code></li>
+          </list>
+        </td>
+        <td>
+            <list>
+                <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+            </list>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong><a href="https://github.com/ashdavies/playground.ashdavies.dev">Conferences List</a></strong>
+        </td>
+        <td>Conferences list utilises the community curated Android Study Group list of conferences to show upcoming Android related conferences.</td>
+        <td>
+          <list>
+            <li>Data storage</li>
+            <li>Model</li>
+            <li>Navigation</li>
+            <li>Networking</li>
+            <li>UI</li>
+          </list>
+        </td>
+        <td>
+          <list>
+            <li><code>circuit</code></li>
+            <li><code>Circuit</code></li>
+            <li><code>Coil</code></li>
+            <li><code>google-cloud</code></li>
+            <li><code>firebase</code></li>
+            <li><code>kotlinx-coroutines</code></li>
+            <li><code>kotlinx-serialization</code></li>
+            <li><code>ktor-client</code></li>
+            <li><code>SqlDelight</code></li>
           </list>
         </td>
         <td>
