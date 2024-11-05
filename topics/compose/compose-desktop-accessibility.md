@@ -15,7 +15,7 @@ Accessibility on Windows is provided via Java Access Bridge, which is disabled b
 To enable it, run the following command:
 
 ```Console
-%JAVA_HOME%\bin\jabswitch.exe /enable
+%\JAVA_HOME%\bin\jabswitch.exe /enable
 ```
 
 ## Example: Custom button with semantic rules
