@@ -67,9 +67,10 @@ val view = remember { UIView() }
 UIKitView(factory = { view }, onReset = { /* ... */ })
 ```
 
-So long as `onReset` is not null, the remembered view can be different from the one that is shown onscreen.
-This can happen if a composable recently left the composition and left the instance of the view
-to be reused after resetting it in `onReset` instead of allocating a new one using `factory`.
+When a `UIKitView` enters the composition, either `factory` or `onReset` is called, never both.
+So, if `onReset` is not null, the remembered `view` can be different from the one that is shown onscreen:
+A composable can leave the composition and leave behind an instance of the view
+that will be reused after resetting it in `onReset` instead of allocating a new one using `factory`.
 
 To avoid such mistakes, don't specify an `onReset` value in the constructor.
 You may need to perform callbacks from within the interop view based on the context in which the function emitting it entered the composition:
