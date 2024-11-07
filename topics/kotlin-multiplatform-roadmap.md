@@ -109,7 +109,7 @@ We aim to support:
 
 As we look ahead to 2025, our work on Gradle enhancements is outlined in the [Kotlin roadmap](https://kotlinlang.org/docs/roadmap.html#tooling).
 
-Here are the key areas we will be working regarding Kotlin Multiplatform in particular:
+Here are the key areas we will be working on regarding Kotlin Multiplatform in particular:
 
 * Support declaring Kotlin Multiplatform dependencies at the project level. This will make it easier for developers to manage their project dependencies effectively.
 * Improve integration of the Kotlin/Native toolchain into Gradle.
