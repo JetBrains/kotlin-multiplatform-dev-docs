@@ -190,10 +190,21 @@ above or beneath a `ComposePanel`.
 >
 {style="warning"}
 
-To enable off-screen rendering, use the `compose.swing.render.on.graphics` system property:
+To enable off-screen rendering, use the `compose.swing.render.on.graphics` system property.
+The property must be set before executing any Compose code in your application, so it is recommended to enable it using 
+the `-D` command-line JVM argument at startup: 
+
+```Console
+-Dcompose.swing.render.on.graphics=true
+```
+
+Alternatively, use `System.setProperty()` at the entry point:
 
 ```kotlin
-System.setProperty("compose.swing.render.on.graphics", "true")
+fun main() {
+    System.setProperty("compose.swing.render.on.graphics", "true")
+    ...
+}
 ```
 
 ### Experimental separate views for popups
