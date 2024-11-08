@@ -219,9 +219,9 @@ or the app window. For example, when the composable view does not occupy the ful
 
 To create separate views or windows for popups on desktop, set the `compose.layers.type` system property. Supported values:
 * `WINDOW` creates `Popup` and `Dialog` components as separate undecorated windows.
-* `COMPONENT` creates `Popup` or `Dialog` as a separate Swing component in the same window. The setting only works with off-screen
-  rendering, with `compose.swing.render.on.graphics` set to `true` (see the [Experimental off-screen rendering](#experimental-off-screen-rendering)
-  section). Note that off-screen rendering only works for `ComposePanel` components, not full window applications.
+* `COMPONENT` creates `Popup` or `Dialog` as a separate Swing component in the same window. Note that the setting requires enabled
+off-screen rendering (see the [Experimental off-screen rendering](#experimental-off-screen-rendering) section), and off-screen rendering only works 
+for `ComposePanel` components, not full window applications.
 
 Note that popups and dialogs are still unable to draw anything outside their own bounds (for example, the shadow of the topmost container).
 
@@ -463,10 +463,15 @@ interop blending.
 >
 {style="warning"}
 
-To enable this experimental feature, use the `compose.interop.blending` system property:
+To enable this experimental feature, set the `compose.interop.blending` system property to `true`.
+The property must be set before executing any Compose code in your application,
+so use `System.setProperty()` at the entry point:
 
 ```kotlin
-System.setProperty("compose.interop.blending", "true")
+fun main() {
+    System.setProperty("compose.interop.blending", "true")
+    ...
+}
 ```
 
 With interop blending enabled, you can rely on Swing in the following use cases:
