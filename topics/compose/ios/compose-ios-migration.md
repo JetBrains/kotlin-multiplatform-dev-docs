@@ -68,9 +68,10 @@ UIKitView(factory = { view }, onReset = { /* ... */ })
 ```
 
 When a `UIKitView` enters the composition, either `factory` or `onReset` is called, never both.
-So as long as `onReset` is not `null`, it is likely that the remembered `view` will actually never be reused:
-The `factory` lambda will be executed only once because the view is going to be reused, not recreated.
+So, if `onReset` is not null, the remembered `view` can be different from the one that is shown onscreen:
+A composable can leave the composition and leave behind an instance of the view
+that will be reused after resetting it in `onReset` instead of allocating a new one using `factory`.
 
-To avoid mistakes this can lead to, don't specify an `onReset` value in the constructor.
-If you need to perform callbacks from within the interop view based on the context in which the function emitting it entered the composition,
-consider storing the callback inside the view using `update` on `onReset`.
+To avoid such mistakes, don't specify an `onReset` value in the constructor.
+You may need to perform callbacks from within the interop view based on the context in which the function emitting it entered the composition:
+In this case, consider storing the callback inside the view using `update` on `onReset`.
