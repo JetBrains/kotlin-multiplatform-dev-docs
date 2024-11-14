@@ -23,6 +23,8 @@ Be sure to check it out to have more context for the direction we're taking.
 * Make Amper suitable for multiplatform mobile development. In 2025, Amper should fully support multiplatform development
     for iOS and Android, including sharing UI code using Compose Multiplatform.
 
+You can find frequently asked questions and answers in the [FAQ section](#faq).
+
 ## Compose Multiplatform
 
 Focus areas for Compose Multiplatform are:
@@ -39,6 +41,11 @@ Focus areas for Compose Multiplatform are:
     while enhancing the user experience through Compose Multiplatform previews.
 * **Documentation**. Provide users with all the resources needed to learn and use Compose Multiplatform in a single place.
 * **Compose Multiplatform for web**. Reach feature parity with other supported platforms.
+
+### Any plans regarding Compose HTML?
+
+While continuing to maintain the Compose HTML library by fixing bugs, we are also exploring use cases for it among existing users
+so that we can formulate plans for its future development.
 
 ## Tooling
 
@@ -111,7 +118,8 @@ As we look ahead to 2025, our work on Gradle enhancements is outlined in the [Ko
 
 Here are the key areas we will be working on regarding Kotlin Multiplatform in particular:
 
-* Support declaring Kotlin Multiplatform dependencies at the project level. This will make it easier for developers to manage their project dependencies effectively.
+* Support declaring Kotlin Multiplatform dependencies at the project level. This will make it easier for developers
+    to manage their project dependencies effectively.
 * Improve integration of the Kotlin/Native toolchain into Gradle.
 * Implement the next-generation distribution format for multiplatform libraries.
     This will simplify the dependencies model and publication layout for multiplatform libraries, making them easier
@@ -125,3 +133,53 @@ Here are the key areas we will be working on regarding Kotlin Multiplatform in p
 > * We will adjust our priorities as we go and update the roadmap accordingly.
 >
 {style="note"}
+
+## FAQ
+
+### Why a standalone KMP IDE based on JetBrains Fleet and not just JetBrains Fleet?
+
+Our goal is to provide an exceptional KMP development experience for a very broad audience,
+including developers and teams without prior Kotlin experience who are considering their cross-platform development options.
+For these users, easy onboarding to the KMP technology and intuitive tooling are crucial.
+
+We want to offer an all-in-one tool that is tailored and optimized specifically for multiplatform development scenarios,
+offers dedicated technology and tooling onboarding flows, and has a variety of relevant licensing options, including free ones.
+
+Delivering the KMP tooling inside JetBrains Fleet was an interim solution that allowed us to get the tools in front of users more quickly.
+We were able to embrace Fleet’s new approach as a generic multi-language code editor, gather feedback, and evaluate options along the way.
+
+### Will the KMP IDE be free?
+
+The KMP IDE will have a variety of free options.
+The exact licensing and pricing schema will be announced at a later date.
+
+### Will I now have to switch between not 4 but 5 IDEs?
+
+No, our aim is quite the opposite – we want to reduce the number of IDEs you need to use.
+The KMP IDE is designed to consolidate your development workflow, allowing you to perform most of your daily coding and
+debugging tasks in one place.
+While there might be occasional scenarios where another IDE is necessary, these cases should be rare.
+
+### Can you fix KMP support in IntelliJ IDEA?
+
+We recognize the importance of providing a great KMP experience in IntelliJ IDEA, and so we will continue to invest in enhancing this support.
+This will include improving quality and stability and introducing certain features so that developers who prefer IntelliJ IDEA for multiplatform
+development aren’t required to leave their preferred IDE.
+However, our ultimate goal is to provide a full-featured KMP experience in a dedicated KMP IDE for a broad audience.
+This includes developers who are just considering cross-platform development options and don’t have experience with IntelliJ IDEA or Android Studio (or those who believe that these technologies are only for backend and Android developers).
+
+### What about KMP support in Android Studio?
+
+We are actively collaborating with Google to improve KMP support in Android Studio.
+
+### Are you giving up on the web?
+
+No, we're not giving up on the web at all!
+We're actively working on the Kotlin/Wasm and Compose Multiplatform for Web frameworks to achieve feature parity with other platforms.
+Our current efforts include implementing drag-and-drop support, improving text input and rendering, and ensuring seamless interoperability
+with HTML content. We will share more detailed plans for the web soon. Stay tuned!
+
+### What about Compose HTML?
+
+While continuing to maintain the Compose HTML library by fixing bugs, we are also exploring use cases for it among existing users
+so that we can formulate plans for its future development.
