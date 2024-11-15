@@ -88,7 +88,7 @@ We’re also looking to improve the publishing process for Kotlin Multiplatform 
 * Provide templates and comprehensive guidelines for creating and publishing KMP libraries.
 * Stabilize klib cross-compilation on different platforms.
 * Launch a fully re-designed KMP library publication process.
-* Significantly improve the libraries' documentation process. <!--TODO: does that mean automation? -->
+* Significantly improve the libraries' documentation process.
 
 While Kotlin Multiplatform will receive significant updates, libraries build with the current format will still work
 with newer Kotlin versions.
@@ -153,7 +153,7 @@ We were able to embrace Fleet’s new approach as a generic multi-language code 
 The KMP IDE will have a variety of free options.
 The exact licensing and pricing schema will be announced at a later date.
 
-### Will I have to switch between not 4 but 5 IDEs?
+### Will I now have to switch between not 4 but 5 IDEs?
 
 No, our aim is quite the opposite – we want to reduce the number of IDEs you need to use.
 The KMP IDE is designed to consolidate your development workflow, allowing you to perform most of your daily coding and
@@ -162,23 +162,29 @@ While there might be occasional scenarios where another IDE is necessary, these 
 
 ### Can you fix KMP support in IntelliJ IDEA?
 
-We recognize the importance of providing a great KMP experience in IntelliJ IDEA, and so we will continue to invest in enhancing this support.
-This will include improving quality and stability and introducing certain features so that developers who prefer IntelliJ IDEA for multiplatform
-development aren’t required to leave their preferred IDE.
+We recognize the importance of providing a great KMP experience in IntelliJ IDEA, and so we will continue to invest
+in enhancing this support.
+This will include improving quality and stability and introducing certain features so that developers who prefer
+IntelliJ IDEA for multiplatform development aren’t required to leave their preferred IDE.
+
 However, our ultimate goal is to provide a full-featured KMP experience in a dedicated KMP IDE for a broad audience.
-This includes developers who are just considering cross-platform development options and don’t have experience with IntelliJ IDEA or Android Studio
-(or those who believe that these IDEs are only for backend and Android developers).
+This includes developers who are just considering cross-platform development options and don’t have experience
+with IntelliJ IDEA or Android Studio (or those who believe that these IDEs are only for backend and Android developers).
 
 ### What about KMP support in Android Studio?
 
 We are actively collaborating with Google to improve KMP support in Android Studio.
+More detailed plans will be available at a later date.
+Stay tuned!
 
 ### Are you giving up on the web?
 
 No, we're not giving up on the web at all!
-We're actively working on the Kotlin/Wasm and Compose Multiplatform for web to achieve feature parity with other platforms.
-Our current efforts include implementing drag-and-drop support, improving text input and rendering, and ensuring seamless interoperability
-with HTML content. We will share more detailed plans for the web soon. Stay tuned!
+We're actively working on Kotlin/Wasm support as well as on Compose Multiplatform for web to achieve feature parity
+with other platforms.
+Our current efforts include implementing drag-and-drop support, improving text input and rendering, and ensuring seamless
+interoperability with HTML content.
+We will share more detailed plans for the web soon. Stay tuned!
 
 ### What about Compose HTML?
 
