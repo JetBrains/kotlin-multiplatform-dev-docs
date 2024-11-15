@@ -64,7 +64,16 @@ fun main() = singleWindowApplication(
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title=".clickable { count += 1 } .semantics(mergeDescendants = true)"}
 
-<img src="compose-desktop-accessibility.png" alt="Custom button with semantic rules" width="600"/>
+To test the application's accessibility on macOS, you can use [Accessibility Inspector](https://developer.apple.com/documentation/accessibility/accessibility-inspector)
+(**Xcode** | **Open Developer Tool** | **Accessibility Inspector**):
+
+<img src="compose-desktop-accessibility-macos.png" alt="Accessibility inspector on mcOS" width="700"/>
+
+On Windows, you can use the **Show Speech History** feature in [JAWS](https://www.freedomscientific.com/Products/Blindness/JAWS) 
+or the **Speech Viewer** in [NVDA](https://www.nvaccess.org/):
+
+<img src="compose-desktop-accessibility.png" alt="Accessibility on Windows" width="600"/>
+
 
 For more examples, refer to the [Accessibility in Jetpack Compose](https://developer.android.com/develop/ui/compose/accessibility) guide.
 
