@@ -2,19 +2,18 @@
 
 In Compose Multiplatform for desktop, you can manage keyboard events by setting up event handlers in two different scopes:
 
-* Event handlers based on the focused element
-* Event handlers in the window scope
+* Event handlers based on the focused element.
+* Event handlers in the window scope.
 
 ## Events in a focused component
 
-This approach implies that a key pressed on a hardware keyboard is handled as an event for the currently focused component.
+This approach implies that pressing a key on a keyboard triggers event handlers for the currently focused component.
 
 A typical scenario is to define keyboard handlers for active controls like `TextField`. To intercept a key event before it
-triggers the default action (typing a symbol) and trigger a custom action instead, you can use both the `onKeyEvent` and `onPreviewKeyEvent` callbacks. 
-However, `onPreviewKeyEvent` is preferable for defining shortcuts, as these two modifiers differ by where the event is dispatched when
-it is not consumed: `onPreviewKeyEvent` dispatches the event to its first child, and `onKeyEvent` dispatches the event to the composable's parent.
+triggers the default action, you can use both the `onKeyEvent` and `onPreviewKeyEvent` modifiers.
+With the `onKeyEvent` modifier, you can handle an individual keystroke, while `onPreviewKeyEvent` is preferable for defining shortcuts.
 
-The following sample demonstrates `TextField` interactions with the different actions depending on
+The following sample demonstrates `TextField` interactions with different actions depending on
 which key is pressed while you hold `Ctrl`:
 
 ```kotlin
@@ -73,9 +72,11 @@ fun main() = singleWindowApplication (title = "Key events") {
 
 ## Events in a window scope
 
-To define keyboard event handlers that are always active within the current window, use the `onPreviewKeyEvent` and `onKeyEvent` properties,
+To define keyboard event handlers that are always active within the current window, use the `onPreviewKeyEvent` and `onKeyEvent` modifiers,
 available for the `Window`, `singleWindowApplication`, and `Dialog` functions. 
-Typically, `onPreviewKeyEvent` is preferred for intercepting events.
+These two modifiers differ in where the event is dispatched when it is not consumed: `onPreviewKeyEvent` dispatches the event to its first child, 
+and `onKeyEvent` dispatches the event to the composable's parent. Typically, `onPreviewKeyEvent` is preferred for intercepting events,
+as it allows implementing even screen-wide keyboard shortcuts.
 
 The following sample demonstrates window interactions such as closing a pop-up dialog by pressing `Escape`
 and changing the window content by pressing the `Ctrl+Shift+C` shortcut:
