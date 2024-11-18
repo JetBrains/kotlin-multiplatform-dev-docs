@@ -18,7 +18,7 @@ For more information, see the `Configuring included JDK modules` section.
 
 As an alternative, you can use [Conveyor](https://www.hydraulic.software), an external tool not developed by JetBrains.
 Conveyor supports online updates, cross-building, and various other features but requires a [license](https://hydraulic.software/pricing.html) for non-open source projects.
-For more information, refer to the [Conveyor documentation](https://conveyor.hydraulic.dev/15.1/tutorial/hare/jvm/).
+For more information, refer to the [Conveyor documentation](https://conveyor.hydraulic.dev/latest/tutorial/hare/jvm).
 
 ## Basic tasks
 
@@ -63,7 +63,7 @@ When you build a project, the plugin creates the following tasks:
         <td><code>package&lt;FormatName&gt;</code></td> 
         <td>Packages the application into the corresponding <code>FormatName</code> binary. Cross-compilation is currently not supported, 
             meaning you can build the specific format using the <a anchor="supported-distribution-formats">corresponding compatible OS</a> only.
-            For example, to build a <code>.dmg</code> binary, run the <code>packageDmg</code> task on macOS. 
+            For example, to build a <code>.dmg</code> binary, you have to run the <code>packageDmg</code> task on macOS. 
             If any tasks are incompatible with the current OS, they are skipped by default.</td>
     </tr>
     <tr>
@@ -400,7 +400,13 @@ compose.desktop {
 
 ## Managing resources
 
-To package and load resources, you can use the JVM resource loading or add files to packaged application.
+To package and load resources, you can use the resources library, the JVM resource loading, or add files to packaged applications.
+
+### Resources library
+
+The most common way to set up the resources for your project is to use the resources library.
+With the resources library, you can access resources in common code across all supported platforms.
+See [Multiplatform resources](compose-multiplatform-resources.md) for details.
 
 ### JVM resource loading
 
@@ -769,8 +775,8 @@ compose.desktop {
 
 ## Information property list on macOS
 
-It's our priority to support essential platform-specific customization scenarios using a declarative DSL. 
-However, there are still can be cases beyond the provided DSL. If you need to specify `Info.plist` values that are not represented in the DSL, 
+While the DSL supports essential platform-specific customizations, there can still be cases beyond the provided capabilities. 
+If you need to specify `Info.plist` values that are not represented in the DSL, 
 you can include a snippet of raw XML as a workaround. This XML will be appended to the application's `Info.plist`.
 
 ### Example: Deep linking {initial-collapse-state="collapsed" collapsible="true"}
@@ -848,7 +854,7 @@ As a result, links like `compose://foo/bar` can now be redirected from a browser
 
 ## Minification and obfuscation
 
-Starting with version 1.2, the Compose Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
+The Compose Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
 ProGuard ia an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
 
 The Gradle plugin provides a *release* task for each *default* packaging task:
