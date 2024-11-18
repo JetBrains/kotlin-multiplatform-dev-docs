@@ -9,7 +9,8 @@ Compose Multiplatform for desktop offers built-in context menus for `TextField` 
 
 The default context menu for a text field includes the following actions, depending on the cursor's position and the 
 selection range: Copy, Cut, Paste, and Select All.
-To enable the standard context menu in the text field, just use the `TextField` component from the Material theme.
+This standard context menu is available by default in the material `TextField` (`androidx.compose.material.TextField`
+or `androidx.compose.material3.TextField`) and the foundation `BasicTextField` (`androidx.compose.foundation.text.BasicTextField`).
 
 ```kotlin
 import androidx.compose.material.Text
@@ -218,36 +219,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.awt.ComposePanel
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
-import java.awt.Dimension
+import androidx.compose.ui.window.singleWindowApplication
 import java.net.URLEncoder
 import java.nio.charset.Charset
-import javax.swing.JFrame
-import javax.swing.SwingUtilities
 
-fun main() = SwingUtilities.invokeLater {
-    val panel = ComposePanel()
-    panel.setContent {
-        CustomTextMenuProvider {
-            Column {
-                SelectionContainer {
-                    Text("Hello, Compose!")
-                }
-
-                var text by remember { mutableStateOf("") }
-
-                TextField(text, { text = it })
+fun main() = singleWindowApplication(title = "Context menu") {
+    CustomTextMenuProvider {
+        Column {
+            SelectionContainer {
+                Text("Hello, Compose!")
             }
+            var text by remember { mutableStateOf("") }
+            TextField(text, { text = it })
         }
     }
-
-    val window = JFrame()
-    window.contentPane.add(panel)
-    window.size = Dimension(800, 600)
-    window.isVisible = true
-    window.title = "Context menu"
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -304,8 +291,8 @@ java.util.Locale.setDefault(java.util.Locale("en"))
 ## Swing interoperability
 
 If you are embedding Compose code into an existing Swing application and need the context menu to match the appearance and 
-behavior of other parts of the application, you can use the `JPopupTextMenu` class. In this class, `TextContextMenu` uses 
-Swing's `JPopupMenu` for context menus in Compose components.
+behavior of other parts of the application, you can use the `JPopupTextMenu` class. In this class, `LocalTextContextMenu` 
+uses Swing's `JPopupMenu` for context menus in Compose components.
 
 ```kotlin
 import androidx.compose.foundation.ExperimentalFoundationApi
