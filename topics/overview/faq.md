@@ -46,7 +46,7 @@ Here's a [list of real-life examples](multiplatform-samples.md).
 
 ### Where can I find a list of real-life Kotlin Multiplatform applications? What companies use KMP in production?
 
-Check out our [list of case studies](case-studies.md) to learn from other companies that have already adopted Kotlin
+Check out our [list of case studies](case-studies.topic) to learn from other companies that have already adopted Kotlin
 Multiplatform in production.
 
 ### Which operating systems can work with Kotlin Multiplatform?

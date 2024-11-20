@@ -5,7 +5,7 @@
 	<toc-element toc-title="Kotlin Multiplatform overview">
 		<toc-element toc-title="Why Kotlin Multiplatform" href="https://www.jetbrains.com/kotlin-multiplatform/"/>
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
-		<toc-element topic="case-studies.md"/>
+		<toc-element topic="case-studies.topic"/>
 		<toc-element topic="faq.md"/>
 		<toc-element topic="kotlin-multiplatform-roadmap.md" toc-title="KMP roadmap"/>
 	</toc-element>

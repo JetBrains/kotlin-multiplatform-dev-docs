@@ -70,7 +70,7 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 
 **Programming language:** Kotlin.
 
-**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](case-studies.md).
+**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](case-studies.topic).
 
 **Key features:**
 
@@ -79,7 +79,7 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 * Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains, developers have full code-sharing flexibility and the ability to share both the logic and the UI.
 * There's no need to introduce a new language to your codebase when you already use Kotlin for Android. You can reuse your Kotlin code and expertise, which makes migrating to Kotlin Multiplatform less risky compared to other technologies.
 
-Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.md) to develop multiplatform apps with a native-like user experience.
+Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.topic) to develop multiplatform apps with a native-like user experience.
 
 > Create your first cross-platform mobile app with [Kotlin Multiplatform](get-started.topic).
 >
