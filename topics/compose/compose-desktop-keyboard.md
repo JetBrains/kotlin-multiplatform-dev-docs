@@ -72,9 +72,9 @@ fun main() = singleWindowApplication (title = "Key events") {
 
 ## Events in a window scope
 
-To define keyboard event handlers that are always active within the current window, use the `onPreviewKeyEvent` and `onKeyEvent` modifiers,
+To define keyboard event handlers that are always active within the current window, use the `onPreviewKeyEvent` and `onKeyEvent` parameters,
 available for the `Window`, `singleWindowApplication`, and `Dialog` functions. 
-These two modifiers differ in where the event is dispatched when it is not consumed: `onPreviewKeyEvent` dispatches the event to its first child, 
+They differ in where the event is dispatched when it is not consumed: `onPreviewKeyEvent` dispatches the event to its first child, 
 and `onKeyEvent` dispatches the event to the composable's parent. Typically, `onPreviewKeyEvent` is preferred for intercepting events,
 as it allows implementing even screen-wide keyboard shortcuts.
 
