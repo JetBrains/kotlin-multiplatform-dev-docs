@@ -13,27 +13,44 @@
 
     <table border="false" style="none" column-width="auto">
         <tr>
-            <td><img src="forbes.svg" alt="Forbes" width="200" style="block"/></td>
-            <td><p>By sharing over 80% of logic across iOS and Android, <b>Forbes</b> now rolls out new features simultaneously on
+            <td>
+                <img src="forbes.svg" alt="Forbes" width="200" style="block"/>
+                <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/>
+            </td>
+            <td>
+                <p>By sharing over 80% of logic across iOS and Android, <b>Forbes</b> now rolls out new features simultaneously on
                 both platforms, keeping the flexibility to withhold or customize features based on the specific platform.
                 This allows the team to innovate and respond to market needs faster than by developing separately for each OS.</p>
                 <a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Read the full story</a>.
             </td>
             <td></td>
-            <td><img src="mcdonalds.svg" alt="McDonald's" width="200" style="block"/></td>
-            <td><p><b>McDonald's</b> leverages Kotlin Multiplatform for their Global Mobile App, enabling them to build a codebase
+            <td>
+                <img src="mcdonalds.svg" alt="McDonald's" width="200" style="block"/>
+                <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            </td>
+            <td>
+                <a href="https://www.jetbrains.com/compose-multiplatform/"><img src="CMP_badge.png" alt="Compose Multiplatform" style="block" width="132"/></a>
+                <p><b>McDonald's</b> leverages Kotlin Multiplatform for their Global Mobile App, enabling them to build a codebase
                 that can be shared across platforms, removing the need for codebase redundancies.</p>
                 <a href="https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc">Read the full story</a>.
             </td>
         </tr>
         <tr>
-            <td><img src="netflix.svg" alt="Netflix" width="200" style="block"/></td>
-            <td><p>Kotlin Multiplatform helps tech giant <b>Netflix</b> optimize product reliability and delivery speed, which is
+            <td>
+                <img src="netflix.svg" alt="Netflix" width="200" style="block"/>
+                <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/>
+            </td>
+            <td>
+                <a href="https://www.jetbrains.com/compose-multiplatform/"><img src="CMP_badge.png" alt="Compose Multiplatform" style="block" width="132"/></a>
+                <p>Kotlin Multiplatform helps tech giant <b>Netflix</b> optimize product reliability and delivery speed, which is
                 crucial for serving their customers' constantly evolving needs.</p>
                 <a href="https://netflixtechblog.com/netflix-android-and-ios-studio-apps-kotlin-multiplatform-d6d4d8d25d23">Read the full story</a>.
             </td>
             <td></td>
-            <td><img src="nine-gag.svg" alt="9GAG" width="200" style="block"/></td>
+            <td>
+                <img src="nine-gag.svg" alt="9GAG" width="200" style="block"/>
+                <img src="desktop.svg" style="inline" alt="desktop" width="24"/><img src="server.svg" style="inline" alt="server" width="24"/>
+            </td>
             <td><p><b>9GAG</b> opted for Kotlin Multiplatform after trying both Flutter and React Native. They gradually adopted
                 the technology and now ship features faster, while providing a consistent experience to their users.</p>
                 <a href="https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04">Read the full story</a>.
