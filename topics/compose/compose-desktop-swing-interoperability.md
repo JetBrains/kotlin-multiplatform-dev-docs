@@ -470,8 +470,9 @@ interop blending.
 {style="warning"}
 
 To enable this experimental feature, set the `compose.interop.blending` system property to `true`.
-The property must be set before executing any Compose code in your application,
-so use `System.setProperty()` at the entry point:
+The property must be enabled before executing any Compose code in your application,
+so set it via the `-Dcompose.interop.blending=true` command-line JVM argument or
+use `System.setProperty()` at the entry point:
 
 ```kotlin
 fun main() {
