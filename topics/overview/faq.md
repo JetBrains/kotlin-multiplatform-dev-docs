@@ -114,8 +114,8 @@ of Jetpack Compose on Android, but they still provide you with the same APIs.
 
 ### Between which platforms can I share my UI?
 
-We want you to have the option to share your UI between any combination of popular platforms – Android, iOS, desktop (
-Linux, macOS, Windows), and web (based on Wasm). However, Compose Multiplatform is only Stable for Android
+We want you to have the option to share your UI between any combination of popular platforms – Android, iOS, desktop
+(Linux, macOS, Windows), and web (based on Wasm). However, Compose Multiplatform is only Stable for Android
 and desktop at the moment. For more details, see [Supported platforms](supported-platforms.md).
 
 ### Can I use Compose Multiplatform in production?
@@ -127,7 +127,7 @@ and expect minimal migration issues, but watch out for changes and deprecation w
 
 The version of Compose Multiplatform for Web that is based on WebAssembly is in Alpha, which means that it's in active development.
 You can use it with caution and expect migration issues.
-It has the same UI as Compose Multiplatform for iOS, Android, and Desktop.
+It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
