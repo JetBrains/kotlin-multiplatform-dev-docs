@@ -46,7 +46,7 @@ Fleet fully supports Swift out of the box, so you can extend and maintain the na
 
 ## Get started with Fleet
 
-When using Fleet, you can create a Multiplatform project by:
+When using Fleet, you can create a multiplatform project by:
 
 * Using the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com/).
 * [Cloning an existing Git repository](https://www.jetbrains.com/help/fleet/workspace.html#clone-project)
