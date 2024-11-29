@@ -98,7 +98,7 @@ val eastClicks = mutableStateOf(0)
 fun main() = SwingUtilities.invokeLater {
     val window = JFrame()
 
-    // Create ComposePanel
+    // Creates ComposePanel
     val composePanel = ComposePanel()
     window.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     window.title = "SwingComposeWindow"
@@ -116,10 +116,10 @@ fun main() = SwingUtilities.invokeLater {
         BorderLayout.SOUTH
     )
 
-    // Add ComposePanel to JFrame
+    // Adds ComposePanel to JFrame
     window.contentPane.add(composePanel, BorderLayout.CENTER)
 
-    // Set the content
+    // Sets the content
     composePanel.setContent {
         ComposeContent()
     }
@@ -266,7 +266,7 @@ fun main() = SwingUtilities.invokeLater {
         ComposeContent()
     }
     
-    // Use the full window for dialogs
+    // Uses the full window for dialogs
     composePanel.windowContainer = contentPane
     contentPane.add(composePanel)
 
