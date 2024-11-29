@@ -44,11 +44,11 @@ fun main() = singleWindowApplication(
             .background(Color.LightGray)
             .fillMaxSize()
             .clickable { count += 1 }
-            // Use text from the content  
+            // Uses text from the content  
             .semantics(mergeDescendants = true) {
-                // This is a button
+                // Assigns the type of UI element
                 role = Role.Button
-                // Add some help text to button
+                // Adds some help text to button
                 contentDescription = "Click to increment value"
             }
         ) {
@@ -64,7 +64,7 @@ fun main() = singleWindowApplication(
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title=".clickable { count += 1 } .semantics(mergeDescendants = true)"}
 
-To test the application's accessibility on macOS, you can use [Accessibility Inspector](https://developer.apple.com/documentation/accessibility/accessibility-inspector)
+To test accessibility information for the elements in your application on macOS, you can use [Accessibility Inspector](https://developer.apple.com/documentation/accessibility/accessibility-inspector)
 (**Xcode** | **Open Developer Tool** | **Accessibility Inspector**):
 
 <img src="compose-desktop-accessibility-macos.png" alt="Accessibility inspector on mcOS" width="700"/>
