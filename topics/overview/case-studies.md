@@ -8,7 +8,7 @@ on Kotlin Multiplatform and Compose Multiplatform.
 
 By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms,
 keeping the flexibility to withhold or customize features based on the specific platform. This allows the team to
-innovate and respond to market needs faster than by developing separately for each OS.
+innovate and respond to market needs faster than by developing separately for each OS. [Read the full story](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/).
 
 [![McDonald's](mcdonalds.svg){width=200 style="block"}](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc)
 
@@ -27,6 +27,10 @@ needs. [Read the full story](https://netflixtechblog.com/netflix-android-and-ios
 9GAG opted for Kotlin Multiplatform after trying both Flutter and React Native. They gradually adopted the technology
 and now ship features faster, while providing a consistent experience to their
 users. [Read the full story](https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04).
+
+[![Posten bring](posten-bring.svg){width=200 style="block"}](https://2024.javazone.no/program/a1d9aeac-ffc3-4b1d-ba08-a0568f415a02)
+
+Posten Bring, a 377-year-old Norwegian National Postal Service, unified complex business logic, rules, and validations across dozens of frontend and backend applications using KMP. By establishing a single source of truth, they reduced coordination time and minimized errors, enabling the team to maintain stability while quickly adapting to business needs. [Watch the full talk](https://2024.javazone.no/program/a1d9aeac-ffc3-4b1d-ba08-a0568f415a02).
 
 [![Cash App](cash-app.svg){width=200 style="block"}](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app)
 

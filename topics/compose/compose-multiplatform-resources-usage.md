@@ -470,7 +470,7 @@ Consider transitioning fully to the multiplatform resource library to unlock tha
 
 With Compose Multiplatform %composeVersion%, the resources API available in the `compose.ui` package is deprecated.
 If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
-works after you upgrade to Compose Multiplatform 1.7.0:
+works after you upgrade to Compose Multiplatform 1.7.0 or above:
 
 ```kotlin
 @Composable
