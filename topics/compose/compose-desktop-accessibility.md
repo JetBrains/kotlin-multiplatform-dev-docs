@@ -12,7 +12,7 @@ code across all platforms. The current status of accessibility support on deskto
 ## Enabling accessibility on Windows
 
 Accessibility on Windows is provided via Java Access Bridge, which is disabled by default.
-To enable it, run the following command:
+To develop accessibility features on Windows, enable Java Access Bridge with the following command:
 
 ```Console
 %\JAVA_HOME%\bin\jabswitch.exe /enable
