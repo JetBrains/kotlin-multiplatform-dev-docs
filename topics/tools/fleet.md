@@ -20,21 +20,17 @@ Fleet fully supports Swift out of the box, so you can extend and maintain the na
 >
 {style="note"}
 
-1. Install [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) app.
+1. Install Fleet: [Download the standalone installer](https://www.jetbrains.com/fleet/download/#section=mac)
+   that matches your processor type, or use JetBrains Toolbox if you have it installed already.
 
-   The Toolbox app provides an easy upgrade path to new versions as they become available. You can also manage multiple
-   versions of JetBrains products, working with stable releases while exploring experimental ones.
-
-2. Log into Toolbox with your [JetBrains account](https://account.jetbrains.com/login).
-3. Click **Install** next to the **Fleet** icon.
-4. Check your version of the JDK. Currently, Fleet requires the Java Development Kit 17.0 and later to be installed for
+2. Check your version of the JDK. Currently, Fleet requires the Java Development Kit 17.0 and later to be installed for
    Kotlin Multiplatform development. To do that, run the following command in your command-line tool:
 
    ```bash
    java -version
    ```
 
-5. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
+3. Install [Android Studio](https://developer.android.com/studio) and [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
    so that you can run your app on Android and iOS simulators.
 
    See [Set up an environment](multiplatform-setup.md) for more details on these prerequisites and
@@ -49,7 +45,7 @@ Fleet fully supports Swift out of the box, so you can extend and maintain the na
 
 ## Get started with Fleet
 
-When using Fleet, you can create a Multiplatform project by:
+When using Fleet, you can create a multiplatform project by:
 
 * Using the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com/).
 * [Cloning an existing Git repository](https://www.jetbrains.com/help/fleet/workspace.html#clone-project)
