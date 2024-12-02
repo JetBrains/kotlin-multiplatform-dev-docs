@@ -20,9 +20,8 @@ Fleet fully supports Swift out of the box, so you can extend and maintain the na
 >
 {style="note"}
 
-1. [Download the standalone installer](https://www.jetbrains.com/fleet/download/#section=mac)
-   that matches your processor type: Apple Silicon or Intel.
-   Ensure you select the correct option based on your system's processor.
+1. Install Fleet: [Download the standalone installer](https://www.jetbrains.com/fleet/download/#section=mac)
+   that matches your processor type, or use JetBrains Toolbox if you have it installed already.
 
 2. Check your version of the JDK. Currently, Fleet requires the Java Development Kit 17.0 and later to be installed for
    Kotlin Multiplatform development. To do that, run the following command in your command-line tool:
