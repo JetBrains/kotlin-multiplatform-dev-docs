@@ -42,6 +42,7 @@
 	<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
 	<toc-element toc-title="Compose Multiplatform UI framework">
 		<toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
+		<toc-element topic="compose-multiplatform-and-jetpack-compose.md"/>
 		<toc-element toc-title="Multiplatform resources">
 			<toc-element accepts-web-file-names="compose-images-resources.html" topic="compose-multiplatform-resources.md"/>
 			<toc-element toc-title="Setup and configuration" topic="compose-multiplatform-resources-setup.md"/>
