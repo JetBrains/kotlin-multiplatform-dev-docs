@@ -22,7 +22,7 @@
         <secondary>
             <title>More resources</title>
             <a href="multiplatform-samples.md" summary="Walk through real-life examples with Kotlin and Compose Multiplatform">Samples</a>
-            <a href="case-studies.md" summary="Learn from other companies that adopted Kotlin Multiplatform in production">Case studies</a>
+            <a href="case-studies.topic" summary="Learn from other companies that adopted Kotlin Multiplatform in production">Case studies</a>
             <a href="faq.md" summary="Have a question about multiplatform development? Check out our FAQ!">FAQ</a>
         </secondary>
     </section-starting-page>
