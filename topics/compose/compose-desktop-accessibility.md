@@ -18,6 +18,20 @@ To develop accessibility features on Windows, enable Java Access Bridge with the
 %\JAVA_HOME%\bin\jabswitch.exe /enable
 ```
 
+[//]: # (TODO remove this workaround when CMP-373 is fixed)
+
+To create a native distribution that includes accessibility features, add the `jdk.accessibility` module using the `modules` DSL method:
+
+```kotlin
+compose.desktop {
+    application {
+        nativeDistributions {
+            modules("jdk.accessibility")
+        }
+    }
+}
+```
+
 ## Example: Custom button with semantic rules
 
 Let's create a simple app with a custom button and specify explanatory text for screen reader tools.
