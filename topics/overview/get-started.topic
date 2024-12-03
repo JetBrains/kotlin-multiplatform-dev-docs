@@ -13,7 +13,7 @@
         </description>
         <spotlight>
             <a href="multiplatform-create-first-app.md" summary="Create your first Kotlin Multiplatform app with a native UI for Android (Jetpack Compose UI) and iOS (SwiftUI)" type="turn-on">Share logic and keep UI native</a>
-            <a href="compose-multiplatform-create-first-app.md" summary="Create your first Kotlin Multiplatform app with a shared UI across Android, iOS, and desktop using Compose Multiplatform" type="cross-platform">Share both logic and UI</a>
+            <a href="compose-multiplatform-create-first-app.md" summary="Create your first Compose Multiplatform app with a shared UI across Android, iOS, and desktop" type="cross-platform">Share both logic and UI</a>
         </spotlight>
         <primary>
             <title>Migration</title>
