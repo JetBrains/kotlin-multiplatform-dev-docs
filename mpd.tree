@@ -61,12 +61,13 @@
 		</toc-element>
 		<toc-element toc-title="Android-specific components" topic="compose-android-only-components.md"/>
 		<toc-element toc-title="Desktop-specific components">
-			<toc-element topic="compose-desktop-components.md"/>
+			<toc-element toc-title="Overview" topic="compose-desktop-components.md"/>
 			<toc-element topic="compose-desktop-top-level-windows-management.md"/>
 			<toc-element topic="compose-desktop-scrollbars.md"/>
 			<toc-element topic="compose-desktop-tooltips.md"/>
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
-			<toc-element topic="compose-desktop-keyboard.md"/>
+      <toc-element topic="compose-desktop-keyboard.md"/>
+			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
       <toc-element topic="compose-desktop-swing-interoperability.md"/>
 		</toc-element>
 		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
