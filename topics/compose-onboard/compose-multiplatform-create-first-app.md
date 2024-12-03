@@ -1,4 +1,4 @@
-[//]: # (title: Create your multiplatform project)
+[//]: # (title: Create your Compose Multiplatform app)
 
 <tldr>
    <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
