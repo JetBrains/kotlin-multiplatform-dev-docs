@@ -39,6 +39,13 @@ if you haven't already.
 Make sure that you have:
 
 * Installed the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) for Android Studio.
+
+  > The KMP plugin doesn't support the [K2 mode](https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides)
+  > yet.
+  > To use the plugin, disable the K2 mode in the IDE settings.
+  >
+  {style="note"}
+
 * Launched Xcode at least once and accepted the terms of use if you plan to build iOS apps.
 * Run Kdoctor to check for any issues in the setup.
 
