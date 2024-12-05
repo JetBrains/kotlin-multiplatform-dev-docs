@@ -293,76 +293,8 @@ tutorial.
 ## Events
 
 * [Mouse events](compose-desktop-mouse-events.md)
-* [Keyboard events](#keyboard-event-handlers)
+* [Keyboard events](compose-desktop-keyboard.md)
 * [Tabbing navigation](#tabbing-navigation-between-components)
-
-
-### Keyboard event handlers
-
-You can set up keyboard event handlers with the `onKeyEvent` and `onPreviewKeyEvent` properties. Use `onPreviewKeyEvent`
-to define shortcuts because it guarantees that children components do not consume key events.
-
-For example, here is how to set up an event handler for the active element in focus, the `TextField` composable:
-
-```kotlin
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.isCtrlPressed
-import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
-import androidx.compose.ui.input.key.type
-import androidx.compose.ui.input.key.KeyEventType
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.singleWindowApplication
-
-@OptIn(ExperimentalComposeUiApi::class)
-fun main() = singleWindowApplication {
-    MaterialTheme {
-        var consumedText by remember { mutableStateOf(0) }
-        var text by remember { mutableStateOf("") }
-        Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
-            Text("Consumed text: $consumedText")
-            TextField(
-                value = text,
-                onValueChange = { text = it },
-                modifier = Modifier.onPreviewKeyEvent {
-                    when {
-                        (it.isCtrlPressed && it.key == Key.Minus && it.type == KeyEventType.KeyUp) -> {
-                            consumedText -= text.length
-                            text = ""
-                            true
-                        }
-                        (it.isCtrlPressed && it.key == Key.Equals && it.type == KeyEventType.KeyUp) -> {
-                            consumedText += text.length
-                            text = ""
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            )
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title=" TextField(modifier = Modifier.onPreviewKeyEvent { "}
-
-You can also define keyboard event handlers that are always active in the current window for
-the `Window`, `singleWindowApplication`, and `Dialog` composables.
-
-For more information, see the [Keyboard event handling](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Keyboard)
-tutorial.
 
 ### Tabbing navigation between components
 
@@ -431,7 +363,7 @@ tutorial.
 
 * Complete the [Compose Multiplatform desktop application](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
   tutorial.
-* Learn how to [create unit tests for your Compose Multiplatform desktop project](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/UI_Testing).
+* Learn how to [create unit tests for your Compose Multiplatform desktop project](compose-desktop-ui-testing.md).
 * Learn how to [create native distributions, installers, and packages for desktop platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution).
-* Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Swing_Integration).
+* Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](compose-desktop-swing-interoperability.md).
 * Learn about [accessibility support on different platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Accessibility).
