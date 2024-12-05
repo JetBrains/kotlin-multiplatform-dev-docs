@@ -1,18 +1,30 @@
 [//]: # (title: Native distributions)
 
-Here, you'll learn about native distributions: how to create installers and packages for all the supported systems, and
+Here, you'll learn about native distributions: how to create installers and packages for all of the supported systems, and
 how to run an application locally with the same settings as for distributions.
+
+Read on for the details about the following topics:
+
+* [What is Compose Multiplatform Gradle plugin](#gradle-plugin)?
+* [Details on basic tasks](#basic-tasks) such as running an application locally, and [advanced tasks](#minification-and-obfuscation) like minification and obfuscation.
+* [How to include JDK modules](#including-jdk-modules) and deal with `ClassNotFoundException`.
+* [How to specify distribution properties](#specifying-distribution-properties): package version, JDK version, output directory, launcher properties, and metadata.
+* [How to manage resources](#managing-resources) using resources library, JVM resource loading, or adding files to packaged applications.
+* [How to customize source sets](#custom-source-sets) using Gradle source set, Kotlin JVM target, or manually.
+* [How to specify application icon](#application-icon) for each OS.
+* [Platform-specific options](#platform-specific-options), such as email of the package maintainer on Linux and the app category for the Apple App Store on macOS.
+* [macOS-specific configurations](#macos-specific-configurations): signing, notarization, and `Info.plist`.
 
 ## Gradle plugin
 
-This tutorial is primarily focused on packaging Compose applications using the Compose Multiplatform Gradle plugin. The `org.jetbrains.compose` plugin 
+This guide is primarily focused on packaging Compose applications using the Compose Multiplatform Gradle plugin. The `org.jetbrains.compose` plugin 
 provides tasks for basic packaging, obfuscation, and macOS code signing.
 
 The plugin simplifies the process of packaging applications into native distributions using `jpackage` and running an application locally.
 Distributable applications are self-contained, installable binaries that include all the necessary Java runtime components,
 without requiring a JDK to be installed on the target system.
 
-To minimize package size, the Gradle plugin uses the [jlink](https://openjdk.org/jeps/282) tool that ensures bundling only the necessary Java Modules in the distributable package. 
+To minimize package size, the Gradle plugin uses the [jlink](https://openjdk.org/jeps/282) tool that ensures bundling only the necessary Java modules in the distributable package. 
 However, you still must configure the Gradle plugin to specify which modules you need.
 For more information, see the `Configuring included JDK modules` section.
 
@@ -26,7 +38,13 @@ The basic configurable unit in the plugin is an `application`. The `application`
 it allows you to pack a collection of files, together with a JDK distribution, into a set of compressed binary installers 
 in various formats such as `.dmg`, `.deb`, `.msi`, and `.exe`.
 
-Here is an example of a `build.gradle.kts` file with a desktop configuration:
+The following formats are available for the supported operating systems:
+
+* **macOS**: `.dmg` (`TargetFormat.Dmg`), `.pkg` (`TargetFormat.Pkg`)
+* **Windows**: `.exe` (`TargetFormat.Exe`), `.msi` (`TargetFormat.Msi`)
+* **Linux**: `.deb` (`TargetFormat.Deb`), `.rpm` (`TargetFormat.Rpm`)
+
+Here is an example of a `build.gradle.kts` file with a basic desktop configuration:
 
 ```kotlin
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
@@ -62,7 +80,7 @@ When you build a project, the plugin creates the following tasks:
     <tr>
         <td><code>package&lt;FormatName&gt;</code></td> 
         <td>Packages the application into the corresponding <code>FormatName</code> binary. Cross-compilation is currently not supported, 
-            meaning you can build the specific format using the <a anchor="supported-distribution-formats">corresponding compatible OS</a> only.
+            meaning you can build the specific format using the corresponding compatible OS only.
             For example, to build a <code>.dmg</code> binary, you have to run the <code>packageDmg</code> task on macOS. 
             If any tasks are incompatible with the current OS, they are skipped by default.</td>
     </tr>
@@ -95,7 +113,7 @@ All available tasks are listed in the Gradle tool window. After you execute a ta
 
 ## Including JDK modules
 
-The Gradle plugin uses [jlink](https://openjdk.org/jeps/282) to reduce the distributable size by including only the necessary JDK modules.
+To reduce the distributable size, the Gradle plugin uses [jlink](https://openjdk.org/jeps/282) that helps bundle only the necessary JDK modules.
 
 For now, the Gradle plugin does not automatically determine necessary JDK Modules. While this will not cause compilation issues, 
 failure to provide the necessary modules can lead to `ClassNotFoundException` at runtime.
@@ -120,34 +138,6 @@ Note that the tool's output might be incomplete or list unnecessary modules.
 
 If the size of the distributable is not a crucial factor and can be ignored, you may opt to include all runtime modules by using the `includeAllModules` DSL property.
 
-## Supported distribution formats
-
-The following formats are available for the supported operating systems:
-
-<table style="header-column">
-    <tr>
-        <td>macOS</td>
-        <td><code>.dmg</code> (<code>TargetFormat.Dmg</code>)</td>
-        <td><code>.pkg</code> (<code>TargetFormat.Pkg</code>)</td>
-    </tr>
-    <tr>
-        <td>Windows</td>
-        <td><code>.exe</code> (<code>TargetFormat.Exe</code>)</td>
-        <td><code>.msi</code> (<code>TargetFormat.Msi</code>)</td>
-    </tr>
-    <tr>
-        <td>Linux</td>
-        <td><code>.deb</code> (<code>TargetFormat.Deb</code>)</td>
-        <td><code>.rpm</code> (<code>TargetFormat.Rpm</code>)</td>
-    </tr>
-</table>
-
-## Signing and notarization on macOS
-
-By default, macOS does not permit users to execute unsigned applications downloaded from the internet. If you attempt to run such an application, you'll encounter
-the following error: "YourApp is damaged and can't be open. You should eject the disk image".
-
-To learn how to sign and notarize your application, see our [tutorial](https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Signing_and_notarization_on_macOS/README.md).
 
 ## Specifying distribution properties
 
@@ -160,16 +150,16 @@ To specify the package version, you can use the following DSL properties, listed
 * `nativeDistributions.<os>.packageVersion` specifies a version for a single target OS.
 * `nativeDistributions.packageVersion` specifies a version for all packages.
 
-On macOS, you can also specify the build version using the following DSL properties, also listed from the highest priority level to the lowest:
+On macOS, you can also specify the build version using the following DSL properties, listed, again, from the highest priority level to the lowest:
 
 * `nativeDistributions.macOS.<packageFormat>PackageBuildVersion` specifies a build version for a single package format.
 * `nativeDistributions.macOS.packageBuildVersion` specifies a build version for all macOS packages.
 
-If there is no specified build version, Gradle uses the package version instead. For more information about versioning on macOS,
+If you don't specify a build version, Gradle uses the package version instead. For more information about versioning on macOS,
 see the [`CFBundleShortVersionString`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleshortversionstring) 
 and [`CFBundleVersion`](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleversion) documentation.
 
-Here is an example of specifying package versions:
+Here is a template for specifying package versions in order of priority:
 
 ```kotlin
 compose.desktop {
@@ -177,15 +167,7 @@ compose.desktop {
         nativeDistributions {
             // Version for all packages
             packageVersion = "..." 
-            
-            linux {
-              // Version for all Linux packages
-              packageVersion = "..." 
-              // Version for the deb package only
-              debPackageVersion = "..." 
-              // Version for the rpm package only
-              rpmPackageVersion = "..." 
-            }
+          
             macOS {
               // Version for all macOS packages
               packageVersion = "..."
@@ -208,6 +190,14 @@ compose.desktop {
               msiPackageVersion = "..."
               // Version for the exe package only
               exePackageVersion = "..." 
+            }
+            linux {
+              // Version for all Linux packages
+              packageVersion = "..."
+              // Version for the deb package only
+              debPackageVersion = "..."
+              // Version for the rpm package only
+              rpmPackageVersion = "..."
             }
         }
     }
@@ -282,13 +272,13 @@ When specifying a JDK version, ensure you meet at least one of the following req
 * The `JAVA_HOME` environment variable points to the compatible JDK version.
 * The `javaHome` property is set via the DSL:
 
-```kotlin
-compose.desktop {
-    application {
-        javaHome = System.getenv("JDK_17")
-    }
-}
-```
+  ```kotlin
+  compose.desktop {
+      application {
+          javaHome = System.getenv("JDK_17")
+      }
+  }
+  ```
 
 ### Output directory
 
@@ -333,8 +323,8 @@ Here's an example configuration:
 compose.desktop {
     application {
         mainClass = "MainKt"
-        jvmArgs += listOf("-Xmx2G") 
-        args += listOf("-customArgument") 
+        args += listOf("-customArgument")
+        jvmArgs += listOf("-Xmx2G")
     }
 }
 ```
@@ -347,7 +337,7 @@ Within the `nativeDistributions` DSL block, you can configure the following prop
   <tr>
     <td>Property</td>
     <td>Description</td>
-    <td>Default Value</td>
+    <td>Default value</td>
   </tr>
   <tr>
     <td><code>packageName</code></td>
@@ -400,11 +390,11 @@ compose.desktop {
 
 ## Managing resources
 
-To package and load resources, you can use the resources library, the JVM resource loading, or add files to packaged applications.
+To package and load resources, you can use the Compose Multiplatform resources library, the JVM resource loading, or add files to packaged applications.
 
 ### Resources library
 
-The most common way to set up the resources for your project is to use the resources library.
+The most straightforward way to set up the resources for your project is to use the resources library.
 With the resources library, you can access resources in common code across all supported platforms.
 See [Multiplatform resources](compose-multiplatform-resources.md) for details.
 
@@ -415,7 +405,7 @@ a `.jar` file using the `java.lang.Class` API. You can access a file in the `src
 [`Class::getResource`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/Class.html#getResource(java.lang.String))
 or [`Class::getResourceAsStream`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/Class.html#getResourceAsStream(java.lang.String)).
 
-###  Adding files to packaged application
+### Adding files to packaged application
 
 There are scenarios where loading resources from `.jar` files may be less practical, for example, when you have target-specific assets 
 and need to include files only in a macOS package but not in a Windows one.
@@ -465,14 +455,14 @@ fun main() {
 }
 ```
 
-## Content sources
+## Custom source sets
 
 You can rely on default configuration, if you use `org.jetbrains.kotlin.jvm` or 
 `org.jetbrains.kotlin.multiplatform` plugins:
 
 * Configuration with `org.jetbrains.kotlin.jvm` includes content from the `main` [source set](https://docs.gradle.org/current/userguide/java_plugin.html#source_sets).
 * Configuration with `org.jetbrains.kotlin.multiplatform` includes content from a single [JVM target](https://kotlinlang.org/docs/mpp-dsl-reference.html#targets).
-  The default configuration is disabled if multiple JVM targets are defined. In this case, you need to configure the plugin manually, 
+  If you define multiple JVM targets, the default configuration is disabled. In this case, you need to configure the plugin manually, 
   or specify a single target (see below).
 
 If the default configuration is ambiguous or insufficient, you can customize it in several ways:
@@ -526,6 +516,32 @@ compose.desktop {
 }
 ```
 
+## Application icon
+
+Make sure your app icon is available in the following OS-specific formats:
+
+* `.icns` for macOS
+* `.ico` for Windows
+* `.png` for Linux
+
+```kotlin
+compose.desktop {
+    application {
+        nativeDistributions {
+            macOS {
+                iconFile.set(project.file("icon.icns"))
+            }
+            windows {
+                iconFile.set(project.file("icon.ico"))
+            }
+            linux {
+                iconFile.set(project.file("icon.png"))
+            }
+        }
+    }
+}
+```
+
 ## Platform-specific options
 
 Platform-specific settings can be configured using the corresponding DSL blocks:
@@ -548,7 +564,7 @@ compose.desktop {
 }
 ```
 
-The following table describes all available platform-specific options. It is **not recommended** to use undocumented properties.
+The following table describes all supported platform-specific options. It is **not recommended** to use undocumented properties.
 
 <table>
     <tr>
@@ -641,7 +657,7 @@ The following table describes all available platform-specific options. It is **n
     </tr>
     <tr>
         <td><code>appStore = true</code></td>
-        <td>Specifies whether to build and sign for the Apple App Store. Requires at least JDK 17.</td>
+        <td>Specifies whether to build and sign the app for the Apple App Store. Requires at least JDK 17.</td>
     </tr>
     <tr>
         <td><code>appCategory</code></td>
@@ -683,13 +699,13 @@ The following table describes all available platform-specific options. It is **n
     <tr>
         <td><code>dmgPackageVersion = "DMG_VERSION"</code></td>
         <td>
-            Sets the dmg-specific package version. For details, see the <a anchor="package-version">Package version</a> section.
+            Sets the DMG-specific package version. For details, see the <a anchor="package-version">Package version</a> section.
         </td>
     </tr>
     <tr>
         <td><code>pkgPackageVersion = "PKG_VERSION"</code></td>
         <td>
-            Sets the pkg-specific package version. For details, see the <a anchor="package-version">Package version</a> section.
+            Sets the PKG-specific package version. For details, see the <a anchor="package-version">Package version</a> section.
         </td>
     </tr>
     <tr>
@@ -701,13 +717,13 @@ The following table describes all available platform-specific options. It is **n
     <tr>
         <td><code>dmgPackageBuildVersion = "DMG_VERSION"</code></td>
         <td>
-            Sets the dmg-specific package build version. For details, see the <a anchor="package-version">Package version</a> section.
+            Sets the DMG-specific package build version. For details, see the <a anchor="package-version">Package version</a> section.
         </td>
     </tr>
     <tr>
         <td><code>pkgPackageBuildVersion = "PKG_VERSION"</code></td>
         <td>
-            Sets the pkg-specific package build version. For details, see the <a anchor="package-version">Package version</a> section.
+            Sets the PKG-specific package build version. For details, see the <a anchor="package-version">Package version</a> section.
         </td>
     </tr>
     <tr>
@@ -739,114 +755,97 @@ The following table describes all available platform-specific options. It is **n
         </tr>
         <tr>
             <td><code>msiPackageVersion = "MSI_VERSION"</code></td>
-            <td>Sets the msi-specific package version. For details, see the <a anchor="package-version">Package version</a> section.</td>
+            <td>Sets the MSI-specific package version. For details, see the <a anchor="package-version">Package version</a> section.</td>
         </tr>
         <tr>
             <td><code>exePackageVersion = "EXE_VERSION"</code></td>
-            <td>Sets the exe-specific package version. For details, see the <a anchor="package-version">Package version</a> section.</td>
+            <td>Sets the EXE-specific package version. For details, see the <a anchor="package-version">Package version</a> section.</td>
         </tr>
 </table>
 
-## Application icon
+## macOS-specific configurations
 
-Make sure your app icon is available in the following OS-specific formats:
+### Signing and notarization on macOS
 
-* `.icns` for macOS
-* `.ico` for Windows
-* `.png` for Linux
+Modern macOS versions do not permit users to execute unsigned applications downloaded from the internet. If you attempt to run such an application, you'll encounter
+the following error: "YourApp is damaged and can't be open. You should eject the disk image".
 
-```kotlin
-compose.desktop {
-    application {
-        nativeDistributions {
-            macOS {
-                iconFile.set(project.file("icon.icns"))
-            }
-            windows {
-                iconFile.set(project.file("icon.ico"))
-            }
-            linux {
-                iconFile.set(project.file("icon.png"))
-            }
-        }
-    }
-}
-```
+To learn how to sign and notarize your application, see our [tutorial](https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Signing_and_notarization_on_macOS/README.md).
 
-## Information property list on macOS
+### Information property list on macOS
 
 While the DSL supports essential platform-specific customizations, there can still be cases beyond the provided capabilities. 
 If you need to specify `Info.plist` values that are not represented in the DSL, 
 you can include a snippet of raw XML as a workaround. This XML will be appended to the application's `Info.plist`.
 
-### Example: Deep linking {initial-collapse-state="collapsed" collapsible="true"}
+#### Example: Deep linking
 
 1. Define a custom URL scheme in the `build.gradle.kts` file:
 
-``` kotlin
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg)
-            packageName = "Deep Linking Example App"
-            macOS {
-                bundleID = "org.jetbrains.compose.examples.deeplinking"
-                infoPlist {
-                    extraKeysRawXml = macExtraPlistKeys
-                }
-            }
-        }
-    }
-}
-
-val macExtraPlistKeys: String
-    get() = """
-      <key>CFBundleURLTypes</key>
-      <array>
-        <dict>
-          <key>CFBundleURLName</key>
-          <string>Example deep link</string>
-          <key>CFBundleURLSchemes</key>
-          <array>
-            <string>compose</string>
-          </array>
-        </dict>
-      </array>
-    """
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="infoPlist { extraKeysRawXml = macExtraPlistKeys"}
+  ``` kotlin
+  compose.desktop {
+      application {
+          mainClass = "MainKt"
+          nativeDistributions {
+              targetFormats(TargetFormat.Dmg)
+              packageName = "Deep Linking Example App"
+              macOS {
+                  bundleID = "org.jetbrains.compose.examples.deeplinking"
+                  infoPlist {
+                      extraKeysRawXml = macExtraPlistKeys
+                  }
+              }
+          }
+      }
+  }
+  
+  val macExtraPlistKeys: String
+      get() = """
+        <key>CFBundleURLTypes</key>
+        <array>
+          <dict>
+            <key>CFBundleURLName</key>
+            <string>Example deep link</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+              <string>compose</string>
+            </array>
+          </dict>
+        </array>
+      """
+  ```
+  {initial-collapse-state="collapsed" collapsible="true" collapsed-title="infoPlist { extraKeysRawXml = macExtraPlistKeys"}
 
 2. Use the `java.awt.Desktop` class to set up a URI handler in the `src/main/main.kt` file:
 
-``` kotlin 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.window.singleWindowApplication
-import java.awt.Desktop
-
-fun main() {
-    var text by mutableStateOf("Hello, World!")
-
-    try {
-        Desktop.getDesktop().setOpenURIHandler { event ->
-            text = "Open URI: " + event.uri
-        }
-    } catch (e: UnsupportedOperationException) {
-        println("setOpenURIHandler is unsupported")
-    }
-
-    singleWindowApplication {
-        MaterialTheme {
-            Text(text)
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Desktop.getDesktop().setOpenURIHandler { event ->"}
+  ``` kotlin 
+  import androidx.compose.material.MaterialTheme
+  import androidx.compose.material.Text
+  import androidx.compose.runtime.getValue
+  import androidx.compose.runtime.mutableStateOf
+  import androidx.compose.runtime.setValue
+  import androidx.compose.ui.window.singleWindowApplication
+  import java.awt.Desktop
+  
+  fun main() {
+      var text by mutableStateOf("Hello, World!")
+  
+      try {
+          Desktop.getDesktop().setOpenURIHandler { event ->
+              text = "Open URI: " + event.uri
+          }
+      } catch (e: UnsupportedOperationException) {
+          println("setOpenURIHandler is unsupported")
+      }
+  
+      singleWindowApplication {
+          MaterialTheme {
+              Text(text)
+          }
+      }
+  }
+  ```
+  {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Desktop.getDesktop().setOpenURIHandler { event ->"}
 
 3. Execute the `runDistributable` task: `./gradlew runDistributable`.
 
@@ -854,7 +853,7 @@ As a result, links like `compose://foo/bar` can now be redirected from a browser
 
 ## Minification and obfuscation
 
-The Compose Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
+The Compose Multiplatform Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
 ProGuard ia an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
 
 The Gradle plugin provides a *release* task for each *default* packaging task:
@@ -955,7 +954,7 @@ compose.desktop {
 }
 ```
 
-Joining to the uber JAR is disabled by default, and ProGuard produces a corresponding `.jar` file for every input `.jar`. To enable it, set the following property via the Gradle DSL:
+Producing an uber JAR is disabled by default, and ProGuard produces a corresponding `.jar` file for every input `.jar`. To enable it, set the following property via the Gradle DSL:
 
 ```kotlin
 compose.desktop {
