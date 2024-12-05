@@ -41,7 +41,8 @@ We recommend that you install the latest stable versions for compatibility and b
 <note>
               <p>
                 The KMP plugin doesn't support the <a href="https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides">K2 mode</a>) yet.
-                To use the plugin, disable K2 mode in the IDE settings.
+                To use the plugin, disable K2 mode:
+in the IDE, go to <b>Languages & Frameworks | Kotlin | Settings</b> and uncheck the <b>Enable K2 mode</b> option.
               </p>
             </note>
 </td>
@@ -55,6 +56,7 @@ We recommend that you install the latest stable versions for compatibility and b
 </table>
 
 ## Check your environment
+
 
 To make sure everything works as expected, install and run the KDoctor tool:
 
