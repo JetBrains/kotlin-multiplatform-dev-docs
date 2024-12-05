@@ -7,7 +7,7 @@
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
 		<toc-element topic="case-studies.md"/>
 		<toc-element topic="faq.md"/>
-		<toc-element toc-title="Roadmap" href="https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/"/>
+		<toc-element topic="kotlin-multiplatform-roadmap.md" toc-title="KMP roadmap"/>
 	</toc-element>
 	<toc-element toc-title="What's new in Kotlin Multiplatform">
 		<toc-element toc-title="What's new in Compose Multiplatform">
@@ -57,15 +57,19 @@
 			<toc-element toc-title="Integration with UIKit" topic="compose-uikit-integration.md"/>
 			<toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-ios-accessibility.md"/>
+			<toc-element topic="compose-ios-migration.md"/>
 		</toc-element>
 		<toc-element toc-title="Android-specific components" topic="compose-android-only-components.md"/>
 		<toc-element toc-title="Desktop-specific components">
-			<toc-element topic="compose-desktop-components.md"/>
+			<toc-element toc-title="Overview" topic="compose-desktop-components.md"/>
 			<toc-element topic="compose-desktop-top-level-windows-management.md"/>
 			<toc-element topic="compose-desktop-scrollbars.md"/>
 			<toc-element topic="compose-desktop-tooltips.md"/>
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
+      <toc-element topic="compose-desktop-keyboard.md"/>
 			<toc-element topic="compose-native-distribution.md"/>
+			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
+      <toc-element topic="compose-desktop-swing-interoperability.md"/>
 		</toc-element>
 		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
 		<toc-element topic="compose-compiler.md"/>

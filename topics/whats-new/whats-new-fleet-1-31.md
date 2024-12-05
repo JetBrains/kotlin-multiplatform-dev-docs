@@ -1,4 +1,4 @@
-[//]: # (title: What's new with KMP in Fleet 1.31)
+[//]: # (title: What's new with KMP in Fleet)
 
 Here are the highlights of changes related to Kotlin Multiplatform support in JetBrains Fleet 1.31:
 

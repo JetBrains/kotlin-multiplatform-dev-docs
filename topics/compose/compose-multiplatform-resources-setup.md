@@ -24,6 +24,9 @@ To access resources in your multiplatform projects, add the library dependency a
        }
    }
    ```
+   
+   > To refer to the library directly, use the fully qualified name from the [artifact page in Maven Central](https://central.sonatype.com/artifact/org.jetbrains.compose.components/components-resources).
+   {style="tip"}
 
 2. Create a new directory `composeResources` in the source set directory you want to add the resources to
    (`commonMain` in this example):
@@ -37,7 +40,7 @@ To access resources in your multiplatform projects, add the library dependency a
    * Strings should be in the `values` directory.
    * Other files should be in the `files` directory, with any folder hierarchy you may find appropriate.
 
-### Custom resource directories {label="EAP"}
+### Custom resource directories
 
 In the `compose.resources {}` block of the `build.gradle.kts` file, you can specify custom resource directories for each source set.
 Each of these custom directories should also contain files in the same way as the default `composeResources`: with a `drawable` subdirectory

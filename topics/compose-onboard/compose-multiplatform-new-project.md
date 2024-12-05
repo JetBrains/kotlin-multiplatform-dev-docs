@@ -345,7 +345,9 @@ code to load and display them:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
-3. Change the codebase to support images:
+3. Build or run the application to generate the `Res` class with accessors for the added resources.
+
+4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
 
     ```kotlin
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
@@ -414,14 +416,15 @@ code to load and display them:
         }
     }
     ```
+    {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)"}
 
     * The `Country` type stores the path to the associated image.
     * The list of countries passed to the `App` includes these paths.
-    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` composable that contains country names.
+    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` composable with the name of a country.
     * Each `Image` requires a `Painter` object to fetch the data.
 
-4. Follow the IDE's instructions to import the missing dependencies and annotations.
-5. Run the application to see the new behavior:
+5. Follow the IDE's instructions to import the missing dependencies.
+6. Run the application to see the new behavior:
 
    ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
 

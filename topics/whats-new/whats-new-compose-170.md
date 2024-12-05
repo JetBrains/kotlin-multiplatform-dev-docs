@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.7.0-rc01)
+[//]: # (title: What's new in Compose Multiplatform %composeVersion%)
 
 Here are the highlights for this feature release:
 
@@ -16,22 +16,22 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle plugin `org.jetbrains.compose`, version %composeEapVersion%. Based on Jetpack Compose libraries:
-  * [Runtime 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.0)
-  * [UI 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.0)
-  * [Foundation 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.0)
-  * [Material 1.7.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.0)
-  * [Material3 1.3.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.0)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.2`. Based on [Jetpack Lifecycle 2.8.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.4).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha10`. Based on [Jetpack Navigation 2.8.0-rc01](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0-rc01).
-* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0-rc01`. Based on [Jetpack Material3 Adaptive 1.0.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0)
+* Gradle plugin `org.jetbrains.compose`, version %composeVersion%. Based on Jetpack Compose libraries:
+  * [Runtime 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.5)
+  * [UI 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.5)
+  * [Foundation 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.5)
+  * [Material 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.5)
+  * [Material3 1.3.1](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.1)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.3`. Based on [Jetpack Lifecycle 2.8.5](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.5).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:%composeNavigationVersion%`. Based on [Jetpack Navigation 2.8.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0).
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0`. Based on [Jetpack Material3 Adaptive 1.0.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0)
 
 ## Breaking changes
 
 ### Minimum AGP version raised to 8.1.0
 
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are both used by Compose Multiplatform 1.7.0, supports AGP 7.
-So, when you update to Compose Multiplatform %composeEapVersion%, you may have to upgrade your AGP dependency, as well.
+So, when you update to Compose Multiplatform %composeVersion%, you may have to upgrade your AGP dependency, as well.
 
 > Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
@@ -50,15 +50,15 @@ While you can use Java resources with Compose Multiplatform, they don't benefit 
 the framework: generated accessors, multimodule support, localization and so on.
 
 If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1457)
-to make sure your code works even after you upgrade to Compose Multiplatform %composeEapVersion% and switch to multiplatform
+to make sure your code works even after you upgrade to Compose Multiplatform %composeVersion% and switch to multiplatform
 resources where possible.
 
 ### New default behavior for processing touch in iOS native elements
 
-Before %composeEapVersion%, Compose Multiplatform could not respond to touch events that landed in interop UI views, so
+Before %composeVersion%, Compose Multiplatform could not respond to touch events that landed in interop UI views, so
 interop views handled these touch sequences entirely.
 
-Compose Multiplatform %composeEapVersion% implements more sophisticated logic for handling interop touch sequences.
+Compose Multiplatform %composeVersion% implements more sophisticated logic for handling interop touch sequences.
 By default, there is now a delay after the initial touch, which helps the parent composable understand whether
 the touch sequence was meant to interact with the native view and react accordingly.
 
@@ -235,7 +235,7 @@ classes, explicitly add the `material3-window-size-class` dependency to the comm
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeEapVersion%")
+    implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeVersion%")
 }
 ```
 
@@ -258,8 +258,8 @@ To use it, add the following explicit dependencies to the common source set in t
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09")
-    implementation("org.jetbrains.compose.material:material-navigation:%composeEapVersion%")
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+    implementation("org.jetbrains.compose.material:material-navigation:1.7.0-beta02")
 }
 ```
 
@@ -313,18 +313,21 @@ It is tricky to scroll the list when most of the screen is taken up by a video t
 <!-- TODO additional copy editing -->
 
 With Kotlin 2.0.20, the Kotlin/Native team made a lot of progress in making Compose apps on iOS perform faster and smoother.
-Compose Multiplatform %composeEapVersion% release makes use of these optimizations, as well as brings performance improvements
+Compose Multiplatform %composeVersion% release makes use of these optimizations, as well as brings performance improvements
 from Jetpack Compose 1.7.0.
 
-When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform %composeEapVersion%
+When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform %composeVersion%
 paired with Kotlin 2.0.20, we see better results across the board:
 
-* The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~22%** faster on average.
+* The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~9%** faster on average.
     It also shows significantly reduced number of missed frames, which usually make the users perceive the UI as less responsive.
     Try it out for yourself: apps made with Compose Multiplatform for iOS should feel much smoother.
-* The *VisualEffects* benchmark renders a lot of randomly placed components and is working **3.6** times faster:
-    average CPU time per 1000 frames is reduced from 8.8 seconds to 2.4.
-* The *AnimatedVisibility* benchmark animates showing and hiding an image and shows **~6%** faster rendering.
+* The *VisualEffects* benchmark renders a lot of randomly placed components and works **3.6** times faster:
+    average CPU time per 1000 frames was reduced from 8.8 seconds to 2.4.
+* The *AnimatedVisibility* composable animates showing and hiding an image and demonstrates **~6%** faster rendering.
+
+On top of that, Kotlin 2.0.20 introduces experimental [support for concurrent marking](https://kotlinlang.org/docs/whatsnew2020.html#concurrent-marking-in-garbage-collector) 
+in the garbage collector. Enabling concurrent marking shortens garbage collector pauses and leads to even bigger improvements for all benchmarks.
 
 You can check out the code for these Compose-specific benchmarks in the Compose Multiplatform repository:
 
