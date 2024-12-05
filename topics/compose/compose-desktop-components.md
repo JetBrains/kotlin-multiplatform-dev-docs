@@ -1,4 +1,4 @@
-[//]: # (title: Overview)
+[//]: # (title: Desktop-only API)
 
 You can use Compose Multiplatform to create macOS, Linux, and Windows desktop applications. This page gives a short
 overview of the desktop-specific components and events. Each section includes a link to a detailed tutorial.
