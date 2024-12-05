@@ -56,7 +56,6 @@ We recommend that you install the latest stable versions for compatibility and b
 
 ## Check your environment
 
-
 To make sure everything works as expected, install and run the KDoctor tool:
 
 > KDoctor works on macOS only. If you use a different operating system, skip this step.
