@@ -42,7 +42,7 @@ Make sure that you have:
 
   > The KMP plugin doesn't support [K2 mode](https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides)
   > yet.
-  > To use the plugin, disable K2 mode in the IDE settings.
+  > To use the plugin, disable K2 mode: in your IDE, go to **Settings | Languages & Frameworks | Kotlin** and uncheck the **Enable K2 mode** option.
   >
   {style="note"}
 
