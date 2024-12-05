@@ -41,7 +41,7 @@ We recommend that you install the latest stable versions for compatibility and b
 <note>
               <p>
                 The KMP plugin doesn't support the <a href="https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides">K2 mode</a>) yet.
-                To use the plugin, disable the K2 mode in the IDE settings.
+                To use the plugin, disable K2 mode in the IDE settings.
               </p>
             </note>
 </td>

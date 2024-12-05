@@ -31,9 +31,9 @@ Make sure that you have:
 
 * Installed the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) for Android Studio.
    
-  > The KMP plugin doesn't support the [K2 mode](https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides)
+  > The KMP plugin doesn't support [K2 mode](https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides)
   > yet.
-  > To use the plugin, disable the K2 mode in the IDE settings.
+  > To use the plugin, disable K2 mode in the IDE settings.
   > 
   {style="note"}
 
