@@ -68,6 +68,7 @@
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
       <toc-element topic="compose-desktop-keyboard.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
+      <toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
       <toc-element topic="compose-desktop-swing-interoperability.md"/>
 		</toc-element>
 		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
