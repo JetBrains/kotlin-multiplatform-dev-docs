@@ -1,10 +1,10 @@
 [//]: # (title: Testing Compose Multiplatform UI with JUnit)
 
 Compose Multiplatform for desktop provides a testing API based on JUnit and the Jetpack Compose testing API.
-For more details on implementation, see the [Test your app's UI](https://developer.android.com/develop/ui/compose/testing) 
+For more details on implementation, see the [Test your Compose layout](https://developer.android.com/develop/ui/compose/testing) 
 guide in the Jetpack Compose documentation.
 
-> For UI testing features available for all platforms, refer to the [Testing Compose Multiplatform UI](compose-test.md) article.
+> For UI testing features available on all supported platforms, refer to the [Testing Compose Multiplatform UI](compose-test.md) article.
 >
 {style="tip"}
 

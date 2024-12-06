@@ -191,4 +191,4 @@ Now that you got the hang of Compose Multiplatform UI testing, you may want to c
 and the [Test your multiplatform app](multiplatform-run-tests.md) tutorial.
 * For details on setting up and running JUnit-based tests for desktop targets, see [Testing Compose Multiplatform UI with JUnit](compose-desktop-ui-testing.md).
 * More advanced testing in Android Studio, including automation, is covered in the [Test your app](https://developer.android.com/studio/test)
-article on the Android for Developers portal.
+article in the Android Studio documentation.
