@@ -7,7 +7,7 @@ overview of the desktop-specific components and events. Each section includes a 
 
 <!-- * [Images and icons](#images-and-icons) -->
 * [Windows and dialogs](compose-desktop-top-level-windows-management.md)
-* [Context menus](#context-menus)
+* [Context menus](compose-desktop-context-menus.md)
 * [The system tray](#the-system-tray)
 * [Menu bar](#menu-bar)
 * [Scrollbars](compose-desktop-scrollbars.md)
@@ -44,59 +44,6 @@ With Compose Multiplatform, you can set the application window icon and the appl
   the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
 * For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-multiplatform-resources.md). -->
-
-### Context menus
-
-Context menus are supported by default for the `TextField` composable (and the `Text` composable, if it's selectable):
-
-```kotlin
-import androidx.compose.foundation.ContextMenuDataProvider
-import androidx.compose.foundation.ContextMenuItem
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication(title = "Context menu") {
-    val text = remember { mutableStateOf("Hello!") }
-    Column {
-        ContextMenuDataProvider(
-            items = {
-            listOf(
-                ContextMenuItem("User-defined Action") {/*do something here*/ },
-                ContextMenuItem("Another user-defined action") {/*do something else*/ }
-            )
-        }
-        ) {
-            TextField(
-                value = text.value,
-                onValueChange = { text.value = it },
-                label = { Text(text = "Input") }
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            SelectionContainer {
-                Text("Hello World!")
-            } 
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
-
-Default context menu options include copy, cut, paste, and select all. You can add more menu items, customize style and
-texts, and so on.
-
-For more information, see the [Context menu in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
-tutorial.
 
 ### The system tray
 
