@@ -67,6 +67,7 @@
 			<toc-element topic="compose-desktop-tooltips.md"/>
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
       <toc-element topic="compose-desktop-keyboard.md"/>
+			<toc-element topic="compose-native-distribution.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
       <toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
       <toc-element topic="compose-desktop-swing-interoperability.md"/>
