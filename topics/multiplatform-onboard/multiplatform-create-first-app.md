@@ -2,7 +2,7 @@
 
 <tldr>
     <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
-    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your multiplatform project</strong><br/>
+    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Kotlin Multiplatform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
        <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies<br/>       
        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
