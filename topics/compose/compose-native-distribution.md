@@ -13,7 +13,7 @@ Read on for the details about the following topics:
 * [How to customize source sets](#custom-source-sets) using Gradle source set, Kotlin JVM target, or manually.
 * [How to specify application icon](#application-icon) for each OS.
 * [Platform-specific options](#platform-specific-options), such as email of the package maintainer on Linux and the app category for the Apple App Store on macOS.
-* [macOS-specific configurations](#macos-specific-configurations): signing, notarization, and `Info.plist`.
+* [macOS-specific configuration](#macos-specific-configuration): signing, notarization, and `Info.plist`.
 
 ## Gradle plugin
 
@@ -36,7 +36,7 @@ For more information, refer to the [Conveyor documentation](https://conveyor.hyd
 
 The basic configurable unit in the plugin is an `application`. The `application` DSL method defines a shared configuration for a set of final binaries, which means
 it allows you to pack a collection of files, together with a JDK distribution, into a set of compressed binary installers 
-in various formats such as `.dmg`, `.deb`, `.msi`, and `.exe`.
+in various formats.
 
 The following formats are available for the supported operating systems:
 
@@ -763,7 +763,7 @@ The following table describes all supported platform-specific options. It is **n
         </tr>
 </table>
 
-## macOS-specific configurations
+## macOS-specific configuration
 
 ### Signing and notarization on macOS
 
@@ -856,52 +856,67 @@ As a result, links like `compose://foo/bar` can now be redirected from a browser
 The Compose Multiplatform Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
 ProGuard ia an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
 
-The Gradle plugin provides a *release* task for each *default* packaging task:
+For each *default* (without ProGuard) packaging task, the Gradle plugin provides a *release* task (with ProGuard):
 
 <table>
   <tr>
-    <td>Default task (without ProGuard)</td>
-    <td>Release task (with ProGuard)</td>
+    <td width="400">Gradle task</td>
     <td>Description</td>
   </tr>
   <tr>
-    <td><code>createDistributable</code></td>
-    <td><code>createReleaseDistributable</code></td>
+    <td>
+        <p>Default: <code>createDistributable</code></p>
+        <p>Release: <code>createReleaseDistributable</code></p>
+    </td>
     <td>Creates an application image with bundled JDK and resources.</td>
   </tr>
   <tr>
-    <td><code>runDistributable</code></td>
-    <td><code>runReleaseDistributable</code></td>
+    <td>
+        <p>Default: <code>runDistributable</code></p>
+        <p>Release: <code>runReleaseDistributable</code></p>
+    </td>
     <td>Runs an application image with bundled JDK and resources.</td>
   </tr>
   <tr>
-    <td><code>run</code></td>
-    <td><code>runRelease</code></td>
+    <td>
+        <p>Default: <code>run</code></p>
+        <p>Release: <code>runRelease</code></p>
+    </td>
     <td>Runs a non-packaged application <code>.jar</code> using the Gradle JDK.</td>
   </tr>
   <tr>
-    <td><code>package&lt;FORMAT_NAME&gt;</code></td>
-    <td><code>packageRelease&lt;FORMAT_NAME&gt;</code></td>
+    <td>
+        <p>Default: <code>package&lt;FORMAT_NAME&gt;</code></p>
+        <p>Release: <code>packageRelease&lt;FORMAT_NAME&gt;</code></p>
+    </td>
     <td>Packages an application image into a <code>&lt;FORMAT_NAME&gt;</code> file.</td>
   </tr>
   <tr>
-    <td><code>packageDistributionForCurrentOS</code></td>
-    <td><code>packageReleaseDistributionForCurrentOS</code></td>
+    <td>
+        <p>Default: <code>packageDistributionForCurrentOS</code></p>
+        <p>Release: <code>packageReleaseDistributionForCurrentOS</code></p>
+    </td>
     <td>Packages an application image into a format compatible with the current OS.</td>
   </tr>
   <tr>
-    <td><code>packageUberJarForCurrentOS</code></td>
-    <td><code>packageReleaseUberJarForCurrentOS</code></td>
+    <td>
+        <p>Default: <code>packageUberJarForCurrentOS</code></p>
+        <p>Release: <code>packageReleaseUberJarForCurrentOS</code></p>
+    </td>
     <td>Packages an application image into an uber (fat) `.jar`.</td>
   </tr>
   <tr>
-    <td><code>notarize&lt;FORMAT_NAME&gt;</code></td>
-    <td><code>notarizeRelease&lt;FORMAT_NAME&gt;</code></td>
+    <td>
+        <p>Default: <code>notarize&lt;FORMAT_NAME&gt;</code></p>
+        <p>Release: <code>notarizeRelease&lt;FORMAT_NAME&gt;</code></p>
+    </td>
     <td>Uploads a <code>&lt;FORMAT_NAME&gt;</code> application image for notarization (macOS only).</td>
   </tr>
   <tr>
-    <td><code>checkNotarizationStatus</code></td>
-    <td><code>checkReleaseNotarizationStatus</code></td>
+    <td>
+        <p>Default: <code>checkNotarizationStatus</code></p>
+        <p>Release: <code>checkReleaseNotarizationStatus</code></p>
+    </td>
     <td>Checks if notarization succeeded (macOS only).</td>
   </tr>
 </table>
