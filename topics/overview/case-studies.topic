@@ -11,7 +11,7 @@
         on Kotlin Multiplatform and Compose Multiplatform.
     </p>
 
-    <table border="false" style="none" column-width="auto">
+    <table style="none" column-width="auto" id="case-studies-table">
         <tr>
             <td>
                 <img src="forbes.svg" alt="Forbes" width="200" style="block"/>

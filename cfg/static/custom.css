@@ -1,0 +1,5 @@
+#case-studies-table td, th, tr, .table__wrapper  {
+    border: none !important;
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+  }
