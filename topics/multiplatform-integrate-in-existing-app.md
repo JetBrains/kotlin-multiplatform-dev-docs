@@ -74,22 +74,12 @@ Create a shared module and connect it to both the existing Android application a
 
 1. In Android Studio settings, select the **Advanced Settings** section and turn on the **Enable experimental Multiplatform IDE features** option.
 2. Restart Android Studio for the changes to take effect.
-3. Add the following lines to the `plugins {}` block of the root `build.gradle.kts` file:
-
-    ```kotlin
-    alias(libs.plugins.kotlinMultiplatform) apply false
-    alias(libs.plugins.androidLibrary) apply false
-    ```
-
-   This helps to avoid classloader issues when the Kotlin Multiplatform Gradle plugin is applied in the shared module
-   that you'll create next.
-
-4. Select **File** | **New** | **New Module** from the main menu.
-5. In the list of templates, select **Java or Kotlin Library**.
+3. Select **File** | **New** | **New Module** from the main menu.
+4. In the list of templates, select **Java or Kotlin Library**.
    Enter the library name `shared` and the package name `com.jetbrains.simplelogin.shared`.
-6. Click **Finish**.
+5. Click **Finish**.
    The wizard creates a base module that you'll expand into a Kotlin Multiplatform module.
-7. In the root `build.gradle.kts` file, replace the contents with the following code to properly apply Gradle plugins:
+6. In the root `build.gradle.kts` file, replace the contents with the following code to properly apply Gradle plugins:
 
    ```kotlin
    plugins {
@@ -100,7 +90,7 @@ Create a shared module and connect it to both the existing Android application a
    }
    ```
 
-8. In the `shared/build.gradle.kts` file, define the necessary KMP targets.
+7. In the `shared/build.gradle.kts` file, define the necessary KMP targets.
    To do that, replace the contents of the file with the following code:
 
     ```kotlin
@@ -151,13 +141,16 @@ Create a shared module and connect it to both the existing Android application a
     }
     ```
    {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="kotlin { ... }"}
-    
+
+8. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
+
 9. In the `shared/src` directory, delete the `main` directory.
-   Then create packages and files to replicate the following structure:
+10. In the `shared/src` directory, create `androidMain/kotlin`, `commonMain/kotlin`, and `iosMain/kotlin` directories. 
+11. Inside those directories, create packages and files to replicate the following structure:
 
-   ![Final file structure inside the shared directory](shared-directory-structure.png)
+   ![Final file structure inside the shared directory](shared-directory-structure.png){width="363"}
 
-10. Add code to the files that you created:
+12. Add code to the files that you created:
 
      * For `commonMain/Platform.kt`:
 
@@ -210,8 +203,8 @@ Create a shared module and connect it to both the existing Android application a
          actual fun getPlatform(): Platform = IOSPlatform()
          ```
 
-11. In the `app/build.gradle.kts` file, set the `android.defaultConfig.minSdk` value to 24.
-12. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
+13. In the `app/build.gradle.kts` file, set the `android.defaultConfig.minSdk` value to 24.
+14. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
 
 You can find the resulting state of the project in the [shared_module](https://github.com/Kotlin/kmp-integration-sample/tree/shared_module) branch of the GitHub repository.
 
