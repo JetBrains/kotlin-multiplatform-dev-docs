@@ -1,112 +1,7 @@
 [//]: # (title: Context menus)
 
 Compose Multiplatform for desktop provides out-of-the-box support for text context menus and allows you to
-conveniently tailor your context menus by adding more items, setting up themes, and customizing text.
-
-## Default context menu
-
-Compose Multiplatform for desktop offers built-in context menus for `TextField` and selectable `Text`.
-
-The default context menu for a text field includes the following actions, depending on the cursor's position and the 
-selection range: Copy, Cut, Paste, and Select All.
-This standard context menu is available by default in the material `TextField` (`androidx.compose.material.TextField`
-or `androidx.compose.material3.TextField`) and the foundation `BasicTextField` (`androidx.compose.foundation.text.BasicTextField`).
-
-```kotlin
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication(title = "Context menu") {
-    val text = remember { mutableStateOf("Hello!") }
-    TextField(
-        value = text.value,
-        onValueChange = { text.value = it },
-        label = { Text(text = "Input") }
-    )
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="TextField( value = text.value, onValueChange ="}
-
-<img src="compose-desktop-context-menu-textfield.png" alt="Default context menu for TextField" width="500"/>
-
-The default context menu for a simple text element includes only the Copy action.
-To enable context menu for a `Text` component, make the text selectable by wrapping it in a `SelectionContainer`:
-
-```kotlin
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.Text
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication(title = "Context menu") {
-    SelectionContainer {
-        Text("Hello World!")
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="SelectionContainer { Text( "}
-
-<img src="compose-desktop-context-menu-text.png" alt="Default context menu for Text" width="500"/>
-
-## Context menu with custom items
-
-To add custom context menu actions for the `TextField` and `Text` components, specify new items via `ContextMenuItem` and
-add them to the hierarchy of context menu items via `ContextMenuDataProvider`. For example, the following code sample 
-demonstrates the addition of two new custom actions to the default context menus of a text field and a simple 
-selectable text element:
-
-```kotlin
-import androidx.compose.foundation.ContextMenuDataProvider
-import androidx.compose.foundation.ContextMenuItem
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication(title = "Context menu") {
-    val text = remember { mutableStateOf("Hello!") }
-    Column {
-        ContextMenuDataProvider(
-            items = {
-                listOf(
-                    ContextMenuItem("User-defined action") {
-                        // Some custom action
-                    },
-                    ContextMenuItem("Another user-defined action") {
-                        // Another custom action
-                    }
-                )
-            }
-        ) {
-            TextField(
-                value = text.value,
-                onValueChange = { text.value = it },
-                label = { Text(text = "Input") }
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            SelectionContainer {
-                Text("Hello World!")
-            }
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="ContextMenuDataProvider( items = { listOf( ContextMenuItem( "}
-
-<img src="compose-desktop-context-menu-custom-actions.png" alt="Context menu with custom actions" width="500"/>
-
-If you want to override the text menu for all text fields and selectable texts in your application, refer to the section about [`TextContextMenu`](#override-default-context-menu).
+conveniently tailor any context menus by adding more items, setting up themes, and customizing text.
 
 ## Context menu in a custom area
 
@@ -129,7 +24,7 @@ fun main() = singleWindowApplication(title = "Context menu") {
     ContextMenuArea(items = {
         listOf(
             ContextMenuItem("User-defined action") {
-                // Some custom action
+                // Custom action
             },
             ContextMenuItem("Another user-defined action") {
                 // Another custom action
@@ -147,7 +42,7 @@ fun main() = singleWindowApplication(title = "Context menu") {
 
 ## Set up theming
 
-You can customize context menu colors to create a responsive UI that matches the system settings and avoid harsh contrast 
+You can customize context menu colors to create a responsive UI that matches the system settings and avoid harsh contrast
 changes when switching between applications. For default light and dark themes, there are two built-in implementations:
 `LightDefaultContextMenuRepresentation` and `DarkDefaultContextMenuRepresentation`.
 They are not applied to context menu colors automatically, so you need to set a suitable theme via `LocalContextMenuRepresentation`:
@@ -196,9 +91,114 @@ fun main() = singleWindowApplication(title = "Dark theme") {
 
 <img src="compose-desktop-context-menu-dark-mode.png" alt="Context menu: Dark theme" width="500"/>
 
-## Override default context menu
+## Text context menu
 
-To override the default context menu for all text fields and selectable text elements, override the `TextContextMenu` interface.
+### Default text context menu
+
+Compose Multiplatform for desktop offers built-in context menus for `TextField` and selectable `Text`.
+
+The default context menu for a text field includes the following actions, depending on the cursor's position and the 
+selection range: copy, cut, paste, and select all.
+This standard context menu is available by default in the material `TextField` (`androidx.compose.material.TextField`
+or `androidx.compose.material3.TextField`) and the foundation `BasicTextField` (`androidx.compose.foundation.text.BasicTextField`).
+
+```kotlin
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.window.singleWindowApplication
+
+fun main() = singleWindowApplication(title = "Context menu") {
+    val text = remember { mutableStateOf("Hello!") }
+    TextField(
+        value = text.value,
+        onValueChange = { text.value = it },
+        label = { Text(text = "Input") }
+    )
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="TextField( value = text.value, onValueChange ="}
+
+<img src="compose-desktop-context-menu-textfield.png" alt="Default context menu for TextField" width="500"/>
+
+The default context menu for a simple text element includes only the copy action.
+To enable a context menu for a `Text` component, make the text selectable by wrapping it in a `SelectionContainer`:
+
+```kotlin
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.Text
+import androidx.compose.ui.window.singleWindowApplication
+
+fun main() = singleWindowApplication(title = "Context menu") {
+    SelectionContainer {
+        Text("Hello World!")
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="SelectionContainer { Text( "}
+
+<img src="compose-desktop-context-menu-text.png" alt="Default context menu for Text" width="500"/>
+
+### Add custom items
+
+To add custom context menu actions for the `TextField` and `Text` components, specify new items via `ContextMenuItem` and
+add them to the hierarchy of context menu items via `ContextMenuDataProvider`. For example, the following code sample 
+shows how to add two new custom actions to the default context menus of a text field and a simple 
+selectable text element:
+
+```kotlin
+import androidx.compose.foundation.ContextMenuDataProvider
+import androidx.compose.foundation.ContextMenuItem
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.singleWindowApplication
+
+fun main() = singleWindowApplication(title = "Context menu") {
+    val text = remember { mutableStateOf("Hello!") }
+    Column {
+        ContextMenuDataProvider(
+            items = {
+                listOf(
+                    ContextMenuItem("User-defined action") {
+                        // Custom action
+                    },
+                    ContextMenuItem("Another user-defined action") {
+                        // Another custom action
+                    }
+                )
+            }
+        ) {
+            TextField(
+                value = text.value,
+                onValueChange = { text.value = it },
+                label = { Text(text = "Input") }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            SelectionContainer {
+                Text("Hello World!")
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="ContextMenuDataProvider( items = { listOf( ContextMenuItem( "}
+
+<img src="compose-desktop-context-menu-custom-actions.png" alt="Context menu with custom actions" width="500"/>
+
+### Override default text context menu
+
+To override the default context menu for text fields and selectable text elements, override the `TextContextMenu` interface.
 In the following code sample, we reuse the original `TextContextMenu`, but add one additional item to the bottom of the list.
 The new item adjusts to the text selection:
 
@@ -250,7 +250,7 @@ fun CustomTextMenuProvider(content: @Composable () -> Unit) {
                 state: ContextMenuState,
                 content: @Composable () -> Unit
             ) {
-                // Reuse original TextContextMenu and add a new item
+                // Reuses original TextContextMenu and adds a new item
                 ContextMenuDataProvider({
                     val shortText = textManager.selectedText.crop()
                     if (shortText.isNotEmpty()) {
@@ -276,22 +276,10 @@ private fun AnnotatedString.crop() = if (length <= 5) toString() else "${take(5)
 
 <img src="compose-desktop-context-menu-custom-text.png" alt="Context menu: LocalTextContextMenu" width="500"/>
 
-## Localized menu items
+### Swing interoperability
 
-By default, the context menu will appear in the preferred language of your system settings:
-
-<img src="compose-desktop-context-menu-localization.png" alt="Context menu: Localization" width="500"/>
-
-If you want to use a specific language, specify it as a default language explicitly before running your application: 
-
-```Console
-java.util.Locale.setDefault(java.util.Locale("en"))
-```
-
-## Swing interoperability
-
-If you are embedding Compose code into an existing Swing application and need the context menu to match the appearance and 
-behavior of other parts of the application, you can use the `JPopupTextMenu` class. In this class, `LocalTextContextMenu` 
+If you are embedding Compose code into an existing Swing application and need the context menu to match the appearance and
+behavior of other parts of the application, you can use the `JPopupTextMenu` class. In this class, `LocalTextContextMenu`
 uses Swing's `JPopupMenu` for context menus in Compose components.
 
 ```kotlin
@@ -377,7 +365,7 @@ fun JPopupTextMenuProvider(owner: Component, content: @Composable () -> Unit) {
                     )
                 }
 
-                // Add items that can be defined via ContextMenuDataProvider in other parts of the application 
+                // Adds items that can be defined via ContextMenuDataProvider in other parts of the application 
                 for (item in items) {
                     add(
                         JMenuItem(item.label).apply {
@@ -419,6 +407,18 @@ private fun circleIcon(color: Color) = object : Icon {
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="fun JPopupTextMenuProvider(owner: Component, content: @Composable () -> Unit) "}
 
 <img src="compose-desktop-context-menu-swing.png" alt="Context menu: Swing interoperability" width="500"/>
+
+## Localized menu items
+
+By default, the context menu will appear in the preferred language of your system settings:
+
+<img src="compose-desktop-context-menu-localization.png" alt="Context menu: Localization" width="500"/>
+
+If you want to use a specific language, specify it as a default language explicitly before running your application: 
+
+```Console
+java.util.Locale.setDefault(java.util.Locale("en"))
+```
 
 ## What's next
 
