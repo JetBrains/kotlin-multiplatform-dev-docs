@@ -91,6 +91,18 @@ fun main() = singleWindowApplication(title = "Dark theme") {
 
 <img src="compose-desktop-context-menu-dark-mode.png" alt="Context menu: Dark theme" width="500"/>
 
+## Localize menu items
+
+By default, the context menu will appear in the preferred language of your system settings:
+
+<img src="compose-desktop-context-menu-localization.png" alt="Context menu: Localization" width="500"/>
+
+If you want to use a specific language, specify it as a default language explicitly before running your application:
+
+```Console
+java.util.Locale.setDefault(java.util.Locale("en"))
+```
+
 ## Text context menu
 
 ### Default text context menu
@@ -407,18 +419,6 @@ private fun circleIcon(color: Color) = object : Icon {
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="fun JPopupTextMenuProvider(owner: Component, content: @Composable () -> Unit) "}
 
 <img src="compose-desktop-context-menu-swing.png" alt="Context menu: Swing interoperability" width="500"/>
-
-## Localized menu items
-
-By default, the context menu will appear in the preferred language of your system settings:
-
-<img src="compose-desktop-context-menu-localization.png" alt="Context menu: Localization" width="500"/>
-
-If you want to use a specific language, specify it as a default language explicitly before running your application: 
-
-```Console
-java.util.Locale.setDefault(java.util.Locale("en"))
-```
 
 ## What's next
 
