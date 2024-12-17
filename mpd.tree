@@ -65,6 +65,7 @@
 			<toc-element topic="compose-desktop-top-level-windows-management.md"/>
 			<toc-element topic="compose-desktop-scrollbars.md"/>
 			<toc-element topic="compose-desktop-tooltips.md"/>
+			<toc-element topic="compose-desktop-context-menus.md"/>
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
       <toc-element topic="compose-desktop-keyboard.md"/>
 			<toc-element topic="compose-native-distribution.md"/>
