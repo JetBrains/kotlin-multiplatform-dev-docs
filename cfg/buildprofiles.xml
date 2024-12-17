@@ -35,6 +35,7 @@
 			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png,
 			https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg
 		</custom-favicons>
+		<custom-css>custom.css</custom-css>
 	</variables>
 	<footer>
 		<link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
