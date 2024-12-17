@@ -101,17 +101,36 @@ To get string resources as a `String`, use the following code:
 
 ```kotlin
 @Composable
-fun stringResource(resource: StringResource): String {...}
+fun stringResource(
+  resource: StringResource,
+  default: String = "",
+): State<String> =
+  produceState(initialValue = default) {
+    value = getString(resource = resource)
+  }
 
 @Composable
-fun stringResource(resource: StringResource, vararg formatArgs: Any): String {...}
+fun stringResource(
+  resource: StringResource,
+  vararg formatArgs: Any,
+  default: String = "",
+): State<String> =
+  produceState(initialValue = default) {
+    value = getString(
+      resource = resource,
+      formatArgs = formatArgs,
+    )
+  }
 ```
 
 For example:
 
 ```kotlin
-Text(stringResource(Res.string.app_name))
+var appName by stringResource(Res.string.app_name)
+Text(text = appName)
 ```
+
+This example uses `produceState` within `stringResource` to load the string from resources. The `appName` variable is then updated on recomposition.
 
 </tab>
 <tab title= "From non-composable code">
