@@ -1,133 +1,418 @@
 [//]: # (title: Publish your multiplatform library)
 
-Once your apps are ready for release, it's time to deliver them to the users by publishing them.
+This guide helps to publish a Kotlin Multiplatform library to the [Maven Central repository](https://central.sonatype.com/).
 
-For mobile apps, multiple stores are available for each platform. However, in this article, we'll focus on the official ones:
-[Google Play Store](https://play.google.com/store) and [Apple App Store](https://www.apple.com/ios/app-store/). For web apps, we'll use [GitHub pages](https://pages.github.com/). 
+To publish your library, you’ll need to:
 
-You'll learn how to prepare Kotlin Multiplatform applications for publishing, and we'll highlight
-the parts of this process that deserve special attention.
+1. Set up credentials, including an account on Maven Central and a PGP key for signing.
+2. Configure the publishing plugin in your library’s project.
+3. Provide your credentials to the publishing plugin so it can sign and upload your artifacts.
+4. Run the publication task, either locally or using continuous integration.
 
-## Android app
+This guide assumes that you are:
 
-Since [Kotlin is the main language for Android development](https://developer.android.com/kotlin),
-Kotlin Multiplatform has no obvious effect on compiling the project and building the Android app. Both the Android library produced from
-the shared module and the Android app itself are typical Android Gradle modules; they are no different from other Android
-libraries and apps. Thus, publishing the Android app from a Kotlin Multiplatform project is no different from the usual process described
-in the [Android developer documentation](https://developer.android.com/studio/publish).
+- Creating an open-source library.
+- Storing the code for your library in a GitHub repository.
+- Using macOS or Linux. If you are a Windows user, use [GnuPG or Gpg4win](https://gnupg.org/download) to generate a key pair.
+- Either not registered on Maven Central yet, or have an existing account that’s suitable for [publishing to the Central Portal](https://central.sonatype.org/publish-ea/publish-ea-guide/) (created after March 12th, 2024, or migrated to the Central Portal by their support).
+- Using GitHub Actions for continuous integration.
 
-## iOS app
+Most of the steps here are still applicable if you’re using a different setup,
+but there may be some differences you need to account for.
+An [important limitation](https://kotlinlang.org/docs/multiplatform-publish-lib.html#host-requirements) is that Apple targets must be built on a machine with macOS.
 
-The iOS app from a Kotlin Multiplatform project is built from a typical Xcode project, so the main stages involved in publishing it are
-the same as described in the [iOS developer documentation](https://developer.apple.com/ios/submit/).
+## Sample library
 
-> With Spring'24 changes to App Store policy, missing or incomplete privacy manifests may lead to warnings or even rejection
-> for your app.
-> For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](https://kotlinlang.org/docs/apple-privacy-manifest.html). 
+Throughout this guide, we’ll use the [fibonacci](https://github.com/kotlin-hands-on/fibonacci) library as an example.
+You can refer to the code of that repository to see how the publishing setup works.
+If you'd like to reuse the code, you **must replace all example values** with those specific to your project.
+
+## Prepare accounts and credentials
+
+To get started with publishing to Maven Central, sign in (or create a new account) on the [Maven Central](https://central.sonatype.com/) portal.
+
+### Choose and verify a namespace
+
+You’ll need to have a verified namespace that would help to uniquely identify artifacts of your libraries.
+
+Maven artifacts are identified by their coordinates, for example, `com.example:library:1.0.0`.
+These coordinates are made up of three parts, separated by colons:
+
+* the `groupId` – `com.example`
+* the `artifactId` – `library`
+* the `version` – `1.0.0`
+
+Your registered namespace allows you to set the format for your `groupId` on Maven Central:
+for example, if you register the `com.example` namespace, you can publish artifacts with the `groupId` set to `com.example`,
+`com.example.libraryname`, `com.example.module.feature` and so on.
+
+Once you are signed on Maven Central, navigate to the [Namespaces](https://central.sonatype.com/publishing/namespaces) page.
+Then, click the **Add Namespace** button and register your namespace:
+
+<tabs>
+
+<tab id="github" title="With a GitHub repository">
+
+Using your GitHub account to create a namespace is a good option if you don’t own a domain name:
+
+1. Enter `io.github.<your username>` as your namespace, for example, `io.github.kotlin-hands-on` and click **Submit**.
+2. Copy the **Verification Key** displayed under the newly created namespace.
+3. On GitHub, log in with the username that you used and create a new public repository with the verification key as the repository’s name.
+   For example, `http://github.com/kotlin-hands-on/ex4mpl3c0d`.
+4. Navigate back to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete the repository you’ve created.
+
+</tab>
+
+<tab id="domain" title="With a domain name">
+
+To use a domain name that you own as your namespace:
+
+1. Enter your domain as the namespace using a reverse-DNS form: If your domain is `example.com`, enter `com.example`.
+2. Copy the **Verification Key** displayed.
+3. Create a new TXT DNS-record with the verification key as its contents.
+   See [Maven Central’s FAQ](https://central.sonatype.org/faq/how-to-set-txt-record/) for more information on how to do this with various domain registrars.
+4. Navigate back to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete the TXT record you’ve created.
+
+</tab>
+
+</tabs>
+
+#### Generate a key pair
+
+Before you publish something to Maven Central,
+you need to sign your artifacts with a [PGP signature](https://central.sonatype.org/publish/requirements/gpg/),
+which allows users to validate the origin of artifacts.
+
+To get started with signing, you’ll need to generate a key pair:
+
+* The *private key* is used to sign your artifacts and should never be shared with others.
+* The *public key* can be used by others to validate the signature of the artifacts and should be published.
+
+The `gpg` tool that can manage signatures for you is available on the [GnuPG website](https://gnupg.org/download/index.html).
+You can also install it using package managers such as [Homebrew](https://brew.sh/):
+
+```bash 
+brew install gpg
+```
+
+1. Start generating a key pair with the following command and fill in the required details when prompted:
+
+    ```bash
+    gpg --full-generate-key
+    ```
+
+2. Choose the recommended defaults for the type of key to be created.
+    You can leave the selections empty and press Enter to accept the default values.
+
+    ```text
+    Please select what kind of key you want:
+        (1) RSA and RSA
+        (2) DSA and Elgamal
+        (3) DSA (sign only)
+        (4) RSA (sign only)
+        (9) ECC (sign and encrypt) *default*
+        (10) ECC (sign only)
+        (14) Existing key from card
+    Your selection? 9
+    
+    Please select which elliptic curve you want:
+        (1) Curve 25519 *default*
+        (4) NIST P-384
+        (6) Brainpool P-256
+    Your selection? 1
+    ```
+
+    > At the time of writing, this is `ECC (sign and encrypt)` with `Curve 25519`.
+    > Older versions of `gpg` might default to `RSA` with a `3072` bit key size.
+    > 
+    {style="note"}
+
+3. When prompted to how long the key should be valid, you can choose the default option of no expiration date.
+    If you choose to create a key that automatically expires after a set amount of time,
+    you’ll need to [extend its validity](https://central.sonatype.org/publish/requirements/gpg/#dealing-with-expired-keys) when it expires.
+
+    ```text
+    Please specify how long the key should be valid.
+        0 = key does not expire
+        <n>  = key expires in n days
+        <n>w = key expires in n weeks
+        <n>m = key expires in n months
+        <n>y = key expires in n years
+    Key is valid for? (0) 0
+    Key does not expire at all
+    
+    Is this correct? (y/N) y
+    ```
+
+4. Enter your name, email, and a comment to attach the key to an identity (you can leave the comment empty).
+
+    ```text
+    GnuPG needs to construct a user ID to identify your key.
+
+    Real name: Jane Doe
+    Email address: janedoe@example.com
+    Comment:
+    You selected this USER-ID:
+        "Jane Doe <janedoe@example.com>"
+    ```
+
+5. Enter a passphrase to encrypt the key, which you have to repeat. Keep this passphrase stored securely and privately.
+   You’ll be using it later to access the private key to sign the artifacts.
+
+Take a look at the key you’ve created with the following command:
+
+```bash
+gpg --list-keys
+```
+
+The output will look something like this:
+
+```text
+pub   ed25519 2024-10-06 [SC]
+      F175482952A225BFD4A07A713EE6B5F76620B385CE
+uid   [ultimate] Jane Doe <janedoe@example.com>
+      sub   cv25519 2024-10-06 [E]
+```
+
+You’ll need to use the long alphanumerical identifier of your key displayed here in the following steps.
+
+#### Upload the public key
+
+You need to [upload the public key to a keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) for it to be accepted by Maven Central. There are multiple available keyservers, we’ll use `keyserver.ubuntu.com` as a default choice.
+
+Run the following command to upload your public key using `gpg`, **substituting your own keyid** in the parameters:
+
+```bash
+gpg --keyserver keyserver.ubuntu.com --send-keys F175482952A225BFC4A07A715EE6B5F76620B385CE
+```
+
+#### Export your private key
+
+To let your Gradle project access your private key, you’ll need to export it to a file. Use the following command, **passing in your own keyid** as a parameter. You will be prompted to enter the passphrase you’ve used when creating the key.
+
+```bash
+gpg --armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > key.gpg
+```
+
+This will create a `key.gpg` file which contains your private key.
+
+> [!CAUTION]
+> Never share a private key with anyone.
+
+If you check the contents of the file, you should see contents similar to this:
+
+```text
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+lQdGBGby2X4BEACvFj7cxScsaBpjty60ehgB6xRmt8ayt+zmgB8p+z8njF7m2XiN
+...
+bpD/h7ZI7FC0Db2uCU4CYdZoQVl0MNNC1Yr56Pa68qucadJhY0sFNiB63KrBUoiO 
+-----END PGP PRIVATE KEY BLOCK-----
+```
+
+#### Generate the user token
+
+Your project will also need to authenticate with Maven Central to upload artifacts. On the Central Portal, navigate to the [Account](https://central.sonatype.com/account) page, and click on *Generate User Token*.
+
+The output will look like the example below, containing a username and a password. Store this information securely, as it can’t be viewed again on the Central Portal. If you lose these credentials, you’ll need to generate new ones later.
+
+```xml
+<server>
+    <id>${server}</id>
+    <username>l3nfaPmz</username>
+    <password>gh9jT9XfnGtUngWTZwTu/8241keYdmQpipqLPRKeDLTh</password>
+</server>
+```
+
+### Configure the project
+
+#### Prepare your library project
+
+If you started developing your library from a template project, this is a good time to change any default names in the project to match your own library’s name. This includes the name of your library module, and the name of the root project in your top-level `build.gradle.kts` file.
+
+If you have an Android target in your project, you should follow the [steps to prepare your Android library release](https://developer.android.com/build/publish-library/prep-lib-release). This, at a minimum, requires you to [specify an appropriate namespace](https://developer.android.com/build/publish-library/prep-lib-release#choose-namespace) for your library, so that a unique R class will be generated when their resources are compiled.  Notice that the namespace is different from the Maven namespace created in the [Register a namespace](#register-a-namespace) section above.
+
+```kotlin
+// build.gradle.kts
+
+android {
+     namespace = "io.github.kotlinhandson.fibonacci"
+}
+```
+
+#### Set up the publishing plugin
+
+This guide uses [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin) to help with publications to Maven Central. You can read more about the advantages of the plugin [here](https://vanniktech.github.io/gradle-maven-publish-plugin/#advantages-over-maven-publish). See the [plugin’s documentation](https://vanniktech.github.io/gradle-maven-publish-plugin/central/) to learn more about its usage and available configuration options.
+
+To add the plugin to your project, add the following line in the plugins block, in your library module’s `build.gradle.kts` file:
+
+```kotlin
+// build.gradle.kts
+
+plugins {
+    id("com.vanniktech.maven.publish") version "0.29.0" 
+}
+```
+
+*Note: for the latest available version of the plugin, check its [releases page](https://github.com/vanniktech/gradle-maven-publish-plugin/releases).*
+
+In the same file, add the following configuration. Customize all these values appropriately for your library.
+
+```kotlin
+// build.gradle.kts
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    
+    signAllPublications()
+    
+    coordinates(group.toString(), "fibonacci", version.toString())
+    
+    pom { 
+        name = "Fibonacci library"
+        description = "A mathematics calculation library."
+        inceptionYear = "2024"
+        url = "https://github.com/kotlin-hands-on/fibonacci/"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "kotlin-hands-on"
+                name = "Kotlin Developer Advocate"
+                url = "https://github.com/kotlin-hands-on/"
+            }
+        }
+        scm {
+            url = "https://github.com/kotlin-hands-on/fibonacci/"
+            connection = "scm:git:git://github.com/kotlin-hands-on/fibonacci.git"
+            developerConnection = "scm:git:ssh://git@github.com/kotlin-hands-on/fibonacci.git"
+        }
+    }
+}
+```
+
+Note that it’s also possible to use Gradle properties instead.
+
+Some of the most important, required settings here are:
+
+* The `coordinates`, which specify the `groupId`, `artifactId`, and `version` of your library.
+* The [license](https://central.sonatype.org/publish/requirements/#license-information) that you’re publishing your library under.
+* The [developer information](https://central.sonatype.org/publish/requirements/#developer-information) which lists the authors of the library.
+* [SCM (Source Code Management) information](https://central.sonatype.org/publish/requirements/#scm-information), which specifies where the sources of your library are available.
+
+### Publish to Maven Central from Continuous Integration
+
+#### Add a GitHub Actions workflow to your project
+
+You can set up continuous integration which builds and publishes your library for you. We’ll use [GitHub Actions](https://docs.github.com/en/actions) as an example.
+
+To get started, add the following workflow to your repository, in the `.github/workflows/publish.yml` file.
+
+```yaml
+# .github/workflows/publish.yml
+
+name: Publish
+on:
+  release:
+    types: [released, prereleased]
+jobs:
+  publish:
+    name: Release build and publish
+    runs-on: macOS-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - name: Publish to MavenCentral
+        run: ./gradlew publishToMavenCentral --no-configuration-cache
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+```
+
+After committing and pushing this change, this workflow will run automatically when you create a release (including a pre-release) in the GitHub repository hosting your project. It checks out the current version of your code, sets up a JDK, and then runs the `publishToMavenCentral` Gradle task.
+
+> [!NOTE]
+> Alternatively, you could configure the workflow to [trigger when a tag is pushed](https://stackoverflow.com/a/61892639) to your repository.
 >
-{style="note"}
+> The script above disables Gradle [configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html) for the publication task by adding `--no-configuration-cache` to the Gradle command, as the publication plugin does not support it (see this [open issue](https://github.com/gradle/gradle/issues/22779)).
+>
+> Reminder: When using `publishToMavenCentral`, you’ll still need to check and release your deployment manually on the website, as described in the previous section. You may use `publishAndReleaseToMavenCentral` instead for a fully automated release.
 
-What is specific to Kotlin Multiplatform projects is compiling the shared Kotlin module into a framework and linking it to the Xcode project.
-Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile).
-However, if you don't use the plugin, bear in mind the following when building and bundling the iOS project in Xcode:
+This action will need your signing details and your Maven Central credentials. These will be configured as GitHub Actions secrets in the next section. The configuration of the workflow above takes these secrets and places them into environment variables, which will make them available to the Gradle build automatically.
 
-* The shared Kotlin library compiles down to the native framework.
-* You need to connect the framework compiled for the specific platform to the iOS app project.
-* In the Xcode project settings, specify the path to the framework to search for the build system.
-* After building the project, you should launch and test the app to make sure that there are no issues when working with the framework in runtime.
+### Add secrets to GitHub
 
-There are two ways you can connect the shared Kotlin module to the iOS project:
-* Use the [Kotlin/Native CocoaPods plugin](https://kotlinlang.org/docs/native-cocoapods.html), which allows you to use a multiplatform project with native targets as a CocoaPods dependency in your iOS project.
-* Manually configure your Multiplatform project to create an iOS framework and the Xcode project to obtain its latest version.
-  The Kotlin Multiplatform wizard or Kotlin Multiplatform plugin for Android Studio usually does this configuration.
-  See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project)
-  to learn how to add the framework directly in Xcode.
+To use the keys and credentials required for publication in your GitHub Action workflow while keeping them private, you need to place those values into secrets. From your GitHub repository, go to `Settings` \> `(Security) Secrets and variables > Actions`.
 
-### Configure your iOS application
+Click on the `New repository secret` button, and add the following secrets:
 
-You can configure basic properties that affect the resulting app without Xcode.
+- `MAVEN_CENTRAL_PASSWORD` and `MAVEN_CENTRAL_PASSWORD` are the values generated by the Central Portal website in the [Generate User Token](#generate-the-user-token) section.
+- `SIGNING_KEY_ID` is **the last 8 characters** of your signing key’s identifier.
+- `SIGNING_PASSWORD` is the passphrase you’ve provided when generating your signing key.
+- `GPG_KEY_CONTENTS` should contain the contents of your GPG private key file, which you’ve created earlier in the [Export your private key](#export-your-private-key) section.
 
-#### Bundle ID
+![](/images/github_secrets.png)
 
-The [bundle ID](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion)
-uniquely identifies your app in the operating system. To change it,
-open the `iosApp/Configuration/Config.xcconfig` file in Android Studio and update the `BUNDLE_ID`.
+Note again that the names used for these secrets must match those used by the workflow that accesses their values.
 
-#### App name
+#### Create a release on GitHub
 
-The app name sets the target executable and application bundle name. To change your app name:
+With the workflow and secrets set up, you’re now ready to [create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) that will trigger the publication of your library.
 
-* If you have _not_ opened the project in Android Studio yet, you can change the `APP_NAME` option in the
-  `iosApp/Configuration/Config.xcconfig` file directly in any text editor.
-* If you've already opened the project in Android Studio, do the following:
+Go to your GitHub repository’s main page, and click on Releases in the menu in the right sidebar.
 
-  1. Close the project.
-  2. In any text editor, change the `APP_NAME` option in the `iosApp/Configuration/Config.xcconfig` file.
-  3. Re-open the project in Android Studio.
+![](/images/github_releases.png)
 
-If you need to configure other settings, use Xcode: after opening the project in Android Studio,
-open the `iosApp/iosApp.xcworkspace` file in Xcode and make changes there.
+Click *Draft a new release*.
 
-### Symbolicating crash reports
+![](/images/draft_release.png)
 
-To help developers make their apps better, iOS provides a means for analyzing app crashes. For detailed crash analysis,
-it uses special debug symbol (`.dSYM`) files that match memory addresses in crash reports with locations in the source code,
-such as functions or line numbers.
+Each release creates a new tag. Set the name for the tag to be created, and set a name for the release (these may be identical). Note that setting a version here does not change the version of your coordinates configured in your `build.gradle.kts` file, so you should update that version before creating a new release.
 
-By default, the release versions of iOS frameworks produced from the shared Kotlin module have an accompanying `.dSYM`
-file. This helps you analyze crashes that happen in the shared module's code.
+![](/images/create_release_and_tag.png)
 
-When an iOS app is rebuilt from bitcode, its `dSYM` file becomes invalid. For such cases, you can compile the shared module
-to a static framework that stores the debug information inside itself. For instructions on setting up crash report
-symbolication in binaries produced from Kotlin modules, see the [Kotlin/Native documentation](https://kotlinlang.org/docs/native-ios-symbolication.html).
+Double-check the branch you want to target with the release (especially if you want to release from a branch that’s different from your default), and add appropriate release notes for your new version.
 
-## Web app
+The checkboxes below allow you to mark a release as a pre-release (useful for alpha, beta, or RC versions of a library), or to set the release as the latest available one:
 
-To publish your web application, create the artifacts containing the compiled files 
-and resources that make up your application. These artifacts are necessary to deploy your application to a web hosting platform like GitHub Pages.
+![](/images/release_settings.png)
 
-### Generate artifacts
+Click the *Publish release* button to create the new release. This will immediately show up on your GitHub repository’s main page.
 
-Create a run configuration for running the **wasmJsBrowserDistribution** task:
+Click the Actions tab on the top of your GitHub repository. Here you’ll see the new workflow was triggered by the GitHub release. Click it to see the outputs of the publication task.
 
-1. Select the **Run | Edit Configurations** menu item.
-2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste this command:
+After this task completes successfully, navigate to the [Deployments](https://central.sonatype.com/publishing/deployments) dashboard. You should see a new deployment here. This deployment will be in the *pending* and *validating* states for some time while Maven Central performs checks on it.
 
-   ```shell
-   wasmJsBrowserDistribution
-   ```
+Once your deployment moves to a *validated* state, you should see that it contains all the artifacts you’ve uploaded. If everything looks correct, click the *Publish* button to release these artifacts.
 
-4. Click **OK**.
+![](/images/published_on_maven_central.png)
 
-Now, you can use this configuration to run the task:
+Note that it will take some time (about 15–30 minutes, usually) after the release for the artifacts to be available publicly on Maven Central.
+Also note that the library may be available for use before they are indexed on [the Maven Central website](https://central.sonatype.com/).
 
-![Run the Wasm distribution task](compose-run-wasm-distribution-task.png){width=350}
+There’s also another task available which both uploads and releases the artifacts automatically once the deployment is verified, without having to manually release them on the website:
 
-Once the task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
-directory:
+```bash
+./gradlew publishAndReleaseToMavenCentral
+```
 
-![Artifacts directory](compose-web-artifacts.png){width=600}
+**Et voilà, you have successfully published your library to Maven Central.**
 
-### Publish your application on GitHub Pages
-
-With the artifacts ready, you can deploy your application on the web hosting platform:
-
-1. Copy the contents of your `productionExecutable` directory into the repository where you want to create a site.
-2. Follow GitHub's instructions for [creating your site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site).
-
-   > It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub.
-   >
-   {style="note"}
-
-3. In a browser, navigate to your GitHub pages domain.
-
-   ![Navigate to GitHub pages](publish-your-application-on-web.png){width=650}
-
-   Congratulations! You have published your artifacts on GitHub pages.
-
-### Debug your web application
-
-You can debug your web application in your browser out of the box, without additional configurations. To learn how to debug
-in the browser, see the [Debug in your browser](https://kotlinlang.org/docs/wasm-debugging.html#debug-in-your-browser)
-guide in Kotlin docs.
+# Next steps
+- Share your library with the Kotlin Community in the `#feed` channel in the [Kotlin Slack](https://kotlinlang.slack.com/) (To sign up visit https://kotl.in/slack.)
+- Add [shield.io badges](https://shields.io/badges/maven-central-version) to your README.
+- Create a documentation site for your project using [Writerside](https://www.jetbrains.com/writerside/).
+- Share API documentation for your project using [Dokka](https://kotl.in/dokka).
+- Add [Renovate](https://docs.renovatebot.com/) to automatically update dependencies.
