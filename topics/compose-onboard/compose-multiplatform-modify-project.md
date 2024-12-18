@@ -18,7 +18,12 @@ You could retrieve the date using platform-specific libraries and [expected and 
 But we recommend that you use this approach only when there's no Kotlin Multiplatform library available. In this case,
 you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library.
 
-To use this library:
+> You can explore Kotlin Multiplatform libraries available for your target platforms on [klibs.io](https://klibs.io/),
+> an experimental search service for discovering multiplatform libraries.
+>
+{style="tip"}
+
+To use the `kotlinx-datetime` library:
 
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 
