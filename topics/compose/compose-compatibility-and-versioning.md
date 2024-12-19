@@ -10,7 +10,7 @@ Compose Multiplatform %composeVersion% supports the following platforms:
 * Android
 * iOS
 * macOS (x86-64, arm64)
-* Windows (x86-64)
+* Windows (x86-64, arm64)
 * Linux (x86-64, arm64)
 * Web browsers
 
