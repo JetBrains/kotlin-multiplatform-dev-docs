@@ -83,7 +83,7 @@ For example, developers need to know Objective-C or Swift to create native apps 
 
 When choosing between different approaches and frameworks, you need to be confident that the platform vendor will continue supporting it over the long term. You can dig into the details about the provider, the size of their community, and adoption by global companies. For example, Kotlin Multiplatform was developed by JetBrains, Flutter by Google, and React Native by Facebook. 
 
-> Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.md).
+> Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.topic).
 >
 {style="note"}
 
