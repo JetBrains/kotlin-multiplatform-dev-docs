@@ -62,7 +62,7 @@ Your future iOS application will use the same logic, so you should make it cross
 
 ### Create a shared module for cross-platform code
 
-> You can find the state of the project with the added shared module
+> You can find the sample project with the shared module already added
 > in the [shared_module](https://github.com/Kotlin/kmp-integration-sample/tree/shared_module) branch of the GitHub repository.
 > 
 {style="tip"}
@@ -123,7 +123,7 @@ Create a shared module and connect it to both the existing Android application a
         
         sourceSets {
             commonMain.dependencies {
-                // put your Multiplatform dependencies here
+                // Contains your multiplatform dependencies
             }
         }
     }
@@ -140,12 +140,12 @@ Create a shared module and connect it to both the existing Android application a
         }
     }
     ```
-   {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="kotlin { ... }"}
+    {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="kotlin { ... }"}
 
 8. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
 
-9. In the `shared/src` directory, delete the `main` directory.
-10. In the `shared/src` directory, create `androidMain/kotlin`, `commonMain/kotlin`, and `iosMain/kotlin` directories. 
+9. In the `shared/src` directory, create `androidMain/kotlin`, `commonMain/kotlin`, and `iosMain/kotlin` directories.
+10. In the `shared/src` directory, delete the `main` directory.
 11. Inside those directories, create packages and files to replicate the following structure:
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="363"}
@@ -224,7 +224,7 @@ there, and make this code cross-platform.
     }
     ```
 
-2. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+2. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
 
    ![Synchronize the Gradle files](gradle-sync.png)
 
