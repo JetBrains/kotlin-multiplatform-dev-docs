@@ -14,7 +14,7 @@ This guide assumes that you are:
 - Creating an open-source library.
 - Storing the code for your library in a GitHub repository.
 - Using macOS or Linux. If you are a Windows user, use [GnuPG or Gpg4win](https://gnupg.org/download) to generate a key pair.
-- Either not registered on Maven Central yet, or have an existing account that’s suitable for [publishing to the Central Portal](https://central.sonatype.org/publish-ea/publish-ea-guide/) (created after March 12th, 2024, or migrated to the Central Portal by their support).
+- Either not registered on Maven Central yet or have an existing account that’s suitable for [publishing to the Central Portal](https://central.sonatype.org/publish-ea/publish-ea-guide/) (created after March 12th, 2024, or migrated to the Central Portal by their support).
 - Using GitHub Actions for continuous integration.
 
 Most of the steps here are still applicable if you’re using a different setup,
