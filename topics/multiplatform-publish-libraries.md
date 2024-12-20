@@ -341,7 +341,7 @@ you need to place those values into secrets.
     * `GPG_KEY_CONTENTS` should contain the entire contents of your `key.gpg` file, which you’ve created earlier
         in the [Export your private key](#export-your-private-key) section.
 
-![](/images/github_secrets.png)
+![](../images/publish/github_secrets.png)
 
 You will use the names for these secrets in the CI configuration on the next step.
 
@@ -410,24 +410,20 @@ that will trigger the publication of your library.
 
 1. Make sure that the version number specified in the `build.gradle.kts` file for your library is the one you would like to publish.
 2. Go to your GitHub repository’s main page.
-3. In the right sidebar under **Releases**, click the **Create a new release** link.
+3. In the right sidebar click **Releases**.
 
-    ![](/images/github_releases.png)
-
-4. Click the **Create a new release** button.
+4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for this repository before).
 
 5. Each release creates a new tag. Create a new tag in the tags dropdown, and set the release title (these may be identical).
    You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
 
-    ![](/images/create_release_and_tag.png)
+    ![](../images/publish/create_release_and_tag.png)
 
 6. Double-check the branch you want to target with the release (especially if you want to release from a branch that’s different from your default),
     and add appropriate release notes for your new version.
 
-7. The checkboxes below allow you to mark a release as a pre-release (useful for early access – alpha, beta, or RC versions of a library),
-   or to mark the release as the latest available one:
-
-    ![](/images/release_settings.png)
+7. The checkboxes below the description allow you to mark a release as a pre-release (useful for early access – alpha, beta, or RC versions of a library).
+   You can also mark the release as the latest one (if you already made a release for this repository before):
 
 8. Click the **Publish release** button to create the new release.
 
@@ -443,7 +439,7 @@ that will trigger the publication of your library.
 Once your deployment is in the *validated* state, you should check that it contains all the artifacts you’ve uploaded.
 If everything looks correct, click the *Publish* button to release these artifacts.
 
-![](/images/published_on_maven_central.png)
+![](../images/publish/published_on_maven_central.png)
 
 > It will take some time (usually about 15–30 minutes) after the release for the artifacts to be available publicly in the Maven Central repository.
 > It may take some more time before they are indexed to be found on [the Maven Central website](https://central.sonatype.com/).
