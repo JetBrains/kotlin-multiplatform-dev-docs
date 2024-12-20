@@ -19,7 +19,7 @@ But we recommend that you use this approach only when there's no Kotlin Multipla
 you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library.
 
 > You can explore Kotlin Multiplatform libraries available for your target platforms on [klibs.io](https://klibs.io/),
-> an experimental search service for discovering multiplatform libraries.
+> an experimental search service from JetBrains for discovering multiplatform libraries.
 >
 {style="tip"}
 

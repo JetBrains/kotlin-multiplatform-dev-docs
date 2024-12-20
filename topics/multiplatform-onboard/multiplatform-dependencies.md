@@ -22,7 +22,7 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
 
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
   [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/). Find more multiplatform libraries on [klibs.io](https://klibs.io/),
-  an experimental search service for discovering Kotlin Multiplatform libraries.
+  an experimental search service from JetBrains for discovering Kotlin Multiplatform libraries.
 
 * _Native dependencies_. These are regular libraries from relevant ecosystems. In native projects you usually work with them
   using Gradle for Android and using CocoaPods or another dependency manager for iOS. 
