@@ -35,12 +35,12 @@ To get started with publishing to Maven Central, sign in (or create a new accoun
 
 You’ll need a verified namespace to uniquely identify your library’s artifacts on Maven Central.
 
-Maven artifacts are identified by their coordinates, for example, `com.example:library:1.0.0`.
+Maven artifacts are identified by their [coordinates](https://central.sonatype.org/publish/requirements/#correct-coordinates), for example, `com.example:fibonacci-library:1.0.0`.
 These coordinates are made up of three parts, separated by colons:
 
-* the `groupId` – `com.example`
-* the `artifactId` – `library`
-* the `version` – `1.0.0`
+* the `groupId` (in the reverse-DNS form, for example, `com.example`),
+* the `artifactId` (the unique name of the library itself, for example, `fibonacci-library`),
+* the `version` (the version string, for example, `1.0.0`). The version can be any string, but it cannot end in `-SNAPSHOT`.
 
 Your registered namespace allows you to set the format for your `groupId` on Maven Central:
 for example, if you register the `com.example` namespace, you can publish artifacts with the `groupId` set to `com.example`,
@@ -67,7 +67,7 @@ Using your GitHub account to create a namespace is a good option if you don’t 
 
 To use a domain name that you own as your namespace:
 
-1. Enter your domain as the namespace using a reverse-DNS form: If your domain is `example.com`, enter `com.example`.
+1. Enter your domain as the namespace using the reverse-DNS form: If your domain is `example.com`, enter `com.example`.
 2. Copy the **Verification Key** displayed.
 3. Create a new TXT DNS-record with the verification key as its contents.
    See [Maven Central’s FAQ](https://central.sonatype.org/faq/how-to-set-txt-record/) for more information on how to do this with various domain registrars.
@@ -243,7 +243,7 @@ You can read more about the advantages of the plugin [here](https://vanniktech.g
 See the [plugin’s documentation](https://vanniktech.github.io/gradle-maven-publish-plugin/central/)
 to learn more about its usage and available configuration options.
 
-To add the plugin to your project, add the following line to the `plugins` block of your library module’s `build.gradle.kts` file:
+To add the plugin to your project, add the following line to the `plugins {}` block of your library module’s `build.gradle.kts` file:
 
 ```kotlin
 // <module directory>/build.gradle.kts
@@ -297,7 +297,7 @@ mavenPublishing {
 }
 ```
 
-> To configure this, you can also use Gradle properties.
+> To configure this, you can also use [Gradle properties](https://docs.gradle.org/current/userguide/build_environment.html).
 > 
 {style="tip"}
 
@@ -387,7 +387,7 @@ The workflow checks out the current version of your code, sets up a JDK, and the
 
 When using the `publishToMavenCentral` task, you’ll still need to check and release your deployment manually on the Maven Central website,
 as described in the [](#create-a-release-on-github) section.
-You may use `publishAndReleaseToMavenCentral` instead for a fully automated release.
+Alternatively, you can use the `publishAndReleaseToMavenCentral` task to fully automate the release process.
 
 You can also configure the workflow to [trigger when a tag is pushed](https://stackoverflow.com/a/61892639) to your repository.
 
@@ -414,7 +414,7 @@ that will trigger the publication of your library.
 
 4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for this repository before).
 
-5. Each release creates a new tag. Create a new tag in the tags dropdown, and set the release title (these may be identical).
+5. Each release creates a new tag. Create a new tag in the tags dropdown, and set the release title (the tag name and the title can be identical).
    You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
 
     ![](../images/publish/create_release_and_tag.png)
@@ -436,13 +436,13 @@ that will trigger the publication of your library.
      You should see a new deployment here. This deployment may remain in the *pending* or *validating* states for some time
      while Maven Central performs checks on it.
 
-Once your deployment is in the *validated* state, you should check that it contains all the artifacts you’ve uploaded.
-If everything is correct, click the *Publish* button to release these artifacts.
+Once your deployment is in the *validated* state, check that it contains all the artifacts you’ve uploaded.
+If everything looks correct, click the *Publish* button to release these artifacts.
 
 ![](../images/publish/published_on_maven_central.png)
 
-> It will take some time (usually about 15–30 minutes) after the release for the artifacts to become publicly available in the Maven Central repository.
-> It may take some more time before they are indexed to be found on [the Maven Central website](https://central.sonatype.com/).
+> It will take some time (usually about 15–30 minutes) after the release for the artifacts to be available publicly in the Maven Central repository.
+> It may take longer for them to be indexed and become searchable on [the Maven Central website](https://central.sonatype.com/).
 
 To release the artifacts automatically once the deployment is verified, replace the `publishToMavenCentral` task in your workflow
 with `publishAndReleaseToMavenCentral`.
