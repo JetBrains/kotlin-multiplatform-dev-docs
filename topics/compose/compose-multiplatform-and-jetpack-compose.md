@@ -1,7 +1,7 @@
 [//]: # (title: Compose Multiplatform and Jetpack Compose)
 
 Compose Multiplatform is a cross-platform UI toolkit developed by JetBrains.
-It extends Google's [Jetpack Compose](https://developer.android.com/jetpack/compose) toolkit for Android by supporting for additional platforms.
+It extends Google's [Jetpack Compose](https://developer.android.com/jetpack/compose) toolkit for Android by supporting additional platforms.
 
 Compose Multiplatform makes compose APIs available from [common Kotlin code](https://kotlinlang.org/docs/multiplatform-discover-project.html#common-code),
 allowing you to write shared compose UI code that can run on Android, iOS, desktop, and web.
