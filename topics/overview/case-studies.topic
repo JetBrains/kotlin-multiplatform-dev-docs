@@ -12,7 +12,7 @@
         <li id="case-study-forbes">
             <img src="forbes.svg" alt="Forbes" height="40" />
             <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
-            <p> By sharing over 80% of logic across iOS and Android, <b> Forbes </b> now rolls out new features simultaneously on
+            <p> By sharing over 80% of logic across iOS and Android, <b>Forbes</b> now rolls out new features simultaneously on
                 both platforms, keeping the flexibility to customize features based on the specific platform.
                 This allows the team to innovate and respond to market needs faster.</p>
             <a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Read the full story</a>.
