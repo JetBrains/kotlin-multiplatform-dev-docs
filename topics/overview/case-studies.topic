@@ -11,7 +11,7 @@
     <list columns="2">
         <li id="case-study-forbes">
             <img src="forbes.svg" alt="Forbes" height="40" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p> By sharing over 80% of logic across iOS and Android, <b>Forbes</b> now rolls out new features simultaneously on
                 both platforms, keeping the flexibility to customize features based on the specific platform.
                 This allows the team to innovate and respond to market needs faster.</p>
@@ -20,14 +20,14 @@
         </li>
         <li id="case-study-netflix">
             <img src="netflix.svg" alt="Netflix" height="40"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Netflix</b> uses KMP to share logic for their mobile studio apps, reducing duplication and enabling faster,
                 more reliable development. This approach helps deliver high-quality features efficiently in the fast-paced world of TV and movie production.</p>
             <a href="https://netflixtechblog.com/netflix-android-and-ios-studio-apps-kotlin-multiplatform-d6d4d8d25d23">Read the full story</a>.
         </li>
         <li id="case-study-mcdonalds">
             <img src="mcdonalds.svg" alt="McDonald's" height="70" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p>By sharing complex code like in-app payments, <b>McDonald’s </b> maintains a seamless native experience while improving performance,
                 reducing crashes, and streamlining testing. KMP has unified their development team
                 and delivered consistent results, supporting over 6.5 million monthly purchases.</p>
@@ -36,9 +36,9 @@
         </li>
         <li id="case-study-wrike">
             <img src="wrike.svg" alt="Wrike" height="50" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
-                <img src="compose-multiplatform.svg" alt="Compose Multiplatform" height="30"/>
+                <img src="compose-multiplatform.svg" alt="Compose Multiplatform" height="28"/>
             </a>
             <p><b> Wrike </b> uses KMP to boost productivity without expanding the team, leveraging its flexibility to combine shared and native code in one project.
                 With Compose Multiplatform, the team achieved rapid UI development and consistent design across platforms, enabling the release of complex features in record time.</p>
@@ -47,21 +47,21 @@
         </li>
         <li id="case-study-philips">
             <img src="philips.svg" alt="Philips" height="34"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/> <img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/> <img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Philips</b> utilizes KMP in its HealthSuite Digital Platform mobile SDK. With KMP, they not only accelerated the implementation of new features but also fostered increased collaboration
                 between Android and iOS developers.</p>
             <a href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Watch the full video</a>.
         </li>
         <li id="case-study-nine-gag">
             <img src="nine-gag.svg" alt="9GAG" height="35" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>9GAG</b> opted for KMP after trying both Flutter and React Native. They gradually adopted
                 the technology and now ship features faster, while providing a consistent experience to their users.</p>
             <a href="https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04">Read the full story</a>.
         </li>
         <li id="case-study-instabee">
             <img src="instabee.svg" alt="Instabee" height="65" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
                 <img src="compose-multiplatform.svg" alt="Compose Multiplatform" height="30"/>
             </a>
@@ -72,7 +72,7 @@
         </li>
         <li id="case-study-baidu">
             <img src="baidu.svg" alt="Baidu" height="63"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p> <b> Baidu </b> uses KMP in their Wonder App to unify the data layer and business logic across iOS and Android,
                 enabling a single Kotlin codebase for both platforms. This ensures consistent user experiences, reduces maintenance costs, and significantly improves productivity.</p>
             <a href="https://kotlinlang.org/lp/multiplatform/case-studies/baidu/">Read the full story</a>.
@@ -80,14 +80,14 @@
         </li>
         <li id="case-study-autodesk">
             <img src="autodesk.svg" alt="Autodesk" height="35" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
             <p><b>Autodesk</b> uses KMP to unify offline synchronization logic and data models across iOS, Android, and Windows.
                 This shared codebase simplifies development, enabling feature reuse across platforms and improving collaboration.</p>
             <a href="https://kotlinlang.org/lp/multiplatform/case-studies/autodesk">Read the full story</a>.
         </li>
         <li id="case-study-cash-app">
             <img src="cash-app.svg" alt="Cash App" height="40"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Cash App</b> gradually transitioned from shared JavaScript to
                 KMP in 2018. This move streamlined collaboration between Android and iOS engineering teams and
                 successfully addressed code-sharing issues previously encountered with JavaScript.</p>
@@ -96,14 +96,14 @@
         </li>
         <li id="case-study-posten-bring">
             <img src="posten-bring.svg" alt="Posten bring" height="270"/>
-            <img src="server.svg" style="inline" alt="server" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/>
+            <img src="server.svg" style="inline" alt="server" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/>
             <p><b>Posten Bring</b>, a 377-year-old norwegian national postal service, unified complex business logic across dozens of frontend and backend applications using KMP. By establishing a single
                 source of truth, they reduced coordination time and minimized errors.</p>
             <a href="https://2024.javazone.no/program/a1d9aeac-ffc3-4b1d-ba08-a0568f415a02">Watch the full talk</a>.
         </li>
         <li id="case-study-quizlet">
             <img src="quizlet.svg" alt="Quizlet" height="40" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/>
             <p>KMP drives global learning platform <b>Quizlet</b>'s web and mobile apps, which boast a
                 combined 100 million active installs. By transitioning their shared code from JavaScript to Kotlin, they
                 significantly improved the performance of both their Android and iOS applications.</p>
@@ -112,7 +112,7 @@
         </li>
         <li id="case-study-wordline">
             <img src="worldline.svg" alt="Worldline" height="70"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Worldline</b> embraced KMP to revamp their Eroski app. Transitioning
                 from Java and Objective-C, the team smoothly migrated all app's screens. Their efforts led to a
                 high-quality app with over 99% crash-free users among 800,000 active users.</p>
@@ -121,7 +121,7 @@
         </li>
         <li id="case-study-kuaishou">
             <img src="kuaishou.svg" alt="Kuaishou" width="70" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Kuaishou</b>, China's pioneering short video platform, has been using KMP for two years,
                 significantly cutting costs in developing new features for both Android and iOS apps, as well as
                 maintaining existing features.</p>
@@ -129,7 +129,7 @@
         </li>
         <li id="case-study-meetup">
             <img src="meetup.svg" alt="Meetup" height="50" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Meetup</b> achieved the simultaneous release of new features by utilizing KMP to share
                 application logic. Now, iOS engineers contribute to the shared Kotlin code just as actively as Android engineers,
                 enhancing team productivity and strengthening collaboration between teams.</p>
@@ -137,7 +137,7 @@
         </li>
         <li id="case-study-down-dog">
             <img src="down-dog.svg" alt="Down Dog" height="200" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/><img src="server.svg" style="inline" alt="server" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/><img src="server.svg" style="inline" alt="server" width="28"/>
             <p><b>Down Dog</b> uses a &quot;maximum shared Kotlin&quot; strategy for their application, which brings a
                 studio-like yoga experience to mobile devices. They share various helpers between clients and servers, and most of the
                 client code with KMP. Their team managed to significantly increase the app's development speed by keeping
@@ -147,7 +147,7 @@
         </li>
         <li id="case-study-touchlab">
             <img src="touchlab.svg" alt="Touchlab" height="40" />
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/>
             <p><b>Touchlab</b> works with organizations adopting and scaling KMP. From startups to
                 multinationals with tens of millions of MAU, Touchlab’s services accelerate and de-risk implementing KMP in production.
                 They are also trusted open-source contributors, building crucial tools used widely in production apps.</p>
@@ -155,7 +155,7 @@
         </li>
         <li id="case-study-unflow">
             <img src="unflow.svg" alt="Unflow" height="45"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Unflow</b> allows development teams to create screens, flows, and features, without a single line of code.
                 Using KMP to build their mobile SDK saved the team two months of development time and allowed
                 them to deliver an exceptionally high-quality product without compromising on performance or native
@@ -165,14 +165,14 @@
         </li>
         <li id="case-study-vmware">
             <img src="vmware.svg" alt="VMware" height="35" />
-            <img src="android.svg" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>VMware</b> uses KMP in various modules to enable different use cases in a consistent,
                 cross-platform way right across their Workspace ONE productivity app portfolio.</p>
             <a href="https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0">Read the full story</a>.
         </li>
         <li id="case-study-mirego">
             <img src="mirego.svg" alt="Mirego" height="35"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
             <p><b>Mirego</b> uses KMP to run the same business logic on the web, iOS (iPhone and iPad), tvOS,
                 Android (device and TV), and Amazon Fire TV. Mirego works with clients to design and develop new digital
                 products.</p>
@@ -181,7 +181,7 @@
         </li>
         <li id="case-study-fastwork">
             <img src="fastwork.svg" alt="Fastwork" height="35"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Fastwork</b> uses KMP for their domain and data layers to help them share their business
                 logic and API service between iOS and Android platforms. Fastwork offers all-in-one business administration and
                 management software to help users meet business needs, anytime, anywhere.</p>
@@ -190,7 +190,7 @@
         </li>
         <li id="case-study-careem">
             <img src="careem.svg" alt="careem" height="35"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>Careem</b>, a vehicle-for-hire company, adopted KMP while migrating their Android app to
                 Kotlin. This move allowed them to reuse their business logic between mobile platforms and saved a significant
                 amount of time in delivering their iOS app.</p>
@@ -198,7 +198,7 @@
         </li>
         <li id="case-study-netvirta">
             <img src="net-virta.svg" alt="NetVirta" height="60"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p><b>NetVirta</b> uses KMP to share data, business, and presentation logic between their apps.
                 Their app portfolio offers an array of solutions, including full-body, foot, and head scanning apps that are used
                 both in stores and within the customer's home.</p>
@@ -208,7 +208,7 @@
 
         <li id="case-study-memrise">
             <img src="memrise.svg" alt="Memrise" width="65"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/>
             <p><b>Memrise</b>, one of the world's most popular language learning apps, has incrementally migrated the logic of
                 their iOS, Android, and web apps to KMP. This allows them to avoid duplicating the code in
                 three different programming languages, while still offering a full offline and native UI experience.</p>
@@ -218,7 +218,7 @@
 
         <li id="case-study-ice-rock">
             <img src="ice-rock.svg" alt="IceRock" height="35"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/><img src="web.svg" style="inline" alt="web" width="24"/><img src="desktop.svg" style="inline" alt="desktop" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="web.svg" style="inline" alt="web" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
             <p><b>IceRock</b> is an outsourcing company that leverages KMP to develop apps for its clients.
                 Their app portfolio spans various business requirements, complemented by a substantial collection of open-source
                 KMP libraries that enhance the KMP development process.</p>
@@ -226,7 +226,7 @@
         </li>
         <li id="case-study-chalk-com">
             <img src="chalk-com.svg" alt="Chalk.com" height="35"/>
-            <img src="android.svg" style="inline" alt="android" width="24"/><img src="ios.svg" style="inline" alt="ios" width="24"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <p>In both of <b>Chalk.com</b>'s mobile apps, KMP is used for networking, offline caching, and
                 business logic. The UI for each of the apps is native to the platform, but other than that, almost everything
                 else in their apps can be shared with KMP.</p>
