@@ -214,9 +214,9 @@ bpD/h7ZI7FC0Db2uCU4CYdZoQVl0MNNC1Yr56Pa68qucadJhY0sFNiB23KrBUoiO
 -----END PGP PRIVATE KEY BLOCK-----
 ```
 
-### Configure the project
+## Configure the project
 
-#### Prepare your library project
+### Prepare your library project
 
 If you started developing your library from a template project, now is a good time to change any default names in the project
 to match your own library’s name.
@@ -235,7 +235,7 @@ android {
 }
 ```
 
-#### Set up the publishing plugin
+### Set up the publishing plugin
 
 This guide uses [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin)
 to help with publications to Maven Central.
@@ -309,7 +309,7 @@ The most important settings here are:
 * [SCM (Source Code Management) information](https://central.sonatype.org/publish/requirements/#scm-information),
   which specifies where the library’s source code is hosted.
 
-### Publish to Maven Central using continuous integration
+## Publish to Maven Central using continuous integration
 
 ### Generate the user token
 
@@ -345,7 +345,7 @@ you need to store these values as secrets.
 
 You will use the names for these secrets in the CI configuration on the next step.
 
-#### Add a GitHub Actions workflow to your project
+### Add a GitHub Actions workflow to your project
 
 You can set up continuous integration to build and publish your library automatically.
 We’ll use [GitHub Actions](https://docs.github.com/en/actions) as an example.
@@ -403,7 +403,7 @@ in the [](#add-secrets-to-github) section.
 The workflow configuration automatically transfers these secrets into environment variables,
 making them available to the Gradle build process.
 
-#### Create a release on GitHub
+### Create a release on GitHub
 
 With the workflow and secrets set up, you’re now ready to [create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
 that will trigger the publication of your library.
