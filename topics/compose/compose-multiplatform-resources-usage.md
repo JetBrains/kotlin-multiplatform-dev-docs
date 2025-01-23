@@ -12,7 +12,7 @@ After that, you can use the generated class to access the configured multiplatfo
 
 To use the prepared resources, import the generated class, for example:
 
-```Kotlin
+```kotlin
 import project.composeapp.generated.resources.Res
 import project.composeapp.generated.resources.example_image
 ```
