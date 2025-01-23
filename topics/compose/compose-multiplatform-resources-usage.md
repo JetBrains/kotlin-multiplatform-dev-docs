@@ -8,6 +8,21 @@ To regenerate the `Res` class and all the resource accessors, build the project 
 
 After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
+## Importing the generated class
+
+To use the prepared resources, import the generated class, for example:
+
+```kotlin
+import project.composeapp.generated.resources.Res
+import project.composeapp.generated.resources.example_image
+```
+
+Here:
+* `project` is the name of your project
+* `composeapp` is the module where you placed the resource directories
+* `Res` is the default name for the generated class
+* `example_image` is the name of an image file in the `composeResources/drawable` directory (`example_image.png`, for example).
+
 ## Customizing accessor class generation
 
 You can customize the generated `Res` class to suit your needs using Gradle settings.

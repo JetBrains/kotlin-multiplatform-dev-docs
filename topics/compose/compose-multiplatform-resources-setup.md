@@ -35,7 +35,8 @@ To access resources in your multiplatform projects, add the library dependency a
 
 3. Organize the `composeResources` directory structure according to these rules:
 
-   * Images should be in the `drawable` directory.
+   * Images should be in the `drawable` directory. Compose Multiplatform supports rasterized images (JPEG, PNG, bitmap, and WebP)
+     and vector Android XML images (without references to Android resources).
    * Fonts should be in the `font` directory.
    * Strings should be in the `values` directory.
    * Other files should be in the `files` directory, with any folder hierarchy you may find appropriate.
