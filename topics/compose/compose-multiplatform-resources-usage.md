@@ -435,6 +435,114 @@ Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
+## Preloading resources for web targets
+
+The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with 
+slower network connections, the fetching can cause visual glitches like a Flash of Unstyled Text (FOUT) or showing 
+placeholders instead of images.
+
+A typical example of such an issue is when a `Text()` component contains some text in a custom font, but the font containing the 
+necessary glyphs is still loading. In this case, users may temporarily see the text in default font or even empty boxes and 
+question marks instead of characters. Similarly, for images or drawables, users may observe a placeholder like a blank or 
+black box until the resource is fully loaded.
+
+To prevent visual glitches, you can preload and cache resources with the built-in browser features and Compose Multiplatform 
+preload API.
+
+### Preload resources with rel="preload"
+
+Modern browsers support resource preloading through the `<link>` tag with the `rel="preload"` attribute. This attribute allows 
+the browser to prioritize downloading and caching resources like fonts and images before the application starts, ensuring 
+that these resources are available early. 
+
+For example, to enable in-browser preloading of a font:
+
+1. Build your application's web distribution:
+
+```console
+   ./gradlew :composeApp:wasmJsBrowserDistribution
+```
+
+2. Find the required resource in the generated `dist` directory.
+3. Add a `<link>` tag to your `index.html` file and set the `href` attribute to the resource path:
+
+```html
+<link rel="preload" href="./composeResources/username.composeapp.generated.resources/font/FiraMono-Regular.ttf" as="fetch" type="font/ttf" crossorigin/>
+```
+
+### Preload resources with preload API
+<secondary-label ref="Experimental"/>
+
+The browser cache stores the raw bytes of preloaded resources that still need to be converted into a format suitable for 
+rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource the first time, the 
+conversion is done asynchronously, which may again result in flickering. To further optimize the experience, Compose resources 
+have their own implicit cache for higher-level representations of the resources, that can also be preloaded.
+
+Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
+web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
+
+Additionally, you can set a fallback font different from the default bundled one if you need special characters like emojis.
+
+The following example demonstrates how to use preloading and fallback font:
+
+```kotlin
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFontFamilyResolver
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.window.CanvasBasedWindow
+import components.resources.demo.shared.generated.resources.*
+import components.resources.demo.shared.generated.resources.NotoColorEmoji
+import components.resources.demo.shared.generated.resources.Res
+import components.resources.demo.shared.generated.resources.Workbench_Regular
+import components.resources.demo.shared.generated.resources.font_awesome
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.configureWebResources
+import org.jetbrains.compose.resources.demo.shared.UseResources
+import org.jetbrains.compose.resources.preloadFont
+
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class, InternalComposeUiApi::class)
+fun main() {
+    configureWebResources {
+        resourcePathMapping { path -> "./$path" }
+    }
+    CanvasBasedWindow("Resources + K/Wasm") {
+        val font1 by preloadFont(Res.font.Workbench_Regular)
+        val font2 by preloadFont(Res.font.font_awesome, FontWeight.Normal, FontStyle.Normal)
+        val emojiFont = preloadFont(Res.font.NotoColorEmoji).value
+        var fontsFallbackInitialized by remember { mutableStateOf(false) }
+
+        UseResources()
+
+        if (font1 != null && font2 != null && emojiFont != null && fontsFallbackInitialized) {
+            println("Fonts are ready")
+        } else {
+            Box(modifier = Modifier.fillMaxSize().background(Color.White.copy(alpha = 0.8f)).clickable {  }) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+            println("Fonts are not ready yet")
+        }
+
+        val fontFamilyResolver = LocalFontFamilyResolver.current
+        LaunchedEffect(fontFamilyResolver, emojiFont) {
+            if (emojiFont != null) {
+                fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))
+                fontsFallbackInitialized = true
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))"}
+
 ## Interaction with other libraries and resources
 
 ### Accessing multiplatform resources from external libraries
