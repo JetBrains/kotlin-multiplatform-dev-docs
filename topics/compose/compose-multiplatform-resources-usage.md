@@ -451,9 +451,9 @@ preload API.
 
 ### Preload resources with rel="preload"
 
-Modern browsers support resource preloading through the `<link>` tag with the `rel="preload"` attribute. This attribute allows 
-the browser to prioritize downloading and caching resources like fonts and images before the application starts, ensuring 
-that these resources are available early. 
+Modern browsers support resource preloading through the `<link>` tag with the [`rel="preload"` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload).
+This attribute allows the browser to prioritize downloading and caching resources like fonts and images 
+before the application starts, ensuring that these resources are available early. 
 
 For example, to enable in-browser preloading of a font:
 
@@ -463,8 +463,9 @@ For example, to enable in-browser preloading of a font:
    ./gradlew :composeApp:wasmJsBrowserDistribution
 ```
 
-2. Find the required resource in the generated `dist` directory.
-3. Add a `<link>` tag to your `index.html` file and set the `href` attribute to the resource path:
+2. Find the required resource in the generated `dist` directory and save the path.
+3. Open the `wasmJsMain/resources/index.html` file and add a `<link>` tag inside the `<head>` element. 
+4. Set the `href` attribute to the resource path:
 
 ```html
 <link rel="preload" href="./composeResources/username.composeapp.generated.resources/font/FiraMono-Regular.ttf" as="fetch" type="font/ttf" crossorigin/>
