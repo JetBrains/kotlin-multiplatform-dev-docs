@@ -482,7 +482,8 @@ have their own implicit cache for higher-level representations of the resources,
 Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
-Additionally, you can set a fallback font different from the default bundled one if you need special characters like emojis.
+Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
+To specify a fallback font, use the `FontFamily.Resolver.preload()` method.
 
 The following example demonstrates how to use preloading and fallback font:
 
