@@ -25,8 +25,8 @@ about [supported platforms](supported-platforms.md).
 
 ### In which IDE should I work on my cross-platform app?
 
-We recommend using JetBrains Fleet code editor or Android Studio IDE, depending on your project needs and expectations.
-Learn more about which one to choose in [Recommended IDEs and code editors](recommended-ides.md).
+We recommend using the Android Studio IDE to work with Kotlin Multiplatform projects.
+Read more about available alternatives in [Recommended IDEs and code editors](recommended-ides.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
@@ -111,6 +111,8 @@ Android UI framework developed by Google. In fact, when you are using Compose Mu
 simply runs on Jetpack Compose.
 Other platforms targeted by Compose Multiplatform may have implementation details under the hood that differ from those
 of Jetpack Compose on Android, but they still provide you with the same APIs.
+
+For details, see the [overview of the frameworks' interrelation](compose-multiplatform-and-jetpack-compose.md).
 
 ### Between which platforms can I share my UI?
 
@@ -238,9 +240,6 @@ working with the DOM in Kotlin/JS, and it's not intended for sharing UIs across 
 
 Yes, we're acutely aware of the current challenges with multiplatform tooling and are actively working on enhancements
 in several areas.
-
-We've already launched previews of the [Kotlin Multiplatform support in Fleet](fleet.md).
-Try it yourself and leave feedback!
 
 ### Are you going to provide a Swift interop?
 
