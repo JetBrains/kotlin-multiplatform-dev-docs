@@ -160,8 +160,8 @@ as you do [for Android strings](https://developer.android.com/guide/topics/resou
 #### String templates
 
 Currently, arguments have basic support for string resources.
-When creating a template, use the `%<number>` format for placing arguments within the string and a `$d` or a `$s` suffix
-to signal that it's a variable placeholder and not simple text.
+When creating a template, use the `%<number>` format to place arguments within the string and include a `$d` or `$s` suffix
+to indicate that it is a variable placeholder and not simple text.
 For example:
 
 ```XML
@@ -177,7 +177,7 @@ passing the arguments for placeholders in the correct order:
 Text(stringResource(Res.string.str_template, 100, "User_name"))
 ```
 
-There is no difference between `$s` and `$d` suffixes, and no others are supported.
+There is no difference between the `$s` and `$d` suffixes, and no others are supported.
 You can put the `%1$s` placeholder in the resource string and use it to display a fractional number, for example:
 
 ```kotlin
