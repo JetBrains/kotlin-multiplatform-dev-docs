@@ -178,7 +178,7 @@ Text(stringResource(Res.string.str_template, 100, "User_name"))
 ```
 
 There is no difference between `$s` and `$d` suffixes, and no others are supported.
-You can provide the placeholder `%1$s` and use it to display a fractional number, for example:
+You can put the `%1$s` placeholder in the resource string and use it to display a fractional number, for example:
 
 ```kotlin
 Text(stringResource(Res.string.str_template, "User_name", 100.1f))
