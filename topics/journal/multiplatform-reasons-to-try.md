@@ -193,7 +193,7 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 * **Xcode**. Apple's IDE can be used to create the iOS part of Kotlin Multiplatform apps.
   Xcode is the standard for iOS app development, offering a plethora of tools for coding, debugging, and configuration.
   However, Xcode is Mac only.
-* **Fleet**. A new technology from JetBrains. 
+* **Fleet**. A new IDE from JetBrains. 
   [Fleet](https://www.jetbrains.com/fleet/) combines the convenience of a lightweight code editor with its 
   Smart Mode and is built using the IntelliJ Platform on the backend.
   Fleet supports multiple programming languages, including Kotlin and Swift, and provides cross-language features like navigation,
