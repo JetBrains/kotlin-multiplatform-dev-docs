@@ -438,21 +438,21 @@ Both resource files in this example are located in the `commonMain` source set:
 ## Preloading resources for web targets
 
 The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with 
-slower network connections, the fetching can cause visual glitches like a Flash of Unstyled Text (FOUT) or showing 
-placeholders instead of images.
+slower network connections, resource fetching can cause visual glitches, such as [FOUT](https://fonts.google.com/knowledge/glossary/fout) 
+or displaying placeholders instead of images.
 
-A typical example of such an issue is when a `Text()` component contains some text in a custom font, but the font containing the 
+A typical example of this issue is when a `Text()` component contains text in a custom font, but the font with the 
 necessary glyphs is still loading. In this case, users may temporarily see the text in default font or even empty boxes and 
 question marks instead of characters. Similarly, for images or drawables, users may observe a placeholder like a blank or 
 black box until the resource is fully loaded.
 
-To prevent visual glitches, you can preload and cache resources with the built-in browser features and Compose Multiplatform 
-preload API.
+To prevent visual glitches, you can use built-in browser features for preloading resources, 
+the Compose Multiplatform preload API, or a combination of both.
 
-### Preload resources with rel="preload"
+### Preload resources using browser features
 
-Modern browsers support resource preloading through the `<link>` tag with the [`rel="preload"` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload).
-This attribute allows the browser to prioritize downloading and caching resources like fonts and images 
+In modern browsers, you can preload resources using the `<link>` tag with the [`rel="preload"` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload).
+This attribute instructs the browser to prioritize downloading and caching resources like fonts and images 
 before the application starts, ensuring that these resources are available early. 
 
 For example, to enable in-browser preloading of a font:
@@ -471,13 +471,13 @@ For example, to enable in-browser preloading of a font:
 <link rel="preload" href="./composeResources/username.composeapp.generated.resources/font/FiraMono-Regular.ttf" as="fetch" type="font/ttf" crossorigin/>
 ```
 
-### Preload resources with preload API
+### Preload resources using the Compose Multiplatform preload API
 <secondary-label ref="Experimental"/>
 
-The browser cache stores the raw bytes of preloaded resources that still need to be converted into a format suitable for 
-rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource the first time, the 
-conversion is done asynchronously, which may again result in flickering. To further optimize the experience, Compose resources 
-have their own implicit cache for higher-level representations of the resources, that can also be preloaded.
+Even if you preloaded the resources in the browser, they are cached as raw bytes that still need to be converted into a 
+format suitable for rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource 
+the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
+Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
 
 Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
@@ -485,7 +485,7 @@ web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`
 Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
 To specify a fallback font, use the `FontFamily.Resolver.preload()` method.
 
-The following example demonstrates how to use preloading and fallback font:
+The following example demonstrates how to use preloading and a fallback font:
 
 ```kotlin
 import androidx.compose.foundation.background
@@ -514,6 +514,7 @@ import org.jetbrains.compose.resources.preloadFont
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class, InternalComposeUiApi::class)
 fun main() {
     configureWebResources {
+        // Overrides the resource location
         resourcePathMapping { path -> "./$path" }
     }
     CanvasBasedWindow("Resources + K/Wasm") {
@@ -522,11 +523,13 @@ fun main() {
         val emojiFont = preloadFont(Res.font.NotoColorEmoji).value
         var fontsFallbackInitialized by remember { mutableStateOf(false) }
 
+        // Uses the preloaded resource for the app's content
         UseResources()
 
         if (font1 != null && font2 != null && emojiFont != null && fontsFallbackInitialized) {
             println("Fonts are ready")
         } else {
+            // Displays the progress indicator to address a FOUT or the app being temporarily non-functional during loading
             Box(modifier = Modifier.fillMaxSize().background(Color.White.copy(alpha = 0.8f)).clickable {  }) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
@@ -536,6 +539,7 @@ fun main() {
         val fontFamilyResolver = LocalFontFamilyResolver.current
         LaunchedEffect(fontFamilyResolver, emojiFont) {
             if (emojiFont != null) {
+                // Preloads a fallback font with emojis to render missing glyphs that are not supported by the bundled font
                 fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))
                 fontsFallbackInitialized = true
             }
