@@ -7,7 +7,7 @@ Resources are static content, such as images, fonts, and strings, which you can 
 When working with resources in Compose Multiplatform, consider the current conditions:
 
 * Almost all resources are read synchronously in the caller thread. The only exceptions are raw files
-  and all of the resources on the JS platform that are read asynchronously.
+  and web resources that are read asynchronously.
 * Reading big raw files, like long videos, as a stream is not supported yet.
   Use the [`getUri()`](compose-multiplatform-resources-usage.md#accessing-multiplatform-resources-from-external-libraries) function to pass separate files to a system API,
   for example, the [kotlinx-io](https://github.com/Kotlin/kotlinx-io) library.
