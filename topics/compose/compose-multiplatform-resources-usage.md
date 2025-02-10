@@ -476,7 +476,7 @@ For example, to enable in-browser preloading of a font:
 
 Even if you preloaded the resources in the browser, they are cached as raw bytes that still need to be converted into a 
 format suitable for rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource 
-the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
+for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
 Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
 
 Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
