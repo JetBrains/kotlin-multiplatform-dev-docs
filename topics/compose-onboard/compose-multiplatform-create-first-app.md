@@ -27,11 +27,6 @@ Things to keep in mind for this tutorial:
   and desktop. For iOS, you'll need a macOS machine with Xcode installed. This is a general limitation of iOS development.
 * If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
 
-> To try a new multiplatform experience without juggling different IDEs and switching to
-> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
->
-{style="tip"}
-
 ## Set up an environment
 
 Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),

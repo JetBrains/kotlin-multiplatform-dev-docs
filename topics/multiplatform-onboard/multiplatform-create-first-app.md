@@ -18,11 +18,6 @@ Kotlin Multiplatform applications can work on a variety of platforms like iOS, A
 One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
 You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.
 
-> To try a new multiplatform experience without juggling different IDEs and switching to
-> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
->
-{style="tip"}
-
 ## Set up the environment
 
 Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
