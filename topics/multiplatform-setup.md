@@ -142,7 +142,6 @@ To make sure everything works as expected, install and run the KDoctor tool:
     </def>
    <def title="Still having trouble?">
             <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
-            <p>For a smoother multiplatform experience, you can also try <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html">JetBrains Fleet</a>: it integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
    </def>
 </deflist>
 

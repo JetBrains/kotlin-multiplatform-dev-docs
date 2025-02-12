@@ -141,7 +141,7 @@ To run tests:
 <tab title="iOS Simulator">
 
 You have two options:
-* In Android Studio and Fleet, you can click the green run icon in the gutter next to the `myTest()` function, choose
+* In Android Studio, you can click the green run icon in the gutter next to the `myTest()` function, choose
 **Run** and the iOS target for the test.
 * Run the following command in the terminal:
 
