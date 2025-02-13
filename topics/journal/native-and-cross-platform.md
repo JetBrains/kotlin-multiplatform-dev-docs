@@ -35,7 +35,7 @@ There are various open-source [frameworks for cross-platform mobile app developm
 | **New work opportunities.** You can attract new talent to your team with modern cross-platform technologies in a product's tech stack. Many developers want to tackle new challenges at work, which is why new technologies and tasks tend to increase developers' motivation and enjoyment while working. | **Challenging hiring process.** It can be harder to find professionals who can build multiplatform apps, compared to native app developers. For example, on Glassdoor, we found 457 Android developer jobs versus only 58 Flutter developer vacancies in the United States. However, with modern technologies such as [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/), this disadvantage becomes easily manageable. You can hire an Android developer who can swiftly adapt to cross-platform development, given that it's all Kotlin. |
 | **Flexible code sharing.** Modern cross-platform technologies allow developers to reuse code across multiple platforms while retaining the benefits of native programming.                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |  
 
-<a href="https://www.jetbrains.com/kotlin-multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="700"/></a>
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="700"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 These are just a few of the key advantages of cross-platform app development. You can learn more about its benefits and use cases from global companies in our article about [cross-platform mobile development](cross-platform-mobile-development.md). As for the challenges of the approach – we'll discuss those in the following section.
 
@@ -81,7 +81,7 @@ For example, developers need to know Objective-C or Swift to create native apps 
 
 When choosing between different approaches and frameworks, you need to be confident that the platform vendor will continue supporting it over the long term. You can dig into the details about the provider, the size of their community, and adoption by global companies. For example, Kotlin Multiplatform was developed by JetBrains, Flutter by Google, and React Native by Facebook. 
 
-<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html"><img src="kmp-use-cases-1.svg" alt="Explore real-world Kotlin Multiplatform use cases" width="700"/></a>
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 #### 4. Development cost and your budget
 
@@ -112,7 +112,7 @@ In a nutshell, you should to opt for cross-platform solutions if:
 
 It can be challenging to implement new technologies and tools into an organization. That’s why we created a guide entitled [“How to introduce multiplatform mobile development to your team”](multiplatform-introduce-your-team.md), where you will find a list of action points and best practices to help make the transition to multiplatform as seamless as possible.
 
-<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html"><img src="see-kmp-in-action.svg" alt="See Kotlin Multiplatform in action" width="700"/></a>
+[![See Kotlin Multiplatform in action](see-kmp-in-action.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 ## When should you choose native app development?
 

@@ -81,7 +81,7 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 
 Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.topic) to develop multiplatform apps with a native-like user experience.
 
-<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html"><img src="kmp-journey-start.svg" alt="Kick off your Kotlin Multiplatform journey" width="700"/></a>
+[![Kick off your Kotlin Multiplatform journey](kmp-journey-start.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 ### Ionic
 
@@ -149,7 +149,7 @@ It's important to be sure that the maintainer of the framework will continue to 
 
 Depending on how crucial the user interface is for your future app, you may need to know how easily you can customize the UI using a particular framework. For example, Kotlin Multiplatform offers full code-sharing flexibility with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains. It enables developers to share UIs across Android, iOS, web, and desktop (via the JVM) and is based on Kotlin and Jetpack Compose.
 
-<a href="https://www.jetbrains.com/compose-multiplatform/"><img src="explore-compose.svg" alt="Explore Compose Multiplatform" width="700"/></a>
+[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
 
 #### 4. Framework maturity
 
