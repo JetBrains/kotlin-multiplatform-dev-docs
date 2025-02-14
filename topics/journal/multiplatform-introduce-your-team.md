@@ -44,9 +44,7 @@ Citing case studies of different companies who already use Kotlin Multiplatform 
 * **Forbes** – By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms while retaining flexibility for platform-specific customization.
 * **9GAG** – After trying both Flutter and React Native, 9GAG gradually adopted the Kotlin Multiplatform, which now helps them ship features faster while providing a consistent experience to their users.
 
-> Explore the [case studies page](case-studies.topic) for inspirational references.
-> 
-{style="note"}
+[![Learn from Kotlin Multiplatform success stories](kmp-success-stories.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 ## Offer proof by creating a sample project
 
@@ -61,7 +59,7 @@ The [Make your Android application work on iOS – tutorial](multiplatform-integ
 
 ## Prepare for questions about multiplatform development from your team
 
-No matter how detailed your pitch is, your team will have a lot of questions. Listen carefully, and try to answer them all patiently. You might expect the majority of the questions to come from the iOS part of the team, as they are the developers who aren't used to seeing Kotlin in their everyday developer routine. This list of some of the most common questions could help you here:
+No matter how detailed your pitch is, your team will have a lot of questions. Listen carefully and try to answer them all patiently. You might expect the majority of the questions to come from the iOS part of the team, as they are the developers who aren't used to seeing Kotlin in their everyday developer routine. This list of some of the most common questions could help you here:
 
 ### Q: I heard applications based on cross-platform technologies can be rejected from the App Store. Is taking this risk worth it?
 

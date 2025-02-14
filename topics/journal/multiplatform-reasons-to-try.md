@@ -53,9 +53,7 @@ The experiment turned out to be very successful, resulting in the following:
 * A reduction in their maintenance and testing costs.
 * Significantly improved productivity within the team.
 
-> [Learn how other global companies use Kotlin Multiplatform in their projects](case-studies.topic)
-> 
-{style="tip"}
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
 
@@ -144,9 +142,7 @@ There is also a community sample, the [New York Times App](https://github.com/xx
 which runs even on Wear OS for watches, the smartwatch operating system. 
 Check this list of [Kotlin Multiplatform and Compose Multiplatform samples](multiplatform-samples.md) to see more examples.
 
-> [Discover Compose Multiplatform, a declarative framework for sharing UI across platforms]((https://www.jetbrains.com/lp/compose-multiplatform/))
->
-{style="tip"}
+[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
 
 ### 6. You can use Kotlin Multiplatform in existing and new projects
 
@@ -241,9 +237,7 @@ If you've already decided to try Kotlin Multiplatform, here are a few tips that 
   If it worked for you, you might want to expand the scope and share even more code.
   If not, you need to understand the reasons why this experiment didn't work out.
 
-> [See Kotlin Multiplatform in action! Get started now](get-started.topic)
->
-{style="tip"}
+[![See Kotlin Multiplatform in action! Get Started now](kmp-get-started-action.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 For those who want to help their team get started with Kotlin Multiplatform, we prepared a [detailed guide](multiplatform-introduce-your-team.md) with practical tips.
 
