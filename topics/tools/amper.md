@@ -70,8 +70,6 @@ You can try Amper in one of the following ways:
 
 * Use [IntelliJ IDEA](https://www.jetbrains.com/idea/nextversion/) 2023.3 and later for JVM and Android projects
   (starting with build 233.11555).
-* Use [Fleet](https://www.jetbrains.com/fleet/download) for JVM, Android, and Kotlin Multiplatform projects
-  (starting with build 1.26.104).
 * Use [Gradle](https://docs.gradle.org/current/userguide/userguide.html) to build Amper projects from the command line
   or your CI/CD tool.
 

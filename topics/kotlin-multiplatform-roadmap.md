@@ -6,7 +6,7 @@ The latest [roadmap blog post](https://blog.jetbrains.com/kotlin/2024/10/kotlin-
 was published on October 28, 2024.
 The page below summarizes it and is updated whenever we reach a declared milestone or need to reflect changes in strategy:
 
-* On February 14th, the roadmap was updated to reflect the changes described in the [Kotlin Multiplatform Tooling – Shifting Gears](https://blog.jetbrains.com/kotlin/2025/02/kotlin-multiplatform-tooling-shifting-gears/)
+* On February 14th, 2025, the roadmap was updated to reflect the changes described in the [Kotlin Multiplatform Tooling – Shifting Gears](https://blog.jetbrains.com/kotlin/2025/02/kotlin-multiplatform-tooling-shifting-gears/)
     blog post.
 
 Kotlin Multiplatform goals are closely aligned with the [Kotlin roadmap](https://kotlinlang.org/docs/roadmap.html).
