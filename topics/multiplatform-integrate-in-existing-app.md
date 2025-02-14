@@ -68,114 +68,45 @@ Your future iOS application will use the same logic, so you should make it cross
 {style="tip"}
 
 The cross-platform code that is used for both iOS and Android will be stored in a shared module.
-The Kotlin Multiplatform plugin for Android Studio provides a wizard for creating such modules.
+Starting with the version Meerkat, Android Studio provides a wizard for creating such modules.
 
 Create a shared module and connect it to both the existing Android application and your future iOS application:
 
-1. In Android Studio settings, select the **Advanced Settings** section and turn on the **Enable experimental Multiplatform IDE features** option.
-2. Restart Android Studio for the changes to take effect.
-3. Select **File** | **New** | **New Module** from the main menu.
-4. In the list of templates, select **Java or Kotlin Library**.
+1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
+2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
    Enter the library name `shared` and the package name `com.jetbrains.simplelogin.shared`.
-5. Click **Finish**.
-   The wizard creates a base module that you'll expand into a Kotlin Multiplatform module.
-6. In the root `build.gradle.kts` file, replace the contents with the following code to properly apply Gradle plugins:
+3. Click **Finish**. The wizard creates a shared module and changes the build script accordingly.
+4. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
+5. You should see this file structure in the `shared` directory:
 
-   ```kotlin
-   plugins {
-       alias(libs.plugins.androidApplication) apply false
-       alias(libs.plugins.kotlinAndroid) apply false
-       alias(libs.plugins.kotlinMultiplatform) apply false
-       alias(libs.plugins.androidLibrary) apply false
-   }
-   ```
+   ![Final file structure inside the shared directory](shared-directory-structure.png){width="363"} 
 
-7. In the `shared/build.gradle.kts` file, define the necessary KMP targets.
-   To do that, replace the contents of the file with the following code:
+6. In the `commonMain/kotlin/com.jetbrains.simplelogin.shared` directory, create a new `Greeting` class with the following code:
 
     ```kotlin
-    import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-    import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-    
-    plugins {
-        alias(libs.plugins.kotlinMultiplatform)
-        alias(libs.plugins.androidLibrary)
-    }
-    
-    kotlin {
-        androidTarget {
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_11)
-            }
-        }
-        
-        listOf(
-            iosX64(),
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
-            iosTarget.binaries.framework {
-                baseName = "Shared"
-                isStatic = true
-            }
-        }
-        
-        sourceSets {
-            commonMain.dependencies {
-                // Contains your multiplatform dependencies
-            }
-        }
-    }
-    
-    android {
-        namespace = "com.jetbrains.simplelogin.shared"
-        compileSdk = libs.versions.android.compileSdk.get().toInt()
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
-        }
-        defaultConfig {
-            minSdk = libs.versions.android.minSdk.get().toInt()
+    package com.jetbrains.simplelogin.shared
+
+    class Greeting {
+        private val platform = getPlatform()
+
+        fun greet(): String {
+            return "Hello, ${platform.name}!"
         }
     }
     ```
-    {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="kotlin { ... }"}
 
-8. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
-
-9. In the `shared/src` directory, create `androidMain/kotlin`, `commonMain/kotlin`, and `iosMain/kotlin` directories.
-10. In the `shared/src` directory, delete the `main` directory.
-11. Inside those directories, create packages and files to replicate the following structure:
-
-   ![Final file structure inside the shared directory](shared-directory-structure.png){width="363"}
-
-12. Add code to the files that you created:
+7. Replace the code in created files (except for the package directives) with the following:
 
      * For `commonMain/Platform.kt`:
 
          ```kotlin
-         package com.jetbrains.simplelogin.shared
-    
          interface Platform {
              val name: String
          }
         
          expect fun getPlatform(): Platform
          ```
-     * For `commonMain/Greeting.kt`:
-
-         ```kotlin
-         package com.jetbrains.simplelogin.shared
-
-         class Greeting {
-             private val platform = getPlatform()
-
-             fun greet(): String {
-                 return "Hello, ${platform.name}!"
-             }
-         }
-         ```
+     
      * For `androidMain/Platform.android.kt`:
 
          ```kotlin
@@ -203,8 +134,8 @@ Create a shared module and connect it to both the existing Android application a
          actual fun getPlatform(): Platform = IOSPlatform()
          ```
 
-13. In the `app/build.gradle.kts` file, set the `android.defaultConfig.minSdk` value to 24.
-14. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
+8. In the `app/build.gradle.kts` file, set the `android.defaultConfig.minSdk` value to 24.
+9. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
 
 You can find the resulting state of the project in the [shared_module](https://github.com/Kotlin/kmp-integration-sample/tree/shared_module) branch of the GitHub repository.
 
@@ -243,7 +174,7 @@ there, and make this code cross-platform.
     }
     ```
 5. Follow Android Studio's suggestions to import missing classes.
-6. In the toolbar, select `app` from the dropdown and click **Debug** ![](debug-android.png){width=20}.
+6. In the toolbar, click the `app` dropdown, then click the debug icon ![](debug-android.png){width=20}.
 
    ![App from list to debug](app-list-android.png){width="300"}
 
@@ -273,121 +204,121 @@ This is necessary for reusing the code for both Android and iOS.
 4. Remove Android-specific code by replacing it with cross-platform Kotlin code or connecting to Android-specific APIs
    using [expected and actual declarations](multiplatform-connect-to-apis.md). See the following sections for details:
 
-#### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
-
-To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
-moved `data` directory wherever possible.
-
-1. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
-   `IOException` is not available in Kotlin/JVM.
-
-    ```kotlin
-    // Before
-    return Result.Error(IOException("Error logging in", e))
-    ```
-
-    ```kotlin
-    // After
-    return Result.Error(RuntimeException("Error logging in", e))
-    ```
-
-2. Remove the import directive for `IOException` as well:
-
-    ```kotlin
-    import java.io.IOException
-    ```
-
-3. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
-   regular expression matching the pattern for email validation:
-
-    ```kotlin
-    // Before
-    private fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    ```
-
-    ```kotlin
-    // After
-    private fun isEmailValid(email: String) = emailRegex.matches(email)
-    
-    companion object {
-        private val emailRegex = 
-            ("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+").toRegex()
-    }
-    ```
-
-4. And remove the import directive for the `Patterns` class:
-
-    ```kotlin
-    import android.util.Patterns
-    ```
-
-#### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
-
-In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
-the `java.util.UUID` class, which is not available for iOS.
-
-```kotlin
-val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-```
-
-Since the Kotlin standard library doesn't provide functionality for generating UUIDs, you still need to use
-platform-specific functionality for this case.
-
-Provide the `expect` declaration for the `randomUUID()` function in the shared code and its `actual` implementations for
-each platform – Android and iOS – in the corresponding source sets.
-You can learn more about [connecting to platform-specific APIs](multiplatform-connect-to-apis.md).
-
-1. Remove the `java.util.UUID` class from the common code:
-
-    ```kotlin
-    val fakeUser = LoggedInUser(randomUUID(), "Jane Doe")
-    ```
-
-2. Create the `Utils.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/commonMain` directory
-   and provide the `expect` declaration:
-
-    ```kotlin
-    package com.jetbrains.simplelogin.shared
-    
-    expect fun randomUUID(): String
-    ```
-
-3. Create the `Utils.android.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/androidMain`
-   directory and provide the `actual` implementation for `randomUUID()` in Android:
-
-    ```kotlin
-    package com.jetbrains.simplelogin.shared
-    
-    import java.util.*
+   #### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
    
-    actual fun randomUUID() = UUID.randomUUID().toString()
-    ```
-
-4. Create the `Utils.ios.kt` file in the `com.jetbrains.simplelogin.shared` of the `shared/src/iosMain` directory and
-   provide the `actual` implementation for `randomUUID()` in iOS:
-
-    ```kotlin
-    package com.jetbrains.simplelogin.shared
-    
-    import platform.Foundation.NSUUID
+   To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
+   moved `data` directory wherever possible.
    
-    actual fun randomUUID(): String = NSUUID().UUIDString()
-    ```
-
-5. All that is left to do is to explicitly import `randomUUID` in the `LoginDataSource.kt` file of the `shared/src/commonMain`
-   directory:
-
+   1. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
+      `IOException` is not available in Kotlin/JVM.
+   
+       ```kotlin
+       // Before
+       return Result.Error(IOException("Error logging in", e))
+       ```
+   
+       ```kotlin
+       // After
+       return Result.Error(RuntimeException("Error logging in", e))
+       ```
+   
+   2. Remove the import directive for `IOException` as well:
+   
+       ```kotlin
+       import java.io.IOException
+       ```
+   
+   3. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
+      regular expression matching the pattern for email validation:
+   
+       ```kotlin
+       // Before
+       private fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+       ```
+   
+       ```kotlin
+       // After
+       private fun isEmailValid(email: String) = emailRegex.matches(email)
+       
+       companion object {
+           private val emailRegex = 
+               ("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                   "\\@" +
+                   "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                   "(" +
+                   "\\." +
+                   "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                   ")+").toRegex()
+       }
+       ```
+   
+   4. Remove the import directive for the `Patterns` class:
+   
+       ```kotlin
+       import android.util.Patterns
+       ```
+   
+   #### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
+   
+   In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
+   the `java.util.UUID` class, which is not available for iOS.
+   
    ```kotlin
-   import com.jetbrains.simplelogin.shared.randomUUID
+   val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
    ```
-
-   Now, Kotlin will use different platform-specific implementations of UUID for Android and iOS.
+   
+   Even though the Kotlin standard library provides an [experimental class for UUID generation](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.uuid/-uuid/),
+   let's use platform-specific functionality for this case to practice doing that.
+   
+   Provide the `expect` declaration for the `randomUUID()` function in the shared code and its `actual` implementations for
+   each platform – Android and iOS – in the corresponding source sets.
+   You can learn more about [connecting to platform-specific APIs](multiplatform-connect-to-apis.md).
+   
+   1. Remove the `java.util.UUID` class from the common code:
+   
+       ```kotlin
+       val fakeUser = LoggedInUser(randomUUID(), "Jane Doe")
+       ```
+   
+   2. Create the `Utils.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/commonMain` directory
+      and provide the `expect` declaration:
+   
+       ```kotlin
+       package com.jetbrains.simplelogin.shared
+       
+       expect fun randomUUID(): String
+       ```
+   
+   3. Create the `Utils.android.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/androidMain`
+      directory and provide the `actual` implementation for `randomUUID()` in Android:
+   
+       ```kotlin
+       package com.jetbrains.simplelogin.shared
+       
+       import java.util.*
+      
+       actual fun randomUUID() = UUID.randomUUID().toString()
+       ```
+   
+   4. Create the `Utils.ios.kt` file in the `com.jetbrains.simplelogin.shared` of the `shared/src/iosMain` directory and
+      provide the `actual` implementation for `randomUUID()` in iOS:
+   
+       ```kotlin
+       package com.jetbrains.simplelogin.shared
+       
+       import platform.Foundation.NSUUID
+      
+       actual fun randomUUID(): String = NSUUID().UUIDString()
+       ```
+   
+   5. All that is left to do is to explicitly import `randomUUID` in the `LoginDataSource.kt` file of the `shared/src/commonMain`
+      directory:
+   
+      ```kotlin
+      import com.jetbrains.simplelogin.shared.randomUUID
+      ```
+   
+      Now, Kotlin will use different platform-specific implementations of UUID for Android and iOS.
 
 ### Run your cross-platform application on Android
 
