@@ -19,3 +19,10 @@ with all style preferences such as weight, width, slant, italic, custom axes, vi
 and style adaptable to specific text sizes.
 
 For details, see the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/text/fonts#variable-fonts).
+
+## Desktop
+
+### Support for Windows ARM64
+
+Compose Multiplatform introduces support for Windows ARM64, allowing you to build and run applications natively on 
+ARM-based Windows devices.
