@@ -23,9 +23,9 @@ For details, see the [Jetpack Compose documentation](https://developer.android.c
 
 ## Desktop
 
-### Support for Windows ARM64
+### Support for Windows for ARM64
 
-Compose Multiplatform introduces support for Windows ARM64, allowing you to build and run applications natively on 
+Compose Multiplatform introduces support for Windows for ARM64, allowing you to build and run applications natively on 
 ARM-based Windows devices.
 
 ## Web
