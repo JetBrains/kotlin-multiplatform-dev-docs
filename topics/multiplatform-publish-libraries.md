@@ -1,92 +1,100 @@
-[//]: # (title: Publish your multiplatform library)
+[//]: # (title: Publish your library to Maven Central – tutorial)
 
-This guide helps to publish a Kotlin Multiplatform library to the [Maven Central repository](https://central.sonatype.com/).
+In this tutorial, you'll learn how to publish your Kotlin Multiplatform library to the [Maven Central](https://central.sonatype.com/)
+repository.
 
-To publish your library, you’ll need to:
+To publish your library, you'll need to:
 
 1. Set up credentials, including an account on Maven Central and a PGP key for signing.
-2. Configure the publishing plugin in your library’s project.
+2. Configure the publishing plugin in your library's project.
 3. Provide your credentials to the publishing plugin so it can sign and upload your artifacts.
 4. Run the publication task, either locally or using continuous integration.
 
-This guide assumes that you are:
+This tutorial assumes that you are:
 
-- Creating an open-source library.
-- Storing the code for your library in a GitHub repository.
-- Using macOS or Linux. If you are a Windows user, use [GnuPG or Gpg4win](https://gnupg.org/download) to generate a key pair.
-- Either not registered on Maven Central yet or have an existing account that’s suitable for [publishing to the Central Portal](https://central.sonatype.org/publish-ea/publish-ea-guide/) (created after March 12th, 2024, or migrated to the Central Portal by their support).
-- Using GitHub Actions for continuous integration.
+* Creating an open-source library.
+* Storing the code for your library in a GitHub repository.
+* Using macOS or Linux. If you are a Windows user, use [GnuPG or Gpg4win](https://gnupg.org/download) to generate a key pair.
+* Either not registered on Maven Central yet or have an existing account that's suitable for [publishing to the Central Portal](https://central.sonatype.org/publish-ea/publish-ea-guide/)
+  (created after March 12th, 2024, or migrated to the Central Portal by their support).
+* Using GitHub Actions for continuous integration.
 
-Most of the steps here are still applicable if you’re using a different setup,
-but there may be some differences you need to account for.
-An [important limitation](https://kotlinlang.org/docs/multiplatform-publish-lib.html#host-requirements) is that Apple targets must be built on a machine with macOS.
+> Most of the steps here are still applicable if you're using a different setup, but there may be some differences you
+> need to take into account.
+> 
+> An [important limitation](https://kotlinlang.org/docs/multiplatform-publish-lib.html#host-requirements)
+> is that Apple targets must be built on a machine with macOS.
+> 
+{style="note"}
 
 ## Sample library
 
-Throughout this guide, we’ll use the [fibonacci](https://github.com/kotlin-hands-on/fibonacci) library as an example.
+In this tutorial, you'll use the [fibonacci](https://github.com/kotlin-hands-on/fibonacci) library as an example.
 You can refer to the code of that repository to see how the publishing setup works.
+
 If you'd like to reuse the code, you **must replace all example values** with those specific to your project.
 
 ## Prepare accounts and credentials
 
-To get started with publishing to Maven Central, sign in (or create a new account) on the [Maven Central](https://central.sonatype.com/) portal.
+To get started with publishing to Maven Central, sign in (or create a new account) on the [Maven Central](https://central.sonatype.com/)
+portal.
 
 ### Choose and verify a namespace
 
-You’ll need a verified namespace to uniquely identify your library’s artifacts on Maven Central.
+You'll need a verified namespace to uniquely identify your library's artifacts on Maven Central.
 
-Maven artifacts are identified by their [coordinates](https://central.sonatype.org/publish/requirements/#correct-coordinates), for example, `com.example:fibonacci-library:1.0.0`.
-These coordinates are made up of three parts, separated by colons:
+Maven artifacts are identified by their [coordinates](https://central.sonatype.org/publish/requirements/#correct-coordinates),
+for example, `com.example:fibonacci-library:1.0.0`. These coordinates are made up of three parts, separated by colons:
 
-* the `groupId` (in the reverse-DNS form, for example, `com.example`),
-* the `artifactId` (the unique name of the library itself, for example, `fibonacci-library`),
-* the `version` (the version string, for example, `1.0.0`). The version can be any string, but it cannot end in `-SNAPSHOT`.
+* `groupId` in the reverse-DNS form, for example, `com.example`
+* `artifactId`: the unique name of the library itself, for example, `fibonacci-library`
+* `version`: the version string, for example, `1.0.0`. The version can be any string, but it cannot end in `-SNAPSHOT`
 
-Your registered namespace allows you to set the format for your `groupId` on Maven Central:
-for example, if you register the `com.example` namespace, you can publish artifacts with the `groupId` set to `com.example`,
-`com.example.libraryname`, `com.example.module.feature` and so on.
+Your registered namespace allows you to set the format for your `groupId` on Maven Central. For example, if you register
+the `com.example` namespace, you can publish artifacts with the `groupId` set to `com.example`,
+`com.example.libraryname`, `com.example.module.feature`, and so on.
 
 Once you are signed on Maven Central, navigate to the [Namespaces](https://central.sonatype.com/publishing/namespaces) page.
 Then, click the **Add Namespace** button and register your namespace:
 
 <tabs>
-
 <tab id="github" title="With a GitHub repository">
 
-Using your GitHub account to create a namespace is a good option if you don’t own a domain name:
+Using your GitHub account to create a namespace is a good option if you don't own a domain name:
 
 1. Enter `io.github.<your username>` as your namespace, for example, `io.github.kotlinhandson` and click **Submit**.
 2. Copy the **Verification Key** displayed under the newly created namespace.
-3. On GitHub, log in with the username that you used and create a new public repository with the verification key as the repository’s name.
-   For example, `http://github.com/kotlin-hands-on/ex4mpl3c0d`.
-4. Navigate back to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete the repository you’ve created.
+3. On GitHub, log in with the username that you used and create a new public repository with the verification key as
+   the repository's name, for example, `http://github.com/kotlin-hands-on/ex4mpl3c0d`.
+4. Navigate back to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete
+   the repository you've created.
 
 </tab>
-
 <tab id="domain" title="With a domain name">
 
 To use a domain name that you own as your namespace:
 
-1. Enter your domain as the namespace using the reverse-DNS form: If your domain is `example.com`, enter `com.example`.
+1. Enter your domain as the namespace using the reverse-DNS form. If your domain is `example.com`, enter `com.example`.
 2. Copy the **Verification Key** displayed.
 3. Create a new TXT DNS-record with the verification key as its contents.
-   See [Maven Central’s FAQ](https://central.sonatype.org/faq/how-to-set-txt-record/) for more information on how to do this with various domain registrars.
-4. Return to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete the TXT record you’ve created.
+
+   See [Maven Central's FAQ](https://central.sonatype.org/faq/how-to-set-txt-record/) for more information on how to do
+   this with various domain registrars.
+4. Return to Maven Central and click the **Verify Namespace** button. When verification succeeds, you can delete
+   the TXT record you've created.
 
 </tab>
-
 </tabs>
 
 #### Generate a key pair
 
-Before you publish something to Maven Central,
-you need to sign your artifacts with a [PGP signature](https://central.sonatype.org/publish/requirements/gpg/),
+Before you publish something to Maven Central, you need to sign your artifacts with a [PGP signature](https://central.sonatype.org/publish/requirements/gpg/),
 which allows users to validate the origin of artifacts.
 
-To get started with signing, you’ll need to generate a key pair:
+To get started with signing, you'll need to generate a key pair:
 
-* The *private key* is used to sign your artifacts and should never be shared with others.
-* The *public key* can be shared with others so they can validate the signature of your artifacts.
+* The _private key_ is used to sign your artifacts and should never be shared with others.
+* The _public key_ can be shared with others so they can validate the signature of your artifacts.
 
 The `gpg` tool that can manage signatures for you is available on the [GnuPG website](https://gnupg.org/download/index.html).
 You can also install it using package managers such as [Homebrew](https://brew.sh/):
@@ -102,7 +110,7 @@ brew install gpg
     ```
 
 2. Choose the recommended defaults for the type of key to be created.
-    You can leave the selections empty and press **Enter** to accept the default values.
+   You can leave the selections empty and press **Enter** to accept the default values.
 
     ```text
     Please select what kind of key you want:
@@ -128,8 +136,9 @@ brew install gpg
     {style="note"}
 
 3. When prompted to specify how long the key should be valid, you can choose the default option of no expiration date.
-    If you choose to create a key that automatically expires after a set amount of time,
-    you’ll need to [extend its validity](https://central.sonatype.org/publish/requirements/gpg/#dealing-with-expired-keys) when it expires.
+
+   If you choose to create a key that automatically expires after a set amount of time, you'll need to [extend its validity](https://central.sonatype.org/publish/requirements/gpg/#dealing-with-expired-keys)
+   when it expires.
 
     ```text
     Please specify how long the key should be valid.
@@ -144,7 +153,8 @@ brew install gpg
     Is this correct? (y/N) y
     ```
 
-4. Enter your name, email, and an optional comment to associate the key with an identity (you can leave the comment field empty).
+4. Enter your name, email, and an optional comment to associate the key with an identity (you can leave the comment field
+   empty):
 
     ```text
     GnuPG needs to construct a user ID to identify your key.
@@ -156,14 +166,15 @@ brew install gpg
         "Jane Doe <janedoe@example.com>"
     ```
 
-5. Enter a passphrase to encrypt the key and repeat it when prompted. Keep this passphrase stored securely and privately.
-   You’ll need it later to access the private key when signing artifacts.
+5. Enter a passphrase to encrypt the key and repeat it when prompted.
 
-Take a look at the key you’ve created with the following command:
+   Keep this passphrase stored securely and privately. You'll need it later to access the private key when signing artifacts.
 
-```bash
-gpg --list-keys
-```
+6. Take a look at the key you've created with the following command:
+
+   ```bash
+   gpg --list-keys
+   ```
 
 The output will look something like this:
 
@@ -174,11 +185,13 @@ uid   [ultimate] Jane Doe <janedoe@example.com>
       sub   cv25519 2024-10-06 [E]
 ```
 
-In the next steps, you’ll need to use the long alphanumerical identifier of your key that appears in the output.
+In the next steps, you'll need to use the long alphanumerical identifier of your key that appears in the output.
 
 #### Upload the public key
 
-You need to [upload the public key to a keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) for it to be accepted by Maven Central. There are multiple available keyservers, we’ll use `keyserver.ubuntu.com` as a default choice.
+You need to [upload the public key to a keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key)
+for it to be accepted by Maven Central. There are multiple available keyservers, let's use `keyserver.ubuntu.com` as a
+default choice.
 
 Run the following command to upload your public key using `gpg`, **substituting your own key ID** in the parameters:
 
@@ -188,8 +201,8 @@ gpg --keyserver keyserver.ubuntu.com --send-keys F175482952A225BFC4A07A715EE6B5F
 
 #### Export your private key
 
-To let your Gradle project access your private key, you’ll need to export it to a file.
-You will be prompted to enter the passphrase you’ve used when creating the key.
+To let your Gradle project access your private key, you'll need to export it to a file.
+You'll be prompted to enter the passphrase you've used when creating the key.
 
 Use the following command, **passing in your own key ID** as a parameter:
 
@@ -199,7 +212,7 @@ gpg --armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > ke
 
 This command will create a `key.gpg` file which contains your private key.
 
-> Never share your private key file with anyone — only you should have access to it,
+> Never share your private key file with anyone — only you should have access to it
 > since the private key enables signing files with your credentials.
 > 
 {style="warning"}
@@ -218,32 +231,32 @@ bpD/h7ZI7FC0Db2uCU4CYdZoQVl0MNNC1Yr56Pa68qucadJhY0sFNiB23KrBUoiO
 
 ### Prepare your library project
 
-If you started developing your library from a template project, now is a good time to change any default names in the project
-to match your own library’s name.
-This includes the name of your library module, and the name of the root project in your top-level `build.gradle.kts` file.
+If you started developing your library from a template project, now is a good time to change any default names in the
+project to match your own library's name. This includes the name of your library module and the name of the root project
+in your top-level `build.gradle.kts` file.
 
 If you have an Android target in your project, you should follow the [steps to prepare your Android library release](https://developer.android.com/build/publish-library/prep-lib-release).
 At a minimum, this process requires you to [specify an appropriate namespace](https://developer.android.com/build/publish-library/prep-lib-release#choose-namespace)
 for your library so that a unique `R` class will be generated when their resources are compiled.
-Notice that the namespace is different from the Maven namespace created earlier in the [](#choose-and-verify-a-namespace) section.
+Notice that the namespace is different from the Maven namespace [created earlier](#choose-and-verify-a-namespace).
 
 ```kotlin
 // build.gradle.kts
 
 android {
-     namespace = "io.github.kotlinhandson.fibonacci"
+    namespace = "io.github.kotlinhandson.fibonacci"
 }
 ```
 
 ### Set up the publishing plugin
 
-This guide uses [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin)
+This tutorial uses [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin)
 to help with publications to Maven Central.
 You can read more about the advantages of the plugin [here](https://vanniktech.github.io/gradle-maven-publish-plugin/#advantages-over-maven-publish).
-See the [plugin’s documentation](https://vanniktech.github.io/gradle-maven-publish-plugin/central/)
+See the [plugin's documentation](https://vanniktech.github.io/gradle-maven-publish-plugin/central/)
 to learn more about its usage and available configuration options.
 
-To add the plugin to your project, add the following line to the `plugins {}` block of your library module’s `build.gradle.kts` file:
+To add the plugin to your project, add the following line to the `plugins {}` block of your library module's `build.gradle.kts` file:
 
 ```kotlin
 // <module directory>/build.gradle.kts
@@ -253,7 +266,7 @@ plugins {
 }
 ```
 
-> For the latest available version of the plugin, check its [releases page](https://github.com/vanniktech/gradle-maven-publish-plugin/releases).
+> For the latest available version of the plugin, check its [Releases page](https://github.com/vanniktech/gradle-maven-publish-plugin/releases).
 > 
 {style="note"}
 
@@ -304,10 +317,11 @@ mavenPublishing {
 The most important settings here are:
 
 * The `coordinates`, which specify the `groupId`, `artifactId`, and `version` of your library.
-* The [license](https://central.sonatype.org/publish/requirements/#license-information) under which your library is published.
-* The [developer information](https://central.sonatype.org/publish/requirements/#developer-information) which lists the authors of the library.
+* The [license](https://central.sonatype.org/publish/requirements/#license-information), under which your library is published.
+* The [developer information](https://central.sonatype.org/publish/requirements/#developer-information), which lists
+  the authors of the library.
 * [SCM (Source Code Management) information](https://central.sonatype.org/publish/requirements/#scm-information),
-  which specifies where the library’s source code is hosted.
+  which specifies where the library's source code is hosted.
 
 ## Publish to Maven Central using continuous integration
 
@@ -317,7 +331,7 @@ You need a Maven access token for Maven Central to authorize your publishing req
 Open the [Setup Token-Based Authentication](https://central.sonatype.com/account) page and click the **Generate User Token** button.
 
 The output looks like the example below, containing a username and a password.
-If you lose these credentials, you’ll need to generate new ones later, as they are not stored by Maven Central.
+If you lose these credentials, you'll need to generate new ones later, as they are not stored by Maven Central.
 
 ```xml
 <server>
@@ -335,22 +349,23 @@ you need to store these values as secrets.
 1. On your GitHub repository **Settings** page, click **Security** | **Secrets and variables** | **Actions**.
 2. Click the `New repository secret` button and add the following secrets:
 
-    * `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` are the values generated for the User Token by the Central Portal website, as described in the [Generate User Token](#generate-the-user-token) section.
-    * `SIGNING_KEY_ID` is **the last 8 characters** of your signing key’s identifier, for example, `20B385CE` for `F175482952A225BFC4A07A715EE6B5F76620B385CE`
-    * `SIGNING_PASSWORD` is the passphrase you’ve provided when generating your GPG key.
-    * `GPG_KEY_CONTENTS` should contain the entire contents of your `key.gpg` file, which you’ve created earlier
-        in the [Export your private key](#export-your-private-key) section.
+   * `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` are the values [generated for the User Token](#generate-the-user-token)
+     by the Central Portal website.
+   * `SIGNING_KEY_ID` is **the last 8 characters** of your signing key's identifier, for example, `20B385CE` for
+     `F175482952A225BFC4A07A715EE6B5F76620B385CE`.
+   * `SIGNING_PASSWORD` is the passphrase you've provided when generating your GPG key.
+   * `GPG_KEY_CONTENTS` should contain the entire contents of [your `key.gpg` file](#export-your-private-key).
 
-![](../images/publish/github_secrets.png)
+   ![Add secrets to GitHub](github_secrets.png){width=700}
 
-You will use the names for these secrets in the CI configuration on the next step.
+You'll use the names for these secrets in the CI configuration in the next step.
 
 ### Add a GitHub Actions workflow to your project
 
 You can set up continuous integration to build and publish your library automatically.
-We’ll use [GitHub Actions](https://docs.github.com/en/actions) as an example.
+We'll use [GitHub Actions](https://docs.github.com/en/actions) as an example.
 
-To get started, add the following workflow to your repository, in the `.github/workflows/publish.yml` file.
+To get started, add the following workflow to your repository in the `.github/workflows/publish.yml` file:
 
 ```yaml
 # .github/workflows/publish.yml
@@ -382,12 +397,12 @@ jobs:
 ```
 
 Once you commit and push this file, the workflow will run automatically whenever you create a release (including a pre-release)
-in the GitHub repository hosting your project.
-The workflow checks out the current version of your code, sets up a JDK, and then runs the `publishToMavenCentral` Gradle task.
+in the GitHub repository hosting your project. The workflow checks out the current version of your code, sets up a JDK,
+and then runs the `publishToMavenCentral` Gradle task.
 
-When using the `publishToMavenCentral` task, you’ll still need to check and release your deployment manually on the Maven Central website,
-as described in the [](#create-a-release-on-github) section.
-Alternatively, you can use the `publishAndReleaseToMavenCentral` task to fully automate the release process.
+When using the `publishToMavenCentral` task, you'll still need to check and [release your deployment manually](#create-a-release-on-github)
+on the Maven Central website. Alternatively, you can use the `publishAndReleaseToMavenCentral` task to fully automate
+the release process.
 
 You can also configure the workflow to [trigger when a tag is pushed](https://stackoverflow.com/a/61892639) to your repository.
 
@@ -397,60 +412,64 @@ You can also configure the workflow to [trigger when a tag is pushed](https://st
 >
 {style="tip"}
 
-This action requires your signing details and your Maven Central credentials, which you created as repository secrets
-in the [](#add-secrets-to-github) section.
+This action requires your signing details and your Maven Central credentials, which you created as [repository secrets](#add-secrets-to-github).
 
 The workflow configuration automatically transfers these secrets into environment variables,
 making them available to the Gradle build process.
 
 ### Create a release on GitHub
 
-With the workflow and secrets set up, you’re now ready to [create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
+With the workflow and secrets set up, you're now ready to [create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
 that will trigger the publication of your library.
 
-1. Make sure that the version number specified in the `build.gradle.kts` file for your library is the one you would like to publish.
-2. Go to your GitHub repository’s main page.
+1. Make sure that the version number is specified in the `build.gradle.kts` file for your library is the one you would
+   like to publish.
+2. Go to your GitHub repository's main page.
 3. In the right sidebar, click **Releases**.
-
-4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for this repository before).
-
-5. Each release creates a new tag. Create a new tag in the tags dropdown, and set the release title (the tag name and the title can be identical).
+4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for
+   this repository before).
+5. Each release has a tag. Create a new tag in the tag dropdown, and set the release title (the tag name and
+   the title can be identical).
+   
    You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
 
-    ![](../images/publish/create_release_and_tag.png)
+   ![Create a release on GitHub](create_release_and_tag.png){width=700}
 
-6. Double-check the branch you want to target with the release (especially if it’s not the default branch),
-    and add appropriate release notes for your new version.
-
-7. Use the checkboxes below the description to mark a release as a pre-release (useful for early access versions such as alpha, beta, or RC).
-   You can also mark the release as the latest one (if you already made a release for this repository before):
-
+6. Double-check the branch you want to target with the release (especially if it's not the default branch) and add
+   appropriate release notes for your new version.
+7. Use the checkboxes below the description to mark a release as a pre-release (useful for early access versions such as
+   alpha, beta, or RC).
+   
+   You can also mark the release as the latest one (if you already made a release for this repository before).
 8. Click the **Publish release** button to create the new release.
+9. Click the **Actions** tab at the top of your GitHub repository's page. Here, you'll see that the new release
+   triggered your publishing workflow.
+    
+   You can click on the workflow to see the outputs of the publication task.
+10. After the workflow run is complete, navigate to the [Deployments](https://central.sonatype.com/publishing/deployments)
+    dashboard on Maven Central. You should see a new deployment here.
 
-9. Click the **Actions** tab at the top of your GitHub repository's page.
-    Here you’ll see that the new release triggered your publishing workflow.
-    Click on it to see the outputs of the publication task.
+    This deployment may remain in the _pending_ or _validating_ states for some time while Maven Central performs checks.
 
-10. After the workflow run completes successfully, navigate to the [Deployments](https://central.sonatype.com/publishing/deployments)
-     dashboard on Maven Central.
-     You should see a new deployment here. This deployment may remain in the *pending* or *validating* states for some time
-     while Maven Central performs checks on it.
+11. Once your deployment is in the _validated_ state, check that it contains all the artifacts you've uploaded.
+    If everything looks correct, click the **Publish** button to release these artifacts.
 
-Once your deployment is in the *validated* state, check that it contains all the artifacts you’ve uploaded.
-If everything looks correct, click the *Publish* button to release these artifacts.
+    ![Publishing settings](published_on_maven_central.png){width=700}
 
-![](../images/publish/published_on_maven_central.png)
+    > It will take some time (usually about 15–30 minutes) after the release for the artifacts to be available publicly in
+    > the Maven Central repository. It may take longer for them to be indexed and become searchable on the [Maven Central website](https://central.sonatype.com/).
+    >
+    {style="tip"}
 
-> It will take some time (usually about 15–30 minutes) after the release for the artifacts to be available publicly in the Maven Central repository.
-> It may take longer for them to be indexed and become searchable on [the Maven Central website](https://central.sonatype.com/).
+To release the artifacts automatically once the deployment is verified, replace the `publishToMavenCentral` task in your
+workflow with `publishAndReleaseToMavenCentral`.
 
-To release the artifacts automatically once the deployment is verified, replace the `publishToMavenCentral` task in your workflow
-with `publishAndReleaseToMavenCentral`.
+## What's next
 
-## Next steps
-- Share your library with the Kotlin Community in the `#feed` channel in the [Kotlin Slack](https://kotlinlang.slack.com/).
-    (To sign up visit https://kotl.in/slack.)
-- Add [shield.io badges](https://shields.io/badges/maven-central-version) to your README.
-- Create a documentation site for your project using [Writerside](https://www.jetbrains.com/writerside/).
-- Share API documentation for your project using [Dokka](https://kotl.in/dokka).
-- Add [Renovate](https://docs.renovatebot.com/) to automatically update dependencies.
+* [Learn more about setting up multiplatform library publication and requirements](https://kotlinlang.org/docs/multiplatform-publish-lib.html)
+* [Add shield.io badges to your README](https://shields.io/badges/maven-central-version)
+* [Share API documentation for your project using Dokka](https://kotl.in/dokka)
+* [Add Renovate to automatically update dependencies](https://docs.renovatebot.com/)
+* [Promote your library on the JetBrains' search platform](https://klibs.io/)
+* [Share your library with the community in the `#feed` Kotlin Slack channel](https://kotlinlang.slack.com/)
+  (to sign up, visit https://kotl.in/slack)
