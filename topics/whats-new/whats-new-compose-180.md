@@ -21,6 +21,13 @@ and style adaptable to specific text sizes.
 
 For details, see the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/text/fonts#variable-fonts).
 
+## Desktop
+
+### Support for Windows for ARM64
+
+Compose Multiplatform introduces support for Windows for ARM64, allowing you to build and run applications natively on 
+ARM-based Windows devices.
+
 ## Web
 
 ### Preloading resources
@@ -35,4 +42,4 @@ The following functions are now available for loading and caching resources:
 * `preloadImageBitmap()` preloads bitmap images
 * `preloadImageVector()` preloads vector images
 
-See the [documentation](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api) for details.  
+See the [documentation](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api) for details. 
