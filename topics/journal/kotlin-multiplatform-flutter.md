@@ -8,7 +8,7 @@ Each project is unique and has specific requirements. This article aims to help 
 
 ## Cross-platform development: a unified approach to modern application building
 
-Cross-platform development offers a way to build applications that run across multiple platforms with a single codebase, eliminating the need to rewrite the same functionality for each system. While often associated with mobile development – targeting both Android and iOS – this approach extends far beyond mobile, covering web, desktop, and even server-side environments.
+Cross-platform development offers a way to build applications that run across multiple platforms with a single codebase, eliminating the need to rewrite the same functionality for each system. While often associated with [mobile development](cross-platform-mobile-development.md) – targeting both Android and iOS – this approach extends far beyond mobile, covering web, desktop, and even server-side environments.
 
 The core idea is to maximize code reuse while ensuring platform-specific features can still be implemented when necessary, streamlining the development process and reducing maintenance efforts. Teams can speed up development cycles, reduce costs, and ensure consistency across platforms, making cross-platform development a smart choice in today's increasingly diverse application landscape.
 
@@ -34,7 +34,7 @@ With Kotlin Multiplatform, you have various options: you can share all code exce
 
 Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In November 2023, Kotlin Multiplatform became [stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). During Google I/O 2024, Google announced its [support for Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) on Android for sharing business logic across Android and iOS.
 
-[![Discover Kotlin Multiplatform](discover-kmp.svg){width="700"}](https://www.jetbrains.com/kotlin-multiplatform/)
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="500"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 #### Compose Multiplatform
 
@@ -42,7 +42,7 @@ You can write shared UI code across multiple platforms using [Compose Multiplatf
 
 Compose Multiplatform is currently stable on Android and desktop, in Beta on iOS, and in Alpha on web.
 
-[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
+[![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
 Our dedicated article outlines the relationship between [Compose Multiplatform and Jetpack Compose](compose-multiplatform-and-jetpack-compose.md), highlighting the key differences.
 
@@ -112,12 +112,12 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
     <tr>
         <td><b>Companies using the technology</b></td>
-        <td><a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Forbes</a>, <a href="https://www.youtube.com/watch?v=z-o9MqN86eE">Todoist</a>, <a href="https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc">McDonald’s</a>, <a href="https://www.youtube.com/watch?v=5sOXv-X43vc">Google Workspace</a>, <a href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Philips</a>, <a href="https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04">9gag</a>, <a href="https://kotlinlang.org/lp/multiplatform/case-studies/baidu">Baidu</a>, <a href="https://kotlinlang.org/lp/multiplatform/case-studies/autodesk/">Autodesk</a>, <a href="https://touchlab.co/">TouchLab</a>, <a href="https://www.youtube.com/watch?v=YsQ-2lQYQ8M">Instabee</a>, and more are listed in our <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html">KMP case studies.</a></td>
+        <td><a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Forbes</a>, <a href="https://www.youtube.com/watch?v=z-o9MqN86eE">Todoist</a>, <a href="https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc">McDonald’s</a>, <a href="https://www.youtube.com/watch?v=5sOXv-X43vc">Google Workspace</a>, <a href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Philips</a>, <a href="https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04">9gag</a>, <a href="https://kotlinlang.org/lp/multiplatform/case-studies/baidu">Baidu</a>, <a href="https://kotlinlang.org/lp/multiplatform/case-studies/autodesk/">Autodesk</a>, <a href="https://touchlab.co/">TouchLab</a>, <a href="https://www.youtube.com/watch?v=YsQ-2lQYQ8M">Instabee</a>, and more are listed in our <a href="case-studies.topic">KMP case studies.</a></td>
         <td><a href="https://flutter.dev/showcase/xiaomi">Xiaomi</a>, <a href="https://flutter.dev/showcase/wolt">Wolt</a>, <a href="https://flutter.dev/showcase/universal-studios">Universal Studios</a>, <a href="https://flutter.dev/showcase/alibaba-group">Alibaba Group</a>, <a href="https://flutter.dev/showcase/bytedance">ByteDance</a>, <a href="https://www.geico.com/techblog/flutter-as-the-multi-channel-ux-framework/">Geico</a>, <a href="https://flutter.dev/showcase/ebay">eBay Motors</a>, <a href="https://flutter.dev/showcase/google-pay">Google Pay</a>, <a href="https://flutter.dev/showcase/so-vegan">So Vegan</a>, and more are listed on the <a href="https://flutter.dev/showcase">Flutter Showcase.</a></td>
     </tr>
 </table>
 
-[![Explore real-life use cases from global companies that leverage Kotlin Multiplatform for cross-platform development.](kmp-use-cases-1.svg){width="700"}](case-studies.topic)
+[![Explore real-life use cases from global companies that leverage Kotlin Multiplatform for cross-platform development.](kmp-use-cases-1.svg){width="500"}](case-studies.topic)
 
 You can also check out Google’s blog post, [Making Development Across Platforms Easier for Developers](https://developers.googleblog.com/en/making-development-across-platforms-easier-for-developers/), which provides guidance on choosing the right tech stack for your project.
 
