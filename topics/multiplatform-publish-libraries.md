@@ -29,7 +29,7 @@ This tutorial assumes that you are:
 
 ## Sample library
 
-In this tutorial, you'll use the [fibonacci](https://github.com/kotlin-hands-on/fibonacci) library as an example.
+In this tutorial, you'll use the [fibonacci](https://github.com/Kotlin/multiplatform-library-template/) library as an example.
 You can refer to the code of that repository to see how the publishing setup works.
 
 If you'd like to reuse the code, you **must replace all example values** with those specific to your project.
