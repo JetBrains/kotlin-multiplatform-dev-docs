@@ -17,7 +17,7 @@ To create your own brand new Kotlin Multiplatform application, we recommend usin
 You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic. 
 To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
 
-### JetBrains Official
+### JetBrains official samples
 
 <table>
     <tr>
@@ -138,7 +138,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
     </tr>
 </table>
 
-### Recommended
+### Recommended samples
 
 <table>
     <tr>
@@ -292,7 +292,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
     </tr>
 </table>
 
-### Other Community
+### Other community samples
 
 <table>
     <tr>
