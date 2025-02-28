@@ -29,8 +29,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
     </tr>
     <tr>
         <td>
-            <strong><a href="https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer">Image Viewer</a>
-            </strong>
+            <strong><a href="https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer">Image Viewer</a></strong>
         </td>
         <td>An application for capturing, viewing, and storing pictures. Includes support for maps. Uses Compose
             Multiplatform for the UI. Introduced at <a href="https://www.youtube.com/watch?v=FWVi4aV36d8">KotlinConf 2023</a>.
