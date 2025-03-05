@@ -6,7 +6,11 @@ You'll be able to write code and test it for both Android and iOS only once, in 
 This tutorial uses a [sample Android application](https://github.com/Kotlin/kmp-integration-sample) with a single screen
 for entering a username and password. The credentials are validated and saved to an in-memory database.
 
-> If you aren't familiar with Kotlin Multiplatform, learn how to [set up environment and create a cross-platform application from scratch](multiplatform-setup.md)
+To make your application work on both iOS and Android,
+you'll first make your code cross-platform by moving some of it to a shared module.
+After that you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
+
+> If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](multiplatform-setup.md)
 > first.
 >
 {style="tip"}
@@ -37,9 +41,6 @@ for entering a username and password. The credentials are validated and saved to
    ![Project view](select-project-view.png){width=200}
 
 ## Make your code cross-platform
-
-To make your application work on iOS, you'll first make your code cross-platform by moving some of it to a shared module.
-After that you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
 
 To make your code cross-platform:
 
