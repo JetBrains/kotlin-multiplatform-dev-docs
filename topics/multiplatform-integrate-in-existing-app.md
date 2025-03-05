@@ -94,7 +94,7 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
 
 2. Replace the code in created files (except for the package directives) with the following:
 
-     * For `commonMain/Platform.kt`:
+     * In `commonMain/Platform.kt`:
 
          ```kotlin
          interface Platform {
@@ -104,7 +104,7 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
          expect fun getPlatform(): Platform
          ```
      
-     * For `androidMain/Platform.android.kt`:
+     * In `androidMain/Platform.android.kt`:
 
          ```kotlin
          import android.os.Build
@@ -115,7 +115,7 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
 
          actual fun getPlatform(): Platform = AndroidPlatform()
          ```
-     * For `iosMain/Platform.ios.kt`:
+     * In `iosMain/Platform.ios.kt`:
 
          ```kotlin
          import platform.UIKit.UIDevice
