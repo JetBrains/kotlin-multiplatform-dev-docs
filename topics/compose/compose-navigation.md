@@ -43,11 +43,12 @@ on app architecture.
 
 ## General sequence of implementing navigation
 
-While you need all of the key components listed above, there is an order in which it makes most sense to tackle creating them:
+While you need all of the key parts listed above,
+there is an order in which it makes the most sense to tackle them:
 
 1. Define your routes. Use a serializable [TODO link?] object or class that describes how to get to a destination and contains all the data
     that the destination requires.
-2. Design your navigation graph, choosing one of the routes as the start destination.
+2. Design your navigation graph choosing one of the routes as the start destination.
     In Compose, you create a `NavHost` composable and add the `NavGraph` to it in one of two ways:
     * Directly, as part of creating the NavHost.
     * Programmatically, using the `NavController.createGraph()` method to create the `NavGraph` that you pass to the `NavHost`.
@@ -76,11 +77,34 @@ NavHost(navController = navController, startDestination = Profile) {
 
 ### Pass arguments to a destination
 
-### Obtain route instance
+When designing your navigation graph, you can define routes with classes that have parameters, for instance:
+
+```kotlin
+@Serializable
+data class Profile(val name: String)
+```
+
+When you need to pass arguments to that destination, create an instance of the route class and pass the arguments
+to the class constructor.
+
+> Navigation arguments are not well suited for passing complex data objects: consider passing the minimum necessary
+> information, such as unique identifiers.
+> Complex objects should be stored in a single source of truth, such as the data layer, so that there is no need to
+> transmit them between navigation graph destinations.
+> 
+{style="note"}
+
+### Deep links
+
+Compose Navigation lets you associate a specific URL, action or MIME type with a composable using deep linking.
+By default, deep links are not exposed to external apps: you need to register the appropriate URI schemas for each
+target
+(for example, on Android this means adding [`<intent-filter>`](https://developer.android.com/develop/ui/compose/navigation#deeplinks)
+elements to your `manifest.xml` file).
+
+For details on implementing deep links, see [TODO link].
 
 ### Minimal example
 
 https://developer.android.com/guide/navigation/design#compose-minimal
 [TODO make sure that the minimal example works with CMP]
-
-instead of passing the NavController to your composables, expose an event to the NavHost
