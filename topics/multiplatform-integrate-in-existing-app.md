@@ -76,6 +76,9 @@ Create a shared module and connect it to both the existing Android application a
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
+5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the same
+    property in the `app/build.gradle.kts` file.
+
 Now that you have a shared module,
 add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simplelogin.shared` directory:
 
