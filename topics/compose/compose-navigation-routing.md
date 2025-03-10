@@ -30,7 +30,7 @@ kotlin {
 ### Minimal example
 
 https://developer.android.com/guide/navigation/design#compose-minimal
-[TODO make sure that the minimal example works with CMP]
+[The minimal example works with CMP, with the corresponding environment setup.]
 
 ## Sample project
 
