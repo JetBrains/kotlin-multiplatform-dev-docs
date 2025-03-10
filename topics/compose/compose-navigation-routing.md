@@ -27,10 +27,10 @@ kotlin {
 }
 ```
 
-## Type-safe navigation
+### Minimal example
 
-Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code as described in
-the [Jetpack documentation](https://developer.android.com/guide/navigation/design/type-safety).
+https://developer.android.com/guide/navigation/design#compose-minimal
+[TODO make sure that the minimal example works with CMP]
 
 ## Sample project
 
@@ -62,15 +62,3 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
   and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
   are not supported on any platform besides Android.
 
-## Third-party alternatives
-
-If the Compose Multiplatform navigation components do not solve your problems,
-there are third-party alternatives that you can choose from:
-
-| Name                                                | Description                                                                                                                                                     |
-|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                                                                              |
-| [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
-| [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
-| [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
-| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |

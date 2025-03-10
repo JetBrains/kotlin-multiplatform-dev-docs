@@ -27,9 +27,12 @@ The Navigation component provides core types implementing the key concepts in na
 
 * _Graph_. Defines all possible navigation destinations within the app and the connections between them.
     Implemented in Compose as the `NavGraph` class.
-* _Destination._ A node in the navigation graph. When the user navigates to the node, the app displays content corresponding
-    to the destination. Implemented in Compose as the `NavDestination` class.
+* _Destination._ A composable node in the navigation graph.
+    When the user navigates to the node, the app displays content corresponding to the destination.
+    Implemented in Compose as the `NavDestination` class.
 * _Route._ Identifies a destination and any data required by it. Can be implemented as any serializable data type.
+    Routes are separated from destinations to allow you to keep destination composables independent of navigation,
+    which makes them easier to test and rearrange in your project.
 * _Host_. Contains the current navigation destination. As the user navigates through an app, the app swaps destinations
   in and out of the navigation host. Implemented in Compose as the `NavHost` class.
 * _Controller_. Offers core coordination functionality: methods for transitioning between destinations,
@@ -38,8 +41,7 @@ The Navigation component provides core types implementing the key concepts in na
 Besides the core types functionality, the Navigation component provides animations and transitions, support for deep linking,
 type safety, `ViewModel` support, and other quality-of-life features for handling app navigation.
 
-To read on the Navigation component in depth, see [Navigation](https://developer.android.com/guide/navigation) in the Android documentation
-on app architecture.
+To read up on the Navigation component in depth, see Android's [Navigation article](https://developer.android.com/guide/navigation).
 
 ## General sequence of implementing navigation
 
@@ -87,12 +89,29 @@ data class Profile(val name: String)
 When you need to pass arguments to that destination, create an instance of the route class and pass the arguments
 to the class constructor.
 
-> Navigation arguments are not well suited for passing complex data objects: consider passing the minimum necessary
-> information, such as unique identifiers.
-> Complex objects should be stored in a single source of truth, such as the data layer, so that there is no need to
-> transmit them between navigation graph destinations.
+> Navigation arguments are not designed for passing complex data objects.
+> Consider passing the minimum necessary information, such as unique identifiers of complex objects stored in the data layer.
+> Using a single source of truth, such as the data layer, helps avoid transmitting complex data between navigation graph destinations.
 > 
 {style="note"}
+
+### Managing UI state
+
+Complex objects that reflect the state of the app in general should be stored in the data layer:
+when the user lands on a destination, it loads the necessary information from a single source of truth.
+This approach helps prevent data loss during configuration changes and any inconsistencies
+when the referenced object is updated or mutated.
+
+https://developer.android.com/develop/ui/compose/navigation#retrieving-complex-data
+
+
+### Type safety [TODO]
+
+https://developer.android.com/guide/navigation/design/type-safety
+
+Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code as described in
+the [Jetpack documentation](https://developer.android.com/guide/navigation/design/type-safety).
+
 
 ### Deep links
 
@@ -104,7 +123,15 @@ elements to your `manifest.xml` file).
 
 For details on implementing deep links, see [TODO link].
 
-### Minimal example
+## Alternative navigation solutions
 
-https://developer.android.com/guide/navigation/design#compose-minimal
-[TODO make sure that the minimal example works with CMP]
+If the Compose-based navigation implementation does not work for you,
+there are third-party alternatives to evaluate:
+
+| Name                                                | Description                                                                                                                                                     |
+|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                                                                              |
+| [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
+| [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
+| [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
+| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |
