@@ -38,12 +38,6 @@ We recommend that you install the latest stable versions for compatibility and b
    <tr>
         <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform plugin</a></td>
         <td><p>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</p>
-<note>
-              <p>
-                The KMP plugin doesn't support <a href="https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides">K2 mode</a>) yet.
-                To use the plugin, disable K2 mode: in your IDE, go to <b>Settings | Languages & Frameworks | Kotlin</b> and uncheck the <b>Enable K2 mode</b> option.
-              </p>
-            </note>
 </td>
    </tr>
    <tr>
