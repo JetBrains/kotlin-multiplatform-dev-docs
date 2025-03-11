@@ -105,13 +105,19 @@ when the referenced object is updated or mutated.
 https://developer.android.com/develop/ui/compose/navigation#retrieving-complex-data
 
 
-### Type safety [TODO]
+### Type-safe navigation
 
-https://developer.android.com/guide/navigation/design/type-safety
+Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code.
+This means that as long as you define routes as serializable objects or classes,
+the framework will provide compile-time type safety for your navigation graph.
 
-Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code as described in
-the [Jetpack documentation](https://developer.android.com/guide/navigation/design/type-safety).
+> This is not a requirement: you can still use plain strings to identify your routes
+> with Compose Navigation, but you will have to keep track of route names and arguments.
+> 
+{style="note"}
 
+
+To learn about Navigation Compose type safety in detail, see the [Jetpack's Type safety article](https://developer.android.com/guide/navigation/design/type-safety).
 
 ### Deep links
 
