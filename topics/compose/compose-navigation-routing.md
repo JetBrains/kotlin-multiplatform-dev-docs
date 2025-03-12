@@ -62,6 +62,35 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
   and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
   are not supported on any platform besides Android.
 
+## Support for browser navigation in web apps
+<primary-label ref="EAP"/>
+
+Compose Multiplatform for web fully supports the common Navigation library APIs,
+and on top of that allows your apps to receive navigational input from the browser.
+Users can use the **Back** and **Forward** buttons in the browser to move through the back stack,
+as well as input URLs with valid routes directly to get to a particular destination.
+
+To bind your web app presentation to the navigation graph defined in your common code,
+call the `window.bindToNavigation()` method in your Kotlin/Wasm code:
+
+```kotlin
+@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalBrowserHistoryApi
+fun main() {
+    val body = document.body ?: return
+    
+    ComposeViewport(body) {
+        
+        val navController = rememberNavController()
+        // Assuming that your main composable function in common code is App()
+        App(navController)
+        LaunchedEffect(Unit) {
+            window.bindToNavigation(navController)
+        }
+    }
+}
+```
+
 ## Third-party alternatives
 
 If the Compose Multiplatform navigation components do not solve your problems,
