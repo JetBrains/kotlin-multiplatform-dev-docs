@@ -116,7 +116,6 @@ the framework will provide compile-time type safety for your navigation graph.
 > 
 {style="note"}
 
-
 To learn about Navigation Compose type safety in detail, see the [Jetpack's Type safety article](https://developer.android.com/guide/navigation/design/type-safety).
 
 ### Deep links
