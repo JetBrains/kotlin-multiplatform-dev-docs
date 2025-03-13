@@ -101,7 +101,7 @@ Implement the same changes as in the Android app:
     * Xcode reports errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
       This is expected – proceed to the next step.
 
-5. In Android Studio, start the iOS run configuration to see the changes:
+5. In Xcode, start the iOS run configuration to see the changes:
 
     ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
 
