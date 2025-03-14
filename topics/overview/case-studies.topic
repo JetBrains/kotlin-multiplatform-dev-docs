@@ -233,5 +233,14 @@
                 else in their apps can be shared with KMP.</p>
             <a href="https://kotlinlang.org/lp/multiplatform/case-studies/chalk/">Read the full story</a>.
         </li>
+        <li id="case-study-meituan-rms">
+            <img src="meituan-rms.svg" alt="Meituan RMS" height="35"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
+            <p><b>Meituan</b> uses KMP to develop client applications for its restaurant management system,
+                across Android, iOS, and Windows platforms since 2020. This approach enabled sharing code for data,
+                domain and presentation layers, improved development efficiency in new features,
+                and ensured smooth user interactions on low-end devices.</p>
+            <a href="https://www.bilibili.com/video/BV1es421T71C">Watch the full video</a>.
+        </li>
     </list>
 </topic>
