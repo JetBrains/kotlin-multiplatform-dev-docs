@@ -42,7 +42,7 @@ After that you'll use your cross-platform code in the Android application, and t
 
 ## Make your code cross-platform
 
-To make your code cross-platform:
+To make your code cross-platform, you'll follow these steps:
 
 1. [Decide what code to make cross-platform](#decide-what-code-to-make-cross-platform).
 2. [Create a shared module for cross-platform code](#create-a-shared-module-for-cross-platform-code).
