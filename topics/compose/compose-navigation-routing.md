@@ -91,6 +91,19 @@ fun main() {
 }
 ```
 
+### Translating routes into URLs and back
+
+User of a website usually expects that the URL displayed in the browser address bar contains all necessary information
+about where they are within the app.
+So, a URL that is copied and pasted into another browser should lead to the same screen.
+
+As Compose apps are single-page apps, the URL does not change automatically – the relation between
+navigation and the displayed address needs to be implemented artificially.
+Compose Multiplatform does just that: it alters the displayed URL according to the current destination
+and catches changes made to the address bar by the user to parse their intention to move to a different screen.
+
+By default, 
+
 ## Third-party alternatives
 
 If the Compose Multiplatform navigation components do not solve your problems,
