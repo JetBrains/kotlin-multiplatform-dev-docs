@@ -101,6 +101,8 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
      * In `commonMain/Platform.kt`:
 
          ```kotlin
+         package com.jetbrains.simplelogin.shared
+       
          interface Platform {
              val name: String
          }
@@ -111,6 +113,8 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
      * In `androidMain/Platform.android.kt`:
 
          ```kotlin
+         package com.jetbrains.simplelogin.shared
+         
          import android.os.Build
 
          class AndroidPlatform : Platform {
@@ -122,6 +126,8 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
      * In `iosMain/Platform.ios.kt`:
 
          ```kotlin
+         package com.jetbrains.simplelogin.shared
+       
          import platform.UIKit.UIDevice
 
          class IOSPlatform: Platform {
@@ -363,13 +369,15 @@ but they are beyond the scope of this tutorial.
 
 1. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
 
-2. In the Targets section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
+2. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
 
 3. Click the **+** icon and select **New Run Script Phase**.
 
-   ![Add run script phase](xcode-run-script-phase-1.png){width=700}
+    ![Add run script phase](xcode-run-script-phase-1.png){width=700}
 
-4. Paste the following script in the text field:
+    The new phase is created at the bottom of the list.
+
+4. Click the **>** icon to expand the created **Run Script** item, then paste the following script in the text field:
 
     ```text
     cd "$SRCROOT/.."
@@ -392,7 +400,8 @@ but they are beyond the scope of this tutorial.
    {style="note"}
 
 7. Build the project in Xcode (**Product** | **Build** in the main menu).
-    If everything is set up correctly, the project will build successfully.
+    If everything is set up correctly, the project will build successfully
+    (you can ignore the "build phase will be run during every build" warning).
    
     > Build may fail if you built the project before disabling the **User Script Sandboxing** option:
     > the Gradle daemon process may be sandboxed and needs to be restarted.
@@ -429,8 +438,7 @@ This is the name of the framework that Kotlin Multiplatform builds for the iOS a
 
 Try adding a call to common code in Swift code:
 
-1. Open the `ContentView.swift` file in Android Studio and import the framework
-   (if the module is not found, build it by running the iOS run configuration):
+1. In Android Studio, open the `iosApp/simpleloginIOS/ContentView.swift` file and import the framework:
 
    ```swift
    import sharedKit
@@ -452,7 +460,7 @@ Try adding a call to common code in Swift code:
 
    ![Greeting from the shared module](xcode-iphone-hello.png){width=300}
 
-4. Replace code in the `ContentView.swift` file again, to use the business logic from the shared module to render the application UI:
+4. Update code in the `ContentView.swift` file again to use the business logic from the shared module to render the application UI:
 
    ```kotlin
    ```
@@ -487,7 +495,8 @@ Now your application is cross-platform. You can update the business logic in the
 and iOS.
 
 1. Change the validation logic for a user's password: "password" shouldn't be a valid option.
-   To do that, update the `checkPassword()` function of the `LoginDataValidator` class:
+    To do that, update the `checkPassword()` function of the `LoginDataValidator` class
+    (to find it quickly, press **Shift** twice, paste the name of the class, and switch to the **Classes** tab):
 
    ```kotlin
    package com.jetbrains.simplelogin.shared.data
