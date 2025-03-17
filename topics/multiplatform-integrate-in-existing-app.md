@@ -63,7 +63,7 @@ Your future iOS application will use the same logic, so you should make it cross
 
 ### Create a shared module for cross-platform code
 
-The cross-platform code that is used for both iOS and Android will be stored in a shared module.
+The cross-platform code used for both iOS and Android will be stored in a shared module.
 Starting with the Meerkat version, Android Studio provides a wizard for creating such modules.
 
 Create a shared module and connect it to both the existing Android application and your future iOS application:
@@ -192,7 +192,7 @@ This is necessary for reusing the code for both Android and iOS.
 
    ![Drag and drop the package with the business logic code](moving-business-logic.png){width=350}
 
-2. When Android Studio asks what you'd like to do, select to move the package, and then approve the refactoring.
+2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
 
    ![Refactor the business logic package](refactor-business-logic-package.png){width=500}
 
@@ -373,7 +373,7 @@ but they are beyond the scope of this tutorial.
 
 3. Click the **+** icon and select **New Run Script Phase**.
 
-    ![Add run script phase](xcode-run-script-phase-1.png){width=700}
+    ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
 
     The new phase is created at the bottom of the list.
 
