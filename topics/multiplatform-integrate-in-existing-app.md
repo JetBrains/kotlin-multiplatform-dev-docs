@@ -36,19 +36,20 @@ After that you'll use your cross-platform code in the Android application, and t
    >
    {style="tip"}
 
-3. Switch to the **Project** view.
+3. Switch from the **Android** view to the **Project** view:
 
-   ![Project view](select-project-view.png){width=200}
+   ![Project view](switch-to-project.png){width="513"}
 
 ## Make your code cross-platform
 
 To make your code cross-platform, you'll follow these steps:
 
-1. [Decide what code to make cross-platform](#decide-what-code-to-make-cross-platform).
-2. [Create a shared module for cross-platform code](#create-a-shared-module-for-cross-platform-code).
-3. [Add a dependency on the shared module to your Android application](#add-a-dependency-on-the-shared-module-to-your-android-application).
-4. [Make the business logic cross-platform](#make-the-business-logic-cross-platform).
-5. [Run your cross-platform application on Android](#run-your-cross-platform-application-on-android).
+1. [Decide what code to make cross-platform](#decide-what-code-to-make-cross-platform)
+2. [Create a shared module for cross-platform code](#create-a-shared-module-for-cross-platform-code)
+3. [Test the code sharing](#add-code-to-the-shared-module)
+4. [Add a dependency on the shared module to your Android application](#add-a-dependency-on-the-shared-module-to-your-android-application)
+5. [Make the business logic cross-platform](#make-the-business-logic-cross-platform)
+6. [Run your cross-platform application on Android](#run-your-cross-platform-application-on-android)
 
 ### Decide what code to make cross-platform
 
@@ -72,12 +73,14 @@ Create a shared module and connect it to both the existing Android application a
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
    Leave the library name `shared` and enter the package name `com.jetbrains.simplelogin.shared`.
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
-4. You should see this file structure in the `shared` directory:
+4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
 5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
     property in the `app/build.gradle.kts` file.
+
+### Add code to the shared module
 
 Now that you have a shared module,
 add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simplelogin.shared` directory:
@@ -436,7 +439,7 @@ The `build.gradle.kts` file of the `shared` module defines the `binaries.framewo
 property for each iOS target as `sharedKit`.
 This is the name of the framework that Kotlin Multiplatform builds for the iOS app to consume.
 
-Try adding a call to common code in Swift code:
+To test the integration, add a call to common code in Swift code:
 
 1. In Android Studio, open the `iosApp/simpleloginIOS/ContentView.swift` file and import the framework:
 
