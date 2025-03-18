@@ -78,9 +78,9 @@ call the `window.bindToNavigation()` method in your Kotlin/Wasm code:
 @ExperimentalBrowserHistoryApi
 fun main() {
     val body = document.body ?: return
-    
+
     ComposeViewport(body) {
-        
+
         val navController = rememberNavController()
         // Assuming that your main composable function in common code is App()
         App(navController)
@@ -102,7 +102,60 @@ navigation and the displayed address needs to be implemented artificially.
 Compose Multiplatform does just that: it alters the displayed URL according to the current destination
 and catches changes made to the address bar by the user to parse their intention to move to a different screen.
 
-By default, 
+By default, the route ID is shown in the URL fragment (after the `#` symbol).
+This might result in URLs that are hard to read,
+especially when using parameterized routes like `details/{id}` or complex nested navigation.
+
+You can customize how routes are displayed in the URL by providing the optional `getBackStackEntryRoute` parameter
+to the `bindToNavigation` function.
+This parameter is a lambda that takes a `NavBackStackEntry` and returns a custom string to be used as the URL fragment.
+
+Here's an example of using the `getBackStackEntryRoute` parameter:
+
+```kotlin
+@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalBrowserHistoryApi
+fun main() {
+    val body = document.body ?: return
+
+    ComposeViewport(body) {
+
+        val navController = rememberNavController()
+        // Assuming that your main composable function in common code is App()
+        App(navController)
+        LaunchedEffect(Unit) {
+            window.bindToNavigation(
+                navController = navController,
+                getBackStackEntryRoute = { entry ->
+                    // Customize the URL fragment based on the destination
+                    when (entry.destination.route) {
+                        "details/{id}" -> {
+                            // Extract the ID parameter and create a more readable URL
+                            val id = entry.arguments?.getString("id") ?: ""
+                            "product/$id"
+                        }
+                        "checkout/{orderId}" -> {
+                            // Create a more user-friendly URL for checkout
+                            val orderId = entry.arguments?.getString("orderId") ?: ""
+                            "checkout?order=$orderId"
+                        }
+                        else -> {
+                            // For other routes, use the default behavior
+                            entry.destination.route ?: ""
+                        }
+                    }
+                }
+            )
+        }
+    }
+}
+```
+
+This approach allows you to:
+* Create more user-friendly and readable URLs
+* Hide implementation details from the URL
+* Implement custom URL patterns that match your application's domain
+* Maintain a consistent URL structure even if your internal routing changes
 
 ## Third-party alternatives
 
