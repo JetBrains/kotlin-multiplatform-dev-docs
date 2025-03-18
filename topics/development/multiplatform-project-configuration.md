@@ -27,7 +27,7 @@ It's possible to consume this framework as a local or remote dependency.
 You can add a dependency on a Kotlin Multiplatform module framework to the iOS project in one of the following ways:
 
 * **Direct integration**. You connect the framework directly by adding a new run script phase to the build of the iOS
-  app. See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#connect-the-framework-to-your-ios-project)
+  app. See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#configure-the-ios-project-to-use-a-kmp-framework)
   to learn how to do that in Xcode.
 
   When you create a project with the Android Studio wizard, choose the **Regular framework** option to have this setup generated
