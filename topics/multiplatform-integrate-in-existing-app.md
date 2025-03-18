@@ -64,7 +64,7 @@ Your future iOS application will use the same logic, so you should make it cross
 ### Create a shared module for cross-platform code
 
 The cross-platform code used for both iOS and Android will be stored in a shared module.
-Starting with the Meerkat version, Android Studio provides a wizard for creating such modules.
+Starting with the Meerkat version, Android Studio provides a wizard for creating such shared modules.
 
 Create a shared module and connect it to both the existing Android application and your future iOS application:
 
@@ -76,7 +76,7 @@ Create a shared module and connect it to both the existing Android application a
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
-5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the same
+5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
     property in the `app/build.gradle.kts` file.
 
 Now that you have a shared module,
@@ -96,7 +96,7 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
     }
     ```
 
-2. Replace the code in created files (except for the package directives) with the following:
+2. Replace the code in created files with the following:
 
      * In `commonMain/Platform.kt`:
 
@@ -386,7 +386,7 @@ but they are beyond the scope of this tutorial.
 
    ![Add the script](xcode-add-run-phase-2.png){width=700}
 
-5. Move the **Run Script** phase up in the order, before the **Compile Sources** phase:
+5. Move the **Run Script** phase higher in the order, placing it before the **Compile Sources** phase:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
@@ -400,8 +400,8 @@ but they are beyond the scope of this tutorial.
    {style="note"}
 
 7. Build the project in Xcode (**Product** | **Build** in the main menu).
-    If everything is set up correctly, the project will build successfully
-    (you can ignore the "build phase will be run during every build" warning).
+    If everything is configured correctly, the project should build successfully 
+    (you can safely ignore the "build phase will be run during every build" warning)
    
     > Build may fail if you built the project before disabling the **User Script Sandboxing** option:
     > the Gradle daemon process may be sandboxed and needs to be restarted.
@@ -422,11 +422,11 @@ When you made sure that Xcode is set up correctly, you can set up a run configur
 
 4. In the **Xcode project file** field, select the location of the `simpleLoginIOS.xcodeproj` file.
 
-5. Choose a simulation environment in the **Execution target** list and click **OK**:
+5. Choose a simulation environment from the **Execution target** list and click **OK**:
 
    ![Android Studio dialog with the iOS run configuration details filled in](android-studio-ios-run-configuration.png)
 
-6. Check the newly created configuration – press the run button to build and launch the iOS app:
+6. Check the newly created configuration by pressing the run button to build and launch the iOS app:
 
    ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=280}
 
