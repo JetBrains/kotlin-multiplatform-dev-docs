@@ -52,7 +52,7 @@ Just as with Jetpack Compose, to implement navigation, you should:
 Each back stack entry (each navigation route included in the graph) implements the `LifecycleOwner` interface.
 A switch between different screens of the app makes it change its state from `RESUMED` to `STARTED` and back.
 `RESUMED` is also described as "settled": navigation is considered finished when the new screen is prepared and active.
-See the [Lifecycle](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
+See the [](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
 
 ## Limitations
 
@@ -67,11 +67,11 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
 
 Compose Multiplatform for web fully supports the common Navigation library APIs,
 and on top of that allows your apps to receive navigational input from the browser.
-Users can use the **Back** and **Forward** buttons in the browser to move through the back stack,
-as well as input URLs with valid routes directly to get to a particular destination.
+Users can use the **Back** and **Forward** buttons in the browser to move between navigation routes reflected in the browser history,
+as well as use the address bar to understand where they are and get to a destination directly.
 
-To bind your web app presentation to the navigation graph defined in your common code,
-call the `window.bindToNavigation()` method in your Kotlin/Wasm code:
+To bind the web app to the navigation graph defined in your common code,
+call the `window.bindToNavigation()` method in your Kotlin/Wasm or Kotlin/JS code:
 
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
@@ -91,70 +91,124 @@ fun main() {
 }
 ```
 
-### Translating routes into URLs and back
+After a `window.bindToNavigation(navController)` call:
+* The URL displayed in the browser reflects the current route (in the URL fragment, after the `#` character).
+* The app parses URLs entered manually to translate them into destinations within the app.
 
-User of a website usually expects that the URL displayed in the browser address bar contains all necessary information
-about where they are within the app.
-So, a URL that is copied and pasted into another browser should lead to the same screen.
+By default, when using type-safe navigation, a destination is translated into a URL fragment using this pattern:
+`<app package>.<type parameter of the destination>_<argument1>_<argument2>`.
+For example, `example.org#org.example.app.StartScreen_123_Alice%2520Smith`.
 
-As Compose Multiplatform apps are single-page apps, the URL does not change automatically.
-The framework manipulates alters the displayed URL according to the current destination
-and catches changes made to the address bar by the user to parse their intention to move to a different screen.
+### Customize translating routes into URLs and back
 
-By default, the route ID is shown in the URL fragment (after the `#` symbol).
-This might result in URLs that are hard to read,
-especially when using parameterized routes like `details/{id}` or complex nested navigation.
+As Compose Multiplatform apps are single-page apps, the framework needs to manipulate the address bar to imitate
+usual web navigation.
+If you would like to make your URLs more readable or isolate implementation from URL patterns,
+you can develop custom processing for destination routes in your Kotlin/Wasm or Kotlin/JS code:
 
-You can customize how routes are displayed in the URL by providing the optional `getBackStackEntryRoute` parameter
-to the `windows.bindToNavigation()` function.
-This parameter is a lambda that takes a `NavBackStackEntry` and returns a custom string to be used as the URL fragment.
+1. Pass the optional `getBackStackEntryRoute` lambda to the `window.bindToNavigation()` function
+    to describe converting routes into URL fragments where necessary.
+2. If needed, add code that catches manual changes in the address bar and navigates the user accordingly.
 
-Here's an example of using the `getBackStackEntryRoute` parameter:
+First, add the lambda to the `.bindToNavigation()` call:
 
 ```kotlin
-@OptIn(ExperimentalComposeUiApi::class)
-@ExperimentalBrowserHistoryApi
+@OptIn(
+    ExperimentalComposeUiApi::class,
+    ExperimentalBrowserHistoryApi::class,
+    ExperimentalSerializationApi::class
+)
 fun main() {
     val body = document.body ?: return
-
     ComposeViewport(body) {
-
         val navController = rememberNavController()
-        // Assuming that your main composable function in common code is App()
         App(navController)
         LaunchedEffect(Unit) {
-            window.bindToNavigation(
-                navController = navController,
-                // Customizes the URL fragment based on the destination
-                getBackStackEntryRoute = { entry ->
-                    when (entry.destination.route) {
-                        "details/{id}" -> {
-                            // Extracts the ID parameter and create a more readable URL
-                            val id = entry.arguments?.getString("id") ?: ""
-                            "product/$id"
-                        }
-                        "checkout/{orderId}" -> {
-                            // Creates a more user-friendly URL for checkout
-                            val orderId = entry.arguments?.getString("orderId") ?: ""
-                            "checkout?order=$orderId"
-                        }
-                        else -> {
-                            // Uses the default behavior for other routes
-                            entry.destination.route ?: ""
-                        }
+            window.bindToNavigation(navController) { entry ->
+                val route = entry.destination.route.orEmpty()
+                when {
+                    // Identifies the route using its serial descriptor.
+                    route.startsWith(StartScreen.serializer().descriptor.serialName) -> {
+                        // Sets the corresponding URL fragment to "#start"
+                        // instead of "#org.example.app.StartScreen".
+                        //
+                        // This string must always start with the `#` character to keep
+                        // the processing at the front end.
+                        "#start"
                     }
+                    route.startsWith(Id.serializer().descriptor.serialName) -> {
+                        // Accesses the route arguments.
+                        val args = entry.toRoute<Id>()
+
+                        // Sets the corresponding URL fragment to "#find_id_222"
+                        // instead of "#org.example.app.ID%2F222"
+                        "#find_id_${args.id}"
+                    }
+                    route.startsWith(Patient.serializer().descriptor.serialName) -> {
+                        val args = entry.toRoute<Patient>()
+                        // Sets the corresponding URL fragment to "#patient_Jane%20Smith-Baker_33"
+                        // instead of "#org.company.app.Patient%2FJane%2520Smith-Baker%2F33"
+                        "#patient_${args.name}_${args.age}"
+                    }
+                    // Doesn't set a URL fragment for all other routes.
+                    else -> ""
                 }
-            )
+            }
         }
     }
 }
 ```
+{default-state="collapsed" collapsible="true" collapsed-title="window.bindToNavigation(navController) { entry ->"}
 
-This approach allows you to:
-* Create more user-friendly and readable URLs.
-* Hide implementation details from the URL.
-* Implement custom URL patterns that match your application's domain.
-* Maintain a consistent URL structure even if your internal routing changes.
+> Make sure that every string that corresponds to a route starts with the `#` character to keep the data
+> within URL fragments.
+> Otherwise, when the user copies and pastes the URL, the browser will try to access a wrong endpoint instead of passing
+> the control to your app.
+> 
+{style="note"}
+
+When your URLs have custom formatting, you should add the reverse processing 
+to match a manually entered URL to a destination route.
+The code that does the matching needs to run before the `window.bindToNavigation()` call binds
+`window.location` to the navigation graph:
+
+```kotlin
+@OptIn(
+    ExperimentalComposeUiApi::class,
+    ExperimentalBrowserHistoryApi::class,
+    ExperimentalSerializationApi::class
+)
+fun main() {
+    val body = document.body ?: return
+    ComposeViewport(body) {
+        val navController = rememberNavController()
+        App(navController)
+        LaunchedEffect(Unit) {
+            // Accesses the fragment substring of the current URL.
+            val initRoute = window.location.hash.substringAfter('#', "")
+            when  {
+                // Identifies the corresponding route and navigates to it.
+                initRoute.startsWith("start") -> {
+                    navController.navigate(StartScreen)
+                }
+                initRoute.startsWith("find_id") -> {
+                    // Parses the string to extract route parameters before navigating to it.
+                    val id = initRoute.substringAfter("find_id_").toLong()
+                    navController.navigate(Id(id))
+                }
+                initRoute.startsWith("patient") -> {
+                    val name = initRoute.substringAfter("patient_").substringBefore("_")
+                    val id = initRoute.substringAfter("patient_").substringAfter("_").toLong()
+                    navController.navigate(Patient(name, id))
+                }
+            }
+            
+            window.bindToNavigation(navController) { ... }
+        }
+    }
+}
+```
+{default-state="collapsed" collapsible="true" collapsed-title="val initRoute = window.location.hash.substringAfter( ..."}
 
 ## Third-party alternatives
 
