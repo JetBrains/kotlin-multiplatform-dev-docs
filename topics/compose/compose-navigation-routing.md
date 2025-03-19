@@ -152,7 +152,7 @@ internal fun App(
 ```
 {default-state="collapsed" collapsible="true" collapsed-title="NavHost(navController = navController, startDestination = StartScreen)"}
 
-In `wasmJsMain/kotlin/main.kt`, First, add the lambda to the `.bindToNavigation()` call:
+In `wasmJsMain/kotlin/main.kt`, add the lambda to the `.bindToNavigation()` call:
 
 ```kotlin
 @OptIn(
