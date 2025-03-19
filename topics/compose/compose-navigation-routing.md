@@ -114,6 +114,7 @@ Here's an example of a simple type-safe navigation graph to use with the followi
 (`commonMain/kotlin/org.example.app/App.kt`):
 
 ```kotlin
+// Serializable object and classes for route arguments in the navigation graph.
 @Serializable data object StartScreen
 @Serializable data class Id(val id: Long)
 @Serializable data class Patient(val name: String, val age: Long)
@@ -134,9 +135,11 @@ internal fun App(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text("Starting screen")
+                // Button that opens the 'Id' screen with a suitable parameter.
                 Button(onClick = { navController.navigate(Id(222)) }) {
                     Text("Pass 222 as a parameter to the ID screen")
                 }
+                // Button that opens the 'Patient' screen with suitable parameters.
                 Button(onClick = { navController.navigate(Patient( "Jane Smith-Baker", 33)) }) {
                     Text("Pass 'Jane Smith-Baker' and 33 to the Person screen")
                 }
