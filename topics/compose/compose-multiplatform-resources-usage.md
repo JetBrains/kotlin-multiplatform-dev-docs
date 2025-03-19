@@ -435,7 +435,7 @@ Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
-## Preloading resources for web targets
+## Preloading of resources for web targets
 
 The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with 
 slower network connections, resource fetching can cause visual glitches, such as [FOUT](https://fonts.google.com/knowledge/glossary/fout) 
@@ -446,7 +446,7 @@ necessary glyphs is still loading. In this case, users may temporarily see the t
 question marks instead of characters. Similarly, for images or drawables, users may observe a placeholder like a blank or 
 black box until the resource is fully loaded.
 
-To prevent visual glitches, you can use built-in browser features for preloading resources, 
+To prevent visual glitches, you can use built-in browser features for preloading of resources, 
 the Compose Multiplatform preload API, or a combination of both.
 
 ### Preload resources using browser features
