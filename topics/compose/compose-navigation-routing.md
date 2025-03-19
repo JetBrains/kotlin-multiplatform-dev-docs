@@ -110,7 +110,46 @@ you can develop custom processing for destination routes in your Kotlin/Wasm or 
     to describe converting routes into URL fragments where necessary.
 2. If needed, add code that catches manual changes in the address bar and navigates the user accordingly.
 
-First, add the lambda to the `.bindToNavigation()` call:
+Here's an example of a simple type-safe navigation graph to use with the following samples of web code
+(`commonMain/kotlin/org.example.app/App.kt`):
+
+```kotlin
+@Serializable data object StartScreen
+@Serializable data class Id(val id: Long)
+@Serializable data class Patient(val name: String, val age: Long)
+
+@Composable
+internal fun App(
+    navController: NavHostController = rememberNavController()
+) = AppTheme {
+
+    NavHost(
+        navController = navController,
+        startDestination = StartScreen
+    ) {
+        composable<StartScreen> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text("Starting screen")
+                Button(onClick = { navController.navigate(Id(222)) }) {
+                    Text("Pass 222 as a parameter to the ID screen")
+                }
+                Button(onClick = { navController.navigate(Patient( "Jane Smith-Baker", 33)) }) {
+                    Text("Pass 'Jane Smith-Baker' and 33 to the Person screen")
+                }
+            }
+        }
+        composable<Id> {...}
+        composable<Patient> {...}
+    }
+}
+```
+{default-state="collapsed" collapsible="true" collapsed-title="NavHost(navController = navController, startDestination = StartScreen)"}
+
+In `wasmJsMain/kotlin/main.kt`, First, add the lambda to the `.bindToNavigation()` call:
 
 ```kotlin
 @OptIn(
@@ -158,7 +197,7 @@ fun main() {
     }
 }
 ```
-{default-state="collapsed" collapsible="true" collapsed-title="window.bindToNavigation(navController) { entry ->"}
+<!--{default-state="collapsed" collapsible="true" collapsed-title="window.bindToNavigation(navController) { entry ->"}-->
 
 > Make sure that every string that corresponds to a route starts with the `#` character to keep the data
 > within URL fragments.
@@ -208,7 +247,7 @@ fun main() {
     }
 }
 ```
-{default-state="collapsed" collapsible="true" collapsed-title="val initRoute = window.location.hash.substringAfter( ..."}
+<!--{default-state="collapsed" collapsible="true" collapsed-title="val initRoute = window.location.hash.substringAfter( ..."}-->
 
 ## Third-party alternatives
 
