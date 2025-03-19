@@ -7,7 +7,7 @@ Here are the highlights for this EAP feature release:
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/v1.8.0-beta01/CHANGELOG.md).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#180-beta01-march-2025).
 
 ## Breaking changes
 
@@ -130,7 +130,7 @@ including proper text direction handling for gestures.
 #### Accessibility for scrollable lists
 
 This version improves the performance and accuracy of scrolling boundary and element position calculations.
-By carefully accounting for safe areas, such as notches and screen edges,
+By accounting for safe areas, such as notches and screen edges,
 we ensure precise accessibility properties for scrolling near gaps and margins.
 
 We’ve also introduced support for scrolling state announcements.
@@ -189,7 +189,7 @@ To switch to accessible navigation mode for containers, rotate two fingers on th
 
 #### Accessible text input
 
-In this version, we've introduced support for text fields' accessibility traits.
+In Compose Multiplatform %composeEapVersion% we've introduced support for text fields' accessibility traits.
 When a text input field comes into focus, it is now marked as editable,
 ensuring proper accessibility-state representation.
 
