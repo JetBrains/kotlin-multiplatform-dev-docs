@@ -82,7 +82,7 @@ fun main() {
     ComposeViewport(body) {
 
         val navController = rememberNavController()
-        // Assuming that your main composable function in common code is App()
+        // Assumes that your main composable function in common code is App()
         App(navController)
         LaunchedEffect(Unit) {
             window.bindToNavigation(navController)
@@ -101,20 +101,34 @@ For example, `example.org#org.example.app.StartScreen_123_Alice%2520Smith`.
 
 ### Customize translating routes into URLs and back
 
-As Compose Multiplatform apps are single-page apps, the framework needs to manipulate the address bar to imitate
+As Compose Multiplatform apps are single-page apps, the framework manipulates the address bar to imitate
 usual web navigation.
-If you would like to make your URLs more readable or isolate implementation from URL patterns,
-you can develop custom processing for destination routes in your Kotlin/Wasm or Kotlin/JS code:
+If you would like to make your URLs more readable and isolate implementation from URL patterns,
+you can assign the name to a screen directly or develop fully custom processing for destination routes:
+
+* To simply make a URL readable, use the `@SerialName` annotation for a serializable object or class:
+
+    ```kotlin
+    // Instead of using the app package and object name,
+    // this route will be translated to the URL simply as "#start".
+    @Serializable @SerialName("start") data object StartScreen
+    ```
+* To fully construct every URL, you can use the optional `getBackStackEntryRoute` lambda.
+
+#### Full URL customization
+
+To implement a fully custom route to URL transformation: 
 
 1. Pass the optional `getBackStackEntryRoute` lambda to the `window.bindToNavigation()` function
-    to describe converting routes into URL fragments where necessary.
-2. If needed, add code that catches manual changes in the address bar and navigates the user accordingly.
+    to specify how routes should be converted into URL fragments when necessary.
+2. If needed, add code that catches URL fragments in the address bar (when someone clicks or pastes your app's URL)
+    and translates URLs into routes to navigate users accordingly.
 
 Here's an example of a simple type-safe navigation graph to use with the following samples of web code
 (`commonMain/kotlin/org.example.app/App.kt`):
 
 ```kotlin
-// Serializable object and classes for route arguments in the navigation graph.
+// Serializable object and classes for route arguments in the navigation graph
 @Serializable data object StartScreen
 @Serializable data class Id(val id: Long)
 @Serializable data class Patient(val name: String, val age: Long)
@@ -204,13 +218,13 @@ fun main() {
 
 > Make sure that every string that corresponds to a route starts with the `#` character to keep the data
 > within URL fragments.
-> Otherwise, when the user copies and pastes the URL, the browser will try to access a wrong endpoint instead of passing
+> Otherwise, when users copy and paste the URL, the browser will try to access a wrong endpoint instead of passing
 > the control to your app.
 > 
 {style="note"}
 
-When your URLs have custom formatting, you should add the reverse processing 
-to match a manually entered URL to a destination route.
+If your URLs have custom formatting, you should add the reverse processing 
+to match manually entered URLs to destination routes.
 The code that does the matching needs to run before the `window.bindToNavigation()` call binds
 `window.location` to the navigation graph:
 
@@ -226,15 +240,15 @@ fun main() {
         val navController = rememberNavController()
         App(navController)
         LaunchedEffect(Unit) {
-            // Accesses the fragment substring of the current URL.
+            // Accesses the fragment substring of the current URL
             val initRoute = window.location.hash.substringAfter('#', "")
             when  {
-                // Identifies the corresponding route and navigates to it.
+                // Identifies the corresponding route and navigates to it
                 initRoute.startsWith("start") -> {
                     navController.navigate(StartScreen)
                 }
                 initRoute.startsWith("find_id") -> {
-                    // Parses the string to extract route parameters before navigating to it.
+                    // Parses the string to extract route parameters before navigating to it
                     val id = initRoute.substringAfter("find_id_").toLong()
                     navController.navigate(Id(id))
                 }
