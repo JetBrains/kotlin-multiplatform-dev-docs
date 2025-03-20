@@ -113,7 +113,7 @@ you can assign the name to a screen directly or develop fully custom processing 
 
     ```kotlin
     // Instead of using the app package and object name,
-    // this route will be translated to the URL simply as "#start".
+    // this route will be translated to the URL simply as "#start"
     @Serializable @SerialName("start") data object StartScreen
     ```
 * To fully construct every URL, you can use the optional `getBackStackEntryRoute` lambda.
