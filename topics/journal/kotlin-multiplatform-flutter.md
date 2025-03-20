@@ -106,7 +106,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     <tr>
         <td><b>Iteration on UI development</b></td>
         <td>IntelliJ IDEA supports previews for desktop applications.
-        <p>The team is working on a <a href="https://www.youtube.com/watch?v=8Z-Vuo3wTd0">hot reload</a> feature that lets you see visual changes as you code, now available in IntelliJ IDEA.</p>
+        <p>The team is working on a <a href="https://www.youtube.com/shorts/xgtHmB2J2f8">hot reload</a> feature that lets you see visual changes as you code, now available in IntelliJ IDEA. If you want to try Hot Reload for Compose Multiplatform in your project, go to its <a href="https://github.com/JetBrains/compose-hot-reload">GitHub repository</a> and follow the steps in the README.</p>
         <p>Android Studio offers preliminary support for <a href="https://developer.android.com/develop/ui/compose/tooling/previews">previews for Android</a>, plus <a href="https://developer.android.com/develop/ui/compose/tooling/iterative-development">Live Edit</a> for quick iteration on Android UI.</p></td>
         <td>IDE plugins are available for VS Code and Android Studio.</td>
     </tr>

@@ -132,6 +132,8 @@ This framework may be the best option in the following situations:
 
 Among the most popular apps built with Flutter are Google Ads, Xianyu by Alibaba, eBay Motors, and Hamilton.
 
+Explore [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) in detail to better understand their capabilities and determine the right fit for your cross-platform project.
+
 ### React Native
 
 Facebook introduced React Native in 2015 as an open-source framework designed to help mobile engineers build hybrid native/cross-platform apps. It's based on ReactJS – a JavaScript library for building user interfaces. In other words, it uses JavaScript to build mobile apps for Android and iOS systems.
