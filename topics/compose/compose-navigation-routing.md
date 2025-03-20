@@ -108,7 +108,8 @@ usual web navigation.
 If you would like to make your URLs more readable and isolate implementation from URL patterns,
 you can assign the name to a screen directly or develop fully custom processing for destination routes:
 
-* To simply make a URL readable, use the `@SerialName` annotation for a serializable object or class:
+* To simply make a URL readable, use the `@SerialName` annotation to explicitly set the serial name
+    for a serializable object or class:
 
     ```kotlin
     // Instead of using the app package and object name,
