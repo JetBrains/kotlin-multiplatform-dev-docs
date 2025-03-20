@@ -95,9 +95,11 @@ After a `window.bindToNavigation(navController)` call:
 * The URL displayed in the browser reflects the current route (in the URL fragment, after the `#` character).
 * The app parses URLs entered manually to translate them into destinations within the app.
 
-By default, when using type-safe navigation, a destination is translated into a URL fragment using this pattern:
-`<app package>.<type parameter of the destination>_<argument1>_<argument2>`.
-For example, `example.org#org.example.app.StartScreen_123_Alice%2520Smith`.
+By default, when using type-safe navigation, a destination is translated into a URL fragment according to
+the [`kotlinx.serialization` default](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization/-serial-name/)
+with appended arguments:
+`<app package>.<serializable type>/<argument1>/<argument2>`.
+For example, `example.org#org.example.app.StartScreen/123/Alice%2520Smith`.
 
 ### Customize translating routes into URLs and back
 
