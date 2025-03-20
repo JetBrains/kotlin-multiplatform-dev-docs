@@ -89,7 +89,7 @@
 	<toc-element toc-title="Multiplatform journal">
 		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.md"/>
 		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
-		<toc-element toc-title="The six best cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
+		<toc-element toc-title="Six popular cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
 		<toc-element topic="multiplatform-introduce-your-team.md"/>
 		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" topic="multiplatform-reasons-to-try.md"/>
 	</toc-element>
