@@ -50,7 +50,7 @@ According to the [Stack Overflow Trends](https://insights.stackoverflow.com/tren
 
 > Take a closer look at [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) to understand their strengths and choose the best fit for your cross-platform development.
 > 
-> {style="note"}
+{style="note"}
 
 ### React Native
 
