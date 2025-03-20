@@ -152,11 +152,11 @@ internal fun App(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text("Starting screen")
-                // Button that opens the 'Id' screen with a suitable parameter.
+                // Button that opens the 'Id' screen with a suitable parameter
                 Button(onClick = { navController.navigate(Id(222)) }) {
                     Text("Pass 222 as a parameter to the ID screen")
                 }
-                // Button that opens the 'Patient' screen with suitable parameters.
+                // Button that opens the 'Patient' screen with suitable parameters
                 Button(onClick = { navController.navigate(Patient( "Jane Smith-Baker", 33)) }) {
                     Text("Pass 'Jane Smith-Baker' and 33 to the Person screen")
                 }
@@ -186,17 +186,17 @@ fun main() {
             window.bindToNavigation(navController) { entry ->
                 val route = entry.destination.route.orEmpty()
                 when {
-                    // Identifies the route using its serial descriptor.
+                    // Identifies the route using its serial descriptor
                     route.startsWith(StartScreen.serializer().descriptor.serialName) -> {
                         // Sets the corresponding URL fragment to "#start"
-                        // instead of "#org.example.app.StartScreen".
+                        // instead of "#org.example.app.StartScreen"
                         //
                         // This string must always start with the `#` character to keep
-                        // the processing at the front end.
+                        // the processing at the front end
                         "#start"
                     }
                     route.startsWith(Id.serializer().descriptor.serialName) -> {
-                        // Accesses the route arguments.
+                        // Accesses the route arguments
                         val args = entry.toRoute<Id>()
 
                         // Sets the corresponding URL fragment to "#find_id_222"
@@ -209,7 +209,7 @@ fun main() {
                         // instead of "#org.company.app.Patient%2FJane%2520Smith-Baker%2F33"
                         "#patient_${args.name}_${args.age}"
                     }
-                    // Doesn't set a URL fragment for all other routes.
+                    // Doesn't set a URL fragment for all other routes
                     else -> ""
                 }
             }
