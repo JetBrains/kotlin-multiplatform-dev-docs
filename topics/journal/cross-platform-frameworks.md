@@ -48,6 +48,10 @@ To build applications with Flutter, you will need to use Google's programming la
 Flutter has a relatively active community of users around the world and is widely used by many developers. 
 According to the [Stack Overflow Trends](https://insights.stackoverflow.com/trends?tags=flutter%2Creact-native), the usage of Flutter has been trending up over time, based on the increasing use of the corresponding tag.
 
+> Take a closer look at [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) to understand their strengths and choose the best fit for your cross-platform development.
+> 
+{style="note"}
+
 ### React Native
 
 An open-source UI software framework, React Native was developed in 2015 (a bit earlier than Flutter) by Meta Platforms, formerly Facebook. It's based on Facebook's JavaScript library React and allows developers to build natively rendered cross-platform mobile apps.
@@ -70,7 +74,7 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 
 **Programming language:** Kotlin.
 
-**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](case-studies.md).
+**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](case-studies.topic).
 
 **Key features:**
 
@@ -79,11 +83,9 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 * Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains, developers have full code-sharing flexibility and the ability to share both the logic and the UI.
 * There's no need to introduce a new language to your codebase when you already use Kotlin for Android. You can reuse your Kotlin code and expertise, which makes migrating to Kotlin Multiplatform less risky compared to other technologies.
 
-Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.md) to develop multiplatform apps with a native-like user experience.
+Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](case-studies.topic) to develop multiplatform apps with a native-like user experience.
 
-> Create your first cross-platform mobile app with [Kotlin Multiplatform](get-started.topic).
->
-{style="note"}
+[![Kick off your Kotlin Multiplatform journey](kmp-journey-start.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 ### Ionic
 
@@ -151,9 +153,7 @@ It's important to be sure that the maintainer of the framework will continue to 
 
 Depending on how crucial the user interface is for your future app, you may need to know how easily you can customize the UI using a particular framework. For example, Kotlin Multiplatform offers full code-sharing flexibility with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains. It enables developers to share UIs across Android, iOS, web, and desktop (via the JVM) and is based on Kotlin and Jetpack Compose.
 
-> [Compose Multiplatform: create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
->
-{style="note"}
+[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
 
 #### 4. Framework maturity
 

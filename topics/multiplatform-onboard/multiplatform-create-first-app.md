@@ -1,8 +1,8 @@
-[//]: # (title: Create your first cross-platform app)
+[//]: # (title: Create your Kotlin Multiplatform app)
 
 <tldr>
     <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
-    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your first cross-platform app</strong><br/>
+    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Kotlin Multiplatform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
        <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies<br/>       
        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
@@ -17,11 +17,6 @@ Kotlin Multiplatform applications can work on a variety of platforms like iOS, A
 
 One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
 You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.
-
-> To try a new multiplatform experience without juggling different IDEs and switching to
-> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
->
-{style="tip"}
 
 ## Set up the environment
 

@@ -4,7 +4,10 @@ The Kotlin Multiplatform roadmap is meant as an overview of priorities and gener
 
 The latest [roadmap blog post](https://blog.jetbrains.com/kotlin/2024/10/kotlin-multiplatform-development-roadmap-for-2025/)
 was published on October 28, 2024.
-The page below summarizes it and is updated whenever we reach a declared milestone.
+The page below summarizes it and is updated whenever we reach a declared milestone or need to reflect changes in strategy:
+
+* On February 14th, 2025, the roadmap was updated to reflect the changes described in the [Kotlin Multiplatform Tooling – Shifting Gears](https://blog.jetbrains.com/kotlin/2025/02/kotlin-multiplatform-tooling-shifting-gears/)
+    blog post.
 
 Kotlin Multiplatform goals are closely aligned with the [Kotlin roadmap](https://kotlinlang.org/docs/roadmap.html).
 Be sure to check it out to have more context for the direction we're taking.
@@ -13,8 +16,8 @@ Be sure to check it out to have more context for the direction we're taking.
 
 * Stable Compose Multiplatform for iOS: driving the iOS target to a stable release involves both improving the underlying framework
     and iOS-specific integrations and benchmarks.
-* Public release of a standalone Kotlin Multiplatform IDE, tailored specifically for multiplatform development in an optimized
-    environment.
+* Better support for multiplatform development in IntelliJ-based IDEs,
+    providing an optimized environment for Kotlin Multiplatform and Compose Multiplatform.
 * Release the first public version of Kotlin-to-Swift export. With the initial release, we aim to provide experience comparable
     to the existing Objective-C export, and pave the way to fully leverage Swift export in the future.
 * Improve the experience of creating multiplatform libraries by providing better tools and guidance. We shall improve
@@ -51,14 +54,6 @@ so that we can formulate plans for its future development.
 
 We aim to ensure that Kotlin Multiplatform integrates seamlessly with the IDEs already commonly used for KMP development,
 such as IntelliJ IDEA and Android Studio, making it more straightforward to share code within or between projects.
-
-We also believe that there is a place for a dedicated multiplatform IDE, and plan to release a standalone Kotlin Multiplatform IDE.
-This IDE, based on [JetBrains Fleet](https://www.jetbrains.com/fleet/), will be tailored specifically for Kotlin Multiplatform development.
-The initial release will focus on mobile scenarios and aim to:
-
-* Ensure that developers no longer need to switch between different IDEs.
-* Provide enhanced language support, delivering an equally great experience in both Kotlin and Swift.
-* Create a unified workflow that helps developers with experience in either iOS or Android to feel productive when working with both platforms.
 
 We are also exploring new areas to enhance the development experience:
 
@@ -136,46 +131,28 @@ Here are the key areas we will be working on regarding Kotlin Multiplatform in p
 
 ## FAQ
 
-### Why a standalone KMP IDE based on JetBrains Fleet and not just JetBrains Fleet?
-
-Our goal is to provide an exceptional KMP development experience for a very broad audience,
-including developers and teams without prior Kotlin experience who are considering their cross-platform development options.
-For these users, easy onboarding to the KMP technology and intuitive tooling are crucial.
-
-We want to offer an all-in-one tool that is tailored and optimized specifically for multiplatform development scenarios,
-offers dedicated technology and tooling onboarding flows, and has a variety of relevant licensing options, including free ones.
-
-Delivering the KMP tooling inside JetBrains Fleet was an interim solution that allowed us to get the tools in front of users more quickly.
-We were able to embrace Fleet’s new approach as a generic multi-language code editor, gather feedback, and evaluate options along the way.
-
-### Will the KMP IDE be free?
-
-The KMP IDE will have a variety of free options.
-The exact licensing and pricing schema will be announced at a later date.
-
-### Will I now have to switch between not 4 but 5 IDEs?
-
-No, our aim is quite the opposite – we want to reduce the number of IDEs you need to use.
-The KMP IDE is designed to consolidate your development workflow, allowing you to perform most of your daily coding and
-debugging tasks in one place.
-While there might be occasional scenarios where another IDE is necessary, these cases should be rare.
-
 ### Can you fix KMP support in IntelliJ IDEA?
 
-We recognize the importance of providing a great KMP experience in IntelliJ IDEA, and so we will continue to invest
-in enhancing this support.
+We recognize the importance of providing a great KMP experience in IntelliJ IDEA.
+As stated in the [blog post about KMP tooling](https://blog.jetbrains.com/kotlin/2025/02/kotlin-multiplatform-tooling-shifting-gears/),
+we will be focusing exclusively on enhancing KMP support for the IntelliJ Platform as a whole.
 This will include improving quality and stability and introducing certain features so that developers who prefer
-IntelliJ IDEA for multiplatform development aren’t required to leave their preferred IDE.
-
-However, our ultimate goal is to provide a full-featured KMP experience in a dedicated KMP IDE for a broad audience.
-This includes developers who are just considering cross-platform development options and don’t have experience
-with IntelliJ IDEA or Android Studio (or those who believe that these IDEs are only for backend and Android developers).
+IntelliJ IDEA for multiplatform development can enjoy full KMP support in their preferred IDE.
 
 ### What about KMP support in Android Studio?
 
 We are actively collaborating with Google to improve KMP support in Android Studio.
 More detailed plans will be available at a later date.
 Stay tuned!
+
+### What is the recommended IDE for KMP development now?
+
+If your primary use case is mobile, we recommend using Android Studio.
+We're also working on providing great support in IntelliJ IDEA.
+
+### Will Swift be available in IntelliJ IDEA and Android Studio?
+
+Swift is an important part of certain KMP scenarios, and we are working on supporting these use cases.
 
 ### Are you giving up on the web?
 

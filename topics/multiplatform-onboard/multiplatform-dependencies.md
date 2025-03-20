@@ -2,7 +2,7 @@
 
 <tldr>
     <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your Kotlin Multiplatform app</a><br/>
         <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
         <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add dependencies</strong><br/>
         <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
@@ -21,7 +21,9 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
   common source set, `commonMain`.
 
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
-  [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/).
+  [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/). Find more multiplatform libraries on [klibs.io](https://klibs.io/),
+  an experimental search service from JetBrains for discovering Kotlin Multiplatform libraries.
+
 * _Native dependencies_. These are regular libraries from relevant ecosystems. In native projects you usually work with them
   using Gradle for Android and using CocoaPods or another dependency manager for iOS. 
   

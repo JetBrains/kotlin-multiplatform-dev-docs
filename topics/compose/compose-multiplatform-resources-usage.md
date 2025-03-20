@@ -1,12 +1,27 @@
 [//]: # (title: Using multiplatform resources in your app)
 
-<toc-settings structure-elements="chapter" depth="3"/>
+<show-structure depth="2"/>
 
 When you've [set up the resources for your project](compose-multiplatform-resources-setup.md),
 build the project to generate the special `Res` class which provides access to resources.
 To regenerate the `Res` class and all the resource accessors, build the project again or re-import the project in the IDE.
 
 After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
+
+## Importing the generated class
+
+To use the prepared resources, import the generated class, for example:
+
+```kotlin
+import project.composeapp.generated.resources.Res
+import project.composeapp.generated.resources.example_image
+```
+
+Here:
+* `project` is the name of your project
+* `composeapp` is the module where you placed the resource directories
+* `Res` is the default name for the generated class
+* `example_image` is the name of an image file in the `composeResources/drawable` directory (`example_image.png`, for example).
 
 ## Customizing accessor class generation
 
@@ -139,21 +154,34 @@ You can use special symbols in string resources:
 * `\t` — for a tab symbol
 * `\uXXXX` — for a specific Unicode character
 
+You don't need to escape special XML characters like "@" or "?"
+as you do [for Android strings](https://developer.android.com/guide/topics/resources/string-resource#escaping_quotes). 
+
 #### String templates
 
-Currently, arguments have basic support in string resources:
+Currently, arguments have basic support for string resources.
+When creating a template, use the `%<number>` format to place arguments within the string and include a `$d` or `$s` suffix
+to indicate that it is a variable placeholder and not simple text.
+For example:
 
 ```XML
 <resources>
-    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
+    <string name="str_template">Hello, %2$s! You have %1$d new messages.</string>
 </resources>
 ```
 
-There is no difference between `%...s` and `%...d ` when using string templates with arguments from composable code,
-for example:
+After creating and importing the string template resource, you can refer to it while
+passing the arguments for placeholders in the correct order:
 
 ```kotlin
-Text(stringResource(Res.string.str_template, "User_name", 100))
+Text(stringResource(Res.string.str_template, 100, "User_name"))
+```
+
+There is no difference between the `$s` and `$d` suffixes, and no others are supported.
+You can put the `%1$s` placeholder in the resource string and use it to display a fractional number, for example:
+
+```kotlin
+Text(stringResource(Res.string.str_template, "User_name", 100.1f))
 ```
 
 #### String arrays

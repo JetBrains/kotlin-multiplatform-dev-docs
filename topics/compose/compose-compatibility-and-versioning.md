@@ -78,13 +78,13 @@ maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 
 When you build your application for Android, Compose Multiplatform uses artifacts published by Google.
 For example, if you apply the Compose Multiplatform 1.5.0 Gradle plugin and add `implementation(compose.material3)` to your `dependencies`, then your
-project will use the `androidx.compose.material3:material3:1.1.1` artifact in the Android target (
-but `org.jetbrains.compose.material3:material3:1.5.0` in other targets).
+project will use the `androidx.compose.material3:material3:1.1.1` artifact in the Android target (but `org.jetbrains.compose.material3:material3:1.5.0` in other targets).
 
 The following table lists Jetpack Compose artifact versions used by each version of Compose Multiplatform:
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.7.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.3)   | 1.7.6                   | 1.3.1                             |
 | [1.7.1](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.1)   | 1.7.5                   | 1.3.1                             |
 | [1.7.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.0)   | 1.7.1                   | 1.3.0                             |
 | [1.6.11](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.6.11) | 1.6.7                   | 1.2.1                             |

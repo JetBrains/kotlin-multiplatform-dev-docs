@@ -58,11 +58,9 @@ However, many modern businesses need to reduce the time to market and the cost o
 > by using Kotlin Multiplatform to write platform-agnostic business logic once in Kotlin 
 > and compiling to a Kotlin library for Android and a native Universal Framework for iOS.
 >
-{style="tip"}
+> {style="tip"}
 
-> [Get started with Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
-> 
-{style="note"}
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="700"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 ## Is cross-platform mobile development right for you?
 
@@ -122,9 +120,9 @@ As modern multiplatform frameworks continue to evolve, they increasingly allow m
 
 ### Flutter
 
-Created by Google, Flutter is a cross-platform development framework that uses the Dart programming language. Flutter supports native features, such as location services, camera functionality, and hard drive access. If you need to create a specific app feature that's not supported in Flutter, you can write platform-specific code using the [Platform Channel technology](https://brightmarbles.io/blog/platform-channel-in-flutter-benefits-and-limitations/).
+Created by Google, Flutter is a cross-platform development framework that uses the Dart programming language. Flutter supports native features, such as location services, camera functionality, and hard drive access. If you need to create a specific app feature that's not supported in Flutter, you can write platform-specific code using the [Platform Channel technology](https://docs.flutter.dev/platform-integration/platform-channels).
 
-Apps built with Flutter need to share all of their UX and UI layers, which is why they may not always feel 100% native. One of the best things about this framework is its Hot Reload feature, which allows developers to make changes and view them instantly.
+Apps built with Flutter need to share all of their UX and UI layers. One of the best things about this framework is its Hot Reload feature, which allows developers to make changes and view them instantly.
 
 This framework may be the best option in the following situations:
 
@@ -133,6 +131,8 @@ This framework may be the best option in the following situations:
 * You need to develop an MVP (minimum viable product).
 
 Among the most popular apps built with Flutter are Google Ads, Xianyu by Alibaba, eBay Motors, and Hamilton.
+
+Explore [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) in detail to better understand their capabilities and determine the right fit for your cross-platform project.
 
 ### React Native
 
@@ -158,13 +158,11 @@ Kotlin Multiplatform is an open-source technology built by JetBrains that allows
 
 If your team needs help adopting a new multiplatform technology, we recommend reviewing our guide on [_How to introduce multiplatform development to your team_](multiplatform-introduce-your-team.md).
 
-> [Get started with Kotlin Multiplatform](get-started.topic).
->
-{style="note"}
+[![Get Started with Kotlin Multiplatform](get-started-with-kmp.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 McDonald's, Netflix, 9GAG, VMware, Cash App, Philips, and many other companies are already capitalizing on Kotlin Multiplatform's ability to be gradually integrated, as well as its low adoption risk. Some of them opt to enhance their app stability by sharing specific, crucial segments of their existing Kotlin code. Others aim to maximize code reuse without compromising app quality and share all application logic across mobile, desktop, web, and TV, while preserving native UIs on each platform. The benefits of this approach are apparent from the stories of the companies that have already adopted it.
 
-> Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.md).
+> Check out all the [Kotlin Multiplatform case studies from global companies and startups](case-studies.topic).
 >
 {style="note"}
 

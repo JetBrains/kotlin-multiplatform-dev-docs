@@ -1,8 +1,8 @@
-[//]: # (title: Create your multiplatform project)
+[//]: # (title: Create your Compose Multiplatform app)
 
 <tldr>
    <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
-   <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your multiplatform project</strong><br/>
+   <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Compose Multiplatform app</strong><br/>
       <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application <br/>
@@ -26,11 +26,6 @@ Things to keep in mind for this tutorial:
 * To complete this tutorial, you'll only need Android Studio. It allows you to try multiplatform development on Android
   and desktop. For iOS, you'll need a macOS machine with Xcode installed. This is a general limitation of iOS development.
 * If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
-
-> To try a new multiplatform experience without juggling different IDEs and switching to
-> Xcode for writing Swift code, take a look at [how JetBrains Fleet handles multiplatform projects](fleet.md).
->
-{style="tip"}
 
 ## Set up an environment
 

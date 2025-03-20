@@ -1,7 +1,7 @@
 [//]: # (title: Modify the project)
 <tldr>
    <p>This is the third part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your multiplatform project</a><br/>
+   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
        <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Modify the project</strong><br/>
        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application<br/>
@@ -18,7 +18,12 @@ You could retrieve the date using platform-specific libraries and [expected and 
 But we recommend that you use this approach only when there's no Kotlin Multiplatform library available. In this case,
 you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library.
 
-To use this library:
+> You can explore Kotlin Multiplatform libraries available for your target platforms on [klibs.io](https://klibs.io/),
+> an experimental search service from JetBrains for discovering multiplatform libraries.
+>
+{style="tip"}
+
+To use the `kotlinx-datetime` library:
 
 1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
 

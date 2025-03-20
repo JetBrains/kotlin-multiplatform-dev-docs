@@ -25,8 +25,8 @@ about [supported platforms](supported-platforms.md).
 
 ### In which IDE should I work on my cross-platform app?
 
-We recommend using JetBrains Fleet code editor or Android Studio IDE, depending on your project needs and expectations.
-Learn more about which one to choose in [Recommended IDEs and code editors](recommended-ides.md).
+We recommend using the Android Studio IDE to work with Kotlin Multiplatform projects.
+Read more about available alternatives in [Recommended IDEs and code editors](recommended-ides.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
@@ -46,7 +46,7 @@ Here's a [list of real-life examples](multiplatform-samples.md).
 
 ### Where can I find a list of real-life Kotlin Multiplatform applications? What companies use KMP in production?
 
-Check out our [list of case studies](case-studies.md) to learn from other companies that have already adopted Kotlin
+Check out our [list of case studies](case-studies.topic) to learn from other companies that have already adopted Kotlin
 Multiplatform in production.
 
 ### Which operating systems can work with Kotlin Multiplatform?
@@ -112,6 +112,8 @@ simply runs on Jetpack Compose.
 Other platforms targeted by Compose Multiplatform may have implementation details under the hood that differ from those
 of Jetpack Compose on Android, but they still provide you with the same APIs.
 
+For details, see the [overview of the frameworks' interrelation](compose-multiplatform-and-jetpack-compose.md).
+
 ### Between which platforms can I share my UI?
 
 We want you to have the option to share your UI between any combination of popular platforms – Android, iOS, desktop
@@ -138,11 +140,7 @@ Developer Advocate Sebastian Aigner.
 
 ### What IDE should I use for building apps with Compose Multiplatform?
 
-We recommend using JetBrains Fleet code editor or Android Studio IDE, depending on your project needs and expectations. To try
-a new multiplatform experience without juggling different IDEs and switching to Xcode for writing Swift code,
-try out [JetBrains Fleet tutorial](fleet.md).
-
-For more details on which one to choose, see [Recommended IDEs and code editors](recommended-ides.md).
+We recommend using Android Studio IDE. For more details, see [Recommended IDEs and code editors](recommended-ides.md).
 
 ### Can I play with a demo application? Where can I find it?
 
@@ -238,9 +236,6 @@ working with the DOM in Kotlin/JS, and it's not intended for sharing UIs across 
 
 Yes, we're acutely aware of the current challenges with multiplatform tooling and are actively working on enhancements
 in several areas.
-
-We've already launched previews of the [Kotlin Multiplatform support in Fleet](fleet.md).
-Try it yourself and leave feedback!
 
 ### Are you going to provide a Swift interop?
 

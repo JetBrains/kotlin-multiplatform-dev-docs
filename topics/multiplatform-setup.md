@@ -37,7 +37,8 @@ We recommend that you install the latest stable versions for compatibility and b
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform plugin</a></td>
-        <td>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</td>
+        <td><p>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</p>
+</td>
    </tr>
    <tr>
         <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
@@ -135,7 +136,6 @@ To make sure everything works as expected, install and run the KDoctor tool:
     </def>
    <def title="Still having trouble?">
             <p>Share your problems with the team by <a href="https://kotl.in/issue">creating a YouTrack issue</a>.</p>
-            <p>For a smoother multiplatform experience, you can also try <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html">JetBrains Fleet</a>: it integrates with Compose Multiplatform and allows writing Swift code without switching to Xcode, with less IDE juggling overall.</p>
    </def>
 </deflist>
 

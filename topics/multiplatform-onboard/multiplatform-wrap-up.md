@@ -2,7 +2,7 @@
 
 <tldr>
     <p>This is the final part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your first cross-platform app</a><br/>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your Kotlin Multiplatform app</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="multiplatform-dependencies.md">Add dependencies</a><br/>
        <img src="icon-4-done.svg" width="20" alt="Fourth step"/> <a href="multiplatform-upgrade-app.md">Share more logic</a><br/>
@@ -28,7 +28,8 @@ additional cross-platform mobile development tasks:
         <li><a href="multiplatform-run-tests.md">Add tests to your Kotlin Multiplatform project</a></li>
         <li><a href="multiplatform-publish-apps.md">Publish your mobile application to app stores</a></li>
         <li><a href="https://kotlinlang.org/docs/multiplatform-introduce-your-team.html">Introduce cross-platform mobile development to your team</a></li>
-        <li><a href="https://github.com/terrakok/kmm-awesome">Check out the list of useful tools and libraries</a></li>
+        <li><a href="https://klibs.io/">Browse Kotlin Multiplatform libraries available for your target platforms</a></li>
+        <li><a href="https://github.com/terrakok/kmm-awesome">Check out the list of useful tools and resources</a></li>
      </list>
    </td>
     <td>

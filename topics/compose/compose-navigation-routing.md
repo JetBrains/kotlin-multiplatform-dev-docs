@@ -1,13 +1,13 @@
 [//]: # (title: Navigation and routing)
 
-> The navigation library is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
-> You're welcome to try it in your Compose Multiplatform projects.
+Navigation is a key part of UI applications that allows users to move between different application screens.
+Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design#frameworks).
+
+> The navigation library is currently in [Alpha](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+> You're welcome to try it in your Compose Multiplatform projects. Remember to track potential migration issues in future releases.
 > We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
 >
 {style="warning"}
-
-Navigation is a key part of UI applications that allows users to move between different application screens.
-Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design#frameworks).
 
 ## Setup
 

@@ -7,7 +7,7 @@ overview of the desktop-specific components and events. Each section includes a 
 
 <!-- * [Images and icons](#images-and-icons) -->
 * [Windows and dialogs](compose-desktop-top-level-windows-management.md)
-* [Context menus](#context-menus)
+* [Context menus](compose-desktop-context-menus.md)
 * [The system tray](#the-system-tray)
 * [Menu bar](#menu-bar)
 * [Scrollbars](compose-desktop-scrollbars.md)
@@ -44,59 +44,6 @@ With Compose Multiplatform, you can set the application window icon and the appl
   the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
   tutorial.
 * For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-multiplatform-resources.md). -->
-
-### Context menus
-
-Context menus are supported by default for the `TextField` composable (and the `Text` composable, if it's selectable):
-
-```kotlin
-import androidx.compose.foundation.ContextMenuDataProvider
-import androidx.compose.foundation.ContextMenuItem
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication(title = "Context menu") {
-    val text = remember { mutableStateOf("Hello!") }
-    Column {
-        ContextMenuDataProvider(
-            items = {
-            listOf(
-                ContextMenuItem("User-defined Action") {/*do something here*/ },
-                ContextMenuItem("Another user-defined action") {/*do something else*/ }
-            )
-        }
-        ) {
-            TextField(
-                value = text.value,
-                onValueChange = { text.value = it },
-                label = { Text(text = "Input") }
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            SelectionContainer {
-                Text("Hello World!")
-            } 
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="ContextMenuDataProvider(items = { listOf(ContextMenuItem( "}
-
-Default context menu options include copy, cut, paste, and select all. You can add more menu items, customize style and
-texts, and so on.
-
-For more information, see the [Context menu in Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Context_Menu)
-tutorial.
 
 ### The system tray
 
@@ -293,76 +240,8 @@ tutorial.
 ## Events
 
 * [Mouse events](compose-desktop-mouse-events.md)
-* [Keyboard events](#keyboard-event-handlers)
+* [Keyboard events](compose-desktop-keyboard.md)
 * [Tabbing navigation](#tabbing-navigation-between-components)
-
-
-### Keyboard event handlers
-
-You can set up keyboard event handlers with the `onKeyEvent` and `onPreviewKeyEvent` properties. Use `onPreviewKeyEvent`
-to define shortcuts because it guarantees that children components do not consume key events.
-
-For example, here is how to set up an event handler for the active element in focus, the `TextField` composable:
-
-```kotlin
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.isCtrlPressed
-import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
-import androidx.compose.ui.input.key.type
-import androidx.compose.ui.input.key.KeyEventType
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.singleWindowApplication
-
-@OptIn(ExperimentalComposeUiApi::class)
-fun main() = singleWindowApplication {
-    MaterialTheme {
-        var consumedText by remember { mutableStateOf(0) }
-        var text by remember { mutableStateOf("") }
-        Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
-            Text("Consumed text: $consumedText")
-            TextField(
-                value = text,
-                onValueChange = { text = it },
-                modifier = Modifier.onPreviewKeyEvent {
-                    when {
-                        (it.isCtrlPressed && it.key == Key.Minus && it.type == KeyEventType.KeyUp) -> {
-                            consumedText -= text.length
-                            text = ""
-                            true
-                        }
-                        (it.isCtrlPressed && it.key == Key.Equals && it.type == KeyEventType.KeyUp) -> {
-                            consumedText += text.length
-                            text = ""
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            )
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title=" TextField(modifier = Modifier.onPreviewKeyEvent { "}
-
-You can also define keyboard event handlers that are always active in the current window for
-the `Window`, `singleWindowApplication`, and `Dialog` composables.
-
-For more information, see the [Keyboard event handling](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Keyboard)
-tutorial.
 
 ### Tabbing navigation between components
 
@@ -431,7 +310,7 @@ tutorial.
 
 * Complete the [Compose Multiplatform desktop application](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
   tutorial.
-* Learn how to [create unit tests for your Compose Multiplatform desktop project](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/UI_Testing).
+* Learn how to [create unit tests for your Compose Multiplatform desktop project](compose-desktop-ui-testing.md).
 * Learn how to [create native distributions, installers, and packages for desktop platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution).
-* Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Swing_Integration).
+* Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](compose-desktop-swing-interoperability.md).
 * Learn about [accessibility support on different platforms](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Accessibility).

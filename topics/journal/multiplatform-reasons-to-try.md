@@ -53,9 +53,7 @@ The experiment turned out to be very successful, resulting in the following:
 * A reduction in their maintenance and testing costs.
 * Significantly improved productivity within the team.
 
-> [Learn how other global companies use Kotlin Multiplatform in their projects](case-studies.md)
-> 
-{style="tip"}
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
 
@@ -144,9 +142,7 @@ There is also a community sample, the [New York Times App](https://github.com/xx
 which runs even on Wear OS for watches, the smartwatch operating system. 
 Check this list of [Kotlin Multiplatform and Compose Multiplatform samples](multiplatform-samples.md) to see more examples.
 
-> [Discover Compose Multiplatform, a declarative framework for sharing UI across platforms]((https://www.jetbrains.com/lp/compose-multiplatform/))
->
-{style="tip"}
+[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
 
 ### 6. You can use Kotlin Multiplatform in existing and new projects
 
@@ -178,7 +174,7 @@ and internal utilities were among the key areas where this technology makes a si
 ### 8. Kotlin Multiplatform is already used by global companies
 
 KMP is already used by many large companies all around the world, including Forbes, Philips, Cash App, Meetup, Autodesk,
-and many others. You can read all of their stories on the [case studies page](case-studies.md).
+and many others. You can read all of their stories on the [case studies page](case-studies.topic).
 
 In November 2023, JetBrains announced that Kotlin Multiplatform is now [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/),
 attracting the interest of more companies and teams in the technology.
@@ -193,16 +189,6 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 * **Xcode**. Apple's IDE can be used to create the iOS part of Kotlin Multiplatform apps.
   Xcode is the standard for iOS app development, offering a plethora of tools for coding, debugging, and configuration.
   However, Xcode is Mac only.
-* **Fleet**. A new technology from JetBrains. 
-  [Fleet](https://www.jetbrains.com/fleet/) combines the convenience of a lightweight code editor with its 
-  Smart Mode and is built using the IntelliJ Platform on the backend.
-  Fleet supports multiple programming languages, including Kotlin and Swift, and provides cross-language features like navigation,
-  refactoring, and debugging. 
-  Moreover, Fleet promotes distributed collaboration, allowing for productive pair programming sessions.
-
-> [Explore Fleet, a single IDE for Kotlin Multiplatform app development](fleet.md)
-> 
-{style="tip"}
 
 ### 10. Kotlin Multiplatform boasts a large and supportive community
 
@@ -251,9 +237,7 @@ If you've already decided to try Kotlin Multiplatform, here are a few tips that 
   If it worked for you, you might want to expand the scope and share even more code.
   If not, you need to understand the reasons why this experiment didn't work out.
 
-> [See Kotlin Multiplatform in action! Get started now](get-started.topic)
->
-{style="tip"}
+[![See Kotlin Multiplatform in action! Get Started now](kmp-get-started-action.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 For those who want to help their team get started with Kotlin Multiplatform, we prepared a [detailed guide](multiplatform-introduce-your-team.md) with practical tips.
 
