@@ -68,6 +68,14 @@ composable(Destinations.Followers.route) { navBackStackEntry ->
 }
 ```
 
+### Implementation of `runOnIdle()` aligned with Android
+
+To bring the Compose Multiplatform implementation of the `runOnIdle()` test function in line with Android behavior,
+we introduced the following changes:
+
+* `runOnIdle()` now executes its `action` in the UI thread.
+* `runOnIdle()` does not call `waitForIdle()` after executing `action` anymore.
+
 ## Across platforms
 
 ### Variable fonts
