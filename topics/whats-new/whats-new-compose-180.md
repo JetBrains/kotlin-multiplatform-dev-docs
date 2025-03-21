@@ -68,6 +68,55 @@ composable(Destinations.Followers.route) { navBackStackEntry ->
 }
 ```
 
+### New handling of coroutine delays in tests
+
+Previously, Compose Multiplatform tests would not consider side effects with `delay()` calls idle.
+Because of that, this test, for example, would hang indefinitely:
+
+```kotlin
+@Test
+fun loopInLaunchedEffectTest() = runComposeUiTest {
+    setContent {
+        LaunchedEffect(Unit) {
+            while (true) {
+                delay(1000)
+                println("Tick")
+            }
+        }
+    }
+}
+```
+
+In Compose Multiplatform %composeEapVersion%, `waitForIdle()`, `awaitIdle()`, and `runOnIdle()` functions consider Compose
+to be idle even when coroutines launched in a composition scope call the `delay()` function.
+This fixes the hanging test above but breaks tests that rely on `waitForIdle()`, `awaitIdle()`, and `runOnIdle()`
+to execute coroutines with `delay()`.
+To produce the same results in these cases, advance time artificially:
+
+```kotlin
+var updateText by mutableStateOf(false)
+var text by mutableStateOf("0")
+setContent {
+    LaunchedEffect(updateText) {
+        if (updateText) {
+            delay(1000)
+            text = "1"
+        }
+    }
+}
+updateText = true
+waitForIdle()
+
+// Since waitForIdle() no longer waits for the delayed LaunchedEffect() to complete,
+// the test needs to advance time to make the following assertion correct
+mainClock.advanceTimeBy(1001)
+
+assertEquals("1", text)
+```
+
+Tests that already use `mainClock.advanceTimeBy()` calls to advance the test clock may behave differently
+with recomposition, layout, drawing, and effects.
+
 ## Across platforms
 
 ### Variable fonts
