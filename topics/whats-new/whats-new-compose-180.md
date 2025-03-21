@@ -77,7 +77,7 @@ we introduced the following changes:
 * `runOnIdle()` does not call `waitForIdle()` after executing `action` anymore.
 
 If your tests rely on that extra `waitForIdle()` call after the `runOnIdle()` action,
-add that call yourself as needed when updating tests for Compose Multiplatform %composeEapVersion%.
+add that call to your tests as needed when you update them for Compose Multiplatform %composeEapVersion%.
 
 ## Across platforms
 
