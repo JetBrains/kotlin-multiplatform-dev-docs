@@ -68,6 +68,17 @@ composable(Destinations.Followers.route) { navBackStackEntry ->
 }
 ```
 
+### Implementation of `runOnIdle()` aligned with Android
+
+To bring the Compose Multiplatform implementation of the `runOnIdle()` test function in line with Android behavior,
+we introduced the following changes:
+
+* `runOnIdle()` now executes its `action` on the UI thread.
+* `runOnIdle()` does not call `waitForIdle()` after executing `action` anymore.
+
+If your tests rely on that extra `waitForIdle()` call after the `runOnIdle()` action,
+add that call to your tests as needed when you update them for Compose Multiplatform %composeEapVersion%.
+
 ### New handling of coroutine delays in tests
 
 Previously, Compose Multiplatform tests would not consider side effects with `delay()` calls idle.
