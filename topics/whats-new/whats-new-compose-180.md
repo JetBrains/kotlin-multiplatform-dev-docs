@@ -107,7 +107,7 @@ setContent {
 updateText = true
 waitForIdle()
 
-// Since waitForIdle no longer waits for the delayed LauchedEffect() to complete,
+// Since waitForIdle() no longer waits for the delayed LaunchedEffect() to complete,
 // the test needs to advance time to make the following assertion correct
 mainClock.advanceTimeBy(1001)
 
