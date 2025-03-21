@@ -75,7 +75,7 @@ Because of that, this test, for example, would hang indefinitely:
 
 ```kotlin
 @Test
-fun loopInLaunchedEffectTest() = runSkikoComposeUiTest {
+fun loopInLaunchedEffectTest() = runComposeUiTest {
     setContent {
         LaunchedEffect(Unit) {
             while (true) {
@@ -109,7 +109,7 @@ waitForIdle()
 
 // Since waitForIdle no longer waits for the delayed LauchedEffect() to complete,
 // the test needs to advance time to make the following assertion correct
-mainClock.advanceTimeBy(1000)
+mainClock.advanceTimeBy(1001)
 
 assertEquals("1", text)
 ```
