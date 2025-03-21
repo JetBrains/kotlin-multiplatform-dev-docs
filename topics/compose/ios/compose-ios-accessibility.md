@@ -27,6 +27,11 @@ You can customize these settings with the new Compose Multiplatform API.
 
 ### Choose the tree synchronization option
 
+> In Compose Multiplatform %composeEapVersion%, [this option has been removed](whats-new-compose-180.md#loading-accessibility-tree-on-demand)
+> as the accessibility tree is synchronized lazily and no longer requires additional configuration.
+>
+{style="tip"}
+
 To debug and test events and interactions, you can change the synchronization mode to:
 * Never synchronize the tree with UI, for example, to temporarily disable accessibility mapping.
 * Always synchronize the tree so that it is rewritten every time the UI updates to test the accessibility integration thoroughly.

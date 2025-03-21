@@ -79,6 +79,55 @@ we introduced the following changes:
 If your tests rely on that extra `waitForIdle()` call after the `runOnIdle()` action,
 add that call to your tests as needed when you update them for Compose Multiplatform %composeEapVersion%.
 
+### New handling of coroutine delays in tests
+
+Previously, Compose Multiplatform tests would not consider side effects with `delay()` calls idle.
+Because of that, this test, for example, would hang indefinitely:
+
+```kotlin
+@Test
+fun loopInLaunchedEffectTest() = runComposeUiTest {
+    setContent {
+        LaunchedEffect(Unit) {
+            while (true) {
+                delay(1000)
+                println("Tick")
+            }
+        }
+    }
+}
+```
+
+In Compose Multiplatform %composeEapVersion%, `waitForIdle()`, `awaitIdle()`, and `runOnIdle()` functions consider Compose
+to be idle even when coroutines launched in a composition scope call the `delay()` function.
+This fixes the hanging test above but breaks tests that rely on `waitForIdle()`, `awaitIdle()`, and `runOnIdle()`
+to execute coroutines with `delay()`.
+To produce the same results in these cases, advance time artificially:
+
+```kotlin
+var updateText by mutableStateOf(false)
+var text by mutableStateOf("0")
+setContent {
+    LaunchedEffect(updateText) {
+        if (updateText) {
+            delay(1000)
+            text = "1"
+        }
+    }
+}
+updateText = true
+waitForIdle()
+
+// Since waitForIdle() no longer waits for the delayed LaunchedEffect() to complete,
+// the test needs to advance time to make the following assertion correct
+mainClock.advanceTimeBy(1001)
+
+assertEquals("1", text)
+```
+
+Tests that already use `mainClock.advanceTimeBy()` calls to advance the test clock may behave differently
+with recomposition, layout, drawing, and effects.
+
 ## Across platforms
 
 ### Variable fonts
@@ -137,6 +186,19 @@ see the [dedicated article](https://developer.android.com/develop/ui/compose/tou
 
 Compose Multiplatform %composeEapVersion% introduces accessibility support for right-to-left languages,
 including proper text direction handling for gestures.
+
+#### Loading accessibility tree on demand
+
+Instead of setting a specific mode of syncing the Compose semantic tree with the iOS accessibility tree,
+you can now rely on Compose Multiplatform to handle this process lazily:
+the tree is fully loaded after the first request from the iOS accessibility engine
+and is disposed of when the screen reader stops interacting with it.
+
+This allows fully supporting iOS Voice Control, VoiceOver,
+and other accessibility tools that rely on the accessibility tree.
+
+The `AccessibilitySyncOptions` class, which was [used to configure accessibility tree sync](compose-ios-accessibility.md#choose-the-tree-synchronization-option),
+has been removed as it is no longer necessary.
 
 #### Accessibility for scrollable lists
 
