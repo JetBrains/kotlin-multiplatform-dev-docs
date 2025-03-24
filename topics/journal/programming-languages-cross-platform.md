@@ -30,7 +30,7 @@ This article focuses on well-established programming languages suited for cross-
     <tr>
         <td>Language</td>
         <td>First appeared</td>
-        <td>Most popular technologies (<a href="https://survey.stackoverflow.co/2024/technology#2-programming-scripting-and-markup-languages">Stack Overflow, 2024</a>)</td>
+        <td>Most popular technologies (<a href="https://survey.stackoverflow.co/2024/technology#most-popular-technologies">Stack Overflow, 2024</a>)</td>
         <td>Most popular technologies (<a href="https://www.jetbrains.com/lp/devecosystem-2024/">Developer Ecosystem Report 2024</a>)</td>
         <td>Ecosystem/tooling</td>
         <td>Technologies/frameworks</td>
