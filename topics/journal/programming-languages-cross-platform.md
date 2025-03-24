@@ -77,15 +77,15 @@ This article focuses on well-established programming languages suited for cross-
     </tr>
 </table>
 
-### JavaScript
+**JavaScript**
 
 JavaScript is a widely used programming language that allows users to implement complex functionalities on web pages. With the introduction of frameworks like React Native and Ionic, it has become a popular choice for cross-platform app development. According to the latest [Developer Ecosystem Survey](https://www.jetbrains.com/lp/devecosystem-2024/) conducted by JetBrains, 61% of developers use JavaScript, which makes it the most popular programming language.
 
-### Dart
+**Dart**
 
 Dart is an object-oriented, class-based programming language that was introduced by Google in 2011. Dart forms the foundation of Flutter, an open-source framework created by Google for building multiplatform applications from a single codebase. Dart provides the language and runtimes that power Flutter apps.
 
-### Kotlin
+**Kotlin**
 
 Kotlin is a modern, mature multiplatform programming language developed by JetBrains. According to the [Octoverse report](https://github.blog/news-insights/octoverse/octoverse-2024/#the-most-popular-programming-languages), it is the fifth-fastest-growing language in 2024. It's concise, safe, interoperable with Java and other languages, and is Google's preferred language for Android app development. 
 
@@ -93,11 +93,11 @@ Kotlin is a modern, mature multiplatform programming language developed by JetBr
 
 [![Discover Kotlin Multiplatform](discover-kmp.svg){width="500"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
-### C#
+**C#**
 
 C# is a cross-platform general purpose programming language developed by Microsoft. C# is the most popular language for the .NET Framework. .NET MAUI is a framework for building native, cross-platform desktop and mobile apps from a single C# codebase for Android, iOS, Mac, and Windows.
 
-### C++
+**C++**
 
 C++ is a general purpose programming language that was first released in 1985 as an extension of the C programming language. Qt is a cross-platform software development framework that includes a set of modularized C++ library classes and provides a range of APIs for application development. Qt provides a C++ class library with application building blocks for C++ development.
 
