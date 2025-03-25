@@ -10,31 +10,6 @@
 		<toc-element topic="kotlin-multiplatform-roadmap.md" toc-title="KMP roadmap"/>
 	</toc-element>
 	<toc-element accepts-web-file-names="compose-multiplatform-setup.html" topic="multiplatform-setup.md"/>
-	<toc-element toc-title="Create an app with shared logic and native UI">
-		<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
-		<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
-		<toc-element toc-title="3. Add dependencies" topic="multiplatform-dependencies.md"/>
-		<toc-element toc-title="4. Share more logic" topic="multiplatform-upgrade-app.md"/>
-		<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
-	</toc-element>
-	<toc-element toc-title="Create an app with shared logic and UI">
-		<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
-		<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
-		<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
-		<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
-	</toc-element>
-	<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
-	<toc-element toc-title="Develop with Kotlin Multiplatform">
-		<toc-element topic="multiplatform-connect-to-apis.md"/>
-		<toc-element toc-title="Choose project configuration" topic="multiplatform-project-configuration.md"/>
-		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
-	</toc-element>
-	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
-	<toc-element toc-title="Publish multiplatform projects">
-		<toc-element toc-title="KMP app" topic="multiplatform-publish-apps.md"/>
-		<toc-element toc-title="KMP library" topic="multiplatform-publish-libraries.md"/>
-	</toc-element>
-	<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
 	<toc-element toc-title="Compose Multiplatform UI framework">
 		<toc-element toc-title="Why Compose Multiplatform" href="https://www.jetbrains.com/lp/compose-multiplatform/"/>
 		<toc-element toc-title="What's new in Compose Multiplatform">
@@ -77,23 +52,83 @@
 			<toc-element topic="compose-desktop-tooltips.md"/>
 			<toc-element topic="compose-desktop-context-menus.md"/>
 			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
-      <toc-element topic="compose-desktop-keyboard.md"/>
+			<toc-element topic="compose-desktop-keyboard.md"/>
 			<toc-element topic="compose-native-distribution.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
-      <toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
-      <toc-element topic="compose-desktop-swing-interoperability.md"/>
+			<toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
+			<toc-element topic="compose-desktop-swing-interoperability.md"/>
 		</toc-element>
 		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
 		<toc-element topic="compose-compiler.md"/>
 		<toc-element topic="compose-compatibility-and-versioning.md"/>
 		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
 	</toc-element>
-	<toc-element toc-title="Kotlin Multiplatform technology" href="https://kotlinlang.org/docs/multiplatform.html"/>
-	<toc-element toc-title="Tooling">
+	<toc-element toc-title="Choose your use case">
+		<toc-element toc-title="Create an app with shared logic and native UI">
+			<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
+			<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
+			<toc-element toc-title="3. Add dependencies" topic="multiplatform-dependencies.md"/>
+			<toc-element toc-title="4. Share more logic" topic="multiplatform-upgrade-app.md"/>
+			<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
+		</toc-element>
+		<toc-element toc-title="Create an app with shared logic and UI">
+			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
+			<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
+			<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
+			<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
+		</toc-element>
+		<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
+		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
+	</toc-element>
+	<toc-element toc-title="Explore project structure">
+		<toc-element toc-title="Basic project structure" topic="multiplatform-discover-project.md"/>
+		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
+		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
+	</toc-element>
+	<toc-element toc-title="Share code">
+		<toc-element topic="multiplatform-share-on-platforms.md"/>
+		<toc-element topic="multiplatform-expect-actual.md"/>
+		<toc-element toc-title="Platform-specific APIs" topic="multiplatform-connect-to-apis.md"/>
+		<toc-element topic="multiplatform-hierarchy.md"/>
+	</toc-element>
+	<toc-element toc-title="Add dependencies">
+		<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md"/>
+		<toc-element toc-title="For Android target platforms" topic="multiplatform-android-dependencies.md"/>
+		<toc-element toc-title="For iOS target platforms" topic="multiplatform-ios-dependencies.md"/>
+	</toc-element>
+	<toc-element toc-title="Set up iOS integration">
+		<toc-element toc-title="Choose integration method" topic="multiplatform-ios-integration-overview.md"/>
+		<toc-element topic="multiplatform-direct-integration.md"/>
+		<toc-element toc-title="Remote SPM export" topic="multiplatform-spm-export.md"/>
+		<toc-element toc-title="CocoaPods integration">
+			<toc-element topic="multiplatform-cocoapods-overview.md"/>
+			<toc-element topic="multiplatform-cocoapods-libraries.md"/>
+			<toc-element topic="multiplatform-cocoapods-xcode.md"/>
+			<toc-element topic="multiplatform-cocoapods-dsl-reference.md"/>
+		</toc-element>
+		<toc-element toc-title="Local integration with SPM" topic="multiplatform-spm-local-integration.md"/>
+	</toc-element>
+	<toc-element toc-title="Compile artifacts">
+		<toc-element topic="multiplatform-configure-compilations.md"/>
+		<toc-element topic="multiplatform-build-native-binaries.md"/>
+	</toc-element>
+	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
+	<toc-element toc-title="Publish your multiplatform project">
+		<toc-element toc-title="KMP app" topic="multiplatform-publish-apps.md"/>
+		<toc-element toc-title="KMP library" topic="multiplatform-publish-libraries.md"/>
+		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
+	</toc-element>
+	<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
+	<toc-element toc-title="Tools">
 		<toc-element topic="recommended-ides.md"/>
+		<toc-element toc-title="Multiplatform Gradle DSL" topic="multiplatform-dsl-reference.md"/>
 		<toc-element toc-title="Amper configuration tool" topic="amper.md"/>
 	</toc-element>
-	<toc-element toc-title="Multiplatform Gradle DSL reference" href="https://kotlinlang.org/docs/multiplatform-dsl-reference.html"/>
+	<toc-element toc-title="Compatibility">
+		<toc-element topic="multiplatform-android-layout.md"/>
+		<toc-element toc-title="Compatibility guide" topic="multiplatform-compatibility-guide.md"/>
+		<toc-element topic="multiplatform-plugin-releases.md"/>
+	</toc-element>
 	<toc-element toc-title="Multiplatform journal">
 		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.md"/>
 		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>

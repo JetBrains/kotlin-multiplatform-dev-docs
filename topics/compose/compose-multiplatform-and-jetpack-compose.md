@@ -12,8 +12,8 @@ Compose Multiplatform is a cross-platform UI toolkit developed by JetBrains.
 It extends Google's [Jetpack Compose](https://developer.android.com/jetpack/compose) toolkit for Android
 by supporting additional target platforms.
 
-Compose Multiplatform makes compose APIs available from [common Kotlin code](https://kotlinlang.org/docs/multiplatform-discover-project.html#common-code),
-allowing you to write shared compose UI code that can run on Android, iOS, desktop, and web:
+Compose Multiplatform makes compose APIs available from [common Kotlin code](multiplatform-discover-project.md#common-code),
+allowing you to write shared compose UI code that can run on Android, iOS, desktop, and web.
 
 |                  | **Compose Multiplatform**  | **Jetpack Compose** |
 |------------------|----------------------------|---------------------|
@@ -90,7 +90,7 @@ This is done automatically, based on Gradle Module Metadata in the multiplatform
 ## Libraries for Compose Multiplatform
 
 By using Compose Multiplatform, you can publish your libraries
-that use compose APIs as [Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-publish-lib.html). 
+that use compose APIs as [Kotlin Multiplatform libraries](multiplatform-publish-lib-setup.md). 
 This makes them available for use from common Kotlin code, targeting multiple platforms.
 
 So if you're building a new library with compose APIs, consider taking advantage of that and building it as a multiplatform library using Compose Multiplatform.

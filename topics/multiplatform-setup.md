@@ -25,7 +25,7 @@ We recommend that you install the latest stable versions for compatibility and b
           <p>Most of the time, Xcode will work in the background. You will use it to add Swift or Objective-C code to your iOS application.</p>
             <note>
               <p>
-                We generally recommend using the latest stable versions for all tools. However, Kotlin/Native sometimes doesn't support the newest Xcode right away. You can check supported versions in the <a href="https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility">compatibility guide</a>, and if necessary, <a href="https://developer.apple.com/download/all/?q=Xcode">install an earlier version of Xcode</a>.
+                We generally recommend using the latest stable versions for all tools. However, Kotlin/Native sometimes doesn't support the newest Xcode right away. You can check supported versions in the <a href="multiplatform-compatibility-guide.md#version-compatibility">compatibility guide</a>, and if necessary, <a href="https://developer.apple.com/download/all/?q=Xcode">install an earlier version of Xcode</a>.
               </p>
             </note>   
       </td>
@@ -36,7 +36,7 @@ We recommend that you install the latest stable versions for compatibility and b
             lang="bash">java -version</code></td>
    </tr>
    <tr>
-        <td><a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html">Kotlin Multiplatform plugin</a></td>
+        <td><a href="multiplatform-plugin-releases.md">Kotlin Multiplatform plugin</a></td>
         <td><p>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</p>
 </td>
    </tr>
@@ -123,7 +123,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
                <list>
                   <li>Make sure that the Kotlin Multiplatform plugin is installed and enabled. On the Android Studio welcome screen, select <strong>Plugins | Installed</strong>. Verify that you have the plugin enabled. If it's not in the <strong>Installed</strong> list, search <strong>Marketplace</strong> for it and install the plugin.</li>
                   <li>If the plugin is outdated, click <strong>Update</strong> next to the plugin name. You can do the same in the <strong>Settings/Preferences | Tools | Plugins</strong> section.</li>
-                  <li>Check the compatibility of the Kotlin Multiplatform plugin with your version of Kotlin in the <a href="https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details">Release details</a> table.</li>
+                  <li>Check the compatibility of the Kotlin Multiplatform plugin with your version of Kotlin in the <a href="multiplatform-plugin-releases.md#release-details">Release details</a> table.</li>
                </list>
          </snippet>
          <snippet>

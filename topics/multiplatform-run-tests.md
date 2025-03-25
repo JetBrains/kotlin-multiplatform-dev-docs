@@ -381,7 +381,7 @@ When working with tests in your future projects, remember:
 
 ## What's next?
 
-* Explore the layout of multiplatform projects in [Understand Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+* Explore the layout of multiplatform projects in [Understand Multiplatform project structure](multiplatform-discover-project.md).
 * Check out [Kotest](https://kotest.io/), another multiplatform testing framework provided by the Kotlin ecosystem.
   Kotest allows writing tests in a range of styles and supports complementary approaches to regular testing.
   These include [data-driven](https://kotest.io/docs/framework/datatesting/data-driven-testing.html)

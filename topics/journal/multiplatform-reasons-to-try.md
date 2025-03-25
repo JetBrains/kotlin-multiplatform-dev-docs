@@ -221,7 +221,7 @@ Here's a breakdown of the key reasons why Kotlin Multiplatform might be the righ
 
 * **Excellent tooling, easy to use**. Kotlin Multiplatform leverages Kotlin, offering excellent tooling and ease of use for developers.
 * **Native programming**. It's easy to write things natively.
-  Thanks to the [expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html),
+  Thanks to the [expected and actual declarations](multiplatform-expect-actual.md),
   you can enable your multiplatform app to access platform-specific APIs.
 * **Great cross-platform performance**. Shared code written in Kotlin is compiled into different output formats for different targets:
   Java bytecode for Android and native binaries for iOS, ensuring good performance across all platforms.
