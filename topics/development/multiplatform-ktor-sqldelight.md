@@ -159,7 +159,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 After the Gradle sync, you are done with the project configuration and can start writing code.
 
-> For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html).
+> For an in-depth guide on multiplatform dependencies, see [Dependency on Kotlin Multiplatform libraries](multiplatform-add-dependencies.md).
 >
 {style="tip"}
 
@@ -291,7 +291,7 @@ To initialize the `AppDatabase` interface, you will pass an `SqlDriver` instance
 SQLDelight provides multiple platform-specific implementations of the SQLite driver, so you need to create these instances
 separately for each platform.
 
-While you can achieve this with [expected and actual interfaces](https://kotlinlang.org/docs/multiplatform-expect-actual.html),
+While you can achieve this with [expected and actual interfaces](multiplatform-expect-actual.md),
 in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
 1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
@@ -1202,4 +1202,4 @@ You can also check out these additional learning materials:
 * [Use the Ktor HTTP client in multiplatform projects](https://ktor.io/docs/http-client-engines.html#mpp-config)
 * [Read about Koin and dependency injection](https://insert-koin.io/docs/setup/why)
 * [Make your Android application work on iOS](multiplatform-integrate-in-existing-app.md)
-* [Learn more about multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+* [Learn more about multiplatform project structure](multiplatform-discover-project.md).

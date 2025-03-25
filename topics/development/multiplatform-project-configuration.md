@@ -35,7 +35,7 @@ You can add a dependency on a Kotlin Multiplatform module framework to the iOS p
 
 * **CocoaPods integration**. You connect a framework through [CocoaPods](https://cocoapods.org/), a popular dependency
   manager for Swift and Objective-C projects. It can be either a local or remote dependency. For more information,
-  see [Use a Kotlin Gradle project as a CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods-xcode.html).
+  see [Use a Kotlin Gradle project as a CocoaPods dependency](multiplatform-cocoapods-xcode.md).
 
   To set up a workflow with a local CocoaPods dependency, you can either generate the project with a wizard, or edit the
   scripts manually.
@@ -43,7 +43,7 @@ You can add a dependency on a Kotlin Multiplatform module framework to the iOS p
 * **Using SPM**. You connect a framework using the Swift package manager (SPM), an Apple tool for managing the
   distribution of Swift code. We're [working on official support for SPM](https://youtrack.jetbrains.com/issue/KT-53877).
   Currently, you can set up a dependency on a Swift package using XCFrameworks. For more information,
-  see [Swift package export setup](https://kotlinlang.org/docs/native-spm.html).
+  see [Swift package export setup](multiplatform-spm-export.md).
 
 ## Module configurations
 

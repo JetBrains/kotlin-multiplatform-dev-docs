@@ -22,7 +22,7 @@ This tutorial assumes that you are:
 > Most of the steps here are still applicable if you're using a different setup, but there may be some differences you
 > need to take into account.
 > 
-> An [important limitation](https://kotlinlang.org/docs/multiplatform-publish-lib.html#host-requirements)
+> An [important limitation](multiplatform-publish-lib-setup.md#host-requirements)
 > is that Apple targets must be built on a machine with macOS.
 > 
 {style="note"}
@@ -466,7 +466,7 @@ workflow with `publishAndReleaseToMavenCentral`.
 
 ## What's next
 
-* [Learn more about setting up multiplatform library publication and requirements](https://kotlinlang.org/docs/multiplatform-publish-lib.html)
+* [Learn more about setting up multiplatform library publication and requirements](multiplatform-publish-lib-setup.md)
 * [Add shield.io badges to your README](https://shields.io/badges/maven-central-version)
 * [Share API documentation for your project using Dokka](https://kotl.in/dokka)
 * [Add Renovate to automatically update dependencies](https://docs.renovatebot.com/)

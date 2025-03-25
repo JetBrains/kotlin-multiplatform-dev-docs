@@ -95,7 +95,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
     <tr>
         <td><b>Communication with native APIs</b></td>
-        <td>Native APIs are accessible directly from Kotlin code using <a href="https://kotlinlang.org/docs/multiplatform-expect-actual.html">expect/actual declarations.</a></td>
+        <td>Native APIs are accessible directly from Kotlin code using <a href="multiplatform-expect-actual.md">expect/actual declarations.</a></td>
         <td>Communication with the host platform is possible using <a href="https://docs.flutter.dev/platform-integration/platform-channels">platform channels.</a></td>
     </tr>
     <tr>
