@@ -91,7 +91,7 @@ Kotlin is a modern, mature multiplatform programming language developed by JetBr
 
 [Kotlin Multiplatform (KMP)](https://www.jetbrains.com/kotlin-multiplatform/) is a technology by JetBrains that allows you to create applications for various platforms and reuse Kotlin code across them while retaining the benefits of native programming. Additionally, JetBrains provides Compose Multiplatform, a declarative framework for sharing UIs across multiple platforms that is based on KMP and Jetpack Compose. In May 2024, Google announced their official [support for Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) for sharing business logic across Android and iOS.
 
-[![Discover Kotlin Multiplatform](discover-kmp.svg){width="500"}](https://www.jetbrains.com/kotlin-multiplatform/)
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="500" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 **C#**
 
@@ -133,7 +133,7 @@ Another important factor to consider is the real-world use of the technology. Re
 
 ![Kotlin Multiplatform Case Studies](kmp-case-studies.png){width="700"}
 
-[![Explore Real-World Kotlin Multiplatform Use Cases](kmp-use-cases-1.svg){width="500"}](case-studies.topic)
+[![Explore Real-World Kotlin Multiplatform Use Cases](kmp-use-cases-1.svg){width="500" style="block"}](case-studies.topic)
 
 **5. Language ecosystem**
 
@@ -151,4 +151,4 @@ It is worth looking closely at the popularity and community support of the progr
 
 As cross-platform development continues to evolve, we can expect even greater efficiency, performance, and flexibility from the tools and languages supporting it. With growing demand for seamless user experiences across multiple devices, more companies are investing in frameworks that allow developers to share code without compromising on native performance. The future of cross-platform technologies looks promising, with advances likely to reduce limitations and further streamline the development process for a wide range of applications.
 
-[![See Kotlin Multiplatform in Action](see-kmp-in-action.svg){width="500"}](https://www.jetbrains.com/kotlin-multiplatform/)
+[![See Kotlin Multiplatform in Action](see-kmp-in-action.svg){width="500" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
