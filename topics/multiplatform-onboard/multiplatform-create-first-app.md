@@ -48,6 +48,11 @@ The following instructions assume that you have all software necessary for the p
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
 
+   > Since the Android Gradle plugin support in Kotlin Multiplatform is a little [behind the latest version](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)
+   > it is **not** recommended to automatically upgrade AGP whenever Android Studio suggests it.
+   >
+   {style="note"}
+
 4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
    which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
 
