@@ -90,10 +90,13 @@ the IDE will show a warning:
    ```kotlin
    import java.util.Random
    
-   fun greet(): String {
-       val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   class Greeting {
+       // ...
+       fun greet(): String {
+           val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
    
-       return firstWord
+           return firstWord
+       }
    }
    ```
 
