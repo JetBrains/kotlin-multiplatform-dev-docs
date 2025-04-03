@@ -91,7 +91,8 @@ the IDE will show a warning:
    import java.util.Random
    
    class Greeting {
-       // ...
+       private val platform: Platform = getPlatform()
+   
        fun greet(): String {
            val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
    
