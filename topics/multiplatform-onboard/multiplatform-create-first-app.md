@@ -48,8 +48,9 @@ The following instructions assume that you have all software necessary for the p
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
 
-   > Since the Android Gradle plugin support in Kotlin Multiplatform is a little [behind the latest version](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)
-   > it is **not** recommended to automatically upgrade AGP whenever Android Studio suggests it.
+   > Android Studio may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+   > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
+   > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
    >
    {style="note"}
 
