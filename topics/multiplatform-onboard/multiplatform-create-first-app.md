@@ -105,7 +105,7 @@ the IDE will show a warning:
 2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
 3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
-4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
+4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` call
    from the Kotlin standard library to reverse the text:
 
     ```kotlin
