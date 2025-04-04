@@ -18,6 +18,7 @@ The following principles set a baseline for a consistent and intuitive user expe
     Each user's journey through app screens is reflected in the _back stack_: the top of the stack is the current screen,
     and previous destinations in the stack represent the history of where the user has been before.
     At the bottom of the stack is the start destination of the app.
+    for details and use cases.
 * _Deep linking_ simulates manual navigation: even if a deep link brings the user to a particular screen of the app,
     a realistic back stack should be synthesized using a route that could organically bring the user to the screen. 
 
@@ -91,11 +92,20 @@ data class Profile(val name: String)
 When you need to pass arguments to that destination, create an instance of the route class and pass the arguments
 to the class constructor.
 
-> Navigation arguments are not designed for passing complex data objects.
-> Consider passing the minimum necessary information, such as unique identifiers of complex objects stored in the data layer.
-> Using a single source of truth, such as the data layer, helps avoid transmitting complex data between navigation graph destinations.
-> 
+Navigation arguments are not designed for passing complex data objects.
+Consider passing the minimum necessary information, such as unique identifiers of complex objects stored in the data layer.
+Using a single source of truth, such as the data layer, helps avoid transmitting complex data between navigation graph destinations.
+
+Starting with the 1.7.0 version, Compose Multiplatform supports type-safe navigation in common code.
+This means that as long as you define routes as serializable objects or classes,
+the framework will provide compile-time type safety for your navigation graph.
+
+> This is not a requirement: you can still use plain strings to identify your routes
+> with Compose Navigation, but you will have to keep track of route names and arguments.
+>
 {style="note"}
+
+To learn about Navigation Compose type safety in detail, see the [Jetpack's Type safety article](https://developer.android.com/guide/navigation/design/type-safety).
 
 ### Managing UI state
 
@@ -106,21 +116,24 @@ when the referenced object is updated or mutated.
 
 https://developer.android.com/develop/ui/compose/navigation#retrieving-complex-data
 
+### Back stack
 
-### Type-safe navigation
+The back stack is held by and controlled by the `NavController` class.
+Just like with any other stack, the `NavController` pushes new items onto the top of the stack and pops them from the top
+as well.
 
-Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code.
-This means that as long as you define routes as serializable objects or classes,
-the framework will provide compile-time type safety for your navigation graph.
+* When the user opens the app, the `NavController` pushes the start destination into the back stack.
+* Each following `NavController.navigate()` call pushes the given destination to the top of the stack.
+* Using the back gesture or back button pops the current destination off the stack.
+    If the user followed a deep link to the current destination, popping the stack would return them to the previous app.
+    Alternatively, the `NavController.navigateUp()` function only navigates the user within the app within the context
+    of the `NavController`.
 
-> This is not a requirement: you can still use plain strings to identify your routes
-> with Compose Navigation, but you will have to keep track of route names and arguments.
-> 
-{style="note"}
-
-To learn about Navigation Compose type safety in detail, see the [Jetpack's Type safety article](https://developer.android.com/guide/navigation/design/type-safety).
+See [JetPack Compose documentation on back stack](https://developer.android.com/guide/navigation/backstack) for details
+and use cases.
 
 ### Deep links
+<primary-label ref="EAP"/>
 
 Compose Multiplatform Navigation lets you associate a specific URL, action or MIME type with a composable using deep linking.
 By default, deep links are not exposed to external apps: you need to register the appropriate URI schemas for each
@@ -142,7 +155,7 @@ The multiplatform Navigation library provides the universal back gesture support
 and translates back gestures on each platform into navigating to the previous screen
 (for iOS, this is a simple back swipe, for desktop – the **Esc** key).
 
-For now, there is no user-facing API for custom implementations of `BackHandler`.
+For now, there is no user-facing API for custom implementations of the `BackHandler` class.
 
 ## Alternative navigation solutions
 
