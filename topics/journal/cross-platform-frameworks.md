@@ -48,6 +48,10 @@ To build applications with Flutter, you will need to use Google's programming la
 Flutter has a relatively active community of users around the world and is widely used by many developers. 
 According to the [Stack Overflow Trends](https://insights.stackoverflow.com/trends?tags=flutter%2Creact-native), the usage of Flutter has been trending up over time, based on the increasing use of the corresponding tag.
 
+> Take a closer look at [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) to understand their strengths and choose the best fit for your cross-platform development.
+> 
+{style="note"}
+
 ### React Native
 
 An open-source UI software framework, React Native was developed in 2015 (a bit earlier than Flutter) by Meta Platforms, formerly Facebook. It's based on Facebook's JavaScript library React and allows developers to build natively rendered cross-platform mobile apps.

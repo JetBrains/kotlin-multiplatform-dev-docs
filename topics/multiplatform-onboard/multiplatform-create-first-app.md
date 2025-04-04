@@ -25,13 +25,6 @@ if you haven't already.
 Make sure that you have:
 
 * Installed the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) for Android Studio.
-   
-  > The KMP plugin doesn't support [K2 mode](https://kotlinlang.org/docs/k2-compiler-migration-guide.html#support-in-ides)
-  > yet.
-  > To use the plugin, disable K2 mode: in your IDE, go to **Settings | Languages & Frameworks | Kotlin** and uncheck the **Enable K2 mode** option.
-  > 
-  {style="note"}
-
 * Launched Xcode at least once and accepted the terms of use if you plan to build iOS apps.
 * Run Kdoctor to check for any issues in the setup.
 
@@ -97,10 +90,14 @@ the IDE will show a warning:
    ```kotlin
    import java.util.Random
    
-   fun greet(): String {
-       val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   class Greeting {
+       private val platform: Platform = getPlatform()
    
-       return firstWord
+       fun greet(): String {
+           val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   
+           return firstWord
+       }
    }
    ```
 
@@ -108,7 +105,7 @@ the IDE will show a warning:
 2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
 3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
-4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
+4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` call
    from the Kotlin standard library to reverse the text:
 
     ```kotlin

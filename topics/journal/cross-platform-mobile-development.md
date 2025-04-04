@@ -120,9 +120,9 @@ As modern multiplatform frameworks continue to evolve, they increasingly allow m
 
 ### Flutter
 
-Created by Google, Flutter is a cross-platform development framework that uses the Dart programming language. Flutter supports native features, such as location services, camera functionality, and hard drive access. If you need to create a specific app feature that's not supported in Flutter, you can write platform-specific code using the [Platform Channel technology](https://brightmarbles.io/blog/platform-channel-in-flutter-benefits-and-limitations/).
+Created by Google, Flutter is a cross-platform development framework that uses the Dart programming language. Flutter supports native features, such as location services, camera functionality, and hard drive access. If you need to create a specific app feature that's not supported in Flutter, you can write platform-specific code using the [Platform Channel technology](https://docs.flutter.dev/platform-integration/platform-channels).
 
-Apps built with Flutter need to share all of their UX and UI layers, which is why they may not always feel 100% native. One of the best things about this framework is its Hot Reload feature, which allows developers to make changes and view them instantly.
+Apps built with Flutter need to share all of their UX and UI layers. One of the best things about this framework is its Hot Reload feature, which allows developers to make changes and view them instantly.
 
 This framework may be the best option in the following situations:
 
@@ -131,6 +131,8 @@ This framework may be the best option in the following situations:
 * You need to develop an MVP (minimum viable product).
 
 Among the most popular apps built with Flutter are Google Ads, Xianyu by Alibaba, eBay Motors, and Hamilton.
+
+Explore [Kotlin Multiplatform and Flutter](kotlin-multiplatform-flutter.md) in detail to better understand their capabilities and determine the right fit for your cross-platform project.
 
 ### React Native
 
