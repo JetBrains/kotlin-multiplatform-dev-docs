@@ -114,9 +114,9 @@
 	</toc-element>
 	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
 	<toc-element toc-title="Publish your multiplatform project">
-		<toc-element toc-title="KMP app" topic="multiplatform-publish-apps.md"/>
-		<toc-element toc-title="KMP library" topic="multiplatform-publish-libraries.md"/>
+		<toc-element topic="multiplatform-publish-apps.md"/>
 		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
+		<toc-element topic="multiplatform-publish-libraries.md"/>
 	</toc-element>
 	<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
 	<toc-element toc-title="Tools">
