@@ -461,14 +461,14 @@ You can rely on default configuration, if you use `org.jetbrains.kotlin.jvm` or
 `org.jetbrains.kotlin.multiplatform` plugins:
 
 * Configuration with `org.jetbrains.kotlin.jvm` includes content from the `main` [source set](https://docs.gradle.org/current/userguide/java_plugin.html#source_sets).
-* Configuration with `org.jetbrains.kotlin.multiplatform` includes content from a single [JVM target](https://kotlinlang.org/docs/mpp-dsl-reference.html#targets).
+* Configuration with `org.jetbrains.kotlin.multiplatform` includes content from a single [JVM target](multiplatform-dsl-reference.md#targets).
   If you define multiple JVM targets, the default configuration is disabled. In this case, you need to configure the plugin manually, 
   or specify a single target (see below).
 
 If the default configuration is ambiguous or insufficient, you can customize it in several ways:
 
 Using a Gradle [source set](https://docs.gradle.org/current/userguide/java_plugin.html#source_sets):
-:
+
 ``` kotlin
 plugins {
     kotlin("jvm")
@@ -482,8 +482,8 @@ compose.desktop {
 }
 ``` 
 
-Using a Kotlin [JVM target](https://kotlinlang.org/docs/reference/mpp-dsl-reference.html#targets):
-:
+Using a Kotlin [JVM target](multiplatform-dsl-reference.md#targets):
+
 ``` kotlin
 plugins {
     kotlin("multiplatform")
@@ -500,7 +500,7 @@ compose.desktop {
 ```
 
 Manually:
-:
+
 * Use `disableDefaultConfiguration` to disable the default settings.
 * Use `fromFiles` to specify files to include.
 * Specify the `mainJar` file property to point to a `.jar` file containing the main class.
@@ -854,7 +854,7 @@ As a result, links like `compose://foo/bar` can now be redirected from a browser
 ## Minification and obfuscation
 
 The Compose Multiplatform Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
-ProGuard ia an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
+ProGuard is an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
 
 For each *default* (without ProGuard) packaging task, the Gradle plugin provides a *release* task (with ProGuard):
 
