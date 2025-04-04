@@ -77,6 +77,8 @@ NavHost(navController = navController, startDestination = Profile) {
 }
 ```
 
+## Supported navigation scenarios
+
 ### Pass arguments to a destination
 
 When designing your navigation graph, you can define routes with classes that have parameters, for instance:
@@ -120,13 +122,27 @@ To learn about Navigation Compose type safety in detail, see the [Jetpack's Type
 
 ### Deep links
 
-Compose Navigation lets you associate a specific URL, action or MIME type with a composable using deep linking.
+Compose Multiplatform Navigation lets you associate a specific URL, action or MIME type with a composable using deep linking.
 By default, deep links are not exposed to external apps: you need to register the appropriate URI schemas for each
-target
-(for example, on Android this means adding [`<intent-filter>`](https://developer.android.com/develop/ui/compose/navigation#deeplinks)
-elements to your `manifest.xml` file).
+target.
 
 For details on implementing deep links, see [TODO link].
+
+### Predictive back gesture
+<primary-label ref="EAP"/>
+
+> This feature is available only when the project depends on the [multiplatform Navigation library](compose-navigation-routing.md)
+> of at least `2.9.0-alpha15` version.
+>
+{style="note"}
+
+Compose Multiplatform adopts the [Android predictive back approach](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
+to be used on other platforms.
+The multiplatform Navigation library provides the universal back gesture support
+and translates back gestures on each platform into navigating to the previous screen
+(for iOS, this is a simple back swipe, for desktop – the **Esc** key).
+
+For now, there is no user-facing API for custom implementations of `BackHandler`.
 
 ## Alternative navigation solutions
 
