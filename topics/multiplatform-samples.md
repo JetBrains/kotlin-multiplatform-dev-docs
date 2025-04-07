@@ -487,7 +487,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
         </td>
         <td>A cross-platform application that is built using Jetpack Compose Multiplatform, a declarative framework for
             sharing UIs across multiple platforms with Kotlin. The application allows users to browse, search, and
-            purchase products from a shopping catalog on Android, iOS, Desktop and AndroidTV.
+            purchase products from a shopping catalog on Android, iOS, Desktop, and Android TV.
         </td>
         <td>
             <list>
@@ -520,7 +520,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
         </td>
         <td>
             <list>
-                <li>Compose Multiplatform on Android, iOS, Desktop and AndroidTV</li>
+                <li>Compose Multiplatform on Android, iOS, Desktop, and Android TV</li>
             </list>
         </td>
     </tr>
