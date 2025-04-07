@@ -167,7 +167,7 @@ Deep links emulate manual navigation:
 following a deep link replaces the current back stack with a synthetic one which looks like a reasonable path
 from the start destination to the linked screen.
 
-For details on registering implementing deep links, see [TODO link].
+For details on registering implementing deep links, see [TODOlink].
 
 ### Predictive back gesture
 <primary-label ref="EAP"/>
