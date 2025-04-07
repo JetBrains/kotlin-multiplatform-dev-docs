@@ -14,7 +14,7 @@ Some projects share almost all their code using Compose Multiplatform for the us
 Others use native code for the user interface and share, for example, only the data model and algorithms.
 To create your own brand new Kotlin Multiplatform application, we recommend using the [web wizard](https://kmp.jetbrains.com).
 
-You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic. 
+You can find even more sample projects on GitHub via the [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic.
 To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform) topic.
 
 ### JetBrains official samples
@@ -586,4 +586,36 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
             </list>
         </td>
     </tr>
+    <tr>
+  <td>
+    <strong><a href="https://github.com/piashcse/kmp-movie">Kmp-movie</a></strong>
+  </td>
+  <td>KMP Movie 📱 app for Android, iOS, Desktop and Web built with Compose Multiplatform. Powered by Coroutine, Flow and ViewModel based on MVVM architecture recommended by Google.
+  </td>
+  <td>
+    <list>
+      <li>UI</li>
+      <li>Model</li>
+      <li>Networking</li>
+      <li>Navigation</li>
+      <li>UI state</li>
+      <li>ViewModel</li>
+    </list>
+  </td>
+  <td>
+    <list>
+      <li><code>kotlinx-coroutines</code></li>
+      <li><code>kotlinx-serialization</code></li>
+      <li><code>ktor-client</code></li>
+      <li><code>PreCompose</code></li>
+      <li><code>Landscapist</code></li>
+      <li><code>ViewModel</code></li>
+    </list>
+  </td>
+  <td>
+    <list>
+      <li>Compose Multiplatform on Android, iOS, desktop, and web</li>
+    </list>
+  </td>
+</tr>
 </table>
