@@ -24,4 +24,7 @@ It's more reliable to refer to the documentation for your particular targets:
     > For iOS, you can edit the file directly or [register schemes using the Xcode GUI](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app#Register-your-URL-scheme).
     >
     {style="note"}
-* Deep links for Windows apps
+* Deep links for Windows apps can be declared by adding a key to the Windows registry. (TODO link to the correct one or mention if there is no link)
+    This can be done with an installation script.
+    Compose Multiplatform does not support configuring this within the project itself.
+* 
