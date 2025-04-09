@@ -7,7 +7,7 @@ Here are the highlights for this EAP feature release:
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#180-beta02-april-2025).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0-beta02).
 
 ## Breaking changes
 
