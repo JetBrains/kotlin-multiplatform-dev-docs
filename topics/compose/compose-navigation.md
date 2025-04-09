@@ -61,20 +61,18 @@ The Navigation library provides the following core types:
 Besides the core types functionality, the Navigation component provides animations and transitions, support for deep linking,
 type safety, `ViewModel` support, and other quality-of-life features for handling app navigation.
 
-To read up on the Navigation component in depth, see Android's [Navigation article](https://developer.android.com/guide/navigation).
+## Basic navigation example
 
-## Steps of implementing navigation
+There is an order in which it makes sense to tackle the necessary steps:
 
-There is an order in which it makes the most sense to tackle the necessary steps:
-
-1. Define your routes. Use a serializable [TODO link?] object or class that all the data
-    that the destination requires as its arguments.
+1. Define your routes. Use a serializable [TODO link?] object or class that holds the data
+   that the destination requires as its arguments.
 2. Design your navigation graph choosing one of the routes as the start destination.
-    Create a `NavHost` composable and add the `NavGraph` to it in one of two ways:
+   To do this, create a `NavHost` composable and add a `NavGraph` to it in one of two ways:
     * Directly, as part of creating the NavHost.
     * Programmatically, using the `NavController.createGraph()` method to create the `NavGraph` that you pass to the `NavHost`.
 3. Create your `NavController`, high enough in the composable hierarchy that all composables have access to it.
-    This NavController will hold the app's back stack and provide a method to transition between destinations in the navigation graph.
+   This NavController will hold the app's back stack and provide a method to transition between destinations in the navigation graph.
 
 The following is a basic example of a foundation for navigating within an app:
 
@@ -153,7 +151,7 @@ as well:
     Alternatively, the `NavController.navigateUp()` function only navigates the user within the app within the context
     of the `NavController`.
 
-See [JetPack Compose documentation on back stack](https://developer.android.com/guide/navigation/backstack) for details
+See [Jetpack Compose documentation on back stack](https://developer.android.com/guide/navigation/backstack) for details
 and use cases.
 
 ### Deep links
@@ -197,3 +195,13 @@ there are third-party alternatives to evaluate:
 | [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
 | [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
 | [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |
+
+## What's next
+
+Compose navigation is covered in-depth on the Android Developer portal.
+Sometimes this documentation uses Android-only examples,
+but fundamental guidance and navigation principles are the same for Multiplatform:
+
+* [Overview of navigation with Compose](https://developer.android.com/develop/ui/compose/navigation).
+* [Starting page for Jetpack Navigation](https://developer.android.com/guide/navigation) with subpages about
+    navigation graphs, moving around them, and other navigation use cases.
