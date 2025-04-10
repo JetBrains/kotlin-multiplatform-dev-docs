@@ -354,15 +354,14 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
                 <li><code>kotlinx.coroutines</code></li>
                 <li><code>kotlinx.datetime</code></li>
                 <li><code>koin</code></li>
-                <li><code>voyager</code></li>
+                <li><code>navigation-compose</code></li>
                 <li><code>multiplatform-settings</code></li>
                 <li>SQLDelight</li>
             </list>
         </td>
         <td>
             <list>
-                <li>Jetpack Compose on Android</li>
-                <li>Compose Multiplatform on iOS and desktop</li>
+                <li>Compose Multiplatform on Android, iOS, and desktop</li>
             </list>
         </td>
     </tr>
@@ -513,7 +512,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
                 <li><code>datastore</code></li>
                 <li><code>koin</code></li>
                 <li><code>google-map</code></li>
-                <li><code>compose-navigation</code></li>
+                <li><code>navigation-compose</code></li>
                 <li><code>coil</code></li>
                 <li><code>kotest</code></li>
             </list>
@@ -575,7 +574,7 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
                 <li><code>kotlinx-serialization</code></li>
                 <li><code>ktor-client</code></li>
                 <li><code>koin</code></li>
-                <li><code>Compose Navigation</code></li>
+                <li><code>navigation-compose</code></li>
                 <li><code>Coil</code></li>
                 <li><code>Jetpack ViewModel</code></li>
             </list>
