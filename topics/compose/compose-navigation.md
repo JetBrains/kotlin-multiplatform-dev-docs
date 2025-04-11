@@ -37,42 +37,18 @@ Using these concepts, the Navigation component implements basic rules that guide
     recorded in the stack.
 * Links that lead inside the app from other apps or the browser (usually called [_deep links_](#deep-links)).
 
-## Main classes of the Navigation library
-
-The Navigation library provides the following core types:
-
-* `NavController`.
-    Contains core navigation functionality: methods for transitioning between destinations,
-    handling deep links, managing the back stack, and so on.
-    You should create the `NavController` high in your composable hierarchy, high enough that all the composables
-    that need to reference it can do so.
-    This way, you can use the `NavController` as the single source of truth for updating composables outside of your screens.
-* `NavHost`.
-    Binds a `NavController` with a navigation graph.
-    A navigation graph is defined as a lambda in a `NavHost` call that builds a `NavGraph` instance from a set of composables.
-* `NavGraph`.
-    Contains all possible navigation destinations within the app and the connections between them.
-    Navigation graphs are defined as builder lambdas that return a `NavGraph`, for example, in `NavHost` declarations.
-* `NavDestination`.
-    Contains a navigable composable.
-    Apart from the composable content, holds the deep links assigned to the destination.
-    Destinations are defined as `composable<T>()` calls within a navigation graph builder.
-
-Besides the core types functionality, the Navigation component provides animations and transitions, support for deep linking,
-type safety, `ViewModel` support, and other quality-of-life features for handling app navigation.
-
 ## Basic navigation example
 
-There is an order in which it makes sense to tackle the necessary steps:
+There is an order in which it makes sense to tackle the necessary steps to set up your navigation:
 
-1. Define your routes. Use a serializable [TODO link?] object or class that holds the data
-   that the destination requires as its arguments.
-2. Design your navigation graph choosing one of the routes as the start destination.
-   To do this, create a `NavHost` composable and add a `NavGraph` to it in one of two ways:
-    * Directly, as part of creating the NavHost.
-    * Programmatically, using the `NavController.createGraph()` method to create the `NavGraph` that you pass to the `NavHost`.
-3. Create your `NavController`, high enough in the composable hierarchy that all composables have access to it.
-   This NavController will hold the app's back stack and provide a method to transition between destinations in the navigation graph.
+1. Define your routes.
+    Use a serializable [TODO link?] object or class that holds the data that the destination requires as its arguments.
+2. Create a `NavController`, which will be your navigation interface, high enough in the composable hierarchy that all
+   composables have access to it.
+   The NavController will hold the app's back stack and provide a method to transition between destinations in the navigation graph.
+3. Design your navigation graph choosing one of the routes as the start destination.
+   To do this, create a `NavHost` composable that holds the navigation graph and describe all navigable destinations
+   as part of the declaration.
 
 The following is a basic example of a foundation for navigating within an app:
 
@@ -94,6 +70,33 @@ NavHost(navController = navController, startDestination = Profile) {
 }
 ```
 
+### Main classes of the Navigation library
+
+The Navigation library provides the following core types:
+
+* `NavController`.
+    Contains core navigation functionality: methods for transitioning between destinations,
+    handling deep links, managing the back stack, and so on.
+    <!--You should create the `NavController` high in your composable hierarchy, high enough that all the composables
+    that need to reference it can do so.
+    This way, you can use the `NavController` as the single source of truth for updating composables outside of your screens.
+    [NB: This doesn't seem to be useful to people who are trying to cover the basics.]-->
+* `NavHost`.
+    Binds a `NavController` to a navigation graph.
+    A navigation graph is usually defined as a lambda in a `NavHost` call that builds a `NavGraph` instance from a set of composables.
+* `NavGraph`.
+    Contains all possible navigation destinations within the app and the connections between them.
+    Navigation graphs are defined as builder lambdas that return a `NavGraph`, for example, in `NavHost` declarations.
+* `NavDestination`.
+    Contains a navigable composable.
+    Apart from the composable content, holds the deep links assigned to the destination.
+    Destinations are defined as `composable<T>()` calls within a navigation graph builder.
+
+Besides the core types functionality, the Navigation component provides animations and transitions, support for deep linking,
+type safety, `ViewModel` support, and other quality-of-life features for handling app navigation.
+
+
+
 ## Navigation use cases
 
 ### Go to a destination
@@ -101,7 +104,7 @@ NavHost(navController = navController, startDestination = Profile) {
 To navigate to a destination, call the `NavController.navigate()` function. To continue the example above:
 
 ```kotlin
-Button(onClick = { navController.navigate(Profile()) }) {
+Button(onClick = { navController.navigate(Profile) }) {
     Text("Go to profile")
 }
 ```
@@ -112,19 +115,11 @@ When designing your navigation graph, you can define routes as classes with para
 
 ```kotlin
 @Serializable
-data class Profile(val name: String)
+data class Profile(val id: String)
 ```
 
 When you need to pass arguments to that destination, pass the arguments to the class constructor when navigating
 to the destination.
-
-> Starting with Compose Multiplatform 1.7.0, the framework supports type-safe navigation in common code.
-> This means that as long as you define routes as serializable objects or classes,
-> the framework provides compile-time type safety for your navigation graph.
-> 
-> To learn about Navigation Compose type safety in detail, see the [Jetpack's Type safety article](https://developer.android.com/guide/navigation/design/type-safety).
-> 
-{style="tip"}
 
 ### Retrieve complex data when navigating
 
@@ -155,7 +150,7 @@ See [Jetpack Compose documentation on back stack](https://developer.android.com/
 and use cases.
 
 ### Deep links
-<primary-label ref="EAP"/>
+<primary-label ref="navEAP"/>
 
 Compose Multiplatform Navigation lets you associate a specific URL, action or MIME type with a composable using deep linking.
 By default, deep links are not exposed to external apps: you need to register the appropriate URI schemas for each
@@ -167,21 +162,40 @@ from the start destination to the linked screen.
 
 For details on registering implementing deep links, see [TODOlink].
 
-### Predictive back gesture
-<primary-label ref="EAP"/>
+### Back gesture
+<primary-label ref="navEAP"/>
 
-> To enable this feature, use the [multiplatform Navigation library](compose-navigation-routing.md)
-> of at least `2.9.0-alpha15` version.
->
-{style="note"}
+Compose Multiplatform adopts Android back gesture handling to automatically navigate to the previous destination
+in the back stack when the user uses the gesture.
 
-Compose Multiplatform adopts the [Android predictive back approach](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
-to be used on other platforms.
-The multiplatform Navigation library provides the universal back gesture support
+The Compose Multiplatform Navigation library provides the universal back gesture support
 and translates back gestures on each platform into navigating to the previous screen
 (for iOS, this is a simple back swipe, for desktop – the **Esc** key).
+On iOS, 
 
 For now, there is no user-facing API for custom implementations of the `BackHandler` class.
+
+### Creating a navigation graph dynamically
+
+Sometimes you may want to implement conditional navigation:
+create different navigation graphs for users with different access levels,
+or create custom onboarding experiences for users from different countries (taking European users through a GDPR screen, for example).
+
+In these cases, you can create navigation graphs programmatically using the `NavController.createGraph()` method:
+
+```kotlin
+val navGraph = navController.createGraph(startDestination = startStep) {
+    if (needsGDPR) {
+        composable("gdpr") { ... }
+    }
+    composable("step1") { ... }
+    if (userNeedsExtraStep) {
+        composable("extraStep") { ... }
+    }
+}
+navController.graph = navGraph
+```
+
 
 ## Alternative navigation solutions
 
@@ -192,9 +206,10 @@ there are third-party alternatives to evaluate:
 |-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                                                                              |
 | [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
+| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |
 | [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
 | [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
-| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |
+
 
 ## What's next
 
