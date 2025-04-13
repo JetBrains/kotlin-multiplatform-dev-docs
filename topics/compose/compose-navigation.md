@@ -121,17 +121,38 @@ data class Profile(val id: String)
 When you need to pass arguments to that destination, pass the arguments to the class constructor when navigating
 to the destination.
 
+```kotlin
+Button(onClick = { navController.navigate(Profile("Alice")) }) {
+    Text("Go to profile")
+}
+```
+
+Then retrieve the data at the destination:
+
+```kotlin
+composable<Profile> { backStackEntry ->
+    val userId = backStackEntry.arguments?.read { getStringOrNull("name") }
+    // ...
+}
+```
+
 ### Retrieve complex data when navigating
 
 When navigating, consider passing the minimum necessary information such as unique identifiers of complex objects stored in the data layer.
-Complex objects that reflect the state of the app in general should be stored in the data layer:
+Files or complex objects that reflect the state of the app in general should be stored in the data layer:
 when the user lands on a destination, it loads the necessary information from a single source of truth.
 
+For example:
+
+* **Don't** pass entire user profiles; **do** pass user IDs to retrieve the profile at the destination.
+* **Don't** pass image objects; **do** pass URIs or file names that would allow loading an image from the source at the destination.
+* **Don't** pass application states or ViewModels; **do** pass only the information necessary for the destination screen to work. 
+
 This approach helps prevent data loss during configuration changes and any inconsistencies
-when the referenced object is updated or mutated.
+when the referenced object is updated or mutated.   
 
 See the [Android's article on data layer](https://developer.android.com/topic/architecture/data-layer)
-for guidance properly implementing a data layer in your app.
+for guidance on properly implementing a data layer in your app.
 
 ### Manage back stack
 
@@ -145,6 +166,17 @@ as well:
     If the user followed a deep link to the current destination, popping the stack would return them to the previous app.
     Alternatively, the `NavController.navigateUp()` function only navigates the user within the app within the context
     of the `NavController`.
+
+The Navigation library allows some flexibility with handling the back stack.
+You can:
+
+* Specify a particular destination in the back stack and navigate to it, popping everything on the stack that
+    is above it.
+* Navigate to destination X simultaneously popping the back stack up to destination Y
+    (by adding a `popUpTo()` argument to a `.navigate()` call).
+* Maintain several back stacks for different parts of the app.
+    For example, in apps with bottom navigation you can maintain a separate `NavHost` and therefore back stack for each
+    tab separately, then restore them when needed.
 
 See [Jetpack Compose documentation on back stack](https://developer.android.com/guide/navigation/backstack) for details
 and use cases.
@@ -162,16 +194,18 @@ from the start destination to the linked screen.
 
 For details on registering implementing deep links, see [TODOlink].
 
-### Back gesture
+### Back gestures
 <primary-label ref="navEAP"/>
 
-Compose Multiplatform adopts Android back gesture handling to automatically navigate to the previous destination
-in the back stack when the user uses the gesture.
+Compose Multiplatform adopts [Android back gesture handling](https://developer.android.com/develop/ui/compose/system/predictive-back)
+to automatically navigate to the last destination in the back stack
+as well as preview that destination while the gesture is held.
 
-The Compose Multiplatform Navigation library provides the universal back gesture support
+The Compose Multiplatform Navigation library provides universal back gesture support
 and translates back gestures on each platform into navigating to the previous screen
-(for iOS, this is a simple back swipe, for desktop – the **Esc** key).
-On iOS, 
+(for example, for iOS, this is a simple back swipe, for desktop, the **Esc** key).
+
+On iOS, the back gesture also triggers native-like animation of the swipe transition to another screen.
 
 For now, there is no user-facing API for custom implementations of the `BackHandler` class.
 
