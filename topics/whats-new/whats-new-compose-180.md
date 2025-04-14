@@ -394,6 +394,7 @@ improving the overall experience of building and running applications on ARM-bas
 ## Gradle plugin
 
 ### Support for multiplatform resources in the `androidLibrary` target
+<secondary-label ref="Experimental"/>
 
 Starting with the Android Gradle plugin version 8.8.0, you can use generated assets in the new `androidLibrary` target. 
 To align Compose Multiplatform with these changes, we’ve introduced support for a new target configuration to work with 
