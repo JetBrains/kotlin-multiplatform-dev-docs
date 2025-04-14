@@ -27,9 +27,13 @@ It's more reliable to refer to the documentation for your particular targets:
     > For iOS, you can edit the file directly in your KMP project or [register schemes using the Xcode GUI](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app#Register-your-URL-scheme).
     >
     {style="note"}
-* Deep links for Windows apps can be declared by adding a key to the Windows registry. (TODO link to the correct one or mention if there is no link)
-    This can be done with an installation script.
+* Deep links for Windows apps can be declared by adding [keys with necessary information to the Windows registry](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767914(v=vs.85))
+    (for Windows 8 and earlier)
+    or by specifying the [extension in the package manifest](https://learn.microsoft.com/en-us/windows/apps/develop/launch/handle-uri-activation) (for Windows 10 and 11).
+    This can be done with an installation script or a third-party distribution package generator like [Hydraulic Conveyor](https://conveyor.hydraulic.dev/).
     Compose Multiplatform does not support configuring this within the project itself.
+    
+    Make sure you're not using one of the [schemes reserved by Windows](https://learn.microsoft.com/en-us/windows/apps/develop/launch/reserved-uri-scheme-names#reserved-uri-scheme-names).
 
 ## Assign deep links to composables
 
