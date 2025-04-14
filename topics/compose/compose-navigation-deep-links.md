@@ -38,8 +38,8 @@ It's more reliable to refer to the documentation for your particular targets:
 ## Assign deep links to composables
 
 A composable that is declared as a part of a navigation graph has an optional `deepLinks` parameter
-which holds the list of `NavDeepLink` objects.
-Each `NavDeeplink` describes a URI pattern that should match the composable – you can define multiple URI patterns
+which can hold the list of corresponding `NavDeepLink` objects.
+Each `NavDeeplink` describes a URI pattern that should start the composable – you can define multiple URI patterns
 to lead to the same screen.
 
 For example:
@@ -69,12 +69,12 @@ NavHost(
 
 Rules for writing URI patterns:
 
-* URIs without a scheme are assumed to be `http://` or `https://`.
+* URIs without a scheme are assumed to start with `http://` or `https://`.
     So `uriPattern = "example.com"` matches both `http://example.com` and `https://example.com`.
 * `{placeholder}` matches one or more characters (`example.com/name={name}` matches `https://example.com/name=Bob`).
     To match zero or more characters, use the `.*` wildcard (`example.com/name={.*}`)
-* Parameters for path placeholders are required while query placeholders are optional.
-  For example, the pattern `example.com/users/{id}?arg1={arg1}&arg2={arg2}`
+* Parameters for path placeholders are required while matching query placeholders is optional.
+  For example, the pattern `example.com/users/{id}?arg1={arg1}&arg2={arg2}`:
     * Matches both `http://www.example.com/users/4?arg2=two` and `http://www.example.com/users/4?arg1=one`.
     * Doesn't match `http://www.example.com/users?arg1=one&arg2=two` because the required part of the path is missing.
     * Also matches `http://www.example.com/users/4?other=random` as extraneous query parameters don't affect matching.
@@ -85,8 +85,8 @@ Rules for writing URI patterns:
 
 ## Handle received deep links
 
-On Android, the received deep link URIs are available as a part of the `Intent` that triggered the deep link.
-A cross-platform implementation needs a way to catch and store deep links.
+On Android, the deep link URIs sent to the app are available as a part of the `Intent` that triggered the deep link.
+A cross-platform implementation needs a universal way to listen for deep links.
 
 Let's create a bare-bones implementation:
 
@@ -130,7 +130,7 @@ object ExternalUrlHandler {
 
 Both for desktop JVM and for iOS you need to explicitly pass the URI received from the system.
 
-For desktop, in `jvmMain/.../main.kt` add a call to the `main()` function:
+For desktop, in `jvmMain/.../main.kt`, add a `.setOpenURIHandler()` call to the `main()` function:
 
 ```kotlin
 // Import the singleton
@@ -165,32 +165,32 @@ func application(
     }
 ```
 
-> For conventions on accessing singletons from Swift, see [Kotlin/Native documentation](https://kotlinlang.org/docs/native-objc-interop.html#kotlin-singletons).
+> For naming conventions for accessing singletons from Swift, see [Kotlin/Native documentation](https://kotlinlang.org/docs/native-objc-interop.html#kotlin-singletons).
 > 
 {style="tip"}
 
 ### Set up the listener
 
-You can use a `DisposableEffect(Unit)` that sets the listener and cleans it up after the composable is no longer active.
+You can use a `DisposableEffect(Unit)` to set up the listener and clean it up after the composable is no longer active.
 For example:
 
 ```kotlin
 internal fun App(navController: NavHostController = rememberNavController()) = AppTheme {
 
-    // The effect is produced only once, as `Unit` never changes.
+    // The effect is produced only once, as `Unit` never changes
     DisposableEffect(Unit) {
         // Sets up the listener to call `NavController.navigate()`
-        // for the composable that has a matching `navDeepLink` listed.
+        // for the composable that has a matching `navDeepLink` listed
         ExternalUrlHandler.listener = { url ->
             navController.navigate(parseStringAsNavUri(url))
         }
-        // Removes the listener when the composable is no longer active.
+        // Removes the listener when the composable is no longer active
         onDispose {
             ExternalUrlHandler.listener = null
         }
     }
 
-    // Reusing the example from earlier in this article.
+    // Reusing the example from earlier in this article
     NavHost(
         navController = navController,
         startDestination = FirstScreen
