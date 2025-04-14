@@ -80,8 +80,10 @@ compose.resources {
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ### Resources in the `androidLibrary` target
+<secondary-label ref="Experimental"/>
 
-Starting with the Android Gradle plugin version 8.8.0, you can use generated assets in the `androidLibrary` target.
+Starting with the Android Gradle plugin version 8.8.0, you can use the generated `Res` class 
+and resource accessors in the `androidLibrary` target.
 To enable support for multiplatform resources in `androidLibrary`, update your configuration as follows:
 
 ```
