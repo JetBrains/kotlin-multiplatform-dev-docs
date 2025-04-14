@@ -1,4 +1,5 @@
 [//]: # (title: Deep links)
+<primary-label ref="EAP"/>
 
 Deep linking is a navigation mechanism that allows the operating system to handle custom links
 by taking the user to a specific destination in the corresponding app.
@@ -73,8 +74,10 @@ Rules for writing URI patterns:
     * Matches both `http://www.example.com/users/4?arg2=two` and `http://www.example.com/users/4?arg1=one`.
     * Doesn't match `http://www.example.com/users?arg1=one&arg2=two` because the required part of the path is missing.
     * Also matches `http://www.example.com/users/4?other=random` as extraneous query parameters don't affect matching.
-* If several have a `navDeepLink` that matches the received URI, behavior is indeterminate.
+* If several composables have a `navDeepLink` that matches the received URI, behavior is indeterminate.
     Make sure that your deep link patterns don't intersect.
+    If you need multiple composables to handle the same deep link pattern, consider adding path or query parameters,
+    or use an intermediate destination to route the user predictably.
 
 ## Handle received deep links
 
@@ -202,7 +205,7 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
 }
 ```
 
-### Full cycle
+## Full cycle
 
 Now you can see the full workflow:
 when the user opens the `demo://example2.com/name=Alice` URL, the operating system matches it with the registered scheme. 
