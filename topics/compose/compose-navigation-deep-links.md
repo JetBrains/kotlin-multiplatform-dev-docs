@@ -89,7 +89,7 @@ For example, the following route type:
 
 has the following generated URI pattern:
 
-```txt
+```none
 <host>/{id}/{name}/?colors={color1}&colors={color2}&latinName={latinName}
 ```
 
