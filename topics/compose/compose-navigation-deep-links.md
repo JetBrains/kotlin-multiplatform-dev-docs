@@ -67,7 +67,37 @@ NavHost(
 }
 ```
 
-Rules for writing URI patterns:
+### Default URI pattern
+
+A default URI pattern is generated for each route based on its fields:
+
+* Required parameters are appended as path parameters (example: `/{id}`)
+* Parameters with a default value (optional parameters) are appended as query parameters (example: `?name={name}`)
+* Collections are appended as query parameters (example: `?items={value1}&items={value2}`)
+* The order of parameters matches the order of the fields in the route definition.
+
+For example, the following route type:
+
+```kotlin
+@Serializable data class PlantDetail(
+  val id: String,
+  val name: String,
+  val colors: List<String>,
+  val latinName: String? = null,
+)
+```
+
+has the following generated URI pattern:
+
+```txt
+<host>/{id}/{name}/?colors={color1}&colors={color2}&latinName={latinName}
+```
+
+### Custom URI patterns
+
+There is no limit to the number of deep links you can define for a route.
+
+Rules for custom URI patterns:
 
 * URIs without a scheme are assumed to start with `http://` or `https://`.
     So `uriPattern = "example.com"` matches both `http://example.com` and `https://example.com`.
@@ -209,10 +239,11 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
 }
 ```
 
-## Full cycle
+## Result
 
 Now you can see the full workflow:
-when the user opens the `demo://example2.com/name=Alice` URL, the operating system matches it with the registered scheme. 
+when the user opens a `demo://` URL, the operating system matches it with the registered scheme.
+Then:
   * If the app handling the deep link is closed, the singleton receives the URL and caches it.
     When the main composable function starts,
     it calls the singleton and navigates to the deep link matching the cached URI.
