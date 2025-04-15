@@ -10,7 +10,7 @@ To implement a deep link in Compose Multiplatform:
 2. Assign specific deep links to composables in the navigation graph.
 3. Handle deep links received by the app by converting them into navigation commands.
 
-## Registering deep links schemas for operating systems
+## Register deep links schemas in the operating system
 
 Each operating system has its own way of handling deep links.
 It's more reliable to refer to the documentation for your particular targets:
