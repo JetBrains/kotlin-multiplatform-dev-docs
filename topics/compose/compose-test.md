@@ -4,7 +4,7 @@ UI testing in Compose Multiplatform is implemented using the same finders, asser
 as the Jetpack Compose testing API. If you're not familiar with them, read the [Jetpack Compose guide](https://developer.android.com/jetpack/compose/testing)
 before you continue with this article.
 
-> The API is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+> The API is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
 > It may change in the future.
 >
 {style="warning"}
