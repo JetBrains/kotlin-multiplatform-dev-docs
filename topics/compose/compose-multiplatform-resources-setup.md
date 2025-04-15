@@ -80,7 +80,7 @@ compose.resources {
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ### Resources in the `androidLibrary` target
-<secondary-label ref="Experimental"/>
+<primary-label ref="EAP"/>
 
 Starting with the Android Gradle plugin version 8.8.0, you can use the generated `Res` class 
 and resource accessors in the `androidLibrary` target.
