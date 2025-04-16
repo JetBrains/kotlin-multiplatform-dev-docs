@@ -206,6 +206,10 @@ Currently, only the `String` and `NSObject` types are supported.
 For common use cases,
 see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) in the Jetpack Compose documentation.
 
+### Improved touch handling for interop views
+
+Gestures that start in an UIKit
+
 ### Accessibility support improvements
 
 #### Support for right-to-left languages
