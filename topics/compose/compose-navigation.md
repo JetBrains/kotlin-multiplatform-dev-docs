@@ -217,35 +217,6 @@ By default, on iOS the back gesture triggers native-like animation of the swipe 
 If you customize the NavHost animation with `enterTransition` or `exitTransition` arguments, the default animation is not
 going to trigger.
 
-### Creating a navigation graph dynamically
-
-Sometimes you may want to implement conditional navigation:
-create different navigation graphs for users with different access levels,
-or create custom onboarding experiences for users from different countries (taking European users through a GDPR screen, for example).
-
-In these cases, you can create navigation graphs programmatically using the `NavController.createGraph()` method:
-
-```kotlin
-val navGraph = navController.createGraph(startDestination = startStep) {
-    if (needsGDPR) {
-        composable("gdpr") { ... }
-    }
-    composable("step1") { ... }
-    if (userNeedsExtraStep) {
-        composable("extraStep") { ... }
-    }
-}
-navController.graph = navGraph
-```
-
-> Declarative approach (listing all possible destinations in the graph) is safer,
-> because when you accidentally navigate to a destination not included in the current graph for some reason,
-> the app can crash.
-> But a dynamic graph may be useful when you can't know at compile time which destinations
-> will be available, for example, when you build navigation according to back end responses.
-> 
-{style="note"}
-
 ## Alternative navigation solutions
 
 If the Compose-based navigation implementation does not work for you,
