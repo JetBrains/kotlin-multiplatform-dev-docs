@@ -4,6 +4,20 @@
 Deep linking is a navigation mechanism that allows the operating system to handle custom links
 by taking the user to a specific destination in the corresponding app.
 
+Deep links are a more general case of app links (as they are called on Android) or universal links (the iOS term):
+these are verified connections of the app with a specific web address.
+To learn about them specifically, see documentation on [Android App Links](https://developer.android.com/training/app-links)
+and [iOS universal links](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/).
+
+Deep links can also be useful for getting outside input into the app,
+for example, in the case of OAuth authorization:
+you can parse the deep link and get the OAuth token without necessarily visually navigating the users.
+
+> Since outside input can be malicious, be sure to follow the [security guidelines](https://developer.android.com/privacy-and-security/risks/unsafe-use-of-deeplinks)
+> to properly mitigate risks associated with processing raw deep link URIs.
+> 
+{style="warning"}
+
 To implement a deep link in Compose Multiplatform:
 
 1. Register your deep link schema in the app configuration.
@@ -12,7 +26,9 @@ To implement a deep link in Compose Multiplatform:
 
 ## Setup
 
-To implement deep links in Compose Multiplatform, you need the following versions in your Gradle catalog:
+To use deep links with Compose Multiplatform, set up the dependencies as follows.
+
+List these versions, libraries, and plugins in your Gradle catalog:
 
 ```toml
 [versions]
@@ -40,7 +56,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 android-application = { id = "com.android.application", version.ref = "agp" }
 ```
 
-Add the dependencies to the shared module's `build.gradle.kts`:
+Add the additional dependencies to the shared module's `build.gradle.kts`:
 
 ```kotlin
 plugins {
@@ -67,10 +83,10 @@ kotlin {
 Each operating system has its own way of handling deep links.
 It's more reliable to refer to the documentation for your particular targets:
 
-* Deep links for Android apps are declared as intent filters in the `AndroidManifest.xml` file.
+* For Android apps, deep link schemes are declared as intent filters in the `AndroidManifest.xml` file.
   See [Android documentation](https://developer.android.com/training/app-links/deep-linking?hl=en#adding-filters)
   to learn how to properly set up intent filters.
-* Deep links for iOS and macOS apps are declared in `Info.plist` files,
+* For iOS and macOS apps, deep link schemes are declared in `Info.plist` files,
     in the [CFBundleURLTypes](https://developer.apple.com/documentation/bundleresources/information-property-list/cfbundleurltypes)
     key.
 
@@ -79,25 +95,28 @@ It's more reliable to refer to the documentation for your particular targets:
     > For iOS, you can edit the file directly in your KMP project or [register schemes using the Xcode GUI](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app#Register-your-URL-scheme).
     >
     {style="note"}
-* Deep links for Windows apps can be declared by adding [keys with necessary information to the Windows registry](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767914(v=vs.85))
+* For Windows apps, deep link schemes can be declared by adding [keys with necessary information to the Windows registry](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767914(v=vs.85))
     (for Windows 8 and earlier)
     or by specifying the [extension in the package manifest](https://learn.microsoft.com/en-us/windows/apps/develop/launch/handle-uri-activation) (for Windows 10 and 11).
     This can be done with an installation script or a third-party distribution package generator like [Hydraulic Conveyor](https://conveyor.hydraulic.dev/).
     Compose Multiplatform does not support configuring this within the project itself.
     
-    Make sure you're not using one of the [schemes reserved by Windows](https://learn.microsoft.com/en-us/windows/apps/develop/launch/reserved-uri-scheme-names#reserved-uri-scheme-names).
+    > Make sure you're not using one of the [schemes reserved by Windows](https://learn.microsoft.com/en-us/windows/apps/develop/launch/reserved-uri-scheme-names#reserved-uri-scheme-names).
+    >
+    {style="tip"}
+* For Linux, deep link schemes can be registered in a `.desktop` file included in the distribution.
 
 ## Assign deep links to destinations
 
 A destination declared as a part of a navigation graph has an optional `deepLinks` parameter
 which can hold the list of corresponding `NavDeepLink` objects.
-Each `NavDeeplink` describes a URI pattern that should start the composable – you can define multiple URI patterns
-to lead to the same screen.
+Each `NavDeeplink` describes a URI pattern that should match a destination – you can define multiple URI patterns
+that should lead to the same screen.
 
 For example:
 
 ```kotlin
-
+@Serializable @SerialName("dlscreen") data class DeepLinkScreen(val name: String)
 
 // ...
 
@@ -116,6 +135,12 @@ NavHost(
             navDeepLink { uriPattern = "demo://example2.com/name={name}" },
         )
     ) {
+        // Gets the string value out of the deep link
+        val name = backStackEntry.arguments?.read { getStringOrNull("name") }
+        
+        val deeplink: DeepLinkScreen = backStackEntry.toRoute()
+        val name1 = deeplink.name
+        
         // Composable content
     }
 }
@@ -123,14 +148,15 @@ NavHost(
 
 ### Default URI pattern
 
-A default URI pattern is generated for each route based on its fields:
+Even if you don't define custom deep link URI patterns, there is always a default pattern that is generated
+for each route based on its fields:
 
 * Required parameters are appended as path parameters (example: `/{id}`)
 * Parameters with a default value (optional parameters) are appended as query parameters (example: `?name={name}`)
 * Collections are appended as query parameters (example: `?items={value1}&items={value2}`)
 * The order of parameters matches the order of the fields in the route definition.
 
-For example, the following route type:
+So, for example, the following route type:
 
 ```kotlin
 @Serializable data class PlantDetail(
@@ -141,10 +167,10 @@ For example, the following route type:
 )
 ```
 
-has the following generated URI pattern:
+has the following generated URI pattern generated by the library:
 
 ```none
-<host>/{id}/{name}/?colors={color1}&colors={color2}&latinName={latinName}
+<basePath>/{id}/{name}/?colors={color1}&colors={color2}&latinName={latinName}
 ```
 
 ### Custom URI patterns
