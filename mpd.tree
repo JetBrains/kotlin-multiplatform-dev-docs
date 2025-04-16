@@ -117,6 +117,7 @@
 		<toc-element topic="multiplatform-publish-apps.md"/>
 		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
 		<toc-element topic="multiplatform-publish-libraries.md"/>
+		<toc-element toc-title="App Store privacy manifests" topic="multiplatform-privacy-manifest.md"/>
 	</toc-element>
 	<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
 	<toc-element toc-title="Tools">
