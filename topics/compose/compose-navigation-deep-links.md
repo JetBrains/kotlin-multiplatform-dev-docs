@@ -30,7 +30,7 @@ To use deep links with Compose Multiplatform, set up the dependencies as follows
 
 List these versions, libraries, and plugins in your Gradle catalog:
 
-```toml
+```ini
 [versions]
 compose-multiplatform = "%composeEapVersion%"
 agp = "8.9.0"
