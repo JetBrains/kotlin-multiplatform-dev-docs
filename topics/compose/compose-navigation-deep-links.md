@@ -10,6 +10,60 @@ To implement a deep link in Compose Multiplatform:
 2. Assign specific deep links to composables in the navigation graph.
 3. Handle deep links received by the app by converting them into navigation commands.
 
+## Setup
+
+To implement deep links in Compose Multiplatform, you need the following versions in your Gradle catalog:
+
+```toml
+[versions]
+compose-multiplatform = "%composeEapVersion%"
+
+# The multiplatform Navigation library version with deep link support 
+androidx-navigation = "%composeNavigationVersion%"
+agp = "8.9.0"
+
+# Minimum Kotlin version to use with Compose Multiplatform 1.8.0
+kotlin = "2.1.0"
+
+# Serialization library necessary to implement type-safe routes
+kotlinx-serialization = "1.7.3"
+
+[libraries]
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+[plugins]
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+```
+
+Add the dependencies to the shared module's `build.gradle.kts`:
+
+```kotlin
+plugins {
+    // ...
+    alias(libs.plugins.kotlinx.serialization)
+}
+
+// ...
+
+kotlin {
+    // ...
+    sourceSets {
+        commonMain.dependencies {
+            // ...
+            implementation(libs.androidx.navigation.compose)
+            implementation(libs.kotlinx.serialization.json)
+        }
+    }
+}
+```
+
+Don't forget to disable 
+
 ## Register deep links schemas in the operating system
 
 Each operating system has its own way of handling deep links.
