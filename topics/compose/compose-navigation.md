@@ -1,51 +1,57 @@
 [//]: # (title: Navigation in Compose)
 
-Jetpack Compose relies on the [Android's Navigation library](https://developer.android.com/guide/navigation) 
-to help you implement UI navigation between composables.
-Compose Multiplatform adds multiplatform support for the Navigation library. 
+[Android's Navigation library](https://developer.android.com/guide/navigation) supports navigation in Jetpack Compose.
+The Compose Multiplatform team contributes multiplatform support to the AndroidX Navigation library.
 
-Below is a summary of the Navigation library's key features that implement the Compose approach to navigation.
+Apart from actual navigation between pieces of content within your app,
+the library solves basic navigation problems:
 
-The library solves basic navigation problems:
-
-* Clarify requirements of each screen: which data needs to be available when a user navigates to a composable.
+* Pass data between destinations in a type-safe manner.
 * Make it easy to track a user's journey through the app by keeping a clear and accessible navigation history.
-* Support the operating system mechanism of deep linking which allows navigating a user to a particular point of the app
+* Support the mechanism of deep linking which allows navigating a user to a particular place in the app
   outside the usual workflows.
 * Support uniform animations and transitions when navigating, as well as allow for common patterns such as
   back gestures with minimal additional work.
 
-If you feel comfortable enough with the basics, you can move on to [Compose Multiplatform Navigation setup](compose-navigation-routing.md),
+If you feel comfortable enough with the basics, move on to [Compose Multiplatform Navigation setup](compose-navigation-routing.md),
 to learn how to leverage the Navigation library in cross-platform projects.
+Otherwise, read on to learn about fundamental concepts the library works with. 
 
 ## Basic concepts of Compose Navigation
 
-The Navigation component offers the following concepts to map your app workflows to:
+The Navigation library uses the following concepts to map navigation use cases to:
 
-* _Destination._ A composable that can be navigated to.
-* _Route_. A data type that identifies a destination and defines data required to navigate to it.
-    Routes are separate from destinations to allow you to keep composables' implementation independent of navigation.
-    This makes it easier to test and rearrange composables in your project.
 * _Navigation graph_. Describes all possible destinations within the app and connections between them.
-    Navigation graphs can be nested to accommodate subflows in your app.
+  Navigation graphs can be nested to accommodate subflows in your app.
+* _Destination._ A node in the navigation graph that can be navigated to.
+    This can be a composable, a nested navigation graph, or a dialog.
+    When the user navigates to the destination, the app displays its content.
+* _Route_. Identifies a destination and defines arguments required to navigate to it.
+    Routes are separate from destinations to allow you to keep each piece of UI implementation independent of the overall app structure.
+    This makes it easier, for example, to test and rearrange composables in your project.
 
-Keeping these concepts in mind, the Navigation library implements basic rules to guide your navigation:
+Keeping these concepts in mind, the Navigation library implements basic rules to guide your navigation architecture:
 
-* There is a fixed _start destination_ (not counting conditional screens for setup or login). 
+<!--* There is a fixed _start destination_, the first screen a user **usually** sees when they launch the app.
+  Conditional screens like initial setup or login should not be considered
+  start destinations even if they are unavoidable for a new user, think about the primary workflow.-->
+<!-- Android introduces this concept, but in our docs there is no use for it so far. Maybe later on. -->
+
 * A user's path in the app is represented as a stack of destinations, or _back stack_.
-    Whenever the user navigates to a different destination, it is added to the top of the stack.
-    When the user uses a back gesture or button, the top of the stack is popped, and they return to the previous destination
-    recorded in the stack.
-* Links that lead inside the app from other apps or the browser (usually called [_deep links_](#deep-links))
-    are associated with particular composables which are supposed to be targets of deep links.
+    By default, whenever the user is navigated to a new destination, that destination is added to the top of the stack.
+    You can use the back stack to make the navigation more straightforward:
+    instead of directly navigating back and forth, you can pop the current destination off the top of the stack
+    and automatically return to the previous one.
+* Each destination can have a set of _deep links_ associated with it:
+    URI patterns that should lead to that destination when the app receives a link from the operating system.
 
 ## Basic navigation example
 
 There is an order in which it makes sense to tackle the necessary steps to set up your navigation:
 
 1. Define your routes.
-    Use a [serializable](https://kotlinlang.org/docs/serialization.html)
-    object or class that holds the data that the destination requires as its arguments.
+    Create a [serializable](https://kotlinlang.org/docs/serialization.html)
+    object or data class for each destination to hold the arguments that the corresponding destination requires.
 2. Create a `NavController`, which will be your navigation interface, high enough in the composable hierarchy that all
    composables have access to it.
    The NavController holds the app's back stack and provides a method to transition between destinations in the navigation graph.
@@ -77,27 +83,21 @@ NavHost(navController = navController, startDestination = Profile) {
 The Navigation library provides the following core types:
 
 * `NavController`.
-    Contains core navigation functionality: methods for transitioning between destinations,
+    Provides APIs for core navigation functionality: transitioning between destinations,
     handling deep links, managing the back stack, and so on.
     <!--You should create the `NavController` high in your composable hierarchy, high enough that all the composables
     that need to reference it can do so.
     This way, you can use the `NavController` as the single source of truth for updating composables outside of your screens.
     [NB: This doesn't seem to be useful to people who are trying to cover the basics.]-->
-* `NavHost`.
-    Binds a `NavController` to a navigation graph.
-    A navigation graph is usually defined as a lambda in a `NavHost` call that builds a `NavGraph` instance from a set of composables.
+* `NavHost`. Composable that displays the content for the current destination based on the navigation graph.
+    Each NavHost has a required `startDestination` parameter: the destination that corresponds to the very first screen
+    that users should see when they start the app.
 * `NavGraph`.
-    Contains all possible navigation destinations within the app and the connections between them.
-    Navigation graphs are defined as builder lambdas that return a `NavGraph`, for example, in `NavHost` declarations.
-* `NavDestination`.
-    Contains a navigable composable.
-    Apart from the composable content, holds the deep links assigned to the destination.
-    Destinations are defined as `composable<T>()` calls within a navigation graph builder.
+    Describes all possible destinations within the app and the connections between them.
+    Navigation graphs are usually defined as builder lambdas that return a `NavGraph`, for example, in `NavHost` declarations.
 
 Besides the core types functionality, the Navigation component provides animations and transitions, support for deep linking,
 type safety, `ViewModel` support, and other quality-of-life features for handling app navigation.
-
-
 
 ## Navigation use cases
 
@@ -113,14 +113,14 @@ Button(onClick = { navController.navigate(Profile) }) {
 
 ### Pass arguments to a destination
 
-When designing your navigation graph, you can define routes as classes with parameters, for instance:
+When designing your navigation graph, you can define routes as data classes with parameters, for instance:
 
 ```kotlin
 @Serializable
 data class Profile(val name: String)
 ```
 
-When you need to pass arguments to that destination, pass the arguments to the class constructor when navigating
+To pass arguments to the destination, pass the arguments to the corresponding class constructor when navigating
 to the destination.
 
 ```kotlin
@@ -162,8 +162,8 @@ for guidance on properly implementing a data layer in your app.
 The back stack is controlled by the `NavController` class.
 Like with any other stack, the `NavController` pushes new items onto the top of the stack and pops them from the top:
 
-* When the user opens the app, the `NavController` pushes the start destination into the back stack.
-* Each following `NavController.navigate()` call pushes the given destination to the top of the stack.
+* When the app launches, the first entry that appears in the back stack is the start destination defined in NavHost.
+* Each `NavController.navigate()` call by default pushes the given destination to the top of the stack.
 * Using the back gesture, back button, or the `NavController.popBackStack()` method pops the current destination off the stack
     and returns the user to the previous destination.
     If the user followed a deep link to the current destination, popping the stack would return them to the previous app.
@@ -173,45 +173,49 @@ Like with any other stack, the `NavController` pushes new items onto the top of 
 The Navigation library allows some flexibility with handling the back stack.
 You can:
 
-* Specify a particular destination in the back stack and navigate to it, popping everything on the stack that
-    is above it.
+* Specify a particular destination in the back stack and navigate to it, popping everything on the stack
+    that is on top of (came after) that destination.
 * Navigate to destination X simultaneously popping the back stack up to destination Y
     (by adding a `popUpTo()` argument to a `.navigate()` call).
 * Process popping an empty back stack (which would land the user on an empty screen).
 * Maintain several back stacks for different parts of the app.
-    For example, in apps with bottom navigation you can maintain a separate `NavHost` and therefore back stack for each
-    tab separately, then restore them when needed.
+    For example, for apps with bottom navigation you can maintain separate nested graphs for each tab
+    while saving and restoring navigation states when switching between tabs.
+    Alternatively, you can create separate NavHosts for each tab, which makes the setup a bit more complex but
+    may be easier to keep track of in some cases.
 
-See [Jetpack Compose documentation on back stack](https://developer.android.com/guide/navigation/backstack) for details
+See [Jetpack Compose documentation on the back stack](https://developer.android.com/guide/navigation/backstack) for details
 and use cases.
 
 ### Deep links
 <primary-label ref="navEAP"/>
 
-Compose Multiplatform Navigation lets you associate a specific URL, action or MIME type with a composable as a deep link.
-By default, deep links are not exposed to external apps: you need to register the appropriate URI schemas with the operating
-system for each target.
+The Navigation library lets you associate a specific URI, action, or MIME type with a destination.
+This association is called a _deep link_.
+
+By default, deep links are not exposed to external apps: you need to register the appropriate URI scheme with the operating
+system for each target distribution.
+
+
 
 Deep links emulate manual navigation:
 following a deep link replaces the current back stack with a synthetic one which looks like a reasonable path
 from the start destination to the linked screen.
+For routes with defined parameters, the library generates default deep link patterns.
+<!--TODO this needs to be transferred to the deep link page and clarified: a path that looks like a path
+will only be created for nested graphs, otherwise there is only going to be the start destination in the back stack.-->
 
-For details on registering and handling deep links, see [TODOlink].
+For details on creating, registering, and handling deep links, see [TODOlink].
 
-### Back gestures
+### Back gesture
 <primary-label ref="navEAP"/>
 
-Compose Multiplatform adopts [Android back gesture handling](https://developer.android.com/develop/ui/compose/system/predictive-back)
-to automatically navigate to the last destination in the back stack
-as well as preview that destination while the gesture is held.
+The multiplatform Navigation library translates back gestures on each platform into navigating to the previous screen
+(for example, on iOS this is a simple back swipe, and on desktop, the **Esc** key).
 
-The Compose Multiplatform Navigation library translates back gestures on each platform
-into navigating to the previous screen
-(for example, for iOS, this is a simple back swipe, for desktop, the **Esc** key).
-
-On iOS, the back gesture also triggers native-like animation of the swipe transition to another screen.
-
-For now, there is no user-facing API for custom implementations of the `BackHandler` class.
+By default, on iOS the back gesture triggers native-like animation of the swipe transition to another screen.
+If you customize the NavHost animation with `enterTransition` or `exitTransition` arguments, the default animation is not
+going to trigger.
 
 ### Creating a navigation graph dynamically
 
@@ -233,6 +237,14 @@ val navGraph = navController.createGraph(startDestination = startStep) {
 }
 navController.graph = navGraph
 ```
+
+> Declarative approach (listing all possible destinations in the graph) is safer,
+> because when you accidentally navigate to a destination not included in the current graph for some reason,
+> the app can crash.
+> But a dynamic graph may be useful when you can't know at compile time which destinations
+> will be available, for example, when you build navigation according to back end responses.
+> 
+{style="note"}
 
 ## Alternative navigation solutions
 
