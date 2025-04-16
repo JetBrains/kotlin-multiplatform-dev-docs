@@ -7,7 +7,7 @@ by taking the user to a specific destination in the corresponding app.
 To implement a deep link in Compose Multiplatform:
 
 1. Register your deep link schema in the app configuration.
-2. Assign specific deep links to composables in the navigation graph.
+2. Assign specific deep links to destinations in the navigation graph (or use default links).
 3. Handle deep links received by the app by converting them into navigation commands.
 
 ## Setup
@@ -17,10 +17,10 @@ To implement deep links in Compose Multiplatform, you need the following version
 ```toml
 [versions]
 compose-multiplatform = "%composeEapVersion%"
+agp = "8.9.0"
 
 # The multiplatform Navigation library version with deep link support 
-androidx-navigation = "%composeNavigationVersion%"
-agp = "8.9.0"
+androidx-navigation = "%composeNavigationEapVersion%"
 
 # Minimum Kotlin version to use with Compose Multiplatform 1.8.0
 kotlin = "2.1.0"
@@ -62,8 +62,6 @@ kotlin {
 }
 ```
 
-Don't forget to disable 
-
 ## Register deep links schemas in the operating system
 
 Each operating system has its own way of handling deep links.
@@ -89,9 +87,9 @@ It's more reliable to refer to the documentation for your particular targets:
     
     Make sure you're not using one of the [schemes reserved by Windows](https://learn.microsoft.com/en-us/windows/apps/develop/launch/reserved-uri-scheme-names#reserved-uri-scheme-names).
 
-## Assign deep links to composables
+## Assign deep links to destinations
 
-A composable that is declared as a part of a navigation graph has an optional `deepLinks` parameter
+A destination declared as a part of a navigation graph has an optional `deepLinks` parameter
 which can hold the list of corresponding `NavDeepLink` objects.
 Each `NavDeeplink` describes a URI pattern that should start the composable – you can define multiple URI patterns
 to lead to the same screen.
@@ -99,6 +97,8 @@ to lead to the same screen.
 For example:
 
 ```kotlin
+
+
 // ...
 
 val firstUrl = "demo://example1.com"
