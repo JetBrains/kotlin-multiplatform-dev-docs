@@ -10,7 +10,7 @@ all touches are processed entirely by the native UI, with Compose not being awar
 Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
 Changes are described in the following sections. Consider trying them out with the %composeVersion% version.
 
-## New approach to handling touches in interop UI
+## Handling touches in interop UIs
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
 the container composable can't react to the same touch.
@@ -23,15 +23,18 @@ that the area:
 To solve this, Compose Multiplatform implements behavior inspired by [`UIScrollView`](https://developer.apple.com/documentation/uikit/uiscrollview).
 When the touch is first detected, there is a short delay (150 ms) that lets the app decide whether to make the container aware of it:
 
-* If there is movement detected within this time, the user likely wants to scroll the container. Compose Multiplatform does not
-  make the native UI element aware of this touch sequence.
-* If there is no movement detected within this time, the touch is likely intended for the underlying element. For the rest of the touch sequence, Compose Multiplatform
-  hands over control to the native UI.
+* If Compose components consume any touch events during this delay, Compose Multiplatform does not make the native UI element
+    aware of this touch sequence.
+* If no events were consumed during the delay, for the rest of the touch sequence Compose Multiplatform
+    hands over control to the native UI.
+
+So, if the user holds the touch, the UI interprets this as an intention to interact with the native element;
+if the touch sequence is rapid, the user likely wants to interact with the parent element.
 
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
-To do that, call the constructor for a `UIKitView` or a `UIViewController` with the `interactive` parameter set to `false`. 
+To do that, call the constructor for a `UIKitView` or a `UIViewController` with the `isInteractive` parameter set to `false`. 
 
-### Choosing the strategy for touch processing
+## Choosing the strategy for touch processing
 <secondary-label ref="Experimental"/>
 
 With Compose Multiplatform %composeVersion% you can also try out the experimental API for finer control over interop UI.
