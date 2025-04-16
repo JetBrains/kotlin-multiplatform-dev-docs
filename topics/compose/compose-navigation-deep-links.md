@@ -113,39 +113,6 @@ which can hold the list of corresponding `NavDeepLink` objects.
 Each `NavDeeplink` describes a URI pattern that should match a destination – you can define multiple URI patterns
 that should lead to the same screen.
 
-For example:
-
-```kotlin
-@Serializable @SerialName("dlscreen") data class DeepLinkScreen(val name: String)
-
-// ...
-
-val firstUrl = "demo://example1.com"
-
-NavHost(
-    navController = navController,
-    startDestination = FirstScreen
-) {
-    // ...
-    
-    composable<DeepLinkScreen>(
-        deepLinks = listOf(
-            // This composable should handle links both for demo://example1.com and demo://example2.com
-            navDeepLink { uriPattern = "$firstUrl?name={name}" },
-            navDeepLink { uriPattern = "demo://example2.com/name={name}" },
-        )
-    ) {
-        // Gets the string value out of the deep link
-        val name = backStackEntry.arguments?.read { getStringOrNull("name") }
-        
-        val deeplink: DeepLinkScreen = backStackEntry.toRoute()
-        val name1 = deeplink.name
-        
-        // Composable content
-    }
-}
-```
-
 ### Default URI pattern
 
 Even if you don't define custom deep link URI patterns, there is always a default pattern that is generated
@@ -180,18 +147,58 @@ There is no limit to the number of deep links you can define for a route.
 Rules for custom URI patterns:
 
 * URIs without a scheme are assumed to start with `http://` or `https://`.
-    So `uriPattern = "example.com"` matches both `http://example.com` and `https://example.com`.
+  So `uriPattern = "example.com"` matches both `http://example.com` and `https://example.com`.
 * `{placeholder}` matches one or more characters (`example.com/name={name}` matches `https://example.com/name=Bob`).
-    To match zero or more characters, use the `.*` wildcard (`example.com/name={.*}`)
+  To match zero or more characters, use the `.*` wildcard (`example.com/name={.*}`)
 * Parameters for path placeholders are required while matching query placeholders is optional.
   For example, the pattern `example.com/users/{id}?arg1={arg1}&arg2={arg2}`:
     * Matches both `http://www.example.com/users/4?arg2=two` and `http://www.example.com/users/4?arg1=one`.
     * Doesn't match `http://www.example.com/users?arg1=one&arg2=two` because the required part of the path is missing.
     * Also matches `http://www.example.com/users/4?other=random` as extraneous query parameters don't affect matching.
 * If several composables have a `navDeepLink` that matches the received URI, behavior is indeterminate.
-    Make sure that your deep link patterns don't intersect.
-    If you need multiple composables to handle the same deep link pattern, consider adding path or query parameters,
-    or use an intermediate destination to route the user predictably.
+  Make sure that your deep link patterns don't intersect.
+  If you need multiple composables to handle the same deep link pattern, consider adding path or query parameters,
+  or use an intermediate destination to route the user predictably.
+
+### Deep links example
+
+Example of assigning and parsing a deep link:
+
+```kotlin
+@Serializable @SerialName("dlscreen") data class DeepLinkScreen(val name: String)
+
+// ...
+
+val firstUrl = "demo://example1.com"
+
+NavHost(
+    navController = navController,
+    startDestination = FirstScreen
+) {
+    // ...
+    
+    composable<DeepLinkScreen>(
+        deepLinks = listOf(
+            // This composable should handle links both for demo://example1.com and demo://example2.com
+            navDeepLink { uriPattern = "$firstUrl?name={name}" },
+            navDeepLink { uriPattern = "demo://example2.com/name={name}" },
+        )
+    ) {
+        // If the app receives the URI `demo://example.com/Jane/`,
+        // it matches with the default URI pattern (name is a required parameter and is given in the path),
+        // and you can map it to the route fields automatically
+        val deeplink: DeepLinkScreen = backStackEntry.toRoute()
+        val name_default = deeplink.name
+        
+        // If the app receives a URI matching only a custom pattern,
+        // like `demo://example1.com/?name=Jane`
+        // you need to parse the URI directly
+        val name = backStackEntry.arguments?.read { getStringOrNull("name") }
+        
+        // Composable content
+    }
+}
+```
 
 ## Handle received deep links
 
