@@ -52,6 +52,7 @@
 		<toc-element topic="compose-lifecycle.md"/>
 		<toc-element topic="compose-viewmodel.md"/>
 		<toc-element topic="compose-navigation-routing.md"/>
+		<toc-element topic="compose-navigation-deep-links.md"/>
 		<toc-element topic="compose-drag-drop.md"/>
 		<toc-element topic="compose-test.md"/>
 		<toc-element toc-title="iOS-specific features">
