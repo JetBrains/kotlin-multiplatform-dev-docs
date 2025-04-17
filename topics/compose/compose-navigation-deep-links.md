@@ -201,6 +201,8 @@ NavHost(
             // This composable should handle links both for demo://example1.org and demo://example2.org
             navDeepLink { uriPattern = "$firstUrl?name={name}" },
             navDeepLink { uriPattern = "demo://example2.org/name={name}" },
+            // The generated pattern only handles the parameters,
+            // so we add the serial name for the route type.
             navDeepLink<Screen3>(basePath = "$firstUrl/dlscreen"),
         )
     ) {
@@ -231,7 +233,8 @@ see [](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps)
 composable<DeepLinkScreen>(
         deepLinks = listOf(
             // For the default Compose Multiplatform setup, localhost:8080
-            // is the local dev endpoint.
+            // is the local dev endpoint that runs with the wasmJsBrowserDevelopmentRun Gradle task
+            // so you can try this out quickly
             navDeepLink { uriPattern = "localhost:8080/#dlscreen%2F{name}" },
         )
     ) { ... }
