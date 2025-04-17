@@ -7,7 +7,7 @@ on addressing real business challenges instead.
 Amper lets you create configuration files for Kotlin Multiplatform applications that work on the JVM, Android, iOS,
 macOS, and Linux, as well as for multiplatform libraries that work with all of these supported targets.
 
-> Amper is currently [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+> Amper is currently [Experimental](supported-platforms.md#general-kotlin-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
 > We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/AMPER).
 >
