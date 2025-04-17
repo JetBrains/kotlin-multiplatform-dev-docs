@@ -27,10 +27,10 @@ kotlin {
 }
 ```
 
-## Type-safe navigation
+### Minimal example
 
-Starting with 1.7.0, Compose Multiplatform supports type-safe navigation in common code as described in
-the [Jetpack documentation](https://developer.android.com/guide/navigation/design/type-safety).
+https://developer.android.com/guide/navigation/design#compose-minimal
+[The minimal example works with CMP, with the corresponding environment setup.]
 
 ## Sample project
 
