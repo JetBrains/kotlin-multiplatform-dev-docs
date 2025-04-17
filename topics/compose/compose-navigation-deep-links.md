@@ -188,7 +188,7 @@ extract parameter values from the received URIs:
 
 // ...
 
-val firstUrl = "demo://example1.com"
+val firstUrl = "demo://example1.org"
 
 NavHost(
     navController = navController,
@@ -198,13 +198,13 @@ NavHost(
     
     composable<DeepLinkScreen>(
         deepLinks = listOf(
-            // This composable should handle links both for demo://example1.com and demo://example2.com
+            // This composable should handle links both for demo://example1.org and demo://example2.org
             navDeepLink { uriPattern = "$firstUrl?name={name}" },
-            navDeepLink { uriPattern = "demo://example2.com/name={name}" },
-            navDeepLink<Screen3>(basePath = "$firstUrl/dlscreen")
+            navDeepLink { uriPattern = "demo://example2.org/name={name}" },
+            navDeepLink<Screen3>(basePath = "$firstUrl/dlscreen"),
         )
     ) {
-        // If the app receives the URI `demo://example.com/dlscreen/Jane/`,
+        // If the app receives the URI `demo://example1.org/dlscreen/Jane/`,
         // it matches the generated URI pattern (name is a required parameter and is given in the path),
         // and you can map it to the route type automatically
         val deeplink: DeepLinkScreen = backStackEntry.toRoute()
@@ -218,6 +218,23 @@ NavHost(
         // Composable content
     }
 }
+```
+
+For web, deep links work a bit differently: since Compose Multiplatform for Web makes single-page apps,
+the deep link URI pattern needs to put all parameters in a URL fragment (after the `#` character),
+and the URL fragment needs to be URL-encoded.
+
+For details on how Compose Multiplatform navigation works on the web,
+see [](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps).
+
+```kotlin
+composable<DeepLinkScreen>(
+        deepLinks = listOf(
+            // For the default Compose Multiplatform setup, localhost:8080
+            // is the local dev endpoint.
+            navDeepLink { uriPattern = "localhost:8080/#dlscreen%2F{name}" },
+        )
+    ) { ... }
 ```
 
 ## Handle received deep links
