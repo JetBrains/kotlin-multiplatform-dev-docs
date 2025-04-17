@@ -136,7 +136,7 @@ Rules for general URI patterns:
   If you need multiple composables to handle the same deep link pattern, consider adding path or query parameters,
   or use an intermediate destination to route the user predictably.
 
-### Default URI pattern for a route type
+### Generated URI pattern for a route type
 
 You can avoid writing out the URI pattern fully:
 the Navigation library can automatically generate a URI pattern based on the parameters of a route.
@@ -208,7 +208,7 @@ NavHost(
         // it matches the generated URI pattern (name is a required parameter and is given in the path),
         // and you can map it to the route type automatically
         val deeplink: DeepLinkScreen = backStackEntry.toRoute()
-        val nameDefault = deeplink.name
+        val nameGenerated = deeplink.name
         
         // If the app receives a URI matching only a general pattern,
         // like `demo://example1.com/?name=Jane`
