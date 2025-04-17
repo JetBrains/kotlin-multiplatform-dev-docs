@@ -226,7 +226,9 @@ For web, deep links work a bit differently: since Compose Multiplatform for Web 
 the deep link URI pattern needs to put all parameters in a URL fragment (after the `#` character),
 and the URL fragment needs to be URL-encoded.
 
-For details on how Compose Multiplatform navigation works on the web,
+You can still use the `backStackEntry.toRoute()` method to parse the parameters if the URL fragment conforms
+to the URI pattern rules.
+For details on accessing and parsing a URL in a web app, as well as particulars on navigation in the browser,
 see [](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps).
 
 ```kotlin
