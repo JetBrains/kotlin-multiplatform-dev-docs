@@ -7,7 +7,7 @@ Here are the highlights for this EAP feature release:
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0-beta02).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0-rc01).
 
 ## Breaking changes
 
@@ -173,6 +173,12 @@ The version of Skia used by Compose Multiplatform, via Skiko, has been updated t
 The previous version of Skia used was Milestone 126. You can see the changes
 made between these versions in the [release notes](https://skia.googlesource.com/skia/+/main/RELEASE_NOTES.md#milestone-132).
 
+### New Clipboard interface
+
+Compose Multiplatform has adopted Jetpack Compose’s new `Clipboard` interface.
+The previously used `ClipboardManager` interface, which was not accessible on web targets, has been deprecated in favor of
+`Clipboard`. The new interface supports `suspend` functions and is compatible with all targets, including web.
+
 ### Line-height alignment
 
 The common API for line-height alignment,
@@ -188,23 +194,6 @@ meaning central alignment will be applied to text with `lineHeight`
 in Material3 components across all platforms unless otherwise specified.
 
 ## iOS
-
-### Drag-and-drop
-<secondary-label ref="Experimental"/>
-
-Compose Multiplatform for iOS introduces support for drag-and-drop functionality,
-allowing you to drag content into or out of a Compose application
-(see pull request [1690](https://github.com/JetBrains/compose-multiplatform-core/pull/1690) for a demo video).
-To define draggable content and drop targets, use the `dragAndDropSource` and `dragAndDropTarget` modifiers.
-
-On iOS, drag-and-drop session data is represented by [`UIDragItem`](https://developer.apple.com/documentation/uikit/uidragitem).
-This object contains information about cross-process data transfer and an optional local object for in-app usage.
-For example, you can use `DragAndDropTransferData(listOf(UIDragItem.fromString(text)))` to drag text,
-where `UIDragItem.fromString(text)` encodes the text into a format suitable for drag-and-drop operations.
-Currently, only the `String` and `NSObject` types are supported.
-
-For common use cases,
-see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) in the Jetpack Compose documentation.
 
 ### Accessibility support improvements
 
@@ -322,6 +311,23 @@ The API that enables operating system logging on iOS is now stable. The `enableT
 experimental opt-in and now aligns with Android-style logging. This logging provides trace information that can be analyzed 
 using Xcode Instruments for debugging and performance analysis.
 
+### Drag-and-drop
+<secondary-label ref="Experimental"/>
+
+Compose Multiplatform for iOS introduces support for drag-and-drop functionality,
+allowing you to drag content into or out of a Compose application
+(see pull request [1690](https://github.com/JetBrains/compose-multiplatform-core/pull/1690) for a demo video).
+To define draggable content and drop targets, use the `dragAndDropSource` and `dragAndDropTarget` modifiers.
+
+On iOS, drag-and-drop session data is represented by [`UIDragItem`](https://developer.apple.com/documentation/uikit/uidragitem).
+This object contains information about cross-process data transfer and an optional local object for in-app usage.
+For example, you can use `DragAndDropTransferData(listOf(UIDragItem.fromString(text)))` to drag text,
+where `UIDragItem.fromString(text)` encodes the text into a format suitable for drag-and-drop operations.
+Currently, only the `String` and `NSObject` types are supported.
+
+For common use cases,
+see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) in the Jetpack Compose documentation.
+
 ### Opt-in concurrent rendering
 <secondary-label ref="Experimental"/>
 
@@ -345,22 +351,6 @@ fun main(vararg args: String) {
 
 ## Web
 
-### Preloading of resources
-<secondary-label ref="Experimental"/>
-
-Compose Multiplatform %composeEapVersion% introduces a new experimental API
-for preloading fonts and images for web targets.
-Preloading helps
-prevent visual issues such as flashes of unstyled text (FOUT) or the flickering of images and icons.
-
-The following functions are now available for loading and caching resources:
-
-* `preloadFont()`, which preloads fonts.
-* `preloadImageBitmap()`, which preloads bitmap images.
-* `preloadImageVector()`, which preloads vector images.
-
-See the [documentation](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api) for details.
-
 ### Browser controls supported in the Navigation library
 
 In Kotlin/Wasm and Kotlin/JS applications built with Compose Multiplatform,
@@ -383,6 +373,22 @@ pointers on a browser page. By passing a keyword as a parameter, you can specify
 For example, you can assign different pointer icons to select text, open a context menu, or indicate a loading process.
 
 Check out the full list of available [keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
+
+### Preloading of resources
+<secondary-label ref="Experimental"/>
+
+Compose Multiplatform %composeEapVersion% introduces a new experimental API
+for preloading fonts and images for web targets.
+Preloading helps
+prevent visual issues such as flashes of unstyled text (FOUT) or the flickering of images and icons.
+
+The following functions are now available for loading and caching resources:
+
+* `preloadFont()`, which preloads fonts.
+* `preloadImageBitmap()`, which preloads bitmap images.
+* `preloadImageVector()`, which preloads vector images.
+
+See the [documentation](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api) for details.
 
 ## Desktop
 
