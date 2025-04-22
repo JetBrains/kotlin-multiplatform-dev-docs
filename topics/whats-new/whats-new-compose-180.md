@@ -20,15 +20,28 @@ only when using Kotlin 2.1.0 or newer.
 
 What this means for your projects, in addition to the underlying changes in the Compose compiler Gradle plugin:
 
+* For an app using libraries that depend on Compose Multiplatform:
+  it's recommended to update your project to Kotlin 2.1.20
+  and update the dependencies to versions compiled against Compose Multiplatform 1.8.0 and Kotlin 2.1.x.
 * For a library that depends on Compose Multiplatform:
-you need to update your project to Kotlin 2.1.x and Compose 1.8.0,
-then recompile the library and publish the new version.
-* For an app using such libraries:
-it's recommended to update your project to Kotlin 2.1.20
-and update the dependencies to versions compiled against Compose Multiplatform 1.8.0 and Kotlin 2.1.x.
+    you need to update your project to Kotlin 2.1.x and Compose 1.8.0,
+    then recompile the library and publish the new version.
 
 If you encounter any compatibility issues when upgrading to Compose Multiplatform 1.8.0,
 please let us know by filing an issue in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+
+### Implicit dependency on `material-icons-core` removed
+
+Compose Multiplatform %composeEapVersion% incorporates a [change made in Material](https://android.googlesource.com/platform/frameworks/support/+/1d1abef790da93325a83fe19b50ccdec06be6956):
+there isn't an automatic dependency on `material-icons-core` anymore.
+This is in line with [moving away from dependencies built with K1](#full-migration-of-compose-multiplatform-to-the-k2-compiler).
+
+If you need to continue using the `material-icons-core` library in your project,
+add the dependency explicitly to your `build.gradle.kts`, for example:
+
+```kotlin
+implementation("org.jetbrains.compose.material:material-icons-core:1.6.11")
+```
 
 ### Migration from Bundle to SavedState in Navigation
 
