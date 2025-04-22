@@ -243,7 +243,7 @@ composable<DeepLinkScreen>(
 
 > Like with any other single-page web app, you can avoid using URL fragments on the web.
 > To do that, you have to configure your web server to redirect appropriate requests to the app
-> and rewrite the default mapping of navigation route to the browser address.
+> and rewrite the [default mapping of navigation route to the browser address](compose-navigation-routing.md#full-url-customization).
 >
 {style="tip"}
 
