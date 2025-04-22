@@ -188,7 +188,7 @@ extract parameter values from the received URIs:
 
 // ...
 
-val firstUrl = "demo://example1.org"
+val firstBasePath = "demo://example1.org"
 
 NavHost(
     navController = navController,
@@ -199,11 +199,11 @@ NavHost(
     composable<DeepLinkScreen>(
         deepLinks = listOf(
             // This composable should handle links both for demo://example1.org and demo://example2.org
-            navDeepLink { uriPattern = "$firstUrl?name={name}" },
+            navDeepLink { uriPattern = "$firstBasePath?name={name}" },
             navDeepLink { uriPattern = "demo://example2.org/name={name}" },
             // The generated pattern only handles the parameters,
             // so we add the serial name for the route type.
-            navDeepLink<Screen3>(basePath = "$firstUrl/dlscreen"),
+            navDeepLink<Screen3>(basePath = "$firstBasePath/dlscreen"),
         )
     ) {
         // If the app receives the URI `demo://example1.org/dlscreen/Jane/`,
@@ -248,7 +248,7 @@ A cross-platform implementation needs a universal way to listen for deep links.
 
 Let's create a bare-bones implementation:
 
-1. Declare a singleton in common code for storing and caching the URIs with a listener for external URLs.
+1. Declare a singleton in common code for storing and caching the URIs with a listener for external URIs.
 2. Where necessary, implement platform-specific calls sending URIs received from the operating system.
 3. Set up the listener for new deep links in the main composable.
 
@@ -257,11 +257,11 @@ Let's create a bare-bones implementation:
 In `commonMain`, declare the singleton object at the top level:
 
 ```kotlin
-object ExternalUrlHandler {
-    // Storage for when a URI arrives before the listener is set up.
+object ExternalUriHandler {
+    // Storage for when a URI arrives before the listener is set up
     private var cached: String? = null
     
-    var listener: ((url: String) -> Unit)? = null
+    var listener: ((uri: String) -> Unit)? = null
         set(value) {
             field = value
             if (value != null) {
@@ -274,10 +274,10 @@ object ExternalUrlHandler {
 
     // When a new URI arrives, cache it.
     // If the listener is already set, invoke it and clear the cache immediately.
-    fun onNewUrl(url: String) {
-        cached = url
+    fun onNewUri(uri: String) {
+        cached = uri
         listener?.let {
-            it.invoke(url)
+            it.invoke(uri)
             cached = null
         }
     }
@@ -288,16 +288,21 @@ object ExternalUrlHandler {
 
 Both for desktop JVM and for iOS you need to explicitly pass the URI received from the system.
 
-For desktop, in `jvmMain/.../main.kt`, add a `.setOpenURIHandler()` call to the `main()` function:
+In `jvmMain/.../main.kt`, parse the command-line arguments for every necessary operating system
+and pass the received URI on to the singleton:
 
 ```kotlin
 // Import the singleton
-import org.company.app.ExternalUrlHandler
+import org.company.app.ExternalUriHandler
 
 fun main() {
-    Desktop.getDesktop().setOpenURIHandler { url ->
-        // Call the `onNewUrl` function with the URI from the `OpenURIEvent` object.
-        ExternalUrlHandler.onNewUrl(url.uri.toString())
+    if(System.getProperty("os.name").indexOf("Mac") > -1) {
+        Desktop.getDesktop().setOpenURIHandler { uri ->
+            ExternalUriHandler.onNewUri(uri.uri.toString())
+        }
+    }
+    else {
+        ExternalUriHandler.onNewUri(args.getOrNull(0).toString())
     }
 
     application {
@@ -306,7 +311,7 @@ fun main() {
 }
 ```
 
-For iOS, in Swift code add an `application()` variant that handles incoming URLs:
+For iOS, in Swift code add an `application()` variant that handles incoming URIs:
 
 ```swift
 // Imports the KMP module to access the singleton
@@ -314,11 +319,11 @@ import ComposeApp
 
 func application(
     _ application: UIApplication,
-    open url: URL,
+    open uri: URL,
     options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 ) -> Bool {
-    // Sends the full URL on to the singleton.
-    ExternalUrlHandler.shared.onNewUrl(url: url.absoluteString)    
+    // Sends the full URI on to the singleton.
+    ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)    
         return true
     }
 ```
@@ -339,12 +344,12 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
     DisposableEffect(Unit) {
         // Sets up the listener to call `NavController.navigate()`
         // for the composable that has a matching `navDeepLink` listed
-        ExternalUrlHandler.listener = { url ->
-            navController.navigate(parseStringAsNavUri(url))
+        ExternalUriHandler.listener = { uri ->
+            navController.navigate(parseStringAsNavUri(uri))
         }
         // Removes the listener when the composable is no longer active
         onDispose {
-            ExternalUrlHandler.listener = null
+            ExternalUriHandler.listener = null
         }
     }
 
@@ -357,7 +362,7 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
 
         composable<DeepLinkScreen>(
             deepLinks = listOf(
-                navDeepLink { uriPattern = "$firstUrl?name={name}" },
+                navDeepLink { uriPattern = "$firstBasePath?name={name}" },
                 navDeepLink { uriPattern = "demo://example2.com/name={name}" },
             )
         ) {
@@ -370,10 +375,10 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
 ## Result
 
 Now you can see the full workflow:
-when the user opens a `demo://` URL, the operating system matches it with the registered scheme.
+when the user opens a `demo://` URI, the operating system matches it with the registered scheme.
 Then:
-  * If the app handling the deep link is closed, the singleton receives the URL and caches it.
+  * If the app handling the deep link is closed, the singleton receives the URI and caches it.
     When the main composable function starts,
     it calls the singleton and navigates to the deep link matching the cached URI.
-  * If the app handling the deep link is open, the listener is already set up, so when the singleton receives the URL
+  * If the app handling the deep link is open, the listener is already set up, so when the singleton receives the URI
     the app immediately navigates to it.
