@@ -208,6 +208,32 @@ in Material3 components across all platforms unless otherwise specified.
 
 ## iOS
 
+### Drag-and-drop
+<secondary-label ref="Experimental"/>
+
+Compose Multiplatform for iOS introduces support for drag-and-drop functionality,
+allowing you to drag content into or out of a Compose application
+(see pull request [1690](https://github.com/JetBrains/compose-multiplatform-core/pull/1690) for a demo video).
+To define draggable content and drop targets, use the `dragAndDropSource` and `dragAndDropTarget` modifiers.
+
+On iOS, drag-and-drop session data is represented by [`UIDragItem`](https://developer.apple.com/documentation/uikit/uidragitem).
+This object contains information about cross-process data transfer and an optional local object for in-app usage.
+For example, you can use `DragAndDropTransferData(listOf(UIDragItem.fromString(text)))` to drag text,
+where `UIDragItem.fromString(text)` encodes the text into a format suitable for drag-and-drop operations.
+Currently, only the `String` and `NSObject` types are supported.
+
+For common use cases,
+see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) in the Jetpack Compose documentation.
+
+### Improved touch handling for scrolling interop views
+
+In this release:
+
+* Compose view with non-scrollable content that is presented as a modal `UIViewController` can be closed with a down swipe.
+* Nested scrollable views work correctly within the general [interop touch framework](compose-ios-touch.md):
+    when scrolling native content within a scrollable Compose view, or Compose content within a scrollable native view,
+    UI closely follows iOS logic to resolve ambiguous touch sequences.
+
 ### Accessibility support improvements
 
 #### Support for right-to-left languages

@@ -25,7 +25,7 @@ When the touch is first detected, there is a short delay (150 ms) that lets the 
 
 * If Compose components consume any touch events during this delay, Compose Multiplatform does not make the native UI element
     aware of this touch sequence.
-* If no events were consumed during the delay, for the rest of the touch sequence Compose Multiplatform
+* If no events are consumed during the delay, for the rest of the touch sequence, Compose Multiplatform
     hands over control to the native UI.
 
 So, if the user holds the touch, the UI interprets this as an intention to interact with the native element;
