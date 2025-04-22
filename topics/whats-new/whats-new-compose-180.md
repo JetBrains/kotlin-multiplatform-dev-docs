@@ -33,7 +33,7 @@ please let us know by filing an issue in [YouTrack](https://youtrack.jetbrains.c
 ### Implicit dependency on `material-icons-core` removed
 
 Compose Multiplatform %composeEapVersion% incorporates a [change made in Material](https://android.googlesource.com/platform/frameworks/support/+/1d1abef790da93325a83fe19b50ccdec06be6956):
-there isn't an automatic dependency on `material-icons-core` anymore.
+there isn't a transitive dependency on `material-icons-core` anymore.
 This is in line with [moving away from dependencies built with K1](#full-migration-of-compose-multiplatform-to-the-k2-compiler).
 
 If you need to continue using the `material-icons-core` library in your project,
