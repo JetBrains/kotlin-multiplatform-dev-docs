@@ -215,7 +215,7 @@ Using Compose Multiplatform %composeEapVersion% along with [org.jetbrains.androi
 you can implement deep linking on iOS in the usual Compose manner:
 assigning deep links to destinations and navigating to them using a `NavController`.
 
-TODO: link to the docs
+For a guide on introducing deep links to common code, see [](compose-navigation-deep-links.md).
 
 ### Accessibility support improvements
 
