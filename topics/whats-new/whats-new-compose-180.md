@@ -189,8 +189,13 @@ made between these versions in the [release notes](https://skia.googlesource.com
 ### New Clipboard interface
 
 Compose Multiplatform has adopted Jetpack Compose’s new `Clipboard` interface.
-The previously used `ClipboardManager` interface, which was not accessible on web targets, has been deprecated in favor of
-`Clipboard`. The new interface supports `suspend` functions and is compatible with all targets, including web.
+The previously used `ClipboardManager` interface, which was inaccessible on web targets due to the asynchronous nature 
+of [Clipboard API on web](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API),
+has been deprecated in favor of `Clipboard`. The new interface supports `suspend` functions and is compatible with all targets,
+including web.
+
+Clipboard interactions from common code are currently limited by the API design.
+For more details, see [CMP-7624](https://youtrack.jetbrains.com/issue/CMP-7624).
 
 ### Line-height alignment
 
