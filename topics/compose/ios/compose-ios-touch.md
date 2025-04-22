@@ -34,6 +34,12 @@ if the touch sequence is rapid, the user likely wants to interact with the paren
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
 To do that, call the constructor for a `UIKitView` or a `UIViewController` with the `isInteractive` parameter set to `false`. 
 
+> For more complex scenarios of handling gestures inside interop views,
+> use the `UIGestureRecognizer` class or its various subclasses.
+> It allows detecting desired gestures in the native interop view as well as cancelling touch sequences in Compose.
+>
+{style="note"}
+
 ## Choosing the strategy for touch processing
 <secondary-label ref="Experimental"/>
 
