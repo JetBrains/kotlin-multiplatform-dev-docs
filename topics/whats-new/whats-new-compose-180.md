@@ -208,6 +208,15 @@ in Material3 components across all platforms unless otherwise specified.
 
 ## iOS
 
+### Deep linking
+
+Using Compose Multiplatform %composeEapVersion% along with [org.jetbrains.androidx.navigation.navigation-compose](compose-navigation-routing.md)
+%composeNavigationEapVersion%,
+you can implement deep linking on iOS in the usual Compose manner:
+assigning deep links to destinations and navigating to them using a `NavController`.
+
+TODO: link to the docs
+
 ### Accessibility support improvements
 
 #### Support for right-to-left languages
