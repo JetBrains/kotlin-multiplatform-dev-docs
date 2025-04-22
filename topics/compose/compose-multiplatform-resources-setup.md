@@ -9,7 +9,7 @@ To properly configure the project to use multiplatform resources:
 3. Create additional directories for qualified resources (for example, different images for the dark UI theme
     or localized strings).
 
-## Dependency and directory setup
+## Build script and directory setup
 
 To access resources in your multiplatform projects, add the library dependency and organize files within your project directory:
 
@@ -78,6 +78,21 @@ compose.resources {
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
+
+### Resources in the `androidLibrary` target
+<primary-label ref="EAP"/>
+
+Starting with the Android Gradle plugin version 8.8.0, you can use the generated `Res` class 
+and resource accessors in the `androidLibrary` target.
+To enable support for multiplatform resources in `androidLibrary`, update your configuration as follows:
+
+```
+kotlin {
+  androidLibrary {
+    experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+  }
+}
+```
 
 ## Qualifiers
 

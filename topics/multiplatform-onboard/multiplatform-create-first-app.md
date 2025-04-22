@@ -48,6 +48,12 @@ The following instructions assume that you have all software necessary for the p
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
 
+   > Android Studio may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+   > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
+   > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
+   >
+   {style="note"}
+
 4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
    which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
 
@@ -90,10 +96,14 @@ the IDE will show a warning:
    ```kotlin
    import java.util.Random
    
-   fun greet(): String {
-       val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   class Greeting {
+       private val platform: Platform = getPlatform()
    
-       return firstWord
+       fun greet(): String {
+           val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
+   
+           return firstWord
+       }
    }
    ```
 
@@ -101,7 +111,7 @@ the IDE will show a warning:
 2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
 3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
-4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` function
+4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` call
    from the Kotlin standard library to reverse the text:
 
     ```kotlin
@@ -256,7 +266,7 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 1. In the list of run configurations, select **composeApp**.
 2. Choose an Android virtual device next to the list of configurations and click **Run**.
 
-   If you don't have a device in the list, create a [new Android virtual device](#run-on-a-new-ios-simulated-device).
+   If you don't have a device in the list, create a [new Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 
    ![Run multiplatform app on Android](compose-run-android.png){width=400}
 

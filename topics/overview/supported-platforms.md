@@ -7,25 +7,34 @@ by the core Kotlin Multiplatform technology for code sharing and by the Compose 
 This page contains information to help you identify which platforms align with your project needs, along with details of
 their stability level.
 
-## Core Kotlin Multiplatform technology stability levels
+## General Kotlin stability levels
 
-Here's a quick guide to platform stability levels for the core Kotlin Multiplatform technology and their meaning:
+Here's a quick guide to stability levels in Kotlin and their meaning:
 
-**Experimental** means "for trial use only":
+**Experimental** means "try it only in toy projects":
 
 * We are just trying out an idea and want some users to play with it and give feedback. If it doesn't work out, we may
-  drop it at any minute.
+  drop it any minute.
 
-**Best effort** means "it is safe to use in most scenarios":
+**Alpha** means "use at your own risk, expect migration issues":
 
-* There might be unexpected breaking changes.
-* You may experience issues during migration.
+* We intend to productize this idea, but it hasn't reached its final shape yet.
 
-**Stable** means "you can use it even in the most conservative of scenarios":
+**Beta** means "you can use it, we'll do our best to minimize migration issues for you":
 
-* It's done. We will be developing it according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
+* It's almost done, user feedback is especially important now.
+* Still, it's not 100% finished, so changes are possible (including ones based on your own feedback).
+* Watch for deprecation warnings in advance for the best update experience.
+
+We collectively refer to _Experimental_, _Alpha_ and _Beta_ as **pre-stable** levels.
+
+**Stable** means "use it even in most conservative scenarios":
+
+* It's done. We will be evolving it according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
 
 ### Current platform stability levels for the core Kotlin Multiplatform technology
+
+Here are the current platform stability levels for the core Kotlin Multiplatform technology:
 
 | Platform                 | Stability level |
 |--------------------------|-----------------|
@@ -35,14 +44,13 @@ Here's a quick guide to platform stability levels for the core Kotlin Multiplatf
 | Server-side (JVM)        | Stable          |
 | Web based on Kotlin/Wasm | Alpha           |
 | Web based on Kotlin/JS   | Stable          |
-| watchOS                  | Best effort     |
-| tvOS                     | Best effort     |
+| watchOS                  | Beta            |
+| tvOS                     | Beta            |
 
-Kotlin Multiplatform supports more native platforms than are listed here. To understand the level of support for each of
-them, see [Kotlin/Native target support](https://kotlinlang.org/docs/native-target-support.html).
-
-For more information on the stability levels of Kotlin components like Kotlin Multiplatform,
-see [Stability levels of Kotlin components](https://kotlinlang.org/docs/components-stability.html#current-stability-of-kotlin-components).
+* Kotlin Multiplatform supports more native platforms than are listed here. To understand the level of support for each
+  of them, see [Kotlin/Native target support](https://kotlinlang.org/docs/native-target-support.html).
+* For more information on the stability levels of Kotlin components like Kotlin Multiplatform,
+  see [Current stability of Kotlin components](https://kotlinlang.org/docs/components-stability.html#current-stability-of-kotlin-components).
 
 ## Compose Multiplatform UI framework stability levels
 

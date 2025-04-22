@@ -58,8 +58,13 @@ To begin, create a sample project. This is best achieved with the Kotlin Multipl
 3. Navigate to the unpacked "ComposeDemo" folder and then click **Open**.
 
    Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
-
    If you didn't select iOS in the wizard, you won't have the folders whose names begin with "ios" or "apple".
+
+    > Android Studio may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+    > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
+    > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
+    >
+    {style="note"}
 
 4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
    which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
