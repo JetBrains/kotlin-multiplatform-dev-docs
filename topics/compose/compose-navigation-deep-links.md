@@ -236,7 +236,6 @@ composable<DeepLinkScreen>(
         deepLinks = listOf(
             // For the default Compose Multiplatform setup, localhost:8080
             // is the local dev endpoint that runs with the wasmJsBrowserDevelopmentRun Gradle task
-            // so you can try this out quickly
             navDeepLink { uriPattern = "localhost:8080/#dlscreen%2F{name}" },
         )
     ) { ... }
