@@ -55,7 +55,7 @@
 		<toc-element topic="compose-drag-drop.md"/>
 		<toc-element topic="compose-test.md"/>
 		<toc-element toc-title="Internationalization and localization">
-			<toc-element topic="compose-rtl.md"/>
+			<toc-element toc-title="RTL languages" topic="compose-rtl.md"/>
 		</toc-element>
 		<toc-element toc-title="iOS-specific features">
 			<toc-element toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html" topic="compose-swiftui-integration.md"/>
