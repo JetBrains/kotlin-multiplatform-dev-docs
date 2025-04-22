@@ -223,8 +223,8 @@ NavHost(
 ```
 
 For web, deep links work a bit differently: since Compose Multiplatform for Web makes single-page apps,
-the deep link URI pattern needs to put all parameters in a URL fragment (after the `#` character),
-and the URL fragment needs to be URL-encoded.
+you need to put all parameters of the deep link URI pattern in a URL fragment (after the `#` character),
+and make sure that all parameters are URL-encoded.
 
 You can still use the `backStackEntry.toRoute()` method to parse the parameters if the URL fragment conforms
 to the URI pattern rules.
@@ -240,6 +240,12 @@ composable<DeepLinkScreen>(
         )
     ) { ... }
 ```
+
+> Like with any other single-page web app, you can avoid using URL fragments on the web.
+> To do that, you have to configure your web server to redirect appropriate requests to the app
+> and rewrite the default mapping of navigation route to the browser address.
+>
+{style="tip"}
 
 ## Handle received deep links
 
