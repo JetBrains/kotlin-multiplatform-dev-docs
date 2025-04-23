@@ -197,16 +197,7 @@ This association is called a _deep link_.
 By default, deep links are not exposed to external apps: you need to register the appropriate URI scheme with the operating
 system for each target distribution.
 
-
-
-Deep links emulate manual navigation:
-following a deep link replaces the current back stack with a synthetic one which looks like a reasonable path
-from the start destination to the linked screen.
-For routes with defined parameters, the library generates default deep link patterns.
-<!--TODO this needs to be transferred to the deep link page and clarified: a path that looks like a path
-will only be created for nested graphs, otherwise there is only going to be the start destination in the back stack.-->
-
-For details on creating, registering, and handling deep links, see [TODOlink].
+For details on creating, registering, and handling deep links, see [](compose-navigation-deep-links.md).
 
 ### Back gesture
 <primary-label ref="navEAP"/>
