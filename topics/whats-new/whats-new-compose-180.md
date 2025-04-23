@@ -229,10 +229,10 @@ see the [dedicated article](https://developer.android.com/develop/ui/compose/tou
 
 In this release:
 
-* Compose view with non-scrollable content that is presented as a modal `UIViewController` can be closed with a down swipe.
+* Compose view with non-scrollable content that is presented as a modal `UIViewController` can be closed with a swipe-down gesture.
 * Nested scrollable views work correctly within the general [interop touch framework](compose-ios-touch.md):
     when scrolling native content within a scrollable Compose view, or Compose content within a scrollable native view,
-    UI closely follows iOS logic to resolve ambiguous touch sequences.
+    the UI closely follows iOS logic to resolve ambiguous touch sequences.
 
 ### Accessibility support improvements
 
