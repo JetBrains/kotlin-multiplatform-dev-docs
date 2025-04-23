@@ -215,6 +215,8 @@ in Material3 components across all platforms unless otherwise specified.
 Compose Multiplatform %composeEapVersion% introduces accessibility support for right-to-left languages,
 including proper text direction handling for gestures.
 
+To learn more about RTL support, refer to [Right-to-Left languages](compose-rtl.md).
+
 #### Accessibility for scrollable lists
 
 This version improves the performance and accuracy of scrolling boundary and element position calculations.
