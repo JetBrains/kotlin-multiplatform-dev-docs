@@ -32,7 +32,7 @@ overriding the system's default locale-based layout behavior.
 
 To exclude an element from automatic mirroring and enforce a specific orientation, 
 you can use `LayoutDirection.Rtl` or `LayoutDirection.Ltr`.
-To specify a layout direction within a scope, use the `CompositionLocalProvider()`, which ensures the layout direction 
+To specify a layout direction within a scope, use the `CompositionLocalProvider()`, which ensures that the layout direction 
 applies to all child components in the composition:
 
 ```kotlin
