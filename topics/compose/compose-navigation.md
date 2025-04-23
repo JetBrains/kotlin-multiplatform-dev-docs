@@ -27,7 +27,7 @@ The Navigation library uses the following concepts to map navigation use cases t
     This can be a composable, a nested navigation graph, or a dialog.
     When the user navigates to the destination, the app displays its content.
 * A _route_ identifies a destination and defines arguments required to navigate to it but does nothing to describe the UI.
-    This way, data is are separate from representation, which allows you to keep each piece of UI implementation independent
+    This way, data is separate from representation, which allows you to keep each piece of UI implementation independent
     of the overall app structure.
     This makes it easier, for example, to test and rearrange composables in your project.
 
