@@ -20,9 +20,9 @@ you can parse the deep link and get the OAuth token without necessarily visually
 
 To implement a deep link in Compose Multiplatform:
 
-1. Register your deep link schema in the app configuration.
-2. Assign specific deep links to destinations in the navigation graph.
-3. Handle deep links received by the app by converting them into navigation commands.
+1. [Register your deep link schema in the app configuration](#register-deep-links-schemas-in-the-operating-system)
+2. [Assign specific deep links to destinations in the navigation graph](#assign-deep-links-to-destinations)
+3. [Handle deep links received by the app](#handle-received-deep-links)
 
 ## Setup
 
@@ -125,7 +125,8 @@ Rules for general URI patterns:
 * URIs without a scheme are assumed to start with `http://` or `https://`.
   So `uriPattern = "example.com"` matches `http://example.com` and `https://example.com`.
 * `{placeholder}` matches one or more characters (`example.com/name={name}` matches `https://example.com/name=Bob`).
-  To match zero or more characters, use the `.*` wildcard (`example.com/name={.*}`)
+  To match zero or more characters, use the `.*` wildcard (`example.com/name={.*}` matches `https://example.com/name=`
+  as well as any value of `name`).
 * Parameters for path placeholders are required while matching query placeholders is optional.
   For example, the pattern `example.com/users/{id}?arg1={arg1}&arg2={arg2}`:
     * Doesn't match `http://www.example.com/users?arg1=one&arg2=two` because the required part of the path (`id`) is missing.
@@ -202,7 +203,7 @@ NavHost(
             navDeepLink { uriPattern = "$firstBasePath?name={name}" },
             navDeepLink { uriPattern = "demo://example2.org/name={name}" },
             // The generated pattern only handles the parameters,
-            // so we add the serial name for the route type.
+            // so we add the serial name for the route type
             navDeepLink<Screen3>(basePath = "$firstBasePath/dlscreen"),
         )
     ) {
@@ -328,7 +329,7 @@ func application(
     open uri: URL,
     options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 ) -> Bool {
-    // Sends the full URI on to the singleton.
+    // Sends the full URI on to the singleton
     ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)    
         return true
     }
