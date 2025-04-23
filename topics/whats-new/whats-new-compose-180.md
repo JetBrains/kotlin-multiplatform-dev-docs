@@ -190,6 +190,7 @@ made between these versions in the [release notes](https://skia.googlesource.com
 ### New Clipboard interface
 
 Compose Multiplatform has adopted Jetpack Compose’s new `Clipboard` interface.
+
 The previously used `ClipboardManager` interface, which was inaccessible on web targets due to the asynchronous nature 
 of the [Clipboard API on web](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API),
 has been deprecated in favor of `Clipboard`. The new interface supports `suspend` functions and is compatible with all targets,
@@ -229,6 +230,8 @@ For a guide on introducing deep links to common code, see [](compose-navigation-
 
 Compose Multiplatform %composeEapVersion% introduces accessibility support for right-to-left languages,
 including proper text direction handling for gestures.
+
+To learn more about RTL support, refer to [Right-to-Left languages](compose-rtl.md).
 
 #### Accessibility for scrollable lists
 
