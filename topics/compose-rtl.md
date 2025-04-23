@@ -12,8 +12,8 @@ Adjustments include changes to paddings, alignments, and component positions:
 
 * **Paddings, margins, and alignments**  
    Default paddings and alignments are reversed. For example, <br/>
- `Modifier.padding(start: Dp, top: Dp, end: Dp, bottom: Dp)` will automatically adjust to
- `Modifier.padding(end: Dp, top: Dp, start: Dp, bottom: Dp)`.
+ `Modifier.padding(start = 1.dp, top = 2.dp, end = 3.dp, bottom = 4.dp)` will be ran as
+ `Modifier.padding(start = 3.dp, top = 2.dp, end = 1.dp, bottom = 4.dp)`.
 
 * **Component alignment**  
    For UI elements like text, navigation items, and icons, the default `Start` alignment becomes `End` in RTL mode.
@@ -30,7 +30,10 @@ You may need to keep the original orientation of some UI elements, such as logos
 You can explicitly set the layout direction for an entire app or individual components, 
 overriding the system's default locale-based layout behavior.
 
-To exclude an element from automatic mirroring, use `LayoutDirection.Rtl` or `LayoutDirection.Ltr` to enforce a specific orientation:
+To exclude an element from automatic mirroring and enforce a specific orientation, 
+you can use `LayoutDirection.Rtl` or `LayoutDirection.Ltr`.
+To specify a layout direction within a scope, use the `CompositionLocalProvider()`, which ensures the layout direction 
+applies to all child components in the composition:
 
 ```kotlin
 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
@@ -41,8 +44,6 @@ CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
     }
 }
 ```
-
-The `CompositionLocalProvider()` ensures that the specified layout direction applies to all child components in the composition.
 
 ## Handling text input in RTL layouts
 
@@ -64,8 +65,10 @@ The cursor should behave intuitively within RTL layouts, aligning with the logic
 Compose Multiplatform uses the [Unicode Bidirectional Algorithm](https://www.w3.org/International/articles/inline-bidi-markup/uba-basics)
 to manage and render bidirectional (BiDi) text, aligning punctuation and numbers.
 
-The text should be displayed in the expected visual order: punctuation and numbers aligned correctly, 
-Arabic script flows from right to left, and English is from left to right.
+The text should be displayed in the expected visual order: punctuation and numbers are aligned correctly, 
+the Arabic script flows from right to left, and English flows from left to right.
+
+The following test sample includes text with Latin and Arabic letters, and their bidirectional combination:
 
 ```kotlin
 import androidx.compose.foundation.border
@@ -75,7 +78,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -86,7 +88,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -129,11 +130,11 @@ fun App() {
     }
 }
 
+// Wrap function for BasicTextField() to reduce code duplication
 @Composable
 internal fun TextField(
     text: String = ""
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     val state = rememberSaveable { mutableStateOf(text) }
 
     BasicTextField(
@@ -142,7 +143,6 @@ internal fun TextField(
             .padding(8.dp),
         value = state.value,
         singleLine = false,
-        keyboardActions = KeyboardActions { keyboardController?.hide() },
         onValueChange = { state.value = it },
     )
 }
@@ -171,7 +171,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -181,7 +180,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -224,11 +222,11 @@ fun App() {
     }
 }
 
+// Wrap function for BasicTextField() to reduce code duplication
 @Composable
 internal fun TextField(
     text: String = ""
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     val state = rememberSaveable { mutableStateOf(text) }
 
     BasicTextField(
@@ -237,7 +235,6 @@ internal fun TextField(
             .padding(8.dp),
         value = state.value,
         singleLine = false,
-        keyboardActions = KeyboardActions { keyboardController?.hide() },
         onValueChange = { state.value = it },
     )
 }
