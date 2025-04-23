@@ -3,6 +3,7 @@ Here are the highlights for this EAP feature release:
 
 * [Variable fonts](#variable-fonts)
 * [Drag-and-drop on iOS](#drag-and-drop)
+* [Deep linking on iOS](#deep-linking)
 * [Improved accessibility on iOS](#accessibility-support-improvements)
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
@@ -33,8 +34,8 @@ please let us know by filing an issue in [YouTrack](https://youtrack.jetbrains.c
 ### Implicit dependency on `material-icons-core` removed
 
 Compose Multiplatform %composeEapVersion% incorporates a [change made in Material](https://android.googlesource.com/platform/frameworks/support/+/1d1abef790da93325a83fe19b50ccdec06be6956):
-there isn't a transitive dependency on `material-icons-core` anymore.
-This is in line with [moving away from dependencies built with K1](#full-migration-of-compose-multiplatform-to-the-k2-compiler).
+there is no longer a transitive dependency on `material-icons-core`.
+This aligns with [moving away from dependencies built with K1](#full-migration-of-compose-multiplatform-to-the-k2-compiler).
 
 If you need to continue using the `material-icons-core` library in your project,
 add the dependency explicitly to your `build.gradle.kts`, for example:
@@ -190,7 +191,7 @@ made between these versions in the [release notes](https://skia.googlesource.com
 
 Compose Multiplatform has adopted Jetpack Compose’s new `Clipboard` interface.
 The previously used `ClipboardManager` interface, which was inaccessible on web targets due to the asynchronous nature 
-of [Clipboard API on web](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API),
+of the [Clipboard API on web](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API),
 has been deprecated in favor of `Clipboard`. The new interface supports `suspend` functions and is compatible with all targets,
 including web.
 
@@ -215,7 +216,7 @@ in Material3 components across all platforms unless otherwise specified.
 
 ### Deep linking
 
-Using Compose Multiplatform %composeEapVersion% along with [org.jetbrains.androidx.navigation.navigation-compose](compose-navigation-routing.md)
+By using Compose Multiplatform %composeEapVersion% along with [org.jetbrains.androidx.navigation.navigation-compose](compose-navigation-routing.md)
 %composeNavigationEapVersion%,
 you can implement deep linking on iOS in the usual Compose manner:
 assigning deep links to destinations and navigating to them using a `NavController`.
