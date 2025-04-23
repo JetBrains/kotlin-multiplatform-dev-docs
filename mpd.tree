@@ -51,7 +51,10 @@
 		</toc-element>
 		<toc-element topic="compose-lifecycle.md"/>
 		<toc-element topic="compose-viewmodel.md"/>
-		<toc-element topic="compose-navigation-routing.md"/>
+	    <toc-element toc-title="Navigation">
+			<toc-element topic="compose-navigation.md"/>
+			<toc-element topic="compose-navigation-routing.md"/>
+		</toc-element>
 		<toc-element topic="compose-drag-drop.md"/>
 		<toc-element topic="compose-test.md"/>
 		<toc-element toc-title="Internationalization and localization">
