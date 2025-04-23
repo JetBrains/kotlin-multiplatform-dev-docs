@@ -21,13 +21,14 @@ Otherwise, read on to learn about fundamental concepts the library works with.
 
 The Navigation library uses the following concepts to map navigation use cases to:
 
-* _Navigation graph_. Describes all possible destinations within the app and connections between them.
+* A _navigation graph_ describes all possible destinations within the app and connections between them.
   Navigation graphs can be nested to accommodate subflows in your app.
-* _Destination._ A node in the navigation graph that can be navigated to.
+* A _destination_ is a node in the navigation graph that can be navigated to.
     This can be a composable, a nested navigation graph, or a dialog.
     When the user navigates to the destination, the app displays its content.
-* _Route_. Identifies a destination and defines arguments required to navigate to it.
-    Routes are separate from destinations to allow you to keep each piece of UI implementation independent of the overall app structure.
+* A _route_ identifies a destination and defines arguments required to navigate to it but does nothing to describe the UI.
+    This way, data is are separate from representation, which allows you to keep each piece of UI implementation independent
+    of the overall app structure.
     This makes it easier, for example, to test and rearrange composables in your project.
 
 Keeping these concepts in mind, the Navigation library implements basic rules to guide your navigation architecture:
@@ -37,7 +38,7 @@ Keeping these concepts in mind, the Navigation library implements basic rules to
   start destinations even if they are unavoidable for a new user, think about the primary workflow.-->
 <!-- Android introduces this concept, but in our docs there is no use for it so far. Maybe later on. -->
 
-* A user's path in the app is represented as a stack of destinations, or _back stack_.
+* The app represents a user's path as a stack of destinations, or _back stack_.
     By default, whenever the user is navigated to a new destination, that destination is added to the top of the stack.
     You can use the back stack to make the navigation more straightforward:
     instead of directly navigating back and forth, you can pop the current destination off the top of the stack
@@ -61,20 +62,20 @@ There is an order in which it makes sense to tackle the necessary steps to set u
 The following is a basic example of a foundation for navigating within an app:
 
 ```kotlin
-// Creates routes.
+// Creates routes
 @Serializable
 object Profile
 @Serializable
 object FriendsList
 
-// Creates the NavController.
+// Creates the NavController
 val navController = rememberNavController()
 
-// Creates the NavHost with the navigation graph consisting of supplied destinations.
+// Creates the NavHost with the navigation graph consisting of supplied destinations
 NavHost(navController = navController, startDestination = Profile) {
     composable<Profile> { ProfileScreen( /* ... */ ) }
     composable<FriendsList> { FriendsListScreen( /* ... */ ) }
-    // You can add more destinations similarly.
+    // You can add more destinations similarly
 }
 ```
 
@@ -135,7 +136,7 @@ Then retrieve the data at the destination:
 composable<Profile> { backStackEntry ->
     val profile: Profile = backStackEntry.toRoute()
     
-    // Use `profile.name` wherever a user's name is needed.
+    // Use `profile.name` wherever a user's name is needed
 }
 ```
 
@@ -215,7 +216,18 @@ The multiplatform Navigation library translates back gestures on each platform i
 
 By default, on iOS the back gesture triggers native-like animation of the swipe transition to another screen.
 If you customize the NavHost animation with `enterTransition` or `exitTransition` arguments, the default animation is not
-going to trigger.
+going to trigger:
+
+```kotlin
+NavHost(
+    navController = navController,
+    startDestination = Profile,
+    // Explicitly specifying transitions turns off default animations
+    // in favor of the selected ones 
+    enterTransition = { slideInHorizontally() },
+    exitTransition = { slideOutVertically() }
+) { ... }
+```
 
 ## Alternative navigation solutions
 
