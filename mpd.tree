@@ -54,6 +54,7 @@
 	    <toc-element toc-title="Navigation">
 			<toc-element topic="compose-navigation.md"/>
 			<toc-element topic="compose-navigation-routing.md"/>
+      <toc-element topic="compose-navigation-deep-links.md"/>
 		</toc-element>
 		<toc-element topic="compose-drag-drop.md"/>
 		<toc-element topic="compose-test.md"/>

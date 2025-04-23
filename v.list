@@ -6,7 +6,7 @@
 
     <var name="composeVersion" value="1.7.3" type="string"/>
 
-    <var name="composeEapVersion" value="1.8.0-beta02" type="string"/>
+    <var name="composeEapVersion" value="1.8.0-rc01" type="string"/>
 
     <var name="kotlinVersion" value="2.0.0" type="string"/>
 
