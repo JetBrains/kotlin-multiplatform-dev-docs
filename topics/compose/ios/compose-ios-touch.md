@@ -28,7 +28,7 @@ When the touch is first detected, there is a short delay (150 ms) that lets the 
 * If no events are consumed during the delay, for the rest of the touch sequence, Compose Multiplatform
     hands over control to the native UI.
 
-So, if the user holds the touch, the UI interprets this as an intention to interact with the native element;
+So, with scrollable content, if the user holds the touch, the UI interprets this as an intention to interact with the native element;
 if the touch sequence is rapid, the user likely wants to interact with the parent element.
 
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
