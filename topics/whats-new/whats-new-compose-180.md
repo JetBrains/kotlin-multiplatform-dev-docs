@@ -359,6 +359,15 @@ Currently, only the `String` and `NSObject` types are supported.
 For common use cases,
 see the [dedicated article](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) in the Jetpack Compose documentation.
 
+### Improved touch handling for scrolling interop views
+
+In this release:
+
+* A Compose view with non-scrollable content that is presented as a modal `UIViewController` can be closed with a swipe-down gesture.
+* Nested scrollable views work correctly within the general [interop touch framework](compose-ios-touch.md):
+  when scrolling native content within a scrollable Compose view, or Compose content within a scrollable native view,
+  the UI closely follows iOS logic to resolve ambiguous touch sequences.
+
 ### Opt-in concurrent rendering
 <secondary-label ref="Experimental"/>
 
