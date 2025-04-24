@@ -1,28 +1,31 @@
 [//]: # (title: Kotlin Multiplatform quickstart)
 
-On this page you can find everything you need to get a simple Kotlin Multiplatform app up and running.
+With this tutorial, you can get a simple Kotlin Multiplatform app up and running.
 
 ## Setup
 
-Kotlin Multiplatform needs a specific environment, but most of the requirements are made clear through preflight checks
-in the IDE.
-So you'll need only to install an IDE and necessary plugins:
+Kotlin Multiplatform projects need a specific environment,
+but most of the requirements are made clear through preflight checks in the IDE.
+Start with an IDE and necessary plugins:
 
-1. Choose and install an IDE.
-    KMP is supported well in IntelliJ IDEA and Android Studio, so you can choose whichever you prefer.
+1. Choose and install the IDE.
+    KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
 
-    > The tooling which makes Kotlin Multiplatform enjoyable to use requires IntelliJ IDEA 2025.1.1
-    > or Android Studio Narwhal 2025.1.
+    > The plugins necessary for Kotlin Multiplatform require IntelliJ IDEA 2025.1.1
+    > or Android Studio Narwhal 2025.1 (TODO: check supported versions before publishing).
     >
-    {style="note"} 
+    {style="note"}
 
 2. Make sure you have all the necessary IDE plugins:
 
-    * Kotlin Multiplatform plugin
+    * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
     * Android plugins, which need to be installed only if you use IDEA (they come bundled with Android Studio)
-      * Android
-      * Android Design Tools
-      * Jetpack Compose
+      * [Android](https://plugins.jetbrains.com/plugin/22989-android)
+      * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
+      * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
+
+3. If you're planning to create iOS applications, you need a macOS host to run them as well as the Xcode IDE.
+   To install Xcode, follow the instructions from
 
 1. Setup
     1. Installing the main IDE, IDEA or AS.
