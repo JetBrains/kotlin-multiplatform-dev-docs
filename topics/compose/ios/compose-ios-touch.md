@@ -10,7 +10,7 @@ all touches are processed entirely by the native UI, with Compose not being awar
 Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
 Changes are described in the following sections. Consider trying them out with the %composeVersion% version.
 
-## Handling touches in interop UIs
+## Touches in interop scrolling
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
 the container composable can't react to the same touch.
