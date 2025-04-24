@@ -27,6 +27,11 @@ kotlin {
 }
 ```
 
+> Compose Multiplatform %composeEapVersion% requires Navigation library version %composeNavigationEapVersion%
+> to correctly support navigation scenarios.
+>
+{style="note"}
+
 ## Sample project
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake),
