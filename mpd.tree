@@ -9,7 +9,7 @@
 		<toc-element topic="faq.md"/>
 		<toc-element topic="kotlin-multiplatform-roadmap.md" toc-title="KMP roadmap"/>
 	</toc-element>
-	<toc-element accepts-web-file-names="compose-multiplatform-setup.html" topic="multiplatform-setup.md"/>
+	<toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
 	<toc-element toc-title="Create an app with shared logic and native UI">
 		<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
 		<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
