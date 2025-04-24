@@ -27,8 +27,7 @@ kotlin {
 }
 ```
 
-> Compose Multiplatform %composeEapVersion% requires Navigation library version %composeNavigationEapVersion%
-> to correctly support navigation scenarios.
+> Compose Multiplatform %composeEapVersion% requires Navigation library version %composeNavigationEapVersion%.
 >
 {style="note"}
 
