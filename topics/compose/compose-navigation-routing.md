@@ -27,11 +27,6 @@ kotlin {
 }
 ```
 
-### Minimal example
-
-https://developer.android.com/guide/navigation/design#compose-minimal
-[The minimal example works with CMP, with the corresponding environment setup.]
-
 ## Sample project
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake),
