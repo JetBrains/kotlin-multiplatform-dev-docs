@@ -30,7 +30,7 @@
 		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
 	</toc-element>
 	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
-	<toc-element toc-title="Create your Kotlin Multiplatform library – tutorial" topic="Create-your-Kotlin-Multiplatform-library.md"/>
+	<toc-element topic="create-multiplatform-library.md"/>
 	<toc-element toc-title="Publish multiplatform projects">
 		<toc-element toc-title="KMP app" topic="multiplatform-publish-apps.md"/>
 		<toc-element toc-title="KMP library" topic="multiplatform-publish-libraries.md"/>
