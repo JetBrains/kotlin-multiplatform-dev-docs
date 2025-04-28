@@ -23,7 +23,8 @@ that requires tests both for common and platform-specific code.
 
 ### Create your project
 
-1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
+1. Prepare your environment for multiplatform development.
+    [Check the list of necessary tools and update them to the latest versions if necessary](quickstart.md#set-up-the-environment).
 2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
 3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
 4. For iOS, choose the **Do not share UI** option. It is not necessary for this tutorial.
