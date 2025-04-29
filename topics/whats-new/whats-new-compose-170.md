@@ -12,7 +12,7 @@ Here are the highlights for this feature release:
 * [Drag and drop implemented on desktop](#drag-and-drop)
 * [`BasicTextField` adopted on desktop](#basictextfield-renamed-from-basictextfield2-adopted-on-desktop)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-beta01-september-2024).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md#170-october-2024).
 
 ## Dependencies
 
