@@ -650,5 +650,6 @@ private fun readResourceBytes(resourcePath: String) =
 
 ## What's next?
 
-Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
+* Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
 that shows how resources can be handled in a Compose Multiplatform project targeting iOS, Android, and desktop.
+* Learn how to manage the application's [resource environment](compose-resource-environment.md) like in-app theme and language.

@@ -48,6 +48,7 @@
 			<toc-element accepts-web-file-names="compose-images-resources.html" topic="compose-multiplatform-resources.md"/>
 			<toc-element toc-title="Setup and configuration" topic="compose-multiplatform-resources-setup.md"/>
 			<toc-element toc-title="Access and usage" topic="compose-multiplatform-resources-usage.md"/>
+			<toc-element toc-title="Local resource environment" topic="compose-resource-environment.md"/>
 		</toc-element>
 		<toc-element topic="compose-lifecycle.md"/>
 		<toc-element topic="compose-viewmodel.md"/>
