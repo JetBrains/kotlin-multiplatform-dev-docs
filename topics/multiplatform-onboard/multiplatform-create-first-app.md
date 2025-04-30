@@ -20,7 +20,7 @@ You can share application logic between iOS and Android apps and write platform-
 
 ## Set up the environment
 
-Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
+Check out the article about [setting up an environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment),
 if you haven't already.
 Make sure that you have:
 

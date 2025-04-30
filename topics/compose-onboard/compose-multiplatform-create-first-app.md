@@ -29,7 +29,7 @@ Things to keep in mind for this tutorial:
 
 ## Set up an environment
 
-Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
+Check out the article about [setting up an environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment),
 if you haven't already.
 Make sure that you have:
 

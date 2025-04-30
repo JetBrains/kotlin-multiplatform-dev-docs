@@ -10,14 +10,14 @@ To make your application work on both iOS and Android,
 you'll first make your code cross-platform by moving some of it to a shared module.
 After that you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
 
-> If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](multiplatform-setup.md)
+> If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](quickstart.md)
 > first.
 >
 {style="tip"}
 
 ## Prepare an environment for development
 
-1. [Install all the necessary tools and update them to the latest versions](multiplatform-setup.md).
+1. [Install all the necessary tools and update them to the latest versions](quickstart.md#set-up-the-environment).
 
    > You will need a Mac with macOS to complete certain steps in this tutorial, which include writing iOS-specific code
    > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
