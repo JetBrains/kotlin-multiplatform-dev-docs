@@ -16,30 +16,51 @@ Start with an IDE and necessary plugins:
     >
     {style="note"}
 
-2. Make sure you have all the necessary IDE plugins:
+2. Make sure you have all the necessary IDE plugins (TODO check if dependencies are automated):
 
     * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
     * Android plugins need to be installed only if you use IDEA (they come bundled with Android Studio):
       * [Android](https://plugins.jetbrains.com/plugin/22989-android)
       * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
-      * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
-      *  (TODO: check that the Android plugins are ) 
+      * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose) 
 
-3. To create iOS applications, you also need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
-   Your IntelliJ IDE will run Xcode under the hood to build iOS frameworks.
+3. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
+
+    <tabs>
+    <tab title= "Bash or Zsh">
+   
+    Add the following command to your `.profile` or `.zprofile`:
+        
+    ```shell
+    export ANDROID_HOME=~/Library/Android/sdk
+    ```
+   
+    </tab>
+    <tab title= "Windows Powershell or CMD">
+
+    For Powershell, you can add a persistent environment variable with the following command (see [PowerShell docs](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables)
+    for details):
+
+    ```shell
+    [Environment]::SetEnvironmentVariable('ANDROID_HOME', '<path to the SDK>', 'Machine')
+    ```
+
+    For CMD, use the [`setx`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setx) command:
+    
+    ```shell
+    setx ANDROID_HOME "<path to the SDK>"
+    ```
+    </tab>
+    </tabs>
+
+4. To create iOS applications, you also need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
+   Your IDE will run Xcode under the hood to build iOS frameworks.
 
     Make sure to launch Xcode at least once before starting to work with KMP projects so that it has a chance to
     go through the initial setup.
 
     > You will need to launch Xcode manually every time it is updated.
-    > Preflight checks in the IntelliJ IDE you're using alert you whenever Xcode is not in the right state to work with.
-
-### Setup troubleshooting
-
-TODO common problems
-* From existing: `sudo xcode-select`
-* JAVA_HOME something? Can this be popular?
-* YouTrack link for when stumped.
+    > Preflight checks in the IDE you're using alert you whenever Xcode is not in the right state to work with.
 
 ## Create a project 
 
@@ -116,7 +137,7 @@ With this configuration you can run the JVM desktop app:
 
 TODO: align this with the CMP tutorial.
 
-Create a run configuration to run the web application:
+Create a run configuration to run the web application (TODO: don't create a run configuration because ):
 
 1. Select **Run | Edit Configurations** from the main menu.
 2. Click the plus button and choose **Gradle** from the dropdown list.
@@ -131,6 +152,24 @@ Create a run configuration to run the web application:
 With this configuration you can run the web app:
 
 [screenshot]
+
+## Troubleshooting
+
+### Java and JDK
+
+Common issues with Java:
+
+* Some tools may not find a Java version to run, or use a wrong version.
+  To solve this:
+    * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed.
+    * Add the path to the `bin` folder inside your JDK installation to the PATH variable
+* If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
+  select **Settings** | **Build, Execution, Deployment** | **Build Tools** | **Gradle**.
+
+### Xcode
+
+If your iOS run configuration reports that there is no virtual device to run on, make sure to launch Xcode
+and see if there are any updates for the iOS simulator.
 
 ## What's next
 
@@ -156,4 +195,4 @@ Discover code already written for KMP:
 ## Get help
 
 * **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
-* **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
+* **Kotlin Multiplatform Tooling issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KMT).
