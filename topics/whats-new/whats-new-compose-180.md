@@ -436,7 +436,7 @@ See the [documentation](compose-multiplatform-resources-usage.md#preload-resourc
 
 Switching to the recommended clang compiler for Skia sped up Windows rendering that relies on the CPU.
 This mostly affects pure software rendering (generally rendering relies on the GPU, with only some computations done on the CPU).
-Therefore the improvement is very noticeable on virtual machines like Parallels:
+Therefore the improvement is very noticeable on some virtual machines and with a few old graphics cards:
 Windows apps produced by Compose Multiplatform are now up to 6 times as fast in those environments
 (compared to Compose Multiplatform 1.7.3).
 
