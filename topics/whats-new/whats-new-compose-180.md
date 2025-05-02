@@ -432,6 +432,16 @@ See the [documentation](compose-multiplatform-resources-usage.md#preload-resourc
 
 ## Desktop
 
+### Software rendering improvement on Windows
+
+Switching to the recommended clang compiler for Skia sped up Windows rendering that relies on the CPU,
+which is mostly about pure software rendering (generally rendering relies on the GPU).
+Therefore the improvement is very noticeable on virtual machines like Parallels:
+Windows apps produced by Compose Multiplatform are now up to 6 times as fast in those environments.
+
+This, in addition to the Windows for ARM64 support, makes Compose Multiplatform apps on virtual Windows systems
+significantly more performant.
+
 ### Support for Windows for ARM64
 
 Compose Multiplatform %composeEapVersion% introduces support for Windows for ARM64 on the JVM,
