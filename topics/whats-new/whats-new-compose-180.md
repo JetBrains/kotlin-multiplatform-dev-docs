@@ -434,7 +434,7 @@ See the [documentation](compose-multiplatform-resources-usage.md#preload-resourc
 
 ### Software rendering improvement on Windows
 
-Switching to the recommended clang compiler for Skia sped up Windows rendering that relies on the CPU.
+Switching to the recommended clang compiler for Skia on Windows sped up rendering that relies on the CPU.
 This mostly affects pure software rendering (generally rendering relies on the GPU, with only some computations done on the CPU).
 Therefore the improvement is very noticeable on some virtual machines
 and with a few old graphics cards that [aren't supported by Skia](https://github.com/JetBrains/skiko/blob/30df516c1a1a25237880f3e0fe83e44a13821292/skiko/src/jvmMain/kotlin/org/jetbrains/skiko/GraphicsApi.jvm.kt#L13):
