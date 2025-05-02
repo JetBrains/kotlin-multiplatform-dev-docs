@@ -268,4 +268,5 @@ Multiplatform module can't be self-sufficient and you'll need to implement the c
 
 ## What's next?
 
-For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html).
+* See a video walkthrough of [Using Platform-Specific APIs in KMP Apps](https://youtu.be/bSNumV04y_w).
+* For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html).
