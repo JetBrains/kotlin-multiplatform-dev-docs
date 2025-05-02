@@ -66,7 +66,7 @@ Start with an IDE and necessary plugins:
 
 Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones Kotlin Multiplatform project:
 
-1. Select **File | New | Project** in the main menu.
+1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. After setting the name, location, and other usual attributes of the project, choose platforms that you
     would like to see as part of the project.
@@ -162,9 +162,16 @@ Common issues with Java:
 * Some tools may not find a Java version to run, or use a wrong version.
   To solve this:
     * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed.
-    * Add the path to the `bin` folder inside your JDK installation to the PATH variable
+    * Append the path to the `bin` folder inside your `JAVA_HOME` to the `PATH` variable,
+      so that the tools included in JDK are available in the terminal.
 * If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
   select **Settings** | **Build, Execution, Deployment** | **Build Tools** | **Gradle**.
+
+### Android tools
+
+Same as for JDK: if you have trouble launching Android tools like `adb`,
+make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
+`ANDROID_HOME/platform-tools` are added to your `PATH` environment variable.
 
 ### Xcode
 
