@@ -11,9 +11,9 @@ When the system locale is configured for an RTL language, Compose Multiplatform 
 Adjustments include changes to paddings, alignments, and component positions:
 
 * **Paddings, margins, and alignments**  
-   Default paddings and alignments are reversed. For example, <br/>
- `Modifier.padding(start = 1.dp, top = 2.dp, end = 3.dp, bottom = 4.dp)` will be ran as
- `Modifier.padding(start = 3.dp, top = 2.dp, end = 1.dp, bottom = 4.dp)`.
+   Default paddings and alignments are reversed. For example, in `Modifier.padding(start: Dp, top: Dp, end: Dp, bottom: Dp)`,
+   the LTR `start` padding corresponds to the left side, and the `end` padding corresponds to the right side; 
+   whereas in RTL languages, `start` corresponds to the right side, and `end` corresponds to the left side.
 
 * **Component alignment**  
    For UI elements like text, navigation items, and icons, the default `Start` alignment becomes `End` in RTL mode.
