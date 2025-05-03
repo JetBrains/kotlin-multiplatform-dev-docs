@@ -442,7 +442,7 @@ Windows apps produced by Compose Multiplatform are now up to 6 times as fast in 
 compared to Compose Multiplatform 1.7.3.
 
 This improvement, in addition to the Windows for ARM64 support, makes Compose Multiplatform UIs on virtual Windows systems
-significantly more performant.
+under macOS significantly more performant.
 
 ### Support for Windows for ARM64
 
