@@ -220,6 +220,19 @@ NavHost(
 ) { ... }
 ```
 
+On Android, you can enable or disable the back gesture handler [in the manifest file](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture#opt-predictive).
+
+On iOS, the handler is enabled by default.
+To disable it, set this flag in a ViewController configuration:
+
+```kotlin
+ComposeUIViewController(
+    configure = { enableBackGesture = false }
+) {
+    App()
+}
+```
+
 ## Alternative navigation solutions
 
 If the Compose-based navigation implementation does not work for you,
