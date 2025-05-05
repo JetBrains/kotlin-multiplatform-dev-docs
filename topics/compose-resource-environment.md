@@ -1,9 +1,8 @@
 # Manage local resource environment
 
-Learn how to manage the application's resource environment to match dynamically updated resource-related settings.
-For example, you may need to handle in-app changes of language or theme.
-
-This section describes the configuration of the following resource environment settings used by the application:
+You may need to manage in-app settings that allow users customize their experience, such as changing the language or theme.
+To dynamically update the application's resource environment, you can configure the following resource-related 
+settings used by the application:
 
 * [Locale (language and region)](#locale)
 * [Theme](#theme)
@@ -283,6 +282,7 @@ fun AppEnvironment(content: @Composable () -> Unit) {
 
 ## What's next?
 
-Learn how to [localize resources](compose-rtl.md).
+* Get more details on resource [qualifiers](compose-multiplatform-resources-setup.md#qualifiers).
+* Learn how to [localize resources](compose-rtl.md).
 
 [//]: # (todo: replace localization link)
