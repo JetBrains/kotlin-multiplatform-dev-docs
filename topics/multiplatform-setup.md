@@ -40,12 +40,6 @@ We recommend that you install the latest stable versions for compatibility and b
         <td><p>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</p>
 </td>
    </tr>
-   <tr>
-        <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
-        <td>
-            <p>The Kotlin plugin is bundled and automatically updated with each Android Studio release.</p>
-        </td>
-   </tr>
 </table>
 
 ## Check your environment
@@ -87,6 +81,13 @@ To make sure everything works as expected, install and run the KDoctor tool:
          <li>Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a></li>
          <li>You may encounter the <code>Kotlin not configured</code> error. It's a known issue in Android Studio Giraffe 2022.3 that doesn't affect building and running projects. To avoid the error, click <strong>Ignore</strong> or upgrade to Android Studio Hedgehog 2023.1.</li>
       </list>
+      <warning>   
+        <p>
+          Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
+          So, to share UI code using the latest Compose Multiplatform you should use at least Kotlin 2.1.0 for your projects
+          and depend on libraries compiled against at least Kotlin 2.1.0 as well.
+        </p>
+      </warning>
    </def>
    <def title="Java and JDK">
          <list>
