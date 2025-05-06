@@ -432,6 +432,18 @@ See the [documentation](compose-multiplatform-resources-usage.md#preload-resourc
 
 ## Desktop
 
+### Software rendering improvement on Windows
+
+Switching to the recommended clang compiler for Skia on Windows sped up rendering that relies on the CPU.
+This mostly affects pure software rendering, as rendering generally relies on the GPU, with only some computations done on the CPU.
+Therefore the improvement is very noticeable on some virtual machines
+and with a few old graphics cards that [aren't supported by Skia](https://github.com/JetBrains/skiko/blob/30df516c1a1a25237880f3e0fe83e44a13821292/skiko/src/jvmMain/kotlin/org/jetbrains/skiko/GraphicsApi.jvm.kt#L13):
+Windows apps produced by Compose Multiplatform are now up to 6 times as fast in those environments
+compared to Compose Multiplatform 1.7.3.
+
+This improvement, in addition to the Windows for ARM64 support, makes Compose Multiplatform UIs on virtual Windows systems
+under macOS significantly more performant.
+
 ### Support for Windows for ARM64
 
 Compose Multiplatform %composeEapVersion% introduces support for Windows for ARM64 on the JVM,
