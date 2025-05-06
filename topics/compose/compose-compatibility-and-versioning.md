@@ -41,6 +41,10 @@ See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for detail
 > So, to share UI code using the latest Compose Multiplatform you should:
 > * use at least Kotlin 2.1.0 for your projects,
 > * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
+> 
+> As a workaround until all dependencies are updated,
+> you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
+> This will increase compilation time.
 >
 {style="warning"}
 
