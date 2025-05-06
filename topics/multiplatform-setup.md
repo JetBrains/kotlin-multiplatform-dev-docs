@@ -40,6 +40,12 @@ We recommend that you install the latest stable versions for compatibility and b
         <td><p>In Android Studio, open <strong>Settings</strong> (<strong>Preferences</strong>) and find the <strong>Plugins</strong> page. Search the <strong>Marketplace</strong> tab for <i>Kotlin Multiplatform</i>, and then install it.</p>
 </td>
    </tr>
+   <tr>
+        <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
+        <td>
+            <p>The Kotlin plugin is bundled and automatically updated with each Android Studio release.</p>
+        </td>
+   </tr>
 </table>
 
 ## Check your environment
