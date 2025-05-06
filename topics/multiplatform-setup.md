@@ -87,13 +87,6 @@ To make sure everything works as expected, install and run the KDoctor tool:
          <li>Make sure that you have Android Studio installed. You can get it from its <a href="https://developer.android.com/studio">official website.</a></li>
          <li>You may encounter the <code>Kotlin not configured</code> error. It's a known issue in Android Studio Giraffe 2022.3 that doesn't affect building and running projects. To avoid the error, click <strong>Ignore</strong> or upgrade to Android Studio Hedgehog 2023.1.</li>
       </list>
-      <note>   
-        <p>
-          Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
-          So, to share UI code using the latest Compose Multiplatform you use at least Kotlin 2.1.0 for your projects
-          and depend on libraries compiled against at least Kotlin 2.1.0 as well.
-        </p>
-      </note>
    </def>
    <def title="Java and JDK">
          <list>
