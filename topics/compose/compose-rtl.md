@@ -1,5 +1,4 @@
 # Working with RTL languages
-<primary-label ref="EAP"/>
 
 Compose Multiplatform provides support for Right-to-Left (RTL) languages such as Arabic, Hebrew, and Persian.
 The framework automatically handles most RTL requirements and adjusts layouts, alignment, and text input behavior 

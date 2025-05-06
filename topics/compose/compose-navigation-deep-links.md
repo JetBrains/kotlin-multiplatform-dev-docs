@@ -1,5 +1,4 @@
 [//]: # (title: Deep links)
-<primary-label ref="EAP"/>
 
 Deep linking is a navigation mechanism that allows the operating system to handle custom links
 by taking the user to a specific destination in the corresponding app.
@@ -32,11 +31,11 @@ List these versions, libraries, and plugins in your Gradle catalog:
 
 ```ini
 [versions]
-compose-multiplatform = "%composeEapVersion%"
+compose-multiplatform = "%composeVersion%"
 agp = "8.9.0"
 
 # The multiplatform Navigation library version with deep link support 
-androidx-navigation = "%composeNavigationEapVersion%"
+androidx-navigation = "%composeNavigationVersion%"
 
 # Minimum Kotlin version to use with Compose Multiplatform 1.8.0
 kotlin = "2.1.0"

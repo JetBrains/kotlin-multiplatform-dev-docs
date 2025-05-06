@@ -507,7 +507,7 @@ format suitable for rendering, such as `FontResource` and `DrawableResource`. Wh
 for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
 Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
 
-Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
+Compose Multiplatform %composeVersion% introduces an experimental API for preloading font and image resources on 
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
 Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.

@@ -27,7 +27,7 @@ kotlin {
 }
 ```
 
-> Compose Multiplatform %composeEapVersion% requires Navigation library version %composeNavigationEapVersion%.
+> Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
 >
 {style="note"}
 
@@ -62,7 +62,7 @@ Current limitations of navigation in Compose Multiplatform, compared to Jetpack 
   are not supported on any platform besides Android.
 
 ## Support for browser navigation in web apps
-<primary-label ref="EAP"/>
+<secondary-label ref="Experimental"/>
 
 Compose Multiplatform for web fully supports the common Navigation library APIs,
 and on top of that allows your apps to receive navigational input from the browser.

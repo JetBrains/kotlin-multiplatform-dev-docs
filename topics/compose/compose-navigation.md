@@ -189,7 +189,6 @@ See [Jetpack Compose documentation on the back stack](https://developer.android.
 and use cases.
 
 ### Deep links
-<primary-label ref="navEAP"/>
 
 The Navigation library lets you associate a specific URI, action, or MIME type with a destination.
 This association is called a _deep link_.
@@ -200,7 +199,6 @@ system for each target distribution.
 For details on creating, registering, and handling deep links, see [](compose-navigation-deep-links.md).
 
 ### Back gesture
-<primary-label ref="navEAP"/>
 
 The multiplatform Navigation library translates back gestures on each platform into navigating to the previous screen
 (for example, on iOS this is a simple back swipe, and on desktop, the **Esc** key).
