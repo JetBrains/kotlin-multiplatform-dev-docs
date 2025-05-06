@@ -37,13 +37,14 @@ Remember that using an EAP version of either product is still potentially unstab
 Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
-> It's strongly recommended that you update your Compose app created with Kotlin 2.0.0 to version 2.0.10 or later. The Compose
-> compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects with
-> non-JVM targets, which can lead to unnecessary (or even endless) recompositions.
->
-> If your app is built with Compose compiler 2.0.10 or later but uses dependencies built with Compose compiler 2.0.0,
-> these older dependencies may still cause recomposition issues.
-> To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
+> Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
+> So, to share UI code using the latest Compose Multiplatform you should:
+> * use at least Kotlin 2.1.0 for your projects,
+> * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
+> 
+> As a workaround until all dependencies are updated,
+> you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
+> This will increase compilation time.
 >
 {style="warning"}
 
