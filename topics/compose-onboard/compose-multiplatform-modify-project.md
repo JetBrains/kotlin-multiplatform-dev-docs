@@ -49,14 +49,12 @@ To use the `kotlinx-datetime` library:
     * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
      dependencies.
 
-2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
-
-   ![Synchronize Gradle files](gradle-sync.png)
+2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 3. In the terminal, navigate to your project directory and run:
 
     ```shell
-    ./gradlew kotlinUpgradeYarnLock
+    ./gradlew wasmKotlinUpgradeYarnLock
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
