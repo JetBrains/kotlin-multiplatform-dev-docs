@@ -89,7 +89,7 @@ To make sure everything works as expected, install and run the KDoctor tool:
          <li>To share UI code using the latest Compose Multiplatform, use at least Kotlin 2.1.0 for your projects (current version is %kotlinVersion%)
              and depend on libraries compiled against at least Kotlin 2.1.0 as well.
              Otherwise, you may encounter linking errors.
-         </li>>
+         </li>
       </list>
    </def>
    <def title="Java and JDK">
