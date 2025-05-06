@@ -53,7 +53,7 @@ If you need to continue using the `material-icons-core` library in your project,
 add the dependency explicitly to your `build.gradle.kts`, for example:
 
 ```kotlin
-implementation("org.jetbrains.compose.material:material-icons-core:1.6.11")
+implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
 ```
 
 ### Migration from Bundle to SavedState in Navigation
