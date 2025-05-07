@@ -371,6 +371,9 @@ When working with tests in your future projects, remember:
   the compiler and the IDE prevent you from using framework-specific functionality.
 * Although it doesn't matter which framework you use for running tests in `commonTest`, it's a good idea to run your
   tests with each framework you intend to use to check that your development environment is set up correctly.
+* Consider the physics difference. For example, scrolling inertia and friction values vary by platform and input device, 
+  so setting the same scrolling speed may result in different scroll positions. Always test your components on 
+  the target platform to ensure the expected behavior.
 * When writing tests for platform-specific code, you can use the functionality of the corresponding framework, for example,
   annotations and extensions.
 * You can run tests both from the IDE and using Gradle tasks.
