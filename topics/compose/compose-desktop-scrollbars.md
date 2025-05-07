@@ -177,6 +177,15 @@ fun TextBox(text: String = "Item") {
 
 <img src="compose-desktop-lazy-scrollbar.animated.gif" alt="Lazy scrollbar" width="289" preview-src="compose-desktop-lazy-scrollbar.png"/>
 
+## Known limitations
+
+Currently, scrolling using touchscreens, touchpads, and trackpads is treated as mouse events, which can lead to glitches 
+and issues, such as the absence of `touchSlop` functionality. We are continually improving input and gesture handling 
+and plan to introduce native support for these input devices:
+
+* Support touch screens natively ([CMP-1609](https://youtrack.jetbrains.com/issue/CMP-1609/))
+* Support touchpad and trackpad natively ([CMP-1610](https://youtrack.jetbrains.com/issue/CMP-1610/))
+
 ## What's next?
 
 Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
