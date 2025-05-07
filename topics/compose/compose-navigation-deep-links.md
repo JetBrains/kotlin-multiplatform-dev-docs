@@ -351,7 +351,7 @@ internal fun App(navController: NavHostController = rememberNavController()) = A
         // Sets up the listener to call `NavController.navigate()`
         // for the composable that has a matching `navDeepLink` listed
         ExternalUriHandler.listener = { uri ->
-            navController.navigate(parseStringAsNavUri(uri))
+            navController.navigate(NavUri(uri))
         }
         // Removes the listener when the composable is no longer active
         onDispose {
