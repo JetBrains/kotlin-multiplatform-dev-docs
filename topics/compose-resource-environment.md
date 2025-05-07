@@ -10,9 +10,10 @@ settings used by the application:
 
 ## Locale
 
-Each platform handles locale settings such as language and region differently. For consistent locale configuration 
-across multiple platforms, you need to define a common entry point in the shared code and then provide 
-the corresponding declarations for each platform using the platform-specific API:
+Each platform handles locale settings such as language and region differently. As a temporary workaround, until a common 
+public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), you need to define 
+a common entry point in the shared code. Then, provide the corresponding declarations for each platform 
+using the platform-specific API:
 
 * **Android**: `context.resources.configuration.locale`
 * **iOS**: `NSLocale.preferredLanguages`
@@ -176,7 +177,9 @@ Themes are handled differently across platforms:
 * Android uses `Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK`.
 * iOS, desktop, and web platforms use `LocalSystemTheme.current`.
 
-The difference requires an `expect-actual` mechanism to handle platform-specific theme customization:
+As a temporary workaround, while a common public API is yet to be implemented 
+([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), this difference requires an `expect-actual` mechanism to 
+handle platform-specific theme customization:
 
 1. In the common code, define the expected `LocalAppTheme` object with the `expect` keyword:
  
