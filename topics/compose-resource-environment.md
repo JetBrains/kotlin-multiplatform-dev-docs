@@ -15,10 +15,10 @@ public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4
 a common entry point in the shared code. Then, provide the corresponding declarations for each platform 
 using the platform-specific API:
 
-* **Android**: `context.resources.configuration.locale`
-* **iOS**: `NSLocale.preferredLanguages`
-* **desktop**: `Locale.getDefault()`
-* **web**: `window.navigator.languages`
+* **Android**: [`context.resources.configuration.locale`](https://developer.android.com/reference/android/content/res/Configuration#setLocale(java.util.Locale))
+* **iOS**: [`NSLocale.preferredLanguages`](https://developer.apple.com/documentation/foundation/nslocale/preferredlanguages)
+* **desktop**: [`Locale.getDefault()`](https://developer.android.com/reference/java/util/Locale#getDefault(java.util.Locale.Category))
+* **web**: [`window.navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages)
 
 1. In the common source set, define the expected `LocalAppLocale` object with the `expect` keyword:
 
@@ -178,7 +178,7 @@ Themes are handled differently across platforms:
 * iOS, desktop, and web platforms use `LocalSystemTheme.current`.
 
 As a temporary workaround, until a common public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), 
-you need to address this difference using the `expect-actual` mechanism to manage platform-specific theme customization:
+you can address this difference using the `expect-actual` mechanism to manage platform-specific theme customization:
 
 1. In the common code, define the expected `LocalAppTheme` object with the `expect` keyword:
  
@@ -255,7 +255,7 @@ you need to address this difference using the `expect-actual` mechanism to manag
 
 ## Density
 
-To change the application's `Density`, you can use the common `LocalDensity` API, supported on all platforms:
+To change the application's resolution `Density`, you can use the common `LocalDensity` API, supported on all platforms:
 
 ```kotlin
 var customAppDensity by mutableStateOf<Density?>(null)
@@ -284,7 +284,8 @@ fun AppEnvironment(content: @Composable () -> Unit) {
 
 ## What's next?
 
-* Get more details on resource [qualifiers](compose-multiplatform-resources-setup.md#qualifiers).
-* Learn how to [localize resources](compose-rtl.md).
+Get more details on [resource qualifiers](compose-multiplatform-resources-setup.md#qualifiers).
+
+[//]: # Learn how to [localize resources](compose-rtl.md).
 
 [//]: # (todo: replace localization link)
