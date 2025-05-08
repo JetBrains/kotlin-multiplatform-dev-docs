@@ -11,19 +11,9 @@ Regardless of the platform you're targeting, each of them needs a dedicated entr
 
 * For Android, that's the Activity whose job it is to show the main composable from common code.
 * For an iOS app, that's the `@main` class or structure that initializes the app.
-* For a JVM app, that's the `main()` function that starts the application.
+* For a JVM app, that's the `main()` function that starts the application which launches the main common composable.
 * For a Kotlin/JS or Kotlin/Wasm app, that's the `main()` function that attaches the main common code composable
   to the web page.
-
-## UI look and feel
-
-### Scroll physics
-
-### Shadows
-
-### Interop views
-
-### Text
 
 ## Input methods
 
@@ -35,6 +25,20 @@ Current desktop implementation interprets all pointer manipulation as mouse gest
 and, therefore, does not support multitouch gestures.
 For example, the common pinch-to-zoom gesture cannot be implemented with Compose Multiplatform for desktop
 as it requires processing two touches at once.
+
+## UI look and feel
+
+### Scroll physics
+
+#### Desktop
+
+Since
+
+### Shadows
+
+### Interop views
+
+### Text
 
 ## Developer experience
 
