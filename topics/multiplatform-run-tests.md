@@ -64,8 +64,7 @@ the pattern.
 Now, let's test the common code. An essential part will be a source set for common tests,
 which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API library as a dependency.
 
-1. In the `shared` directory, open the `build.gradle.kts` file. Add a source set for testing the common code with
-   a dependency on the `kotlin.test` library:
+1. In the `shared/build.gradle.kts` file, check that there is a dependency on the `kotlin.test` library:
 
     ```kotlin
    sourceSets {
@@ -76,17 +75,15 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
    }
    ```
    
-2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
-
-3. The `commonTest` source set stores all common tests. Now you also need to create a directory with the same name in your project:
+2. The `commonTest` source set stores all common tests. You need to create a directory with the same name in your project:
 
     1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
     2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
 
       ![Creating common test directory](create-common-test-dir.png){width=350}
 
-4. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
-5. In this package, create the `Grep.kt` file and update it with the following unit test:
+3. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
+4. In this package, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
     import kotlin.test.Test
@@ -280,6 +277,10 @@ As well as implementing this function on each platform, you should provide tests
         }
     }
     ```
+   
+   > If you chose a different JDK version at the beginning of the tutorial, you may need to change the `name` and `version` for the test to run successfully.
+   > 
+   {style="note"}
 
 It may seem strange that an Android-specific test is run on a local JVM. This is because these tests run as local unit
 tests on the current machine. As described in the [Android Studio documentation](https://developer.android.com/studio/test/test-in-android-studio),
