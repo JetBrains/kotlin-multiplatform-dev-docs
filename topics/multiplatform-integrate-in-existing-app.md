@@ -71,7 +71,10 @@ Create a shared module and connect it to both the existing Android application a
 
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
-   Leave the library name `shared` and enter the package name `com.jetbrains.simplelogin.shared`.
+   Leave the library name `shared` and enter the package name:
+   ```
+   com.jetbrains.simplelogin.shared
+   ```
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
 4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
@@ -197,7 +200,7 @@ This is necessary for reusing the code for both Android and iOS.
 
 2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
 
-   ![Refactor the business logic package](refactor-business-logic-package.png){width=500}
+   ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
 3. Ignore all warnings about platform-dependent code and click **Continue**.
 
