@@ -32,9 +32,8 @@ as it requires processing two touches at once.
 
 #### Desktop
 
-Since
-
-### Shadows
+Desktop apps don't support common mobile gesture patterns like overscroll (often used for "pull to refresh")
+or fling.
 
 ### Interop views
 
