@@ -174,7 +174,10 @@ using the platform-specific API:
 Compose Multiplatform defines the current theme via `isSystemInDarkTheme()`. 
 Themes are handled differently across platforms:
 
-* Android uses `Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK`.
+* Android defines the theme via the following bitwise operation: 
+    ```kotlin
+        Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK
+    ```
 * iOS, desktop, and web platforms use `LocalSystemTheme.current`.
 
 As a temporary workaround, until a common public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), 
