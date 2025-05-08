@@ -101,5 +101,6 @@
 		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" topic="multiplatform-reasons-to-try.md"/>
 		<toc-element toc-title="Kotlin Multiplatform and Flutter" topic="kotlin-multiplatform-flutter.md"/>
 		<toc-element toc-title="Programming languages for cross-platform development" topic="programming-languages-cross-platform.md"/>
+		<toc-element toc-title="Choosing your web target" topic="choosing-web-target.md"/>
 	</toc-element>
 </instance-profile>
