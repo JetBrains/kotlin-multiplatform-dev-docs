@@ -206,28 +206,25 @@ you can address this difference using the `expect-actual` mechanism to manage pl
 
 2. In Android code, add the actual implementation that uses the `LocalConfiguration` API:
 
-    ```kotlin
+   ```kotlin
     actual object LocalAppTheme {
-        private var default: Int? = null
-        actual val current: Boolean
-            @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
-    
-        @Composable
-        actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-            val configuration = LocalConfiguration.current
-    
-            if (default == null) {
-                default = configuration.uiMode
-            }
-    
-            val new = when(value) {
-                true -> (configuration.uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
-                false -> (configuration.uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
-                null -> default!!
-            }
-            configuration.uiMode = new
-            return LocalConfiguration.provides(configuration)
-        }
+       actual val current: Boolean
+           @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
+
+       @Composable
+       actual infix fun provides(value: Boolean?): ProvidedValue<*> {
+           val new = if (value == null) {
+               LocalConfiguration.current
+           } else {
+               Configuration(LocalConfiguration.current).apply {
+                   uiMode = when (value) {
+                       true -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
+                       false -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
+                   }
+               }
+           }
+           return LocalConfiguration.provides(new)
+       }
     }
     ```
 
@@ -236,19 +233,15 @@ you can address this difference using the `expect-actual` mechanism to manage pl
     ```kotlin
     @OptIn(InternalComposeUiApi::class)
     actual object LocalAppTheme {
-        private var default: SystemTheme? = null
         actual val current: Boolean
             @Composable get() = LocalSystemTheme.current == SystemTheme.Dark
     
         @Composable
         actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-            if (default == null) {
-                default = LocalSystemTheme.current
-            }
             val new = when(value) {
                 true -> SystemTheme.Dark
                 false -> SystemTheme.Light
-                null -> default!!
+                null -> LocalSystemTheme.current
             }
     
             return LocalSystemTheme.provides(new)
