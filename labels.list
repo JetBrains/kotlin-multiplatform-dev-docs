@@ -11,6 +11,8 @@
         href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html">
         Navigation library for the EAP version of Compose Multiplatform.
     </primary-label>
+    <primary-label id="intellij-and-android-studio" short-name="IntelliJ IDEA and Android Studio" name="Works with IntelliJ IDEA and Android Studio" color="blue">This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio –
+        both IDEs share the same core functionality and Kotlin Multiplatform support.</primary-label>
 
     <secondary-label id="Deprecated" name="Deprecated" color="strawberry">Still available, but deprecated.</secondary-label>
     <secondary-label id="Experimental" name="Experimental" color="red">This feature is at the experimental stage of development and can be significantly changed or removed in future releases.</secondary-label>
