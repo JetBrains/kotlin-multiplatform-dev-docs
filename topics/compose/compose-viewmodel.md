@@ -5,7 +5,7 @@ approach to building UI can be implemented in common code using Compose Multipla
 
 > Support for the common `ViewModel` in Compose Multiplatform is in [Beta](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
 >
-{style="tip"}
+{style="note"}
 
 ## Adding the common ViewModel to your project
 
