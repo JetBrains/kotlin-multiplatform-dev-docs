@@ -180,8 +180,7 @@ fun TextBox(text: String = "Item") {
 ## Known limitations
 
 Currently, scrolling using touchscreens, touchpads, and trackpads is treated as mouse events, which can lead to glitches 
-and issues, such as the lack of touch slop — a threshold distance used to differentiate intentional scrolling gestures 
-from unintentional taps or touches. We are continually improving input and gesture handling 
+and issues like the lack of pinch-to-zoom. We are continually improving input and gesture handling 
 and plan to introduce native support for these input devices:
 
 * Support touch screens natively ([CMP-1609](https://youtrack.jetbrains.com/issue/CMP-1609/))
