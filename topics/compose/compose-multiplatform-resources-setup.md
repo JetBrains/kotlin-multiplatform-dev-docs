@@ -100,6 +100,10 @@ Sometimes, the same resource should be presented in different ways depending on 
 screen density, or interface theme. For example, you might need to localize texts for different languages or adjust
 images for the dark theme. For that, the library provides special qualifiers.
 
+> Learn how to handle resource-related settings in the [Manage local resource environment](compose-resource-environment.md) tutorial.
+>
+{style="note"}
+
 All resource types, except for raw files in the `files` directory, support qualifiers. Add qualifiers to directory
 names using a hyphen:
 
