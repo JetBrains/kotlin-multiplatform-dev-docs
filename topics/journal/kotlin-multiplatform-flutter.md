@@ -40,7 +40,7 @@ Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In Nove
 
 You can write shared UI code across multiple platforms using [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/), a modern declarative framework by JetBrains, which is built on Kotlin Multiplatform and Google’s Jetpack Compose.
 
-Compose Multiplatform is currently stable on Android and desktop, in Beta on iOS, and in Alpha on web.
+Compose Multiplatform is currently stable on iOS, Android and desktop, and in Alpha on web.
 
 [![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
