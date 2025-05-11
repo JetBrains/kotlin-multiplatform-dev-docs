@@ -11,9 +11,8 @@ settings used by the application:
 ## Locale
 
 Each platform handles locale settings such as language and region differently. As a temporary workaround, until a common 
-public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), you need to define 
-a common entry point in the shared code. Then, provide the corresponding declarations for each platform 
-using the platform-specific API:
+public API is implemented, you need to define a common entry point in the shared code. Then, 
+provide the corresponding declarations for each platform using the platform-specific API:
 
 * **Android**: [`context.resources.configuration.locale`](https://developer.android.com/reference/android/content/res/Configuration#setLocale(java.util.Locale))
 * **iOS**: [`NSLocale.preferredLanguages`](https://developer.apple.com/documentation/foundation/nslocale/preferredlanguages)
@@ -180,7 +179,7 @@ Themes are handled differently across platforms:
     ```
 * iOS, desktop, and web platforms use `LocalSystemTheme.current`.
 
-As a temporary workaround, until a common public API is implemented ([CMP-4197](https://youtrack.jetbrains.com/issue/CMP-4197)), 
+As a temporary workaround, until a common public API is implemented, 
 you can address this difference using the `expect-actual` mechanism to manage platform-specific theme customization:
 
 1. In the common code, define the expected `LocalAppTheme` object with the `expect` keyword:
