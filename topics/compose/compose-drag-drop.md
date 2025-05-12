@@ -1,7 +1,7 @@
 [//]: # (title: Drag-and-drop operations)
 
-> Currently, drag-and-drop operations are only supported in Compose Multiplatform for desktop.
-> The support will be extended to iOS and web in future releases.
+> Currently, drag-and-drop operations are not supported in Compose Multiplatform for web.
+> Stay tuned for future releases.
 >
 {style="note"}
 
