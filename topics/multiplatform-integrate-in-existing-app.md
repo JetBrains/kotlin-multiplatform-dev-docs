@@ -66,11 +66,9 @@ Create a shared module and connect it to both the existing Android application a
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
    Leave the library name `shared` and enter the package name:
-
-   ```kotlin
+   ```
    com.jetbrains.simplelogin.shared
    ```
-   
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
 4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
