@@ -1,6 +1,6 @@
 [//]: # (title: Default UI behavior on different platforms)
 
-Compose Multiplatform aims to help you produce apps which behave as similar as possible on different platforms.
+Compose Multiplatform aims to help you produce apps which behave as similarly as possible on different platforms.
 On this page, you can learn about unavoidable differences or temporary compromises which
 you should expect when writing shared UI code for different platforms
 with Compose Multiplatform.
