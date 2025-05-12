@@ -11,18 +11,19 @@ Start with an IDE and necessary plugins:
 1. Choose and install the IDE.
     KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
 
-    > The plugins necessary for Kotlin Multiplatform require IntelliJ IDEA 2025.1
-    > or Android Studio Narwhal 2025.1 (TODO: this is a guess, check supported versions before publishing).
+    > The plugins necessary for Kotlin Multiplatform require IntelliJ IDEA 2025.1.1.1
+    > or Android Studio Narwhal 2025.1.1 (TODO: this is a guess, check supported versions before publishing).
     >
     {style="note"}
 
-2. Make sure you have all the necessary IDE plugins (TODO check if dependencies are automated):
+2. Make sure you have all the necessary IDE plugins (TODO check if in IDEA dependencies are automated):
 
     * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
+    * The [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support) plugin
     * Android plugins need to be installed only if you use IDEA (they come bundled with Android Studio):
       * [Android](https://plugins.jetbrains.com/plugin/22989-android)
       * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
-      * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose) 
+      * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
 
 3. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
 
@@ -66,15 +67,18 @@ Start with an IDE and necessary plugins:
 
 Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones Kotlin Multiplatform project:
 
+<tabs>
+<tab title= "IntelliJ IDEA">
+
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
-3. After setting the name, location, and other usual attributes of the project, choose platforms that you
-    would like to see as part of the project.
+3. Set the name, location, and other base attributes of the project as needed.
+4. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
       (except for the server module that doesn't have UI code).
-    * For iOS, you can choose one of two implementations: 
-      * shared UI code, with Compose Multiplatform,
-      * or fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
+    * For iOS, you can choose one of two implementations:
+        * shared UI code, with Compose Multiplatform,
+        * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
     * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
@@ -82,10 +86,43 @@ Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones K
 
 When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
+![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png)
+
+</tab>
+<tab title= "Android Studio">
+
+Before you start, make sure K2 mode is enabled: **Settings** | **Languages & Frameworks** | **Kotlin** | **Enable K2 mode**.
+The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is not going to work properly otherwise.
+
+<!-- TODO check if K2 is actually required or strongly recommended -->
+
+Use the wizard to create a new KMP project:
+
+1. Select **File** | **New** | **New project** in the main menu.
+2. Choose **Kotlin Multiplatform** in the default **Phone and Tablet** template category.
+3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
+4. Choose platforms that you would like to see as part of the project:
+    * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
+      (except for the server module that doesn't have UI code).
+    * For iOS, you can choose one of two implementations: 
+      * shared UI code, with Compose Multiplatform,
+      * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
+    * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
+      as soon as you alter corresponding code.
+      Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
+      writing UI code.
+
+When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
+
+![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png)
+
+</tab>
+</tabs>
+
 ## Run the sample apps
 
-The project created by the IDE wizard includes pregenerated run configurations for iOS and Android
-as well as Gradle tasks for running desktop, web, and server applications.
+The project created by the IDE wizard includes pregenerated run configurations for iOS, Android,
+desktop, and web applications, as well as Gradle tasks for running the server app.
 
 ### Run the Android app
 
@@ -94,64 +131,52 @@ but that is not quick.
 
 To run the Android app, start the composeApp run configuration:
 
-[screenshot]
+![Dropdown with the Android run configuration highlighted](run-android-configuration.png)
 
 By default, it runs on the first available virtual device:
 
-[screenshot]
+![Android app ran on a virtual device](run-android-app.png)
+
+For details on running the Android app (adding virtual devices and setting up physical device connections) see
+TODO link to the tutorial. 
 
 ### Run the iOS app
 
-TODO: align this with the CMP tutorial. There are a lot of details on running on a physical device, for example,
-but that is not quick.
-* iOS app does not run without Apple Development Team ID?
+TODO: iOS app does not run without Apple Development Team ID?
 
 If you chose the iOS target for the project and set up a macOS machine with Xcode,
-you can start the iosApp run configuration:
+you can choose the **iosApp** run configuration and select a simulated device:
 
-[screenshot]
+![Dropdown with the iOS run configuration highlighted](run-ios-configuration.png)
 
-By default, it runs on the first available virtual device:
+When you run the iOS app, it is built with Xcode under the hood and launched in the iOS Simulator.
+The very first build collects native dependencies for compilation and warms up the build for subsequent runs:
 
-[screenshot]
+![iOS app ran on a virtual device](run-ios-app.png)
 
 ### Run the desktop app
 
 TODO: align this with the CMP tutorial.
 
-You can create a run configuration for running the desktop application as follows:
+The default run configuration for a desktop app is created as **composeApp [desktop]**:
 
-1. Select **Run | Edit Configurations** from the main menu.
-2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste this command:
-   ```shell
-   run
-   ```
-4. Click **OK**.
+![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png)
 
 With this configuration you can run the JVM desktop app:
 
-[screenshot]
+![iOS app ran on a virtual device](run-desktop-app.png)
 
 ### Run the web app
 
 TODO: align this with the CMP tutorial.
 
-Create a run configuration to run the web application (TODO: don't create a run configuration because ):
+The default run configuration for a web app is created as **composeApp [wasmJs]**:
 
-1. Select **Run | Edit Configurations** from the main menu.
-2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste this command:
+![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png)
 
-   ```shell
-   wasmJsBrowserRun -t --quiet
-   ```
+When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
 
-4. Click **OK**.
-
-With this configuration you can run the web app:
-
-[screenshot]
+![iOS app ran on a virtual device](run-wasm-app.png)
 
 ## Troubleshooting
 
