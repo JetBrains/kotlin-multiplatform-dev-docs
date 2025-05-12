@@ -189,8 +189,8 @@ See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4
 You can now create uber JARs (complex packages with JARs of the application and all dependencies) using ProGuard
 Gradle tasks.
 
-See the [minification and obfuscation tutorial](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation)
-for details.
+See the [minification and obfuscation](compose-native-distribution.md#minification-and-obfuscation)
+guide for details.
 
 ### Known issue: MissingResourceException
 
