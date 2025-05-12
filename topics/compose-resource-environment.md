@@ -207,23 +207,23 @@ you can address this difference using the `expect-actual` mechanism to manage pl
 
    ```kotlin
     actual object LocalAppTheme {
-       actual val current: Boolean
-           @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
-
-       @Composable
-       actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-           val new = if (value == null) {
-               LocalConfiguration.current
-           } else {
-               Configuration(LocalConfiguration.current).apply {
-                   uiMode = when (value) {
-                       true -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
-                       false -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
-                   }
-               }
-           }
-           return LocalConfiguration.provides(new)
-       }
+        actual val current: Boolean
+            @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
+    
+        @Composable
+        actual infix fun provides(value: Boolean?): ProvidedValue<*> {
+            val new = if (value == null) {
+                LocalConfiguration.current
+            } else {
+                Configuration(LocalConfiguration.current).apply {
+                    uiMode = when (value) {
+                        true -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
+                        false -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
+                    }
+                }
+            }
+            return LocalConfiguration.provides(new)
+        }
     }
     ```
 
