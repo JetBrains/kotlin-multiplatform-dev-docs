@@ -15,20 +15,19 @@ consistent across devices while following platform-specific guidelines.
 
 For a detailed guide, check out [Adaptive layout do's and don'ts](https://developer.android.com/develop/ui/compose/layouts/adaptive/adaptive-dos-and-donts).
 
-## Using WindowSizeClass
+## Using window size classes
 
-Window size classes are a set of opinionated breakpoints that help you design, develop, and test adaptive layouts.
+Window size classes are a set of predefined thresholds, also referred to as breakpoints, that categorize different screen 
+sizes to help you design, develop, and test adaptive layouts.
+
+The window size classes categorize the display area available to your app into three categories for both width and height:
+compact, medium, and expanded. As you make layout changes, test the layout behavior across all window sizes,
+especially at the different breakpoint widths.
 
 With `WindowSizeClass`, you can change your app layout as the display space available to your app changes. For example,
 when the device orientation changes, or the app window is resized in multi‑window mode.
 
-The window size classes categorize the display area available to your app into three categories for both width and height:
-compact, medium, and expanded. As you make layout changes, test the layout behavior across all window sizes, 
-especially at the different breakpoint widths.
-
-Learn more about adaptive layouts in the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/layouts/adaptive).
-
-<!--- waiting for a new plugin
+<!--- waiting for a page about @Preview and hot reload
 ## Previewing layouts
 
 We have three different @Preview:
@@ -37,3 +36,7 @@ We have three different @Preview:
 * Separate desktop annotation plugin with our own implementation (only for desktop source set) + uiTooling plugin.
 * Common annotation, also supported in Android Studio, works for Android only but from common code.
 -->
+
+## What's next
+
+Learn more about adaptive layouts in the [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/layouts/adaptive).

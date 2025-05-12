@@ -15,8 +15,11 @@ Modifiers can be chained together to apply multiple effects:
 @Composable
 private fun Greeting(name: String) {
     Column(
+        // Chained `Modifier` functions:
         modifier = Modifier
+            // `Modifier.padding(24.dp)` adds padding around the column
             .padding(24.dp)
+            // `Modifier.fillMaxWidth()` makes the column expand to fill the available width
             .fillMaxWidth()
     ) {
         Text(text = "Hello,")
@@ -29,6 +32,11 @@ The order of modifier functions in the chain is significant. Each function makes
 the previous function, so the sequence of calls directly affects the composable's final behavior and appearance.
 
 ## Built-in modifiers
+
+Compose Multiplatform provides built-in modifiers, such as `size`, `padding`, and `offset`, for handling common 
+layout and positioning tasks.
+
+### Size modifiers
 
 To set a fixed size, use the `size` modifier. When constraints need to be overridden, use the `requiredSize` modifier:
 
@@ -49,6 +57,8 @@ fun Card() {
 }
 ```
 
+### Padding modifiers
+
 Add padding around an element with the `padding` modifier. You can also apply padding dynamically in relation to 
 baselines using `paddingFromBaseline`:
 
@@ -68,6 +78,8 @@ fun Card() {
     }
 }
 ```
+
+### Offset modifiers
 
 To adjust the position of a layout from its original position, use the `offset` modifier. Specify the offset in the X and Y axes:
 
@@ -112,7 +124,7 @@ fun MatchParentSizeComposable() {
 ```
 
 Another example of a scoped modifier is `weight`, available within the `RowScope` or `ColumnScope`. 
-It defines how much space a composable should occupy relative to its siblings:
+It determines how much space a composable should occupy relative to its siblings:
 
 ```kotlin
 @Composable
@@ -122,14 +134,14 @@ fun Card() {
         modifier = Modifier.fillMaxWidth() 
     ) {
         Image(
-            /*...*/
-            // Assigns a weight of 2f to ccupy twice the width compared to the Column
-            modifier = Modifier.weight(2f) 
+            model = "https://example.com/image.jpg",
+            // Assigns a weight of 1f to occupy one fraction of the available space 
+            modifier = Modifier.weight(1f) 
         )
         
         Column(
-            // Assigns a weight of 1f, taking one fraction of the available space
-            modifier = Modifier.weight(1f)
+            // Assigns a weight of 2f, taking twice the width compared to the Image
+            modifier = Modifier.weight(2f)
         ) {
             // Content inside the column
         }
@@ -139,7 +151,7 @@ fun Card() {
 
 ## Extracting and reusing modifiers 
 
-When you chain multiple modifiers together, you can extract the chain into variables or functions for reuse. 
+When you chain modifiers together, you can extract the chain into variables or functions for reuse. 
 This improves code readability and may enhance performance by reusing modifier instances.
 
 ```kotlin
@@ -170,8 +182,10 @@ create your own custom modifiers.
 
 There are several approaches to creating custom modifiers:
 
-* Chaining existing modifiers
-* Using a composable modifier factory
-* Lower the level `Modifier.Node` API 
+* [Chaining existing modifiers](https://developer.android.com/develop/ui/compose/custom-modifiers#chain-existing)
+* [Using a composable modifier factory](https://developer.android.com/develop/ui/compose/custom-modifiers#create_a_custom_modifier_using_a_composable_modifier_factory)
+* [Lower the level `Modifier.Node` API](https://developer.android.com/develop/ui/compose/custom-modifiers#implement-custom)
+
+## What's next
 
 Learn more about modifiers in [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/modifiers).

@@ -2,8 +2,7 @@
 
 To effectively build user interfaces in Compose Multiplatform, it's important to understand the key concepts of layout 
 construction, including core principles, layout phases, and common components and tools available for 
-structuring your UI. Compose Multiplatform adopts the 
-[Jetpack Compose approach to implementing layouts](https://developer.android.com/develop/ui/compose/layouts/basics).
+structuring your UI.
 
 ## Composable functions
 
@@ -27,7 +26,8 @@ To structure your layouts, you can use these basic building blocks:
 * Use `Row` to place items horizontally on the screen.
 * Use `Box` to stack elements on top of each other. 
 * Use the `FlowRow` and `FlowColumn` versions of `Row` and `Column` to build responsive layouts. 
-Items automatically flow into the next line when the container runs out of space, creating multiple rows or columns:
+  Items automatically flow into the next line when the container runs out of space, creating multiple rows or columns:
+ 
     ```kotlin
     @Composable
     fun ResponsiveLayout() {
@@ -64,15 +64,16 @@ Learn more in [](compose-layout-modifiers.md).
 Compose uses a single-pass layout model for rendering the UI tree. Here are the key layout phases:
 
 * **Measuring**. Each composable is measured, passing size constraints down the tree to its children recursively.
-* **Sizing**. Leaf nodes determine their sizes based on constraints and content.
+* **Sizing**. Tree nodes determine their sizes based on constraints and content.
 * **Placing**. The resolved sizes and placement instructions are passed back up the tree to position the composables.
 
 See [Jetpack Compose documentation on the layout model](https://developer.android.com/develop/ui/compose/layouts/basics#model) for details.
 
-## ConstraintLayout
+## Constrained-based layouts
 
-`ConstraintLayout` allows you to arrange composables relative to one another without nesting the
-`Row`, `Column`, or `Box` elements. `ConstraintLayout` positions composables using the following constraints:
+`ConstraintLayout` is a composable that allows you hat allows you to create complex layouts by defining relationships 
+and constraints between composables without nesting the `Row`, `Column`, or `Box` elements. 
+`ConstraintLayout` positions composables using the following constraints:
 
 * **Guidelines** are visual helpers for aligning composables.
 * **Barriers** are virtual guidelines that reference multiple composables, and adjust based on the most extreme 
