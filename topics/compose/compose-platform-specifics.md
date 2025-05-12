@@ -15,17 +15,21 @@ Regardless of the platform you're targeting, each of them needs a dedicated entr
 * For a Kotlin/JS or Kotlin/Wasm app, that's the `main()` function that attaches the main common code composable
   to the web page.
 
-### Platform-specific APIs
-
-
+Certain platform-specific APIs necessary for your app may not have multiplatform support,
+and you will have to implement calling these APIs in platform-specific source sets.
+But before you do that, check out [klibs.io](https://klibs.io/), a JetBrains project which aims to comprehensively
+catalog all available Kotlin Multiplatform libraries.
+Already available are libraries for network code, databases, coroutines, and much more.
 
 ## Input methods
 
 ### IME keyboards
 
+
+
 ### Touch and mouse support
 
-Current desktop implementation interprets all pointer manipulation as mouse gestures
+The current desktop implementation interprets all pointer manipulation as mouse gestures
 and, therefore, does not support multitouch gestures.
 For example, the common pinch-to-zoom gesture cannot be implemented with Compose Multiplatform for desktop
 as it requires processing two touches at once.
@@ -34,7 +38,7 @@ as it requires processing two touches at once.
 
 ### System functionality
 
-Some UI elements depend on system integration and may look different in default configuration,
+Some UI elements depend on system integration and may look different in the default configuration,
 for example:
 
 * The "Share" actions use system APIs to offer a list of specific ways to share or send content.
@@ -49,11 +53,24 @@ common mobile gesture patterns like fling or overscroll (often used for the "pul
 
 ### Interop views
 
+If you would like to embed native views within common composables, or vice versa,
+you'll need to familiarize yourself with platform-specific mechanisms supported by Compose Multiplatform.
+
+For iOS, there are separate guides for interop code with [SwiftUI](compose-swiftui-integration.md) and [UIKit](compose-uikit-integration.md).
+
+For desktop, Compose Multiplatform supports [](compose-desktop-swing-interoperability.md).
+
 ### Back gesture
 
 Android devices have back gesture support by default, and every screen reacts to the **Back** button in some fashion.
 
-On iOS, there is no back gesture by default, although developers 
+On iOS, there is no back gesture by default, although developers are encouraged to implement similar functionality
+to meet user experience expectations.
+Compose Multiplatform for iOS supports back gestures by default to mimic Android functionality.
+
+On desktop, Compose Multiplatform uses the **Esc** key by default as a back trigger.
+
+For details, see the [](compose-navigation.md#back-gesture) section.
 
 ### Text
 
@@ -62,15 +79,17 @@ With text, Compose Multiplatform doesn't guarantee pixel-perfect correspondence 
 * If you don't set a font explicitly, each system assigns a different default font to your text.
 * Even for the same font, letter aliasing mechanisms specific to each platform can lead to noticeable differences.
 
-This doesn't have a significant impact on user experience, but may get in the way of screenshot testing, for example.
+This doesn't have a significant impact on user experience (on the contrary, default fonts look as expected on each platform).
+But pixel differences may get in the way of screenshot testing, for example.
 
-### Start times
+### Initial performance
 
-On iOS, you may notice a delay in initial loading of the app compared to Android.
-This can happen if you have a lot of shaders to be compiled.
-Shaders are not only relevant for apps using 3D models:
-if your app is complicated enough, it may include a sufficient amount of ordinary UI widgets that need to be pre-built
-at startup.
+On iOS, you may notice a delay in the initial performance of individual screens compared to Android.
+This can happen because Compose Multiplatform compiles UI shaders on demand.
+So, if a particular shader is not cached yet, compiling it may delay rendering of a scene.
+
+This affects only the first time launches for each screen:
+after all necessary shaders are cached, their compilation won't delay subsequent launches.
 
 ## Developer experience
 
