@@ -44,6 +44,7 @@
 			<toc-element accepts-web-file-names="whats-new-compose-1-6-0.html" topic="whats-new-compose.md"/>
 		</toc-element>
 		<toc-element topic="compose-multiplatform-and-jetpack-compose.md"/>
+		<toc-element topic="compose-layout.md"/>
 		<toc-element toc-title="Multiplatform resources">
 			<toc-element accepts-web-file-names="compose-images-resources.html" topic="compose-multiplatform-resources.md"/>
 			<toc-element toc-title="Setup and configuration" topic="compose-multiplatform-resources-setup.md"/>
@@ -51,7 +52,7 @@
 		</toc-element>
 		<toc-element topic="compose-lifecycle.md"/>
 		<toc-element topic="compose-viewmodel.md"/>
-	    <toc-element toc-title="Navigation">
+		<toc-element toc-title="Navigation">
 			<toc-element topic="compose-navigation.md"/>
 			<toc-element topic="compose-navigation-routing.md"/>
       <toc-element topic="compose-navigation-deep-links.md"/>
