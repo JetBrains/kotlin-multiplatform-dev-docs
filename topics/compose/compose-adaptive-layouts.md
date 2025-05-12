@@ -7,11 +7,12 @@ and input modes.
 
 Follow these key guidelines when designing adaptive layouts:
 
-* Prefer canonical layouts patterns like list-detail, feed, and supporting pane.
+* Prefer [canonical layouts](https://developer.android.com/develop/ui/compose/layouts/adaptive/canonical-layouts) patterns 
+  like list-detail, feed, and supporting pane.
 * Maintain consistency by reusing shared styles for padding, typography, and other design elements. Keep navigation patterns 
 consistent across devices while following platform-specific guidelines.
 * Break complex layouts into reusable composables for flexibility and modularity.
-* Adjust for screen density and orientation using tools like `LocalConfiguration` and `LocalDensity`.
+* Adjust for screen density and orientation.
 
 For a detailed guide, check out [Adaptive layout do's and don'ts](https://developer.android.com/develop/ui/compose/layouts/adaptive/adaptive-dos-and-donts).
 

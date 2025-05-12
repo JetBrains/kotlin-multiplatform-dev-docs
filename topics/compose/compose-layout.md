@@ -59,47 +59,6 @@ fun ModifierExample() {
 
 Learn more in [](compose-layout-modifiers.md).
 
-## Layout phases
-
-Compose uses a single-pass layout model for rendering the UI tree. Here are the key layout phases:
-
-* **Measuring**. Each composable is measured, passing size constraints down the tree to its children recursively.
-* **Sizing**. Tree nodes determine their sizes based on constraints and content.
-* **Placing**. The resolved sizes and placement instructions are passed back up the tree to position the composables.
-
-See [Jetpack Compose documentation on the layout model](https://developer.android.com/develop/ui/compose/layouts/basics#model) for details.
-
-## Constrained-based layouts
-
-`ConstraintLayout` is a composable that allows you hat allows you to create complex layouts by defining relationships 
-and constraints between composables without nesting the `Row`, `Column`, or `Box` elements. 
-`ConstraintLayout` positions composables using the following constraints:
-
-* **Guidelines** are visual helpers for aligning composables.
-* **Barriers** are virtual guidelines that reference multiple composables, and adjust based on the most extreme 
-widget on the specified side.
-* **Chains** provide group-like behavior along a single axis (horizontally or vertically).
-
-In this example, we position and align a `Text` element to a guideline placed 25% of the way from the start (left) of the layout:
-
-```kotlin
-@Composable
-fun ConstraintLayoutExample() {
-    ConstraintLayout {
-        // Positions 25% from the start
-        val guideline = createGuidelineFromStart(0.25f) 
-        val text = createRef()
-
-        Text(
-            text = "Aligned to guideline",
-            modifier = Modifier.constrainAs(text) {
-                start.linkTo(guideline)
-            }
-        )
-    }
-}
-```
-
 ## What's next
 
 * For a deep dive, see [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/layouts).

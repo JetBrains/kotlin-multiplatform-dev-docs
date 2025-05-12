@@ -134,7 +134,7 @@ fun Card() {
         modifier = Modifier.fillMaxWidth() 
     ) {
         Image(
-            model = "https://example.com/image.jpg",
+            /* Placeholder for loading an image */,
             // Assigns a weight of 1f to occupy one fraction of the available space 
             modifier = Modifier.weight(1f) 
         )
