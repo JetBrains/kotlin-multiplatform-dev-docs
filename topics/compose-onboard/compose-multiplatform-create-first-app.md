@@ -280,7 +280,7 @@ Create a run configuration to run the web application:
 3. In the **Tasks and arguments** field, paste this command:
 
    ```shell
-   wasmJsBrowserRun -t --quiet
+   wasmJsBrowserDevelopmentRun -t --quiet
    ```
 
 4. Click **OK**.
