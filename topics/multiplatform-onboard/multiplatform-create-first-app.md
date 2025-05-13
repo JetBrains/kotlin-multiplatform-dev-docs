@@ -61,7 +61,7 @@ In Kotlin Multiplatform, different source sets in a shared module can target dif
 The common source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
-![Source sets and modules structure](basic-project-structure-2.png){width=300}
+![Source sets and modules structure](basic-project-structure-2.png){width=350}
 
 When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
 When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
@@ -244,7 +244,7 @@ or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
 
    If you don't have a device in the list, create a [new Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 
-   ![Run multiplatform app on Android](compose-run-android.png){width=400}
+   ![Run multiplatform app on Android](compose-run-android.png){width=350}
 
    ![First mobile multiplatform app on Android](first-multiplatform-project-on-android-1.png){width=300}
 
@@ -258,7 +258,7 @@ or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
 
    If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
-   ![Run multiplatform app on iOS](compose-run-ios.png){width=450}
+   ![Run multiplatform app on iOS](compose-run-ios.png){width=350}
 
    ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
