@@ -1,6 +1,6 @@
 [//]: # (title: Create a multiplatform app using Ktor and SQLDelight)
 
-This tutorial demonstrates how to use Android Studio to create an advanced mobile application for iOS and Android using
+This tutorial demonstrates how to use IntelliJ IDEA to create an advanced mobile application for iOS and Android using
 Kotlin Multiplatform.
 This application is going to:
 
@@ -29,28 +29,22 @@ You will use the following multiplatform libraries in the project:
 >
 {style="note"}
 
-## Create your project
+## Create a project
 
-1. Prepare your environment for multiplatform development.
-    [Check the list of necessary tools and update them to the latest versions if necessary](quickstart.md#set-up-the-environment).
-2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. You will implement a native UI for both platforms.
-5. Click the **Download** button and unpack the downloaded archive.
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+2. In IntelliJ IDEA, select **File** | **New** | **Project**.
+3. In the panel on the left, select **Kotlin Multiplatform**.
+4. Specify the following fields in the **New Project** window:
 
-   ![Kotlin Multiplatform wizard](ktor-wizard.png){width=450}
+   * **Name**: SpaceTutorial
+   * **Group**: com.jetbrains.spacetutorial
+   * **Artifact**: spacetutorial
 
-6. Launch Android Studio.
-7. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
-8. Navigate to the unpacked project folder and then click **Open**.
+   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
 
-   Android Studio detects that the folder contains a Gradle build file, opens the folder as a new project,
-   and starts the initial Gradle Sync.
-
-9. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
-   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
-
-   ![Select the project view](select-project-view.png){width=200}
+5. Select **Android** and **iOS** targets.
+6. For iOS, select the **Do not share UI** option. You will implement a native UI for both platforms.
+7. Once you've specified all the fields and targets, click **Create**.
 
 ## Add Gradle dependencies
 
@@ -108,9 +102,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```
 
-4. Once the dependencies are added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
-
-   ![Synchronize Gradle files](gradle-sync.png)
+4. Once the dependencies are added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 5. At the very beginning of the `shared/build.gradle.kts` file, add the following lines to the
    `plugins {}` block:
@@ -156,7 +148,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
      to use `kotlinx.serialization` for processing network requests and responses.
    * The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
-7. Once the dependencies are added, click **Sync Now** to synchronize Gradle files once again.
+7. Once the dependencies are added, click the **Sync Gradle Changes** button to synchronize Gradle files once again.
 
 After the Gradle sync, you are done with the project configuration and can start writing code.
 
@@ -551,7 +543,7 @@ public class, `SpaceXSDK`.
 
 ## Create the Android application
 
-The Kotlin Multiplatform wizard handles the initial Gradle configuration for you, so the `shared` module is already
+IntelliJ IDEA handles the initial Gradle configuration for you, so the `shared` module is already
 connected to your Android application.
 
 Before implementing the UI and the presentation logic, add all the required UI dependencies to
@@ -929,13 +921,13 @@ and its UI made using native Jetpack Compose.
 For the iOS part of the project, you'll make use of [SwiftUI](https://developer.apple.com/xcode/swiftui/) to build the user
 interface and the [Model View View-Model](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
 
-The Kotlin Multiplatform wizard generates an iOS project that is already connected to the shared module. The Kotlin module
+IntelliJ IDEA generates an iOS project that is already connected to the shared module. The Kotlin module
 is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
 using a regular `import` statement: `import Shared`.
 
 ### Add the dynamic linking flag for SQLDelight
 
-By default, the Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
+By default, IntelliJ IDEA generates projects set up for static linking of iOS frameworks.
 
 To use the native SQLDelight driver on iOS, add the dynamic linker flag that allows Xcode tooling to find the
 system-provided SQLite binary:
@@ -1184,7 +1176,7 @@ It will allow you to call the SDK function with the correct database driver.
     }
     ```
 
-4. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
+4. In IntelliJ IDEA, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
 
 ![iOS Application](ios-application.png){width=350}
 
