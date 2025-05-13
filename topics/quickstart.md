@@ -6,6 +6,7 @@ With this tutorial, you can get a simple Kotlin Multiplatform app up and running
 
 Kotlin Multiplatform projects need a specific environment,
 but most of the requirements are made clear through preflight checks in the IDE.
+
 Start with an IDE and necessary plugins:
 
 1. Choose and install the IDE.
@@ -19,7 +20,11 @@ Start with an IDE and necessary plugins:
 2. Make sure you have all the necessary IDE plugins (TODO check if in IDEA dependencies are automated):
 
     * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
-    * The [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support) plugin
+
+        > The Kotlin Multiplatform plugin is not yet available for IDEs on Windows or Linux.
+        > TODO You can still follow the tutorial to learn about the alternatives. 
+
+     * The [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support) plugin
     * Android plugins need to be installed only if you use IDEA (they come bundled with Android Studio):
       * [Android](https://plugins.jetbrains.com/plugin/22989-android)
       * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
@@ -62,8 +67,14 @@ Start with an IDE and necessary plugins:
 
     > You will need to launch Xcode manually every time it is updated.
     > Preflight checks in the IDE you're using alert you whenever Xcode is not in the right state to work with.
+    >
+    {style="note"}
 
 ## Create a project 
+
+For the quickstart we'll use the IDE wizard, but it's not available on Windows and Linux yet.
+You can generate the same project as an IDE wizard using the [web KMP wizard](https://kmp.jetbrains.com/).
+TODO: you can import and run the generated project on any host. Maybe link to running?
 
 Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones Kotlin Multiplatform project:
 
@@ -133,6 +144,8 @@ To run the Android app, start the composeApp run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png)
 
+TODO: collapsible Windows/Linux stuff about running the project
+
 By default, it runs on the first available virtual device:
 
 ![Android app ran on a virtual device](run-android-app.png)
@@ -142,7 +155,9 @@ TODO link to the tutorial.
 
 ### Run the iOS app
 
-TODO: iOS app does not run without Apple Development Team ID?
+> You need a macOS host to build iOS apps.
+>
+{style="note"}
 
 If you chose the iOS target for the project and set up a macOS machine with Xcode,
 you can choose the **iosApp** run configuration and select a simulated device:
@@ -203,12 +218,17 @@ make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 If your iOS run configuration reports that there is no virtual device to run on, make sure to launch Xcode
 and see if there are any updates for the iOS simulator.
 
+### Get help
+
+* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* **Kotlin Multiplatform Tooling issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KMT).
+
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
 * A series of tutorials about working with the shared UI code: [TODO current CMP tutorial chain]
 * A series of tutorials about working with shared code along with native UI: [TODO current KMP tutorial chain]
-* Take a deep dive into the Kotlin Multiplatform documentation:
+* Take a deep dive into the Kotlin Multiplatform documentation TODO links:
   * Project structure
   * Working with dependencies
   * Publishing artifacts
@@ -224,7 +244,3 @@ Discover code already written for KMP:
 * [klibs.io](https://klibs.io) — search platform for KMP libraries, with more than 2000 libraries indexed so far,
     including OkHttp, Ktor, Coil, Koin, SQLDelight, and others.
 
-## Get help
-
-* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
-* **Kotlin Multiplatform Tooling issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KMT).
