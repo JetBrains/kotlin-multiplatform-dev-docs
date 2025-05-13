@@ -73,19 +73,29 @@ To bind the web app to the navigation graph defined in your common code,
 call the `window.bindToNavigation()` method in your Kotlin/Wasm or Kotlin/JS code:
 
 ```kotlin
+//common
+@Composable
+fun App(
+  onNavHostReady: suspend (NavController) -> Unit = {}
+) {
+  val navController = rememberNavController()
+  NavHost(...) {
+    //...
+  }
+  LaunchedEffect(navController) {
+    onNavHostReady(navController)
+  }
+}
+
+//web
 @OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalBrowserHistoryApi
 fun main() {
     val body = document.body ?: return
-
     ComposeViewport(body) {
-
-        val navController = rememberNavController()
-        // Assumes that your main composable function in common code is App()
-        App(navController)
-        LaunchedEffect(Unit) {
-            window.bindToNavigation(navController)
-        }
+        App(
+          onNavHostReady = { window.bindToNavigation(it) }
+        )
     }
 }
 ```
