@@ -6,141 +6,244 @@ With this tutorial, you can get a simple Kotlin Multiplatform app up and running
 
 Kotlin Multiplatform projects need a specific environment,
 but most of the requirements are made clear through preflight checks in the IDE.
+
 Start with an IDE and necessary plugins:
 
 1. Choose and install the IDE.
     KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
+    
+    The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
+    or **Android Studio Narwhal 2025.1.1** (TODO: this is a guess, check supported versions before publishing).
 
-    > The plugins necessary for Kotlin Multiplatform require IntelliJ IDEA 2025.1
-    > or Android Studio Narwhal 2025.1 (TODO: this is a guess, check supported versions before publishing).
-    >
-    {style="note"}
-
-2. Make sure you have all the necessary IDE plugins:
+2. Make sure you have all the necessary IDE plugins (TODO check if in IDEA dependencies are automated):
 
     * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
+
+        > The Kotlin Multiplatform plugin is not yet available for IDEs on Windows or Linux.
+        > But it is also not strictly necessary on those platforms:
+        > you can still follow the tutorial to generate and run a KMP project.
+        >
+        {style="note"}
+
+     * The [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support) plugin
     * Android plugins need to be installed only if you use IDEA (they come bundled with Android Studio):
       * [Android](https://plugins.jetbrains.com/plugin/22989-android)
       * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
       * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
-      *  (TODO: check that the Android plugins are ) 
 
-3. To create iOS applications, you also need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
-   Your IntelliJ IDE will run Xcode under the hood to build iOS frameworks.
+3. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
+
+    <tabs>
+    <tab title= "Bash or Zsh">
+   
+    Add the following command to your `.profile` or `.zprofile`:
+        
+    ```shell
+    export ANDROID_HOME=~/Library/Android/sdk
+    ```
+   
+    </tab>
+    <tab title= "Windows Powershell or CMD">
+
+    For Powershell, you can add a persistent environment variable with the following command (see [PowerShell docs](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables)
+    for details):
+
+    ```shell
+    [Environment]::SetEnvironmentVariable('ANDROID_HOME', '<path to the SDK>', 'Machine')
+    ```
+
+    For CMD, use the [`setx`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setx) command:
+    
+    ```shell
+    setx ANDROID_HOME "<path to the SDK>"
+    ```
+    </tab>
+    </tabs>
+
+4. To create iOS applications, you also need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
+   Your IDE will run Xcode under the hood to build iOS frameworks.
 
     Make sure to launch Xcode at least once before starting to work with KMP projects so that it has a chance to
     go through the initial setup.
 
-    > You will need to launch Xcode manually every time it is updated.
-    > Preflight checks in the IntelliJ IDE you're using alert you whenever Xcode is not in the right state to work with.
-
-### Setup troubleshooting
-
-TODO common problems
-* From existing: `sudo xcode-select`
-* JAVA_HOME something? Can this be popular?
-* YouTrack link for when stumped.
+    > You will need to launch Xcode manually every time it is updated and download the updated tooling.
+    > Preflight checks in the IDE you're using alert you whenever Xcode is not in the right state to work with.
+    >
+    {style="note"}
 
 ## Create a project 
 
-Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones Kotlin Multiplatform project:
+### On macOS
 
-1. Select **File | New | Project** in the main menu.
+On macOS, the Kotlin Multiplatform plugin provides a project generation wizard inside the IDE:
+
+<tabs>
+<tab title= "IntelliJ IDEA">
+
+Use the IDE wizard to create a new KMP project:
+
+1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
-3. After setting the name, location, and other usual attributes of the project, choose platforms that you
-    would like to see as part of the project.
+3. Set the name, location, and other base attributes of the project as needed.
+4. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
       (except for the server module that doesn't have UI code).
-    * For iOS, you can choose one of two implementations: 
-      * shared UI code, with Compose Multiplatform,
-      * or fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
-    * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
+    * For iOS, you can choose one of two implementations:
+        * shared UI code, with Compose Multiplatform,
+        * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
+    * The desktop target includes an alpha version of hot reload (TODO link?) functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
 
 When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
+![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=800}
+
+</tab>
+<tab title= "Android Studio">
+
+Before you start, make sure K2 mode is enabled: **Settings** | **Languages & Frameworks** | **Kotlin** | **Enable K2 mode**.
+The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is not going to work properly otherwise.
+
+<!-- TODO check if K2 is actually required or strongly recommended -->
+
+Use the IDE wizard to create a new KMP project:
+
+1. Select **File** | **New** | **New project** in the main menu.
+2. Choose **Kotlin Multiplatform** in the default **Phone and Tablet** template category.
+3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
+4. Choose platforms that you would like to see as part of the project:
+    * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
+      (except for the server module that doesn't have UI code).
+    * For iOS, you can choose one of two implementations: 
+      * shared UI code, with Compose Multiplatform,
+      * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
+    * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
+      as soon as you alter corresponding code.
+      Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
+      writing UI code.
+
+When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
+
+![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=800}
+
+</tab>
+</tabs>
+
+### Windows and Linux
+
+If you're on Windows or Linux:
+
+1. Generate a project using the [web KMP wizard](https://kmp.jetbrains.com/).
+2. Extract the archive and open the resulting folder in your IDE.
+3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
+
 ## Run the sample apps
 
-The project created by the IDE wizard includes pregenerated run configurations for iOS and Android
-as well as Gradle tasks for running desktop, web, and server applications.
+The project created by the IDE wizard includes pregenerated run configurations for iOS, Android,
+desktop, and web applications, as well as Gradle tasks for running the server app.
 
 ### Run the Android app
 
-TODO: align this with the CMP tutorial. There are a lot of details on running on a physical device, for example,
-but that is not quick.
-
 To run the Android app, start the composeApp run configuration:
 
-[screenshot]
+![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
 By default, it runs on the first available virtual device:
 
-[screenshot]
+![Android app ran on a virtual device](run-android-app.png){width=350}
+
+For details on running the Android app (adding virtual devices and setting up physical device connections) see
+[](compose-multiplatform-create-first-app.md).
+
+#### Running the Android app on Windows and Linux {collapsible="true"}
+
+TODO: collapsible Windows/Linux stuff about running the project
 
 ### Run the iOS app
 
-TODO: align this with the CMP tutorial. There are a lot of details on running on a physical device, for example,
-but that is not quick.
-* iOS app does not run without Apple Development Team ID?
+> You need a macOS host to build iOS apps.
+>
+{style="note"}
 
 If you chose the iOS target for the project and set up a macOS machine with Xcode,
-you can start the iosApp run configuration:
+you can choose the **iosApp** run configuration and select a simulated device:
 
-[screenshot]
+![Dropdown with the iOS run configuration highlighted](run-ios-configuration.png){width=250}
 
-By default, it runs on the first available virtual device:
+When you run the iOS app, it is built with Xcode under the hood and launched in the iOS Simulator.
+The very first build collects native dependencies for compilation and warms up the build for subsequent runs:
 
-[screenshot]
+![iOS app ran on a virtual device](run-ios-app.png){width=350}
 
 ### Run the desktop app
 
-TODO: align this with the CMP tutorial.
+The default run configuration for a desktop app is created as **composeApp [desktop]**:
 
-You can create a run configuration for running the desktop application as follows:
-
-1. Select **Run | Edit Configurations** from the main menu.
-2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste this command:
-   ```shell
-   run
-   ```
-4. Click **OK**.
+![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
 With this configuration you can run the JVM desktop app:
 
-[screenshot]
+![JVM app ran on a virtual device](run-desktop-app.png){width=600}
+
+#### Running the desktop app on Windows and Linux {collapsible="true"}
+
+TODO: collapsible Windows/Linux stuff about running the project
 
 ### Run the web app
 
-TODO: align this with the CMP tutorial.
+The default run configuration for a web app is created as **composeApp [wasmJs]**:
 
-Create a run configuration to run the web application:
+![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
-1. Select **Run | Edit Configurations** from the main menu.
-2. Click the plus button and choose **Gradle** from the dropdown list.
-3. In the **Tasks and arguments** field, paste this command:
+When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
 
-   ```shell
-   wasmJsBrowserRun -t --quiet
-   ```
+![Web app ran on a virtual device](run-wasm-app.png){width=600}
 
-4. Click **OK**.
+#### Running the web app on Windows and Linux {collapsible="true"}
 
-With this configuration you can run the web app:
+TODO: collapsible Windows/Linux stuff about running the project
 
-[screenshot]
+## Troubleshooting
+
+### Java and JDK
+
+Common issues with Java:
+
+* Some tools may not find a Java version to run, or use a wrong version.
+  To solve this:
+    * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed.
+    * Append the path to the `bin` folder inside your `JAVA_HOME` to the `PATH` variable,
+      so that the tools included in JDK are available in the terminal.
+* If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
+  select **Settings** | **Build, Execution, Deployment** | **Build Tools** | **Gradle**.
+
+### Android tools
+
+Same as for JDK: if you have trouble launching Android tools like `adb`,
+make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
+`ANDROID_HOME/platform-tools` are added to your `PATH` environment variable.
+
+### Xcode
+
+If your iOS run configuration reports that there is no virtual device to run on, make sure to launch Xcode
+and see if there are any updates for the iOS simulator.
+
+### Get help
+
+* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* **Kotlin Multiplatform Tooling issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KMT).
 
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* A series of tutorials about working with the shared UI code: [TODO current CMP tutorial chain]
-* A series of tutorials about working with shared code along with native UI: [TODO current KMP tutorial chain]
+* A series of tutorials about working with the shared UI code: [](compose-multiplatform-create-first-app.md)
+* A series of tutorials about working with shared code along with native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation:
-  * Project structure
-  * Working with dependencies
-  * Publishing artifacts
+  * [Project configuration](multiplatform-project-configuration.md)
+  * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
+  * Publishing artifacts: [apps](multiplatform-publish-apps.md) or [libraries] (TODO link to libraries tutorial)
 * Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features: [CMP overview]
 
 Discover code already written for KMP:
@@ -153,7 +256,3 @@ Discover code already written for KMP:
 * [klibs.io](https://klibs.io) — search platform for KMP libraries, with more than 2000 libraries indexed so far,
     including OkHttp, Ktor, Coil, Koin, SQLDelight, and others.
 
-## Get help
-
-* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
-* **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
