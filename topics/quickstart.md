@@ -11,11 +11,9 @@ Start with an IDE and necessary plugins:
 
 1. Choose and install the IDE.
     KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
-
-    > The plugins necessary for Kotlin Multiplatform require IntelliJ IDEA 2025.1.1.1
-    > or Android Studio Narwhal 2025.1.1 (TODO: this is a guess, check supported versions before publishing).
-    >
-    {style="note"}
+    
+    The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
+    or **Android Studio Narwhal 2025.1.1** (TODO: this is a guess, check supported versions before publishing).
 
 2. Make sure you have all the necessary IDE plugins (TODO check if in IDEA dependencies are automated):
 
@@ -148,9 +146,6 @@ desktop, and web applications, as well as Gradle tasks for running the server ap
 
 ### Run the Android app
 
-TODO: align this with the CMP tutorial. There are a lot of details on running on a physical device, for example,
-but that is not quick.
-
 To run the Android app, start the composeApp run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
@@ -197,8 +192,6 @@ With this configuration you can run the JVM desktop app:
 TODO: collapsible Windows/Linux stuff about running the project
 
 ### Run the web app
-
-TODO: align this with the CMP tutorial.
 
 The default run configuration for a web app is created as **composeApp [wasmJs]**:
 
@@ -247,7 +240,7 @@ and see if there are any updates for the iOS simulator.
 Learn more about the structure of a KMP project and writing shared code:
 * A series of tutorials about working with the shared UI code: [](compose-multiplatform-create-first-app.md)
 * A series of tutorials about working with shared code along with native UI: [](multiplatform-create-first-app.md)
-* Take a deep dive into the Kotlin Multiplatform documentation TODO links:
+* Take a deep dive into the Kotlin Multiplatform documentation:
   * [Project configuration](multiplatform-project-configuration.md)
   * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
   * Publishing artifacts: [apps](multiplatform-publish-apps.md) or [libraries] (TODO link to libraries tutorial)
