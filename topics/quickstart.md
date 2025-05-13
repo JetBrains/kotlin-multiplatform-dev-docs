@@ -75,16 +75,14 @@ Start with an IDE and necessary plugins:
 
 ## Create a project 
 
-If you're on Windows or Linux:
+### On macOS
 
-1. Generate a project using the [web KMP wizard](https://kmp.jetbrains.com/).
-2. Extract the archive and open the resulting folder in your IDE.
-3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
-
-If you're using macOS, the Kotlin Multiplatform IDE plugin provides a wizard inside the IDE:
+On macOS, the Kotlin Multiplatform plugin provides a project generation wizard inside the IDE:
 
 <tabs>
 <tab title= "IntelliJ IDEA">
+
+Use the IDE wizard to create a new KMP project:
 
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
@@ -112,7 +110,7 @@ The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is no
 
 <!-- TODO check if K2 is actually required or strongly recommended -->
 
-Use the wizard to create a new KMP project:
+Use the IDE wizard to create a new KMP project:
 
 1. Select **File** | **New** | **New project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the default **Phone and Tablet** template category.
@@ -135,6 +133,14 @@ When you're done choosing platforms, click the **Finish** button and wait for th
 </tab>
 </tabs>
 
+### Windows and Linux
+
+If you're on Windows or Linux:
+
+1. Generate a project using the [web KMP wizard](https://kmp.jetbrains.com/).
+2. Extract the archive and open the resulting folder in your IDE.
+3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
+
 ## Run the sample apps
 
 The project created by the IDE wizard includes pregenerated run configurations for iOS, Android,
@@ -149,14 +155,16 @@ To run the Android app, start the composeApp run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png)
 
-TODO: collapsible Windows/Linux stuff about running the project
-
 By default, it runs on the first available virtual device:
 
 ![Android app ran on a virtual device](run-android-app.png)
 
 For details on running the Android app (adding virtual devices and setting up physical device connections) see
-TODO link to the tutorial. 
+[](compose-multiplatform-create-first-app.md).
+
+#### Running the Android app on Windows and Linux {collapsible="true"}
+
+TODO: collapsible Windows/Linux stuff about running the project
 
 ### Run the iOS app
 
@@ -176,8 +184,6 @@ The very first build collects native dependencies for compilation and warms up t
 
 ### Run the desktop app
 
-TODO: align this with the CMP tutorial.
-
 The default run configuration for a desktop app is created as **composeApp [desktop]**:
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png)
@@ -185,6 +191,10 @@ The default run configuration for a desktop app is created as **composeApp [desk
 With this configuration you can run the JVM desktop app:
 
 ![iOS app ran on a virtual device](run-desktop-app.png)
+
+#### Running the desktop app on Windows and Linux {collapsible="true"}
+
+TODO: collapsible Windows/Linux stuff about running the project
 
 ### Run the web app
 
@@ -197,6 +207,10 @@ The default run configuration for a web app is created as **composeApp [wasmJs]*
 When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
 
 ![iOS app ran on a virtual device](run-wasm-app.png)
+
+#### Running the web app on Windows and Linux {collapsible="true"}
+
+TODO: collapsible Windows/Linux stuff about running the project
 
 ## Troubleshooting
 
