@@ -56,11 +56,11 @@ multiplatform support, is the most convenient way to work with dates in your sha
    }
    ```
 
-3. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+3. Click the **Sync Gradle Changes** button to synchronize the Gradle files:
 
    ![Synchronize the Gradle files](gradle-sync.png)
 
-4. In `shared/src/commonMain/kotlin`, create a new file `NewYear.kt` in the project directory.
+4. In `shared/src/commonMain/kotlin`, create a new file `NewYear.kt` in the project directory where your `Greeting.kt` file is located.
 5. Update the file with a short function that calculates
    the number of days from today until the New Year using the `date-time` date arithmetic:
    
@@ -90,7 +90,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
     }
     ```
 
-7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
+7. To see the results, re-run your **composeApp** and **iosApp** configurations from IntelliJ IDEA:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
