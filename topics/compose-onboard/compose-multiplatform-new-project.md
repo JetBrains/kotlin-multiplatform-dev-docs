@@ -84,10 +84,22 @@ To get started, implement a new `App` composable:
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
     the screen.
 
+    > To see your changes in real time in the desktop app, use [Compose Hot Reload](compose-hot-reload.md):
+    > 1. In the `main.kt` file, click the **Run** icon in the gutter.
+    > 2. Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**.
+    > ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+    > Compose Hot Reload is currently in [Alpha](https://kotlinlang.org/components-stability.html#stability-levels-explained) so its functionality is subject to change.
+    >
+    {style="tip"}
+
 5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the desktop application again. Its appearance should improve:
 
    ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
+
+   ### Compose Hot Reload demo {initial-collapse-state="collapsed" collapsible="true"}
+
+   ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
 ## Support user input
 
