@@ -100,7 +100,7 @@ Use the IDE wizard to create a new KMP project:
 
 When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
-![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png)
+![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=800}
 
 </tab>
 <tab title= "Android Studio">
@@ -128,7 +128,7 @@ Use the IDE wizard to create a new KMP project:
 
 When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
-![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png)
+![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=800}
 
 </tab>
 </tabs>
@@ -153,11 +153,11 @@ but that is not quick.
 
 To run the Android app, start the composeApp run configuration:
 
-![Dropdown with the Android run configuration highlighted](run-android-configuration.png)
+![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
 By default, it runs on the first available virtual device:
 
-![Android app ran on a virtual device](run-android-app.png)
+![Android app ran on a virtual device](run-android-app.png){width=350}
 
 For details on running the Android app (adding virtual devices and setting up physical device connections) see
 [](compose-multiplatform-create-first-app.md).
@@ -175,22 +175,22 @@ TODO: collapsible Windows/Linux stuff about running the project
 If you chose the iOS target for the project and set up a macOS machine with Xcode,
 you can choose the **iosApp** run configuration and select a simulated device:
 
-![Dropdown with the iOS run configuration highlighted](run-ios-configuration.png)
+![Dropdown with the iOS run configuration highlighted](run-ios-configuration.png){width=250}
 
 When you run the iOS app, it is built with Xcode under the hood and launched in the iOS Simulator.
 The very first build collects native dependencies for compilation and warms up the build for subsequent runs:
 
-![iOS app ran on a virtual device](run-ios-app.png)
+![iOS app ran on a virtual device](run-ios-app.png){width=350}
 
 ### Run the desktop app
 
 The default run configuration for a desktop app is created as **composeApp [desktop]**:
 
-![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png)
+![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
 With this configuration you can run the JVM desktop app:
 
-![iOS app ran on a virtual device](run-desktop-app.png)
+![JVM app ran on a virtual device](run-desktop-app.png){width=600}
 
 #### Running the desktop app on Windows and Linux {collapsible="true"}
 
@@ -202,11 +202,11 @@ TODO: align this with the CMP tutorial.
 
 The default run configuration for a web app is created as **composeApp [wasmJs]**:
 
-![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png)
+![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
 When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
 
-![iOS app ran on a virtual device](run-wasm-app.png)
+![Web app ran on a virtual device](run-wasm-app.png){width=600}
 
 #### Running the web app on Windows and Linux {collapsible="true"}
 
