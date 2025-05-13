@@ -23,9 +23,19 @@ Already available are libraries for network code, databases, coroutines, and muc
 
 ## Input methods
 
-### IME keyboards
+### Software keyboards
 
+Each platform may handle software keyboards a little differently in the way it appears when a text field becomes active,
+for example.
 
+Compose Multiplatform adopts the [Compose window insets approach](https://developer.android.com/develop/ui/compose/system/insets)
+and imitates it on iOS
+to account for [safe areas](https://developer.apple.com/documentation/UIKit/positioning-content-relative-to-the-safe-area).
+Depending on your implementation, the software keyboard may be positioned a little differently on iOS.
+Make sure to check that the keyboard does not cover important UI elements on both platforms. 
+
+Compose Multiplatform currently doesn't support changing the default IME action, for example,
+showing a magnifying glass or a checkmark instead of the usual &crarr; icon.
 
 ### Touch and mouse support
 
