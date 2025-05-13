@@ -22,7 +22,10 @@ Start with an IDE and necessary plugins:
     * The [Kotlin Multiplatform](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) plugin (TODO: check the URL)
 
         > The Kotlin Multiplatform plugin is not yet available for IDEs on Windows or Linux.
-        > TODO You can still follow the tutorial to learn about the alternatives. 
+        > But it is also not strictly necessary on those platforms:
+        > you can still follow the tutorial to generate and run a KMP project.
+        >
+        {style="note"}
 
      * The [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support) plugin
     * Android plugins need to be installed only if you use IDEA (they come bundled with Android Studio):
@@ -65,18 +68,20 @@ Start with an IDE and necessary plugins:
     Make sure to launch Xcode at least once before starting to work with KMP projects so that it has a chance to
     go through the initial setup.
 
-    > You will need to launch Xcode manually every time it is updated.
+    > You will need to launch Xcode manually every time it is updated and download the updated tooling.
     > Preflight checks in the IDE you're using alert you whenever Xcode is not in the right state to work with.
     >
     {style="note"}
 
 ## Create a project 
 
-For the quickstart we'll use the IDE wizard, but it's not available on Windows and Linux yet.
-You can generate the same project as an IDE wizard using the [web KMP wizard](https://kmp.jetbrains.com/).
-TODO: you can import and run the generated project on any host. Maybe link to running?
+If you're on Windows or Linux:
 
-Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones Kotlin Multiplatform project:
+1. Generate a project using the [web KMP wizard](https://kmp.jetbrains.com/).
+2. Extract the archive and open the resulting folder in your IDE.
+3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
+
+If you're using macOS, the Kotlin Multiplatform IDE plugin provides a wizard inside the IDE:
 
 <tabs>
 <tab title= "IntelliJ IDEA">
@@ -90,7 +95,7 @@ Both IntelliJ IDEA and Android Studio explicitly support creating a bare-bones K
     * For iOS, you can choose one of two implementations:
         * shared UI code, with Compose Multiplatform,
         * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
-    * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
+    * The desktop target includes an alpha version of hot reload (TODO link?) functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
@@ -226,12 +231,12 @@ and see if there are any updates for the iOS simulator.
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* A series of tutorials about working with the shared UI code: [TODO current CMP tutorial chain]
-* A series of tutorials about working with shared code along with native UI: [TODO current KMP tutorial chain]
+* A series of tutorials about working with the shared UI code: [](compose-multiplatform-create-first-app.md)
+* A series of tutorials about working with shared code along with native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation TODO links:
-  * Project structure
-  * Working with dependencies
-  * Publishing artifacts
+  * [Project configuration](multiplatform-project-configuration.md)
+  * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
+  * Publishing artifacts: [apps](multiplatform-publish-apps.md) or [libraries] (TODO link to libraries tutorial)
 * Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features: [CMP overview]
 
 Discover code already written for KMP:
