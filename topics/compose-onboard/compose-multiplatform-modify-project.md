@@ -82,7 +82,12 @@ To use the `kotlinx-datetime` library:
         MaterialTheme {
             var showContent by remember { mutableStateOf(false) }
             val greeting = remember { Greeting().greet() }
-            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     text = "Today's date is ${todaysDate()}",
                     modifier = Modifier.padding(20.dp),
@@ -139,9 +144,11 @@ You can now rerun the application using the same run configurations for Android,
 
 ![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
 >
 {style="tip"}
+-->
 
 ## Next step
 
