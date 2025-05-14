@@ -1,0 +1,134 @@
+[//]: # (title: Default UI behavior on different platforms)
+
+Compose Multiplatform aims to help you produce apps which behave as similarly as possible on different platforms.
+On this page, you can learn about unavoidable differences or temporary compromises which
+you should expect when writing shared UI code for different platforms
+with Compose Multiplatform.
+
+## Project structure
+
+Regardless of the platform you're targeting, each of them needs a dedicated entry point:
+
+* For Android, that's the Activity whose job it is to show the main composable from common code.
+* For an iOS app, that's the `@main` class or structure that initializes the app.
+* For a JVM app, that's the `main()` function that starts the application which launches the main common composable.
+* For a Kotlin/JS or Kotlin/Wasm app, that's the `main()` function that attaches the main common code composable
+  to the web page.
+
+Certain platform-specific APIs necessary for your app may not have multiplatform support,
+and you will have to implement calling these APIs in platform-specific source sets.
+But before you do that, check out [klibs.io](https://klibs.io/), a JetBrains project which aims to comprehensively
+catalog all available Kotlin Multiplatform libraries.
+Already available are libraries for network code, databases, coroutines, and much more.
+
+## Input methods
+
+### Software keyboards
+
+Each platform may handle software keyboards a little differently in the way it appears when a text field becomes active,
+for example.
+
+Compose Multiplatform adopts the [Compose window insets approach](https://developer.android.com/develop/ui/compose/system/insets)
+and imitates it on iOS
+to account for [safe areas](https://developer.apple.com/documentation/UIKit/positioning-content-relative-to-the-safe-area).
+Depending on your implementation, the software keyboard may be positioned a little differently on iOS.
+Make sure to check that the keyboard does not cover important UI elements on both platforms. 
+
+Compose Multiplatform currently doesn't support changing the default IME action, for example,
+showing a magnifying glass or a checkmark instead of the usual &crarr; icon.
+
+### Touch and mouse support
+
+The current desktop implementation interprets all pointer manipulation as mouse gestures
+and, therefore, does not support multitouch gestures.
+For example, the common pinch-to-zoom gesture cannot be implemented with Compose Multiplatform for desktop
+as it requires processing two touches at once.
+
+## UI behavior and appearance
+
+### System functionality
+
+Some UI elements depend on system integration and may look different in the default configuration,
+for example:
+
+* The "Share" actions use system APIs to offer a list of specific ways to share or send content.
+* The popup-views (for example, for selected text) are fully native and currently cannot be customized
+    through Compose Multiplatform.
+
+### Scroll physics
+
+For Android and iOS, the feel of scrolling is aligned with the platform.
+For desktop, scrolling support is limited since the JVM target by default doesn't support
+common mobile gesture patterns like fling or overscroll (often used for the "pull to refresh" action).
+
+### Interop views
+
+If you would like to embed native views within common composables, or vice versa,
+you'll need to familiarize yourself with platform-specific mechanisms supported by Compose Multiplatform.
+
+For iOS, there are separate guides for interop code with [SwiftUI](compose-swiftui-integration.md) and [UIKit](compose-uikit-integration.md).
+
+For desktop, Compose Multiplatform supports [](compose-desktop-swing-interoperability.md).
+
+### Back gesture
+
+Android devices have back gesture support by default, and every screen reacts to the **Back** button in some fashion.
+
+On iOS, there is no back gesture by default, although developers are encouraged to implement similar functionality
+to meet user experience expectations.
+Compose Multiplatform for iOS supports back gestures by default to mimic Android functionality.
+
+On desktop, Compose Multiplatform uses the **Esc** key by default as a back trigger.
+
+For details, see the [](compose-navigation.md#back-gesture) section.
+
+### Text
+
+With text, Compose Multiplatform doesn't guarantee pixel-perfect correspondence between different platforms:
+
+* If you don't set a font explicitly, each system assigns a different default font to your text.
+* Even for the same font, letter aliasing mechanisms specific to each platform can lead to noticeable differences.
+
+This doesn't have a significant impact on user experience (on the contrary, default fonts look as expected on each platform).
+But pixel differences may get in the way of screenshot testing, for example.
+
+### Initial performance
+
+On iOS, you may notice a delay in the initial performance of individual screens compared to Android.
+This can happen because Compose Multiplatform compiles UI shaders on demand.
+So, if a particular shader is not cached yet, compiling it may delay rendering of a scene.
+
+This affects only the first time launches for each screen:
+after all necessary shaders are cached, their compilation won't delay subsequent launches.
+
+## Developer experience
+
+### Previews
+
+_Previews_ are non-interactable layout presentations of composables available in the IDE.
+
+To see a preview for a composable:
+
+1. Add an Android target to your project if there isn't one (the preview mechanism uses an Android library).
+2. Mark composables that you would like to be previewable with the `@Preview` annotation in common code.
+3. Switch to the **Split** or **Design** view in the editor window.
+     It prompts you to build the project for the first time if you haven't done that yet.
+
+In both IntelliJ IDEA and Android Studio, you will be able to see the initial layout of every composable
+annotated with `@Preview` in the current file.
+
+### Hot reload
+
+_Hot reload_ is the experience of the app reflecting changes in code without additional input, on the fly.
+For Compose Multiplatform, the hot reload functionality is available only for JVM (desktop) targets,
+but you can use it to quickly iron out problems before switching to your actual target platforms for fine-tuning.
+
+TODO: link the CMP hot reload repo, or the doc page if it's there already 
+
+## What's next
+
+Read more about Compose Multiplatform implementation for the following components:
+  * [Resources](compose-multiplatform-resources.md)
+  * [](compose-lifecycle.md)
+  * [](compose-viewmodel.md)
+  * [](compose-navigation-routing.md)
