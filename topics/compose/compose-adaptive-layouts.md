@@ -14,8 +14,6 @@ consistent across devices while following platform-specific guidelines.
 * Break complex layouts into reusable composables for flexibility and modularity.
 * Adjust for screen density and orientation.
 
-For a detailed guide, check out [Adaptive layout do's and don'ts](https://developer.android.com/develop/ui/compose/layouts/adaptive/adaptive-dos-and-donts).
-
 ## Using window size classes
 
 Window size classes are a set of predefined thresholds, also referred to as breakpoints, that categorize different screen 
