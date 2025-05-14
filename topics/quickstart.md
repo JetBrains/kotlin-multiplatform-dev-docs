@@ -13,7 +13,7 @@ Start with an IDE and necessary plugins:
     KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
     
     The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
-    or **Android Studio Narwhal 2025.1.1** (TODO: this is a guess, check supported versions before publishing).
+    or **Android Studio Narwhal 2025.1.1 Beta** (TODO: check that the latest versions are indeed that when we publish).
 
 2. Make sure you have all the necessary IDE plugins (TODO check if in IDEA dependencies are automated):
 
