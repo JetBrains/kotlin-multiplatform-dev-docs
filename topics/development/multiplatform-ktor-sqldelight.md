@@ -796,52 +796,64 @@ Create the main `App()` composable for your application, and call it from a `Com
 
 2. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
 
+    <!-- TODO Check the code example-->
     ```kotlin
-    import com.jetbrains.spacetutorial.theme.AppTheme
-    import com.jetbrains.spacetutorial.entity.RocketLaunch
-    import com.jetbrains.spacetutorial.theme.app_theme_successful
-    import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
-    import androidx.compose.material3.HorizontalDivider
-    import androidx.compose.material3.MaterialTheme
-    import androidx.compose.material3.Scaffold
-    import androidx.compose.material3.Text
-    import androidx.compose.material3.TopAppBar
-    import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
-    import androidx.compose.ui.Modifier
-    import androidx.compose.ui.Alignment
-    import androidx.compose.foundation.layout.Arrangement
-    import androidx.compose.foundation.layout.Box
-    import androidx.compose.foundation.layout.Column
-    import androidx.compose.foundation.layout.Spacer
-    import androidx.compose.foundation.layout.fillMaxSize
-    import androidx.compose.foundation.layout.height
-    import androidx.compose.foundation.layout.padding
+    package com.jetbrains.spacetutorial
+
+    import androidx.compose.foundation.layout.*
     import androidx.compose.foundation.lazy.LazyColumn
     import androidx.compose.foundation.lazy.items
-    import androidx.compose.ui.input.nestedscroll.nestedScroll
+    import androidx.compose.material3.*
+    import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+    import androidx.compose.runtime.*
+    import androidx.compose.ui.Alignment
+    import androidx.compose.ui.Modifier
     import androidx.compose.ui.unit.dp
-    
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import com.jetbrains.spacetutorial.theme.AppTheme
+    import com.jetbrains.spacetutorial.theme.app_theme_successful
+    import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
+    import kotlinx.coroutines.launch
+    import org.koin.androidx.compose.koinViewModel
+
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun App() {
-        // ...
+    val viewModel = koinViewModel<RocketLaunchViewModel>()
+    val state by remember { viewModel.state }
+    val coroutineScope = rememberCoroutineScope()
+    var isRefreshing by remember { mutableStateOf(false) }
+    val pullToRefreshState = rememberPullToRefreshState()
+    
         AppTheme {
             Scaffold(
                 topBar = {
-                    TopAppBar(title = {
-                        Text(
-                            "SpaceX Launches",
-                            style = MaterialTheme.typography.headlineLarge
-                        )
-                    })
+                    TopAppBar(
+                        title = {
+                            Text(
+                                "SpaceX Launches",
+                                style = MaterialTheme.typography.headlineLarge
+                            )
+                        }
+                    )
                 }
             ) { padding ->
-                Box(
+                PullToRefreshBox(
                     modifier = Modifier
-                    .nestedScroll(pullToRefreshState.nestedScrollConnection)
-                    .fillMaxSize()
-                       .padding(padding)
+                        .fillMaxSize()
+                        .padding(padding),
+                    state = pullToRefreshState,
+                    isRefreshing = isRefreshing,
+                    onRefresh = {
+                        isRefreshing = true
+                        coroutineScope.launch {
+                            viewModel.loadLaunches()
+                            isRefreshing = false
+                        }
+                    }
                 ) {
-                    if (state.isLoading) {
+                    if (state.isLoading && !isRefreshing) {
                         Column(
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -852,7 +864,7 @@ Create the main `App()` composable for your application, and call it from a `Com
                     } else {
                         LazyColumn {
                             items(state.launches) { launch: RocketLaunch ->
-                                Column(modifier = Modifier.padding(all = 16.dp)) {
+                                Column(modifier = Modifier.padding(16.dp)) {
                                     Text(
                                         text = "${launch.missionName} - ${launch.launchYear}",
                                         style = MaterialTheme.typography.headlineSmall
@@ -863,22 +875,14 @@ Create the main `App()` composable for your application, and call it from a `Com
                                         color = if (launch.launchSuccess == true) app_theme_successful else app_theme_unsuccessful
                                     )
                                     Spacer(Modifier.height(8.dp))
-                                    val details = launch.details
-                                    if (details?.isNotBlank() == true) { 
-                                        Text(
-                                            text = details
-                                        )
+                                    launch.details?.takeIf { it.isNotBlank() }?.let {
+                                        Text(it)
                                     }
                                 }
                                 HorizontalDivider()
                             }
                         }
                     }
-    
-                    PullToRefreshContainer(
-                        state = pullToRefreshState,
-                        modifier = Modifier.align(Alignment.TopCenter)
-                    )
                 }
             }
         }
