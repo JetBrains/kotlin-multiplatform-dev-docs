@@ -17,13 +17,7 @@ After that you'll use your cross-platform code in the Android application, and t
 
 ## Prepare an environment for development
 
-1. [Install all the necessary tools and update them to the latest versions](quickstart.md#set-up-the-environment).
-
-   > You will need a Mac with macOS to complete certain steps in this tutorial, which include writing iOS-specific code
-   > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
-   > This is due to an Apple requirement.
-   >
-   {style="note"}
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 
 2. In Android Studio, create a new project from version control:
 
@@ -71,7 +65,12 @@ Create a shared module and connect it to both the existing Android application a
 
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
-   Leave the library name `shared` and enter the package name `com.jetbrains.simplelogin.shared`.
+   Leave the library name `shared` and enter the package name:
+
+   ```kotlin
+   com.jetbrains.simplelogin.shared
+   ```
+   
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
 4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
@@ -158,9 +157,6 @@ there, and make this code cross-platform.
     ```
 
 2. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
-
-   ![Synchronize the Gradle files](gradle-sync.png)
-
 3. In the `app/src/main/java/` directory, open the `LoginActivity.kt` file in the `com.jetbrains.simplelogin.androidapp.ui.login`
    package.
 4. To make sure that the shared module is successfully connected to your application, dump the `greet()` function
@@ -193,13 +189,13 @@ This is necessary for reusing the code for both Android and iOS.
 1. Move the business logic code `com.jetbrains.simplelogin.androidapp.data` from the `app` directory to
    the `com.jetbrains.simplelogin.shared` package in the `shared/src/commonMain` directory.
 
-   ![Drag and drop the package with the business logic code](moving-business-logic.png){width=350}
+   ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
 
 2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
 
-   ![Refactor the business logic package](refactor-business-logic-package.png){width=500}
+   ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
-3. Ignore all warnings about platform-dependent code and click **Continue**.
+3. Ignore all warnings about platform-dependent code and click **Refactor Anyway**.
 
    ![Warnings about platform-dependent code](warnings-android-specific-code.png){width=450}
 
