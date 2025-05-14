@@ -43,9 +43,9 @@ Here's a breakdown of the contents in its main source code (`src`):
 
 * **`commonMain`:** contains Kotlin code shared across all target platforms. This is where you place code that doesn't 
      rely on any platform-specific APIs.
-* **`androidMain`, `iosMain`, `jvmMain`, `linuxX64Main`:** contain code specific to the Android, iOS, JVM, and Linux platforms. 
+* **`androidMain`, `iosMain`, `jvmMain`, and `linuxX64Main`:** contain code specific to the Android, iOS, JVM, and Linux platforms. 
      Here is where you implement functionalities that are unique to these platforms.
-* **`commonTest`, `androidUnitTest`, `iosTest`, `jvmTest`, `linuxX64Test`:** contain tests for the shared `commonMain` code and
+* **`commonTest`, `androidUnitTest`, `iosTest`, `jvmTest`, and `linuxX64Test`:** contain tests for the shared `commonMain` code and
      tests specific to the Android, iOS, JVM, and Linux platforms, respectively.
 
 Let's focus on the `library` code that is shared across all the platforms. Inside the `src/commonMain/kotlin` directory, 
