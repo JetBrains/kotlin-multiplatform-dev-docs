@@ -9,7 +9,7 @@ At the moment, Compose hot reload is only available when you include a desktop t
 However, we plan to expand support to other targets in the future. In the meantime, using the desktop app as your sandbox
 lets you quickly experiment with UI changes without interrupting your flow.
 
-TODO: Add GIF
+![Compose hot reload](compose-hot-reload.gif){width=500}
 
 ## Add Compose hot reload to your project
 
@@ -52,7 +52,7 @@ tutorial.
    ```
    
 3. Update the version catalog. In `gradle/libs.versions.toml`, add the following code:
-   ```toml
+   ```kotlin
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
    
@@ -107,7 +107,7 @@ tutorial.
 
 5. Update the string returned from the `greet()` function and see the desktop app update automatically.
 
-TODO: Add GIF
+![Compose hot reload](compose-hot-reload.gif){width=500}
 
 Congratulations! You've run your first Compose hot reload. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration every time.
