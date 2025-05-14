@@ -932,10 +932,12 @@ By default, IntelliJ IDEA generates projects set up for static linking of iOS fr
 To use the native SQLDelight driver on iOS, add the dynamic linker flag that allows Xcode tooling to find the
 system-provided SQLite binary:
 
-1. In Android Studio, right-click the `iosApp/iosApp.xcodeproj` folder and select the **Open In** | **Xcode** option.
-2. In Xcode, double-click the project name to open its settings.
-3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
-4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
+1. In IntelliJ IDEA, switch to **File** view.
+   ![Select Files view](select-files-view.png){width="200"}
+2. Select the `iosApp/iosApp.xcodeproj` folder, then select the **File** | **Open Project in Xcode** option.
+3. In Xcode, double-click the project name to open its settings.
+4. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
+5. Double-click the field value, click **+**, and add the `-lsqlite3` string.
 
 ### Prepare a Koin class for iOS dependency injection
 
@@ -992,8 +994,8 @@ First, you'll create a `RocketLaunchRow` SwiftUI view for displaying an item fro
 and `VStack` views. There will be extensions on the `RocketLaunchRow` structure with useful helpers for displaying the
 data.
 
-1. Right-click the `iosApp/iosApp.xcodeproj` directory and choose **Open In | Xcode**.
-2. In your Xcode project, create a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
+1. In IntelliJ IDEA, make sure you are in **Project** view.
+2. Create a new Swift file in the `iosApp` folder and name it `RocketLaunchRow`.
 3. Update the `RocketLaunchRow.swift` file with the following code:
 
     ```Swift
