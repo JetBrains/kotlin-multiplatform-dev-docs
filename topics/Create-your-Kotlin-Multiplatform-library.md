@@ -1,5 +1,11 @@
 [//]: # (title: Create your Kotlin Multiplatform library – tutorial)
-<primary-label ref="intellij-and-android-studio"/>
+
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
 
 In this tutorial, you'll learn how to create a Multiplatform library in IntelliJ IDEA, 
 publish the library to a local Maven repository, and add it as a dependency in another project.
@@ -30,7 +36,7 @@ various platforms.
 In the template project, `library` serves as the core module and contains the main source code and build resources for 
 the Multiplatform library.
 
-![Multiplatform library project structure](multiplatform-library-template-project-structure.png){width=450}
+![Multiplatform library project structure](multiplatform-library-template-project-structure.png){width=350}
 
 The `library` module is structured to accommodate shared code as well as platform-specific implementations. 
 Here's a breakdown of the contents in its main source code (`src`):
@@ -198,7 +204,7 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 3. Synchronize the Gradle files by clicking the **Sync Gradle Changes** icon (![Gradle sync icon](gradle-sync-icon.png){width=30}{type="joined"}) that appears in your build file. Alternatively,
    click the refresh button on the Gradle tool window.
 
-4. In the Gradle tool Widow, run the `publishToMavenLocal` Gradle task from the `Tasks/publishing` directory.
+4. In the Gradle tool Widow, go to **multiplatform-library-template** | **Tasks** | **publishing** and run the **publishToMavenLocal** Gradle task.
 
    ![Multiplatform library Gradle tool window](publish-maven-local-gradle.png){width=450}
 
