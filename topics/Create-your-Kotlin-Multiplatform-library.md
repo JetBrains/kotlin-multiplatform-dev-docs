@@ -36,7 +36,7 @@ various platforms.
 In the template project, `library` serves as the core module and contains the main source code and build resources for 
 the Multiplatform library.
 
-![Multiplatform library project structure](multiplatform-library-template-project-structure.png){width=350}
+![Multiplatform library project structure](multiplatform-library-template-project.png){width=350}
 
 The `library` module is structured to accommodate shared code as well as platform-specific implementations. 
 Here's a breakdown of the contents in its main source code (`src`):
@@ -164,7 +164,7 @@ Make sure your project compiles correctly supporting the new platform:
 1. Open the Gradle tool window by selecting **View** | **Tool Windows** | **Gradle**.
 2. In **multiplatform-library-template** | **library** | **Tasks** | **build**, run the **build** task.
 
-   ![Gradle tool window](library-gradle-build-window.png){width=450}
+   ![Gradle tool window](library-gradle-build-window-tasks.png){width=450}
 
    Alternatively, run the following command in the terminal from the `multiplatform-library-template` root directory:
 
@@ -206,7 +206,7 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 
 4. In the Gradle tool Widow, go to **multiplatform-library-template** | **Tasks** | **publishing** and run the **publishToMavenLocal** Gradle task.
 
-   ![Multiplatform library Gradle tool window](publish-maven-local-gradle.png){width=450}
+   ![Multiplatform library Gradle tool window](publish-maven-local-gradle-task.png){width=450}
 
 Alternatively, run the following command in the terminal from the `multiplatform-library-template` root directory:
 
