@@ -172,10 +172,9 @@ The application data model will have three entity classes with:
 {style="note"}
 
 Create the necessary data classes:
-1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
-   to make nested package folders.
-2. In the `com.jetbrains.spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside.
-3. Declare all the data classes for basic entities:
+
+1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside. 
+2. Declare all the data classes for basic entities:
 
    ```kotlin
    ```
@@ -746,7 +745,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
    ![theme directory location](theme-directory.png){width=299}
 
-3. In each theme file, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to refer
+3. In each theme file, `Color.kt` and `Theme.kt`, ensure that the package line refers
    to your package:
 
     ```kotlin
@@ -764,7 +763,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
 Create the main `App()` composable for your application, and call it from a `ComponentActivity` class:
 
-1. Create the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
+1. Open the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
    and add the `App()` composable function:
 
     ```kotlin
