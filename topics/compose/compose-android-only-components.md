@@ -18,19 +18,19 @@ need certain concepts that Android uses. The API usually uses classes from the `
 Android-specific behavior. Here are some examples of parts of the Android-only API:
 
 * [`android.context.Context`](https://developer.android.com/reference/android/content/Context) class
-* [`LocalContext`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/platform/AndroidCompositionLocals.android.kt)
-  and [`LocalConfiguration`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/platform/AndroidCompositionLocals.android.kt)
+* [`LocalContext`](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/package-summary#LocalContext())
+  and [`LocalConfiguration`](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/package-summary#LocalConfiguration())
   variables
 * [`android.graphics.BitmapFactory`](https://developer.android.com/reference/android/graphics/BitmapFactory)
   and [`android.graphics.Bitmap`](https://developer.android.com/reference/android/graphics/Bitmap) classes
 * [`ImageBitmap.asAndroidBitmap()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap#(androidx.compose.ui.graphics.ImageBitmap).asAndroidBitmap())
   function
 * [`android.app.Activity`](https://developer.android.com/reference/android/app/Activity) class
-* [`android.app.Activity.setContent()`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/activity/activity-compose/src/main/java/androidx/activity/compose/ComponentActivity.kt)
+* [`android.app.Activity.setContent()`](https://developer.android.com/reference/kotlin/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).setContent(androidx.compose.runtime.CompositionContext,kotlin.Function0))
   function
-* [`ComposeView`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/platform/ComposeView.android.kt)
+* [`ComposeView`](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/ComposeView)
   class
-* [`LocalView`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/platform/AndroidCompositionLocals.android.kt)
+* [`LocalView`](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/package-summary#LocalView())
   variable
 * [`Modifier.pointerInteropFilter()`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/ui/ui/src/androidMain/kotlin/androidx/compose/ui/input/pointer/PointerInteropFilter.android.kt)
   function
@@ -51,10 +51,10 @@ in their signatures, but their behavior is applicable for other platforms as wel
   For more information, see [Navigation and routing](compose-navigation-routing.md).
 * [`ViewModel`](https://developer.android.com/jetpack/compose/libraries#viewmodel) class.
 * [Paging](https://developer.android.com/jetpack/compose/libraries#paging) library.
-* [`ConstraintLayout`](https://developer.android.com/jetpack/compose/layouts/constraintlayout) layout.
+* [`ConstraintLayout`](https://developer.android.com/reference/androidx/constraintlayout/widget/ConstraintLayout) layout.
 * [Maps](https://developer.android.com/jetpack/compose/libraries#maps) library.
-* [Preview](https://developer.android.com/jetpack/compose/libraries#maps) tool.
-  ([Desktop support](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)).
+* [Preview](https://developer.android.com/reference/kotlin/androidx/compose/ui/tooling/preview/package-summary) tool
+  and a plugin for previewing [desktop](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support) applications.
 * [`WebView`](https://developer.android.com/reference/android/webkit/WebView) class.
 * Other Jetpack Compose libraries that haven't been ported to Compose Multiplatform.
 
@@ -84,14 +84,14 @@ In Compose Multiplatform %composeVersion%, the following parts of the API are **
 * [`LocalOverscrollConfiguration`](https://github.com/androidx/androidx/blob/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/foundation/foundation/src/androidMain/kotlin/androidx/compose/foundation/OverscrollConfiguration.kt)
   variable
 * [`AnimatedImageVector.animatedVectorResource` API](https://developer.android.com/jetpack/compose/resources#animated-vector-drawables)
-* [material3-adaptive](https://github.com/androidx/androidx/tree/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/material3/material3-adaptive)
+* [material3-adaptive](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive)
   library
-* [material3-window-size-class](https://github.com/androidx/androidx/tree/41cb7d5c422180edd89efde4076f9dc724d3a313/compose/material3/material3-window-size-class)
+* [material3-window-size-class](https://developer.android.com/reference/kotlin/androidx/compose/material3/windowsizeclass/package-summary)
   library
 
 ## Request to port Android API
 
 For each API that can be ported from Android, there
-is [an open issue](https://youtrack.jetbrains.com/issues/CMP?q=tag:compose-commonization) in the Compose Multiplatform
+is [an open issue](https://youtrack.jetbrains.com/issues/CMP) in the Compose Multiplatform
 YouTrack. If you see that an API can be ported from Android and commonized, and there is no existing issue for
 it, [create one](https://youtrack.jetbrains.com/newIssue?project=CMP).
