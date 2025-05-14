@@ -19,12 +19,12 @@ To set up the integration, you'll add a special script that uses the `embedAndSi
 as a pre-action in your project's build settings. To see the changes made in common code reflected in your Xcode project,
 you'll only need to rebuild the Kotlin Multiplatform project.
 
-This way, you can easily use Kotlin code in local Swift packages, compared to a regular direct integration method,
+This way, you can easily use Kotlin code in local Swift packages, compared to a regular direct integration method
 that adds the script to the build phase and requires rebuilding both the Kotlin Multiplatform and the iOS project to get
 the changes from the common code.
 
-> If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)
-> and [create a cross-platform application from scratch](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) first.
+> If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
+> and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
 >
 {style="tip"}
 
@@ -39,9 +39,9 @@ The feature is available starting with Kotlin 2.0.0.
 > 
 {style="tip"}
 
-The tutorial assumes that your project is using [direct integration](multiplatform-direct-integration.md)
+The tutorial assumes that your project is using the [direct integration](multiplatform-direct-integration.md)
 approach with the `embedAndSignAppleFrameworkForXcode` task in the project's build phase. If you're connecting a Kotlin
-framework through CocoaPods plugin or through Swift package with `binaryTarget`, migrate first.
+framework through the CocoaPods plugin or through Swift package with `binaryTarget`, migrate first.
 
 ### Migrate from SPM binaryTarget integration {initial-collapse-state="collapsed" collapsible="true"}
 
@@ -63,14 +63,14 @@ To migrate from the CocoaPods plugin:
 
 1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
    <shortcut>Cmd + Shift + K</shortcut> shortcut.
-2. In the directory with `Podfile`, run the following command:
+2. In the directory with Podfile, run the following command:
 
     ```none
    pod deintegrate
    ```
 
 3. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
-4. Delete the `.podspec` and `Podfile` files.
+4. Delete the `.podspec` file and the Podfile.
 
 ## Connect the framework to your project
 

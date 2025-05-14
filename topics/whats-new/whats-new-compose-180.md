@@ -105,7 +105,7 @@ Read more about child-parent view controller relationships in Apple’s develope
 ### Removed obsolete `platformLayers` option on iOS
 
 The `platformLayers`
-experimental option [was introduced in 1.6.0](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop)
+experimental option [was introduced in 1.6.0](whats-new-compose.md#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop)
 to allow enabling alternative layering mode and drawing popups and dialogs outside the bounds of the parent container.
 
 This mode is now the default behavior on iOS, and the option to enable it has been removed as obsolete.

@@ -26,7 +26,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 ### New Compose compiler Gradle plugin is required for Kotlin 2.0.0
 
 Starting with Kotlin 2.0.0-RC2, Compose Multiplatform requires the new Compose compiler Gradle plugin.
-See [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project)
+See [the migration guide](compose-compiler.md#migrating-a-compose-multiplatform-project)
 for details.
 
 ## Across platforms
@@ -103,7 +103,7 @@ Compose Multiplatform also provides a general `ViewModelStoreOwner` implementati
 
 Kotlin 2.0.0-RC2 came out along with the new Gradle plugin for the Compose compiler.
 To use Compose Multiplatform with the latest compiler version, apply the plugin to the modules in your project
-(see [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project) for details).
+(see [the migration guide](compose-compiler.md#migrating-a-compose-multiplatform-project) for details).
 
 ## Desktop
 

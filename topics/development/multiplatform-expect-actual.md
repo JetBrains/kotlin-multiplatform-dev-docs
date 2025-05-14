@@ -4,7 +4,7 @@ Expected and actual declarations allow you to access platform-specific APIs from
 You can provide platform-agnostic APIs in the common code.
 
 > This article describes the language mechanism of expected and actual declarations. For general recommendations on
-> different ways to use platform-specific APIs, see [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html).
+> different ways to use platform-specific APIs, see [Use platform-specific APIs](multiplatform-connect-to-apis.md).
 >
 {style="tip"}
 
@@ -242,7 +242,7 @@ dependencies using regular [Kotlin interfaces](https://kotlinlang.org/docs/inter
 platform-specific implementation, for example, from the JVM or an iOS module.
 
 This means that expected and actual declarations are only needed in the configuration of the DI
-framework. See [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html#dependency-injection-framework) for examples.
+framework. See [Use platform-specific APIs](multiplatform-connect-to-apis.md#dependency-injection-framework) for examples.
 
 With this approach, you can adopt Kotlin Multiplatform simply by using interfaces and factory functions. If you already
 use the DI framework to manage dependencies in your project, we recommend using the same approach for managing
@@ -250,7 +250,7 @@ platform dependencies.
 
 ### Expected and actual classes
 
-> Expected and actual classes are in [Beta](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels).
+> Expected and actual classes are in [Beta](supported-platforms.md#general-kotlin-stability-levels).
 > They are almost stable, but migration steps may be required in the future.
 > We'll do our best to minimize any further changes for you to make.
 >
@@ -562,4 +562,4 @@ error.
 
 ## What's next?
 
-For general recommendations on different ways to use platform-specific APIs, see [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html).
+For general recommendations on different ways to use platform-specific APIs, see [Use platform-specific APIs](multiplatform-connect-to-apis.md).

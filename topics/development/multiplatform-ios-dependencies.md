@@ -28,7 +28,7 @@ but the general workflow looks like this:
 1. Download the library source code and place it somewhere where you can reference it from your project.
 2. Build a library (library authors usually provide a guide on how to do this) and get a path to the binaries.
 3. In your project, create a `.def` file, for example `DateTools.def`.
-4. Add a first string to this file: `language = Objective-C`. If you want to use a pure C dependency, omit the language
+4. Add the first string to this file: `language = Objective-C`. If you want to use a pure C dependency, omit the language
    property.
 5. Provide values for two mandatory properties:
 
@@ -201,7 +201,7 @@ property in the `.def` file. For the example above, this will be:
 import MyFramework.*
 ```
 
-Learn more about [Objective-C and Swift interop](https://kotlinlang.org/docs/native-objc-interop.html) and
+Learn more about [Swift/Objective-C interop](https://kotlinlang.org/docs/native-objc-interop.html) and
 [configuring cinterop from Gradle](multiplatform-dsl-reference.md#cinterops).
 
 ### With CocoaPods
@@ -251,7 +251,7 @@ Learn more about [Objective-C and Swift interop](https://kotlinlang.org/docs/nat
    * [From a custom Podspec repository](multiplatform-cocoapods-libraries.md#from-a-custom-podspec-repository)
    * [With custom cinterop options](multiplatform-cocoapods-libraries.md#with-custom-cinterop-options)
 
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
+3. Run **Build** | **Reload All Gradle Projects** in IntelliJ IDEA (or **File** | **Sync Project with Gradle Files** in Android Studio)
    to re-import the project.
 
 To use the dependency in your Kotlin code, import the package `cocoapods.<library-name>`. For the example above, it's:

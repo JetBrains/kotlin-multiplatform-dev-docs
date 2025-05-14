@@ -16,7 +16,7 @@ libraries and APIs.
 
 To share code among a subset of targets, intermediate source sets are used. For example, the `appleMain` source set
 represents the code shared among all Apple platforms. The code shared among all platforms and compiled to all declared
-targets has its own source set, `commonMain`. It cannot use platform-specific APIs, but can take advantage of
+targets has its own source set, `commonMain`. It cannot use platform-specific APIs but can take advantage of
 multiplatform libraries.
 
 When compiling for a specific target, Kotlin combines the common source set, the relevant intermediate source sets,
@@ -36,7 +36,7 @@ that are created based on the targets you specified in your project.
 To access platform-specific APIs from shared code, you can use another Kotlin mechanism, *expected and actual declarations*.
 This way, you can declare that you `expect` a platform-specific API in common code but provide a separate `actual`
 implementation for each target platform. You can use this mechanism with different Kotlin concepts, including functions,
-classes, and interfaces. For example, you can define a function in common code, but provide its implementation using a
+classes, and interfaces. For example, you can define a function in common code but provide its implementation using a
 platform-specific library in a corresponding source set.
 
 For more details on this topic, see:

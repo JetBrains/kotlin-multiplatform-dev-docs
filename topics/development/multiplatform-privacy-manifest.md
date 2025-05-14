@@ -22,7 +22,7 @@ Apple's requirements for App Store submissions [have changed in the spring of 20
 [App Store Connect](https://appstoreconnect.apple.com) no longer accepts apps that don't specify a reason for using a required
 reason API in their privacy manifests.
 
-This is an automatic check, not a manual moderation: your app's code is analyzed, and you receive a list of issues in an
+This is an automatic check, not manual moderation: your app's code is analyzed, and you receive a list of issues in an
 email. The email will reference the "ITMS-91053: Missing API declaration" issue, listing all API categories used in the
 app that fall under the [required reasons](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api)
 category.
@@ -102,7 +102,7 @@ The plugin will copy the privacy manifest file to the [corresponding output loca
 
 Using Compose Multiplatform may result in `fstat`, `stat` and `mach_absolute_time` usages in your binary.
 Even though these functions are not used for tracking or fingerprinting and are not sent from the device, Apple can still
-flag them as APIs with missing required reasons.
+flag them as APIs with missing required reasons. 
 
 If you must specify a reason for `stat` and `fstat` usages, use `0A2A.1`. For `mach_absolute_time`, use `35F9.1`.
 

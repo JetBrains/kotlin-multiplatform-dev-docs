@@ -262,7 +262,7 @@ framework:
 ![Using dependency injection framework](expect-di-framework.svg){width=700}
 
 This approach only works if you put the implementations in the platform modules. It isn't very scalable, as your Kotlin
-Multiplatform module can't be self-sufficient and you'll need to implement the common interface in a different module.
+Multiplatform module can't be self-sufficient, and you'll need to implement the common interface in a different module.
 
 <!-- If you're interested in having this functionality expanded to a shared module, please vote for this issue in Youtrack and describe your use case. -->
 

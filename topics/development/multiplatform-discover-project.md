@@ -306,8 +306,7 @@ You can write platform-specific tests like regular tests for each platform in th
 the main code, you can have platform-specific dependencies for each source set, such as `JUnit` for JVM and `XCTest` for
 iOS. To run tests for a particular target, use the `<targetName>Test` task.
 
-Learn how to create and run multiplatform tests in the [Test your multiplatform app
-tutorial](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-run-tests.html).
+Learn how to create and run multiplatform tests in the [Test your multiplatform app tutorial](multiplatform-run-tests.md).
 
 ## What's next?
 

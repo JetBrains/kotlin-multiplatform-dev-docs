@@ -6,7 +6,7 @@ for example, for production and test purposes.
 For each target, default compilations include:
 
 * `main` and `test` compilations for JVM, JS, and Native targets.
-* A [compilation](#compilation-for-android) per [Android build variant](https://developer.android.com/studio/build/build-variants), for Android targets.
+* A [compilation](#compilation-for-android) per [Android build variant](https://developer.android.com/build/build-variants), for Android targets.
 
 ![Compilations](compilations.svg)
 
@@ -125,42 +125,35 @@ kotlin {
 
 If you need to compile something other than production code and unit tests, for example, integration or performance tests, 
 create a custom compilation.
+
+For custom compilations, you need to set up all dependencies manually. The default source set of a custom compilation
+does not depend on the `commonMain` and the `commonTest` source sets.
  
-For example, to create a custom compilation for integration tests of the `jvm()` target, add a new item to the `compilations` 
-collection. 
- 
-> For custom compilations, you need to set up all dependencies manually. The default source set of a custom compilation 
-> does not depend on the `commonMain` and the `commonTest` source sets.
->
-{style="note"}
+For example, to create a custom compilation for integration tests of the `jvm` target, set up an [`associateWith`](https://kotlinlang.org/docs/gradle-configure-project.html#associate-compiler-tasks)
+relation between the `integrationTest` and `main` compilations:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 kotlin {
-    jvm() {
+    jvm {
         compilations {
             val main by getting
-            
-            val integrationTest by compilations.creating {
+            val integrationTest by creating {
+                // Import main and its classpath as dependencies and establish internal visibility
+                associateWith(main)
                 defaultSourceSet {
                     dependencies {
-                        // Compile against the main compilation's compile classpath and outputs:
-                        implementation(main.compileDependencyFiles + main.output.classesDirs)
                         implementation(kotlin("test-junit"))
                         /* ... */
                     }
                 }
                 
                 // Create a test task to run the tests produced by this compilation:
-                tasks.register<Test>("integrationTest") {
-                    // Run the tests with the classpath containing the compile dependencies (including 'main'),
-                    // runtime dependencies, and the outputs of this compilation:
-                    classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
-                    
-                    // Run only the tests from this compilation's outputs:
-                    testClassesDirs = output.classesDirs
+                testRuns.create("integration") {
+                    // Configure the test task
+                    setExecutionSourceFrom(integrationTest)
                 }
             }
         }
@@ -173,26 +166,22 @@ kotlin {
 
 ```groovy
 kotlin {
-    jvm() {
+    jvm {
         compilations.create('integrationTest') {
+            def main = compilations.main
+            // Import main and its classpath as dependencies and establish internal visibility
+            associateWith(main)
             defaultSourceSet {
                 dependencies {
-                    def main = compilations.main
-                    // Compile against the main compilation's compile classpath and outputs:
-                    implementation(main.compileDependencyFiles + main.output.classesDirs)
                     implementation kotlin('test-junit')
                     /* ... */
                 }
             }
-           
-            // Create a test task to run the tests produced by this compilation:
-            tasks.register('jvmIntegrationTest', Test) {
-                // Run the tests with the classpath containing the compile dependencies (including 'main'),
-                // runtime dependencies, and the outputs of this compilation:
-                classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
-                
-                // Run only the tests from this compilation's outputs:
-                testClassesDirs = output.classesDirs
+
+            // Create a test task to run the tests produced by this compilation
+            testRuns.create('integration') {
+                // Configure the test task
+                setExecutionSourceFrom(compilations.integrationTest)
             }
         }
     }
@@ -202,31 +191,103 @@ kotlin {
 </tab>
 </tabs>
 
-You also need to create a custom compilation in other cases, for example, if you want to combine compilations for different 
-JVM versions in your final artifact, or you have already set up source sets in Gradle and want to migrate to a multiplatform project.
+By associating compilations, you add the main compilation output as a dependency and establish the `internal` visibility
+between compilations.
 
-## Use Java sources in JVM compilations
+Custom compilations are also necessary in other cases. For example, if you want to combine compilations for different 
+JVM versions in your final artifact, or you have already set up source sets in Gradle and want to migrate to a
+multiplatform project.
 
-When creating a project with the [project wizard](https://kmp.jetbrains.com/), Java sources are created by default and included in the compilations of
-the JVM target.
+> To create custom compilations for the [`androidTarget`](#compilation-for-android), set up build variants
+> through the [Android Gradle plugin](https://developer.android.com/build/build-variants).
+> 
+{style="tip"}
 
-The Java source files are placed in the child directories of the Kotlin source roots. For example, the paths are:
+## Compilation for JVM
+
+When you declare the `jvm` target in your multiplatform project, the Kotlin Multiplatform plugin automatically
+creates Java sources sets and includes them in the compilations of the JVM target.
+
+The common source sets can't include Java resources, so you should place them in the corresponding child directories
+of your multiplatform project. For example:
 
 ![Java source files](java-source-paths.png){width=200}
 
-The common source sets can't include Java sources.
+Currently, the Kotlin Multiplatform plugin replaces some tasks configured by the Java plugin:
 
-Due to current limitations, the Kotlin plugin replaces some tasks configured by the Java plugin:
+* JAR task: instead of a standard `jar`, it uses a target-specific task based on the artifact's name, for example,
+  `jvmJar` for the `jvm()` target declaration and `desktopJar` for `jvm("desktop")`.
+* Test task: instead of a standard `test`, it uses a target-specific task based on the artifact's name, for example, `jvmTest`.
+* Resource processing: instead of `*ProcessResources` tasks, resources are handled by the corresponding compilation tasks.
 
-* The target's JAR task instead of `jar` (for example, `jvmJar`).
-* The target's test task instead of `test` (for example, `jvmTest`).
-* The resources are processed by the equivalent tasks of the compilations instead of `*ProcessResources` tasks.
+These tasks are created automatically when the target is declared. However, you can manually define the JAR task
+and configure it if necessary:
 
-The publication of this target is handled by the Kotlin plugin and doesn't require steps that are specific for the Java plugin.
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+// Shared module's `build.gradle.kts` file
+plugins {
+    kotlin("multiplatform") version "%kotlinVersion%"
+}
+
+kotlin {
+    // Specify the JVM target
+    jvm {
+        // Add the task for JAR generation
+        tasks.named<Jar>(artifactsTaskName).configure {
+            // Configure the task
+        }
+    }
+
+    sourceSets {
+        jvmMain {
+            dependencies {
+                // Add JVM-specific dependencies
+            }
+        }
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+// Shared module's `build.gradle` file
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
+}
+
+kotlin {
+    // Specify the JVM target
+    jvm {
+        // Add the task for JAR generation
+        tasks.named<Jar>(artifactsTaskName).configure {
+            // Configure the task
+        }
+    }
+
+    sourceSets {
+        jvmMain {
+            dependencies {
+                // Add JVM-specific dependencies
+            }
+        }
+    }
+}
+```
+
+</tab>
+</tabs>
+
+This target is published by the Kotlin Multiplatform plugin and doesn't require steps that are specific
+to the Java plugin.
 
 ## Configure interop with native languages
 
-Kotlin provides interoperability with native languages and DSL to configure this for a specific 
+Kotlin provides [interoperability with native languages](https://kotlinlang.org/docs/native-overview.html) and DSL to configure this for a specific 
 compilation.
 
 | Native language       | Supported platforms                         | Comments                                                                  |
@@ -295,7 +356,7 @@ kotlin {
                     // Options to be passed to compiler by cinterop tool.
                     compilerOpts '-Ipath/to/headers'
                     
-                    // Directories for header search (an eqivalent of the -I<path> compiler option).
+                    // Directories for header search (an equivalent of the -I<path> compiler option).
                     includeDirs.allHeaders("path1", "path2")
                     
                     // Additional directories to search headers listed in the 'headerFilter' def-file option.
@@ -318,10 +379,10 @@ kotlin {
 
 ## Compilation for Android 
  
-The compilations created for an Android target by default are tied to [Android build variants](https://developer.android.com/studio/build/build-variants): 
+The compilations created for an Android target by default are tied to [Android build variants](https://developer.android.com/build/build-variants): 
 for each build variant, a Kotlin compilation is created under the same name.
 
-Then, for each [Android source set](https://developer.android.com/studio/build/build-variants#sourcesets) compiled for 
+Then, for each [Android source set](https://developer.android.com/build/build-variants#sourcesets) compiled for 
 each of the variants, a Kotlin source set is created under that source set name prepended by the target name, like the 
 Kotlin source set `androidDebug` for an Android source set `debug` and the Kotlin target named `androidTarget`.
 These Kotlin source sets are added to the variants' compilations accordingly.
@@ -369,7 +430,7 @@ bugfix features).
 
 ## Configure Isolated Projects feature in Gradle
 
-> This feature is [Experimental](supported-platforms.md#core-kotlin-multiplatform-technology-stability-levels) and is currently in a pre-alpha state with Gradle. 
+> This feature is [Experimental](supported-platforms.md#general-kotlin-stability-levels) and is currently in a pre-alpha state with Gradle. 
 > Use it only with Gradle versions 8.10 or higher, and solely for evaluation purposes. The feature may be dropped or changed at any time.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform). 
 > Opt-in is required (see details below).
