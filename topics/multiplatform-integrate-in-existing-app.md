@@ -504,9 +504,7 @@ and iOS.
 
 2. Run both the iOS and Android applications from Android Studio to see the changes:
 
-   ![iOS application password error](iphone-password-error.png){width=300}
-
-   ![Android application password error](android-password-error.png){width=300}
+   ![Android and iOS applications password error](android-iphone-password-error.png){width=600}
 
 You can review the [final code for this tutorial](https://github.com/Kotlin/kmp-integration-sample/tree/final).
 
