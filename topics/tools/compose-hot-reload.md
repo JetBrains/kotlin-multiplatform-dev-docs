@@ -54,7 +54,7 @@ tutorial.
 3. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins{}` block:
    ```kotlin
    plugins { 
-       id("org.jetbrains.compose.hot-reload")
+       alias(libs.plugins.composeHotReload)
    }
    ```
 
