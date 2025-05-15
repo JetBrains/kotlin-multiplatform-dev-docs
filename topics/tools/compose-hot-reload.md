@@ -6,7 +6,7 @@ Compose hot reload is a feature for your IDE that helps you visualize and experi
 working on a Compose Multiplatform project.
 
 At the moment, Compose hot reload is only available when you include a desktop target in your multiplatform project. 
-However, we plan to expand support to other targets in the future. In the meantime, using the desktop app as your sandbox
+We're exploring adding support for other targets in the future. In the meantime, using the desktop app as your sandbox
 lets you quickly experiment with UI changes without interrupting your flow.
 
 ![Compose hot reload](compose-hot-reload.gif){width=500}
@@ -36,32 +36,32 @@ tutorial.
 
 ### Update your Gradle files
 
-1. In the `build.gradle.kts` of your parent project (`ComposeDemo/build.gradle.kts`), add the following code to your `plugins{}` block:
-   ```kotlin
-   plugins {
-    alias(libs.plugins.composeHotReload) apply false
-    }
-   ```
-   This prevents the Compose hot reload plugin from being loaded multiple times in each of your subprojects.
-
-2. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins{}` block:
-   ```kotlin
-   plugins {
-    id("org.jetbrains.compose.hot-reload")
-    }
-   ```
-   
-3. Update the version catalog. In `gradle/libs.versions.toml`, add the following code:
+1. Update the version catalog. In `gradle/libs.versions.toml`, add the following code:
    ```kotlin
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
-   
+
    > To learn more about how to use a version catalog to centrally manage dependencies across your project, see our [Gradle best practices](https://kotlinlang.org/gradle-best-practices.html).
+
+2. In the `build.gradle.kts` of your parent project (`ComposeDemo/build.gradle.kts`), add the following code to your `plugins{}` block:
+   ```kotlin
+   plugins {
+       alias(libs.plugins.composeHotReload) apply false
+   }
+   ```
+   This prevents the Compose hot reload plugin from being loaded multiple times in each of your subprojects.
+
+3. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins{}` block:
+   ```kotlin
+   plugins { 
+       id("org.jetbrains.compose.hot-reload")
+   }
+   ```
 
 4. In your `settings.gradle.kts` file, add the following code:
    ```kotlin
    plugins {
-   id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+       id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
    }
    ```
 
