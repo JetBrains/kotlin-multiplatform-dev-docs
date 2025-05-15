@@ -6,8 +6,9 @@
     <primary-label id="EAP" short-name="EAP" name="Compose Multiplatform %composeEapVersion%">
         This functionality is available only in the EAP version.
     </primary-label>
+
     <primary-label id="navEAP" short-name="navEAP" name="Compose Multiplatform Navigation %composeNavigationEapVersion%"
-    href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html">
+        href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html">
         Navigation library for the EAP version of Compose Multiplatform.
     </primary-label>
 
@@ -358,5 +359,8 @@
         set of languages, the support of which is determined by inspection internally.
     </secondary-label>
 
+    <secondary-label id="IntelliJ IDEA" name="IntelliJ IDEA" color="blue">This tutorial works with IntelliJ IDEA.</secondary-label>
 
+    <secondary-label id="Android Studio" name="Android Studio" color="green">This tutorial works with Android Studio.</secondary-label>
+    
 </labels>
