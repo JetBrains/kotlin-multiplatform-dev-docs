@@ -115,7 +115,6 @@ the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-
         // ...
         @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
         wasmJs {
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
             browser()
             binaries.executable()
         }
