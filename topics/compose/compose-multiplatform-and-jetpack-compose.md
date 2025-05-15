@@ -1,22 +1,45 @@
 [//]: # (title: Compose Multiplatform and Jetpack Compose)
 
+![Compose Multiplatform created by JetBrains, Jetpack Compose created by Google](compose-multiplatform-and-jetpack-compose.png){width=730}
+
+<tldr>
+This article explains the relationship between Compose Multiplatform and Jetpack Compose.
+You'll learn how the two toolkits align, how libraries are handled across targets,
+and how to create or adapt your own UI libraries for multiplatform projects.
+</tldr>
+
 Compose Multiplatform is a cross-platform UI toolkit developed by JetBrains.
-It extends Google's [Jetpack Compose](https://developer.android.com/jetpack/compose) toolkit for Android by supporting additional platforms.
+It extends Google's [Jetpack Compose](https://developer.android.com/jetpack/compose) toolkit for Android
+by supporting additional target platforms.
 
 Compose Multiplatform makes compose APIs available from [common Kotlin code](https://kotlinlang.org/docs/multiplatform-discover-project.html#common-code),
-allowing you to write shared compose UI code that can run on Android, iOS, desktop, and web.
+allowing you to write shared compose UI code that can run on Android, iOS, desktop, and web:
 
 |                  | **Compose Multiplatform**  | **Jetpack Compose** |
 |------------------|----------------------------|---------------------|
 | **Platforms**    | Android, iOS, desktop, web | Android             |
 | **Supported by** | JetBrains                  | Google              |
 
-As Compose Multiplatform is based on Jetpack Compose, using these frameworks is a very similar experience. 
-Both are powered by the Compose compiler and runtime. They use the same core concepts and the same APIs for building UI,
-including `@Composable` functions, state handling APIs like `remember`, UI components such as `Row` and `Column`,
-modifiers, animation APIs, and so on.
-This means that you can reuse existing knowledge of Jetpack Compose in Compose Multiplatform, 
-and you can learn from almost any Jetpack Compose material, including [Google's official documentation](https://developer.android.com/jetpack/compose/documentation).
+## Jetpack Compose and composables
+
+Jetpack Compose is a declarative UI toolkit for building native Android interfaces.
+Its foundation is _composable_ functions, marked with the `@Composable` annotation.
+These functions define parts of the UI and automatically update when the underlying data changes.
+You can combine composables to build layouts, handle user input, manage state, and apply animations.
+Jetpack Compose includes common UI components like `Text`, `Button`, `Row`, and `Column`, which you can customize with modifiers.
+
+Compose Multiplatform builds on the same principles. 
+It shares the Compose compiler and runtime with Jetpack Compose and uses the same APIs — `@Composable` functions,
+state management tools like `remember`, layout components, modifiers, and animation support.
+This means you can reuse your Jetpack Compose knowledge with Compose Multiplatform to build cross-platform UIs for Android,
+iOS, desktop, and web.
+
+## Compose Multiplatform and Jetpack Compose features
+
+> You can learn about the fundamentals of both UI frameworks from almost any Jetpack Compose material,
+> including [Google's official documentation](https://developer.android.com/jetpack/compose/documentation).
+> 
+{style="tip"}
 
 Naturally, Compose Multiplatform has platform-specific features and considerations:
 
