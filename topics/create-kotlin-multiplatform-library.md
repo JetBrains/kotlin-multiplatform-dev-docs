@@ -7,10 +7,10 @@
 <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-In this tutorial, you'll learn how to create a Multiplatform library in IntelliJ IDEA, 
+In this tutorial, you'll learn how to create a multiplatform library in IntelliJ IDEA, 
 publish the library to a local Maven repository, and add it as a dependency in another project.
 
-The tutorial is based on our [Multiplatform library template](https://github.com/Kotlin/multiplatform-library-template),
+The tutorial is based on our [multiplatform library template](https://github.com/Kotlin/multiplatform-library-template),
 which is a simple library containing a function to generate the Fibonacci 
 sequence.
 
@@ -21,16 +21,18 @@ sequence.
 ## Create a project
 
 1. In IntelliJ IDEA, select **File** | **New** | **Project from Version Control**.
-2. Enter the URL of the [Multiplatform library template project](https://github.com/Kotlin/multiplatform-library-template):
+2. Enter the URL of the [multiplatform library template project](https://github.com/Kotlin/multiplatform-library-template):
+
     ```text
     https://github.com/Kotlin/multiplatform-library-template
     ```
+   
 3. Click **Clone**.
 
 ## Examine the project structure
 
 The Kotlin Multiplatform library template project provides a foundational structure 
-for developing Kotlin Multiplatform libraries. This template facilitates the creation of libraries that can operate across 
+for developing Kotlin Multiplatform libraries. This template helps create libraries that can operate across 
 various platforms.
 
 In the template project, `library` serves as the core module and contains the main source code and build resources for 
@@ -44,11 +46,11 @@ Here's a breakdown of the contents in its main source code (`src`):
 * **`commonMain`:** contains Kotlin code shared across all target platforms. This is where you place code that doesn't 
      rely on any platform-specific APIs.
 * **`androidMain`, `iosMain`, `jvmMain`, and `linuxX64Main`:** contain code specific to the Android, iOS, JVM, and Linux platforms. 
-     Here is where you implement functionalities that are unique to these platforms.
+     This is where you implement functionalities that are unique to these platforms.
 * **`commonTest`, `androidUnitTest`, `iosTest`, `jvmTest`, and `linuxX64Test`:** contain tests for the shared `commonMain` code and
      tests specific to the Android, iOS, JVM, and Linux platforms, respectively.
 
-Let's focus on the `library` code that is shared across all the platforms. Inside the `src/commonMain/kotlin` directory, 
+Let's focus on the `library` code that is shared across all platforms. Inside the `src/commonMain/kotlin` directory, 
 you can find the `CustomFibi.kt` file with Kotlin Multiplatform code that defines a Fibonacci sequence generator:
 
 ```kotlin
@@ -78,10 +80,11 @@ expect val secondElement: Int
 The `firstElement` and `secondElement` properties are placeholders that the platform-specific code can implement.
 Each target should provide actual values by using the `actual` keyword in their respective source sets.
 
-Typically, the [`expect` declarations are paired with `actual` implementations](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties). 
+The `expect` declarations are [matched](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties)
+with `actual` implementations.
 This mechanism is useful when writing cross-platform code that requires platform-specific behavior. 
 
-In this case, the Multiplatform library template includes platform-specific implementations of the `firstElement` and 
+In this case, the multiplatform library template includes platform-specific implementations of the `firstElement` and 
 `secondElement` properties. The `androidMain`, `iosMain`, `jvmMain`, and `linuxX64Main` directories contain `actual` 
 declarations that provide values for these properties.
 
@@ -111,7 +114,6 @@ to implement platform-specific functionality for the `firstElement` and `secondE
     ```kotlin
     kotlin {
         // ...
-        // Insert this snippet within the `kotlin {}` block:
         @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
         wasmJs {
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -119,9 +121,8 @@ to implement platform-specific functionality for the `firstElement` and `secondE
             binaries.executable()
         }
         // ...
-        sourceSets{
+        sourceSets {
             //...
-            // Insert this snippet within the `kotlin { sourceSets { } }` block:
             val wasmJsMain by getting {
                 dependencies {
                     // Wasm-specific dependencies
@@ -132,20 +133,20 @@ to implement platform-specific functionality for the `firstElement` and `secondE
     ```
 
 2. Synchronize the Gradle files by clicking the **Sync Gradle Changes** icon (![Gradle sync icon](gradle-sync-icon.png){width=30}{type="joined"}) that appears in your build file. Alternatively,
-   click the refresh button on the Gradle tool window.
+   click the refresh button in the Gradle tool window.
 
 ### Create platform-specific code for Wasm
 
-After adding the Wasm target, you need a Wasm directory to host the platform-specific implementation of
+After adding the Wasm target, you need a Wasm directory to hold the platform-specific implementation of
 `firstElement` and `secondElement`:
 
-1. In the `library/src` directory, right-click and select **New | Directory**. 
+1. Right-click the `library/src` directory and select **New | Directory**. 
 2. Select **wasmJsMain/kotlin** from the **Gradle Source Sets** lists.
 
    ![Gradle source sets list](gradle-source-sets-list.png){width=450}
 
 3. Right-click the newly created `wasmJsMain/kotlin` directory and select **New | Kotlin Class/File**. 
-4. Type **fibiprops.wasm** as the name of the file and select **File**.
+4. Enter **fibiprops.wasm** as the name of the file and select **File**.
 5. Add the following code to the `fibiprops.wasm.kt` file:
 
     ```kotlin
@@ -159,7 +160,7 @@ After adding the Wasm target, you need a Wasm directory to host the platform-spe
 
 ### Build the project
 
-Make sure your project compiles correctly supporting the new platform:
+Make sure your project compiles correctly with the new platform:
 
 1. Open the Gradle tool window by selecting **View** | **Tool Windows** | **Gradle**.
 2. In **multiplatform-library-template** | **library** | **Tasks** | **build**, run the **build** task.
@@ -172,11 +173,11 @@ Make sure your project compiles correctly supporting the new platform:
    ./gradlew build
    ```
 
-You can see the successful output in the **Build** console. 
+You can see the successful output in the **Build** tool window. 
 
 ## Publish your library to the local Maven repository
 
-Your multiplatform library is ready for publishing locally so that you can add it in other projects within the same machine.
+Your multiplatform library is ready for publishing locally so that you can use it in other projects on the same machine.
 
 To publish your library, use the [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) Gradle plugin as follows:
 
@@ -204,7 +205,7 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 3. Synchronize the Gradle files by clicking the **Sync Gradle Changes** icon (![Gradle sync icon](gradle-sync-icon.png){width=30}{type="joined"}) that appears in your build file. Alternatively,
    click the refresh button on the Gradle tool window.
 
-4. In the Gradle tool Widow, go to **multiplatform-library-template** | **Tasks** | **publishing** and run the **publishToMavenLocal** Gradle task.
+4. In the Gradle tool window, go to **multiplatform-library-template** | **Tasks** | **publishing** and run the **publishToMavenLocal** Gradle task.
 
    ![Multiplatform library Gradle tool window](publish-maven-local-gradle-task.png){width=450}
 
@@ -243,7 +244,7 @@ If you're adding it to another multiplatform project, you can add it to shared o
 ```kotlin
 kotlin {
     sourceSets {
-        // For all the platforms
+        // For all platforms
         val commonMain by getting {
             dependencies {
                 implementation("io.github.kotlin:library:1.0.0")
