@@ -116,6 +116,7 @@ the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-
         @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
         wasmJs {
             browser()
+            // ...
             binaries.executable()
         }
         // ...
@@ -215,11 +216,8 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 
 Your library is published to the local Maven repository. 
 
-To locate your published library, use your file explorer or terminal and navigate to the following directory:
-
-```text
-C:\Users\<your-username>\.m2\repository\io\github\kotlin\library\1.0.0\
-```
+To locate your published library, use your file explorer or terminal and navigate to `.m2\repository\io\github\kotlin\library\1.0.0\`
+in your user home directory.
 
 ## Add your library as a dependency in another project
 
@@ -271,9 +269,8 @@ Sync the consumer project and start using your library!
 We encourage you to explore multiplatform development further:
 
 * [Publish your library to Maven Central](multiplatform-publish-libraries.md)
-* [Create an app with shared logic and native UI](multiplatform-create-first-app.md)
-* [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
-* [Publish your application](multiplatform-publish-apps.md)
+* [Check the library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html)
+
 
 Join the community:
 
