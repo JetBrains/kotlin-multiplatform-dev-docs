@@ -103,9 +103,8 @@ The other platforms follow the same pattern, with variations in the values of `f
 
 Now that you're familiar with how shared and platform-specific code work in the template, let's extend the project by adding support for an additional platform.
 
-Configure support for the [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-overview.html) platform. Use 
-the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties)
-to implement platform-specific functionality for the `firstElement` and `secondElement` properties.
+Configure support for the [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-overview.html) platform by using 
+the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties). You can implement platform-specific functionality for the `firstElement` and `secondElement` properties.
 
 ### Add the Kotlin/Wasm target to your project
 
@@ -209,13 +208,19 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 
    ![Multiplatform library Gradle tool window](publish-maven-local-gradle-task.png){width=450}
 
-Alternatively, run the following command in the terminal from the `multiplatform-library-template` root directory:
+   Alternatively, run the following command in the terminal from the `multiplatform-library-template` root directory:
 
-```bash
-  ./gradlew publishToMavenLocal
+   ```bash
+   ./gradlew publishToMavenLocal
+   ```
+
+Your library is published to the local Maven repository. 
+
+To locate your published library, use your file explorer or terminal and navigate to the following directory:
+
+```text
+C:\Users\<your-username>\.m2\repository\io\github\kotlin\library\1.0.0\
 ```
-
-Your library is published to the local Maven repository.
 
 ## Add your library as a dependency in another project
 
@@ -262,4 +267,22 @@ kotlin {
 
 Sync the consumer project and start using your library!
 
-    
+## What's next
+
+We encourage you to explore multiplatform development further:
+
+* [Publish your library to Maven Central](multiplatform-publish-libraries.md)
+* [Create an app with shared logic and native UI](multiplatform-create-first-app.md)
+* [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
+* [Publish your application](multiplatform-publish-apps.md)
+
+Join the community:
+
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
+  an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
+* ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
+  the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
+* ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
+  about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)
