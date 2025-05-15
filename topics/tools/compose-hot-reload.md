@@ -1,6 +1,6 @@
 [//]: # (title: Compose hot reload)
 
-<primary-label ref="beta"/>
+<primary-label ref="alpha"/>
 
 Compose hot reload is a feature for your IDE that helps you visualize and experiment with UI changes while
 working on a Compose Multiplatform project.
@@ -13,30 +13,29 @@ lets you quickly experiment with UI changes without interrupting your flow.
 
 ## Add Compose hot reload to your project
 
-Compose hot reload is available as a Gradle plugin. This tutorial guides you through the steps to add Compose hot
-reload to an existing multiplatform project. We'll use the same project that we use for the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
-tutorial.
+Compose hot reload can be added in two ways, by:
 
-### Create a project
+* [Creating a project from scratch in IntelliJ IDEA or Android Studio](#from-scratch)
+* [Adding it as a Gradle plugin  to an existing project](#to-an-existing-project)
+
+### From scratch
+
+This section walks you through the steps to create a multiplatform project with a desktop target in IntelliJ IDEA and
+Android Studio. When your project is created, Compose hot reload is automatically added.
 
 1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 2. In IntelliJ IDEA, select **File** | **New** | **Project**.
 3. In the panel on the left, select **Kotlin Multiplatform**.
-4. Specify the following fields in the **New Project** window:
+4. Specify the **Name**, **Group**, and **Artifact** fields in the **New Project** window
+5. Select the **Desktop** target and click **Create**.
+   ![Create multiplatform project with desktop target](create-desktop-project.png){width=700}
 
-   * **Name**: ComposeDemo
-   * **Group**: compose.project.demo
-   * **Artifact**: composedemo
+### To an existing project
 
-   ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
+This section walks you through the steps to add Compose hot reload to an existing multiplatform project. The steps refer
+to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
-5. Select **Android**, **Desktop**, and **Web** targets.
-   * If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
-6. Once you've specified all the fields and targets, click **Create**.
-
-### Update your Gradle files
-
-1. Update the version catalog. In `gradle/libs.versions.toml`, add the following code:
+1. In your project, update the version catalog. In `gradle/libs.versions.toml`, add the following code:
    ```kotlin
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
@@ -69,7 +68,7 @@ tutorial.
 
 ## Use Compose hot reload
 
-1. In the `desktopMain` source set, open the `main.kt` file and update the `main()` function:
+1. In the `desktopMain` directory, open the `main.kt` file and update the `main()` function:
    ```kotlin
    fun main() = application {
        Window(
@@ -84,7 +83,7 @@ tutorial.
    By setting the `alwaysOnTop` variable to `true`, the generated desktop app stays on top of all your windows, making it easier
    to edit your code and see changes live.
 
-2. In the `commonMain` source set, open the `App.kt` file and update the `Button` composable:
+2. In the `commonMain` directory, open the `App.kt` file and update the `Button` composable:
    ```kotlin
    Button(onClick = { showContent = !showContent }) {
        Column {
@@ -94,20 +93,23 @@ tutorial.
    ```
    Now, the text for the button is controlled by the `greet()` function.
 
-3. In the `commonMain` source set, open the `Greeting.kt` file and update the `greet()` function:
+3. In the `commonMain` directory, open the `Greeting.kt` file and update the `greet()` function:
    ```kotlin
     fun greet(): String {
         return "Hello!"
     }
    ```
 
-4. Select **composeApp [desktop]** in the list of run configurations and click **Run**. The desktop app is automatically generated.
+4.  In the `desktopMain` directory, open the `main.kt` file and click the **Run** icon in the gutter. 
+    Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**. The desktop app is generated.
 
-   ![First Compose hot reload on desktop app](compose-hot-reload-hello.png){width=500}
+    ![Run Compose hot reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+
+    ![First Compose hot reload on desktop app](compose-hot-reload-hello.png){width=500}
 
 5. Update the string returned from the `greet()` function and see the desktop app update automatically.
 
-![Compose hot reload](compose-hot-reload.gif){width=500}
+   ![Compose hot reload](compose-hot-reload.gif){width=500}
 
 Congratulations! You've run your first Compose hot reload. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration every time.

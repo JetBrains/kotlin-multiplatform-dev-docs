@@ -74,9 +74,11 @@ To get started, implement a new `App` composable:
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
     the screen.
 
-    > To see your changes update in real time in the desktop app, use [Compose hot reload](compose-hot-reload.md).
-    > Compose hot reload is currently in [Beta](https://kotlinlang.org/components-stability.html#stability-levels-explained).
-    > It's almost stable, but migration steps may be required in the future.
+    > To see your changes update in real time in the desktop app, use [Compose hot reload](compose-hot-reload.md):
+    > 1. In the `main.kt` file, click the **Run** icon in the gutter.
+    > 2. Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**.
+    > ![Run Compose hot reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+    > Compose hot reload is currently in [Alpha](https://kotlinlang.org/components-stability.html#stability-levels-explained) so its functionality is subject to change.
     >
     {style="tip"}
 
