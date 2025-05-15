@@ -32,15 +32,15 @@ You can share application logic between iOS and Android apps and write platform-
 6. For iOS, select the **Do not share UI** option to keep the UI native.
 7. Once you've specified all the fields and targets, click **Create**.
 
-## Examine the project structure
-
-In IntelliJ IDEA, navigate to the "GreetingKMP" folder.
-
 > IntelliJ IDEA may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
 > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
 >
 {style="note"}
+
+## Examine the project structure
+
+In IntelliJ IDEA, navigate to the "GreetingKMP" folder.
 
 Each Kotlin Multiplatform project includes three modules:
 
@@ -149,7 +149,7 @@ and generates a single declaration with actual implementations.
     ```
 
     * The `name` property implementation from `AndroidPlatform` uses the Android platform code, namely the `android.os.Build`
-      dependency. This code is written in Kotlin/JVM. If you try to access JVM specific class, such as `java.util.Random` here, this code will compile.
+      dependency. This code is written in Kotlin/JVM. If you try to access a JVM specific class, such as `java.util.Random` here, this code will compile.
     * The `name` property implementation from `IOSPlatform` uses iOS platform code, namely the `platform.UIKit.UIDevice`
       dependency. It's written in Kotlin/Native, meaning you can write iOS code in Kotlin. This code becomes a part of the iOS
       framework, which you will later call from Swift in your iOS application.
@@ -218,7 +218,7 @@ such as properties and classes. Let's implement an expected property:
    actual val num: Int = 2
    ```
 
-5. In the `commonMain/Greeting.kt`, add the `num` property to the `greet()` function to see the differences:
+5. In the `commonMain/Greeting.kt` file, add the `num` property to the `greet()` function to see the differences:
 
    ```kotlin
    fun greet(): String {

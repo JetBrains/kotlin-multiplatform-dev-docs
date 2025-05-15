@@ -404,7 +404,7 @@ The view model will manage the data from the activity and won't disappear when t
    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
      arranged vertically and separated by dividers.
 
-2. To see the results, re-run your **composeApp** configuration:
+2. To see the results, rerun your **composeApp** configuration:
 
    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
@@ -531,7 +531,7 @@ plugins {
     }
     ```
 
-3. Re-run the **iosApp** configuration to make sure your app's logic is synced:
+3. Rerun the **iosApp** configuration to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
@@ -671,7 +671,7 @@ every time the flow emits a value.
     }
     ```
 
-3. Re-run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
+3. Rerun the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 

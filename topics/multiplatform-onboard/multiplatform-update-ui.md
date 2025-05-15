@@ -67,7 +67,7 @@ Make some changes and see how they are reflected in the UI:
 
 ## Work with the iOS module
 
-`iosApp` module file builds into an iOS application. It depends on and uses the `shared` module as an iOS
+The `iosApp` directory builds into an iOS application. It depends on and uses the `shared` module as an iOS
 framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
