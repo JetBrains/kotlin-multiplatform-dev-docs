@@ -409,23 +409,14 @@ but they are beyond the scope of this tutorial.
 
 ### Set up an iOS run configuration in Android Studio
 
-When you made sure that Xcode is set up correctly, you can set up a run configuration for the iOS app in Android Studio:
+When you made sure that Xcode is set up correctly, return to Android Studio:
 
-1. Select **Run | Edit configurations** in the main menu.
+1. Select **File | Sync Project with Gradle Files** in the main menu. Android Studio automatically generates a run
+   configuration called **simpleLoginIOS**.
 
-2. To add a new configuration, click the plus sign and choose **iOS Application**.
+2. In the list of run configurations, select **simpleLoginIOS**. Choose an iOS emulator and then click **Run**.
 
-3. Name the configuration "SimpleLoginIOS".
-
-4. In the **Xcode project file** field, select the location of the `simpleLoginIOS.xcodeproj` file.
-
-5. Choose a simulation environment from the **Execution target** list and click **OK**:
-
-   ![Android Studio dialog with the iOS run configuration details filled in](android-studio-ios-run-configuration.png)
-
-6. Check the newly created configuration by pressing the run button to build and launch the iOS app:
-
-   ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=280}
+   ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=400}
 
 ### Use the shared module in the iOS project
 
