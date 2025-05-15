@@ -36,7 +36,7 @@ iOS, desktop, and web.
 
 ## Compose Multiplatform and Jetpack Compose features
 
-> You can learn about the fundamentals of the both UI frameworks from almost any Jetpack Compose material,
+> You can learn about the fundamentals of both UI frameworks from almost any Jetpack Compose material,
 > including [Google's official documentation](https://developer.android.com/jetpack/compose/documentation).
 > 
 {style="tip"}
