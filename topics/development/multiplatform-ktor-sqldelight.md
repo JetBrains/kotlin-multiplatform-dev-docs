@@ -745,7 +745,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
    ![theme directory location](theme-directory.png){width=299}
 
-3. In each theme file, `Color.kt` and `Theme.kt`, ensure that the package line refers
+3. In each theme file, `Color.kt` and `Theme.kt`, make sure that the package line refers
    to your package:
 
     ```kotlin
@@ -875,8 +875,9 @@ Create the main `App()` composable for your application, and call it from a `Com
                                         color = if (launch.launchSuccess == true) app_theme_successful else app_theme_unsuccessful
                                     )
                                     Spacer(Modifier.height(8.dp))
-                                    launch.details?.takeIf { it.isNotBlank() }?.let {
-                                        Text(it)
+                                    val details = launch.details
+                                    if (details != null && details.isNotBlank()) {
+                                        Text(details)
                                     }
                                 }
                                 HorizontalDivider()
@@ -935,12 +936,10 @@ By default, IntelliJ IDEA generates projects set up for static linking of iOS fr
 To use the native SQLDelight driver on iOS, add the dynamic linker flag that allows Xcode tooling to find the
 system-provided SQLite binary:
 
-1. In IntelliJ IDEA, switch to **File** view.
-   ![Select Files view](select-files-view.png){width="200"}
-2. Select the `iosApp/iosApp.xcodeproj` folder, then select the **File** | **Open Project in Xcode** option.
-3. In Xcode, double-click the project name to open its settings.
-4. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
-5. Double-click the field value, click **+**, and add the `-lsqlite3` string.
+1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
+2. In Xcode, double-click the project name to open its settings.
+3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
+4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
 
 ### Prepare a Koin class for iOS dependency injection
 
