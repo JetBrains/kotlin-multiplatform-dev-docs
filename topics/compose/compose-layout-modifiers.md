@@ -28,7 +28,7 @@ private fun Greeting(name: String) {
 }
 ```
 
-The order of modifier functions in the chain is significant. Each function makes changes to the `Modifier` returned by 
+**The order of modifier functions in the chain is significant**. Each function makes changes to the `Modifier` returned by 
 the previous function, so the sequence of calls directly affects the composable's final behavior and appearance.
 
 ## Built-in modifiers

@@ -61,5 +61,5 @@ Learn more in [](compose-layout-modifiers.md).
 
 ## What's next
 
-* For a deep dive, see [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/layouts).
+* For a deep dive on layouts, see [Jetpack Compose documentation](https://developer.android.com/develop/ui/compose/layouts).
 * Learn about the [lifecycle](compose-lifecycle.md) of components.
