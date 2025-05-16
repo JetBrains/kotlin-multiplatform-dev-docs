@@ -1,6 +1,6 @@
 [//]: # (title: Create a multiplatform app using Ktor and SQLDelight)
 
-This tutorial demonstrates how to use Android Studio to create an advanced mobile application for iOS and Android using
+This tutorial demonstrates how to use IntelliJ IDEA to create an advanced mobile application for iOS and Android using
 Kotlin Multiplatform.
 This application is going to:
 
@@ -29,28 +29,22 @@ You will use the following multiplatform libraries in the project:
 >
 {style="note"}
 
-## Create your project
+## Create a project
 
-1. Prepare your environment for multiplatform development.
-    [Check the list of necessary tools and update them to the latest versions if necessary](quickstart.md#set-up-the-environment).
-2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. You will implement a native UI for both platforms.
-5. Click the **Download** button and unpack the downloaded archive.
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+2. In IntelliJ IDEA, select **File** | **New** | **Project**.
+3. In the panel on the left, select **Kotlin Multiplatform**.
+4. Specify the following fields in the **New Project** window:
 
-   ![Kotlin Multiplatform wizard](ktor-wizard.png){width=450}
+   * **Name**: SpaceTutorial
+   * **Group**: com.jetbrains.spacetutorial
+   * **Artifact**: spacetutorial
 
-6. Launch Android Studio.
-7. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
-8. Navigate to the unpacked project folder and then click **Open**.
+   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
 
-   Android Studio detects that the folder contains a Gradle build file, opens the folder as a new project,
-   and starts the initial Gradle Sync.
-
-9. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
-   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
-
-   ![Select the project view](select-project-view.png){width=200}
+5. Select **Android** and **iOS** targets.
+6. For iOS, select the **Do not share UI** option. You will implement a native UI for both platforms.
+7. Once you've specified all the fields and targets, click **Create**.
 
 ## Add Gradle dependencies
 
@@ -108,9 +102,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```
 
-4. Once the dependencies are added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
-
-   ![Synchronize Gradle files](gradle-sync.png)
+4. Once the dependencies are added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 5. At the very beginning of the `shared/build.gradle.kts` file, add the following lines to the
    `plugins {}` block:
@@ -156,7 +148,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
      to use `kotlinx.serialization` for processing network requests and responses.
    * The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
-7. Once the dependencies are added, click **Sync Now** to synchronize Gradle files once again.
+7. Once the dependencies are added, click the **Sync Gradle Changes** button to synchronize Gradle files once again.
 
 After the Gradle sync, you are done with the project configuration and can start writing code.
 
@@ -180,10 +172,9 @@ The application data model will have three entity classes with:
 {style="note"}
 
 Create the necessary data classes:
-1. In the `shared/src/commonMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial`,
-   to make nested package folders.
-2. In the `com.jetbrains.spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside.
-3. Declare all the data classes for basic entities:
+
+1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside. 
+2. Declare all the data classes for basic entities:
 
    ```kotlin
    ```
@@ -551,7 +542,7 @@ public class, `SpaceXSDK`.
 
 ## Create the Android application
 
-The Kotlin Multiplatform wizard handles the initial Gradle configuration for you, so the `shared` module is already
+IntelliJ IDEA handles the initial Gradle configuration for you, so the `shared` module is already
 connected to your Android application.
 
 Before implementing the UI and the presentation logic, add all the required UI dependencies to
@@ -754,7 +745,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
    ![theme directory location](theme-directory.png){width=299}
 
-3. In each theme file, `Color.kt` and `Theme.kt`, change the `package com.example.compose` line to refer
+3. In each theme file, `Color.kt` and `Theme.kt`, make sure that the package line refers
    to your package:
 
     ```kotlin
@@ -772,7 +763,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
 Create the main `App()` composable for your application, and call it from a `ComponentActivity` class:
 
-1. Create the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
+1. Open the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
    and add the `App()` composable function:
 
     ```kotlin
@@ -805,52 +796,64 @@ Create the main `App()` composable for your application, and call it from a `Com
 
 2. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
 
+    <!-- TODO Check the code example-->
     ```kotlin
-    import com.jetbrains.spacetutorial.theme.AppTheme
-    import com.jetbrains.spacetutorial.entity.RocketLaunch
-    import com.jetbrains.spacetutorial.theme.app_theme_successful
-    import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
-    import androidx.compose.material3.HorizontalDivider
-    import androidx.compose.material3.MaterialTheme
-    import androidx.compose.material3.Scaffold
-    import androidx.compose.material3.Text
-    import androidx.compose.material3.TopAppBar
-    import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
-    import androidx.compose.ui.Modifier
-    import androidx.compose.ui.Alignment
-    import androidx.compose.foundation.layout.Arrangement
-    import androidx.compose.foundation.layout.Box
-    import androidx.compose.foundation.layout.Column
-    import androidx.compose.foundation.layout.Spacer
-    import androidx.compose.foundation.layout.fillMaxSize
-    import androidx.compose.foundation.layout.height
-    import androidx.compose.foundation.layout.padding
+    package com.jetbrains.spacetutorial
+
+    import androidx.compose.foundation.layout.*
     import androidx.compose.foundation.lazy.LazyColumn
     import androidx.compose.foundation.lazy.items
-    import androidx.compose.ui.input.nestedscroll.nestedScroll
+    import androidx.compose.material3.*
+    import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+    import androidx.compose.runtime.*
+    import androidx.compose.ui.Alignment
+    import androidx.compose.ui.Modifier
     import androidx.compose.ui.unit.dp
-    
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import com.jetbrains.spacetutorial.theme.AppTheme
+    import com.jetbrains.spacetutorial.theme.app_theme_successful
+    import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
+    import kotlinx.coroutines.launch
+    import org.koin.androidx.compose.koinViewModel
+
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun App() {
-        // ...
+    val viewModel = koinViewModel<RocketLaunchViewModel>()
+    val state by remember { viewModel.state }
+    val coroutineScope = rememberCoroutineScope()
+    var isRefreshing by remember { mutableStateOf(false) }
+    val pullToRefreshState = rememberPullToRefreshState()
+    
         AppTheme {
             Scaffold(
                 topBar = {
-                    TopAppBar(title = {
-                        Text(
-                            "SpaceX Launches",
-                            style = MaterialTheme.typography.headlineLarge
-                        )
-                    })
+                    TopAppBar(
+                        title = {
+                            Text(
+                                "SpaceX Launches",
+                                style = MaterialTheme.typography.headlineLarge
+                            )
+                        }
+                    )
                 }
             ) { padding ->
-                Box(
+                PullToRefreshBox(
                     modifier = Modifier
-                    .nestedScroll(pullToRefreshState.nestedScrollConnection)
-                    .fillMaxSize()
-                       .padding(padding)
+                        .fillMaxSize()
+                        .padding(padding),
+                    state = pullToRefreshState,
+                    isRefreshing = isRefreshing,
+                    onRefresh = {
+                        isRefreshing = true
+                        coroutineScope.launch {
+                            viewModel.loadLaunches()
+                            isRefreshing = false
+                        }
+                    }
                 ) {
-                    if (state.isLoading) {
+                    if (state.isLoading && !isRefreshing) {
                         Column(
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -861,7 +864,7 @@ Create the main `App()` composable for your application, and call it from a `Com
                     } else {
                         LazyColumn {
                             items(state.launches) { launch: RocketLaunch ->
-                                Column(modifier = Modifier.padding(all = 16.dp)) {
+                                Column(modifier = Modifier.padding(16.dp)) {
                                     Text(
                                         text = "${launch.missionName} - ${launch.launchYear}",
                                         style = MaterialTheme.typography.headlineSmall
@@ -873,21 +876,14 @@ Create the main `App()` composable for your application, and call it from a `Com
                                     )
                                     Spacer(Modifier.height(8.dp))
                                     val details = launch.details
-                                    if (details?.isNotBlank() == true) { 
-                                        Text(
-                                            text = details
-                                        )
+                                    if (details != null && details.isNotBlank()) {
+                                        Text(details)
                                     }
                                 }
                                 HorizontalDivider()
                             }
                         }
                     }
-    
-                    PullToRefreshContainer(
-                        state = pullToRefreshState,
-                        modifier = Modifier.align(Alignment.TopCenter)
-                    )
                 }
             }
         }
@@ -929,18 +925,18 @@ and its UI made using native Jetpack Compose.
 For the iOS part of the project, you'll make use of [SwiftUI](https://developer.apple.com/xcode/swiftui/) to build the user
 interface and the [Model View View-Model](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
 
-The Kotlin Multiplatform wizard generates an iOS project that is already connected to the shared module. The Kotlin module
+IntelliJ IDEA generates an iOS project that is already connected to the shared module. The Kotlin module
 is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
 using a regular `import` statement: `import Shared`.
 
 ### Add the dynamic linking flag for SQLDelight
 
-By default, the Kotlin Multiplatform wizard generates projects set up for static linking of iOS frameworks.
+By default, IntelliJ IDEA generates projects set up for static linking of iOS frameworks.
 
 To use the native SQLDelight driver on iOS, add the dynamic linker flag that allows Xcode tooling to find the
 system-provided SQLite binary:
 
-1. In Android Studio, right-click the `iosApp/iosApp.xcodeproj` folder and select the **Open In** | **Xcode** option.
+1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
 2. In Xcode, double-click the project name to open its settings.
 3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
 4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
@@ -1000,8 +996,8 @@ First, you'll create a `RocketLaunchRow` SwiftUI view for displaying an item fro
 and `VStack` views. There will be extensions on the `RocketLaunchRow` structure with useful helpers for displaying the
 data.
 
-1. Right-click the `iosApp/iosApp.xcodeproj` directory and choose **Open In | Xcode**.
-2. In your Xcode project, create a new Swift file with the type **SwiftUI View** and name it `RocketLaunchRow`.
+1. In IntelliJ IDEA, make sure you are in **Project** view.
+2. Create a new Swift file in the `iosApp` folder and name it `RocketLaunchRow`.
 3. Update the `RocketLaunchRow.swift` file with the following code:
 
     ```Swift
@@ -1184,7 +1180,7 @@ It will allow you to call the SDK function with the correct database driver.
     }
     ```
 
-4. In Android Studio, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
+4. In IntelliJ IDEA, switch to the **iosApp** configuration, choose an emulator, and run it to see the result:
 
 ![iOS Application](ios-application.png){width=350}
 
