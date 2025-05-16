@@ -66,7 +66,7 @@ Each Kotlin Multiplatform project includes three modules:
 * _composeApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The composeApp module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
-  framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](https://kotlinlang.org/docs/native-cocoapods.html).
+  framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](multiplatform-cocoapods-overview.md).
   By default, the Kotlin Multiplatform wizard creates projects that use the regular framework dependency.
 
 ![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
@@ -297,7 +297,7 @@ In the next part of the tutorial, you'll learn how to update the UI elements usi
 ### See also
 
 * See how to [create and run multiplatform tests](multiplatform-run-tests.md) to check that the code works correctly.
-* Learn more about the [project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+* Learn more about the [project structure](multiplatform-discover-project.md).
 * If you want to convert your existing Android project into a cross-platform app, [complete this tutorial to make your Android app cross-platform](multiplatform-integrate-in-existing-app.md).
 
 ## Get help

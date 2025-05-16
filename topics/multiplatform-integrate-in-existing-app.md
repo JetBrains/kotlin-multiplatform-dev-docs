@@ -144,7 +144,7 @@ add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simple
          ```
 
 If you want to better understand the layout of the resulting project,
-see the [basics of Kotlin Multiplatform project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html).
+see the [basics of Kotlin Multiplatform project structure](multiplatform-discover-project.md).
 
 ### Add a dependency on the shared module to your Android application
 
@@ -370,7 +370,7 @@ If you rename the folder with Xcode open, you'll get a warning and may corrupt y
 ### Configure the iOS project to use a KMP framework
 
 You can set up integration between the iOS app and the framework built by Kotlin Multiplatform directly.
-Alternatives to this method are covered in the [iOS integration methods overview](https://kotlinlang.org/docs/multiplatform-ios-integration-overview.html),
+Alternatives to this method are covered in the [iOS integration methods overview](multiplatform-ios-integration-overview.md),
 but they are beyond the scope of this tutorial.
 
 1. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
@@ -539,9 +539,9 @@ and you can share it if your mobile applications should have the same presentati
 
 Once you've made your Android application cross-platform, you can move on and:
 
-* [Add dependencies on multiplatform libraries](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
-* [Add Android dependencies](https://kotlinlang.org/docs/multiplatform-android-dependencies.html)
-* [Add iOS dependencies](https://kotlinlang.org/docs/multiplatform-ios-dependencies.html)
+* [Add dependencies on multiplatform libraries](multiplatform-add-dependencies.md)
+* [Add Android dependencies](multiplatform-android-dependencies.md)
+* [Add iOS dependencies](multiplatform-ios-dependencies.md)
 
 You can also check out community resources:
 

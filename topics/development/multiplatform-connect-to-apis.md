@@ -13,7 +13,7 @@ functionality and more. For more information, see [this curated list](https://gi
 ## Expected and actual functions and properties
 
 Kotlin provides a language mechanism to access platform-specific APIs while developing common logic:
-[expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html).
+[expected and actual declarations](multiplatform-expect-actual.md).
 
 With this mechanism, the common source set of a multiplatform module defines an expected declaration, and every platform
 source set must provide the actual declaration that corresponds to the expected declaration. The compiler ensures that
@@ -262,11 +262,11 @@ framework:
 ![Using dependency injection framework](expect-di-framework.svg){width=700}
 
 This approach only works if you put the implementations in the platform modules. It isn't very scalable, as your Kotlin
-Multiplatform module can't be self-sufficient and you'll need to implement the common interface in a different module.
+Multiplatform module can't be self-sufficient, and you'll need to implement the common interface in a different module.
 
 <!-- If you're interested in having this functionality expanded to a shared module, please vote for this issue in Youtrack and describe your use case. -->
 
 ## What's next?
 
 * See a video walkthrough of [Using Platform-Specific APIs in KMP Apps](https://youtu.be/bSNumV04y_w).
-* For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html).
+* For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).

@@ -25,7 +25,7 @@ At this stage, you need to show that using Kotlin Multiplatform could bring valu
 
 KMP has been widely used in production since its Alpha release. As a result, JetBrains has been able to collect extensive feedback and provide an even better development experience in the [Stable version](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/).
 
-* **Ability to use all iOS and Android features** – Whenever a task cannot be accomplished in the shared code or whenever you want to use specific native features, you can use the [expect/actual](https://kotlinlang.org/docs/multiplatform-expect-actual.html) pattern to seamlessly write platform-specific code.
+* **Ability to use all iOS and Android features** – Whenever a task cannot be accomplished in the shared code or whenever you want to use specific native features, you can use the [expect/actual](multiplatform-expect-actual.md) pattern to seamlessly write platform-specific code.
 * **Seamless performance** – Shared code written in Kotlin is compiled into different output formats for different targets: Java bytecode for Android and native binaries for iOS. Thus, there is no additional runtime overhead when it comes to executing this code on platforms, and the performance is comparable to [native apps](native-and-cross-platform.md).
 * **Compatibility with legacy code** – No matter how large your project is, your existing code will not prevent you from integrating Kotlin Multiplatform. You can start writing cross-platform code at any moment and connect it to your iOS and Android apps as a regular dependency, or you can use the code you've already written and modify it to be compatible with iOS.
 
