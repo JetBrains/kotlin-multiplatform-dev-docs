@@ -96,7 +96,7 @@ kotlin {
 }
 ```
 
-Synchronize the Gradle files by clicking **Sync Now** in the notification.
+Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
 ## Create API requests
 
@@ -404,7 +404,7 @@ The view model will manage the data from the activity and won't disappear when t
    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
      arranged vertically and separated by dividers.
 
-2. To see the results, re-run your **composeApp** configuration in Android Studio:
+2. To see the results, rerun your **composeApp** configuration:
 
    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
@@ -415,15 +415,9 @@ pattern again to connect the UI to the shared module, which contains all the bus
 
 The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-> If you see errors in Xcode regarding the shared module or when updating your code, run the **iosApp** configuration
-> from Android Studio.
->
-{style="tip"}
-
 #### Introducing a view model
 
-1. Go back to your iOS app in Xcode.
-2. In `iosApp/iOSApp.swift`, update the entry point for your app:
+1. In `iosApp/iOSApp.swift`, update the entry point for your app:
 
    ```swift
    @main
@@ -436,7 +430,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
    }
    ```
 
-3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
+2. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
    Call the `startObserving()` function within a `task()` call to support concurrency:
 
     ```Swift
@@ -506,7 +500,7 @@ adding a Cocoapod or SPM dependency in iOS projects.
 >
 {style="note"}
 
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Now** button.
+To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
 ```kotlin
 plugins {
@@ -515,8 +509,6 @@ plugins {
 ```
 
 ##### Consume the flow using SKIE
-
-Return to Xcode and update the code using the library:
 
 1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
    property every time the flow emits a value.
@@ -539,7 +531,7 @@ Return to Xcode and update the code using the library:
     }
     ```
 
-3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+3. Rerun the **iosApp** configuration to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
@@ -554,7 +546,7 @@ Return to Xcode and update the code using the library:
 >
 {style="note"}
 
-1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
+1. In the `build.gradle.kts` file of the _whole project_,
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
 
     ```kotlin
@@ -589,7 +581,7 @@ Return to Xcode and update the code using the library:
     }
     ```
 
-4. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+4. Click the **Sync Gradle Changes** button to synchronize the Gradle files.
 
 ##### Mark the flow with KMP-NativeCoroutines
 
@@ -612,7 +604,8 @@ Return to Xcode and update the code using the library:
 
 ##### Import the library using SPM in XCode
 
-1. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
+1. Open Xcode.
+2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
 2. In the search bar, enter the package name:
 
      ```none
@@ -678,7 +671,7 @@ every time the flow emits a value.
     }
     ```
 
-3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+3. Rerun the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 

@@ -60,29 +60,27 @@ Make some changes and see how they are reflected in the UI:
 
    Here the `Column` composable shows each of the `Text` items, adding padding around them and space between them.
 
-5. Follow Android Studio's suggestions to import the missing dependencies.
+5. Follow IntelliJ IDEA's suggestions to import the missing dependencies.
 6. Now you can run the Android app to see how it displays the list of strings:
 
    ![Updated UI of Android multiplatform app](first-multiplatform-project-on-android-2.png){width=300}
 
-## Work with the iOS module in Xcode
+## Work with the iOS module
 
-`iosApp` is an Xcode project that builds into an iOS application. It depends on and uses the `shared` module as an iOS
+The `iosApp` directory builds into an iOS application. It depends on and uses the `shared` module as an iOS
 framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
 
-1. Find the `iosApp` folder at the root of your project in the **Project** tool window.
-2. Inside `iosApp`, right-click the `iosApp.xcodeproj` folder and select **Open In** | **Xcode**.
-3. Open the `ContentView.swift` file, select the `greet()` function and use the <shortcut>⌃ ⌘ J</shortcut> shortcut,
-    or right-click the function name and select **Jump to Definition**.
+1. In IntelliJ IDEA, find the `iosApp` folder at the root of your project in the **Project** tool window.
+2. Open the `ContentView.swift` file, select the `greet()` function right click and select the **Go To** | **Definition** menu item.
 
     You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
     represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
     returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
     see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
-4. Update the SwiftUI code to display a list of items in the same way as in the Android app:
+3. Update the SwiftUI code to display a list of items in the same way as in the Android app:
 
     ```Swift
     struct ContentView: View {
@@ -98,10 +96,8 @@ Implement the same changes as in the Android app:
 
     * The results of the `greet()` call are stored in the `phrases` variable (`let` in Swift is similar to Kotlin's `val`).
     * The `List` function produces a list of `Text` items.
-    * Xcode reports errors in this `ContentView` implementation if you haven't rebuilt the iOS framework.
-      This is expected – proceed to the next step.
 
-5. In Android Studio, start the iOS run configuration to see the changes:
+4. Start the iOS run configuration to see the changes:
 
     ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
 
@@ -113,12 +109,12 @@ Implement the same changes as in the Android app:
 
 ### Xcode reports errors in the code calling the shared framework
 
-Your Xcode project may still be using an old version of the framework.
-To resolve this, return to Android Studio and rebuild the project or start the iOS run configuration.
+If you are using Xcode, your Xcode project may still be using an old version of the framework.
+To resolve this, return to IntelliJ IDEA and rebuild the project or start the iOS run configuration.
 
 ### Xcode reports an error when importing the shared framework
 
-Xcode may need to clear cached binaries: try resetting the environment by choosing
+If you are using Xcode, it may need to clear cached binaries: try resetting the environment by choosing
 **Product | Clean Build Folder** in the main menu.
 
 ## Next step

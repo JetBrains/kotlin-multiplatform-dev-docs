@@ -11,7 +11,7 @@
 </tldr>
 
 You've created your first Kotlin Multiplatform app that works both on iOS and Android! Now you know how
-to set up an environment for cross-platform mobile development, create a project in Android Studio, run your app on devices,
+to set up an environment for cross-platform mobile development, create a project in IntelliJ IDEA, run your app on devices,
 and expand its functionality.
 
 Now that you've gained some experience with Kotlin Multiplatform, you can take a look at some advanced topics and take on
