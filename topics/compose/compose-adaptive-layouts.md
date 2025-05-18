@@ -32,8 +32,8 @@ commonMain.dependencies {
 }
 ```
 
-The `WindowSizeClass` API allows you to adapt your app's layout based on the available display space. 
-For example, you can manage the visibility of a top app bar depending on the window height:
+The `WindowSizeClass` API allows you to change your app's layout based on the available display space. 
+For example, you can manage visibility of the top app bar depending on the window height:
 
 ```kotlin
 @Composable
@@ -43,7 +43,7 @@ fun MyApp(
     // Determines whether the top app bar should be displayed
     val showTopAppBar = windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
 
-    // Uses the bar visibility to define UI 
+    // Uses bar visibility to define UI 
     MyScreen(
         showTopAppBar = showTopAppBar,
         /* ... */
