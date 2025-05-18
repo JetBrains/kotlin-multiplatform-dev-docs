@@ -37,7 +37,7 @@ To use the `kotlinx-datetime` library:
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
             }
             wasmJsMain.dependencies {
-                implementation(npm("@js-joda/timezone", "2.3.0"))
+                implementation(npm("@js-joda/timezone", "2.22.0"))
             }
         }
     }
@@ -51,10 +51,10 @@ To use the `kotlinx-datetime` library:
 
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
-3. In the terminal, navigate to your project directory and run:
+3. In the **Terminal** tool window, run the following command:
 
     ```shell
-    ./gradlew wasmKotlinUpgradeYarnLock
+    ./gradlew kotlinUpgradeYarnLock
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
@@ -104,6 +104,7 @@ To use the `kotlinx-datetime` library:
     ```
 
 3. Follow the IDE's suggestions to import the missing dependencies.
+   Make sure to import `Clock` from `kotlinx-datetime`, not `kotlin.time`.
 
    ![Unresolved references](compose-unresolved-references.png)
 
@@ -113,7 +114,7 @@ To use the `kotlinx-datetime` library:
 
         ```html
         <body>
-        <div id="composeApplication" style="width:400px; height: 500px;"></div>
+        <div id="composeApplication" style="width:400px; height: 600px;"></div>
         </body>
         ```
     2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,

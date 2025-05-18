@@ -26,21 +26,25 @@ To get started, implement a new `App` composable:
 1. In `composeApp/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
    composable:
 
-   ```kotlin
-   @Composable
-   @Preview
-   fun App() {
-       MaterialTheme {
-           var timeAtLocation by remember { mutableStateOf("No location selected") }
-           Column {
-               Text(timeAtLocation)
-               Button(onClick = { timeAtLocation = "13:30" }) { 
-                   Text("Show Time At Location")
-               }
-           }
-       }
-   }
-   ```
+    ```kotlin
+    @Composable
+    @Preview
+    fun App() {
+        MaterialTheme {
+            var timeAtLocation by remember { mutableStateOf("No location selected") }
+            Column(
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
+                Text(timeAtLocation)
+                Button(onClick = { timeAtLocation = "13:30" }) {
+                    Text("Show Time At Location")
+                }
+            }
+        }
+    }
+    ```
 
    * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
    * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
@@ -94,7 +98,11 @@ a `TextField` composable:
             var location by remember { mutableStateOf("Europe/Paris") }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
     
-            Column {
+            Column(
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(timeAtLocation)
                 TextField(value = location, onValueChange = { location = it })
                 Button(onClick = { timeAtLocation = "13:30" }) {
@@ -184,41 +192,44 @@ time message could be rendered more prominently.
 
 1. To address these issues, use the following version of the `App` composable:
 
-   ```kotlin
-   @Composable
-   @Preview
-   fun App() {
-       MaterialTheme {
-           var location by remember { mutableStateOf("Europe/Paris") }
-           var timeAtLocation by remember { mutableStateOf("No location selected") }
-   
-           Column(modifier = Modifier.padding(20.dp)) {
-               Text(
-                   timeAtLocation,
-                   style = TextStyle(fontSize = 20.sp),
-                   textAlign = TextAlign.Center,
-                   modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
-               )
-               TextField(value = location,
-                   modifier = Modifier.padding(top = 10.dp),
-                   onValueChange = { location = it })
-               Button(modifier = Modifier.padding(top = 10.dp),
-                   onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
-                   Text("Show Time")
-               }
-           }
-       }
-   }
-   ```
+    ```kotlin
+    @Composable
+    @Preview
+    fun App() {
+        MaterialTheme {
+            var location by remember { mutableStateOf("Europe/Paris") }
+            var timeAtLocation by remember { mutableStateOf("No location selected") }
+    
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
+                Text(
+                    timeAtLocation,
+                    style = TextStyle(fontSize = 20.sp),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
+                )
+                TextField(value = location,
+                    modifier = Modifier.padding(top = 10.dp),
+                    onValueChange = { location = it })
+                Button(modifier = Modifier.padding(top = 10.dp),
+                    onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+                    Text("Show Time")
+                }
+            }
+        }
+    }
+    ```
 
     * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and the `TextField`.
     * The `Text` composable fills the available horizontal space and centers its content.
     * The `style` parameter customizes the appearance of the `Text`.
 
 2. Follow the IDE's instructions to import the missing dependencies.
-   
-    * For `TextAlign`, use the `androidx.compose.ui.text.style` version.
-    * For `Alignment`, use the `androidx.compose.ui` version.
+    For `Alignment`, use the `androidx.compose.ui` version.
 
 3. Run the application to see how the appearance has improved:
 
@@ -266,7 +277,12 @@ list.
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
     
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
@@ -376,7 +392,12 @@ code to load and display them:
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
 
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),

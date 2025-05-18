@@ -91,7 +91,12 @@ minimalistic but complete Compose Multiplatform UI:
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier
+                .safeContentPadding()
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
@@ -145,10 +150,11 @@ Learn how to [configure and connect a hardware device and run your application o
 
 ### Run your application on iOS
 
-1. Launch Xcode in a separate window to complete the initial setup. If it's the first time you launch Xcode, you
-   may also need to accept its license terms and allow it to perform some necessary initial tasks.
-2. In IntelliJ IDEA, select **iosApp** in the list of run configurations and click **Run**. By default, the run configuration
-   starts a simulated device available in Xcode and runs the app there. If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+If you haven't launched Xcode as part of the initial setup, do that before trying to run the iOS app.
+
+In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
+and click **Run**.
+If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
 ![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
 
@@ -252,8 +258,8 @@ The web application opens automatically in your browser. Alternatively, you can 
 ```shell
    http://localhost:8080/
 ```
-> The port number can vary because the 8080 port may be unavailable. You can find the actual port number in the 
-> Gradle build console.
+> The port number can vary because the 8080 port may be unavailable.
+> You can find the actual port number in the Gradle build console.
 >
 {style="tip"}
 
