@@ -158,7 +158,7 @@ To run the Android app, start the **composeApp** run configuration:
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
 To run the Android app on Windows or Linux, create an **Android App** run configuration
-and choose the module **<project name>.composeApp**.
+and choose the module **[project name].composeApp**.
 
 By default, it runs on the first available virtual device:
 
@@ -191,8 +191,8 @@ The default run configuration for a desktop app is created as **composeApp [desk
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
-To run the Android app on Windows or Linux, create a **Gradle** run configuration pointing
-to the **<app name>:composeApp** Gradle project with the following command:
+To run the desktop app on Windows or Linux, create a **Gradle** run configuration pointing
+to the **[app name]:composeApp** Gradle project with the following command:
 
 ```shell
 desktopRun -DmainClass=com.example.myapplication.MainKt --quiet
@@ -209,8 +209,8 @@ The default run configuration for a web app is created as **composeApp [wasmJs]*
 
 ![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
-To run the Android app on Windows or Linux, create a **Gradle** run configuration pointing
-to the **<app name>:composeApp** Gradle project with the following command:
+To run the web app on Windows or Linux, create a **Gradle** run configuration pointing
+to the **[app name]:composeApp** Gradle project with the following command:
 
 ```shell
 wasmJsBrowserDevelopmentRun
