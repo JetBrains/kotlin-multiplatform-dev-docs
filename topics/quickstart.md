@@ -144,6 +144,18 @@ If you're on Windows or Linux:
 
 Since the Kotlin Multiplatform IDE plugin does not support Windows or Linux yet
 
+## Consult the preflight checks
+
+You can make sure there are no environment issues with the project setup by opening
+the **Project Environment Preflight Checks** tool window:
+click the preflight checks icon on the right sidebar or the bottom bar ![Preflight checks icon with a plane](ide-preflight-checks.png)
+In this tool window, you can see the messages related to these checks, rerun them, or change their settings. 
+
+Preflight checks commands are also available in the **Search Everywhere** dialog.
+Press double **Shift** and search for commands containing the word "preflight":
+
+![Search Everywhere menu with the word "preflight entered"](double-shift-preflight-checks.png)
+
 ## Run the sample apps
 
 The project created by the IDE wizard includes pregenerated run configurations for iOS, Android,
