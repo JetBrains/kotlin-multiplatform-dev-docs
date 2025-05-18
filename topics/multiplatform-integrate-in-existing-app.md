@@ -31,7 +31,7 @@ After that you'll use your cross-platform code in the Android application, and t
    https://github.com/Kotlin/kmp-integration-sample
    ```
 
-   > The `master` branch contains the project's initial state — a simple Android application. To see the final state
+   > The `master` branch contains the project's initial state – a simple Android application. To see the final state
    > with the iOS application and the shared module, switch to the `final` branch.
    >
    {style="tip"}

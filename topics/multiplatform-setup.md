@@ -130,8 +130,8 @@ To make sure everything works as expected, install and run the KDoctor tool:
    <def title="Command line">
             <p>Make sure you have all the necessary tools installed:</p>
             <list>
-              <li><code>command not found: brew</code> — <a href="https://brew.sh/">install Homebrew</a>.</li>
-              <li><code>command not found: java</code> — <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
+              <li><code>command not found: brew</code> – <a href="https://brew.sh/">install Homebrew</a>.</li>
+              <li><code>command not found: java</code> – <a href="https://www.oracle.com/java/technologies/javase-downloads.html">install Java</a>.</li>
            </list>
     </def>
    <def title="Still having trouble?">

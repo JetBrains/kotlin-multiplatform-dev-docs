@@ -212,7 +212,7 @@ gpg --armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > ke
 
 This command will create a `key.gpg` file which contains your private key.
 
-> Never share your private key file with anyone — only you should have access to it
+> Never share your private key file with anyone – only you should have access to it
 > since the private key enables signing files with your credentials.
 > 
 {style="warning"}

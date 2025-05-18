@@ -282,6 +282,6 @@ Discover code already written for KMP:
   * [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform), projects implemented with Kotlin Multiplatform.
   * [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample),
       a list of sample projects written with KMP.
-* [klibs.io](https://klibs.io) — search platform for KMP libraries, with more than 2000 libraries indexed so far,
+* [klibs.io](https://klibs.io) – search platform for KMP libraries, with more than 2000 libraries indexed so far,
     including OkHttp, Ktor, Coil, Koin, SQLDelight, and others.
 

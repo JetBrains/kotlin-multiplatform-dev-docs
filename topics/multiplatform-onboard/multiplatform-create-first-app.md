@@ -178,7 +178,7 @@ Here, the common source set defines an expected `getPlatform()` function and has
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 into a single `getPlatform()` function with its actual implementations.
 
-That's why expected and actual declarations should be defined in the same package — they are merged into one declaration
+That's why expected and actual declarations should be defined in the same package – they are merged into one declaration
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
 calls a correct actual implementation.
 
