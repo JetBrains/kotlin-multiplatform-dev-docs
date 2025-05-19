@@ -296,13 +296,12 @@ list.
                     ) {
                         countries().forEach { (name, zone) ->
                             DropdownMenuItem(
+                                text = {   Text(name)},
                                 onClick = {
                                     timeAtLocation = currentTimeAt(name, zone)
                                     showCountries = false
                                 }
-                            ) {
-                                Text(name)
-                            }
+                            )
                         }
                     }
                 }
@@ -411,20 +410,19 @@ code to load and display them:
                     ) {
                         countries.forEach { (name, zone, image) ->
                             DropdownMenuItem(
-                                onClick = {
-                                    timeAtLocation = currentTimeAt(name, zone)
-                                    showCountries = false
-                                }
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                text = { Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
                                         painterResource(image),
                                         modifier = Modifier.size(50.dp).padding(end = 10.dp),
                                         contentDescription = "$name flag"
                                     )
                                     Text(name)
+                                } },
+                                onClick = {
+                                    timeAtLocation = currentTimeAt(name, zone)
+                                    showCountries = false
                                 }
-                            }
+                            )
                         }
                     }
                 }
