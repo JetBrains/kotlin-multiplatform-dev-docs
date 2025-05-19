@@ -1,12 +1,16 @@
 [//]: # (title: Create your Compose Multiplatform app)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
-   <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
-   <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Compose Multiplatform app</strong><br/>
-      <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
-      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
-      <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application <br/>
-  </p>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
+    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Compose Multiplatform app</strong><br/>
+        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
+        <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project <br/>      
+        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application <br/>
+    </p>
 </tldr>
 
 Here, you'll learn how to create and run your first Compose Multiplatform application using IntelliJ IDEA.

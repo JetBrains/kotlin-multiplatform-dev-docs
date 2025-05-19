@@ -1,5 +1,12 @@
 [//]: # (title: Test your multiplatform app − tutorial)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
+
 In this tutorial, you'll learn how to create, configure, and run tests in Kotlin Multiplatform applications.
 
 Tests for multiplatform projects can be divided into two categories:

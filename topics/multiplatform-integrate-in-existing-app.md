@@ -1,5 +1,12 @@
 [//]: # (title: Make your Android application work on iOS – tutorial)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
+
 Learn how to make your existing Android application cross-platform so that it works both on Android and iOS.
 You'll be able to write code and test it for both Android and iOS only once, in one place.
 

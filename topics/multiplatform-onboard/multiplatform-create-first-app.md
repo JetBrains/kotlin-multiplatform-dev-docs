@@ -1,6 +1,10 @@
 [//]: # (title: Create your Kotlin Multiplatform app)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
     <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
     <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Kotlin Multiplatform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>

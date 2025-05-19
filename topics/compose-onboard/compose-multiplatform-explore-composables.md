@@ -1,5 +1,10 @@
 [//]: # (title: Explore composable code)
+
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
    <p>This is the second part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Explore composable code</strong><br/>
