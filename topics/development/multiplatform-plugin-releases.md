@@ -30,7 +30,7 @@ To check your Kotlin version and update it, go to **Settings** | **Plugins** or 
 
 ## Release details
 
-The following table lists the details of the latest releases of Kotlin Multiplatform plugin for Android Studio: 
+The following table lists the releases of the Kotlin Multiplatform IDE plugin: 
 
 <table> 
 <tr>
@@ -61,7 +61,7 @@ The Kotlin Multiplatform plugin was rebuilt from the ground up:
 * Automatically generated run configurations for all supported platforms, with the device selector for iOS and Android.
 * Cross-language support: cross-language navigation and debugging for Swift and Kotlin, along with Swift syntax highlighting
     and quick documentation.
-* Compose Multiplatform support: the Kotlin Multiplatform plugin now supports multiplatform Compose resources,
+* Compose Multiplatform support: the Kotlin Multiplatform plugin now supports Compose Multiplatform resources,
     autocompletion, and UI previews for common code (the [previous Compose Multiplatform plugin](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
     can be safely uninstalled).
 * Compose Hot Reload: instantly see UI changes without restarting the app (with a desktop JVM target).
@@ -76,7 +76,7 @@ Known issues:
 <td>
 
 The plugin works with [any of the Kotlin versions](https://kotlinlang.org/docs/releases.html#release-details),
-but some of its functionality relies on Kotlin 2.1.21.
+but most of its functionality relies on Kotlin 2.1.21.
 Updating to the latest stable Kotlin version ensures the best experience.
 
 This version also requires K2 mode, so make sure to enable it:
@@ -188,7 +188,7 @@ Released: 5 October, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -210,7 +210,7 @@ Released: 24 May, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -232,7 +232,7 @@ Released: 12 April, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -255,7 +255,7 @@ Released: 30 January, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -274,7 +274,7 @@ Released: 30 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -296,7 +296,7 @@ Released: 22 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -325,7 +325,7 @@ Released: 12 September, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -344,7 +344,7 @@ Released: 9 June, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -363,7 +363,7 @@ Released: 4 April, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -387,7 +387,7 @@ Released: 15 February, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -416,7 +416,7 @@ Released: 16 November, 2021
 </td>
 <td>
 
-* [Kotlin 1.6.0](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.6.0](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -442,7 +442,7 @@ Released: August 2, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -462,7 +462,7 @@ Released: June 10, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -481,7 +481,7 @@ Released: May 25, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -502,7 +502,7 @@ Use this version of the plugin with Android Studio 4.2 or Android Studio 2020.3.
 </td>
 <td>
 
-* [Kotlin 1.5.0](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -525,7 +525,7 @@ Released: April 5, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -547,7 +547,7 @@ Released: March 3, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -568,7 +568,7 @@ Use this version of the plugin with Android Studio 4.2.
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -594,7 +594,7 @@ Released: November 23, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.20](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.20](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
