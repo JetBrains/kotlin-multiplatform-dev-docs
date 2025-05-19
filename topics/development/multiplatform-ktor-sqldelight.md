@@ -1,5 +1,12 @@
 [//]: # (title: Create a multiplatform app using Ktor and SQLDelight)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
+
 This tutorial demonstrates how to use IntelliJ IDEA to create an advanced mobile application for iOS and Android using
 Kotlin Multiplatform.
 This application is going to:
