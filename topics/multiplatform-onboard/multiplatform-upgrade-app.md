@@ -683,9 +683,13 @@ every time the flow emits a value.
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
+<!-- sample needs to be updated
+
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 >
 {style="tip"}
+
+-->
 
 ## Next step
 

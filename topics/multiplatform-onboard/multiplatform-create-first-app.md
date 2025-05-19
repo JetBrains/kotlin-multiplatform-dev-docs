@@ -232,9 +232,13 @@ such as properties and classes. Let's implement an expected property:
    }
    ```
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
->
-{style="tip"}
+<!-- sample needs to be updated
+
+    > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
+    >
+    {style="tip"}
+
+-->
 
 ## Run your application
 
