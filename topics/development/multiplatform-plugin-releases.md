@@ -1,24 +1,24 @@
-[//]: # (title: Android Studio plugin releases)
+[//]: # (title: Kotlin Multiplatform IDE plugin releases)
 
-The [Kotlin Multiplatform plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-helps you develop applications both for Android and iOS.
-Ensure that you have the latest version of the plugin to work with Kotlin Multiplatform projects.
+The [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+helps you develop cross-platform applications for Android, iOS, desktop, and web.
+Make sure that you have the latest version of the plugin to work with Kotlin Multiplatform projects.
+
+It is compatible both with IntelliJ IDEA (starting with version 2025.1.1.1)
+and Android Studio (starting with Narwhal 2025.1.1 Canary 10).
 
 > For the information on the Kotlin Multiplatform Gradle plugin, see its [DSL reference](multiplatform-dsl-reference.md)
 > and the [Compatibility guide](multiplatform-compatibility-guide.md).
 > 
 {style="tip"}
 
-## Update to the new release
+## Update to the latest release
 
-Android Studio suggests updating to a new Kotlin Multiplatform plugin release as soon as it's available.
-If you accept the suggestion, it automatically updates the plugin to the latest version.
-To complete the plugin installation, restart your Android Studio.
+Your IDE suggests updating to a new Kotlin Multiplatform plugin release as soon as it's available.
+If you accept the suggestion, the plugin is updated to the latest version.
+To complete the plugin installation, restart the IDE.
 
 You can check the plugin version and update it manually in **Settings** | **Plugins**.
-
-You need a compatible version of Kotlin for the plugin to work correctly. You can find compatible versions in the [release details](#release-details).
-To check your Kotlin version and update it, go to **Settings** | **Plugins** or in **Tools** | **Kotlin** | **Configure Kotlin in Project**.
 
 > If you don't have a compatible version of Kotlin installed, the Kotlin Multiplatform plugin will be disabled.
 > Update your Kotlin version and then enable the plugin again in **Settings** | **Plugins**.
@@ -41,6 +41,42 @@ Release highlights
 Compatible Kotlin version
 </th>
 </tr>
+<tr id="0.9">
+<td>
+
+**0.9**
+
+Released: 19 May, 2025
+
+</td>
+<td>
+
+The Kotlin Multiplatform plugin was rebuilt from the ground up:
+
+* Integrated New Project wizard for supported IDEs.
+* Preflight environment checks that help find and solve issues with the setup, including Java, Android, Xcode, and Gradle.
+* Automatically generated run configurations for all supported platforms, with the device selector for iOS and Android.
+* Cross-language support: cross-language navigation and debugging for Swift and Kotlin, along with Swift syntax highlighting
+    and quick documentation.
+* Compose Multiplatform support: the Kotlin Multiplatform plugin now supports multiplatform Compose resources,
+    autocompletion, and UI previews for common code.
+* Compose Hot Reload: instantly see UI changes without restarting the app (with a desktop JVM target).
+    See [Hot Reload docs] TODO link for more information.
+
+Known issues:
+
+* In Android Studio, the Compose debugger currently doesn't work with Kotlin 2.1.20 and 2.1.21.
+    This issue will be fixed in Kotlin 2.2.0-RC2.
+
+</td>
+<td>
+
+The plugin works with [any of the Kotlin versions](https://kotlinlang.org/docs/releases.html#release-details),
+but some of its functionality relies on Kotlin 2.1.21.
+Updating to the latest stable Kotlin version ensures the best experience.
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -56,7 +92,7 @@ Released: 06 December, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -75,7 +111,7 @@ Released: 23 July, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -95,7 +131,7 @@ Released: 16 May, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -119,7 +155,7 @@ Released: 9 November, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
