@@ -1,11 +1,17 @@
 [//]: # (title: Explore composable code)
+
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
-   <p>This is the second part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>
+    <p>This is the second part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
       <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Explore composable code</strong><br/>
       <img src="icon-3-todo.svg" width="20" alt="Third step"/> Modify the project<br/>      
       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Create your own application<br/>
-  </p>
+    </p>
 </tldr>
 
 Let's examine closely the sample composable created by the Kotlin Multiplatform wizard. First, there is the
@@ -20,21 +26,26 @@ In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
+  MaterialTheme {
+    var showContent by remember { mutableStateOf(false) }
+    Column(
+      modifier = Modifier
+        .safeContentPadding()
+        .fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Button(onClick = { showContent = !showContent }) {
+        Text("Click me!")
+      }
+      AnimatedVisibility(showContent) {
+        val greeting = remember { Greeting().greet() }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+          Image(painterResource(Res.drawable.compose_multiplatform), null)
+          Text("Compose: $greeting")
         }
+      }
     }
+  }
 }
 ```
 
@@ -92,6 +103,7 @@ For Android, open the `MainActivity.kt` file in `composeApp/src/androidMain/kotl
 ```kotlin
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {

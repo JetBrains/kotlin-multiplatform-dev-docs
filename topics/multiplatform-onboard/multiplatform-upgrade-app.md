@@ -1,6 +1,11 @@
 [//]: # (title: Share more logic between iOS and Android)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>
     <p>This is the fourth part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your Kotlin Multiplatform app</a><br/>
       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
@@ -96,7 +101,7 @@ kotlin {
 }
 ```
 
-Synchronize the Gradle files by clicking **Sync Now** in the notification.
+Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
 ## Create API requests
 
@@ -239,21 +244,24 @@ suspending functions return.
 
 3. Change the `greet()` function to return a `Flow`:
 
-   ```kotlin
-   import kotlinx.coroutines.delay
-   import kotlinx.coroutines.flow.Flow
-   import kotlinx.coroutines.flow.flow
-   import kotlin.time.Duration.Companion.seconds
-
-   fun greet(): Flow<String> = flow {
-        emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
-        delay(1.seconds)
-        emit("Guess what this is! > ${platform.name.reversed()}")
-        delay(1.seconds)
-        emit(daysPhrase())
-        emit(rocketComponent.launchPhrase())
-   }
-   ```
+    ```kotlin
+    import kotlinx.coroutines.delay
+    import kotlinx.coroutines.flow.Flow
+    import kotlinx.coroutines.flow.flow
+    import kotlin.time.Duration.Companion.seconds
+    
+    class Greeting {
+        // ...
+        fun greet(): Flow<String> = flow {
+            emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
+            delay(1.seconds)
+            emit("Guess what this is! > ${platform.name.reversed()}")
+            delay(1.seconds)
+            emit(daysPhrase())
+            emit(rocketComponent.launchPhrase())
+        }
+    }
+    ```
 
    * The `Flow` is created here with the `flow()` builder function, which wraps all the statements.
    * The `Flow` emits strings with a delay of one second between each emission. The last element is only emitted after
@@ -301,7 +309,8 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-2. In `composeApp/src/androidMain/kotlin`, create a new `MainViewModel` Kotlin class:
+2. In the `composeApp/src/androidMain/kotlin/com/jetbrains/greeting/greetingkmp` directory,
+    create a new `MainViewModel` Kotlin class:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -374,7 +383,7 @@ The view model will manage the data from the activity and won't disappear when t
 
 #### Use the view model's flow
 
-1. In `composeApp/src/androidMain/kotlin`, locate the `App.kt` file and update it, replacing the previous implementation:
+1. In `composeApp/src/androidMain/kotlin`, open the `App.kt` file and update it, replacing the previous implementation:
 
     ```kotlin
     import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -387,24 +396,26 @@ The view model will manage the data from the activity and won't disappear when t
             val greetings by mainViewModel.greetingList.collectAsStateWithLifecycle()
     
             Column(
-                modifier = Modifier.padding(all = 20.dp),
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 greetings.forEach { greeting ->
                     Text(greeting)
-                    Divider()
+                    HorizontalDivider()
                 }
             }
         }
     }
     ```
 
-   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
+   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the ViewModel's flow
      and represent it as a composable state in a lifecycle-aware manner.
    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
      arranged vertically and separated by dividers.
 
-2. To see the results, re-run your **composeApp** configuration in Android Studio:
+2. To see the results, rerun your **composeApp** configuration:
 
    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
@@ -415,15 +426,9 @@ pattern again to connect the UI to the shared module, which contains all the bus
 
 The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-> If you see errors in Xcode regarding the shared module or when updating your code, run the **iosApp** configuration
-> from Android Studio.
->
-{style="tip"}
+#### Introducing a ViewModel
 
-#### Introducing a view model
-
-1. Go back to your iOS app in Xcode.
-2. In `iosApp/iOSApp.swift`, update the entry point for your app:
+1. In `iosApp/iOSApp.swift`, update the entry point for your app:
 
    ```swift
    @main
@@ -436,7 +441,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
    }
    ```
 
-3. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
+2. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
    Call the `startObserving()` function within a `task()` call to support concurrency:
 
     ```Swift
@@ -476,12 +481,12 @@ The module is already imported in the `ContentView.swift` file with the `import 
 
    * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
    * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-     SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
+     SwiftUI connects the ViewModel (`ContentView.ViewModel`) with the view (`ContentView`).
    * `ContentView.ViewModel` is declared as an `ObservableObject`.
    * The `@Published` wrapper is used for the `greetings` property.
-   * The `@ObservedObject` property wrapper is used to subscribe to the view model.
+   * The `@ObservedObject` property wrapper is used to subscribe to the ViewModel.
 
-Now the view model will emit signals whenever this property changes.
+Now the ViewModel will emit signals whenever this property changes.
 
 #### Choose a library to consume flows from iOS
 
@@ -490,77 +495,29 @@ and [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) 
 that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
 
 The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
-Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bi-directional
+Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
-The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating necessary
-wrappers. KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift. It has been
-available longer than SKIE, and thus you may encounter fewer edge cases with it today. Using KMP-NativeCoroutines requires
-adding a Cocoapod or SPM dependency in iOS projects.
+The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
+wrappers.
+KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
+Using KMP-NativeCoroutines requires adding a Cocoapod or SPM dependency in iOS projects.
 
-#### Option 1. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
-
-> We recommend using the latest version of the library.
-> Check the [SKIE repository](https://github.com/touchlab/SKIE/releases) to see whether a newer version of the plugin is available.
->
-{style="note"}
-
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Now** button.
-
-```kotlin
-plugins {
-   id("co.touchlab.skie") version "%skieVersion%"
-}
-```
-
-##### Consume the flow using SKIE
-
-Return to Xcode and update the code using the library:
-
-1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
-   property every time the flow emits a value.
-2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
-   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
-
-    ```Swift
-    // ...
-    extension ContentView {
-        @MainActor
-        class ViewModel: ObservableObject {
-            @Published var greetings: [String] = []
-            
-            func startObserving() async {
-                for await phrase in Greeting().greet() {
-                    self.greetings.append(phrase)
-                }
-            }
-        }
-    }
-    ```
-
-3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
-
-   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
->
-{style="tip"}
-
-#### Option 2. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
+#### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
 >
 {style="note"}
 
-1. Return to Android Studio. In the `build.gradle.kts` file of the _whole project_,
+1. In the `build.gradle.kts` file of the _whole project_,
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
 
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("2.0.0-1.0.24").apply(false)
+        id("com.google.devtools.ksp").version("%kspVersion%").apply(false)
         id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```
@@ -589,7 +546,7 @@ Return to Xcode and update the code using the library:
     }
     ```
 
-4. Synchronize the Gradle files by clicking **Sync Now** in the notification.
+4. Click the **Sync Gradle Changes** button to synchronize the Gradle files.
 
 ##### Mark the flow with KMP-NativeCoroutines
 
@@ -612,8 +569,9 @@ Return to Xcode and update the code using the library:
 
 ##### Import the library using SPM in XCode
 
-1. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
-2. In the search bar, enter the package name:
+1. Go to **File** | **Open Project in Xcode**.
+2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
+3. In the search bar, enter the package name:
 
      ```none
     https://github.com/rickclephas/KMP-NativeCoroutines.git
@@ -678,13 +636,73 @@ every time the flow emits a value.
     }
     ```
 
-3. Re-run the **iosApp** configuration from Android Studio to make sure your app's logic is synced:
+3. Rerun the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
 
    ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+
+<!-- sample needs to be updated
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
 >
 {style="tip"}
+
+-->
+
+#### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
+
+> Right now, SKIE doesn't support the latest Kotlin version necessary for the Kotlin Multiplatform IDE plugin.
+> You can try using a preview version while downgrading Kotlin to 2.1.20.
+>
+{style="warning"}
+
+To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
+
+```kotlin
+plugins {
+   id("co.touchlab.skie") version "%skieVersion%"
+}
+```
+
+Make sure that the Kotlin version in your `gradle/libs.toml` file is set to 2.1.20:
+
+```text
+kotlin = "2.1.20"
+```
+
+##### Consume the flow using SKIE
+
+You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
+property every time the flow emits a value.
+
+Make sure `ViewModel` is marked with the `@MainActor` annotation.
+The annotation ensures that all asynchronous operations within `ViewModel` run on the main thread
+to comply with the Kotlin/Native requirement:
+
+```Swift
+// ...
+extension ContentView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        @Published var greetings: [String] = []
+        
+        func startObserving() async {
+            for await phrase in Greeting().greet() {
+                self.greetings.append(phrase)
+            }
+        }
+    }
+}
+```
+
+Rerun the **iosApp** configuration to make sure your app's logic is synced:
+
+![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+
+<!-- sample needs to be updated
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
+>
+{style="tip"}
+-->
 
 ## Next step
 

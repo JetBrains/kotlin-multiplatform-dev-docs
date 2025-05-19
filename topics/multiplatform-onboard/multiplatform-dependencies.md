@@ -1,6 +1,11 @@
 [//]: # (title: Add dependencies to your project)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>   
     <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your Kotlin Multiplatform app</a><br/>
         <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
@@ -56,11 +61,8 @@ multiplatform support, is the most convenient way to work with dates in your sha
    }
    ```
 
-3. Synchronize the Gradle files by clicking **Sync Now** in the notification.
-
-   ![Synchronize the Gradle files](gradle-sync.png)
-
-4. In `shared/src/commonMain/kotlin`, create a new file `NewYear.kt` in the project directory.
+3. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
+4. In `shared/src/commonMain/kotlin`, create a new file, `NewYear.kt`, in the project directory where your `Greeting.kt` file is located.
 5. Update the file with a short function that calculates
    the number of days from today until the New Year using the `date-time` date arithmetic:
    
@@ -90,13 +92,17 @@ multiplatform support, is the most convenient way to work with dates in your sha
     }
     ```
 
-7. To see the results, re-run your **composeApp** and **iosApp** configurations from Android Studio:
+7. To see the results, re-run your **composeApp** and **iosApp** configurations from IntelliJ IDEA:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
->
-{style="tip"}
+<!-- sample needs to be updated
+
+    > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
+    >
+    {style="tip"}
+
+-->
 
 ## Next step
 

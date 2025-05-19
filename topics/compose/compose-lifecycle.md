@@ -18,7 +18,7 @@ The flow of lifecycle states and events
 ## Lifecycle implementation
 
 Composables usually don't need unique lifecycles: a common `LifecycleOwner` provides a lifecycle
-for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle —
+for all interconnected entities. By default, all composables created by Compose Multiplatform share the same lifecycle –
 they can subscribe to its events, refer to the lifecycle state, and so on.
 
 > The `LifecycleOwner` object is provided as a [CompositionLocal](https://developer.android.com/reference/kotlin/androidx/compose/runtime/CompositionLocal).

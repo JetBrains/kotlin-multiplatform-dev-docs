@@ -1,6 +1,11 @@
 [//]: # (title: Create your Kotlin Multiplatform app)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>
     <p>This is the first part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial.</p>
     <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Kotlin Multiplatform app</strong><br/>
        <img src="icon-2-todo.svg" width="20" alt="Second step"/> Update the user interface<br/>
@@ -10,7 +15,7 @@
     </p>
 </tldr>
 
-Here you will learn how to create and run your first Kotlin Multiplatform application using Android Studio.
+Here you will learn how to create and run your first Kotlin Multiplatform application using IntelliJ IDEA.
 
 Kotlin Multiplatform technology simplifies the development of cross-platform projects.
 Kotlin Multiplatform applications can work on a variety of platforms like iOS, Android, macOS, Windows, Linux, web, and others.
@@ -18,48 +23,33 @@ Kotlin Multiplatform applications can work on a variety of platforms like iOS, A
 One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
 You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.
 
-## Set up the environment
+## Create a project
 
-Check out the article about [setting up an environment for Kotlin Multiplatform development](multiplatform-setup.md),
-if you haven't already.
-Make sure that you have:
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+2. In IntelliJ IDEA, select **File** | **New** | **Project**.
+3. In the panel on the left, select **Kotlin Multiplatform**.
+4. Specify the following fields in the **New Project** window:
+   * **Name**: GreetingKMP
+   * **Group**: com.jetbrains.greeting
+   * **Artifact**: greetingkmp
+   
+   ![Create Compose Multiplatform project](create-first-multiplatform-app.png){width=800}
 
-* Installed the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) for Android Studio.
-* Launched Xcode at least once and accepted the terms of use if you plan to build iOS apps.
-* Run Kdoctor to check for any issues in the setup.
+5. Select **Android** and **iOS** targets.
+6. For iOS, select the **Do not share UI** option to keep the UI native.
+7. Once you've specified all the fields and targets, click **Create**.
 
-The following instructions assume that you have all software necessary for the platforms you're aiming at.
-
-## Create the project with a wizard
-
-1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-2. On the **New project** tab, change the project name to "GreetingKMP" and the project ID to "com.jetbrains.greeting".
-3. Ensure that the **Android** and **iOS** options are selected.
-4. For iOS, select the **Do not share UI** option to keep the UI native.
-5. Click the **Download** button and unpack the resulting archive.
-
-![Kotlin Multiplatform wizard](multiplatform-web-wizard-1.png){width=450}
+> IntelliJ IDEA may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+> We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
+> (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
+>
+{style="note"}
 
 ## Examine the project structure
 
-1. Launch Android Studio.
-2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
-3. Navigate to the unpacked project folder and then click **Open**.
+In IntelliJ IDEA, expand the `GreetingKMP` folder.
 
-   Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
-
-   > Android Studio may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
-   > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
-   > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
-   >
-   {style="note"}
-
-4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
-   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
-
-   ![Select the project view](select-project-view.png){width=200}
-
-Each Kotlin Multiplatform project includes three modules:
+This Kotlin Multiplatform project includes three modules:
 
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
   between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
@@ -78,7 +68,7 @@ In Kotlin Multiplatform, different source sets in a shared module can target dif
 The common source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
-![Source sets and modules structure](basic-project-structure-2.png){width=200}
+![Source sets and modules structure](basic-project-structure-2.png){width=350}
 
 When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
 When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
@@ -91,28 +81,22 @@ The common source set contains shared code that can be used across multiple targ
 It's designed to contain code that is platform-independent. If you try to use platform-specific APIs in the common source set,
 the IDE will show a warning:
 
-1. Open the `Greeting.kt` file and try to access one of the Java classes, `java.util.Random().nextBoolean()`, inside the `greet()` function:
+1. Open the `shared/src/commonMain/kotlin/com/jetbrains/greeting/greetingkmp/Greeting.kt` file
+    where you can find an automatically generated `Greeting` class with a `greet()` function:
 
-   ```kotlin
-   import java.util.Random
-   
-   class Greeting {
-       private val platform: Platform = getPlatform()
-   
-       fun greet(): String {
-           val firstWord = if (Random().nextBoolean()) "Hi!" else "Hello!"
-   
-           return firstWord
-       }
-   }
-   ```
+    ```kotlin
+    class Greeting {
+        private val platform = getPlatform()
 
-   Android Studio highlights that the `Random` class is unresolved because you can't call specific Java functions from the common Kotlin code.
-2. Follow the IDE's suggestions and replace it with `kotlin.random.Random` from the Kotlin standard library.
-   This is a multiplatform library that works on all platforms and is included automatically as a dependency.
-3. Remove brackets from `Random()`, as it is an abstract class. The code should now compile successfully.
-4. Add a bit of variety to the greeting. Update the shared code with the `reversed()` call
-   from the Kotlin standard library to reverse the text:
+        fun greet(): String {
+            return "Hello, ${platform.name}!"
+        }
+    }
+    ```
+
+2. Add a bit of variety to the greeting. Import `kotlin.random.Random` from the Kotlin standard library.
+    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
+3. Update the shared code with the `reversed()` call from the Kotlin standard library to reverse the text:
 
     ```kotlin
     import kotlin.random.Random
@@ -128,19 +112,19 @@ the IDE will show a warning:
     }
     ```
 
-Writing the code only in common Kotlin has obvious limitations because it can't use any platform specifics.
+Writing the code only in common Kotlin has obvious limitations because it can't use any platform-specific functionality.
 Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.
 
 ### Check out platform-specific implementations
 
-The common source set can define an interface or an expected declaration. Then each platform source set,
-in this case `androidMain` and `iosMain`, has to provide actual platform-specific implementations for the expected
-declarations from the common source set.
+The common source set can define expected declarations (interfaces, classes, and so on).
+Then each platform source set, in this case `androidMain` and `iosMain`,
+has to provide actual platform-specific implementations for the expected declarations.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 and generates a single declaration with actual implementations.
 
-1. When creating a project with the web wizard or using the Kotlin Multiplatform plugin in Android Studio,
+1. When creating a Kotlin Multiplatform project with IntelliJ IDEA,
    you get a template with the `Platform.kt` file in the `commonMain` module:
 
     ```kotlin
@@ -155,10 +139,11 @@ and generates a single declaration with actual implementations.
    You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
     
     ```kotlin
-    // Platform.android.kt in the androidMain module:    
-    class AndroidPlatform: Platform {
-        override val name: String =
-            "Android ${android.os.Build.VERSION.SDK_INT}"
+    // Platform.android.kt in the androidMain module:
+    import android.os.Build
+
+    class AndroidPlatform : Platform {
+        override val name: String = "Android ${Build.VERSION.SDK_INT}"
     }
     ```
    
@@ -172,9 +157,9 @@ and generates a single declaration with actual implementations.
     }
     ```
 
-    * The `name` property implementation from `AndroidPlatform` uses the Android platform code, namely the `android.os.Build`
-      dependency. This code is written in Kotlin/JVM. If you try to access `java.util.Random` here, this code will compile.
-    * The `name` property implementation from `IOSPlatform` uses iOS platform code, namely the `platform.UIKit.UIDevice`
+    * The `name` property implementation from `AndroidPlatform` uses the Android-specific code, namely the `android.os.Build`
+      dependency. This code is written in Kotlin/JVM. If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
+    * The `name` property implementation from `IOSPlatform` uses iOS-specific code, namely the `platform.UIKit.UIDevice`
       dependency. It's written in Kotlin/Native, meaning you can write iOS code in Kotlin. This code becomes a part of the iOS
       framework, which you will later call from Swift in your iOS application.
 
@@ -182,17 +167,17 @@ and generates a single declaration with actual implementations.
    and actual implementations are provided in the platform code:
 
     ```kotlin
-    // Platform.kt in the commonMain module:
+    // Platform.kt in the commonMain source set
     expect fun getPlatform(): Platform
     ```
    
     ```kotlin
-    // Platform.android.kt in the androidMain module:
+    // Platform.android.kt in the androidMain source set
     actual fun getPlatform(): Platform = AndroidPlatform()
     ```
    
     ```kotlin
-    // Platform.ios.kt in the iosMain module:
+    // Platform.ios.kt in the iosMain source set
     actual fun getPlatform(): Platform = IOSPlatform()
     ```
 
@@ -202,7 +187,7 @@ Here, the common source set defines an expected `getPlatform()` function and has
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 into a single `getPlatform()` function with its actual implementations.
 
-That's why expected and actual declarations should be defined in the same package − they are merged into one declaration
+That's why expected and actual declarations should be defined in the same package – they are merged into one declaration
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
 calls a correct actual implementation.
 
@@ -229,7 +214,7 @@ such as properties and classes. Let's implement an expected property:
 
    You'll get an error saying that expected declarations must not have a body, in this case an initializer.
    The implementations must be provided in actual platform modules. Remove the initializer.
-3. Select the `num` property. Press **Option + Enter** and choose "Add missing actual declarations".
+3. Hover the `num` property and click **Create missed actuals...**.
    Choose the `androidMain` source set. You can then complete the implementation in `androidMain/Platform.android.kt`:
 
    ```kotlin
@@ -242,7 +227,7 @@ such as properties and classes. Let's implement an expected property:
    actual val num: Int = 2
    ```
 
-5. Add the `num` property to the `greet()` function to see the differences:
+5. In the `commonMain/Greeting.kt` file, add the `num` property to the `greet()` function to see the differences:
 
    ```kotlin
    fun greet(): String {
@@ -252,14 +237,21 @@ such as properties and classes. Let's implement an expected property:
    }
    ```
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
->
-{style="tip"}
+<!-- sample needs to be updated
+
+    > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step2).
+    >
+    {style="tip"}
+
+-->
 
 ## Run your application
 
 You can run your multiplatform application for both [Android](#run-your-application-on-android)
-or [iOS](#run-your-application-on-ios) from Android Studio.
+or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
+
+If you have explored the expect/actual mechanism earlier, you can see "[1]" added to the greeting for Android
+and "[2]" added for iOS.
 
 ### Run your application on Android
 
@@ -268,7 +260,7 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
    If you don't have a device in the list, create a [new Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
 
-   ![Run multiplatform app on Android](compose-run-android.png){width=400}
+   ![Run multiplatform app on Android](compose-run-android.png){width=350}
 
    ![First mobile multiplatform app on Android](first-multiplatform-project-on-android-1.png){width=300}
 
@@ -276,15 +268,16 @@ or [iOS](#run-your-application-on-ios) from Android Studio.
 
 ### Run your application on iOS
 
-1. Launch Xcode in a separate window. The first time you do this, you may also need to accept the license terms and allow
-   Xcode to perform some necessary initial tasks.
-2. In Android Studio, select **iosApp** in the list of run configurations and click **Run**.
+If you haven't launched Xcode as part of the initial setup, do that before running the iOS app.
 
-   If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
+and click **Run**.
 
-   ![Run multiplatform app on iOS](compose-run-ios.png){width=450}
+If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
-   ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
+![Run multiplatform app on iOS](compose-run-ios.png){width=350}
+
+![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
 <include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
 

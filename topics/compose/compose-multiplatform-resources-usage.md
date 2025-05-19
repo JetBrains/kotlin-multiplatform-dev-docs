@@ -150,9 +150,9 @@ coroutineScope.launch {
 
 You can use special symbols in string resources:
 
-* `\n` — for a new line
-* `\t` — for a tab symbol
-* `\uXXXX` — for a specific Unicode character
+* `\n` – for a new line
+* `\t` – for a tab symbol
+* `\uXXXX` – for a specific Unicode character
 
 You don't need to escape special XML characters like "@" or "?"
 as you do [for Android strings](https://developer.android.com/guide/topics/resources/string-resource#escaping_quotes). 

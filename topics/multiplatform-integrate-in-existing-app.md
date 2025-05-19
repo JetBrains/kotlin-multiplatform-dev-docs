@@ -1,5 +1,12 @@
 [//]: # (title: Make your Android application work on iOS – tutorial)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
+
 Learn how to make your existing Android application cross-platform so that it works both on Android and iOS.
 You'll be able to write code and test it for both Android and iOS only once, in one place.
 
@@ -10,14 +17,14 @@ To make your application work on both iOS and Android,
 you'll first make your code cross-platform by moving some of it to a shared module.
 After that you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
 
-> If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](multiplatform-setup.md)
+> If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](quickstart.md)
 > first.
 >
 {style="tip"}
 
 ## Prepare an environment for development
 
-1. [Install all the necessary tools and update them to the latest versions](multiplatform-setup.md).
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 
    > You will need a Mac with macOS to complete certain steps in this tutorial, which include writing iOS-specific code
    > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
@@ -31,7 +38,7 @@ After that you'll use your cross-platform code in the Android application, and t
    https://github.com/Kotlin/kmp-integration-sample
    ```
 
-   > The `master` branch contains the project's initial state — a simple Android application. To see the final state
+   > The `master` branch contains the project's initial state – a simple Android application. To see the final state
    > with the iOS application and the shared module, switch to the `final` branch.
    >
    {style="tip"}
@@ -161,9 +168,6 @@ there, and make this code cross-platform.
     ```
 
 2. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
-
-   ![Synchronize the Gradle files](gradle-sync.png)
-
 3. In the `app/src/main/java/` directory, open the `LoginActivity.kt` file in the `com.jetbrains.simplelogin.androidapp.ui.login`
    package.
 4. To make sure that the shared module is successfully connected to your application, dump the `greet()` function
@@ -196,13 +200,13 @@ This is necessary for reusing the code for both Android and iOS.
 1. Move the business logic code `com.jetbrains.simplelogin.androidapp.data` from the `app` directory to
    the `com.jetbrains.simplelogin.shared` package in the `shared/src/commonMain` directory.
 
-   ![Drag and drop the package with the business logic code](moving-business-logic.png){width=350}
+   ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
 
 2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
 
    ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
-3. Ignore all warnings about platform-dependent code and click **Continue**.
+3. Ignore all warnings about platform-dependent code and click **Refactor Anyway**.
 
    ![Warnings about platform-dependent code](warnings-android-specific-code.png){width=450}
 
@@ -418,23 +422,14 @@ but they are beyond the scope of this tutorial.
 
 ### Set up an iOS run configuration in Android Studio
 
-When you made sure that Xcode is set up correctly, you can set up a run configuration for the iOS app in Android Studio:
+Once you've made sure that Xcode is set up correctly, return to Android Studio:
 
-1. Select **Run | Edit configurations** in the main menu.
+1. Select **File | Sync Project with Gradle Files** in the main menu. Android Studio automatically generates a run
+   configuration called **simpleLoginIOS**.
 
-2. To add a new configuration, click the plus sign and choose **iOS Application**.
+2. In the list of run configurations, select **simpleLoginIOS**. Choose an iOS emulator and then click **Run**.
 
-3. Name the configuration "SimpleLoginIOS".
-
-4. In the **Xcode project file** field, select the location of the `simpleLoginIOS.xcodeproj` file.
-
-5. Choose a simulation environment from the **Execution target** list and click **OK**:
-
-   ![Android Studio dialog with the iOS run configuration details filled in](android-studio-ios-run-configuration.png)
-
-6. Check the newly created configuration by pressing the run button to build and launch the iOS app:
-
-   ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=280}
+   ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=400}
 
 ### Use the shared module in the iOS project
 
@@ -522,9 +517,7 @@ and iOS.
 
 2. Run both the iOS and Android applications from Android Studio to see the changes:
 
-   ![iOS application password error](iphone-password-error.png){width=300}
-
-   ![Android application password error](android-password-error.png){width=300}
+   ![Android and iOS applications password error](android-iphone-password-error.png){width=600}
 
 You can review the [final code for this tutorial](https://github.com/Kotlin/kmp-integration-sample/tree/final).
 
@@ -542,6 +535,12 @@ Once you've made your Android application cross-platform, you can move on and:
 * [Add dependencies on multiplatform libraries](multiplatform-add-dependencies.md)
 * [Add Android dependencies](multiplatform-android-dependencies.md)
 * [Add iOS dependencies](multiplatform-ios-dependencies.md)
+
+You can use Compose Multiplatform to create a unified UI across all platforms:
+
+* [Learn about Compose Multiplatform and Jetpack Compose](compose-multiplatform-and-jetpack-compose.md)
+* [Explore available resources for Compose Multiplatform](compose-multiplatform-resources.md)
+* [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
 
 You can also check out community resources:
 
