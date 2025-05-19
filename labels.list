@@ -11,7 +11,9 @@
         href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html">
         Navigation library for the EAP version of Compose Multiplatform.
     </primary-label>
-    
+    <primary-label id="beta" name="Beta" short-name="β" href="https://kotlinlang.org/components-stability.html#stability-levels-explained" color="tangerine">The feature is in Beta. It is almost stable, but migration steps may be required in the future. We'll do our best to minimize any changes you have to make.</primary-label>
+    <primary-label id="alpha" name="Alpha" short-name="α" href="https://kotlinlang.org/components-stability.html#stability-levels-explained" color="strawberry">The feature is in Alpha. It may change incompatibly and require manual migration in the future.</primary-label>
+
     <secondary-label id="Deprecated" name="Deprecated" color="strawberry">Still available, but deprecated.</secondary-label>
     <secondary-label id="Experimental" name="Experimental" color="red">This feature is at the experimental stage of development and can be significantly changed or removed in future releases.</secondary-label>
     <secondary-label id="Android" name="Android">Available in Compose Multiplatform for Android</secondary-label>

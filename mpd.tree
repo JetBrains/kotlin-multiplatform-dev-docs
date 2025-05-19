@@ -91,6 +91,7 @@
 	<toc-element toc-title="Kotlin Multiplatform technology" href="https://kotlinlang.org/docs/multiplatform.html"/>
 	<toc-element toc-title="Tooling">
 		<toc-element topic="recommended-ides.md"/>
+		<toc-element topic="compose-hot-reload.md"/>
 		<toc-element toc-title="Amper configuration tool" topic="amper.md"/>
 	</toc-element>
 	<toc-element toc-title="Multiplatform Gradle DSL reference" href="https://kotlinlang.org/docs/multiplatform-dsl-reference.html"/>
