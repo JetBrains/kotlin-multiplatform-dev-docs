@@ -5,6 +5,7 @@
 
 <tldr>
     <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>
     <p>This is the first part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial.</p>
     <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create your Compose Multiplatform app</strong><br/>
         <img src="icon-2-todo.svg" width="20" alt="Second step"/> Explore composable code <br/>
