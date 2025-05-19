@@ -279,8 +279,5 @@ fun AppEnvironment(content: @Composable () -> Unit) {
 
 ## What's next?
 
-Get more details on [resource qualifiers](compose-multiplatform-resources-setup.md#qualifiers).
-
-[//]: # Learn how to [localize resources](compose-rtl.md).
-
-[//]: # (todo: replace localization link)
+* Get more details on [resource qualifiers](compose-multiplatform-resources-setup.md#qualifiers).
+* Learn how to [localize resources](compose-localize-strings.md).
