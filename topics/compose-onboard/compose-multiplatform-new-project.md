@@ -224,7 +224,7 @@ time message could be rendered more prominently.
                 )
                 TextField(
                     value = location,
-                    onValueChange = { location = it }),
+                    onValueChange = { location = it },
                     modifier = Modifier.padding(top = 10.dp)
                 Button(
                     onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" },
