@@ -177,9 +177,6 @@ By default, it runs on the first available virtual device:
 
 ![Android app ran on a virtual device](run-android-app.png){width=350}
 
-For details on running the Android app (adding virtual devices and setting up physical device connections) see
-[](compose-multiplatform-create-first-app.md).
-
 </tab>
 <tab title="iOS">
 
