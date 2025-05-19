@@ -14,7 +14,7 @@ embedding UIKit components inside Compose Multiplatform UI.
 ## Use Compose Multiplatform inside a UIKit application
 
 To use Compose Multiplatform inside a UIKit application, add your Compose Multiplatform code to
-any [container view controller]( https://developer.apple.com/documentation/uikit/view_controllers).
+any [container view controller](https://developer.apple.com/documentation/uikit/view_controllers).
 This example uses Compose Multiplatform inside the `UITabBarController` class:
 
 ```swift

@@ -3,12 +3,12 @@
 <show-structure depth="3"/>
 
 Compose Multiplatform is interoperable with the [SwiftUI](https://developer.apple.com/xcode/swiftui/) framework.
-You can embed Compose Multiplatform within a SwiftUI application as well as embed native SwiftUI components within
+You can embed Compose Multiplatform within a SwiftUI application as well as embed native SwiftUI components within the
 Compose Multiplatform UI. This page provides examples both for using Compose Multiplatform inside SwiftUI
 and for embedding SwiftUI inside a Compose Multiplatform app.
 
 > To learn about UIKit interoperability, see the [](compose-uikit-integration.md) article.
-> 
+>
 {style="tip"}
 
 ## Use Compose Multiplatform inside a SwiftUI application
@@ -205,6 +205,55 @@ Main_iosKt.ComposeEntryPointWithUIViewController(createUIViewController: {
 })
 ```
 
+To make this work, define `CameraView` as follows:
+
+```swift
+import SwiftUI
+import UIKit
+
+struct CameraView: UIViewControllerRepresentable {
+    let imageHandler: (UIImage) -> Void
+    @Environment(\.presentationMode) private var presentationMode
+
+    init(imageHandler: @escaping (UIImage) -> Void) {
+        self.imageHandler = imageHandler
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: CameraView
+
+        init(_ parent: CameraView) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController,
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.imageHandler(image)
+            }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+```
+
 Now, let's look at an advanced example. This code presents a camera view and displays a thumbnail of the captured image
 in the same SwiftUI view:
 
@@ -247,6 +296,11 @@ The `CameraPreview` view performs the following tasks:
 * Embeds SwiftUI's native `Image` view to preview the photo.
 * Reuses the same `UIViewControllerRepresentable`-based `CameraView` as before, but integrates it more deeply into
   the SwiftUI state system.
+
+> To test on a real device, you need to add the `NSCameraUsageDescription` key to your app's `Info.plist` file.
+> Without this, the app will crash at runtime.
+>
+{style="note"}
 
 ### Web view
 
