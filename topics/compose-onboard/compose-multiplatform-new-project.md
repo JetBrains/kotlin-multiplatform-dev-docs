@@ -32,6 +32,7 @@ To get started, implement a new `App` composable:
     fun App() {
         MaterialTheme {
             var timeAtLocation by remember { mutableStateOf("No location selected") }
+   
             Column(
                 modifier = Modifier
                     .safeContentPadding()
@@ -64,15 +65,20 @@ To get started, implement a new `App` composable:
 4. To fix this, in `composeApp/src/desktopMain/kotlin`, update the `main.kt` file as follows:
 
     ```kotlin
-    fun main() = application {
-        val state = rememberWindowState(
-            size = DpSize(400.dp, 250.dp),
-            position = WindowPosition(300.dp, 300.dp)
-        )
-        Window(title = "Local Time App", onCloseRequest = ::exitApplication, state = state) {
-            App()
-        }
-    }
+   fun main() = application {
+       val state = rememberWindowState(
+           size = DpSize(400.dp, 250.dp),
+           position = WindowPosition(300.dp, 300.dp)
+       )
+       Window(
+           title = "Local Time App", 
+           onCloseRequest = ::exitApplication, 
+           state = state,
+           alwaysOnTop = true
+       ) {
+           App()
+       }
+   }
     ```
 
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
@@ -150,22 +156,26 @@ The next step is to use the given input to calculate time. To do this, create a 
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
 
     ```kotlin
-    @Composable
-    @Preview
-    fun App() {
-        MaterialTheme {
-            var location by remember { mutableStateOf("Europe/Paris") }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
-            Column {
-                Text(timeAtLocation)
-                TextField(value = location, onValueChange = { location = it })
-                Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
-                    Text("Show Time At Location")
-                }
-            }
-        }
-    }
+   @Composable
+   @Preview
+   fun App() {
+   MaterialTheme { 
+       var location by remember { mutableStateOf("Europe/Paris") }
+       var timeAtLocation by remember { mutableStateOf("No location selected") }
+   
+       Column(
+           modifier = Modifier
+               .safeContentPadding()
+               .fillMaxSize()
+           ) {
+               Text(timeAtLocation)
+               TextField(value = location, onValueChange = { location = it })
+               Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+                   Text("Show Time At Location")
+               }
+           }
+       }
+   }
     ```
 
 4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
@@ -199,7 +209,7 @@ time message could be rendered more prominently.
         MaterialTheme {
             var location by remember { mutableStateOf("Europe/Paris") }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
+   
             Column(
                 modifier = Modifier
                     .padding(20.dp)
@@ -212,11 +222,14 @@ time message could be rendered more prominently.
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
                 )
-                TextField(value = location,
-                    modifier = Modifier.padding(top = 10.dp),
-                    onValueChange = { location = it })
-                Button(modifier = Modifier.padding(top = 10.dp),
-                    onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+                TextField(
+                    value = location,
+                    onValueChange = { location = it }),
+                    modifier = Modifier.padding(top = 10.dp)
+                Button(
+                    onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" },
+                    modifier = Modifier.padding(top = 10.dp)
+                ) {
                     Text("Show Time")
                 }
             }
@@ -237,10 +250,11 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
 {style="tip"}
+-->
 
 ## Refactor the design
 
@@ -328,9 +342,11 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
 {style="tip"}
+-->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -449,9 +465,11 @@ code to load and display them:
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
 {style="tip"}
+-->
 
 ## What's next
 
