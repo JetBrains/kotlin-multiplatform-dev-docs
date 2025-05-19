@@ -139,53 +139,117 @@ UIKitView(
 )
 ```
 
-Now, let's look at an advanced example. This code captures a photo using, handles device orientation, and includes
-location metadata:
+Now, let's look at an advanced example. This code captures a photo, attaches GPS metadata, and displays a live preview
+using a native `UIView`:
 
 ```kotlin
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-fun CameraView(
-    modifier: Modifier = Modifier,
+fun RealDeviceCamera(
+    camera: AVCaptureDevice,
     onCapture: (picture: PictureData.Camera, image: PlatformStorableImage) -> Unit
 ) {
-    var cameraAccess by remember { mutableStateOf(CameraAccess.Undefined) }
-    LaunchedEffect(Unit) {
-        when (AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)) {
-            AVAuthorizationStatusAuthorized -> cameraAccess = CameraAccess.Authorized
-            AVAuthorizationStatusDenied, AVAuthorizationStatusRestricted -> cameraAccess = CameraAccess.Denied
-            AVAuthorizationStatusNotDetermined -> {
-                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) {
-                    cameraAccess = if (it) CameraAccess.Authorized else CameraAccess.Denied
+    // Set up AVCapturePhotoOutput for a photo capturing session
+    val capturePhotoOutput = remember { AVCapturePhotoOutput() }
+    // ...
+    // Capture callback: process image data, attach GPS, setup onCapture
+    val photoCaptureDelegate = remember {
+        object : NSObject(), AVCapturePhotoCaptureDelegateProtocol {
+            override fun captureOutput(
+                output: AVCapturePhotoOutput,
+                didFinishProcessingPhoto: AVCapturePhoto,
+                error: NSError?
+            ) {
+                val photoData = didFinishProcessingPhoto.fileDataRepresentation()
+                if (photoData != null) {
+                    val gps = locationManager.location?.toGps() ?: GpsPosition(0.0, 0.0)
+                    val uiImage = UIImage(photoData)
+                    onCapture(
+                        createCameraPictureData(
+                            name = nameAndDescription.name,
+                            description = nameAndDescription.description,
+                            gps = gps
+                        ),
+                        IosStorableImage(uiImage)
+                    )
                 }
+                capturePhotoStarted = false
             }
         }
     }
-
-    Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        when (cameraAccess) {
-            CameraAccess.Authorized -> AuthorizedCamera(onCapture)
-            CameraAccess.Denied -> Text("Camera access denied", color = Color.White)
-            CameraAccess.Undefined -> Unit
+    // ...
+    // Set up capture session 
+    val captureSession: AVCaptureSession = remember {
+        AVCaptureSession().also { captureSession ->
+            captureSession.sessionPreset = AVCaptureSessionPresetPhoto
+            val captureDeviceInput: AVCaptureDeviceInput =
+                deviceInputWithDevice(device = camera, error = null)!!
+            captureSession.addInput(captureDeviceInput)
+            captureSession.addOutput(capturePhotoOutput)
         }
+    }
+    val cameraPreviewLayer = remember {
+        AVCaptureVideoPreviewLayer(session = captureSession)
+    }
+    // ...
+    // Create a native UIView with a native camera preview layer
+    UIKitView(
+        modifier = Modifier.fillMaxSize().background(Color.Black),
+        factory = {
+            val cameraContainer = object: UIView(frame = CGRectZero.readValue()) {
+                override fun layoutSubviews() {
+                    CATransaction.begin()
+                    CATransaction.setValue(true, kCATransactionDisableActions)
+                    layer.setFrame(frame)
+                    cameraPreviewLayer.setFrame(frame)
+                    CATransaction.commit()
+                }
+            }
+            cameraContainer.layer.addSublayer(cameraPreviewLayer)
+            cameraPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            captureSession.startRunning()
+            cameraContainer
+        },
+    )
+    // ...
+    // Create a compose button that executes the capturePhotoWithSettings callback when pressed
+    CircularButton(
+        imageVector = IconPhotoCamera,
+        modifier = Modifier.align(Alignment.BottomCenter).padding(36.dp),
+        enabled = !capturePhotoStarted,
+    ) {
+        capturePhotoStarted = true
+        val photoSettings = AVCapturePhotoSettings.photoSettingsWithFormat(
+            format = mapOf(AVVideoCodecKey to AVVideoCodecTypeJPEG)
+        )
+        if (camera.position == AVCaptureDevicePositionFront) {
+            capturePhotoOutput.connectionWithMediaType(AVMediaTypeVideo)
+                ?.automaticallyAdjustsVideoMirroring = false
+            capturePhotoOutput.connectionWithMediaType(AVMediaTypeVideo)
+                ?.videoMirrored = true
+        }
+        capturePhotoOutput.capturePhotoWithSettings(
+            settings = photoSettings,
+            delegate = photoCaptureDelegate
+        )
     }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="val capturePhotoOutput = remember { AVCapturePhotoOutput() }"}
 
-The `AuthorizedCamera` composable performs the following tasks:
+The `RealDeviceCamera` composable performs the following tasks:
 
-* Sets up `AVCaptureSession` with input and output.
-* Creates a `UIKitView` to render the camera preview using `AVCaptureVideoPreviewLayer`.
-* Observes device orientation and updates the video feed's orientation accordingly.
-* Captures photos using `AVCapturePhotoOutput`.
-* Retrieves GPS location via `CLLocationManager`.
-* Shows a loading indicator while a photo is being processed.
-* Passes the photo and its metadata (name, description, GPS position) back to the compose layer using a callback.
+* Sets up a native camera preview using `AVCaptureSession` and `AVCaptureVideoPreviewLayer`.
+* Creates a `UIKitView` that hosts a custom `UIView` subclass, which manages layout updates and embeds the preview layer.
+* Initializes a `AVCapturePhotoOutput` and configures a delegate to handle photo capture.
+* Uses `CLLocationManager` (through `locationManager`) to retrieve GPS coordinates at the moment of capture.
+* Converts the captured image into a `UIImage`, wraps it as a `PlatformStorableImage`, and provides metadata such as name,
+  description, and GPS location via `onCapture`.
+* Displays a circular composable button for triggering the capture.
+* Applies mirroring settings when using the front-facing camera to match natural selfie behavior.
+* Updates the preview layout dynamically in `layoutSubviews()` using `CATransaction` to avoid animations.
 
-The preview is displayed using a custom `UIView` subclass, which updates the preview layer size dynamically in `layoutSubviews()`.
-A floating capture button allows users to take a photo, and `CircularProgressIndicator` gives feedback during capture.
-
-Explore the code for this example in the [ImageViewer sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer).
+Explore the full code for this example in the [ImageViewer sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer).
 
 ### Web view
 
