@@ -8,18 +8,18 @@ Here are the highlights for this feature release:
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.1).
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version 1.8.0. Based on Jetpack Compose libraries:
-    * [Runtime 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.8.0)
-    * [UI 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.8.0)
-    * [Foundation 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.8.0)
-    * [Material 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.8.0)
+* Gradle Plugin `org.jetbrains.compose`, version 1.8.1. Based on Jetpack Compose libraries:
+    * [Runtime 1.8.1](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.8.1)
+    * [UI 1.8.1](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.8.1)
+    * [Foundation 1.8.1](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.8.1)
+    * [Material 1.8.1](https://developer.android.com/jetpack/androidx/releases/compose-material#1.8.1)
     * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.0-beta01`. Based on [Jetpack Lifecycle 2.9.0-beta01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.0-beta01)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta01`. Based on [Jetpack Navigation 2.9.0-beta01](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0-beta01)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.0`. Based on [Jetpack Lifecycle 2.9.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.0)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
 * Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.1.0`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
 
 ## Breaking changes
