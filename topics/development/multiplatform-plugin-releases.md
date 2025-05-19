@@ -65,7 +65,7 @@ The Kotlin Multiplatform plugin was rebuilt from the ground up:
     autocompletion, and UI previews for common code (the [previous Compose Multiplatform plugin](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
     can be safely uninstalled).
 * Compose Hot Reload: instantly see UI changes without restarting the app (with a desktop JVM target).
-    See [Hot Reload docs] TODO link for more information.
+    See [Hot Reload docs](compose-hot-reload.md) for more information.
 
 Known issues:
 
