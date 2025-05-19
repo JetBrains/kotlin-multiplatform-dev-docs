@@ -20,6 +20,9 @@ To complete the plugin installation, restart the IDE.
 
 You can check the plugin version and update it manually in **Settings** | **Plugins**.
 
+You need a compatible version of Kotlin for the plugin to work correctly. You can find compatible versions in the [release details](#release-details).
+To check your Kotlin version and update it, go to **Settings** | **Plugins** or in **Tools** | **Kotlin** | **Configure Kotlin in Project**.
+
 > If you don't have a compatible version of Kotlin installed, the Kotlin Multiplatform plugin will be disabled.
 > Update your Kotlin version and then enable the plugin again in **Settings** | **Plugins**.
 >
