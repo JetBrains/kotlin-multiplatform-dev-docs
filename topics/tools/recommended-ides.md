@@ -2,7 +2,7 @@
 
 ## IntelliJ IDEA
 
-IntelliJ IDEA provides full Kotlin Multiplatform support.
+[IntelliJ IDEA](https://www.jetbrains.com/idea/) provides full Kotlin Multiplatform support.
 
 On macOS with IntelliJ IDEA 2025.1.1.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
