@@ -243,7 +243,7 @@ in IntelliJ IDEA and select your device in the **Execution target** list. Run th
 Select **composeApp [desktop]** in the list of run configurations and click **Run**. By default, the run configuration
 starts a desktop app in its own OS window:
 
-![Run the Compose Multiplatform app on desktop](compose-run-desktop-temp.png){width=350}
+![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
 
 ![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
 
