@@ -23,8 +23,8 @@ This way, you can easily use Kotlin code in local Swift packages, compared to a 
 that adds the script to the build phase and requires rebuilding both the Kotlin Multiplatform and the iOS project to get
 the changes from the common code.
 
-> If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](multiplatform-setup.md)
-> and [create a cross-platform application from scratch](multiplatform-create-first-app.md) first.
+> If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](quickstart.md)
+> and [create a cross-platform application from scratch](compose-multiplatform-create-first-app.md) first.
 >
 {style="tip"}
 

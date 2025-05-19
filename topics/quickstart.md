@@ -116,7 +116,7 @@ Use the IDE wizard to create a new KMP project:
 1. Select **File** | **New** | **New project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the default **Phone and Tablet** template category.
 
-    ![First new project step in Android Studio](as-wizard-1.png)
+    ![First new project step in Android Studio](as-wizard-1.png){width="400"}
 
 3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
 4. Choose platforms that you would like to see as part of the project:
