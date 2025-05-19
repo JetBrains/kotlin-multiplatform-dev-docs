@@ -75,6 +75,9 @@ The plugin works with [any of the Kotlin versions](https://kotlinlang.org/docs/r
 but some of its functionality relies on Kotlin 2.1.21.
 Updating to the latest stable Kotlin version ensures the best experience.
 
+This version also requires K2 mode, so make sure to enable it:
+in **Settings** | **Languages & Frameworks** | **Kotlin**, check **Enable K2 mode**.
+
 </td>
 </tr>
 <tr>
