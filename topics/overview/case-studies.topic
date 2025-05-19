@@ -168,7 +168,7 @@
             <a href="https://www.jetbrains.com/compose-multiplatform/">
                 <img src="compose-multiplatform-logo.svg" alt="Compose Multiplatform" height="28"/>
             </a>
-            <p> By sharing over 90% of the <b>Fast&Fit</b> codebase, including the entire UI, through KMP and Compose Multiplatform,
+            <p> By sharing over 90% of the <b>Fast&amp;Fit</b> codebase, including the entire UI, through KMP and Compose Multiplatform,
                 the team ships synchronized features across platforms, trims maintenance overhead, and focuses on adding innovative wellness tools.
             </p>
         </li>
