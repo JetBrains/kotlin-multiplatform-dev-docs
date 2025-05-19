@@ -4,13 +4,13 @@ With this tutorial, you can get a simple Kotlin Multiplatform app up and running
 
 ## Set up the environment
 
-Kotlin Multiplatform projects need a specific environment,
+Kotlin Multiplatform (KMP) projects need a specific environment,
 but most of the requirements are made clear through preflight checks in the IDE.
 
 Start with an IDE and necessary plugins:
 
 1. Choose and install the IDE.
-    KMP is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
+    Kotlin Multiplatform is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
     
     The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
     or **Android Studio Narwhal 2025.1.1 Canary 10**.
@@ -95,7 +95,7 @@ Use the IDE wizard to create a new KMP project:
     * For iOS, you can choose one of two implementations:
         * shared UI code, with Compose Multiplatform,
         * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
-    * The desktop target includes an alpha version of hot reload (TODO link?) functionality that allows you to see UI changes
+    * The desktop target includes an Alpha version of [](compose-hot-reload.md) functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
@@ -115,6 +115,9 @@ Use the IDE wizard to create a new KMP project:
 
 1. Select **File** | **New** | **New project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the default **Phone and Tablet** template category.
+
+    ![First new project step in Android Studio](as-wizard-1.png)
+
 3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
 4. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
