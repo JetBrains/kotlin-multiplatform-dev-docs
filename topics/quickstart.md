@@ -155,13 +155,13 @@ In this tool window, you can see the messages related to these checks, rerun the
 Preflight checks commands are also available in the **Search Everywhere** dialog.
 Press double **Shift** and search for commands containing the word "preflight":
 
-![Search Everywhere menu with the word "preflight entered"](double-shift-preflight-checks.png)
+![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png)
 
 ## Run the sample apps
 
-The project created by the IDE wizard includes pregenerated run configurations for iOS, Android,
+The project created by the IDE wizard includes generated run configurations for iOS, Android,
 desktop, and web applications, as well as Gradle tasks for running the server app.
-On Windows and Linux, see Gradle commands for each platform below. 
+On Windows and Linux, see Gradle commands for each platform below.
 
 <tabs>
 <tab title="Android">
@@ -176,9 +176,6 @@ and choose the module **[project name].composeApp**.
 By default, it runs on the first available virtual device:
 
 ![Android app ran on a virtual device](run-android-app.png){width=350}
-
-For details on running the Android app (adding virtual devices and setting up physical device connections) see
-[](compose-multiplatform-create-first-app.md).
 
 </tab>
 <tab title="iOS">
@@ -270,11 +267,12 @@ and see if there are any updates for the iOS simulator.
 
 Learn more about the structure of a KMP project and writing shared code:
 * A series of tutorials about working with the shared UI code: [](compose-multiplatform-create-first-app.md)
-* A series of tutorials about working with shared code along with native UI: [](multiplatform-create-first-app.md)
+* A series of tutorials about working with shared code along with a native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation:
   * [Project configuration](multiplatform-project-configuration.md)
   * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
-* Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features: [CMP overview] (TODO overview)
+* Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features:
+    [](compose-multiplatform-and-jetpack-compose.md).
 
 Discover code already written for KMP:
 * Our [Samples](multiplatform-samples.md) page, with official JetBrains samples as well as a curated list of
