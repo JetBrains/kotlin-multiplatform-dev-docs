@@ -70,18 +70,18 @@
 		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
 	</toc-element>
 	<toc-element toc-title="Choose your use case">
+		<toc-element toc-title="Create an app with shared logic and UI">
+			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
+			<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
+			<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
+			<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
+		</toc-element>
 		<toc-element toc-title="Create an app with shared logic and native UI">
 			<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
 			<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
 			<toc-element toc-title="3. Add dependencies" topic="multiplatform-dependencies.md"/>
 			<toc-element toc-title="4. Share more logic" topic="multiplatform-upgrade-app.md"/>
 			<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
-		</toc-element>
-		<toc-element toc-title="Create an app with shared logic and UI">
-			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
-			<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
-			<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
-			<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
 		</toc-element>
 		<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
 		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
