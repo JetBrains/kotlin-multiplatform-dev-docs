@@ -40,7 +40,7 @@ Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In Nove
 
 You can write shared UI code across multiple platforms using [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/), a modern declarative framework by JetBrains, which is built on Kotlin Multiplatform and Google’s Jetpack Compose.
 
-Compose Multiplatform is currently stable on Android and desktop, in Beta on iOS, and in Alpha on web.
+Compose Multiplatform is currently stable on iOS, Android and desktop, and in Alpha on web.
 
 [![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
@@ -95,7 +95,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
     <tr>
         <td><b>Communication with native APIs</b></td>
-        <td>Native APIs are accessible directly from Kotlin code using <a href="https://kotlinlang.org/docs/multiplatform-expect-actual.html">expect/actual declarations.</a></td>
+        <td>Native APIs are accessible directly from Kotlin code using <a href="multiplatform-expect-actual.md">expect/actual declarations.</a></td>
         <td>Communication with the host platform is possible using <a href="https://docs.flutter.dev/platform-integration/platform-channels">platform channels.</a></td>
     </tr>
     <tr>

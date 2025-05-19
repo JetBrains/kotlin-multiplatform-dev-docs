@@ -102,7 +102,7 @@ Compose Multiplatform also provides a general `ViewModelStoreOwner` implementati
 
 Kotlin 2.0.0 came out along with the new Gradle plugin for the Compose compiler.
 To use Compose Multiplatform with the latest compiler version, apply the plugin to the modules in your project
-(see [the migration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#migrating-a-compose-multiplatform-project) for details).
+(see [the migration guide](compose-compiler.md#migrating-a-compose-multiplatform-project) for details).
 
 ## Desktop
 
@@ -189,8 +189,8 @@ See the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/4
 You can now create uber JARs (complex packages with JARs of the application and all dependencies) using ProGuard
 Gradle tasks.
 
-See the [minification and obfuscation tutorial](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Native_distributions_and_local_execution#minification--obfuscation)
-for details.
+See the [minification and obfuscation](compose-native-distribution.md#minification-and-obfuscation)
+guide for details.
 
 ### Known issue: MissingResourceException
 

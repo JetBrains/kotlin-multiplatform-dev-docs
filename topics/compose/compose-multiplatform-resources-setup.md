@@ -80,7 +80,7 @@ compose.resources {
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
 ### Resources in the `androidLibrary` target
-<primary-label ref="EAP"/>
+<secondary-label ref="Experimental"/>
 
 Starting with the Android Gradle plugin version 8.8.0, you can use the generated `Res` class 
 and resource accessors in the `androidLibrary` target.
@@ -99,6 +99,10 @@ kotlin {
 Sometimes, the same resource should be presented in different ways depending on the environment, such as locale,
 screen density, or interface theme. For example, you might need to localize texts for different languages or adjust
 images for the dark theme. For that, the library provides special qualifiers.
+
+> Learn how to handle resource-related settings in the [Manage local resource environment](compose-resource-environment.md) tutorial.
+>
+{style="note"}
 
 All resource types, except for raw files in the `files` directory, support qualifiers. Add qualifiers to directory
 names using a hyphen:

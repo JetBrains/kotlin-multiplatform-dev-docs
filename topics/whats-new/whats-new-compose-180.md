@@ -1,5 +1,5 @@
-[//]: # (title: What's new in Compose Multiplatform %composeEapVersion%)
-Here are the highlights for this EAP feature release:
+[//]: # (title: What's new in Compose Multiplatform %composeVersion%)
+Here are the highlights for this feature release:
 
 * [Variable fonts](#variable-fonts)
 * [Drag-and-drop on iOS](#drag-and-drop)
@@ -8,7 +8,19 @@ Here are the highlights for this EAP feature release:
 * [Preloading of resources for web targets](#preloading-of-resources)
 * [Integration with browser navigation controls](#browser-controls-supported-in-the-navigation-library)
 
-See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0-rc01).
+See the full list of changes for this release [on GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.0).
+
+## Dependencies
+
+* Gradle Plugin `org.jetbrains.compose`, version 1.8.0. Based on Jetpack Compose libraries:
+    * [Runtime 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.8.0)
+    * [UI 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.8.0)
+    * [Foundation 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.8.0)
+    * [Material 1.8.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.8.0)
+    * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.0-beta01`. Based on [Jetpack Lifecycle 2.9.0-beta01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.0-beta01)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta01`. Based on [Jetpack Navigation 2.9.0-beta01](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0-beta01)
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.1.0`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
 
 ## Breaking changes
 
@@ -33,7 +45,7 @@ please let us know by filing an issue in [YouTrack](https://youtrack.jetbrains.c
 
 ### Implicit dependency on `material-icons-core` removed
 
-Compose Multiplatform %composeEapVersion% incorporates a [change made in Material](https://android.googlesource.com/platform/frameworks/support/+/1d1abef790da93325a83fe19b50ccdec06be6956):
+Compose Multiplatform %composeVersion% incorporates a [change made in Material](https://android.googlesource.com/platform/frameworks/support/+/1d1abef790da93325a83fe19b50ccdec06be6956):
 there is no longer a transitive dependency on `material-icons-core`.
 This aligns with [moving away from dependencies built with K1](#full-migration-of-compose-multiplatform-to-the-k2-compiler).
 
@@ -41,12 +53,12 @@ If you need to continue using the `material-icons-core` library in your project,
 add the dependency explicitly to your `build.gradle.kts`, for example:
 
 ```kotlin
-implementation("org.jetbrains.compose.material:material-icons-core:1.6.11")
+implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
 ```
 
 ### Migration from Bundle to SavedState in Navigation
 
-Navigation in Compose Multiplatform %composeEapVersion%,
+Navigation in Compose Multiplatform %composeVersion%,
 along with the Android Navigation component, is transitioning to using the `SavedState` class to store UI states.
 This breaks the pattern of accessing state data when you declare destinations in a navigation graph.
 When upgrading to a 2.9.* version of the [Navigation library](compose-navigation-routing.md),
@@ -70,7 +82,7 @@ composable(Destinations.Followers.route) { navBackStackEntry ->
 }
 ```
 
-Starting with Compose Multiplatform %composeEapVersion%:
+Starting with Compose Multiplatform %composeVersion%:
 
 ```kotlin
 composable(Destinations.Followers.route) { navBackStackEntry ->
@@ -85,7 +97,7 @@ composable(Destinations.Followers.route) { navBackStackEntry ->
 ### Deprecated `ComposeUIViewControllerDelegate` on iOS
 
 The `ComposeUIViewControllerDelegate` API has been deprecated in favor of the parent view controller. 
-If you use the deprecated API with Compose Multiplatform %composeEapVersion%, you will encounter a deprecation error indicating 
+If you use the deprecated API with Compose Multiplatform %composeVersion%, you will encounter a deprecation error indicating 
 that you should override the `UIViewController` class methods via the parent view controller.
 
 Read more about child-parent view controller relationships in Apple’s developer [documentation](https://developer.apple.com/documentation/uikit/uiviewcontroller).
@@ -93,7 +105,7 @@ Read more about child-parent view controller relationships in Apple’s develope
 ### Removed obsolete `platformLayers` option on iOS
 
 The `platformLayers`
-experimental option [was introduced in 1.6.0](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop)
+experimental option [was introduced in 1.6.0](whats-new-compose.md#separate-platform-views-for-popups-dialogs-and-dropdowns-ios-desktop)
 to allow enabling alternative layering mode and drawing popups and dialogs outside the bounds of the parent container.
 
 This mode is now the default behavior on iOS, and the option to enable it has been removed as obsolete.
@@ -158,11 +170,11 @@ we’ve introduced the following changes:
 * `runOnIdle()` does not call `waitForIdle()` after executing `action` anymore.
 
 If your tests rely on that extra `waitForIdle()` call after the `runOnIdle()` action,
-add the call to your tests as needed when you update them for Compose Multiplatform %composeEapVersion%.
+add the call to your tests as needed when you update them for Compose Multiplatform %composeVersion%.
 
 #### Advancing time in tests is decoupled from rendering
 
-In Compose Multiplatform %composeEapVersion%, the `mainClock.advanceTimeBy()` function no longer causes recomposition, layout,
+In Compose Multiplatform %composeVersion%, the `mainClock.advanceTimeBy()` function no longer causes recomposition, layout,
 or drawing if the time was not advanced past the point of rendering the next frame (virtual test frames are rendered every 16 ms).
 
 This may break tests that rely on rendering being triggered by every `mainClock.advanceTimeBy()` call.
@@ -172,7 +184,7 @@ See the [PR description](https://github.com/JetBrains/compose-multiplatform-core
 
 ### Variable fonts
 
-Compose Multiplatform %composeEapVersion% supports variable fonts on all platforms.
+Compose Multiplatform %composeVersion% supports variable fonts on all platforms.
 With variable fonts, you can keep one font file that contains all style preferences such as weight,
 width, slant, italic, custom axes, visual weight with typographic color,
 and adaptations to specific text sizes.
@@ -217,8 +229,8 @@ in Material3 components across all platforms unless otherwise specified.
 
 ### Deep linking
 
-By using Compose Multiplatform %composeEapVersion% along with [org.jetbrains.androidx.navigation.navigation-compose](compose-navigation-routing.md)
-%composeNavigationEapVersion%,
+By using Compose Multiplatform %composeVersion% along with [org.jetbrains.androidx.navigation.navigation-compose](compose-navigation-routing.md)
+%composeNavigationVersion%,
 you can implement deep linking on iOS in the usual Compose manner:
 assigning deep links to destinations and navigating to them using a `NavController`.
 
@@ -228,7 +240,7 @@ For a guide on introducing deep links to common code, see [](compose-navigation-
 
 #### Support for right-to-left languages
 
-Compose Multiplatform %composeEapVersion% introduces accessibility support for right-to-left languages,
+Compose Multiplatform %composeVersion% introduces accessibility support for right-to-left languages,
 including proper text direction handling for gestures.
 
 To learn more about RTL support, refer to [Right-to-Left languages](compose-rtl.md).
@@ -259,7 +271,7 @@ screen readers cannot determine the correct reading order without properly defin
 This is particularly relevant for layouts with container views, such as tables and nested views,
 that support the scrolling and zooming of contained views.
 
-Starting with Compose Multiplatform %composeEapVersion%,
+Starting with Compose Multiplatform %composeVersion%,
 you can define traversal semantic properties for containers
 to ensure the correct reading order when scrolling and swiping through complex views.
 
@@ -295,7 +307,7 @@ To switch to accessible navigation mode for containers, rotate two fingers on th
 
 #### Accessible text input
 
-In Compose Multiplatform %composeEapVersion% we've introduced support for text fields' accessibility traits.
+In Compose Multiplatform %composeVersion% we've introduced support for text fields' accessibility traits.
 When a text input field comes into focus, it is now marked as editable,
 ensuring proper accessibility-state representation.
 
@@ -417,7 +429,7 @@ Check out the full list of available [keywords](https://developer.mozilla.org/en
 ### Preloading of resources
 <secondary-label ref="Experimental"/>
 
-Compose Multiplatform %composeEapVersion% introduces a new experimental API
+Compose Multiplatform %composeVersion% introduces a new experimental API
 for preloading fonts and images for web targets.
 Preloading helps
 prevent visual issues such as flashes of unstyled text (FOUT) or the flickering of images and icons.
@@ -432,9 +444,21 @@ See the [documentation](compose-multiplatform-resources-usage.md#preload-resourc
 
 ## Desktop
 
+### Software rendering improvement on Windows
+
+Switching to the recommended clang compiler for Skia on Windows sped up rendering that relies on the CPU.
+This mostly affects pure software rendering, as rendering generally relies on the GPU, with only some computations done on the CPU.
+Therefore the improvement is very noticeable on some virtual machines
+and with a few old graphics cards that [aren't supported by Skia](https://github.com/JetBrains/skiko/blob/30df516c1a1a25237880f3e0fe83e44a13821292/skiko/src/jvmMain/kotlin/org/jetbrains/skiko/GraphicsApi.jvm.kt#L13):
+Windows apps produced by Compose Multiplatform are now up to 6 times as fast in those environments
+compared to Compose Multiplatform 1.7.3.
+
+This improvement, in addition to the Windows for ARM64 support, makes Compose Multiplatform UIs on virtual Windows systems
+under macOS significantly more performant.
+
 ### Support for Windows for ARM64
 
-Compose Multiplatform %composeEapVersion% introduces support for Windows for ARM64 on the JVM,
+Compose Multiplatform %composeVersion% introduces support for Windows for ARM64 on the JVM,
 improving the overall experience of building and running applications on ARM-based Windows devices.
 
 ## Gradle plugin

@@ -3,11 +3,11 @@
 Navigation is a key part of UI applications that allows users to move between different application screens.
 Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design#frameworks).
 
-> The navigation library is currently in [Alpha](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
-> You're welcome to try it in your Compose Multiplatform projects. Remember to track potential migration issues in future releases.
+> The navigation library is currently in [Beta](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
+> You're welcome to try it in your Compose Multiplatform projects.
 > We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
 >
-{style="warning"}
+{style="tip"}
 
 ## Setup
 
@@ -27,7 +27,7 @@ kotlin {
 }
 ```
 
-> Compose Multiplatform %composeEapVersion% requires Navigation library version %composeNavigationEapVersion%.
+> Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
 >
 {style="note"}
 
@@ -53,16 +53,8 @@ A switch between different screens of the app makes it change its state from `RE
 `RESUMED` is also described as "settled": navigation is considered finished when the new screen is prepared and active.
 See the [](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
 
-## Limitations
-
-Current limitations of navigation in Compose Multiplatform, compared to Jetpack Compose:
-* [Deep links](https://developer.android.com/guide/navigation/design/deep-link) (handling or following them) are not supported.
-* The [BackHandler](https://developer.android.com/develop/ui/compose/libraries#handling_the_system_back_button) function
-  and [predictive back gestures](https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture)
-  are not supported on any platform besides Android.
-
 ## Support for browser navigation in web apps
-<primary-label ref="EAP"/>
+<secondary-label ref="Experimental"/>
 
 Compose Multiplatform for web fully supports the common Navigation library APIs,
 and on top of that allows your apps to receive navigational input from the browser.
@@ -73,19 +65,29 @@ To bind the web app to the navigation graph defined in your common code,
 call the `window.bindToNavigation()` method in your Kotlin/Wasm or Kotlin/JS code:
 
 ```kotlin
+//commonMain source set
+@Composable
+fun App(
+    onNavHostReady: suspend (NavController) -> Unit = {}
+) {
+    val navController = rememberNavController()
+    NavHost(...) {
+        //...
+    }
+    LaunchedEffect(navController) {
+        onNavHostReady(navController)
+    }
+}
+
+//wasmJsMain or jsMain source set
 @OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalBrowserHistoryApi
 fun main() {
     val body = document.body ?: return
-
     ComposeViewport(body) {
-
-        val navController = rememberNavController()
-        // Assumes that your main composable function in common code is App()
-        App(navController)
-        LaunchedEffect(Unit) {
-            window.bindToNavigation(navController)
-        }
+        App(
+          onNavHostReady = { window.bindToNavigation(it) }
+        )
     }
 }
 ```
@@ -267,16 +269,3 @@ fun main() {
 }
 ```
 <!--{default-state="collapsed" collapsible="true" collapsed-title="val initRoute = window.location.hash.substringAfter( ..."}-->
-
-## Third-party alternatives
-
-If the Compose Multiplatform navigation components do not solve your problems,
-there are third-party alternatives that you can choose from:
-
-| Name                                                | Description                                                                                                                                                     |
-|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Voyager](https://voyager.adriel.cafe)              | A pragmatic approach to navigation                                                                                                                              |
-| [Decompose](https://arkivanov.github.io/Decompose/) | An advanced approach to navigation that covers the full lifecycle and any potential dependency injection                                                        |
-| [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
-| [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
-| [Circuit](https://slackhq.github.io/circuit/)       | A Compose-driven architecture for Kotlin applications with navigation and advanced state management.                                                            |

@@ -38,7 +38,7 @@
             <img src="wrike.svg" alt="Wrike" height="50" />
             <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
-                <img src="compose-multiplatform.svg" alt="Compose Multiplatform" height="28"/>
+                <img src="compose-multiplatform-logo.svg" alt="Compose Multiplatform" height="20"/>
             </a>
             <p><b> Wrike </b> uses KMP to boost productivity without expanding the team, leveraging its flexibility to combine shared and native code in one project.
                 With Compose Multiplatform, the team achieved rapid UI development and consistent design across platforms, enabling the release of complex features in record time.
@@ -64,7 +64,7 @@
             <img src="instabee.svg" alt="Instabee" height="65" />
             <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
-                <img src="compose-multiplatform.svg" alt="Compose Multiplatform" height="30"/>
+                <img src="compose-multiplatform-logo.svg" alt="Compose Multiplatform" height="20"/>
             </a>
             <p> <b> Instabee </b> migrated their Android application logic and UI to KMP with Compose
                 Multiplatform. Thanks to that, they were able to release their iOS application in a short period of time

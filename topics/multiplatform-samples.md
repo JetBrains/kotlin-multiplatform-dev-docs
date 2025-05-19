@@ -216,9 +216,9 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
         </td>
         <td>
             <list>
-                <li>Jetpack Compose on Android</li>
+                <li>Jetpack Compose on Android and Wear OS</li>
                 <li>Compose Multiplatform on iOS, desktop, and web</li>
-                <li>SwiftUI on iOS, macOS, and watchOS</li>
+                <li>SwiftUI on iOS and macOS</li>
             </list>
         </td>
     </tr>

@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform %composeVersion%)
+[//]: # (title: What's new in Compose Multiplatform 1.7.3)
 
 Here are the highlights for this feature release:
 
@@ -16,7 +16,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle plugin `org.jetbrains.compose`, version %composeVersion%. Based on Jetpack Compose libraries:
+* Gradle plugin `org.jetbrains.compose`, version 1.7.3. Based on Jetpack Compose libraries:
   * [Runtime 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.7.5)
   * [UI 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.7.5)
   * [Foundation 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.7.5)
@@ -31,7 +31,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
 ### Minimum AGP version raised to 8.1.0
 
 Neither Jetpack Compose 1.7.0 nor Lifecycle 2.8.0, which are both used by Compose Multiplatform 1.7.0, supports AGP 7.
-So, when you update to Compose Multiplatform %composeVersion%, you may have to upgrade your AGP dependency, as well.
+So, when you update to Compose Multiplatform 1.7.3, you may have to upgrade your AGP dependency, as well.
 
 > Newly implemented previews for Android composables in Android Studio [require one of the latest AGP versions](#resources-packed-into-android-assets).
 >
@@ -50,15 +50,15 @@ While you can use Java resources with Compose Multiplatform, they don't benefit 
 the framework: generated accessors, multimodule support, localization and so on.
 
 If you still have to access Java resources, you can copy the [implementation suggested in the pull request](https://github.com/JetBrains/compose-multiplatform-core/pull/1457)
-to make sure your code works even after you upgrade to Compose Multiplatform %composeVersion% and switch to multiplatform
+to make sure your code works even after you upgrade to Compose Multiplatform 1.7.3 and switch to multiplatform
 resources where possible.
 
 ### New default behavior for processing touch in iOS native elements
 
-Before %composeVersion%, Compose Multiplatform could not respond to touch events that landed in interop UI views, so
+Before 1.7.3, Compose Multiplatform could not respond to touch events that landed in interop UI views, so
 interop views handled these touch sequences entirely.
 
-Compose Multiplatform %composeVersion% implements more sophisticated logic for handling interop touch sequences.
+Compose Multiplatform 1.7.3 implements more sophisticated logic for handling interop touch sequences.
 By default, there is now a delay after the initial touch, which helps the parent composable understand whether
 the touch sequence was meant to interact with the native view and react accordingly.
 
@@ -235,7 +235,7 @@ classes, explicitly add the `material3-window-size-class` dependency to the comm
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3:material3-window-size-class:%composeVersion%")
+    implementation("org.jetbrains.compose.material3:material3-window-size-class:1.7.3")
 }
 ```
 
@@ -313,10 +313,10 @@ It is tricky to scroll the list when most of the screen is taken up by a video t
 <!-- TODO additional copy editing -->
 
 With Kotlin 2.0.20, the Kotlin/Native team made a lot of progress in making Compose apps on iOS perform faster and smoother.
-Compose Multiplatform %composeVersion% release makes use of these optimizations, as well as brings performance improvements
+Compose Multiplatform 1.7.3 release makes use of these optimizations, as well as brings performance improvements
 from Jetpack Compose 1.7.0.
 
-When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform %composeVersion%
+When comparing Compose Multiplatform 1.6.11 paired with Kotlin 2.0.0 and Compose Multiplatform 1.7.3
 paired with Kotlin 2.0.20, we see better results across the board:
 
 * The *LazyGrid* benchmark simulates `LazyVerticalGrid` scrolling, which is closest to real-life use cases, and performs **~9%** faster on average.

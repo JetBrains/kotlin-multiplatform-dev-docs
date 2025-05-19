@@ -27,18 +27,18 @@ additional cross-platform mobile development tasks:
      <list>
         <li><a href="multiplatform-run-tests.md">Add tests to your Kotlin Multiplatform project</a></li>
         <li><a href="multiplatform-publish-apps.md">Publish your mobile application to app stores</a></li>
-        <li><a href="https://kotlinlang.org/docs/multiplatform-introduce-your-team.html">Introduce cross-platform mobile development to your team</a></li>
+        <li><a href="multiplatform-introduce-your-team.md">Introduce cross-platform mobile development to your team</a></li>
         <li><a href="https://klibs.io/">Browse Kotlin Multiplatform libraries available for your target platforms</a></li>
         <li><a href="https://github.com/terrakok/kmm-awesome">Check out the list of useful tools and resources</a></li>
      </list>
    </td>
     <td>
      <list>
-        <li><a href="https://kotlinlang.org/docs/multiplatform-discover-project.html">Kotlin Multiplatform project structure</a></li>
+        <li><a href="multiplatform-discover-project.md">Kotlin Multiplatform project structure</a></li>
         <li><a href="https://kotlinlang.org/docs/native-objc-interop.html">Interoperability with Objective-C frameworks and libraries</a></li>
-        <li><a href="https://kotlinlang.org/docs/multiplatform-add-dependencies.html">Adding dependencies on multiplatform libraries</a></li>        
-        <li><a href="https://kotlinlang.org/docs/multiplatform-android-dependencies.html">Adding Android dependencies</a></li>
-        <li><a href="https://kotlinlang.org/docs/multiplatform-ios-dependencies.html">Adding iOS dependencies</a></li>
+        <li><a href="multiplatform-add-dependencies.md">Adding dependencies on multiplatform libraries</a></li>        
+        <li><a href="multiplatform-android-dependencies.md">Adding Android dependencies</a></li>
+        <li><a href="multiplatform-ios-dependencies.md">Adding iOS dependencies</a></li>
      </list>
    </td>
    </tr>

@@ -507,7 +507,7 @@ format suitable for rendering, such as `FontResource` and `DrawableResource`. Wh
 for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
 Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
 
-Compose Multiplatform %composeEapVersion% introduces an experimental API for preloading font and image resources on 
+Compose Multiplatform %composeVersion% introduces an experimental API for preloading font and image resources on 
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
 Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
@@ -650,5 +650,6 @@ private fun readResourceBytes(resourcePath: String) =
 
 ## What's next?
 
-Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
+* Check out the official [demo project](https://github.com/JetBrains/compose-multiplatform/tree/master/components/resources/demo)
 that shows how resources can be handled in a Compose Multiplatform project targeting iOS, Android, and desktop.
+* Learn how to manage the application's [resource environment](compose-resource-environment.md) like in-app theme and language.

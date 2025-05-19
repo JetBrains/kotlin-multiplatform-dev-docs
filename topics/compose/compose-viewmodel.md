@@ -3,9 +3,9 @@
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
 
-> Support for the common `ViewModel` in Compose Multiplatform is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
+> Support for the common `ViewModel` in Compose Multiplatform is in [Beta](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
 >
-{style="warning"}
+{style="note"}
 
 ## Adding the common ViewModel to your project
 

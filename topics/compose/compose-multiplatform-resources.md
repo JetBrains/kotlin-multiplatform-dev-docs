@@ -1,7 +1,7 @@
 [//]: # (title: Resources overview)
 
-Compose Multiplatform provides a special library and Gradle plugin support for accessing resources in common code
-across all supported platforms.
+Compose Multiplatform provides a special `compose-multiplatform-resources` library and 
+Gradle plugin support for accessing resources in common code across all supported platforms.
 Resources are static content, such as images, fonts, and strings, which you can use in your application.
 
 When working with resources in Compose Multiplatform, consider the current conditions:
@@ -16,9 +16,14 @@ When working with resources in Compose Multiplatform, consider the current condi
 
 ### Set up a project with multiplatform resources
 
-To set up and configure all resources that your app should be able to access, see [](compose-multiplatform-resources-setup.md).
+To add the `resources` library dependency and set up all resources that your app should be able to access, see [](compose-multiplatform-resources-setup.md).
 
 ### Access the available resources in your code
 
 To access resources in your UI, use the automatically generated accessors.
 For the reference and various use cases, see [](compose-multiplatform-resources-usage.md).
+
+### Manage local resource environment
+
+To manage the application's resource environment like in-app theme and language, 
+see the [Local resource environment](compose-resource-environment.md) tutorial.

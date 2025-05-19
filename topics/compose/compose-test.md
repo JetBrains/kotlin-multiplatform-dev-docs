@@ -187,7 +187,7 @@ Run this command in the terminal:
 ## What's next
 
 Now that you got the hang of Compose Multiplatform UI testing, you may want to check out more testing-related resources:
-* For a general overview of testing in a Kotlin Multiplatform project, see [Understand basic project structure](https://kotlinlang.org/docs/multiplatform-discover-project.html#integration-with-tests)
+* For a general overview of testing in a Kotlin Multiplatform project, see [Understand basic project structure](multiplatform-discover-project.md#integration-with-tests)
 and the [Test your multiplatform app](multiplatform-run-tests.md) tutorial.
 * For details on setting up and running JUnit-based tests for desktop targets, see [Testing Compose Multiplatform UI with JUnit](compose-desktop-ui-testing.md).
 * More advanced testing in Android Studio, including automation, is covered in the [Test your app](https://developer.android.com/studio/test)
