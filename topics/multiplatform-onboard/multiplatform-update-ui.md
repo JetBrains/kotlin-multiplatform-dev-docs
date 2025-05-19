@@ -23,9 +23,9 @@ The `composeApp` module contains an Android application, defines its main activi
 Make some changes and see how they are reflected in the UI:
 
 1. Navigate to the `App.kt` file in `composeApp/src/androidMain/kotlin`.
-2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it and select the **Go To** | **Declaration or Usages** menu item.
+2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it, and select **Go To** | **Declaration or Usages**.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
-3. In `Greeting.kt`, update the `greet()` function:
+3. In the `Greeting.kt` file, update the `greet()` function:
 
    ```kotlin
    fun greet(): List<String> = buildList {
@@ -46,12 +46,15 @@ Make some changes and see how they are reflected in the UI:
            val greeting = remember { Greeting().greet() }
    
            Column(
-               modifier = Modifier.padding(all = 20.dp),
+               modifier = Modifier
+                   .padding(all = 10.dp)
+                   .safeContentPadding()
+                   .fillMaxSize(),
                verticalArrangement = Arrangement.spacedBy(8.dp),
            ) {
                greeting.forEach { greeting ->
                    Text(greeting)
-                   Divider()
+                   HorizontalDivider()
                }
            }
        }
@@ -73,7 +76,7 @@ framework. The UI of the app is written in Swift.
 Implement the same changes as in the Android app:
 
 1. In IntelliJ IDEA, find the `iosApp` folder at the root of your project in the **Project** tool window.
-2. Open the `ContentView.swift` file, select the `greet()` function right click and select the **Go To** | **Definition** menu item.
+2. Open the `ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Definition**.
 
     You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
     represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function

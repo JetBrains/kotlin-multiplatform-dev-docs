@@ -239,21 +239,24 @@ suspending functions return.
 
 3. Change the `greet()` function to return a `Flow`:
 
-   ```kotlin
-   import kotlinx.coroutines.delay
-   import kotlinx.coroutines.flow.Flow
-   import kotlinx.coroutines.flow.flow
-   import kotlin.time.Duration.Companion.seconds
-
-   fun greet(): Flow<String> = flow {
-        emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
-        delay(1.seconds)
-        emit("Guess what this is! > ${platform.name.reversed()}")
-        delay(1.seconds)
-        emit(daysPhrase())
-        emit(rocketComponent.launchPhrase())
-   }
-   ```
+    ```kotlin
+    import kotlinx.coroutines.delay
+    import kotlinx.coroutines.flow.Flow
+    import kotlinx.coroutines.flow.flow
+    import kotlin.time.Duration.Companion.seconds
+    
+    class Greeting {
+        // ...
+        fun greet(): Flow<String> = flow {
+            emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
+            delay(1.seconds)
+            emit("Guess what this is! > ${platform.name.reversed()}")
+            delay(1.seconds)
+            emit(daysPhrase())
+            emit(rocketComponent.launchPhrase())
+        }
+    }
+    ```
 
    * The `Flow` is created here with the `flow()` builder function, which wraps all the statements.
    * The `Flow` emits strings with a delay of one second between each emission. The last element is only emitted after
@@ -301,7 +304,8 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-2. In `composeApp/src/androidMain/kotlin`, create a new `MainViewModel` Kotlin class:
+2. In the `composeApp/src/androidMain/kotlin/com/jetbrains/greeting/greetingkmp` directory,
+    create a new `MainViewModel` Kotlin class:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -374,7 +378,7 @@ The view model will manage the data from the activity and won't disappear when t
 
 #### Use the view model's flow
 
-1. In `composeApp/src/androidMain/kotlin`, locate the `App.kt` file and update it, replacing the previous implementation:
+1. In `composeApp/src/androidMain/kotlin`, open the `App.kt` file and update it, replacing the previous implementation:
 
     ```kotlin
     import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -387,19 +391,21 @@ The view model will manage the data from the activity and won't disappear when t
             val greetings by mainViewModel.greetingList.collectAsStateWithLifecycle()
     
             Column(
-                modifier = Modifier.padding(all = 20.dp),
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 greetings.forEach { greeting ->
                     Text(greeting)
-                    Divider()
+                    HorizontalDivider()
                 }
             }
         }
     }
     ```
 
-   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the view model's flow
+   * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the ViewModel's flow
      and represent it as a composable state in a lifecycle-aware manner.
    * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
      arranged vertically and separated by dividers.
@@ -415,7 +421,7 @@ pattern again to connect the UI to the shared module, which contains all the bus
 
 The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-#### Introducing a view model
+#### Introducing a ViewModel
 
 1. In `iosApp/iOSApp.swift`, update the entry point for your app:
 
@@ -470,12 +476,12 @@ The module is already imported in the `ContentView.swift` file with the `import 
 
    * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
    * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-     SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`).
+     SwiftUI connects the ViewModel (`ContentView.ViewModel`) with the view (`ContentView`).
    * `ContentView.ViewModel` is declared as an `ObservableObject`.
    * The `@Published` wrapper is used for the `greetings` property.
-   * The `@ObservedObject` property wrapper is used to subscribe to the view model.
+   * The `@ObservedObject` property wrapper is used to subscribe to the ViewModel.
 
-Now the view model will emit signals whenever this property changes.
+Now the ViewModel will emit signals whenever this property changes.
 
 #### Choose a library to consume flows from iOS
 
@@ -510,30 +516,32 @@ plugins {
 
 ##### Consume the flow using SKIE
 
-1. Use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
-   property every time the flow emits a value.
-2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
-   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
+You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
+property every time the flow emits a value.
 
-    ```Swift
-    // ...
-    extension ContentView {
-        @MainActor
-        class ViewModel: ObservableObject {
-            @Published var greetings: [String] = []
-            
-            func startObserving() async {
-                for await phrase in Greeting().greet() {
-                    self.greetings.append(phrase)
-                }
+Make sure `ViewModel` is marked with the `@MainActor` annotation.
+The annotation ensures that all asynchronous operations within `ViewModel` run on the main thread
+to comply with the Kotlin/Native requirement:
+
+```Swift
+// ...
+extension ContentView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        @Published var greetings: [String] = []
+        
+        func startObserving() async {
+            for await phrase in Greeting().greet() {
+                self.greetings.append(phrase)
             }
         }
     }
-    ```
+}
+```
 
-3. Rerun the **iosApp** configuration to make sure your app's logic is synced:
+Rerun the **iosApp** configuration to make sure your app's logic is synced:
 
-   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
 >
@@ -552,7 +560,7 @@ plugins {
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("2.0.0-1.0.24").apply(false)
+        id("com.google.devtools.ksp").version("2.1.21-2.0.1").apply(false)
         id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```
@@ -604,9 +612,9 @@ plugins {
 
 ##### Import the library using SPM in XCode
 
-1. Open Xcode.
+1. Go to **File** | **Open Project in Xcode**.
 2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
-2. In the search bar, enter the package name:
+3. In the search bar, enter the package name:
 
      ```none
     https://github.com/rickclephas/KMP-NativeCoroutines.git

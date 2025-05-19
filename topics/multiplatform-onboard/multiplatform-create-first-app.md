@@ -27,7 +27,9 @@ You can share application logic between iOS and Android apps and write platform-
    * **Name**: GreetingKMP
    * **Group**: com.jetbrains.greeting
    * **Artifact**: greetingkmp
+   
    ![Create Compose Multiplatform project](create-first-multiplatform-app.png){width=800}
+
 5. Select **Android** and **iOS** targets.
 6. For iOS, select the **Do not share UI** option to keep the UI native.
 7. Once you've specified all the fields and targets, click **Create**.
@@ -40,9 +42,9 @@ You can share application logic between iOS and Android apps and write platform-
 
 ## Examine the project structure
 
-In IntelliJ IDEA, navigate to the "GreetingKMP" folder.
+In IntelliJ IDEA, expand the `GreetingKMP` folder.
 
-Each Kotlin Multiplatform project includes three modules:
+This Kotlin Multiplatform project includes three modules:
 
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
   between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
@@ -74,7 +76,8 @@ The common source set contains shared code that can be used across multiple targ
 It's designed to contain code that is platform-independent. If you try to use platform-specific APIs in the common source set,
 the IDE will show a warning:
 
-1. Open the `Greeting.kt` file where you can find an automatically generated `Greeting` class with a `greet()` function:
+1. Open the `shared/src/commonMain/kotlin/com/jetbrains/greeting/greetingkmp/Greeting.kt` file
+    where you can find an automatically generated `Greeting` class with a `greet()` function:
 
     ```kotlin
     class Greeting {
@@ -86,7 +89,8 @@ the IDE will show a warning:
     }
     ```
 
-2. Add a bit of variety to the greeting. Import `kotlin.random.Random` from the Kotlin standard library. This is a multiplatform library that works on all platforms and is included automatically as a dependency.
+2. Add a bit of variety to the greeting. Import `kotlin.random.Random` from the Kotlin standard library.
+    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
 3. Update the shared code with the `reversed()` call from the Kotlin standard library to reverse the text:
 
     ```kotlin
@@ -103,14 +107,14 @@ the IDE will show a warning:
     }
     ```
 
-Writing the code only in common Kotlin has obvious limitations because it can't use any platform specifics.
+Writing the code only in common Kotlin has obvious limitations because it can't use any platform-specific functionality.
 Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.
 
 ### Check out platform-specific implementations
 
-The common source set can define an interface or an expected declaration. Then each platform source set,
-in this case `androidMain` and `iosMain`, has to provide actual platform-specific implementations for the expected
-declarations from the common source set.
+The common source set can define expected declarations (interfaces, classes, and so on).
+Then each platform source set, in this case `androidMain` and `iosMain`,
+has to provide actual platform-specific implementations for the expected declarations.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 and generates a single declaration with actual implementations.
@@ -148,9 +152,9 @@ and generates a single declaration with actual implementations.
     }
     ```
 
-    * The `name` property implementation from `AndroidPlatform` uses the Android platform code, namely the `android.os.Build`
-      dependency. This code is written in Kotlin/JVM. If you try to access a JVM specific class, such as `java.util.Random` here, this code will compile.
-    * The `name` property implementation from `IOSPlatform` uses iOS platform code, namely the `platform.UIKit.UIDevice`
+    * The `name` property implementation from `AndroidPlatform` uses the Android-specific code, namely the `android.os.Build`
+      dependency. This code is written in Kotlin/JVM. If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
+    * The `name` property implementation from `IOSPlatform` uses iOS-specific code, namely the `platform.UIKit.UIDevice`
       dependency. It's written in Kotlin/Native, meaning you can write iOS code in Kotlin. This code becomes a part of the iOS
       framework, which you will later call from Swift in your iOS application.
 
@@ -158,17 +162,17 @@ and generates a single declaration with actual implementations.
    and actual implementations are provided in the platform code:
 
     ```kotlin
-    // Platform.kt in the commonMain module:
+    // Platform.kt in the commonMain source set
     expect fun getPlatform(): Platform
     ```
    
     ```kotlin
-    // Platform.android.kt in the androidMain module:
+    // Platform.android.kt in the androidMain source set
     actual fun getPlatform(): Platform = AndroidPlatform()
     ```
    
     ```kotlin
-    // Platform.ios.kt in the iosMain module:
+    // Platform.ios.kt in the iosMain source set
     actual fun getPlatform(): Platform = IOSPlatform()
     ```
 
@@ -205,7 +209,7 @@ such as properties and classes. Let's implement an expected property:
 
    You'll get an error saying that expected declarations must not have a body, in this case an initializer.
    The implementations must be provided in actual platform modules. Remove the initializer.
-3. Select the `num` property. Press **Option + Enter** and choose "Add missing actual declarations".
+3. Hover the `num` property and click **Create missed actuals...**.
    Choose the `androidMain` source set. You can then complete the implementation in `androidMain/Platform.android.kt`:
 
    ```kotlin
@@ -237,6 +241,9 @@ such as properties and classes. Let's implement an expected property:
 You can run your multiplatform application for both [Android](#run-your-application-on-android)
 or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
 
+If you have explored the expect/actual mechanism earlier, you can see "[1]" added to the greeting for Android
+and "[2]" added for iOS.
+
 ### Run your application on Android
 
 1. In the list of run configurations, select **composeApp**.
@@ -252,15 +259,16 @@ or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
 
 ### Run your application on iOS
 
-1. Launch Xcode in a separate window. The first time you do this, you may also need to accept the license terms and allow
-   Xcode to perform some necessary initial tasks.
-2. In IntelliJ IDEA, select **iosApp** in the list of run configurations and click **Run**.
+If you haven't launched Xcode as part of the initial setup, do that before running the iOS app.
 
-   If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
+and click **Run**.
 
-   ![Run multiplatform app on iOS](compose-run-ios.png){width=350}
+If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
-   ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
+![Run multiplatform app on iOS](compose-run-ios.png){width=350}
+
+![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
 <include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
 

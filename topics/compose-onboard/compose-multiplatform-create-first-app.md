@@ -150,7 +150,7 @@ Learn how to [configure and connect a hardware device and run your application o
 
 ### Run your application on iOS
 
-If you haven't launched Xcode as part of the initial setup, do that before trying to run the iOS app.
+If you haven't launched Xcode as part of the initial setup, do that before running the iOS app.
 
 In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
 and click **Run**.
