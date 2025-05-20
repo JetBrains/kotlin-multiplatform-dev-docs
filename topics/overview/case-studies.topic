@@ -149,9 +149,10 @@
                 its open-source Bitcoin wallet. By migrating to Compose Multiplatform, the team unified UI development and
                 improved feature parity across Android and iOS.
             </p>
+            <a href="https://engineering.block.xyz/blog/how-bitkey-uses-cross-platform-development">Read the full story</a>.
         </li>
         <li id="case-study-music-work">
-            <img src="music-work.png" alt="Music Work" height="50"/>
+            <img src="music-work.png" alt="Music Work" height="60"/>
             <img src="android.svg" style="inline" alt="android" width="28"/> <img src="ios.svg" style="inline" alt="ios" width="28"/>
             <img src="web.svg" style="inline" alt="web" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
@@ -163,7 +164,7 @@
             </p>
         </li>
         <li id="case-study-fast-and-fit">
-            <img src="fast-and-fit.svg" alt="Fast and Fit" height="40"/>
+            <img src="fast-and-fit.svg" alt="Fast and Fit" height="60"/>
             <img src="android.svg" style="inline" alt="android" width="28"/> <img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
                 <img src="compose-multiplatform-logo.svg" alt="Compose Multiplatform" height="20"/>
@@ -206,7 +207,7 @@
             <a href="https://medium.com/@xiang.j9501/case-studies-kuaiying-kotlin-multiplatform-mobile-268e325f8610">Read the full story</a>.
         </li>
         <li id="case-study-wallhub">
-            <img src="wallhub.svg" alt="WallHub" height="34"/>
+            <img src="wallhub.svg" alt="WallHub" height="70"/>
             <img src="android.svg" style="inline" alt="android" width="28"/> <img src="ios.svg" style="inline" alt="ios" width="28"/>
             <a href="https://www.jetbrains.com/compose-multiplatform/">
                 <img src="compose-multiplatform-logo.svg" alt="Compose Multiplatform" height="20"/>
