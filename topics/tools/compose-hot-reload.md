@@ -2,7 +2,7 @@
 
 <primary-label ref="alpha"/>
 
-Compose Hot Reload helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
+[Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
 
 At the moment, Compose Hot Reload is only available when you include a desktop target in your multiplatform project. 
 We're exploring adding support for other targets in the future. In the meantime, using the desktop app as your sandbox
@@ -34,6 +34,10 @@ Android Studio. When your project is created, Compose Hot Reload is automaticall
 This section walks you through the steps to add Compose Hot Reload to an existing multiplatform project. The steps refer
 to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
+> To find the latest version of Compose Hot Reload, see [Releases](https://github.com/JetBrains/compose-hot-reload/releases).
+> 
+{style="tip"}
+
 1. In your project, update the version catalog. In `gradle/libs.versions.toml`, add the following code:
    ```kotlin
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
@@ -59,7 +63,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 4. In your `settings.gradle.kts` file, add a plugin that's required for the Compose Hot Reload plugin:
    ```kotlin
    plugins {
-       id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+       id("org.gradle.toolchains.foojay-resolver-convention") version "%foojayResolverConventionVersion%"
    }
    ```
 
