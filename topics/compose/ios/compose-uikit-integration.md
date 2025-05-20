@@ -249,6 +249,11 @@ The `RealDeviceCamera` composable performs the following tasks:
 * Applies mirroring settings when using the front-facing camera to match natural selfie behavior.
 * Updates the preview layout dynamically in `layoutSubviews()` using `CATransaction` to avoid animations.
 
+> To test on a real device, you need to add the `NSCameraUsageDescription` key to your app's `Info.plist` file.
+> Without it, the app will crash at runtime.
+>
+{style="note"}
+
 Explore the full code for this example in the [ImageViewer sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer).
 
 ### Web view

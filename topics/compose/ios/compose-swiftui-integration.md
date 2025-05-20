@@ -298,7 +298,7 @@ The `CameraPreview` view performs the following tasks:
   the SwiftUI state system.
 
 > To test on a real device, you need to add the `NSCameraUsageDescription` key to your app's `Info.plist` file.
-> Without this, the app will crash at runtime.
+> Without it, the app will crash at runtime.
 >
 {style="note"}
 
