@@ -119,7 +119,7 @@ annotated with `@Preview` in the current file.
 
 ### Hot reload
 
-_Hot reload_  refers to the app reflecting code changes on the fly without requiring additional input.
+_Hot reload_ refers to the app reflecting code changes on the fly without requiring additional input.
 In Compose Multiplatform, hot reload functionality is available only for JVM (desktop) targets.
 However, you can use it to quickly troubleshoot issues before switching to your intended platforms for fine-tuning.
 
