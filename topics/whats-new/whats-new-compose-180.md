@@ -19,8 +19,8 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
     * [Material 1.8.1](https://developer.android.com/jetpack/androidx/releases/compose-material#1.8.1)
     * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.0`. Based on [Jetpack Lifecycle 2.9.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.0)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
-* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.1.0`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta02`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.1.1`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
 
 ## Breaking changes
 
@@ -235,6 +235,13 @@ you can implement deep linking on iOS in the usual Compose manner:
 assigning deep links to destinations and navigating to them using a `NavController`.
 
 For a guide on introducing deep links to common code, see [](compose-navigation-deep-links.md).
+
+### Compose resources in XCFrameworks
+
+Compose Multiplatform now embeds resources directly within the generated XCFrameworks. 
+You can build and use Compose libraries with resources as standard XCFrameworks. 
+
+This feature requires Kotlin Gradle plugin version 2.2 or higher.
 
 ### Accessibility support improvements
 
@@ -462,6 +469,22 @@ Compose Multiplatform %composeVersion% introduces support for Windows for ARM64 
 improving the overall experience of building and running applications on ARM-based Windows devices.
 
 ## Gradle plugin
+
+### Option to change the generated Res class name
+
+You can now customize the name of the generated resource class, which provides access to resources in your app.
+Custom naming is particularly useful for distinguishing resources in multi-module projects and
+helps maintain consistency with your project's naming conventions.
+
+To define a custom name, add the following line to the `compose.resources` block in your `build.gradle.kts` file:
+
+```kotlin
+compose.resources {
+    nameOfResClass = "MyRes"
+}
+```
+
+For more details, see the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/5296).
 
 ### Support for multiplatform resources in the `androidLibrary` target
 <secondary-label ref="Experimental"/>
