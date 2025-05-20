@@ -46,20 +46,18 @@ as it requires processing two touches at once.
 
 ## UI behavior and appearance
 
-### System functionality
+### Platform-specific functionality
 
-Some UI elements depend on system integration and may look different in the default configuration,
-for example:
+Some common UI elements are not covered by Compose Multiplatform and cannot be customized using the framework.
+Therefore, you should expect them to look different on different platforms, for example:
 
-* The "Share" actions use system APIs to offer a list of specific ways to share or send content.
-* The popup-views (for example, for selected text) are fully native and currently cannot be customized
-    through Compose Multiplatform.
+* **Share** actions that use system APIs to offer a list of specific ways to share or send content.
+* Native popup-views (for example, **Copy** or **Translate** actions for selected text).
 
 ### Scroll physics
 
 For Android and iOS, the feel of scrolling is aligned with the platform.
-For desktop, scrolling support is limited since the JVM target by default doesn't support
-common mobile gesture patterns like fling or overscroll (often used for the "pull to refresh" action).
+For desktop, scrolling support is limited to the mouse wheel (as mentioned in [](#touch-and-mouse-support)). 
 
 ### Interop views
 
