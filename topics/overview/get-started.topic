@@ -41,7 +41,7 @@
                 </group>
                 <group>
                     <title>Tools</title>
-                    <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform" summary="Kotlin Multiplatform plugin for IDEA and Android Studio">Kotlin Multiplatform IDE plugin</a>
+                    <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform" summary="Kotlin Multiplatform plugin for IJ IDEA and Android Studio">Kotlin Multiplatform IDE plugin</a>
                     <a href="https://kmp.jetbrains.com/" summary="Quickly generate and download a multiplatform project template">New project wizard</a>
                     <a href="multiplatform-dsl-reference.md" summary="Configure Gradle build scripts for Kotlin Multiplatform projects">Gradle DSL reference</a>
                     <a href="https://klibs.io/" summary="Experimental search platform for Kotlin Multiplatform libraries developed by JetBrains">Search platform for libraries</a>
