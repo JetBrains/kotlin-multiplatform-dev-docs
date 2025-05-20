@@ -1,11 +1,17 @@
 [//]: # (title: Create your own application)
+
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
 <tldr>
-   <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
+    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+    <br/>   
+    <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
        <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
        <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Create your own application</strong><br/>
-  </p>
+    </p>
 </tldr>
 
 Now that you've explored and enhanced the sample project created by the wizard, you can create your own application from
@@ -26,21 +32,26 @@ To get started, implement a new `App` composable:
 1. In `composeApp/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
    composable:
 
-   ```kotlin
-   @Composable
-   @Preview
-   fun App() {
-       MaterialTheme {
-           var timeAtLocation by remember { mutableStateOf("No location selected") }
-           Column {
-               Text(timeAtLocation)
-               Button(onClick = { timeAtLocation = "13:30" }) { 
-                   Text("Show Time At Location")
-               }
-           }
-       }
-   }
-   ```
+    ```kotlin
+    @Composable
+    @Preview
+    fun App() {
+        MaterialTheme {
+            var timeAtLocation by remember { mutableStateOf("No location selected") }
+   
+            Column(
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
+                Text(timeAtLocation)
+                Button(onClick = { timeAtLocation = "13:30" }) {
+                    Text("Show Time At Location")
+                }
+            }
+        }
+    }
+    ```
 
    * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
    * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
@@ -60,24 +71,41 @@ To get started, implement a new `App` composable:
 4. To fix this, in `composeApp/src/desktopMain/kotlin`, update the `main.kt` file as follows:
 
     ```kotlin
-    fun main() = application {
-        val state = rememberWindowState(
-            size = DpSize(400.dp, 250.dp),
-            position = WindowPosition(300.dp, 300.dp)
-        )
-        Window(title = "Local Time App", onCloseRequest = ::exitApplication, state = state) {
-            App()
-        }
-    }
+   fun main() = application {
+       val state = rememberWindowState(
+           size = DpSize(400.dp, 250.dp),
+           position = WindowPosition(300.dp, 300.dp)
+       )
+       Window(
+           title = "Local Time App", 
+           onCloseRequest = ::exitApplication, 
+           state = state,
+           alwaysOnTop = true
+       ) {
+           App()
+       }
+   }
     ```
 
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
     the screen.
 
+    > To see your changes in real time in the desktop app, use [Compose Hot Reload](compose-hot-reload.md):
+    > 1. In the `main.kt` file, click the **Run** icon in the gutter.
+    > 2. Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**.
+    > ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+    > Compose Hot Reload is currently in [Alpha](https://kotlinlang.org/components-stability.html#stability-levels-explained) so its functionality is subject to change.
+    >
+    {style="tip"}
+
 5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the desktop application again. Its appearance should improve:
 
    ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
+
+   ### Compose Hot Reload demo {initial-collapse-state="collapsed" collapsible="true"}
+
+   ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
 ## Support user input
 
@@ -94,7 +122,11 @@ a `TextField` composable:
             var location by remember { mutableStateOf("Europe/Paris") }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
     
-            Column {
+            Column(
+                modifier = Modifier
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(timeAtLocation)
                 TextField(value = location, onValueChange = { location = it })
                 Button(onClick = { timeAtLocation = "13:30" }) {
@@ -142,22 +174,26 @@ The next step is to use the given input to calculate time. To do this, create a 
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
 
     ```kotlin
-    @Composable
-    @Preview
-    fun App() {
-        MaterialTheme {
-            var location by remember { mutableStateOf("Europe/Paris") }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
-            Column {
-                Text(timeAtLocation)
-                TextField(value = location, onValueChange = { location = it })
-                Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
-                    Text("Show Time At Location")
-                }
-            }
-        }
-    }
+   @Composable
+   @Preview
+   fun App() {
+   MaterialTheme { 
+       var location by remember { mutableStateOf("Europe/Paris") }
+       var timeAtLocation by remember { mutableStateOf("No location selected") }
+   
+       Column(
+           modifier = Modifier
+               .safeContentPadding()
+               .fillMaxSize()
+           ) {
+               Text(timeAtLocation)
+               TextField(value = location, onValueChange = { location = it })
+               Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+                   Text("Show Time At Location")
+               }
+           }
+       }
+   }
     ```
 
 4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
@@ -184,41 +220,47 @@ time message could be rendered more prominently.
 
 1. To address these issues, use the following version of the `App` composable:
 
-   ```kotlin
-   @Composable
-   @Preview
-   fun App() {
-       MaterialTheme {
-           var location by remember { mutableStateOf("Europe/Paris") }
-           var timeAtLocation by remember { mutableStateOf("No location selected") }
+    ```kotlin
+    @Composable
+    @Preview
+    fun App() {
+        MaterialTheme {
+            var location by remember { mutableStateOf("Europe/Paris") }
+            var timeAtLocation by remember { mutableStateOf("No location selected") }
    
-           Column(modifier = Modifier.padding(20.dp)) {
-               Text(
-                   timeAtLocation,
-                   style = TextStyle(fontSize = 20.sp),
-                   textAlign = TextAlign.Center,
-                   modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
-               )
-               TextField(value = location,
-                   modifier = Modifier.padding(top = 10.dp),
-                   onValueChange = { location = it })
-               Button(modifier = Modifier.padding(top = 10.dp),
-                   onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
-                   Text("Show Time")
-               }
-           }
-       }
-   }
-   ```
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
+                Text(
+                    timeAtLocation,
+                    style = TextStyle(fontSize = 20.sp),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
+                )
+                TextField(
+                    value = location,
+                    onValueChange = { location = it },
+                    modifier = Modifier.padding(top = 10.dp)
+                Button(
+                    onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" },
+                    modifier = Modifier.padding(top = 10.dp)
+                ) {
+                    Text("Show Time")
+                }
+            }
+        }
+    }
+    ```
 
     * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and the `TextField`.
     * The `Text` composable fills the available horizontal space and centers its content.
     * The `style` parameter customizes the appearance of the `Text`.
 
 2. Follow the IDE's instructions to import the missing dependencies.
-   
-    * For `TextAlign`, use the `androidx.compose.ui.text.style` version.
-    * For `Alignment`, use the `androidx.compose.ui` version.
+    For `Alignment`, use the `androidx.compose.ui` version.
 
 3. Run the application to see how the appearance has improved:
 
@@ -226,10 +268,11 @@ time message could be rendered more prominently.
 
    ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
 
-
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
 >
 {style="tip"}
+-->
 
 ## Refactor the design
 
@@ -266,7 +309,12 @@ list.
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
     
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
@@ -280,13 +328,12 @@ list.
                     ) {
                         countries().forEach { (name, zone) ->
                             DropdownMenuItem(
+                                text = {   Text(name)},
                                 onClick = {
                                     timeAtLocation = currentTimeAt(name, zone)
                                     showCountries = false
                                 }
-                            ) {
-                                Text(name)
-                            }
+                            )
                         }
                     }
                 }
@@ -313,9 +360,11 @@ list.
 
    ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
 >
 {style="tip"}
+-->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -376,7 +425,12 @@ code to load and display them:
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
 
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .safeContentPadding()
+                    .fillMaxSize(),
+            ) {
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
@@ -390,20 +444,19 @@ code to load and display them:
                     ) {
                         countries.forEach { (name, zone, image) ->
                             DropdownMenuItem(
-                                onClick = {
-                                    timeAtLocation = currentTimeAt(name, zone)
-                                    showCountries = false
-                                }
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                text = { Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
                                         painterResource(image),
                                         modifier = Modifier.size(50.dp).padding(end = 10.dp),
                                         contentDescription = "$name flag"
                                     )
                                     Text(name)
+                                } },
+                                onClick = {
+                                    timeAtLocation = currentTimeAt(name, zone)
+                                    showCountries = false
                                 }
-                            }
+                            )
                         }
                     }
                 }
@@ -430,9 +483,11 @@ code to load and display them:
 
    ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
 
+<!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
 >
 {style="tip"}
+-->
 
 ## What's next
 

@@ -107,7 +107,7 @@ Now, you can use this configuration to run the task:
 Once the task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
 directory:
 
-![Artifacts directory](compose-web-artifacts.png){width=600}
+![Artifacts directory](compose-web-artifacts.png){width=400}
 
 ### Publish your application on GitHub Pages
 

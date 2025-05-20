@@ -1,5 +1,12 @@
 [//]: # (title: Test your multiplatform app − tutorial)
 
+<secondary-label ref="IntelliJ IDEA"/>
+<secondary-label ref="Android Studio"/>
+
+<tldr>
+<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+</tldr>
+
 In this tutorial, you'll learn how to create, configure, and run tests in Kotlin Multiplatform applications.
 
 Tests for multiplatform projects can be divided into two categories:
@@ -21,51 +28,50 @@ that requires tests both for common and platform-specific code.
 
 ## Test a simple multiplatform project
 
-### Create your project
+### Create a project
 
-1. Prepare your environment for multiplatform development. [Check the list of necessary tools and update them to the latest versions if necessary](multiplatform-setup.md).
-2. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com).
-3. On the **New project** tab, ensure that the **Android** and **iOS** options are selected.
-4. For iOS, choose the **Do not share UI** option. It is not necessary for this tutorial.
-5. Click the **Download** button and unpack the resulting archive.
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+2. In IntelliJ IDEA, select **File** | **New** | **Project**.
+3. In the panel on the left, select **Kotlin Multiplatform**.
+4. Specify the following fields in the **New Project** window:
 
-![Kotlin Multiplatform wizard](multiplatform-web-wizard-test.png){width=450}
+    * **Name**: KotlinProject
+    * **Group**: kmp.project.demo
+    * **Artifact**: kotlinproject
+    * **JDK**: Amazon Corretto version 17
+        > This JDK version is required for one of the tests that you add later to run successfully.
+        >
+        {style="note"}
+
+5. Select the **Android** target.
+    * If you're using a Mac, select **iOS** as well. Make sure that the **Do not share UI** option is selected.
+6. Deselect **Include tests** and click **Create**.
+
+   ![Create simple multiplatform project](create-test-multiplatform-project.png){width=800}
 
 ### Write code
 
-1. Launch Android Studio.
-2. On the Welcome screen, click **Open**, or select **File | Open** in the editor.
-3. Navigate to the unpacked project folder and then click **Open**.
+In the `shared/src/commonMain/kotlin` directory, create a new `common.example.search` directory.
+In this directory, create a Kotlin file, `Grep.kt`, with the following function:
 
-   Android Studio detects that the folder contains a Gradle build file and opens the folder as a new project.
+```kotlin
+fun grep(lines: List<String>, pattern: String, action: (String) -> Unit) {
+    val regex = pattern.toRegex()
+    lines.filter(regex::containsMatchIn)
+        .forEach(action)
+}
+```
 
-4. The default view in Android Studio is optimized for Android development. To see the full file structure of the project,
-   which is more convenient for multiplatform development, switch the view from **Android** to **Project**:
-
-   ![Select the project view](select-project-view.png){width=200}
-
-5. In the `shared/src/commonMain/kotlin` directory, create a new `common.example.search` directory.
-6. In this directory, create a Kotlin file, `Grep.kt`, and add the following function:
-
-    ```kotlin
-    fun grep(lines: List<String>, pattern: String, action: (String) -> Unit) {
-        val regex = pattern.toRegex()
-        lines.filter(regex::containsMatchIn)
-            .forEach(action)
-    }
-    ```
-
-   This function is designed to resemble the [UNIX grep command](https://en.wikipedia.org/wiki/Grep). Here, the function
-   takes lines of text, a pattern used as a regular expression, and a function that is invoked every time a line matches
-   the pattern.
+This function is designed to resemble the [UNIX `grep` command](https://en.wikipedia.org/wiki/Grep). Here, the function
+takes lines of text, a pattern used as a regular expression, and a function that is invoked every time a line matches
+the pattern.
 
 ### Add tests
 
 Now, let's test the common code. An essential part will be a source set for common tests,
 which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API library as a dependency.
 
-1. In the `shared` directory, open the `build.gradle.kts` file. Add a source set for testing the common code with
-   a dependency on the `kotlin.test` library:
+1. In the `shared/build.gradle.kts` file, check that there is a dependency on the `kotlin.test` library:
 
     ```kotlin
    sourceSets {
@@ -76,19 +82,15 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
    }
    ```
    
-2. Once the dependency is added, you're prompted to resync the project. Click **Sync Now** to synchronize Gradle files:
+2. The `commonTest` source set stores all common tests. You need to create a directory with the same name in your project:
 
-   ![Synchronize Gradle files](gradle-sync.png)
-
-3. The `commonTest` source set stores all common tests. Now you also need to create a directory with the same name in your project:
-
-   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
-   2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
+    1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
+    2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
 
       ![Creating common test directory](create-common-test-dir.png){width=350}
 
-4. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
-5. In this package, create the `Grep.kt` file and update it with the following unit test:
+3. In the `commonTest/kotlin` directory, create a new `common.example.search` package.
+4. In this package, create the `Grep.kt` file and update it with the following unit test:
 
     ```kotlin
     import kotlin.test.Test
@@ -260,7 +262,7 @@ As well as implementing this function on each platform, you should provide tests
 
 3. Create a directory for tests inside the `shared/src` directory:
  
-   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
    2. Start typing the `androidUnitTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating Android test directory](create-android-test-dir.png){width=350}
@@ -282,6 +284,10 @@ As well as implementing this function on each platform, you should provide tests
         }
     }
     ```
+   
+   > If you chose a different JDK version at the beginning of the tutorial, you may need to change the `name` and `version` for the test to run successfully.
+   > 
+   {style="note"}
 
 It may seem strange that an Android-specific test is run on a local JVM. This is because these tests run as local unit
 tests on the current machine. As described in the [Android Studio documentation](https://developer.android.com/studio/test/test-in-android-studio),
@@ -308,7 +314,7 @@ You can add other types of tests to your project. To learn about instrumented te
 
 3. Create a new directory in the `shared/src` directory:
    
-   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE will present a list of options.
+   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
    2. Start typing the `iosTest/kotlin` path to narrow down the selection, then choose it from the list:
 
    ![Creating iOS test directory](create-ios-test-dir.png){width=350}
@@ -316,9 +322,7 @@ You can add other types of tests to your project. To learn about instrumented te
 4. In the `iosTest/kotlin` directory, create a new `org.kmp.testing` directory.
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:
 
-    ```kotlin
-    package org.kmp.testing 
-   
+    ```kotlin 
     import kotlin.test.Test
     import kotlin.test.assertEquals
     

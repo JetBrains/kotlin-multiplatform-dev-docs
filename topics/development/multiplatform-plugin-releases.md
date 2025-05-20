@@ -1,19 +1,22 @@
-[//]: # (title: Android Studio plugin releases)
+[//]: # (title: Kotlin Multiplatform IDE plugin releases)
 
-The [Kotlin Multiplatform plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-helps you develop applications both for Android and iOS.
-Ensure that you have the latest version of the plugin to work with Kotlin Multiplatform projects.
+The [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+helps you develop cross-platform applications for Android, iOS, desktop, and web.
+Make sure that you have the latest version of the plugin to work with Kotlin Multiplatform projects.
+
+It is compatible both with IntelliJ IDEA (starting with version 2025.1.1.1)
+and Android Studio (starting with Narwhal 2025.1.1 Canary 10).
 
 > For the information on the Kotlin Multiplatform Gradle plugin, see its [DSL reference](multiplatform-dsl-reference.md)
 > and the [Compatibility guide](multiplatform-compatibility-guide.md).
 > 
 {style="tip"}
 
-## Update to the new release
+## Update to the latest release
 
-Android Studio suggests updating to a new Kotlin Multiplatform plugin release as soon as it's available.
-If you accept the suggestion, it automatically updates the plugin to the latest version.
-To complete the plugin installation, restart your Android Studio.
+Your IDE suggests updating to a new Kotlin Multiplatform plugin release as soon as it's available.
+If you accept the suggestion, the plugin is updated to the latest version.
+To complete the plugin installation, restart the IDE.
 
 You can check the plugin version and update it manually in **Settings** | **Plugins**.
 
@@ -27,7 +30,7 @@ To check your Kotlin version and update it, go to **Settings** | **Plugins** or 
 
 ## Release details
 
-The following table lists the details of the latest releases of Kotlin Multiplatform plugin for Android Studio: 
+The following table lists the releases of the Kotlin Multiplatform IDE plugin: 
 
 <table> 
 <tr>
@@ -40,6 +43,46 @@ Release highlights
 <th>
 Compatible Kotlin version
 </th>
+</tr>
+<tr id="0.9">
+<td>
+
+**0.9**
+
+Released: 19 May, 2025
+
+</td>
+<td>
+
+The Kotlin Multiplatform plugin was rebuilt from the ground up:
+
+* Integrated **New Project** wizard for supported IDEs.
+* Preflight environment checks that help find and solve issues with the setup, including Java, Android, Xcode, and Gradle.
+* Automatically generated run configurations for all supported platforms, with the device selector for iOS and Android.
+* Cross-language support: cross-language navigation and debugging for Swift and Kotlin, along with Swift syntax highlighting
+    and quick documentation.
+* Compose Multiplatform support: the Kotlin Multiplatform plugin now supports Compose Multiplatform resources,
+    autocompletion, and UI previews for common code (the [previous Compose Multiplatform plugin](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
+    can be safely uninstalled).
+* Compose Hot Reload: instantly see UI changes without restarting the app (with a desktop JVM target).
+    See [Hot Reload docs](compose-hot-reload.md) for more information.
+
+Known issues:
+
+* In Android Studio, the Compose debugger currently doesn't work with Kotlin 2.1.20 and 2.1.21.
+    This issue will be fixed in Kotlin 2.2.0-RC2.
+
+</td>
+<td>
+
+The plugin works with [any of the Kotlin versions](https://kotlinlang.org/docs/releases.html#release-details),
+but most of its functionality relies on Kotlin 2.1.21.
+Updating to the latest stable Kotlin version ensures the best experience.
+
+This version also requires K2 mode, so make sure to enable it:
+in **Settings** | **Languages & Frameworks** | **Kotlin**, check **Enable K2 mode**.
+
+</td>
 </tr>
 <tr>
 <td>
@@ -56,7 +99,7 @@ Released: 06 December, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -75,7 +118,7 @@ Released: 23 July, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -95,7 +138,7 @@ Released: 16 May, 2024
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -119,7 +162,7 @@ Released: 9 November, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -145,7 +188,7 @@ Released: 5 October, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -167,7 +210,7 @@ Released: 24 May, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -189,7 +232,7 @@ Released: 12 April, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -212,7 +255,7 @@ Released: 30 January, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
+[Any of Kotlin plugin versions](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -231,7 +274,7 @@ Released: 30 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -253,7 +296,7 @@ Released: 22 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -282,7 +325,7 @@ Released: 12 September, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -301,7 +344,7 @@ Released: 9 June, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.7.0—1.7.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -320,7 +363,7 @@ Released: 4 April, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -344,7 +387,7 @@ Released: 15 February, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0—1.6.*](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -373,7 +416,7 @@ Released: 16 November, 2021
 </td>
 <td>
 
-* [Kotlin 1.6.0](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.6.0](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -399,7 +442,7 @@ Released: August 2, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -419,7 +462,7 @@ Released: June 10, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -438,7 +481,7 @@ Released: May 25, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.10](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -459,7 +502,7 @@ Use this version of the plugin with Android Studio 4.2 or Android Studio 2020.3.
 </td>
 <td>
 
-* [Kotlin 1.5.0](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.5.0](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -482,7 +525,7 @@ Released: April 5, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -504,7 +547,7 @@ Released: March 3, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -525,7 +568,7 @@ Use this version of the plugin with Android Studio 4.2.
 </td>
 <td>
 
-* [Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.30](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
@@ -551,7 +594,7 @@ Released: November 23, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.20](https://kotlinlang.org/docs/releases.html#release-details)
+[Kotlin 1.4.20](https://kotlinlang.org/docs/releases.html#release-details)
 
 </td>
 </tr>
