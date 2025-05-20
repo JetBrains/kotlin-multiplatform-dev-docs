@@ -9,7 +9,7 @@ with Compose Multiplatform.
 
 Regardless of the platform you're targeting, each of them needs a dedicated entry point:
 
-* For Android, that's the Activity whose job it is to show the main composable from common code.
+* For Android, that's the `Activity`, whose job is to show the main composable from common code.
 * For an iOS app, that's the `@main` class or structure that initializes the app.
 * For a JVM app, that's the `main()` function that starts the application which launches the main common composable.
 * For a Kotlin/JS or Kotlin/Wasm app, that's the `main()` function that attaches the main common code composable
@@ -17,16 +17,15 @@ Regardless of the platform you're targeting, each of them needs a dedicated entr
 
 Certain platform-specific APIs necessary for your app may not have multiplatform support,
 and you will have to implement calling these APIs in platform-specific source sets.
-But before you do that, check out [klibs.io](https://klibs.io/), a JetBrains project which aims to comprehensively
+Before doing so, check out [klibs.io](https://klibs.io/), a JetBrains project which aims to comprehensively
 catalog all available Kotlin Multiplatform libraries.
-Already available are libraries for network code, databases, coroutines, and much more.
+There are already libraries available for network code, databases, coroutines, and much more.
 
 ## Input methods
 
 ### Software keyboards
 
-Each platform may handle software keyboards a little differently in the way it appears when a text field becomes active,
-for example.
+Each platform may handle software keyboards slightly differently, including the way a keyboard appears when a text field becomes active.
 
 Compose Multiplatform adopts the [Compose window insets approach](https://developer.android.com/develop/ui/compose/system/insets)
 and imitates it on iOS
@@ -52,7 +51,7 @@ Some common UI elements are not covered by Compose Multiplatform and cannot be c
 Therefore, you should expect them to look different on different platforms, for example:
 
 * **Share** actions that use system APIs to offer a list of specific ways to share or send content.
-* Native popup-views (for example, **Copy** or **Translate** actions for selected text).
+* Native pop-up views (for example, **Copy** or **Translate** actions for selected text).
 
 ### Scroll physics
 
@@ -76,7 +75,7 @@ On iOS, there is no back gesture by default, although developers are encouraged 
 to meet user experience expectations.
 Compose Multiplatform for iOS supports back gestures by default to mimic Android functionality.
 
-On desktop, Compose Multiplatform uses the **Esc** key by default as a back trigger.
+On desktop, Compose Multiplatform uses the **Esc** key as the default back trigger.
 
 For details, see the [](compose-navigation.md#back-gesture) section.
 
@@ -87,8 +86,8 @@ With text, Compose Multiplatform doesn't guarantee pixel-perfect correspondence 
 * If you don't set a font explicitly, each system assigns a different default font to your text.
 * Even for the same font, letter aliasing mechanisms specific to each platform can lead to noticeable differences.
 
-This doesn't have a significant impact on user experience (on the contrary, default fonts look as expected on each platform).
-But pixel differences may get in the way of screenshot testing, for example.
+This doesn't have a significant impact on user experience. On the contrary, the default fonts appear as expected on each platform.
+However, pixel differences may interfere with screenshot testing, for example.
 
 ### Initial performance
 
@@ -96,8 +95,8 @@ On iOS, you may notice a delay in the initial performance of individual screens 
 This can happen because Compose Multiplatform compiles UI shaders on demand.
 So, if a particular shader is not cached yet, compiling it may delay rendering of a scene.
 
-This affects only the first time launches for each screen:
-after all necessary shaders are cached, their compilation won't delay subsequent launches.
+This issue affects only the first launch of each screen.
+Once all necessary shaders are cached, subsequent launches are not delayed by compilation.
 
 ## Developer experience
 
@@ -117,9 +116,9 @@ annotated with `@Preview` in the current file.
 
 ### Hot reload
 
-_Hot reload_ is the experience of the app reflecting changes in code without additional input, on the fly.
-For Compose Multiplatform, the hot reload functionality is available only for JVM (desktop) targets,
-but you can use it to quickly iron out problems before switching to your actual target platforms for fine-tuning.
+_Hot reload_  refers to the app reflecting code changes on the fly without requiring additional input.
+In Compose Multiplatform, hot reload functionality is available only for JVM (desktop) targets.
+However, you can use it to quickly troubleshoot issues before switching to your intended platforms for fine-tuning.
 
 TODO: link the CMP hot reload repo, or the doc page if it's there already 
 
