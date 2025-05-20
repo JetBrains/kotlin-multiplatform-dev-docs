@@ -48,10 +48,11 @@ as it requires processing two touches at once.
 ### Platform-specific functionality
 
 Some common UI elements are not covered by Compose Multiplatform and cannot be customized using the framework.
-Therefore, you should expect them to look different on different platforms, for example:
+Therefore, you should expect them to look different on different platforms.
 
-* **Share** actions that use system APIs to offer a list of specific ways to share or send content.
-* Native pop-up views (for example, **Copy** or **Translate** actions for selected text).
+Native pop-up views are an example of this:
+when you select text in a Compose Multiplatform text field, default suggested actions like **Copy** or **Translate**
+are specific to the platform the app is running on.
 
 ### Scroll physics
 
@@ -89,6 +90,7 @@ With text, Compose Multiplatform doesn't guarantee pixel-perfect correspondence 
 This doesn't have a significant impact on user experience. On the contrary, the default fonts appear as expected on each platform.
 However, pixel differences may interfere with screenshot testing, for example.
 
+<!-- this should be covered in benchmarking, not as a baseline Compose Multiplatform limitation 
 ### Initial performance
 
 On iOS, you may notice a delay in the initial performance of individual screens compared to Android.
@@ -97,6 +99,7 @@ So, if a particular shader is not cached yet, compiling it may delay rendering o
 
 This issue affects only the first launch of each screen.
 Once all necessary shaders are cached, subsequent launches are not delayed by compilation.
+-->
 
 ## Developer experience
 
@@ -120,7 +123,7 @@ _Hot reload_  refers to the app reflecting code changes on the fly without requi
 In Compose Multiplatform, hot reload functionality is available only for JVM (desktop) targets.
 However, you can use it to quickly troubleshoot issues before switching to your intended platforms for fine-tuning.
 
-TODO: link the CMP hot reload repo, or the doc page if it's there already 
+To learn more, see our [](compose-hot-reload.md) article. 
 
 ## What's next
 
