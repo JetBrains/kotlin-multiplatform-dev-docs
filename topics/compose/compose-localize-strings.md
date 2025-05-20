@@ -1,8 +1,10 @@
 # Localizing strings
 
 Localization is the process of adapting your app to different languages, regions, and cultural conventions. 
-This guide explains how to set up translation directories, work with region-specific formats, 
-handle right-to-left (RTL) languages, and test localization across platforms.
+This guide explains how to set up translation directories, 
+[work with region-specific formats](compose-regional-format.md), 
+[handle right-to-left (RTL) languages](compose-rtl.md), 
+and [test localization](compose-localization-tests.md) across platforms.
 
 To localize strings in Compose Multiplatform, you need to provide translated texts for your application's user interface 
 elements in all supported languages. Compose Multiplatform simplifies this process by offering a common resource 
@@ -68,7 +70,7 @@ fun MyApp() {
 }
 ```
 
-In the example above, the `welcome_message` string includes a placeholder (`%s`) to insert a dynamic value. 
+In the example above, the `welcome_message` string includes a placeholder (`%s`) for a dynamic value. 
 Both the generated accessor and the `stringResource()` function support passing such parameters.
 
 ## What's next

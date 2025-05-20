@@ -2,7 +2,7 @@
 
 Text fields and related components, such as date and time pickers, automatically apply locale-specific formatting patterns.
 These include the formatting of numbers, dates, times, and currencies. 
-The patterns are determined by the system's locale or a custom locale specified within your application, 
+The patterns are determined by the system's locale or a custom locale set within your application, 
 ensuring consistent data display across platforms.
 
 ## Locale formatting patterns

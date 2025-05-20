@@ -98,7 +98,7 @@ Image(
 Store all string resources in XML files in `composeResources/values` directories.
 A static accessor is generated for each item in each file.
 
-For more information on how to localize strings for different locales, refer to this 
+For more information on how to localize strings for different locales, refer to the 
 [guide on localizing strings](compose-localize-strings.md).
 
 #### Simple strings
