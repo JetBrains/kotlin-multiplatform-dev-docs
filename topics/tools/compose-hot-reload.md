@@ -104,7 +104,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    ```
 
 4.  In the `desktopMain` directory, open the `main.kt` file and click the **Run** icon in the gutter. 
-    Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**.
+    Select **Run 'composeApp [desktop]' with Compose Hot Reload (Alpha)**.
 
     ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
 
