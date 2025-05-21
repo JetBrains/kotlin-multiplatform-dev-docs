@@ -8,6 +8,14 @@ produce better-organized, and often lighter, code that is easier to maintain.
 Compose Multiplatform provides a common `LifecycleOwner` implementation, which extends the original Jetpack Compose
 functionality to other platforms and helps observe lifecycle states in common code.
 
+To use the multiplatform `Lifecycle` implementation, add the following dependency to your `commonMain` source set:
+
+```kotlin
+commonMain.dependencies {
+    implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%")
+}
+```
+
 ## States and events
 
 The flow of lifecycle states and events
