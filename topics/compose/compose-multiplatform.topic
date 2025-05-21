@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/html-entities.dtd">
+
+<topic 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+	title="Get started with Compose Multiplatform" id="compose-multiplatform">
+
+    <section-starting-page>
+        <title>Get started with Compose Multiplatform</title>
+        <description>
+            A declarative framework developed by JetBrains for sharing Kotlin UI code across multiple platforms.
+        </description>
+        <spotlight>
+            <a href="compose-layout.md" type="cross-platform" summary="Learn the basics of making UIs with Compose">Compose Multiplatform basics</a>
+            <a href="compose-multiplatform-and-jetpack-compose.md" summary="Learn about the connection between Jetpack Compose and Compose Multiplatform" type="branch">Compose Multiplatform and Jetpack Compose</a>
+        </spotlight>
+        <primary>
+            <title>Popular use cases</title>
+            <a href="compose-multiplatform-resources.md" summary="Manage and share common assets in a cross-platform app">Resources</a>
+            <a href="compose-navigation.md" summary="Use the multiplatform Navigation library to implement navigation in a Compose Multiplatform app">Navigation</a>
+            <!--<a href="compose-localize-strings.md" summary="Adapt UI for different languages and regions">Localization</a>-->
+            <a href="compose-test.md" summary="Write and run UI tests for Compose Multiplatform apps">Test Compose Multiplatform UI</a>
+        </primary>
+        <secondary>
+            <title>References</title>
+            <a href="https://kotlinlang.org/api/compose-multiplatform/material3/" summary="An API reference with interactive previews">Material3 components supported by Compose Multiplatform">Material3 components supported by Compose Multiplatform</a>
+            <a href="compose-desktop-components.md" summary="A list of desktop-specific components implemented by Compose Multiplatform">Desktop-specific components</a>
+            <a href="compose-android-only-components.md" summary="A list of APIs exclusive to Android or not commonly available">Android-only APIs</a>
+            <a href="compose-compatibility-and-versioning.md" summary="Compatibility information about Compose Multiplatform releases">Version compatibility and limitations</a>
+        </secondary>
+        <misc>
+            <links narrow="true">
+                <group>
+                    <title>iOS-specific features</title>
+                    <a href="compose-swiftui-integration.md" summary="Interoperability with SwiftUI: using Compose in native views and vice versa">SwiftUI interoperability</a>
+                    <a href="compose-uikit-integration.md" summary="Interoperability with UIKit: using Compose in native views and vice versa">UIKit interoperability</a>
+                    <a href="compose-ios-touch.md" summary="Learn how Compose Multiplatform handles touch events in interop scenarios">Touch in iOS interop scenarios</a>
+                    <a href="compose-ios-accessibility.md" summary="Learn about the current level of support for iOS Accessibility Services">iOS accessibility</a>
+                </group>
+                <group>
+                    <title>Tools</title>
+                    <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform" summary="Kotlin Multiplatform plugin for IntelliJ IDEA and Android Studio">IDE plugin for Compose Multiplatform</a>
+                    <a href="compose-hot-reload.md" summary="Quickly iterate on your UI with Compose Hot Reload">Compose Hot Reload</a>
+                    <a href="https://klibs.io/" summary="Experimental search platform for Kotlin Multiplatform libraries developed by JetBrains">Search for Compose Multiplatform libraries</a>
+                    <a href="https://kotlinlang.org/docs/compose-compiler-options.html" summary="Options for the Compose compiler included with Kotlin">Compose compiler and its options</a>
+                </group>
+                <group>
+                    <title>Community &amp; help</title>
+                    <a href="https://kotlinlang.slack.com/archives/CJLTWPH7S" summary="Main Compose-related channel in the Kotlin workspace">Join the general #compose Slack channel</a>
+                    <a href="https://kotlinlang.slack.com/archives/C0346LWVBJ4" summary="iOS-specific Compose Multiplatform channel">iOS-specific Slack channel</a>
+                    <a href="https://kotlinlang.slack.com/archives/C01D6HTPATV" summary="Desktop-specific Compose Multiplatform channel">Desktop-specific Slack channel</a>
+                    <a href="https://kotlinlang.slack.com/archives/C01F2HV7868" summary="Web-specific Compose Multiplatform channel">Web-specific Slack channel</a>
+                    <a href="https://youtrack.jetbrains.com/newIssue?project=CMP" summary="Compose Multiplatform issue tracker">Report an issue in YouTrack</a>
+                </group>
+            </links>
+        </misc>
+    </section-starting-page>
+</topic>
