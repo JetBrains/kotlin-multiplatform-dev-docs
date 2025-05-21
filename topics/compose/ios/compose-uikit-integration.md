@@ -72,15 +72,20 @@ UIKit's [`UITextField`](https://developer.apple.com/documentation/uikit/uitextfi
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 fun UseUITextField(modifier: Modifier = Modifier) {
+    // Holds the state of the text in Compose
     var message by remember { mutableStateOf("Hello, World!") }
+
     UIKitView(
         factory = {
+            // Creates a UITextField integrated with Compose state
             val textField = object : UITextField(CGRectMake(0.0, 0.0, 0.0, 0.0)) {
                 @ObjCAction
                 fun editingChanged() {
+                    // Updates the Compose state when text changes in UITextField
                     message = text ?: ""
                 }
             }
+            // Adds a listener for text changes within the UITextField
             textField.addTarget(
                 target = textField,
                 action = NSSelectorFromString(textField::editingChanged.name),
@@ -90,6 +95,7 @@ fun UseUITextField(modifier: Modifier = Modifier) {
         },
         modifier = modifier.fillMaxWidth().height(30.dp),
         update = { textField ->
+            // Updates UITextField text from Compose state
             textField.text = message
         }
     )
@@ -149,10 +155,10 @@ fun RealDeviceCamera(
     camera: AVCaptureDevice,
     onCapture: (picture: PictureData.Camera, image: PlatformStorableImage) -> Unit
 ) {
-    // Set up AVCapturePhotoOutput for a photo capturing session
+    // Initializes AVCapturePhotoOutput for photo capturing
     val capturePhotoOutput = remember { AVCapturePhotoOutput() }
     // ...
-    // Capture callback: process image data, attach GPS, setup onCapture
+    // Defines a delegate to capture callback: process image data, attach GPS, setup onCapture
     val photoCaptureDelegate = remember {
         object : NSObject(), AVCapturePhotoCaptureDelegateProtocol {
             override fun captureOutput(
@@ -178,7 +184,7 @@ fun RealDeviceCamera(
         }
     }
     // ...
-    // Set up capture session 
+    // Sets up AVCaptureSession for photo capture
     val captureSession: AVCaptureSession = remember {
         AVCaptureSession().also { captureSession ->
             captureSession.sessionPreset = AVCaptureSessionPresetPhoto
@@ -188,11 +194,12 @@ fun RealDeviceCamera(
             captureSession.addOutput(capturePhotoOutput)
         }
     }
+    // Sets up AVCaptureVideoPreviewLayer for the live camera preview
     val cameraPreviewLayer = remember {
         AVCaptureVideoPreviewLayer(session = captureSession)
     }
     // ...
-    // Create a native UIView with a native camera preview layer
+    // Creates a native UIView with the native camera preview layer
     UIKitView(
         modifier = Modifier.fillMaxSize().background(Color.Black),
         factory = {
@@ -212,7 +219,7 @@ fun RealDeviceCamera(
         },
     )
     // ...
-    // Create a compose button that executes the capturePhotoWithSettings callback when pressed
+    // Creates a Compose button that executes the capturePhotoWithSettings callback when pressed
     CircularButton(
         imageVector = IconPhotoCamera,
         modifier = Modifier.align(Alignment.BottomCenter).padding(36.dp),
@@ -282,12 +289,14 @@ fun WebViewWithDelegate(
     initialUrl: String = "https://www.jetbrains.com",
     onNavigationChange: (String) -> Unit = {}
 ) {
+    // Creates a delegate to listen for navigation events
     val delegate = remember {
         object : NSObject(), WKNavigationDelegateProtocol {
             override fun webView(
                 webView: WKWebView,
                 didFinishNavigation: WKNavigation?
             ) {
+                // Updates the current URL after navigation is complete
                 onNavigationChange(webView.URL?.absoluteString ?: "")
             }
         }
@@ -295,6 +304,7 @@ fun WebViewWithDelegate(
     UIKitView(
         modifier = modifier,
         factory = {
+            // Instantiates a WKWebView and sets its delegate
             val webView = WKWebView().apply {
                 navigationDelegate = delegate
                 loadRequest(NSURLRequest(uRL = NSURL(string = initialUrl)))
@@ -302,6 +312,7 @@ fun WebViewWithDelegate(
             webView
         },
         update = { webView ->
+            // Reloads the web page if the URL changes
             if (webView.URL?.absoluteString != initialUrl) {
                 webView.loadRequest(NSURLRequest(uRL = NSURL(string = initialUrl)))
             }
