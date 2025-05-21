@@ -9,8 +9,7 @@
     <section-starting-page>
         <title>Get started with Compose Multiplatform</title>
         <description>
-            Compose Multiplatform is a declarative framework for sharing Kotlin UI code across multiple platforms.
-            It is based on Jetpack Compose and developed by JetBrains and open-source contributors.
+            A declarative framework developed by JetBrains for sharing Kotlin UI code across multiple platforms.
         </description>
         <spotlight>
             <a href="compose-layout.md" type="cross-platform" summary="Learn the basics of making UIs with Compose">Compose Multiplatform basics</a>
@@ -18,16 +17,16 @@
         </spotlight>
         <primary>
             <title>Popular use cases</title>
-            <a href="compose-multiplatform-resources.md" summary="Learn about sharing resources as well as code in a cross-platform app">Resources</a>
-            <a href="compose-navigation.md" summary="Implement navigation in Compose Multiplatform app using the multiplatform Navigation library">Navigation</a>
-            <!--<a href="compose-localize-strings.md" summary="Learn about aspects of UI localization and how to deal with them in Compose Multiplatform">Localization</a>-->
-            <a href="compose-test.md" summary="Using Jetpack Compose testing API for Compose Multiplatform apps">Testing Compose Multiplatform UI</a>
+            <a href="compose-multiplatform-resources.md" summary="Manage and share common assets in a cross-platform app">Resources</a>
+            <a href="compose-navigation.md" summary="Use the multiplatform Navigation library to implement navigation in a Compose Multiplatform app">Navigation</a>
+            <!--<a href="compose-localize-strings.md" summary="Adapt UI for different languages and regions">Localization</a>-->
+            <a href="compose-test.md" summary="Write and run UI tests for Compose Multiplatform apps">Test Compose Multiplatform UI</a>
         </primary>
         <secondary>
             <title>References</title>
-            <a href="https://kotlinlang.org/api/compose-multiplatform/material3/" summary="API reference with interactive previews">Material3 components supported by Compose Multiplatform</a>
-            <a href="compose-desktop-components.md" summary="List of desktop-specific components implemented by Compose Multiplatform">Desktop-specific components</a>
-            <a href="compose-android-only-components.md" summary="List of APIs either exclusive to Android or not commonized yet">Android-only APIs</a>
+            <a href="https://kotlinlang.org/api/compose-multiplatform/material3/" summary="An API reference with interactive previews">Material3 components supported by Compose Multiplatform">Material3 components supported by Compose Multiplatform</a>
+            <a href="compose-desktop-components.md" summary="A list of desktop-specific components implemented by Compose Multiplatform">Desktop-specific components</a>
+            <a href="compose-android-only-components.md" summary="A list of APIs exclusive to Android or not commonly available">Android-only APIs</a>
             <a href="compose-compatibility-and-versioning.md" summary="Compatibility information about Compose Multiplatform releases">Version compatibility and limitations</a>
         </secondary>
         <misc>
