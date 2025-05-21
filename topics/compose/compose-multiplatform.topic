@@ -24,7 +24,7 @@
         </primary>
         <secondary>
             <title>References</title>
-            <a href="https://kotlinlang.org/api/compose-multiplatform/material3/" summary="An API reference with interactive previews">Material3 components supported by Compose Multiplatform">Material3 components supported by Compose Multiplatform</a>
+            <a href="https://kotlinlang.org/api/compose-multiplatform/material3/" summary="An API reference with interactive previews">Material3 components supported by Compose Multiplatform</a>
             <a href="compose-desktop-components.md" summary="A list of desktop-specific components implemented by Compose Multiplatform">Desktop-specific components</a>
             <a href="compose-android-only-components.md" summary="A list of APIs exclusive to Android or not commonly available">Android-only APIs</a>
             <a href="compose-compatibility-and-versioning.md" summary="Compatibility information about Compose Multiplatform releases">Version compatibility and limitations</a>
