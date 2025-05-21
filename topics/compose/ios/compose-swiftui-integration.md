@@ -189,7 +189,7 @@ The `AnnotatedMapView` performs the following tasks:
 * Uses `annotationItems` to declaratively place custom markers on the map.
 * Wraps the SwiftUI component inside a `UIHostingController`, which is then passed to Compose Multiplatform as a `UIViewController`.
 
-### Camera
+### Camera view
 
 You can implement a camera view in Compose Multiplatform using SwiftUI and UIKit's [`UIImagePickerController`](https://developer.apple.com/documentation/uikit/uiimagepickercontroller),
 wrapped in a SwiftUI-compatible component. This allows your application to launch the system camera and capture photos.
