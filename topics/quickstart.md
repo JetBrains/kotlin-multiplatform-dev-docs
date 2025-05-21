@@ -32,7 +32,7 @@ Start with an IDE and necessary plugins:
     * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
     * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
     * [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support)
-    * [Compose Multiplatform IDE Support](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
+    * [Compose Multiplatform for Desktop IDE Support](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-for-desktop-ide-support)
       (only needed if you don't have the Kotlin Multiplatform plugin).
 
 4. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
