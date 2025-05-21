@@ -105,7 +105,8 @@ fun UseUITextField(modifier: Modifier = Modifier) {
 * The factory parameter contains the `editingChanged()` function and the `textField.addTarget()` listener to detect any
   changes to `UITextField`.
 * The `editingChanged()` function is annotated with `@ObjCAction` so that it can interoperate with Objective-C code.
-* The `action` parameter of the `addTarget()` function passes the name of the `editingChanged()` function, triggering it in response to a `UIControlEventEditingChanged` event.
+* The `action` parameter of the `addTarget()` function passes the name of the `editingChanged()` function, triggering it
+  in response to a `UIControlEventEditingChanged` event.
 * The `update` parameter of `UIKitView()` is called when the observable message state changes its value.
 * The function updates the `text` attribute of the `UITextField` so that the user sees the updated value.
 

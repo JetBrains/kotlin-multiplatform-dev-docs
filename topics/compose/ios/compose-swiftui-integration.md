@@ -146,11 +146,12 @@ import SwiftUI
 import MapKit
 
 struct AnnotatedMapView: View {
+    // Manages map region state
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
-
+    // Displays a map with a custom annotation
     var body: some View {
         Map(coordinateRegion: $region, annotationItems: [Landmark.example]) { landmark in
             MapMarker(coordinate: landmark.coordinate, tint: .blue)
@@ -162,7 +163,6 @@ struct Landmark: Identifiable {
     let id = UUID()
     let name: String
     let coordinate: CLLocationCoordinate2D
-
 
     static let example = Landmark(
         name: "Big Ben",
@@ -262,23 +262,29 @@ import SwiftUI
 import UIKit
 
 struct CameraPreview: View {
+    // Controls the camera sheet visibility
     @State private var showCamera = false
+    // Stores the captured image
     @State private var capturedImage: UIImage?
 
     var body: some View {
         VStack {
             if let image = capturedImage {
+                // Displays the captured image
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
             } else {
+                // Shows placeholder text when no image is captured
                 Text("No image captured")
             }
 
+            // Adds a button to open the camera
             Button("Open Camera") {
                 showCamera = true
             }
+            // Presents CameraView as a modal sheet
             .sheet(isPresented: $showCamera) {
                 CameraView { image in
                     capturedImage = image
@@ -329,6 +335,7 @@ struct AdvancedWebView: UIViewRepresentable {
     @Binding var isLoading: Bool
     @Binding var currentURL: String
 
+    // Creates WKWebView with navigation delegate
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.navigationDelegate = context.coordinator
@@ -338,6 +345,7 @@ struct AdvancedWebView: UIViewRepresentable {
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 
+    // Creates coordinator to handle web navigation events 
     func makeCoordinator() -> Coordinator {
         Coordinator(isLoading: $isLoading, currentURL: $currentURL)
     }
@@ -355,6 +363,7 @@ struct AdvancedWebView: UIViewRepresentable {
             isLoading = true
         }
 
+        // Updates URL and indicates loading has completed
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
             isLoading = false
             currentURL = webView.url?.absoluteString ?? ""
@@ -367,19 +376,24 @@ Use it in a SwiftUI view as follows:
 
 ```swift
 struct WebViewContainer: View {
+    // Tracks loading state of web view
     @State private var isLoading = false
+    // Tracks current URL displayed
     @State private var currentURL = ""
 
     var body: some View {
         VStack {
+            // Displays loading indicator while loading
             if isLoading {
                 ProgressView()
             }
+            // Shows current URL
             Text("URL: \(currentURL)")
                 .font(.caption)
                 .lineLimit(1)
                 .truncationMode(.middle)
 
+            // Embeds the advanced web view
             AdvancedWebView(
                 url: URL(string: "https://www.jetbrains.com")!,
                 isLoading: $isLoading,
