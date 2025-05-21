@@ -13,7 +13,7 @@
         </description>
         <spotlight>
             <a href="quickstart.md" type="cross-platform" summary="Set up and run your first KMP project">Kotlin Multiplatform quickstart</a>
-            <a href="https://www.jetbrains.com/lp/compose-multiplatform/" summary="Discover Kotlin-based declarative multiplatform UI framework developed by JetBrains" type="creative">Compose Multiplatform</a>
+            <a href="compose-multiplatform.topic" summary="Discover Kotlin-based declarative multiplatform UI framework developed by JetBrains" type="creative">Compose Multiplatform</a>
         </spotlight>
         <primary>
             <title>Popular use cases</title>
