@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
-<instance-profile id="mpd" name="Kotlin Multiplatform Development" status="release" start-page="get-started.topic">
+<instance-profile id="mpd" name="Kotlin Multiplatform" status="release" start-page="get-started.topic">
 	<toc-element toc-title="Get started" topic="get-started.topic"/>
 	<toc-element toc-title="Kotlin Multiplatform overview">
 		<toc-element toc-title="Why Kotlin Multiplatform" href="https://www.jetbrains.com/kotlin-multiplatform/"/>
