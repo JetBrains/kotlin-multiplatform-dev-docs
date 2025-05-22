@@ -134,6 +134,8 @@ fun main() = singleWindowApplication(title = "Context menu") {
 
 <img src="compose-desktop-context-menu-textfield.png" alt="Default context menu for TextField" width="500"/>
 
+See the [API reference](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-text-field.html) for details.
+
 The default context menu for a simple text element includes only the copy action.
 To enable a context menu for a `Text` component, make the text selectable by wrapping it in a `SelectionContainer`:
 

@@ -798,7 +798,7 @@ Create the main `App()` composable for your application, and call it from a `Com
     }
     ```
 
-   Here, you are using the [Koin ViewModel API](https://insert-koin.io/docs/reference/koin-compose/compose#viewmodel-for-composable)
+   Here, you are using the [Koin ViewModel API](https://insert-koin.io/docs/%koinVersion%/reference/koin-compose/compose/#viewmodel-for-composable)
    to refer to the `viewModel` you declared in the Android Koin module.
 
 2. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
