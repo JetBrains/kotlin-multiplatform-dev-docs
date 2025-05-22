@@ -105,7 +105,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
     <tr>
         <td><b>Iteration on UI development</b></td>
-        <td>UI previews are available even for common code.
+        <td>UI previews are available even from common code.
         <p>With <a href="compose-hot-reload.md">Compose Hot Reload</a>, you can instantly see UI changes without restarting your app or losing its state.</p></td>
         <td>IDE plugins are available for VS Code and Android Studio.</td>
     </tr>
