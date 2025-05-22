@@ -36,17 +36,23 @@ Things to keep in mind for this tutorial:
 1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 2. In IntelliJ IDEA, select **File** | **New** | **Project**.
 3. In the panel on the left, select **Kotlin Multiplatform**.
+
+    > If you're not using the Kotlin Multiplatform IDE plugin, you can generate the same project
+    > using the [KMP web wizard](https://kmp.jetbrains.com/?android=true&ios=true&iosui=compose&desktop=true&web=true&includeTests=true).
+    >
+    {style="note"}
+
 4. Specify the following fields in the **New Project** window:
 
-    * **Name**: ComposeDemo
-    * **Group**: compose.project.demo
-    * **Artifact**: composedemo
+    * **Name**: ComposeDemo (**Project Name** in the web wizard)
+    * **Group**: compose.project.demo (**Project ID** in the web wizard)
+    * **Artifact**: composedemo (not necessary in the web wizard)
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
-5. Select **Android**, **Desktop**, and **Web** targets.
-    * If you're using a Mac, select **iOS** as well. Make sure that the **Share UI** option is selected.
-6. Once you've specified all the fields and targets, click **Create**.
+5. Select **Android**, **iOS**, **Desktop**, and **Web** targets.
+    Make sure that the **Share UI** option is selected for iOS.
+6. Once you've specified all the fields and targets, click **Create** (**Download** for the web wizard).
 
 ## Examine the project structure
 
