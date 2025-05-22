@@ -13,7 +13,7 @@ the library solves basic navigation problems:
 * Support uniform animations and transitions when navigating, as well as allow for common patterns such as
   back gestures with minimal additional work.
 
-If you feel comfortable enough with the basics, move on to [Compose Multiplatform Navigation setup](compose-navigation-routing.md),
+If you feel comfortable enough with the basics, move on to [](compose-navigation-routing.md),
 to learn how to leverage the Navigation library in cross-platform projects.
 Otherwise, read on to learn about fundamental concepts the library works with. 
 
@@ -47,6 +47,19 @@ Keeping these concepts in mind, the Navigation library implements basic rules to
     URI patterns that should lead to that destination when the app receives a link from the operating system.
 
 ## Basic navigation example
+
+To use the Navigation library, add the following dependency to your `commonMain` source set:
+
+```kotlin
+commonMain.dependencies {
+    // ...
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%")
+}
+```
+
+> Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
+>
+{style="note"}
 
 There is an order in which it makes sense to tackle the necessary steps to set up your navigation:
 
