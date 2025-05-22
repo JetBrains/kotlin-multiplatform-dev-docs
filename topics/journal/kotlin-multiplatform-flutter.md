@@ -40,7 +40,7 @@ Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In Nove
 
 You can write shared UI code across multiple platforms using [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/), a modern declarative framework by JetBrains, which is built on Kotlin Multiplatform and Google’s Jetpack Compose.
 
-Compose Multiplatform is currently stable on iOS, Android and desktop, and in Alpha on web.
+Compose Multiplatform is currently [stable on iOS](https://blog.jetbrains.com/kotlin/2025/05/compose-multiplatform-1-8-0-released-compose-multiplatform-for-ios-is-stable-and-production-ready/), Android and desktop, and in Alpha on web.
 
 [![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
@@ -105,9 +105,8 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
     <tr>
         <td><b>Iteration on UI development</b></td>
-        <td>IntelliJ IDEA supports previews for desktop applications.
-        <p>The team is working on a <a href="https://www.youtube.com/shorts/xgtHmB2J2f8">hot reload</a> feature that lets you see visual changes as you code, now available in IntelliJ IDEA. If you want to try Hot Reload for Compose Multiplatform in your project, go to its <a href="https://github.com/JetBrains/compose-hot-reload">GitHub repository</a> and follow the steps in the README.</p>
-        <p>Android Studio offers preliminary support for <a href="https://developer.android.com/develop/ui/compose/tooling/previews">previews for Android</a>, plus <a href="https://developer.android.com/develop/ui/compose/tooling/iterative-development">Live Edit</a> for quick iteration on Android UI.</p></td>
+        <td>UI previews are available even for common code.
+        <p>With <a href="compose-hot-reload.md">Compose Hot Reload</a>, you can instantly see UI changes without restarting your app or losing its state.</p></td>
         <td>IDE plugins are available for VS Code and Android Studio.</td>
     </tr>
     <tr>
