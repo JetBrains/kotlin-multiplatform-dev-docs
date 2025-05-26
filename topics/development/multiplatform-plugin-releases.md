@@ -4,7 +4,11 @@ The [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936
 helps you develop cross-platform applications for Android, iOS, desktop, and web.
 Make sure that you have the latest version of the plugin to work with Kotlin Multiplatform projects.
 
-It is compatible both with IntelliJ IDEA (starting with version 2025.1.1.1)
+> The IDE plugin is currently available only for macOS, with support for Windows and Linux on the way.
+> 
+{style="note"}
+
+The plugin is compatible both with IntelliJ IDEA (starting with version 2025.1.1.1)
 and Android Studio (starting with Narwhal 2025.1.1 Canary 10).
 
 > For the information on the Kotlin Multiplatform Gradle plugin, see its [DSL reference](multiplatform-dsl-reference.md)
