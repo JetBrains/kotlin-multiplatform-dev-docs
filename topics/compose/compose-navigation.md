@@ -51,11 +51,19 @@ Keeping these concepts in mind, the Navigation library implements basic rules to
 To use the Navigation library, add the following dependency to your `commonMain` source set:
 
 ```kotlin
-commonMain.dependencies {
+kotlin {
     // ...
-    implementation("org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%")
+    sourceSets {
+        // ...
+        commonMain.dependencies {
+            // ...
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%")
+        }
+        // ...
+    }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%"}
 
 > Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
 >
