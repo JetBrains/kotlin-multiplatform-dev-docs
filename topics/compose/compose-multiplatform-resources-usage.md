@@ -213,7 +213,8 @@ fun stringArrayResource(resource: StringArrayResource): List<String> {...}
 For example:
 
 ```kotlin
-Text(stringArrayResource(Res.array.str_arr)[0])
+val arr = stringArrayResource(Res.array.str_arr)
+if (arr.isNotEmpty()) Text(arr[0])
 ```
 
 </tab>
