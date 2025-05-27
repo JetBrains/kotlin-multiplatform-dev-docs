@@ -46,13 +46,13 @@ Things to keep in mind for this tutorial:
 
     * **Name**: ComposeDemo (**Project Name** in the web wizard)
     * **Group**: compose.project.demo (**Project ID** in the web wizard)
-    * **Artifact**: composedemo (not necessary in the web wizard)
+    * **Artifact**: composedemo (not required in the web wizard)
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
-5. Select **Android**, **iOS**, **Desktop**, and **Web** targets.
+5. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
     Make sure that the **Share UI** option is selected for iOS.
-6. Once you've specified all the fields and targets, click **Create** (**Download** for the web wizard).
+6. Once you've specified all the fields and targets, click **Create** (**Download** in the web wizard).
 
 ## Examine the project structure
 
