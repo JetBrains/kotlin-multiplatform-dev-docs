@@ -185,8 +185,8 @@ fun main() {
     val body = document.body ?: return
     ComposeViewport(body) {
         App(
-            onNavHostReady = {
-                window.bindToNavigation(it) { entry ->
+            onNavHostReady = { navController ->
+                window.bindToNavigation(navController) { entry ->
                     val route = entry.destination.route.orEmpty()
                     when {
                         // Identifies the route using its serial descriptor
@@ -245,7 +245,7 @@ fun main() {
     val body = document.body ?: return
     ComposeViewport(body) {
         App(
-            onNavHostReady = {
+            onNavHostReady = { navController ->
                 // Accesses the fragment substring of the current URL
                 val initRoute = window.location.hash.substringAfter('#', "")
                 when  {
