@@ -650,10 +650,12 @@ every time the flow emits a value.
 
 #### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
+<!-- chances are 2.2.0 will have the same problem and we'll have to put the note back up
 > Right now, SKIE doesn't support the latest Kotlin version necessary for the Kotlin Multiplatform IDE plugin.
 > You can try using a preview version while downgrading Kotlin to 2.1.20.
 >
 {style="warning"}
+-->
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
@@ -661,12 +663,6 @@ To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and 
 plugins {
    id("co.touchlab.skie") version "%skieVersion%"
 }
-```
-
-Make sure that the Kotlin version in your `gradle/libs.toml` file is set to 2.1.20:
-
-```text
-kotlin = "2.1.20"
 ```
 
 ##### Consume the flow using SKIE
