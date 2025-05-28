@@ -140,9 +140,9 @@ Here's an example of a simple type-safe navigation graph to use with the followi
 
 @Composable
 internal fun App(
-    navController: NavHostController = rememberNavController()
+    onNavHostReady: suspend (NavController) -> Unit = {}
 ) = AppTheme {
-
+    val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = StartScreen
@@ -167,6 +167,9 @@ internal fun App(
         composable<Id> {...}
         composable<Patient> {...}
     }
+    LaunchedEffect(navController) {
+        onNavHostReady(navController)
+    }
 }
 ```
 {default-state="collapsed" collapsible="true" collapsed-title="NavHost(navController = navController, startDestination = StartScreen)"}
@@ -182,40 +185,40 @@ In `wasmJsMain/kotlin/main.kt`, add the lambda to the `.bindToNavigation()` call
 fun main() {
     val body = document.body ?: return
     ComposeViewport(body) {
-        val navController = rememberNavController()
-        App(navController)
-        LaunchedEffect(Unit) {
-            window.bindToNavigation(navController) { entry ->
-                val route = entry.destination.route.orEmpty()
-                when {
-                    // Identifies the route using its serial descriptor
-                    route.startsWith(StartScreen.serializer().descriptor.serialName) -> {
-                        // Sets the corresponding URL fragment to "#start"
-                        // instead of "#org.example.app.StartScreen"
-                        //
-                        // This string must always start with the `#` character to keep
-                        // the processing at the front end
-                        "#start"
+        App(
+            onNavHostReady = { navController ->
+                window.bindToNavigation(navController) { entry ->
+                    val route = entry.destination.route.orEmpty()
+                    when {
+                        // Identifies the route using its serial descriptor
+                        route.startsWith(StartScreen.serializer().descriptor.serialName) -> {
+                            // Sets the corresponding URL fragment to "#start"
+                            // instead of "#org.example.app.StartScreen"
+                            //
+                            // This string must always start with the `#` character to keep
+                            // the processing at the front end
+                            "#start"
+                        }
+                        route.startsWith(Id.serializer().descriptor.serialName) -> {
+                            // Accesses the route arguments
+                            val args = entry.toRoute<Id>()
+    
+                            // Sets the corresponding URL fragment to "#find_id_222"
+                            // instead of "#org.example.app.ID%2F222"
+                            "#find_id_${args.id}"
+                        }
+                        route.startsWith(Patient.serializer().descriptor.serialName) -> {
+                            val args = entry.toRoute<Patient>()
+                            // Sets the corresponding URL fragment to "#patient_Jane%20Smith-Baker_33"
+                            // instead of "#org.company.app.Patient%2FJane%2520Smith-Baker%2F33"
+                            "#patient_${args.name}_${args.age}"
+                        }
+                        // Doesn't set a URL fragment for all other routes
+                        else -> ""
                     }
-                    route.startsWith(Id.serializer().descriptor.serialName) -> {
-                        // Accesses the route arguments
-                        val args = entry.toRoute<Id>()
-
-                        // Sets the corresponding URL fragment to "#find_id_222"
-                        // instead of "#org.example.app.ID%2F222"
-                        "#find_id_${args.id}"
-                    }
-                    route.startsWith(Patient.serializer().descriptor.serialName) -> {
-                        val args = entry.toRoute<Patient>()
-                        // Sets the corresponding URL fragment to "#patient_Jane%20Smith-Baker_33"
-                        // instead of "#org.company.app.Patient%2FJane%2520Smith-Baker%2F33"
-                        "#patient_${args.name}_${args.age}"
-                    }
-                    // Doesn't set a URL fragment for all other routes
-                    else -> ""
                 }
             }
-        }
+        )
     }
 }
 ```
@@ -242,30 +245,30 @@ The code that does the matching needs to run before the `window.bindToNavigation
 fun main() {
     val body = document.body ?: return
     ComposeViewport(body) {
-        val navController = rememberNavController()
-        App(navController)
-        LaunchedEffect(Unit) {
-            // Accesses the fragment substring of the current URL
-            val initRoute = window.location.hash.substringAfter('#', "")
-            when  {
-                // Identifies the corresponding route and navigates to it
-                initRoute.startsWith("start") -> {
-                    navController.navigate(StartScreen)
+        App(
+            onNavHostReady = { navController ->
+                // Accesses the fragment substring of the current URL
+                val initRoute = window.location.hash.substringAfter('#', "")
+                when  {
+                    // Identifies the corresponding route and navigates to it
+                    initRoute.startsWith("start") -> {
+                        navController.navigate(StartScreen)
+                    }
+                    initRoute.startsWith("find_id") -> {
+                        // Parses the string to extract route parameters before navigating to it
+                        val id = initRoute.substringAfter("find_id_").toLong()
+                        navController.navigate(Id(id))
+                    }
+                    initRoute.startsWith("patient") -> {
+                        val name = initRoute.substringAfter("patient_").substringBefore("_")
+                        val id = initRoute.substringAfter("patient_").substringAfter("_").toLong()
+                        navController.navigate(Patient(name, id))
+                    }
                 }
-                initRoute.startsWith("find_id") -> {
-                    // Parses the string to extract route parameters before navigating to it
-                    val id = initRoute.substringAfter("find_id_").toLong()
-                    navController.navigate(Id(id))
-                }
-                initRoute.startsWith("patient") -> {
-                    val name = initRoute.substringAfter("patient_").substringBefore("_")
-                    val id = initRoute.substringAfter("patient_").substringAfter("_").toLong()
-                    navController.navigate(Patient(name, id))
-                }
+                
+                window.bindToNavigation(navController) { ... }
             }
-            
-            window.bindToNavigation(navController) { ... }
-        }
+        )
     }
 }
 ```
