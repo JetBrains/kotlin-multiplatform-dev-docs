@@ -11,10 +11,19 @@ functionality to other platforms and helps observe lifecycle states in common co
 To use the multiplatform `Lifecycle` implementation, add the following dependency to your `commonMain` source set:
 
 ```kotlin
-commonMain.dependencies {
-    implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%")
+kotlin {
+    // ...
+    sourceSets {
+        // ...
+        commonMain.dependencies {
+            // ...
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%")
+        }
+        // ...
+    }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%"}
 
 ## States and events
 

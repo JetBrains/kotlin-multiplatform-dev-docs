@@ -20,6 +20,7 @@ kotlin {
     }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%composeViewmodelVersion%"}
 
 ## Using ViewModel in common code
 

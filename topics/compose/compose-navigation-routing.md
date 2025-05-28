@@ -11,7 +11,7 @@ Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https:
 
 ## Setup
 
-To use the navigation library, add the following dependency to your `commonMain` source set:
+To use the Navigation library, add the following dependency to your `commonMain` source set:
 
 ```kotlin
 kotlin {
@@ -26,6 +26,7 @@ kotlin {
     }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%"}
 
 > Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
 >
