@@ -329,8 +329,8 @@ For example:
 val fontAwesome = FontFamily(Font(Res.font.font_awesome))
 ```
 
-To support special characters like emojis or Arabic script in web targets, you need to provide and
-[preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
+To support special characters like emojis or Arabic script in web targets, you need to add the corresponding fonts
+to resources and [preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
 
 ### Raw files
 

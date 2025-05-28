@@ -19,7 +19,7 @@
             <title>Popular use cases</title>
             <a href="compose-multiplatform-resources.md" summary="Manage and share common assets in a cross-platform app">Resources</a>
             <a href="compose-navigation.md" summary="Use the multiplatform Navigation library to implement navigation in a Compose Multiplatform app">Navigation</a>
-            <!--<a href="compose-localize-strings.md" summary="Adapt UI for different languages and regions">Localization</a>-->
+            <a href="compose-localize-strings.md" summary="Adapt UI for different languages and regions">Localization</a>
             <a href="compose-test.md" summary="Write and run UI tests for Compose Multiplatform apps">Test Compose Multiplatform UI</a>
         </primary>
         <secondary>
