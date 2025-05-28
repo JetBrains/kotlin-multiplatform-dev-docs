@@ -328,6 +328,9 @@ For example:
 val fontAwesome = FontFamily(Font(Res.font.font_awesome))
 ```
 
+To support special characters like emojis or Arabic script in web targets, you need to provide and
+[preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
+
 ### Raw files
 
 To load any raw file as a byte array, use the `Res.readBytes(path)` function:
