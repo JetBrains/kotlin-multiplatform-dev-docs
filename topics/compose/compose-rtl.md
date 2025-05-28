@@ -251,14 +251,17 @@ To preload fallback fonts, use the `FontFamily.Resolver.preload()` method:
 
 ```kotlin
 val fontFamilyResolver = LocalFontFamilyResolver.current
+val fontsLoaded = remember { mutableStateOf(false) }
 
-// ...
+if (fontsLoaded.value) {
+   app.Content()
+}
 
 LaunchedEffect(Unit) {
-      val notoEmojisBytes = loadEmojisFontAsBytes()
-      val fontFamily = FontFamily(listOf(Font("NotoColorEmoji", notoEmojisBytes)))
-      fontFamilyResolver.preload(fontFamily)
-      fontsLoaded.value = true
+   val notoEmojisBytes = loadEmojisFontAsBytes()
+   val fontFamily = FontFamily(listOf(Font("NotoColorEmoji", notoEmojisBytes)))
+   fontFamilyResolver.preload(fontFamily)
+   fontsLoaded.value = true
 }
 ```
 
