@@ -245,9 +245,9 @@ internal fun TextField(
 ## Fonts for web targets
 
 Web targets lack built-in fonts for rendering characters for certain locales, such as Arabic and Chinese. 
-To address this, you need to provide and preload custom fallback fonts, as they are not enabled automatically.
+To address this, you need to add custom fallback fonts to resources and preload them, as they are not enabled automatically.
 
-To preload fallback fonts, use the `FontFamily.Resolver.preload()` method:
+To preload fallback fonts, use the `FontFamily.Resolver.preload()` method. For example:
 
 ```kotlin
 val fontFamilyResolver = LocalFontFamilyResolver.current
