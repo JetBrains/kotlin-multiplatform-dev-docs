@@ -242,6 +242,32 @@ internal fun TextField(
 
 <img src="compose-rtl-emoji.png" alt="Numbers and emojis" width="600"/>
 
+## Fonts for web targets
+
+Web targets lack built-in fonts for rendering characters for certain locales, such as Arabic and Chinese. 
+To address this, you need to provide and preload custom fallback fonts, as they are not enabled automatically.
+
+To preload fallback fonts, use the `FontFamily.Resolver.preload()` method:
+
+```kotlin
+val fontFamilyResolver = LocalFontFamilyResolver.current
+val fontsLoaded = remember { mutableStateOf(false) }
+
+if (fontsLoaded.value) {
+   app.Content()
+}
+
+LaunchedEffect(Unit) {
+   val notoEmojisBytes = loadEmojisFontAsBytes()
+   val fontFamily = FontFamily(listOf(Font("NotoColorEmoji", notoEmojisBytes)))
+   fontFamilyResolver.preload(fontFamily)
+   fontsLoaded.value = true
+}
+```
+
+For details on preloading resources for web targets, refer to the section about the
+[preload API](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api).
+
 ## Accessibility in RTL layouts
 
 Compose Multiplatform supports accessibility features for RTL layouts, 

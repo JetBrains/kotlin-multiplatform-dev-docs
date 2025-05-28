@@ -98,6 +98,9 @@ Image(
 Store all string resources in XML files in `composeResources/values` directories.
 A static accessor is generated for each item in each file.
 
+For more information on how to localize strings for different locales, refer to the 
+[guide on localizing strings](compose-localize-strings.md).
+
 #### Simple strings
 
 To store a simple string, add a `<string>` element to your XML:
@@ -325,6 +328,9 @@ For example:
 ```kotlin
 val fontAwesome = FontFamily(Font(Res.font.font_awesome))
 ```
+
+To support special characters like emojis or Arabic script in web targets, you need to provide and
+[preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
 
 ### Raw files
 
