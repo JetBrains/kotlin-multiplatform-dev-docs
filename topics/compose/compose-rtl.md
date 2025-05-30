@@ -294,9 +294,7 @@ You can also define traversal semantics to ensure correct navigation between dif
 with the swipe-up or swipe-down accessibility gestures.
 
 For details on how to define traversal semantics and set traversal indexes, 
-refer to the [Accessibility](whats-new-compose-180.md#accessibility-for-container-views) section.
-
-[//]: # (todo: replace accessibility link)
+refer to the [Accessibility](compose-accessibility.md#traversal-order) section.
 
 ## Known issues
 
