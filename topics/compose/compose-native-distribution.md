@@ -17,16 +17,17 @@ Read on for the details about the following topics:
 
 ## Gradle plugin
 
-This guide is primarily focused on packaging Compose applications using the Compose Multiplatform Gradle plugin. The `org.jetbrains.compose` plugin 
-provides tasks for basic packaging, obfuscation, and macOS code signing.
+This guide is primarily focused on packaging Compose applications using the Compose Multiplatform Gradle plugin. 
+The `org.jetbrains.compose` plugin provides tasks for basic packaging, obfuscation, and macOS code signing.
 
 The plugin simplifies the process of packaging applications into native distributions using `jpackage` and running an application locally.
 Distributable applications are self-contained, installable binaries that include all the necessary Java runtime components,
 without requiring a JDK to be installed on the target system.
 
-To minimize package size, the Gradle plugin uses the [jlink](https://openjdk.org/jeps/282) tool that ensures bundling only the necessary Java modules in the distributable package. 
+To minimize package size, the Gradle plugin uses the [jlink](https://openjdk.org/jeps/282) tool that ensures 
+bundling only the necessary Java modules in the distributable package. 
 However, you still must configure the Gradle plugin to specify which modules you need.
-For more information, see the `Configuring included JDK modules` section.
+For more information, see the [](#including-jdk-modules) section.
 
 As an alternative, you can use [Conveyor](https://www.hydraulic.software), an external tool not developed by JetBrains.
 Conveyor supports online updates, cross-building, and various other features but requires a [license](https://hydraulic.software/pricing.html) for non-open source projects.
@@ -34,7 +35,10 @@ For more information, refer to the [Conveyor documentation](https://conveyor.hyd
 
 ## Basic tasks
 
-The basic configurable unit in the plugin is an `application`. The `application` DSL method defines a shared configuration for a set of final binaries, which means
+The basic configurable unit in the Compose Multiplatform Gradle plugin is an `application` (not to be confused with the 
+[Gradle application](https://docs.gradle.org/current/userguide/application_plugin.html) plugin, which is deprecated).
+
+The `application` DSL method defines a shared configuration for a set of final binaries, which means
 it allows you to pack a collection of files, together with a JDK distribution, into a set of compressed binary installers 
 in various formats.
 
