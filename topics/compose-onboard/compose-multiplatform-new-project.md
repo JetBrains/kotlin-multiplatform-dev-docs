@@ -143,9 +143,14 @@ a `TextField` composable:
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application on each platform you're targeting:
 
-   ![User input in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-4.png){width=500}
-
-   ![User input in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-5.png){width=350}
+<tabs>
+    <tab id="mobile-user-input" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-4.png" alt="User input in the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-user-input" title="Desktop">
+        <img src="first-compose-project-on-desktop-5.png" alt="User input in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+</tabs>
 
 ## Calculate time
 
@@ -209,9 +214,14 @@ The next step is to use the given input to calculate time. To do this, create a 
 5. Run the application again and enter a valid timezone.
 6. Click the button. You should see the correct time:
 
-   ![Time display in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-5.png){width=500}
-
-   ![Time display in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-6.png){width=350}
+<tabs>
+    <tab id="mobile-time-display" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-5.png" alt="Time display in the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-time-display" title="Desktop">
+        <img src="first-compose-project-on-desktop-6.png" alt="Time display in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+</tabs>
 
 ## Improve the style
 
@@ -264,9 +274,14 @@ time message could be rendered more prominently.
 
 3. Run the application to see how the appearance has improved:
 
-   ![Improved style of the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-6.png){width=500}
-
-   ![Improved style of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-7.png){width=350}
+<tabs>
+    <tab id="mobile-improved-style" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-6.png" alt="Improved style of the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-improved-style" title="Desktop">
+        <img src="first-compose-project-on-desktop-7.png" alt="Improved style of the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+</tabs>
 
 <!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
@@ -356,9 +371,14 @@ list.
 2. Follow the IDE's instructions to import the missing dependencies.
 3. Run the application to see the redesigned version:
 
-   ![The country list in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-7.png){width=500}
-
-   ![The country list in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-8.png){width=350}
+<tabs>
+    <tab id="mobile-country-list" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-7.png" alt="The country list in the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-country-list" title="Desktop">
+        <img src="first-compose-project-on-desktop-8.png" alt="The country list in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+</tabs>
 
 <!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
@@ -479,9 +499,14 @@ code to load and display them:
 5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the application to see the new behavior:
 
-   ![The country flags in the Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-8.png){width=500}
-
-   ![The country flags in the Compose Multiplatform app on desktop](first-compose-project-on-desktop-9.png){width=350}
+<tabs>
+    <tab id="mobile-flags" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-8.png" alt="The country flags in the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-flags" title="Desktop">
+        <img src="first-compose-project-on-desktop-9.png" alt="The country flags in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+</tabs>
 
 <!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).

@@ -144,11 +144,17 @@ To use the `kotlinx-datetime` library:
 
 You can now rerun the application using the same run configurations for Android, iOS, desktop, and web:
 
-![First Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-2.png){width=500}
-
-![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-2.png){width=400}
-
-![First Compose Multiplatform app on web](first-compose-project-on-web-2.png){width=400}
+<tabs>
+    <tab id="mobile-app" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-2.png" alt="First Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-app" title="Desktop">
+        <img src="first-compose-project-on-desktop-2.png" alt="First Compose Multiplatform app on desktop" width="400"/>
+    </tab>
+    <tab id="web-app" title="Web">
+        <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="400"/>
+    </tab>
+</tabs>
 
 <!--
 > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
