@@ -4,7 +4,7 @@
 <secondary-label ref="Android Studio"/>
 
 <tldr>
-<p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+<p>This tutorial uses Android Studio, but you can also follow it in IntelliJ IDEA – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
 Learn how to make your existing Android application cross-platform so that it works both on Android and iOS.
