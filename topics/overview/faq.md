@@ -122,10 +122,7 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 
 ### Can I use Compose Multiplatform in production?
 
-The Android and desktop targets of Compose Multiplatform are Stable. You can use them in production.
-
-The iOS target is in Beta, which means that it's feature complete. You can use it in production
-and expect minimal migration issues, but watch out for changes and deprecation warnings.
+The Android, iOS, and desktop targets of Compose Multiplatform are Stable. You can use them in production.
 
 The version of Compose Multiplatform for Web that is based on WebAssembly is in Alpha, which means that it's in active development.
 You can use it with caution and expect migration issues.
@@ -217,7 +214,8 @@ We have plans for improving the core Kotlin Multiplatform technology, integratio
 
 ### When will Compose Multiplatform become Stable?
 
-Compose Multiplatform is Stable for Android and desktop, while the iOS platform support is in Beta, and web is in Alpha. We are working towards a stable release for both iOS and web platforms, with exact dates to be announced.
+Compose Multiplatform is Stable for Android, iOS, and desktop, while the web platform support is in Alpha. 
+We are working towards a stable release for the web platform, with exact dates to be announced.
 
 For more information on stability statuses, see [Supported platforms](supported-platforms.md).
 
