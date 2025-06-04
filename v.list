@@ -4,9 +4,9 @@
 
 <vars>
     <!-- Kotlin -->
-    <var name="kotlinVersion" value="2.1.21" type="string"/>
-    <var name="languageVersion" value="2.1" type="string"/>
-    <var name="apiVersion" value="2.1" type="string"/>
+    <var name="kotlinVersion" value="2.2.0" type="string"/>
+    <var name="languageVersion" value="2.2" type="string"/>
+    <var name="apiVersion" value="2.2" type="string"/>
 
     <!-- Compose -->
     <var name="composeVersion" value="1.8.1" type="string"/>
@@ -22,10 +22,10 @@
 
     <!-- KGP, AGP, Xcode -->
     <var name="minGradleVersion" value="7.6.3" type="string"/>
-    <var name="maxGradleVersion" value="8.12.1" type="string"/>
+    <var name="maxGradleVersion" value="8.14" type="string"/>
 
     <var name="minAndroidGradleVersion" value="7.3.1" type="string"/>
-    <var name="maxAndroidGradleVersion" value="8.7.2" type="string"/>
+    <var name="maxAndroidGradleVersion" value="8.9.2" type="string"/>
 
     <var name="xcode" value="16.3" type="string"/>
 

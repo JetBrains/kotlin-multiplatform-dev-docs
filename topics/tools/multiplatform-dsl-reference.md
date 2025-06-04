@@ -421,13 +421,12 @@ For more cinterop properties, see [Definition file](https://kotlinlang.org/docs/
 
 ### Android targets
 
-The Kotlin Multiplatform plugin contains two specific functions for android targets.
-Two functions help you configure [build variants](https://developer.android.com/studio/build/build-variants):
+The Kotlin Multiplatform plugin has a specific function that helps you configure [build variants](https://developer.android.com/studio/build/build-variants)
+for the Android target:
 
 | **Name**                      | **Description**                                                                                                                                      | 
 |-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `publishLibraryVariants()`    | Specifies build variants to publish. Learn more about [publishing Android libraries](multiplatform-publish-lib-setup.md#publish-an-android-library). |
-| `publishAllLibraryVariants()` | Publishes all build variants.                                                                                                                        |
 
 ```kotlin
 kotlin {
