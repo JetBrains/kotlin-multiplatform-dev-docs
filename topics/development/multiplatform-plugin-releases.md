@@ -9,7 +9,7 @@ Make sure that you have the latest version of the plugin to work with Kotlin Mul
 {style="note"}
 
 The plugin is compatible both with IntelliJ IDEA (starting with version 2025.1.1.1)
-and Android Studio (starting with Narwhal 2025.1.1 Canary 10).
+and Android Studio (starting with Narwhal 2025.1.1 RC 1).
 
 > For the information on the Kotlin Multiplatform Gradle plugin, see its [DSL reference](multiplatform-dsl-reference.md)
 > and the [Compatibility guide](multiplatform-compatibility-guide.md).
