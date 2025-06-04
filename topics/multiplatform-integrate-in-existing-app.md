@@ -486,7 +486,7 @@ To test the integration, add a call to common code in Swift code:
 6. Run the iOS run configuration again to see that the iOS app shows the login form.
 7. Enter "Jane" as the username and "password" as the password.
 8. As you have [set up the integration earlier](#configure-the-ios-project-to-use-a-kmp-framework),
-    the iOS app validates input using common code:
+    the iOS app validates input using common code and emits a success message in the system console:
 
    ![Simple login application](xcode-iphone-login.png){width=300}
 
