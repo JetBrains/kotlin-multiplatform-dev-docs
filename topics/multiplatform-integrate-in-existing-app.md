@@ -43,7 +43,7 @@ After that you'll use your cross-platform code in the Android application, and t
    >
    {style="tip"}
 
-3. Switch from the **Android** view to the **Project** view:
+3. Switch to the **Project** view:
 
    ![Project view](switch-to-project.png){width="513"}
 
@@ -74,7 +74,7 @@ Your future iOS application will use the same logic, so you should make it cross
 The cross-platform code used for both iOS and Android will be stored in a shared module.
 Starting with the Meerkat version, Android Studio provides a wizard for creating such shared modules.
 
-Create a shared module and connect it to both the existing Android application and your future iOS application:
+Create a shared module to connect to both the existing Android application and your future iOS application:
 
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
@@ -87,8 +87,8 @@ Create a shared module and connect it to both the existing Android application a
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
-5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
-    property in the `app/build.gradle.kts` file.
+6. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file is the same as
+   the value of that property in the `app/build.gradle.kts` file.
 
 ### Add code to the shared module
 
@@ -217,27 +217,8 @@ This is necessary for reusing the code for both Android and iOS.
    
    To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
    moved `data` directory wherever possible.
-   
-   1. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
-      `IOException` is not available in Kotlin/JVM.
-   
-       ```kotlin
-       // Before
-       return Result.Error(IOException("Error logging in", e))
-       ```
-   
-       ```kotlin
-       // After
-       return Result.Error(RuntimeException("Error logging in", e))
-       ```
-   
-   2. Remove the import directive for `IOException` as well:
-   
-       ```kotlin
-       import java.io.IOException
-       ```
-   
-   3. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
+
+   1. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
       regular expression matching the pattern for email validation:
    
        ```kotlin
@@ -261,12 +242,32 @@ This is necessary for reusing the code for both Android and iOS.
        }
        ```
    
-   4. Remove the import directive for the `Patterns` class:
+   2. Remove the import directive for the `Patterns` class:
    
        ```kotlin
        import android.util.Patterns
        ```
-   
+
+   3. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
+      `IOException` is not available in Kotlin/JVM.
+
+          ```kotlin
+          // Before
+          return Result.Error(IOException("Error logging in", e))
+          ```
+
+          ```kotlin
+          // After
+          return Result.Error(RuntimeException("Error logging in", e))
+          ```
+
+   4. Remove the import directive for `IOException` as well:
+
+       ```kotlin
+       import java.io.IOException
+       ```
+
+
    #### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
    
    In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
@@ -332,7 +333,7 @@ Now, Kotlin will use platform-specific implementations of UUID for Android and i
 
 ### Run your cross-platform application on Android
 
-Run your cross-platform application for Android to make sure it works.
+Run your cross-platform application for Android to make sure it works as before.
 
 ![Android login application](android-login.png){width=300}
 
