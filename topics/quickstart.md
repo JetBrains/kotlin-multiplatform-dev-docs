@@ -12,6 +12,13 @@ Start with an IDE and necessary plugins:
 1. Choose and install the IDE.
     Kotlin Multiplatform is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
     
+    The [JetBrains Toolbox App](https://www.jetbrains.com/toolbox/app/) is the recommended tool to install IDEs.
+    It allows you to manage multiple products or versions, including
+    [Early Access Program](https://www.jetbrains.com/resources/eap/) (EAP) and Nightly releases.
+
+    For standalone installations, download the installer for [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 
+    or [Android Studio](https://developer.android.com/studio).
+
     The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
     or **Android Studio Narwhal 2025.1.1 RC 1**.
 
