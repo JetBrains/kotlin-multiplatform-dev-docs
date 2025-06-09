@@ -72,7 +72,7 @@ Your future iOS application will use the same logic, so you should make it cross
 ### Create a shared module for cross-platform code
 
 The cross-platform code used for both iOS and Android will be stored in a shared module.
-Starting with the Meerkat version, Android Studio provides a wizard for creating such shared modules.
+Both IntelliJ IDEA and Android Studio provide a wizard for creating shared modules for Kotlin Multiplatform.
 
 Create a shared module to connect to both the existing Android application and your future iOS application:
 
@@ -182,7 +182,7 @@ there, and make this code cross-platform.
         // ...
     }
     ```
-5. Follow Android Studio's suggestions to import missing classes.
+5. Follow IDE's suggestions to import missing classes.
 6. In the toolbar, click the `app` dropdown, then click the debug icon:
 
    ![App from list to debug](app-list-android.png){width="300"}
@@ -202,7 +202,7 @@ This is necessary for reusing the code for both Android and iOS.
 
    ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
 
-2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
+2. When IntelliJ IDEA asks what you'd like to do, select to move the package and then approve the refactoring.
 
    ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
@@ -443,7 +443,7 @@ This is the name of the framework that Kotlin Multiplatform builds for the iOS a
 
 To test the integration, add a call to common code in Swift code:
 
-1. In Android Studio, open the `iosApp/simpleloginIOS/ContentView.swift` file and import the framework:
+1. In IntelliJ IDEA, open the `iosApp/simpleloginIOS/ContentView.swift` file and import the framework:
 
    ```swift
    import sharedKit
@@ -461,7 +461,7 @@ To test the integration, add a call to common code in Swift code:
    }
    ```
 
-3. Run the app using the Android Studio iOS run configuration to see the result:
+3. Run the app using the IntelliJ IDEA iOS run configuration to see the result:
 
    ![Greeting from the shared module](xcode-iphone-hello.png){width=300}
 
@@ -519,7 +519,7 @@ and iOS.
    }
    ```
 
-2. Run both the iOS and Android applications from Android Studio to see the changes:
+2. Run both the iOS and Android applications from IntelliJ IDEA to see the changes:
 
    ![Android and iOS applications password error](android-iphone-password-error.png){width=600}
 
