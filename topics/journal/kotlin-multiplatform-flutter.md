@@ -116,7 +116,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     </tr>
 </table>
 
-[![Explore real-life use cases from global companies that leverage Kotlin Multiplatform for cross-platform development.](kmp-use-cases-1.svg){width="500"}](case-studies.topic)
+[![Explore real-life use cases from global companies that leverage Kotlin Multiplatform for cross-platform development.](kmp-use-cases-1.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 You can also check out Google’s blog post, [Making Development Across Platforms Easier for Developers](https://developers.googleblog.com/en/making-development-across-platforms-easier-for-developers/), which provides guidance on choosing the right tech stack for your project.
 
