@@ -35,7 +35,7 @@ To build applications with Flutter, you will need to use Google's programming la
 
 **Programming language:** Dart.
 
-**Mobile app examples:** eBay, Alibaba, Google Pay, ByteDance apps.
+**Mobile app examples:** eBay Motors, Alibaba, Google Pay, ByteDance apps.
 
 **Key features:**
 
