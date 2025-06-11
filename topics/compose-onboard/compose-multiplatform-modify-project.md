@@ -115,7 +115,7 @@ To use the `kotlinx-datetime` library:
     ```
 
 3. Follow the IDE's suggestions to import the missing dependencies.
-   Make sure to import `Clock` from `kotlinx-datetime`, not `kotlin.time`.
+   Make sure to import all the missing dependencies for the `todaysDate()` function from the `kotlinx.datetime` package, **NOT** `kotlin.time`.
 
    ![Unresolved references](compose-unresolved-references.png)
 
