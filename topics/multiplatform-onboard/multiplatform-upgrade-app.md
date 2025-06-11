@@ -490,21 +490,26 @@ Now the ViewModel will emit signals whenever this property changes.
 
 #### Choose a library to consume flows from iOS
 
-In this tutorial, you can choose between the [SKIE](https://github.com/touchlab/SKIE/)
-and [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) libraries to help you work with flows in iOS. Both are open-source solutions
-that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default.
+<!-- when adding SKIE back to the tutorial, add it here as well -->
 
-The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
+In this tutorial, you will use the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library to help you work with flows in iOS.
+It is an open-source solution that supports cancellation and generics with flows,
+which the Kotlin/Native compiler doesn't provide by default yet.
+
+<!-- Both are open-source solutions
+that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default. -->
+
+<!-- The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
 Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
-including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
+including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects. -->
 
 The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
 wrappers.
 KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
-Using KMP-NativeCoroutines requires adding a Cocoapod or SPM dependency in iOS projects.
+Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS projects.
 
-#### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
+#### Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
@@ -648,14 +653,8 @@ every time the flow emits a value.
 
 -->
 
+<!--
 #### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
-
-<!-- chances are 2.2.0 will have the same problem and we'll have to put the note back up
-> Right now, SKIE doesn't support the latest Kotlin version necessary for the Kotlin Multiplatform IDE plugin.
-> You can try using a preview version while downgrading Kotlin to 2.1.20.
->
-{style="warning"}
--->
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
@@ -693,6 +692,7 @@ extension ContentView {
 Rerun the **iosApp** configuration to make sure your app's logic is synced:
 
 ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+-->
 
 <!-- sample needs to be updated
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).

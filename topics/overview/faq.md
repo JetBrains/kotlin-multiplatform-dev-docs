@@ -67,14 +67,19 @@ this code depends on where you call the code from. Calling suspending functions 
 documented, especially for Android. [Calling them from Swift code](https://kotlinlang.org/docs/native-arc-integration.html#completion-handlers)
 requires a little more work, see [KT-47610](https://youtrack.jetbrains.com/issue/KT-47610) for more details.
 
+<!-- when adding SKIE back to the tutorial, add it here as well
+and uncomment the paragraph below --> 
+
 The best current approach for calling suspending functions and flows from Swift is to use plugins and libraries like
-[KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) or [SKIE](https://skie.touchlab.co/) together
-with Swift's `async`/`await` or libraries like Combine and RxSwift. At the moment, KMP-NativeCoroutines is the more
+[KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) together
+with Swift's `async`/`await` or libraries like Combine and RxSwift.
+
+<!-- At the moment, KMP-NativeCoroutines is the more
 tried-and-tested solution, and it supports `async`/`await`, Combine, and RxSwift approaches to concurrency. SKIE is easier
 to set up and less verbose. For instance, it maps Kotlin `Flow` to Swift `AsyncSequence` directly. Both of these libraries
-support the proper cancellation of coroutines.
+support the proper cancellation of coroutines. -->
 
-To learn how to use them, see [Share more logic between iOS and Android](multiplatform-upgrade-app.md).
+To learn how to use them, see [](multiplatform-upgrade-app.md).
 
 ### What is Kotlin/Native, and how does it relate to Kotlin Multiplatform?
 
