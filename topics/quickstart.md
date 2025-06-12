@@ -152,8 +152,6 @@ If you're on Windows or Linux:
 2. Extract the archive and open the resulting folder in your IDE.
 3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
 
-Since the Kotlin Multiplatform IDE plugin does not support Windows or Linux yet
-
 ## Consult the preflight checks
 
 You can make sure there are no environment issues with the project setup by opening
