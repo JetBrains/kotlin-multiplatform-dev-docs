@@ -1,7 +1,7 @@
 [//]: # (title: Compatibility and versions)
 
 Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose releases. This page contains information
-about Compose Multiplatform releases, the compatibility between different releases, and the release cycles.
+about Compose Multiplatform releases, Compose release cycles, and component compatibility. 
 
 ## Supported platforms
 
@@ -18,35 +18,36 @@ Compose Multiplatform %composeVersion% supports the following platforms:
 > 
 {style="note"}
 
+## Kotlin compatibility
+
+The latest Compose Multiplatform is always compatible with the latest version of Kotlin.
+There is no need to manually align their versions.
+Remember that using an EAP version of either product is still potentially unstable.
+
+Compose Multiplatform requires the Compose Compiler Gradle plugin applied with the same version
+as the Kotlin Multiplatform plugin.
+See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
+
+> Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
+> So, to use the latest Compose Multiplatform release, you should:
+> * use at least Kotlin 2.1.0 for your projects,
+> * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
+> 
+> As a workaround for backward compatibility problems until all your dependencies are updated,
+> you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
+> This will increase compilation time.
+>
+{style="warning"}
+
 ## Limitations of Compose Multiplatform for desktop releases
 
-Compose Multiplatform for desktop has the following limitations: 
+Compose Multiplatform for desktop has the following limitations:
 
 * Only JDK 11 or later is supported due to the memory management scheme used in [Skia](https://skia.org/) bindings.
 * Only JDK 17 or later is supported for packaging native distributions due
   to [`jpackage`](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html) limitations.
 * There is a known [issue](https://github.com/JetBrains/compose-multiplatform/issues/940) with OpenJDK 11.0.12 when switching keyboard layouts on macOS.
   This issue isn't reproducible in OpenJDK 11.0.15.
-
-## Kotlin compatibility
-
-As long as you are using Compose Multiplatform 1.6.10 or higher and Kotlin 1.7.10 or higher, Compose Multiplatform is 
-compatible with Kotlin. There is no need to manually align their versions.
-Remember that using an EAP version of either product is still potentially unstable.
-
-Compose Multiplatform requires Compose Compiler Gradle plugin applied with the same version as the Kotlin one.
-See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
-
-> Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
-> So, to share UI code using the latest Compose Multiplatform you should:
-> * use at least Kotlin 2.1.0 for your projects,
-> * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
-> 
-> As a workaround until all dependencies are updated,
-> you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
-> This will increase compilation time.
->
-{style="warning"}
 
 ## Jetpack Compose and Compose Multiplatform release cycles
 
@@ -65,7 +66,7 @@ The gap between a Compose Multiplatform release and a Jetpack Compose release is
 
 ### Development versions of Compose Multiplatform
 
-Development versions of the Compose Multiplatform compiler plugin (for example, `1.7.0-dev1776`) are built without a set schedule,
+Development versions of the Compose Multiplatform compiler plugin (for example, `1.8.2+dev2544`) are built without a set schedule,
 to test updates between formal releases.
 
 These builds are not available in [Maven Central](https://central.sonatype.com/).
