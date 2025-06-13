@@ -30,37 +30,38 @@ module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
- ```
- [versions]
- # ...
- kotlin = "%kotlinVersion%"
+    ```
+    [versions]
+    # ...
+    kotlin = "%kotlinVersion%"
+    compose-plugin = "%composeVersion%"
  
- [plugins]
- # ...
- jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
- kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
- compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
- ```
+    [plugins]
+    # ...
+    jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+    kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+    compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+    ```
 
 2. Add the Gradle plugin to the root `build.gradle.kts` file:
 
- ```kotlin
- plugins {
+    ```kotlin
+    plugins {
      // ...
      alias(libs.plugins.jetbrainsCompose) apply false
      alias(libs.plugins.compose.compiler) apply false
- }
- ```
+    }
+    ```
 
 3. Apply the plugin to every module that uses Compose Multiplatform:
 
- ```kotlin
- plugins {
-     // ...
-     alias(libs.plugins.jetbrainsCompose)
-     alias(libs.plugins.compose.compiler)
- }
- ```
+    ```kotlin
+    plugins { 
+        // ...
+        alias(libs.plugins.jetbrainsCompose)
+        alias(libs.plugins.compose.compiler)
+    }
+    ```
 
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
    See [Compose compiler options DSL](https://kotlinlang.org/docs/compose-compiler-options.html) for reference.
