@@ -1,7 +1,7 @@
 [//]: # (title: Compatibility and versions)
 
 Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose releases. This page contains information
-about Compose Multiplatform releases, their release cycles, and compatibility with other components. 
+about Compose Multiplatform releases, Compose release cycles, and component compatibility. 
 
 ## Supported platforms
 
