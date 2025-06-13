@@ -20,7 +20,8 @@ When configuring your project, check the compatibility of a particular version o
 
 | Kotlin Multiplatform plugin version | Gradle                                | Android Gradle plugin                               | Xcode   |
 |-------------------------------------|---------------------------------------|-----------------------------------------------------|---------|
-| 2.1.21                              | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.2.0                               | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.1.21                              | 7.6.3–8.12.1                          | 7.3.1–8.7.2                                         | 16.3    |
 | 2.1.20                              | 7.6.3–8.11                            | 7.4.2–8.7.2                                         | 16.0    |
 | 2.1.0–2.1.10                        | 7.6.3-8.10*                           | 7.4.2–8.7.2                                         | 16.0    |
 | 2.0.21                              | 7.5-8.8*                              | 7.4.2–8.5                                           | 16.0    |
@@ -38,6 +39,26 @@ When configuring your project, check the compatibility of a particular version o
 ## Kotlin 2.0.0 and later
 
 This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 2.0.0−%kotlinVersion%.
+
+### Deprecated bitcode embedding
+
+**What's changed?**
+
+Bitcode embedding was deprecated in Xcode 14 and removed in Xcode 15 for all Apple targets. In turn, the `embedBitcode`
+parameter for the framework configuration, as well as the `-Xembed-bitcode` and `-Xembed-bitcode-marker` command line
+arguments are deprecated in Kotlin.
+
+**What's the best practice now?**
+
+If you still use earlier versions of Xcode but want to upgrade to Kotlin 2.0.20 or later,
+disable bitcode embedding in your Xcode projects.
+
+**When do the changes take effect?**
+
+Here's the planned deprecation cycle:
+
+* 2.0.20: the Kotlin/Native compiler no longer supports bitcode embedding
+* 2.2.0: the `embedBitcode` DSL is removed from the Kotlin Multiplatform Gradle plugin
 
 <anchor name="java-source-set-created-by-default"/>
 ### Java source sets created by default
@@ -283,8 +304,8 @@ The Kotlin team is eager to help the ecosystem migrate, so if you face any issue
 Here's the planned deprecation cycle:
 
 * 1.9: introduce a deprecation warning for dependencies on legacy libraries
-* 2.0: raise the warning for dependencies on legacy libraries to an error
-* &gt;2.0: remove support for dependencies on legacy libraries; using such dependencies can cause build failures
+* 2.0.0: raise the warning for dependencies on legacy libraries to an error
+* &gt;2.0.0: remove support for dependencies on legacy libraries; using such dependencies can cause build failures
 
 <anchor name="deprecate-hmpp-properties"/>
 ### Deprecated Gradle properties for hierarchical structure support
@@ -317,8 +338,8 @@ The following properties are now deprecated:
 * In case deprecated properties are set by some third-party Gradle plugin used in your build, ask the plugin maintainers
   not to set these properties.
 
-As the default behavior of the Kotlin toolchain doesn't include such properties since 1.6.20, we don't expect
-any serious impact from removing them. Most possible consequences will be visible immediately after the project rebuild.
+As the default behavior of the Kotlin toolchain doesn't include such properties since Kotlin 1.6.20, we don't expect
+any serious impact. Most possible consequences will be visible immediately after the project rebuilds.
 
 If you're a library author and want to be extra safe, check that consumers can work with your library.
 
@@ -326,9 +347,9 @@ If you're a library author and want to be extra safe, check that consumers can w
 
 Here's the planned deprecation cycle:
 
-* 1.8.20: report a warning when these properties are used
+* 1.8.20: report a warning when Gradle properties are used
 * 1.9.20: raise this warning to an error
-* 2.0: remove these properties; the Kotlin Gradle plugin ignores their usages
+* 2.0.0: remove Gradle properties; the Kotlin Gradle plugin ignores their usages
 
 In the unlikely case you face some problems after removing these properties, create an [issue in YouTrack](https://kotl.in/issue).
 
@@ -387,8 +408,8 @@ kotlin {
 Here's the planned deprecation cycle:
 
 * 1.9.20: report a warning on any usages of the presets-related API
-* 2.0: raise this warning to an error
-* &gt;2.0: remove the presets-related API from the public API of the Kotlin Gradle plugin; sources that still use it fail
+* 2.0.0: raise this warning to an error
+* 2.2.0: remove the presets-related API from the public API of the Kotlin Gradle plugin; sources that still use it fail
   with "unresolved reference" errors, and binaries (for example, Gradle plugins) might fail with linkage errors
   unless recompiled against the latest versions of the Kotlin Gradle plugin
 
@@ -527,7 +548,7 @@ Here's the planned deprecation cycle:
 
 * 1.9.0: introduce a deprecation warning when `KotlinComplation.source` is used
 * 1.9.20: raise this warning to an error
-* &gt;1.9.20: remove `KotlinComplation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
+* 2.2.0: remove `KotlinComplation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
   reference" errors during the buildscript compilation
 
 <anchor name="kotlin-js-plugin-deprecation"/>
