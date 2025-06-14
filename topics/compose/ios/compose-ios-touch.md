@@ -32,7 +32,7 @@ So, with scrollable content, if the user holds the touch, the UI interprets this
 if the touch sequence is rapid, the user likely wants to interact with the parent element.
 
 If your interop view is not meant to be interacted with, you can disable all touch processing in advance.
-To do that, call the constructor for a `UIKitView` or a `UIViewController` with the `isInteractive` parameter set to `false`. 
+To do that, call the constructor for a `UIKitView` or a `UIKitViewController` with the `isInteractive` parameter set to `false`. 
 
 > For more complex scenarios of handling gestures inside interop views,
 > use the `UIGestureRecognizer` class or its various subclasses.
@@ -45,7 +45,7 @@ To do that, call the constructor for a `UIKitView` or a `UIViewController` with 
 
 With Compose Multiplatform %composeVersion% you can also try out the experimental API for finer control over interop UI.
 
-The new constructors for `UIKitView` or a `UIViewController` accept a `UIKitInteropProperties` object as an argument.
+The new constructors for a `UIKitView` or a `UIKitViewController` accept a `UIKitInteropProperties` object as an argument.
 This object allows setting:
 
 * The `interactionMode` parameter for the given interop view, which lets you select a touch processing strategy.
