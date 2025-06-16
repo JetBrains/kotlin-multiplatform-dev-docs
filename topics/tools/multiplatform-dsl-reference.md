@@ -447,7 +447,7 @@ Learn more about [compilation for Android](multiplatform-configure-compilations.
 ## Source sets
 
 The `sourceSets {}` block describes source sets of the project. A source set contains Kotlin source files that participate
-in compilations together, along with their resources, dependencies, and language settings. 
+in compilations together, along with their resources and dependencies. 
 
 A multiplatform project contains [predefined](#predefined-source-sets) source sets for its targets;
 developers can also create [custom](#custom-source-sets) source sets for their needs.
@@ -534,7 +534,7 @@ Configurations of source sets are stored inside the corresponding blocks of `sou
 | `resources.srcDir` | Location of resources inside the source set directory.                                 |
 | `dependsOn`        | [Connection with another source set](multiplatform-hierarchy.md#manual-configuration). |
 | `dependencies`     | [Dependencies](#dependencies) of the source set.                                       |
-| `languageSettings` | [Language settings](#language-settings) applied to the source set.                     |
+| `languageSettings` | [Language settings](#language-settings) applied to the shared source set.              |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -1017,7 +1017,11 @@ dependencies {
 
 ## Language settings
 
-The `languageSettings {}` block of a source set defines certain aspects of project analysis and build. The following language settings are available:
+The `languageSettings {}` block in a source set defines certain aspects of project analysis and compilation. Use the
+`languageSettings {}` block only to configure settings that apply specifically to a shared source set. For all other cases,
+use the `compilerOptions {}` block to [configure compiler options](#compiler-options) at the extension or target level.
+
+The following language settings are available:
 
 | **Name**                | **Description**                                                                                                                                                                 | 
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
