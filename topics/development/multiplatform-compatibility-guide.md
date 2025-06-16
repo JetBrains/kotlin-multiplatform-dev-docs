@@ -58,7 +58,8 @@ disable bitcode embedding in your Xcode projects.
 Here's the planned deprecation cycle:
 
 * 2.0.20: the Kotlin/Native compiler no longer supports bitcode embedding
-* 2.2.0: the `embedBitcode` DSL is removed from the Kotlin Multiplatform Gradle plugin
+* 2.2.0: the `embedBitcode` DSL is deprecated in the Kotlin Multiplatform Gradle plugin
+* 2.3.0: the `embedBitcode` DSL is removed 
 
 <anchor name="java-source-set-created-by-default"/>
 ### Java source sets created by default
@@ -709,7 +710,7 @@ Here's the planned deprecation cycle:
 
 * 1.3.40: introduce a warning when `targetPresets.jvmWithJava` is used
 * 1.9.20: raise this warning to an error
-* >1.9.20: remove `targetPresets.jvmWithJava` API; attempts to use it lead to the buildscript compilation failure
+* &gt;1.9.20: remove `targetPresets.jvmWithJava` API; attempts to use it lead to the buildscript compilation failure
 
 > Even though the whole `targetPresets` API is deprecated, the `jvmWithJava` preset has a different deprecation timeline.
 >
