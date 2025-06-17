@@ -10,6 +10,7 @@
 
     <!-- Compose -->
     <var name="composeVersion" value="1.8.1" type="string"/>
+    <var name="jetpackComposeVersion" value="1.8.1" type="string"/>
     <!--  <var name="composeEapVersion" value="1.8.0-rc01" type="string"/> -->
     <var name="composeNavigationVersion" value="2.9.0-beta01" type="string"/>
     <!-- <var name="composeNavigationEapVersion" value="2.9.0-alpha15" type="string"/> -->
