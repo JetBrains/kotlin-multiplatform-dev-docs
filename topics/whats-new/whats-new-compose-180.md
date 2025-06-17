@@ -18,9 +18,9 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
     * [Foundation 1.8.2](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.8.2)
     * [Material 1.8.2](https://developer.android.com/jetpack/androidx/releases/compose-material#1.8.2)
     * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.1`. Based on [Jetpack Lifecycle 2.9.1](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.1)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta03`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
-* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.1.2`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:%composeLifecycleVersion%`. Based on [Jetpack Lifecycle %composeLifecycleVersion%](https://developer.android.com/jetpack/androidx/releases/lifecycle#%composeLifecycleVersion%)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:%composeNavigationVersion%`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
+* Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:%material3adaptiveVersion%`. Based on [Jetpack Material3 Adaptive 1.1.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.1.0)
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.1`. Based on [Jetpack Savedstate 1.3.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.0)
 * WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-alpha07`. Based on [Jetpack WindowManager 1.4.0-alpha04](https://developer.android.com/jetpack/androidx/releases/window#1.4.0-alpha04)
 
