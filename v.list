@@ -9,13 +9,13 @@
     <var name="apiVersion" value="2.1" type="string"/>
 
     <!-- Compose -->
-    <var name="composeVersion" value="1.8.1" type="string"/>
+    <var name="composeVersion" value="1.8.2" type="string"/>
     <!--  <var name="composeEapVersion" value="1.8.0-rc01" type="string"/> -->
-    <var name="composeNavigationVersion" value="2.9.0-beta01" type="string"/>
+    <var name="composeNavigationVersion" value="2.9.0-beta03" type="string"/>
     <!-- <var name="composeNavigationEapVersion" value="2.9.0-alpha15" type="string"/> -->
-    <var name="composeViewmodelVersion" value="2.9.0" type="string"/>
-    <var name="material3adaptiveVersion" value="1.1.1" type="string"/>
-    <var name="composeLifecycleVersion" value="2.9.0" type="string"/>
+    <var name="composeViewmodelVersion" value="2.9.1" type="string"/>
+    <var name="material3adaptiveVersion" value="1.1.2" type="string"/>
+    <var name="composeLifecycleVersion" value="2.9.1" type="string"/>
 
     <!-- Compose Hot Reload -->
     <var name="foojayResolverConventionVersion" value="0.10.0" type="string"/>
