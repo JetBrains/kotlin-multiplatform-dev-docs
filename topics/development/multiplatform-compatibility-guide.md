@@ -364,8 +364,8 @@ Each target preset essentially represented a factory for Kotlin Multiplatform ta
 redundant, as DSL functions like `jvm()` or `iosSimulatorArm64()` cover the same use cases while being much more
 straightforward and concise.
 
-To reduce the confusion and provide clearer guidelines, all presets-related APIs are now deprecated and will be
-removed from the public API of the Kotlin Gradle plugin in future releases. This includes:
+To reduce the confusion and provide clearer guidelines, all presets-related APIs are now deprecated in the public API of
+the Kotlin Gradle plugin. This includes:
 
 * The `presets` property in `org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension`
 * The `org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset` interface and all its inheritors
@@ -853,7 +853,6 @@ and [Application](https://docs.gradle.org/current/userguide/application_plugin.h
 there is now a deprecation warning when you apply these plugins to the same project. The warning also appears when another
 Gradle plugin in your multiplatform project applies a Gradle Java plugin. For example, the [Spring Boot Gradle Plugin](https://docs.spring.io/spring-boot/gradle-plugin/index.html)
 automatically applies the Application plugin.
-In future Kotlin releases, the warning will be increased to an error.
 
 We've added this deprecation warning due to fundamental compatibility issues between Kotlin Multiplatform's project model
 and Gradle's Java ecosystem plugins. Gradle's Java ecosystem plugins currently don't take into account that other plugins may:
