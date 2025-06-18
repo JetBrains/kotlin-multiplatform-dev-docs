@@ -54,8 +54,9 @@ Create a common test source set and add the necessary dependencies:
     }
     ```
 
-3. If you need to run instrumented (emulator) tests for Android, amend your Gradle configuration further:
-   1. Add the following code to the `androidTarget {}` block and follow IDE's suggestions to add missing imports:
+3. If you need to run instrumented (emulator) tests for Android, amend your Gradle configuration as follows:
+   1. Add the following code to the `androidTarget {}` block to configure the instrumented test source set to depend on 
+   a common test source set. Then, follow the IDE's suggestions to add any missing imports.
 
       ```kotlin
       kotlin {
@@ -69,7 +70,7 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-   2. Add the following code to the `android.defaultConfig {}` block:
+   2. Add the following code to the `android.defaultConfig {}` block to configure the Android test instrumentation runner:
 
       ```kotlin
       android {
@@ -81,15 +82,20 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-   3. Add the following code to the config top level:
+   3. Add the required dependencies for `androidTarget`:
 
-      ```kotlin
-      //https://developer.android.com/develop/ui/compose/testing#setup
-      dependencies {
-          androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:1.6.8")
-          debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
-      }
-      ```
+       ```kotlin
+       kotlin {
+            // ...
+            androidTarget {
+                // ...
+                dependencies { 
+                    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%jetpackComposeVersion%")
+                    debugImplementation("androidx.compose.ui:ui-test-manifest:%jetpackComposeVersion%")
+                }
+            }
+        }
+       ```
 
 Now, you are ready to write and run common tests for the Compose Multiplatform UI.
 
@@ -189,6 +195,7 @@ Run this command in the terminal:
 Now that you got the hang of Compose Multiplatform UI testing, you may want to check out more testing-related resources:
 * For a general overview of testing in a Kotlin Multiplatform project, see [Understand basic project structure](multiplatform-discover-project.md#integration-with-tests)
 and the [Test your multiplatform app](multiplatform-run-tests.md) tutorial.
-* For details on setting up and running JUnit-based tests for desktop targets, see [Testing Compose Multiplatform UI with JUnit](compose-desktop-ui-testing.md).
+* For details on setting up and running JUnit-based tests for desktop targets, see [](compose-desktop-ui-testing.md).
+* For localization tests, see [](compose-localization-tests.md#testing-locales-on-different-platforms).
 * More advanced testing in Android Studio, including automation, is covered in the [Test your app](https://developer.android.com/studio/test)
 article in the Android Studio documentation.
