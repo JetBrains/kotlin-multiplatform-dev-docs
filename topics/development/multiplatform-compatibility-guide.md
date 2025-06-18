@@ -58,7 +58,8 @@ disable bitcode embedding in your Xcode projects.
 Here's the planned deprecation cycle:
 
 * 2.0.20: the Kotlin/Native compiler no longer supports bitcode embedding
-* 2.2.0: the `embedBitcode` DSL is deprecated in the Kotlin Multiplatform Gradle plugin
+* 2.1.0: the `embedBitcode` DSL is deprecated in the Kotlin Multiplatform Gradle plugin with a warning
+* 2.2.0: the warning is raised to an error
 * 2.3.0: the `embedBitcode` DSL is removed 
 
 <anchor name="java-source-set-created-by-default"/>
@@ -304,7 +305,7 @@ The Kotlin team is eager to help the ecosystem migrate, so if you face any issue
 
 Here's the planned deprecation cycle:
 
-* 1.9: introduce a deprecation warning for dependencies on legacy libraries
+* 1.9.0: introduce a deprecation warning for dependencies on legacy libraries
 * 2.0.0: raise the warning for dependencies on legacy libraries to an error
 * &gt;2.0.0: remove support for dependencies on legacy libraries; using such dependencies can cause build failures
 
