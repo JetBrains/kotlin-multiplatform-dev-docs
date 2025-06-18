@@ -928,6 +928,12 @@ kotlin {
 </tab>
 </tabs>
 
+### Migrate from `kotlinOptions {}` to `compilerOptions {}` {collapsible="true"}
+
+Before Kotlin 2.2.0, you could configure compiler options using the `kotlinOptions {}` block. Since the `kotlinOptions {}`
+block is deprecated in Kotlin 2.2.0, you need to use the `compilerOptions {}` block in your build scripts instead. 
+See [Migrate from `kotlinOptions{}` to `compilerOptions{}`](https://kotlinlang.org/gradle-compiler-options.html#migrate-from-koltinoptions-to-compileroptions), for more information.
+
 ## Dependencies
 
 The `dependencies {}` block of the source set declaration contains the dependencies of this source set.
