@@ -20,18 +20,18 @@ you should always include necessary [license files](https://kotlinlang.org/docs/
 
 Use the following factory methods to declare elements of the `binaries` collection.
 
-| Factory method | Binary kind           | Available for                                |
-|----------------|-----------------------|----------------------------------------------|
-| `executable`   | Product executable    | All native targets                           |
-| `test`         | Test executable       | All native targets                           |
-| `sharedLib`    | Shared native library | All native targets, except for `WebAssembly` |
-| `staticLib`    | Static native library | All native targets, except for `WebAssembly` |
-| `framework`    | Objective-C framework | macOS, iOS, watchOS, and tvOS targets only   |
+| Factory method | Binary kind           | Available for                              |
+|----------------|-----------------------|--------------------------------------------|
+| `executable`   | Product executable    | All native targets                         |
+| `test`         | Test executable       | All native targets                         |
+| `sharedLib`    | Shared native library | All native targets                         |
+| `staticLib`    | Static native library | All native targets                         |
+| `framework`    | Objective-C framework | macOS, iOS, watchOS, and tvOS targets only |
 
 The simplest version doesn't require any additional parameters and creates one binary for each build type. Currently,
 two build types are available:
 
-* `DEBUG` – produces a non-optimized binary with debug information
+* `DEBUG` – produces a non-optimized binary with additional metadata that is helpful when working with [debugger tools](https://kotlinlang.org/docs/native-debugging.html)
 * `RELEASE` – produces an optimized binary without debug information
 
 The following snippet creates two executable binaries, debug and release:
