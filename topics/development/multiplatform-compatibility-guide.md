@@ -341,7 +341,7 @@ The following properties are now deprecated:
   not to set these properties.
 
 As the default behavior of the Kotlin toolchain doesn't include such properties since Kotlin 1.6.20, we don't expect
-any serious impact. Most possible consequences will be visible immediately after the project rebuilds.
+any serious impact. Most consequences will be visible immediately after a project is rebuilt.
 
 If you're a library author and want to be extra safe, check that consumers can work with your library.
 
@@ -349,9 +349,9 @@ If you're a library author and want to be extra safe, check that consumers can w
 
 Here's the planned deprecation cycle:
 
-* 1.8.20: report a warning when Gradle properties are used
+* 1.8.20: report a warning when the deprecated Gradle properties are used
 * 1.9.20: raise this warning to an error
-* 2.0.0: remove Gradle properties; the Kotlin Gradle plugin ignores their usages
+* 2.0.0: remove the deprecated properties; the Kotlin Gradle plugin ignores their usages
 
 In the unlikely case you face some problems after removing these properties, create an [issue in YouTrack](https://kotl.in/issue).
 
