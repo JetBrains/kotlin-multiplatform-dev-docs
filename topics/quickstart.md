@@ -98,7 +98,7 @@ Use the IDE wizard to create a new KMP project:
 3. Set the name, location, and other base attributes of the project as needed.
 4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
    as the JDK for your project as it improves the performance and compatibility of KMP projects. [TODO: does it?]
-   JetBrains Runtime is included in every IntelliJ IDEA distribution. 
+   JetBrains Runtime is included in every IntelliJ IDEA distribution.
 5. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
       (except for the server module that doesn't have UI code).
@@ -139,6 +139,9 @@ Use the IDE wizard to create a new KMP project:
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
+5. When the project is generated, we recommend making sure that it runs on [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime),
+   a JDK that improves the performance and compatibility of KMP projects. [TODO: does it?]
+   JetBrains Runtime is included and used by default in every Android Studio distribution.
 
 When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
@@ -266,7 +269,7 @@ Common issues with Java:
 
 ### Android tools
 
-Same as for JDK: if you have trouble launching Android tools like `adb`,
+Same as for JDK, if you have trouble launching Android tools like `adb`,
 make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 `ANDROID_HOME/platform-tools` are added to your `PATH` environment variable.
 

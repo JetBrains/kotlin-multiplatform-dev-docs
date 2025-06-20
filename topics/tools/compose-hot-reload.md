@@ -62,8 +62,9 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 
 4. To use the full functionality of Compose Hot Reload, your project must run on [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
    (JBR), an OpenJDK fork that supports enhanced class redefinition.
-   For Compose Hot Reload to automatically provision a compatible JBR for your project, you can use a Gradle plugin:
-   In your `settings.gradle.kts` file, add the following line:
+   Compose Hot Reload can automatically provision a compatible JBR for your project.
+   To enable that, add the following Gradle plugin to your `settings.gradle.kts` file:
+
    ```kotlin
    plugins {
        id("org.gradle.toolchains.foojay-resolver-convention") version "%foojayResolverConventionVersion%"
