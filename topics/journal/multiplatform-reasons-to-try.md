@@ -18,16 +18,16 @@ this article will explain some of the practical benefits that Kotlin Multiplatfo
 from its ability to streamline development efforts to its extensive platform support and robust tooling ecosystem, 
 along with case studies from real companies.
 
-* [Kotlin Multiplatform allows you to avoid code duplication](#1-kotlin-multiplatform-allows-you-to-avoid-code-duplication)
-* [Kotlin Multiplatform supports an extensive list of platforms](#2-kotlin-multiplatform-supports-an-extensive-list-of-platforms)
-* [Kotlin provides simplified code-sharing mechanisms](#3-kotlin-provides-simplified-code-sharing-mechanisms)
-* [Kotlin Multiplatform allows for flexible multiplatform development](#4-kotlin-multiplatform-allows-for-flexible-multiplatform-development)
-* [With the Kotlin Multiplatform solution, you can share UI code](#5-with-the-kotlin-multiplatform-solution-you-can-share-ui-code)
-* [You can use Kotlin Multiplatform in existing and new projects](#6-you-can-use-kotlin-multiplatform-in-existing-and-new-projects)
-* [With Kotlin Multiplatform, you can start sharing your code gradually](#7-with-kotlin-multiplatform-you-can-start-sharing-your-code-gradually)
-* [Kotlin Multiplatform is already used by global companies](#8-kotlin-multiplatform-is-already-used-by-global-companies)
-* [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
-* [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
+1.[Kotlin Multiplatform allows you to avoid code duplication](#1-kotlin-multiplatform-allows-you-to-avoid-code-duplication)
+1. [Kotlin Multiplatform supports an extensive list of platforms](#2-kotlin-multiplatform-supports-an-extensive-list-of-platforms)
+2. [Kotlin provides simplified code-sharing mechanisms](#3-kotlin-provides-simplified-code-sharing-mechanisms)
+3. [Kotlin Multiplatform allows for flexible multiplatform development](#4-kotlin-multiplatform-allows-for-flexible-multiplatform-development)
+4. [With the Kotlin Multiplatform solution, you can share UI code](#5-with-the-kotlin-multiplatform-solution-you-can-share-ui-code)
+5. [You can use Kotlin Multiplatform in existing and new projects](#6-you-can-use-kotlin-multiplatform-in-existing-and-new-projects)
+6. [With Kotlin Multiplatform, you can start sharing your code gradually](#7-with-kotlin-multiplatform-you-can-start-sharing-your-code-gradually)
+7. [Kotlin Multiplatform is already used by global companies](#8-kotlin-multiplatform-is-already-used-by-global-companies)
+8. [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
+9. [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
 
 ### 1. Kotlin Multiplatform allows you to avoid code duplication
 
