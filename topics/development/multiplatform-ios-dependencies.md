@@ -113,6 +113,10 @@ property in the `.def` file. For the example above, this will be:
 import DateTools.*
 ```
 
+> See the sample project that [uses the cinterop tool and the libcurl library](https://github.com/Kotlin/kotlin-hands-on-intro-kotlin-native).
+>
+{style="tip"}
+
 #### Add a framework
 
 1. Download the framework source code and place it somewhere that you can reference it from your project.
@@ -259,6 +263,11 @@ To use the dependency in your Kotlin code, import the package `cocoapods.<librar
 ```kotlin
 import cocoapods.SDWebImage.*
 ```
+
+> * See the sample project with [different Pod dependencies set up in a Kotlin project](https://github.com/Kotlin/kmp-with-cocoapods-multitarget-xcode-sample).
+> * Check out the sample project where [an Xcode project with several targets depends on a Kotlin library](https://github.com/Kotlin/kmp-with-cocoapods-multitarget-xcode-sample).
+> 
+{style="tip"}
 
 ## What's next?
 

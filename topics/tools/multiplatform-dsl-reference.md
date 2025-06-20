@@ -350,7 +350,7 @@ kotlin {
     linuxX64 { // Replace with a target you need.
         compilations.getByName("main") {
             val myInterop by cinterops.creating {
-                // Def-file describing the native API.
+                // Definition file describing the native API.
                 // The default path is src/nativeInterop/cinterop/<interop-name>.def
                 definitionFile.set(project.file("def-file.def"))
 
@@ -386,7 +386,7 @@ kotlin {
         compilations.main {
             cinterops {
                 myInterop {
-                    // Def-file describing the native API.
+                    // Definition file describing the native API.
                     // The default path is src/nativeInterop/cinterop/<interop-name>.def
                     definitionFile = project.file("def-file.def")
 
