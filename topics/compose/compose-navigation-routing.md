@@ -63,7 +63,8 @@ Users can use the **Back** and **Forward** buttons in the browser to move betwee
 as well as use the address bar to understand where they are and get to a destination directly.
 
 To bind the web app to the navigation graph defined in your common code,
-call the `window.bindToNavigation()` method in your Kotlin/Wasm or Kotlin/JS code:
+you can use the `window.bindToNavigation()` method in your Kotlin/Wasm code. For Kotlin/JS, ensure this code runs within 
+the `onWasmReady {}` block. Here is an example of how to set this up:
 
 ```kotlin
 //commonMain source set
@@ -80,7 +81,7 @@ fun App(
     }
 }
 
-//wasmJsMain or jsMain source set
+//wasmJsMain source set
 @OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalBrowserHistoryApi
 fun main() {
@@ -89,6 +90,20 @@ fun main() {
         App(
           onNavHostReady = { window.bindToNavigation(it) }
         )
+    }
+}
+
+//jsMain source set
+@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalBrowserHistoryApi
+fun main() {
+    onWasmReady {
+        val body = document.body ?: return@onWasmReady
+        ComposeViewport(body) {
+            App(
+                onNavHostReady = { window.bindToNavigation(it) }
+            )
+        }
     }
 }
 ```
@@ -202,7 +217,7 @@ fun main() {
                         route.startsWith(Id.serializer().descriptor.serialName) -> {
                             // Accesses the route arguments
                             val args = entry.toRoute<Id>()
-    
+
                             // Sets the corresponding URL fragment to "#find_id_222"
                             // instead of "#org.example.app.ID%2F222"
                             "#find_id_${args.id}"
@@ -243,32 +258,35 @@ The code that does the matching needs to run before the `window.bindToNavigation
     ExperimentalSerializationApi::class
 )
 fun main() {
-    val body = document.body ?: return
-    ComposeViewport(body) {
-        App(
-            onNavHostReady = { navController ->
-                // Accesses the fragment substring of the current URL
-                val initRoute = window.location.hash.substringAfter('#', "")
-                when  {
-                    // Identifies the corresponding route and navigates to it
-                    initRoute.startsWith("start") -> {
-                        navController.navigate(StartScreen)
+    // `onWasmReady` ensures initialization in Kotlin/JS, not required in Kotlin/Wasm
+    onWasmReady {  
+        val body = document.body ?: return@onWasmReady
+        ComposeViewport(body) {
+            App(
+                onNavHostReady = { navController ->
+                    // Accesses the fragment substring of the current URL
+                    val initRoute = window.location.hash.substringAfter('#', "")
+                    when {
+                        // Identifies the corresponding route and navigates to it
+                        initRoute.startsWith("start") -> {
+                            navController.navigate(StartScreen)
+                        }
+                        initRoute.startsWith("find_id") -> {
+                            // Parses the string to extract route parameters before navigating to it
+                            val id = initRoute.substringAfter("find_id_").toLong()
+                            navController.navigate(Id(id))
+                        }
+                        initRoute.startsWith("patient") -> {
+                            val name = initRoute.substringAfter("patient_").substringBefore("_")
+                            val id = initRoute.substringAfter("patient_").substringAfter("_").toLong()
+                            navController.navigate(Patient(name, id))
+                        }
                     }
-                    initRoute.startsWith("find_id") -> {
-                        // Parses the string to extract route parameters before navigating to it
-                        val id = initRoute.substringAfter("find_id_").toLong()
-                        navController.navigate(Id(id))
-                    }
-                    initRoute.startsWith("patient") -> {
-                        val name = initRoute.substringAfter("patient_").substringBefore("_")
-                        val id = initRoute.substringAfter("patient_").substringAfter("_").toLong()
-                        navController.navigate(Patient(name, id))
-                    }
+
+                    window.bindToNavigation(navController) { ... }
                 }
-                
-                window.bindToNavigation(navController) { ... }
-            }
-        )
+            )
+        }
     }
 }
 ```
