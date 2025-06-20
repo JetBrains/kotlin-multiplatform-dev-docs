@@ -349,15 +349,15 @@ kotlin {
     val watchos64 = watchosArm64("watchos64")
     configure(listOf(watchos32, watchos64)) {
         binaries.framework {
-            baseName = "my_framework"
+            baseName = "MyFramework"
         }
     }
     // Create a task to build a fat framework.
     tasks.register<FatFrameworkTask>("debugFatFramework") {
         // The fat framework must have the same base name as the initial frameworks.
-        baseName = "my_framework"
+        baseName = "MyFramework"
         // The default destination directory is "<build directory>/fat-framework".
-        destinationDir = buildDir.resolve("fat-framework/debug")
+        destinationDirProperty.set(layout.buildDirectory.dir("fat-framework/debug"))
         // Specify the frameworks to be merged.
         from(
             watchos32.binaries.getFramework("DEBUG"),
@@ -380,16 +380,16 @@ kotlin {
         watchosArm64("watchos64")
         configure([watchos32, watchos64]) {
             binaries.framework {
-                baseName = "my_framework"
+                baseName = "MyFramework"
             }
         }
     }
     // Create a task building a fat framework.
     tasks.register("debugFatFramework", FatFrameworkTask) {
         // The fat framework must have the same base name as the initial frameworks.
-        baseName = "my_framework"
+        baseName = "MyFramework"
         // The default destination directory is "<build directory>/fat-framework".
-        destinationDir = file("$buildDir/fat-framework/debug")
+        destinationDirProperty.set(layout.buildDirectory.dir("fat-framework/debug"))
         // Specify the frameworks to be merged.
         from(
             targets.watchos32.binaries.getFramework("DEBUG"),
