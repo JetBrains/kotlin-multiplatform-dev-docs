@@ -97,8 +97,9 @@ Use the IDE wizard to create a new KMP project:
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. Set the name, location, and other base attributes of the project as needed.
 4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   as the JDK for your project as it improves the performance and compatibility of KMP projects. [TODO: does it?]
-   JetBrains Runtime is included in every IntelliJ IDEA distribution.
+   (JBR) as the JDK for your project because it provides important fixes, in particular improving the compatibility
+   of desktop KMP apps.
+   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
 5. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
       (except for the server module that doesn't have UI code).
