@@ -63,8 +63,10 @@ Users can use the **Back** and **Forward** buttons in the browser to move betwee
 as well as use the address bar to understand where they are and get to a destination directly.
 
 To bind the web app to the navigation graph defined in your common code,
-you can use the `window.bindToNavigation()` method in your Kotlin/Wasm code. For Kotlin/JS, ensure this code runs within 
-the `onWasmReady {}` block. Here is an example of how to set this up:
+you can use the `window.bindToNavigation()` method in your Kotlin/Wasm code. 
+You can use the same method in Kotlin/JS, but wrap it in the `onWasmReady {}` block to ensure 
+that the Wasm application is initialized and Skia is ready to render graphics.
+Here is an example of how to set this up:
 
 ```kotlin
 //commonMain source set
