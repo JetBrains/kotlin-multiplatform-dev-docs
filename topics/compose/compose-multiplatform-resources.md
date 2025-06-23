@@ -26,4 +26,4 @@ To learn how to work with resources in Compose Multiplatform, refer to the follo
 
 * [Local resource environment](compose-resource-environment.md)
   
-  Customize your app's resource environment like in-app theme and language.
+  Manage your app's resource environment like in-app theme and language.
