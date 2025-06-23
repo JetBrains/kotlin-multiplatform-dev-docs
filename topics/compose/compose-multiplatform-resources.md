@@ -14,16 +14,16 @@ When working with resources in Compose Multiplatform, consider the current condi
 * Starting with 1.6.10, you can place resources in any module or source set,
   as long as you are using Kotlin 2.0.0 or newer, and Gradle 7.6 or newer.
 
-### Set up a project with multiplatform resources
+To learn how to work with resources in Compose Multiplatform, refer to the following key sections:
 
-To add the `resources` library dependency and set up all resources that your app should be able to access, see [](compose-multiplatform-resources-setup.md).
+* [](compose-multiplatform-resources-setup.md)
 
-### Access the available resources in your code
+  Add the `resources` library dependency and set up all resources that your app should be able to access.
 
-To access resources in your UI, use the automatically generated accessors.
-For the reference and various use cases, see [](compose-multiplatform-resources-usage.md).
+* [](compose-multiplatform-resources-usage.md)
 
-### Manage local resource environment
+  Learn how to use the automatically generated accessors to access resources directly in your UI code.
 
-To manage the application's resource environment like in-app theme and language, 
-see the [Local resource environment](compose-resource-environment.md) tutorial.
+* [Local resource environment](compose-resource-environment.md)
+  
+  Manage your app's resource environment like in-app theme and language.
