@@ -140,9 +140,10 @@ Use the IDE wizard to create a new KMP project:
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
-5. When the project is generated, we recommend making sure that it runs on [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime),
-   a JDK that improves the performance and compatibility of KMP projects. [TODO: does it?]
-   JetBrains Runtime is included and used by default in every Android Studio distribution.
+5. When the project is generated, we recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
+   (JBR) as the JDK for your project because it provides important fixes, in particular improving the compatibility
+   of desktop KMP apps.
+   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
 
 When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
