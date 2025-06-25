@@ -97,7 +97,7 @@ Use the IDE wizard to create a new KMP project:
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. Set the name, location, and other base attributes of the project as needed.
 4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR) as the JDK for your project because it provides important fixes, in particular improving the compatibility
+   (JBR) as the JDK for your project, as it provides important fixes, particularly for improving the compatibility
    of desktop KMP apps.
    Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
 5. Choose platforms that you would like to see as part of the project:
@@ -141,7 +141,7 @@ Use the IDE wizard to create a new KMP project:
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
 5. When the project is generated, we recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR) as the JDK for your project because it provides important fixes, in particular improving the compatibility
+   (JBR) as the JDK for your project because it provides important fixes, particularly for  improving the compatibility
    of desktop KMP apps.
    Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
 
