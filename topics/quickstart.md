@@ -96,7 +96,11 @@ Use the IDE wizard to create a new KMP project:
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. Set the name, location, and other base attributes of the project as needed.
-4. Choose platforms that you would like to see as part of the project:
+4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
+   (JBR) as the JDK for your project, as it provides important fixes, particularly for improving the compatibility
+   of desktop KMP apps.
+   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
+5. Choose platforms that you would like to see as part of the project:
     * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
       (except for the server module that doesn't have UI code).
     * For iOS, you can choose one of two implementations:
@@ -136,6 +140,10 @@ Use the IDE wizard to create a new KMP project:
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
+5. When the project is generated, we recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
+   (JBR) as the JDK for your project because it provides important fixes, particularly for  improving the compatibility
+   of desktop KMP apps.
+   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
 
 When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
@@ -247,9 +255,15 @@ When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it
 
 Common issues with Java:
 
-* Some tools may not find a Java version to run, or use a wrong version.
+* Some tools may not find a Java version to run or use a wrong version.
   To solve this:
     * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed.
+  
+      > We recommend using [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime),
+      > an OpenJDK fork that supports class redefinition.
+      >
+      {style="note"}
+  
     * Append the path to the `bin` folder inside your `JAVA_HOME` to the `PATH` variable,
       so that the tools included in JDK are available in the terminal.
 * If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
@@ -257,7 +271,7 @@ Common issues with Java:
 
 ### Android tools
 
-Same as for JDK: if you have trouble launching Android tools like `adb`,
+Same as for JDK, if you have trouble launching Android tools like `adb`,
 make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 `ANDROID_HOME/platform-tools` are added to your `PATH` environment variable.
 
