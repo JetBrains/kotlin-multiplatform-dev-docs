@@ -292,7 +292,7 @@ compilation.
 
 | Native language       | Supported platforms                         | Comments                                                                  |
 |-----------------------|---------------------------------------------|---------------------------------------------------------------------------|
-| C                     | All platforms, except for WebAssembly       |                                                                           |
+| C                     | All platforms                               |                                                                           |
 | Objective-C           | Apple platforms (macOS, iOS, watchOS, tvOS) |                                                                           |
 | Swift via Objective-C | Apple platforms (macOS, iOS, watchOS, tvOS) | Kotlin can use only Swift declarations marked with the `@objc` attribute. |
 
