@@ -13,7 +13,7 @@ preflight environment checks, and other helpful KMP functionality.
 
 [Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
 
-On macOS with Android Studio Narwhal 2025.1.1 (currently at RC 1),
+On macOS with Android Studio Narwhal 2025.1.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.

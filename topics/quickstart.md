@@ -20,7 +20,7 @@ Start with an IDE and necessary plugins:
     or [Android Studio](https://developer.android.com/studio).
 
     The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
-    or **Android Studio Narwhal 2025.1.1 RC 1**.
+    or **Android Studio Narwhal 2025.1.1**.
 
 2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
     (not to be confused with the Kotlin Multiplatform Gradle plugin).
