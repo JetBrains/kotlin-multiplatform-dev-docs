@@ -4,11 +4,12 @@
 <secondary-label ref="Android Studio"/>
 
 <tldr>
-<p>This tutorial uses Android Studio, but you can also follow it in IntelliJ IDEA – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+<p>This tutorial uses Android Studio, but you can also follow it in IntelliJ IDEA – when <a href="quickstart.md">set up properly</a>>,
+   IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-Learn how to make your existing Android application cross-platform so that it works both on Android and iOS.
-You'll be able to write code and test it for both Android and iOS only once, in one place.
+This tutorial shows how to make an existing Android application cross-platform so that it works both on Android and iOS.
+You'll be able to write code for both Android and iOS at once, in the same place.
 
 This tutorial uses a [sample Android application](https://github.com/Kotlin/kmp-integration-sample) with a single screen
 for entering a username and password. The credentials are validated and saved to an in-memory database.
@@ -24,11 +25,10 @@ After that you'll use your cross-platform code in the Android application, and t
 
 ## Prepare an environment for development
 
-1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+1. In the quickstart, complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 
-   > You will need a Mac with macOS to complete certain steps in this tutorial, which include writing iOS-specific code
-   > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
-   > This is due to an Apple requirement.
+   > You need a Mac with macOS to complete certain steps in this tutorial, such as running an iOS application.
+   > This is due to an Apple requirement. 
    >
    {style="note"}
 
@@ -38,12 +38,12 @@ After that you'll use your cross-platform code in the Android application, and t
    https://github.com/Kotlin/kmp-integration-sample
    ```
 
-   > The `master` branch contains the project's initial state – a simple Android application. To see the final state
-   > with the iOS application and the shared module, switch to the `final` branch.
+   > The `master` branch contains the project's initial state – a simple Android application.
+   > To see the final state with the iOS application and the shared module, switch to the `final` branch.
    >
    {style="tip"}
 
-3. Switch from the **Android** view to the **Project** view:
+3. Switch to the **Project** view:
 
    ![Project view](switch-to-project.png){width="513"}
 
@@ -72,23 +72,25 @@ Your future iOS application will use the same logic, so you should make it cross
 ### Create a shared module for cross-platform code
 
 The cross-platform code used for both iOS and Android will be stored in a shared module.
-Starting with the Meerkat version, Android Studio provides a wizard for creating such shared modules.
+Both Android Studio and IntelliJ IDEA provide a wizard for creating shared modules for Kotlin Multiplatform.
 
-Create a shared module and connect it to both the existing Android application and your future iOS application:
+Create a shared module to connect to both the existing Android application and your future iOS application:
 
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
    Leave the library name `shared` and enter the package name:
-   ```
+   
+   ```text
    com.jetbrains.simplelogin.shared
    ```
+   
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
 4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
 5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
-    property in the `app/build.gradle.kts` file.
+   property in the `app/build.gradle.kts` file.
 
 ### Add code to the shared module
 
@@ -182,7 +184,7 @@ there, and make this code cross-platform.
         // ...
     }
     ```
-5. Follow Android Studio's suggestions to import missing classes.
+5. Follow IDE's suggestions to import missing classes.
 6. In the toolbar, click the `app` dropdown, then click the debug icon:
 
    ![App from list to debug](app-list-android.png){width="300"}
@@ -202,7 +204,7 @@ This is necessary for reusing the code for both Android and iOS.
 
    ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
 
-2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
+2. When IntelliJ IDEA asks what you'd like to do, select to move the package and then approve the refactoring.
 
    ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
@@ -217,27 +219,8 @@ This is necessary for reusing the code for both Android and iOS.
    
    To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
    moved `data` directory wherever possible.
-   
-   1. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
-      `IOException` is not available in Kotlin/JVM.
-   
-       ```kotlin
-       // Before
-       return Result.Error(IOException("Error logging in", e))
-       ```
-   
-       ```kotlin
-       // After
-       return Result.Error(RuntimeException("Error logging in", e))
-       ```
-   
-   2. Remove the import directive for `IOException` as well:
-   
-       ```kotlin
-       import java.io.IOException
-       ```
-   
-   3. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
+
+   1. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
       regular expression matching the pattern for email validation:
    
        ```kotlin
@@ -261,12 +244,32 @@ This is necessary for reusing the code for both Android and iOS.
        }
        ```
    
-   4. Remove the import directive for the `Patterns` class:
+   2. Remove the import directive for the `Patterns` class:
    
        ```kotlin
        import android.util.Patterns
        ```
-   
+
+   3. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
+      `IOException` is not available in Kotlin/JVM.
+
+          ```kotlin
+          // Before
+          return Result.Error(IOException("Error logging in", e))
+          ```
+
+          ```kotlin
+          // After
+          return Result.Error(RuntimeException("Error logging in", e))
+          ```
+
+   4. Remove the import directive for `IOException` as well:
+
+       ```kotlin
+       import java.io.IOException
+       ```
+
+
    #### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
    
    In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
@@ -332,7 +335,7 @@ Now, Kotlin will use platform-specific implementations of UUID for Android and i
 
 ### Run your cross-platform application on Android
 
-Run your cross-platform application for Android to make sure it works.
+Run your cross-platform application for Android to make sure it works as before.
 
 ![Android login application](android-login.png){width=300}
 
@@ -377,17 +380,19 @@ You can set up integration between the iOS app and the framework built by Kotlin
 Alternatives to this method are covered in the [iOS integration methods overview](multiplatform-ios-integration-overview.md),
 but they are beyond the scope of this tutorial.
 
-1. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
+1. In Android Studio, right-click the `iosApp/simpleLoginIOS.xcodeproj` directory and select
+   **Open In** | **Open In Associated Application** to open the iOS project in Xcode.
+2. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
 
-2. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
+3. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
 
-3. Click the **+** icon and select **New Run Script Phase**.
+4. Click the **+** icon and select **New Run Script Phase**.
 
     ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
 
     The new phase is created at the bottom of the list.
 
-4. Click the **>** icon to expand the created **Run Script** item, then paste the following script in the text field:
+5. Click the **>** icon to expand the created **Run Script** item, then paste the following script in the text field:
 
     ```text
     cd "$SRCROOT/.."
@@ -396,11 +401,11 @@ but they are beyond the scope of this tutorial.
 
    ![Add the script](xcode-add-run-phase-2.png){width=700}
 
-5. Move the **Run Script** phase higher in the order, placing it before the **Compile Sources** phase:
+6. Move the **Run Script** phase higher in the order, placing it before the **Compile Sources** phase:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-6. Click the **Build Settings** tab, then find and disable the **User Script Sandboxing** option under **Build Options**:
+7. Click the **Build Settings** tab, then find and disable the **User Script Sandboxing** option under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -409,7 +414,7 @@ but they are beyond the scope of this tutorial.
    >
    {style="note"}
 
-7. Build the project in Xcode (**Product** | **Build** in the main menu).
+8. Build the project in Xcode (**Product** | **Build** in the main menu).
     If everything is configured correctly, the project should build successfully 
     (you can safely ignore the "build phase will be run during every build" warning)
    
@@ -424,10 +429,13 @@ but they are beyond the scope of this tutorial.
 
 Once you've made sure that Xcode is set up correctly, return to Android Studio:
 
-1. Select **File | Sync Project with Gradle Files** in the main menu. Android Studio automatically generates a run
-   configuration called **simpleLoginIOS**.
+1. Select **File | Sync Project with Gradle Files** in the main menu.
 
-2. In the list of run configurations, select **simpleLoginIOS**. Choose an iOS emulator and then click **Run**.
+   Android Studio automatically generates a run configuration called **simpleLoginIOS** and marks the `iosApp`
+   directory as a linked Xcode project.
+
+2. In the list of run configurations, select **simpleLoginIOS**.
+   Choose an iOS emulator and then click **Run** to check that the iOS app runs correctly.
 
    ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=400}
 
