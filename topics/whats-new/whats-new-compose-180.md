@@ -273,46 +273,15 @@ Localized versions of these announcements are also provided, allowing VoiceOver 
 
 #### Accessibility for container views
 
-By default, screen readers navigate through UI elements in a fixed order,
-following their layout from left to right and top to bottom.
-For complex layouts,
-screen readers cannot determine the correct reading order without properly defined traversal semantics.
-This is particularly relevant for layouts with container views, such as tables and nested views,
-that support the scrolling and zooming of contained views.
-
 Starting with Compose Multiplatform %composeVersion%,
 you can define traversal semantic properties for containers
 to ensure the correct reading order when scrolling and swiping through complex views.
 
-For example, if you want the screen reader to first focus on a floating action button,
-you can set its traversal index to `-1f`.
-The default value of the index is `0f`,
-which means that the lower specified value causes the element to be read before others on the screen.
-
-```kotlin
-@Composable
-fun FloatingBox() {
-    Box(
-        modifier =
-        Modifier.semantics {
-            isTraversalGroup = true
-            // Sets a negative index to prioritize over elements with the default index
-            traversalIndex = -1f
-        }
-    ) {
-        FloatingActionButton(onClick = {}) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Icon of floating action button"
-            )
-        }
-    }
-}
-```
-
 In addition to proper sorting elements for screen readers,
 support for traversal properties enables navigation between different traversal groups with the swipe-up or swipe-down accessibility gestures.
 To switch to accessible navigation mode for containers, rotate two fingers on the screen while VoiceOver is active.
+
+Learn more about traversal semantic properties in the [Accessibility](compose-accessibility.md#traversal-order) section.
 
 #### Accessible text input
 
@@ -323,6 +292,7 @@ ensuring proper accessibility-state representation.
 You can now also use accessible text input in UI testing.
 
 #### Support for control via trackpad and keyboard
+
 Compose Multiplatform for iOS now supports two additional input methods to control your device. Instead of relying on the touchscreen, 
 you can enable either AssistiveTouch to use a mouse or trackpad, or Full Keyboard Access to use a keyboard:
 
