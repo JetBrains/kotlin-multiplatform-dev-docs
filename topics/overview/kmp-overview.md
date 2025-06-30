@@ -5,6 +5,10 @@ while integrating with native code where needed.
 
 You can find case studies of big companies who already enjoy the benefits of shared code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
 
+There is also a wealth of smaller sample apps, in our [curated sample list](multiplatform-samples.md),
+as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
+topic.
+
 ## Learning about Kotlin Multiplatform
 
 Our [Get started](get-started.topic) page lays out the primary use cases:
