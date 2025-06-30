@@ -53,11 +53,12 @@ To connect the Kotlin framework generated from the multiplatform project to your
 1. The `embedAndSignAppleFrameworkForXcode` task only registers if the `binaries.framework` configuration option is
    declared. In your Kotlin Multiplatform project, check the iOS target declaration in the `build.gradle.kts` file.
 2. In Xcode, open the iOS project settings by double-clicking the project name.
-3. On the **Build Phases** tab of the project settings, click **+** and select **New Run Script Phase**.
+3. In the **Targets** section on the left, select your target, then navigate to the **Build Phases** tab.
+4. Click **+** and select **New Run Script Phase**.
 
    ![Add run script phase](xcode-run-script-phase-1.png){width=700}
 
-4. Adjust the following script and copy the result to the run script phase:
+5. Adjust the following script and paste the result in the run script field:
 
    ```bash
    cd "<Path to the root of the multiplatform project>"
@@ -69,11 +70,14 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    ![Add the script](xcode-run-script-phase-2.png){width=700}
 
-5. Drag the **Run Script** phase before the **Compile Sources** phase.
+6. Disable **Based on dependency analysis** option.
+
+   This ensures that Xcode runs the script during every build and doesn't complain about missing output dependencies.
+7. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase.
 
    ![Drag the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-6. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
+8. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -85,7 +89,7 @@ To connect the Kotlin framework generated from the multiplatform project to your
    >
    > {style="tip"}
 
-7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+9. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
 > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
 > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
