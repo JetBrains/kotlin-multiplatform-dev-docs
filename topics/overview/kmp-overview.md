@@ -17,6 +17,8 @@ you can choose the one that is closest to your situation and get into the corres
   * Learn about the available [sharing code mechanisms](multiplatform-share-on-platforms.md).
   * See [how dependencies work](multiplatform-add-dependencies.md) in a KMP project.
   * Consider different [iOS integration methods](multiplatform-ios-integration-overview.md).
+  * Learn how KMP [compiles code](multiplatform-configure-compilations.md) and [builds binaries](multiplatform-build-native-binaries.md)
+    for various targets.
 
 ## Is Kotlin Multiplatform right for you?
 
