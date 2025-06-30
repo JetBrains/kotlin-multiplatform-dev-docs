@@ -437,7 +437,11 @@ Once you've made sure that Xcode is set up correctly, return to Android Studio:
 1. Select **File | Sync Project with Gradle Files** in the main menu. Android Studio automatically generates a run
    configuration called **simpleLoginIOS**.
 
-2. In the list of run configurations, select **simpleLoginIOS**. Choose an iOS emulator and then click **Run**.
+   Android Studio automatically generates a run configuration called **simpleLoginIOS** and marks the `iosApp`
+   directory as a linked Xcode project.
+
+2. In the list of run configurations, select **simpleLoginIOS**.
+   Choose an iOS emulator and then click **Run** to check that the iOS app runs correctly.
 
    ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=400}
 
