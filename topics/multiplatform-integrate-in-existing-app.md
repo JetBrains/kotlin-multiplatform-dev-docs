@@ -377,30 +377,30 @@ You can set up integration between the iOS app and the framework built by Kotlin
 Alternatives to this method are covered in the [iOS integration methods overview](multiplatform-ios-integration-overview.md),
 but they are beyond the scope of this tutorial.
 
-1. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
-
-2. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
-
+1. In Xcode, open the iOS project settings by double-clicking the project name.
+2. In the **Targets** section on the left, select **simpleLoginIOS**, then navigate to the **Build Phases** tab.
 3. Click the **+** icon and select **New Run Script Phase**.
 
     ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
 
-    The new phase is created at the bottom of the list.
-
-4. Click the **>** icon to expand the created **Run Script** item, then paste the following script in the text field:
+4. Paste the following script in the run script field:
 
     ```text
     cd "$SRCROOT/.."
     ./gradlew :shared:embedAndSignAppleFrameworkForXcode
     ```
 
-   ![Add the script](xcode-add-run-phase-2.png){width=700}
+   ![Add the script](xcode-run-script-phase-2.png){width=700}
 
-5. Move the **Run Script** phase higher in the order, placing it before the **Compile Sources** phase:
+5. Disable **Based on dependency analysis** option.
+
+   This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
+
+6. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-6. Click the **Build Settings** tab, then find and disable the **User Script Sandboxing** option under **Build Options**:
+7. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -409,16 +409,19 @@ but they are beyond the scope of this tutorial.
    >
    {style="note"}
 
-7. Build the project in Xcode (**Product** | **Build** in the main menu).
+8. Build the project in Xcode (**Product** | **Build** in the main menu).
     If everything is configured correctly, the project should build successfully 
     (you can safely ignore the "build phase will be run during every build" warning)
    
     > Build may fail if you built the project before disabling the **User Script Sandboxing** option:
     > the Gradle daemon process may be sandboxed and needs to be restarted.
     > Stop it before building the project again by running this command in the project directory (`kmp-integration-sample` in our example):
+    > 
     > ```shell
     > ./gradlew --stop
     > ```
+    > 
+    {style="note"}
 
 ### Set up an iOS run configuration in Android Studio
 
