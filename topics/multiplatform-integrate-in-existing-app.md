@@ -394,7 +394,7 @@ but they are beyond the scope of this tutorial.
 
 5. Disable **Based on dependency analysis** option.
 
-   This ensures that Xcode runs the script during every build and doesn't complain about missing output dependencies.
+   This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
 
 6. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase:
 

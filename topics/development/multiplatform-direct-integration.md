@@ -72,7 +72,7 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
 6. Disable **Based on dependency analysis** option.
 
-   This ensures that Xcode runs the script during every build and doesn't complain about missing output dependencies.
+   This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
 7. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase.
 
    ![Drag the Run Script phase](xcode-run-script-phase-3.png){width=700}
