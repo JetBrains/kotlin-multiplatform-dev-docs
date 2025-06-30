@@ -12,6 +12,7 @@ set. For that, update your `build.gradle(.kts)` file in the `shared` directory o
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         androidMain.dependencies {
             implementation("com.example.android:app-magic:12.3")
@@ -25,6 +26,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         androidMain {
             dependencies {

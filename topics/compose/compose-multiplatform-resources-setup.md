@@ -17,6 +17,7 @@ To access resources in your multiplatform projects, add the library dependency a
 
    ```kotlin
    kotlin {
+       //...
        sourceSets {
            commonMain.dependencies {
                implementation(compose.components.resources)

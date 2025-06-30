@@ -12,6 +12,7 @@ block:
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain.dependencies {
             implementation("com.example:my-library:1.0") // library shared for all source sets
@@ -25,6 +26,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {
@@ -63,6 +65,7 @@ create a multiplatform project, you can add test dependencies to all the source 
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonTest.dependencies {
             implementation(kotlin("test")) // Brings all the platform dependencies automatically
@@ -76,6 +79,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonTest {
             dependencies {
@@ -99,6 +103,7 @@ dependency only once in the shared source set. Use the library base artifact nam
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
@@ -112,6 +117,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {
@@ -133,6 +139,7 @@ still use library's base artifact name in the corresponding platform source set:
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         jvmMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
@@ -146,6 +153,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         jvmMain {
             dependencies {
@@ -183,6 +191,7 @@ Multiplatform Mobile plugin will automatically add the corresponding parts to an
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain.dependencies {
             implementation("io.ktor:ktor-client-core:%ktorVersion%")
@@ -199,6 +208,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {
@@ -231,6 +241,7 @@ specified library declarations will then be available only in those source sets.
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain.dependencies {
             // kotlinx.coroutines will be available in all source sets
@@ -255,6 +266,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {
@@ -292,6 +304,7 @@ other source sets will get their versions automatically.
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain.dependencies {
             implementation(project(":some-other-multiplatform-module"))
@@ -308,6 +321,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {

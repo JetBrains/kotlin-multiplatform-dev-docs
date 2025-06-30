@@ -219,6 +219,7 @@ the `export` method.
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         macosMain.dependencies {
             // Will be exported.
@@ -246,6 +247,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         macosMain.dependencies {
             // Will be exported.
