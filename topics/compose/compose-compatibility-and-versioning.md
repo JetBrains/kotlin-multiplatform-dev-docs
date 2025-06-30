@@ -7,12 +7,16 @@ about Compose Multiplatform releases, Compose release cycles, and component comp
 
 Compose Multiplatform %composeVersion% supports the following platforms:
 
-* Android
-* iOS
-* macOS (x86-64, arm64)
-* Windows (x86-64, arm64)
-* Linux (x86-64, arm64)
-* Web browsers
+| Platform | Minimum version                                                                                        |
+|----------|--------------------------------------------------------------------------------------------------------|
+| Android  | Android 5.0 (API level 21)                                                                             |
+| iOS      | iOS 13                                                                                                 |
+| macOS    | macOS 12 x64, macOS 13 arm64                                                                           |
+| Windows  | Windows 10 (x86-64, arm64)                                                                             |
+| Linux    | Ubuntu 20.04 (x86-64, arm64)                                                                           |
+| Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions) |
+
+[//]: # (https://youtrack.jetbrains.com/issue/CMP-7539)
 
 > All Compose Multiplatform releases support only 64-bit platforms. 
 > 
