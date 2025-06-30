@@ -21,8 +21,11 @@ class from the material3 library, which currently lacks out-of-the-box support f
 For a high-contrast theme on iOS, you need to add an extra set of colours 
 to the application palette. For each custom colour, its high-contrast version should be specified manually.
 
-When you provide an additional high-contrast color palette, users need to manually select it, as it will not be 
-automatically triggered by iOS's system-level accessibility settings.
+iOS provides the **Increase Contrast** accessibility setting, which can be detected by checking 
+the value of `UIAccessibilityDarkerSystemColorsEnabled`. 
+You can also keep track of the `UIAccessibilityDarkerSystemColorsStatusDidChangeNotification`.
+These APIs allow you to switch to a high-contrast color palette when the system accessibility setting 
+is enabled.
 
 While defining a color palette, use a WCAG-compliant contrast checker tool to verify that your chosen `onPrimary` color has 
 sufficient contrast with your primary color, `onSurface` with a surface color, and so on.
