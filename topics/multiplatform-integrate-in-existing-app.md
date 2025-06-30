@@ -25,11 +25,10 @@ After that you'll use your cross-platform code in the Android application, and t
 
 ## Prepare an environment for development
 
-1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+1. In the quickstart, complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 
-   > You will need a Mac with macOS to complete certain steps in this tutorial, which include writing iOS-specific code
-   > and running an iOS application. These steps can't be performed on other operating systems, such as Microsoft Windows.
-   > This is due to an Apple requirement.
+   > You need a Mac with macOS to complete certain steps in this tutorial, such as running an iOS application.
+   > This is due to an Apple requirement. 
    >
    {style="note"}
 
@@ -39,8 +38,8 @@ After that you'll use your cross-platform code in the Android application, and t
    https://github.com/Kotlin/kmp-integration-sample
    ```
 
-   > The `master` branch contains the project's initial state – a simple Android application. To see the final state
-   > with the iOS application and the shared module, switch to the `final` branch.
+   > The `master` branch contains the project's initial state – a simple Android application.
+   > To see the final state with the iOS application and the shared module, switch to the `final` branch.
    >
    {style="tip"}
 
@@ -73,23 +72,25 @@ Your future iOS application will use the same logic, so you should make it cross
 ### Create a shared module for cross-platform code
 
 The cross-platform code used for both iOS and Android will be stored in a shared module.
-Both IntelliJ IDEA and Android Studio provide a wizard for creating shared modules for Kotlin Multiplatform.
+Both Android Studio and IntelliJ IDEA provide a wizard for creating shared modules for Kotlin Multiplatform.
 
 Create a shared module to connect to both the existing Android application and your future iOS application:
 
 1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
 2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
    Leave the library name `shared` and enter the package name:
-   ```
+   
+   ```text
    com.jetbrains.simplelogin.shared
    ```
+   
 3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
 4. When the setup is complete, you will see the following file structure in the `shared` directory:
 
    ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
 
-6. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file is the same as
-   the value of that property in the `app/build.gradle.kts` file.
+5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
+   property in the `app/build.gradle.kts` file.
 
 ### Add code to the shared module
 
@@ -379,9 +380,13 @@ You can set up integration between the iOS app and the framework built by Kotlin
 Alternatives to this method are covered in the [iOS integration methods overview](multiplatform-ios-integration-overview.md),
 but they are beyond the scope of this tutorial.
 
-1. In Xcode, open the iOS project settings by double-clicking the project name.
-2. In the **Targets** section on the left, select **simpleLoginIOS**, then navigate to the **Build Phases** tab.
-3. Click the **+** icon and select **New Run Script Phase**.
+1. In Android Studio, right-click the `iosApp/simpleLoginIOS.xcodeproj` directory and select
+   **Open In** | **Open In Associated Application** to open the iOS project in Xcode.
+2. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
+
+3. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
+
+4. Click the **+** icon and select **New Run Script Phase**.
 
     ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
 
