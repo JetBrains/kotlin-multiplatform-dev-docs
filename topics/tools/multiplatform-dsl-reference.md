@@ -467,6 +467,7 @@ Available predefined source sets are the following:
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain { /* ... */ }
     }
@@ -477,7 +478,8 @@ kotlin {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-kotlin { 
+kotlin {
+    //...
     sourceSets { 
         commonMain { /* ... */ }
     }
@@ -499,7 +501,8 @@ If using Kotlin Gradle DSL, mark custom source sets `by creating`.
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-kotlin { 
+kotlin {
+    //...
     sourceSets { 
         val myMain by creating { /* ... */ } // create a new source set by the name 'MyMain'
     }
@@ -510,7 +513,8 @@ kotlin {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-kotlin { 
+kotlin {
+    //...
     sourceSets { 
         myMain { /* ... */ } // create or configure a source set by the name 'myMain' 
     }
@@ -540,6 +544,7 @@ Configurations of source sets are stored inside the corresponding blocks of `sou
 
 ```kotlin
 kotlin { 
+    //...
     sourceSets { 
         commonMain {
             kotlin.srcDir("src")
@@ -558,6 +563,7 @@ kotlin {
 
 ```groovy
 kotlin { 
+    //...
     sourceSets { 
         commonMain {
             kotlin.srcDir('src')
@@ -953,6 +959,7 @@ There are four types of dependencies:
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {
@@ -973,6 +980,7 @@ kotlin {
 
 ```groovy
 kotlin {
+    //...
     sourceSets {
         commonMain {
             dependencies {

@@ -245,6 +245,7 @@ If you're adding it to another multiplatform project, you can add it to shared o
 
 ```kotlin
 kotlin {
+    //...
     sourceSets {
         // For all platforms
         val commonMain by getting {

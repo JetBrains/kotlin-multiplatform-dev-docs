@@ -11,10 +11,13 @@ set. For that, update your `build.gradle(.kts)` file in the `shared` directory o
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-sourceSets {
-    androidMain.dependencies {
-        implementation("com.example.android:app-magic:12.3")
-    }
+kotlin {
+    //...
+    sourceSets {
+        androidMain.dependencies {
+            implementation("com.example.android:app-magic:12.3")
+        }
+    } 
 }
 ```
 
@@ -22,10 +25,13 @@ sourceSets {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-sourceSets {
-    androidMain {
-        dependencies {
-            implementation 'com.example.android:app-magic:12.3'
+kotlin {
+    //...
+    sourceSets {
+        androidMain {
+            dependencies {
+                implementation 'com.example.android:app-magic:12.3'
+            }
         }
     }
 }
@@ -44,10 +50,12 @@ problems like this, you can add a `dependencies {}` block inside the `androidTar
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-androidTarget {
-    //...
-    dependencies {
-        implementation("com.example.android:app-magic:12.3")
+kotlin {
+    androidTarget {
+        //...
+        dependencies {
+            implementation("com.example.android:app-magic:12.3")
+        }
     }
 }
 ```
@@ -56,10 +64,12 @@ androidTarget {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-androidTarget {
-    //...
-    dependencies {
-        implementation 'com.example.android:app-magic:12.3'
+kotlin {
+    androidTarget {
+        //...
+        dependencies {
+            implementation 'com.example.android:app-magic:12.3'
+        }
     }
 }
 ```
