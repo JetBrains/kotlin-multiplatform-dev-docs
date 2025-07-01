@@ -3,13 +3,17 @@
 Kotlin Multiplatform is a technology that allows reusing code across Android, iOS, desktop, web, and server-side
 while integrating with native code where needed.
 
-You can find case studies of big companies who already enjoy the benefits of shared code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
+## Discover Kotlin Multiplatform
 
-There is also a wealth of smaller sample apps, in our [curated sample list](multiplatform-samples.md),
+You can find case studies of big companies who already enjoy the benefits of shared Kotlin code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
+
+There is also a wealth of smaller sample apps in our [curated sample list](multiplatform-samples.md),
 as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
 topic.
 
-## Learning about Kotlin Multiplatform
+Finally, you can look for multiplatform libraries that may solve your problems on [klibs.io](https://klibs.io/).
+
+## Learning the basics
 
 Our [Get started](get-started.topic) page lays out the primary use cases:
 you can choose the one that is closest to your situation and get into the corresponding tutorial for KMP beginners.
