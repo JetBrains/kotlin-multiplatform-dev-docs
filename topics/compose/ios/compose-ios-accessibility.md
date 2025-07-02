@@ -17,13 +17,13 @@ available to Accessibility Services and XCTest framework.
 ## High-contrast theme
 
 Compose Multiplatform uses the [`ColorScheme`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-color-scheme/)
-class from the material3 library, which currently lacks out-of-the-box support for high-contrast colours. 
+class from the Material3 library, which currently lacks out-of-the-box support for high-contrast colours. 
 For a high-contrast theme on iOS, you need to add an extra set of colours 
 to the application palette. For each custom colour, its high-contrast version should be specified manually.
 
 iOS provides the **Increase Contrast** accessibility setting, which can be detected by checking 
 the value of `UIAccessibilityDarkerSystemColorsEnabled`. 
-You can also keep track of the `UIAccessibilityDarkerSystemColorsStatusDidChangeNotification`.
+You can also keep track of `UIAccessibilityDarkerSystemColorsStatusDidChangeNotification`.
 These APIs allow you to switch to a high-contrast color palette when the system accessibility setting 
 is enabled.
 
@@ -33,7 +33,7 @@ Ensure the contrast ratio between colors is at least 4.5:1. For custom foregroun
 the contrast ratio should be 7:1, especially for small text. This applies to both your `lightColorScheme` 
 and `darkColorScheme`.
 
-This code shows how to define high-contrast color palettes for light and dark themes:
+This code shows how to define high-contrast light and dark color palettes in your theme package:
 
 ```kotlin
 import androidx.compose.ui.graphics.Color
@@ -135,8 +135,12 @@ Compose Multiplatform for iOS supports additional input methods to control your 
 touchscreen, you can enable either AssistiveTouch to use a mouse or trackpad, or Full Keyboard Access to use a keyboard:
 
 * AssistiveTouch (**Settings** | **Accessibility** | **Touch** | **AssistiveTouch**) allows you to control your 
-  iPhone or iPad with a pointer from a connected mouse or trackpad. You can use the pointer to click icons on your 
+  iPhone with a pointer from a connected mouse or trackpad. You can use the pointer to click icons on your 
   screen, navigate through the AssistiveTouch menu, or type using the onscreen keyboard.
+
+  On an iPad, connecting a mouse or trackpad works out-of-the-box for basic usage. However,
+  if you want to adjust the pointer size, change the tracking speed, or assign specific actions to buttons,
+  you still need to enable AssistiveTouch.
 * Full Keyboard Access (**Settings** | **Accessibility** | **Keyboards** | **Full Keyboard Access**) enables device 
   control with a connected keyboard. You can navigate with keys like **Tab** and activate items using **Space**.
 
@@ -214,26 +218,6 @@ ComposeUIViewController(configure = {
     })
 }) {
     // your @Composable content
-}
-```
-
-## Test accessibility with XCTest framework
-
-You can use the semantic accessibility data in testing and other automation. Properties such as `testTag` correctly map
-to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform
-available to Accessibility Services and the XCTest framework.
-
-You can use automated accessibility audits in your UI tests.
-Calling `performAccessibilityAudit()` for your `XCUIApplication` will audit the current view for accessibility
-issues just as the Accessibility Inspector does.
-
-```swift
-func testAccessibilityTabView() throws {
-	let app = XCUIApplication()
-	app.launch()
-	app.tabBars.buttons["MyLabel"].tap()
-	
-	try app.performAccessibilityAudit()
 }
 ```
 

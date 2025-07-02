@@ -9,18 +9,17 @@ and the [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21/) (W
 
 ## Semantic properties
 
-Semantic properties define the meaning and role of a component, adding context for services such as accessibility, 
-autofill, and testing.
+To provide context for services such as accessibility, autofill, and testing, you can define the meaning
+and role of a component using semantic properties.
 
-Semantic properties are the building blocks of the semantic tree. When you define semantic properties in composables, 
-they are automatically added to the semantic tree. When assistive technologies interact with the app, they traverse 
-the semantic tree, not the entire UI tree.
+Semantic properties are the building blocks of the semantic tree, which is a simplified representation of the UI. 
+When you define semantic properties in composables, they are automatically added to the semantic tree. 
+Assistive technologies interact with the app by traversing the semantic tree, not the entire UI tree.
 
 Key semantic properties for accessibility:
 
 * `contentDescription` provides a description for non-textual or ambiguous UI elements like
-  [`IconButton`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-icon-button.html),  
-  and [`FloatingActionButton`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-floating-action-button.html).
+  [`IconButton`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-icon-button.html), and [`FloatingActionButton`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-floating-action-button.html).
   It is the primary accessibility API and serves for providing a textual label that screen readers announce.
 
   ```kotlin
@@ -40,7 +39,7 @@ Key semantic properties for accessibility:
   Modifier.semantics { stateDescription = if (isChecked) "Checked" else "Unchecked" }
   ```
 
-* `testTag` is used primarily in UI testing via accessibility identifiers, like in the Espresso 
+* `testTag` assigns a unique identifier to a composable element for UI testing with the Espresso 
   framework on Android or XCUITest on iOS. In addition, `testTag` can be useful for debugging or in specific 
   automation scenarios where a component identifier is required.
 
@@ -48,22 +47,21 @@ Key semantic properties for accessibility:
   Modifier.testTag("my_unique_element_id")
   ```
 
-For a full list of semantics properties, see the 
-[SemanticsProperties API](https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties) 
-reference.
+For a full list of semantics properties, see the Jetpack Compose API reference for
+[`SemanticsProperties`](https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties).
 
 ## Traversal order
 
 By default, screen readers navigate through UI elements in a fixed order, following their layout from left 
-to right and top to bottom. However, for complex layouts, screen readers may not automatically determine the correct 
-reading order. This is crucial for layouts with container views, 
+to right and top to bottom. However, for complex layouts, screen readers may not determine the correct 
+reading order automatically. This is crucial for layouts with container views, 
 such as tables and nested views, that support the scrolling and zooming of contained views.
 
 To ensure the correct reading order when scrolling and swiping through complex views, define traversal semantic properties.
 This also ensures correct navigation between different traversal groups with the swipe-up 
 or swipe-down accessibility gestures.
 
-The default value of the traversal index is `0f`.
+The default value of the traversal index of a component is `0f`.
 The lower the traversal index value of a component, the earlier its content description will be read relative
 to other components.
 
