@@ -1,11 +1,11 @@
 [//]: # (title: What is Kotlin Multiplatform)
 
-Kotlin Multiplatform is a technology that allows reusing code across Android, iOS, desktop, web, and server-side
+Kotlin Multiplatform (KMP) is a technology that allows reusing code across Android, iOS, desktop, web, and server-side
 while integrating with native code where needed.
 
 ## Discover Kotlin Multiplatform
 
-You can find case studies of big companies who already enjoy the benefits of shared Kotlin code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
+You can find case studies of companies who already enjoy the benefits of shared Kotlin code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
 
 There is also a wealth of smaller sample apps in our [curated sample list](multiplatform-samples.md),
 as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
@@ -15,11 +15,18 @@ Finally, you can look for multiplatform libraries that may solve your problems o
 
 ## Learning the basics
 
-Our [Get started](get-started.topic) page lays out the primary use cases:
-you can choose the one that is closest to your situation and get into the corresponding tutorial for KMP beginners.
+You can start with something you're interested 
 
-* If you'd rather get straight into it and see what Kotlin Multiplatform has to offer with your own eyes, try the [quickstart](quickstart.md).
-  It helps to quickly set up your environment and run a sample application on different platforms.
+TODO: "Depending on your level of understanding..."
+
+* To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
+  You'll set up your environment and run a sample application on different platforms.
+  * To try creating an app that shares most of the code between platforms,
+    see the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
+  * To see how an Android app can be turned into a multiplatform app,
+    check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
+  * To see how you can share some code without sharing UI implementation,
+    follow the [shared logic tutorial](multiplatform-create-first-app.md).
 * If you want to dig into technical details:
   * Start with the [basic project structure](multiplatform-discover-project.md).
   * Learn about the available [sharing code mechanisms](multiplatform-share-on-platforms.md).
@@ -28,15 +35,12 @@ you can choose the one that is closest to your situation and get into the corres
   * Learn how KMP [compiles code](multiplatform-configure-compilations.md) and [builds binaries](multiplatform-build-native-binaries.md)
     for various targets.
 
-## Is Kotlin Multiplatform right for you?
+## Adopting Kotlin Multiplatform
 
-We have a number of high-level overviews of cross-platform development in general as well as specific
-problems and solutions available:
+Adopting a cross-platform framework in a team can be a challenge.
+To learn about benefits and solutions to potential problems, take a look at our high-level overviews
+of cross-platform development:
 
-* [](native-and-cross-platform.md). Helps choose between the native and cross-platform approaches.
 * [](cross-platform-mobile-development.md) Talks about different approaches and implementations of cross-platform applications.
-* [](cross-platform-frameworks.md). Lists the most popular cross-platform frameworks today.
 * [](multiplatform-introduce-your-team.md). Suggests an approach to introducing cross-platform development in a team.
-* [](multiplatform-reasons-to-try.md). Lists reason to adopt Kotlin Multiplatform in particular as a cross-platform solution.
-* [](kotlin-multiplatform-flutter.md). Offers a comparative overview of Kotlin Multiplatform and Flutter, two popular cross-platform frameworks.
-* [](programming-languages-cross-platform.md). Compares languages used today for cross-platform development.
+* [](multiplatform-reasons-to-try.md). Lists reasons to adopt Kotlin Multiplatform in particular as a cross-platform solution.
