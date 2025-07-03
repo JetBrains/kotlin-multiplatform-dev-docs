@@ -5,13 +5,13 @@ while integrating with native code where needed.
 
 ## Discover Kotlin Multiplatform
 
-You can find case studies of companies who already enjoy the benefits of shared Kotlin code on our [overview page](https://www.jetbrains.com/kotlin-multiplatform/).
+Look at how companies and developers already enjoy the benefits of shared Kotlin code:
 
-There is also a wealth of smaller sample apps in our [curated sample list](multiplatform-samples.md),
-as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
-topic.
-
-Finally, you can look for multiplatform libraries that may solve your problems on [klibs.io](https://klibs.io/).
+* Our [case studies page](case-studies.topic) lists companies who successfully adopted KMP in their codebase.
+* There is a wealth of sample apps in our [curated sample list](multiplatform-samples.md),
+  as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
+  topic.
+* You can search for specific multiplatform libraries among several thousands already indexed on [klibs.io](https://klibs.io/).
 
 ## Learning the basics
 
