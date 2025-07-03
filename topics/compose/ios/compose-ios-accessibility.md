@@ -2,6 +2,7 @@
 
 Compose Multiplatform accessibility support allows people with disabilities to interact with the Compose Multiplatform UI
 as comfortably as with the native iOS UI:
+
 * Screen readers and VoiceOver can access the content of the Compose Multiplatform UI.
 * The Compose Multiplatform UI supports the same gestures as the native iOS UI for navigation and interaction.
 
@@ -10,12 +11,158 @@ that are consumed by iOS Accessibility Services. For most interfaces built with 
 automatically.
 
 You can also use this semantic data in testing and other automation: properties such as `testTag` will correctly map
-to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform available
-to Accessibility Services and XCTest framework.
+to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform 
+available to Accessibility Services and XCTest framework.
 
-iOS accessibility support is in the early stages of development. If you have trouble with this feature,
-we would appreciate your feedback in the [#compose-ios](https://kotlinlang.slack.com/archives/C0346LWVBJ4/p1678888063176359)
-Slack channel or as an issue in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP). 
+## High-contrast theme
+
+Compose Multiplatform uses the [`ColorScheme`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-color-scheme/)
+class from the Material3 library, which currently lacks out-of-the-box support for high-contrast colours. 
+For a high-contrast theme on iOS, you need to add an extra set of colours 
+to the application palette. For each custom colour, its high-contrast version should be specified manually.
+
+iOS provides the **Increase Contrast** accessibility setting, which can be detected by checking 
+the value of `UIAccessibilityDarkerSystemColorsEnabled`. 
+You can also keep track of `UIAccessibilityDarkerSystemColorsStatusDidChangeNotification`.
+These APIs allow you to switch to a high-contrast color palette when the system accessibility setting 
+is enabled.
+
+While defining a color palette, use a WCAG-compliant contrast checker tool to verify that your chosen `onPrimary` color has 
+sufficient contrast with your primary color, `onSurface` with a surface color, and so on.
+Ensure the contrast ratio between colors is at least 4.5:1. For custom foreground and background colors, 
+the contrast ratio should be 7:1, especially for small text. This applies to both your `lightColorScheme` 
+and `darkColorScheme`.
+
+This code shows how to define high-contrast light and dark color palettes in your theme package:
+
+```kotlin
+import androidx.compose.ui.graphics.Color
+
+// Defines a data class to hold the color palette for high-contrast themes
+data class HighContrastColors(
+    val primary: Color, // Main interactive elements, primary text, top app bars
+    val onPrimary: Color, // Content displayed on top of a 'primary' color
+    val secondary: Color, // Secondary interactive elements, floating action buttons
+    val onSecondary: Color, // Content displayed on top of a 'secondary' color
+    val tertiary: Color, // An optional third accent color
+    val onTertiary: Color, // Content displayed on top of a 'tertiary' color
+    val background: Color, // Main background of the screen
+    val onBackground: Color, // Content displayed on top of a 'background' color
+    val surface: Color, // Card backgrounds, sheets, menus, elevated surfaces
+    val onSurface: Color, // Content displayed on top of a 'surface' color
+    val error: Color, // Error states and messages
+    val onError: Color, // Content displayed on top of an 'error' color
+    val success: Color, // Success states and messages
+    val onSuccess: Color, // Content displayed on top of a 'success' color
+    val warning: Color, // Warning states and messages
+    val onWarning: Color, // Content displayed on top of a 'warning' color
+    val outline: Color, // Borders, dividers, disabled states
+    val scrim: Color // Dimming background content behind modals/sheets
+)
+
+// Neutral colors
+val Black = Color(0xFF000000)
+val White = Color(0xFFFFFFFF)
+val DarkGrey = Color(0xFF1A1A1A)
+val MediumGrey = Color(0xFF888888)
+val LightGrey = Color(0xFFE5E5E5)
+
+// Primary accent colors
+val RoyalBlue = Color(0xFF0056B3)
+val SkyBlue = Color(0xFF007AFF)
+
+// Secondary  and tertiary accent colors
+val EmeraldGreen = Color(0xFF28A745)
+val GoldenYellow = Color(0xFFFFC107)
+val DeepPurple = Color(0xFF6F42C1)
+
+// Status colors
+val ErrorRed = Color(0xFFD32F2F)
+val SuccessGreen = Color(0xFF388E3C)
+val WarningOrange = Color(0xFFF57C00)
+
+// Light high-contrast palette, dark content on light backgrounds
+val LightHighContrastPalette =
+    HighContrastColors(
+        primary = RoyalBlue,
+        onPrimary = White,
+        secondary = EmeraldGreen,
+        onSecondary = White,
+        tertiary = DeepPurple,
+        onTertiary = White,
+        background = White,
+        onBackground = Black,
+        surface = LightGrey,
+        onSurface = DarkGrey,
+        error = ErrorRed,
+        onError = White,
+        success = SuccessGreen,
+        onSuccess = White,
+        warning = WarningOrange,
+        onWarning = White,
+        outline = MediumGrey,
+        scrim = Black.copy(alpha = 0.6f)
+    )
+
+// Dark high-contrast palette, light content on dark backgrounds
+val DarkHighContrastPalette =
+    HighContrastColors(
+        primary = SkyBlue,
+        onPrimary = Black,
+        secondary = EmeraldGreen,
+        onSecondary = White,
+        tertiary = GoldenYellow,
+        onTertiary = Black,
+        background = Black,
+        onBackground = White,
+        surface = DarkGrey,
+        onSurface = LightGrey,
+        error = ErrorRed,
+        onError = White,
+        success = SuccessGreen,
+        onSuccess = White,
+        warning = WarningOrange,
+        onWarning = White,
+        outline = MediumGrey,
+        scrim = Black.copy(alpha = 0.6f)
+    )
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="val LightHighContrastPalette = HighContrastColors( primary = RoyalBlue,"}
+
+## Control via trackpad and keyboard
+
+Compose Multiplatform for iOS supports additional input methods to control your device. Instead of relying on the 
+touchscreen, you can enable either AssistiveTouch to use a mouse or trackpad, or Full Keyboard Access to use a keyboard:
+
+* AssistiveTouch (**Settings** | **Accessibility** | **Touch** | **AssistiveTouch**) allows you to control your 
+  iPhone with a pointer from a connected mouse or trackpad. You can use the pointer to click icons on your 
+  screen, navigate through the AssistiveTouch menu, or type using the onscreen keyboard.
+
+  On an iPad, connecting a mouse or trackpad works out of the box for basic usage. However,
+  if you want to adjust the pointer size, change the tracking speed, or assign specific actions to buttons,
+  you still need to enable AssistiveTouch.
+* Full Keyboard Access (**Settings** | **Accessibility** | **Keyboards** | **Full Keyboard Access**) enables device 
+  control with a connected keyboard. You can navigate with keys like **Tab** and activate items using **Space**.
+
+## Test accessibility with XCTest framework
+
+You can use the semantic accessibility data in testing and other automation. Properties such as `testTag` correctly map
+to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform
+available to Accessibility Services and the XCTest framework.
+
+You can use automated accessibility audits in your UI tests.
+Calling `performAccessibilityAudit()` for your `XCUIApplication` will audit the current view for accessibility
+issues just as the Accessibility Inspector does.
+
+```swift
+func testAccessibilityTabView() throws {
+	let app = XCUIApplication()
+	app.launch()
+	app.tabBars.buttons["MyLabel"].tap()
+
+	try app.performAccessibilityAudit()
+}
+```
 
 ## Customize synchronization of the accessibility tree 
 
@@ -96,7 +243,6 @@ ComposeUIViewController(configure = {
 
 ## What's next?
 
-Now that you're up to speed with iOS accessibility support in Compose Multiplatform:
-* Try out the project generated by [the Kotlin Multiplatform wizard](https://kmp.jetbrains.com/) in your usual iOS accessibility workflow.
-* Learn about [resource qualifiers](compose-multiplatform-resources.md) that will be helpful when adapting
-a Compose Multiplatform UI to a particular situation.
+* Learn more in the [Apple accessibility](https://developer.apple.com/accessibility/) guide.
+* Try out the project generated by [the Kotlin Multiplatform wizard](https://kmp.jetbrains.com/) in your usual 
+  iOS accessibility workflow.
