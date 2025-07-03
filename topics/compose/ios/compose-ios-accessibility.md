@@ -138,11 +138,31 @@ touchscreen, you can enable either AssistiveTouch to use a mouse or trackpad, or
   iPhone with a pointer from a connected mouse or trackpad. You can use the pointer to click icons on your 
   screen, navigate through the AssistiveTouch menu, or type using the onscreen keyboard.
 
-  On an iPad, connecting a mouse or trackpad works out-of-the-box for basic usage. However,
+  On an iPad, connecting a mouse or trackpad works out of the box for basic usage. However,
   if you want to adjust the pointer size, change the tracking speed, or assign specific actions to buttons,
   you still need to enable AssistiveTouch.
 * Full Keyboard Access (**Settings** | **Accessibility** | **Keyboards** | **Full Keyboard Access**) enables device 
   control with a connected keyboard. You can navigate with keys like **Tab** and activate items using **Space**.
+
+## Test accessibility with XCTest framework
+
+You can use the semantic accessibility data in testing and other automation. Properties such as `testTag` correctly map
+to native accessibility properties such as `accessibilityIdentifier`. This makes semantic data from Compose Multiplatform
+available to Accessibility Services and the XCTest framework.
+
+You can use automated accessibility audits in your UI tests.
+Calling `performAccessibilityAudit()` for your `XCUIApplication` will audit the current view for accessibility
+issues just as the Accessibility Inspector does.
+
+```swift
+func testAccessibilityTabView() throws {
+	let app = XCUIApplication()
+	app.launch()
+	app.tabBars.buttons["MyLabel"].tap()
+
+	try app.performAccessibilityAudit()
+}
+```
 
 ## Customize synchronization of the accessibility tree 
 

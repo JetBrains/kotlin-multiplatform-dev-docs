@@ -40,7 +40,7 @@ Key semantic properties for accessibility:
   ```
 
 * `testTag` assigns a unique identifier to a composable element for UI testing with the Espresso 
-  framework on Android or XCUITest on iOS. In addition, `testTag` can be useful for debugging or in specific 
+  framework on Android or XCUITest on iOS. You can also use `testTag` for debugging or in specific 
   automation scenarios where a component identifier is required.
 
   ```kotlin
