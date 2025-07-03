@@ -15,9 +15,7 @@ Finally, you can look for multiplatform libraries that may solve your problems o
 
 ## Learning the basics
 
-You can start with something you're interested 
-
-TODO: "Depending on your level of understanding..."
+You can learn KMP fundamentals in a way that suits you: 
 
 * To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
   You'll set up your environment and run a sample application on different platforms.
@@ -34,6 +32,8 @@ TODO: "Depending on your level of understanding..."
   * Consider different [iOS integration methods](multiplatform-ios-integration-overview.md).
   * Learn how KMP [compiles code](multiplatform-configure-compilations.md) and [builds binaries](multiplatform-build-native-binaries.md)
     for various targets.
+  * Read about [publishing a multiplatform app](multiplatform-publish-apps.md)
+    or a [multiplatform library](multiplatform-publish-lib-setup.md).
 
 ## Adopting Kotlin Multiplatform
 
