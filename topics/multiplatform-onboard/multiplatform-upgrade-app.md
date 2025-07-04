@@ -110,7 +110,8 @@ get the list of all launches from the **v4/launches** endpoint.
 
 ### Add a data model
 
-In `shared/src/commonMain/kotlin`, create a new `RocketLaunch.kt` file and add a data class which stores data from the SpaceX API:
+In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
+and add a data class which stores data from the SpaceX API:
 
 ```kotlin
 import kotlinx.serialization.SerialName
@@ -136,7 +137,7 @@ data class RocketLaunch (
 
 ### Connect HTTP client
 
-1. In `shared/src/commonMain/kotlin`, create a new `RocketComponent` class.
+1. In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -166,8 +167,12 @@ data class RocketLaunch (
 3. Add the `getDateOfLastSuccessfulLaunch()` suspending function to `RocketComponent`:
 
    ```kotlin
-   private suspend fun getDateOfLastSuccessfulLaunch(): String {
+   class RocketComponent {
        // ...
+       
+       private suspend fun getDateOfLastSuccessfulLaunch(): String {
+       
+       }
    }
    ```
 
@@ -177,8 +182,12 @@ data class RocketLaunch (
    import io.ktor.client.request.*
    import io.ktor.client.call.*
 
-   private suspend fun getDateOfLastSuccessfulLaunch(): String {
-       val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
+   class RocketComponent {
+       // ...
+       
+       private suspend fun getDateOfLastSuccessfulLaunch(): String {
+           val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
+       }
    }
    ```
 
@@ -190,9 +199,13 @@ data class RocketLaunch (
 5. Update the function again to find the last successful launch in the list:
 
    ```kotlin
-   private suspend fun getDateOfLastSuccessfulLaunch(): String {
-       val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
-       val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
+   class RocketComponent {
+       // ...
+       
+       private suspend fun getDateOfLastSuccessfulLaunch(): String {
+           val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
+           val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
+       }
    }
    ```
 
@@ -205,14 +218,18 @@ data class RocketLaunch (
    import kotlinx.datetime.TimeZone
    import kotlinx.datetime.toLocalDateTime
 
-   private suspend fun getDateOfLastSuccessfulLaunch(): String {
-       val rockets: List<RocketLaunch> =
-           httpClient.get("https://api.spacexdata.com/v4/launches").body()
-       val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
-       val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
-           .toLocalDateTime(TimeZone.currentSystemDefault())
+   class RocketComponent {
+       // ...
        
-       return "${date.month} ${date.dayOfMonth}, ${date.year}"
+       private suspend fun getDateOfLastSuccessfulLaunch(): String {
+           val rockets: List<RocketLaunch> =
+               httpClient.get("https://api.spacexdata.com/v4/launches").body()
+           val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
+           val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
+               .toLocalDateTime(TimeZone.currentSystemDefault())
+       
+           return "${date.month} ${date.dayOfMonth}, ${date.year}" 
+       }
    }
    ```
 
@@ -221,15 +238,20 @@ data class RocketLaunch (
 7. Add another suspending function, `launchPhrase()`, which will create a message using the `getDateOfLastSuccessfulLaunch()`
    function:
 
-   ```kotlin
-   suspend fun launchPhrase(): String =
-       try {
-           "The last successful launch was on ${getDateOfLastSuccessfulLaunch()} 🚀"
-       } catch (e: Exception) {
-           println("Exception during getting the date of the last successful launch $e")
-           "Error occurred"
-       }
-   ```
+    ```kotlin
+    class RocketComponent {
+        // ...
+    
+        suspend fun launchPhrase(): String =
+            try {
+                "The last successful launch was on ${getDateOfLastSuccessfulLaunch()} 🚀"
+            } catch (e: Exception) {
+                println("Exception during getting the date of the last successful launch $e")
+                "Error occurred"
+            }
+    }
+    ```
+
 ### Create the flow
 
 You can use flows instead of suspending functions. They emit a sequence of values instead of a single value that
@@ -282,17 +304,16 @@ Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the acces
 </manifest>
 ```
 
-## Update native Android and iOS UI
-
 You've already updated the API of the shared module by changing the return type of the `greet()` function to `Flow`.
-Now you need to update native (iOS, Android) parts of the project so that they can properly handle the result of calling
+Now you need to update native parts of the project so that they can properly handle the result of calling
 the `greet()` function.
 
-### Android app
+
+## Update native Android UI
 
 As both the shared module and the Android application are written in Kotlin, using shared code from Android is straightforward.
 
-#### Introduce a view model
+### Introduce a view model
 
 Now that the application is becoming more complex, it's time to introduce a view model to the [Android activity](https://developer.android.com/guide/components/activities/intro-activities)
 called `MainActivity`. It invokes the `App()` function that implements the UI.
@@ -381,7 +402,7 @@ The view model will manage the data from the activity and won't disappear when t
 
    The `update()` function will update the value automatically.
 
-#### Use the view model's flow
+### Use the view model's flow
 
 1. In `composeApp/src/androidMain/kotlin`, open the `App.kt` file and update it, replacing the previous implementation:
 
@@ -419,104 +440,87 @@ The view model will manage the data from the activity and won't disappear when t
 
    ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
 
-### iOS app
+## Update native iOS UI
 
 For the iOS part of the project, you'll make use of the [Model–view–viewmodel](https://en.wikipedia.org/wiki/Model–view–viewmodel)
 pattern again to connect the UI to the shared module, which contains all the business logic.
 
 The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
 
-#### Introducing a ViewModel
+### Introducing a ViewModel
 
-1. In `iosApp/iOSApp.swift`, update the entry point for your app:
+In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
+Call the `startObserving()` function within a `task()` call to support concurrency:
 
-   ```swift
-   @main
-   struct iOSApp: App {
-       var body: some Scene {
-           WindowGroup {
-               ContentView(viewModel: ContentView.ViewModel())
-           }
-       }
-   }
-   ```
+```swift
+import SwiftUI
+import Shared
 
-2. In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
-   Call the `startObserving()` function within a `task()` call to support concurrency:
+struct ContentView: View {
+    @ObservedObject private(set) var viewModel: ViewModel
 
-    ```Swift
-    import SwiftUI
-    import Shared
-    
-    struct ContentView: View {
-        @ObservedObject private(set) var viewModel: ViewModel
-    
-        var body: some View {
-            ListView(phrases: viewModel.greetings)
-                .task { await self.viewModel.startObserving() }
+    var body: some View {
+        ListView(phrases: viewModel.greetings)
+            .task { await self.viewModel.startObserving() }
+    }
+}
+
+extension ContentView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        @Published var greetings: Array<String> = []
+        
+        func startObserving() {
+            // ...
         }
     }
-    
-    extension ContentView {
-        @MainActor
-        class ViewModel: ObservableObject {
-            @Published var greetings: Array<String> = []
-            
-            func startObserving() {
-                // ...
-            }
+}
+
+struct ListView: View {
+    let phrases: Array<String>
+
+    var body: some View {
+        List(phrases, id: \.self) {
+            Text($0)
         }
     }
-    
-    struct ListView: View {
-        let phrases: Array<String>
-    
-        var body: some View {
-            List(phrases, id: \.self) {
-                Text($0)
-            }
-        }
-    }
-    ```
+}
+```
 
-   * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
-   * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-     SwiftUI connects the ViewModel (`ContentView.ViewModel`) with the view (`ContentView`).
-   * `ContentView.ViewModel` is declared as an `ObservableObject`.
-   * The `@Published` wrapper is used for the `greetings` property.
-   * The `@ObservedObject` property wrapper is used to subscribe to the ViewModel.
+* `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
+* `ViewModel` has a `greetings` property that is an array of `String` phrases.
+  SwiftUI connects the ViewModel (`ContentView.ViewModel`) with the view (`ContentView`).
+* `ContentView.ViewModel` is declared as an `ObservableObject`.
+* The `@Published` wrapper is used for the `greetings` property.
+* The `@ObservedObject` property wrapper is used to subscribe to the ViewModel.
 
-Now the ViewModel will emit signals whenever this property changes.
+This ViewModel will emit signals whenever this property changes.
+Now you need to implement the `startObserving()` function to consume flows.
 
-#### Choose a library to consume flows from iOS
+### Choose a library to consume flows from iOS
 
-<!-- when adding SKIE back to the tutorial, add it here as well -->
+In this tutorial, you can use [SKIE](https://skie.touchlab.co/) the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library
+to help you work with flows in iOS.
+Both are open-source solutions that support cancellation and generics with flows,
+which the Kotlin/Native compiler doesn't yet provide by default:
 
-In this tutorial, you will use the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library to help you work with flows in iOS.
-It is an open-source solution that supports cancellation and generics with flows,
-which the Kotlin/Native compiler doesn't provide by default yet.
-
-<!-- Both are open-source solutions
-that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default. -->
-
-<!-- The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
+* The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
 Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
-including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects. -->
-
-The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
+including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
+* The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
 wrappers.
-KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
-Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS projects.
+  KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
+  Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS projects.
 
-#### Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
+### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
 >
 {style="note"}
 
-1. In the `build.gradle.kts` file of the _whole project_,
+1. In the root `build.gradle.kts` file of your project (**not** the `shared/build.gradle.kts` file),
    add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
 
     ```kotlin
@@ -527,7 +531,7 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
     }
     ```
 
-2. In the _shared_ `build.gradle.kts` file, configure the KMP-NativeCoroutines plugin:
+2. In the `shared/build.gradle.kts` file, add the KMP-NativeCoroutines plugin:
 
     ```kotlin
     plugins {
@@ -537,7 +541,7 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
     }
     ```
 
-3. In the _shared_ `build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
+3. Also in the `shared/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
     kotlin {
@@ -553,7 +557,7 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
 
 4. Click the **Sync Gradle Changes** button to synchronize the Gradle files.
 
-##### Mark the flow with KMP-NativeCoroutines
+#### Mark the flow with KMP-NativeCoroutines
 
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
 2. Add the `@NativeCoroutines` annotation to the `greet()` function. This will ensure that the plugin generates the right
@@ -572,7 +576,7 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
     }
     ```
 
-##### Import the library using SPM in XCode
+#### Import the library using SPM in XCode
 
 1. Go to **File** | **Open Project in Xcode**.
 2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
@@ -584,15 +588,15 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `%kmpncVersion%` version in the adjacent field.
-4. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
-5. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
+4. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `%kmpncVersion%` version in the adjacent field.
+5. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
+6. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 
 This should install the parts of the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
-##### Consume the flow using the KMP-NativeCoroutines library
+#### Consume the flow using the KMP-NativeCoroutines library
 
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using KMP-NativeCoroutine's
    `asyncSequence()` function for the `Greeting().greet()` function:
@@ -641,20 +645,12 @@ every time the flow emits a value.
     }
     ```
 
-3. Rerun the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
-
-   ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
-
-<!-- sample needs to be updated
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
+> You can find the final state of the project with KMP-NativeCoroutines in the `main` branch of our
+> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/).
 >
 {style="tip"}
 
--->
-
-<!--
-#### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
+### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
@@ -664,7 +660,7 @@ plugins {
 }
 ```
 
-##### Consume the flow using SKIE
+#### Consume the flow using SKIE
 
 You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
 property every time the flow emits a value.
@@ -679,7 +675,7 @@ extension ContentView {
     @MainActor
     class ViewModel: ObservableObject {
         @Published var greetings: [String] = []
-        
+
         func startObserving() async {
             for await phrase in Greeting().greet() {
                 self.greetings.append(phrase)
@@ -689,16 +685,29 @@ extension ContentView {
 }
 ```
 
-Rerun the **iosApp** configuration to make sure your app's logic is synced:
-
-![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
--->
-
-<!-- sample needs to be updated
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
+> You can find the final state of the project in the `main_skie` branch in our
+> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie).
 >
 {style="tip"}
--->
+
+### Consume the ViewModel and run the iOS app
+
+In `iosApp/iOSApp.swift`, update the entry point for your app:
+
+```swift
+@main
+struct iOSApp: App {
+   var body: some Scene {
+       WindowGroup {
+           ContentView(viewModel: ContentView.ViewModel())
+       }
+   }
+}
+```
+
+Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
+
+![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
 
 ## Next step
 
