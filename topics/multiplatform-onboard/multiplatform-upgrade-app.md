@@ -497,28 +497,23 @@ struct ListView: View {
 This ViewModel will emit signals whenever this property changes.
 Now you need to implement the `startObserving()` function to consume flows.
 
-### Consume flows from iOS
-<!-- #### Choose a library to consume flows from iOS-->
-<!-- when adding SKIE back to the tutorial, add it here as well and change the title -->
+### Choose a library to consume flows from iOS
 
-In this tutorial, you will use the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library to help you work with flows in iOS.
-It is an open-source solution that supports cancellation and generics with flows,
-which the Kotlin/Native compiler doesn't provide by default yet.
+In this tutorial, you can use [SKIE](https://skie.touchlab.co/) the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library
+to help you work with flows in iOS.
+Both are open-source solutions that support cancellation and generics with flows,
+which the Kotlin/Native compiler doesn't yet provide by default:
 
-<!-- Both are open-source solutions
-that support cancellation and generics with flows, which the Kotlin/Native compiler doesn't yet provide by default. -->
-
-<!-- The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
+* The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
 Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
-including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects. -->
-
-The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
+including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
+* The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
 wrappers.
-KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
-Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS projects.
+  KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
+  Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS projects.
 
-### Configure KMP-NativeCoroutines <!-- {initial-collapse-state="collapsed" collapsible="true"} -->
+### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
 > Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
@@ -593,9 +588,9 @@ Using KMP-NativeCoroutines requires adding an SPM or CocoaPod dependency in iOS 
 
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
-3. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `%kmpncVersion%` version in the adjacent field.
-4. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
-5. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
+4. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `%kmpncVersion%` version in the adjacent field.
+5. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
+6. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 
@@ -650,16 +645,12 @@ every time the flow emits a value.
     }
     ```
 
-<!-- sample needs to be updated
-
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5).
+> You can find the final state of the project with KMP-NativeCoroutines in the `main` branch of our
+> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/).
 >
 {style="tip"}
 
--->
-
-<!--
-#### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
+### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
@@ -669,7 +660,7 @@ plugins {
 }
 ```
 
-##### Consume the flow using SKIE
+#### Consume the flow using SKIE
 
 You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
 property every time the flow emits a value.
@@ -684,7 +675,7 @@ extension ContentView {
     @MainActor
     class ViewModel: ObservableObject {
         @Published var greetings: [String] = []
-        
+
         func startObserving() async {
             for await phrase in Greeting().greet() {
                 self.greetings.append(phrase)
@@ -694,16 +685,10 @@ extension ContentView {
 }
 ```
 
-Rerun the **iosApp** configuration to make sure your app's logic is synced:
-
-![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
--->
-
-<!-- sample needs to be updated
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step5skie).
+> You can find the final state of the project in the `main_skie` branch in our
+> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie).
 >
 {style="tip"}
--->
 
 ### Consume the ViewModel and run the iOS app
 
