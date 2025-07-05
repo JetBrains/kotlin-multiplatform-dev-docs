@@ -312,7 +312,7 @@ coroutineScope.launch {
 
 Store custom fonts in the `composeResources/font` directory as `*.ttf` or `*.otf` files.
 
-To load a font as a `Font` type, use the `Font()` function:
+To load a font as a `Font` type, use the `Font()` composable function:
 
 ```kotlin
 @Composable
@@ -326,11 +326,15 @@ fun Font(
 For example:
 
 ```kotlin
-val fontAwesome = FontFamily(Font(Res.font.font_awesome))
+val fontAwesome
+    @Composable get() = FontFamily(Font(Res.font.font_awesome))
 ```
-
 To support special characters like emojis or Arabic script in web targets, you need to add the corresponding fonts
 to resources and [preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
+
+> Because the `Font` function is a composable, also the `TextStyle` using it and `Typography` need to be composables.
+>
+{style="note"}
 
 ### Raw files
 
