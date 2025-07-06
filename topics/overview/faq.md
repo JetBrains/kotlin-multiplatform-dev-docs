@@ -122,7 +122,7 @@ For details, see the [overview of the frameworks' interrelation](compose-multipl
 ### Between which platforms can I share my UI?
 
 We want you to have the option to share your UI between any combination of popular platforms – Android, iOS, desktop
-(Linux, macOS, Windows), and web (based on Wasm). However, Compose Multiplatform is only Stable for Android
+(Linux, macOS, Windows), and web (based on Wasm). Compose Multiplatform is only Stable for Android, iOS,
 and desktop at the moment. For more details, see [Supported platforms](supported-platforms.md).
 
 ### Can I use Compose Multiplatform in production?
