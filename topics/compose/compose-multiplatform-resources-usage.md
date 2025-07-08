@@ -332,7 +332,7 @@ val fontAwesome
 To support special characters like emojis or Arabic script in web targets, you need to add the corresponding fonts
 to resources and [preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
 
-> Because the `Font` function is a composable, also the `TextStyle` using it and `Typography` need to be composables.
+> When `Font` is a composable, make sure its dependent components, such as `TextStyle` and `Typography`, are also composable.
 >
 {style="note"}
 
