@@ -312,7 +312,7 @@ coroutineScope.launch {
 
 Store custom fonts in the `composeResources/font` directory as `*.ttf` or `*.otf` files.
 
-To load a font as a `Font` type, use the `Font()` function:
+To load a font as a `Font` type, use the `Font()` composable function:
 
 ```kotlin
 @Composable
@@ -326,8 +326,40 @@ fun Font(
 For example:
 
 ```kotlin
-val fontAwesome = FontFamily(Font(Res.font.font_awesome))
+@Composable
+private fun InterTypography(): Typography {
+    val interFont = FontFamily(
+        Font(Res.font.Inter_24pt_Regular, FontWeight.Normal),
+        Font(Res.font.Inter_24pt_SemiBold, FontWeight.Bold),
+    )
+
+    return with(MaterialTheme.typography) {
+        copy(
+            displayLarge = displayLarge.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            displayMedium = displayMedium.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            displaySmall = displaySmall.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            headlineLarge = headlineLarge.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            headlineMedium = headlineMedium.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            headlineSmall = headlineSmall.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            titleLarge = titleLarge.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            titleMedium = titleMedium.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            titleSmall = titleSmall.copy(fontFamily = interFont, fontWeight = FontWeight.Bold),
+            labelLarge = labelLarge.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+            labelMedium = labelMedium.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+            labelSmall = labelSmall.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+            bodyLarge = bodyLarge.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+            bodyMedium = bodyMedium.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+            bodySmall = bodySmall.copy(fontFamily = interFont, fontWeight = FontWeight.Normal),
+        )
+    }
+}
 ```
+
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="@Composable private fun InterTypography(): Typography { val interFont = FontFamily("}
+
+> When `Font` is a composable, make sure its dependent components, such as `TextStyle` and `Typography`, are also composable.
+>
+{style="note"}
 
 To support special characters like emojis or Arabic script in web targets, you need to add the corresponding fonts
 to resources and [preload fallback fonts](#preload-resources-using-the-compose-multiplatform-preload-api).
