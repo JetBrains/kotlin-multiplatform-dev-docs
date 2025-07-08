@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymap id="my_keymap">
+    <layouts>
+        <layout name="Windows" platform="PC"/>
+        <layout name="macOS" platform="MAC"/>
+        <layout name="Linux" platform="PC"/>
+    </layouts>
+    <actions>
+        <action id="$Save">
+            <description>Copy</description>
+            <shortcut layout="Windows">Ctrl+S</shortcut>
+            <shortcut layout="macOS">⌘ S</shortcut>
+            <shortcut layout="Linux">Ctrl+S</shortcut>
+        </action>
+    </actions>
+</keymap>
