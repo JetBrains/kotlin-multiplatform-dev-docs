@@ -204,7 +204,7 @@ This is necessary for reusing the code for both Android and iOS.
 
    ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
 
-2. When IntelliJ IDEA asks what you'd like to do, select to move the package and then approve the refactoring.
+2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
 
    ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
 
