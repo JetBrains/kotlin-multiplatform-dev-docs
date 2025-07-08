@@ -4,12 +4,12 @@
 <secondary-label ref="Android Studio"/>
 
 <tldr>
-<p>This tutorial uses Android Studio, but you can also follow it in IntelliJ IDEA – when <a href="quickstart.md">set up properly</a>>,
-   IDEs share the same core functionality and Kotlin Multiplatform support.</p>
+<p>This tutorial uses Android Studio, but you can also follow it in IntelliJ IDEA. When <a href="quickstart.md">set up properly</a>,
+   both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
 This tutorial shows how to make an existing Android application cross-platform so that it works both on Android and iOS.
-You'll be able to write code for both Android and iOS at once, in the same place.
+You'll be able to write code for both Android and iOS all at once, in the same place.
 
 This tutorial uses a [sample Android application](https://github.com/Kotlin/kmp-integration-sample) with a single screen
 for entering a username and password. The credentials are validated and saved to an in-memory database.
@@ -184,7 +184,7 @@ there, and make this code cross-platform.
         // ...
     }
     ```
-5. Follow IDE's suggestions to import missing classes.
+5. Follow the IDE's suggestions to import missing classes.
 6. In the toolbar, click the `app` dropdown, then click the debug icon:
 
    ![App from list to debug](app-list-android.png){width="300"}
@@ -335,7 +335,7 @@ Now, Kotlin will use platform-specific implementations of UUID for Android and i
 
 ### Run your cross-platform application on Android
 
-Run your cross-platform application for Android to make sure it works as before.
+Run your cross-platform application for Android to make sure it works as it did before.
 
 ![Android login application](android-login.png){width=300}
 
