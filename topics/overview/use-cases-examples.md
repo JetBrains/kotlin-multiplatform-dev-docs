@@ -27,7 +27,7 @@ For companies that want to share both logic and UI, Kotlin Multiplatform with Co
 * [Instabee](https://www.youtube.com/watch?v=YsQ-2lQYQ8M) migrated their Android application logic and UI to Kotlin Multiplatform with Compose Multiplatform. Thanks to that, they were able to release their iOS application in a short period of time by leveraging the Android codebase.
 * [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u) develops a habit-tracking and productivity app. Their iOS app is built with Compose Multiplatform, sharing 96% of its code with Android.
 
-> If you’re choosing between [Kotlin Multiplatform and Flutter](../journal/kotlin-multiplatform-flutter.md), you can check our overview of both technologies.
+> If you’re choosing between [Kotlin Multiplatform and Flutter](https://www.jetbrains.com/help/kotlin-multiplatform-dev/kotlin-multiplatform-flutter.html), you can check our overview of both technologies.
 > 
 {style="tip"}
 
