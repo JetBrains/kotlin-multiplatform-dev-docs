@@ -62,7 +62,7 @@ it and call `runBlocking` from a source set that is shared between the JVM and n
 
 ## Connect platform-specific libraries
 
-To share more native code without being limited by platform-specific dependencies, use [platform libraries](https://kotlinlang.org/docs/native-platform-libs.hml),
+To share more native code without being limited by platform-specific dependencies, use [platform libraries](https://kotlinlang.org/docs/native-platform-libs.html),
 like Foundation, UIKit, and POSIX. These libraries are shipped with Kotlin/Native and available in shared source sets by default.
 
 In addition, if you use the [Kotlin CocoaPods Gradle](multiplatform-cocoapods-overview.md) plugin in your projects,
