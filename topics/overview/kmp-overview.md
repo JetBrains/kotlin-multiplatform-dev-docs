@@ -17,8 +17,8 @@ You can learn KMP fundamentals in a way that suits you:
 
 * To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
   You'll set up your environment and run a sample application on different platforms.
-  * To create an app that shares most of its code between platforms,
-    see the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
+  * You can create an app that shares most of its code between platforms
+    following the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
   * To see how an Android app can be turned into a multiplatform app,
     check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
   * To see how you can share some code without sharing UI implementation,
