@@ -45,7 +45,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 
    > To learn more about how to use a version catalog to centrally manage dependencies across your project, see our [Gradle best practices](https://kotlinlang.org/gradle-best-practices.html).
 
-2. In the `build.gradle.kts` of your parent project (`ComposeDemo/build.gradle.kts`), add the following code to your `plugins{}` block:
+2. In the `build.gradle.kts` of your parent project (`ComposeDemo/build.gradle.kts`), add the following code to your `plugins {}` block:
    ```kotlin
    plugins {
        alias(libs.plugins.composeHotReload) apply false
@@ -53,7 +53,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    ```
    This prevents the Compose Hot Reload plugin from being loaded multiple times in each of your subprojects.
 
-3. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins{}` block:
+3. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins {}` block:
    ```kotlin
    plugins { 
        alias(libs.plugins.composeHotReload)
@@ -114,7 +114,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 
     ![First Compose Hot Reload on desktop app](compose-hot-reload-hello.png){width=500}
 
-5. Update the string returned from the `greet()` function and see the desktop app update automatically.
+5. Update the string returned from the `greet()` function, then save the file to see the desktop app update automatically.
 
    ![Compose Hot Reload](compose-hot-reload.gif){width=500}
 
