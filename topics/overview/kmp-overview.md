@@ -7,19 +7,17 @@ while integrating with native code where needed.
 
 Look at how companies and developers already enjoy the benefits of shared Kotlin code:
 
-* Our [case studies page](case-studies.topic) lists companies who successfully adopted KMP in their codebase.
-* There is a wealth of sample apps in our [curated sample list](multiplatform-samples.md),
-  as well as in the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample)
-  topic.
-* You can search for specific multiplatform libraries among several thousands already indexed on [klibs.io](https://klibs.io/).
+* Learn how companies have successfully adopted KMP in their codebases on our [case studies page](case-studies.topic).
+* Check out a wide range of sample apps in our [curated sample list](multiplatform-samples.md) and the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic.
+* Search for specific multiplatform libraries among the thousands already indexed on [klibs.io](https://klibs.io/).
 
-## Learning the basics
+## Learn the basics
 
 You can learn KMP fundamentals in a way that suits you: 
 
 * To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
   You'll set up your environment and run a sample application on different platforms.
-  * To try creating an app that shares most of the code between platforms,
+  * To create an app that shares most of its code between platforms,
     see the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
   * To see how an Android app can be turned into a multiplatform app,
     check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
@@ -35,7 +33,7 @@ You can learn KMP fundamentals in a way that suits you:
   * Read about [publishing a multiplatform app](multiplatform-publish-apps.md)
     or a [multiplatform library](multiplatform-publish-lib-setup.md).
 
-## Adopting Kotlin Multiplatform
+## Adopt Kotlin Multiplatform
 
 Adopting a cross-platform framework in a team can be a challenge.
 To learn about benefits and solutions to potential problems, take a look at our high-level overviews
