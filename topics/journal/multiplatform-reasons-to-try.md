@@ -13,8 +13,8 @@ Kotlin Multiplatform in their existing or new projects and why KMP continues to 
 
 ## Why you should try Kotlin Multiplatform in your projects
 
-Whether you're seeking efficiency gains or eager to explore new technologies,
-you will probably find this article helpful.
+Whether you'd like to make your development more efficient or explore new technologies,
+you will find this article helpful.
 It explains some of the practical benefits that Kotlin Multiplatform brings, 
 from its ability to streamline development efforts to its extensive platform support and robust tooling ecosystem, 
 along with case studies from real companies.
