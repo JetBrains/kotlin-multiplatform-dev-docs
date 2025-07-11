@@ -23,6 +23,12 @@ you can use them in future projects.
 The updated app will retrieve data over the internet from the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs)
 and display the date of the last successful launch of a SpaceX rocket.
 
+> You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
+> * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
+> * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
+>
+{style="note"}
+
 ## Add more dependencies
 
 You'll need to add the following multiplatform libraries in your project:
@@ -645,11 +651,6 @@ every time the flow emits a value.
     }
     ```
 
-> You can find the final state of the project with KMP-NativeCoroutines in the `main` branch of our
-> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/).
->
-{style="tip"}
-
 ### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
 To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
@@ -685,11 +686,6 @@ extension ContentView {
 }
 ```
 
-> You can find the final state of the project in the `main_skie` branch in our
-> [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie).
->
-{style="tip"}
-
 ### Consume the ViewModel and run the iOS app
 
 In `iosApp/iOSApp.swift`, update the entry point for your app:
@@ -708,6 +704,12 @@ struct iOSApp: App {
 Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
 
 ![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+
+> You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
+> * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
+> * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
+>
+{style="note"}
 
 ## Next step
 
