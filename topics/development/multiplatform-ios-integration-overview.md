@@ -26,9 +26,8 @@ project. The script is integrated into the build phase of your project's build s
 This integration method can work for you if you do **not** import CocoaPods dependencies in your Kotlin Multiplatform
 project.
 
-If you create a project in Android Studio, choose the **Regular framework** option to have this setup generated
-automatically. If you use the [Kotlin Multiplatform web wizard](https://kmp.jetbrains.com/), direct integration
-is applied by default.
+If you use the [Kotlin Multiplatform IDE plugin]https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+direct integration is applied by default.
 
 For more information, see [Direct integration](multiplatform-direct-integration.md).
 
