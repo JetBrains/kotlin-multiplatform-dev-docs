@@ -25,6 +25,10 @@ modifiers, and layouts.
 At each stage, you can run the application on all three platforms (iOS, Android, and desktop), or you can focus on the
 specific platforms that best suit your needs.
 
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
+>
+{style="note"}
+
 ## Lay the foundation
 
 To get started, implement a new `App` composable:
@@ -511,11 +515,10 @@ code to load and display them:
     </tab>
 </tabs>
 
-<!--
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage4).
+
+> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
-{style="tip"}
--->
+{style="note"}
 
 ## What's next
 
