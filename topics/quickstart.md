@@ -1,5 +1,7 @@
 [//]: # (title: Kotlin Multiplatform quickstart)
 
+<web-summary>JetBrains provides official Kotlin IDE support for IntelliJ IDEA and Android Studio.</web-summary>
+
 With this tutorial, you can get a simple Kotlin Multiplatform app up and running.
 
 ## Set up the environment
