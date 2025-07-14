@@ -269,6 +269,8 @@ Common issues with Java:
 * If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
   select **Settings** | **Build, Execution, Deployment** | **Build Tools** | **Gradle**.
 
+  - if 'desktopRun' is not recognised, try `.\gradlew :composeApp:run` from the terminal (in the project directory) _-- tested on windows_
+
 ### Android tools
 
 Same as for JDK, if you have trouble launching Android tools like `adb`,
