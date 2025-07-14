@@ -90,7 +90,7 @@ To enable support for multiplatform resources in `androidLibrary`, update your c
 ```
 kotlin {
   androidLibrary {
-    experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+    androidResources.enable = true
   }
 }
 ```

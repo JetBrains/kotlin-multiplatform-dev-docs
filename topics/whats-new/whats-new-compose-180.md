@@ -469,9 +469,9 @@ If you are using the `androidLibrary` target, enable resources in your configura
 
 ```
 kotlin {
-  androidLibrary {
-    experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
-  }
+    androidLibrary {
+        androidResources.enable = true
+    }
 }
 ```
 
