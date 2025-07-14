@@ -88,7 +88,7 @@ When the value of the state changes, any composables that observe it are re-invo
 produce to be redrawn. This is called a _recomposition_.
 
 In your application, the only place where the state is changed is in the click event of the button. The `onClick` event
-handler flips the value of the `showContent` property. As a result, the image gets shown or hidden
+handler flips the value of the `showContent` property. As a result, the image gets shown or hidden along with a `Greeting().greet()` call
 because the parent `AnimatedVisibility` composable observes `showContent`.
 
 ## Launching UI on different platforms
