@@ -99,7 +99,7 @@ To get started, implement a new `App` composable:
     > 2. Select **Run 'main [desktop]' with Compose Hot Reload (Alpha)**.
     > ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
     > 
-    > To see the app automatically update, save any modified files (<shortcut key="$Save"/>).
+    > To see the app automatically update, save any modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>).
     > 
     > Compose Hot Reload is currently in [Alpha](https://kotlinlang.org/components-stability.html#stability-levels-explained) so its functionality is subject to change.
     >

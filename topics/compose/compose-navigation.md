@@ -222,7 +222,7 @@ For details on creating, registering, and handling deep links, see [](compose-na
 ### Back gesture
 
 The multiplatform Navigation library translates back gestures on each platform into navigating to the previous screen
-(for example, on iOS this is a simple back swipe, and on desktop, the **Esc** key).
+(for example, on iOS this is a simple back swipe, and on desktop, the <shortcut>Esc</shortcut> key).
 
 By default, on iOS the back gesture triggers native-like animation of the swipe transition to another screen.
 If you customize the NavHost animation with `enterTransition` or `exitTransition` arguments, the default animation is not

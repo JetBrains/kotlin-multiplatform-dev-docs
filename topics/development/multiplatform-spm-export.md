@@ -187,11 +187,11 @@ project or create a new project. To add the package dependency:
 
    ![Specify repo with the package file](multiplatform-spm-url.png)
 
-3. Press the **Add package** button, then select products and corresponding targets for the package.
+3. Click the **Add package** button, then select products and corresponding targets for the package.
 
-   > If you're making a Swift package, the dialog will be different. In this case, press the **Copy package** button.
-   > This will put a `.package` line in your clipboard. Paste this line into the [Package.Dependency](https://developer.apple.com/documentation/packagedescription/package/dependency)
-   > block of your own `Package.swift` file, and add the necessary product to the appropriate `Target.Dependency` block.
+   > If you're making a Swift package, the dialog is different. In this case, click the **Copy package** button.
+   > This puts a `.package` line in your clipboard. Paste this line into the [Package.Dependency](https://developer.apple.com/documentation/packagedescription/package/dependency)
+   > block of your own `Package.swift` file and add the necessary product to the appropriate `Target.Dependency` block.
    >
    {style="tip"}
 

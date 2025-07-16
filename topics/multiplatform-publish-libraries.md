@@ -110,7 +110,7 @@ brew install gpg
     ```
 
 2. Choose the recommended defaults for the type of key to be created.
-   You can leave the selections empty and press **Enter** to accept the default values.
+   You can leave the selections empty and press <shortcut>Enter</shortcut> to accept the default values.
 
     ```text
     Please select what kind of key you want:

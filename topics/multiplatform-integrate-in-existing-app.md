@@ -511,7 +511,7 @@ and iOS.
 
 1. Change the validation logic for a user's password: "password" shouldn't be a valid option.
     To do that, update the `checkPassword()` function of the `LoginDataValidator` class
-    (to find it quickly, press **Shift** twice, paste the name of the class, and switch to the **Classes** tab):
+    (to find it quickly, press <shortcut>Shift</shortcut> twice, paste the name of the class, and switch to the **Classes** tab):
 
    ```kotlin
    package com.jetbrains.simplelogin.shared.data
