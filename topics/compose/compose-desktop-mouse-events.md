@@ -223,7 +223,7 @@ You can configure each `onClick` to target specific pointer events using `matche
 * `keyboardModifiers` allows you to filter pointer events that have specified key pressed.
 
 You can also create a chain of multiple `onClick` modifiers to handle different clicks with different conditions of the matcher and keyboard modifiers. 
-Unlike `clickable`, `onClick` doesn't have default `Modifier.indication` and `Modifier.semantics`, and it doesn't trigger a click event when you press `Enter`. If necessary, add these modifiers separately. 
+Unlike `clickable`, `onClick` doesn't have default `Modifier.indication` and `Modifier.semantics`, and it doesn't trigger a click event when you press <shortcut>Enter</shortcut>. If necessary, add these modifiers separately. 
 You should declare the most generic (with the least number of conditions) `onClick` handlers before others to ensure correct propagation of events.
 
 ```kotlin
@@ -337,7 +337,7 @@ With `Modifier.onDrag`, you can specify the pointer that should trigger the drag
 Similar to `onClick`, you can chain together many `onDrag` modifiers.
 
 You can also check the state of keyboard modifiers via `LocalWindowInfo.current.keyboardModifier` for cases when keys can alter the behavior of the drag. 
-For example, when you move an item with a simple drag, and copy/paste an item with a drag and `Ctrl` pressed.
+For example, to move an item with a simple drag and copy/paste an item with a drag while <shortcut>Ctrl</shortcut> is pressed.
 
 The following code sample demonstrates how to handle drag events triggered by left and right mouse buttons, and with the keyboard involved:
 

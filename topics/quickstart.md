@@ -169,7 +169,7 @@ click the preflight checks icon on the right sidebar or the bottom bar ![Preflig
 In this tool window, you can see the messages related to these checks, rerun them, or change their settings. 
 
 Preflight checks commands are also available in the **Search Everywhere** dialog.
-Press double **Shift** and search for commands containing the word "preflight":
+Press double <shortcut>Shift</shortcut> and search for commands containing the word "preflight":
 
 ![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png)
 

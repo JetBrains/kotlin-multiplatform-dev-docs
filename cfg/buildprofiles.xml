@@ -45,10 +45,4 @@
 		<social type="rss" href="https://kotl.in/gamt3a">Kotlin Multiplatform Slack</social>
 	</footer>
 	<build-profile instance="mpd"/>
-	<shortcuts>
-		<src>keymap.xml</src>
-		<layout name="Windows" display-name="Windows"/>
-		<layout name="macOS" display-name="macOS"/>
-		<layout name="Linux" display-name="Linux"/>
-	</shortcuts>
 </buildprofiles>
