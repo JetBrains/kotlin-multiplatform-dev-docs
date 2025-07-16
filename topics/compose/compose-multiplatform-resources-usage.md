@@ -444,7 +444,7 @@ Image(painterResource(Res.allDrawableResources["compose_multiplatform"]!!), null
 
 ### Compose Multiplatform resources as Android assets
 
-Starting with Compose Multiplatform %composeVersion%, all multiplatform resources are packed into Android assets.
+Starting with Compose Multiplatform 1.7.0, all multiplatform resources are packed into Android assets.
 This enables Android Studio to generate previews for Compose Multiplatform composables in Android source sets.
 
 > Android Studio previews are available only for composables in an Android source set.
@@ -546,7 +546,7 @@ format suitable for rendering, such as `FontResource` and `DrawableResource`. Wh
 for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience, 
 Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
 
-Compose Multiplatform %composeVersion% introduces an experimental API for preloading font and image resources on 
+Compose Multiplatform 1.8.0 introduced an experimental API for preloading font and image resources on 
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
 Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
@@ -649,7 +649,7 @@ While you can use Java resources with Compose Multiplatform, they don't benefit 
 the framework: generated accessors, multimodule support, localization, and so on.
 Consider transitioning fully to the multiplatform resource library to unlock that potential.
 
-With Compose Multiplatform %composeVersion%, the resources API available in the `compose.ui` package is deprecated.
+With Compose Multiplatform 1.7.0, the resources API available in the `compose.ui` package is deprecated.
 If you still need to work with Java resources, copy the following implementation to your project to ensure that your code
 works after you upgrade to Compose Multiplatform 1.7.0 or above:
 

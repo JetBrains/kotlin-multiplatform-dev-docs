@@ -34,7 +34,7 @@ module that uses the `org.jetbrains.compose` plugin:
     [versions]
     # ...
     kotlin = "%kotlinVersion%"
-    compose-plugin = "%composeVersion%"
+    compose-plugin = "%org.jetbrains.compose%"
  
     [plugins]
     # ...

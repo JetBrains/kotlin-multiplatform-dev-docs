@@ -73,7 +73,7 @@ implementation uses many platform specifics and it takes time to write other imp
 Normally, parts of the API like this are ported to Compose Multiplatform after they are introduced in Jetpack Compose
 for the Android target.
 
-In Compose Multiplatform %composeVersion%, the following parts of the API are **not** available in `commonMain`:
+In Compose Multiplatform %org.jetbrains.compose%, the following parts of the API are **not** available in `commonMain`:
 
 * [`Modifier.imeNestedScroll()`](https://github.com/androidx/androidx/blob/0e8dd4edd03f6e802303e5325ad11e89292c26c3/compose/foundation/foundation-layout/src/androidMain/kotlin/androidx/compose/foundation/layout/WindowInsetsConnection.android.kt)
   function

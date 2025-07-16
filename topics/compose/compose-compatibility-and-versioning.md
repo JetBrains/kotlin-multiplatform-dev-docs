@@ -5,7 +5,7 @@ about Compose Multiplatform releases, Compose release cycles, and component comp
 
 ## Supported platforms
 
-Compose Multiplatform %composeVersion% supports the following platforms:
+Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 
 | Platform | Minimum version                                                                                        |
 |----------|--------------------------------------------------------------------------------------------------------|

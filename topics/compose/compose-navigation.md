@@ -57,15 +57,15 @@ kotlin {
         // ...
         commonMain.dependencies {
             // ...
-            implementation("org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%")
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:%org.jetbrains.androidx.navigation%")
         }
         // ...
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%composeNavigationVersion%"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%org.jetbrains.androidx.navigation%"}
 
-> Compose Multiplatform %composeVersion% requires Navigation library version %composeNavigationVersion%.
+> Compose Multiplatform %org.jetbrains.compose% requires Navigation library version %org.jetbrains.androidx.navigation%.
 >
 {style="note"}
 

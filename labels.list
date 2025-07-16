@@ -3,7 +3,7 @@
 <labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/labels.xsd">
 
-    <primary-label id="EAP" short-name="EAP" name="Compose Multiplatform %composeEapVersion%">
+    <primary-label id="EAP" short-name="EAP" name="Compose Multiplatform %org.jetbrains.compose-eap%">
         This functionality is available only in the EAP version.
     </primary-label>
 
