@@ -90,8 +90,8 @@ Create a common test source set and add the necessary dependencies:
             androidTarget {
                 // ...
                 dependencies { 
-                    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%jetpackComposeVersion%")
-                    debugImplementation("androidx.compose.ui:ui-test-manifest:%jetpackComposeVersion%")
+                    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%androidx.compose%")
+                    debugImplementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
                 }
             }
         }

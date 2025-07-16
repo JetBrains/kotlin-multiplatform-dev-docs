@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform %composeEapVersion%)
+[//]: # (title: What's new in Compose Multiplatform %org.jetbrains.compose-eap%)
 
 Here are the highlights for this EAP feature release:
 
@@ -13,15 +13,19 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version %composeEapVersion%. Based on Jetpack Compose libraries:
-   * [Runtime %composeEapVersion%](https://developer.android.com/jetpack/androidx/releases/compose-runtime#%composeEapVersion%)
-   * [UI %composeEapVersion%](https://developer.android.com/jetpack/androidx/releases/compose-ui#%composeEapVersion%)
-   * [Foundation %composeEapVersion%](https://developer.android.com/jetpack/androidx/releases/compose-foundation#%composeEapVersion%)
-   * [Material %composeEapVersion%](https://developer.android.com/jetpack/androidx/releases/compose-material#%composeEapVersion%)
-   * [Material3 %material3EapVersion%](https://developer.android.com/jetpack/androidx/releases/compose-material3#%material3EapVersion%)
+* Gradle Plugin `org.jetbrains.compose`, version %org.jetbrains.compose-eap%. Based on Jetpack Compose libraries:
+   * [Runtime 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.0)
+   * [UI 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.0)
+   * [Foundation 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0)
+   * [Material 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0)
+   * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
 * Graphics-Shapes library `org.jetbrains.androidx.graphics:graphics-shapes:1.0.0-alpha09`. Based on [Jetpack Graphics-Shapes 1.0.1](https://developer.android.com/jetpack/androidx/releases/graphics#graphics-shapes-#1.0.1)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.1`. Based on [Jetpack Lifecycle 2.9.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.0)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta03`. Based on [Jetpack Navigation 2.9.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.0)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.1`. Based on [Jetpack Lifecycle 2.9.1](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.1)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta04`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
+* Material3 library `org.jetbrains.compose.material3:1.9.0-alpha04`. Based on [Jetpack Material3 1.4.0-alpha17](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-alpha17)
+  
+  The stable version of the common Material3 library is based on Jetpack Compose Material3 1.3.2, but thanks to
+  [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3 you can choose a newer EAP version for your project.
 * Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha03`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha07](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha07)
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.1`. Based on [Jetpack Savedstate 1.3.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.0)
 * WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-alpha08`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
@@ -40,7 +44,7 @@ To use the Expressive theme:
 1. Include the latest version of Material 3:
  
     ```kotlin
-    implementation("org.jetbrains.compose.material3:material3:%material3EapVersion%")
+    implementation("org.jetbrains.compose.material3:material3:%org.jetbrains.compose.material3%")
     ```
 
 2. Use the `MaterialExpressiveTheme()` function with the `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` opt-in to 
@@ -54,7 +58,7 @@ will then automatically use the values you’ve provided.
 
 ### Customizable shadows
 
-In Compose Multiplatform %composeEapVersion%, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
+In Compose Multiplatform %org.jetbrains.compose-eap%, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
 shadow primitives and APIs. In addition to the previously supported `shadow` modifier, you can now use the new API 
 to create more advanced and flexible shadow effects.
 
@@ -220,7 +224,7 @@ Note that you can only use this function with the `ComposeViewport` entry point,
 
 ### Context menus
 
-Compose Multiplatform %composeEapVersion% brings the following updates for web context menus:
+Compose Multiplatform %org.jetbrains.compose-eap% brings the following updates for web context menus:
 
 * Text context menu: The standard Compose text context menu is now fully supported for both mobile and desktop modes.
 * New customizable context menu: We’ve adopted Jetpack Compose’s new API for custom web context menus.
@@ -266,15 +270,15 @@ LaunchedEffect(Unit) {
 
 ## Gradle plugin
 
-### Decoupled Material 3 versioning
+### Decoupled Material3 versioning
 
-The versions and stability levels of the Material 3 library and Compose Multiplatform Gradle plugin no 
+The versions and stability levels of the Material3 library and Compose Multiplatform Gradle plugin no 
 longer have to be aligned. The `compose.material3` DSL alias now references Material3 1.8.2 from the previous 
 stable release of Jetpack Compose.
 
-If you want to use a newer Material 3 version with Expressive design support, replace the Material 3 dependency 
+If you want to use a newer Material3 version with Expressive design support, replace the Material 3 dependency 
 in `build.gradle.kts` with the following:
 
 ```kotlin
-implementation("org.jetbrains.compose.material3:material3:%material3EapVersion%")
+implementation("org.jetbrains.compose.material3:material3:%org.jetbrains.compose.material3%")
 ```

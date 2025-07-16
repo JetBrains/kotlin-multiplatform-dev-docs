@@ -17,13 +17,13 @@ kotlin {
         // ...
         commonMain.dependencies {
             // ...
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%org.jetbrains.androidx.lifecycle%")
         }
         // ...
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%composeLifecycleVersion%"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%org.jetbrains.androidx.lifecycle%"}
 
 ## States and events
 

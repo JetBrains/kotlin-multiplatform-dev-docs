@@ -28,7 +28,7 @@ To use `WindowSizeClass` classes, add the `material3.adaptive` dependency to the
 
 ```kotlin
 commonMain.dependencies {
-    implementation("org.jetbrains.compose.material3.adaptive:adaptive:%material3adaptiveVersion%")
+    implementation("org.jetbrains.compose.material3.adaptive:adaptive:%org.jetbrains.compose.material3.adaptive%")
 }
 ```
 

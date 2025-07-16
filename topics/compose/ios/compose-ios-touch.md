@@ -7,9 +7,6 @@ the app may need to react differently to touches in the interop area depending o
 Currently, Compose Multiplatform has only one strategy for dealing with touch events in a native view:
 all touches are processed entirely by the native UI, with Compose not being aware that they occurred at all.
 
-Both the default behavior and the ability to customize it will be improved with the release of Compose Multiplatform 1.7.0.
-Changes are described in the following sections. Consider trying them out with the %composeVersion% version.
-
 ## Touches in interop scrolling
 
 When each touch in an interop area is sent immediately to the underlying native UI element,
@@ -43,7 +40,7 @@ To do that, call the constructor for a `UIKitView` or a `UIKitViewController` wi
 ## Choosing the strategy for touch processing
 <secondary-label ref="Experimental"/>
 
-With Compose Multiplatform %composeVersion% you can also try out the experimental API for finer control over interop UI.
+With Compose Multiplatform %org.jetbrains.compose% you can also try out the experimental API for finer control over interop UI.
 
 The new constructors for a `UIKitView` or a `UIKitViewController` accept a `UIKitInteropProperties` object as an argument.
 This object allows setting:
