@@ -261,6 +261,7 @@ time message could be rendered more prominently.
                     value = location,
                     onValueChange = { location = it },
                     modifier = Modifier.padding(top = 10.dp)
+                )
                 Button(
                     onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" },
                     modifier = Modifier.padding(top = 10.dp)
@@ -426,7 +427,13 @@ code to load and display them:
 4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
 
     ```kotlin
-    data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
+    import compose.project.demo.generated.resources.eg
+    import compose.project.demo.generated.resources.fr
+    import compose.project.demo.generated.resources.id
+    import compose.project.demo.generated.resources.jp
+    import compose.project.demo.generated.resources.mx
+   
+   data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"

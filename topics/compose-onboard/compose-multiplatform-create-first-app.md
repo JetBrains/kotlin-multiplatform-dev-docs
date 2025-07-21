@@ -44,9 +44,13 @@ Things to keep in mind for this tutorial:
 
 4. Specify the following fields in the **New Project** window:
 
-    * **Name**: ComposeDemo (**Project Name** in the web wizard)
-    * **Group**: compose.project.demo (**Project ID** in the web wizard)
-    * **Artifact**: composedemo (not required in the web wizard)
+    * **Name**: ComposeDemo
+    * **Group**: compose.project
+    * **Artifact**: demo
+
+    > If using the web wizard, specify "ComposeDemo" as **Project Name** and "compose.project.demo" as **Project ID**.
+    >
+    {style="note"} 
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
