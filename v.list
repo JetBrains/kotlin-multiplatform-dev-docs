@@ -36,7 +36,7 @@
     <var name="sqlDelightVersion" value="2.1.0" type="string"/>
     <var name="ktorVersion" value="3.2.2" type="string"/>
     <var name="dateTimeVersion" value="0.6.2" type="string"/>
-    <var name="koinVersion" value="4.1" type="string"/>
+    <var name="koinVersion" value="3.5.3" type="string"/> <!-- We're using this only for one tutorial which breaks with the latest version. -->
     <var name="skieVersion" value="0.10.4" type="string"/>
     <var name="kmpncVersion" value="1.0.0-ALPHA-45" type="string"/>
     <var name="kspVersion" value="2.1.21-2.0.1" type="string"/>

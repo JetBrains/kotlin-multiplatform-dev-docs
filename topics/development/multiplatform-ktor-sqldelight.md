@@ -44,7 +44,7 @@ You will use the following multiplatform libraries in the project:
 4. Specify the following fields in the **New Project** window:
 
    * **Name**: SpaceTutorial
-   * **Group**: com.jetbrains.spacetutorial
+   * **Group**: com.jetbrains
    * **Artifact**: spacetutorial
 
    ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
@@ -66,7 +66,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
    ```
    [versions]
-   agp = "8.2.2"
+   agp = "8.6.0"
    ...
    coroutinesVersion = "%coroutinesVersion%"
    dateTimeVersion = "%dateTimeVersion%"
@@ -216,7 +216,8 @@ sqldelight {
 
 The `packageName` parameter specifies the package name for the generated Kotlin sources.
 
-Sync the Gradle project files when prompted.
+Sync the Gradle project files when prompted, or press double <shortcut>Shift</shortcut> and search for the
+**Sync All Gradle, Swift Package Manager projects**.
 
 > Consider installing the official [SQLDelight plugin](https://plugins.jetbrains.com/plugin/8191-sqldelight)
 > to work with `.sq` files.
@@ -293,8 +294,8 @@ separately for each platform.
 While you can achieve this with [expected and actual interfaces](multiplatform-expect-actual.md),
 in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
-1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin` directory, create
-   a directory with the name `com/jetbrains/spacetutorial/cache`(this will add the `cache` directory to the package).
+1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
+   create the `cache` directory.
 2. Create the `DatabaseDriverFactory` interface inside the `cache` directory:
 
    ```kotlin
@@ -326,8 +327,8 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-5. For iOS, in the `shared/src/iosMain/kotlin` directory, create a directory with the name `com/jetbrains/spacetutorial/cache`.
-6. Inside this directory, create the `DatabaseDriverFactory.kt` file and add this code:
+5. For iOS, in the `shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `cache` directory.
+6. Inside the `cache` directory, create the `DatabaseDriverFactory.kt` file and add this code:
 
    ```kotlin
    package com.jetbrains.spacetutorial.cache
@@ -569,7 +570,8 @@ kotlin {
 }
 ```
 
-Sync the Gradle project files when prompted.
+Sync the Gradle project files when prompted, or press double <shortcut>Shift</shortcut> and search for the
+**Sync All Gradle, Swift Package Manager projects**.
 
 ### Add internet access permission
 
@@ -745,21 +747,22 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
 1. You can generate a theme for your Compose app
    using the [Material Theme Builder](https://m3.material.io/theme-builder#/custom).
-   When you're done picking colors, click **Export** in the top right corner and select the **Jetpack Compose (Theme.kt)**
+   Pick your colors, pick your fonts, then click **Export theme** in the bottom right corner.
+2. On the export screen, click the **Export** dropdown and select the **Jetpack Compose (Theme.kt)**
    option.
-2. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
+3. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
    directory.
 
    ![theme directory location](theme-directory.png){width=299}
 
-3. In each theme file, `Color.kt` and `Theme.kt`, make sure that the package line refers
+4. In each theme file, `Color.kt` and `Theme.kt`, make sure that the package line refers
    to your package:
 
     ```kotlin
     package com.jetbrains.spacetutorial.theme
     ```
 
-4. In the `Color.kt` file, add two variables for colors you are going to use for successful and unsuccessful launches:
+5. In the `Color.kt` file, add two variables for colors you are going to use for successful and unsuccessful launches:
 
     ```kotlin
     val app_theme_successful = Color(0xff4BB543)
@@ -771,7 +774,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 Create the main `App()` composable for your application, and call it from a `ComponentActivity` class:
 
 1. Open the `App.kt` file next to the `theme` directory in the `com.jetbrains.spacetutorial` package
-   and add the `App()` composable function:
+   and replace the default `App()` composable function:
 
     ```kotlin
     package com.jetbrains.spacetutorial
@@ -898,10 +901,10 @@ Create the main `App()` composable for your application, and call it from a `Com
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
-3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
-   the `setContent()` function refers to the `App()` composable you just created in that package.
+<!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
+   the `setContent()` function refers to the `App()` composable you just created in that package.-->
 
-4. Finally, specify your `MainActivity` class in the `AndroidManifest.xml` file:
+1. Finally, specify your `MainActivity` class in the `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -918,7 +921,7 @@ Create the main `App()` composable for your application, and call it from a `Com
     </manifest>
     ```
 
-5. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
+2. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
    The app automatically runs the API request and displays the list of launches (the background color depends on
    the Material Theme you generated):
 
@@ -1004,7 +1007,7 @@ and `VStack` views. There will be extensions on the `RocketLaunchRow` structure 
 data.
 
 1. In IntelliJ IDEA, make sure you are in **Project** view.
-2. Create a new Swift file in the `iosApp` folder and name it `RocketLaunchRow`.
+2. Create a new Swift file in the `iosApp` folder, next to `ContentView.swift`, and name it `RocketLaunchRow`.
 3. Update the `RocketLaunchRow.swift` file with the following code:
 
     ```Swift
