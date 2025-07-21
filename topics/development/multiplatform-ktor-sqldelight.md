@@ -901,10 +901,9 @@ Create the main `App()` composable for your application, and call it from a `Com
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
-<!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
-   the `setContent()` function refers to the `App()` composable you just created in that package.-->
-
-1. Finally, specify your `MainActivity` class in the `AndroidManifest.xml` file:
+   <!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
+      the `setContent()` function refers to the `App()` composable you just created in that package.-->
+3. Finally, specify your `MainActivity` class in the `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -921,7 +920,7 @@ Create the main `App()` composable for your application, and call it from a `Com
     </manifest>
     ```
 
-2. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
+4. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
    The app automatically runs the API request and displays the list of launches (the background color depends on
    the Material Theme you generated):
 
