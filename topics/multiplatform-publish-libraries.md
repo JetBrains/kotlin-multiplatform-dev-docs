@@ -210,8 +210,8 @@ Use the following command, **passing in your own key ID** as a parameter:
 gpg --no-armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > key.gpg
 ```
 
-This command will create a `key.gpg` binary file which contains your private key.
-Do not use flag --armor to create ASCII file with plain text of your key, the publishing plugin need binary format.
+This command will create a `key.gpg` binary file which contains your private key
+(make sure **not** to use the --armor flag which only creates a plain text version of your key).
 
 > Never share your private key file with anyone – only you should have access to it
 > since the private key enables signing files with your credentials.
