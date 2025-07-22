@@ -174,7 +174,7 @@ You can customize these settings with the new Compose Multiplatform API.
 
 ### Choose the tree synchronization option
 
-> In Compose Multiplatform %composeVersion%, [this option has been removed](whats-new-compose-180.md#loading-accessibility-tree-on-demand)
+> In Compose Multiplatform 1.8.0, [this option has been removed](whats-new-compose-180.md#loading-accessibility-tree-on-demand)
 > as the accessibility tree is synchronized lazily and no longer requires additional configuration.
 >
 {style="tip"}
