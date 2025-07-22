@@ -23,7 +23,7 @@ See the full list of changes for this release [on GitHub](https://github.com/Jet
   * [Material 1.7.5](https://developer.android.com/jetpack/androidx/releases/compose-material#1.7.5)
   * [Material3 1.3.1](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.1)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.8.3`. Based on [Jetpack Lifecycle 2.8.5](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.8.5).
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:%org.jetbrains.androidx.navigation%`. Based on [Jetpack Navigation 2.8.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0).
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.8.0-alpha10`. Based on [Jetpack Navigation 2.8.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.8.0).
 * Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive-*:1.0.0`. Based on [Jetpack Material3 Adaptive 1.0.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.0.0)
 
 ## Breaking changes
