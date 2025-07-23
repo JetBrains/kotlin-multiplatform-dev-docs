@@ -25,6 +25,11 @@ kotlin {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:%org.jetbrains.androidx.lifecycle%"}
 
+> You can track changes to the multiplatform Lifecycle implementation in our [What's new](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html)
+> or follow specific EAP releases in the [Compose Multiplatform changelog](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md).
+>
+{style="tip"}
+
 ## States and events
 
 The flow of lifecycle states and events
