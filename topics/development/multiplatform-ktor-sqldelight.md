@@ -903,7 +903,7 @@ Create the main `App()` composable for your application, and call it from a `Com
 
    <!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
       the `setContent()` function refers to the `App()` composable you just created in that package.-->
-3. Finally, specify your `MainActivity` class in the `AndroidManifest.xml` file:
+3. Finally, specify your `MainActivity` class in the `<activity>` tag the `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
