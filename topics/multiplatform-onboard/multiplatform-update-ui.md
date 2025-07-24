@@ -111,11 +111,6 @@ Implement the same changes as in the Android app:
 
     ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
 
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step3).
->
-{style="tip"}
-
-
 ## Possible issues and solutions
 
 ### Xcode reports errors in the code calling the shared framework

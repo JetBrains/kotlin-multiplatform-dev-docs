@@ -99,14 +99,6 @@ multiplatform support, is the most convenient way to work with dates in your sha
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
-<!-- sample needs to be updated
-
-    > You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step4).
-    >
-    {style="tip"}
-
--->
-
 ## Next step
 
 In the next part of the tutorial, you'll add more dependencies and more complex logic to your project.
