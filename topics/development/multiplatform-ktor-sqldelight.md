@@ -66,15 +66,15 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
    ```
    [versions]
-   agp = "8.6.0"
+   agp = "8.7.3"
    ...
    coroutinesVersion = "%coroutinesVersion%"
-   dateTimeVersion = "%dateTimeVersion%"
+   dateTimeVersion = "0.6.2"
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
-   lifecycleViewmodelCompose = "2.7.0"
-   material3 = "1.2.0"
+   lifecycleViewmodelCompose = "2.9.1"
+   material3 = "1.3.2"
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
 
@@ -733,7 +733,7 @@ function that brings it all together.
 4. Now, in the `AppModule.kt` file, specify the view model in the Koin module:
 
     ```kotlin
-    import org.koin.androidx.viewmodel.dsl.viewModel
+    import org.koin.core.module.dsl.viewModel
     
     val appModule = module {
         // ...
@@ -778,26 +778,28 @@ Create the main `App()` composable for your application, and call it from a `Com
 
     ```kotlin
     package com.jetbrains.spacetutorial
-   
-    import androidx.compose.material3.ExperimentalMaterial3Api
+    
     import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
     import androidx.compose.runtime.Composable
     import androidx.compose.runtime.getValue
+    import androidx.compose.runtime.mutableStateOf
     import androidx.compose.runtime.remember
+    import androidx.compose.runtime.rememberCoroutineScope
+    import androidx.compose.runtime.setValue
+    import org.jetbrains.compose.ui.tooling.preview.Preview
     import org.koin.androidx.compose.koinViewModel
     
     @OptIn(
-        ExperimentalMaterial3Api::class
+      ExperimentalMaterial3Api::class
     )
     @Composable
+    @Preview
     fun App() {
         val viewModel = koinViewModel<RocketLaunchViewModel>()
         val state by remember { viewModel.state }
+        val coroutineScope = rememberCoroutineScope()
+        var isRefreshing by remember { mutableStateOf(false) }
         val pullToRefreshState = rememberPullToRefreshState()
-        if (pullToRefreshState.isRefreshing) {
-            viewModel.loadLaunches()
-            pullToRefreshState.endRefresh()
-        }
     }
     ```
 
@@ -806,17 +808,23 @@ Create the main `App()` composable for your application, and call it from a `Com
 
 2. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
 
-    <!-- TODO Check the code example-->
     ```kotlin
     package com.jetbrains.spacetutorial
-
-    import androidx.compose.foundation.layout.*
+    
+    import androidx.compose.foundation.layout.Arrangement
+    import androidx.compose.foundation.layout.Column
+    import androidx.compose.foundation.layout.Spacer
+    import androidx.compose.foundation.layout.fillMaxSize
+    import androidx.compose.foundation.layout.height
+    import androidx.compose.foundation.layout.padding
     import androidx.compose.foundation.lazy.LazyColumn
     import androidx.compose.foundation.lazy.items
-    import androidx.compose.material3.*
+    import androidx.compose.material3.HorizontalDivider
+    import androidx.compose.material3.MaterialTheme
+    import androidx.compose.material3.Scaffold
+    import androidx.compose.material3.Text
+    import androidx.compose.material3.TopAppBar
     import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
-    import androidx.compose.runtime.*
     import androidx.compose.ui.Alignment
     import androidx.compose.ui.Modifier
     import androidx.compose.ui.unit.dp
@@ -825,16 +833,19 @@ Create the main `App()` composable for your application, and call it from a `Com
     import com.jetbrains.spacetutorial.theme.app_theme_successful
     import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
     import kotlinx.coroutines.launch
-    import org.koin.androidx.compose.koinViewModel
-
-    @OptIn(ExperimentalMaterial3Api::class)
+    ...
+    
+    @OptIn(
+        ExperimentalMaterial3Api::class
+    )
     @Composable
+    @Preview
     fun App() {
-    val viewModel = koinViewModel<RocketLaunchViewModel>()
-    val state by remember { viewModel.state }
-    val coroutineScope = rememberCoroutineScope()
-    var isRefreshing by remember { mutableStateOf(false) }
-    val pullToRefreshState = rememberPullToRefreshState()
+        val viewModel = koinViewModel<RocketLaunchViewModel>()
+        val state by remember { viewModel.state }
+        val coroutineScope = rememberCoroutineScope()
+        var isRefreshing by remember { mutableStateOf(false) }
+        val pullToRefreshState = rememberPullToRefreshState()
     
         AppTheme {
             Scaffold(
@@ -899,16 +910,15 @@ Create the main `App()` composable for your application, and call it from a `Com
         }
     }
     ```
-   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
    <!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
       the `setContent()` function refers to the `App()` composable you just created in that package.-->
-3. Finally, specify your `MainActivity` class in the `<activity>` tag the `AndroidManifest.xml` file:
+3. Finally, specify your `MainActivity` class in the `<activity>` tag in the `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
         ...
-    
         <application
             ...
             <activity
@@ -975,14 +985,14 @@ module for iOS.
     }
     ```
 
-3. Add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
+3. After the `KoinHelper` class, add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
 
     ```kotlin
     import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
     import com.jetbrains.spacetutorial.network.SpaceXApi
     import org.koin.core.context.startKoin
     import org.koin.dsl.module
-   
+    
     fun initKoin() {
         startKoin {
             modules(module {
