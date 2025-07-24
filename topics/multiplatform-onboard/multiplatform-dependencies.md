@@ -49,18 +49,19 @@ function to display the number of days left until New Year's Day. The `kotlinx-d
 multiplatform support, is the most convenient way to work with dates in your shared code.
 
 1. Open the `build.gradle.kts` file located in the `shared` directory.
-2. Add the following dependency to the `commonMain` source set dependencies:
+2. Add the following dependency and the Kotlin time opt-in to the `commonMain` source set dependencies:
 
-   ```kotlin
-   kotlin {
-       //... 
-       sourceSets {
-           commonMain.dependencies {
-               implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-           } 
-       }
-   }
-   ```
+    ```kotlin
+    kotlin {
+        //... 
+        sourceSets
+            languageSettings.optIn("kotlin.time.ExperimentalTime")
+            commonMain.dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+            } 
+        }
+    }
+    ```
 
 3. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 4. In `shared/src/commonMain/kotlin`, create a new file, `NewYear.kt`, in the project directory where your `Greeting.kt` file is located.
@@ -69,6 +70,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    
    ```kotlin
    import kotlinx.datetime.*
+   import kotlin.time.Clock
    
    fun daysUntilNewYear(): Int {
        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
