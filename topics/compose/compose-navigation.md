@@ -15,7 +15,12 @@ the library solves basic navigation problems:
 
 If you feel comfortable enough with the basics, move on to [](compose-navigation-routing.md),
 to learn how to leverage the Navigation library in cross-platform projects.
-Otherwise, read on to learn about fundamental concepts the library works with. 
+Otherwise, read on to learn about fundamental concepts the library works with.
+
+> You can track changes to the multiplatform version of the Navigation library in our [What's new](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html)
+> or follow specific EAP releases in the [Compose Multiplatform changelog](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md).
+>
+{style="tip"}
 
 ## Basic concepts of Compose Navigation
 
