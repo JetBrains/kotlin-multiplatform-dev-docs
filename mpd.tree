@@ -154,4 +154,7 @@
 		<toc-element toc-title="Programming languages for cross-platform development" topic="programming-languages-cross-platform.md"/>
 		<toc-element toc-title="Choosing your web target" topic="choosing-web-target.md"/>
 	</toc-element>
+	<toc-element toc-title="Redirect the old tutorial to Fleet" hidden="true"
+				 accepts-web-file-names="fleet.html"
+				 target-for-accept-web-file-names="https://www.jetbrains.com/help/fleet/getting-started.html"/>
 </instance-profile>
