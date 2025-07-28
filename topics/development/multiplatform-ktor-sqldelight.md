@@ -295,8 +295,8 @@ While you can achieve this with [expected and actual interfaces](multiplatform-e
 in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
 1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
-   create the `cache` directory.
-2. Create the `DatabaseDriverFactory` interface inside the `cache` directory:
+   create the `cache` package.
+2. Create the `DatabaseDriverFactory` interface inside the `cache` package:
 
    ```kotlin
    package com.jetbrains.spacetutorial.cache
@@ -327,8 +327,8 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-5. For iOS, in the `shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `cache` directory.
-6. Inside the `cache` directory, create the `DatabaseDriverFactory.kt` file and add this code:
+5. For iOS, in the `shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `cache` package.
+6. Inside the `cache` package, create the `DatabaseDriverFactory.kt` file and add this code:
 
    ```kotlin
    package com.jetbrains.spacetutorial.cache
@@ -446,7 +446,7 @@ and a single method to retrieve the list of all launches from the `v5/launches` 
 
 Create a class that will connect the application to the API:
 
-1. In the common source set `shared/src/commonMain/kotlin`, create a directory with the name `com/jetbrains/spacetutorial/network`.
+1. In the common source set `shared/src/commonMain/kotlin`, create a package with the name `com/jetbrains/spacetutorial/network`.
 2. Inside the `network` directory, create the `SpaceXApi` class:
 
    ```kotlin
