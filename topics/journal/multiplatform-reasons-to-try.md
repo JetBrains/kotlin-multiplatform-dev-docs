@@ -1,6 +1,6 @@
 [//]: # (title: Ten reasons to adopt Kotlin Multiplatform and supercharge your projects)
 
-[//]: # (description: Discover ten reasons why you should use Kotlin Multiplatform in your projects. See real-life examples from companies and start using this technology in your multiplatform development.)
+<web-summary>Discover ten reasons why you should use Kotlin Multiplatform in your projects. See real-life examples from companies and start using this technology in your multiplatform development.</web-summary>
 
 In today's diverse tech landscape,
 developers face the challenge of building applications that can seamlessly operate across various platforms, 

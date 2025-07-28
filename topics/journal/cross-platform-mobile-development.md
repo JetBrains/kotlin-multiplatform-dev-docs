@@ -1,6 +1,6 @@
 [//]: # (title: What is cross-platform mobile development?)
 
-[//]: # (description: Cross-platform mobile development helps you save a lot of time and effort. See why many developers have already switched to this cost-efficient technology.)
+<web-summary>Cross-platform mobile development helps you save a lot of time and effort. See why many developers have already switched to this cost-efficient technology.</web-summary>
 
 Nowadays, many companies are facing the challenge of needing to build mobile apps for multiple platforms, specifically for both Android and iOS. This is why cross-platform mobile development solutions have emerged as one of the most popular software development trends.
 

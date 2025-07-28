@@ -1,6 +1,6 @@
 # Kotlin Multiplatform and Flutter: cross-platform development solutions
 
-[//]: # (description: This article explores Kotlin Multiplatform and Flutter, helping you to understand their capabilities and choose the right fit for your cross-platform project.) 
+<web-summary>This article explores Kotlin Multiplatform and Flutter, helping you to understand their capabilities and choose the right fit for your cross-platform project.</web-summary> 
 
 In the rapidly evolving world of technology, developers are constantly seeking efficient frameworks and tools to help them build high-quality applications. However, when choosing between available possibilities, it’s important to avoid placing too much emphasis on finding the so-called best option, as this approach might not always lead to the most suitable choice.
 
