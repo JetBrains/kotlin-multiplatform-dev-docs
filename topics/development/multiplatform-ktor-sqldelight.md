@@ -122,12 +122,16 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    }
    ```
 
-6. In the same `shared/build.gradle.kts` file, refer to all the required dependencies:
+6.  The common source set requires a core artifact of each library, as well as the Ktor [serialization feature](https://ktor.io/docs/serialization-client.html)
+    to use `kotlinx.serialization` for processing network requests and responses.
+    The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
+
+    In the same `shared/build.gradle.kts` file, add all the required dependencies:
 
     ```kotlin
     kotlin {
         // ...
-   
+    
         sourceSets {
             commonMain.dependencies {
                 implementation(libs.kotlinx.coroutines.core)
@@ -149,11 +153,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
         }
     }
     ```
-
-   * The common source set requires a core artifact of each library,
-     as well as the Ktor [serialization feature](https://ktor.io/docs/serialization-client.html)
-     to use `kotlinx.serialization` for processing network requests and responses.
-   * The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
 7. Once the dependencies are added, click the **Sync Gradle Changes** button to synchronize Gradle files once again.
 
@@ -180,7 +179,8 @@ The application data model will have three entity classes with:
 
 Create the necessary data classes:
 
-1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` directory with the `Entity.kt` file inside. 
+1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` package,
+   then create the `Entity.kt` file inside that package. 
 2. Declare all the data classes for basic entities:
 
    ```kotlin
@@ -309,7 +309,7 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    ```
 
 3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
-   create the `com.jetbrains.spacetutorial.cache` package with the `DatabaseDriverFactory.kt` file inside.
+   create the `com.jetbrains.spacetutorial.cache` package, then create the `DatabaseDriverFactory.kt` file inside it.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
@@ -327,7 +327,7 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-5. For iOS, in the `shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `cache` package.
+5. For iOS, in the `shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/` directory, create the `cache` package.
 6. Inside the `cache` package, create the `DatabaseDriverFactory.kt` file and add this code:
 
    ```kotlin
@@ -351,7 +351,7 @@ So far, you have added factories for platform database drivers and an `AppDataba
 Now, create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
 
 1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
-   the `com.jetbrains.spacetutorial.cache` directory. It will contain logic common to both platforms.
+   the `com.jetbrains.spacetutorial.cache` package. It will contain logic common to both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` instance to the `Database`
    class constructor:
@@ -439,45 +439,50 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
     }
     ```
 
-## Implement an API service
+## Implement the API service
 
 To retrieve data over the internet, you'll use the [SpaceX public API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs)
 and a single method to retrieve the list of all launches from the `v5/launches` endpoint.
 
 Create a class that will connect the application to the API:
 
-1. In the common source set `shared/src/commonMain/kotlin`, create a package with the name `com/jetbrains/spacetutorial/network`.
+1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
 2. Inside the `network` directory, create the `SpaceXApi` class:
 
-   ```kotlin
-   package com.jetbrains.spacetutorial.network
+    ```kotlin
+    package com.jetbrains.spacetutorial.network
+    
+    import io.ktor.client.HttpClient
+    import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+    import io.ktor.serialization.kotlinx.json.json
+    import kotlinx.serialization.json.Json
+    
+    class SpaceXApi {
+        private val httpClient = HttpClient {
+            install(ContentNegotiation) {
+                json(Json {
+                    ignoreUnknownKeys = true
+                    useAlternativeNames = false 
+                })
+            }
+        }
+    }
+    ```
 
-   import io.ktor.client.HttpClient
-   import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-   import io.ktor.serialization.kotlinx.json.json
-   import kotlinx.serialization.json.Json
+    This class executes network requests and deserializes JSON responses into entities from the `com.jetbrains.spacetutorial.entity` package.
+    The Ktor `HttpClient` instance initializes and stores the `httpClient` property. 
 
-   class SpaceXApi {
-       private val httpClient = HttpClient {
-           install(ContentNegotiation) {
-               json(Json {
-                   ignoreUnknownKeys = true
-                   useAlternativeNames = false
-               })
-           }
-       }
-   }
-   ```
-
-   * This class executes network requests and deserializes JSON responses into entities from the `com.jetbrains.spacetutorial.entity` package.
-     The Ktor `HttpClient` instance initializes and stores the `httpClient` property.
-   * This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
-     to deserialize the result of a `GET` request. The plugin processes the request and the response payload as JSON,
-     serializing and deserializing them as needed.
+    This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
+    to deserialize the result of a `GET` request. The plugin processes the request and the response payload as JSON,
+    serializing and deserializing them as needed.
 
 3. Declare the data retrieval function that returns the list of rocket launches:
 
     ```kotlin
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import io.ktor.client.request.get
+    import io.ktor.client.call.body
+    
     class SpaceXApi {
         // ...
         
@@ -497,7 +502,7 @@ Create a class that will connect the application to the API:
 Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
 public class, `SpaceXSDK`.
 
-1. In the common source set `shared/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` directory, create
+1. In the common source set `shared/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
    the `SpaceXSDK` class.
    This class will be the facade for the `Database` and `SpaceXApi` classes.
 
@@ -539,12 +544,14 @@ public class, `SpaceXSDK`.
     }
     ```
 
-* The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
+The class contains one function for getting all launch information. Depending on the value of `forceReload`, it
   returns cached values or loads the data from the internet and then updates the cache with the results. If there is
   no cached data, it loads the data from the internet regardless of the `forceReload` flag's value.
-* Clients of your SDK could use a `forceReload` flag to load the latest information about the launches,
+
+Clients of your SDK could use a `forceReload` flag to load the latest information about the launches,
   enabling the pull-to-refresh gesture for users.
-* All Kotlin exceptions are unchecked, while Swift has only checked errors (see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#errors-and-exceptions)
+
+All Kotlin exceptions are unchecked, while Swift has only checked errors (see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#errors-and-exceptions)
   for details). Thus, to make your Swift code aware of expected exceptions, Kotlin functions called from Swift
   should be marked with the `@Throws` annotation specifying a list of potential exception classes.
 
@@ -755,8 +762,7 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
    ![theme directory location](theme-directory.png){width=299}
 
-4. In each theme file, `Color.kt` and `Theme.kt`, make sure that the package line refers
-   to your package:
+4. In each file inside the `theme` package, change the `package` line to refer to the package you created:
 
     ```kotlin
     package com.jetbrains.spacetutorial.theme
@@ -788,6 +794,7 @@ Create the main `App()` composable for your application, and call it from a `Com
     import androidx.compose.runtime.setValue
     import org.jetbrains.compose.ui.tooling.preview.Preview
     import org.koin.androidx.compose.koinViewModel
+    import androidx.compose.material3.ExperimentalMaterial3Api
     
     @OptIn(
       ExperimentalMaterial3Api::class
@@ -1078,10 +1085,10 @@ data.
     }
     ```
 
-    * The view model (`ContentView.ViewModel`) connects with the view (`ContentView`) via the [Combine framework](https://developer.apple.com/documentation/combine):
-        * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
-        * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
-          property changes.
+    The view model (`ContentView.ViewModel`) connects with the view (`ContentView`) via the [Combine framework](https://developer.apple.com/documentation/combine):
+    * The `ContentView.ViewModel` class is declared as an `ObservableObject`.
+    * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
+ property changes.
 
 5. Remove the `ContentView_Previews` structure: you won't need to implement a preview that should be compatible with
    your view model.
@@ -1159,23 +1166,24 @@ It will allow you to call the SDK function with the correct database driver.
 2. Call the `KoinHelper.getLaunches()` function (which will proxy the call to the `SpaceXSDK` class) and save the result
    in the `launches` property:
 
-   ```Swift
-   func loadLaunches(forceReload: Bool) {
-       Task {
-           do {
-               self.launches = .loading
-               let launches = try await helper.getLaunches(forceReload: forceReload)
-               self.launches = .result(launches)
-           } catch {
-               self.launches = .error(error.localizedDescription)
-           }
-       }
-   }
-   ```
+    ```Swift
+    func loadLaunches(forceReload: Bool) {
+        Task {
+            do {
+                self.launches = .loading
+                let launches = try await helper.getLaunches(forceReload: forceReload)
+                self.launches = .result(launches)
+            } catch {
+                self.launches = .error(error.localizedDescription)
+            }
+        }
+    }
+    ```
 
-   * When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
+    When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
      can be called using the Swift's `async`/`await` mechanism.
-   * Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation in Kotlin, any exceptions
+   
+    Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation in Kotlin, any exceptions
      that are instances of the `Exception` class or its subclass will be propagated to Swift as `NSError`.
      Therefore, all such exceptions can be caught by the `loadLaunches()` function.
 
