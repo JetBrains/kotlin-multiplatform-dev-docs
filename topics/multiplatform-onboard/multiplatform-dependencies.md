@@ -57,7 +57,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
         sourceSets
             languageSettings.optIn("kotlin.time.ExperimentalTime")
             commonMain.dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
             } 
         }
     }
