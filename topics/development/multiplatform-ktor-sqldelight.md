@@ -492,10 +492,11 @@ Create a class that will connect the application to the API:
     }
     ```
 
-   * The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`.
+The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`.
      The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
      coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-   * The URL for sending a GET request is passed as an argument to the `get()` function.
+   
+The URL for sending a GET request is passed as an argument to the `get()` function.
 
 ## Build an SDK
 
