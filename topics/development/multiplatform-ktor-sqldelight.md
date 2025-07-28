@@ -40,7 +40,8 @@ You will use the following multiplatform libraries in the project:
 
 1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
 2. In IntelliJ IDEA, select **File** | **New** | **Project**.
-3. In the panel on the left, select **Kotlin Multiplatform**.
+3. In the panel on the left, select **Kotlin Multiplatform** (in Android Studio, the template can be found in the **Generic** tab
+   of the **New Project** wizard).
 4. Specify the following fields in the **New Project** window:
 
    * **Name**: SpaceTutorial
