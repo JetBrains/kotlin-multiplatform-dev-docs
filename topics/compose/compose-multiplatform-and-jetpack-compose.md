@@ -1,6 +1,6 @@
 [//]: # (title: Compose Multiplatform and Jetpack Compose)
 
-[//]: # (description: This article explains the relationship between Compose Multiplatform and Jetpack Compose. You'll learn more about the two toolkits and how they align.)
+<web-summary>This article explains the relationship between Compose Multiplatform and Jetpack Compose. You'll learn more about the two toolkits and how they align.</web-summary>
 
 ![Compose Multiplatform created by JetBrains, Jetpack Compose created by Google](compose-multiplatform-and-jetpack-compose.png){width=730}
 

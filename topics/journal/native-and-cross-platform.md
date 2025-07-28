@@ -1,6 +1,6 @@
 [//]: # (title: Cross-platform and native app development: How do you choose?)
 
-[//]: # (description: When choosing between cross-platform and native app development, consider these six key things and pick the best solution for your next app.)
+<web-summary>When choosing between cross-platform and native app development, consider these six key things and pick the best solution for your next app.</web-summary>
 
 In 2023, people spent almost [16 billion hours using mobile applications](https://www.statista.com/statistics/1446684/cumulative-time-spent-on-apps/), indicating a sustained demand for them.
 
