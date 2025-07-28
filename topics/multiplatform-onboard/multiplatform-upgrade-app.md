@@ -220,9 +220,9 @@ data class RocketLaunch (
 6. Convert the launch date from UTC to your local date and format the output:
 
    ```kotlin
-   import kotlinx.datetime.Instant
    import kotlinx.datetime.TimeZone
    import kotlinx.datetime.toLocalDateTime
+   import kotlin.time.Instant
 
    class RocketComponent {
        // ...
@@ -234,7 +234,7 @@ data class RocketLaunch (
            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
                .toLocalDateTime(TimeZone.currentSystemDefault())
        
-           return "${date.month} ${date.dayOfMonth}, ${date.year}" 
+           return "${date.month} ${date.day}, ${date.year}"
        }
    }
    ```
@@ -554,7 +554,10 @@ wrappers.
         // ...
         sourceSets{
             all {
-                languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+                languageSettings {
+                    optIn("kotlin.experimental.ExperimentalObjCName")
+                    optIn("kotlin.time.ExperimentalTime")
+                }
             }
             // ...
         }

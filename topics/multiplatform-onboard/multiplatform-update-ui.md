@@ -33,6 +33,8 @@ Make some changes and see how they are reflected in the UI:
 3. In the `Greeting.kt` file, update the `greet()` function:
 
    ```kotlin
+   import kotlin.random.Random
+   
    fun greet(): List<String> = buildList {
        add(if (Random.nextBoolean()) "Hi!" else "Hello!")
        add("Guess what this is! > ${platform.name.reversed()}!")
@@ -108,14 +110,6 @@ Implement the same changes as in the Android app:
 4. Start the iOS run configuration to see the changes:
 
     ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
-
-<!-- sample needs to be updated
-
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main/step3).
->
-{style="tip"}
-
--->
 
 ## Possible issues and solutions
 
