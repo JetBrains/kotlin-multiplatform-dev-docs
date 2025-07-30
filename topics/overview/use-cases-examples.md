@@ -152,7 +152,8 @@ Ride-hailing, delivery, and mobility platforms benefit from Kotlin Multiplatform
 their driver, rider, and merchant apps. Core logic for services like real-time tracking, route optimization, 
 or in-app chat can be written once and used on both Android and iOS, guaranteeing consistent behavior for all users.
 
-**Case studies:** [Bolt](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), Feres
+**Case studies:** [Bolt](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), 
+[Feres](case-studies.topic#case-study-feres)
 
 ### Educational technology
 
@@ -162,7 +163,8 @@ educational apps deliver a uniform learning experience on every device.
 This code sharing can significantly boost performance and consistency — for example, Quizlet migrated its shared code
 from JavaScript to Kotlin and saw notable speed improvements in both its Android and iOS apps.
 
-**Case studies:** [Duolingo](https://youtu.be/RJtiFt5pbfs?si=mFpiN9SNs8m-jpFL), [Quizlet](https://quizlet.com/blog/shared-code-kotlin-multiplatform), [Chalk](https://kotlinlang.org/lp/multiplatform/case-studies/chalk/?_gl=1*1wxmdrv*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEwMjI5ODAkbzYwJGcxJHQxNzUxMDIzMTU2JGo1OCRsMCRoMA..), [Memrise](https://engineering.memrise.com/kotlin-multiplatform-memrise-3764b5a4a0db), Physics Wallah
+**Case studies:** [Duolingo](https://youtu.be/RJtiFt5pbfs?si=mFpiN9SNs8m-jpFL), [Quizlet](https://quizlet.com/blog/shared-code-kotlin-multiplatform), [Chalk](https://kotlinlang.org/lp/multiplatform/case-studies/chalk/?_gl=1*1wxmdrv*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEwMjI5ODAkbzYwJGcxJHQxNzUxMDIzMTU2JGo1OCRsMCRoMA..), [Memrise](https://engineering.memrise.com/kotlin-multiplatform-memrise-3764b5a4a0db), 
+[Physics Wallah](case-studies.topic#case-study-physics-wallah)
 
 ### E-commerce
 
@@ -171,7 +173,7 @@ camera access, and maps. Kotlin Multiplatform with Compose Multiplatform enables
 and UIs across platforms, while still using platform-specific components where needed. 
 This hybrid approach ensures faster development, a consistent user experience, and the flexibility to integrate critical native features.
 
-**Case studies:** Balary Market, Markaz
+**Case studies:** [Balary Market](case-studies.topic#case-study-balary), [Markaz](case-studies.topic#case-study-markaz)
 
 ### Social networking and community
 
@@ -188,7 +190,7 @@ Whether guiding a yoga session or syncing health data across devices, wellness a
 and reliable cross-platform behavior. These apps often need to share core functionality, such as workout logic and data handling, 
 while maintaining fully native UI and platform-specific integrations like sensors, notifications, or health APIs.
 
-**Case studies:** [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u), Fasting App, [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [Down Dog](https://kotlinlang.org/lp/multiplatform/case-studies/down-dog/?_gl=1*1ryf8m7*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEyNzEzNzckbzYyJGcxJHQxNzUxMjcxMzgzJGo1NCRsMCRoMA..)
+**Case studies:** [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u), [Fast&amp;Fit](case-studies.topic#case-study-fast-and-fit), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [Down Dog](https://kotlinlang.org/lp/multiplatform/case-studies/down-dog/?_gl=1*1ryf8m7*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEyNzEzNzckbzYyJGcxJHQxNzUxMjcxMzgzJGo1NCRsMCRoMA..)
 
 ### Postal services
 
