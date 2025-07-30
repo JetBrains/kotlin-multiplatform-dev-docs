@@ -36,7 +36,7 @@
     <var name="coroutinesVersion" value="1.10.2" type="string"/>
     <var name="serializationVersion" value="1.8.1" type="string"/>
     <var name="sqlDelightVersion" value="2.1.0" type="string"/>
-    <var name="ktorVersion" value="3.2.2" type="string"/>
+    <var name="ktorVersion" value="3.2.3" type="string"/>
     <var name="dateTimeVersion" value="0.6.2" type="string"/>
     <var name="koinVersion" value="4.1.0" type="string"/>
     <var name="skieVersion" value="0.10.4" type="string"/>
