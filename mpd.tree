@@ -6,7 +6,6 @@
 		<toc-element toc-title="Why Kotlin Multiplatform" href="https://www.jetbrains.com/kotlin-multiplatform/"/>
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
 		<toc-element topic="case-studies.topic"/>
-		<toc-element toc-title="How teams use Kotlin Multiplatform in production" topic="use-cases-examples.md"/>
 		<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
 		<toc-element topic="faq.md"/>
 		<toc-element topic="kotlin-multiplatform-roadmap.md" toc-title="KMP roadmap"/>
@@ -149,6 +148,7 @@
 		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
 		<toc-element toc-title="Six popular cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
 		<toc-element topic="multiplatform-introduce-your-team.md"/>
+		<toc-element toc-title="How teams use Kotlin Multiplatform in production" topic="use-cases-examples.md"/>
 		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" topic="multiplatform-reasons-to-try.md"/>
 		<toc-element toc-title="Kotlin Multiplatform and Flutter" topic="kotlin-multiplatform-flutter.md"/>
 		<toc-element toc-title="Programming languages for cross-platform development" topic="programming-languages-cross-platform.md"/>
