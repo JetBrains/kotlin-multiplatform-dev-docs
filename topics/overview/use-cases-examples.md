@@ -20,7 +20,7 @@ As adoption grows, this article examines how Kotlin Multiplatform is used in pro
 
 ## Kotlin Multiplatform use cases by the type of business and team
 
-Here are several ways different teams are leveraging Kotlin Multiplatform to meet various project needs:
+Here are several ways different teams are applying Kotlin Multiplatform to meet various project needs:
 
 ### Startups starting a new greenfield project
 
@@ -36,7 +36,7 @@ flexibility, and a high-quality native experience.
 **Case studies:**
 
 * [Instabee](https://www.youtube.com/watch?v=YsQ-2lQYQ8M) migrated its Android application logic and UI to Kotlin Multiplatform with Compose Multiplatform. 
-  By leveraging the Android codebase effectively, the company was able to release its iOS application in a short period of time.
+  By using the Android codebase effectively, the company was able to release its iOS application in a short period of time.
 * [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u) develops a habit-tracking and productivity app. Its iOS app is built with Compose Multiplatform, 
   sharing 96% of its code with Android.
 
@@ -49,7 +49,7 @@ flexibility, and a high-quality native experience.
 
 Small and medium-sized businesses often have compact teams while maintaining mature, feature-rich products. 
 Kotlin Multiplatform allows them to share core logic while keeping the native look-and-feel users expect. 
-By leveraging existing codebases, these teams can accelerate development without compromising on user experience.
+By relying on existing codebases, these teams can accelerate development without compromising on user experience.
 
 KMP also supports a flexible approach to gradually introduce cross-platform capabilities. This makes it especially 
 effective for teams evolving existing apps or launching new features, helping reduce development time, lower overhead, 
@@ -84,7 +84,7 @@ app behavior across platforms.
 
 **Case studies:**
 
-* [IceRock](https://icerockdev.com/) is an outsourcing company that leverages Kotlin Multiplatform to develop apps for its clients. 
+* [IceRock](https://icerockdev.com/) is an outsourcing company that uses Kotlin Multiplatform to develop apps for its clients. 
   Its app portfolio spans various business requirements, complemented by a substantial collection of open-source 
   Kotlin Multiplatform libraries that enhance the Kotlin Multiplatform development process.
 * [Mirego](https://kotlinlang.org/lp/multiplatform/case-studies/mirego/), an end-to-end digital product team, uses Kotlin Multiplatform to run the same business logic on the web, 
@@ -95,8 +95,8 @@ app behavior across platforms.
 Some companies want to enter new markets by launching their apps on platforms they haven't previously targeted, 
 for example, moving from iOS-only to include Android or vice versa.
 
-KMP helps you leverage existing iOS code and development practices while maintaining native performance and UI flexibility on Android. 
-If you want to maintain platform-specific user experiences and leverage existing knowledge and code, 
+KMP helps you utilize existing iOS code and development practices while maintaining native performance and UI flexibility on Android. 
+If you want to maintain platform-specific user experiences and take advantage of existing knowledge and code, 
 KMP could be the ideal long-term solution.
 
 **Case study:** [Instabee](https://www.youtube.com/watch?v=YsQ-2lQYQ8M) used Kotlin Multiplatform with Compose Multiplatform to migrate its Android app logic and UI. 
@@ -180,7 +180,7 @@ This hybrid approach ensures faster development, a consistent user experience, a
 On social platforms, timely feature delivery and consistent interactions are essential for keeping communities active 
 and connected across devices. Key interaction logic might include messaging, notifications, or scheduling. 
 For example, Meetup, which allows users to find local groups, events, and activities, has been able to release 
-new features simultaneously by leveraging KMP.
+new features simultaneously thanks to KMP.
 
 **Case study:** [Meetup](https://youtu.be/GtJBS7B3eyM?si=lNX3KMhSTCICFPxv)
 
@@ -203,5 +203,5 @@ helping them streamline workflows and drastically reduce the time required to ro
 These examples highlight how Kotlin Multiplatform can be used in practically any industry or type of app. 
 Whether you are building a fintech app, a mobility solution, an education platform, or something else, 
 Kotlin Multiplatform provides the flexibility to share as much code as makes sense for your project, 
-without sacrificing the native experience. You can also check out an extensive list of [KMP case studies](case-studies.topic) on its website, 
+without sacrificing the native experience. You can also check out an extensive list of [KMP case studies](case-studies.topic), 
 showcasing many other companies that use the technology in production.
