@@ -77,7 +77,7 @@ such as functions or line numbers.
 By default, the release versions of iOS frameworks produced from the shared Kotlin module have an accompanying `.dSYM`
 file. This helps you analyze crashes that happen in the shared module's code.
 
-For more information on crash report symbolication, see the [Kotlin/Native documentation](https://kotlinlang.org/docs/native-debugging.html##debug-ios-applications).
+For more information on crash report symbolication, see the [Kotlin/Native documentation](https://kotlinlang.org/docs/native-debugging.html#debug-ios-applications).
 
 ## Web app
 
