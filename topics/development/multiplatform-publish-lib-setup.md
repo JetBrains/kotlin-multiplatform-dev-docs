@@ -130,29 +130,21 @@ This guarantees that all artifacts are available and correctly referenced.
 ## Host requirements
 
 Kotlin/Native supports cross-compilation, allowing any host to produce necessary `.klib` artifacts.
-However, there are still some specifics you should keep in mind.
+However, there are still some limitations you should keep in mind.
 
-### Compilation for Apple targets
-<secondary-label ref="Experimental"/>
+**Compilation for Apple targets**
 
-To produce artifacts for projects with Apple targets, you'd normally need an Apple machine.
-However, if you want to use other hosts, set this option in your `gradle.properties` file:
+You can use any host to produce artifacts for projects with Apple targets.
+However, you still need to use a Mac machine if:
 
-```none
-kotlin.native.enableKlibsCrossCompilation=true
-```
-
-Cross-compilation is currently Experimental and has some limitations. You still need to use a Mac machine if:
-
-* Your library has a [cinterop dependency](https://kotlinlang.org/docs/native-c-interop.html).
+* Your library or dependent modules have [cinterop dependencies](https://kotlinlang.org/docs/native-c-interop.html).
 * You have [CocoaPods integration](multiplatform-cocoapods-overview.md) set up in your project.
 * You need to build or test [final binaries](multiplatform-build-native-binaries.md) for Apple targets.
 
-### Duplicating publications
+**Duplicating publications**
 
 To avoid any issues during publication, publish all artifacts from a single host to avoid duplicating publications in the
 repository. Maven Central, for example, explicitly forbids duplicate publications and fails the process.
-<!-- TBD: add the actual error -->
 
 ## Publish an Android library
 
