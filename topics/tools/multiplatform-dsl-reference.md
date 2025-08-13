@@ -1002,32 +1002,6 @@ kotlin {
 Additionally, source sets can depend on each other and form a hierarchy.
 In this case, the [`dependsOn()`](#source-set-parameters) relation is used.
 
-Source set dependencies can also be declared in the top-level `dependencies {}` block of the build script.
-In this case, their declarations follow the pattern `<sourceSetName><DependencyKind>`, for example, `commonMainApi`.
-
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-dependencies {
-    "commonMainApi"("com.example:foo-common:1.0")
-    "jvm6MainApi"("com.example:foo-jvm6:1.0")
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-dependencies {
-    commonMainApi 'com.example:foo-common:1.0'
-    jvm6MainApi 'com.example:foo-jvm6:1.0'
-}
-```
-
-</tab>
-</tabs>
-
 ## Language settings
 
 The `languageSettings {}` block in a source set defines certain aspects of project analysis and compilation. Use the
