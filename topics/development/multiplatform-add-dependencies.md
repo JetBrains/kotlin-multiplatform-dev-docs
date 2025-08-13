@@ -40,8 +40,6 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, you can [set dependencies at the top level](https://kotlinlang.org/docs/gradle-configure-project.html#set-dependencies-at-top-level).
-
 ## Dependency on a Kotlin library
 
 ### Standard library
