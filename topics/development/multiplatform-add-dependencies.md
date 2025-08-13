@@ -40,6 +40,8 @@ kotlin {
 </tab>
 </tabs>
 
+You can also configure common dependencies in a top-level `dependencies` block. See [Configure dependencies at the top level](multiplatform-dsl-reference.md#configure-dependencies-at-the-top-level).
+
 ## Dependency on a Kotlin library
 
 ### Standard library
