@@ -14,47 +14,49 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 ## Dependencies
 
 * Gradle Plugin `org.jetbrains.compose`, version %org.jetbrains.compose-eap%. Based on Jetpack Compose libraries:
-   * [Runtime 1.9.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.0-beta02)
-   * [UI 1.9.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.0-beta02)
-   * [Foundation 1.9.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0-beta02)
-   * [Material 1.9.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0-beta02)
+   * [Runtime 1.9.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.0-rc01)
+   * [UI 1.9.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.0-rc01)
+   * [Foundation 1.9.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0-rc01)
+   * [Material 1.9.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0-rc01)
    * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
-* Compose Material3 library `org.jetbrains.compose.material3:1.9.0-alpha04`. Based on [Jetpack Material3 1.4.0-alpha17](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-alpha17)
+* Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0-beta01`. Based on [Jetpack Material3 1.4.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01).
 
   The stable version of the common Material3 library is based on Jetpack Compose Material3 1.3.2, but thanks to
-  [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3 you can choose a newer EAP version for your project.
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha04`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha08](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha08)
-* Graphics-Shapes library `org.jetbrains.androidx.graphics:graphics-shapes:1.0.0-alpha09`. Based on [Jetpack Graphics-Shapes 1.0.1](https://developer.android.com/jetpack/androidx/releases/graphics#graphics-shapes-1.0.1)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.1`. Based on [Jetpack Lifecycle 2.9.1](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.1)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta04`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
-* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.1`. Based on [Jetpack Savedstate 1.3.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.0)
-* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-alpha09`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
+  [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3 you can choose a newer pre-release version for your project.
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha05`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha10)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.2`. Based on [Jetpack Lifecycle 2.9.2](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.2)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-beta05`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
+* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.2`. Based on [Jetpack Savedstate 1.3.1](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.1)
+* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-beta01`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
+
+## Breaking changes
+
+In alignment with the Jetpack Material3 [1.4.0-beta01 release](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01), 
+Compose Multiplatform has removed all public APIs tagged with `ExperimentalMaterial3ExpressiveApi` and `ExperimentalMaterial3ComponentOverrideApi`.
+
+If you want to continue using these experimental features, 
+you can explicitly include the previous Material3 alpha version:
+
+```kotlin
+implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+```
 
 ## Across platforms
 
-### New Material 3 Expressive theme
-<secondary-label ref="Experimental"/>
+### Parameters for the `@Preview` annotation
 
-Compose Multiplatform now supports an experimental [`MaterialExpressiveTheme`](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary?hl=en#MaterialExpressiveTheme(androidx.compose.material3.ColorScheme,androidx.compose.material3.MotionScheme,androidx.compose.material3.Shapes,androidx.compose.material3.Typography,kotlin.Function0)) 
-from the Material 3 library. The expressive theming allows you to customize your Material Design app 
-for a more personalized experience.
+The `@Preview` annotation in Compose Multiplatform now includes additional parameters for
+configuring how a `@Composable` function is rendered in design-time previews:
 
-To use the Expressive theme:
+* `name`: The display name of the preview.
+* `group`: The group name for the preview, enabling the logical organization and selective display of related previews.
+* `widthDp`: The maximum width (in dp).
+* `heightDp`: The maximum height (in dp).
+* `locale`: The current locale of the application.
+* `showBackground`: A flag to apply the default background color to the preview.
+* `backgroundColor`: A 32-bit ARGB color integer defining the preview’s background color.
 
-1. Include the latest version of Material 3:
- 
-    ```kotlin
-    implementation("org.jetbrains.compose.material3:material3:%org.jetbrains.compose.material3%")
-    ```
-
-2. Use the `MaterialExpressiveTheme()` function with the `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` opt-in to 
-configure the overall theme of your UI elements by setting the `colorScheme`, `motionScheme`, `shapes`, and `typography` parameters.
-
-Material components, such as [`Button()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-button.html) 
-and [`Checkbox()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-checkbox.html), 
-will then automatically use the values you’ve provided.
-
-<img src="compose_expressive_theme.animated.gif" alt="Material 3 Expressive" width="250" preview-src="compose_expressive_theme.png"/>
+These new preview parameters are recognized and work in both IntelliJ IDEA and Android Studio.
 
 ### Customizable shadows
 
@@ -94,20 +96,29 @@ You can draw shadows of any shape and color, or even use shadow geometry as a ma
 
 For details, see the [shadow API reference](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/shadow/package-summary.html).
 
-### Parameters for the `@Preview` annotation
+### New Material 3 Expressive theme
+<secondary-label ref="Experimental"/>
 
-The `@Preview` annotation in Compose Multiplatform now includes additional parameters for
-configuring how a `@Composable` function is rendered in design-time previews:
+Compose Multiplatform now supports an experimental [`MaterialExpressiveTheme`](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary?hl=en#MaterialExpressiveTheme(androidx.compose.material3.ColorScheme,androidx.compose.material3.MotionScheme,androidx.compose.material3.Shapes,androidx.compose.material3.Typography,kotlin.Function0))
+from the Material 3 library. The expressive theming allows you to customize your Material Design app
+for a more personalized experience.
 
-* `name`: The display name of the preview.
-* `group`: The group name for the preview, enabling the logical organization and selective display of related previews.
-* `widthDp`: The maximum width (in dp).
-* `heightDp`: The maximum height (in dp).
-* `locale`: The current locale of the application.
-* `showBackground`: A flag to apply the default background color to the preview.
-* `backgroundColor`: A 32-bit ARGB color integer defining the preview’s background color.
+To use the Expressive theme:
 
-These new preview parameters are recognized and work in both IntelliJ IDEA and Android Studio.
+1. Include the latest version of Material 3:
+
+    ```kotlin
+    implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+    ```
+
+2. Use the `MaterialExpressiveTheme()` function with the `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` opt-in to
+   configure the overall theme of your UI elements by setting the `colorScheme`, `motionScheme`, `shapes`, and `typography` parameters.
+
+Material components, such as [`Button()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-button.html)
+and [`Checkbox()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-checkbox.html),
+will then automatically use the values you’ve provided.
+
+<img src="compose_expressive_theme.animated.gif" alt="Material 3 Expressive" width="250" preview-src="compose_expressive_theme.png"/>
 
 ### Multiplatform targets in `androidx.compose.runtime:runtime`
 
@@ -280,5 +291,5 @@ If you want to use a newer Material3 version with Expressive design support, rep
 in `build.gradle.kts` with the following:
 
 ```kotlin
-implementation("org.jetbrains.compose.material3:material3:%org.jetbrains.compose.material3%")
+implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
 ```
