@@ -1006,8 +1006,8 @@ In this case, the [`dependsOn()`](#source-set-parameters) relation is used.
 ### Configure dependencies at the top level
 <secondary-label ref="Experimental"/>
 
-Starting with Kotlin 2.2.20, you can configure common dependencies using a top-level `dependencies {}` block.
-Dependencies declared here behave as if they were added to the `commonMain` or `commonTest` source sets.
+You can configure common dependencies using a top-level `dependencies {}` block. Dependencies declared here behave as if
+they were added to the `commonMain` or `commonTest` source sets.
 
 To use the top-level `dependencies {}` block, opt in by adding the `@OptIn(ExperimentalKotlinGradlePluginApi::class)`
 annotation before the block:
@@ -1038,7 +1038,7 @@ kotlin {
 </tab>
 </tabs>
 
-Add platform-specific dependencies inside the appropriate source sets of the `sourceSets {}` block.
+Add platform-specific dependencies inside the `sourceSets {}` block of the corresponding target.
 
 You can share your feedback on this feature in [YouTrack](https://youtrack.jetbrains.com/issue/KT-76446).
 
