@@ -178,7 +178,7 @@ their dependencies to your project.
 ### Library shared for all source sets
 
 If you want to use a library from all source sets, you can add it only to the common source set. The Kotlin
-Multiplatform Mobile plugin will automatically add the corresponding parts to any other source sets.
+Multiplatform plugin automatically adds the corresponding parts to any other source sets.
 
 > You cannot set dependencies on platform-specific libraries in the common source set.
 >
@@ -224,6 +224,10 @@ kotlin {
 
 </tab>
 </tabs>
+
+> You can also configure a common library in a top-level `dependencies {}` block. See [Configure dependencies at the top level](multiplatform-dsl-reference.md#configure-dependencies-at-the-top-level).
+> 
+{style="tip"}
 
 ### Library used in specific source sets
 

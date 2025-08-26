@@ -36,12 +36,13 @@ plugins {
 `kotlin {}` is the top-level block for multiplatform project configuration in the Gradle build script.
 Inside `kotlin {}`, you can write the following blocks:
 
-| **Block**            | **Description**                                                                                                                          |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| _&lt;targetName&gt;_ | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                 |
-| `targets`            | Lists all targets of the project.                                                                                                        |
-| `sourceSets`         | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                    |
+| **Block**            | **Description**                                                                                                                         |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| _&lt;targetName&gt;_ | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                |
+| `targets`            | Lists all targets of the project.                                                                                                       |
+| `sourceSets`         | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                   |
 | `compilerOptions`    | Specifies common extension-level [compiler options](#compiler-options) that are used as defaults for all targets and shared source sets. |
+| `dependencies`       | Configures [common dependencies](#configure-dependencies-at-the-top-level). (Experimental)                                              |
 
 ## Targets
 
@@ -1001,6 +1002,45 @@ kotlin {
 
 Additionally, source sets can depend on each other and form a hierarchy.
 In this case, the [`dependsOn()`](#source-set-parameters) relation is used.
+
+### Configure dependencies at the top level
+<secondary-label ref="Experimental"/>
+
+You can configure common dependencies using a top-level `dependencies {}` block. Dependencies declared here behave as if
+they were added to the `commonMain` or `commonTest` source sets.
+
+To use the top-level `dependencies {}` block, opt in by adding the `@OptIn(ExperimentalKotlinGradlePluginApi::class)`
+annotation before the block:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+kotlin {
+    dependencies {
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
+    }
+}
+```
+
+</tab>
+</tabs>
+
+Add platform-specific dependencies inside the `sourceSets {}` block of the corresponding target.
+
+You can share your feedback on this feature in [YouTrack](https://youtrack.jetbrains.com/issue/KT-76446).
 
 ## Language settings
 
