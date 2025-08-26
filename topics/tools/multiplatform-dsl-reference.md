@@ -36,13 +36,13 @@ plugins {
 `kotlin {}` is the top-level block for multiplatform project configuration in the Gradle build script.
 Inside `kotlin {}`, you can write the following blocks:
 
-| **Block**            | **Description**                                                                                                                          |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| _&lt;targetName&gt;_ | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                 |
-| `targets`            | Lists all targets of the project.                                                                                                        |
-| `sourceSets`         | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                    |
+| **Block**            | **Description**                                                                                                                         |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| _&lt;targetName&gt;_ | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                |
+| `targets`            | Lists all targets of the project.                                                                                                       |
+| `sourceSets`         | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                   |
 | `compilerOptions`    | Specifies common extension-level [compiler options](#compiler-options) that are used as defaults for all targets and shared source sets. |
-| `dependencies`       | EXPERIMENTAL. Configures [common dependencies](#configure-dependencies-at-the-top-level) for the project.                                |
+| `dependencies`       | Configures [common dependencies](#configure-dependencies-at-the-top-level). (Experimental)                                              |
 
 ## Targets
 
