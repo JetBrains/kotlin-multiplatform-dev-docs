@@ -1,6 +1,6 @@
 [//]: # (title: Compose Hot Reload)
 
-<primary-label ref="alpha"/>
+<primary-label ref="beta"/>
 
 [Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
 
@@ -75,7 +75,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 
 ## Use Compose Hot Reload
 
-1. In the `desktopMain` directory, open the `main.kt` file and update the `main()` function:
+1. In the `jvmMain` directory, open the `main.kt` file and update the `main()` function:
    ```kotlin
    fun main() = application {
        Window(
@@ -90,7 +90,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    By setting the `alwaysOnTop` variable to `true`, the generated desktop app stays on top of all your windows, making it easier
    to edit your code and see changes live.
 
-2. In the `commonMain` directory, open the `App.kt` file and update the `Button` composable:
+2. Open the `App.kt` file and update the `Button` composable:
    ```kotlin
    Button(onClick = { showContent = !showContent }) {
        Column {
@@ -100,15 +100,15 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    ```
    Now, the text for the button is controlled by the `greet()` function.
 
-3. In the `commonMain` directory, open the `Greeting.kt` file and update the `greet()` function:
+3. Open the `Greeting.kt` file and update the `greet()` function:
    ```kotlin
     fun greet(): String {
         return "Hello!"
     }
    ```
 
-4.  In the `desktopMain` directory, open the `main.kt` file and click the **Run** icon in the gutter. 
-    Select **Run 'composeApp [desktop]' with Compose Hot Reload (Alpha)**.
+4.  Open the `main.kt` file and click the **Run** icon in the gutter. 
+    Select **Run 'composeApp [hotRunJvm]' with Compose Hot Reload (Beta)**.
 
     ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
 
