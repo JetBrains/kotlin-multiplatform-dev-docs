@@ -100,14 +100,14 @@ For details, see the [shadow API reference](https://developer.android.com/refere
 ### Customizable context menu
 
 We've adopted Jetpack Compose's new API for custom context menus in `SelectionContainer` and `BasicTextField`. 
-The implementation is complete for iOS and web platforms, while desktop currently has initial support.
+The implementation is complete for iOS and web, while desktop has initial support.
 
 <list columns="2">
-   <li><img src="compose_basic_text_field.png" type="inline" alt="Customizable shadows" width="420"/></li>
-   <li><img src="compose_selection_container.png" type="inline" alt="Customizable shadows" width="440"/></li>
+   <li><img src="compose_basic_text_field.png" type="inline" alt="Context menu for BasicTextField" width="420"/></li>
+   <li><img src="compose_selection_container.png" type="inline" alt="Context menu for SelectionContainer" width="440"/></li>
 </list>
 
-To enable this new API, use the following setting in the application entry point:
+To enable this new API, use the following setting at the application entry point:
 
 ```kotlin
 ComposeFoundationFlags.isNewContextMenuEnabled = true
@@ -124,7 +124,7 @@ for a more personalized experience.
 
 To use the Expressive theme:
 
-1. Include the latest version of Material 3:
+1. Include the experimental version of Material 3:
 
     ```kotlin
     implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
@@ -298,7 +298,7 @@ Compose Multiplatform now includes new `SwingFrame()` and `SwingDialog()` compos
 They are similar to the existing `Window()` and `DialogWindow()` functions but include an `init` block.
 
 Previously, it was impossible to set certain window properties that must be configured before display.
-The `init` block executes prior to your window or dialog appearing on the screen, allowing you to configure properties
+The new `init` block executes prior to your window or dialog appearing on the screen, allowing you to configure properties
 like `java.awt.Window.setType` or add event listeners that need to be ready early.
 
 We recommend using the `init` block only for properties that cannot be changed once the window or dialog is visible.
