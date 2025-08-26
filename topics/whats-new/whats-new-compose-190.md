@@ -2,9 +2,10 @@
 
 Here are the highlights for this EAP feature release:
 
-* [Material 3 Expressive theme](#new-material-3-expressive-theme)
-* [Customizable shadows](#customizable-shadows)
 * [Parameters for the `@Preview` annotation](#parameters-for-the-preview-annotation)
+* [Customizable shadows](#customizable-shadows)
+* [Customizable context menu](#customizable-context-menu)
+* [Material 3 Expressive theme](#material-3-expressive-theme)
 * [Frame rate configuration on iOS](#frame-rate-configuration)
 * [Accessibility support on web targets](#accessibility-support)
 * [New API for embedding HTML content](#new-api-for-embedding-html-content)
@@ -96,7 +97,25 @@ You can draw shadows of any shape and color, or even use shadow geometry as a ma
 
 For details, see the [shadow API reference](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/shadow/package-summary.html).
 
-### New Material 3 Expressive theme
+### Customizable context menu
+
+We've adopted Jetpack Compose's new API for custom context menus in `SelectionContainer` and `BasicTextField`. 
+The implementation is complete for iOS and web platforms, while desktop currently has initial support.
+
+<list columns="2">
+   <li><img src="compose_basic_text_field.png" type="inline" alt="Customizable shadows" width="420"/></li>
+   <li><img src="compose_selection_container.png" type="inline" alt="Customizable shadows" width="440"/></li>
+</list>
+
+To enable this new API, use the following setting in the application entry point:
+
+```kotlin
+ComposeFoundationFlags.isNewContextMenuEnabled = true
+```
+
+For details, see the [context menu API reference](https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/contextmenu/data/package-summary).
+
+### Material 3 Expressive theme
 <secondary-label ref="Experimental"/>
 
 Compose Multiplatform now supports an experimental [`MaterialExpressiveTheme`](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary?hl=en#MaterialExpressiveTheme(androidx.compose.material3.ColorScheme,androidx.compose.material3.MotionScheme,androidx.compose.material3.Shapes,androidx.compose.material3.Typography,kotlin.Function0))
@@ -158,6 +177,12 @@ rate in frames per second using a non-negative number:
 ```kotlin
 Modifier.preferredFrameRate(30f)
 ```
+
+### IME options
+
+Compose Multiplatform introduces support for iOS-specific IME customization for text input components. 
+You can now use `PlatformImeOptions` to configure native UIKit text input traits such as keyboard type, 
+autocorrection, and return key behavior directly in the text field code.
 
 ## Web
 
@@ -233,20 +258,6 @@ fun Map() {
 
 Note that you can only use this function with the `ComposeViewport` entry point, as `CanvasBasedWindow` is deprecated.
 
-### Context menus
-
-Compose Multiplatform %org.jetbrains.compose-eap% brings the following updates for web context menus:
-
-* Text context menu: The standard Compose text context menu is now fully supported for both mobile and desktop modes.
-* New customizable context menu: We’ve adopted Jetpack Compose’s new API for custom web context menus.
-   For now, it’s available in desktop mode only.
-
-   To enable this new API, use the following setting in the application entry point:
-   
-   ```kotlin
-   ComposeFoundationFlags.isNewContextMenuEnabled = true
-   ```
-
 ### Simplified API for binding to the navigation graph
 
 Compose Multiplatform has introduced a new API for binding the browser’s navigation state to the `NavController`:
@@ -279,6 +290,21 @@ LaunchedEffect(Unit) {
 }
 ```
 
+## Desktop
+
+### Configuring windows before display
+
+Compose Multiplatform now includes new `SwingFrame()` and `SwingDialog()` composables. 
+They are similar to the existing `Window()` and `DialogWindow()` functions but include an `init` block.
+
+Previously, it was impossible to set certain window properties that must be configured before display.
+The `init` block executes prior to your window or dialog appearing on the screen, allowing you to configure properties
+like `java.awt.Window.setType` or add event listeners that need to be ready early.
+
+We recommend using the `init` block only for properties that cannot be changed once the window or dialog is visible.
+For all other configurations, continue using the `LaunchedEffect(window)` pattern to ensure your code remains 
+compatible and works correctly with future updates.
+
 ## Gradle plugin
 
 ### Decoupled Material3 versioning
@@ -293,3 +319,8 @@ in `build.gradle.kts` with the following:
 ```kotlin
 implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
 ```
+
+### Unified web distribution
+
+The new `composeCompatibilityBrowserDistribution` Gradle task combines Kotlin/JS and Kotlin/Wasm distributions into a single package. 
+This allows Wasm applications to fall back to the JS target when modern Wasm features are not supported by a browser.
