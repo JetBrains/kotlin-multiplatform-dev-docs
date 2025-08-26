@@ -53,7 +53,7 @@ A simple example is to point to a specific folder:
 ```kotlin
 compose.resources {
     customDirectory(
-        sourceSetName = "desktopMain",
+        sourceSetName = "jvmMain",
         directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
     )
 }
