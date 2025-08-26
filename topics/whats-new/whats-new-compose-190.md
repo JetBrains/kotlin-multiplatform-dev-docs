@@ -30,18 +30,6 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.2`. Based on [Jetpack Savedstate 1.3.1](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.1)
 * WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-beta01`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
 
-## Breaking changes
-
-In alignment with the Jetpack Material3 [1.4.0-beta01 release](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01), 
-Compose Multiplatform has removed all public APIs tagged with `ExperimentalMaterial3ExpressiveApi` and `ExperimentalMaterial3ComponentOverrideApi`.
-
-If you want to continue using these experimental features, 
-you can explicitly include the previous Material3 alpha version:
-
-```kotlin
-implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
-```
-
 ## Across platforms
 
 ### Parameters for the `@Preview` annotation
@@ -122,6 +110,12 @@ Compose Multiplatform now supports an experimental [`MaterialExpressiveTheme`](h
 from the Material 3 library. The expressive theming allows you to customize your Material Design app
 for a more personalized experience.
 
+>In alignment with the Jetpack Material3 [1.4.0-beta01 release](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01),
+>Compose Multiplatform has removed all public APIs tagged with `ExperimentalMaterial3ExpressiveApi` and `ExperimentalMaterial3ComponentOverrideApi`.
+>
+>If you want to use these experimental features, you need to explicitly include the alpha Material3 version.
+{style="note"}
+
 To use the Expressive theme:
 
 1. Include the experimental version of Material 3:
@@ -130,8 +124,9 @@ To use the Expressive theme:
     implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
     ```
 
-2. Use the `MaterialExpressiveTheme()` function with the `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` opt-in to
-   configure the overall theme of your UI elements by setting the `colorScheme`, `motionScheme`, `shapes`, and `typography` parameters.
+2. Configure the overall theme of your UI elements using the `MaterialExpressiveTheme()` function. 
+   This function requires the `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` opt-in and allows you to specify
+   `colorScheme`, `motionScheme`, `shapes`, and `typography`.
 
 Material components, such as [`Button()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-button.html)
 and [`Checkbox()`](https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-checkbox.html),
