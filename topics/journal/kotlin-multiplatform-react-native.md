@@ -67,7 +67,7 @@ With KMP, you can choose your sharing strategy: from sharing all code except for
 
 To share UI code across platforms, you can use [Compose Multiplatform](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/) – JetBrains’ modern declarative framework built on Kotlin Multiplatform and Google’s Jetpack Compose. It is [stable for iOS](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/?_gl=1*dcswc7*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTA2NzU0MzQkbzM2JGcxJHQxNzUwNjc1NjEwJGo2MCRsMCRoMA..), Android, and desktop, with web support currently in Alpha.
 
-[![Explore Compose Multiplatform](explore-compose.svg){width="500}"](https://www.jetbrains.com/compose-multiplatform/)
+[![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
 Originally introduced in Kotlin 1.2 (2017), Kotlin Multiplatform reached [stable status](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/) in November 2023. At Google I/O 2024, Google announced [official support for using Kotlin Multiplatform on Android](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) to share business logic between Android and iOS.
 
