@@ -173,11 +173,26 @@ rate in frames per second using a non-negative number:
 Modifier.preferredFrameRate(30f)
 ```
 
+If you apply `preferredFrameRate` multiple times within the same `@Composable` tree, the highest specified value will be applied.
+However, the device's hardware may limit the supported frame rates, typically up to 120 Hz.
+
 ### IME options
 
 Compose Multiplatform introduces support for iOS-specific IME customization for text input components. 
 You can now use `PlatformImeOptions` to configure native UIKit text input traits such as keyboard type, 
-autocorrection, and return key behavior directly in the text field code.
+autocorrection, and return key behavior directly in the text field component:
+
+```kotlin
+BasicTextField(
+    value = "",
+    onValueChange = {},
+    keyboardOptions = KeyboardOptions(
+        platformImeOptions = PlatformImeOptions {
+            keyboardType(UIKeyboardTypeEmailAddress)
+        }
+    )
+)
+```
 
 ## Web
 
