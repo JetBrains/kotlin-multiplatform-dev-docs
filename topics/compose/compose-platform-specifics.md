@@ -31,10 +31,7 @@ Compose Multiplatform adopts the [Compose window insets approach](https://develo
 and imitates it on iOS
 to account for [safe areas](https://developer.apple.com/documentation/UIKit/positioning-content-relative-to-the-safe-area).
 Depending on your implementation, the software keyboard may be positioned a little differently on iOS.
-Make sure to check that the keyboard does not cover important UI elements on both platforms. 
-
-Compose Multiplatform currently doesn't support changing the default IME action, for example,
-showing a magnifying glass or a checkmark instead of the usual &crarr; icon.
+Make sure to check that the keyboard does not cover important UI elements on both platforms.
 
 ### Touch and mouse support
 
