@@ -203,7 +203,7 @@ NavHost(
             navDeepLink { uriPattern = "demo://example2.org/name={name}" },
             // The generated pattern only handles the parameters,
             // so we add the serial name for the route type
-            navDeepLink<Screen3>(basePath = "$firstBasePath/dlscreen"),
+            navDeepLink<DeepLinkScreen>(basePath = "$firstBasePath/dlscreen"),
         )
     ) {
         // If the app receives the URI `demo://example1.org/dlscreen/Jane/`,
