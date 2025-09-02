@@ -79,10 +79,12 @@ Due to limitations of the Wasm target, lifecycles:
 * Skip the `CREATED` state, as the application is always attached to the page.
 * Never reach the `DESTROYED` state, as web pages are usually terminated only when the user closes the tab.
 
-| Native event | Lifecycle event | Lifecycle state change |
-|--------------|-----------------|------------------------|
-| `blur`       | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
-| `focus`      | `ON_RESUME`     | `STARTED` → `RESUMED`  |
+| Native event                             | Lifecycle event | Lifecycle state change |
+|------------------------------------------|-----------------|------------------------|
+| `blur`                                   | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `focus`                                  | `ON_RESUME`     | `STARTED` → `RESUMED`  |
+| `visibilitychange` (becomes visible)     | `ON_START`      | `STARTED` → `RESUMED`  |
+| `visibilitychange` (stops being visible) | `ON_STOP`       | `RESUMED` → `STARTED`  |
 
 ### Desktop
 
