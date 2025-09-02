@@ -185,31 +185,24 @@ fun Counter(text: String, counter: MutableState<Int>) {
 
 ### Experimental off-screen rendering
 
-An experimental mode allows rendering compose panels directly on Swing components.
-This prevents transitional rendering issues when panels are shown, hidden, or resized.
+An experimental mode allows rendering a `ComposePanel` directly on Swing components.
+This prevents transitional rendering issues when a `ComposePanel` is shown, hidden, or resized.
 It also enables proper layering when combining Swing components and compose panels: a Swing component can be shown 
 above or beneath a `ComposePanel`.
+This can, however, result in performance penalty proportional to the panel size when compared to default Skia rendering.
+
+This mode only affects `ComposePanel` components.
+Right now, there are no corresponding settings for `ComposeWindow` or `ComposeDialog`.
 
 > Off-screen rendering is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels),
 > and you should use it only for evaluation purposes.
 >
 {style="warning"}
 
-To enable off-screen rendering, use the `compose.swing.render.on.graphics` system property.
-The property must be set before executing any Compose code in your application, so it is recommended to enable it using 
-the `-D` command-line JVM argument at startup: 
-
-```Console
--Dcompose.swing.render.on.graphics=true
-```
-
-Alternatively, use `System.setProperty()` at the entry point:
+To enable off-screen rendering, pass the `RenderSettings.SwingGraphics` value when creating a `ComposePanel`:
 
 ```kotlin
-fun main() {
-    System.setProperty("compose.swing.render.on.graphics", "true")
-    ...
-}
+val composePanel = ComposePanel(renderSettings = RenderSettings.SwingGraphics)
 ```
 
 ### Experimental separate views for popups
