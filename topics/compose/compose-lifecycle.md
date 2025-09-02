@@ -81,10 +81,10 @@ Due to limitations of the Wasm target, lifecycles:
 
 | Native event                             | Lifecycle event | Lifecycle state change |
 |------------------------------------------|-----------------|------------------------|
-| `blur`                                   | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `visibilitychange` (becomes visible)     | `ON_START`      | `CREATED` → `STARTED`  |
 | `focus`                                  | `ON_RESUME`     | `STARTED` → `RESUMED`  |
-| `visibilitychange` (becomes visible)     | `ON_START`      | `STARTED` → `RESUMED`  |
-| `visibilitychange` (stops being visible) | `ON_STOP`       | `RESUMED` → `STARTED`  |
+| `blur`                                   | `ON_PAUSE`      | `RESUMED` → `STARTED`  |
+| `visibilitychange` (stops being visible) | `ON_STOP`       | `STARTED` → `CREATED`  |
 
 ### Desktop
 
