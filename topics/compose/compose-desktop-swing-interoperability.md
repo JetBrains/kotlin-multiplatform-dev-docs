@@ -185,32 +185,42 @@ fun Counter(text: String, counter: MutableState<Int>) {
 
 ### Experimental off-screen rendering
 
-An experimental mode allows rendering compose panels directly on Swing components.
-This prevents transitional rendering issues when panels are shown, hidden, or resized.
+An experimental mode allows rendering a `ComposePanel` directly on Swing components.
+This prevents transitional rendering issues when a `ComposePanel` is shown, hidden, or resized.
 It also enables proper layering when combining Swing components and compose panels: a Swing component can be shown 
 above or beneath a `ComposePanel`.
+However, this can result in a performance penalty that increases with the panel size when compared to the default Skia rendering.
+
+This mode only affects `ComposePanel` components.
+Right now, there are no corresponding settings for `ComposeWindow` or `ComposeDialog`.
 
 > Off-screen rendering is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels),
 > and you should use it only for evaluation purposes.
 >
 {style="warning"}
 
-To enable off-screen rendering, use the `compose.swing.render.on.graphics` system property.
-The property must be set before executing any Compose code in your application, so it is recommended to enable it using 
-the `-D` command-line JVM argument at startup: 
-
-```Console
--Dcompose.swing.render.on.graphics=true
-```
-
-Alternatively, use `System.setProperty()` at the entry point:
+To enable off-screen rendering for a specific `ComposePanel`, pass the `RenderSettings.SwingGraphics` value when creating it:
 
 ```kotlin
-fun main() {
-    System.setProperty("compose.swing.render.on.graphics", "true")
-    ...
-}
+val composePanel = ComposePanel(renderSettings = RenderSettings.SwingGraphics)
 ```
+
+To enable off-screen rendering by default for every `ComposePanel` in your project, use the `compose.swing.render.on.graphics`
+feature flag:
+
+* Specify the flag as a command-line JVM argument at startup:
+
+    ```shell
+    -Dcompose.swing.render.on.graphics=true
+    ```
+* Or pass the flag as an argument to the `System.setProperty()` function at the entry point:
+
+    ```kotlin
+    fun main() {
+        System.setProperty("compose.swing.render.on.graphics", "true")
+        ...
+    }
+    ```
 
 ### Experimental separate views for popups
 
