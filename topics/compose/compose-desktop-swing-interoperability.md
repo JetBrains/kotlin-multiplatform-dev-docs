@@ -189,7 +189,7 @@ An experimental mode allows rendering a `ComposePanel` directly on Swing compone
 This prevents transitional rendering issues when a `ComposePanel` is shown, hidden, or resized.
 It also enables proper layering when combining Swing components and compose panels: a Swing component can be shown 
 above or beneath a `ComposePanel`.
-This can, however, result in performance penalty proportional to the panel size when compared to default Skia rendering.
+However, this can result in a performance penalty that increases with the panel size when compared to the default Skia rendering.
 
 This mode only affects `ComposePanel` components.
 Right now, there are no corresponding settings for `ComposeWindow` or `ComposeDialog`.
