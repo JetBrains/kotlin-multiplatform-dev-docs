@@ -323,10 +323,10 @@ The resulting hierarchical structure will look like this:
 
 You can have a shared source set for the following combinations of targets:
 
-* JVM or Android + JS + Native
+* JVM or Android + Web + Native
 * JVM or Android + Native
-* JS + Native
-* JVM or Android + JS
+* Web + Native
+* JVM or Android + Web
 * Native
 
 Kotlin doesn't currently support sharing a source set for these combinations:
