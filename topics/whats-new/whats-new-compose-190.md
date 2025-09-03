@@ -196,6 +196,17 @@ BasicTextField(
 
 ## Web
 
+### Compose Multiplatform for Web in Beta
+
+Compose Multiplatform for Web is now in Beta, making it the perfect time to give it a try. 
+Check out [our blog post]<!--TODO:link --> to learn more about the progress made to reach this milestone.
+
+As we work toward a stable release, our roadmap includes the following plans:
+
+* Implementing support for drag-and-drop functionality
+* Improving accessibility support
+* Addressing issues related to the `TextField` component
+
 ### Accessibility support
 
 Compose Multiplatform now provides initial accessibility support for the web target. This version enables 
