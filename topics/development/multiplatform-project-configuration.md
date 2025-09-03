@@ -18,32 +18,14 @@ Answering these questions will help you pick the best configuration for your pro
 
 To use a Kotlin Multiplatform shared module from an iOS app, you first need to generate
 an [iOS framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html)
-from this shared module. Then, you should add it as a dependency to the iOS project:
+from this shared module. Then, you should add it as a dependency to the iOS project.
 
-![Kotlin Multiplatform shared module](kmp-shared-module.svg){width=700}
+Generally, there are two options with different implementations:
 
-It's possible to consume this framework as a local or remote dependency.
+* Local dependency. Kotlin build is directly interacting with an iOS build.
+* Remote dependency. Kotlin build produces an iOS framework which you then connect to an iOS project using a package manager.
 
-You can add a dependency on a Kotlin Multiplatform module framework to the iOS project in one of the following ways:
-
-* **Direct integration**. You connect the framework directly by adding a new run script phase to the build of the iOS
-  app. See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#configure-the-ios-project-to-use-a-kmp-framework)
-  to learn how to do that in Xcode.
-
-  When you create a project with the Android Studio wizard, choose the **Regular framework** option to have this setup generated
-  automatically.
-
-* **CocoaPods integration**. You connect a framework through [CocoaPods](https://cocoapods.org/), a popular dependency
-  manager for Swift and Objective-C projects. It can be either a local or remote dependency. For more information,
-  see [Use a Kotlin Gradle project as a CocoaPods dependency](multiplatform-cocoapods-xcode.md).
-
-  To set up a workflow with a local CocoaPods dependency, you can either generate the project with a wizard, or edit the
-  scripts manually.
-
-* **Using SPM**. You connect a framework using the Swift package manager (SPM), an Apple tool for managing the
-  distribution of Swift code. We're [working on official support for SPM](https://youtrack.jetbrains.com/issue/KT-53877).
-  Currently, you can set up a dependency on a Swift package using XCFrameworks. For more information,
-  see [Swift package export setup](multiplatform-spm-export.md).
+To review all available options for iOS integration, see [](multiplatform-ios-integration-overview.md).
 
 ## Module configurations
 
@@ -304,7 +286,7 @@ Xcode installed to open and run both apps after making changes to the common cod
 
 ### Remote: artifact distribution
 
-Remote distribution means that the framework artifact is published as a CocoaPod or Swift package using SPM and consumed
+Remote distribution means that the framework artifact is published using Swift Package Manager or as a CocoaPod and consumed
 by the iOS app. The Android app may consume the binary dependency either locally or remotely.
 
 Remote distribution is often used to gradually introduce the technology to existing projects. It doesn't significantly
@@ -346,7 +328,7 @@ That allows making changes to common Kotlin code, immediately observing the beha
 code. When the functionality is ready, they can switch back to the remote dependency and publish their changes
 accordingly. First, they publish changes to the shared modules, and only after that do they make changes to the apps.
 
-For remote distribution workflows, use either CocoaPods integration or SPM. For local distribution workflow, integrate
+For remote distribution workflows, use Swift Package Manager. For local distribution workflow, integrate
 the framework directly.
 
 <!-- This tutorial [TODO] describes how to switch workflows by choosing the corresponding scheme in Xcode:
