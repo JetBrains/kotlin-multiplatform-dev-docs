@@ -53,14 +53,14 @@ Things to keep in mind for this tutorial:
     {style="note"}
 
 5. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
-    Make sure that the **Share UI** option is selected for iOS.
+    Make sure that the **Share UI** option is selected for iOS and Web.
 6. Once you've specified all the fields and targets, click **Create** (**Download** in the web wizard).
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
 ## Examine the project structure
 
-In IntelliJ IDEA, navigate to the "ComposeDemo" folder.
+In IntelliJ IDEA, navigate to the `ComposeDemo` folder.
 If you didn't select iOS in the wizard, you won't have the folders whose names begin with "ios" or "apple".
 
 > IntelliJ IDEA may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
@@ -78,14 +78,16 @@ The project contains two modules:
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
 
-  ![Compose Multiplatform project structure](compose-project-structure.png){width=350}
+  ![Compose Multiplatform project structure](compose-project-structure.png)
 
-The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `desktopMain`, `iosMain`, and `wasmJsMain`.
+The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `jvmMain`, `iosMain`, and `wasmJsMain`
+(with `commonTest` if you chose to include tests).
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
-The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
-target. Kotlin/JVM is used for `androidMain` and `desktopMain`. Kotlin/Native is used for `iosMain`. On the other hand, Kotlin/Wasm is 
+The `commonMain` source set contains the common Kotlin code, and platform source sets contain Kotlin code specific to each
+target.
+Kotlin/JVM is used for `androidMain` and `jvmMain`, Kotlin/Native is used for `iosMain`, and Kotlin/Wasm is 
 used for `wasmJsMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
