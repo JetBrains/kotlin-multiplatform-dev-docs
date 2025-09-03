@@ -4,7 +4,7 @@ Here are the highlights for this EAP feature release:
 
 * [Parameters for the `@Preview` annotation](#parameters-for-the-preview-annotation)
 * [Customizable shadows](#customizable-shadows)
-* [Customizable context menu](#customizable-context-menu)
+* [New context menu API](#new-context-menu-api)
 * [Material 3 Expressive theme](#material-3-expressive-theme)
 * [Frame rate configuration on iOS](#frame-rate-configuration)
 * [Accessibility support on web targets](#accessibility-support)
@@ -85,7 +85,7 @@ You can draw shadows of any shape and color, or even use shadow geometry as a ma
 
 For details, see the [shadow API reference](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/shadow/package-summary.html).
 
-### Customizable context menu
+### New context menu API
 
 We've adopted Jetpack Compose's new API for custom context menus in `SelectionContainer` and `BasicTextField`. 
 The implementation is complete for iOS and web, while desktop has initial support.
