@@ -129,7 +129,7 @@ This guarantees that all artifacts are available and correctly referenced.
 
 ## Host requirements
 
-Kotlin/Native supports cross-compilation, allowing any host to produce necessary `.klib` artifacts.
+Kotlin/Native supports cross-compilation, allowing any host to produce the necessary `.klib` artifacts.
 However, there are still some limitations you should keep in mind.
 
 **Compilation for Apple targets**
