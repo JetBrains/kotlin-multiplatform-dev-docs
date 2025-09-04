@@ -130,7 +130,7 @@ Now, you can share almost anything, except for platform-specific code.
 ### 5. With the Kotlin Multiplatform solution, you can share UI code
 
 JetBrains provides [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a declarative framework for sharing user interfaces across multiple platforms, 
-including Android (via Jetpack Compose), iOS, desktop, and web (Alpha), based on Kotlin and Jetpack Compose.
+including Android (via Jetpack Compose), iOS, desktop, and web (Beta), based on Kotlin and Jetpack Compose.
 
 _Instabee_, a last-mile logistics platform specialized for e-commerce businesses, 
 started using Compose Multiplatform in their Android and iOS applications, 
