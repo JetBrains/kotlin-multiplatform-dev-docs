@@ -7,6 +7,7 @@ Here are the highlights for this EAP feature release:
 * [New context menu API](#new-context-menu-api)
 * [Material 3 Expressive theme](#material-3-expressive-theme)
 * [Frame rate configuration on iOS](#frame-rate-configuration)
+* [Compose Multiplatform for Web in Beta](#compose-multiplatform-for-web-in-beta)
 * [Accessibility support on web targets](#accessibility-support)
 * [New API for embedding HTML content](#new-api-for-embedding-html-content)
 
@@ -198,10 +199,10 @@ BasicTextField(
 
 ### Compose Multiplatform for Web in Beta
 
-Compose Multiplatform for Web is now in Beta, making it the perfect time to give it a try. 
+Compose Multiplatform for Web is now in Beta, making it a great time to give it a try. 
 Check out [our blog post]<!--TODO:link --> to learn more about the progress made to reach this milestone.
 
-As we work toward a stable release, our roadmap includes the following plans:
+As we work toward a stable release, our roadmap includes:
 
 * Implementing support for drag-and-drop functionality
 * Improving accessibility support
