@@ -204,7 +204,7 @@ Check out [our blog post]<!--TODO:link --> to learn more about the progress made
 
 As we work toward a stable release, our roadmap includes:
 
-* Implementing support for drag-and-drop functionality
+* Implementing support for drag-and-drop functionality in mobile browsers
 * Improving accessibility support
 * Addressing issues related to the `TextField` component
 
