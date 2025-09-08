@@ -80,6 +80,23 @@ compose.resources {
 ```
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
+### Custom web resource paths
+
+Use the `configureWebResources()` function to define custom logic for generating web resource paths.
+You can specify either a relative path starting with `/` or an absolute URL starting with `http://` or `https://`:
+
+```kotlin
+// Maps resources to an application-specific path
+configureWebResources {
+    resourcePathMapping { path -> "/myApp/resources/$path" }
+}
+
+// Maps resources to an external CDN
+configureWebResources {
+    resourcePathMapping { path -> "https://mycdn.com/myApp/res/$path" }
+}
+```
+
 ### Resources in the `androidLibrary` target
 <secondary-label ref="Experimental"/>
 
