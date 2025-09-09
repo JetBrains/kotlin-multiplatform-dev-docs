@@ -82,8 +82,10 @@ compose.resources {
 
 ### Custom web resource paths
 
-Use the `configureWebResources()` function to define custom logic for generating web resource paths.
-You can specify either a relative path starting with `/` or an absolute URL starting with `http://` or `https://`:
+The `configureWebResources()` function allows you to specify paths and URLs for your web resources:
+
+* Use a relative path (starting with `/`) to reference a resource from the domain root.
+* Use an absolute URL (starting with `http://` or `https://`) to reference a resource hosted on an external domain or CDN.
 
 ```kotlin
 // Maps resources to an application-specific path
