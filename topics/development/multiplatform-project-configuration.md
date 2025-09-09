@@ -245,7 +245,7 @@ Local distribution is where the iOS app consumes a Kotlin Multiplatform module f
 need for publishing. The iOS app can either integrate the framework directly or by using CocoaPods.
 
 This workflow is typically used when both Android and iOS team members want to edit the shared Kotlin Multiplatform
-code. The iOS developers need to install Android Studio and have a basic knowledge of Kotlin and Gradle.
+code. The iOS developers need to install IntelliJ IDEA or Android Studio and have a basic knowledge of Kotlin and Gradle.
 
 In the local distribution scheme, the iOS app build triggers the generation of the iOS framework. This means that iOS
 developers can observe their changes to Kotlin Multiplatform code right away:
@@ -258,8 +258,8 @@ workflow. See [Setting up a local dependency for local development](#setting-up-
 details.
 
 This workflow is most effective when all of the team members are ready to edit code in the whole project. It includes both
-Android and iOS parts after making changes to the common parts. Ideally, every team member can have Android Studio and
-Xcode installed to open and run both apps after making changes to the common code.
+Android and iOS parts after making changes to the common parts. Ideally, every team member can have IntelliJ IDEA/Android Studio and
+Xcode installed to open and run both Android and iOS apps after making changes to the common code.
 
 <table>
   <tr>
@@ -277,7 +277,7 @@ Xcode installed to open and run both apps after making changes to the common cod
 <td>
   <list>
     <li>Team members need to set up a full development environment on their machines.</li>
-    <li>iOS developers have to learn how to use Android Studio and Gradle.</li>
+    <li>iOS developers have to learn how to use IntelliJ IDEA or Android Studio and Gradle.</li>
     <li>Managing changes becomes difficult as more code is shared and the team grows.</li>
   </list>
 </td>
@@ -304,7 +304,8 @@ remote distribution workflow. Alternatively, you can always set up a similar wor
      <th>Cons</th>
   </tr>
   <tr>
-  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like Android Studio and Gradle. This lowers the barrier of entry for the team significantly.</td>
+  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like IntelliJ IDEA/Android Studio or Gradle.
+      This lowers the barrier of entry for the team significantly.</td>
 <td>
   <list>
     <li>Slower workflow for iOS developers, as the process of editing and building the shared code involves publishing and versioning.</li>
