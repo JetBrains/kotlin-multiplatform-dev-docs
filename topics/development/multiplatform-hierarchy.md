@@ -262,10 +262,10 @@ It will hold the shared code for several targets.
 For example, here's what to do if you want to share code among native Linux,
 Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosX64`):
 
-1. In the shared module's `build.gradle(.kts)` file, add the intermediate source set `desktopMain`, which holds the shared
+1. In the shared module's `build.gradle(.kts)` file, add the intermediate source set `myDesktopMain`, which would the shared
    logic for these targets.
-2. Using the `dependsOn` relation, set up the source set hierarchy. Connect `commonMain` with `desktopMain` and then
-   `desktopMain` with each of the target source sets:
+2. Using the `dependsOn` relation, set up the source set hierarchy. Connect `commonMain` with `myDesktopMain` and then
+   `myDesktopMain` with each of the target source sets:
 
     <tabs group="build-script">
     <tab title="Kotlin" group-key="kotlin">
@@ -277,13 +277,13 @@ Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosX64`):
         macosX64()
     
         sourceSets {
-            val desktopMain by creating {
+            val myDesktopMain by creating {
                 dependsOn(commonMain.get())
             }
     
-            linuxX64Main.get().dependsOn(desktopMain)
-            mingwX64Main.get().dependsOn(desktopMain)
-            macosX64Main.get().dependsOn(desktopMain)
+            linuxX64Main.get().dependsOn(myDesktopMain)
+            mingwX64Main.get().dependsOn(myDesktopMain)
+            macosX64Main.get().dependsOn(myDesktopMain)
         }
     }
     ```
@@ -298,17 +298,17 @@ Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosX64`):
         macosX64()
     
         sourceSets {
-            desktopMain {
+            myDesktopMain {
                 dependsOn(commonMain.get())
             }
             linuxX64Main {
-                dependsOn(desktopMain)
+                dependsOn(myDesktopMain)
             }
             mingwX64Main {
-                dependsOn(desktopMain)
+                dependsOn(myDesktopMain)
             }
             macosX64Main {
-                dependsOn(desktopMain)
+                dependsOn(myDesktopMain)
             }
         }
     }
@@ -323,10 +323,10 @@ The resulting hierarchical structure will look like this:
 
 You can have a shared source set for the following combinations of targets:
 
-* JVM or Android + JS + Native
+* JVM or Android + Web + Native
 * JVM or Android + Native
-* JS + Native
-* JVM or Android + JS
+* Web + Native
+* JVM or Android + Web
 * Native
 
 Kotlin doesn't currently support sharing a source set for these combinations:
