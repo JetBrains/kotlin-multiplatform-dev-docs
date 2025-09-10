@@ -262,7 +262,7 @@ It will hold the shared code for several targets.
 For example, here's what to do if you want to share code among native Linux,
 Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosX64`):
 
-1. In the shared module's `build.gradle(.kts)` file, add the intermediate source set `myDesktopMain`, which would the shared
+1. In the shared module's `build.gradle(.kts)` file, add the intermediate source set `myDesktopMain`, which would hold the shared
    logic for these targets.
 2. Using the `dependsOn` relation, set up the source set hierarchy. Connect `commonMain` with `myDesktopMain` and then
    `myDesktopMain` with each of the target source sets:
