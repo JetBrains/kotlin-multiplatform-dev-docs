@@ -114,7 +114,8 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 
     ![First Compose Hot Reload on desktop app](compose-hot-reload-hello.png){width=500}
 
-5. Update the string returned from the `greet()` function, then save the file to see the desktop app update automatically.
+5. Update the string returned from the `greet()` function, then save all files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>)
+   to see the desktop app update automatically.
 
    ![Compose Hot Reload](compose-hot-reload.gif){width=500}
 

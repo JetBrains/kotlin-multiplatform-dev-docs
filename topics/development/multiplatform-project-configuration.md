@@ -18,32 +18,14 @@ Answering these questions will help you pick the best configuration for your pro
 
 To use a Kotlin Multiplatform shared module from an iOS app, you first need to generate
 an [iOS framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html)
-from this shared module. Then, you should add it as a dependency to the iOS project:
+from this shared module. Then, you should add it as a dependency to the iOS project.
 
-![Kotlin Multiplatform shared module](kmp-shared-module.svg){width=700}
+Generally, there are two options with different implementations:
 
-It's possible to consume this framework as a local or remote dependency.
+* Local dependency. Kotlin build is directly interacting with an iOS build.
+* Remote dependency. Kotlin build produces an iOS framework which you then connect to an iOS project using a package manager.
 
-You can add a dependency on a Kotlin Multiplatform module framework to the iOS project in one of the following ways:
-
-* **Direct integration**. You connect the framework directly by adding a new run script phase to the build of the iOS
-  app. See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#configure-the-ios-project-to-use-a-kmp-framework)
-  to learn how to do that in Xcode.
-
-  When you create a project with the Android Studio wizard, choose the **Regular framework** option to have this setup generated
-  automatically.
-
-* **CocoaPods integration**. You connect a framework through [CocoaPods](https://cocoapods.org/), a popular dependency
-  manager for Swift and Objective-C projects. It can be either a local or remote dependency. For more information,
-  see [Use a Kotlin Gradle project as a CocoaPods dependency](multiplatform-cocoapods-xcode.md).
-
-  To set up a workflow with a local CocoaPods dependency, you can either generate the project with a wizard, or edit the
-  scripts manually.
-
-* **Using SPM**. You connect a framework using the Swift package manager (SPM), an Apple tool for managing the
-  distribution of Swift code. We're [working on official support for SPM](https://youtrack.jetbrains.com/issue/KT-53877).
-  Currently, you can set up a dependency on a Swift package using XCFrameworks. For more information,
-  see [Swift package export setup](multiplatform-spm-export.md).
+To review all available options for iOS integration, see [](multiplatform-ios-integration-overview.md).
 
 ## Module configurations
 
@@ -263,7 +245,7 @@ Local distribution is where the iOS app consumes a Kotlin Multiplatform module f
 need for publishing. The iOS app can either integrate the framework directly or by using CocoaPods.
 
 This workflow is typically used when both Android and iOS team members want to edit the shared Kotlin Multiplatform
-code. The iOS developers need to install Android Studio and have a basic knowledge of Kotlin and Gradle.
+code. The iOS developers need to install IntelliJ IDEA or Android Studio and have a basic knowledge of Kotlin and Gradle.
 
 In the local distribution scheme, the iOS app build triggers the generation of the iOS framework. This means that iOS
 developers can observe their changes to Kotlin Multiplatform code right away:
@@ -276,8 +258,8 @@ workflow. See [Setting up a local dependency for local development](#setting-up-
 details.
 
 This workflow is most effective when all of the team members are ready to edit code in the whole project. It includes both
-Android and iOS parts after making changes to the common parts. Ideally, every team member can have Android Studio and
-Xcode installed to open and run both apps after making changes to the common code.
+Android and iOS parts after making changes to the common parts. Ideally, every team member can have IntelliJ IDEA/Android Studio and
+Xcode installed to open and run both Android and iOS apps after making changes to the common code.
 
 <table>
   <tr>
@@ -295,7 +277,7 @@ Xcode installed to open and run both apps after making changes to the common cod
 <td>
   <list>
     <li>Team members need to set up a full development environment on their machines.</li>
-    <li>iOS developers have to learn how to use Android Studio and Gradle.</li>
+    <li>iOS developers have to learn how to use IntelliJ IDEA or Android Studio and Gradle.</li>
     <li>Managing changes becomes difficult as more code is shared and the team grows.</li>
   </list>
 </td>
@@ -304,7 +286,7 @@ Xcode installed to open and run both apps after making changes to the common cod
 
 ### Remote: artifact distribution
 
-Remote distribution means that the framework artifact is published as a CocoaPod or Swift package using SPM and consumed
+Remote distribution means that the framework artifact is published using Swift Package Manager or as a CocoaPod and consumed
 by the iOS app. The Android app may consume the binary dependency either locally or remotely.
 
 Remote distribution is often used to gradually introduce the technology to existing projects. It doesn't significantly
@@ -322,7 +304,8 @@ remote distribution workflow. Alternatively, you can always set up a similar wor
      <th>Cons</th>
   </tr>
   <tr>
-  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like Android Studio and Gradle. This lowers the barrier of entry for the team significantly.</td>
+  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like IntelliJ IDEA/Android Studio or Gradle.
+      This lowers the barrier of entry for the team significantly.</td>
 <td>
   <list>
     <li>Slower workflow for iOS developers, as the process of editing and building the shared code involves publishing and versioning.</li>
@@ -346,7 +329,7 @@ That allows making changes to common Kotlin code, immediately observing the beha
 code. When the functionality is ready, they can switch back to the remote dependency and publish their changes
 accordingly. First, they publish changes to the shared modules, and only after that do they make changes to the apps.
 
-For remote distribution workflows, use either CocoaPods integration or SPM. For local distribution workflow, integrate
+For remote distribution workflows, use Swift Package Manager. For local distribution workflow, integrate
 the framework directly.
 
 <!-- This tutorial [TODO] describes how to switch workflows by choosing the corresponding scheme in Xcode:

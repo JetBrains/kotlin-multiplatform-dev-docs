@@ -57,13 +57,13 @@ See the [](compose-lifecycle.md) page for details of the current implementation 
 ## Support for browser navigation in web apps
 <secondary-label ref="Experimental"/>
 
-Compose Multiplatform for web fully supports the common Navigation library APIs,
-and on top of that allows your apps to receive navigational input from the browser.
+Compose Multiplatform for web fully supports the common Navigation library APIs
+and allows your apps to receive navigational input from the browser.
 Users can use the **Back** and **Forward** buttons in the browser to move between navigation routes reflected in the browser history,
 as well as use the address bar to understand where they are and get to a destination directly.
 
 To bind the web app to the navigation graph defined in your common code,
-you can use the `window.bindToNavigation()` method in your Kotlin/Wasm code. 
+you can use the `NavController.bindToBrowserNavigation()` method in your Kotlin/Wasm code. 
 You can use the same method in Kotlin/JS, but wrap it in the `onWasmReady {}` block to ensure 
 that the Wasm application is initialized and Skia is ready to render graphics.
 Here is an example of how to set this up:
@@ -90,7 +90,7 @@ fun main() {
     val body = document.body ?: return
     ComposeViewport(body) {
         App(
-          onNavHostReady = { window.bindToNavigation(it) }
+          onNavHostReady = { it.bindToBrowserNavigation() }
         )
     }
 }
@@ -103,14 +103,14 @@ fun main() {
         val body = document.body ?: return@onWasmReady
         ComposeViewport(body) {
             App(
-                onNavHostReady = { window.bindToNavigation(it) }
+                onNavHostReady = { it.bindToBrowserNavigation() }
             )
         }
     }
 }
 ```
 
-After a `window.bindToNavigation(navController)` call:
+After calling `navController.bindToBrowserNavigation()`:
 * The URL displayed in the browser reflects the current route (in the URL fragment, after the `#` character).
 * The app parses URLs entered manually to translate them into destinations within the app.
 
@@ -141,7 +141,7 @@ you can assign the name to a screen directly or develop fully custom processing 
 
 To implement a fully custom route to URL transformation: 
 
-1. Pass the optional `getBackStackEntryRoute` lambda to the `window.bindToNavigation()` function
+1. Pass the optional `getBackStackEntryRoute` lambda to the `navController.bindToBrowserNavigation()` function
     to specify how routes should be converted into URL fragments when necessary.
 2. If needed, add code that catches URL fragments in the address bar (when someone clicks or pastes your app's URL)
     and translates URLs into routes to navigate users accordingly.
@@ -191,7 +191,7 @@ internal fun App(
 ```
 {default-state="collapsed" collapsible="true" collapsed-title="NavHost(navController = navController, startDestination = StartScreen)"}
 
-In `wasmJsMain/kotlin/main.kt`, add the lambda to the `.bindToNavigation()` call:
+In `wasmJsMain/kotlin/main.kt`, add the lambda to the `.bindToBrowserNavigation()` call:
 
 ```kotlin
 @OptIn(
@@ -204,7 +204,7 @@ fun main() {
     ComposeViewport(body) {
         App(
             onNavHostReady = { navController ->
-                window.bindToNavigation(navController) { entry ->
+                navController.bindToBrowserNavigation() { entry ->
                     val route = entry.destination.route.orEmpty()
                     when {
                         // Identifies the route using its serial descriptor
@@ -239,7 +239,7 @@ fun main() {
     }
 }
 ```
-<!--{default-state="collapsed" collapsible="true" collapsed-title="window.bindToNavigation(navController) { entry ->"}-->
+<!--{default-state="collapsed" collapsible="true" collapsed-title="navController.bindToBrowserNavigation() { entry ->"}-->
 
 > Make sure that every string that corresponds to a route starts with the `#` character to keep the data
 > within URL fragments.
@@ -250,8 +250,8 @@ fun main() {
 
 If your URLs have custom formatting, you should add the reverse processing 
 to match manually entered URLs to destination routes.
-The code that does the matching needs to run before the `window.bindToNavigation()` call binds
-`window.location` to the navigation graph:
+The code that does the matching needs to run before the `navController.bindToBrowserNavigation()` call binds
+the browser location to the navigation graph:
 
 <tabs>
     <tab title="Kotlin/Wasm">
@@ -284,7 +284,7 @@ The code that does the matching needs to run before the `window.bindToNavigation
                                 navController.navigate(Patient(name, id))
                             }
                         }
-                        window.bindToNavigation(navController) { ... }
+                        navController.bindToBrowserNavigation() { ... }
                     }
                 )
             }
@@ -322,7 +322,7 @@ The code that does the matching needs to run before the `window.bindToNavigation
                                     navController.navigate(Patient(name, id))
                                 }
                             }
-                            window.bindToNavigation(navController) { ... }
+                            navController.bindToBrowserNavigation() { ... }
                         }
                     )
                 }

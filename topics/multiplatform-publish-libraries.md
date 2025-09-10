@@ -253,7 +253,7 @@ To add the plugin to your project, add the following line to the `plugins {}` bl
 // <module directory>/build.gradle.kts
 
 plugins {
-    id("com.vanniktech.maven.publish") version "0.30.0" 
+    id("com.vanniktech.maven.publish") version "%vanniktechPublishPlugin%" 
 }
 ```
 
@@ -267,7 +267,7 @@ In the same file, add the following configuration, making sure to customize all 
 // <module directory>/build.gradle.kts
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
     
     signAllPublications()
     
