@@ -3,7 +3,7 @@
 	<sitemap priority="0.35" change-frequency="monthly"/>
 	<variables>
 		<analytics-head-script-file>thirdparty/dpk-gtm-analytics.html</analytics-head-script-file>
-		<include-in-head>thirdparty/favicons.html</include-in-head>
+		<include-in-head>thirdparty/dpk-gtm-analytics.html</include-in-head>
 		<website-title>%instance% Documentation</website-title>
 		<automaticLinkSummaries>false</automaticLinkSummaries>
 		<header-logo>jb-kotlin-multiplatform-logo.svg</header-logo>
