@@ -15,14 +15,14 @@
             "name": "Is Kotlin Multiplatform production-ready?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "<p>Kotlin Multiplatform is a stable technology that is ready for use in production. This means that you can use Kotlin Multiplatform for sharing code in production across Android, iOS, desktop (JVM), server-side (JVM), and web, even in the most conservative usage scenarios. Compose Multiplatform, a framework for building shared UIs across platforms (powered by Kotlin Multiplatform and Google’s Jetpack Compose), is stable for iOS, Android, and desktop. Web support is currently in Alpha.</p>"
+              "text": "<p>Kotlin Multiplatform is a stable technology that is ready for use in production. This means that you can use Kotlin Multiplatform for sharing code in production across Android, iOS, desktop (JVM), server-side (JVM), and web, even in the most conservative usage scenarios. Compose Multiplatform, a framework for building shared UIs across platforms (powered by Kotlin Multiplatform and Google's Jetpack Compose), is stable for iOS, Android, and desktop. Web support is currently in Alpha.</p>"
             }
           }, {
             "@type": "Question",
             "name": "Is Kotlin Multiplatform better than React Native?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Both Kotlin Multiplatform and React Native have their own strengths, and the choice depends on your project’s specific goals, technical requirements, and team expertise. In the comparison above, we’ve outlined key differences in areas like code sharing, build tools, compilation, and ecosystem to help you decide which option is the best fit for your use case."
+              "text": "Both Kotlin Multiplatform and React Native have their own strengths, and the choice depends on your project's specific goals, technical requirements, and team expertise. In the comparison above, we've outlined key differences in areas like code sharing, build tools, compilation, and ecosystem to help you decide which option is the best fit for your use case."
             }
           }, {
             "@type": "Question",
@@ -36,7 +36,7 @@
             "name": "Is it worth learning Kotlin Multiplatform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "If you're interested in sharing code across Android, iOS, desktop, and web while retaining native performance and flexibility, Kotlin Multiplatform is worth learning. It's backed by JetBrains and officially supported by Google on Android to share business logic between Android and iOS. What’s more, KMP with Compose Multiplatform is increasingly adopted in production by companies building multiplatform apps."
+              "text": "If you're interested in sharing code across Android, iOS, desktop, and web while retaining native performance and flexibility, Kotlin Multiplatform is worth learning. It's backed by JetBrains and officially supported by Google on Android to share business logic between Android and iOS. What's more, KMP with Compose Multiplatform is increasingly adopted in production by companies building multiplatform apps."
             }
           }]
         }
@@ -50,10 +50,10 @@
 
     <tip>
         <p>This comparison article highlights that Kotlin Multiplatform excels in delivering truly native experiences
-            across Android and iOS with full access to platform APIs. KMP is particularly attractive for teams focused
-            on performance, maintainability, and a native look and feel, especially when using Compose Multiplatform for
-            shared UI code. Meanwhile, React Native may suit teams with JavaScript expertise, especially for rapid
-            prototyping.</p>
+            across Android and iOS with full access to platform APIs.
+            KMP is particularly attractive for teams focused on performance, maintainability, and a native look and feel,
+            especially when using Compose Multiplatform for shared UI code.
+            Meanwhile, React Native may suit teams with JavaScript expertise, especially for rapid prototyping.</p>
     </tip>
     <p>Cross-platform development has significantly changed the way teams build applications, enabling them to deliver
         apps for multiple platforms from a shared codebase. This approach streamlines development and helps ensure a
@@ -62,7 +62,7 @@
         which led to duplicated effort and noticeable differences between platforms. Cross-platform solutions have
         accelerated time to market and improved overall efficiency.</p>
     <p>Among the available tools, Kotlin Multiplatform, React Native, and Flutter stand out as three of the most widely
-        adopted options. In this article, we’ll take a closer look at both to help you choose the right fit for your
+        adopted options. In this article, we'll take a closer look at both to help you choose the right fit for your
         product and team.</p>
     <chapter title="Kotlin Multiplatform and Compose Multiplatform" id="kotlin-multiplatform-and-compose-multiplatform">
         <p><a href="https://www.jetbrains.com/kotlin-multiplatform/">Kotlin Multiplatform (KMP)</a> is an open-source
@@ -84,9 +84,9 @@
             UI native.</p>
         <p>To share UI code across platforms, you can use <a
                 href="https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/">Compose Multiplatform</a>
-            — JetBrains’ modern declarative framework built on Kotlin Multiplatform and Google’s Jetpack Compose. It is
+            — JetBrains' modern declarative framework built on Kotlin Multiplatform and Google's Jetpack Compose. It is
             <a href="https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/?_gl=1*dcswc7*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTA2NzU0MzQkbzM2JGcxJHQxNzUwNjc1NjEwJGo2MCRsMCRoMA..">stable
-                for iOS</a>, Android, and desktop, with web support currently in Alpha.</p>
+                for iOS</a>, Android, and desktop, with web support currently in Beta.</p>
         <p><a href="https://www.jetbrains.com/compose-multiplatform/"><img src="explore-compose.svg"
                                                                            alt="Explore Compose Multiplatform"
                                                                            style="block"
@@ -101,7 +101,7 @@
     <chapter title="React Native" id="react-native">
         <p>React Native is an open-source framework for building Android and iOS applications using <a
                 href="https://reactjs.org/">React</a>, a library for web and native user interfaces, and the app
-            platform’s native capabilities. React Native allows developers to use JavaScript to access their platform’s
+            platform's native capabilities. React Native allows developers to use JavaScript to access their platform's
             APIs and describe the appearance and behavior of the UI using React components — bundles of reusable,
             nestable code.</p>
         <p>React Native was first announced in January 2015 at React.js Conf. Later that year, Meta released React
@@ -182,7 +182,7 @@
             </tr>
             <tr>
                 <td><b>Communication with native APIs</b></td>
-                <td>Native APIs are accessible directly from Kotlin code thanks to Kotlin’s interoperability with both
+                <td>Native APIs are accessible directly from Kotlin code thanks to Kotlin's interoperability with both
                     Swift/Objective-C and JavaScript.
                 </td>
                 <td>React Native exposes a set of APIs to connect your native code to your JavaScript application code:
@@ -200,9 +200,9 @@
                     compatible with OpenGL, ANGLE (which translates OpenGL ES 2 or 3 calls to native APIs), Vulkan, and
                     Metal.
                 </td>
-                <td>React Native includes a core set of platform-agnostic native components, such as `View`, `Text`, and
-                    `Image`, that map directly to the platform's native UI building blocks, like `UIView` on iOS and
-                    `android.view` on Android.
+                <td>React Native includes a core set of platform-agnostic native components, such as <code>View</code>,
+                    <code>Text</code>, and <code>Image</code>, that map directly to the platform's native UI building blocks,
+                    like <code>UIView</code> on iOS and <code>android.view</code> on Android.
                 </td>
             </tr>
             <tr>
@@ -219,7 +219,7 @@
                 <td>
                     <a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Forbes</a>,
                     <a href="https://www.youtube.com/watch?v=z-o9MqN86eE">Todoist</a>, <a
-                        href="https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc">McDonald’s</a>,
+                        href="https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc">McDonald's</a>,
                     <a href="https://youtu.be/5lkZj4v4-ks?si=DoW00DU7CYkaMmKc">Google Workspace</a>, <a
                         href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Philips</a>, <a
                         href="https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04">9gag</a>,
@@ -242,8 +242,8 @@
     </chapter>
     <chapter title="Choosing the right cross-platform technology for your project"
              id="choosing-the-right-cross-platform-technology-for-your-project">
-        <p>Deciding on a cross-platform framework isn’t about finding a one-size-fits-all solution — it’s about choosing
-            the best fit for your project’s goals, technical requirements, and team expertise. Whether you're building a
+        <p>Deciding on a cross-platform framework isn't about finding a one-size-fits-all solution — it's about choosing
+            the best fit for your project's goals, technical requirements, and team expertise. Whether you're building a
             feature-rich product with a complex UI or aiming to launch quickly with existing skills, the right choice
             will depend on your specific priorities. Consider how much control you need over UI customization, how
             important long-term stability is, and what platforms you plan to support.</p>
@@ -266,13 +266,13 @@
             production across Android, iOS, desktop (JVM), server-side (JVM), and web, even in the most conservative
             usage scenarios.</p>
         <p>Compose Multiplatform, a framework for building shared UIs across platforms (powered by Kotlin Multiplatform
-            and Google’s Jetpack Compose), is stable for iOS, Android, and desktop. Web support is currently in
-            Alpha.</p>
+            and Google's Jetpack Compose), is stable for iOS, Android, and desktop. Web support is currently in
+            Beta.</p>
         <p>
             <control>Q: Is Kotlin Multiplatform better than React Native?</control>
         </p>
         <p>A: Both Kotlin Multiplatform and React Native have their own strengths, and the choice depends on your
-            project’s specific goals, technical requirements, and team expertise. In the comparison above, we’ve
+            project's specific goals, technical requirements, and team expertise. In the comparison above, we've
             outlined key differences in areas like code sharing, build tools, compilation, and ecosystem to help you
             decide which option is the best fit for your use case.</p>
         <p>
@@ -286,7 +286,7 @@
         </p>
         <p>A: If you're interested in sharing code across Android, iOS, desktop, and web while retaining native
             performance and flexibility, Kotlin Multiplatform is worth learning. It's backed by JetBrains and officially
-            supported by Google on Android to share business logic between Android and iOS. What’s more, KMP with
+            supported by Google on Android to share business logic between Android and iOS. What's more, KMP with
             Compose Multiplatform is increasingly adopted in production by companies building multiplatform apps.</p>
     </chapter>
 
