@@ -81,7 +81,7 @@ The project contains two modules:
   ![Compose Multiplatform project structure](compose-project-structure.png)
 
 The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
-`jvmMain`, `wasmJsMain`, and `webMain`.
+`jvmMain`, `wasmJsMain`, and `webMain` (with `commonTest` if you chose to include tests).
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
