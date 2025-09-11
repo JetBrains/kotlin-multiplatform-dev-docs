@@ -285,7 +285,7 @@ starts a desktop app in its own OS window:
    * **[composeApp:jsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
    * **[composeApp:wasmJsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
 
-   ![Run the Compose Multiplatform app on web](web-new-run-configuration.png){width=500}
+   ![Run the Compose Multiplatform app on web](web-new-run-configuration.png){width=650}
 
 4. Click **Run**.
 
@@ -299,7 +299,7 @@ The web application opens automatically in your browser. Alternatively, you can 
 >
 {style="tip"}
 
-![Compose web application](first-compose-project-on-web.png){width=500}
+![Compose web application](first-compose-project-on-web.png){width=600}
 
 ## Next step
 
