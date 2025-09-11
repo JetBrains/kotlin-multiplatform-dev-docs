@@ -82,7 +82,7 @@ compose.resources {
 
 ### Custom web resource paths
 
-The `configureWebResources()` function allows you to specify paths and URLs for your web resources:
+You can specify paths and URLs for your web resources using the `configureWebResources()` function:
 
 * Use a relative path (starting with `/`) to reference a resource from the domain root.
 * Use an absolute URL (starting with `http://` or `https://`) to reference a resource hosted on an external domain or CDN.
