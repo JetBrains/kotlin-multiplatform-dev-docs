@@ -53,7 +53,7 @@ Things to keep in mind for this tutorial:
     {style="note"}
 
 5. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
-    Make sure that the **Share UI** option is selected for iOS and Web.
+    Make sure that the **Share UI** option is selected for iOS and web.
 6. Once you've specified all the fields and targets, click **Create** (**Download** in the web wizard).
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
@@ -80,21 +80,26 @@ The project contains two modules:
 
   ![Compose Multiplatform project structure](compose-project-structure.png)
 
-The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `jvmMain`, `iosMain`, and `wasmJsMain`
-(with `commonTest` if you chose to include tests).
+The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
+`jvmMain`, `wasmJsMain`, and `webMain`.
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
-The `commonMain` source set contains the common Kotlin code, and platform source sets contain Kotlin code specific to each
-target.
-Kotlin/JVM is used for `androidMain` and `jvmMain`, Kotlin/Native is used for `iosMain`, and Kotlin/Wasm is 
-used for `wasmJsMain`.
+The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
+target: 
+
+* `jvmMain` is the source file for desktop, which uses Kotlin/JVM.
+* `androidMain` also uses Kotlin/JVM.
+* `iosMain` uses Kotlin/Native.
+* `jsMain` uses Kotlin/JS.
+* `wasmJsMain` uses Kotlin/Wasm.
+* `webMain` contains shared source sets for both `jsMain` and `wasmJsMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
-Kotlin code gets treated as Kotlin/Wasm.
+Kotlin code can be treated as Kotlin/Wasm or Kotlin/JS.
 
-![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.png){width=700}
+![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.svg){width=700}
 
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
@@ -110,6 +115,7 @@ fun App() {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .safeContentPadding()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -119,7 +125,10 @@ fun App() {
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
                 }
@@ -266,9 +275,19 @@ starts a desktop app in its own OS window:
 
 ### Run your web application
 
-Select **composeApp [wasmJs]** in the list of run configurations and click **Run**.
+1. In the list of run configurations, click **Edit configurations**. 
 
-![Run the Compose Multiplatform app on web](compose-run-web.png){width=350}
+   ![Edit run configurations](ios-edit-configurations.png){width=450}
+
+2. Click the **+** button above the list of configurations and then select **Gradle**.
+3. Select from the **Run** list:
+
+   * **[composeApp:jsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
+   * **[composeApp:wasmJsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
+
+   ![Run the Compose Multiplatform app on web](web-new-run-configuration.png){width=500}
+
+4. Click **Run**.
 
 The web application opens automatically in your browser. Alternatively, you can type the following URL in your browser when the run is finished:
 
@@ -280,7 +299,7 @@ The web application opens automatically in your browser. Alternatively, you can 
 >
 {style="tip"}
 
-![Compose web application](first-compose-project-on-web.png){width=550}
+![Compose web application](first-compose-project-on-web.png){width=500}
 
 ## Next step
 

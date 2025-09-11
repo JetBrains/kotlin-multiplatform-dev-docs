@@ -26,26 +26,30 @@ In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()
 @Composable
 @Preview
 fun App() {
-  MaterialTheme {
-    var showContent by remember { mutableStateOf(false) }
-    Column(
-      modifier = Modifier
-        .safeContentPadding()
-        .fillMaxSize(),
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      Button(onClick = { showContent = !showContent }) {
-        Text("Click me!")
-      }
-      AnimatedVisibility(showContent) {
-        val greeting = remember { Greeting().greet() }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-          Image(painterResource(Res.drawable.compose_multiplatform), null)
-          Text("Compose: $greeting")
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .safeContentPadding()
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
 
@@ -149,21 +153,25 @@ platform-specific dependencies. These dependencies could be created by hand or u
 
 ### On web
 
-In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, take a look at the `main()` function:
+In the `composeApp/src/webMain/kotlin/main.kt` file, take a look at the `main()` function:
 
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(document.body!!) { App() }
+    ComposeViewport {
+        App()
+    }
 }
 ```
 
 * The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
   experimental and may change in future releases.
-* The `ComposeViewport()` function sets up the Compose environment for the application.
+* The `ComposeViewport{}` function sets up the Compose environment for the application.
 * The web app is inserted into the container specified as a parameter for the `ComposeViewport` function.
-  In the example, the entire document's body works as the container.
 * The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
+
+The `main.kt` file is located
+in the `webMain` directory, which contains common code for the web targets.
 
 ## Next step
 
