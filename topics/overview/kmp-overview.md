@@ -5,23 +5,26 @@ while integrating with native code where needed.
 
 ## Why you should adopt Kotlin Multiplatform
 
-Kotlin Multiplatform is productive:
+Kotlin Multiplatform allows you to build more efficiently and launch faster:
 
-* **Start small, scale smoothly**. You can start sharing code for a single feature or a single screen and expand from there.
-* **Native speed**. Apps made with Kotlin Multiplatform are compiled to native code, so Compose UIs feel native on every platform,
-  without a custom engine or a VM.
-* **Built-in tooling**. Kotlin Multiplatform and tooling around it are built by JetBrains, the team behind IntelliJ IDEA.
-  Tools tailored for multiplatform development help with onboarding and development efficiency.
-* **Open source**. Just like for Kotlin itself, source code for both Kotlin Multiplatform and Compose Multiplatform is open and free to use.
-
-Kotlin Multiplatform is cost-efficient:
-
-* **Faster time to market**. Ship updates to cross-platform functionality for several platforms simultaneously.
-* **Real impact**. In addition to faster time to market, 65% of teams reported improved performance and quality,
-  and 55% reported improved collaboration after adopting KMP (based on the KMP survey ran in 2024).
-* **Smaller teams**. Kotlin Multiplatform allows one team to use one language for everything and own the entire project
-  without splitting the code into, for example, iOS and Android silos.
-* **Less code**. Sharing code means writing and maintaining less code to achieve the same result.
+* **Share code across platforms** to reduce development and maintenance costs.
+  Focus on features, not duplication.
+* **Launch faster** by shipping updates simultaneously across platforms with one team and one workflow.
+* **Build with smaller, smarter teams.**
+  KMP lets one team own the entire app without splitting into iOS and Android silos.
+* **Start small – share one module or screen.**
+  Scale when it makes sense.
+  Avoid risky rewrites.
+* **Follow the big players:**
+  KMP is used by startups as well as scale-ups like 9GAG, Wrike, and Instabee.
+  It’s trusted by high-growth, high-demand apps.
+* **See real impact:** In addition to faster time to market, 65% of teams reported improved performance and quality,
+  and 55% reported improved collaboration after adopting KMP, based on the KMP Survey 2024.
+* **Use one language for everything:** Use Kotlin across your entire stack – from backend to shared code on Android, iOS, desktop, and web
+  – thanks to Kotlin Multiplatform and Compose Multiplatform.
+* **Leverage your team’s existing skills** in Kotlin and Jetpack to build apps across platforms. Minimize learning curves and the time needed to get started.
+* **Delegate routine tasks** to [Junie](https://www.jetbrains.com/junie/), the coding agent by JetBrains which can already handle Kotlin Multiplatform,
+  and focus on what really matters.
 
 ## Discover Kotlin Multiplatform use cases
 
