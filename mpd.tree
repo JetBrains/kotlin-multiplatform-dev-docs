@@ -99,6 +99,7 @@
 			<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
 		</toc-element>
 		<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
+        <toc-element toc-title="Make your app multiplatform" topic="migrate-from-android.md"/>
 		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
 		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
 	</toc-element>
