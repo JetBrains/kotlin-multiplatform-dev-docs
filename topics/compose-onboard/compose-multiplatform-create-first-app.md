@@ -275,21 +275,34 @@ starts a desktop app in its own OS window:
 
 ### Run your web application
 
-1. In the list of run configurations, click **Edit configurations**. 
+1. In the list of run configurations, select:
 
-   ![Edit run configurations](ios-edit-configurations.png){width=450}
+   * **composeApp[js]**: To run your Kotlin/JS application.
+   * **composeApp[wasmJs]**: To run your Kotlin/Wasm application.
+
+   ![Run the Compose Multiplatform app on web](web-run-configuration.png){width=400}
+
+2. Click **Run**.
+
+You can also run your application in compatibility mode, enabling cross-compilation 
+for both the `js` and `wasmJs` targets. 
+Given this fallback mode, when you create a website, it works on all 
+browsers out of the box, as modern browsers use `wasmJs` and older ones use `js`.
+
+To run your application in compatibility mode for both `js` and `wasmJs`:
+
+1. In the list of run configurations, click **Edit configurations**.
+
+   ![Edit run configurations](web-edit-configurations.png){width=400}
 
 2. Click the **+** button above the list of configurations and then select **Gradle**.
-3. Select from the **Run** list:
-
-   * **[composeApp:jsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
-   * **[composeApp:wasmJsBrowserDevelopmentRun]**: To run your Kotlin/JS application.
-
-   ![Run the Compose Multiplatform app on web](web-new-run-configuration.png){width=650}
-
+3. Select **[composeApp:composeCompatibilityBrowserDistribution]** from the Run list. 
 4. Click **Run**.
 
-The web application opens automatically in your browser. Alternatively, you can type the following URL in your browser when the run is finished:
+   ![Add new run configurations](web-run-compatibility-configuration.png){width=650}
+
+After running the configuration, the web application opens automatically in your browser. 
+Alternatively, you can type the following URL in your browser when the run is finished:
 
 ```shell
    http://localhost:8080/
