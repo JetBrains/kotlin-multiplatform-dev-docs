@@ -70,7 +70,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    agp = "8.7.3"
    ...
    coroutinesVersion = "%coroutinesVersion%"
-   dateTimeVersion = "0.6.2"
+   dateTimeVersion = "%dateTimeVersion%"
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
@@ -123,7 +123,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    }
    ```
 
-6.  The common source set requires a core artifact of each library, as well as the Ktor [serialization feature](https://ktor.io/docs/serialization-client.html)
+6. The common source set requires a core artifact of each library, as well as the Ktor [serialization feature](https://ktor.io/docs/serialization-client.html)
     to use `kotlinx.serialization` for processing network requests and responses.
     The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
@@ -155,7 +155,23 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
     }
     ```
 
-7. Once the dependencies are added, click the **Sync Gradle Changes** button to synchronize Gradle files once again.
+7. At the beginning of the `sourseSets` block, opt in for the experimental time API of the standard Kotlin library:
+
+    ```kotlin
+    kotlin {
+        // ...
+    
+        sourceSets {
+            all {
+                languageSettings.optIn("kotlin.time.ExperimentalTime")
+            }
+            
+            // ...
+        }
+    }
+    ```
+
+8. Once the dependencies are added, click the **Sync Gradle Changes** button to synchronize Gradle files once again.
 
 After the Gradle sync, you are done with the project configuration and can start writing code.
 
