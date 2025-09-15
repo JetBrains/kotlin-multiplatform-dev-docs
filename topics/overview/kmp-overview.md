@@ -3,28 +3,60 @@
 Kotlin Multiplatform (KMP) is a technology that allows reusing code across Android, iOS, desktop, web, and server-side
 while integrating with native code where needed.
 
-## Why you should adopt Kotlin Multiplatform
+Kotlin Multiplatform (KMP) is an open-source technology by JetBrains that enables sharing code across Android, iOS, desktop,
+web, and server while retaining the advantages of native development.
 
-Kotlin Multiplatform allows you to build more efficiently and launch faster:
+With Compose Multiplatform, you can also share UI code across multiple platforms for maximum code reuse.
 
-* **Share code across platforms** to reduce development and maintenance costs.
-  Focus on features, not duplication.
-* **Launch faster** by shipping updates simultaneously across platforms with one team and one workflow.
-* **Build with smaller, smarter teams.**
-  KMP lets one team own the entire app without splitting into iOS and Android silos.
-* **Start small – share one module or screen.**
-  Scale when it makes sense.
-  Avoid risky rewrites.
-* **Follow the big players:**
-  KMP is used by startups as well as scale-ups like 9GAG, Wrike, and Instabee.
-  It’s trusted by high-growth, high-demand apps.
-* **See real impact:** In addition to faster time to market, 65% of teams reported improved performance and quality,
-  and 55% reported improved collaboration after adopting KMP, based on the KMP Survey 2024.
-* **Use one language for everything:** Use Kotlin across your entire stack – from backend to shared code on Android, iOS, desktop, and web
-  – thanks to Kotlin Multiplatform and Compose Multiplatform.
-* **Leverage your team’s existing skills** in Kotlin and Jetpack to build apps across platforms. Minimize learning curves and the time needed to get started.
-* **Delegate routine tasks** to [Junie](https://www.jetbrains.com/junie/), the coding agent by JetBrains which can already handle Kotlin Multiplatform,
-  and focus on what really matters.
+![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png)
+
+KMP is used in production by organizations of different sizes, from startups to global enterprises,
+including Google, Duolingo, Forbes, Philips, McDonald’s, Bolt, H&M, Baidu, Kuaishou, and Bilibili.
+These companies have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,
+cost efficiency, and support for gradual adoption. [Learn more about companies who adopted KMP](case-studies.topic).
+
+## Why companies choose KMP
+
+### Cost efficiency and faster delivery 🚀
+
+* Reduce duplication and maintenance costs through shared logic
+* Release features simultaneously on multiple platforms
+* Use Compose Multiplatform to build shared UIs without separate implementations
+
+### Flexibility of code sharing 🔄
+
+* Share isolated modules such as networking or storage
+* Share business logic while keeping UIs native
+* Share both logic and UI with Compose Multiplatform for maximum reuse
+
+### Native feel on iOS 📱
+
+* Use SwiftUI or UIKit for fully native interfaces
+* Get native-feeling apps on Android and iOS with Compose Multiplatform 
+* Combine native and shared approaches as needed
+
+### ⚡ Native performance
+
+* Code compiled to platform binaries for near-native performance
+* Access platform APIs directly without extra layers
+
+
+### ✨ AI-powered development
+
+Let Junie, JetBrains’ AI coding agent, handle KMP tasks so your team can move faster
+
+### 👩‍💻 Team collaboration
+
+* Maintain consistency with a shared codebase
+* Reduce duplication across platform teams
+* Simplify knowledge transfer through unified logic
+
+
+### 🪜 Gradual adoption
+
+* Start with a single feature or module
+* Expand progressively over time 
+* Mix native and shared code in the same project
 
 ## Discover Kotlin Multiplatform use cases
 
