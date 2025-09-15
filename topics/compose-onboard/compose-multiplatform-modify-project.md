@@ -42,6 +42,9 @@ To use the `kotlinx-datetime` library:
                 // ...
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
             }
+            wasmJsMain.dependencies {
+                implementation(npm("@js-joda/timezone", "2.22.0"))
+            }
         }
     }
     
@@ -49,13 +52,14 @@ To use the `kotlinx-datetime` library:
 
     * The main dependency is added to the section that configures the common code source set.
     * For simplicity, the version number is included directly instead of being added to the version catalog.
+    * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain` dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 3. In the **Terminal** tool window, run the following command:
 
     ```shell
-    ./gradlew kotlinUpgradeYarnLock
+    ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.

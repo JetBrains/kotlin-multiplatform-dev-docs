@@ -97,7 +97,7 @@ target:
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
-Kotlin code can be treated as Kotlin/Wasm or Kotlin/JS.
+Kotlin code can be treated as Kotlin/Wasm and Kotlin/JS.
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.svg){width=700}
 
@@ -284,24 +284,7 @@ starts a desktop app in its own OS window:
 
 2. Click **Run**.
 
-You can also run your application in compatibility mode, enabling cross-compilation 
-for both the `js` and `wasmJs` targets. 
-Given this fallback mode, when you create a website, it works on all 
-browsers out of the box, as modern browsers use `wasmJs` and older ones use `js`.
-
-To run your application in compatibility mode for both `js` and `wasmJs`:
-
-1. In the list of run configurations, click **Edit configurations**.
-
-   ![Edit run configurations](web-edit-configurations.png){width=400}
-
-2. Click the **+** button above the list of configurations and then select **Gradle**.
-3. Select **[composeApp:composeCompatibilityBrowserDistribution]** from the Run list. 
-4. Click **Run**.
-
-   ![Add new run configurations](web-run-compatibility-configuration.png){width=650}
-
-After running the configuration, the web application opens automatically in your browser. 
+The web application opens automatically in your browser. 
 Alternatively, you can type the following URL in your browser when the run is finished:
 
 ```shell
@@ -313,6 +296,30 @@ Alternatively, you can type the following URL in your browser when the run is fi
 {style="tip"}
 
 ![Compose web application](first-compose-project-on-web.png){width=600}
+
+#### Compatibility mode for web targets
+
+You can enable compatibility mode for your web application. This means, cross-compilation
+for both the `js` and `wasmJs` targets.
+Given this fallback mode, when you create a website, it works on all
+browsers out of the box, as modern browsers use Wasm-compatible versions and older ones use JS-compatible versions.
+
+To enable compatibility mode for your web application:
+
+1. In the list of run configurations, click **Edit configurations**.
+
+   ![Edit run configurations](web-edit-configurations.png){width=400}
+
+2. Click the **+** button above the list of configurations and then select **Gradle**.
+3. Select **[composeApp:composeCompatibilityBrowserDistribution]** from the **Run** list.
+4. Click **Run**.
+
+   ![Add new run configurations](web-run-compatibility-configuration.png){width=650}
+
+Once the Run configuration completes, compatible artifacts are generated in the
+`composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
+You can use these artifacts to publish your application working on both the `js` and `wasmJs` targets.
+
 
 ## Next step
 
