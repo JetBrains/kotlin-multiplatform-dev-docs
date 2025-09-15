@@ -447,7 +447,7 @@ that will trigger the publication of your library.
 
     ![Publishing settings](published_on_maven_central.png){width=700}
 
-    > It will take some time (usually about 15–30 minutes) after the release for the artifacts to be available publicly in
+    > It will take some time (usually about 15–30 minutes, but can be several hours) after the release for the artifacts to be available publicly in
     > the Maven Central repository. It may take longer for them to be indexed and become searchable on the [Maven Central website](https://central.sonatype.com/).
     >
     {style="tip"}
