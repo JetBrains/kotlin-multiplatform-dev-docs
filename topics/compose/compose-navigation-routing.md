@@ -3,12 +3,6 @@
 Navigation is a key part of UI applications that allows users to move between different application screens.
 Compose Multiplatform adopts the [Jetpack Compose approach to navigation](https://developer.android.com/guide/navigation/design#frameworks).
 
-> The navigation library is currently in [Beta](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels).
-> You're welcome to try it in your Compose Multiplatform projects.
-> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
->
-{style="tip"}
-
 ## Setup
 
 To use the Navigation library, add the following dependency to your `commonMain` source set:
