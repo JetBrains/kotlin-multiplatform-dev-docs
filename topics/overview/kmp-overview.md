@@ -32,7 +32,7 @@ expand shared code over time.
 You can also share the entirety of business logic while keeping the UI native, or gradually migrate the UI as well
 using Compose Multiplatform.
 
-![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png)
+![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png){width="700"}
 
 ### Native feel on iOS
 
@@ -51,7 +51,7 @@ for example, on iOS.
 
 This helps achieve near-native performance while writing platform-agnostic code:
 
-![Graphs showing comparable performance of Compose Multiplatform and SwiftUI on iOS on iPhone 13 and iPhone 16](cmp-ios-performance.png)
+![Graphs showing comparable performance of Compose Multiplatform and SwiftUI on iOS on iPhone 13 and iPhone 16](cmp-ios-performance.png){width="700"}
 
 ### Seamless tooling
 
@@ -76,25 +76,26 @@ Look at how companies and developers already enjoy the benefits of shared Kotlin
 
 ## Learn the basics
 
-You can learn KMP fundamentals in a way that suits you: 
+To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
+You'll set up your environment and run a sample application on different platforms.
 
-* To quickly see Kotlin Multiplatform in action, try the [quickstart](quickstart.md).
-  You'll set up your environment and run a sample application on different platforms.
-  * To create an app that shares both UI and business logic code between platforms,
-    follow the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
+Choose a use case
+: * To create an app that shares both UI and business logic code between platforms,
+follow the [shared logic and UI tutorial](compose-multiplatform-create-first-app.md).
   * To see how an Android app can be turned into a multiplatform app,
-    check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
+  check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
   * To see how you can share some code without sharing UI implementation,
-    follow the [shared logic tutorial](multiplatform-create-first-app.md).
-* If you want to dig into technical details:
-  * Start with the [basic project structure](multiplatform-discover-project.md).
+  follow the [shared logic tutorial](multiplatform-create-first-app.md).
+
+Dig into technical details
+: * Start with the [basic project structure](multiplatform-discover-project.md).
   * Learn about the available [sharing code mechanisms](multiplatform-share-on-platforms.md).
   * See [how dependencies work](multiplatform-add-dependencies.md) in a KMP project.
   * Consider different [iOS integration methods](multiplatform-ios-integration-overview.md).
   * Learn how KMP [compiles code](multiplatform-configure-compilations.md) and [builds binaries](multiplatform-build-native-binaries.md)
     for various targets.
   * Read about [publishing a multiplatform app](multiplatform-publish-apps.md)
-    or a [multiplatform library](multiplatform-publish-lib-setup.md).
+    or a [multiplatform library](multiplatform-publish-lib-setup.md). 
 
 ## Adopt Kotlin Multiplatform at scale
 
