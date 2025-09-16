@@ -129,8 +129,8 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 
 The Android, iOS, and desktop targets of Compose Multiplatform are Stable. You can use them in production.
 
-The version of Compose Multiplatform for Web that is based on WebAssembly is in Alpha, which means that it's in active development.
-You can use it with caution and expect migration issues.
+The version of Compose Multiplatform for Web that is based on WebAssembly is in Beta, which means that it's almost complete.
+You can use it, but migration issues may still occur.
 It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 ### How do I create a new Compose Multiplatform project?
@@ -219,7 +219,7 @@ We have plans for improving the core Kotlin Multiplatform technology, integratio
 
 ### When will Compose Multiplatform become Stable?
 
-Compose Multiplatform is Stable for Android, iOS, and desktop, while the web platform support is in Alpha. 
+Compose Multiplatform is Stable for Android, iOS, and desktop, while the web platform support is in Beta. 
 We are working towards a stable release for the web platform, with exact dates to be announced.
 
 For more information on stability statuses, see [Supported platforms](supported-platforms.md).

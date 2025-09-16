@@ -108,7 +108,7 @@ Use the IDE wizard to create a new KMP project:
     * For iOS, you can choose one of two implementations:
         * shared UI code, with Compose Multiplatform,
         * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
-    * The desktop target includes an Alpha version of [](compose-hot-reload.md) functionality that allows you to see UI changes
+    * The desktop target includes a Beta version of [](compose-hot-reload.md) functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
@@ -138,7 +138,7 @@ Use the IDE wizard to create a new KMP project:
     * For iOS, you can choose one of two implementations: 
       * shared UI code, with Compose Multiplatform,
       * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
-    * The desktop target includes an alpha version of hot reload functionality that allows you to see UI changes
+    * The desktop target includes a Beta version of [](compose-hot-reload.md) functionality that allows you to see UI changes
       as soon as you alter corresponding code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
