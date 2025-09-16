@@ -1,13 +1,13 @@
-[//]: # (title: What's new in Compose Multiplatform %org.jetbrains.compose-eap%)
+[//]: # (title: What's new in Compose Multiplatform 1.9.0)
 
-Here are the highlights for this EAP feature release:
+Here are the highlights for this feature release:
 
 * [Parameters for the `@Preview` annotation](#parameters-for-the-preview-annotation)
 * [Customizable shadows](#customizable-shadows)
 * [New context menu API](#new-context-menu-api)
 * [Material 3 Expressive theme](#material-3-expressive-theme)
 * [Frame rate configuration on iOS](#frame-rate-configuration)
-* [Compose Multiplatform for Web in Beta](#compose-multiplatform-for-web-in-beta)
+* [Compose Multiplatform for web in Beta](#compose-multiplatform-for-web-in-beta)
 * [Accessibility support on web targets](#accessibility-support)
 * [New API for embedding HTML content](#new-api-for-embedding-html-content)
 
@@ -15,21 +15,21 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version %org.jetbrains.compose-eap%. Based on Jetpack Compose libraries:
+* Gradle Plugin `org.jetbrains.compose`, version 1.9.0. Based on Jetpack Compose libraries:
    * [Runtime 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.0)
    * [UI 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.0)
    * [Foundation 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0)
    * [Material 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0)
    * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
-* Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0-beta04`. Based on [Jetpack Material3 1.4.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta02).
+* Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0-beta06`. Based on [Jetpack Material3 1.4.0-beta03](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta03).
 
   The stable version of the common Material3 library is based on Jetpack Compose Material3 1.3.2, but thanks to
   [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3 you can choose a newer pre-release version for your project.
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha05`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha10)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.3`. Based on [Jetpack Lifecycle 2.9.2](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.2)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0-rc01`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
-* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.3`. Based on [Jetpack Savedstate 1.3.1](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.1)
-* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0-rc01`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha06`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha11](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha11)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.4`. Based on [Jetpack Lifecycle 2.9.2](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.2)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
+* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.4`. Based on [Jetpack Savedstate 1.3.1](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.1)
+* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
 
 ## Across platforms
 
@@ -50,7 +50,7 @@ These new preview parameters are recognized and work in both IntelliJ IDEA and A
 
 ### Customizable shadows
 
-In Compose Multiplatform %org.jetbrains.compose-eap%, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
+In Compose Multiplatform 1.9.0, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
 shadow primitives and APIs. In addition to the previously supported `shadow` modifier, you can now use the new API 
 to create more advanced and flexible shadow effects.
 
@@ -114,7 +114,7 @@ for a more personalized experience.
 >In alignment with the Jetpack Material3 [1.4.0-beta01 release](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01),
 >all public APIs tagged with `ExperimentalMaterial3ExpressiveApi` and `ExperimentalMaterial3ComponentOverrideApi` have been removed.
 >
->If you want to use these experimental features, you need to explicitly include the alpha Material3 version.
+>If you want to use these experimental features, you need to explicitly include the Beta Material3 version.
 {style="note"}
 
 To use the Expressive theme:
@@ -122,7 +122,7 @@ To use the Expressive theme:
 1. Include the experimental version of Material 3:
 
     ```kotlin
-    implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+    implementation("org.jetbrains.compose.material3:material3:1.9.0-beta06")
     ```
 
 2. Configure the overall theme of your UI elements using the `MaterialExpressiveTheme()` function. 
@@ -179,7 +179,7 @@ However, the device's hardware may limit the supported frame rates, typically up
 
 ### IME options
 
-Compose Multiplatform introduces support for iOS-specific IME customization for text input components. 
+Compose Multiplatform 1.9.0 introduces support for iOS-specific IME customization for text input components. 
 You can now use `PlatformImeOptions` to configure native UIKit text input traits such as keyboard type, 
 autocorrection, and return key behavior directly in the text field component:
 
@@ -197,16 +197,17 @@ BasicTextField(
 
 ## Web
 
-### Compose Multiplatform for Web in Beta
+### Compose Multiplatform for web in Beta
 
-Compose Multiplatform for Web is now in Beta, making it a great time to give it a try. 
-Check out [our blog post]<!--TODO:link --> to learn more about the progress made to reach this milestone.
+Compose Multiplatform for web is now in Beta, making it a great time to give it a try. 
+<!-- Check out [our blog post]()  to learn more about the progress made to reach this milestone.
+-->
 
 As we work toward a stable release, our roadmap includes:
 
-* Implementing support for drag-and-drop functionality in mobile browsers
-* Improving accessibility support
-* Addressing issues related to the `TextField` component
+* Implementing support for drag-and-drop functionality in mobile browsers.
+* Improving accessibility support.
+* Addressing issues related to the `TextField` component.
 
 ### Accessibility support
 
@@ -319,8 +320,8 @@ LaunchedEffect(Unit) {
 Compose Multiplatform now includes new `SwingFrame()` and `SwingDialog()` composables. 
 They are similar to the existing `Window()` and `DialogWindow()` functions but include an `init` block.
 
-Previously, it was impossible to set certain window properties that must be configured before display.
-The new `init` block executes prior to your window or dialog appearing on the screen, allowing you to configure properties
+Previously, you couldn't set certain window properties that had to be configured before display.
+The new `init` block executes before your window or dialog appears on the screen, allowing you to configure properties
 like `java.awt.Window.setType` or add event listeners that need to be ready early.
 
 We recommend using the `init` block only for properties that cannot be changed once the window or dialog is visible.
@@ -339,7 +340,7 @@ If you want to use a newer Material3 version with Expressive design support, rep
 in `build.gradle.kts` with the following:
 
 ```kotlin
-implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+implementation("org.jetbrains.compose.material3:material3:1.9.0-beta06")
 ```
 
 ### Unified web distribution
