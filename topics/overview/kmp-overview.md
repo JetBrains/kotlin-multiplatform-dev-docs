@@ -60,6 +60,8 @@ But KMP is also supported in IntelliJ IDEA and Android Studio through a dedicate
 of maintaining a cross-platform project, as well as mirroring some functionality of Jetpack Compose IDE features such as
 UI preview.
 
+[the Hot Reload clip]
+
 ### AI-powered development
 
 Let [Junie](https://jetbrains.com/junie), the JetBrains’ AI coding agent, handle KMP tasks so your team can move faster.
