@@ -53,7 +53,7 @@ A simple example is to point to a specific folder:
 ```kotlin
 compose.resources {
     customDirectory(
-        sourceSetName = "desktopMain",
+        sourceSetName = "jvmMain",
         directoryProvider = provider { layout.projectDirectory.dir("desktopResources") }
     )
 }
@@ -79,6 +79,25 @@ compose.resources {
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
+
+### Custom web resource paths
+
+You can specify paths and URLs for your web resources using the `configureWebResources()` function:
+
+* Use a relative path (starting with `/`) to reference a resource from the domain root.
+* Use an absolute URL (starting with `http://` or `https://`) to reference a resource hosted on an external domain or CDN.
+
+```kotlin
+// Maps resources to an application-specific path
+configureWebResources {
+    resourcePathMapping { path -> "/myApp/resources/$path" }
+}
+
+// Maps resources to an external CDN
+configureWebResources {
+    resourcePathMapping { path -> "https://mycdn.com/myApp/res/$path" }
+}
+```
 
 ### Resources in the `androidLibrary` target
 <secondary-label ref="Experimental"/>

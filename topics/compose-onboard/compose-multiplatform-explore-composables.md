@@ -129,7 +129,7 @@ role as an activity on Android. Notice that both the iOS and Android types simpl
 
 ### On desktop
 
-For desktop, look at the `main()` function in `composeApp/src/desktopMain/kotlin`:
+For desktop, look at the `main()` function in `composeApp/src/jvmMain/kotlin`:
 
 ```kotlin
 fun main() = application {

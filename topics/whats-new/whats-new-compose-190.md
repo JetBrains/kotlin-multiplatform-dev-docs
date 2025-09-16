@@ -21,6 +21,7 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
    * [Foundation 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0)
    * [Material 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0)
    * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
+
 * Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0-beta06`. Based on [Jetpack Material3 1.4.0-beta03](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta03).
 
   The stable version of the common Material3 library is based on Jetpack Compose Material3 1.3.2, but thanks to
