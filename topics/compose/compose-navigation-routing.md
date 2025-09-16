@@ -28,10 +28,6 @@ kotlin {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%org.jetbrains.androidx.navigation%"}
 
-> Compose Multiplatform %org.jetbrains.compose% requires Navigation library version %org.jetbrains.androidx.navigation%.
->
-{style="note"}
-
 ## Sample project
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake),

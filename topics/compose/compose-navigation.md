@@ -70,10 +70,6 @@ kotlin {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.navigation:navigation-compose:%org.jetbrains.androidx.navigation%"}
 
-> Compose Multiplatform %org.jetbrains.compose% requires Navigation library version %org.jetbrains.androidx.navigation%.
->
-{style="note"}
-
 There is an order in which it makes sense to tackle the necessary steps to set up your navigation:
 
 1. Define your routes.
