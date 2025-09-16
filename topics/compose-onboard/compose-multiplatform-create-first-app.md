@@ -302,7 +302,7 @@ Alternatively, you can type the following URL in your browser when the run is fi
 You can enable compatibility mode for your web application. This means, cross-compilation
 for both the `js` and `wasmJs` targets.
 Given this fallback mode, when you create a website, it works on all
-browsers out of the box, as modern browsers use Wasm-compatible versions and older ones use JS-compatible versions.
+browsers out of the box, as modern browsers use a Wasm version and older ones use a JS version.
 
 To enable compatibility mode for your web application:
 
@@ -318,7 +318,8 @@ To enable compatibility mode for your web application:
 
 Once the Run configuration completes, compatible artifacts are generated in the
 `composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
-You can use these artifacts to publish your application working on both the `js` and `wasmJs` targets.
+You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
+working on both the `js` and `wasmJs` targets.
 
 
 ## Next step
