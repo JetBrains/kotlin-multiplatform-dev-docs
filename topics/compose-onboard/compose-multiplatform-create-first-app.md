@@ -306,21 +306,26 @@ browsers out of the box, as modern browsers use a Wasm version and older ones us
 
 To enable compatibility mode for your web application:
 
-1. In the list of run configurations, click **Edit configurations**.
+1. Open the Gradle tool window by selecting **View | Tool Windows | Gradle**.
+2. In **composedemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
 
-   ![Edit run configurations](web-edit-configurations.png){width=400}
+   > You need at least Java 11 as your Gradle JVM for the tasks to load successfully, and we recommend at least
+   > Java 17 for Compose Multiplatform projects in general.
+   >
+   {style="note"}
 
-2. Click the **+** button above the list of configurations and then select **Gradle**.
-3. Select **[composeApp:composeCompatibilityBrowserDistribution]** from the **Run** list.
-4. Click **Run**.
+   ![Run compatibility task](web-compatibility-gradle-task.png){width=500}
 
-   ![Add new run configurations](web-run-compatibility-configuration.png){width=650}
+   Alternatively, you can run the following command in the terminal from the `ComposeDemo` root directory:
 
-Once the Run configuration completes, compatible artifacts are generated in the
+    ```bash
+    ./gradlew composeCompatibilityBrowserDistribution
+    ```
+
+Once the Gradle task completes, compatible artifacts are generated in the
 `composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
 You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
 working on both the `js` and `wasmJs` targets.
-
 
 ## Next step
 
