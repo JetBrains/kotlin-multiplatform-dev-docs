@@ -1,14 +1,11 @@
 [//]: # (title: What is Kotlin Multiplatform)
 
-Kotlin Multiplatform (KMP) is a technology that allows reusing code across Android, iOS, desktop, web, and server-side
-while integrating with native code where needed.
-
 Kotlin Multiplatform (KMP) is an open-source technology by JetBrains that enables sharing code across Android, iOS, desktop,
 web, and server while retaining the advantages of native development.
 
 With Compose Multiplatform, you can also share UI code across multiple platforms for maximum code reuse.
 
-![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png)
+
 
 KMP is used in production by organizations of different sizes, from startups to global enterprises,
 including Google, Duolingo, Forbes, Philips, McDonald’s, Bolt, H&M, Baidu, Kuaishou, and Bilibili.
@@ -17,46 +14,55 @@ cost efficiency, and support for gradual adoption. [Learn more about companies w
 
 ## Why companies choose KMP
 
-### Cost efficiency and faster delivery 🚀
+### Cost efficiency and faster delivery
 
-* Reduce duplication and maintenance costs through shared logic
-* Release features simultaneously on multiple platforms
-* Use Compose Multiplatform to build shared UIs without separate implementations
+Kotlin Multiplatfrom helps streamline both technical and organizational processes:
 
-### Flexibility of code sharing 🔄
+* On one hand, you can reduce duplication and maintenance costs by sharing logic and UI code across platforms.
+This also allows to release features simultaneously on multiple platforms.
+* On the other hand, you make team collaboration easier as the knowledge of unified logic reflected in shared code
+is easier to transfer between team members, and there's less duplication of effort between dedicated platform teams.
 
-* Share isolated modules such as networking or storage
-* Share business logic while keeping UIs native
-* Share both logic and UI with Compose Multiplatform for maximum reuse
+[some graphic on the KMP survey about the share of people happy with the outcomes]
 
-### Native feel on iOS 📱
+### Flexibility of code sharing
 
-* Use SwiftUI or UIKit for fully native interfaces
-* Get native-feeling apps on Android and iOS with Compose Multiplatform 
-* Combine native and shared approaches as needed
+You can share code on your terms: share isolated modules, such as networking or storage, and progressively
+expand shared code over time.
+You can also share the entirety of business logic while keeping the UI native, or gradually migrate the UI as well
+using Compose Multiplatform.
 
-### ⚡ Native performance
+![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png)
 
-* Code compiled to platform binaries for near-native performance
-* Access platform APIs directly without extra layers
+### Native feel on iOS
 
+You can fully build your UI using SwiftUI or UIKit, get uniform experience on Android and iOS with Compose Multiplatform,
+or mix and match combining native and shared UI code as needed.
 
-### ✨ AI-powered development
+Regardless of the approach, you can produce apps which feel native on each platform: 
 
-Let Junie, JetBrains’ AI coding agent, handle KMP tasks so your team can move faster
+<video src="https://www.youtube.com/watch?v=LB5a2FRrT94"/>
 
-### 👩‍💻 Team collaboration
+### Native performance
 
-* Maintain consistency with a shared codebase
-* Reduce duplication across platform teams
-* Simplify knowledge transfer through unified logic
+Kotlin Multiplatform leverages [Kotlin/Native](https://kotlinlang.org/docs/native-overview.html)
+to produce native binaries and access platform APIs directly where virtual machines are undesirable or impossible,
+for example, on iOS.
 
+This helps achieve near-native performance while writing platform-agnostic code:
 
-### 🪜 Gradual adoption
+![Graphs showing comparable performance of Compose Multiplatform and SwiftUI on iOS on iPhone 13 and iPhone 16](cmp-ios-performance.png)
 
-* Start with a single feature or module
-* Expand progressively over time 
-* Mix native and shared code in the same project
+### Seamless tooling
+
+Base Kotlin provides KMP support out of the box as regards to build tools, for example.
+But KMP is also supported in IntelliJ IDEA and Android Studio through a dedicated IDE plugin that handles a lot of the hassle
+of maintaining a cross-platform project, as well as mirroring some functionality of Jetpack Compose IDE features such as
+UI preview.
+
+### AI-powered development
+
+Let [Junie](https://jetbrains.com/junie), the JetBrains’ AI coding agent, handle KMP tasks so your team can move faster.
 
 ## Discover Kotlin Multiplatform use cases
 
