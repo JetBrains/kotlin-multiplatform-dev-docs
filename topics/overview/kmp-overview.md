@@ -5,8 +5,6 @@ web, and server while retaining the advantages of native development.
 
 With Compose Multiplatform, you can also share UI code across multiple platforms for maximum code reuse.
 
-
-
 KMP is used in production by organizations of different sizes, from startups to global enterprises,
 including Google, Duolingo, Forbes, Philips, McDonald’s, Bolt, H&M, Baidu, Kuaishou, and Bilibili.
 These companies have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,
