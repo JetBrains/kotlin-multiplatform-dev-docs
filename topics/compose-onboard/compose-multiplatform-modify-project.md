@@ -42,7 +42,7 @@ To use the `kotlinx-datetime` library:
                 // ...
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
             }
-            wasmJsMain.dependencies {
+            webMain.dependencies {
                 implementation(npm("@js-joda/timezone", "2.22.0"))
             }
         }
@@ -52,7 +52,7 @@ To use the `kotlinx-datetime` library:
 
     * The main dependency is added to the section that configures the common code source set.
     * For simplicity, the version number is included directly instead of being added to the version catalog.
-    * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain` dependencies.
+    * To support timezones in the web target, the reference to the necessary npm package is included in `webMain` dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
@@ -114,7 +114,8 @@ To use the `kotlinx-datetime` library:
     ```
 
 3. Follow the IDE's suggestions to import the missing dependencies.
-   Make sure to import all the missing dependencies for the `todaysDate()` function from the `kotlinx.datetime` package, **NOT** `kotlin.time`.
+   Make sure to import all the missing dependencies for the `todaysDate()` function from the updated packages, and
+   opt in when prompted by the IDE.
 
    ![Unresolved references](compose-unresolved-references.png)
 
