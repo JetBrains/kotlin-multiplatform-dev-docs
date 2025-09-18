@@ -93,7 +93,7 @@ target:
 * `iosMain` uses Kotlin/Native.
 * `jsMain` uses Kotlin/JS.
 * `wasmJsMain` uses Kotlin/Wasm.
-* `webMain` contains shared source sets for both `jsMain` and `wasmJsMain`.
+* `webMain` is the web [intermediate source set](multiplatform-hierarchy.md#manual-configuration) that includes `jsMain` and `wasmJsMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
@@ -299,10 +299,9 @@ Alternatively, you can type the following URL in your browser when the run is fi
 
 #### Compatibility mode for web targets
 
-You can enable compatibility mode for your web application. This means, cross-compilation
-for both the `js` and `wasmJs` targets.
-Given this fallback mode, when you create a website, it works on all
-browsers out of the box, as modern browsers use a Wasm version and older ones use a JS version.
+You can enable compatibility mode for your web application to ensure it works on all browsers out of the box.
+In this mode, modern browsers use the Wasm version, while older ones fall back to the JS version.
+This mode is achieved through cross-compilation for both the `js` and `wasmJs` targets.
 
 To enable compatibility mode for your web application:
 
@@ -310,7 +309,7 @@ To enable compatibility mode for your web application:
 2. In **composedemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
 
    > You need at least Java 11 as your Gradle JVM for the tasks to load successfully, and we recommend at least
-   > Java 17 for Compose Multiplatform projects in general.
+   > JetBrains Runtime 17 for Compose Multiplatform projects in general.
    >
    {style="note"}
 
