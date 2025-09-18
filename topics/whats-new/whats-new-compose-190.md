@@ -115,7 +115,7 @@ for a more personalized experience.
 >In alignment with the Jetpack Material3 [1.4.0-beta01 release](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta01),
 >all public APIs tagged with `ExperimentalMaterial3ExpressiveApi` and `ExperimentalMaterial3ComponentOverrideApi` have been removed.
 >
->If you want to use these experimental features, you need to explicitly include the Beta Material3 version.
+>If you want to use these experimental features, you need to explicitly include the Alpha Material3 version.
 {style="note"}
 
 To use the Expressive theme:
@@ -123,7 +123,7 @@ To use the Expressive theme:
 1. Include the experimental version of Material 3:
 
     ```kotlin
-    implementation("org.jetbrains.compose.material3:material3:1.9.0-beta06")
+    implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
     ```
 
 2. Configure the overall theme of your UI elements using the `MaterialExpressiveTheme()` function. 
@@ -341,7 +341,7 @@ If you want to use a newer Material3 version with Expressive design support, rep
 in `build.gradle.kts` with the following:
 
 ```kotlin
-implementation("org.jetbrains.compose.material3:material3:1.9.0-beta06")
+implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
 ```
 
 ### Unified web distribution
