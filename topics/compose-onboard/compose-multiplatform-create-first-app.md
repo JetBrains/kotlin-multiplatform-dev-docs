@@ -53,7 +53,7 @@ Things to keep in mind for this tutorial:
     {style="note"}
 
 5. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
-    Make sure that the **Share UI** option is selected for iOS and Web.
+    Make sure that the **Share UI** option is selected for iOS and web.
 6. Once you've specified all the fields and targets, click **Create** (**Download** in the web wizard).
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
@@ -80,21 +80,26 @@ The project contains two modules:
 
   ![Compose Multiplatform project structure](compose-project-structure.png)
 
-The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `jvmMain`, `iosMain`, and `wasmJsMain`
-(with `commonTest` if you chose to include tests).
+The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
+`jvmMain`, `wasmJsMain`, and `webMain` (with `commonTest` if you chose to include tests).
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
-The `commonMain` source set contains the common Kotlin code, and platform source sets contain Kotlin code specific to each
-target.
-Kotlin/JVM is used for `androidMain` and `jvmMain`, Kotlin/Native is used for `iosMain`, and Kotlin/Wasm is 
-used for `wasmJsMain`.
+The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
+target: 
+
+* `jvmMain` is the source file for desktop, which uses Kotlin/JVM.
+* `androidMain` also uses Kotlin/JVM.
+* `iosMain` uses Kotlin/Native.
+* `jsMain` uses Kotlin/JS.
+* `wasmJsMain` uses Kotlin/Wasm.
+* `webMain` is the web [intermediate source set](multiplatform-hierarchy.md#manual-configuration) that includes `jsMain` and `wasmJsMain`.
 
 When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
-Kotlin code gets treated as Kotlin/Wasm.
+Kotlin code can be treated as Kotlin/Wasm and Kotlin/JS.
 
-![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.png){width=700}
+![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.svg){width=700}
 
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
@@ -110,6 +115,7 @@ fun App() {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .safeContentPadding()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -119,7 +125,10 @@ fun App() {
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
                 }
@@ -266,11 +275,17 @@ starts a desktop app in its own OS window:
 
 ### Run your web application
 
-Select **composeApp [wasmJs]** in the list of run configurations and click **Run**.
+1. In the list of run configurations, select:
 
-![Run the Compose Multiplatform app on web](compose-run-web.png){width=350}
+   * **composeApp[js]**: To run your Kotlin/JS application.
+   * **composeApp[wasmJs]**: To run your Kotlin/Wasm application.
 
-The web application opens automatically in your browser. Alternatively, you can type the following URL in your browser when the run is finished:
+   ![Run the Compose Multiplatform app on web](web-run-configuration.png){width=400}
+
+2. Click **Run**.
+
+The web application opens automatically in your browser. 
+Alternatively, you can type the following URL in your browser when the run is finished:
 
 ```shell
    http://localhost:8080/
@@ -280,7 +295,36 @@ The web application opens automatically in your browser. Alternatively, you can 
 >
 {style="tip"}
 
-![Compose web application](first-compose-project-on-web.png){width=550}
+![Compose web application](first-compose-project-on-web.png){width=600}
+
+#### Compatibility mode for web targets
+
+You can enable compatibility mode for your web application to ensure it works on all browsers out of the box.
+In this mode, modern browsers use the Wasm version, while older ones fall back to the JS version.
+This mode is achieved through cross-compilation for both the `js` and `wasmJs` targets.
+
+To enable compatibility mode for your web application:
+
+1. Open the Gradle tool window by selecting **View | Tool Windows | Gradle**.
+2. In **composedemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
+
+   > You need at least Java 11 as your Gradle JVM for the tasks to load successfully, and we recommend at least
+   > JetBrains Runtime 17 for Compose Multiplatform projects in general.
+   >
+   {style="note"}
+
+   ![Run compatibility task](web-compatibility-gradle-task.png){width=500}
+
+   Alternatively, you can run the following command in the terminal from the `ComposeDemo` root directory:
+
+    ```bash
+    ./gradlew composeCompatibilityBrowserDistribution
+    ```
+
+Once the Gradle task completes, compatible artifacts are generated in the
+`composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
+You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
+working on both the `js` and `wasmJs` targets.
 
 ## Next step
 

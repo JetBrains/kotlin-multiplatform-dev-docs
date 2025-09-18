@@ -42,7 +42,7 @@ To use the `kotlinx-datetime` library:
                 // ...
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
             }
-            wasmJsMain.dependencies {
+            webMain.dependencies {
                 implementation(npm("@js-joda/timezone", "2.22.0"))
             }
         }
@@ -52,15 +52,14 @@ To use the `kotlinx-datetime` library:
 
     * The main dependency is added to the section that configures the common code source set.
     * For simplicity, the version number is included directly instead of being added to the version catalog.
-    * To support timezones in the web target, the reference to the necessary npm package is included in `wasmJsMain`
-     dependencies.
+    * To support timezones in the web target, the reference to the necessary npm package is included in `webMain` dependencies.
 
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 3. In the **Terminal** tool window, run the following command:
 
     ```shell
-    ./gradlew kotlinUpgradeYarnLock
+    ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
@@ -115,34 +114,15 @@ To use the `kotlinx-datetime` library:
     ```
 
 3. Follow the IDE's suggestions to import the missing dependencies.
-   Make sure to import all the missing dependencies for the `todaysDate()` function from the `kotlinx.datetime` package, **NOT** `kotlin.time`.
+   Make sure to import all the missing dependencies for the `todaysDate()` function from the updated packages, and
+   opt in when prompted by the IDE.
 
    ![Unresolved references](compose-unresolved-references.png)
 
-4. Switch the web app from using an `Element` as a container to an HTML element with an externally specified `id`:
-
-    1. In the `composeApp/src/wasmJsMain/resources/index.html` file, add a named element within the `<body>`:
-
-        ```html
-        <body>
-        <div id="composeApplication" style="width:400px; height: 600px;"></div>
-        </body>
-        ```
-    2. In the `composeApp/src/wasmJsMain/kotlin/main.kt` file, change the `ComposeViewport` call to the `String` variant,
-        pointing to the ID you specified in the HTML file:
-
-        ```kotlin
-        @OptIn(ExperimentalComposeUiApi::class)
-        fun main() {
-            ComposeViewport(viewportContainerId = "composeApplication") {
-                App()
-            }
-        }
-        ```
-
 ## Rerun the application
 
-You can now rerun the application using the same run configurations for Android, iOS, desktop, and web:
+You can now [rerun the application](compose-multiplatform-create-first-app.md#run-your-application) 
+using the same run configurations for Android, iOS, desktop, and web:
 
 <tabs>
     <tab id="mobile-app" title="Android and iOS">
