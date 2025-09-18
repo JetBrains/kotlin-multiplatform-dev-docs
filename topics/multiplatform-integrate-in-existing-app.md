@@ -352,15 +352,17 @@ business logic in it.
 ### Create an iOS project in Xcode
 
 1. In Xcode, click **File** | **New** | **Project**.
-2. Select a template for an iOS app: go to the **iOS** tab and select the basic **App** template, then click **Next**.
+2. In the dialogue, switch to the **iOS** tab:
 
    ![iOS project template](ios-project-wizard-1.png){width=700}
 
-3. As the product name, specify "simpleLoginIOS" and click **Next**.
+3. Select the **App** template, then click **Next**.
+
+4. As the product name, specify "simpleLoginIOS" and click **Next**.
 
    ![iOS project settings](ios-project-wizard-2.png){width=700}
 
-4. As the location for your project, select the directory that stores your cross-platform application, for
+5. As the location for your project, select the directory that stores your cross-platform application, for
    example, `kmp-integration-sample`.
 
 In Android Studio, you'll get the following structure:
