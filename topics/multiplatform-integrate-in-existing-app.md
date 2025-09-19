@@ -352,15 +352,17 @@ business logic in it.
 ### Create an iOS project in Xcode
 
 1. In Xcode, click **File** | **New** | **Project**.
-2. Select a template for an iOS app and click **Next**.
+2. In the dialogue, switch to the **iOS** tab:
 
    ![iOS project template](ios-project-wizard-1.png){width=700}
 
-3. As the product name, specify "simpleLoginIOS" and click **Next**.
+3. Select the **App** template, then click **Next**.
+
+4. As the product name, specify "simpleLoginIOS" and click **Next**.
 
    ![iOS project settings](ios-project-wizard-2.png){width=700}
 
-4. As the location for your project, select the directory that stores your cross-platform application, for
+5. As the location for your project, select the directory that stores your cross-platform application, for
    example, `kmp-integration-sample`.
 
 In Android Studio, you'll get the following structure:
@@ -390,7 +392,7 @@ but they are beyond the scope of this tutorial.
 
     ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
 
-4. Paste the following script in the run script field:
+5. Paste the following script in the run script field:
 
     ```text
     cd "$SRCROOT/.."
@@ -399,15 +401,15 @@ but they are beyond the scope of this tutorial.
 
    ![Add the script](xcode-run-script-phase-2.png){width=700}
 
-5. Disable **Based on dependency analysis** option.
+6. Disable **Based on dependency analysis** option.
 
    This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
 
-6. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase:
+7. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase:
 
    ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
 
-7. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
+8. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
 
    ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
@@ -416,7 +418,7 @@ but they are beyond the scope of this tutorial.
    >
    {style="note"}
 
-8. Build the project in Xcode (**Product** | **Build** in the main menu).
+9. Build the project in Xcode (**Product** | **Build** in the main menu).
     If everything is configured correctly, the project should build successfully 
     (you can safely ignore the "build phase will be run during every build" warning)
    
