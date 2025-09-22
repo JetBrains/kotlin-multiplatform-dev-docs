@@ -201,8 +201,7 @@ BasicTextField(
 ### Compose Multiplatform for web in Beta
 
 Compose Multiplatform for web is now in Beta, making it a great time to give it a try. 
-<!-- Check out [our blog post]()  to learn more about the progress made to reach this milestone.
--->
+Check out [our blog post](https://blog.jetbrains.com/kotlin/2025/09/compose-multiplatform-1-9-0-compose-for-web-beta/) to learn more about the progress made to reach this milestone.
 
 As we work toward a stable release, our roadmap includes:
 
