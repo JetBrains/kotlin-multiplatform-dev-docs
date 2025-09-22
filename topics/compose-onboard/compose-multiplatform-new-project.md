@@ -210,18 +210,8 @@ The next step is to use the given input to calculate time. To do this, create a 
    }
     ```
 
-4. In the `wasmJsMain/kotlin/main.kt` file, add the following code before the `main()` function to initialize timezone
-   support for web:
-
-    ```kotlin
-    @JsModule("@js-joda/timezone")
-    external object JsJodaTimeZoneModule
-    
-    private val jsJodaTz = JsJodaTimeZoneModule
-    ```
-
-5. Run the application again and enter a valid timezone.
-6. Click the button. You should see the correct time:
+4. Run the application again and enter a valid timezone.
+5. Click the button. You should see the correct time:
 
 <tabs>
     <tab id="mobile-time-display" title="Android and iOS">
