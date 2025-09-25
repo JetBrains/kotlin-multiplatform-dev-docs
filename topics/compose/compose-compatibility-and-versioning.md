@@ -14,7 +14,7 @@ Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 | macOS    | macOS 12 x64, macOS 13 arm64                                                                           |
 | Windows  | Windows 10 (x86-64, arm64)                                                                             |
 | Linux    | Ubuntu 20.04 (x86-64, arm64)                                                                           |
-| Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-troubleshooting.html#browser-versions) |
+| Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-configuration.html#browser-versions)   |
 
 [//]: # (https://youtrack.jetbrains.com/issue/CMP-7539)
 
@@ -45,9 +45,9 @@ See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for detail
 
 ## Limitations of Compose Multiplatform for desktop releases
 
-Compose Multiplatform for desktop has the following limitations:
+Compose Multiplatform for desktop supports only JDK 11 or later is supported due to the memory management scheme used in [Skia](https://skia.org/) bindings.
 
-* Only JDK 11 or later is supported due to the memory management scheme used in [Skia](https://skia.org/) bindings.
+Additionally:
 * Only JDK 17 or later is supported for packaging native distributions due
   to [`jpackage`](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html) limitations.
 * There is a known [issue](https://github.com/JetBrains/compose-multiplatform/issues/940) with OpenJDK 11.0.12 when switching keyboard layouts on macOS.
@@ -61,10 +61,10 @@ Jetpack Compose so that the common code is properly tested and stabilized.
 
 When a new version of Jetpack Compose is released, we:
 
-* Use the release commit as a base for the next [Compose Multiplatform](https://github.com/JetBrains/androidx) version.
-* Add support for new platform features.
-* Stabilize all platforms.
-* Release a new version of Compose Multiplatform.
+1. Use the release commit as a base for the next [Compose Multiplatform](https://github.com/JetBrains/androidx) version.
+2. Add support for new platform features.
+3. Stabilize all platforms.
+4. Release a new version of Compose Multiplatform.
 
 The gap between a Compose Multiplatform release and a Jetpack Compose release is usually 1–3 months.
 
@@ -90,6 +90,7 @@ The following table lists Jetpack Compose artifact versions used by each version
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.9.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.0)   | 1.9.0                   | 1.3.2                             |
 | [1.8.2](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.2)   | 1.8.2                   | 1.3.2                             |
 | [1.7.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.3)   | 1.7.6                   | 1.3.1                             |
 | [1.7.1](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.1)   | 1.7.5                   | 1.3.1                             |
