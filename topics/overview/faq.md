@@ -25,14 +25,15 @@ about [supported platforms](supported-platforms.md).
 
 ### In which IDE should I work on my cross-platform app?
 
-We recommend using the Android Studio IDE to work with Kotlin Multiplatform projects.
+We recommend using IntelliJ IDEA or the Android Studio IDE to work with Kotlin Multiplatform projects.
 Read more about available alternatives in [Recommended IDEs and code editors](recommended-ides.md).
 
 ### How do I create a new Kotlin Multiplatform project?
 
-The [Create a Kotlin Multiplatform app](get-started.topic) tutorials provide step-by-step
-instructions for creating Kotlin Multiplatform projects. You can decide what to share – only logic or both logic and a
-UI.
+The [shared logic](multiplatform-create-first-app.md) tutorial and [shared UI](compose-multiplatform-create-first-app.md)
+tutorials provide step-by-step instructions for creating Kotlin Multiplatform projects.
+The shared logic tutorial uses a sample with native Android and iOS UI
+while in the shared UI sample apps share most of UI code as well.
 
 ### I have an existing Android application. How can I migrate it to Kotlin Multiplatform?
 
@@ -51,14 +52,13 @@ Multiplatform in production.
 
 ### Which operating systems can work with Kotlin Multiplatform?
 
-If you are going to work with shared code or platform-specific code, except for iOS, you can work on any operating
-system supported by your IDE.
-
+If you are not going to create iOS-specific code, you can use any operating system supported by your IDE.
 Learn more about [recommended IDEs](recommended-ides.md).
 
-If you want to write iOS-specific code and run an iOS application on a simulator or real device, use a Mac with a macOS.
-This is because iOS simulators can run only on macOS, per Apple requirements, but cannot run on other operating
-systems, such as Microsoft Windows or Linux.
+If you want to write iOS-specific code and run iOS applications on a simulator or real device,
+you will need to use a Mac with a macOS.
+Xcode and iOS simulators can only run on macOS, per Apple requirements,
+so while you can write the code on Microsoft Windows or Linux you won't have the tools to build and run your app.
 
 ### How can I write concurrent code in Kotlin Multiplatform projects?
 
@@ -67,17 +67,17 @@ this code depends on where you call the code from. Calling suspending functions 
 documented, especially for Android. [Calling them from Swift code](https://kotlinlang.org/docs/native-arc-integration.html#completion-handlers)
 requires a little more work, see [KT-47610](https://youtrack.jetbrains.com/issue/KT-47610) for more details.
 
-<!-- when adding SKIE back to the tutorial, add it here as well
-and uncomment the paragraph below --> 
-
 The best current approach for calling suspending functions and flows from Swift is to use plugins and libraries like
 [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) together
 with Swift's `async`/`await` or libraries like Combine and RxSwift.
 
-<!-- At the moment, KMP-NativeCoroutines is the more
-tried-and-tested solution, and it supports `async`/`await`, Combine, and RxSwift approaches to concurrency. SKIE is easier
-to set up and less verbose. For instance, it maps Kotlin `Flow` to Swift `AsyncSequence` directly. Both of these libraries
-support the proper cancellation of coroutines. -->
+At the moment, KMP-NativeCoroutines is the more
+tried-and-tested solution, and it supports `async`/`await`, Combine, and RxSwift approaches to concurrency.
+
+SKIE is easier to set up and less verbose.
+For instance, it maps Kotlin `Flow` to Swift `AsyncSequence` directly.
+Both of these libraries
+support the proper cancellation of coroutines.
 
 To learn how to use them, see [](multiplatform-upgrade-app.md).
 
@@ -114,12 +114,12 @@ any of the supported platforms – iOS, Android, desktop (Windows, macOS, Linux)
 Compose Multiplatform shares most of its API with [Jetpack Compose](https://developer.android.com/jetpack/compose), the
 Android UI framework developed by Google. In fact, when you are using Compose Multiplatform to target Android, your app
 simply runs on Jetpack Compose.
-Other platforms targeted by Compose Multiplatform may have implementation details under the hood that differ from those
-of Jetpack Compose on Android, but they still provide you with the same APIs.
+Other platforms targeted by Compose Multiplatform may have not support certain Compose APIs or provide different implementations under the hood,
+but the supported set of Compose features works the same as it does on Android.
 
 For details, see the [overview of the frameworks' interrelation](compose-multiplatform-and-jetpack-compose.md).
 
-### Between which platforms can I share my UI?
+### Which platforms can share UI code?
 
 We want you to have the option to share your UI between any combination of popular platforms – Android, iOS, desktop
 (Linux, macOS, Windows), and web (based on Wasm). Compose Multiplatform is only Stable for Android, iOS,
@@ -129,7 +129,7 @@ and desktop at the moment. For more details, see [Supported platforms](supported
 
 The Android, iOS, and desktop targets of Compose Multiplatform are Stable. You can use them in production.
 
-The version of Compose Multiplatform for Web that is based on WebAssembly is in Beta, which means that it's almost complete.
+The version of Compose Multiplatform for web that is based on WebAssembly is in Beta, which means that it's almost complete.
 You can use it, but migration issues may still occur.
 It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
@@ -137,12 +137,13 @@ It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 The [Create a Compose Multiplatform app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial provides step-by-step
 instructions for creating a Kotlin Multiplatform project with Compose Multiplatform for Android, iOS, and desktop.
-You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by Kotlin
-Developer Advocate Sebastian Aigner.
+You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by a Kotlin
+Developer Advocate, Sebastian Aigner.
 
 ### What IDE should I use for building apps with Compose Multiplatform?
 
-We recommend using Android Studio IDE. For more details, see [Recommended IDEs and code editors](recommended-ides.md).
+We recommend using IntelliJ IDEA or the Android Studio IDE.
+For more details, see [Recommended IDEs and code editors](recommended-ides.md).
 
 ### Can I play with a demo application? Where can I find it?
 
@@ -170,9 +171,9 @@ depends on the complexity of your application and the amount of Android-specific
 You can migrate most of your screens to Compose Multiplatform without changes. All of the Jetpack Compose widgets are
 supported. However, some APIs work only in the Android target – they might be Android-specific or have yet to be ported to
 other platforms. For instance, resource handling is Android-specific, so you would need to migrate to the [Compose
-Multiplatform resource library](compose-multiplatform-resources.md) or use a community solution. The
-Android [Navigation library](https://developer.android.com/jetpack/androidx/releases/navigation) is also
-Android-specific, but there are [community alternatives](compose-navigation-routing.md) available. For more information on components available only for Android, see the
+Multiplatform resource library](compose-multiplatform-resources.md) or use a community solution.
+
+For more information on components available only for Android, see the
 current [list of Android-only APIs](compose-android-only-components.md).
 
 You need to [migrate the business logic to Kotlin Multiplatform](multiplatform-integrate-in-existing-app.md). When you

@@ -62,7 +62,8 @@ They may be ported to `commonMain` in the future, depending on complexity and de
 
 APIs that are often used when developing applications, such as permissions, devices (Bluetooth, GPS, Camera),
 and IO (network, files, databases), are out of the scope of Compose Multiplatform.
-<!-- To find alternative solutions, see [Search for Multiplatform libraries](search-libs.md). -->
+
+To find alternative solutions, you can use [klibs.io](https://klibs.io/), the Kotlin Multiplatform libraries catalog.
 
 ## API without Android classes in their signatures
 
