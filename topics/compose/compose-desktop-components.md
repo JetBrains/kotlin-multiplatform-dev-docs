@@ -308,8 +308,6 @@ tutorial.
 
 ## What's next
 
-* Complete the [Compose Multiplatform desktop application](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
-  tutorial.
 * Learn how to [create unit tests for your Compose Multiplatform desktop project](compose-desktop-ui-testing.md).
 * Learn how to [create native distributions, installers, and packages for desktop platforms](compose-native-distribution.md).
 * Set up [interoperability with Swing and migrate your Swing applications to Compose Multiplatform](compose-desktop-swing-interoperability.md).
