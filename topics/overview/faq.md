@@ -64,7 +64,7 @@ systems, such as Microsoft Windows or Linux.
 
 You can still use coroutines and flows to write asynchronous code in your Kotlin Multiplatform projects. How you call
 this code depends on where you call the code from. Calling suspending functions and flows from Kotlin code is widely
-documented, especially for Android. [Calling them from Swift code](https://kotlinlang.org/docs/native-arc-integration.html#completion-handlers)
+documented, especially for Android. [Calling them from Swift code](/docs/native-arc-integration.html#completion-handlers)
 requires a little more work, see [KT-47610](https://youtrack.jetbrains.com/issue/KT-47610) for more details.
 
 <!-- when adding SKIE back to the tutorial, add it here as well
@@ -83,7 +83,7 @@ To learn how to use them, see [](multiplatform-upgrade-app.md).
 
 ### What is Kotlin/Native, and how does it relate to Kotlin Multiplatform?
 
-[Kotlin/Native](https://kotlinlang.org/docs/native-overview.html) is a technology for compiling Kotlin code to native
+[Kotlin/Native](/docs/native-overview.html) is a technology for compiling Kotlin code to native
 binaries, which can run without a virtual machine. It includes an [LLVM-based](https://llvm.org/) backend for the Kotlin
 compiler and a native implementation of the Kotlin standard library.
 
@@ -99,7 +99,7 @@ seamless on both platforms.
 
 ### How can I speed up my Kotlin Multiplatform module compilation for native platforms (iOS, macOS, Linux)?
 
-See these [tips for improving Kotlin/Native compilation times](https://kotlinlang.org/docs/native-improving-compilation-time.html).
+See these [tips for improving Kotlin/Native compilation times](/docs/native-improving-compilation-time.html).
 
 ## Compose Multiplatform
 
@@ -227,7 +227,7 @@ For more information on stability statuses, see [Supported platforms](supported-
 ### What about future support for web targets in Kotlin and Compose Multiplatform?
 
 We're currently focusing resources on WebAssembly (Wasm), which shows great potential. You can experiment with our new
-[Kotlin/Wasm backend](https://kotlinlang.org/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
+[Kotlin/Wasm backend](/docs/wasm-overview.html) and [Compose Multiplatform for Web](https://kotl.in/wasm-compose-example) powered by Wasm.
 
 As for the JS target, the Kotlin/JS backend has already reached Stable status. In Compose Multiplatform, due to resource
 constraints, we've shifted our focus from JS Canvas to Wasm, which we believe holds more promise.
