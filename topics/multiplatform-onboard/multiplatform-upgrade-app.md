@@ -718,8 +718,8 @@ In the final part of the tutorial, you'll wrap up your project and see what step
 
 ### See also
 
-* Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).
-* Learn more about the [interoperability with Objective-C frameworks and libraries](https://kotlinlang.org/docs/native-objc-interop.html).
+* Explore various approaches to [composition of suspending functions](/docs/composing-suspending-functions.html).
+* Learn more about the [interoperability with Objective-C frameworks and libraries](/docs/native-objc-interop.html).
 * Complete this tutorial on [networking and data storage](multiplatform-ktor-sqldelight.md).
 
 ## Get help

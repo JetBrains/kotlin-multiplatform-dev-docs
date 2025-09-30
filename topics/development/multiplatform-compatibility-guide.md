@@ -2,7 +2,7 @@
 
 <show-structure depth="1"/>
 
-This guide summarizes [incompatible changes](https://kotlinlang.org/docs/kotlin-evolution-principles.html#incompatible-changes) you might encounter while
+This guide summarizes [incompatible changes](/docs/kotlin-evolution-principles.html#incompatible-changes) you might encounter while
 developing projects with Kotlin Multiplatform.
 
 The current Stable version of Kotlin is %kotlinVersion%. Mind the deprecation cycle of a specific change in relation to
@@ -90,21 +90,21 @@ From Kotlin 2.1.20, you can remove the `withJava()` function from your build scr
 In addition, Gradle now only runs Java compile tasks if Java sources are present, triggering a JVM validation 
 diagnostic that previously didn't run before. This diagnostic fails if you explicitly configure an incompatible JVM target
 for `KotlinJvmCompile` tasks or inside `compilerOptions`. For guidance on ensuring JVM target compatibility, see 
-[Check for JVM target compatibility of related compile tasks](https://kotlinlang.org/docs/gradle-configure-project.html#check-for-jvm-target-compatibility-of-related-compile-tasks).
+[Check for JVM target compatibility of related compile tasks](/docs/gradle-configure-project.html#check-for-jvm-target-compatibility-of-related-compile-tasks).
 
 If your project uses Gradle versions higher than 8.7 and doesn't rely on Gradle Java plugins, like [Java](https://docs.gradle.org/current/userguide/java_plugin.html),
 [Java Library](https://docs.gradle.org/current/userguide/java_library_plugin.html), or [Application](https://docs.gradle.org/current/userguide/application_plugin.html),
 or a third party Gradle plugin that has a dependency on a Gradle Java plugin, you can remove the `withJava()` function.
 
 If your project uses the [Application](https://docs.gradle.org/current/userguide/application_plugin.html) Gradle Java plugin,
-we recommend migrating to the [new Experimental DSL](https://kotlinlang.org/docs/whatsnew2120.html#kotlin-multiplatform-new-dsl-to-replace-gradle-s-application-plugin).
+we recommend migrating to the [new Experimental DSL](/docs/whatsnew2120.html#kotlin-multiplatform-new-dsl-to-replace-gradle-s-application-plugin).
 Starting with Gradle 8.7, the Application plugin will no longer work with the Kotlin Multiplatform Gradle plugin.
 
 If you want to use both the Kotlin Multiplatform Gradle plugin and other Gradle plugins for
 Java in your multiplatform project, see [Deprecated compatibility with Kotlin Multiplatform Gradle plugin and Java plugins](multiplatform-compatibility-guide.md#deprecated-compatibility-with-kotlin-multiplatform-gradle-plugin-and-gradle-java-plugins).
 
 If you use the [Java test fixtures](https://docs.gradle.org/current/userguide/java_testing.html#sec:java_test_fixtures) Gradle plugin with Kotlin 2.1.20
-and a Gradle version higher than 8.7, the plugin doesn't work. Instead, upgrade to [Kotlin 2.1.21](https://kotlinlang.org/docs/releases.html#release-details)
+and a Gradle version higher than 8.7, the plugin doesn't work. Instead, upgrade to [Kotlin 2.1.21](/docs/releases.html#release-details)
 where this issue is resolved.
 
 If you run into any issues, report them in our [issue tracker](https://kotl.in/issue) or ask for help in our [public Slack channel](https://kotlinlang.slack.com/archives/C19FD9681).
@@ -478,7 +478,7 @@ version of the iOS framework. So, the changes won't be visible in the iOS app in
 **When will the issue be fixed?**
 
 We're planning to fix this issue in Kotlin 2.0.10. You can check if any preview versions of
-Kotlin 2.0.10 are already available in the [Participate in the Kotlin Early Access Preview](https://kotlinlang.org/docs/eap.html) section.
+Kotlin 2.0.10 are already available in the [Participate in the Kotlin Early Access Preview](/docs/eap.html) section.
 
 For more information, see the [corresponding issue in YouTrack](https://youtrack.jetbrains.com/issue/KT-68257).
 

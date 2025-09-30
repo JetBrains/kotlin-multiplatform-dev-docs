@@ -48,9 +48,9 @@ Here are the current platform stability levels for the core Kotlin Multiplatform
 | tvOS                     | Beta            |
 
 * Kotlin Multiplatform supports more native platforms than are listed here. To understand the level of support for each
-  of them, see [Kotlin/Native target support](https://kotlinlang.org/docs/native-target-support.html).
+  of them, see [Kotlin/Native target support](/docs/native-target-support.html).
 * For more information on the stability levels of Kotlin components like Kotlin Multiplatform,
-  see [Current stability of Kotlin components](https://kotlinlang.org/docs/components-stability.html#current-stability-of-kotlin-components).
+  see [Current stability of Kotlin components](/docs/components-stability.html#current-stability-of-kotlin-components).
 
 ## Compose Multiplatform UI framework stability levels
 

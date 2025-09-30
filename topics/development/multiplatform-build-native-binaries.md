@@ -14,7 +14,7 @@ and provides a set of methods for declaring and configuring them.
 
 Binaries produced by the Kotlin/Native compiler can include third-party code, data, or derived work.
 This means if you distribute a Kotlin/Native-compiled final binary,
-you should always include necessary [license files](https://kotlinlang.org/docs/native-binary-licenses.html) into your binary distribution.
+you should always include necessary [license files](/docs/native-binary-licenses.html) into your binary distribution.
 
 ## Declare binaries
 
@@ -31,7 +31,7 @@ Use the following factory methods to declare elements of the `binaries` collecti
 The simplest version doesn't require any additional parameters and creates one binary for each build type. Currently,
 two build types are available:
 
-* `DEBUG` – produces a non-optimized binary with additional metadata that is helpful when working with [debugger tools](https://kotlinlang.org/docs/native-debugging.html)
+* `DEBUG` – produces a non-optimized binary with additional metadata that is helpful when working with [debugger tools](/docs/native-debugging.html)
 * `RELEASE` – produces an optimized binary without debug information
 
 The following snippet creates two executable binaries, debug and release:
@@ -277,7 +277,7 @@ For example, you implement several modules in Kotlin and want to access them fro
 several Kotlin/Native frameworks in a Swift application is limited, but you can create an umbrella framework and
 export all these modules to it.
 
-> You can export only [`api` dependencies](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types) of the corresponding source set.
+> You can export only [`api` dependencies](/docs/gradle-configure-project.html#dependency-types) of the corresponding source set.
 >
 {style="note"}
 

@@ -89,7 +89,7 @@ Implement the same changes as in the Android app:
     You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
     represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
     returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
-    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
+    see [Interoperability with Swift/Objective-C](/docs/native-objc-interop.html).
 
 3. Update the SwiftUI code to display a list of items in the same way as in the Android app:
 

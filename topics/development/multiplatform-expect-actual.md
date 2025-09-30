@@ -238,7 +238,7 @@ compared to hosting locally. As long as a dependency is expressed through an int
 implementations can be injected, either at compile time or at runtime.
 
 The same principle applies when the dependencies are platform-specific. In the common code, a component can express its
-dependencies using regular [Kotlin interfaces](https://kotlinlang.org/docs/interfaces.html). The DI framework can then be configured to inject a
+dependencies using regular [Kotlin interfaces](/docs/interfaces.html). The DI framework can then be configured to inject a
 platform-specific implementation, for example, from the JVM or an iOS module.
 
 This means that expected and actual declarations are only needed in the configuration of the DI
@@ -428,7 +428,7 @@ Within a JVM module, the `java.time.Month` enum can be used to implement the fir
 the `java.time.LocalDate` class to implement the second. However, there's no way to add the `actual` keyword directly to
 these types.
 
-Instead, you can use [type aliases](https://kotlinlang.org/docs/type-aliases.html) to connect the expected declarations and the platform-specific
+Instead, you can use [type aliases](/docs/type-aliases.html) to connect the expected declarations and the platform-specific
 types:
 
 ```kotlin

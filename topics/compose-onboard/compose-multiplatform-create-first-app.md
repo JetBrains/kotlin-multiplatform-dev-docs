@@ -26,7 +26,7 @@ events, and modifiers.
 
 Things to keep in mind for this tutorial:
 * No previous experience with Compose Multiplatform, Android, or iOS is required. We do recommend that
-  you become familiar with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting.
+  you become familiar with the [fundamentals of Kotlin](/docs/getting-started.html) before starting.
 * To complete this tutorial, you'll only need IntelliJ IDEA. It allows you to try multiplatform development on Android
   and desktop. For iOS, you'll need a macOS machine with Xcode installed. This is a general limitation of iOS development.
 * If you wish, you can limit your choice to the specific platforms you're interested in and omit the others.
@@ -65,14 +65,14 @@ If you didn't select iOS in the wizard, you won't have the folders whose names b
 
 > The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
-> (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
+> (see the [compatibility table](/docs/multiplatform-compatibility-guide.html#version-compatibility)).
 >
 {style="note"}
 
 The project contains two modules:
 
 * _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, iOS, and web applications – the code
-  you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
+  you use for all the platforms. It uses [Gradle](/docs/gradle.html) as the build system that helps
   you automate your build process.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
@@ -322,7 +322,7 @@ To enable compatibility mode for your web application:
 
 Once the Gradle task completes, compatible artifacts are generated in the
 `composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
-You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
+You can use these artifacts to [publish your application](/docs/wasm-get-started.html#publish-the-application) 
 working on both the `js` and `wasmJs` targets.
 
 ## Next step

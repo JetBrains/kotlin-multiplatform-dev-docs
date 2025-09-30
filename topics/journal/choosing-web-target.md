@@ -17,7 +17,7 @@ The table below summarizes the recommended target based on your use case:
 |---------------------------------------| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sharing business logic, but native UI | JS                 | Offers straightforward interop with JavaScript and minimal overhead                                                                                                                                                          |
 | Sharing both UI and business logic    | Wasm               | Provides better performance for rendering with [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/)                                                                                                      |
-| Non-shareable UI                      | JS                 | Allows building UIs with HTML-based frameworks like [Kobweb](https://kobweb.varabyte.com/), [Kilua](https://kilua.dev/), or [React](https://kotlinlang.org/docs/js-react.html), leveraging existing JS ecosystems and tooling |
+| Non-shareable UI                      | JS                 | Allows building UIs with HTML-based frameworks like [Kobweb](https://kobweb.varabyte.com/), [Kilua](https://kilua.dev/), or [React](/docs/js-react.html), leveraging existing JS ecosystems and tooling |
 
 ## When to choose Kotlin/JS
 
@@ -43,7 +43,7 @@ In this case, the Kotlin/JS provides several options. You can:
 
 * Use Compose HTML-based frameworks, such as [Kobweb](https://kobweb.varabyte.com/) or [Kilua](https://kilua.dev/),
   to build UIs using a familiar Compose Multiplatform architecture.
-* Take advantage of React-based solutions with Kotlin wrappers to build [React components in Kotlin](https://kotlinlang.org/docs/js-react.html).
+* Take advantage of React-based solutions with Kotlin wrappers to build [React components in Kotlin](/docs/js-react.html).
 
 ## When to choose Kotlin/Wasm
 

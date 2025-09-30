@@ -26,7 +26,7 @@ plugins {
 }
 ```
 
-The plugin versions match the [Kotlin release versions](https://kotlinlang.org/docs/releases.html). The latest stable version is %kotlinVersion%.
+The plugin versions match the [Kotlin release versions](/docs/releases.html). The latest stable version is %kotlinVersion%.
 
 ## `cocoapods {}` block
 
