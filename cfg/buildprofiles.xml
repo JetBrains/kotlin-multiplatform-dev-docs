@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
-	<sitemap priority="0.35" change-frequency="monthly"/>
-	<variables>
-		<analytics-head-script-file>thirdparty/dpk-gtm-analytics.html</analytics-head-script-file>
-		<include-in-head>thirdparty/dpk-gtm-analytics.html</include-in-head>
-		<website-title>%instance% Documentation</website-title>
-		<automaticLinkSummaries>false</automaticLinkSummaries>
-		<header-logo>jb-kotlin-multiplatform-logo.svg</header-logo>
-		<product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
-		<primary-color>frozen</primary-color>
-		<enable-contribution>true</enable-contribution>
-		<contribute-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</contribute-url>
-		<web-root>https://www.jetbrains.com/help</web-root>
-		<download-page/>
-		<feedbackRequireEmail>false</feedbackRequireEmail>
-		<feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
-		<feedback-widget>true</feedback-widget>
-		<search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
-		<og-twitter>@kotlin</og-twitter>
-		<og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
-		<noindex-content>false</noindex-content>
-		<property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
-<!--		<generate-canonicals>true</generate-canonicals>-->
-		<custom-favicons>
-			https://resources.jetbrains.com/storage/ui/favicons/favicon.ico,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-60x60.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-72x72.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-76x76.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-114x114.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-120x120.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-144x144.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-152x152.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png,
-			https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg
-		</custom-favicons>
-	</variables>
-	<footer>
-		<link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
-		<social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
-		<social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog</social>
-		<social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
-		<!-- Custom CSS will replace rss type -->
-		<social type="rss" href="https://kotl.in/gamt3a">Kotlin Multiplatform Slack</social>
-	</footer>
-	<build-profile instance="mpd"/>
+<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
+    <sitemap priority="0.35" change-frequency="monthly"/>
+    <variables>
+        <analytics-head-script-file>thirdparty/dpk-gtm-analytics.html</analytics-head-script-file>
+        <include-in-head>thirdparty/dpk-gtm-analytics.html</include-in-head>
+        <website-title>%instance% Documentation</website-title>
+        <automaticLinkSummaries>false</automaticLinkSummaries>
+        <header-logo>jb-kotlin-multiplatform-logo.svg</header-logo>
+        <product-web-url>https://www.jetbrains.com/kotlin-multiplatform/</product-web-url>
+        <primary-color>frozen</primary-color>
+        <enable-contribution>true</enable-contribution>
+        <contribute-url>https://github.com/JetBrains/kotlin-multiplatform-dev-docs/edit/master/</contribute-url>
+        <web-root>https://www.jetbrains.com/help</web-root>
+        <download-page/>
+        <feedbackRequireEmail>false</feedbackRequireEmail>
+        <feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
+        <feedback-widget>true</feedback-widget>
+        <search-scopes-provider>https://data.services.jetbrains.com/search/</search-scopes-provider>
+        <og-twitter>@kotlin</og-twitter>
+        <og-image>https://resources.jetbrains.com/storage/products/jetbrains/img/meta/preview.png</og-image>
+        <noindex-content>false</noindex-content>
+        <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
+        <!--		<generate-canonicals>true</generate-canonicals>-->
+        <custom-favicons>
+            https://resources.jetbrains.com/storage/ui/favicons/favicon.ico,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-57x57.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-60x60.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-72x72.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-76x76.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-114x114.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-120x120.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-144x144.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-152x152.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-touch-icon-180x180.png,
+            https://resources.jetbrains.com/storage/ui/favicons/apple-mask-icon.svg
+        </custom-favicons>
+    </variables>
+    <footer>
+        <link href="https://github.com/JetBrains/compose-multiplatform">GitHub</link>
+        <social type="twitter" href="https://twitter.com/kotlin">X (former Twitter)</social>
+        <social type="blog" href="https://blog.jetbrains.com/kotlin/category/multiplatform/">Kotlin Multiplatform blog
+        </social>
+        <social type="youtube" href="https://www.youtube.com/c/kotlin">Kotlin YouTube channel</social>
+        <!-- Custom CSS will replace rss type -->
+        <social type="rss" href="https://kotl.in/gamt3a">Kotlin Multiplatform Slack</social>
+    </footer>
+    <build-profile instance="mpd"/>
 </buildprofiles>
