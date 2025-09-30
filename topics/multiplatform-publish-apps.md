@@ -23,7 +23,7 @@ the same as described in the [iOS developer documentation](https://developer.app
 
 > With Spring'24 changes to App Store policy, missing or incomplete privacy manifests may lead to warnings or even rejection
 > for your app.
-> For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](https://kotlinlang.org/docs/apple-privacy-manifest.html). 
+> For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](/docs/apple-privacy-manifest.html). 
 >
 {style="note"}
 
@@ -77,7 +77,7 @@ such as functions or line numbers.
 By default, the release versions of iOS frameworks produced from the shared Kotlin module have an accompanying `.dSYM`
 file. This helps you analyze crashes that happen in the shared module's code.
 
-For more information on crash report symbolication, see the [Kotlin/Native documentation](https://kotlinlang.org/docs/native-debugging.html#debug-ios-applications).
+For more information on crash report symbolication, see the [Kotlin/Native documentation](/docs/native-debugging.html#debug-ios-applications).
 
 ## Web app
 
@@ -127,5 +127,5 @@ With the artifacts ready, you can deploy your application on the web hosting pla
 ### Debug your web application
 
 You can debug your web application in your browser out of the box, without additional configurations. To learn how to debug
-in the browser, see the [Debug in your browser](https://kotlinlang.org/docs/wasm-debugging.html#debug-in-your-browser)
+in the browser, see the [Debug in your browser](/docs/wasm-debugging.html#debug-in-your-browser)
 guide in Kotlin docs.

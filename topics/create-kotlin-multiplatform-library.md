@@ -103,7 +103,7 @@ The other platforms follow the same pattern, with variations in the values of `f
 
 Now that you're familiar with how shared and platform-specific code work in the template, let's extend the project by adding support for an additional platform.
 
-Configure support for the [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-overview.html) platform by using 
+Configure support for the [Kotlin/Wasm](/docs/wasm-overview.html) platform by using 
 the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties). You can implement platform-specific functionality for the `firstElement` and `secondElement` properties.
 
 ### Add the Kotlin/Wasm target to your project
@@ -270,7 +270,7 @@ Sync the consumer project and start using your library!
 We encourage you to explore multiplatform development further:
 
 * [Publish your library to Maven Central](multiplatform-publish-libraries.md)
-* [Check the library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html)
+* [Check the library authors' guidelines](/docs/api-guidelines-introduction.html)
 
 
 Join the community:

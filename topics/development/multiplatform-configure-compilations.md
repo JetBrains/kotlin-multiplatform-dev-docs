@@ -19,7 +19,7 @@ You can configure how artifacts are produced in:
 * [Compilations for one target](#configure-compilations-for-one-target) since one target can have multiple compilations.
 * [A specific compilation](#configure-one-compilation).
 
-See the [list of compilation parameters](multiplatform-dsl-reference.md#compilation-parameters) and [compiler options](https://kotlinlang.org/docs/gradle-compiler-options.html) 
+See the [list of compilation parameters](multiplatform-dsl-reference.md#compilation-parameters) and [compiler options](/docs/gradle-compiler-options.html) 
 available for all or specific targets.
 
 ## Configure all compilations
@@ -129,7 +129,7 @@ create a custom compilation.
 For custom compilations, you need to set up all dependencies manually. The default source set of a custom compilation
 does not depend on the `commonMain` and the `commonTest` source sets.
  
-For example, to create a custom compilation for integration tests of the `jvm` target, set up an [`associateWith`](https://kotlinlang.org/docs/gradle-configure-project.html#associate-compiler-tasks)
+For example, to create a custom compilation for integration tests of the `jvm` target, set up an [`associateWith`](/docs/gradle-configure-project.html#associate-compiler-tasks)
 relation between the `integrationTest` and `main` compilations:
 
 <tabs group="build-script">
@@ -287,7 +287,7 @@ to the Java plugin.
 
 ## Configure interop with native languages
 
-Kotlin provides [interoperability with native languages](https://kotlinlang.org/docs/native-overview.html) and DSL to configure this for a specific 
+Kotlin provides [interoperability with native languages](/docs/native-overview.html) and DSL to configure this for a specific 
 compilation.
 
 | Native language       | Supported platforms                         | Comments                                                                  |
@@ -297,7 +297,7 @@ compilation.
 | Swift via Objective-C | Apple platforms (macOS, iOS, watchOS, tvOS) | Kotlin can use only Swift declarations marked with the `@objc` attribute. |
 
 A compilation can interact with several native libraries. Configure interoperability with available properties in the
-[definition file](https://kotlinlang.org/docs/native-definition-file.html) or in the [`cinterops` block](multiplatform-dsl-reference.md#cinterops) of
+[definition file](/docs/native-definition-file.html) or in the [`cinterops` block](multiplatform-dsl-reference.md#cinterops) of
 your build file:
 
 <tabs group="build-script">
@@ -390,7 +390,7 @@ These Kotlin source sets are added to the variants' compilations accordingly.
 The default source set `commonMain` is added to each production (application or library) variant's compilation. 
 The `commonTest` source set is similarly added to the compilations of unit test and instrumented test variants.
 
-Annotation processing with [`kapt`](https://kotlinlang.org/docs/kapt.html) is also supported, but due to current limitations it requires that the Android target 
+Annotation processing with [`kapt`](/docs/kapt.html) is also supported, but due to current limitations it requires that the Android target 
 is created before the `kapt` dependencies are configured, which needs to be done in a top-level `dependencies {}` block rather 
 than within Kotlin source set dependencies.
 

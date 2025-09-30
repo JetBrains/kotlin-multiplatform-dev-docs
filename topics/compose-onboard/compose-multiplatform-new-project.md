@@ -526,7 +526,7 @@ We encourage you to explore multiplatform development further and try out more p
 * [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
 * [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
 * [Share business logic between iOS and Android while keeping the UI native](multiplatform-create-first-app.md)
-* [Create a Compose Multiplatform app with Kotlin/Wasm](https://kotlinlang.org/docs/wasm-get-started.html)
+* [Create a Compose Multiplatform app with Kotlin/Wasm](/docs/wasm-get-started.html)
 * [See the curated list of sample projects](multiplatform-samples.md)
 
 Join the community:

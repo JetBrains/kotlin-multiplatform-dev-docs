@@ -117,4 +117,4 @@ We recommend upgrading to Kotlin 1.9.20 or later versions. If the upgrade is imp
 To do that, set the `-Xallocator=custom` compilation option in your Gradle build script for the current Kotlin allocator
 or `-Xallocator=std` for the system allocator.
 
-For more information, see [Kotlin/Native memory management](https://kotlinlang.org/docs/native-memory-manager.html).
+For more information, see [Kotlin/Native memory management](/docs/native-memory-manager.html).

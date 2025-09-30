@@ -86,7 +86,7 @@ expected URLs and coordinates for individual platform artifacts.
   library to meet the repository's requirements.
 
   > Learn more about JAR artifact generation with [Gradle](multiplatform-configure-compilations.md#compilation-for-jvm)
-  > and [Maven](https://kotlinlang.org/docs/maven.html#create-jar-file) build systems.
+  > and [Maven](/docs/maven.html#create-jar-file) build systems.
   >
   {style="tip"}
 
@@ -137,7 +137,7 @@ However, there are still some limitations you should keep in mind.
 You can use any host to produce artifacts for projects with Apple targets.
 However, you still need to use a Mac machine if:
 
-* Your library or dependent modules have [cinterop dependencies](https://kotlinlang.org/docs/native-c-interop.html).
+* Your library or dependent modules have [cinterop dependencies](/docs/native-c-interop.html).
 * You have [CocoaPods integration](multiplatform-cocoapods-overview.md) set up in your project.
 * You need to build or test [final binaries](multiplatform-build-native-binaries.md) for Apple targets.
 
@@ -287,4 +287,4 @@ see [FAQ](https://klibs.io/faq).
 ## What's next
 
 * [Learn how to publish your Kotlin Multiplatform library to the Maven Central repository](multiplatform-publish-libraries.md)
-* [See the Library authors' guidelines for best practices and tips on designing a library for Kotlin Multiplatform](https://kotlinlang.org/docs/api-guidelines-build-for-multiplatform.html)
+* [See the Library authors' guidelines for best practices and tips on designing a library for Kotlin Multiplatform](/docs/api-guidelines-build-for-multiplatform.html)
