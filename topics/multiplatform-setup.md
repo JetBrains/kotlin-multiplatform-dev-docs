@@ -41,7 +41,7 @@ We recommend that you install the latest stable versions for compatibility and b
 </td>
    </tr>
    <tr>
-        <td><a href="/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
+        <td><a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-release">Kotlin plugin</a></td>
         <td>
             <p>The Kotlin plugin is bundled and automatically updated with each Android Studio release.</p>
         </td>

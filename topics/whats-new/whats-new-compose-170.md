@@ -326,7 +326,7 @@ paired with Kotlin 2.0.20, we see better results across the board:
     average CPU time per 1000 frames was reduced from 8.8 seconds to 2.4.
 * The *AnimatedVisibility* composable animates showing and hiding an image and demonstrates **~6%** faster rendering.
 
-On top of that, Kotlin 2.0.20 introduces experimental [support for concurrent marking](/docs/whatsnew2020.html#concurrent-marking-in-garbage-collector) 
+On top of that, Kotlin 2.0.20 introduces experimental [support for concurrent marking](https://kotlinlang.org/docs/whatsnew2020.html#concurrent-marking-in-garbage-collector) 
 in the garbage collector. Enabling concurrent marking shortens garbage collector pauses and leads to even bigger improvements for all benchmarks.
 
 You can check out the code for these Compose-specific benchmarks in the Compose Multiplatform repository:
