@@ -9,7 +9,7 @@ The page below summarizes it and is updated whenever we reach a declared milesto
 * On February 14th, 2025, the roadmap was updated to reflect the changes described in the [Kotlin Multiplatform Tooling – Shifting Gears](https://blog.jetbrains.com/kotlin/2025/02/kotlin-multiplatform-tooling-shifting-gears/)
     blog post.
 
-Kotlin Multiplatform goals are closely aligned with the [Kotlin roadmap](/docs/roadmap.html).
+Kotlin Multiplatform goals are closely aligned with the [Kotlin roadmap](https://kotlinlang.org/docs/roadmap.html).
 Be sure to check it out to have more context for the direction we're taking.
 
 ## Key priorities
@@ -109,7 +109,7 @@ We aim to support:
 
 ### Gradle and other build tools
 
-As we look ahead to 2025, our work on Gradle enhancements is outlined in the [Kotlin roadmap](/docs/roadmap.html#tooling).
+As we look ahead to 2025, our work on Gradle enhancements is outlined in the [Kotlin roadmap](https://kotlinlang.org/docs/roadmap.html#tooling).
 
 Here are the key areas we will be working on regarding Kotlin Multiplatform in particular:
 

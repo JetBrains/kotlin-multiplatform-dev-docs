@@ -21,7 +21,7 @@ simultaneously with Kotlin and will always be compatible with Kotlin of the same
 
 To use the new Compose compiler plugin in your project, apply it for each module that uses Compose.
 Read on for details on how to [migrate a Compose Multiplatform project](#migrating-a-compose-multiplatform-project). For a Jetpack Compose project,
-refer to the [migration guide](/docs/compose-compiler-migration-guide.html#migrating-a-jetpack-compose-project).
+refer to the [migration guide](https://kotlinlang.org/docs/compose-compiler-migration-guide.html#migrating-a-jetpack-compose-project).
 
 ## Migrating a Compose Multiplatform project
 
@@ -64,7 +64,7 @@ module that uses the `org.jetbrains.compose` plugin:
     ```
 
 4. If you are using compiler options for the Jetpack Compose compiler, set them in the `composeCompiler {}` block.
-   See [Compose compiler options DSL](/docs/compose-compiler-options.html) for reference.
+   See [Compose compiler options DSL](https://kotlinlang.org/docs/compose-compiler-options.html) for reference.
 
 #### Possible issue: "Missing resource with path"
 
@@ -79,5 +79,5 @@ To resolve this, delete all the `build` directories: at the root of your project
 ## What's next
 
 * See [Google's announcement](https://android-developers.googleblog.com/2024/04/jetpack-compose-compiler-moving-to-kotlin-repository.html) about the Compose compiler moving to the Kotlin repository.
-* See [Compose compiler options DSL](/docs/compose-compiler-options.html) for reference.
-* To migrate a Jetpack Compose app, check out [Compose compiler documentation](/docs/compose-compiler-migration-guide.html).
+* See [Compose compiler options DSL](https://kotlinlang.org/docs/compose-compiler-options.html) for reference.
+* To migrate a Jetpack Compose app, check out [Compose compiler documentation](https://kotlinlang.org/docs/compose-compiler-migration-guide.html).

@@ -39,7 +39,7 @@ compose.resources {
 }
 ```
 
-* `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](/docs/visibility-modifiers.html).
+* `publicResClass` set to `true` makes the generated `Res` class public. By default, the generated class is [internal](https://kotlinlang.org/docs/visibility-modifiers.html).
 * `packageOfResClass` allows you to assign the generated `Res` class to a particular package (to access within the code,
     as well as for isolation in a final artifact). By default, Compose Multiplatform assigns the
     `{group name}.{module name}.generated.resources` package to the class.
