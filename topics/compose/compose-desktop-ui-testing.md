@@ -85,4 +85,4 @@ Create the test source set and add the necessary dependencies:
 ## What's next?
 
 * See how to [create and run multiplatform tests](multiplatform-run-tests.md).
-* For a general overview of JUnit-based testing in a Kotlin project, see the [Test code using JUnit in JVM](/docs/jvm-test-using-junit.html) tutorial.
+* For a general overview of JUnit-based testing in a Kotlin project, see the [Test code using JUnit in JVM](https://kotlinlang.org/docs/jvm-test-using-junit.html) tutorial.

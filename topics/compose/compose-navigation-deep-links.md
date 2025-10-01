@@ -334,7 +334,7 @@ func application(
     }
 ```
 
-> For naming conventions for accessing singletons from Swift, see [Kotlin/Native documentation](/docs/native-objc-interop.html#kotlin-singletons).
+> For naming conventions for accessing singletons from Swift, see [Kotlin/Native documentation](https://kotlinlang.org/docs/native-objc-interop.html#kotlin-singletons).
 > 
 {style="tip"}
 

@@ -85,14 +85,14 @@ The complete list of available targets is the following:
                 <li><code>browser {}</code> for applications running in the browser.</li>
                 <li><code>nodejs {}</code> for applications running on Node.js.</li>
             </list>
-            <p>Learn more in <a href="/docs/js-project-setup.html#execution-environments">Setting up a Kotlin/JS project</a>.</p>
+            <p>Learn more in <a href="https://kotlinlang.org/docs/js-project-setup.html#execution-environments">Setting up a Kotlin/JS project</a>.</p>
         </td>
     </tr>
     <tr>
         <td>Kotlin/Native</td>
         <td></td>
         <td>
-            <p>Learn about currently supported targets for the macOS, Linux, and Windows hosts in <a href="/docs/native-target-support.html">Kotlin/Native target support</a>.</p>
+            <p>Learn about currently supported targets for the macOS, Linux, and Windows hosts in <a href="https://kotlinlang.org/docs/native-target-support.html">Kotlin/Native target support</a>.</p>
         </td>
     </tr>
     <tr>
@@ -147,7 +147,7 @@ environment:
 | [`browser`](#browser) | Configuration of the browser target. |
 | [`nodejs`](#node-js)  | Configuration of the Node.js target. |
 
-Learn more about [configuring Kotlin/JS projects](/docs/js-project-setup.html).
+Learn more about [configuring Kotlin/JS projects](https://kotlinlang.org/docs/js-project-setup.html).
 
 A separate `wasmWasi {}` block describes the configuration of Kotlin/Wasm targets that support the WASI system interface.
 Here, only the [`nodejs`](#node-js) execution environment is available:
@@ -162,7 +162,7 @@ kotlin {
 ```
 
 All the web targets, `js`, `wasmJs`, and `wasmWasi`, also support the `binaries.executable()` call. It explicitly
-instructs the Kotlin compiler to emit executable files. For more information, see [Execution environments](/docs/js-project-setup.html#execution-environments)
+instructs the Kotlin compiler to emit executable files. For more information, see [Execution environments](https://kotlinlang.org/docs/js-project-setup.html#execution-environments)
 in the Kotlin/JS documentation.
 
 #### Browser
@@ -418,7 +418,7 @@ kotlin {
 </tab>
 </tabs>
 
-For more cinterop properties, see [Definition file](/docs/native-definition-file.html#properties).
+For more cinterop properties, see [Definition file](https://kotlinlang.org/docs/native-definition-file.html#properties).
 
 ### Android targets
 
@@ -634,7 +634,7 @@ kotlin {
 ### Custom compilations
 
 In addition to predefined compilations, you can create your own custom compilations.
-To do that, set up an [`associateWith`](/docs/gradle-configure-project.html#associate-compiler-tasks) relation between the new
+To do that, set up an [`associateWith`](https://kotlinlang.org/docs/gradle-configure-project.html#associate-compiler-tasks) relation between the new
 and the `main` compilation. If you're using the Kotlin Gradle DSL, mark custom compilations with `by creating`:
 
 <tabs group="build-script">
@@ -710,7 +710,7 @@ A compilation has the following parameters:
 | `defaultSourceSet`       | The compilation's default source set.                                                                                                                                     |
 | `kotlinSourceSets`       | Source sets participating in the compilation.                                                                                                                             |
 | `allKotlinSourceSets`    | Source sets participating in the compilation and their connections via `dependsOn()`.                                                                                     |
-| `compilerOptions`        | Compiler options applied to the compilation. For the list of available options, see [Compiler options](/docs/gradle-compiler-options.html).         |
+| `compilerOptions`        | Compiler options applied to the compilation. For the list of available options, see [Compiler options](https://kotlinlang.org/docs/gradle-compiler-options.html).         |
 | `compileKotlinTask`      | Gradle task for compiling Kotlin sources.                                                                                                                                 |
 | `compileKotlinTaskName`  | Name of `compileKotlinTask`.                                                                                                                                              |
 | `compileAllTaskName`     | Name of the Gradle task for compiling all sources of a compilation.                                                                                                       |
@@ -796,7 +796,7 @@ Configurations made at a lower level override similar settings at higher levels:
 * Task-level compiler options override similar settings at the target or extension level.
 * Target-level compiler options override similar settings at the extension level.
 
-For the list of possible compiler options, see [All compiler options](/docs/gradle-compiler-options.html#all-compiler-options).
+For the list of possible compiler options, see [All compiler options](https://kotlinlang.org/docs/gradle-compiler-options.html#all-compiler-options).
 
 ### Extension level
 
@@ -938,13 +938,13 @@ kotlin {
 
 Before Kotlin 2.2.0, you could configure compiler options using the `kotlinOptions {}` block. Since the `kotlinOptions {}`
 block is deprecated in Kotlin 2.2.0, you need to use the `compilerOptions {}` block in your build scripts instead. 
-See [Migrate from `kotlinOptions{}` to `compilerOptions{}`](/docs/gradle-compiler-options.html#migrate-from-kotlinoptions-to-compileroptions), for more information.
+See [Migrate from `kotlinOptions{}` to `compilerOptions{}`](https://kotlinlang.org/docs/gradle-compiler-options.html#migrate-from-kotlinoptions-to-compileroptions), for more information.
 
 ## Dependencies
 
 The `dependencies {}` block of the source set declaration contains the dependencies of this source set.
 
-Learn more about [configuring dependencies](/docs/gradle-configure-project.html).
+Learn more about [configuring dependencies](https://kotlinlang.org/docs/gradle-configure-project.html).
 
 There are four types of dependencies:
 
@@ -1055,8 +1055,8 @@ The following language settings are available:
 | `languageVersion`       | Provides source compatibility with the specified version of Kotlin.                                                                                                             |
 | `apiVersion`            | Allows using declarations only from the specified version of Kotlin bundled libraries.                                                                                          |
 | `enableLanguageFeature` | Enables the specified language feature. The available values correspond to the language features that are currently experimental or have been introduced as such at some point. |
-| `optIn`                 | Allows using the specified [opt-in annotation](/docs/opt-in-requirements.html).                                                                           |
-| `progressiveMode`       | Enables the [progressive mode](/docs/whatsnew13.html#progressive-mode).                                                                                   |
+| `optIn`                 | Allows using the specified [opt-in annotation](https://kotlinlang.org/docs/opt-in-requirements.html).                                                                           |
+| `progressiveMode`       | Enables the [progressive mode](https://kotlinlang.org/docs/whatsnew13.html#progressive-mode).                                                                                   |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">

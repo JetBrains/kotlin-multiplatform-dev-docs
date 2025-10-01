@@ -51,7 +51,7 @@ struct ComposeViewController: UIViewControllerRepresentable {
 Now you can use the `ComposeView` structure in other SwiftUI code.
 
 `Main_iosKt.MainViewController` is a generated
-name. You can learn more about accessing Kotlin code from Swift on the [Interoperability with Swift/Objective-C](/docs/native-objc-interop.html#top-level-functions-and-properties)
+name. You can learn more about accessing Kotlin code from Swift on the [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#top-level-functions-and-properties)
 page.
 
 In the end, your application should look like this:

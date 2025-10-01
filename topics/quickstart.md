@@ -268,7 +268,7 @@ Learn more about the structure of a KMP project and writing shared code:
 * A series of tutorials about working with shared code along with a native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation:
   * [Project configuration](multiplatform-project-configuration.md)
-  * [Working with multiplatform dependencies](/docs/multiplatform-add-dependencies.html)
+  * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
 * Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features:
     [](compose-multiplatform-and-jetpack-compose.md).
 

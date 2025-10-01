@@ -289,7 +289,7 @@ manually or using a shell command:
 ### Module or framework not found {initial-collapse-state="collapsed" collapsible="true"}
 
 When installing Pods, you may encounter `module 'SomeSDK' not found` or `framework 'SomeFramework' not found`
-errors related to [C interop](/docs/native-c-interop.html) issues. To resolve such errors, try these solutions:
+errors related to [C interop](https://kotlinlang.org/docs/native-c-interop.html) issues. To resolve such errors, try these solutions:
 
 #### Update packages
 

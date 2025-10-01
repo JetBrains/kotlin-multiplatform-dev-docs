@@ -41,7 +41,7 @@ You can share application logic between iOS and Android apps and write platform-
 
 > The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
-> (see the [compatibility table](/docs/multiplatform-compatibility-guide.html#version-compatibility)).
+> (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
 >
 {style="note"}
 
@@ -52,7 +52,7 @@ In IntelliJ IDEA, expand the `GreetingKMP` folder.
 This Kotlin Multiplatform project includes three modules:
 
 * _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
-  between platforms. It uses [Gradle](/docs/gradle.html) as the build system to help automate your build process.
+  between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
 * _composeApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The composeApp module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS

@@ -4,7 +4,7 @@ Every program requires a set of libraries to operate successfully. A Kotlin Mult
 multiplatform libraries that work for all target platforms, platform-specific libraries, and other multiplatform projects.
 
 To add a dependency on a library, update your `build.gradle(.kts)` file in the directory of your project containing shared code. Set a
-dependency of the required [type](/docs/gradle-configure-project.html#dependency-types) (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
+dependency of the required [type](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types) (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
 block: 
 
 <tabs group="build-script">
@@ -49,9 +49,9 @@ library is the same as the version of the `kotlin-multiplatform` plugin.
 
 For platform-specific source sets, the corresponding platform-specific variant of the library is used, while a common
 standard library is added to the rest. The Kotlin Gradle plugin will select the appropriate JVM standard library
-depending on the `compilerOptions.jvmTarget` [compiler option](/docs/gradle-compiler-options.html) of your Gradle build script.
+depending on the `compilerOptions.jvmTarget` [compiler option](https://kotlinlang.org/docs/gradle-compiler-options.html) of your Gradle build script.
 
-Learn how to [change the default behavior](/docs/gradle-configure-project.html#dependency-on-the-standard-library).
+Learn how to [change the default behavior](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-on-the-standard-library).
 
 ### Test libraries
 

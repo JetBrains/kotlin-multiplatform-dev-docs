@@ -20,7 +20,7 @@ but the general workflow looks like this:
 
 1. Download your dependency.
 2. Build it to get its binaries.
-3. Create a special `.def` [definition file](/docs/native-definition-file.html) that describes this dependency to cinterop.
+3. Create a special `.def` [definition file](https://kotlinlang.org/docs/native-definition-file.html) that describes this dependency to cinterop.
 4. Adjust your build script to generate bindings during the build.
 
 #### Add a library
@@ -205,7 +205,7 @@ property in the `.def` file. For the example above, this will be:
 import MyFramework.*
 ```
 
-Learn more about [Swift/Objective-C interop](/docs/native-objc-interop.html) and
+Learn more about [Swift/Objective-C interop](https://kotlinlang.org/docs/native-objc-interop.html) and
 [configuring cinterop from Gradle](multiplatform-dsl-reference.md#cinterops).
 
 ### With CocoaPods
@@ -273,6 +273,6 @@ import cocoapods.SDWebImage.*
 
 Check out other resources on adding dependencies in multiplatform projects and learn more about:
 
-* [Connecting platform libraries](/docs/native-platform-libs.html)
+* [Connecting platform libraries](https://kotlinlang.org/docs/native-platform-libs.html)
 * [Adding dependencies on multiplatform libraries or other multiplatform projects](multiplatform-add-dependencies.md)
 * [Adding Android dependencies](multiplatform-android-dependencies.md)

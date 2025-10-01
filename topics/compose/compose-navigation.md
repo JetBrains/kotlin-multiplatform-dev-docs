@@ -73,7 +73,7 @@ kotlin {
 There is an order in which it makes sense to tackle the necessary steps to set up your navigation:
 
 1. Define your routes.
-    Create a [serializable](/docs/serialization.html)
+    Create a [serializable](https://kotlinlang.org/docs/serialization.html)
     object or data class for each destination to hold the arguments that the corresponding destination requires.
 2. Create a `NavController`, which will be your navigation interface, high enough in the composable hierarchy that all
    composables have access to it.

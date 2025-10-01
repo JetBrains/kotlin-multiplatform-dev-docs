@@ -380,7 +380,7 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
    }
    ```
 
-   This class's [visibility](/docs/visibility-modifiers.html#class-members) is set to internal,
+   This class's [visibility](https://kotlinlang.org/docs/visibility-modifiers.html#class-members) is set to internal,
    which means it is only accessible from within the multiplatform module.
 
 3. Inside the `Database` class, implement some data handling operations.
@@ -567,7 +567,7 @@ The class contains one function for getting all launch information. Depending on
 Clients of your SDK could use a `forceReload` flag to load the latest information about the launches,
   enabling the pull-to-refresh gesture for users.
 
-All Kotlin exceptions are unchecked, while Swift has only checked errors (see [Interoperability with Swift/Objective-C](/docs/native-objc-interop.html#errors-and-exceptions)
+All Kotlin exceptions are unchecked, while Swift has only checked errors (see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#errors-and-exceptions)
   for details). Thus, to make your Swift code aware of expected exceptions, Kotlin functions called from Swift
   should be marked with the `@Throws` annotation specifying a list of potential exception classes.
 
@@ -1200,7 +1200,7 @@ It will allow you to call the SDK function with the correct database driver.
     }
     ```
 
-    When you compile a Kotlin module into an Apple framework, [suspending functions](/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
+    When you compile a Kotlin module into an Apple framework, [suspending functions](https://kotlinlang.org/docs/whatsnew14.html#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)
      can be called using the Swift's `async`/`await` mechanism.
    
     Since the `getLaunches` function is marked with the `@Throws(Exception::class)` annotation in Kotlin, any exceptions
@@ -1239,7 +1239,7 @@ It will allow you to call the SDK function with the correct database driver.
 
 This tutorial features some potentially resource-heavy operations, like parsing JSON and making requests to the database in
 the main thread. To learn about how to write concurrent code and optimize your app,
-see the [Coroutines guide](/docs/coroutines-guide.html).
+see the [Coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html).
 
 You can also check out these additional learning materials:
 
