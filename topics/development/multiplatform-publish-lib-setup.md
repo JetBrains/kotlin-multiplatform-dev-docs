@@ -149,9 +149,17 @@ Maven Central, for example, explicitly forbids duplicate publications and fails 
 ## Publish an Android library
 
 To publish an Android library, you need to provide additional configuration.
+By default, no artifacts of an Android library are published.
 
-By default, no artifacts of an Android library are published. To publish artifacts them, add the `androidLibrary {}` block
-to the `shared/build.gradle.kts` file, and use the publication DSL as is usual for the `android {}` block.
+> This section assumes that you are using the Android Gradle Library Plugin.
+> For a guide on setting up the plugin, or on migrating from the legacy `com.android.library` plugin,
+> see the [Set up the Android Gradle Library Plugin](https://developer.android.com/kotlin/multiplatform/plugin#migrate)
+> page in the Android documentation.
+> 
+{style="note"}
+
+To publish artifacts, add the `androidLibrary {}` block
+to the `shared/build.gradle.kts` file, and configure the publication using the KMP DSL.
 For example:
 
 ```kotlin
@@ -161,7 +169,8 @@ kotlin {
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
-        // Enables Java compilation support
+        // Enables Java compilation support.
+        // This improves build times when Java compilation is not needed
         withJava()
 
         compilations.configureEach {
@@ -174,37 +183,6 @@ kotlin {
     }
 }
 ```
-
-The example works for Android libraries without [product flavors](https://developer.android.com/build/build-variants#product-flavors).
-For a library with product flavors, the variant names also contain the flavors, like `fooBarDebug` or `fooBarRelease`.
-
-The default publishing setup is as follows:
-* If the published variants have the same build type (for example, all of them are `release` or`debug`),
-  they will be compatible with any consumer build type.
-* If the published variants have different build types, then only the release variants will be compatible
-  with consumer build types that are not among the published variants. All other variants (such as `debug`)
-  will only match the same build type on the consumer side, unless the consumer project specifies the
-  [matching fallbacks](https://developer.android.com/reference/tools/gradle-api/4.2/com/android/build/api/dsl/BuildType).
-
-If you want to make every published Android variant compatible with only the same build type used by the library consumer,
-set this Gradle property: `kotlin.android.buildTypeAttribute.keep=true`.
-
-You can also publish variants grouped by the product flavor, so that the outputs of the different build types are placed
-in a single module, with the build type becoming a classifier for the artifacts (the release build type is still published
-with no classifier). This mode is disabled by default and can be enabled as follows in the `shared/build.gradle.kts` file:
-
-```kotlin
-kotlin {
-    androidTarget {
-        publishLibraryVariantsGroupedByFlavor = true
-    }
-}
-```
-
-> It is not recommended that you publish variants grouped by the product flavor in case they have different dependencies,
-> as those will be merged into one dependency list.
->
-{style="note"}
 
 ## Disable sources publication
 
