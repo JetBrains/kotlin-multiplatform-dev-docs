@@ -4,46 +4,47 @@
 
 <vars>
     <!-- Kotlin -->
-    <var name="kotlinVersion" value="2.2.21" type="string"/>
-    <var name="languageVersion" value="2.2" type="string"/>
-    <var name="apiVersion" value="2.2" type="string"/>
+    <var name="kotlinVersion" value="2.2.21"/>
+    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.2.21"/>
+    <var name="kmpLatestUrl" value="https://github.com/JetBrains/compose-multiplatform/releases"/>
+    <var name="languageVersion" value="2.2"/>
+    <var name="apiVersion" value="2.2"/>
 
     <!-- Compose Multiplatform -->
-    <var name="org.jetbrains.compose" value="1.9.3" type="string"/>
-    <var name="org.jetbrains.compose-eap" value="1.10.0-beta01" type="string"/>
-    <var name="org.jetbrains.androidx.navigation" value="2.9.1" type="string"/>
-    <var name="org.jetbrains.androidx.lifecycle" value="2.9.6" type="string"/>
-    <var name="org.jetbrains.compose.material3.adaptive" value="1.2.0" type="string"/>
-    <var name="org.jetbrains.compose.material3" value="1.9.0" type="string"/>
+    <var name="org.jetbrains.compose" value="1.9.3"/>
+    <var name="org.jetbrains.compose-eap" value="1.10.0-beta01"/>
+    <var name="org.jetbrains.androidx.navigation" value="2.9.1"/>
+    <var name="org.jetbrains.androidx.lifecycle" value="2.9.6"/>
+    <var name="org.jetbrains.compose.material3.adaptive" value="1.2.0"/>
+    <var name="org.jetbrains.compose.material3" value="1.9.0"/>
 
     <!-- Jetpack Compose -->
-    <var name="androidx.compose" value="1.9.4" type="string"/>
-    <var name="androidx.compose.material3-stable" value="1.4.0" type="string"/>
+    <var name="androidx.compose" value="1.9.4"/>
+    <var name="androidx.compose.material3-stable" value="1.4.0"/>
 
     <!-- Compose Hot Reload -->
-    <var name="foojayResolverConventionVersion" value="1.0.0" type="string"/>
+    <var name="foojayResolverConventionVersion" value="1.0.0"/>
 
     <!-- KGP, AGP, Xcode -->
-    <var name="minGradleVersion" value="7.6.3" type="string"/>
-    <var name="maxGradleVersion" value="8.14" type="string"/>
+    <var name="minGradleVersion" value="7.6.3"/>
+    <var name="maxGradleVersion" value="8.14"/>
 
-    <var name="minAndroidGradleVersion" value="7.3.1" type="string"/>
-    <var name="maxAndroidGradleVersion" value="8.11.1" type="string"/>
+    <var name="minAndroidGradleVersion" value="7.3.1"/>
+    <var name="maxAndroidGradleVersion" value="8.11.1"/>
 
-    <var name="xcode" value="26.0" type="string"/>
+    <var name="xcode" value="26.0"/>
 
     <!-- Libraries and Frameworks -->
-    <var name="coroutinesVersion" value="1.10.2" type="string"/>
-    <var name="serializationVersion" value="1.8.1" type="string"/>
-    <var name="sqlDelightVersion" value="2.1.0" type="string"/>
-    <var name="ktorVersion" value="3.3.2" type="string"/>
-    <var name="dateTimeVersion" value="0.7.1" type="string"/>
-    <var name="koinVersion" value="4.1.0" type="string"/>
-    <var name="skieVersion" value="0.10.6" type="string"/>
-    <var name="kmpncVersion" value="1.0.0-ALPHA-45" type="string"/>
-    <var name="kspVersion" value="2.2.10-2.0.2" type="string"/>
-    <var name="vanniktechPublishPlugin" value="0.34.0" type="string"/>
+    <var name="coroutinesVersion" value="1.10.2"/>
+    <var name="serializationVersion" value="1.8.1"/>
+    <var name="sqlDelightVersion" value="2.1.0"/>
+    <var name="ktorVersion" value="3.3.2"/>
+    <var name="dateTimeVersion" value="0.7.1"/>
+    <var name="koinVersion" value="4.1.0"/>
+    <var name="skieVersion" value="0.10.6"/>
+    <var name="kmpncVersion" value="1.0.0-ALPHA-45"/>
+    <var name="kspVersion" value="2.2.10-2.0.2"/>
+    <var name="vanniktechPublishPlugin" value="0.34.0"/>
 
-    <var name="rubyVersion" value="3.4.7" type="string"/>
-
+    <var name="rubyVersion" value="3.4.7"/>
 </vars>
