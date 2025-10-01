@@ -156,7 +156,7 @@ For example:
 
 ```kotlin
 kotlin {
-    androidTarget {
+    androidLibrary {
         namespace = "org.example.library"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
