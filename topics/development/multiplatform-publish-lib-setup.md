@@ -132,7 +132,7 @@ This guarantees that all artifacts are available and correctly referenced.
 Kotlin/Native supports cross-compilation, allowing any host to produce the necessary `.klib` artifacts.
 However, there are still some limitations you should keep in mind.
 
-**Compilation for Apple targets**
+### Compilation for Apple targets
 
 You can use any host to produce artifacts for projects with Apple targets.
 However, you still need to use a Mac machine if:
@@ -141,22 +141,36 @@ However, you still need to use a Mac machine if:
 * You have [CocoaPods integration](multiplatform-cocoapods-overview.md) set up in your project.
 * You need to build or test [final binaries](multiplatform-build-native-binaries.md) for Apple targets.
 
-**Duplicating publications**
+### Duplicating publications
 
-To avoid any issues during publication, publish all artifacts from a single host to avoid duplicating publications in the
-repository. Maven Central, for example, explicitly forbids duplicate publications and fails the process.
+To avoid duplicating publications in the repository, publish all artifacts from a single host.
+Maven Central, for example, explicitly forbids duplicate publications and fails the process when they are created.
 
 ## Publish an Android library
 
 To publish an Android library, you need to provide additional configuration.
 
-By default, no artifacts of an Android library are published. To publish artifacts produced by a set of Android [build variants](https://developer.android.com/build/build-variants),
-specify the variant names in the Android target block in the `shared/build.gradle.kts` file:
+By default, no artifacts of an Android library are published. To publish artifacts them, add the `androidLibrary {}` block
+to the `shared/build.gradle.kts` file, and use the publication DSL as is usual for the `android {}` block.
+For example:
 
 ```kotlin
 kotlin {
     androidTarget {
-        publishLibraryVariants("release")
+        namespace = "org.example.library"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        // Enables Java compilation support
+        withJava()
+
+        compilations.configureEach {
+            compilerOptions.configure {
+                jvmTarget.set(
+                    JvmTarget.JVM_11
+                )
+            }
+        }
     }
 }
 ```
@@ -249,10 +263,11 @@ kotlin.publishJvmEnvironmentAttribute=false
 
 ## Promote your library
 
-Your library can be featured on the [JetBrains' search platform](https://klibs.io/).
+Your library can be featured on the [JetBrains' multiplatform library catalog](https://klibs.io/).
 It's designed to make it easy to look for Kotlin Multiplatform libraries based on their target platforms.
 
-Libraries that meet the criteria are added automatically. For more information on how to add your library, see [FAQ](https://klibs.io/faq).
+Libraries that meet the criteria are added automatically. For more information on how to make sure your library appears in the catalog,
+see [FAQ](https://klibs.io/faq).
 
 ## What's next
 
