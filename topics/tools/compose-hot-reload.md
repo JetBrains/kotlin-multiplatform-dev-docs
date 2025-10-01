@@ -5,7 +5,7 @@
 [Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
 
 At the moment, Compose Hot Reload is only available when you include a desktop target in your multiplatform project
-and use Java 21 or older (the latest version compatible with the required JetBrains Runtime). 
+and make the project compatible with Java 21 or earlier. 
 
 We're exploring adding support for other targets in the future. In the meantime, using the desktop app as your sandbox
 lets you quickly experiment with UI changes in common code without interrupting your flow.
@@ -67,7 +67,8 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    Compose Hot Reload can automatically provision a compatible JBR for your project.
 
    > The latest JetBrains Runtime supports only Java 21:
-   > if you add Compose Hot Reload to a project that uses Java 22 or newer, running the project results in a linkage error.
+   > if you add Compose Hot Reload to a project that is only compatible with Java 22 or newer,
+   > running the project results in a linkage error.
    > 
    {style="warning"}
 
