@@ -328,5 +328,12 @@
                 and ensured smooth user interactions on low-end devices.</p>
             <a href="https://www.bilibili.com/video/BV1es421T71C">Watch the full video</a>.
         </li>
+
+        <li id="case-study-abwabannahw">
+            <img src="abwabannahw.svg" alt="Abwab An-nahw" height="35"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="ios.svg" style="inline" alt="ios" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
+            <p><b>Abwabannahw</b> is an educational app designed to simplify Arabic grammar rules and present them in a clear, well-structured way for students and language enthusiasts.
+The app is developed using Kotlin Multiplatform, enabling it to run seamlessly on Android, iOS, and desktop platforms with a unified experience.</p>
+            <a href="https://tinyurl.com/aboutabwab">Read the full story</a>.
     </list>
 </topic>
