@@ -23,6 +23,7 @@
         <algolia-id>7961PKYRXV</algolia-id>
         <algolia-index>stage_KOTLINLANG_WEBHELP</algolia-index>
         <algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</algolia-api-key>
+        <algolia-product-id>help/kotlin-reference</algolia-product-id>
         <noindex-content>false</noindex-content>
         <noindex-content status="eap">false</noindex-content>
         <noindex-content status="deprecated">true</noindex-content>
