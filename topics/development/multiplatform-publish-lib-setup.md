@@ -184,6 +184,43 @@ kotlin {
 }
 ```
 
+Note that the Android Gradle Library plugin doesn't support product flavors and build variants, streamlining configuration.
+One of the consequences is that you need to opt in to create test source sets and configurations, for example:
+
+```kotlin
+kotlin {
+    androidLibrary {
+        // ...
+
+        // Opt in to enable and configure host-side (unit) tests
+        withHostTestBuilder {}.configure {}
+
+        // Opt in to enable device tests, specifying the source set name
+        withDeviceTestBuilder {
+            sourceSetTreeName = "test"
+        }
+
+        // ...
+    }
+}
+```
+
+Before, running tests with a GitHub action, for example, required mentioning debug and release variants:
+
+```yaml
+- target: testDebugUnitTest
+  os: ubuntu-latest
+- target: testReleaseUnitTest
+  os: ubuntu-latest
+```
+
+With the Android Gradle Library plugin, you need to specify only the general target with the source set name:
+
+```yaml
+- target: testAndroidHostTest
+  os: ubuntu-latest
+```
+
 ## Disable sources publication
 
 By default, the Kotlin Multiplatform Gradle plugin publishes sources for all the specified targets. However,
