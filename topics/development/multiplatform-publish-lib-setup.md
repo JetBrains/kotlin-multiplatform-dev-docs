@@ -132,7 +132,7 @@ This guarantees that all artifacts are available and correctly referenced.
 Kotlin/Native supports cross-compilation, allowing any host to produce the necessary `.klib` artifacts.
 However, there are still some limitations you should keep in mind.
 
-**Compilation for Apple targets**
+### Compilation for Apple targets
 
 You can use any host to produce artifacts for projects with Apple targets.
 However, you still need to use a Mac machine if:
@@ -141,56 +141,85 @@ However, you still need to use a Mac machine if:
 * You have [CocoaPods integration](multiplatform-cocoapods-overview.md) set up in your project.
 * You need to build or test [final binaries](multiplatform-build-native-binaries.md) for Apple targets.
 
-**Duplicating publications**
+### Duplicating publications
 
-To avoid any issues during publication, publish all artifacts from a single host to avoid duplicating publications in the
-repository. Maven Central, for example, explicitly forbids duplicate publications and fails the process.
+To avoid duplicating publications in the repository, publish all artifacts from a single host.
+For example, Maven Central explicitly forbids duplicate publications and fails the process if they are created.
 
 ## Publish an Android library
 
 To publish an Android library, you need to provide additional configuration.
+By default, no artifacts of an Android library are published.
 
-By default, no artifacts of an Android library are published. To publish artifacts produced by a set of Android [build variants](https://developer.android.com/build/build-variants),
-specify the variant names in the Android target block in the `shared/build.gradle.kts` file:
-
-```kotlin
-kotlin {
-    androidTarget {
-        publishLibraryVariants("release")
-    }
-}
-```
-
-The example works for Android libraries without [product flavors](https://developer.android.com/build/build-variants#product-flavors).
-For a library with product flavors, the variant names also contain the flavors, like `fooBarDebug` or `fooBarRelease`.
-
-The default publishing setup is as follows:
-* If the published variants have the same build type (for example, all of them are `release` or`debug`),
-  they will be compatible with any consumer build type.
-* If the published variants have different build types, then only the release variants will be compatible
-  with consumer build types that are not among the published variants. All other variants (such as `debug`)
-  will only match the same build type on the consumer side, unless the consumer project specifies the
-  [matching fallbacks](https://developer.android.com/reference/tools/gradle-api/4.2/com/android/build/api/dsl/BuildType).
-
-If you want to make every published Android variant compatible with only the same build type used by the library consumer,
-set this Gradle property: `kotlin.android.buildTypeAttribute.keep=true`.
-
-You can also publish variants grouped by the product flavor, so that the outputs of the different build types are placed
-in a single module, with the build type becoming a classifier for the artifacts (the release build type is still published
-with no classifier). This mode is disabled by default and can be enabled as follows in the `shared/build.gradle.kts` file:
-
-```kotlin
-kotlin {
-    androidTarget {
-        publishLibraryVariantsGroupedByFlavor = true
-    }
-}
-```
-
-> It is not recommended that you publish variants grouped by the product flavor in case they have different dependencies,
-> as those will be merged into one dependency list.
->
+> This section assumes that you are using the Android Gradle Library Plugin.
+> For a guide on setting up the plugin, or on migrating from the legacy `com.android.library` plugin,
+> see the [Set up the Android Gradle Library Plugin](https://developer.android.com/kotlin/multiplatform/plugin#migrate)
+> page in the Android documentation.
+> 
 {style="note"}
+
+To publish artifacts, add the `androidLibrary {}` block
+to the `shared/build.gradle.kts` file, and configure the publication using the KMP DSL.
+For example:
+
+```kotlin
+kotlin {
+    androidLibrary {
+        namespace = "org.example.library"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        // Enables Java compilation support.
+        // This improves build times when Java compilation is not needed
+        withJava()
+
+        compilations.configureEach {
+            compilerOptions.configure {
+                jvmTarget.set(
+                    JvmTarget.JVM_11
+                )
+            }
+        }
+    }
+}
+```
+
+Note that the Android Gradle Library plugin doesn't support product flavors and build variants, streamlining configuration.
+As a result, you need to opt in to create test source sets and configurations. For example:
+
+```kotlin
+kotlin {
+    androidLibrary {
+        // ...
+
+        // Opt in to enable and configure host-side (unit) tests
+        withHostTestBuilder {}.configure {}
+
+        // Opt in to enable device tests, specifying the source set name
+        withDeviceTestBuilder {
+            sourceSetTreeName = "test"
+        }
+
+        // ...
+    }
+}
+```
+
+Previously, running tests with a GitHub action, for example, required specifying debug and release variants separately:
+
+```yaml
+- target: testDebugUnitTest
+  os: ubuntu-latest
+- target: testReleaseUnitTest
+  os: ubuntu-latest
+```
+
+With the Android Gradle Library plugin, you need to specify only the general target with the source set name:
+
+```yaml
+- target: testAndroidHostTest
+  os: ubuntu-latest
+```
 
 ## Disable sources publication
 
@@ -249,10 +278,11 @@ kotlin.publishJvmEnvironmentAttribute=false
 
 ## Promote your library
 
-Your library can be featured on the [JetBrains' search platform](https://klibs.io/).
+Your library can be featured on the [JetBrains' multiplatform library catalog](https://klibs.io/).
 It's designed to make it easy to look for Kotlin Multiplatform libraries based on their target platforms.
 
-Libraries that meet the criteria are added automatically. For more information on how to add your library, see [FAQ](https://klibs.io/faq).
+Libraries that meet the criteria are added automatically. For more information on how to make sure your library appears in the catalog,
+see [FAQ](https://klibs.io/faq).
 
 ## What's next
 
