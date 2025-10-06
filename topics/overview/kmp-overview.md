@@ -21,10 +21,8 @@ This also allows to release features simultaneously on multiple platforms.
 * You make team collaboration easier as the knowledge of unified logic reflected in shared code
 is easier to transfer between team members, and there's less duplication of effort between dedicated platform teams.
 
-In addition to faster time to market, 65% of teams reported improved performance and quality,
-and 55% reported improved collaboration after adopting KMP, based on the KMP Survey Q2 2024.
-
-<!-- [some graphic on the KMP survey about the share of people happy with the outcomes] -->
+In addition to faster time to market, <format style="bold," color="Blue">55%</format> users reported improved collaboration after adopting KMP
+and <format style="bold," color="Purple">65%</format> of teams reported improved performance and quality, (in the KMP Survey Q2 2024).
 
 ### Flexibility of code sharing
 
@@ -59,7 +57,7 @@ This helps achieve near-native performance while writing platform-agnostic code:
 IntelliJ IDEA and Android Studio provide smart IDE support for KMP with the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 common UI previews, Compose Hot Reload, cross-language navigation, refactorings, and debugging across Kotlin and Swift code.
 
-[the Hot Reload clip]
+<video src="https://youtu.be/ACmerPEQAWA"/>
 
 ### AI-powered development
 
