@@ -205,7 +205,7 @@ kotlin {
 }
 ```
 
-Before, running tests with a GitHub action, for example, required mentioning debug and release variants:
+Previously, running tests with a GitHub action, for example, required specifying debug and release variants separately:
 
 ```yaml
 - target: testDebugUnitTest
