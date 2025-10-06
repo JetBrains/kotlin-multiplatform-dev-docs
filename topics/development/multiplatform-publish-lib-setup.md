@@ -144,7 +144,7 @@ However, you still need to use a Mac machine if:
 ### Duplicating publications
 
 To avoid duplicating publications in the repository, publish all artifacts from a single host.
-Maven Central, for example, explicitly forbids duplicate publications and fails the process when they are created.
+For example, Maven Central explicitly forbids duplicate publications and fails the process if they are created.
 
 ## Publish an Android library
 
@@ -185,7 +185,7 @@ kotlin {
 ```
 
 Note that the Android Gradle Library plugin doesn't support product flavors and build variants, streamlining configuration.
-One of the consequences is that you need to opt in to create test source sets and configurations, for example:
+As a result, you need to opt in to create test source sets and configurations. For example:
 
 ```kotlin
 kotlin {
