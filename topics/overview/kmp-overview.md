@@ -14,14 +14,17 @@ cost efficiency, and support for gradual adoption. [Learn more about companies w
 
 ### Cost efficiency and faster delivery
 
-Kotlin Multiplatfrom helps streamline both technical and organizational processes:
+Kotlin Multiplatform helps streamline both technical and organizational processes:
 
-* On one hand, you can reduce duplication and maintenance costs by sharing logic and UI code across platforms.
+* You can reduce duplication and maintenance costs by sharing logic and UI code across platforms.
 This also allows to release features simultaneously on multiple platforms.
-* On the other hand, you make team collaboration easier as the knowledge of unified logic reflected in shared code
+* You make team collaboration easier as the knowledge of unified logic reflected in shared code
 is easier to transfer between team members, and there's less duplication of effort between dedicated platform teams.
 
-[some graphic on the KMP survey about the share of people happy with the outcomes]
+In addition to faster time to market, 65% of teams reported improved performance and quality,
+and 55% reported improved collaboration after adopting KMP, based on the KMP Survey Q2 2024.
+
+<!-- [some graphic on the KMP survey about the share of people happy with the outcomes] -->
 
 ### Flexibility of code sharing
 
@@ -53,10 +56,8 @@ This helps achieve near-native performance while writing platform-agnostic code:
 
 ### Seamless tooling
 
-Base Kotlin provides KMP support out of the box as regards to build tools, for example.
-But KMP is also supported in IntelliJ IDEA and Android Studio through a dedicated IDE plugin that handles a lot of the hassle
-of maintaining a cross-platform project, as well as mirroring some functionality of Jetpack Compose IDE features such as
-UI preview.
+IntelliJ IDEA and Android Studio provide smart IDE support for KMP with the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+common UI previews, Compose Hot Reload, cross-language navigation, refactorings, and debugging across Kotlin and Swift code.
 
 [the Hot Reload clip]
 
