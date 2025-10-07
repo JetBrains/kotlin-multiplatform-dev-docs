@@ -8,7 +8,7 @@ The plugin is compatible both with IntelliJ IDEA (starting with version 2025.1.1
 and Android Studio (starting with Narwhal 2025.1.1).
 
 > To use the Kotlin Multiplatform plugin on Windows and Linux, you need IntelliJ IDEA 2025.2.2.
-> Android Studio will add support for the KMP IDE plugin on Windows and Linux in the coming months.
+> Android Studio will add support for the KMP IDE plugin on Windows and Linux in an upcoming release.
 >
 {style="note"}
 
