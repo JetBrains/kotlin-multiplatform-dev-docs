@@ -21,29 +21,20 @@ Start with an IDE and necessary plugins:
     For standalone installations, download the installer for [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 
     or [Android Studio](https://developer.android.com/studio).
 
-    The plugins necessary for Kotlin Multiplatform require **IntelliJ IDEA 2025.1.1.1**
+    The plugins necessary for Kotlin Multiplatform require at least **IntelliJ IDEA 2025.1.1**
     or **Android Studio Narwhal 2025.1.1**.
 
 2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
     (not to be confused with the Kotlin Multiplatform Gradle plugin).
    
-    > The Kotlin Multiplatform plugin is not yet available for IDEs on Windows or Linux.
-    > But it is also not strictly necessary on those platforms:
-    > you can still follow the tutorial to generate and run a KMP project.
+    > To use the Kotlin Multiplatform plugin on Windows and Linux, you need IntelliJ IDEA 2025.2.2.
+    > Android Studio will add support for the KMP IDE plugin on Windows and Linux in an upcoming release.
     >
     {style="note"}
     
 3. Installing the Kotlin Multiplatform IDE plugin for IntelliJ IDEA also installs all necessary dependencies if you don't have them yet
     (Android Studio has all necessary plugins bundled).
     
-    If you're using IntelliJ IDEA for Windows or Linux, make sure to install all necessary plugins manually:
-    * [Android](https://plugins.jetbrains.com/plugin/22989-android)
-    * [Android Design Tools](https://plugins.jetbrains.com/plugin/22990-android-design-tools)
-    * [Jetpack Compose](https://plugins.jetbrains.com/plugin/18409-jetpack-compose)
-    * [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support)
-    * [Compose Multiplatform for Desktop IDE Support](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-for-desktop-ide-support)
-      (only needed if you don't have the Kotlin Multiplatform plugin).
-
 4. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
 
     <tabs>
@@ -86,10 +77,6 @@ Start with an IDE and necessary plugins:
 
 ## Create a project 
 
-### On macOS
-
-On macOS, the Kotlin Multiplatform plugin provides a project generation wizard inside the IDE:
-
 <tabs>
 <tab title= "IntelliJ IDEA">
 
@@ -119,6 +106,10 @@ When you're done choosing platforms, click the **Create** button and wait for th
 
 </tab>
 <tab title= "Android Studio">
+
+> The KMP IDE plugin is not yet supported in Windows and Linux versions of Android Studio.
+>
+{style="warning"}
 
 The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is not going to work as described without it.
 So, before you start, make sure K2 mode is enabled:
@@ -154,14 +145,6 @@ When you're done choosing platforms, click the **Finish** button and wait for th
 </tab>
 </tabs>
 
-### On Windows or Linux
-
-If you're on Windows or Linux:
-
-1. Generate a project using the [web KMP wizard](https://kmp.jetbrains.com/).
-2. Extract the archive and open the resulting folder in your IDE.
-3. Wait for the import to finish, then go to the [](#run-the-sample-apps) section to learn how to build and run the apps.
-
 ## Consult the preflight checks
 
 You can make sure there are no environment issues with the project setup by opening
@@ -179,7 +162,7 @@ Press double <shortcut>Shift</shortcut> and search for commands containing the w
 
 The project created by the IDE wizard includes generated run configurations for iOS, Android,
 desktop, and web applications, as well as Gradle tasks for running the server app.
-On Windows and Linux, see Gradle commands for each platform below.
+The specific Gradle commands for each platform are listed below.
 
 <tabs>
 <tab title="Android">
@@ -188,8 +171,8 @@ To run the Android app, start the **composeApp** run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
-To run the Android app on Windows or Linux, create an **Android App** run configuration
-and choose the module **[project name].composeApp**.
+To create an Android run configuration manually, choose **Android App** as the run configuration template
+and select the module **[project name].composeApp**.
 
 By default, it runs on the first available virtual device:
 
@@ -219,8 +202,8 @@ The default run configuration for a desktop app is created as **composeApp [desk
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
-To run the desktop app on Windows or Linux, create a **Gradle** run configuration pointing
-to the **[app name]:composeApp** Gradle project with the following command:
+To create a desktop run configuration manually, choose a **Gradle** run configuration template and point to
+the **[app name]:composeApp** Gradle project with the following command:
 
 ```shell
 desktopRun -DmainClass=com.example.myapplication.MainKt --quiet
@@ -237,8 +220,8 @@ The default run configuration for a web app is created as **composeApp [wasmJs]*
 
 ![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
-To run the web app on Windows or Linux, create a **Gradle** run configuration pointing
-to the **[app name]:composeApp** Gradle project with the following command:
+To create a web run configuration manually, choose a **Gradle** run configuration template and point to
+the **[app name]:composeApp** Gradle project with the following command:
 
 ```shell
 wasmJsBrowserDevelopmentRun
@@ -279,7 +262,7 @@ make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 
 ### Xcode
 
-If your iOS run configuration reports that there is no virtual device to run on, make sure to launch Xcode
+If your iOS run configuration reports that there is no virtual device to run on, or the preflight check fails, make sure to launch Xcode
 and see if there are any updates for the iOS simulator.
 
 ### Get help
