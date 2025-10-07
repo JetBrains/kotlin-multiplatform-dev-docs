@@ -262,7 +262,7 @@ make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 
 ### Xcode
 
-If your iOS run configuration reports that there is no virtual device to run on, or the preflight checkmake sure to launch Xcode
+If your iOS run configuration reports that there is no virtual device to run on, or the preflight check fails, make sure to launch Xcode
 and see if there are any updates for the iOS simulator.
 
 ### Get help
