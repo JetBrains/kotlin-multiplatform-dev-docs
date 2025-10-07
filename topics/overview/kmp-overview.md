@@ -40,7 +40,7 @@ or mix and match combining native and shared UI code as needed.
 
 Regardless of the approach, you can produce apps which feel native on each platform: 
 
-<video src="https://www.youtube.com/watch?v=LB5a2FRrT94"/>
+<video src="https://www.youtube.com/watch?v=LB5a2FRrT94" width="700"/>
 
 ### Native performance
 
@@ -57,7 +57,7 @@ This helps achieve near-native performance while writing platform-agnostic code:
 IntelliJ IDEA and Android Studio provide smart IDE support for KMP with the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 common UI previews, Compose Hot Reload, cross-language navigation, refactorings, and debugging across Kotlin and Swift code.
 
-<video src="https://youtu.be/ACmerPEQAWA"/>
+<video src="https://youtu.be/ACmerPEQAWA" width="700"/>
 
 ### AI-powered development
 
