@@ -87,11 +87,11 @@ Create a common test source set and add the necessary dependencies:
        ```kotlin
        kotlin {
             // ...
-            androidTarget {
+            sourceSets {
                 // ...
-                dependencies { 
-                    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%androidx.compose%")
-                    debugImplementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
+                androidInstrumentedTest.dependencies { 
+                    implementation("androidx.compose.ui:ui-test-junit4-android:%androidx.compose%")
+                    implementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
                 }
             }
         }
