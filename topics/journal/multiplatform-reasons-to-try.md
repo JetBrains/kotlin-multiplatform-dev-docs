@@ -19,7 +19,7 @@ It explains some of the practical benefits of Kotlin Multiplatform,
 such as streamlining development, supporting multiple platforms, and offering a robust tooling ecosystem.
 You'll also find case studies from real companies.
 
-1. [Kotlin Multiplatform allows you to avoid code duplication](#1-kotlin-multiplatform-allows-you-to-avoid-code-duplication)
+1. [Kotlin Multiplatform helps you avoid code duplication](#1-kotlin-multiplatform-helps-you-avoid-code-duplication)
 2. [Kotlin Multiplatform supports an extensive list of platforms](#2-kotlin-multiplatform-supports-an-extensive-list-of-platforms)
 3. [Kotlin provides simplified code-sharing mechanisms](#3-kotlin-provides-simplified-code-sharing-mechanisms)
 4. [Kotlin Multiplatform allows for flexible multiplatform development](#4-kotlin-multiplatform-allows-for-flexible-multiplatform-development)
@@ -30,7 +30,7 @@ You'll also find case studies from real companies.
 9. [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
 10. [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
 
-### 1. Kotlin Multiplatform allows you to avoid code duplication
+### 1. Kotlin Multiplatform helps you avoid code duplication
 
 Baidu, the largest Chinese language search engine, launched _Wonder App_, an application targeted at a younger audience. 
 Here are some of the problems they faced with traditional app development:
