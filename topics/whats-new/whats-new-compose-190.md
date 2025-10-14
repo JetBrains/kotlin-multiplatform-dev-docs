@@ -24,7 +24,7 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 
 * Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0`. Based on [Jetpack Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0).
   Thanks to the [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3, you can choose a newer pre-release version for your project.
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha06`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha11](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha11)
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha05`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha10)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.5`. Based on [Jetpack Lifecycle 2.9.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.4)
 * Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.1`. Based on [Jetpack Navigation 2.9.4](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.4)
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.5`. Based on [Jetpack Savedstate 1.3.3](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.3)
@@ -49,7 +49,7 @@ These new preview parameters are recognized and work in both IntelliJ IDEA and A
 
 ### Customizable shadows
 
-In Compose Multiplatform 1.9.1, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
+In Compose Multiplatform 1.9.0, we’ve introduced customizable shadows, adopting Jetpack Compose’s new 
 shadow primitives and APIs. In addition to the previously supported `shadow` modifier, you can now use the new API 
 to create more advanced and flexible shadow effects.
 
@@ -178,7 +178,7 @@ However, the device's hardware may limit the supported frame rates, typically up
 
 ### IME options
 
-Compose Multiplatform 1.9.1 introduces support for iOS-specific IME customization for text input components. 
+Compose Multiplatform 1.9.0 introduces support for iOS-specific IME customization for text input components. 
 You can now use `PlatformImeOptions` to configure native UIKit text input traits such as keyboard type, 
 autocorrection, and return key behavior directly in the text field component:
 
