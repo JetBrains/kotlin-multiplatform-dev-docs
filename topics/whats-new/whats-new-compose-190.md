@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.9.0)
+[//]: # (title: What's new in Compose Multiplatform 1.9.1)
 
 Here are the highlights for this feature release:
 
@@ -11,25 +11,23 @@ Here are the highlights for this feature release:
 * [Accessibility support on web targets](#accessibility-support)
 * [New API for embedding HTML content](#new-api-for-embedding-html-content)
 
-See the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.0-beta01).
+See the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.0).
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version 1.9.0. Based on Jetpack Compose libraries:
-   * [Runtime 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.0)
-   * [UI 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.0)
-   * [Foundation 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.0)
-   * [Material 1.9.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.0)
-   * [Material3 1.3.2](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.3.2)
+* Gradle Plugin `org.jetbrains.compose`, version 1.9.1. Based on Jetpack Compose libraries:
+   * [Runtime 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.3)
+   * [UI 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.3)
+   * [Foundation 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.3)
+   * [Material 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.3)
+   * [Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0)
 
-* Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0-beta06`. Based on [Jetpack Material3 1.4.0-beta03](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0-beta03).
-
-  The stable version of the common Material3 library is based on Jetpack Compose Material3 1.3.2, but thanks to
-  [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3 you can choose a newer pre-release version for your project.
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha06`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha11](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha11)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.4`. Based on [Jetpack Lifecycle 2.9.2](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.2)
-* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.0`. Based on [Jetpack Navigation 2.9.1](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.1)
-* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.4`. Based on [Jetpack Savedstate 1.3.1](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.1)
+* Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0`. Based on [Jetpack Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0).
+  Thanks to the [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3, you can choose a newer pre-release version for your project.
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha05`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha10)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.5`. Based on [Jetpack Lifecycle 2.9.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.4)
+* Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.1`. Based on [Jetpack Navigation 2.9.4](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.4)
+* Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.5`. Based on [Jetpack Savedstate 1.3.3](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.3)
 * WindowManager Core library `org.jetbrains.androidx.window:window-core:1.4.0`. Based on [Jetpack WindowManager 1.4.0](https://developer.android.com/jetpack/androidx/releases/window#1.4.0)
 
 ## Across platforms
@@ -333,10 +331,10 @@ compatible and works correctly with future updates.
 ### Decoupled Material3 versioning
 
 The versions and stability levels of the Material3 library and Compose Multiplatform Gradle plugin no 
-longer have to be aligned. The `compose.material3` DSL alias now references Material3 1.8.2 from the previous 
-stable release of Jetpack Compose.
+longer have to be aligned. The `compose.material3` DSL alias references Material3 1.9.0 from the 
+stable release of Jetpack Compose, but you can choose a pre-release version for your project.
 
-If you want to use a newer Material3 version with Expressive design support, replace the Material 3 dependency 
+If you want to use a Material3 version with Expressive design support, replace the Material 3 dependency 
 in `build.gradle.kts` with the following:
 
 ```kotlin
