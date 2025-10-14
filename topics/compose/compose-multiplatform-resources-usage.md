@@ -88,8 +88,35 @@ Here's an example of how you can access images in your Compose Multiplatform cod
 
 ```kotlin
 Image(
-    painter = painterResource(Res.drawable.my_icon),
+    painter = painterResource(Res.drawable.my_image),
     contentDescription = null
+)
+```
+
+### Icons
+
+You can use the vector Android XML icons from the Material Symbols library:
+
+1. Download the icon from the Android tab on the [Google Fonts Icons](https://fonts.google.com/icons) gallery.
+
+2. Add the downloaded XML icon file to the `drawable` directory of your shared multiplatform resources.
+
+3. Build the project to generate the resource accessors.
+
+4. Open the XML icon file and remove any Android-specific attributes, such as `@android:color`.
+
+5. Remove color references from the icon file. Instead, adjust the colors using the `colorFilter` parameter in the application code.
+
+Here's an example of how you can access an icon in your Compose Multiplatform code:
+
+```kotlin
+val iconPainter = painterResource("drawable/ic_sample_icon.xml")
+
+Image(
+    painter = iconPainter,
+    contentDescription = "Sample icon",
+    modifier = Modifier.size(24.dp),
+    colorFilter = ColorFilter.tint(Color.Red)
 )
 ```
 
