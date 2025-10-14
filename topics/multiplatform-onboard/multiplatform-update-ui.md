@@ -33,11 +33,11 @@ Make some changes and see how they are reflected in the UI:
 3. In the `Greeting.kt` file, update the `greet()` function:
 
    ```kotlin
-   import kotlin.random.Random
-   
-   fun greet(): List<String> = buildList {
-       add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-       add("Guess what this is! > ${platform.name.reversed()}!")
+   class Greeting {
+       fun greet(): List<String> = buildList {
+           add(if (Random.nextBoolean()) "Hi!" else "Hello!")
+           add("Guess what this is! > ${platform.name.reversed()}!")
+       }
    }
    ```
 
