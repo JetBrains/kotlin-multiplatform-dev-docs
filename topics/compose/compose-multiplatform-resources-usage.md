@@ -101,22 +101,23 @@ You can use the vector Android XML icons from the Material Symbols library:
 
 2. Add the downloaded XML icon file to the `drawable` directory of your shared multiplatform resources.
 
-3. Build the project to generate the resource accessors.
+3. Open the XML icon file and set `android:fillColor` to `#00000000`.
+   Remove any other Android-specific attributes for color adjustments like `android:tint`.
+ 
+4. Build the project to generate the resource accessors, 
+   or let the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
 
-4. Open the XML icon file and remove any Android-specific attributes, such as `@android:color`.
 
-5. Remove color references from the icon file. Instead, adjust the colors using the `colorFilter` parameter in the application code.
 
-Here's an example of how you can access an icon in your Compose Multiplatform code:
+Here's an example of how you can access an icon and adjust the colors using the `colorFilter` parameter
+in your Compose Multiplatform code:
 
 ```kotlin
-val iconPainter = painterResource("drawable/ic_sample_icon.xml")
-
 Image(
-    painter = iconPainter,
+    painter = painterResource(Res.drawable.ic_sample_icon),
     contentDescription = "Sample icon",
     modifier = Modifier.size(24.dp),
-    colorFilter = ColorFilter.tint(Color.Red)
+    colorFilter = ColorFilter.tint(Color.Blue)
 )
 ```
 
