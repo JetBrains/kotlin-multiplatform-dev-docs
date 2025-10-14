@@ -11,7 +11,10 @@ new [Android Gradle Library plugin](https://developer.android.com/kotlin/multipl
 In the following guide, we highlight changes related to this as well.
 
 > To make your project work with AGP 9.0 in the short term, you can manually enable the hidden APIs.
-> TODO: explain how to do that.
+> To do that, in the `gradle.properties` file of your project add this property:
+> `android.enableLegacyVariantApi=true`.
+>
+> The legacy API is going to be removed completely in AGP 10, make sure you finish the migration before that!
 >
 {style="note"}
 
@@ -27,7 +30,8 @@ the [update_october_2025 branch](https://github.com/kotlin-hands-on/get-started-
 of the sample project.
 
 <!-- TODO this branch doesn't work, need something else here — I just followed the tutorial with the current plugin version
-     and migrated the result -->
+     and migrated the result
+     in the meantime, the best approach is to follow the tutorial :)-->
 
 The example consists of a single Gradle module (`composeApp`) that contains all the shared code and all of the KMP entry
 points.
@@ -59,6 +63,11 @@ In this example, the only clear candidate is the `currentTimeAt()` function that
 location and time zone.
 The `Country` data class, for example, relies on `DrawableResource` from Compose Multiplatform and can't be separated
 from UI code.
+
+> If your project already has a `shared` module, for example, because you don't share the entirety of UI code,
+> then you can use this module in place of `sharedLogic` — or rename it to better differentiate between shared logic and UI.
+> 
+{style="note"}
 
 Isolate the corresponding code in a `sharedLogic` module:
 
@@ -198,7 +207,7 @@ Isolate shared code implementing common UI elements in the `sharedUi` module:
     ```kotlin
     include(":sharedUi")
     ```
-4. Configure the Gradle build script for the new module.
+4. Configure the Gradle build script for the new module:
 
     1. If you haven't done this for the `sharedLogic` module, in `gradle/libs.versions.toml`,
        add the Android Gradle Library plugin to your version catalog:
@@ -309,7 +318,6 @@ Isolate shared code implementing common UI elements in the `sharedUi` module:
        ```
     7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
        editor.
-    5. TODO Maybe notable changes to the build script should be summarized in the beginning.
 5. Create a new `commonMain/kotlin` directory inside `sharedUi/src`.
 6. Move resource files to the `sharedUi` module: the entire directory of `composeApp/commonMain/composeResources` should
    be relocated to `sharedUi/commonMain/composeResources`.
@@ -429,14 +437,15 @@ Create and configure a new entry point module for the Android app:
 6. Rename the `androidApp/src/androidMain` directory into `main`.
 7. If everything is configured correctly, the imports in the `androidApp/src/main/.../MainActivity.kt` file are working
    and the code is compiling.
-8. Run the Android app from the gutter in the `androidApp/src/main/.../MainActivity.kt` file: click the green arrow
-   in the `class MainActivity` line and select **Run 'MainActivity'**.
-9. If everything works correctly:
-    * Remove the `composeApp/src/androidMain` directory.
-    * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
-        * the `android {}` block,
-        * the `androidMain.dependencies {}`,
-        * the `androidTarget {}` block inside the `kotlin {}` block.
+8. To run your Android app, change and rename the **composeApp** Android run configuration or add a similar one.
+   In the **General | Module** field, change `demo.composeApp` to `demo.androidApp`.
+9. Start the run configuration to make sure that the app runs as expected.
+10. If everything works correctly:
+     * Remove the `composeApp/src/androidMain` directory.
+     * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
+         * the `android {}` block,
+         * the `androidMain.dependencies {}`,
+         * the `androidTarget {}` block inside the `kotlin {}` block.
 
 #### Desktop JVM app
 
@@ -520,14 +529,15 @@ Create and configure the JVM desktop app module:
    It's important that the package coordinates are aligned with the `compose.desktop {}` configuration.
 7. If everything is configured correctly, the imports in the `desktopApp/src/main/.../main.kt` file are working
    and the code is compiling.
-8. Run your desktop app from the gutter in the `desktopApp/src/main/.../main.kt` file: click the green arrow next
-   to the `main()` function and select **Run 'Main.kt'**.
-9. If everything works correctly:
-   * Remove the `composeApp/src/jvmMain` directory.
-   * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
-      * the `compose.desktop {}` block,
-      * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
-      * the `jvm()` target declaration inside the `kotlin {}` block.
+8. To run your desktop app, change and rename the **composeApp [jvm]** run configuration or add a similar one.
+   In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:desktopApp`.
+9. Start the run configuration to make sure that the app runs as expected.
+10. If everything works correctly:
+    * Remove the `composeApp/src/jvmMain` directory.
+    * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
+       * the `compose.desktop {}` block,
+       * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
+       * the `jvm()` target declaration inside the `kotlin {}` block.
 
 #### Web app
 
@@ -602,18 +612,19 @@ Create and configure the web app module:
    If everything is configured correctly, the imports in the `webApp/src/webMain/.../main.kt` file are working
    and the code is compiling.
 6. In the `webApp/src/webMain/resources/index.html` file update the script name: from `composeApp.js` to `webApp.js`.
-7. Run your web app from the gutter in the `webApp/src/webMain/.../main.kt` file: click the green arrow next
-   to the `main()` function and select **Run 'webApp [wasmJs]'**.
-8. If everything works correctly:
-    * Remove the `composeApp/src/jvmMain` directory.
-    * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
-        * the `compose.desktop {}` block,
-        * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
-        * the `jvm()` target declaration inside the `kotlin {}` block.
+7. Run your web app: change and rename the **composeApp [wasmJs]** and **composeApp [js]** run configurations or add similar ones.
+   In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:webApp`.
+8. Start the run configurations to make sure that the app runs as expected.
+9. If everything works correctly:
+    * Remove the `composeApp/src/webMain` directory.
+    * In the `composeApp/build.gradle.kts` file, remove the web-related code:
+        * the `webMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
+        * the `js {}` and `wasmJs {}` target declarations inside the `kotlin {}` block.
 
 ### Update the iOS integration
 
-Since the iOS app is not a separate Gradle module, you can simply move the source set into the `sharedUi` directory:
+Since the iOS app entry point is not built as a separate Gradle module, you can embed the source code into any module.
+In this example, `sharedUi` makes most sense:
 
 1. Move the `composeApp/src/iosMain` directory into the `sharedUi/src` directory.
 2. Configure the Xcode project to consume the framework produced by the `sharedUi` module:
@@ -622,24 +633,39 @@ Since the iOS app is not a separate Gradle module, you can simply move the sourc
     3. Find the **Compile Kotlin Framework** phase.
     4. Find the line starting with `./gradlew` and swap `composeApp` for `sharedUi`:
 
-       ```text
-       ./gradlew :sharedUi:embedAndSignAppleFrameworkForXcode
-       ```
+        ```text
+        ./gradlew :sharedUi:embedAndSignAppleFrameworkForXcode
+        ```
    
     5. Note that the import in the `ContentView.swift` file will stay the same, because it matches the `baseName` parameter from
        Gradle configuration of the iOS target,
        not actual name of the module.
        If you change the framework name in the `sharedUi/build.gradle.kts` file, you need to change the import directive accordingly.
 
-4. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
+3. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
 
-### Remove composeApp and TODO create new run configurations?
+### Remove `composeApp` and update the Android Gradle plugin version
 
-Now that me moved all code outside composeApp, check that there are no dependencies left. Then remove composeApp
-entirely.
+When all code is working from correct new modules:
 
+1. Remove the old module completely:
+   1. Remove the `composeApp` dependency from the `settings.gradle.kts` file (the line `include(":composeApp")`).
+   2. Remove the `composeApp` directory entirely.
+   3. If you followed all instructions, you have working run configurations for the new project structure.
+      You can remove old run configurations associated with the `composeApp` module.
+2. In the `gradle/libs.versions.toml` file, update the AGP version to a 9.* version, for example:
 
+    ```txt
+    [versions]
+    agp = "9.0.0"
+    ```
+3. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   build script editor.
 
-## Anything else?
+4. That your apps build and run with the new AGP.
 
-If you already have a `shared` module, then this will be the `sharedLogic` module TODO put this in the sharedLogic part.
+Congratulations, you modernized and optimized the structure of your project!
+
+## What's next
+
+TODO up for suggestions here — the first thought is to link platform-specific guidance.
