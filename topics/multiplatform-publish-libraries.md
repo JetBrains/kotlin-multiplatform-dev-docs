@@ -319,7 +319,7 @@ The most important settings here are:
 ### Generate the user token
 
 You need a Maven access token for Maven Central to authorize your publishing requests.
-Open the [Setup Token-Based Authentication](https://central.sonatype.com/account) page and click the **Generate User Token** button.
+Open the [Setup Token-Based Authentication](https://central.sonatype.com/usertoken) page and click the **Generate User Token** button.
 
 The output looks like the example below, containing a username and a password.
 If you lose these credentials, you'll need to generate new ones later, as they are not stored by Maven Central.
