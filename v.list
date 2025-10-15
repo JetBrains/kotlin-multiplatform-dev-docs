@@ -44,4 +44,6 @@
     <var name="kspVersion" value="2.2.10-2.0.2" type="string"/>
     <var name="vanniktechPublishPlugin" value="0.34.0" type="string"/>
 
+    <var name="rubyVersion" value="3.4.7" type="string"/>
+
 </vars>

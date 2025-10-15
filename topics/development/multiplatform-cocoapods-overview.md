@@ -29,7 +29,7 @@ Install the [CocoaPods dependency manager](https://cocoapods.org/) using the ins
 2. Install Ruby. You can choose a specific version:
 
     ```bash
-    rvm install ruby 3.0.0
+    rvm install ruby %rubyVersion%
     ```
 
 3. Install CocoaPods:
@@ -41,17 +41,17 @@ Install the [CocoaPods dependency manager](https://cocoapods.org/) using the ins
 </tab>
 <tab title="Rbenv">
 
-1. Install [rbenv from GitHub](https://github.com/rbenv/rbenv#installation) in case you don't have it yet.
+1. Install [rbenv from GitHub](https://github.com/rbenv/rbenv#installation) if you don't have it yet.
 2. Install Ruby. You can choose a specific version:
 
     ```bash
-    rbenv install 3.0.0
+    rbenv install %rubyVersion%
     ```
 
 3. Set the Ruby version as local for a particular directory or global for the whole machine:
 
     ```bash
-    rbenv global 3.0.0
+    rbenv global %rubyVersion%
     ```
     
 4. Install CocoaPods:
@@ -262,11 +262,8 @@ to install Ruby or refer to the [RubyGems website](https://rubygems.org/pages/do
 
 #### Version compatibility
 
-We recommend using the latest Kotlin version. If your current version is earlier than 1.7.0, you'll need to additionally
-install the [`cocoapods-generate`](https://github.com/square/cocoapods-generate#installation") plugin.
-
-However, `cocoapods-generate` is not compatible with Ruby 3.0.0 or later. In this case, downgrade Ruby or upgrade Kotlin
-to 1.7.0 or later.
+We recommend using the latest Kotlin version.
+The lowest possible version that enables this Cocoapods setup is 1.7.0.
 
 ### Build errors when using Xcode {initial-collapse-state="collapsed" collapsible="true"}
 
