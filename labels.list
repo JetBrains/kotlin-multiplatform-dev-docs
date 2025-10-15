@@ -6,7 +6,7 @@
     <primary-label id="EAP" short-name="EAP" name="Compose Multiplatform %org.jetbrains.compose-eap%">
         This functionality is available only in the EAP version.
     </primary-label>
-
+    <primary-label id="Experimental" short-name="Experimental" name="Experimental" color="red">This feature is at the experimental stage of development and can be significantly changed or removed in future releases.</primary-label>
     <primary-label id="navEAP" short-name="navEAP" name="Compose Multiplatform Navigation %composeNavigationEapVersion%"
         href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html">
         Navigation library for the EAP version of Compose Multiplatform.

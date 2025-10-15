@@ -45,7 +45,7 @@ A switch between different screens of the app makes it change its state from `RE
 See the [](compose-lifecycle.md) page for details of the current implementation in Compose Multiplatform.
 
 ## Support for browser navigation in web apps
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Compose Multiplatform for web fully supports the common Navigation library APIs
 and allows your apps to receive navigational input from the browser.

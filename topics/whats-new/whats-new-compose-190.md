@@ -104,7 +104,7 @@ ComposeFoundationFlags.isNewContextMenuEnabled = true
 For details, see the [context menu API reference](https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/contextmenu/data/package-summary).
 
 ### Material 3 Expressive theme
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Compose Multiplatform now supports an experimental [`MaterialExpressiveTheme`](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary?hl=en#MaterialExpressiveTheme(androidx.compose.material3.ColorScheme,androidx.compose.material3.MotionScheme,androidx.compose.material3.Shapes,androidx.compose.material3.Typography,kotlin.Function0))
 from the Material 3 library. The expressive theming allows you to customize your Material Design app
