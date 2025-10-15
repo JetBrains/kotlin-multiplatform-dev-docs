@@ -38,7 +38,7 @@ To do that, call the constructor for a `UIKitView` or a `UIKitViewController` wi
 {style="note"}
 
 ## Choosing the strategy for touch processing
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 With Compose Multiplatform %org.jetbrains.compose% you can also try out the experimental API for finer control over interop UI.
 

@@ -334,7 +334,7 @@ experimental opt-in and now aligns with Android-style logging. This logging prov
 using Xcode Instruments for debugging and performance analysis.
 
 ### Drag-and-drop
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Compose Multiplatform for iOS introduces support for drag-and-drop functionality,
 allowing you to drag content into or out of a Compose application
@@ -360,7 +360,7 @@ In this release:
   the UI closely follows iOS logic to resolve ambiguous touch sequences.
 
 ### Opt-in concurrent rendering
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Compose Multiplatform for iOS now supports offloading rendering tasks to a dedicated render thread.
 Concurrent rendering may improve performance in scenarios without UIKit interop.
@@ -397,7 +397,7 @@ The `window.bindToNavigation()` method has the optional `getBackStackEntryPath` 
 which allows you to customize the translation of route strings into URL fragments.
 
 ### Setting the browser cursor
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 We introduced an experimental `PointerIcon.Companion.fromKeyword()` function to manage icons that can be used as mouse 
 pointers on a browser page. By passing a keyword as a parameter, you can specify the type of cursor to display based on the context. 
@@ -406,7 +406,7 @@ For example, you can assign different pointer icons to select text, open a conte
 Check out the full list of available [keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
 ### Preloading of resources
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Compose Multiplatform 1.8.2 introduces a new experimental API
 for preloading fonts and images for web targets.
@@ -459,7 +459,7 @@ compose.resources {
 For more details, see the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/5296).
 
 ### Support for multiplatform resources in the `androidLibrary` target
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Starting with the Android Gradle plugin version 8.8.0, you can use generated assets in the new `androidLibrary` target. 
 To align Compose Multiplatform with these changes, we’ve introduced support for a new target configuration to work with 

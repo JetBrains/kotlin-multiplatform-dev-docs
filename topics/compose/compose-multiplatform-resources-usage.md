@@ -539,7 +539,7 @@ For example, to enable in-browser preloading of a font:
 ```
 
 ### Preload resources using the Compose Multiplatform preload API
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Even if you preloaded the resources in the browser, they are cached as raw bytes that still need to be converted into a 
 format suitable for rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource 

@@ -1004,7 +1004,7 @@ Additionally, source sets can depend on each other and form a hierarchy.
 In this case, the [`dependsOn()`](#source-set-parameters) relation is used.
 
 ### Configure dependencies at the top level
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 You can configure common dependencies using a top-level `dependencies {}` block. Dependencies declared here behave as if
 they were added to the `commonMain` or `commonTest` source sets.

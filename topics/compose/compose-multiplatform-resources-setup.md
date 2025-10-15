@@ -100,7 +100,7 @@ configureWebResources {
 ```
 
 ### Resources in the `androidLibrary` target
-<secondary-label ref="Experimental"/>
+<primary-label ref="Experimental"/>
 
 Starting with the Android Gradle plugin version 8.8.0, you can use the generated `Res` class 
 and resource accessors in the `androidLibrary` target.
