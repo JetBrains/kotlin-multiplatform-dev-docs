@@ -263,7 +263,7 @@ to install Ruby or refer to the [RubyGems website](https://rubygems.org/pages/do
 #### Version compatibility
 
 We recommend using the latest Kotlin version.
-The lowest possible version that enables this Cocoapods setup is 1.7.0.
+The minimum required version for this CocoaPods setup is 1.7.0.
 
 ### Build errors when using Xcode {initial-collapse-state="collapsed" collapsible="true"}
 
