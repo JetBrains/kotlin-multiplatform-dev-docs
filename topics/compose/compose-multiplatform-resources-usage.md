@@ -103,7 +103,36 @@ You can use the vector Android XML icons from the Material Symbols library:
 
 3. Open the XML icon file and set `android:fillColor` to `#00000000`.
    Remove any other Android-specific attributes for color adjustments like `android:tint`.
- 
+   
+   Before:
+
+   ```xml
+   <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="960"
+        android:viewportHeight="960"
+        android:tint="?attr/colorControlNormal">
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="..."/>
+    </vector>
+   ```
+   
+   After:
+
+   ```xml
+   <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="960"
+        android:viewportHeight="960">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="..."/>
+   </vector>
+   ```
+   
 4. Build the project to generate the resource accessors, 
    or let the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
 
