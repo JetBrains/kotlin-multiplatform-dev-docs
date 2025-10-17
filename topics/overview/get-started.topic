@@ -24,9 +24,9 @@
         </primary>
         <secondary>
             <title>Kotlin Multiplatform technology</title>
+            <a href="kmp-overview.md" summary="What is KMP, what are its benefits and use cases">Why choose Kotlin Multiplatform</a>
             <a href="multiplatform-discover-project.md" summary="Learn the basics: common and platform-specific code, targets, and source sets">Key concepts of project structure</a>
             <a href="multiplatform-expect-actual.md" summary="Use expected and actual declarations to access platform-specific APIs">Expected and actual declarations</a>
-            <a href="multiplatform-hierarchy.md" summary="Arrange a hierarchy of source sets for sharing common code">Hierarchical project structure</a>
             <a href="multiplatform-ios-integration-overview.md" summary="Integrate a Kotlin Multiplatform shared module into your iOS app">Set up iOS integration</a>
         </secondary>
         <misc>
