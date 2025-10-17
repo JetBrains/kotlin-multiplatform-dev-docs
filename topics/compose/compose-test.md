@@ -30,13 +30,13 @@ to replace `composeApp` in paths and commands with the module name you are testi
 Create a common test source set and add the necessary dependencies:
 
 1. Create a directory for the common test source set: `composeApp/src/commonTest/kotlin`.
-2. In the `composeApp/build.gradle.kts` file, add the following dependencies:
+2. In the `composeApp/build.gradle.kts` file, add the following configuration:
 
     ```kotlin
     kotlin {
         //...
         sourceSets { 
-            val desktopTest by getting
+            val jvmTest by getting
    
             // Adds common test dependencies
             commonTest.dependencies {
@@ -47,7 +47,7 @@ Create a common test source set and add the necessary dependencies:
             }
    
             // Adds the desktop test dependency
-            desktopTest.dependencies { 
+            jvmTest.dependencies { 
                 implementation(compose.desktop.currentOs)
             }
         }
@@ -56,7 +56,7 @@ Create a common test source set and add the necessary dependencies:
 
 3. If you need to run instrumented (emulator) tests for Android, amend your Gradle configuration as follows:
    1. Add the following code to the `androidTarget {}` block to configure the instrumented test source set to depend on 
-   a common test source set. Then, follow the IDE's suggestions to add any missing imports.
+   a common test source set.
 
       ```kotlin
       kotlin {
@@ -69,8 +69,8 @@ Create a common test source set and add the necessary dependencies:
           //... 
       }
       ```
-
-   2. Add the following code to the `android.defaultConfig {}` block to configure the Android test instrumentation runner:
+   2. Follow the IDE's suggestions to add any missing imports.
+   3. Add the following code to the `android.defaultConfig {}` block to configure the Android test instrumentation runner:
 
       ```kotlin
       android {
@@ -82,7 +82,7 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-   3. Add the required dependencies in the root `dependencies {}` block:
+   4. Add the required dependencies in the root `dependencies {}` block:
 
        ```kotlin
        dependencies { 
@@ -90,6 +90,8 @@ Create a common test source set and add the necessary dependencies:
            debugImplementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
        }
        ```
+4. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   build script editor.
 
 Now, you are ready to write and run common tests for the Compose Multiplatform UI.
 
@@ -98,11 +100,19 @@ Now, you are ready to write and run common tests for the Compose Multiplatform U
 In the `composeApp/src/commonTest/kotlin` directory, create a file named `ExampleTest.kt` and copy the following code into it:
 
 ```kotlin
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
 
 class ExampleTest {
@@ -169,7 +179,7 @@ You have two options:
 * Run the following command in the terminal:
 
    ```shell
-   ./gradlew :composeApp:desktopTest
+   ./gradlew :composeApp:jvmTest
    ```
 
 </tab>
