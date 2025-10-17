@@ -1,4 +1,5 @@
 [//]: # (title: What is Kotlin Multiplatform)
+[//]: # (description: Kotlin Multiplatform is an open-source technology from JetBrains that enables sharing code across Android, iOS, desktop, web, and server.)
 
 Kotlin Multiplatform (KMP) is an open-source technology from JetBrains that enables sharing code across Android, iOS, desktop,
 web, and server while retaining the advantages of native development.
