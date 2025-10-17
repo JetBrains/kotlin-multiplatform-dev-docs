@@ -66,7 +66,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
 
 3. Select the **Build | Sync Project with Gradle Files** menu item
    or click the **Sync Gradle Changes** button in the build script editor to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
-4. In the `shared/src/commonMain/.../greetingkmp` directory, create a new file, `NewYear.kt` next to `Greeting.kt`.
+4. Right-click the `shared/src/commonMain/.../greetingkmp` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
 5. Update the file with a short function that calculates
    the number of days from today until the New Year using the `datetime` date arithmetic:
    
