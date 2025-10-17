@@ -16,12 +16,11 @@ This also makes it possible to release features simultaneously on multiple platf
 * Team collaboration becomes easier because unified logic is accessible in shared code, making
 it easier to transfer knowledge between team members, and reduce duplication of effort between dedicated platform teams.
 
-In addition to faster time to market, <format style="bold,">55%</format> users reported improved collaboration after adopting KMP
-and <format style="bold,">65%</format> of teams reported improved performance and quality, (in the KMP Survey Q2 2024).
+In addition to faster time to market, **55%** users reported improved collaboration after adopting KMP
+and **65%** of teams reported improved performance and quality, (in the KMP Survey Q2 2024).
 
 KMP is used in production by organizations of all sizes, from startups to global enterprises.
-Companies like Google, Duolingo, Forbes, Philips, McDonald's, Bolt, H&M, Baidu, Kuaishou, and Bilibili.
-These companies have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,
+Companies like Google, Duolingo, Forbes, Philips, McDonald's, Bolt, H&M, Baidu, Kuaishou, and Bilibili have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,
 cost efficiency, and support for gradual adoption. [Learn more about companies who have adopted KMP](case-studies.topic).
 
 ### Flexibility of code sharing
@@ -55,7 +54,7 @@ This helps achieve near-native performance while writing platform-agnostic code:
 ### Seamless tooling
 
 IntelliJ IDEA and Android Studio provide smart IDE support for KMP with the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-common UI previews, [](compose-hot-reload.md), cross-language navigation, refactorings, and debugging across Kotlin and Swift code.
+common UI previews, [hot reload for Compose Multiplatform](compose-hot-reload.md), cross-language navigation, refactorings, and debugging across Kotlin and Swift code.
 
 <video src="https://youtu.be/ACmerPEQAWA" width="700"/>
 
