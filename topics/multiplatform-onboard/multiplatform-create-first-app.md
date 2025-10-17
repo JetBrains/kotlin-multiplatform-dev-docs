@@ -81,7 +81,7 @@ The common source set contains shared code that can be used across multiple targ
 It's designed to contain code that is platform-independent. If you try to use platform-specific APIs in the common source set,
 the IDE will show a warning:
 
-1. Open the `shared/src/commonMain/kotlin/com/jetbrains/greeting/greetingkmp/Greeting.kt` file
+1. Open the `shared/src/commonMain/.../Greeting.kt` file
     where you can find an automatically generated `Greeting` class with a `greet()` function:
 
     ```kotlin
@@ -94,23 +94,22 @@ the IDE will show a warning:
     }
     ```
 
-2. Add a bit of variety to the greeting. Import `kotlin.random.Random` from the Kotlin standard library.
-    This is a multiplatform library that works on all platforms and is included automatically as a dependency.
-3. Update the shared code with the `reversed()` call from the Kotlin standard library to reverse the text:
+2. Let's add a bit of variety to the greeting.
+   Update the shared code with randomization and the `reversed()` call from the Kotlin standard library to reverse the text:
 
     ```kotlin
-    import kotlin.random.Random
-    
     class Greeting {
         private val platform: Platform = getPlatform()
 
         fun greet(): String {
+            //
             val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
 
             return "$firstWord Guess what this is! > ${platform.name.reversed()}!"
         }
     }
     ```
+3. Import the `kotlin.random.Random` class following the IDE's suggestion.
 
 Writing the code only in common Kotlin has obvious limitations because it can't use any platform-specific functionality.
 Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.

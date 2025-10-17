@@ -42,7 +42,7 @@ You'll need to add the following multiplatform libraries in your project:
 ### kotlinx.coroutines
 
 To add `kotlinx.coroutines` to your project, specify a dependency in the common source set. To do so, add the following
-line to the `build.gradle.kts` file of the shared module:
+line to the `shared/build.gradle.kts` file:
 
 ```kotlin
 kotlin {
@@ -62,8 +62,7 @@ of `kotlinx.coroutines`.
 ### kotlinx.serialization
 
 To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
-To do that, add the following line to the existing `plugins {}` block at the very beginning of the `build.gradle.kts` file
-in the shared module:
+To do that, add the following line to the existing `plugins {}` block at the very beginning of the `shared/build.gradle.kts` file:
 
 ```kotlin
 plugins {
@@ -116,7 +115,7 @@ get the list of all launches from the **v4/launches** endpoint.
 
 ### Add a data model
 
-In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
+In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
 and add a data class which stores data from the SpaceX API:
 
 ```kotlin
@@ -143,13 +142,13 @@ data class RocketLaunch (
 
 ### Connect HTTP client
 
-1. In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketComponent` class.
+1. In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
-    import io.ktor.client.*
-    import io.ktor.client.plugins.contentnegotiation.*
-    import io.ktor.serialization.kotlinx.json.*
+    import io.ktor.client.HttpClient
+    import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+    import io.ktor.serialization.kotlinx.json.json
     import kotlinx.serialization.json.Json
     
     class RocketComponent {
@@ -185,8 +184,8 @@ data class RocketLaunch (
 4. Call the `httpClient.get()` function to retrieve information about rocket launches:
 
    ```kotlin
-   import io.ktor.client.request.*
-   import io.ktor.client.call.*
+   import io.ktor.client.request.get
+   import io.ktor.client.call.body
 
    class RocketComponent {
        // ...
@@ -222,11 +221,13 @@ data class RocketLaunch (
    ```kotlin
    import kotlinx.datetime.TimeZone
    import kotlinx.datetime.toLocalDateTime
+   import kotlin.time.ExperimentalTime
    import kotlin.time.Instant
 
    class RocketComponent {
        // ...
        
+       @OptIn(ExperimentalTime::class)
        private suspend fun getDateOfLastSuccessfulLaunch(): String {
            val rockets: List<RocketLaunch> =
                httpClient.get("https://api.spacexdata.com/v4/launches").body()
@@ -325,18 +326,7 @@ Now that the application is becoming more complex, it's time to introduce a view
 called `MainActivity`. It invokes the `App()` function that implements the UI.
 The view model will manage the data from the activity and won't disappear when the activity undergoes a lifecycle change.
 
-1. Add the following dependencies to your `composeApp/build.gradle.kts` file:
-
-    ```kotlin
-    androidMain.dependencies {
-        // ...
-        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
-        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-    }
-    ```
-
-2. In the `composeApp/src/androidMain/kotlin/com/jetbrains/greeting/greetingkmp` directory,
+1. In the `composeApp/src/androidMain/.../greetingkmp` directory,
     create a new `MainViewModel` Kotlin class:
 
     ```kotlin
@@ -349,7 +339,7 @@ The view model will manage the data from the activity and won't disappear when t
 
    This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
 
-3. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
+2. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
    type and its backing property:
 
     ```kotlin
@@ -365,7 +355,7 @@ The view model will manage the data from the activity and won't disappear when t
    * `StateFlow` here extends the `Flow` interface but has a single value or state.
    * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
 
-4. In the `init` function of the View Model, collect all the strings from the `Greeting().greet()` flow:
+3. In the `init` function of the View Model, collect all the strings from the `Greeting().greet()` flow:
 
     ```kotlin
    import androidx.lifecycle.viewModelScope
@@ -388,7 +378,7 @@ The view model will manage the data from the activity and won't disappear when t
    Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
    This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
 
-5. Inside the `collect` trailing lambda, update the value of `_greetingList` to append the collected `phrase` to the list of phrases in `list`:
+4. Inside the `collect` trailing lambda, update the value of `_greetingList` to append the collected `phrase` to the list of phrases in `list`:
 
     ```kotlin
     import kotlinx.coroutines.flow.update
@@ -418,6 +408,7 @@ The view model will manage the data from the activity and won't disappear when t
     import androidx.lifecycle.viewmodel.compose.viewModel
     
     @Composable
+    @Preview
     fun App(mainViewModel: MainViewModel = viewModel()) {
         MaterialTheme {
             val greetings by mainViewModel.greetingList.collectAsStateWithLifecycle()
@@ -663,6 +654,11 @@ plugins {
    id("co.touchlab.skie") version "%skieVersion%"
 }
 ```
+
+> The 0.10.6 version of SKIE latest at the moment of writing does not support the latest Kotlin.
+> To use it, downgrade your Kotlin version to 2.2.10 in the `gradle/libs.versions.toml` file.
+> 
+{style="warning"}
 
 #### Consume the flow using SKIE
 
