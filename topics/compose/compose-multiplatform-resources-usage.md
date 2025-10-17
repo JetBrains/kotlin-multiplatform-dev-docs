@@ -88,8 +88,63 @@ Here's an example of how you can access images in your Compose Multiplatform cod
 
 ```kotlin
 Image(
-    painter = painterResource(Res.drawable.my_icon),
+    painter = painterResource(Res.drawable.my_image),
     contentDescription = null
+)
+```
+
+### Icons
+
+You can use the vector Android XML icons from the Material Symbols library:
+
+1. Open the [Google Fonts Icons](https://fonts.google.com/icons) gallery, choose an icon, go to the Android tab, and click **Download**.
+
+2. Add the downloaded XML icon file to the `drawable` directory of your multiplatform resources.
+
+3. Open the XML icon file and set `android:fillColor` to `#00000000`.
+   Remove any other Android-specific attributes for color adjustments like `android:tint`.
+
+   Before:
+
+   ```xml
+   <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="960"
+        android:viewportHeight="960"
+        android:tint="?attr/colorControlNormal">
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="..."/>
+    </vector>
+   ```
+   
+   After:
+
+   ```xml
+   <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="960"
+        android:viewportHeight="960">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="..."/>
+   </vector>
+   ```
+   
+4. Build the project to generate the resource accessors, 
+   or let the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
+
+Here's an example of how you can access an icon and adjust the colors using the `colorFilter` parameter
+in your Compose Multiplatform code:
+
+```kotlin
+Image(
+    painter = painterResource(Res.drawable.ic_sample_icon),
+    contentDescription = "Sample icon",
+    modifier = Modifier.size(24.dp),
+    colorFilter = ColorFilter.tint(Color.Blue)
 )
 ```
 
