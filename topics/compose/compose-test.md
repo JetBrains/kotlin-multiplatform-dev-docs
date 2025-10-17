@@ -82,19 +82,13 @@ Create a common test source set and add the necessary dependencies:
       }
       ```
 
-   3. Add the required dependencies for `androidTarget`:
+   3. Add the required dependencies in the root `dependencies {}` block:
 
        ```kotlin
-       kotlin {
-            // ...
-            androidTarget {
-                // ...
-                dependencies { 
-                    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%androidx.compose%")
-                    debugImplementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
-                }
-            }
-        }
+       dependencies { 
+           androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:%androidx.compose%")
+           debugImplementation("androidx.compose.ui:ui-test-manifest:%androidx.compose%")
+       }
        ```
 
 Now, you are ready to write and run common tests for the Compose Multiplatform UI.
