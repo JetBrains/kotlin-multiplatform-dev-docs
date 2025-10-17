@@ -152,7 +152,7 @@ To run tests:
 
 You have two options:
 * In Android Studio, you can click the green run icon in the gutter next to the `myTest()` function, choose
-**Run** and the iOS target for the test.
+**Run | ExampleTest.myTest**, then select the iOS target for the test.
 * Run the following command in the terminal:
 
    ```shell
@@ -175,7 +175,7 @@ Android Studio, for example, won't be helpful.
 <tab title="Desktop">
 
 You have two options:
-* Click the green run icon in the gutter next to the `myTest()` function and choose **Run&nbsp;|&nbsp;desktop**.
+* Click the green run icon in the gutter next to the `myTest()` function and choose **Run | ExampleTest.myTest**, then select the JVM target.
 * Run the following command in the terminal:
 
    ```shell
