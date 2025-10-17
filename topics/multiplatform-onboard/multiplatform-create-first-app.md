@@ -81,7 +81,7 @@ The common source set contains shared code that can be used across multiple targ
 It's designed to contain code that is platform-independent. If you try to use platform-specific APIs in the common source set,
 the IDE will show a warning:
 
-1. Open the `shared/src/commonMain/kotlin/com/jetbrains/greeting/greetingkmp/Greeting.kt` file
+1. Open the `shared/src/commonMain/.../Greeting.kt` file
     where you can find an automatically generated `Greeting` class with a `greet()` function:
 
     ```kotlin

@@ -115,7 +115,7 @@ get the list of all launches from the **v4/launches** endpoint.
 
 ### Add a data model
 
-In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
+In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
 and add a data class which stores data from the SpaceX API:
 
 ```kotlin
@@ -142,7 +142,7 @@ data class RocketLaunch (
 
 ### Connect HTTP client
 
-1. In the `shared/src/commonMain/kotlin/.../greetingkmp` directory, create a new `RocketComponent` class.
+1. In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -326,7 +326,7 @@ Now that the application is becoming more complex, it's time to introduce a view
 called `MainActivity`. It invokes the `App()` function that implements the UI.
 The view model will manage the data from the activity and won't disappear when the activity undergoes a lifecycle change.
 
-1. In the `composeApp/src/androidMain/kotlin/com/jetbrains/greeting/greetingkmp` directory,
+1. In the `composeApp/src/androidMain/.../greetingkmp` directory,
     create a new `MainViewModel` Kotlin class:
 
     ```kotlin
