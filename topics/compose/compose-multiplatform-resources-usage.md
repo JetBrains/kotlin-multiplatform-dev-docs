@@ -97,13 +97,13 @@ Image(
 
 You can use the vector Android XML icons from the Material Symbols library:
 
-1. Download the icon from the Android tab on the [Google Fonts Icons](https://fonts.google.com/icons) gallery.
+1. Open the [Google Fonts Icons](https://fonts.google.com/icons) gallery, choose an icon, go to the Android tab, and click **Download**.
 
-2. Add the downloaded XML icon file to the `drawable` directory of your shared multiplatform resources.
+2. Add the downloaded XML icon file to the `drawable` directory of your multiplatform resources.
 
 3. Open the XML icon file and set `android:fillColor` to `#00000000`.
    Remove any other Android-specific attributes for color adjustments like `android:tint`.
-   
+
    Before:
 
    ```xml
@@ -135,8 +135,6 @@ You can use the vector Android XML icons from the Material Symbols library:
    
 4. Build the project to generate the resource accessors, 
    or let the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
-
-
 
 Here's an example of how you can access an icon and adjust the colors using the `colorFilter` parameter
 in your Compose Multiplatform code:
