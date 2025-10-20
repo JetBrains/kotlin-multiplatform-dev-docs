@@ -101,7 +101,7 @@ You can use the vector Android XML icons from the Material Symbols library:
 
 2. Add the downloaded XML icon file to the `drawable` directory of your multiplatform resources.
 
-3. Open the XML icon file and set `android:fillColor` to `#00000000`.
+3. Open the XML icon file and set `android:fillColor` to `#000000`.
    Remove any other Android-specific attributes for color adjustments like `android:tint`.
 
    Before:
