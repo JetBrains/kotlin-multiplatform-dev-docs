@@ -20,7 +20,7 @@
             <a href="multiplatform-create-first-app.md" summary="Get to know Kotlin Multiplatform and create a mobile app in Android Studio that works on both Android and iOS">Share logic but keep UI native</a>
             <a href="compose-multiplatform-create-first-app.md" summary="Create an application with UI shared among Android, iOS, and desktop using Compose Multiplatform">Share both logic and UI</a>
             <a href="multiplatform-ktor-sqldelight.md" summary="Create a multiplatform app that has a shared data access layer between Android and iOS">Share a piece of logic</a>
-            <a href="multiplatform-integrate-in-existing-app.md" summary="Migrate your Android application to KMP to make it work on iOS">Make your app multiplatform</a>
+            <a href="multiplatform-integrate-in-existing-app.md" summary="Migrate your Android application to Kotlin Multiplatform for Android and iOS">Make your app multiplatform</a>
         </primary>
         <secondary>
             <title>Kotlin Multiplatform technology</title>
