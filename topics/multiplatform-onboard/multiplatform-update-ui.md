@@ -27,21 +27,22 @@ The `composeApp` module contains an Android application, defines its main activi
 
 Make some changes and see how they are reflected in the UI:
 
-1. Navigate to the `App.kt` file in `composeApp/src/androidMain/kotlin`.
+1. Navigate to the `App.kt` file in the `composeApp/src/androidMain/.../greetingkmp` directory.
 2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it, and select **Go To** | **Declaration or Usages**.
    You'll see that it's the same class from the `shared` module you edited in the previous step.
-3. In the `Greeting.kt` file, update the `greet()` function:
+3. In the `Greeting.kt` file, update the `Greeting` class so that the `greet()` function returns a list of strings:
 
    ```kotlin
-   import kotlin.random.Random
+   class Greeting {
    
-   fun greet(): List<String> = buildList {
-       add(if (Random.nextBoolean()) "Hi!" else "Hello!")
-       add("Guess what this is! > ${platform.name.reversed()}!")
+       private val platform: Platform = getPlatform()
+   
+       fun greet(): List<String> = buildList {
+           add(if (Random.nextBoolean()) "Hi!" else "Hello!")
+           add("Guess what this is! > ${platform.name.reversed()}!")
+       }
    }
    ```
-
-   Now it returns a list of strings.
 
 4. Go back to the `App.kt` file and update the `App()` implementation:
 
@@ -82,8 +83,8 @@ framework. The UI of the app is written in Swift.
 
 Implement the same changes as in the Android app:
 
-1. In IntelliJ IDEA, find the `iosApp` folder at the root of your project in the **Project** tool window.
-2. Open the `ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Definition**.
+1. In IntelliJ IDEA, find the `iosApp/iosApp` folder at the root of your project in the **Project** tool window.
+2. Open the `iosApp/ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Definition**.
 
     You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
     represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
