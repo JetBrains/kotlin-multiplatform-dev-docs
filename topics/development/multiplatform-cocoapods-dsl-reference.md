@@ -7,6 +7,7 @@
 * Check out the sample project where [an Xcode project with several targets depends on a Kotlin library](https://github.com/Kotlin/kmp-with-cocoapods-multitarget-xcode-sample).
 
 </tldr>
+<show-structure for="chapter,procedure" depth="2"/>
 
 The Kotlin CocoaPods Gradle plugin is a tool for creating Podspec files. These files are necessary to integrate your Kotlin
 project with the [CocoaPods dependency manager](https://cocoapods.org/).
@@ -92,7 +93,7 @@ kotlin {
 }
 ```
 
-### `framework {} block
+### `framework {}` block
 
 The `framework {}` block is nested inside `cocoapods` and configures the framework properties of the Pod built from the project.
 
