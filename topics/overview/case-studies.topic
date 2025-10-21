@@ -328,5 +328,17 @@
                 and ensured smooth user interactions on low-end devices.</p>
             <a href="https://www.bilibili.com/video/BV1es421T71C">Watch the full video</a>.
         </li>
+        <li id="case-study-pincode-business">
+            <img src="pincode-business.svg" alt="Pincode Business" height="45"/>
+            <img src="android.svg" style="inline" alt="android" width="28"/><img src="desktop.svg" style="inline" alt="desktop" width="28"/>
+            <a href="https://www.jetbrains.com/compose-multiplatform/">
+                <img src="compose-multiplatform-logo.svg" style="inline" alt="Compose Multiplatform" height="15"/>
+            </a>
+            <p><b>Pincode Business</b> uses KMP to share business logic and CMP to share UI across Android and Desktop apps.
+                What started as a pure Android app has now evolved into a cross-platform solution,
+                enabling sellers to manage their business seamlessly across platforms.
+                We could leverage the team's existing expertise in Kotlin and Jetpack Compose, making the transition seamless.</p>
+            <a href="https://tech.phonepe.com/pincode-migration-journey-with-compose-multiplatform/">Read the full story</a>.
+        </li>
     </list>
 </topic>
