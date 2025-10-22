@@ -13,8 +13,9 @@ A typical scenario is to define keyboard handlers for active controls like `Text
 triggers the default action, you can use both the `onKeyEvent` and `onPreviewKeyEvent` modifiers.
 With the `onKeyEvent` modifier, you can handle an individual keystroke, while `onPreviewKeyEvent` is preferable for defining shortcuts.
 
-The following sample demonstrates `TextField` interactions with different actions depending on
-which key is pressed while you hold <shortcut>Ctrl</shortcut>:
+The following example demonstrates `TextField` interactions with different actions depending on
+the key that is pressed while you hold <shortcut>Ctrl</shortcut>. 
+Add this code to the `main.kt` file in `composeApp/src/jvmMain/kotlin`:
 
 ```kotlin
 import androidx.compose.foundation.layout.fillMaxSize
@@ -79,7 +80,8 @@ and `onKeyEvent` dispatches the event to the composable's parent. Typically, `on
 as it allows implementing even screen-wide keyboard shortcuts.
 
 The following sample demonstrates window interactions such as closing a pop-up dialog by pressing `Escape`
-and changing the window content by pressing the <shortcut>Ctrl+Shift+C</shortcut> shortcut:
+and changing the window content by pressing the <shortcut>Ctrl+Shift+C</shortcut> shortcut.
+Add this code to the `main.kt` file in `composeApp/src/jvmMain/kotlin`:
 
 ```kotlin
 import androidx.compose.foundation.layout.Arrangement
