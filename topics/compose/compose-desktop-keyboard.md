@@ -14,7 +14,7 @@ triggers the default action, you can use both the `onKeyEvent` and `onPreviewKey
 With the `onKeyEvent` modifier, you can handle an individual keystroke, while `onPreviewKeyEvent` is preferable for defining shortcuts.
 
 The following example demonstrates `TextField` interactions with different actions depending on
-which key is pressed while you hold <shortcut>Ctrl</shortcut>. 
+the key that is pressed while you hold <shortcut>Ctrl</shortcut>. 
 Add this code to the `main.kt` file in `composeApp/src/jvmMain/kotlin`:
 
 ```kotlin

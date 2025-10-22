@@ -10,8 +10,8 @@ The `TooltipArea` composable has the following main parameters:
   an offset, and an alignment.
 * `delayMillis`, time in milliseconds after which the tooltip is shown. The default value is 500 ms.
 
-In the following example, we’ll create a simple window that contains a list of buttons, each wrapped in a `TooltipArea`. 
-When you hover over a button, a tooltip displaying the button's name will appear.
+The following example shows how to create a simple window that contains a list of buttons, 
+each wrapped in a `TooltipArea`. When you hover over a button, a tooltip with the button's name will appear.
 Add this code to the `main.kt` file in `composeApp/src/jvmMain/kotlin`:
 
 ```kotlin
