@@ -586,7 +586,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.compose.material3)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.viewmodelCompose)
         }
         // ... 
     }
@@ -980,8 +980,12 @@ system-provided SQLite binary:
 
 1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
 2. In Xcode, double-click the project name to open its settings.
-3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
-4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
+3. Switch to the **Build Settings** tab, there switch to the **All** list and search for the **Other Linker Flags** field.
+4. Expand the field, press the plus sign next to the **Debug** field,
+   and paste the `-lsqlite3` string into the **Any Architecture | Any SDK**.
+5. Repeat for **Other Linker Flags** | **Release**.
+
+![The result of correctly adding the linker flag to the Xcode project](xcode-other-linker-flags.png){width="434"}
 
 ### Prepare a Koin class for iOS dependency injection
 
@@ -1008,7 +1012,7 @@ module for iOS.
     }
     ```
 
-3. After the `KoinHelper` class, add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
+3. Below the `KoinHelper` class, add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
 
     ```kotlin
     import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
