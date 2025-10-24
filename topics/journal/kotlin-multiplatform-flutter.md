@@ -32,9 +32,9 @@ With Kotlin Multiplatform, you have various options: you can share all code exce
 
 ![Kotlin Multiplatform is a technology for reusing up to 100% of your code](kmp-logic-and-ui.svg){ width="700" }
 
-Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In November 2023, Kotlin Multiplatform became stable. During Google I/O 2024, Google announced its [support for Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) on Android for sharing business logic across Android and iOS.
+Kotlin Multiplatform was first introduced as part of Kotlin 1.2 in 2017. In November 2023, Kotlin Multiplatform became stable. During Google I/O 2024, Google announced its [support for Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) for sharing business logic across Android and iOS.
 
-If you want to learn more about the general direction for Kotlin Multiplatform, please take a look at our blog post, [What’s Next for Kotlin Multiplatform and Compose Multiplatform](https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/).
+If you want to learn more about the general direction for Kotlin Multiplatform, take a look at our blog post, [What’s Next for Kotlin Multiplatform and Compose Multiplatform](https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/).
 
 [![Discover Kotlin Multiplatform](discover-kmp.svg){width="500"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
