@@ -5,7 +5,7 @@
        id="kotlin-multiplatform-react-native"
        title="Kotlin Multiplatform vs. React Native: A cross-platform comparison">
     <include-in-head>
-        <![CDATA[
+    <![CDATA[
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
