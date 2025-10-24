@@ -5,7 +5,7 @@
        id="kotlin-multiplatform-react-native"
        title="Kotlin Multiplatform vs. React Native: A cross-platform comparison">
     <include-in-head>
-    <![CDATA[
+        <![CDATA[
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -64,6 +64,7 @@
     <p>Among the available tools, Kotlin Multiplatform, React Native, and Flutter stand out as three of the most widely
         adopted options. In this article, we'll take a closer look at both to help you choose the right fit for your
         product and team.</p>
+
     <chapter title="Kotlin Multiplatform and Compose Multiplatform" id="kotlin-multiplatform-and-compose-multiplatform">
         <p><a href="https://www.jetbrains.com/kotlin-multiplatform/">Kotlin Multiplatform (KMP)</a> is an open-source
             technology developed by JetBrains that enables code sharing across Android, iOS, desktop (Windows, macOS,
@@ -98,6 +99,7 @@
                 support for using Kotlin Multiplatform</a> to share business logic between Android and iOS.
         </p>
     </chapter>
+
     <chapter title="React Native" id="react-native">
         <p>React Native is an open-source framework for building Android and iOS applications using <a
                 href="https://reactjs.org/">React</a>, a library for web and native user interfaces, and the app
@@ -111,6 +113,7 @@
             consists of partners, core contributors, and an active community. Today, the framework is supported by
             contributions from individuals and companies around the globe.</p>
     </chapter>
+
     <chapter title="Kotlin Multiplatform vs. React Native: Side-by-side comparison"
              id="kotlin-multiplatform-vs-react-native-side-by-side-comparison">
         <table style="both">
@@ -240,6 +243,7 @@
         <p>You can also take a look at the comparison of <a href="kotlin-multiplatform-flutter.md">Kotlin Multiplatform
             and Flutter</a>.</p>
     </chapter>
+
     <chapter title="Choosing the right cross-platform technology for your project"
              id="choosing-the-right-cross-platform-technology-for-your-project">
         <p>Deciding on a cross-platform framework isn't about finding a one-size-fits-all solution — it's about choosing
@@ -256,12 +260,13 @@
         <p>You can find more guidance in our detailed article on how to choose the right <a
                 href="cross-platform-frameworks.md">cross-platform development frameworks</a> for your next project.</p>
     </chapter>
+
     <chapter title="Frequently Asked Questions" id="frequently-asked-questions">
         <p>
             <control>Q: Is Kotlin Multiplatform production-ready?</control>
         </p>
-        <p>A: Kotlin Multiplatform is a stable technology that is
-            ready for use in production</a>. This means that you can use Kotlin Multiplatform for sharing code in
+        <p>A: Kotlin Multiplatform is a stable technology that is ready for use in production.
+            This means that you can use Kotlin Multiplatform for sharing code in
             production across Android, iOS, desktop (JVM), server-side (JVM), and web, even in the most conservative
             usage scenarios.</p>
         <p>Compose Multiplatform, a framework for building shared UIs across platforms (powered by Kotlin Multiplatform
@@ -287,7 +292,8 @@
         <p>A: If you're interested in sharing code across Android, iOS, desktop, and web while retaining native
             performance and flexibility, Kotlin Multiplatform is worth learning. It's backed by JetBrains and officially
             supported by Google on Android to share business logic between Android and iOS. What's more, KMP with
-            Compose Multiplatform is increasingly adopted in production by companies building multiplatform apps.</p>
+            Compose Multiplatform is increasingly adopted in production by companies building multiplatform apps.
+        </p>
     </chapter>
 
 </topic>
