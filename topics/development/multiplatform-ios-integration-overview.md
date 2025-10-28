@@ -26,7 +26,7 @@ project. The script is integrated into the build phase of your project's build s
 This integration method can work for you if you do **not** import CocoaPods dependencies in your Kotlin Multiplatform
 project.
 
-If you use the [Kotlin Multiplatform IDE plugin]https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+If you use the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
 direct integration is applied by default.
 
 For more information, see [Direct integration](multiplatform-direct-integration.md).
