@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.9.1)
+[//]: # (title: What's new in Compose Multiplatform 1.9.2)
 
 Here are the highlights for this feature release:
 
@@ -15,16 +15,16 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version 1.9.1. Based on Jetpack Compose libraries:
-   * [Runtime 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.3)
-   * [UI 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.3)
-   * [Foundation 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.3)
-   * [Material 1.9.3](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.3)
+* Gradle Plugin `org.jetbrains.compose`, version 1.9.2. Based on Jetpack Compose libraries:
+   * [Runtime 1.9.4](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.9.4)
+   * [UI 1.9.4](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.9.4)
+   * [Foundation 1.9.4](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.9.4)
+   * [Material 1.9.4](https://developer.android.com/jetpack/androidx/releases/compose-material#1.9.4)
    * [Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0)
 
 * Compose Material3 libraries `org.jetbrains.compose.material3:1.9.0`. Based on [Jetpack Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0).
   Thanks to the [decoupled versions](#decoupled-material3-versioning) of Compose Multiplatform and Material3, you can choose a newer pre-release version for your project.
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0-alpha05`. Based on [Jetpack Material3 Adaptive 1.2.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0-alpha10)
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.2.0`. Based on [Jetpack Material3 Adaptive 1.2.0](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.2.0)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.9.5`. Based on [Jetpack Lifecycle 2.9.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.4)
 * Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.1`. Based on [Jetpack Navigation 2.9.4](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.4)
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate:1.3.5`. Based on [Jetpack Savedstate 1.3.3](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.3)
