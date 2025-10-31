@@ -206,7 +206,7 @@ private class MyWindowState(
 
 <img src="compose-multiple-windows.animated.gif" alt="Multiple windows" preview-src="compose-multiple-windows.png" width="600"/>
 
-For a more complex example, see the [Codeviewer](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/codeviewer) sample.
+For a more complex example, see the [Code Viewer](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/codeviewer) sample.
 
 ## Minimize a window to the system tray
 
