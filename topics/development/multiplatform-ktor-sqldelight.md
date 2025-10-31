@@ -74,7 +74,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
-   lifecycleViewmodelCompose = "2.9.1"
    material3 = "1.3.2"
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
@@ -96,7 +95,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
    native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
    runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-   androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
    androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[libraries]"}
@@ -588,7 +586,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.compose.material3)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.viewmodelCompose)
         }
         // ... 
     }
@@ -982,8 +980,12 @@ system-provided SQLite binary:
 
 1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
 2. In Xcode, double-click the project name to open its settings.
-3. Switch to the **Build Settings** tab and search for the **Other Linker Flags** field.
-4. Double-click the field value, click **+**, and add the `-lsqlite3` string.
+3. Switch to the **Build Settings** tab, there switch to the **All** list and search for the **Other Linker Flags** field.
+4. Expand the field, press the plus sign next to the **Debug** field,
+   and paste the `-lsqlite3` string into the **Any Architecture | Any SDK**.
+5. Repeat the process for the **Other Linker Flags** | **Release** field.
+
+![The result of correctly adding the linker flag to the Xcode project](xcode-other-linker-flags.png){width="434"}
 
 ### Prepare a Koin class for iOS dependency injection
 
@@ -1010,7 +1012,7 @@ module for iOS.
     }
     ```
 
-3. After the `KoinHelper` class, add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
+3. Below the `KoinHelper` class, add the `initKoin()` function, which you will use in Swift to initialize and start the iOS Koin module:
 
     ```kotlin
     import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
