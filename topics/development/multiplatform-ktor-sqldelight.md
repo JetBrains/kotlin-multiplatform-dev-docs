@@ -983,7 +983,7 @@ system-provided SQLite binary:
 3. Switch to the **Build Settings** tab, there switch to the **All** list and search for the **Other Linker Flags** field.
 4. Expand the field, press the plus sign next to the **Debug** field,
    and paste the `-lsqlite3` string into the **Any Architecture | Any SDK**.
-5. Repeat for **Other Linker Flags** | **Release**.
+5. Repeat the process for the **Other Linker Flags** | **Release** field.
 
 ![The result of correctly adding the linker flag to the Xcode project](xcode-other-linker-flags.png){width="434"}
 
@@ -1012,7 +1012,7 @@ module for iOS.
     }
     ```
 
-3. Below the `KoinHelper` class, add the `initKoin` function, which you will use in Swift to initialize and start the iOS Koin module:
+3. Below the `KoinHelper` class, add the `initKoin()` function, which you will use in Swift to initialize and start the iOS Koin module:
 
     ```kotlin
     import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
