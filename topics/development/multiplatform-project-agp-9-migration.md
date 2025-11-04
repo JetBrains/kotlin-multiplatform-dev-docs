@@ -1,20 +1,17 @@
 [//]: # (title: Migrating a Kotlin Multiplatform project to support AGP 9.0)
 
-Kotlin Multiplatform projects with Android targets which were created using the Android Gradle plugin version earlier
-than 9.0
-need to be restructured to upgrade to AGP 9.0.
-Several APIs needed for KMP configuration are hidden in AGP 9.0 and eventually are going to be removed.
-To solve this in the long term, we recommend updating your project structure to isolate AGP usage to an Android module.
+Projects where multiplatform modules configured Android targets using the `com.android.application` plugin 
+need to be restructured to upgrade to Android Gradle plugin 9.0.
+AGP deprecates several APIs, but provides a new [Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
+to be used instead.
 
-On top of AGP compatibility, there is an issue of migrating to the
-new [Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin).
-In the following guide, we highlight changes related to this as well.
+The following guide shows how to swap the plugins and restructure the project at the same time.
 
-> To make your project work with AGP 9.0 in the short term, you can manually enable the hidden APIs.
+> To make your project work with AGP 9.0 in the short term, you can manually enable the deprecated APIs.
 > To do that, in the `gradle.properties` file of your project add this property:
 > `android.enableLegacyVariantApi=true`.
 >
-> The legacy API is going to be removed completely in AGP 10, make sure you finish the migration before that!
+> The legacy APIs are going to be removed completely in AGP 10, make sure you finish the migration before that!
 >
 {style="note"}
 
