@@ -2,8 +2,8 @@
 
 Here are the highlights for this EAP feature release:
  * [Unified `@Preview` annotation](#unified-preview-annotation)
- * [Support for Navigation3](#support-for-navigation-3)
- * [Bundled hot reload](#compose-hot-reload-integration)
+ * [Support for Navigation 3](#support-for-navigation-3)
+ * [Bundled Compose Hot Reload](#compose-hot-reload-integration)
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0-beta01).
 
