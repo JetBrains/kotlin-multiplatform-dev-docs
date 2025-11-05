@@ -18,9 +18,6 @@ topics like migrating existing Android apps, sharing ViewModels, and integrating
 interoperability, and building full, industry-level applications.
 * **Resources for library creators**: If your goal is to build reusable multiplatform libraries, use this section for API 
 guidelines, documentation tools (Dokka), and tutorials on publishing to Maven Central.
-* **Essential community resources** (all levels): These are ongoing sources of information, updates, and support, 
-including Slack channels, newsletters, podcasts, and official blogs.
-
 
 <tabs>
 <tab id="all-resources" title="All">
