@@ -2,7 +2,8 @@
 
 Projects where multiplatform modules configured Android targets using the `com.android.application` plugin 
 need to be restructured to upgrade to Android Gradle plugin 9.0.
-AGP deprecates several APIs, but provides a new [Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
+AGP 9 deprecates several APIs which are used by Kotlin Multiplatform,
+but provides a new [Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
 to be used instead.
 
 The following guide shows how to swap the plugins and restructure the project at the same time.
