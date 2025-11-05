@@ -96,6 +96,24 @@ To get started with signing, you'll need to generate a key pair:
 * The _private key_ is used to sign your artifacts and should never be shared with others.
 * The _public key_ can be shared with others so they can validate the signature of your artifacts.
 
+<tabs group ="key-pair-tools">
+<tab title="With the Kotlin Gradle plugin" group-key="kgp">
+
+The Kotlin Gradle plugin has a Gradle task that you can use to generate a key pair.
+
+1. Generate a key pair using the following command. Provide the password for the private keystore and your name in the following format:
+
+    ```bash
+    ./gradlew -Psigning.password=example-password generatePgpKeys --name "John Smith <john@example.com>"
+    ```
+
+   The key pair is stored in the `build/pgp` directory.
+
+2. Move your key pair from the `build/pgp` directory to a secure location to prevent accidental deletion or unauthorized access.
+
+</tab>
+<tab title="With the gpg tool" group-key="gpg">
+
 The `gpg` tool that can manage signatures for you is available on the [GnuPG website](https://gnupg.org/download/index.html).
 You can also install it using package managers such as [Homebrew](https://brew.sh/):
 
@@ -130,10 +148,10 @@ brew install gpg
     Your selection? 1
     ```
 
-    > At the time of writing, this is `ECC (sign and encrypt)` with `Curve 25519`.
-    > Older versions of `gpg` might default to `RSA` with a `3072` bit key size.
-    > 
-    {style="note"}
+   > At the time of writing, this is `ECC (sign and encrypt)` with `Curve 25519`.
+   > Older versions of `gpg` might default to `RSA` with a `3072` bit key size.
+   >
+   {style="note"}
 
 3. When prompted to specify how long the key should be valid, you can choose the default option of no expiration date.
 
@@ -176,18 +194,39 @@ brew install gpg
    gpg --list-keys
    ```
 
-The output will look something like this:
+   The output looks something like this:
 
-```text
-pub   ed25519 2024-10-06 [SC]
-      F175482952A225BFD4A07A713EE6B5F76620B385CE
-uid   [ultimate] Jane Doe <janedoe@example.com>
-      sub   cv25519 2024-10-06 [E]
-```
+    ```text
+    pub   ed25519 2024-10-06 [SC]
+          F175482952A225BFD4A07A713EE6B5F76620B385CE
+    uid   [ultimate] Jane Doe <janedoe@example.com>
+          sub   cv25519 2024-10-06 [E]
+    ```
 
-In the next steps, you'll need to use the long alphanumerical identifier of your key that appears in the output.
+    In the next steps, you'll need to use the long alphanumerical identifier of your key that appears in the output.
+
+</tab>
+</tabs>
 
 #### Upload the public key
+
+You need to [upload the public key to a keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key)
+for it to be accepted by Maven Central. There are multiple available keyservers, let's use `keyserver.ubuntu.com` as a
+default choice.
+
+<tabs group ="key-pair-tools">
+<tab title="With the Kotlin Gradle plugin" group-key="kgp">
+
+The Kotlin Gradle plugin has a Gradle task that you can use to upload a public key.
+
+Run the following command to upload your public key, providing its path:
+
+```bash
+./gradlew uploadPublicPgpKey --keyring /path_to/build/pgp/public_KEY_ID.asc
+```
+
+</tab>
+<tab title="With the gpg tool" group-key="gpg">
 
 You need to [upload the public key to a keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key)
 for it to be accepted by Maven Central. There are multiple available keyservers, let's use `keyserver.ubuntu.com` as a
@@ -199,7 +238,7 @@ Run the following command to upload your public key using `gpg`, **substituting 
 gpg --keyserver keyserver.ubuntu.com --send-keys F175482952A225BFC4A07A715EE6B5F76620B385CE
 ```
 
-#### Export your private key
+**Export your private key** {id="export-your-private-key"}
 
 To let your Gradle project access your private key, you'll need to export it to a binary file.
 You'll be prompted to enter the passphrase you've used when creating the key.
@@ -215,8 +254,11 @@ This command will create a `key.gpg` binary file which contains your private key
 
 > Never share your private key file with anyone – only you should have access to it
 > since the private key enables signing files with your credentials.
-> 
+>
 {style="warning"}
+
+</tab>
+</tabs>
 
 ## Configure the project
 
@@ -313,6 +355,40 @@ The most important settings here are:
   the authors of the library.
 * [SCM (Source Code Management) information](https://central.sonatype.org/publish/requirements/#scm-information),
   which specifies where the library's source code is hosted.
+
+### Run local checks
+
+Before publishing to Maven Central, it's a good idea to check locally whether your project is configured correctly.
+
+#### Check signing locally
+
+Verify that your keys are configured correctly for signing by running:
+
+```bash
+./gradlew checkSigningConfiguration
+```
+
+This Gradle task checks that your public key has been uploaded to either `keyserver.ubuntu.com` or `keys.openpgp.org` key servers.
+
+If the task reports an error, review the output for details on how to fix it.
+
+#### Check the `pom.xml` file locally
+
+To publish your library to Maven Central, the `pom.xml` file must meet Maven Central's [requirements](https://central.sonatype.org/publish/requirements/#required-pom-metadata).
+
+For each library you plan to publish, run the following command, replacing `<PUBLICATION_NAME>` with the publication name:
+
+```bash
+./gradlew checkPomFileFor<PUBLICATION_NAME>Publication
+```
+
+With the [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin), the publication is typically named `Maven`. In this case, the task becomes:
+
+```bash
+./gradlew checkPomFileForMavenPublication
+```
+
+If the task reports an error, review the output for details on how to fix it.
 
 ## Publish to Maven Central using continuous integration
 
