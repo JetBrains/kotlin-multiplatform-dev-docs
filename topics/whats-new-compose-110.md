@@ -2,10 +2,10 @@
 
 Here are the highlights for this EAP feature release:
  * [Unified `@Preview` annotation](#unified-preview-annotation)
- * [Support for Navigation3](#navigation-3-supported)
- * [Bundled hot reload](#hot-reload-integration)
+ * [Support for Navigation3](#support-for-navigation-3)
+ * [Bundled hot reload](#compose-hot-reload-integration)
 
-See the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0-beta01).
+You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0-beta01).
 
 ## Dependencies
 
@@ -29,21 +29,21 @@ See the full list of changes for this release on [GitHub](https://github.com/Jet
 
 ### Unified `@Preview` annotation
 
-We've unified the approach for previews across platforms. 
+We've unified the approach to previews across platforms. 
 You can now use the `androidx.compose.ui.tooling.preview.Preview` annotation for all target platforms in the `commonMain` source set.
 
 All other annotations, such as `org.jetbrains.compose.ui.tooling.preview.Preview` and 
-desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have been deprecated.
+the desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have been deprecated.
 
-### Navigation 3 supported
+### Support for Navigation 3
 
 Navigation 3 is a new navigation library designed to work with Compose. 
 With Navigation 3, you have full control over your back stack, 
 and navigating to and from destinations is as simple as adding and removing items from a list. 
-You can read about the new guiding principles and decisions made in [Navigation 3 documentation](https://developer.android.com/guide/navigation/navigation-3) 
-as well as the announcement [blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
+You can read about the new guiding principles and decisions in the [Navigation 3 documentation](https://developer.android.com/guide/navigation/navigation-3), 
+as well as in the announcement [blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
 
-Compose Multiplatform 1.10.0-beta01 provides Alpha support for new navigation APIs on non-Android targets. 
+Compose Multiplatform 1.10.0-beta01 provides Alpha support for using new navigation APIs on non-Android targets. 
 The released multiplatform artifacts are:
 
 * Navigation 3 UI library, `org.jetbrains.androidx.navigation3:navigation3-ui`
@@ -54,9 +54,15 @@ You can find an example of a multiplatform Navigation 3 implementation in the [n
 
 Some platform-specific implementation details:
 
-* On iOS, you can now manage navigation for end edge [pan gestures](https://developer.apple.com/documentation/uikit/handling-pan-gestures) using the [EndEdgePanGestureBehavior](https://github.com/JetBrains/compose-multiplatform-core/pull/2519) option (`Disabled` by default). "End edge" here refers to the right edge of the screen in LTR interfaces and the left edge in RTL. "Start edge" is the opposite to end edge and always bound to the back gesture.
-* In web apps, pressing the Esc key in a desktop browser now returns the user to the previous screen (and closes dialogs, popups and some widgets like Material3 SearchBar), just as it already does in desktop apps.
-* Support for [browser history navigation](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps) and destination in address bar will not be extended to Navigation 3 with Compose Multiplatform 1.10. It is postponed until a later version of the multiplatform library.
+* On iOS, you can now manage navigation for end edge [pan gestures](https://developer.apple.com/documentation/uikit/handling-pan-gestures) using the [EndEdgePanGestureBehavior](https://github.com/JetBrains/compose-multiplatform-core/pull/2519) option (`Disabled` by default). 
+  "End edge" here refers to the right edge of the screen in LTR interfaces and the left edge in RTL ones. 
+  The start edge is the opposite to the end edge and is always bound to the back gesture.
+* In web apps, pressing the **Esc** key in a desktop browser now returns the user to the previous screen 
+  (and closes dialogs, popups and some widgets like Material 3's `SearchBar`), 
+  just as it already does in desktop apps.
+* Support for [browser history navigation](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps) and using a destination in the address bar will not be extended 
+  to Navigation 3 with Compose Multiplatform 1.10. 
+  This has been postponed until a later version of the multiplatform library.
 
 ### Skia updated to Milestone 138
 
@@ -73,8 +79,10 @@ Compose Multiplatform now supports `WindowInsetsRulers`,
 which provides functionality to position and size UI elements based on window insets, such as the status bar, 
 navigation bar, or on-screen keyboard.
 
-This new approach to managing window insets uses a single implementation for retrieving platform-specific window inset data. This means both `WindowInsets` and `WindowInsetsRulers` use a common mechanism to manage insets consistently.
-Accordingly, platform-specific locals, including `LocalLayoutMargins`, `LocalSafeArea`, `LocalKeyboardOverlapHeight`, and `LocalInterfaceOrientation`, were removed in favor of a new unified API.
+This new approach to managing window insets uses a single implementation for retrieving platform-specific window inset data. 
+This means both `WindowInsets` and `WindowInsetsRulers` use a common mechanism to manage insets consistently.
+Accordingly, platform-specific locals, including `LocalLayoutMargins`, `LocalSafeArea`, 
+`LocalKeyboardOverlapHeight`, and `LocalInterfaceOrientation`, were removed in favor of a new unified API.
 
 >Previously, `WindowInsets.Companion.captionBar` was not marked as `@Composable`. 
 > We added the `@Composable` attribute to align its behavior across platforms.
@@ -89,21 +97,24 @@ this release adds new APIs for configuring text input views with `PlatformImeOpt
 These new APIs allow customization of the input interface when a field gains focus and triggers the IME:
 
  * `UIResponder.inputView` specifies a custom input view to replace the default system keyboard.
- * `UIResponder.inputAccessoryView` defines a custom accessory view that attaches to the system keyboard or a custom `inputView` upon IME activation.
+ * `UIResponder.inputAccessoryView` defines a custom accessory view that attaches to the system keyboard 
+    or a custom `inputView` upon IME activation.
 
 ## Desktop
 
-### Hot reload integration
+### Compose Hot Reload integration
 
 The Compose Hot Reload plugin is now bundled with the Compose Multiplatform Gradle plugin. 
 You no longer need to configure the Hot Reload plugin separately, 
 as it is enabled by default for Compose Multiplatform projects targeting desktop.
 
 What this means for the projects that explicitly declare the Compose Hot Reload plugin:
- * You can safely remove the declaration to use the version provided by the Compose Multiplatform Gradle plugin.
+
+ * You can safely remove the declaration in order to use the version provided by the Compose Multiplatform Gradle plugin.
  * If you choose to keep a specific version declaration, that version will be used instead of the bundled one.
 
-> The bundled Hot Reload Gradle plugin raises the Kotlin version necessary for a Compose Multiplatform project to 2.1.20
+> The bundled Compose Hot Reload Gradle plugin raises the Kotlin version necessary for 
+> a Compose Multiplatform project to 2.1.20.
 >
 {style="warning"}
 
@@ -138,9 +149,9 @@ singleWindowApplication {
 
 ### Deprecated dependency aliases
 
-Dependency aliases supported by the Compose Multiplatform Gradle plugin  (`compose.ui` and others)
+Dependency aliases supported by the Compose Multiplatform Gradle plugin (`compose.ui` and others)
 are deprecated with the 1.10.0-beta01 release.
-We encourage users to add direct library references to their version catalogs.
+We encourage you to add direct library references to your version catalogs.
 Specific references are suggested in the corresponding deprecation notices.
 
 This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
@@ -148,8 +159,8 @@ In the future, we hope to provide a BOM for Compose Multiplatform to simplify se
 
 ### Support for AGP 9.0.0
 
-Compose Multiplatform introduces support for the Android Gradle Plugin (AGP) version 9.0.0.
+Compose Multiplatform introduces support for version 9.0.0 of the Android Gradle Plugin (AGP).
 For compatibility with the new AGP version, make sure you upgrade to Compose Multiplatform 1.10.0.
 
-To smooth the update process in the long term, 
+To make the update process smoother in the long term, 
 we recommend changing your project structure to isolate AGP usage to a dedicated Android module.
