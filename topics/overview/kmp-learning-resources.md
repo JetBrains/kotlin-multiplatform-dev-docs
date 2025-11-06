@@ -2,22 +2,22 @@
 
 <web-summary>Choose the learning materials that best match your KMP experience level.</web-summary>
 
-This comprehensive guide provides a curated list of learning resources for Kotlin Multiplatform (KMP) and Compose Multiplatform 
-development. The resources are organized to guide learners from fundamental concepts to advanced topics and community engagement.
+This guide curates key Kotlin Multiplatform (KMP) and Compose Multiplatform learning materials. Browse by skill level to 
+find tutorials, courses, and articles that fit your experience.
 
-To maximize your learning, feel free to use this guide in a way that suits your needs. New developers can follow the skill levels 
-sequentially, while those interested in specific topics can quickly scan the table to find relevant learning resources.
+Here are level descriptions:
 
-The resources are primarily categorized by skill level, allowing you to focus on content appropriate for your current knowledge:
+🌱 **Beginner** – Learn KMP and Compose fundamentals through official JetBrains and Google tutorials. Build simple apps using core libraries 
+like Room, Ktor, and SQLDelight.
 
-* **Beginner resources**: Start here if you are new to KMP, Compose Multiplatform, or cross-platform development in general. 
-These include official quickstarts, tutorials for creating your first app, and foundational books/codelabs.
-* **Intermediate resources**: Move to this section once you have a basic KMP app running. These resources cover practical 
-topics like migrating existing Android apps, sharing ViewModels, and integrating with common libraries like Room.
-* **Advanced resources**: This section is for deep dives into production-level architecture, complex topics like Kotlin/Swift 
-interoperability, and building full, industry-level applications.
-* **Resources for library creators**: If your goal is to build reusable multiplatform libraries, use this section for API 
-guidelines, documentation tools (Dokka), and tutorials on publishing to Maven Central.
+🌿 **Intermediate** – Develop real-world apps with shared ViewModels, Koin-based DI, and clean architecture. Includes courses by JetBrains and 
+community educators.
+
+🌳 **Advanced** – Advance into full-scale KMP engineering with backend and game dev use cases, plus guides on scaling architecture and 
+adoption for large, multi-team projects.
+
+🧩 **Library authors** – Create and publish reusable KMP libraries. Learn API design, Dokka documentation, and Maven publishing with official 
+JetBrains tooling and templates.
 
 <tabs>
 <tab id="all-resources" title="All">
@@ -301,7 +301,7 @@ Udemy
 
 <td>
 How to apply Clean Architecture and MVI from the ground up to build a complete KMP application, integrating a full stack of 
-essential libraries—Ktor, SQLDelight, and Koin—with native Jetpack Compose and SwiftUI UIs.
+essential libraries – Ktor, SQLDelight, and Koin – with native Jetpack Compose and SwiftUI UIs.
 </td>
 <td>
 Paid (€10-20)
@@ -621,7 +621,8 @@ GitHub
 </td>
 
 <td>
-Interoperability with iOS (Obj-C/Swift), SKIE, KMP-NativeCoroutines, workarounds for language feature gaps, Swift export, bidirectional interop
+Interoperability with iOS (Obj-C/Swift), SKIE, KMP-NativeCoroutines, workarounds for language feature gaps, Swift export, 
+bidirectional interop.
 </td>
 <td>
 Free
@@ -823,7 +824,7 @@ JetBrains
 </td>
 
 <td>
-Tutorial using official starter template, local Maven publishing, library structure, publishing setup
+How to use the official starter template, set up local Maven publishing, structure your library, and configure publishing.
 </td>
 <td>
 Free
