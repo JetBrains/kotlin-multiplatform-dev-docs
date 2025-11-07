@@ -7,16 +7,16 @@ find tutorials, courses, and articles that fit your experience.
 
 Here are level descriptions:
 
-🌱 **Beginner** – Learn KMP and Compose fundamentals through official JetBrains and Google tutorials. Build simple apps using core libraries 
+🌱 **Beginner**. Learn KMP and Compose fundamentals through official JetBrains and Google tutorials. Build simple apps using core libraries 
 like Room, Ktor, and SQLDelight.
 
-🌿 **Intermediate** – Develop real-world apps with shared ViewModels, Koin-based DI, and clean architecture. Includes courses by JetBrains and 
+🌿 **Intermediate**. Develop real-world apps with multiplatform ViewModels, Koin-based DI, and clean architecture. Includes courses by JetBrains and 
 community educators.
 
-🌳 **Advanced** – Advance into full-scale KMP engineering with backend and game dev use cases, plus guides on scaling architecture and 
+🌳 **Advanced**. Advance into full-scale KMP engineering with backend and game dev use cases, plus guides on scaling architecture and 
 adoption for large, multi-team projects.
 
-🧩 **Library authors** – Create and publish reusable KMP libraries. Learn API design, Dokka documentation, and Maven publishing with official 
+🧩 **Library authors**. Create and publish reusable KMP libraries. Learn API design, Dokka documentation, and Maven publishing with official 
 JetBrains tooling and templates.
 
 <tabs>
