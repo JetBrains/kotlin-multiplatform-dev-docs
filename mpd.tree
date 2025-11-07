@@ -5,15 +5,17 @@
 	<toc-element toc-title="Kotlin Multiplatform overview">
 		<toc-element toc-title="What is Kotlin Multiplatform" topic="kmp-overview.md"/>
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
-		<toc-element topic="case-studies.topic"/>
+        <toc-element topic="case-studies.topic"/>
 		<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
-		<toc-element topic="faq.md"/>
+        <toc-element topic="kmp-learning-resources.md"/>
+        <toc-element topic="faq.md"/>
         <toc-element toc-title="What's next for KMP" href="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
         <toc-element toc-title="Redirect to blog post" hidden="true"
                      accepts-web-file-names="kotlin-multiplatform-roadmap.html"
                      target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
-	<toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
+
+    <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
 	<toc-element toc-title="Compose Multiplatform UI framework">
 		<toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
