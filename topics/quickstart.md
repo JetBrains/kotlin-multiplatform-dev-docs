@@ -107,9 +107,9 @@ When you're done choosing platforms, click the **Create** button and wait for th
 </tab>
 <tab title= "Android Studio">
 
-> The KMP IDE plugin is not yet supported in Windows and Linux versions of Android Studio.
+> The KMP IDE plugin is now supported in Android Studio Otter 2025.2.1 and later on Windows and Linux.  
 >
-{style="warning"}
+{style="note"}
 
 The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is not going to work as described without it.
 So, before you start, make sure K2 mode is enabled:
