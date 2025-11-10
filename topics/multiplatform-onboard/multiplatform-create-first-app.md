@@ -39,7 +39,7 @@ You can share application logic between iOS and Android apps and write platform-
 6. For iOS, select the **Do not share UI** option to keep the UI native.
 7. Once you've specified all the fields and targets, click **Create**.
 
-> IntelliJ IDEA may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+> The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
 > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
 >

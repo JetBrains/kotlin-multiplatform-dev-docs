@@ -21,16 +21,11 @@ Start with an IDE and necessary plugins:
     For standalone installations, download the installer for [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 
     or [Android Studio](https://developer.android.com/studio).
 
-    The plugins necessary for Kotlin Multiplatform require at least **IntelliJ IDEA 2025.1.1**
-    or **Android Studio Narwhal 2025.1.1**.
+    The plugins necessary for Kotlin Multiplatform require at least
+    **IntelliJ IDEA 2025.2.2** or **Android Studio Otter 2025.2.1**.
 
 2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
     (not to be confused with the Kotlin Multiplatform Gradle plugin).
-   
-    > To use the Kotlin Multiplatform plugin on Windows and Linux, you need IntelliJ IDEA 2025.2.2.
-    > Android Studio will add support for the KMP IDE plugin on Windows and Linux in an upcoming release.
-    >
-    {style="note"}
     
 3. Installing the Kotlin Multiplatform IDE plugin for IntelliJ IDEA also installs all necessary dependencies if you don't have them yet
     (Android Studio has all necessary plugins bundled).
