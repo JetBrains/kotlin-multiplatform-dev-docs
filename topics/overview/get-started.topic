@@ -13,12 +13,12 @@
         </description>
         <spotlight>
             <a href="quickstart.md" type="cross-platform" summary="Set up and run your first KMP project">Kotlin Multiplatform quickstart</a>
-            <a href="compose-multiplatform.topic" summary="Discover Kotlin-based declarative multiplatform UI framework developed by JetBrains" type="creative">Compose Multiplatform</a>
+            <a href="kmp-overview.md" summary="Discover Kotlin-based declarative multiplatform UI framework developed by JetBrains" type="creative">Compose Multiplatform</a>
         </spotlight>
         <primary>
             <title>Popular use cases</title>
-            <a href="multiplatform-create-first-app.md" summary="Get to know Kotlin Multiplatform and create a mobile app in Android Studio that works on both Android and iOS">Share logic but keep UI native</a>
             <a href="compose-multiplatform-create-first-app.md" summary="Create an application with UI shared among Android, iOS, and desktop using Compose Multiplatform">Share both logic and UI</a>
+            <a href="multiplatform-create-first-app.md" summary="Get to know Kotlin Multiplatform and create a mobile app in Android Studio that works on both Android and iOS">Share logic but keep UI native</a>
             <a href="multiplatform-ktor-sqldelight.md" summary="Create a multiplatform app that has a shared data access layer between Android and iOS">Share a piece of logic</a>
             <a href="multiplatform-integrate-in-existing-app.md" summary="Migrate your Android application to Kotlin Multiplatform for Android and iOS">Make your app multiplatform</a>
         </primary>
