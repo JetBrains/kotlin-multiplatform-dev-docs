@@ -422,7 +422,7 @@ For more cinterop properties, see [Definition file](https://kotlinlang.org/docs/
 
 ### Android targets
 
-The Kotlin Multiplatform plugin has a specific function that helps you configure [build variants](https://developer.android.com/studio/build/build-variants)
+The Kotlin Multiplatform Gradle plugin has a specific function that helps you configure [build variants](https://developer.android.com/studio/build/build-variants)
 for the Android target:
 
 | **Name**                      | **Description**                                                                                                                                      | 

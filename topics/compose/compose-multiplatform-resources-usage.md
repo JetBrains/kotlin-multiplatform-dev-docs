@@ -134,7 +134,7 @@ You can use the vector Android XML icons from the Material Symbols library:
    ```
    
 4. Build the project to generate the resource accessors, 
-   or let the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
+   or let the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) handle it automatically.
 
 Here's an example of how you can access an icon and adjust the colors using the `colorFilter` parameter
 in your Compose Multiplatform code:

@@ -63,12 +63,11 @@ Things to keep in mind for this tutorial:
 In IntelliJ IDEA, navigate to the `ComposeDemo` folder.
 If you didn't select iOS in the wizard, you won't have the folders whose names begin with "ios" or "apple".
 
-> IntelliJ IDEA may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
+> The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
 > (see the [compatibility table](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html#version-compatibility)).
 >
 {style="note"}
-
 
 The project contains two modules:
 

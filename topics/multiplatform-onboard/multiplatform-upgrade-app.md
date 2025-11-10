@@ -56,7 +56,7 @@ kotlin {
 }
 ```
 
-The Multiplatform Gradle plugin automatically adds a dependency to the platform-specific (iOS and Android) parts
+The Kotlin Multiplatform Gradle plugin automatically adds a dependency to the platform-specific (iOS and Android) parts
 of `kotlinx.coroutines`.
 
 ### kotlinx.serialization
