@@ -28,7 +28,7 @@ the same as described in the [iOS developer documentation](https://developer.app
 {style="note"}
 
 What is specific to Kotlin Multiplatform projects is compiling the shared Kotlin module into a framework and linking it to the Xcode project.
-Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile).
+Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform).
 However, if you don't use the plugin, bear in mind the following when building and bundling the iOS project in Xcode:
 
 * The shared Kotlin library compiles down to the native framework.
@@ -39,7 +39,7 @@ However, if you don't use the plugin, bear in mind the following when building a
 There are two ways you can connect the shared Kotlin module to the iOS project:
 * Use the [Kotlin CocoaPods Gradle plugin](multiplatform-cocoapods-overview.md), which allows you to use a multiplatform project with native targets as a CocoaPods dependency in your iOS project.
 * Manually configure your Multiplatform project to create an iOS framework and the Xcode project to obtain its latest version.
-  The Kotlin Multiplatform wizard or Kotlin Multiplatform plugin for Android Studio usually does this configuration.
+  The Kotlin Multiplatform wizard or the Kotlin Multiplatform IDE plugin usually takes care of this configuration.
   See [Connect the framework to your iOS project](multiplatform-integrate-in-existing-app.md#configure-the-ios-project-to-use-a-kmp-framework)
   to learn how to add the framework directly in Xcode.
 

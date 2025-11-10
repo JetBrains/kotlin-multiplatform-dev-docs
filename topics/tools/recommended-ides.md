@@ -4,7 +4,7 @@
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/) provides full Kotlin Multiplatform support.
 
-On macOS with IntelliJ IDEA 2025.1.1.1,
+With IntelliJ IDEA 2025.2.2,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.
@@ -13,12 +13,12 @@ preflight environment checks, and other helpful KMP functionality.
 
 [Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
 
-On macOS with Android Studio Narwhal 2025.1.1,
+With Android Studio Otter 2025.2.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.
 
-> Make sure to turn on K2 mode in Android Studio to fully experience the technology,
+> Make sure to turn on K2 mode in Android Studio to fully experience the framework,
 > as it might be turned off by default.
 > 
 {style="note"}

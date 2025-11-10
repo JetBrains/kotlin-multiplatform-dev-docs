@@ -205,7 +205,7 @@ multiplatform project.
 
 ## Compilation for JVM
 
-When you declare the `jvm` target in your multiplatform project, the Kotlin Multiplatform plugin automatically
+When you declare the `jvm` target in your multiplatform project, the Kotlin Multiplatform Gradle plugin automatically
 creates Java sources sets and includes them in the compilations of the JVM target.
 
 The common source sets can't include Java resources, so you should place them in the corresponding child directories
@@ -213,7 +213,7 @@ of your multiplatform project. For example:
 
 ![Java source files](java-source-paths.png){width=200}
 
-Currently, the Kotlin Multiplatform plugin replaces some tasks configured by the Java plugin:
+Currently, the Kotlin Multiplatform Gradle plugin replaces some tasks configured by the Java plugin:
 
 * JAR task: instead of a standard `jar`, it uses a target-specific task based on the artifact's name, for example,
   `jvmJar` for the `jvm()` target declaration and `desktopJar` for `jvm("desktop")`.
@@ -282,7 +282,7 @@ kotlin {
 </tab>
 </tabs>
 
-This target is published by the Kotlin Multiplatform plugin and doesn't require steps that are specific
+This target is published by the Kotlin Multiplatform Gradle plugin and doesn't require steps that are specific
 to the Java plugin.
 
 ## Configure interop with native languages
