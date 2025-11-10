@@ -10,7 +10,7 @@ and is compatible with Java 21 or earlier.
 We're exploring adding support for other targets in the future. In the meantime, using the desktop app as your sandbox
 lets you quickly experiment with UI changes in common code without interrupting your flow.
 
-![Compose Hot Reload](compose-hot-reload.gif){width=500}
+![Compose Hot Reload](compose-hot-reload.gif){width=350}
 
 ## Add Compose Hot Reload to your project
 
@@ -29,18 +29,21 @@ Android Studio. When your project is created, Compose Hot Reload is automaticall
 3. In the panel on the left, select **Kotlin Multiplatform**.
 4. Specify the **Name**, **Group**, and **Artifact** fields in the **New Project** window
 5. Select the **Desktop** target and click **Create**.
-   ![Create multiplatform project with desktop target](create-desktop-project.png){width=700}
+   ![Create multiplatform project with desktop target](create-desktop-project.png){width=600 style="block"}
 
 ### To an existing project
 
 This section walks you through the steps to add Compose Hot Reload to an existing multiplatform project. The steps refer
 to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
-> To find the latest version of Compose Hot Reload, see [Releases](https://github.com/JetBrains/compose-hot-reload/releases).
+> Starting from Compose Multiplatform 1.10.0, you no longer need to configure the Compose Hot Reload plugin separately, 
+> as it is [bundled](whats-new-compose-110.md#compose-hot-reload-integration) and enabled by default for projects targeting desktop. 
+> However, you can still explicitly declare the Compose Hot Reload plugin to use a specific version.
 > 
-{style="tip"}
+{style="note"}
 
-1. In your project, update the version catalog. In `gradle/libs.versions.toml`, add the following code:
+1. In your project, update the version catalog with the latest version of Compose Hot Reload (see [Releases](https://github.com/JetBrains/compose-hot-reload/releases)).
+   In `gradle/libs.versions.toml`, add the following code:
    ```kotlin
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
@@ -126,7 +129,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
 5. Update the string returned from the `greet()` function, then save all files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>)
    to see the desktop app update automatically.
 
-   ![Compose Hot Reload](compose-hot-reload.gif){width=500}
+   ![Compose Hot Reload](compose-hot-reload.gif){width=350}
 
 Congratulations! You've seen Compose Hot Reload in action. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration after every change.

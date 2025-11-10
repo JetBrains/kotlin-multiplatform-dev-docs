@@ -102,7 +102,7 @@ Use the IDE wizard to create a new KMP project:
 
 When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
-![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=800}
+![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=600}
 
 </tab>
 <tab title= "Android Studio">
@@ -140,7 +140,7 @@ Use the IDE wizard to create a new KMP project:
 
 When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
-![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=800}
+![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=600}
 
 </tab>
 </tabs>
@@ -156,7 +156,7 @@ In this tool window, you can see the messages related to these checks, rerun the
 Preflight checks commands are also available in the **Search Everywhere** dialog.
 Press double <shortcut>Shift</shortcut> and search for commands containing the word "preflight":
 
-![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png)
+![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png){width=600}
 
 ## Run the sample apps
 
@@ -176,7 +176,7 @@ and select the module **[project name].composeApp**.
 
 By default, it runs on the first available virtual device:
 
-![Android app ran on a virtual device](run-android-app.png){width=350}
+![Android app ran on a virtual device](run-android-app.png){width=300}
 
 </tab>
 <tab title="iOS">
