@@ -22,7 +22,7 @@ and **65%** of teams reported improved performance and quality, (in the KMP Surv
 
 KMP is used in production by organizations of all sizes, from startups to global enterprises.
 Companies like Google, Duolingo, Forbes, Philips, McDonald's, Bolt, H&M, Baidu, Kuaishou, and Bilibili have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,
-cost efficiency, and support for gradual adoption. [Learn more about companies who have adopted KMP](case-studies.topic).
+cost efficiency, and support for gradual adoption. [Learn more about companies who have adopted KMP](https://kotlinlang.org/case-studies/?type=multiplatform).
 
 ### Flexibility of code sharing
 
@@ -67,7 +67,7 @@ Let [Junie](https://jetbrains.com/junie), the JetBrains' AI coding agent, handle
 
 Look at how companies and developers already enjoy the benefits of shared Kotlin code:
 
-* Learn how companies have successfully adopted KMP in their codebases on our [case studies page](case-studies.topic).
+* Learn how companies have successfully adopted KMP in their codebases on our [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
 * Check out a wide range of sample apps in our [curated sample list](multiplatform-samples.md) and the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic.
 * Search for specific multiplatform libraries among the thousands already present on [klibs.io](https://klibs.io/).
 
