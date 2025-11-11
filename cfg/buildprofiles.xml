@@ -11,7 +11,7 @@
         <automaticLinkSummaries>false</automaticLinkSummaries>
         <product-web-url>%kmpLatestUrl%</product-web-url>
         <web-root>https://kotlinlang.org/docs/multiplatform/</web-root>
-        <og-image>https://kotlinlang.org/assets/images/open-graph/kmp-docs.png</og-image>
+        <og-image>https://kotlinlang.org/assets/images/open-graph/docs.png</og-image>
         <og-twitter>@kotlin</og-twitter>
         <download-page/>
         <feedbackRequireEmail>false</feedbackRequireEmail>
