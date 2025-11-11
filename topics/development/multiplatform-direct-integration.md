@@ -71,8 +71,9 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
-   * The `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable is set by the IntelliJ IDE you are using when you set
-     a build guard for the iOS build in your project. TODO: is this correct?
+   * The `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable is set by IntelliJ IDEA and Android Studio
+     when you use a run configuration to run an iOS build, since the Gradle task is already performed before Xcode is called.
+     When you run an iOS build for a project that is not configured to support this, the IDE suggests a fix to set up the build guard.
 
    ![Add the script](xcode-run-script-phase-2.png){width=700}
 
