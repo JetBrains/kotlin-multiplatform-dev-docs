@@ -58,15 +58,21 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    ![Add run script phase](xcode-run-script-phase-1.png){width=700}
 
-5. Adjust the following script and paste the result in the run script field:
+5. Adjust the following script and paste it in the script text field of the new phase:
 
    ```bash
+   if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+       echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
+       exit 0
+   fi
    cd "<Path to the root of the multiplatform project>"
-   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode 
+   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode
    ```
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
+   * The `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable is set by the IntelliJ IDE you are using when you set
+     a build guard for the iOS build in your project. TODO: is this correct?
 
    ![Add the script](xcode-run-script-phase-2.png){width=700}
 
