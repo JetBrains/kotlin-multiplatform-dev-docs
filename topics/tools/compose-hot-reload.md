@@ -37,7 +37,7 @@ This section walks you through the steps to add Compose Hot Reload to an existin
 to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
 > Starting from Compose Multiplatform 1.10.0, you no longer need to configure the Compose Hot Reload plugin separately, 
-> as it is [bundled](whats-new-compose-110.md#compose-hot-reload-integration) and enabled by default for projects targeting desktop. 
+> as it is [bundled](whats-new-compose-110.md#compose-hot-reload-integration) and enabled by default for projects that include a desktop target. 
 > However, you can still explicitly declare the Compose Hot Reload plugin to use a specific version.
 > 
 {style="note"}
