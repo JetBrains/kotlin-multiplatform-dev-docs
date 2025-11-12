@@ -1,168 +1,166 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
-<instance-profile id="mpd" name="Kotlin Multiplatform" status="release" start-page="get-started.topic">
-	<toc-element toc-title="Get started" topic="get-started.topic"/>
+<instance-profile id="mpd" name="Kotlin Multiplatform" status="release" start-page="hidden.md">
+    <toc-element toc-title="Hidden" topic="hidden.md"/>
+	<toc-element toc-title="Get started" accepts-web-file-names="get-started.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/get-started.html"/>
 	<toc-element toc-title="Kotlin Multiplatform overview">
-		<toc-element toc-title="What is Kotlin Multiplatform" topic="kmp-overview.md"/>
-		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
-        <toc-element topic="case-studies.topic"/>
-		<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
-        <toc-element topic="kmp-learning-resources.md"/>
-        <toc-element topic="faq.md"/>
+		<toc-element toc-title="What is Kotlin Multiplatform" accepts-web-file-names="kmp-overview.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/kmp-overview.html"/>
+		<toc-element toc-title="Supported platforms" accepts-web-file-names="supported-platforms.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/supported-platforms.html"/>
+        <toc-element accepts-web-file-names="case-studies.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/case-studies.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="Samples" accepts-web-file-names="multiplatform-samples.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-samples.html"/>
+        <toc-element accepts-web-file-names="kmp-learning-resources.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/kmp-learning-resources.html" toc-title="Redirect to blog post"/>
+        <toc-element accepts-web-file-names="faq.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/faq.html" toc-title="Redirect to blog post"/>
         <toc-element toc-title="What's next for KMP" href="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
-        <toc-element toc-title="Redirect to blog post" hidden="true"
-                     accepts-web-file-names="kotlin-multiplatform-roadmap.html"
-                     target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
+        <toc-element toc-title="Redirect to blog post" hidden="true" accepts-web-file-names="kotlin-multiplatform-roadmap.html" target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
 
-    <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
+    <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html,quickstart.html"  target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/quickstart.html" toc-title="Redirect to blog post"/>
 	<toc-element toc-title="Compose Multiplatform UI framework">
-		<toc-element topic="compose-multiplatform.topic"/>
+		<toc-element accepts-web-file-names="compose-multiplatform.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform.html" toc-title="Redirect to blog post"/>
 		<toc-element toc-title="What's new">
-			<toc-element topic="whats-new-compose-190.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.9.3"/>
-            <toc-element topic="whats-new-compose-110.md" accepts-web-file-names="whats-new-compose-eap.html" toc-title="Compose Multiplatform 1.10.0-beta01"/>
+			<toc-element accepts-web-file-names="whats-new-compose-190.html,whats-new-compose.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-190.html" toc-title="Compose Multiplatform 1.9.3"/>
+            <toc-element accepts-web-file-names="whats-new-compose-110.html,whats-new-compose-eap.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-110.html" toc-title="Compose Multiplatform 1.10.0-beta01"/>
             <toc-element toc-title="Earlier versions">
-                <toc-element topic="whats-new-compose-180.md" toc-title="Compose Multiplatform 1.8.2"/>
-                <toc-element topic="whats-new-compose-170.md" toc-title="Compose Multiplatform 1.7.3"/>
-                <toc-element topic="whats-new-compose-1610.md" toc-title="Compose Multiplatform 1.6.10"/>
-                <toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
+                <toc-element accepts-web-file-names="whats-new-compose-180.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-180.html" toc-title="Compose Multiplatform 1.8.2"/>
+                <toc-element accepts-web-file-names="whats-new-compose-170.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-170.html" toc-title="Compose Multiplatform 1.7.3"/>
+                <toc-element accepts-web-file-names="whats-new-compose-1610.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-1610.html" toc-title="Compose Multiplatform 1.6.10"/>
+                <toc-element accepts-web-file-names="whats-new-compose-160.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/whats-new-compose-160.html" toc-title="Compose Multiplatform 1.6.0"/>
             </toc-element>
 		</toc-element>
-		<toc-element topic="compose-multiplatform-and-jetpack-compose.md"/>
-        <toc-element toc-title="Platform differences" topic="compose-platform-specifics.md"/>
+		<toc-element accepts-web-file-names="compose-multiplatform-and-jetpack-compose.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html" toc-title="Redirect to blog post"/>
+        <toc-element toc-title="Platform differences" accepts-web-file-names="compose-platform-specifics.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-platform-specifics.html"/>
 		<toc-element toc-title="Implementing layouts">
-			<toc-element topic="compose-layout.md"/>
-			<toc-element topic="compose-layout-modifiers.md"/>
-			<toc-element topic="compose-adaptive-layouts.md"/>
+			<toc-element accepts-web-file-names="compose-layout.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-layout.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-layout-modifiers.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-layout-modifiers.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-adaptive-layouts.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-adaptive-layouts.html" toc-title="Redirect to blog post"/>
 		</toc-element>
 		<toc-element toc-title="Multiplatform resources">
-			<toc-element accepts-web-file-names="compose-images-resources.html" topic="compose-multiplatform-resources.md"/>
-			<toc-element toc-title="Setup and configuration" topic="compose-multiplatform-resources-setup.md"/>
-			<toc-element toc-title="Access and usage" topic="compose-multiplatform-resources-usage.md"/>
-			<toc-element toc-title="Local resource environment" topic="compose-resource-environment.md"/>
+			<toc-element accepts-web-file-names="compose-images-resources.html,compose-multiplatform-resources.html"  target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-resources.html" toc-title="Redirect to blog post"/>
+			<toc-element toc-title="Setup and configuration" accepts-web-file-names="compose-multiplatform-resources-setup.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-resources-setup.html"/>
+			<toc-element toc-title="Access and usage" accepts-web-file-names="compose-multiplatform-resources-usage.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-resources-usage.html"/>
+			<toc-element toc-title="Local resource environment" accepts-web-file-names="compose-resource-environment.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-resource-environment.html"/>
 		</toc-element>
-		<toc-element topic="compose-lifecycle.md"/>
-		<toc-element topic="compose-viewmodel.md"/>
+		<toc-element accepts-web-file-names="compose-lifecycle.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-lifecycle.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="compose-viewmodel.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-viewmodel.html" toc-title="Redirect to blog post"/>
 		<toc-element toc-title="Navigation">
-			<toc-element topic="compose-navigation.md"/>
-			<toc-element topic="compose-navigation-routing.md"/>
-      <toc-element topic="compose-navigation-deep-links.md"/>
+			<toc-element accepts-web-file-names="compose-navigation.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-navigation.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-navigation-routing.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-navigation-routing.html" toc-title="Redirect to blog post"/>
+      <toc-element accepts-web-file-names="compose-navigation-deep-links.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-navigation-deep-links.html" toc-title="Redirect to blog post"/>
 		</toc-element>
-		<toc-element topic="compose-drag-drop.md"/>
-		<toc-element topic="compose-test.md"/>
+		<toc-element accepts-web-file-names="compose-drag-drop.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-drag-drop.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="compose-test.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-test.html" toc-title="Redirect to blog post"/>
 		<toc-element toc-title="Localization">
-			<toc-element topic="compose-localize-strings.md"/>
-			<toc-element toc-title="Regional format settings" topic="compose-regional-format.md"/>
-			<toc-element toc-title="RTL languages" topic="compose-rtl.md"/>
-			<toc-element topic="compose-localization-tests.md"/>
+			<toc-element accepts-web-file-names="compose-localize-strings.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-localize-strings.html" toc-title="Redirect to blog post"/>
+			<toc-element toc-title="Regional format settings" accepts-web-file-names="compose-regional-format.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-regional-format.html"/>
+			<toc-element toc-title="RTL languages" accepts-web-file-names="compose-rtl.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-rtl.html"/>
+			<toc-element accepts-web-file-names="compose-localization-tests.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-localization-tests.html" toc-title="Redirect to blog post"/>
 		</toc-element>
-		<toc-element topic="compose-accessibility.md"/>
+		<toc-element accepts-web-file-names="compose-accessibility.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-accessibility.html" toc-title="Redirect to blog post"/>
 		<toc-element toc-title="iOS-specific features">
-			<toc-element toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html" topic="compose-swiftui-integration.md"/>
-			<toc-element toc-title="Integration with UIKit" topic="compose-uikit-integration.md"/>
-			<toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
-			<toc-element toc-title="Accessibility support" topic="compose-ios-accessibility.md"/>
-			<toc-element topic="compose-ios-migration.md"/>
+			<toc-element toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html,compose-swiftui-integration.html"  target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-swiftui-integration.html"/>
+			<toc-element toc-title="Integration with UIKit" accepts-web-file-names="compose-uikit-integration.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-uikit-integration.html"/>
+			<toc-element toc-title="Handling touch with native UI elements" accepts-web-file-names="compose-ios-touch.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-ios-touch.html"/>
+			<toc-element toc-title="Accessibility support" accepts-web-file-names="compose-ios-accessibility.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-ios-accessibility.html"/>
+			<toc-element accepts-web-file-names="compose-ios-migration.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-ios-migration.html" toc-title="Redirect to blog post"/>
 		</toc-element>
-		<toc-element toc-title="Android-specific components" topic="compose-android-only-components.md"/>
+		<toc-element toc-title="Android-specific components" accepts-web-file-names="compose-android-only-components.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-android-only-components.html"/>
 		<toc-element toc-title="Desktop-specific components">
-			<toc-element toc-title="Overview" topic="compose-desktop-components.md"/>
-			<toc-element topic="compose-desktop-top-level-windows-management.md"/>
-			<toc-element topic="compose-desktop-scrollbars.md"/>
-			<toc-element topic="compose-desktop-tooltips.md"/>
-			<toc-element topic="compose-desktop-context-menus.md"/>
-			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
-			<toc-element topic="compose-desktop-keyboard.md"/>
-			<toc-element topic="compose-native-distribution.md"/>
-			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
-			<toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
-			<toc-element topic="compose-desktop-swing-interoperability.md"/>
+			<toc-element toc-title="Overview" accepts-web-file-names="compose-desktop-components.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-components.html"/>
+			<toc-element accepts-web-file-names="compose-desktop-top-level-windows-management.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-top-level-windows-management.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-desktop-scrollbars.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-scrollbars.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-desktop-tooltips.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-tooltips.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-desktop-context-menus.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-context-menus.html" toc-title="Redirect to blog post"/>
+			<toc-element toc-title="Mouse events" accepts-web-file-names="compose-desktop-mouse-events.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-mouse-events.html"/>
+			<toc-element accepts-web-file-names="compose-desktop-keyboard.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-keyboard.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="compose-native-distribution.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-native-distribution.html" toc-title="Redirect to blog post"/>
+			<toc-element toc-title="Accessibility support" accepts-web-file-names="compose-desktop-accessibility.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-accessibility.html"/>
+			<toc-element toc-title="Testing UI with JUnit" accepts-web-file-names="compose-desktop-ui-testing.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-ui-testing.html"/>
+			<toc-element accepts-web-file-names="compose-desktop-swing-interoperability.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-desktop-swing-interoperability.html" toc-title="Redirect to blog post"/>
 		</toc-element>
-		<toc-element toc-title="Compose Multiplatform for web" href="/docs/wasm-get-started.html"/>
-		<toc-element topic="compose-compiler.md">
-		</toc-element>
-		<toc-element topic="compose-compatibility-and-versioning.md"/>
+		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
+		<toc-element accepts-web-file-names="compose-compiler.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-compiler.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="compose-compatibility-and-versioning.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-compatibility-and-versioning.html" toc-title="Redirect to blog post"/>
 		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
 	</toc-element>
 	<toc-element toc-title="Choose your use case">
 		<toc-element toc-title="Create an app with shared logic and UI">
-			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
-			<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
-			<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
-			<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
+			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html,compose-multiplatform-create-first-app.html"  target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-create-first-app.html"/>
+			<toc-element toc-title="2. Explore composable code" accepts-web-file-names="compose-multiplatform-explore-composables.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-explore-composables.html"/>
+			<toc-element toc-title="3. Modify the project" accepts-web-file-names="compose-multiplatform-modify-project.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-modify-project.html"/>
+			<toc-element toc-title="4. Create your own application" accepts-web-file-names="compose-multiplatform-new-project.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-new-project.html"/>
 		</toc-element>
 		<toc-element toc-title="Create an app with shared logic and native UI">
-			<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
-			<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
-			<toc-element toc-title="3. Add dependencies" topic="multiplatform-dependencies.md"/>
-			<toc-element toc-title="4. Share more logic" topic="multiplatform-upgrade-app.md"/>
-			<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
+			<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html,multiplatform-create-first-app.html"  target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-create-first-app.html"/>
+			<toc-element toc-title="2. Update UI" accepts-web-file-names="multiplatform-update-ui.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-update-ui.html"/>
+			<toc-element toc-title="3. Add dependencies" accepts-web-file-names="multiplatform-dependencies.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-dependencies.html"/>
+			<toc-element toc-title="4. Share more logic" accepts-web-file-names="multiplatform-upgrade-app.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-upgrade-app.html"/>
+			<toc-element toc-title="5. Wrap up your project" accepts-web-file-names="multiplatform-wrap-up.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-wrap-up.html"/>
 		</toc-element>
-		<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
-		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
-		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
+		<toc-element toc-title="Make your app multiplatform" accepts-web-file-names="multiplatform-integrate-in-existing-app.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-integrate-in-existing-app.html"/>
+		<toc-element toc-title="Share data access layer" accepts-web-file-names="multiplatform-ktor-sqldelight.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-ktor-sqldelight.html"/>
+		<toc-element toc-title="Create Kotlin Multiplatform library" accepts-web-file-names="create-kotlin-multiplatform-library.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/create-kotlin-multiplatform-library.html"/>
 	</toc-element>
 	<toc-element toc-title="Explore project structure">
-		<toc-element toc-title="Basic project structure" topic="multiplatform-discover-project.md"/>
-		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
-		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
+		<toc-element toc-title="Basic project structure" accepts-web-file-names="multiplatform-discover-project.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-discover-project.html"/>
+		<toc-element toc-title="Advanced project structure" accepts-web-file-names="multiplatform-advanced-project-structure.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-advanced-project-structure.html"/>
+		<toc-element toc-title="Project configuration options" accepts-web-file-names="multiplatform-project-configuration.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-project-configuration.html"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
-		<toc-element topic="multiplatform-share-on-platforms.md"/>
-		<toc-element topic="multiplatform-expect-actual.md"/>
-		<toc-element toc-title="Platform-specific APIs" topic="multiplatform-connect-to-apis.md"/>
-		<toc-element topic="multiplatform-hierarchy.md"/>
+		<toc-element accepts-web-file-names="multiplatform-share-on-platforms.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-share-on-platforms.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="multiplatform-expect-actual.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="Platform-specific APIs" accepts-web-file-names="multiplatform-connect-to-apis.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-connect-to-apis.html"/>
+		<toc-element accepts-web-file-names="multiplatform-hierarchy.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-hierarchy.html" toc-title="Redirect to blog post"/>
 	</toc-element>
 	<toc-element toc-title="Add dependencies">
-		<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md"/>
-		<toc-element toc-title="For Android target platforms" topic="multiplatform-android-dependencies.md"/>
-		<toc-element toc-title="For iOS target platforms" topic="multiplatform-ios-dependencies.md"/>
+		<toc-element toc-title="On multiplatform libraries" accepts-web-file-names="multiplatform-add-dependencies.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-add-dependencies.html"/>
+		<toc-element toc-title="For Android target platforms" accepts-web-file-names="multiplatform-android-dependencies.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-android-dependencies.html"/>
+		<toc-element toc-title="For iOS target platforms" accepts-web-file-names="multiplatform-ios-dependencies.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-ios-dependencies.html"/>
 	</toc-element>
 	<toc-element toc-title="Set up iOS integration">
-		<toc-element toc-title="Choose integration method" topic="multiplatform-ios-integration-overview.md"/>
-		<toc-element topic="multiplatform-direct-integration.md"/>
-		<toc-element toc-title="Remote SPM export" topic="multiplatform-spm-export.md"/>
+		<toc-element toc-title="Choose integration method" accepts-web-file-names="multiplatform-ios-integration-overview.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-ios-integration-overview.html"/>
+		<toc-element accepts-web-file-names="multiplatform-direct-integration.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-direct-integration.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="Remote SPM export" accepts-web-file-names="multiplatform-spm-export.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-spm-export.html"/>
 		<toc-element toc-title="CocoaPods integration">
-			<toc-element topic="multiplatform-cocoapods-overview.md"/>
-			<toc-element topic="multiplatform-cocoapods-libraries.md"/>
-			<toc-element topic="multiplatform-cocoapods-xcode.md"/>
-			<toc-element topic="multiplatform-cocoapods-dsl-reference.md"/>
+			<toc-element accepts-web-file-names="multiplatform-cocoapods-overview.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-overview.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="multiplatform-cocoapods-libraries.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-libraries.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="multiplatform-cocoapods-xcode.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-xcode.html" toc-title="Redirect to blog post"/>
+			<toc-element accepts-web-file-names="multiplatform-cocoapods-dsl-reference.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-dsl-reference.html" toc-title="Redirect to blog post"/>
 		</toc-element>
-		<toc-element toc-title="Local integration with SPM" topic="multiplatform-spm-local-integration.md"/>
+		<toc-element toc-title="Local integration with SPM" accepts-web-file-names="multiplatform-spm-local-integration.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-spm-local-integration.html"/>
 	</toc-element>
 	<toc-element toc-title="Compile artifacts">
-		<toc-element topic="multiplatform-configure-compilations.md"/>
-		<toc-element topic="multiplatform-build-native-binaries.md"/>
+		<toc-element accepts-web-file-names="multiplatform-configure-compilations.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-configure-compilations.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="multiplatform-build-native-binaries.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-build-native-binaries.html" toc-title="Redirect to blog post"/>
 	</toc-element>
-	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
+	<toc-element toc-title="Test your multiplatform app" accepts-web-file-names="multiplatform-run-tests.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-run-tests.html"/>
 	<toc-element toc-title="Publish your multiplatform project">
-		<toc-element topic="multiplatform-publish-apps.md"/>
-		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
-		<toc-element topic="multiplatform-publish-libraries.md"/>
-		<toc-element toc-title="App Store privacy manifest" topic="multiplatform-privacy-manifest.md"/>
+		<toc-element accepts-web-file-names="multiplatform-publish-apps.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-publish-apps.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="Set up library publication" accepts-web-file-names="multiplatform-publish-lib-setup.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-publish-lib-setup.html"/>
+		<toc-element accepts-web-file-names="multiplatform-publish-libraries.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-publish-libraries.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="App Store privacy manifest" accepts-web-file-names="multiplatform-privacy-manifest.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-privacy-manifest.html"/>
 	</toc-element>
 	<toc-element toc-title="KMP tooling">
-		<toc-element topic="recommended-ides.md"/>
-		<toc-element topic="compose-hot-reload.md"/>
-		<toc-element toc-title="Multiplatform Gradle DSL" topic="multiplatform-dsl-reference.md"/>
-		<toc-element toc-title="Amper configuration tool" topic="amper.md"/>
+		<toc-element accepts-web-file-names="recommended-ides.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/recommended-ides.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="compose-hot-reload.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/compose-hot-reload.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="Multiplatform Gradle DSL" accepts-web-file-names="multiplatform-dsl-reference.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html"/>
+		<toc-element toc-title="Amper configuration tool" accepts-web-file-names="amper.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/amper.html"/>
 	</toc-element>
 	<toc-element toc-title="Compatibility">
-		<toc-element toc-title="Compatibility guide" topic="multiplatform-compatibility-guide.md"/>
-		<toc-element topic="multiplatform-android-layout.md"/>
-		<toc-element topic="multiplatform-plugin-releases.md"/>
+		<toc-element toc-title="Compatibility guide" accepts-web-file-names="multiplatform-compatibility-guide.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-compatibility-guide.html"/>
+		<toc-element accepts-web-file-names="multiplatform-android-layout.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-android-layout.html" toc-title="Redirect to blog post"/>
+		<toc-element accepts-web-file-names="multiplatform-plugin-releases.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-plugin-releases.html" toc-title="Redirect to blog post"/>
 	</toc-element>
 	<toc-element toc-title="Multiplatform journal">
-		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.md"/>
-		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
-		<toc-element toc-title="Six popular cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
-		<toc-element topic="multiplatform-introduce-your-team.md"/>
-		<toc-element toc-title="How teams use Kotlin Multiplatform in production" topic="use-cases-examples.md"/>
-		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" topic="multiplatform-reasons-to-try.md"/>
-		<toc-element toc-title="Kotlin Multiplatform and Flutter" topic="kotlin-multiplatform-flutter.md"/>
-		<toc-element toc-title="Kotlin Multiplatform and React Native" topic="kotlin-multiplatform-react-native.topic"/>
-		<toc-element toc-title="Programming languages for cross-platform development" topic="programming-languages-cross-platform.md"/>
-		<toc-element toc-title="Choosing your web target" topic="choosing-web-target.md"/>
+		<toc-element toc-title="Cross-platform mobile development" accepts-web-file-names="cross-platform-mobile-development.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/cross-platform-mobile-development.html"/>
+		<toc-element toc-title="Native and cross-platform mobile development" accepts-web-file-names="native-and-cross-platform.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/native-and-cross-platform.html"/>
+		<toc-element toc-title="Six popular cross-platform app development frameworks" accepts-web-file-names="cross-platform-frameworks.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/cross-platform-frameworks.html"/>
+		<toc-element accepts-web-file-names="multiplatform-introduce-your-team.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-introduce-your-team.html" toc-title="Redirect to blog post"/>
+		<toc-element toc-title="How teams use Kotlin Multiplatform in production" accepts-web-file-names="use-cases-examples.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/use-cases-examples.html"/>
+		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" accepts-web-file-names="multiplatform-reasons-to-try.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/multiplatform-reasons-to-try.html"/>
+		<toc-element toc-title="Kotlin Multiplatform and Flutter" accepts-web-file-names="kotlin-multiplatform-flutter.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-flutter.html"/>
+		<toc-element toc-title="Kotlin Multiplatform and React Native" accepts-web-file-names="kotlin-multiplatform-react-native.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-react-native.html"/>
+		<toc-element toc-title="Programming languages for cross-platform development" accepts-web-file-names="programming-languages-cross-platform.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/programming-languages-cross-platform.html"/>
+		<toc-element toc-title="Choosing your web target" accepts-web-file-names="choosing-web-target.html" target-for-accept-web-file-names="https://kotlinlang.org/docs/multiplatform/choosing-web-target.html"/>
 	</toc-element>
 	<toc-element toc-title="Redirect the old tutorial to Fleet" hidden="true"
 				 accepts-web-file-names="fleet.html"
