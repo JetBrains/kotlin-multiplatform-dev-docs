@@ -200,7 +200,7 @@ This suggests the following sequence, for example:
 4. :core:domain
 5. :core:domain-testing
 
-### Migrating to multiplatform libraries
+### Migrate to multiplatform libraries
 
 As mentioned above, there are a couple of big libraries that we can transition to in advance, before configuring multiplatform modules:
 
@@ -211,9 +211,9 @@ As mentioned above, there are a couple of big libraries that we can transition t
   there are very little changes needed to implement the migration. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/9250b1081b2557cb60aa887900fc66c3ff3a6bee).
 * Upgrade to Coil 3 from Coil 2. Again, relatively little code modified. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
 
-### Migrating :core:data
+### Migrate :core:data
 
-#### Migrating to a multiplatform RSS library
+#### Migrate to a multiplatform RSS library
 
 This can be done before `:core:data` is configured to be multiplatform.
 The RSS reader is not involved with other modules, so we can tie this migration to `:core:data` directly.
@@ -238,7 +238,7 @@ See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/com
 it doesn't need anything more than to update the Gradle configuration and move to the source set
 folder structure.
 
-### Migrating to multiplatform UI
+### Migrate to multiplatform UI
 
 When all the `:core` logic is multiplatform, you can start moving UI to common code as well.
 Once again, since we're aiming for full migration, we're not adding the iOS target yet, just making sure that the Android app
@@ -249,12 +249,41 @@ To demonstrate migrating UI gradually, we will:
    We start with the podcast details screen:
    1. [Update the ViewModel and the corresponding DI code](https://github.com/zamulla/compose-samples/pull/3/commits/531633fbcda8d22eac8036b0241faf17bdc8c1a6#diff-488213e3596fa0e794ba90a72423cc8d9368f4ffa4d900002ef1b52777f24e76).
    2. [Move the code and resources to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/b534de30c63bbc4214230affe14233fc832de11d)
-3. Migrate the Compose theme.
-4. Migrate another screen, this time the home page:
+2. Migrate the Compose theme (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/4bbabbadf418ba9eccfc569a4db970d64cdb6459)).
+   Note the platform-specific implementations of color schemes.
+3. Migrate another screen, this time the home page:
    1. [Migrate the ViewModel](https://github.com/zamulla/compose-samples/pull/3/commits/a6af9c05903e9f88332cb1a2d14acf50defc6019).
    2. [Move code to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/9229d115b98964e10d583341ed10bc2821aadccb)
    3. [Move and adjust references to resources](https://github.com/zamulla/compose-samples/pull/3/commits/57cc44394a07ae3ff1ee93450a038f7f42d569df)
 4. Partially migrate navigation to showcase combining multiplatform screens with an Android native screen (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0f9f6e95c0eead62937df4896b17f9e0cf4537e7)).
    This way `PlayerScreen` is still in the `mobile` module, and is included in navigation only for the Android entry point,
    being injected in the overarching multiplatform navigation.
-5. Finalize by moving everything that is left over.
+5. Finalize by moving everything that is left over:
+   * Move the rest of navigation over to common code ([resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/1ff3edaf759635ab546eb00bb445b1890389f0d1)).
+   * Migrate the last screen, `PlayerScreen`, to Compose Multiplatform ([resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/c0ac6b306d5de0314b539eaae6d560969d094418)).
+
+### Add a JVM entry point
+
+This is an optional step, but this helps:
+* show how little effort it takes to create a desktop app out of the Android app that has been made comprehensively multiplatform,
+* showcase Compose Hot Reload, which is currently only supported for desktop targets, as a tool of quick iteration on building a Compose UI.
+
+Since we've done everything we could to share code up to this point, adding a new entry point for a desktop JVM app is a matter
+of creating a `main()` function and integrating it with the DI framework (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c67078d13338648e661f353ef8bdc3bbb700e53)).
+
+### Add an iOS entry point
+
+The general sequence here is as follows:
+
+1. Create a template Xcode project for an iOS app.
+2. Put it inside your multiplatform project.
+3. Create a `MainViewController` in `iosMain` and call it from the Swift code to connect the iOS app with the XCFramework
+   produced by KMP.
+
+See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7a0bfa55c436a869cbabbd1718a5da02249850e2)
+which brings Jetcaster to life on iOS!
+
+> The direct integration method is the most straightforward, but may not be the best for your project.
+> See the [overview of iOS integration methods](multiplatform-ios-integration-overview.md) to understand the range of alternatives.
+> 
+{style="note"}
