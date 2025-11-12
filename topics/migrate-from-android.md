@@ -211,6 +211,24 @@ As mentioned above, there are a couple of big libraries that we can transition t
   there are very little changes needed to implement the migration. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/9250b1081b2557cb60aa887900fc66c3ff3a6bee).
 * Upgrade to Coil 3 from Coil 2. Again, relatively little code modified. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
 
+### Rewrite Java-dependent code into Kotlin
+TODO this is actually later in the current history, see if we can move it up cheaply
+
+In the Jetcaster example, what prevents us from directly commonizing code is the `java.time` package.
+Time calculation is almost everywhere in a podcast app, so without migrating that code to `kotlin.time` and `kotlinx-datetime`
+we won't be sharing a lot of code in the end.
+
+The rewrite of everything time-related is collected in [this commit](https://github.com/zamulla/compose-samples/pull/1/commits/f125720bdabb64b16291574fb03cc1655b039946).
+
+Another example is the `Objects.hash()` calls which we had to quickly implement in Kotlin: see the [resulting commit](https://github.com/zamulla/compose-samples/pull/1/commits/cb75696694237cd6d1dff5ff8934b2452fdb35b1).
+
+> A dependency example that Jetcaster fortunately lacks, but is still fairly popular, is RxJava,
+> a Java framework for managing asynchronous operations.
+> It is recommended to move to `kotlinx-coroutines` before trying a KMP migration,
+> because while implementing platform-specific API calls is expected, implementing async code twice for JVM and iOS, for example, is a lot of trouble.
+> 
+{style="note"}
+
 ### Migrate :core:data
 
 #### Migrate to a multiplatform RSS library
@@ -237,6 +255,26 @@ We can also immediately reconfigure `:core:data-testing` module to be multiplatf
 See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/6d6af83bb15b846c83020a59948bde6aaf79e609):
 it doesn't need anything more than to update the Gradle configuration and move to the source set
 folder structure.
+
+#### Configure and migrate :core:designsystem
+
+For `:core:designsystem`, we:
+
+1. Configured the KMP module and move code and resources into `commonMain`.
+2. Made the `JetcasterTypography` argument for a `MaterialExpressiveTheme` into a composable, encapsulating the calls to
+   multiplatform fonts.
+
+See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/e929161aca3b0436e9bdbe4049ae59f3f14dab1a).
+
+#### Configure and migrate :core:domain
+
+If all dependencies are already accounted for and migrated to multiplatform, the only thing we have to do here
+is move the code and re-configure the module.
+
+See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/a2f29a8d9fb969d194cdb937913fcf6878a03d0a).
+
+Similarly to `:core:data-testing`, we can easily update the `:core:domain-testing` to be multiplatform as well
+(see the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0643d8fa7ddd0458ff403084e6fc4d0dda77c18f)).
 
 ### Migrate to multiplatform UI
 
