@@ -4,7 +4,7 @@
 <root>
 	<builds>
 		<instance id="mpd" master="writerside.cfg" family="idea">
-			<artifact type="web2" tips-of-the-day="false" name="webHelpKR2.zip"  platform="primary" local-update="true" local-update-path="kotlin-multiplatform-development"/>
+			<artifact type="web2" tips-of-the-day="false"  platform="primary" local-update="true" local-update-path="kotlin-multiplatform-development"/>
 		</instance>
 	</builds>
 </root>
