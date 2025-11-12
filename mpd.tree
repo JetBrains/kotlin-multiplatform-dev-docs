@@ -78,7 +78,7 @@
 			<toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
 			<toc-element topic="compose-desktop-swing-interoperability.md"/>
 		</toc-element>
-		<toc-element toc-title="Compose Multiplatform for web" href="https://kotlinlang.org/docs/wasm-get-started.html"/>
+		<toc-element toc-title="Compose Multiplatform for web" href="/docs/wasm-get-started.html"/>
 		<toc-element topic="compose-compiler.md">
 		</toc-element>
 		<toc-element topic="compose-compatibility-and-versioning.md"/>

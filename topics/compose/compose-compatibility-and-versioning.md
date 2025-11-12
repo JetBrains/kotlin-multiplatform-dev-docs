@@ -7,14 +7,14 @@ about Compose Multiplatform releases, Compose release cycles, and component comp
 
 Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 
-| Platform | Minimum version                                                                                        |
-|----------|--------------------------------------------------------------------------------------------------------|
-| Android  | Android 5.0 (API level 21)                                                                             |
-| iOS      | iOS 13                                                                                                 |
-| macOS    | macOS 12 x64, macOS 13 arm64                                                                           |
-| Windows  | Windows 10 (x86-64, arm64)                                                                             |
-| Linux    | Ubuntu 20.04 (x86-64, arm64)                                                                           |
-| Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-configuration.html#browser-versions)   |
+| Platform | Minimum version                                                                |
+|----------|--------------------------------------------------------------------------------|
+| Android  | Android 5.0 (API level 21)                                                     |
+| iOS      | iOS 13                                                                         |
+| macOS    | macOS 12 x64, macOS 13 arm64                                                   |
+| Windows  | Windows 10 (x86-64, arm64)                                                     |
+| Linux    | Ubuntu 20.04 (x86-64, arm64)                                                   |
+| Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-configuration.html#browser-versions) |
 
 [//]: # (https://youtrack.jetbrains.com/issue/CMP-7539)
 
