@@ -212,20 +212,21 @@ As mentioned above, there are a couple of big libraries that we can transition t
 * Upgrade to Coil 3 from Coil 2. Again, relatively little code modified. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
 
 ### Rewrite Java-dependent code into Kotlin
-TODO this is actually later in the current history, see if we can move it up cheaply
 
-In the Jetcaster example, what prevents us from directly commonizing code is the `java.time` package.
-Time calculation is almost everywhere in a podcast app, so without migrating that code to `kotlin.time` and `kotlinx-datetime`
-we won't be sharing a lot of code in the end.
+Now that the major libraries are all multiplatform, we get rid of Java dependencies.
+
+In the Jetcaster example, what mostly prevents us from directly commonizing code is the `java.time` package.
+Time calculation is almost everywhere in a podcast app, so we need to migrate that code to `kotlin.time` and `kotlinx-datetime`
+to be able to better benefit from KMP code sharing.
 
 The rewrite of everything time-related is collected in [this commit](https://github.com/zamulla/compose-samples/pull/1/commits/f125720bdabb64b16291574fb03cc1655b039946).
 
-Another example is the `Objects.hash()` calls which we had to quickly implement in Kotlin: see the [resulting commit](https://github.com/zamulla/compose-samples/pull/1/commits/cb75696694237cd6d1dff5ff8934b2452fdb35b1).
+Another exclusively Java API is the `Objects.hash()` call which we had to quickly re-implement in Kotlin:
+see the [resulting commit](https://github.com/zamulla/compose-samples/pull/1/commits/cb75696694237cd6d1dff5ff8934b2452fdb35b1).
 
 > A dependency example that Jetcaster fortunately lacks, but is still fairly popular, is RxJava,
 > a Java framework for managing asynchronous operations.
-> It is recommended to move to `kotlinx-coroutines` before trying a KMP migration,
-> because while implementing platform-specific API calls is expected, implementing async code twice for JVM and iOS, for example, is a lot of trouble.
+> It is recommended to move to `kotlinx-coroutines` before trying a KMP migration.
 > 
 {style="note"}
 
