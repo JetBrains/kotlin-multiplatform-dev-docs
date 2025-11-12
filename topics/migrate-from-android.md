@@ -8,556 +8,253 @@
    both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-This tutorial shows how to make an existing Android application cross-platform so that it works both on Android and iOS.
-You will write code common to both platforms and complement it with platform-specific API calls where needed.
+This guide talks about general problems about making your Android app multiplatform,
+illustrating solutions to some of these problems with an advanced Compose sample.
+You can follow the commit sequence closely, or overview general steps of a migration and dive deeper
+at a particular step.
 
 The starting app is [Jetcaster](https://github.com/android/compose-samples/tree/main/Jetcaster),
 a sample podcast app built for Android with Jetpack Compose.
-The sample is fully featured, and showcases Material Expressive components that you'll be able to make cross-platform
+The sample is fully featured, showcasing resource management, network access, and navigation,
+as well as the latest Material Expressive components that you can make cross-platform
 using the Compose Multiplatform framework.
 
 To make your application work on both iOS and Android, you will:
 
-1. Separate features into potentially cross-platform and platform-specific: you will move most of the code into shared modules,
+1. Learn how to evaluate your project as a candidate for a KMP migration.
+2. See how to separate modules into potentially cross-platform and platform-specific.
+   For Jetcaster, we were able to make most business logic modules multiplatform,
    except for some lower-lever system calls that need to be programmed separately for iOS and Android.
-2. Make business logic modules multiplatform one by one: you will gradually evaluate code and build scripts of each module,
-   then reorganize and adjust them to be built with Kotlin Multiplatform.
-3. Share UI code: using Compose Multiplatform, you will be able to implement virtually identical Material UI for both Android and iOS.
+3. Follow the process of making business logic modules multiplatform one by one:
+   gradually updating build scripts and code to move between working states with minimal changes.
+4. See the transition to shared UI code:
+   using Compose Multiplatform, it's possible to share most of UI code for Jetcaster,
+   but more importantly you can see how to implement this transition gradually, screen by screen.
 
-> If you aren't familiar with Kotlin Multiplatform, do learn how to [create a cross-platform application from scratch](quickstart.md)
+> If you aren't familiar with Kotlin Multiplatform, do learn how to [create and run a cross-platform application from scratch](quickstart.md)
 > first.
 >
 {style="tip"}
 
-## Prepare an environment for development
+The resulting application runs on Android, iOS, and desktop.
+The desktop target mostly serves as a [Compose Hot Reload](compose-hot-reload.md) illustration,
+but it is also functional.
 
-1. From the quickstart, complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+## Prepare environment for development {collapsible="true"}
 
-   > You need a Mac with macOS to complete certain steps in this tutorial, such as running an iOS application.
+If you'd like to follow the migration steps or run the provided sample on your machine,
+make sure you prepare the environment:
+
+1. From the quickstart, complete the instructions to [set up your environment for Kotlin Multiplatform](quickstart.md#set-up-the-environment).
+
+   > You need a Mac with macOS to run the .
    > This is an Apple requirement. 
    >
    {style="note"}
 
-2. In IntelliJ IDEA, clone the general Jetpack Compose samples repository (TODO do we link the actual repo):
+2. In IntelliJ IDEA, clone the sample repository (TODO do we link the actual repo):
 
    ```text
    git@github.com:android/compose-samples.git
    ```
 
-3. Using **File | Open**, open the Jetcaster folder as a project in IntelliJ IDEA (TODO screenshot):
+3. Select **File | Open** in the main menu of the IDE and open the Jetcaster folder as a project in IntelliJ IDEA (TODO screenshot):
 
    ![Project view](switch-to-project.png){width="513"}
 
-## Make your code cross-platform
+## Checklist for a potential KMP migration
 
-To make your code cross-platform, you'll follow these steps:
+If your project is a relatively modern Android app, it is likely to already satisfy most requirements.
+But this is a useful list to evaluate older or complex projects.
 
-1. [Decide what code to make cross-platform](#decide-what-code-to-make-cross-platform)
-2. [Create a shared module for cross-platform code](#create-a-shared-module-for-cross-platform-code)
-3. [Test the code sharing](#add-code-to-the-shared-module)
-4. [Add a dependency on the shared module to your Android application](#add-a-dependency-on-the-shared-module-to-your-android-application)
-5. [Make the business logic cross-platform](#make-the-business-logic-cross-platform)
-6. [Run your cross-platform application on Android](#run-your-cross-platform-application-on-android)
+The general steps are:
+1. Pick a module that can be made multiplatform.
+2. Make sure all its dependencies are multiplatform.
+3. Reconfigure the module and lay out the code in source sets.
+4. Reconfigure the project.
 
-### Decide what code to make cross-platform
+What can you do in advance to make these steps smoother?
 
-Decide which code of your Android application is better to share for iOS and which to keep native. A simple rule is:
-share what you want to reuse as much as possible. The business logic is often the same for both Android and iOS,
-so it's a great candidate for reuse.
+### Convert or isolate Java code
+
+While you can call Java from Kotlin and vice versa,
+the `commonMain` source set, that is the actual shared code part of a Kotlin Multiplatform module, cannot contain Java code.
+Therefore, when making your Android app multiplatform you have to either isolate such code to `androidMain`
+(and rewrite it for iOS),
+or convert Java code to Kotlin.
+
+There are [guides on migrating to Kotlin from Java](https://kotlinlang.org/docs/java-to-kotlin-idioms-strings.html)
+as well as a [helper in IntelliJ IDEA](https://www.jetbrains.com/help/idea/get-started-with-kotlin.html#convert-java-to-kotlin)
+that can convert Java code automatically and streamline the process.
 
-In your sample Android application, the business logic is stored in the package `com.jetbrains.simplelogin.androidapp.data`.
-Your future iOS application will use the same logic, so you should make it cross-platform, as well.
+### Check your Android/JVM-only dependencies
+
+While a lot of projects, especially newer ones, may not have a lot of Java code, there are definitely a lot of Android-only dependencies.
+For Jetcaster, figuring out how to replace such libraries and migrating to them constituted the bulk of the job we needed to do.
+
+So the important step here is to build a list of dependencies for the code you are hoping to share and make sure there
+are multiplatform counterparts.
+While the multiplatform ecosystem is not as vast as Java, if only because it is harder to make a multiplatfrom library,
+it is expanding rapidly.
+Use [klibs.io](https://klibs.io) as your starting point for evaluating potential options.
 
-![Business logic to share](business-logic-to-share.png){width=366}
+For Jetcaster, the list of these libraries was as follows:
+
+* Dagger/Hilt, the popular dependency injection solution (replaced with [Koin](https://insert-koin.io/))
+* Coil 2, the image loading library (which [became multiplatform with version 3](https://coil-kt.github.io/coil/upgrading_to_coil3/))
+* ROME, the RSS framework (replaced with the multiplatform [RSS Parser](https://github.com/prof18/RSS-Parser))
+* JUnit, the test framework (replaced with [kotlin-test](https://kotlinlang.org/api/core/kotlin-test/))
 
-### Create a shared module for cross-platform code
+As you go along, you may find small pieces of code that stop working in multiplatform because there is no cross-platform implementation yet:
+for example, in Jetcaster, we had to replace the `AnnotatedString.fromHtml()` function, which is a part of the Compose UI library,
+with a third-party multiplatform dependency.
 
-The cross-platform code used for both iOS and Android will be stored in a shared module.
-Both Android Studio and IntelliJ IDEA provide a wizard for creating shared modules for Kotlin Multiplatform.
+It's hard to figure out all such cases in advance, so be ready to find replacements or rewrite such code after the migration already starts.
+This is why we try to show how to move from one working state of a project making the smallest steps possible,
+so a hiccup would not stall your progress with a lot of parts moving at the same time.
 
-Create a shared module to connect to both the existing Android application and your future iOS application:
+### Catch up with modularization technical debt
 
-1. In Android Studio, select **File** | **New** | **New Module** from the main menu.
-2. In the list of templates, select **Kotlin Multiplatform Shared Module**.
-   Leave the library name `shared` and enter the package name:
-   
-   ```text
-   com.jetbrains.simplelogin.shared
-   ```
-   
-3. Click **Finish**. The wizard creates a shared module, changes the build script accordingly, and starts a Gradle sync.
-4. When the setup is complete, you will see the following file structure in the `shared` directory:
+KMP allows you to migrate to a multiplatform state selectively, module by module, screen by screen.
+But for this to work smoothly, your module structure needs to be clear and easy to manipulate.
+Consider evaluating your modularization according to the [high cohesion, low coupling principle](https://developer.android.com/topic/modularization/patterns#cohesion-coupling),
+for example, and related recommendations on module structure.
 
-   ![Final file structure inside the shared directory](shared-directory-structure.png){width="341"}
+With a clear structure, even if you have a lot of modules,
+you should be able to migrate modules to KMP individually and therefore smoother than going through a sweeping rewrite.
 
-5. Make sure that the `kotlin.androidLibrary.minSdk` property in the `shared/build.gradle.kts` file matches the value of the same
-   property in the `app/build.gradle.kts` file.
+### Migrate to Compose
 
-### Add code to the shared module
+Kotlin Multiplatform offers Compose Multiplatform as means to create cross-platform UI code.
+But to easily transition to Compose Multiplatform your UI code should already be written using Compose — if you are using Views,
+you will have to rewrite it in the new paradigm and the new framework.
+This obviously is easier when done in advance.
 
-Now that you have a shared module,
-add some common code to be shared in the `commonMain/kotlin/com.jetbrains.simplelogin.shared` directory:
+Google has been advancing and enriching Compose for a long time, check out [Jetpack Compose migration guides](https://developer.android.com/develop/ui/compose/migrate)
+for most common scenarios.
+You can make use of Views-Compose interoperability, but as with Java code, this will have to be isolated in your
+`androidMain` source set.
 
-1. Create a new `Greeting` class with the following code:
+## Steps to make an app multiplatform
 
-    ```kotlin
-    package com.jetbrains.simplelogin.shared
+After the initial preparations and evaluations are done, the general process is:
 
-    class Greeting {
-        private val platform = getPlatform()
+1. Transition your business logic to KMP.
+   1. Pick a module with the least number of your project modules depending on it.
+   2. Reconfigure it and migrate to using multiplatform libraries.
+   3. Pick the next module in the dependency tree and repeat.
+2. Transition your UI code to Compose Multiplatform.
+   When all of your business logic is already multiplatform, transitioning to Compose Multiplatform is relatively
+   straightforward.
+   For Jetcaster, we show incremental migration: how to migrate screen by screen, and how to adjust the navigation graph
+   when some screens are migrated and some are not.
 
-        fun greet(): String {
-            return "Hello, ${platform.name}!"
-        }
-    }
-    ```
+> To simplify the example, we removed Android-specific Glance, TV, and wearable targets
+> in the very beginning since they don't interact with multiplatform code anyway and won't need to be migrated.
+> 
+{style="note"}
 
-2. Replace the code in created files with the following:
-
-     * In `commonMain/Platform.kt`:
-
-         ```kotlin
-         package com.jetbrains.simplelogin.shared
-       
-         interface Platform {
-             val name: String
-         }
-        
-         expect fun getPlatform(): Platform
-         ```
-     
-     * In `androidMain/Platform.android.kt`:
-
-         ```kotlin
-         package com.jetbrains.simplelogin.shared
-         
-         import android.os.Build
-
-         class AndroidPlatform : Platform {
-             override val name: String = "Android ${Build.VERSION.SDK_INT}"
-         }
-
-         actual fun getPlatform(): Platform = AndroidPlatform()
-         ```
-     * In `iosMain/Platform.ios.kt`:
-
-         ```kotlin
-         package com.jetbrains.simplelogin.shared
-       
-         import platform.UIKit.UIDevice
-
-         class IOSPlatform: Platform {
-             override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
-         }
-
-         actual fun getPlatform(): Platform = IOSPlatform()
-         ```
-
-If you want to better understand the layout of the resulting project,
-see the [basics of Kotlin Multiplatform project structure](multiplatform-discover-project.md).
-
-### Add a dependency on the shared module to your Android application
-
-To use cross-platform code in your Android application, connect the shared module to it, move the business logic code
-there, and make this code cross-platform.
-
-1. Add a dependency on the shared module to the `app/build.gradle.kts` file:
-
-    ```kotlin
-    dependencies {
-        // ...
-        implementation(project(":shared"))
-    }
-    ```
-
-2. Sync the Gradle files as suggested by the IDE or using the **File** | **Sync Project with Gradle Files** menu item.
-3. In the `app/src/main/java/` directory, open the `LoginActivity.kt` file in the `com.jetbrains.simplelogin.androidapp.ui.login`
-   package.
-4. To make sure that the shared module is successfully connected to your application, dump the `greet()` function
-   result to the log by adding a `Log.i()` call to the `onCreate()` method:
-
-    ```kotlin
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Log.i("Login Activity", "Hello from shared module: " + (Greeting().greet()))
-   
-        // ...
-    }
-    ```
-5. Follow the IDE's suggestions to import missing classes.
-6. In the toolbar, click the `app` dropdown, then click the debug icon:
-
-   ![App from list to debug](app-list-android.png){width="300"}
-
-7. In the **Logcat** tool window, search for "Hello" in the log, and you'll find the greeting from the shared
-   module:
-
-   ![Greeting from the shared module](shared-module-greeting.png){width="700"}
-
-### Make the business logic cross-platform
-
-You can now extract the business logic code to the Kotlin Multiplatform shared module and make it platform-independent.
-This is necessary for reusing the code for both Android and iOS.
-
-1. Move the business logic code `com.jetbrains.simplelogin.androidapp.data` from the `app` directory to
-   the `com.jetbrains.simplelogin.shared` package in the `shared/src/commonMain` directory.
-
-   ![Drag and drop the package with the business logic code](moving-business-logic.png){width=300}
-
-2. When Android Studio asks what you'd like to do, select to move the package and then approve the refactoring.
-
-   ![Refactor the business logic package](refactor-business-logic-package.png){width=300}
-
-3. Ignore all warnings about platform-dependent code and click **Refactor Anyway**.
-
-   ![Warnings about platform-dependent code](warnings-android-specific-code.png){width=450}
-
-4. Remove Android-specific code by replacing it with cross-platform Kotlin code or connecting to Android-specific APIs
-   using [expected and actual declarations](multiplatform-connect-to-apis.md). See the following sections for details:
-
-   #### Replace Android-specific code with cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
-   
-   To make your code work well on both Android and iOS, replace all JVM dependencies with Kotlin dependencies in the
-   moved `data` directory wherever possible.
-
-   1. In the `LoginDataValidator` class, replace the `Patterns` class from the `android.utils` package with a Kotlin
-      regular expression matching the pattern for email validation:
-   
-       ```kotlin
-       // Before
-       private fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-       ```
-   
-       ```kotlin
-       // After
-       private fun isEmailValid(email: String) = emailRegex.matches(email)
-       
-       companion object {
-           private val emailRegex = 
-               ("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                   "\\@" +
-                   "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                   "(" +
-                   "\\." +
-                   "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                   ")+").toRegex()
-       }
-       ```
-   
-   2. Remove the import directive for the `Patterns` class:
-   
-       ```kotlin
-       import android.util.Patterns
-       ```
-
-   3. In the `LoginDataSource` class, replace `IOException` in the `login()` function with `RuntimeException`.
-      `IOException` is not available in Kotlin/JVM.
-
-          ```kotlin
-          // Before
-          return Result.Error(IOException("Error logging in", e))
-          ```
-
-          ```kotlin
-          // After
-          return Result.Error(RuntimeException("Error logging in", e))
-          ```
-
-   4. Remove the import directive for `IOException` as well:
-
-       ```kotlin
-       import java.io.IOException
-       ```
-
-
-   #### Connect to platform-specific APIs from the cross-platform code {initial-collapse-state="collapsed" collapsible="true"}
-   
-   In the `LoginDataSource` class, a universally unique identifier (UUID) for `fakeUser` is generated using
-   the `java.util.UUID` class, which is not available for iOS.
-   
-   ```kotlin
-   val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-   ```
-   
-   Even though the Kotlin standard library provides an [experimental class for UUID generation](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.uuid/-uuid/),
-   let's use platform-specific functionality for this case to practice doing that.
-   
-   Provide the `expect` declaration for the `randomUUID()` function in the shared code and its `actual` implementations for
-   each platform – Android and iOS – in the corresponding source sets.
-   You can learn more about [connecting to platform-specific APIs](multiplatform-connect-to-apis.md).
-   
-   1. Change the `java.util.UUID.randomUUID()` call in the `login()` function to a `randomUUID()` call, which you will
-       implement for each platform:
-   
-       ```kotlin
-       val fakeUser = LoggedInUser(randomUUID(), "Jane Doe")
-       ```
-   
-   2. Create the `Utils.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/commonMain` directory
-      and provide the `expect` declaration:
-   
-       ```kotlin
-       package com.jetbrains.simplelogin.shared
-       
-       expect fun randomUUID(): String
-       ```
-   
-   3. Create the `Utils.android.kt` file in the `com.jetbrains.simplelogin.shared` package of the `shared/src/androidMain`
-      directory and provide the `actual` implementation for `randomUUID()` in Android:
-   
-       ```kotlin
-       package com.jetbrains.simplelogin.shared
-       
-       import java.util.*
-      
-       actual fun randomUUID() = UUID.randomUUID().toString()
-       ```
-   
-   4. Create the `Utils.ios.kt` file in the `com.jetbrains.simplelogin.shared` of the `shared/src/iosMain` directory and
-      provide the `actual` implementation for `randomUUID()` in iOS:
-   
-       ```kotlin
-       package com.jetbrains.simplelogin.shared
-       
-       import platform.Foundation.NSUUID
-      
-       actual fun randomUUID(): String = NSUUID().UUIDString()
-       ```
-   
-   5. Import the `randomUUID` function in the `LoginDataSource.kt` file of the `shared/src/commonMain`
-      directory:
-   
-      ```kotlin
-      import com.jetbrains.simplelogin.shared.randomUUID
-      ```
-   
-Now, Kotlin will use platform-specific implementations of UUID for Android and iOS.
-
-### Run your cross-platform application on Android
-
-Run your cross-platform application for Android to make sure it works as it did before.
-
-![Android login application](android-login.png){width=300}
-
-## Make your cross-platform application work on iOS
-
-Once you've made your Android application cross-platform, you can create an iOS application and reuse the shared
-business logic in it.
-
-1. [Create an iOS project in Xcode](#create-an-ios-project-in-xcode)
-2. [Configure the iOS project to use a KMP framework](#configure-the-ios-project-to-use-a-kmp-framework)
-3. [Set up an iOS run configuration in Android Studio](#set-up-an-ios-run-configuration-in-android-studio)
-4. [Use the shared module in the iOS project](#use-the-shared-module-in-the-ios-project)
-
-### Create an iOS project in Xcode
-
-1. In Xcode, click **File** | **New** | **Project**.
-2. Select a template for an iOS app and click **Next**.
-
-   ![iOS project template](ios-project-wizard-1.png){width=700}
-
-3. As the product name, specify "simpleLoginIOS" and click **Next**.
-
-   ![iOS project settings](ios-project-wizard-2.png){width=700}
-
-4. As the location for your project, select the directory that stores your cross-platform application, for
-   example, `kmp-integration-sample`.
-
-In Android Studio, you'll get the following structure:
-
-![iOS project in Android Studio](ios-project-in-as.png){width=194}
-
-You can rename the `simpleLoginIOS` directory to `iosApp` for consistency with other top-level directories of your
-cross-platform project.
-To do that, close Xcode and then rename the `simpleLoginIOS` directory to `iosApp`.
-If you rename the folder with Xcode open, you'll get a warning and may corrupt your project.
-
-![Renamed iOS project directory in Android Studio](ios-directory-renamed-in-as.png){width=194}
-
-### Configure the iOS project to use a KMP framework
-
-You can set up integration between the iOS app and the framework built by Kotlin Multiplatform directly.
-Alternatives to this method are covered in the [iOS integration methods overview](multiplatform-ios-integration-overview.md),
-but they are beyond the scope of this tutorial.
-
-1. In Android Studio, right-click the `iosApp/simpleLoginIOS.xcodeproj` directory and select
-   **Open In** | **Open In Associated Application** to open the iOS project in Xcode.
-2. In Xcode, open the iOS project settings by double-clicking the project name in the **Project** navigator.
-
-3. In the **Targets** section on the left, select **simpleLoginIOS**, then click the **Build Phases** tab.
-
-4. Click the **+** icon and select **New Run Script Phase**.
-
-    ![Add a run script phase](xcode-run-script-phase-1.png){width=700}
-
-4. Paste the following script in the run script field:
-
-    ```text
-    cd "$SRCROOT/.."
-    ./gradlew :shared:embedAndSignAppleFrameworkForXcode
-    ```
-
-   ![Add the script](xcode-run-script-phase-2.png){width=700}
-
-5. Disable **Based on dependency analysis** option.
-
-   This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
-
-6. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase:
-
-   ![Move the Run Script phase](xcode-run-script-phase-3.png){width=700}
-
-7. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
-
-   ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
-
-   > If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
-   > tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
-   >
-   {style="note"}
-
-8. Build the project in Xcode (**Product** | **Build** in the main menu).
-    If everything is configured correctly, the project should build successfully 
-    (you can safely ignore the "build phase will be run during every build" warning)
-   
-    > Build may fail if you built the project before disabling the **User Script Sandboxing** option:
-    > the Gradle daemon process may be sandboxed and needs to be restarted.
-    > Stop it before building the project again by running this command in the project directory (`kmp-integration-sample` in our example):
-    > 
-    > ```shell
-    > ./gradlew --stop
-    > ```
-    > 
-    {style="note"}
-
-### Set up an iOS run configuration in Android Studio
-
-Once you've made sure that Xcode is set up correctly, return to Android Studio:
-
-1. Select **File | Sync Project with Gradle Files** in the main menu. Android Studio automatically generates a run
-   configuration called **simpleLoginIOS**.
-
-   Android Studio automatically generates a run configuration called **simpleLoginIOS** and marks the `iosApp`
-   directory as a linked Xcode project.
-
-2. In the list of run configurations, select **simpleLoginIOS**.
-   Choose an iOS emulator and then click **Run** to check that the iOS app runs correctly.
-
-   ![The iOS run configuration in the list of run configurations](ios-run-configuration-simplelogin.png){width=400}
-
-### Use the shared module in the iOS project
-
-The `build.gradle.kts` file of the `shared` module defines the `binaries.framework.baseName`
-property for each iOS target as `sharedKit`.
-This is the name of the framework that Kotlin Multiplatform builds for the iOS app to consume.
-
-To test the integration, add a call to common code in Swift code:
-
-1. In Android Studio, open the `iosApp/simpleloginIOS/ContentView.swift` file and import the framework:
-
-   ```swift
-   import sharedKit
-   ```
-
-2. To check that it is properly connected, change the `ContentView` structure to use the `greet()` function
-   from the shared module of your cross-platform app:
-
-   ```swift
-   struct ContentView: View {
-       var body: some View {
-           Text(Greeting().greet())
-           .padding()
-       }
-   }
-   ```
-
-3. Run the app using the Android Studio iOS run configuration to see the result:
-
-   ![Greeting from the shared module](xcode-iphone-hello.png){width=300}
-
-4. Update code in the `ContentView.swift` file again to use the business logic from the shared module to render the application UI:
-
-   ```kotlin
-   ```
-   {src="android-ios-tutorial/ContentView.swift" initial-collapse-state="collapsed" collapsible="true"}
-
-5. In the `simpleLoginIOSApp.swift` file, import the `sharedKit` module and specify the arguments for the `ContentView()` function:
-
-    ```swift
-    import SwiftUI
-    import sharedKit
-    
-    @main
-    struct SimpleLoginIOSApp: App {
-        var body: some Scene {
-            WindowGroup {
-                ContentView(viewModel: .init(loginRepository: LoginRepository(dataSource: LoginDataSource()), loginValidator: LoginDataValidator()))
-            }
-        }
-    }
-    ```
-
-6. Run the iOS run configuration again to see that the iOS app shows the login form.
-7. Enter "Jane" as the username and "password" as the password.
-8. As you have [set up the integration earlier](#configure-the-ios-project-to-use-a-kmp-framework),
-    the iOS app validates input using common code:
-
-   ![Simple login application](xcode-iphone-login.png){width=300}
-
-## Enjoy the results – update the logic only once
-
-Now your application is cross-platform. You can update the business logic in the `shared` module and see results on both Android
-and iOS.
-
-1. Change the validation logic for a user's password: "password" shouldn't be a valid option.
-    To do that, update the `checkPassword()` function of the `LoginDataValidator` class
-    (to find it quickly, press <shortcut>Shift</shortcut> twice, paste the name of the class, and switch to the **Classes** tab):
-
-   ```kotlin
-   package com.jetbrains.simplelogin.shared.data
-   
-   class LoginDataValidator {
-   //...
-       fun checkPassword(password: String): Result {
-           return when {
-               password.length < 5 -> Result.Error("Password must be >5 characters")
-               password.lowercase() == "password" -> Result.Error("Password shouldn't be \"password\"")
-               else -> Result.Success
-           }
-       }
-   //...
-   }
-   ```
-
-2. Run both the iOS and Android applications from Android Studio to see the changes:
-
-   ![Android and iOS applications password error](android-iphone-password-error.png){width=600}
-
-You can review the [final code for this tutorial](https://github.com/Kotlin/kmp-integration-sample/tree/final).
-
-## What else to share?
-
-You've shared the business logic of your application, but you can also decide to share other layers of your application.
-For example, the `ViewModel` class code is almost the same for [Android](https://github.com/Kotlin/kmp-integration-sample/blob/final/app/src/main/java/com/jetbrains/simplelogin/androidapp/ui/login/LoginViewModel.kt)
-and [iOS applications](https://github.com/Kotlin/kmp-integration-sample/blob/final/iosApp/SimpleLoginIOS/ContentView.swift#L84),
-and you can share it if your mobile applications should have the same presentation layer.
-
-## What's next?
-
-Once you've made your Android application cross-platform, you can move on and:
-
-* [Add dependencies on multiplatform libraries](multiplatform-add-dependencies.md)
-* [Add Android dependencies](multiplatform-android-dependencies.md)
-* [Add iOS dependencies](multiplatform-ios-dependencies.md)
-
-You can use Compose Multiplatform to create a unified UI across all platforms:
-
-* [Learn about Compose Multiplatform and Jetpack Compose](compose-multiplatform-and-jetpack-compose.md)
-* [Explore available resources for Compose Multiplatform](compose-multiplatform-resources.md)
-* [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
-
-You can also check out community resources:
-
-* [Video: How to migrate an Android project to Kotlin Multiplatform](https://www.youtube.com/watch?v=vb-Pt8SdfEE&t=1s)
-* [Video: 3 ways to get your Kotlin JVM code ready for Kotlin Multiplatform](https://www.youtube.com/watch?v=X6ckI1JWjqo)
+To choose a module to start with, it's useful to build a dependency graph of the modules in your project.
+For Jetcaster, it looked like this:
+
+```mermaid
+flowchart LR
+  %% Style for modules
+  classDef Module fill:#e6f7ff,stroke:#0086c9,stroke-width:1px,color:#003a52
+
+  %% Modules
+  M_MOBILE[":mobile"]
+  M_CORE_DATA[":core:data"]
+  M_CORE_DATA_TESTING[":core:data-testing"]
+  M_CORE_DOMAIN[":core:domain"]
+  M_CORE_DOMAIN_TESTING[":core:domain-testing"]
+  M_CORE_DESIGNSYSTEM[":core:designsystem"]
+
+  class M_MOBILE,M_CORE_DATA,M_CORE_DATA_TESTING,M_CORE_DOMAIN,M_CORE_DOMAIN_TESTING,M_CORE_DESIGNSYSTEM Module
+
+  %% Internal dependencies between modules
+  %% :mobile
+  M_MOBILE --> M_CORE_DATA
+  M_MOBILE --> M_CORE_DESIGNSYSTEM
+  M_MOBILE --> M_CORE_DOMAIN
+  M_MOBILE --> M_CORE_DOMAIN_TESTING
+
+  %% :core:domain
+  M_CORE_DOMAIN --> M_CORE_DATA
+  M_CORE_DOMAIN --> M_CORE_DATA_TESTING
+
+  %% :core:data-testing
+  M_CORE_DATA_TESTING --> M_CORE_DATA
+
+  %% :core:domain-testing
+  M_CORE_DOMAIN_TESTING --> M_CORE_DOMAIN
+
+  %% :core:designsystem and :core:data have no intra-project dependencies
+```
+
+This suggests the following sequence, for example:
+
+1. :core:data
+2. :core:data-testing
+3. :core:designsystem
+4. :core:domain
+5. :core:domain-testing
+
+### Migrating to multiplatform libraries
+
+As mentioned above, there are a couple of big libraries that we can transition to in advance, before configuring multiplatform modules:
+
+* Migrate from Dagger/Hilt to Koin 4 in the entire app, including Android-only entry point module `mobile`.
+  This requires rewriting the dependency injection logic according to the Koin approach, but code outside of `*.di` packages
+  remains largely unaffected. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/f1c757dac5efa377226f15675bb580b10ee86c6a).
+* Migrate from JUnit to `kotlin-test`. This concerns all modules with tests, but thanks to `kotlin-test` compatibility,
+  there are very little changes needed to implement the migration. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/9250b1081b2557cb60aa887900fc66c3ff3a6bee).
+* Upgrade to Coil 3 from Coil 2. Again, relatively little code modified. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
+
+### Migrating :core:data
+
+#### Migrating to a multiplatform RSS library
+
+This can be done before `:core:data` is configured to be multiplatform.
+The RSS reader is not involved with other modules, so we can tie this migration to `:core:data` directly.
+
+See the [commit with the corresponding rewrite](https://github.com/zamulla/compose-samples/pull/3/commits/c2280bb6df0da407984b8afcbeb947a071b33b84).
+
+#### Configure :core:data and migrate database code
+
+Jetcaster uses Room as the database library. Since Room is multiplatform from version 2.7.0,
+we only need to update the code to work across platforms.
+At this point we don't have the iOS app yet, but we can already write platform-specific code that will be called
+when we set up an iOS entry point.
+
+See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c4364a65a3577538a678daf989663f6ca55c9d3):
+* Note the new code structure, with `androidMain`, `commonMain`, `iosMain`, and `jvmMain` source sets.
+* Most of the code changes are about creating expect/actual structure for Room and corresponding DI changes.
+* There is a new `OnlineChecker` interface that is covering for the fact that we only check for internet connectivity
+  on Android. We will add an iOS implementation later on.
+
+We can also immediately reconfigure `:core:data-testing` module to be multiplatform.
+See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/6d6af83bb15b846c83020a59948bde6aaf79e609):
+it doesn't need anything more than to update the Gradle configuration and move to the source set
+folder structure.
+
+### Migrating to multiplatform UI
+
+When all the `:core` logic is multiplatform, you can start moving UI to common code as well.
+Once again, since we're aiming for full migration, we're not adding the iOS target yet, just making sure that the Android app
+works with Compose parts placed in common code.
+
+To demonstrate migrating UI gradually, we will:
+1. Migrate one screen to Compose Multiplatform, which will work with the Compose theme still in the Android module.
+   We start with the podcast details screen:
+   1. [Update the ViewModel and the corresponding DI code](https://github.com/zamulla/compose-samples/pull/3/commits/531633fbcda8d22eac8036b0241faf17bdc8c1a6#diff-488213e3596fa0e794ba90a72423cc8d9368f4ffa4d900002ef1b52777f24e76).
+   2. [Move the code and resources to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/b534de30c63bbc4214230affe14233fc832de11d)
+3. Migrate the Compose theme.
+4. Migrate another screen, this time the home page:
+   1. [Migrate the ViewModel](https://github.com/zamulla/compose-samples/pull/3/commits/a6af9c05903e9f88332cb1a2d14acf50defc6019).
+   2. [Move code to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/9229d115b98964e10d583341ed10bc2821aadccb)
+   3. [Move and adjust references to resources](https://github.com/zamulla/compose-samples/pull/3/commits/57cc44394a07ae3ff1ee93450a038f7f42d569df)
+4. Partially migrate navigation to showcase combining multiplatform screens with an Android native screen (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0f9f6e95c0eead62937df4896b17f9e0cf4537e7)).
+   This way `PlayerScreen` is still in the `mobile` module, and is included in navigation only for the Android entry point,
+   being injected in the overarching multiplatform navigation.
+5. Finalize by moving everything that is left over.
