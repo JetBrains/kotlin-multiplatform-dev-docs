@@ -64,14 +64,13 @@ make sure you prepare the environment:
 
 ## Checklist for a potential KMP migration
 
-If your project is a relatively modern Android app, it is likely to already satisfy most requirements.
-But this is a useful list to evaluate older or complex projects.
+If your project is a relatively modern Android app, it is likely to already adhere to most requirements and recommendations.
+But this is a useful list to evaluate older or complex projects:
 
-The general steps are:
-1. Pick a module that can be made multiplatform.
-2. Make sure all its dependencies are multiplatform.
-3. Reconfigure the module and lay out the code in source sets.
-4. Reconfigure the project.
+1. [Convert or isolate Java code](#convert-or-isolate-java-code)
+2. [Check your Android/JVM-only dependencies](#check-your-android-jvm-only-dependencies)
+3. [Catch up with modularization technical debt](#catch-up-with-modularization-technical-debt)
+4. [Migrate to Compose](#migrate-to-compose)
 
 What can you do in advance to make these steps smoother?
 
