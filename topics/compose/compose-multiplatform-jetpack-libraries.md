@@ -40,10 +40,10 @@ Among the base Compose libraries:
   `org.jetbrains.compose.runtime` artifact now serves as an alias.)
 * Compose Multiplatform implements:
    * Multiplatform versions of `androidx.compose.ui` and `androidx.compose.foundation`
-     which are available in Compose Multiplatform projects using the `compose.ui` and `compose.foundation` aliases.
-   * Multiplatform versions of `androidx.compose.material3` and `androidx.compose.material`.
-     These are also available through aliases (`compose.material3` and `compose.material`), but, unlike the others,
-     the Material 3 library is not coupled with Compose Multiplatform versions.
+     which are available in Compose Multiplatform projects as `org.jetbrains.compose.ui` and `org.jetbrains.compose.foundation`.
+   * Multiplatform versions of `androidx.compose.material3` and `androidx.compose.material` which are similarly
+     packaged (`org.jetbrains.compose.material3` and `org.jetbrains.compose.material`).
+     Unlike the others, the Material 3 library is not coupled with Compose Multiplatform versions.
      So, instead of the `material3` alias you can provide a direct dependency, for example on an EAP version.
    * Material 3 adaptive library as standalone artifacts (`org.jetbrains.compose.material3.adaptive:adaptive*`)
 
@@ -57,8 +57,8 @@ so JetBrains implements it as multiplatform libraries bundled with Compose Multi
     * helps create distribution packages for desktop and web targets,
     * supports the multiplatform resource library in making resources available correctly for each target.
 * `org.jetbrains.compose.components.resources`, which provides [cross-platform resources](compose-multiplatform-resources.md) support.
-* `org.jetbrains.compose.components.uiToolingPreview`, which supports Compose UI previews in IntelliJ IDEA and Android Studio.
+* `org.jetbrains.compose.components.uiToolingPreview`, which supports Compose UI previews for common code in IntelliJ IDEA and Android Studio.
 * `org.jetbrains.compose.components.animatedimage`, which supports displaying animated images.
-* `org.jetbrains.compose.components.splitpane` TODO what's that? Is there anything else?
+* `org.jetbrains.compose.components.splitpane`, which implements an analogue of Swing's [JSplitPane](https://docs.oracle.com/javase/8/docs/api/javax/swing/JSplitPane.html).
 
 
