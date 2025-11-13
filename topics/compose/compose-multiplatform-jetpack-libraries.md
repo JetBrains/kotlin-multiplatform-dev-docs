@@ -14,7 +14,7 @@ the Android distribution of your app uses the Android artifact while distributio
 
 Here's the outline of the process:
 
-![](org.jetbrains.androidx-diagram.png)
+![](androidx-cmp-artifacts.svg)
 
 So, for example, "Navigation artifacts for iOS" refers to the collection of the following multiplatform artifacts:
 * `org.jetbrains.androidx.navigation.navigation-compose-uikitarm64`
