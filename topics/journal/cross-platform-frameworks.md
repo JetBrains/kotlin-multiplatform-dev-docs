@@ -74,7 +74,7 @@ Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that 
 
 **Programming language:** Kotlin.
 
-**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](case-studies.topic).
+**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](https://kotlinlang.org/case-studies/?type=multiplatform).
 
 **Key features:**
 
