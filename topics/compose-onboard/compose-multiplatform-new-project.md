@@ -341,7 +341,7 @@ list.
                         expanded = showCountries,
                         onDismissRequest = { showCountries = false }
                     ) {
-                        countries().forEach { (name, zone) ->
+                        countries.forEach { (name, zone) ->
                             DropdownMenuItem(
                                 text = {   Text(name)},
                                 onClick = {
