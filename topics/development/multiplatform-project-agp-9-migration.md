@@ -46,8 +46,8 @@ For library migration steps, see the [guide in Android documentation](https://de
 To migrate an app project, you need to have the Android entry point and the shared code in properly configured separate modules.
 There is a [general tutorial for migrating a sample app](#step-by-step-migration-of-a-sample-app),
 but the mandatory parts are:
-* [Create and configure a shared module]()
-* [Create and configure an Android app module]()
+* [Create and configure a shared module](#create-shared-modules)
+* [Create and configure an Android app module](#android-app)
 
 ## Recommended changes
 
@@ -701,7 +701,7 @@ When all code is working from correct new modules:
       You can remove old run configurations associated with the `composeApp` module.
 2. In the `gradle/libs.versions.toml` file, update the AGP version to a 9.* version, for example:
 
-    ```txt
+    ```text
     [versions]
     agp = "9.0.0"
     ```
