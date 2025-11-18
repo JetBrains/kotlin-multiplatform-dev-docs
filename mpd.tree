@@ -106,7 +106,7 @@
 		<toc-element toc-title="Basic project structure" topic="multiplatform-discover-project.md"/>
 		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
 		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
-        <toc-element toc-title="Project configuration options" topic="multiplatform-project-agp-9-migration.md"/>
+        <toc-element toc-title="Upgrading to AGP 9" topic="multiplatform-project-agp-9-migration.md"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
 		<toc-element topic="multiplatform-share-on-platforms.md"/>
