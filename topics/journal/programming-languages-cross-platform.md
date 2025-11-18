@@ -133,7 +133,7 @@ Another important factor to consider is the real-world use of the technology. Re
 
 ![Kotlin Multiplatform Case Studies](kmp-case-studies.png){width="700"}
 
-[![Explore Real-World Kotlin Multiplatform Use Cases](kmp-use-cases-1.svg){width="500" style="block"}](case-studies.topic)
+[![Explore Real-World Kotlin Multiplatform Use Cases](kmp-use-cases-1.svg){width="500" style="block"}](https://kotlinlang.org/case-studies/?type=multiplatform)
 
 **5. Language ecosystem**
 

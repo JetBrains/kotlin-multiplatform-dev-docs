@@ -5,7 +5,7 @@
 	<toc-element toc-title="Kotlin Multiplatform overview">
 		<toc-element toc-title="What is Kotlin Multiplatform" topic="kmp-overview.md"/>
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
-        <toc-element topic="case-studies.topic"/>
+        <toc-element toc-title="Case studies" accepts-web-file-names="case-studies.html" target-for-accept-web-file-names="https://kotlinlang.org/case-studies/?type=multiplatform"/>
 		<toc-element toc-title="Samples" topic="multiplatform-samples.md"/>
         <toc-element topic="kmp-learning-resources.md"/>
         <toc-element topic="faq.md"/>

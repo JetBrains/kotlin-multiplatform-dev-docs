@@ -175,7 +175,7 @@ and internal utilities were among the key areas where this technology makes a si
 ### 8. Kotlin Multiplatform is already used by global companies
 
 KMP is already used by many large companies all around the world, including Forbes, Philips, Cash App, Meetup, Autodesk,
-and many others. You can read all of their stories on the [case studies page](case-studies.topic).
+and many others. You can read all of their stories on the [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
 
 In November 2023, JetBrains announced that Kotlin Multiplatform is now [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/),
 attracting the interest of more companies and teams in the technology.

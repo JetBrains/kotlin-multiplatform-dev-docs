@@ -73,7 +73,7 @@ using KMP also saves them from introducing new tech stacks.
 **Case studies:** [Forbes](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/), [McDonald’s](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc), [Google Docs](https://www.youtube.com/watch?v=5lkZj4v4-ks), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [VMware](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app?_gl=1*1qc1ixl*_gcl_aw*R0NMLjE3NTEzNTcwMDguRUFJYUlRb2JDaE1JblBLRmc0cWJqZ01WZ0VnZENSM3pYQkVWRUFFWUFTQUFFZ0ltOVBEX0J3RQ..*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTE1MjQ2MDUkbzcxJGcxJHQxNzUxNTI3Njc5JGozJGwwJGgw), 
 [Wonder App by Baidu](https://kotlinlang.org/lp/multiplatform/case-studies/baidu)
 
-[![Learn from KMP success stories](kmp-success-stories.svg){width="700"}{style="block"}](case-studies.topic)
+[![Learn from KMP success stories](kmp-success-stories.svg){width="700"}{style="block"}](https://kotlinlang.org/case-studies/?type=multiplatform)
 
 ### Agencies
 
@@ -153,7 +153,7 @@ their driver, rider, and merchant apps. Core logic for services like real-time t
 or in-app chat can be written once and used on both Android and iOS, guaranteeing consistent behavior for all users.
 
 **Case studies:** [Bolt](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), 
-[Feres](case-studies.topic#case-study-feres)
+[Feres](https://kotlinlang.org/case-studies/#case-study-feres)
 
 ### Educational technology
 
@@ -164,7 +164,7 @@ This code sharing can significantly boost performance and consistency — for ex
 from JavaScript to Kotlin and saw notable speed improvements in both its Android and iOS apps.
 
 **Case studies:** [Duolingo](https://youtu.be/RJtiFt5pbfs?si=mFpiN9SNs8m-jpFL), [Quizlet](https://quizlet.com/blog/shared-code-kotlin-multiplatform), [Chalk](https://kotlinlang.org/lp/multiplatform/case-studies/chalk/?_gl=1*1wxmdrv*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEwMjI5ODAkbzYwJGcxJHQxNzUxMDIzMTU2JGo1OCRsMCRoMA..), [Memrise](https://engineering.memrise.com/kotlin-multiplatform-memrise-3764b5a4a0db), 
-[Physics Wallah](case-studies.topic#case-study-physics-wallah)
+[Physics Wallah](https://kotlinlang.org/case-studies/#case-study-physics-wallah)
 
 ### E-commerce
 
@@ -173,7 +173,7 @@ camera access, and maps. Kotlin Multiplatform with Compose Multiplatform enables
 and UIs across platforms, while still using platform-specific components where needed. 
 This hybrid approach ensures faster development, a consistent user experience, and the flexibility to integrate critical native features.
 
-**Case studies:** [Balary Market](case-studies.topic#case-study-balary), [Markaz](case-studies.topic#case-study-markaz)
+**Case studies:** [Balary Market](https://kotlinlang.org/case-studies/#case-study-balary), [Markaz](https://kotlinlang.org/case-studies/#case-study-markaz)
 
 ### Social networking and community
 
@@ -190,7 +190,7 @@ Whether guiding a yoga session or syncing health data across devices, wellness a
 and reliable cross-platform behavior. These apps often need to share core functionality, such as workout logic and data handling, 
 while maintaining fully native UI and platform-specific integrations like sensors, notifications, or health APIs.
 
-**Case studies:** [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u), [Fast&amp;Fit](case-studies.topic#case-study-fast-and-fit), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [Down Dog](https://kotlinlang.org/lp/multiplatform/case-studies/down-dog/?_gl=1*1ryf8m7*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTEyNzEzNzckbzYyJGcxJHQxNzUxMjcxMzgzJGo1NCRsMCRoMA..)
+**Case studies:** [Respawn Pro](https://youtu.be/LB5a2FRrT94?si=vgcJI-XoCrWree3u), [Fast&amp;Fit](https://kotlinlang.org/case-studies/#case-study-fast-and-fit), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [Down Dog](https://kotlinlang.org/lp/multiplatform/case-studies/down-dog)
 
 ### Postal services
 
@@ -203,5 +203,5 @@ helping them streamline workflows and drastically reduce the time required to ro
 These examples highlight how Kotlin Multiplatform can be used in practically any industry or type of app. 
 Whether you are building a fintech app, a mobility solution, an education platform, or something else, 
 Kotlin Multiplatform provides the flexibility to share as much code as makes sense for your project, 
-without sacrificing the native experience. You can also check out an extensive list of [KMP case studies](case-studies.topic), 
+without sacrificing the native experience. You can also check out an extensive list of [KMP case studies](https://kotlinlang.org/case-studies/?type=multiplatform), 
 showcasing many other companies that use the technology in production.
