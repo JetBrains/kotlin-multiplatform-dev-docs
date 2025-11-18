@@ -1,59 +1,107 @@
-[//]: # (title: Migrating a Kotlin Multiplatform project to support AGP 9.0)
+[//]: # (title: Updating a Kotlin Multiplatform project to support AGP 9)
+<show-structure for="chapter,procedure" depth="3"/>
 
-Projects where multiplatform modules configured Android targets using the `com.android.application` plugin 
-need to be restructured to upgrade to Android Gradle plugin 9.0.
-AGP 9 deprecates several APIs which are used by Kotlin Multiplatform,
-but provides a new [Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
-to be used instead.
+Kotlin Multiplatform projects targeting Android need to migrate to using the new
+[Android Gradle Library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
+to be able to use Android Gradle plugin version 9.0 and newer.
 
-The following guide shows how to swap the plugins and restructure the project at the same time.
+> AGP 9 is supported in IntelliJ IDEA starting with version 2025.3 TODO
+> and Android Studio starting with Otter 2025.3 TODO
+> 
+{style="note"}
+
+## Mandatory changes
+
+### Migrate to built-in Kotlin
+
+AGP 9.0 brings built-in Kotlin support that is enabled by default,
+so you don't need to enable the Kotlin Android Gradle plugin (`org.jetbrains.kotlin.android`) explicitly anymore.
+
+If you're using [kapt](https://kotlinlang.org/docs/kapt.html) or custom `kotlinOptions`,
+you may need to perform additional migration steps.
+
+Follow the [migration guide](https://developer.android.com/build/migrate-to-built-in-kotlin)
+to make sure you don't miss anything.
+
+### Migrate to the Android Gradle Library plugin
+
+Previously, to configure an Android target in a multiplatform module you needed to use
+the KMP plugin (`org.jetbrains.kotlin.multiplatform`)
+together with either
+the Android application (`com.android.application`) or the Android library (`com.android.library`) plugin.
+
+With AGP 9.0, these plugins stop being compatible with KMP,
+and you need to migrate to the new Android Gradle Library plugin built specifically for KMP.
 
 > To make your project work with AGP 9.0 in the short term, you can manually enable the deprecated APIs.
 > To do that, in the `gradle.properties` file of your project add this property:
 > `android.enableLegacyVariantApi=true`.
 >
-> The legacy APIs are going to be removed completely in AGP 10, make sure you finish the migration before that!
+> The legacy APIs are going to be removed completely in AGP 10. Make sure you finish the migration before that!
 >
 {style="note"}
 
-## Migration guide
+For library migration steps, see the [guide in Android documentation](https://developer.android.com/kotlin/multiplatform/plugin#migrate).
 
-In this guide, we show how to restructure a combined multiplatform module into discrete modules clearly delineating
-shared logic, shared UI, and individual entry points.
+To migrate an app project, you need to have the Android entry point and the shared code in properly configured separate modules.
+There is a [general tutorial for migrating a sample app](#step-by-step-migration-of-a-sample-app),
+but the mandatory parts are:
+* [Create and configure a shared module]()
+* [Create and configure an Android app module]()
 
-The example project is a Compose Multiplatform app that is the result of the [](compose-multiplatform-new-project.md)
+## Recommended changes
+
+Along with updating your Gradle configuration, we recommend to review the structure of your KMP project.
+The general approach is to extract shared code in its own module, and create a separate module for each platform-specific
+entry point.
+
+In terms of [Android modularization approach](https://developer.android.com/topic/modularization),
+we recommend creating separate **app modules** for platform-specific entry points
+(so, a separate module for Android, web, and JVM)
+and **feature modules** for shared code.
+
+<!-- TODO link to the blog post explaining the changes -->
+
+## Step by step migration of a sample app
+
+The example project that you will prepare for the migration is a Compose Multiplatform app that is the result of the
+[](compose-multiplatform-new-project.md)
 tutorial.
-You can check out the initial state of the project in
-the [update_october_2025 branch](https://github.com/kotlin-hands-on/get-started-with-cm/tree/update_october_2025)
-of the sample project.
+The example consists of a single Gradle module (`composeApp`) that contains all the shared code and KMP entry
+points,
+and the `iosApp` project with the iOS-specific code and configuration.
 
-<!-- TODO this branch doesn't work, need something else here — I just followed the tutorial with the current plugin version
-     and migrated the result
-     in the meantime, the best approach is to follow the tutorial :)-->
+To prepare for the AGP 9 migration and to create a generally more flexible and scalable project structure,
+you will:
 
-The example consists of a single Gradle module (`composeApp`) that contains all the shared code and all of the KMP entry
-points.
-You will extract shared code and entry points into separate modules to reach two goals:
+* Create feature modules for shared UI and business logic code.
+* Create app modules with entry points for each platform.
 
-* Create a more flexible and scalable project structure that allows managing shared logic, shared UI, and different
-  entry points
-  separately.
-* Isolate the Android module (that uses the `androidApplication` Gradle plugin) from KMP modules (that use the
-  `androidLibrary`
-  Gradle plugin).
+If you are looking to only implement changes mandatory for the AGP 9 migration,
+you required steps are:
 
-For general modularization advice,
-see [Android modularization intro](https://developer.android.com/topic/modularization).
-In these terms, you are going to create several **app modules**, for each platform, and shared **feature modules**, for
-UI and business logic.
+* [Create and configure a shared module](#create-shared-modules)
+* [Create and configure an Android app module](#android-app)
 
-> If your project is simple enough, it might suffice to combine all shared code (shared logic and UI) in a single
-module.
-> We'll separate them to illustrate the modularisation pattern.
->
-{style="note"}
+<!-- When the new structure is implemented in the wizard, this is going to change: 
+     following the tutorial will bring you to the new structure already.
+     So we need to save a sample of "how things used to be" and link to it when the wizard update hits.-->
 
-### Create a shared logic module
+### Create shared modules
+
+The rule of thumb for shared modules is:
+
+* If you implement Compose Multiplatform UI for each of your apps, you only need a single `shared` module that
+  includes all multiplatform dependencies.
+* If at least one of your apps has fully native UI and only should depend on common code for business logic,
+  create a `sharedLogic` and a `sharedUI` module to separate them.
+
+The UI in the sample project is fully implemented using Compose Multiplatform,
+but to illustrate the more general case we'll show the more complicated structure with `sharedUI` and `sharedLogic` modules.
+If you only want a single shared module, skip the shared logic step, jump ahead to the [`sharedUI`](#create-a-shared-ui-module)
+section and use it as a blueprint.
+
+#### Create a shared logic module
 
 Before actually creating a module, you need to decide on what is business logic, which code is both UI- and
 platform-independent.
@@ -194,9 +242,9 @@ To do that, recreate the source set structure with the folders that contain `Pla
    The entry points
 10. Sync Gradle check that there are no expect-actual errors. -->
 
-### Create a shared UI module
+#### Create a shared UI module
 
-Isolate shared code implementing common UI elements in the `sharedUi` module:
+Extract shared code implementing common UI elements in the `sharedUi` module:
 
 1. Create the `sharedUi` directory at the root of the project.
 2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
@@ -440,7 +488,7 @@ Create and configure a new entry point module for the Android app:
 9. Start the run configuration to make sure that the app runs as expected.
 10. If everything works correctly:
      * Remove the `composeApp/src/androidMain` directory.
-     * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
+     * In the `composeApp/build.gradle.kts` file, remove the Android-related code:
          * the `android {}` block,
          * the `androidMain.dependencies {}`,
          * the `androidTarget {}` block inside the `kotlin {}` block.
