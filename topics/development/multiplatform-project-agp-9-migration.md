@@ -87,322 +87,12 @@ you required steps are:
      following the tutorial will bring you to the new structure already.
      So we need to save a sample of "how things used to be" and link to it when the wizard update hits.-->
 
-### Create shared modules
+### Create modules for the Android entry point and other app targets
 
-The rule of thumb for shared modules is:
-
-* If you implement Compose Multiplatform UI for each of your apps, you only need a single `shared` module that
-  includes all multiplatform dependencies.
-* If at least one of your apps has fully native UI and only should depend on common code for business logic,
-  create a `sharedLogic` and a `sharedUI` module to separate them.
-
-The UI in the sample project is fully implemented using Compose Multiplatform,
-but to illustrate the more general case we'll show the more complicated structure with `sharedUI` and `sharedLogic` modules.
-If you only want a single shared module, skip the shared logic step, jump ahead to the [`sharedUI`](#create-a-shared-ui-module)
-section and use it as a blueprint.
-
-#### Create a shared logic module
-
-Before actually creating a module, you need to decide on what is business logic, which code is both UI- and
-platform-independent.
-In this example, the only clear candidate is the `currentTimeAt()` function that returns exact time for a pair of
-location and time zone.
-The `Country` data class, for example, relies on `DrawableResource` from Compose Multiplatform and can't be separated
-from UI code.
-
-> If your project already has a `shared` module, for example, because you don't share the entirety of UI code,
-> then you can use this module in place of `sharedLogic` — or rename it to better differentiate between shared logic and UI.
-> 
-{style="note"}
-
-Isolate the corresponding code in a `sharedLogic` module:
-
-1. Create the `sharedLogic` directory at the root of the project.
-2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
-3. Add the new module to `settings.gradle.kts` by adding this line at the end of the file:
-
-    ```kotlin
-    include(":sharedLogic")
-    ```
-4. Configure the Gradle build script for the new module.
-
-    1. In the `gradle/libs.versions.toml` file, add the Android Gradle Library plugin to your version catalog:
-
-        ```text
-        [plugins]
-        androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-        ```
-
-    2. In the `sharedLogic/build.gradle.kts` file, specify the plugins necessary for the shared logic module:
-
-       ```kotlin
-       plugins {
-           alias(libs.plugins.kotlinMultiplatform)
-           alias(libs.plugins.androidMultiplatformLibrary)
-       }
-       ```
-    3. Make sure these plugins are mentioned in the **root** `build.gradle.kts` file:
-
-       ```kotlin
-       plugins {
-         alias(libs.plugins.androidMultiplatformLibrary) apply false
-         alias(libs.plugins.kotlinMultiplatform) apply false
-         // ...
-       }
-       ```
-    4. In the `kotlin {}` block, specify the targets that the common module should support in this example:
-
-        ```kotlin
-        kotlin {
-            // There's no need for iOS framework configuration since sharedLogic
-            // is not going to be exported as a framework, only sharedUi is.
-            iosArm64()
-            iosSimulatorArm64()
-     
-            jvm()
-     
-            js {
-                browser()
-            }
-     
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmJs {
-                browser()
-            }
-        }
-        ```
-    5. For Android, instead of the `androidTarget {}` block, add the `androidLibrary {}` configuration to the
-       `kotlin {}` block:
-
-        ```kotlin
-        kotlin {
-            // ...
-            androidLibrary {
-                namespace = "com.jetbrains.greeting.demo.sharedLogic"
-                compileSdk = libs.versions.android.compileSdk.get().toInt()
-                minSdk = libs.versions.android.minSdk.get().toInt()
-        
-                compilerOptions {
-                    jvmTarget = JvmTarget.JVM_11
-                }
-            }
-        }
-        ```
-    6. Add the necessary time dependencies for the common and JavaScript source sets in the same
-       way they are declared for `composeApp`:
-
-        ```kotlin
-        kotlin {
-            sourceSets {
-                commonMain.dependencies {
-                    implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-                }
-                webMain.dependencies {
-                    implementation(npm("@js-joda/timezone", "2.22.0"))
-                }
-            }
-        }
-        ```
-    7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-       editor.
-
-5. Move the business logic code identified in the beginning:
-    1. Create a `commonMain/kotlin` directory inside `sharedLogic/src`.
-    2. Inside `commonMain/kotlin`, create the `CurrentTime.kt` file.
-    3. Move the `currentTimeAt` function from the original `App.kt` to `CurrentTime.kt`.
-6. Make the function available to the `App()` composable at its new place.
-   To do that, declare the dependency between `composeApp` and `sharedLogic` in the `composeApp/build.gradle.kts` file:
-
-    ```kotlin
-    commonMain.dependencies {
-        implementation(projects.sharedLogic)
-    }
-    ```
-7. Run **Build | Sync Project with Gradle Files** again to make the dependency work.
-8. In the `composeApp/commonMain/.../App.kt` file, import the `currentTimeAt()` function to fix the code.
-9. Run the application to make sure that your new module functions properly.
-
-You have isolated the shared logic in a separate module and successfully used it cross-platform.
-Next step, creating a shared UI module.
-
-<!-- TODO Platform.kt may be a good example of migrating expect-actuals, but are they still there in the sample we're using?
-This looks like a lot of space for a routine operation that is not really related to the structure or AGP 9.
-
-#### Moving expect-actuals to another module {collapsible="true"}
-
-In the sample, there is a `Platform` interface that illustrates expect-actual code sharing mechanism.
-This interface is not used in the actual app, but to be thorough you can try moving it out of the `composeApp` module, too.
-This code is clearly unrelated to UI implementation, so let's move it to the shared logic module.
-
-To do that, recreate the source set structure with the folders that contain `Platform`-related code:
-
-1. Move the `composeApp/src/commonMain/.../Platform.kt` file to the `sharedLogic/src/commonMain/kotlin` directory.
-2. Copy the `androidMain/`, `jvmMain`, `iosMain`, `jsMain`, and `wasmJsMain` folders inside the `sharedLogic/src` directory.
-3. From each of the copied folders, delete all source code except the files with `Platform` interface and corresponding implementations.
-   The entry points
-10. Sync Gradle check that there are no expect-actual errors. -->
-
-#### Create a shared UI module
-
-Extract shared code implementing common UI elements in the `sharedUi` module:
-
-1. Create the `sharedUi` directory at the root of the project.
-2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
-3. Add the new module to `settings.gradle.kts` by adding this line at the end of the file:
-
-    ```kotlin
-    include(":sharedUi")
-    ```
-4. Configure the Gradle build script for the new module:
-
-    1. If you haven't done this for the `sharedLogic` module, in `gradle/libs.versions.toml`,
-       add the Android Gradle Library plugin to your version catalog:
-
-        ```text
-        [plugins]
-        androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-        ```
-
-    2. In the `sharedUi/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
-
-        ```kotlin
-        plugins {
-           alias(libs.plugins.kotlinMultiplatform)
-           alias(libs.plugins.androidMultiplatformLibrary)
-           alias(libs.plugins.composeMultiplatform)
-           alias(libs.plugins.composeCompiler)
-           alias(libs.plugins.composeHotReload)
-        }
-        ```
-
-    3. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
-
-        ```kotlin
-        plugins {
-            alias(libs.plugins.androidMultiplatformLibrary) apply false
-            alias(libs.plugins.composeHotReload) apply false
-            alias(libs.plugins.composeMultiplatform) apply false
-            alias(libs.plugins.composeCompiler) apply false
-            alias(libs.plugins.kotlinMultiplatform) apply false
-            // ...
-        }
-        ```
-
-    4. In the `kotlin {}` block, specify the targets that the shared UI module should support in this example:
-
-        ```kotlin
-        kotlin {
-            listOf(
-                iosArm64(),
-                iosSimulatorArm64()
-            ).forEach { iosTarget ->
-                iosTarget.binaries.framework {
-                    // This is the name of the iOS framework you're going
-                    // to import in your Swift code.
-                    baseName = "SharedUi"
-                    isStatic = true
-                }
-            }
-     
-            jvm()
-     
-            js {
-                browser()
-                binaries.executable()
-            }
-     
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmJs {
-                browser()
-                binaries.executable()
-            }
-        }
-        ```
-
-    5. For Android, instead of the `androidTarget {}` block, add the `androidLibrary {}` configuration to the
-       `kotlin {}` block:
-
-        ```kotlin
-        kotlin {
-            // ...
-            androidLibrary {
-                namespace = "com.jetbrains.greeting.demo.sharedLogic"
-                compileSdk = libs.versions.android.compileSdk.get().toInt()
-                minSdk = libs.versions.android.minSdk.get().toInt()
-         
-                compilerOptions {
-                    jvmTarget = JvmTarget.JVM_11
-                }
-       
-                // Enables Compose Multiplatform resources to be used in the Android app
-                androidResources {
-                    enable = true
-                }
-            }
-        }
-        ```
-
-    6. Add the necessary dependencies for the shared UI in the same way they are declared for `composeApp`:
-
-       ```kotlin
-       kotlin {
-           sourceSets {
-               commonMain.dependencies { 
-                   implementation(projects.sharedLogic)
-                   implementation(compose.runtime)
-                   implementation(compose.foundation)
-                   implementation(compose.material3)
-                   implementation(compose.ui)
-                   implementation(compose.components.resources)
-                   implementation(compose.components.uiToolingPreview)
-                   implementation(libs.androidx.lifecycle.viewmodelCompose)
-                   implementation(libs.androidx.lifecycle.runtimeCompose)
-                   implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-               }
-           }
-       }
-       ```
-    7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-       editor.
-5. Create a new `commonMain/kotlin` directory inside `sharedUi/src`.
-6. Move resource files to the `sharedUi` module: the entire directory of `composeApp/commonMain/composeResources` should
-   be relocated to `sharedUi/commonMain/composeResources`.
-7. In the `sharedUi/src/commonMain/kotlin directory`, create a new `App.kt` file.
-8. Copy the entire contents of the original `composeApp/src/commonMain/.../App.kt` to the new `App.kt` file.
-9. Comment out all code in the old `App.kt` file in the meantime.
-   You'll test whether the shared UI module is working before removing old code completely.
-10. Everything in the new `App.kt` file should be working except for resource imports, which are now located in a
-    different package.
-    Reimport the `Res` object and all drawable resources with the correct path, for example:
-
-    <compare type="top-bottom">
-    <code-block lang="kotlin">
-        import demo.composeapp.generated.resources.mx
-    </code-block>
-    <code-block lang="kotlin">
-        import demo.sharedui.generated.resources.mx
-    </code-block>
-    </compare>
-11. Make the new `App()` composable available to the entry poins in the `composeApp` module.
-    To do that, declare the dependency between `composeApp` and `sharedUi` in the `composeApp/build.gradle.kts` file:
-
-     ```kotlin
-     commonMain.dependencies {
-         implementation(projects.sharedLogic)
-         implementation(projects.sharedUi)
-     }
-     ```
-12. Run your apps to check that the new module works to supply app entry points with shared UI code.
-13. Remove the `composeApp/src/commonMain/.../App.kt` file.
-
-You have successfully moved the cross-platform UI code to a dedicated module.
-The only thing left is to create dedicated modules for every app you are producing with this project.
-
-### Create modules for each app entry point
-
-As stated in the beginning of this page, the only module that needs isolating is the Android app entry point.
-But if you have other targets enabled, it's more straightforward and transparent to keep all the entry points
+The only entry point that needs isolating to enable AGP 9 migration is the Android app.
+But in a project with several targets enabled, it's more straightforward and transparent to keep all the entry points
 on the same level of the project hierarchy.
+So below we provide instructions for all targets supported in the sample app. 
 
 #### Android app
 
@@ -418,6 +108,7 @@ Create and configure a new entry point module for the Android app:
 4. Configure the Gradle build script for the new module.
 
     1. In the `gradle/libs.versions.toml` file, add the Kotlin Android Gradle plugin to your version catalog:
+       TODO this needs to be removed before actually building with AGP 9
 
         ```text
         [plugins]
@@ -440,42 +131,61 @@ Create and configure a new entry point module for the Android app:
         ```kotlin
         plugins {
             alias(libs.plugins.kotlinAndroid) apply false
-            alias(libs.plugins.androidApplication)
+            alias(libs.plugins.androidApplication) apply false
             alias(libs.plugins.composeMultiplatform) apply false
             alias(libs.plugins.composeCompiler) apply false
             // ...
         }
         ```
 
-    4. To add the necessary dependencies on other modules, copy existing dependencies from the
-       `commonMain.dependencies {}` and `androidMain.dependencies {}` blocks
-       of the `composeApp` build script. In this example the end result should look like this:
+    4. To add the necessary dependencies, copy existing dependencies from the `androidMain.dependencies {}` block
+       of the `composeApp` build script, and add the dependency on the `composeApp` itself. 
+       In this example the end result should look like this:
 
        ```kotlin
        kotlin {
            dependencies { 
-               implementation(projects.sharedLogic)
-               implementation(projects.sharedUi)
+               implementation(projects.composeApp)
                implementation(libs.androidx.activity.compose)
-               implementation(compose.preview)
+               implementation(compose.uiToolingPreview)
            }
        }
        ```
 
     5. Copy the entire `android {}` block with Android-specific configuration from the `composeApp/build.gradle.kts`
        file to the `androidApp/build.gradle.kts` file.
+    6. Change the configuration from an Android application to an Android library,
+       since that's what it becomes. In `composeApp/build.gradle.kts`:
+       * Change the reference to the Gradle plugin:
 
-    6. In the `kotlin {}` block, add a `compilerOptions {}` block that would match the Java version specified for 
-       the Android application. In our example:
+           <compare type="top-bottom">
+              <code-block lang="kotlin">
+                  alias(libs.plugins.androidApplication)
+              </code-block>
+              <code-block lang="kotlin">
+                  alias(libs.plugins.androidLibrary)
+              </code-block>
+           </compare>
        
-        ```kotlin
-        kotlin {
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_11)
-            }
-        }
-        ```
+        * Remove the application property lines from the `android.defaultConfig {}` block:
 
+          <compare type="top-bottom">
+              <code-block lang="kotlin">
+                  defaultConfig {
+                      applicationId = "com.jetbrains.demo"
+                      minSdk = libs.versions.android.minSdk.get().toInt()
+                      targetSdk = libs.versions.android.targetSdk.get().toInt()
+                      versionCode = 1
+                      versionName = "1.0"
+                  }
+              </code-block>
+              <code-block lang="kotlin">
+                  defaultConfig {
+                      minSdk = libs.versions.android.minSdk.get().toInt()
+                  }
+              </code-block>
+           </compare>
+       
     7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
        editor.
 
@@ -486,12 +196,11 @@ Create and configure a new entry point module for the Android app:
 8. To run your Android app, change and rename the **composeApp** Android run configuration or add a similar one.
    In the **General | Module** field, change `demo.composeApp` to `demo.androidApp`.
 9. Start the run configuration to make sure that the app runs as expected.
-10. If everything works correctly:
-     * Remove the `composeApp/src/androidMain` directory.
-     * In the `composeApp/build.gradle.kts` file, remove the Android-related code:
-         * the `android {}` block,
-         * the `androidMain.dependencies {}`,
-         * the `androidTarget {}` block inside the `kotlin {}` block.
+10. If everything works correctly, remove the `composeApp/src/androidMain` directory.
+
+You have extracted the Android entry point to a separate module.
+If you don't have any other entry points and want to keep changes to a minimum to upgrade to AGP 9,
+you can jump straight to [configuring a shared module](#configure-a-shared-module).
 
 #### Desktop JVM app
 
@@ -544,7 +253,7 @@ Create and configure the JVM desktop app module:
        kotlin {
            dependencies { 
                implementation(projects.sharedLogic)
-               implementation(projects.sharedUi)
+               implementation(projects.sharedUI)
                implementation(compose.desktop.currentOs)
                implementation(libs.kotlinx.coroutinesSwing)
            }
@@ -581,9 +290,9 @@ Create and configure the JVM desktop app module:
 10. If everything works correctly:
     * Remove the `composeApp/src/jvmMain` directory.
     * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
-       * the `compose.desktop {}` block,
-       * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
-       * the `jvm()` target declaration inside the `kotlin {}` block.
+        * the `compose.desktop {}` block,
+        * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
+        * the `jvm()` target declaration inside the `kotlin {}` block.
 
 #### Web app
 
@@ -667,26 +376,348 @@ Create and configure the web app module:
         * the `webMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
         * the `js {}` and `wasmJs {}` target declarations inside the `kotlin {}` block.
 
+
+### Create shared modules
+
+The rule of thumb for the migration of shared modules is:
+
+* If you implement Compose Multiplatform UI for each of your apps, you only need a single `shared` module that
+  includes all multiplatform dependencies.
+* If at least one of your apps has fully native UI and only should depend on common code for business logic,
+  create a `sharedLogic` and a `sharedUI` module to separate them.
+
+The UI in the sample project is fully implemented using Compose Multiplatform,
+so a single `shared` module makes sense.
+But to illustrate the more general case there's an optional section on extracting non-UI code and the changes you
+would need to make. TODO link
+
+#### Configure a `shared` module
+
+Since you have already extracted all entry points (platform-specific code) out of the `composeApp` module,
+you can simply continue using it as the module with common code.
+You only need to adjust the Gradle configuration:
+
+1. In `gradle/libs.versions.toml`,
+   add the Android Gradle Library plugin to your version catalog:
+
+    ```text
+    [plugins]
+    androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+    ```
+
+2. In the `composeApp/build.gradle.kts` file, add the plugin the plugins necessary for the shared UI module:
+
+    ```kotlin
+    plugins {
+       alias(libs.plugins.kotlinMultiplatform)
+       alias(libs.plugins.androidMultiplatformLibrary)
+       alias(libs.plugins.composeMultiplatform)
+       alias(libs.plugins.composeCompiler)
+       alias(libs.plugins.composeHotReload)
+    }
+    ```
+
+#### Create a shared logic module
+
+Before actually creating a module, you need to decide on what is business logic, which code is both UI- and
+platform-independent.
+In this example, the only clear candidate is the `currentTimeAt()` function that returns exact time for a pair of
+location and time zone.
+The `Country` data class, for example, relies on `DrawableResource` from Compose Multiplatform and can't be separated
+from UI code.
+
+> If your project already has a `shared` module, for example, because you don't share the entirety of UI code,
+> then you can use this module in place of `sharedLogic` — or rename it to better differentiate between shared logic and UI.
+> 
+{style="note"}
+
+Isolate the corresponding code in a `sharedLogic` module:
+
+1. Create the `sharedLogic` directory at the root of the project.
+2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
+3. Add the new module to `settings.gradle.kts` by adding this line at the end of the file:
+
+    ```kotlin
+    include(":sharedLogic")
+    ```
+4. Configure the Gradle build script for the new module.
+
+    1. In the `gradle/libs.versions.toml` file, add the Android Gradle Library plugin to your version catalog:
+
+        ```text
+        [plugins]
+        androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+        ```
+
+    2. In the `sharedLogic/build.gradle.kts` file, specify the plugins necessary for the shared logic module:
+
+       ```kotlin
+       plugins {
+           alias(libs.plugins.kotlinMultiplatform)
+           alias(libs.plugins.androidMultiplatformLibrary)
+       }
+       ```
+    3. Make sure these plugins are mentioned in the **root** `build.gradle.kts` file:
+
+       ```kotlin
+       plugins {
+         alias(libs.plugins.androidMultiplatformLibrary) apply false
+         alias(libs.plugins.kotlinMultiplatform) apply false
+         // ...
+       }
+       ```
+    4. In the `kotlin {}` block, specify the targets that the common module should support in this example:
+
+        ```kotlin
+        kotlin {
+            // There's no need for iOS framework configuration since sharedLogic
+            // is not going to be exported as a framework, only sharedUI is.
+            iosArm64()
+            iosSimulatorArm64()
+     
+            jvm()
+     
+            js {
+                browser()
+            }
+     
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                browser()
+            }
+        }
+        ```
+    5. For Android, instead of the `androidTarget {}` block, add the `androidLibrary {}` configuration to the
+       `kotlin {}` block:
+
+        ```kotlin
+        kotlin {
+            // ...
+            androidLibrary {
+                namespace = "com.jetbrains.greeting.demo.sharedLogic"
+                compileSdk = libs.versions.android.compileSdk.get().toInt()
+                minSdk = libs.versions.android.minSdk.get().toInt()
+        
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_11
+                }
+            }
+        }
+        ```
+    6. Add the necessary time dependencies for the common and JavaScript source sets in the same
+       way they are declared for `composeApp`:
+
+        ```kotlin
+        kotlin {
+            sourceSets {
+                commonMain.dependencies {
+                    implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+                }
+                webMain.dependencies {
+                    implementation(npm("@js-joda/timezone", "2.22.0"))
+                }
+            }
+        }
+        ```
+    7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+       editor.
+
+5. Move the business logic code identified in the beginning:
+    1. Create a `commonMain/kotlin` directory inside `sharedLogic/src`.
+    2. Inside `commonMain/kotlin`, create the `CurrentTime.kt` file.
+    3. Move the `currentTimeAt` function from the original `App.kt` to `CurrentTime.kt`.
+6. Make the function available to the `App()` composable at its new place.
+   To do that, declare the dependency between `composeApp` and `sharedLogic` in the `composeApp/build.gradle.kts` file:
+
+    ```kotlin
+    commonMain.dependencies {
+        implementation(projects.sharedLogic)
+    }
+    ```
+7. Run **Build | Sync Project with Gradle Files** again to make the dependency work.
+8. In the `composeApp/commonMain/.../App.kt` file, import the `currentTimeAt()` function to fix the code.
+9. Run the application to make sure that your new module functions properly.
+
+You have isolated the shared logic in a separate module and successfully used it cross-platform.
+Next step, creating a shared UI module.
+
+#### Create a shared UI module
+
+Extract shared code implementing common UI elements in the `sharedUI` module:
+
+1. Create the `sharedUI` directory at the root of the project.
+2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
+3. Add the new module to `settings.gradle.kts` by adding this line at the end of the file:
+
+    ```kotlin
+    include(":sharedUI")
+    ```
+4. Configure the Gradle build script for the new module:
+
+    1. If you haven't done this for the `sharedLogic` module, in `gradle/libs.versions.toml`,
+       add the Android Gradle Library plugin to your version catalog:
+
+        ```text
+        [plugins]
+        androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+        ```
+
+    2. In the `sharedUI/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
+
+        ```kotlin
+        plugins {
+           alias(libs.plugins.kotlinMultiplatform)
+           alias(libs.plugins.androidMultiplatformLibrary)
+           alias(libs.plugins.composeMultiplatform)
+           alias(libs.plugins.composeCompiler)
+           alias(libs.plugins.composeHotReload)
+        }
+        ```
+
+    3. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
+
+        ```kotlin
+        plugins {
+            alias(libs.plugins.androidMultiplatformLibrary) apply false
+            alias(libs.plugins.composeHotReload) apply false
+            alias(libs.plugins.composeMultiplatform) apply false
+            alias(libs.plugins.composeCompiler) apply false
+            alias(libs.plugins.kotlinMultiplatform) apply false
+            // ...
+        }
+        ```
+
+    4. In the `kotlin {}` block, specify the targets that the shared UI module should support in this example:
+
+        ```kotlin
+        kotlin {
+            listOf(
+                iosArm64(),
+                iosSimulatorArm64()
+            ).forEach { iosTarget ->
+                iosTarget.binaries.framework {
+                    // This is the name of the iOS framework you're going
+                    // to import in your Swift code.
+                    baseName = "sharedUI"
+                    isStatic = true
+                }
+            }
+     
+            jvm()
+     
+            js {
+                browser()
+                binaries.executable()
+            }
+     
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                browser()
+                binaries.executable()
+            }
+        }
+        ```
+
+    5. For Android, instead of the `androidTarget {}` block, add the `androidLibrary {}` configuration to the
+       `kotlin {}` block:
+
+        ```kotlin
+        kotlin {
+            // ...
+            androidLibrary {
+                namespace = "com.jetbrains.greeting.demo.sharedLogic"
+                compileSdk = libs.versions.android.compileSdk.get().toInt()
+                minSdk = libs.versions.android.minSdk.get().toInt()
+         
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_11
+                }
+       
+                // Enables Compose Multiplatform resources to be used in the Android app
+                androidResources {
+                    enable = true
+                }
+            }
+        }
+        ```
+
+    6. Add the necessary dependencies for the shared UI in the same way they are declared for `composeApp`:
+
+       ```kotlin
+       kotlin {
+           sourceSets {
+               commonMain.dependencies { 
+                   implementation(projects.sharedLogic)
+                   implementation(compose.runtime)
+                   implementation(compose.foundation)
+                   implementation(compose.material3)
+                   implementation(compose.ui)
+                   implementation(compose.components.resources)
+                   implementation(compose.components.uiToolingPreview)
+                   implementation(libs.androidx.lifecycle.viewmodelCompose)
+                   implementation(libs.androidx.lifecycle.runtimeCompose)
+                   implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+               }
+           }
+       }
+       ```
+    7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+       editor.
+5. Create a new `commonMain/kotlin` directory inside `sharedUI/src`.
+6. Move resource files to the `sharedUI` module: the entire directory of `composeApp/commonMain/composeResources` should
+   be relocated to `sharedUI/commonMain/composeResources`.
+7. In the `sharedUI/src/commonMain/kotlin directory`, create a new `App.kt` file.
+8. Copy the entire contents of the original `composeApp/src/commonMain/.../App.kt` to the new `App.kt` file.
+9. Comment out all code in the old `App.kt` file in the meantime.
+   You'll test whether the shared UI module is working before removing old code completely.
+10. Everything in the new `App.kt` file should be working except for resource imports, which are now located in a
+    different package.
+    Reimport the `Res` object and all drawable resources with the correct path, for example:
+
+    <compare type="top-bottom">
+    <code-block lang="kotlin">
+        import demo.composeapp.generated.resources.mx
+    </code-block>
+    <code-block lang="kotlin">
+        import demo.sharedUI.generated.resources.mx
+    </code-block>
+    </compare>
+11. Make the new `App()` composable available to the entry poins in the `composeApp` module.
+    To do that, declare the dependency between `composeApp` and `sharedUI` in the `composeApp/build.gradle.kts` file:
+
+     ```kotlin
+     commonMain.dependencies {
+         implementation(projects.sharedLogic)
+         implementation(projects.sharedUI)
+     }
+     ```
+12. Run your apps to check that the new module works to supply app entry points with shared UI code.
+13. Remove the `composeApp/src/commonMain/.../App.kt` file.
+
+You have successfully moved the cross-platform UI code to a dedicated module.
+The only thing left is to create dedicated modules for every app you are producing with this project.
+
+
 ### Update the iOS integration
 
 Since the iOS app entry point is not built as a separate Gradle module, you can embed the source code into any module.
-In this example, `sharedUi` makes most sense:
+In this example, `sharedUI` makes most sense:
 
-1. Move the `composeApp/src/iosMain` directory into the `sharedUi/src` directory.
-2. Configure the Xcode project to consume the framework produced by the `sharedUi` module:
+1. Move the `composeApp/src/iosMain` directory into the `sharedUI/src` directory.
+2. Configure the Xcode project to consume the framework produced by the `sharedUI` module:
     1. Select the **File | Open Project in Xcode** menu item.
     2. Click the **iosApp** project in the **Project navigator** tool window, then select the **Build Phases** tab.
     3. Find the **Compile Kotlin Framework** phase.
-    4. Find the line starting with `./gradlew` and swap `composeApp` for `sharedUi`:
+    4. Find the line starting with `./gradlew` and swap `composeApp` for `sharedUI`:
 
         ```text
-        ./gradlew :sharedUi:embedAndSignAppleFrameworkForXcode
+        ./gradlew :sharedUI:embedAndSignAppleFrameworkForXcode
         ```
    
     5. Note that the import in the `ContentView.swift` file will stay the same, because it matches the `baseName` parameter from
        Gradle configuration of the iOS target,
        not actual name of the module.
-       If you change the framework name in the `sharedUi/build.gradle.kts` file, you need to change the import directive accordingly.
+       If you change the framework name in the `sharedUI/build.gradle.kts` file, you need to change the import directive accordingly.
 
 3. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
 
@@ -705,10 +736,16 @@ When all code is working from correct new modules:
     [versions]
     agp = "9.0.0"
     ```
-3. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+3. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9](https://developer.android.com/build/migrate-to-built-in-kotlin)
+   and the Kotlin Android plugin is no longer necessary:
+
+    ```kotlin
+    alias(libs.plugins.kotlinAndroid)
+    ```
+4. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    build script editor.
 
-4. That your apps build and run with the new AGP.
+5. That your apps build and run with the new AGP.
 
 Congratulations, you modernized and optimized the structure of your project!
 
