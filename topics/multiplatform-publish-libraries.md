@@ -240,17 +240,16 @@ gpg --keyserver keyserver.ubuntu.com --send-keys F175482952A225BFC4A07A715EE6B5F
 
 **Export your private key** {id="export-your-private-key"}
 
-To let your Gradle project access your private key, you'll need to export it to a binary file.
+To let your Gradle project access your private key, you'll need to export it to a file.
 You'll be prompted to enter the passphrase you've used when creating the key.
 
 Use the following command, **passing in your own key ID** as a parameter:
 
 ```bash
-gpg --no-armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > key.gpg
+gpg --armor --export-secret-keys F175482952A225BFC4A07A715EE6B5F76620B385CE > key.gpg
 ```
 
-This command will create a `key.gpg` binary file which contains your private key
-(make sure **not** to use the --armor flag which only creates a plain text version of your key).
+This command will create a `key.gpg` text file which contains your private key.
 
 > Never share your private key file with anyone – only you should have access to it
 > since the private key enables signing files with your credentials.
