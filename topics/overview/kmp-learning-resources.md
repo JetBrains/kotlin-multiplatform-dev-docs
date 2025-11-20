@@ -976,5 +976,4 @@ The complete life cycle of creating a KMP library, from effective API design and
 <include element-id="source" use-filter="empty,lib-authors" from="kmp-learning-resources.md"/>
 
 </tab>
-
 </tabs>
