@@ -42,12 +42,9 @@ Specific references are suggested in the corresponding deprecation notices.
 This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
 In the future, we hope to provide a BOM for Compose Multiplatform to simplify setting up compatible versions.
 
-### Minimum Kotlin version increased
+### Minimum Kotlin version increased for web
 
-For the [bundled](#compose-hot-reload-integration) Compose Hot Reload Gradle plugin, the minimum Kotlin version is 2.1.20. 
-If an older version of Kotlin is detected, the hot reload functionality will be disabled.
-
-If your project includes a web target, we recommend upgrading to Kotlin 2.2.21.
+If your project includes a web target, the latest features require upgrading to Kotlin 2.2.21.
 
 ## Across platforms
 
@@ -140,7 +137,7 @@ You can now place `UIKitView` and `UIKitViewController` views above the Compose 
 This flag allows interop views to support transparent backgrounds and native shader effects.
 
 To render an interop view as an overlay, use the `@OptIn(ExperimentalComposeUiApi::class)` annotation and 
-set the `placedAsOverlay` flag to `true` in `UIKitInteropProperties`:
+set the `placedAsOverlay` parameter to `true` in `UIKitInteropProperties`:
 
 ```kotlin
 UIKitViewController(
@@ -152,7 +149,7 @@ UIKitViewController(
 ```
 
 Keep in mind that this configuration renders the view on top of the Compose UI layer; 
-consequently, it will visually cover any other Composables located in the same area.
+consequently, it will visually cover any other composables located in the same area.
 
 ## Desktop
 
@@ -166,6 +163,9 @@ What this means for the projects that explicitly declare the Compose Hot Reload 
 
  * You can safely remove the declaration in order to use the version provided by the Compose Multiplatform Gradle plugin.
  * If you choose to keep a specific version declaration, that version will be used instead of the bundled one.
+
+The minimum Kotlin version for the bundled Compose Hot Reload Gradle plugin is 2.1.20.
+If an older version of Kotlin is detected, the hot reload functionality will be disabled.
 
 ## Gradle
 
