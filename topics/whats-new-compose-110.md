@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.10.0-beta01)
+[//]: # (title: What's new in Compose Multiplatform 1.10.0-beta02)
 
 Here are the highlights for this EAP feature release:
  * [Unified `@Preview` annotation](#unified-preview-annotation)
@@ -9,26 +9,42 @@ You can find the full list of changes for this release on [GitHub](https://githu
 
 ## Dependencies
 
-* Gradle Plugin `org.jetbrains.compose`, version `1.10.0-beta01`. Based on Jetpack Compose libraries:
-    * [Runtime 1.10.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.10.0-beta01)
-    * [UI 1.10.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.10.0-beta01)
-    * [Foundation 1.10.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.10.0-beta01)
-    * [Material 1.10.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.10.0-beta01)
-    * [Material3 1.4.0](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.4.0)
+* Gradle Plugin `org.jetbrains.compose`, version `1.10.0-beta02`. Based on Jetpack Compose libraries:
+    * [Runtime 1.10.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.10.0-beta02)
+    * [UI 1.10.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.10.0-beta02)
+    * [Foundation 1.10.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.10.0-beta02)
+    * [Material 1.10.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material#1.10.0-beta02)
+    * [Material3 1.5.0-alpha08](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha08)
 
-* Compose Material3 libraries `org.jetbrains.compose.material3:material3*:1.10.0-alpha04`. Based on [Jetpack Compose Material3 1.5.0-alpha07](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha07).
+* Compose Material3 libraries `org.jetbrains.compose.material3:material3*:1.10.0-alpha05`. Based on [Jetpack Compose Material3 1.5.0-alpha08](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha08).
 
   To use the [Expressive theme](whats-new-compose-190.md#material-3-expressive-theme), include the experimental version of Material 3:
     ```kotlin
     implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
     ```
-* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.3.0-alpha01`. Based on [Jetpack Compose Material3 Adaptive 1.3.0-alpha02](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.3.0-alpha02)
-* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.10.0-alpha04`. Based on [Jetpack Lifecycle 2.10.0-beta01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.10.0-beta01)
+* Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.3.0-alpha02`. Based on [Jetpack Compose Material3 Adaptive 1.3.0-alpha03](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.3.0-alpha03)
+* Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.10.0-alpha05`. Based on [Jetpack Lifecycle 2.10.0-rc01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.10.0-rc01)
 * Navigation libraries `org.jetbrains.androidx.navigation:navigation-*:2.9.1`. Based on [Jetpack Navigation 2.9.4](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.4)
-* Navigation 3 libraries `org.jetbrains.androidx.navigation:navigation3-*:1.0.0-alpha04`. Based on [Jetpack Navigation 3](https://developer.android.com/jetpack/androidx/releases/navigation3#1.0.0-beta01)
-* Navigation Event library `org.jetbrains.androidx.navigationevent:navigationevent-compose:1.0.0-beta01`. Based on [Jetpack Navigation Event 1.0.0-beta01](https://developer.android.com/jetpack/androidx/releases/navigationevent#1.0.0-beta01)
-* Savedstate library `org.jetbrains.androidx.savedstate:savedstate*:1.4.0-beta01`. Based on [Jetpack Savedstate 1.4.0-rc01](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0-rc01)
-* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.5.0-rc01`. Based on [Jetpack WindowManager 1.5.0](https://developer.android.com/jetpack/androidx/releases/window#1.5.0)
+* Navigation 3 libraries `org.jetbrains.androidx.navigation3:navigation3-*:1.0.0-alpha05`. Based on [Jetpack Navigation3 1.0.0-rc01](https://developer.android.com/jetpack/androidx/releases/navigation3#1.0.0-rc01)
+* Navigation Event library `org.jetbrains.androidx.navigationevent:navigationevent-compose:1.0.0-beta02`. Based on [Jetpack Navigation Event 1.0.0-rc01](https://developer.android.com/jetpack/androidx/releases/navigationevent#1.0.0-rc01)
+* Savedstate library `org.jetbrains.androidx.savedstate:savedstate*:1.4.0-rc01`. Based on [Jetpack Savedstate 1.4.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0)
+* WindowManager Core library `org.jetbrains.androidx.window:window-core:1.5.0`. Based on [Jetpack WindowManager 1.5.0](https://developer.android.com/jetpack/androidx/releases/window#1.5.0)
+
+## Breaking changes
+
+### Deprecated dependency aliases
+
+Dependency aliases supported by the Compose Multiplatform Gradle plugin (`compose.ui` and others)
+are deprecated with the 1.10.0-beta01 release.
+We encourage you to add direct library references to your version catalogs.
+Specific references are suggested in the corresponding deprecation notices.
+
+This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
+In the future, we hope to provide a BOM for Compose Multiplatform to simplify setting up compatible versions.
+
+### Minimum Kotlin version increased for web
+
+If your project includes a web target, the latest features require upgrading to Kotlin 2.2.21.
 
 ## Across platforms
 
@@ -69,6 +85,17 @@ Some platform-specific implementation details:
   to Navigation 3 with Compose Multiplatform 1.10. 
   This has been postponed until a later version of the multiplatform library.
 
+### Autosizing interop views
+
+Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS. 
+These elements can now adapt their layout based on their content, 
+eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
+
+* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
+* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size). 
+  This enables proper wrapping of SwiftUI views (via `UIHostingController`) 
+  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
+
 ### Skia updated to Milestone 138
 
 The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
@@ -86,10 +113,8 @@ navigation bar, or on-screen keyboard.
 
 This new approach to managing window insets uses a single implementation for retrieving platform-specific window inset data. 
 This means both `WindowInsets` and `WindowInsetsRulers` use a common mechanism to manage insets consistently.
-Accordingly, platform-specific locals, including `LocalLayoutMargins`, `LocalSafeArea`, 
-`LocalKeyboardOverlapHeight`, and `LocalInterfaceOrientation`, were removed in favor of a new unified API.
 
->Previously, `WindowInsets.Companion.captionBar` was not marked as `@Composable`. 
+> Previously, `WindowInsets.Companion.captionBar` was not marked as `@Composable`. 
 > We added the `@Composable` attribute to align its behavior across platforms.
 > 
 {style="note"}
@@ -105,6 +130,27 @@ These new APIs allow customization of the input interface when a field gains foc
  * `UIResponder.inputAccessoryView` defines a custom accessory view that attaches to the system keyboard 
     or a custom `inputView` upon IME activation.
 
+### Overlay placement for interop views
+<primary-label ref="Experimental"/>
+
+You can now place `UIKitView` and `UIKitViewController` views above the Compose UI using the experimental `placedAsOverlay` flag.
+This flag allows interop views to support transparent backgrounds and native shader effects.
+
+To render an interop view as an overlay, use the `@OptIn(ExperimentalComposeUiApi::class)` annotation and 
+set the `placedAsOverlay` parameter to `true` in `UIKitInteropProperties`:
+
+```kotlin
+UIKitViewController(
+    modifier = modifier,
+    update = {},
+    factory = { factory.createNativeMap() },
+    properties = UIKitInteropProperties(placedAsOverlay = true)
+)
+```
+
+Keep in mind that this configuration renders the view on top of the Compose UI layer; 
+consequently, it will visually cover any other composables located in the same area.
+
 ## Desktop
 
 ### Compose Hot Reload integration
@@ -118,49 +164,10 @@ What this means for the projects that explicitly declare the Compose Hot Reload 
  * You can safely remove the declaration in order to use the version provided by the Compose Multiplatform Gradle plugin.
  * If you choose to keep a specific version declaration, that version will be used instead of the bundled one.
 
-> The bundled Compose Hot Reload Gradle plugin raises the Kotlin version necessary for 
-> a Compose Multiplatform project to 2.1.20.
->
-{style="warning"}
-
-### Autosizing `SwingPanel`
-
-`SwingPanel` now automatically adjusts its size based on the content's minimum, preferred, and maximum sizes. 
-This removes the need to calculate exact sizes and specify fixed dimensions in advance.
-
-```kotlin
-val label = JLabel("Hello Swing!")
-
-singleWindowApplication {
-    SwingPanel(factory = { label })
-
-    LaunchedEffect(Unit) {
-        delay(500)
-        // Grows the text
-        repeat(2) { 
-            label.text = "#${label.text}#"
-            delay(200)
-        }
-        // Shrinks the text
-        repeat(2) { 
-            label.text = label.text.substring(1, label.text.length - 1)
-            delay(200)
-        }
-    }
-}
-```
+The minimum Kotlin version for the bundled Compose Hot Reload Gradle plugin is 2.1.20.
+If an older version of Kotlin is detected, the hot reload functionality will be disabled.
 
 ## Gradle
-
-### Deprecated dependency aliases
-
-Dependency aliases supported by the Compose Multiplatform Gradle plugin (`compose.ui` and others)
-are deprecated with the 1.10.0-beta01 release.
-We encourage you to add direct library references to your version catalogs.
-Specific references are suggested in the corresponding deprecation notices.
-
-This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
-In the future, we hope to provide a BOM for Compose Multiplatform to simplify setting up compatible versions.
 
 ### Support for AGP 9.0.0
 
