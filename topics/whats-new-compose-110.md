@@ -42,6 +42,13 @@ Specific references are suggested in the corresponding deprecation notices.
 This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
 In the future, we hope to provide a BOM for Compose Multiplatform to simplify setting up compatible versions.
 
+### Minimum Kotlin version increased
+
+For the [bundled](#compose-hot-reload-integration) Compose Hot Reload Gradle plugin, the minimum Kotlin version is 2.1.20. 
+If an older version of Kotlin is detected, the hot reload functionality will be disabled.
+
+If your project includes a web target, we recommend upgrading to Kotlin 2.2.21.
+
 ## Across platforms
 
 ### Unified `@Preview` annotation
@@ -81,6 +88,17 @@ Some platform-specific implementation details:
   to Navigation 3 with Compose Multiplatform 1.10. 
   This has been postponed until a later version of the multiplatform library.
 
+### Autosizing interop views
+
+Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS. 
+These elements can now adapt their layout based on their content, 
+eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
+
+* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
+* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size). 
+  This enables proper wrapping of SwiftUI views (via `UIHostingController`) 
+  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
+
 ### Skia updated to Milestone 138
 
 The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
@@ -98,10 +116,8 @@ navigation bar, or on-screen keyboard.
 
 This new approach to managing window insets uses a single implementation for retrieving platform-specific window inset data. 
 This means both `WindowInsets` and `WindowInsetsRulers` use a common mechanism to manage insets consistently.
-Accordingly, platform-specific locals, including `LocalLayoutMargins`, `LocalSafeArea`, 
-`LocalKeyboardOverlapHeight`, and `LocalInterfaceOrientation`, were removed in favor of a new unified API.
 
->Previously, `WindowInsets.Companion.captionBar` was not marked as `@Composable`. 
+> Previously, `WindowInsets.Companion.captionBar` was not marked as `@Composable`. 
 > We added the `@Composable` attribute to align its behavior across platforms.
 > 
 {style="note"}
@@ -117,6 +133,27 @@ These new APIs allow customization of the input interface when a field gains foc
  * `UIResponder.inputAccessoryView` defines a custom accessory view that attaches to the system keyboard 
     or a custom `inputView` upon IME activation.
 
+### Overlay placement for interop views
+<primary-label ref="Experimental"/>
+
+You can now place `UIKitView` and `UIKitViewController` views above the Compose UI using the experimental `placedAsOverlay` flag.
+This flag allows interop views to support transparent backgrounds and native shader effects.
+
+To render an interop view as an overlay, use the `@OptIn(ExperimentalComposeUiApi::class)` annotation and 
+set the `placedAsOverlay` flag to `true` in `UIKitInteropProperties`:
+
+```kotlin
+UIKitViewController(
+    modifier = modifier,
+    update = {},
+    factory = { factory.createNativeMap() },
+    properties = UIKitInteropProperties(placedAsOverlay = true)
+)
+```
+
+Keep in mind that this configuration renders the view on top of the Compose UI layer; 
+consequently, it will visually cover any other Composables located in the same area.
+
 ## Desktop
 
 ### Compose Hot Reload integration
@@ -129,38 +166,6 @@ What this means for the projects that explicitly declare the Compose Hot Reload 
 
  * You can safely remove the declaration in order to use the version provided by the Compose Multiplatform Gradle plugin.
  * If you choose to keep a specific version declaration, that version will be used instead of the bundled one.
-
-> The bundled Compose Hot Reload Gradle plugin raises the Kotlin version necessary for 
-> a Compose Multiplatform project to 2.1.20.
->
-{style="warning"}
-
-### Autosizing `SwingPanel`
-
-`SwingPanel` now automatically adjusts its size based on the content's minimum, preferred, and maximum sizes. 
-This removes the need to calculate exact sizes and specify fixed dimensions in advance.
-
-```kotlin
-val label = JLabel("Hello Swing!")
-
-singleWindowApplication {
-    SwingPanel(factory = { label })
-
-    LaunchedEffect(Unit) {
-        delay(500)
-        // Grows the text
-        repeat(2) { 
-            label.text = "#${label.text}#"
-            delay(200)
-        }
-        // Shrinks the text
-        repeat(2) { 
-            label.text = label.text.substring(1, label.text.length - 1)
-            delay(200)
-        }
-    }
-}
-```
 
 ## Gradle
 
