@@ -71,12 +71,15 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
-   * When you start an iOS run configuration, IntelliJ IDEA and Android Studio build the Kotlin framework dependency
+   
+   When you start an iOS run configuration, IntelliJ IDEA and Android Studio build the Kotlin framework dependency
      before starting the Xcode build, and set the `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable to "YES".
-     The suggested shell script checks this variable and prevents the Kotlin framework from being built a second time, from Xcode.
+     The provided shell script checks this variable and prevents the Kotlin framework from being built a second time from Xcode.
      
-     When you launch an iOS run configuration for a project that does not support this,
+   > When you launch an iOS run configuration for a project that does not support this,
      the IDE suggests a fix to set up the build guard.
+   >
+   {style="note"}
 
    ![Add the script](xcode-run-script-phase-2.png){width=700}
 
