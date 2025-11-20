@@ -5,12 +5,13 @@ to other platforms besides Android.
 As shown on the [Android Developers website](https://developer.android.com/kotlin/multiplatform),
 many Jetpack libraries (like `androidx.annotation`) are published by the Android team fully multiplatform
 and can be used in KMP projects as is.
-Others, namely, Compose itself, Navigation, Lifecycle, and ViewModel — need additional support to work in common code.
+Others, namely, Compose itself, Navigation, Lifecycle, and ViewModel, need additional support to work in common code.
 
 The Compose Multiplatform team at JetBrains produces artifacts for such libraries for platforms besides Android,
 and then publishes them all together with original Android artifacts under a single group ID.
-So when you add this single multiplatform dependency to your common source set,
-the Android distribution of your app uses the Android artifact while distributions for other targets use the additional platform-specific artifacts.
+This way, when you add such a multiplatform dependency to your common source set,
+the Android distribution of your app uses the Android artifact while distributions for other targets use artifacts
+built for other platforms.
 
 Here's the outline of the process:
 
@@ -23,10 +24,10 @@ So, for example, "Navigation artifacts for iOS" refers to the collection of the 
 * `org.jetbrains.androidx.navigation.navigation-runtime-iossimulatorarm64`
 * and so on.
 
-All of them, together with the artifacts for other platforms and a reference to the original Android library (`androidx.navigation.navigation-compose`),
+All of these artifacts, together with the artifacts for other platforms and a reference to the original Android library (`androidx.navigation.navigation-compose`),
 are published as a group and accessible through the unifying 
 `org.jetbrains.androidx.navigation.navigation-compose` dependency.
-Compose Multiplatform Gradle plugin handles the mapping of platform-specific artifacts to distributions.
+The Compose Multiplatform Gradle plugin handles the mapping of platform-specific artifacts to distributions.
 
 This way, the Android app produced by a KMP project with that dependency uses the original Android Navigation library,
 while the iOS app uses the corresponding iOS library built by JetBrains.
@@ -35,7 +36,7 @@ while the iOS app uses the corresponding iOS library built by JetBrains.
 
 Among the base Compose libraries:
 
-* The fundamental `androidx.compose.runtime` is fully multiplatform by itself.
+* The fundamental `androidx.compose.runtime` is fully multiplatform.
   ([Previously used](whats-new-compose-190.md#multiplatform-targets-in-androidx-compose-runtime-runtime)
   `org.jetbrains.compose.runtime` artifact now serves as an alias.)
 * Compose Multiplatform implements:
