@@ -199,7 +199,7 @@ The default run configuration for a desktop app is created as **composeApp [desk
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
-To create a desktop configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include **:composeApp:run** in "Run".
+To create a desktop configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include `:composeApp:run` in "Run".
 ![Android configuration](desktop_config.png){width=300}
 
 With this configuration you can run the JVM desktop app:
@@ -213,7 +213,7 @@ The default run configuration for a web app is created as **composeApp [wasmJs]*
 
 ![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
-To create a Wen run configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include **:composeApp:wasmJsBrowserDevelopmentRun** in "Run".
+To create a Wen run configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include `:composeApp:wasmJsBrowserDevelopmentRun` in "Run".
 ![Android configuration](web_config.png){width=300}
 
 When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
