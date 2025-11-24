@@ -59,7 +59,7 @@ the desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have
 ### Autosizing interop views
 
 Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS.
-These elements can now adapt their layout based on their content,
+These elements can now adapt their layout to their content,
 eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
 
 * On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
