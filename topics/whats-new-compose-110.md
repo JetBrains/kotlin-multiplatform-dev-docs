@@ -56,7 +56,51 @@ You can now use the `androidx.compose.ui.tooling.preview.Preview` annotation for
 All other annotations, such as `org.jetbrains.compose.ui.tooling.preview.Preview` and 
 the desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have been deprecated.
 
+### New context menu enabled by default
+
+Starting with Compose Multiplatform 1.10.0, 
+the [new API for custom context menus](whats-new-compose-190.md#new-context-menu-api) is enabled by default for all projects.
+
+If you encounter any issues while using the new context menu API, 
+you can temporarily revert to the previous implementation by adding the following setting at the application entry point:
+
+```kotlin
+ComposeFoundationFlags.isNewContextMenuEnabled = false
+```
+
+Please report any issues to our [issue tracker](https://youtrack.jetbrains.com/issues/CMP).
+
+### Autosizing interop views
+
+Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS.
+These elements can now adapt their layout based on their content,
+eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
+
+* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
+* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size).
+  This enables proper wrapping of SwiftUI views (via `UIHostingController`)
+  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
+
+### Stable popup and dialog properties
+
+The following properties in `DialogProperties` have been promoted to stable and are no longer experimental: 
+`usePlatformInsets`, `useSoftwareKeyboardInset`, and `scrimColor`.
+
+Similarly, the `usePlatformDefaultWidth` and `usePlatformInsets` properties 
+in `PopupProperties` have also been promoted to stable.
+
+The deprecation level for `Popup` overloads without the `PopupProperties` parameter 
+has been changed to `ERROR` to enforce the use of the updated API.
+
+### Skia updated to Milestone 138
+
+The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
+
+The previous version of Skia used was Milestone 132.
+You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/chrome/m138/RELEASE_NOTES.md).
+
 ### Support for Navigation 3
+<primary-label ref="Experimental"/>
 
 Navigation 3 is a new navigation library designed to work with Compose. 
 With Navigation 3, you have full control over your back stack, 
@@ -84,24 +128,6 @@ Some platform-specific implementation details:
 * Support for [browser history navigation](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps) and using a destination in the address bar will not be extended 
   to Navigation 3 with Compose Multiplatform 1.10. 
   This has been postponed until a later version of the multiplatform library.
-
-### Autosizing interop views
-
-Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS. 
-These elements can now adapt their layout based on their content, 
-eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
-
-* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
-* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size). 
-  This enables proper wrapping of SwiftUI views (via `UIHostingController`) 
-  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
-
-### Skia updated to Milestone 138
-
-The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
-
-The previous version of Skia used was Milestone 132. 
-You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/chrome/m138/RELEASE_NOTES.md).
 
 ## iOS
 
