@@ -73,7 +73,7 @@ fun App(
     }
 }
 
-//jsMain source set
+//wasmJsMain source set
 @OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalBrowserHistoryApi
 fun main() {
@@ -85,7 +85,7 @@ fun main() {
     }
 }
 
-//wasmJsMain source set
+//jsMain source set
 @OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalBrowserHistoryApi
 fun main() {
