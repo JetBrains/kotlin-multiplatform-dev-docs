@@ -56,20 +56,6 @@ You can now use the `androidx.compose.ui.tooling.preview.Preview` annotation for
 All other annotations, such as `org.jetbrains.compose.ui.tooling.preview.Preview` and 
 the desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have been deprecated.
 
-### New context menu enabled by default
-
-Starting with Compose Multiplatform 1.10.0, 
-the [new API for custom context menus](whats-new-compose-190.md#new-context-menu-api) is enabled by default for all projects.
-
-If you encounter any issues while using the new context menu API, 
-you can temporarily revert to the previous implementation by adding the following setting at the application entry point:
-
-```kotlin
-ComposeFoundationFlags.isNewContextMenuEnabled = false
-```
-
-Please report any issues to our [issue tracker](https://youtrack.jetbrains.com/issues/CMP).
-
 ### Autosizing interop views
 
 Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS.
@@ -81,7 +67,7 @@ eliminating the need to calculate exact sizes manually and specify fixed dimensi
   This enables proper wrapping of SwiftUI views (via `UIHostingController`)
   and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
 
-### Stable popup and dialog properties
+### Stable `Popup` and `Dialog` properties
 
 The following properties in `DialogProperties` have been promoted to stable and are no longer experimental: 
 `usePlatformInsets`, `useSoftwareKeyboardInset`, and `scrimColor`.
@@ -200,5 +186,5 @@ If an older version of Kotlin is detected, the hot reload functionality will be 
 Compose Multiplatform introduces support for version 9.0.0 of the Android Gradle Plugin (AGP).
 For compatibility with the new AGP version, make sure you upgrade to Compose Multiplatform 1.9.3 or 1.10.0.
 
-To make the update process smoother in the long term, 
-we recommend changing your project structure to isolate AGP usage to a dedicated Android module.
+To make the update process smoother in the long term,
+we recommend changing your project structure to use a dedicated Android application module.
