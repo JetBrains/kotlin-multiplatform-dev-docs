@@ -56,7 +56,37 @@ You can now use the `androidx.compose.ui.tooling.preview.Preview` annotation for
 All other annotations, such as `org.jetbrains.compose.ui.tooling.preview.Preview` and 
 the desktop-specific `androidx.compose.desktop.ui.tooling.preview.Preview`, have been deprecated.
 
+### Autosizing interop views
+
+Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS.
+These elements can now adapt their layout to their content,
+eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
+
+* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
+* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size).
+  This enables proper wrapping of SwiftUI views (via `UIHostingController`)
+  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
+
+### Stable `Popup` and `Dialog` properties
+
+The following properties in `DialogProperties` have been promoted to stable and are no longer experimental: 
+`usePlatformInsets`, `useSoftwareKeyboardInset`, and `scrimColor`.
+
+Similarly, the `usePlatformDefaultWidth` and `usePlatformInsets` properties 
+in `PopupProperties` have also been promoted to stable.
+
+The deprecation level for `Popup` overloads without the `PopupProperties` parameter 
+has been changed to `ERROR` to enforce the use of the updated API.
+
+### Skia updated to Milestone 138
+
+The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
+
+The previous version of Skia used was Milestone 132.
+You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/chrome/m138/RELEASE_NOTES.md).
+
 ### Support for Navigation 3
+<primary-label ref="Experimental"/>
 
 Navigation 3 is a new navigation library designed to work with Compose. 
 With Navigation 3, you have full control over your back stack, 
@@ -84,24 +114,6 @@ Some platform-specific implementation details:
 * Support for [browser history navigation](compose-navigation-routing.md#support-for-browser-navigation-in-web-apps) and using a destination in the address bar will not be extended 
   to Navigation 3 with Compose Multiplatform 1.10. 
   This has been postponed until a later version of the multiplatform library.
-
-### Autosizing interop views
-
-Compose Multiplatform now supports automatic resizing for native interop elements on both desktop and iOS. 
-These elements can now adapt their layout based on their content, 
-eliminating the need to calculate exact sizes manually and specify fixed dimensions in advance.
-
-* On desktop, `SwingPanel` automatically adjusts its size based on the embedded component's minimum, preferred, and maximum sizes.
-* On iOS, UIKit interop views now support sizing according to the view's fitting size (intrinsic content size). 
-  This enables proper wrapping of SwiftUI views (via `UIHostingController`) 
-  and basic `UIView` subclasses that do not depend on `NSLayoutConstraints`.
-
-### Skia updated to Milestone 138
-
-The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 138.
-
-The previous version of Skia used was Milestone 132. 
-You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/chrome/m138/RELEASE_NOTES.md).
 
 ## iOS
 
@@ -174,5 +186,5 @@ If an older version of Kotlin is detected, the hot reload functionality will be 
 Compose Multiplatform introduces support for version 9.0.0 of the Android Gradle Plugin (AGP).
 For compatibility with the new AGP version, make sure you upgrade to Compose Multiplatform 1.9.3 or 1.10.0.
 
-To make the update process smoother in the long term, 
-we recommend changing your project structure to isolate AGP usage to a dedicated Android module.
+To make the update process smoother in the long term,
+we recommend changing your project structure to use a dedicated Android application module.
