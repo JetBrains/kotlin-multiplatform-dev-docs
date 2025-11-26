@@ -47,6 +47,8 @@ and the `iosApp` folder with the iOS project code and configuration.
 To extract an entry point to its own module, you need to create the module, move the code, and adjust
 configurations accordingly both for the new module and the common code module.
 
+<include from="multiplatform-project-agp-9-migration.md" element-id="android-app"/>
+
 ### Desktop JVM app
 
 #### Create and configure the desktop app module
@@ -127,7 +129,7 @@ To make the desktop app build script work:
 6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
 
-#### Move the code and run the app
+#### Move the code and run the desktop app
 
 After the configuration is complete, move the code of the desktop app to the new directory:
 
@@ -148,9 +150,11 @@ After the configuration is complete, move the code of the desktop app to the new
        * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
        * the `jvm()` target declaration inside the `kotlin {}` block.
 
-#### Web app
+### Web app
 
-Create and configure the web app module:
+#### Create and configure the web app module
+
+To create a desktop app module (`webApp`):
 
 1. Create the `webApp` directory at the root of the project.
 2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
@@ -159,9 +163,12 @@ Create and configure the web app module:
     ```kotlin
     include(":webApp")
     ```
-4. Configure the Gradle build script for the new module.
 
-    1. In the `webApp/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
+#### Configure the build script for the web app
+
+To make the desktop app build script work:
+
+1. In the `webApp/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
 
         ```kotlin
         plugins {
@@ -171,75 +178,85 @@ Create and configure the web app module:
         }
         ```
 
-    2. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
+2. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
 
-        ```kotlin
-        plugins {
-            alias(libs.plugins.kotlinMultiplatform) apply false
-            alias(libs.plugins.composeMultiplatform) apply false
-            alias(libs.plugins.composeCompiler) apply false
-            // ...
+    ```kotlin
+    plugins {
+        alias(libs.plugins.kotlinMultiplatform) apply false
+        alias(libs.plugins.composeMultiplatform) apply false
+        alias(libs.plugins.composeCompiler) apply false
+        // ...
+    }
+    ```
+
+3. Copy the JavaScript and Wasm target declarations from the `composeApp/build.gradle.kts` file into the `kotlin {}` block
+   in the `webApp/build.gradle.kts` file:
+
+    ```kotlin
+    kotlin {
+        js {
+            browser()
+            binaries.executable()
         }
-        ```
 
-    3. Copy the JavaScript and Wasm target declarations from the `composeApp/build.gradle.kts` file into the `kotlin {}` block
-       in the `webApp/build.gradle.kts` file:
-
-        ```kotlin
-        kotlin {
-            js {
-                browser()
-                binaries.executable()
-            }
-
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmJs {
-                browser()
-                binaries.executable()
-            }
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
+            browser()
+            binaries.executable()
         }
-        ```
+    }
+    ```
 
-    4. Add the necessary dependencies on other modules:
+4. Add the necessary dependencies on other modules:
 
-       ```kotlin
-       kotlin {
-           sourceSets {
-               commonMain.dependencies { 
-                   implementation(projects.sharedLogic)
-                   // Provides the necessary entry point API
-                   implementation(compose.ui)
-               }
+   ```kotlin
+   kotlin {
+       sourceSets {
+           commonMain.dependencies { 
+               implementation(projects.sharedLogic)
+               // Provides the necessary entry point API
+               implementation(compose.ui)
            }
        }
-       ```
+   }
+   ```
 
-    5. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-       editor.
+5. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   editor.
 
-5. Copy the entire `composeApp/src/webMain` directory into the `webApp/src` directory.
+#### Move the code and run the web app
+
+After the configuration is complete, move the code of the web app to the new directory:
+
+1. Move the entire `composeApp/src/webMain` directory into the `webApp/src` directory.
    If everything is configured correctly, the imports in the `webApp/src/webMain/.../main.kt` file are working
    and the code is compiling.
-6. In the `webApp/src/webMain/resources/index.html` file update the script name: from `composeApp.js` to `webApp.js`.
-7. Run your web app: change and rename the **composeApp [wasmJs]** and **composeApp [js]** run configurations or add similar ones.
-   In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:webApp`.
-8. Start the run configurations to make sure that the app runs as expected.
-9. If everything works correctly:
+2. In the `webApp/src/webMain/resources/index.html` file update the script name: from `composeApp.js` to `webApp.js`.
+3. To run your web app, modify the **composeApp [wasmJs]** run configuration:
+    1. In the run configuration dropdown, select **Edit Configurations**.
+    2. Find the **composeApp [wasmJs]** configuration in the **Gradle** category.
+    3. In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:webApp`.
+4. Repeat for **composeApp [js]** to be able to run the JavaScript version, too.
+5. Start the run configurations to make sure that the app runs as expected.
+6. If everything works correctly:
     * Delete the `composeApp/src/webMain` directory.
     * In the `composeApp/build.gradle.kts` file, remove the web-related code:
         * the `webMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
         * the `js {}` and `wasmJs {}` target declarations inside the `kotlin {}` block.
 
-### Configure a shared module
+### Configure the shared module
 
 In the example app, both UI and business logic code are being shared, so it only needs a single shared module
-to hold all common code: we can simply repurpose `composeApp` as the common code module.
+to hold all common code: you can simply repurpose `composeApp` as the common code module.
 
 For an overview of other project configurations and ways of dealing with them, see our blogpost about
 the new recommended project structure TODO link
 
-The only thing you need to adjust in the Gradle configuration that is not covered by sections on app modules
-is the new Android Library Gradle plugin:
+The only thing you need to adjust in the Gradle configuration that is not related to connections with entry point modules
+is the new Android Library Gradle plugin.
+The new plugin is built specifically for multiplatform projects and is required to use AGP 9 and newer.
+
+Here are the necessary changes:
 
 1. In `gradle/libs.versions.toml`,
    add the Android-KMP library plugin to your version catalog:
@@ -595,31 +612,6 @@ In this example, you can leave it inside `shared`:
        If you change the framework name in the `shared/build.gradle.kts` file, you need to change the import directive accordingly.
 
 3. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
-
-### Update the Android Gradle plugin version
-
-When all code is working with the new configuration:
-
-1. If you followed the instructions, you have working run configurations for the new app modules.
-      You can delete obsolete run configurations associated with the `composeApp` module.
-2. In the `gradle/libs.versions.toml` file, update the AGP version to a 9.* version, for example:
-
-    ```text
-    [versions]
-    agp = "9.0.0"
-    ```
-3. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9](https://developer.android.com/build/migrate-to-built-in-kotlin)
-   and applying the Kotlin Android plugin is no longer necessary:
-
-    ```kotlin
-    alias(libs.plugins.kotlinAndroid)
-    ```
-4. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-   build script editor.
-
-5. That your apps build and run with the new AGP version.
-
-Congratulations! You have modernized and optimized the structure of your project.
 
 ## What's next
 
