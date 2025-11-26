@@ -1,303 +1,152 @@
-[//]: # (title: Recommended project structure with AGP 9 and newer)
+[//]: # (title: Recommended Kotlin Multiplatform project structure)
 <show-structure for="chapter,procedure" depth="3"/>
 
-If you have a Kotlin Multiplatform project targeting Android,
-you need to migrate to using the new
-[Android-KMP library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
-to be able to use Android Gradle plugin version 9.0.0 or newer.
+The overviews of [basic](multiplatform-discover-project.md) and [advanced](multiplatform-advanced-project-structure.md)
+project structure concepts should give you and understanding of source sets and dependency management.
+What about modules which organize the source sets and rely on the dependencies?
 
-> AGP 9 is supported in IntelliJ IDEA starting with version 2025.3 TODO
-> and Android Studio starting with Otter 2025.2.3 TODO
+> The article talks specifically about KMP projects.
+> For a general understanding of modularization decision-making, see the [Android introduction to modularization](https://developer.android.com/topic/modularization).
+
+## Optimal module structure
+
+The optimal module structure can vary depending on your goals and necessary targets.
+You can analyze the output of the [KMP IDE plugin wizard]() with different configurations and sets of targets
+to see how we organize projects by default.
+
+The general approach can be outlined as follows:
+* The entry points for your apps should be contained in separate modules, each of which depends on necessary shared code modules.
+* The shared code is generally divided into business logic and UI, and the strategy is to avoid unnecessary dependencies:
+  * If all of your apps produced by the KMP project are using shared UI code as well as shared business logic,
+    a single `shared` module for all of your shared code can be sufficient.
+  * If UI for any one of your apps is written using native code (for example, you implemented the iOS UI in pure Swift),
+    it makes sense to separate UI code from business logic to avoid Compose Multiplatform dependencies where they are not needed.
+    So you can have a `sharedLogic` and a `sharedUI` module, and add them as dependencies to entry point modules as needed.
+* If your project includes server code which should share logic with client apps, the recommended way to structure it is:
+  * An `app` folder with entry point modules and client common code modules organized as described above.
+  * A `server` module with the server-specific code.
+  * A `core` module for code shared between the server and clients, such as models and validation.
+
+If your project uses older structure, with app entry points and shared code contained in a single module,
+you can follow guides below to extract the entry points into separate modules.
+
+> It is mandatory to separate your Android app entry points from common code if you intend to use Android Gradle Plugin 9 or newer.
+> See our [AGP 9 migration article](multiplatform-project-agp-9-migration.md) for details.
 > 
 {style="note"}
 
-## Mandatory changes
+## Creating separate modules for app entry points
 
-### Migrate to the Android-KMP library plugin
+The example project that we will use to illustrate for a transition to the recommended structure is an older Compose Multiplatform sample
+which can be found in the [old-project-structure](https://github.com/kotlin-hands-on/get-started-with-cm/tree/old-project-structure)
+branch of the sample repository.
 
-Previously, to configure an Android target in a multiplatform module you needed to use
-the KMP plugin (`org.jetbrains.kotlin.multiplatform`)
-together with either
-the Android application (`com.android.application`) or the Android library (`com.android.library`) plugin.
+The example consists of a single Gradle module (`composeApp`) that contains all the shared code and KMP entry points,
+and the `iosApp` folder with the iOS project code and configuration.
 
-With AGP 9.0, these plugins stop being compatible with KMP,
-and you need to migrate to the new Android-KMP library plugin built specifically for KMP.
+To extract an entry point to its own module, you need to create the module, move the code, and adjust
+configurations accordingly both for the new module and the common code module.
 
-> To make your project work with AGP 9.0 in the short term, you can manually enable the deprecated APIs.
-> To do this, in the `gradle.properties` file of your project, add the following property:
-> `android.enableLegacyVariantApi=true`.
->
-> The legacy APIs are going to be [removed completely in AGP 10](https://developer.android.com/build/releases/gradle-plugin-roadmap#agp-10),
-> which is likely to come out in the second half of 2026.
-> Make sure you finish the migration before that!
->
-{style="note"}
+### Desktop JVM app
 
-For library migration steps, see the [guide in Android documentation](https://developer.android.com/kotlin/multiplatform/plugin#migrate).
+#### Create and configure the desktop app module
 
-To migrate an app project, you need to have the Android entry point and the shared code in properly configured separate modules.
-There is a [general tutorial for migrating a sample app](#step-by-step-migration-of-a-sample-app),
-but the mandatory parts are:
-* [Create and configure a shared module](#configure-a-shared-module)
-* [Create and configure an Android app module](#android-app)
-
-### Migrate to built-in Kotlin
-
-AGP 9.0 brings built-in Kotlin support that is enabled by default,
-so you don't need to enable the Kotlin Android Gradle plugin (`org.jetbrains.kotlin.android`) explicitly anymore.
-
-If you're using [kapt](https://kotlinlang.org/docs/kapt.html) or custom `kotlinOptions`,
-you may need to perform additional migration steps.
-Follow the [migration guide](https://developer.android.com/build/migrate-to-built-in-kotlin)
-to make sure you don't miss anything.
-
-## Recommended changes
-
-Along with updating your Gradle configuration, we recommend to review the structure of your KMP project.
-The general approach is to extract shared code in its own module, and create a separate module for each platform-specific
-entry point.
-
-Our 
-
-In terms of [Android modularization approach](https://developer.android.com/topic/modularization),
-we recommend creating separate **app modules** for platform-specific entry points
-(so, a separate module for Android, web, and JVM)
-and **feature modules** for shared code.
-
-<!-- TODO link to the blog post explaining the changes -->
-
-## Step by step migration of a sample app
-
-The example project that you will prepare for the migration is a Compose Multiplatform app that is the result of the
-[](compose-multiplatform-new-project.md)
-tutorial. TODO link to a branch with this state
-The example consists of a single Gradle module (`composeApp`) that contains all the shared code and KMP entry
-points,
-and the `iosApp` project with the iOS-specific code and configuration.
-
-To prepare for the AGP 9 migration and to create a generally more flexible and scalable project structure,
-you will:
-
-* Create feature modules for shared UI and business logic code.
-* Create app modules with entry points for each platform.
-
-If you are looking to only implement changes mandatory for the AGP 9 migration,
-you required steps are:
-
-* [Create and configure a shared module](#configure-a-shared-module)
-* [Create and configure an Android app module](#android-app)
-
-<!-- When the new structure is implemented in the wizard, this is going to change: 
-     following the tutorial will bring you to the new structure already.
-     So we need to save a sample of "how things used to be" and link to it when the wizard update hits.-->
-
-### Create modules for the Android entry point and other app targets
-
-The only entry point that needs isolating to enable AGP 9 migration is the Android app.
-However, if you have multiple targets enabled, it is more straightforward and transparent to keep all the entry points
-on the same level of the project hierarchy.
-So below we provide instructions for all targets supported in the sample app. 
-
-#### Android app
-
-Create and configure a new entry point module for the Android app:
-
-1. Create the `androidApp` directory at the root of the project.
-2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
-3. Add the new module to project settings in the `settings.gradle.kts` file by adding this line at the end of the file:
-
-    ```kotlin
-    include(":androidApp")
-    ```
-4. Configure the Gradle build script for the new module.
-
-    1. In the `gradle/libs.versions.toml` file, add the Kotlin Android Gradle plugin to your version catalog:
-       TODO this needs to be removed before actually building with AGP 9
-
-        ```text
-        [plugins]
-        kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-        ```
-
-    2. In the `androidApp/build.gradle.kts` file, specify the plugins necessary for the Android app module:
-
-        ```kotlin
-        plugins {
-           alias(libs.plugins.kotlinAndroid)
-           alias(libs.plugins.androidApplication)
-           alias(libs.plugins.composeMultiplatform)
-           alias(libs.plugins.composeCompiler)
-        }
-        ```
-
-    3. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
-
-        ```kotlin
-        plugins {
-            alias(libs.plugins.kotlinAndroid) apply false
-            alias(libs.plugins.androidApplication) apply false
-            alias(libs.plugins.composeMultiplatform) apply false
-            alias(libs.plugins.composeCompiler) apply false
-            // ...
-        }
-        ```
-
-    4. To add the necessary dependencies, copy existing dependencies from the `androidMain.dependencies {}` block
-       of the `composeApp` build script, and add the dependency on the `composeApp` itself. 
-       In this example the end result should look like this:
-
-       ```kotlin
-       kotlin {
-           dependencies { 
-               implementation(projects.composeApp)
-               implementation(libs.androidx.activity.compose)
-               implementation(compose.uiToolingPreview)
-           }
-       }
-       ```
-
-    5. Copy the entire `android {}` block with Android-specific configuration from the `composeApp/build.gradle.kts`
-       file to the `androidApp/build.gradle.kts` file.
-    6. Change the configuration of the `composeApp` module from an Android application to an Android library,
-       since that's what it effectively becomes. In `composeApp/build.gradle.kts`:
-       * Change the reference to the Gradle plugin:
-
-           <compare type="top-bottom">
-              <code-block lang="kotlin">
-                  alias(libs.plugins.androidApplication)
-              </code-block>
-              <code-block lang="kotlin">
-                  alias(libs.plugins.androidLibrary)
-              </code-block>
-           </compare>
-       
-        * Remove the application property lines from the `android.defaultConfig {}` block:
-
-          <compare type="top-bottom">
-              <code-block lang="kotlin">
-                  defaultConfig {
-                      applicationId = "com.jetbrains.demo"
-                      minSdk = libs.versions.android.minSdk.get().toInt()
-                      targetSdk = libs.versions.android.targetSdk.get().toInt()
-                      versionCode = 1
-                      versionName = "1.0"
-                  }
-              </code-block>
-              <code-block lang="kotlin">
-                  defaultConfig {
-                      minSdk = libs.versions.android.minSdk.get().toInt()
-                  }
-              </code-block>
-           </compare>
-       
-    7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-       editor.
-
-5. Copy the `composeApp/src/androidMain` directory into the `androidApp/src/` directory.
-6. Rename the `androidApp/src/androidMain` directory to `main`.
-7. If everything is configured correctly, the imports in the `androidApp/src/main/.../MainActivity.kt` file are working
-   and the code is compiling.
-8. To run your Android app, modify the **composeApp** Android run configuration or add a similar one.
-   In the **General | Module** field, change `demo.composeApp` to `demo.androidApp`.
-9. Start the run configuration to make sure that the app runs as expected.
-10. If everything works correctly:
-    * Delete the `composeApp/src/androidMain` directory.
-    * In the `composeApp/build.gradle.kts` file, remove the `kotlin.sourceSets.androidMain.dependencies {}` block.
-
-You have extracted the Android entry point to a separate module!
-
-If you don't have any other entry points, or want to keep changes to a minimum to upgrade to AGP 9,
-jump straight to [configuring a shared module](#configure-a-shared-module).
-
-#### Desktop JVM app
-
-Create and configure the JVM desktop app module:
+To create a desktop app module (`desktopApp`):
 
 1. Create the `desktopApp` directory at the root of the project.
 2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
-3. Add the new module to project settings in the `settings.gradle.kts` file by adding this line at the end of the file:
+3. Add the new module to project settings in the `settings.gradle.kts` file by adding this line:
 
     ```kotlin
     include(":desktopApp")
     ```
-4. Configure the Gradle build script for the new module.
 
-    1. In the `gradle/libs.versions.toml` file, add the Kotlin JVM Gradle plugin to your version catalog:
+#### Configure the build script for the desktop app
 
-        ```text
-        [plugins]
-        kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-        ```
+To make the desktop app build script work:
 
-    2. In the `desktopApp/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
+1. In the `gradle/libs.versions.toml` file, add the Kotlin JVM Gradle plugin to your version catalog:
 
-        ```kotlin
-        plugins {
-           alias(libs.plugins.kotlinJvm)
-           alias(libs.plugins.composeMultiplatform)
-           alias(libs.plugins.composeCompiler)
-        }
-        ```
+    ```text
+    [plugins]
+    kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+    ```
 
-    3. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
+2. In the `desktopApp/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
 
-        ```kotlin
-        plugins {
-            alias(libs.plugins.kotlinJvm) apply false
-            alias(libs.plugins.composeMultiplatform) apply false
-            alias(libs.plugins.composeCompiler) apply false
-            // ...
-        }
-        ```
+    ```kotlin
+    plugins {
+       alias(libs.plugins.kotlinJvm)
+       alias(libs.plugins.composeMultiplatform)
+       alias(libs.plugins.composeCompiler)
+    }
+    ```
 
-    4. To add the necessary dependencies on other modules, copy existing dependencies from the
-       `commonMain.dependencies {}` and `jvmMain.dependencies {}` blocks
-       of the `composeApp` build script. In this example the end result should look like this:
+3. Make sure all of these plugins are mentioned in the **root** `build.gradle.kts` file:
 
-       ```kotlin
-       kotlin {
-           dependencies { 
-               implementation(projects.sharedLogic)
-               implementation(projects.sharedUI)
-               implementation(compose.desktop.currentOs)
-               implementation(libs.kotlinx.coroutinesSwing)
-           }
+    ```kotlin
+    plugins {
+        alias(libs.plugins.kotlinJvm) apply false
+        alias(libs.plugins.composeMultiplatform) apply false
+        alias(libs.plugins.composeCompiler) apply false
+        // ...
+    }
+    ```
+
+4. To add the necessary dependencies on other modules, copy existing dependencies from the
+   `commonMain.dependencies {}` and `jvmMain.dependencies {}` blocks
+   of the `composeApp` build script. In this example the end result should look like this:
+
+   ```kotlin
+   kotlin {
+       dependencies { 
+           implementation(projects.sharedLogic)
+           implementation(projects.sharedUI)
+           implementation(compose.desktop.currentOs)
+           implementation(libs.kotlinx.coroutinesSwing)
        }
-       ```
+   }
+   ```
 
-    5. Copy the `compose.desktop {}` block with desktop-specific configuration from the `composeApp/build.gradle.kts`
-       file to the `desktopApp/build.gradle.kts` file:
+5. Copy the `compose.desktop {}` block with desktop-specific configuration from the `composeApp/build.gradle.kts`
+   file to the `desktopApp/build.gradle.kts` file:
 
-        ```kotlin
-        compose.desktop {
-            application {
-                mainClass = "compose.project.demo.MainKt"
+    ```kotlin
+    compose.desktop {
+        application {
+            mainClass = "compose.project.demo.MainKt"
 
-                nativeDistributions {
-                    targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                    packageName = "compose.project.demo"
-                    packageVersion = "1.0.0"
-                }
+            nativeDistributions {
+                targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+                packageName = "compose.project.demo"
+                packageVersion = "1.0.0"
             }
         }
-        ```
-    6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
-       editor.
+    }
+    ```
+6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   editor.
 
-5. Move the code: In the `desktopApp/src` directory, create a new `main` directory.
-6. Copy the `composeApp/src/jvmMain/kotlin` directory into the `desktopApp/src/main/` directory:
+#### Move the code and run the app
+
+After the configuration is complete, move the code of the desktop app to the new directory:
+
+1. In the `desktopApp/src` directory, create a new `main` directory.
+2. Move the `composeApp/src/jvmMain/kotlin` directory into the `desktopApp/src/main/` directory:
    It's important that the package coordinates are aligned with the `compose.desktop {}` configuration.
-7. If everything is configured correctly, the imports in the `desktopApp/src/main/.../main.kt` file are working
+3. If everything is configured correctly, the imports in the `desktopApp/src/main/.../main.kt` file are working
    and the code is compiling.
-8. To run your desktop app, modify and rename the **composeApp [jvm]** run configuration or add a similar one.
-   In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:desktopApp`.
-9. Start the run configuration to make sure that the app runs as expected.
-10. If everything works correctly:
-    * Delete the `composeApp/src/jvmMain` directory.
-    * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
-        * the `compose.desktop {}` block,
-        * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
-        * the `jvm()` target declaration inside the `kotlin {}` block.
+4. To run your desktop app, modify the **composeApp [jvm]** run configuration:
+   1. In the run configuration dropdown, select **Edit Configurations**.
+   2. Find the **composeApp [jvm]** configuration in the **Gradle** category.
+   3. In the **Gradle project** field, change `ComposeDemo:composeApp` to `ComposeDemo:desktopApp`.
+5. Start the updated configuration to make sure that the app runs as expected.
+6. If everything works correctly:
+   * Delete the `composeApp/src/jvmMain` directory.
+   * In the `composeApp/build.gradle.kts` file, remove the desktop-related code:
+       * the `compose.desktop {}` block,
+       * the `jvmMain.dependencies {}` block inside the Kotlin `sourceSets {}` block,
+       * the `jvm()` target declaration inside the `kotlin {}` block.
 
 #### Web app
 
