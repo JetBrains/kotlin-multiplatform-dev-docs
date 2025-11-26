@@ -1,7 +1,5 @@
 [//]: # (title: Compose Hot Reload)
 
-<primary-label ref="beta"/>
-
 [Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
 
 Compose Hot Reload is currently available only if your multiplatform project includes a desktop target
