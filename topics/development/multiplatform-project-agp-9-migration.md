@@ -40,7 +40,7 @@ For library migration steps, see the [guide in Android documentation](https://de
 To migrate an Android app project, you need to have the Android entry point and the shared code in properly configured separate modules.
 Below is a general tutorial for migrating a sample app, where you can see:
 * [How to extract the Android app entry point into a separate module](#android-app)
-* [How to update the configuration of a shared module](#configure-a-shared-module)
+* [How to update the configuration of a shared module](#configure-the-shared-module-to-use-the-android-kmp-library-plugin)
 
 ## Migration of a sample app
 
