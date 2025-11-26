@@ -69,6 +69,7 @@ To use the `kotlinx-datetime` library:
 1. Open the `composeApp/src/commonMain/kotlin/App.kt` file and add the following function which returns a string containing the current date:
 
    ```kotlin
+   @OptIn(ExperimentalTime::class)
    fun todaysDate(): String {
        fun LocalDateTime.format() = toString().substringBefore('T')
 
@@ -77,8 +78,8 @@ To use the `kotlinx-datetime` library:
        return now.toLocalDateTime(zone).format()
    }
    ```
-
-2. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
+2. Add the imports that are suggested by the IDE. Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
+3. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
    
     ```kotlin
     @Composable
@@ -113,7 +114,7 @@ To use the `kotlinx-datetime` library:
     }
     ```
 
-3. Follow the IDE's suggestions to import the missing dependencies.
+4. Follow the IDE's suggestions to import the missing dependencies.
    Make sure to import all the missing dependencies for the `todaysDate()` function from the updated packages, and
    opt in when prompted by the IDE.
 
@@ -135,12 +136,6 @@ using the same run configurations for Android, iOS, desktop, and web:
         <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="400"/>
     </tab>
 </tabs>
-
-<!--
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage1).
->
-{style="tip"}
--->
 
 ## Next step
 
