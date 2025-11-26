@@ -78,7 +78,7 @@ To use the `kotlinx-datetime` library:
        return now.toLocalDateTime(zone).format()
    }
    ```
-2. Add necessary imports as suggested by the IDE. Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
+2. Add the imports that are suggested by the IDE. Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
 3. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
    
     ```kotlin
