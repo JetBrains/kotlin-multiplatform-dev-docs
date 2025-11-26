@@ -118,7 +118,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    ```
 
 4.  Open the `main.kt` file and click the **Run** icon in the gutter. 
-    Select **Run 'composeApp [hotRunJvm]' with Compose Hot Reload (Beta)**.
+    Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
 
     ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
 
