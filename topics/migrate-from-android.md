@@ -22,7 +22,7 @@ using the Compose Multiplatform framework.
 To make your application work on both iOS and Android, you will:
 
 1. Learn how to evaluate your project as a candidate for a KMP migration.
-2. See how to separate modules into potentially cross-platform and platform-specific.
+2. See how to separate Gradle modules into cross-platform and platform-specific.
    For Jetcaster, we were able to make most business logic modules multiplatform,
    except for some lower-lever system calls that need to be programmed separately for iOS and Android.
 3. Follow the process of making business logic modules multiplatform one by one:
@@ -93,8 +93,7 @@ For Jetcaster, figuring out how to replace such libraries and migrating to them 
 
 So the important step here is to build a list of dependencies for the code you are hoping to share and make sure there
 are multiplatform counterparts.
-While the multiplatform ecosystem is not as vast as Java, if only because it is harder to make a multiplatfrom library,
-it is expanding rapidly.
+While the multiplatform ecosystem is not as vast as Java, it is expanding rapidly.
 Use [klibs.io](https://klibs.io) as your starting point for evaluating potential options.
 
 For Jetcaster, the list of these libraries was as follows:
@@ -120,9 +119,9 @@ Consider evaluating your modularization according to the [high cohesion, low cou
 for example, and related recommendations on module structure.
 
 With a clear structure, even if you have a lot of modules,
-you should be able to migrate modules to KMP individually and therefore smoother than going through a sweeping rewrite.
+you should be able to migrate them to KMP individually, which should be smoother than going through a sweeping rewrite.
 
-### Migrate to Compose
+### Migrate from Views to Jetpack Compose
 
 Kotlin Multiplatform offers Compose Multiplatform as means to create cross-platform UI code.
 But to easily transition to Compose Multiplatform your UI code should already be written using Compose — if you are using Views,
@@ -140,7 +139,7 @@ After the initial preparations and evaluations are done, the general process is:
 
 1. Transition your business logic to KMP.
    1. Pick a module with the least number of your project modules depending on it.
-   2. Reconfigure it and migrate to using multiplatform libraries.
+   2. Migrate it to KMP module structure and migrate to using multiplatform libraries.
    3. Pick the next module in the dependency tree and repeat.
 2. Transition your UI code to Compose Multiplatform.
    When all of your business logic is already multiplatform, transitioning to Compose Multiplatform is relatively
