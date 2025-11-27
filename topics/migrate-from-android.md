@@ -8,16 +8,23 @@
    both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-This guide talks about general problems about making your Android app multiplatform,
-illustrating solutions to some of these problems with an advanced Compose sample.
-You can follow the commit sequence closely, or overview general steps of a migration and dive deeper
+This guide is about migrating an Android-only app to multiplatform across the whole stack,
+from business logic to UI.
+It illustrates general challenges and solutions using an advanced Compose sample.
+You can follow the commit sequence closely, or skim through the general steps of the migration and dive deeper
 at a particular step.
 
 The starting app is [Jetcaster](https://github.com/android/compose-samples/tree/main/Jetcaster),
 a sample podcast app built for Android with Jetpack Compose.
-The sample is fully featured, showcasing resource management, network access, and navigation,
-as well as the latest Material Expressive components that you can make cross-platform
-using the Compose Multiplatform framework.
+The sample is a fully featured app that relies on:
+* multiple modules,
+* Android resource management,
+* network and database access,
+* Compose Navigation.
+* latest Material Expressive components.
+
+All of these features can be adapted into a cross-platform app with the help of Kotlin Multiplatform and
+the Compose Multiplatform framework.
 
 To make your application work on both iOS and Android, you will:
 
@@ -70,17 +77,22 @@ But this is a useful list to evaluate older or complex projects:
 1. [Convert or isolate Java code](#convert-or-isolate-java-code)
 2. [Check your Android/JVM-only dependencies](#check-your-android-jvm-only-dependencies)
 3. [Catch up with modularization technical debt](#catch-up-with-modularization-technical-debt)
-4. [Migrate to Compose](#migrate-to-compose)
-
-What can you do in advance to make these steps smoother?
+4. [Migrate to Compose](#migrate-from-views-to-jetpack-compose)
 
 ### Convert or isolate Java code
 
+In the original Android Jetcaster example, there are Java-only `Objects.hash()` and `Uri.encode()` calls,
+as well as a lot of usages of the `java.time` package.
+
 While you can call Java from Kotlin and vice versa,
-the `commonMain` source set, that is the actual shared code part of a Kotlin Multiplatform module, cannot contain Java code.
+the `commonMain` source set that is the actual shared code part of a Kotlin Multiplatform module, cannot contain Java code.
 Therefore, when making your Android app multiplatform you have to either isolate such code to `androidMain`
 (and rewrite it for iOS),
-or convert Java code to Kotlin.
+or convert Java code to Kotlin — ideally using multiplatform dependencies before even starting the KMP migration.
+
+Another Java-specific example that Jetcaster fortunately lacks, but is fairly popular, is RxJava,
+a Java framework for managing asynchronous operations.
+It is recommended to move to `kotlinx-coroutines` before starting a KMP migration.
 
 There are [guides on migrating to Kotlin from Java](https://kotlinlang.org/docs/java-to-kotlin-idioms-strings.html)
 as well as a [helper in IntelliJ IDEA](https://www.jetbrains.com/help/idea/get-started-with-kotlin.html#convert-java-to-kotlin)
@@ -141,6 +153,8 @@ After the initial preparations and evaluations are done, the general process is:
    1. Pick a module with the least number of your project modules depending on it.
    2. Migrate it to KMP module structure and migrate to using multiplatform libraries.
    3. Pick the next module in the dependency tree and repeat.
+   
+   {type="alpha-lower"}
 2. Transition your UI code to Compose Multiplatform.
    When all of your business logic is already multiplatform, transitioning to Compose Multiplatform is relatively
    straightforward.
@@ -222,12 +236,6 @@ The rewrite of everything time-related is collected in [this commit](https://git
 Another exclusively Java API is the `Objects.hash()` call which we had to quickly re-implement in Kotlin:
 see the [resulting commit](https://github.com/zamulla/compose-samples/pull/1/commits/cb75696694237cd6d1dff5ff8934b2452fdb35b1).
 
-> A dependency example that Jetcaster fortunately lacks, but is still fairly popular, is RxJava,
-> a Java framework for managing asynchronous operations.
-> It is recommended to move to `kotlinx-coroutines` before trying a KMP migration.
-> 
-{style="note"}
-
 ### Migrate :core:data
 
 #### Migrate to a multiplatform RSS library
@@ -249,6 +257,7 @@ See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/com
 * Most of the code changes are about creating expect/actual structure for Room and corresponding DI changes.
 * There is a new `OnlineChecker` interface that is covering for the fact that we only check for internet connectivity
   on Android. We will add an iOS implementation later on.
+  TODO check where the OnlineChecker implementation is in the commit history
 
 We can also immediately reconfigure `:core:data-testing` module to be multiplatform.
 See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/6d6af83bb15b846c83020a59948bde6aaf79e609):
@@ -280,6 +289,55 @@ Similarly to `:core:data-testing`, we can easily update the `:core:domain-testin
 When all the `:core` logic is multiplatform, you can start moving UI to common code as well.
 Once again, since we're aiming for full migration, we're not adding the iOS target yet, just making sure that the Android app
 works with Compose parts placed in common code.
+
+To visualize the logic that we'll follow, here is a simplified diagram that represents relationships between Jetcaster screens:
+
+<!-- The deep link connections and the supporting pane are commented out for the sake of brevity but may be interesting. --> 
+
+```mermaid
+---
+config:
+  labelBackground: '#ded'
+---
+flowchart LR
+  %% Nodes (plain labels, no quotes/parentheses/braces)
+  %% Start[Start]
+  Home[Home]
+  Player[Player]
+  PodcastDetailsRoute[PodcastDetails]
+  %% DeepLinkEpisodes[Deep link to player]
+  %% DeepLinkPodcasts[Deep link to podcast]
+
+  %% Home’s supporting pane represented as a subgraph
+  %% subgraph HomeSupportingPane
+    %% direction LR
+    %% HomeMain[Home main content]
+    %% PodcastDetailsPane[PodcastDetails in supporting pane]
+  %% end
+
+  %% Start and primary navigation
+  %% Start --> Home
+
+  %% Home main actions
+  Home -->|Select episode| Player
+  %% Home -->|Select podcast| PodcastDetailsPane
+
+  %% From PodcastDetails (supporting pane) actions
+  %% PodcastDetailsPane -->|Select episode| Player
+  %% PodcastDetailsPane -->|Back| Home
+
+  %% Standalone routes (deep links)
+  %% DeepLinkEpisodes --> Player
+  %% DeepLinkPodcasts --> PodcastDetailsRoute
+
+  %% From standalone PodcastDetails route
+  PodcastDetailsRoute -->|Select episode| Player
+  PodcastDetailsRoute -->|Back| Home
+
+  %% Back behavior from Player (returns to previous context)
+  Player -->|Back| Home
+  %% Player -->|Back| PodcastDetailsPane
+```
 
 To demonstrate migrating UI gradually, we will:
 1. Migrate one screen to Compose Multiplatform, which will work with the Compose theme still in the Android module.
