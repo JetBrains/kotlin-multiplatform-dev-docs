@@ -35,7 +35,7 @@ The iOS app, on the other hand, uses the corresponding iOS library built by JetB
 ## Compose packages available for multiplatform projects
 
 Among the base Compose libraries, the fundamental `androidx.compose.runtime` is fully multiplatform.
-  ([Previously used](whats-new-compose-190.md#multiplatform-targets-in-androidx-compose-runtime-runtime)
+  ([The previously used](whats-new-compose-190.md#multiplatform-targets-in-androidx-compose-runtime-runtime)
   `org.jetbrains.compose.runtime` artifact now serves as an alias.)
 In addition, Compose Multiplatform implements:
    * Multiplatform versions of `androidx.compose.ui` and `androidx.compose.foundation`,
