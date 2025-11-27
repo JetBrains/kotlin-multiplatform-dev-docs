@@ -10,8 +10,8 @@ Others, such as, Compose itself, Navigation, Lifecycle, and ViewModel, need addi
 The Compose Multiplatform team at JetBrains produces artifacts for such libraries for platforms besides Android,
 and then publishes them all together with original Android artifacts under a single group ID.
 This way, when you add such a multiplatform dependency to your common source set,
-the Android distribution of your app uses the Android artifact while distributions for other targets use artifacts
-built for other platforms.
+the Android distribution of your app uses the Android artifact.
+At the same time, distributions for other targets use artifacts built for corresponding platforms.
 
 Here's an outline of the process:
 
@@ -29,7 +29,8 @@ are published as a group. They are accessible through the unifying
 `org.jetbrains.androidx.navigation.navigation-compose` dependency.
 The Compose Multiplatform Gradle plugin handles the mapping of platform-specific artifacts to distributions.
 
-With this approach, the Android app produced by a Kotlin Multiplatform (KMP) project with that dependency uses the original Android Navigation library. The iOS app, on the other hand, uses the corresponding iOS library built by JetBrains.
+With this approach, the Android app produced by a Kotlin Multiplatform (KMP) project with that dependency uses the original Android Navigation library.
+The iOS app, on the other hand, uses the corresponding iOS library built by JetBrains.
 
 ## Compose packages available for multiplatform projects
 

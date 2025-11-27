@@ -28,8 +28,9 @@
                 <toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
             </toc-element>
 		</toc-element>
-		<toc-element topic="compose-multiplatform-and-jetpack-compose.md">
-            <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform Jetpack libraries"/>
+        <toc-element toc-title="Compose Multiplatform and Jetpack Compose">
+            <toc-element topic="compose-multiplatform-and-jetpack-compose.md" toc-title="Relationship between frameworks"/>
+            <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform artifacts for Compose libraries"/>
         </toc-element>
         <toc-element toc-title="Platform differences" topic="compose-platform-specifics.md"/>
 		<toc-element toc-title="Implementing layouts">

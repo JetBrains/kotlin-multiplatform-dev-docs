@@ -1,4 +1,4 @@
-[//]: # (title: Compose Multiplatform and Jetpack Compose)
+[//]: # (title: Relationship between Compose Multiplatform and Jetpack Compose)
 
 <web-summary>This article explains the relationship between Compose Multiplatform and Jetpack Compose. You'll learn more about the two toolkits and how they align.</web-summary>
 
