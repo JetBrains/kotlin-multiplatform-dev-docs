@@ -68,11 +68,16 @@ To get started, implement a new `App` composable:
 
    When you run your application and click the button, the hardcoded time is displayed.
 
-3. Run the application on the desktop. It works, but the window is clearly too large for the UI:
+3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md):
+   1. In the `composeApp/src/jvmMain/kotlin/main.kt` file, click the **Run** icon in the gutter.
+   2. Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
+   ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+
+   The app works, but the window is clearly too large for the UI:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-4. To fix this, in `composeApp/src/jvmMain/kotlin`, update the `main.kt` file as follows:
+4. To fix this, update the `main.kt` file as follows:
 
     ```kotlin
    fun main() = application {
@@ -94,27 +99,13 @@ To get started, implement a new `App` composable:
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
     the screen.
 
-    > To see your changes in real time in the desktop app, use [Compose Hot Reload](compose-hot-reload.md):
-    > 1. In the `main.kt` file, click the **Run** icon in the gutter.
-    > 2. Select **Run 'composeApp [hotRunJvm]' with Compose Hot Reload (Beta)**.
-    > ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
-    > 
-    > To see the app automatically update, save any modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>).
-    > 
-    > Compose Hot Reload is currently in [Beta](https://kotlinlang.org/components-stability.html#stability-levels-explained) so its functionality is subject to change.
-    >
-    {style="tip"}
-
 5. Follow the IDE's instructions to import the missing dependencies.
-6. Run the desktop application again. Its appearance should improve:
+
+6. To see the app automatically update, save any modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>). Its appearance should improve:
 
    ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
 
-<!--
-   ### Compose Hot Reload demo {initial-collapse-state="collapsed" collapsible="true"}
-
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
--->
 
 ## Support user input
 

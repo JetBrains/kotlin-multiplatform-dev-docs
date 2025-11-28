@@ -1,7 +1,5 @@
 [//]: # (title: Compose Hot Reload)
 
-<primary-label ref="beta"/>
-
 [Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
 
 Compose Hot Reload is currently available only if your multiplatform project includes a desktop target
@@ -120,7 +118,7 @@ to the project from the [Create an app with shared logic and UI](compose-multipl
    ```
 
 4.  Open the `main.kt` file and click the **Run** icon in the gutter. 
-    Select **Run 'composeApp [hotRunJvm]' with Compose Hot Reload (Beta)**.
+    Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
 
     ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
 
