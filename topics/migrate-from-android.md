@@ -44,8 +44,8 @@ To make your application work on both iOS and Android, you will:
 {style="tip"}
 
 The resulting application runs on Android, iOS, and desktop.
-The desktop target mostly serves as a [Compose Hot Reload](compose-hot-reload.md) illustration,
-but it is also functional.
+The desktop application also serves as a [Compose Hot Reload](compose-hot-reload.md) illustration,
+a way to quickly iterate on the way your UI works.
 
 ## Prepare environment for development {collapsible="true"}
 
@@ -54,7 +54,7 @@ make sure you prepare the environment:
 
 1. From the quickstart, complete the instructions to [set up your environment for Kotlin Multiplatform](quickstart.md#set-up-the-environment).
 
-   > You need a Mac with macOS to run the .
+   > You need a Mac with macOS to build and run the iOS application.
    > This is an Apple requirement. 
    >
    {style="note"}
@@ -111,6 +111,11 @@ Use [klibs.io](https://klibs.io) as your starting point for evaluating potential
 For Jetcaster, the list of these libraries was as follows:
 
 * Dagger/Hilt, the popular dependency injection solution (replaced with [Koin](https://insert-koin.io/))
+
+  Koin is a tried and true multiplatform DI framework, but if it doesn't satisfy your needs, or the required rewrite
+  is too extensive, there are other solutions.
+  The [Metro] framework is also multiplatform, and it can make the migration smoother through [interop with other annotations](https://zacsweers.github.io/metro/latest/interop/),
+  with Dagger and Kotlin Inject specifically supported.
 * Coil 2, the image loading library (which [became multiplatform with version 3](https://coil-kt.github.io/coil/upgrading_to_coil3/))
 * ROME, the RSS framework (replaced with the multiplatform [RSS Parser](https://github.com/prof18/RSS-Parser))
 * JUnit, the test framework (replaced with [kotlin-test](https://kotlinlang.org/api/core/kotlin-test/))
@@ -149,13 +154,13 @@ You can make use of Views-Compose interoperability, but as with Java code, this 
 
 After the initial preparations and evaluations are done, the general process is:
 
-1. Transition your business logic to KMP.
+1. [Transition your business logic to KMP](#migrating-the-business-logic).
    1. Pick a module with the least number of your project modules depending on it.
    2. Migrate it to KMP module structure and migrate to using multiplatform libraries.
    3. Pick the next module in the dependency tree and repeat.
    
    {type="alpha-lower"}
-2. Transition your UI code to Compose Multiplatform.
+2. [Transition your UI code to Compose Multiplatform](#migrating-to-multiplatform-ui).
    When all of your business logic is already multiplatform, transitioning to Compose Multiplatform is relatively
    straightforward.
    For Jetcaster, we show incremental migration: how to migrate screen by screen, and how to adjust the navigation graph
@@ -165,6 +170,8 @@ After the initial preparations and evaluations are done, the general process is:
 > in the very beginning since they don't interact with multiplatform code anyway and won't need to be migrated.
 > 
 {style="note"}
+
+## Migrating the business logic
 
 To choose a module to start with, it's useful to build a dependency graph of the modules in your project.
 For Jetcaster, it looked like this:
@@ -206,22 +213,37 @@ flowchart LR
 
 This suggests the following sequence, for example:
 
-1. :core:data
-2. :core:data-testing
-3. :core:designsystem
-4. :core:domain
-5. :core:domain-testing
+1. `:core:data`
+2. `:core:data-testing`
+3. `:core:designsystem`
+4. `:core:domain`
+5. `:core:domain-testing`
 
 ### Migrate to multiplatform libraries
 
 As mentioned above, there are a couple of big libraries that we can transition to in advance, before configuring multiplatform modules:
 
+* Migrate from the ROME tools parser to the multiplatform RSS Parser.
+  This requires to account for differences between the APIs, one of which is handling dates.
+  
+  > See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/c2280bb6df0da407984b8afcbeb947a071b33b84). 
 * Migrate from Dagger/Hilt to Koin 4 in the entire app, including Android-only entry point module `mobile`.
-  This requires rewriting the dependency injection logic according to the Koin approach, but code outside of `*.di` packages
-  remains largely unaffected. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/f1c757dac5efa377226f15675bb580b10ee86c6a).
+  This requires rewriting the dependency injection logic according to the Koin approach, but code outside `*.di` packages
+  remains largely unaffected.
+
+  > See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/f1c757dac5efa377226f15675bb580b10ee86c6a).
+
+  Koin is a tried and true multiplatform DI framework, but if it doesn't satisfy your needs, or the required rewrite
+  is too extensive, there are other solutions.
+  The [Metro] framework is also multiplatform, and it can make the migration smoother through [interop with other annotations](https://zacsweers.github.io/metro/latest/interop/),
+  with Dagger and Kotlin Inject specifically supported.
 * Migrate from JUnit to `kotlin-test`. This concerns all modules with tests, but thanks to `kotlin-test` compatibility,
-  there are very little changes needed to implement the migration. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/9250b1081b2557cb60aa887900fc66c3ff3a6bee).
-* Upgrade to Coil 3 from Coil 2. Again, relatively little code modified. See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
+  there are very little changes needed to implement the migration.
+  
+  > See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/9250b1081b2557cb60aa887900fc66c3ff3a6bee).
+* Upgrade to Coil 3 from Coil 2. Again, relatively little code modified.
+ 
+  > See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0a437a4d1579cf64f09e72278d1e67b9f59ebcca).
 
 ### Rewrite Java-dependent code into Kotlin
 
@@ -243,7 +265,7 @@ see the [resulting commit](https://github.com/zamulla/compose-samples/pull/1/com
 This can be done before `:core:data` is configured to be multiplatform.
 The RSS reader is not involved with other modules, so we can tie this migration to `:core:data` directly.
 
-See the [commit with the corresponding rewrite](https://github.com/zamulla/compose-samples/pull/3/commits/c2280bb6df0da407984b8afcbeb947a071b33b84).
+> See the [commit with the corresponding rewrite](https://github.com/zamulla/compose-samples/pull/3/commits/c2280bb6df0da407984b8afcbeb947a071b33b84).
 
 #### Configure :core:data and migrate database code
 
@@ -252,7 +274,8 @@ we only need to update the code to work across platforms.
 At this point we don't have the iOS app yet, but we can already write platform-specific code that will be called
 when we set up an iOS entry point.
 
-See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c4364a65a3577538a678daf989663f6ca55c9d3):
+> See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c4364a65a3577538a678daf989663f6ca55c9d3):
+
 * Note the new code structure, with `androidMain`, `commonMain`, `iosMain`, and `jvmMain` source sets.
 * Most of the code changes are about creating expect/actual structure for Room and corresponding DI changes.
 * There is a new `OnlineChecker` interface that is covering for the fact that we only check for internet connectivity
@@ -272,19 +295,20 @@ For `:core:designsystem`, we:
 2. Made the `JetcasterTypography` argument for a `MaterialExpressiveTheme` into a composable, encapsulating the calls to
    multiplatform fonts.
 
-See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/e929161aca3b0436e9bdbe4049ae59f3f14dab1a).
+> See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/e929161aca3b0436e9bdbe4049ae59f3f14dab1a).
 
 #### Configure and migrate :core:domain
 
 If all dependencies are already accounted for and migrated to multiplatform, the only thing we have to do here
-is move the code and re-configure the module.
+is move the code and reconfigure the module.
 
-See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/a2f29a8d9fb969d194cdb937913fcf6878a03d0a).
+> See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/a2f29a8d9fb969d194cdb937913fcf6878a03d0a).
 
-Similarly to `:core:data-testing`, we can easily update the `:core:domain-testing` to be multiplatform as well
-(see the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0643d8fa7ddd0458ff403084e6fc4d0dda77c18f)).
+Similarly to `:core:data-testing`, we can easily update the `:core:domain-testing` to be multiplatform as well.
 
-### Migrate to multiplatform UI
+> See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/0643d8fa7ddd0458ff403084e6fc4d0dda77c18f)).
+
+## Migrating to multiplatform UI
 
 When all the `:core` logic is multiplatform, you can start moving UI to common code as well.
 Once again, since we're aiming for full migration, we're not adding the iOS target yet, just making sure that the Android app
@@ -339,12 +363,12 @@ flowchart LR
   %% Player -->|Back| PodcastDetailsPane
 ```
 
-To demonstrate migrating UI gradually, we will:
+To demonstrate migrating UI gradually (the links lead to corresponding GitHub commits):
 1. Migrate one screen to Compose Multiplatform, which will work with the Compose theme still in the Android module.
    We start with the podcast details screen:
    1. [Update the ViewModel and the corresponding DI code](https://github.com/zamulla/compose-samples/pull/3/commits/531633fbcda8d22eac8036b0241faf17bdc8c1a6#diff-488213e3596fa0e794ba90a72423cc8d9368f4ffa4d900002ef1b52777f24e76).
    2. [Move the code and resources to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/b534de30c63bbc4214230affe14233fc832de11d)
-2. Migrate the Compose theme (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/4bbabbadf418ba9eccfc569a4db970d64cdb6459)).
+2. [Migrate the Compose theme](https://github.com/zamulla/compose-samples/pull/3/commits/4bbabbadf418ba9eccfc569a4db970d64cdb6459).
    Note the platform-specific implementations of color schemes.
 3. Migrate another screen, this time the home page:
    1. [Migrate the ViewModel](https://github.com/zamulla/compose-samples/pull/3/commits/a6af9c05903e9f88332cb1a2d14acf50defc6019).
@@ -354,10 +378,10 @@ To demonstrate migrating UI gradually, we will:
    This way `PlayerScreen` is still in the `mobile` module, and is included in navigation only for the Android entry point,
    being injected in the overarching multiplatform navigation.
 5. Finalize by moving everything that is left over:
-   * Move the rest of navigation over to common code ([resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/1ff3edaf759635ab546eb00bb445b1890389f0d1)).
-   * Migrate the last screen, `PlayerScreen`, to Compose Multiplatform ([resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/c0ac6b306d5de0314b539eaae6d560969d094418)).
+   * [Move the rest of navigation over to common code](https://github.com/zamulla/compose-samples/pull/3/commits/1ff3edaf759635ab546eb00bb445b1890389f0d1).
+   * [Migrate the last screen, `PlayerScreen`, to Compose Multiplatform](https://github.com/zamulla/compose-samples/pull/3/commits/c0ac6b306d5de0314b539eaae6d560969d094418).
 
-### Add a JVM entry point
+## Add a JVM entry point
 
 This is an optional step, but this helps:
 * show how little effort it takes to create a desktop app out of the Android app that has been made comprehensively multiplatform,
@@ -366,7 +390,7 @@ This is an optional step, but this helps:
 Since we've done everything we could to share code up to this point, adding a new entry point for a desktop JVM app is a matter
 of creating a `main()` function and integrating it with the DI framework (see [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c67078d13338648e661f353ef8bdc3bbb700e53)).
 
-### Add an iOS entry point
+## Add an iOS entry point
 
 The general sequence here is as follows:
 
