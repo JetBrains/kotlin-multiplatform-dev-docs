@@ -69,10 +69,13 @@ make sure you prepare the environment:
 
    ![Project view](switch-to-project.png){width="513"}
 
-## Checklist for a potential KMP migration
+## Checklist for a potential Kotlin Mutliplatform migration
 
-If your project is a relatively modern Android app, it is likely to already adhere to most requirements and recommendations.
-But this is a useful list to evaluate older or complex projects:
+The main hurdles for a potential KMP migration are Java and Android Views.
+If your project is already written in Kotlin and uses Jetpack Compose as the UI framework,
+it lowers the threshold considerably.
+
+Here is a general checklist of what you may need to do before migrating a project or a module:
 
 1. [Convert or isolate Java code](#convert-or-isolate-java-code)
 2. [Check your Android/JVM-only dependencies](#check-your-android-jvm-only-dependencies)
@@ -90,7 +93,7 @@ Therefore, when making your Android app multiplatform you have to either isolate
 (and rewrite it for iOS),
 or convert Java code to Kotlin — ideally using multiplatform dependencies before even starting the KMP migration.
 
-Another Java-specific example that Jetcaster fortunately lacks, but is fairly popular, is RxJava,
+Another Java-specific library that Jetcaster doesn't depend on but is fairly popular, is RxJava,
 a Java framework for managing asynchronous operations.
 It is recommended to move to `kotlinx-coroutines` before starting a KMP migration.
 
@@ -134,6 +137,14 @@ KMP allows you to migrate to a multiplatform state selectively, module by module
 But for this to work smoothly, your module structure needs to be clear and easy to manipulate.
 Consider evaluating your modularization according to the [high cohesion, low coupling principle](https://developer.android.com/topic/modularization/patterns#cohesion-coupling),
 for example, and related recommendations on module structure.
+
+General advice can be summarized as follows:
+
+* Separate distinct parts of the app's functionality into feature modules,
+  and separate feature modules from data modules (concerned with handling and providing access to data).
+* Encapsulate data and business logic of a certain domain in a module.
+  Related data types should be consolidated, but different domains should not cross-contaminate.
+* Hide implementation details and data sources of a module from outside access by using Kotlin [visibility modifiers](https://kotlinlang.org/docs/visibility-modifiers.html).
 
 With a clear structure, even if you have a lot of modules,
 you should be able to migrate them to KMP individually, which should be smoother than going through a sweeping rewrite.
@@ -221,7 +232,8 @@ This suggests the following sequence, for example:
 
 ### Migrate to multiplatform libraries
 
-As mentioned above, there are a couple of big libraries that we can transition to in advance, before configuring multiplatform modules:
+There are a couple of libraries that most of the app functionality relies on.
+We can transition their usage to be KMP-compatible before actually configuring any modules to be multiplatform:
 
 * Migrate from the ROME tools parser to the multiplatform RSS Parser.
   This requires to account for differences between the APIs, one of which is handling dates.
@@ -274,13 +286,15 @@ we only need to update the code to work across platforms.
 At this point we don't have the iOS app yet, but we can already write platform-specific code that will be called
 when we set up an iOS entry point.
 
+To switch to the multiplatform Room, we followed the [general setup guide](https://developer.android.com/kotlin/multiplatform/room)
+available in the Android documentation. 
+
 > See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7c4364a65a3577538a678daf989663f6ca55c9d3):
 
 * Note the new code structure, with `androidMain`, `commonMain`, `iosMain`, and `jvmMain` source sets.
 * Most of the code changes are about creating expect/actual structure for Room and corresponding DI changes.
 * There is a new `OnlineChecker` interface that is covering for the fact that we only check for internet connectivity
-  on Android. We will add an iOS implementation later on.
-  TODO check where the OnlineChecker implementation is in the commit history
+  on Android. Until we [add an iOS app as a target](#add-an-ios-entry-point), the online checker is going to be a stub.
 
 We can also immediately reconfigure `:core:data-testing` module to be multiplatform.
 See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/6d6af83bb15b846c83020a59948bde6aaf79e609):
@@ -367,7 +381,18 @@ To demonstrate migrating UI gradually (the links lead to corresponding GitHub co
 1. Migrate one screen to Compose Multiplatform, which will work with the Compose theme still in the Android module.
    We start with the podcast details screen:
    1. [Update the ViewModel and the corresponding DI code](https://github.com/zamulla/compose-samples/pull/3/commits/531633fbcda8d22eac8036b0241faf17bdc8c1a6#diff-488213e3596fa0e794ba90a72423cc8d9368f4ffa4d900002ef1b52777f24e76).
-   2. [Move the code and resources to commonMain](https://github.com/zamulla/compose-samples/pull/3/commits/b534de30c63bbc4214230affe14233fc832de11d)
+   2. While the multiplatform resources library is closely aligned with the Android experience, there are some
+      notable differences that need to be addressed:
+      * There are slight differences in how resource files are handled.
+        For example, the resource directory needs to be called `composeResources` instead of `res`,
+        and `@android:color` usages in Android XML files won't work and need to be replaced with color hex-codes.
+        See the documentation on [multiplatform resources](compose-multiplatform-resources.md) to learn more.
+      * The generated class with resource accessors is called `Res` (as opposed to `R` on Android).
+        After you moved and adjusted the resource files, regenerate the accessors and replace the imports for each resource
+        in your UI code.
+      
+      > See the [commit with these changes made for the Jetcaster app](https://github.com/zamulla/compose-samples/pull/3/commits/b534de30c63bbc4214230affe14233fc832de11d).
+
 2. [Migrate the Compose theme](https://github.com/zamulla/compose-samples/pull/3/commits/4bbabbadf418ba9eccfc569a4db970d64cdb6459).
    Note the platform-specific implementations of color schemes.
 3. Migrate another screen, this time the home page:
@@ -398,6 +423,7 @@ The general sequence here is as follows:
 2. Put it inside your multiplatform project.
 3. Create a `MainViewController` in `iosMain` and call it from the Swift code to connect the iOS app with the XCFramework
    produced by KMP.
+4. Add the iOS-specific implementation for the `OnlineChecker` interface.
 
 See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7a0bfa55c436a869cbabbd1718a5da02249850e2)
 which brings Jetcaster to life on iOS!
