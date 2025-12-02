@@ -12,7 +12,7 @@
 
     <!-- Compose Multiplatform -->
     <var name="org.jetbrains.compose" value="1.9.3"/>
-    <var name="org.jetbrains.compose-eap" value="1.10.0-beta02"/>
+    <var name="org.jetbrains.compose-eap" value="1.10.0-rc01"/>
     <var name="org.jetbrains.androidx.navigation" value="2.9.1"/>
     <var name="org.jetbrains.androidx.lifecycle" value="2.9.6"/>
     <var name="org.jetbrains.compose.material3.adaptive" value="1.2.0"/>
