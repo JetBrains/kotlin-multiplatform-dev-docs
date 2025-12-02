@@ -18,11 +18,6 @@ you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.
 
-> Make sure to turn on K2 mode in Android Studio to fully experience the framework,
-> as it might be turned off by default.
-> 
-{style="note"}
-
 ## Other IDEs and code editors
 
 If basic Kotlin Multiplatform support is enough for you, you can use any IDE that supports Kotlin.
