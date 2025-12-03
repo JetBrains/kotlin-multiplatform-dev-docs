@@ -87,7 +87,6 @@ To create a desktop app module (`androidApp`):
 Configure the Gradle build script for the new module:
 
 1. In the `gradle/libs.versions.toml` file, add the Kotlin Android Gradle plugin to your version catalog:
-   TODO this needs to be removed before actually building with AGP 9
 
     ```text
     [plugins]
@@ -291,7 +290,7 @@ When all code is working with the new configuration:
 
 7. That your apps build and run with the new AGP version.
 
-Congratulations! You have modernized and optimized the structure of your project.
+Congratulations! You have upgraded your project to be compatible with AGP 9.
 
 ## What's next
 
