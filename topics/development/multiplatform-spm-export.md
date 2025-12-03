@@ -271,7 +271,7 @@ For example, you have a `network` and a `database` module, which you combine in 
 
     ```kotlin
     kotlin {
-        androidTarget {
+        android {
             //...
         }
         
