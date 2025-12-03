@@ -246,11 +246,9 @@ Now migrate to the new multiplatform library plugin:
    * The `android {}` block is replaced with the `kotlin.androidLibrary {}` configuration.
    * The only root dependency (`debugImplementation(compose.uiTooling)`) conflicts with the new plugin that doesn't
    support build variants.
-6. Remove the `androidMain` dependencies, since all code was moved to the app module:
-   delete the `kotlin.sourceSets.androidMain.dependencies {}` block.
-7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
-8. Check that the Android app is running as expected.
+7. Check that the Android app is running as expected.
 
 ### Update the Android Gradle plugin version
 
