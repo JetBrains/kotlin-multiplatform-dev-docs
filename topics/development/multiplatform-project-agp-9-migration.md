@@ -243,7 +243,7 @@ Now migrate to the new multiplatform library plugin:
     }
     ```
 5. Remove both the `android {}` and the `dependencies {}` block from the `composeApp/build.gradle.kts` file.
-   * The `android {}` block is replaced with the `kotlin.androidLibrary {}` configuration,
+   * The `android {}` block is replaced with the `kotlin.androidLibrary {}` configuration.
    * The only root dependency (`debugImplementation(compose.uiTooling)`) conflicts with the new plugin that doesn't
    support build variants.
 6. Remove the `androidMain` dependencies, since all code was moved to the app module:
@@ -288,7 +288,7 @@ When all code is working with the new configuration:
 6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    build script editor.
 
-7. That your apps build and run with the new AGP version.
+7. Check that your app builds and runs with the new AGP version.
 
 Congratulations! You have upgraded your project to be compatible with AGP 9.
 
