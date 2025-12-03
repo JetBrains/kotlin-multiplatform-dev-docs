@@ -214,33 +214,6 @@ Here's the planned deprecation cycle:
 * Gradle 9.0: raise this warning to an error.
 * 2.1.20: introduce a deprecation warning when using the `withJava()` function with any version of Gradle.
 
-<anchor name="android-target-rename"/>
-### Rename of `android` target to `androidTarget`
-
-**What's changed?**
-
-We continue our efforts to make Kotlin Multiplatform more stable. An essential step in this direction is to provide first-class
-support for the Android target. In the future, this support will be provided via a separate plugin, developed by the
-Android team from Google.
-
-To open the way for the new solution, we're renaming the `android` block to `androidTarget` in the current
-Kotlin DSL. This is a temporary change that is necessary to free the short `android` name for the upcoming DSL
-from Google.
-
-**What's the best practice now?**
-
-Rename all the occurrences of the `android` block to `androidTarget`. When the new plugin for the Android target support
-is available, migrate to the DSL from Google. It will be the preferred option to work with Android in Kotlin Multiplatform
-projects.
-
-**When do the changes take effect?**
-
-Here's the planned deprecation cycle:
-
-* 1.9.0: introduce a deprecation warning when the `android` name is used in Kotlin Multiplatform projects
-* 2.1.0: raise this warning to an error
-* 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
-
 <anchor name="declaring-multiple-targets"/>
 ### Declaring several similar targets
 
@@ -373,7 +346,7 @@ Here's the planned deprecation cycle:
 * 2.1.0: report an error in such cases, except for Kotlin/JS targets; to learn more about this exception, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47038/KJS-MPP-Split-JS-target-into-JsBrowser-and-JsNode)
 
 <anchor name="deprecate-pre-hmpp-dependencies"/>
-### Deprecated support of multiplatform libraries published in the legacy mode
+### Deprecated support of multiplatform libraries published in legacy mode
 
 **What's changed?**
 
@@ -578,6 +551,24 @@ We're planning to fix this issue in Kotlin 2.0.10. You can check if any preview 
 Kotlin 2.0.10 are already available in the [Participate in the Kotlin Early Access Preview](https://kotlinlang.org/docs/eap.html) section.
 
 For more information, see the [corresponding issue in YouTrack](https://youtrack.jetbrains.com/issue/KT-68257).
+
+### Deprecated old mode of multiplatform IDE import
+
+**What's the issue?**
+
+Before Kotlin 2.3.0, we supported multiple modes of multiplatform IDE import. Now, the older mode is deprecated,
+leaving only one mode available. Previously, the old mode was enabled using the `kotlin.mpp.import.enableKgpDependencyResolution=false`
+Gradle property. Using this property now triggers a deprecation warning.
+
+**What's the best practice now?**
+
+Remove the `kotlin.mpp.import.enableKgpDependencyResolution=false` Gradle property from your `gradle.properties` file.
+
+**When do the changes take effect?**
+
+Here's the planned deprecation cycle:
+
+* 2.3.0: report a warning when the `kotlin.mpp.import.enableKgpDependencyResolution=false` Gradle property is used
 
 ## Kotlin 1.9.0−1.9.25
 
