@@ -419,16 +419,56 @@ of creating a `main()` function and integrating it with the DI framework (see [r
 
 The general sequence here is as follows:
 
-1. Create a template Xcode project for an iOS app.
-2. Put it inside your multiplatform project.
-3. Create a `MainViewController` in `iosMain` and call it from the Swift code to connect the iOS app with the XCFramework
-   produced by KMP.
-4. Add the iOS-specific implementation for the `OnlineChecker` interface.
+### Create a base iOS app using Xcode
 
-See the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7a0bfa55c436a869cbabbd1718a5da02249850e2)
-which brings Jetcaster to life on iOS!
+Create an iOS app project to serve as a KMP entry point:
 
-> The direct integration method is the most straightforward, but may not be the best for your project.
+1. In Xcode, select **File | New | Project** in the main menu.
+2. Select the **iOS** tab, then the **App** template, and click **Next**:
+
+   ![Screenshot of the Xcode "Create New Project" window with the iOS tab and the App template selected](ios-project-wizard-1.png)
+3. Name the project `iosApp` and click **Next**.
+4. As the location for your project, select the root directory of your Kotlin Multiplatform project.
+
+> The direct integration method we're using here is the most straightforward, but may not be the best for your project.
 > See the [overview of iOS integration methods](multiplatform-ios-integration-overview.md) to understand the range of alternatives.
-> 
+>
 {style="note"}
+
+### Update the iOS-specific code
+
+Connect the Kotlin code with the iOS app:
+
+1. In the `sharedUI/src/iosMain/kotlin/com/example/jetcaster/shared/` folder, create a `MainViewController.kt` file
+   with the function that will provide a `UIViewController` to the iOS app.
+2. In the `ContenView.swift` file of the iOS project, call that function to provide content to the `ContentView` structure.
+3. In the `core/data/src/iosMain` source set, add an iOS-specific implementation for the `OnlineChecker` interface.
+
+> See the iOS project and the corresponding code updates in the [resulting commit](https://github.com/zamulla/compose-samples/pull/3/commits/7a0bfa55c436a869cbabbd1718a5da02249850e2).
+
+### Run the app
+
+The Kotlin Multiplatform IDE plugin recognizes an iOS entry point and creates a new run configuration automatically.
+Run the app on the device of your choice to see that the app runs on iOS just as it does on Android
+
+If the run configuration wasn't generated automatically, you can add one manually:
+
+1. In the run configurations dropdown, select **Edit Configurations**.
+2. Click **+** and select the **Xcode Application** type.
+3. Select the target iOS project in the **Target** field and click **OK**.
+
+<!-- This commit should be broken up into these two parts exactly. -->
+
+## Final summary
+
+In this migration, we have followed general steps for turning a pure Android app into a Kotlin Multiplatform app:
+
+* Transition to multiplatform dependencies, or rewrite the code where it's not possible.
+* Transform Android modules usable on other platforms into multiplatform modules, one by one.
+* Create a shared UI module for Compose Multiplatform code, and transition to shared UI code, screen by screen.
+* Create entry points for other platforms.
+
+The sequence is not set in stone: It's possible to start with entry points for other platforms,
+and gradually build the foundation under them until they work.
+For this guide we opted for a clearer sequence of changes.
+If you have any feedback on the guide or demonstrated solutions, please create an issue on [YouTrack](https://kotl.in/issue). 
