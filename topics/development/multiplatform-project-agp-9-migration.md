@@ -1,8 +1,8 @@
 [//]: # (title: Updating multiplatform projects with Android apps to use AGP 9)
 <show-structure for="chapter,procedure" depth="3"/>
 
-With AGP 9, the Kotlin Multiplatform Gradle plugin stops being compatible with the `com.android.application`
-and the `com.android.library` plugins.
+When used along with Android Gradly Plugin 9 or newer,
+the Kotlin Multiplatform Gradle plugin stops being compatible with the `com.android.application` and the `com.android.library` plugins.
 
 To update your project:
 * If your Android entry point is currently implemented in a shared code module,
@@ -79,10 +79,12 @@ To create a desktop app module (`androidApp`):
     ```kotlin
     include(":androidApp")
     ```
+4. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   editor.
 
 #### Configure the build script for the Android app
 
-To make the Android app build script work:
+Configure the Gradle build script for the new module:
 
 1. In the `gradle/libs.versions.toml` file, add the Kotlin Android Gradle plugin to your version catalog:
    TODO this needs to be removed before actually building with AGP 9
@@ -124,14 +126,27 @@ To make the Android app build script work:
        dependencies { 
            implementation(projects.composeApp)
            implementation(libs.androidx.activity.compose)
-           implementation(compose.uiToolingPreview)
+           implementation(compose.components.uiToolingPreview)
        }
    }
    ```
 
 5. Copy the entire `android {}` block with Android-specific configuration from the `composeApp/build.gradle.kts`
    file to the `androidApp/build.gradle.kts` file.
-6. Change the configuration of the `composeApp` module from an Android application to an Android library,
+6. To avoid the `Inconsistent JVM Target Compatibility Between Java and Kotlin Tasks` Gradle error, make sure that
+   your Gradle JVM is in sync with the Java version specified in the `android.compileOptions {}` block.
+   For example, if your Gradle JVM is set to JetBrains Runtime 21, adjust the version accordingly in the `androidApp/build.gradle.kts` file:
+
+    ```kotlin
+    android {
+        // ...
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
+        }
+    }
+    ```
+7. Change the configuration of the `composeApp` module from an Android application to an Android library,
    since that's what it effectively becomes. In `composeApp/build.gradle.kts`:
    * Change the reference to the Gradle plugin:
 
@@ -163,7 +178,7 @@ To make the Android app build script work:
           </code-block>
        </compare>
    
-7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+8. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
 
 #### Move the code and run the Android app
@@ -172,22 +187,22 @@ To make the Android app build script work:
 2. Rename the `androidApp/src/androidMain` directory to `main`.
 3. If everything is configured correctly, the imports in the `androidApp/src/main/.../MainActivity.kt` file are working
    and the code is compiling.
-4. To run your Android app, modify the **composeApp** Android run configuration:
+4. When you're using IntelliJ IDEA or Android Studio, the IDE recognizes the new module and automatically creates a new
+   run configuration, **androidApp**.
+   If that doesn't happen, modify the **composeApp** Android run configuration manually:
    1. In the run configuration dropdown, select **Edit Configurations**.
    2. Find the **composeApp** configuration in the **Android** category.
    3. In the **General | Module** field, change `demo.composeApp` to `demo.androidApp`.
-5. Start the updated run configuration to make sure that the app runs as expected.
-6. If everything works correctly:
-   * Delete the `composeApp/src/androidMain` directory.
-   * In the `composeApp/build.gradle.kts` file, remove the `kotlin.sourceSets.androidMain.dependencies {}` block.
+5. Start the new run configuration to make sure that the app runs as expected.
+6. If everything works correctly, in the `composeApp/build.gradle.kts` file, remove the `kotlin.sourceSets.androidMain.dependencies {}` block.
 
 You have extracted the Android entry point to a separate module.
-Now let's update the common code module to use the new Android-KMP library plugin. 
+Now update the common code module to use the new Android-KMP library plugin. 
 
 ### Configure the shared module to use the Android-KMP library plugin
 
-To simply extract the Android entry point, we used the `com.android.library` plugin for the shared `composeApp` module.
-Now let's migrate to the new multiplatform library plugin:
+To simply extract the Android entry point, you applied the `com.android.library` plugin for the shared `composeApp` module.
+Now migrate to the new multiplatform library plugin:
 
 1. In `gradle/libs.versions.toml`,
    add the Android-KMP library plugin to your version catalog:
@@ -197,16 +212,16 @@ Now let's migrate to the new multiplatform library plugin:
     androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
     ```
 
-2. In the `composeApp/build.gradle.kts` file, add the plugin the plugins necessary for the shared UI module:
+2. In the `composeApp/build.gradle.kts` file, swap the old Android library plugin for the new one:
 
-    ```kotlin
-    plugins {
-       alias(libs.plugins.kotlinMultiplatform)
-       alias(libs.plugins.androidMultiplatformLibrary)
-       alias(libs.plugins.composeMultiplatform)
-       alias(libs.plugins.composeCompiler)
-    }
-    ```
+    <compare type="top-bottom">
+        <code-block lang="kotlin">
+            alias(libs.plugins.androidLibrary)
+        </code-block>
+        <code-block lang="kotlin">
+            alias(libs.plugins.androidMultiplatformLibrary)
+        </code-block>
+    </compare>
 3. In the root `build.gradle.kts` file, add the following line to avoid conflicts in applying the plugin:
 
     ```kotlin
@@ -228,10 +243,15 @@ Now let's migrate to the new multiplatform library plugin:
         }
     }
     ```
-5. Remove the root `android {}` block from the `composeApp/build.gradle.kts` file.
+5. Remove both the `android {}` and the `dependencies {}` block from the `composeApp/build.gradle.kts` file.
+   * The `android {}` block is replaced with the `kotlin.androidLibrary {}` configuration,
+   * The only root dependency (`debugImplementation(compose.uiTooling)`) conflicts with the new plugin that doesn't
+   support build variants.
 6. Remove the `androidMain` dependencies, since all code was moved to the app module:
    delete the `kotlin.sourceSets.androidMain.dependencies {}` block.
-7. Check that the Android app is running as expected.
+7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+   editor.
+8. Check that the Android app is running as expected.
 
 ### Update the Android Gradle plugin version
 
@@ -239,22 +259,37 @@ When all code is working with the new configuration:
 
 1. If you followed the instructions, you have working run configurations for the new app modules.
       You can delete obsolete run configurations associated with the `composeApp` module.
-2. In the `gradle/libs.versions.toml` file, update the AGP version to a 9.* version, for example:
+2. In the `gradle/libs.versions.toml` file, update the AGP to a 9.* version, for example:
 
     ```text
     [versions]
-    agp = "9.0.0-beta02"
+    agp = "9.0.0-beta03"
     ```
-3. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9](https://developer.android.com/build/migrate-to-built-in-kotlin)
+3. Up the Gradle version in the `gradle/wrapper/gradle-wrapper.properties` file to at least 9.1.0:
+
+    ```text
+    distributionUrl=https\://services.gradle.org/distributions/gradle-9.1.0-bin.zip
+    ```
+4. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9](https://developer.android.com/build/migrate-to-built-in-kotlin)
    and applying the Kotlin Android plugin is no longer necessary:
 
     ```kotlin
     alias(libs.plugins.kotlinAndroid)
     ```
-4. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+5. In the `composeApp/build.gradle.kts` file update the namespace in the `kotlin.androidLibrary {}` block
+   so that it doesn't conflict with the app's namespace, for example:
+
+    ```kotlin
+    kotlin {
+        androidLibrary {
+            namespace = "compose.project.demo.composedemolibrary"
+            // ...
+    ```
+   
+6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    build script editor.
 
-5. That your apps build and run with the new AGP version.
+7. That your apps build and run with the new AGP version.
 
 Congratulations! You have modernized and optimized the structure of your project.
 
