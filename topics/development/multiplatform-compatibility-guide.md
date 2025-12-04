@@ -47,7 +47,7 @@ This section covers incompatible changes that end their deprecation cycle and co
 
 **What's changed?**
 
-Before Kotlin 2.3.0, we provided first-class support for the Android target through the `com.android.application` and `com.android.library` plugins.
+Before Kotlin 2.3.0, we provided support for the Android target through the `com.android.application` and `com.android.library` plugins.
 This was a temporary solution while the Android team at Google developed a separate plugin tailored to Kotlin Multiplatform.
 
 Initially, we used the `android` block, but later transitioned to the `androidTarget` block so that the `android` block could be
