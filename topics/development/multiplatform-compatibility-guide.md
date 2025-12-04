@@ -570,6 +570,23 @@ Here's the planned deprecation cycle:
 
 * 2.3.0: report a warning when the `kotlin.mpp.import.enableKgpDependencyResolution=false` Gradle property is used
 
+### Remove `kotlin.mpp.resourcesResolutionStrategy` Gradle property
+
+**What's the issue?**
+
+The `kotlin.mpp.resourcesResolutionStrategy` Gradle property is removed because it isn't used.
+
+**What's the best practice now?**
+
+Remove the `kotlin.mpp.resourcesResolutionStrategy` Gradle property from your `gradle.properties` file.
+
+**When do the changes take effect?**
+
+Here's the deprecation cycle:
+
+* 2.2.0: report a configuration-time diagnostic when the `kotlin.mpp.resourcesResolutionStrategy` Gradle property is used
+* 2.3.0: remove the Gradle property
+
 ## Kotlin 1.9.0−1.9.25
 
 This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 1.9.0−1.9.25.
