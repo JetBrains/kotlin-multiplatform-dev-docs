@@ -26,7 +26,7 @@ The sample is a fully featured app that relies on:
 All of these features can be adapted into a cross-platform app with the help of Kotlin Multiplatform and
 the Compose Multiplatform framework.
 
-To make your application work on both iOS and Android, you will:
+To prepare to make your Android application work on other platforms, you can:
 
 1. Learn how to evaluate your project as a candidate for a KMP migration.
 2. See how to separate Gradle modules into cross-platform and platform-specific.
@@ -37,11 +37,6 @@ To make your application work on both iOS and Android, you will:
 4. See the transition to shared UI code:
    using Compose Multiplatform, it's possible to share most of UI code for Jetcaster,
    but more importantly you can see how to implement this transition gradually, screen by screen.
-
-> If you aren't familiar with Kotlin Multiplatform, do learn how to [create and run a cross-platform application from scratch](quickstart.md)
-> first.
->
-{style="tip"}
 
 The resulting application runs on Android, iOS, and desktop.
 The desktop application also serves as a [Compose Hot Reload](compose-hot-reload.md) illustration,
@@ -146,22 +141,26 @@ After the initial preparations and evaluations are done, the general process is:
 
 1. [Migrate to multiplatform libraries](#migrate-to-multiplatform-libraries)
 
-1. [Transition your business logic to KMP](#migrating-the-business-logic).
+2. [Transition your business logic to KMP](#migrating-the-business-logic).
    1. Pick a module with the least number of your project modules depending on it.
    2. Migrate it to KMP module structure and migrate to using multiplatform libraries.
    3. Pick the next module in the dependency tree and repeat.
    
    {type="alpha-lower"}
-2. [Transition your UI code to Compose Multiplatform](#migrating-to-multiplatform-ui).
+3. [Transition your UI code to Compose Multiplatform](#migrating-to-multiplatform-ui).
    When all of your business logic is already multiplatform, transitioning to Compose Multiplatform is relatively
    straightforward.
    For Jetcaster, we show incremental migration: how to migrate screen by screen, and how to adjust the navigation graph
    when some screens are migrated and some are not.
 
-> To simplify the example, we removed Android-specific Glance, TV, and wearable targets
-> from the start since they don't interact with multiplatform code anyway and won't need to be migrated.
+To simplify the example, we removed Android-specific Glance, TV, and wearable targets
+from the start since they don't interact with multiplatform code anyway and won't need to be migrated.
+
+> You can follow the description of the steps below, or jump straight to the [repository with the final multiplatform Jetcaster project](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commits/main/).
+> Each commit represents a working state of the app, to showcase the potential of a gradual migration from Android-only
+> to fully Kotlin Multiplatform.
 > 
-{style="note"}
+{style="tip"}
 
 ### Prepare the environment {collapsible="true"}
 
@@ -418,7 +417,7 @@ Guided by the screens diagram above, we start with the podcast details screen:
    * Move the rest of navigation over to common code ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/48f13acc02d3630871e3671114f736cb3db51424)).
    * Migrate the last screen, `PlayerScreen`, to Compose Multiplatform ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/60d5a2f96943705c869b5726622e873925fc2651)).
 
-Now that all of the UI code is made common, we can make use of it to quickly create apps for other platforms.
+Now that all the UI code is made common, we can make use of it to quickly create apps for other platforms.
 
 ## Add a JVM entry point (optional)
 
@@ -453,7 +452,8 @@ we do that by adding a function that will return a `UIViewController` with the e
 
 In the final state of the migrated app, there are run configurations for the initial Android module (`mobile`)
 and the new iOS app.
-Run them both to see the way shared UI works on both platforms!
+You can run the desktop app from the corresponding `main.kt` file.
+Run them both to see the way shared UI works on all platforms!
 
 ## Final summary
 
