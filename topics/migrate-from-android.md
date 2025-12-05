@@ -225,7 +225,7 @@ An AI agent like [Junie](https://www.jetbrains.com//junie/) can easily help with
 For Jetcaster, the simplified graph of module dependencies looked like this:
 
 ```mermaid
-flowchart LR
+flowchart TB
   %% Style for modules
   classDef Module fill:#e6f7ff,stroke:#0086c9,stroke-width:1px,color:#003a52
 
@@ -328,7 +328,7 @@ To visualize the logic that we'll follow, here is a simplified diagram that repr
 config:
   labelBackground: '#ded'
 ---
-flowchart LR
+flowchart TB
   %% Nodes (plain labels, no quotes/parentheses/braces)
   %% Start[Start]
   Home[Home]
