@@ -232,9 +232,9 @@ flowchart TB
   %% Modules
   M_MOBILE[":mobile ."]
   M_CORE_DATA[":core:data ."]
-  M_CORE_DATA_TESTING[":core:data-testing ."]
+  M_CORE_DATA_TESTING[":core:data-testing .."]
   M_CORE_DOMAIN[":core:domain ."]
-  M_CORE_DOMAIN_TESTING[":core:domain-testing ."]
+  M_CORE_DOMAIN_TESTING[":core:domain-testing .."]
   M_CORE_DESIGNSYSTEM[":core:designsystem ."]
 
   class M_MOBILE,M_CORE_DATA,M_CORE_DATA_TESTING,M_CORE_DOMAIN,M_CORE_DOMAIN_TESTING,M_CORE_DESIGNSYSTEM Module
