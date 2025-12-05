@@ -45,7 +45,7 @@ a way to quickly iterate on your UI's behavior.
 
 The main hurdles for a potential KMP migration are Java and Android Views.
 If your project is already written in Kotlin and uses Jetpack Compose for the UI,
-it lowers the threshold considerably.
+it lowers the complexity of a migration considerably.
 
 Here is a general checklist of what preparations you should consider before migrating a project or a module:
 
@@ -59,11 +59,11 @@ Here is a general checklist of what preparations you should consider before migr
 In the original Android Jetcaster example, there are Java-only calls like `Objects.hash()` and `Uri.encode()`,
 along with extensive use of the `java.time` package.
 
-While you can call Java from Kotlin and vice versa,
-the `commonMain` source set that is the actual shared code part of a Kotlin Multiplatform module, cannot contain Java code.
-Therefore, when making your Android app multiplatform you have to either isolate such code to `androidMain`
-(and rewrite it for iOS),
-or convert Java code to Kotlin — ideally using multiplatform dependencies before even starting the KMP migration.
+While you can call Java from Kotlin and the other way around,
+the `commonMain` source set, which contains the shared code in a Kotlin Multiplatform module, can't contain Java code.
+So, when you make your Android app multiplatform, you need to either:
+* Isolate this code in `androidMain` (and rewrite it for iOS), or
+* Convert the Java code to Kotlin using multiplatform-compatible dependencies.
 
 Another Java-specific library, RxJava, is not used in Jetcaster but is widely adopted. Since it's
 a Java framework for managing asynchronous operations,
@@ -219,7 +219,7 @@ The rewrite of everything time-related is collected in [this commit](https://git
 
 ## Migrating the business logic
 
-When the primary dependencies are multiplatform, we can choose a module to start with the migration.
+Once the primary dependencies are multiplatform, we can choose a module to start with the migration.
 It can be useful to build a dependency graph of the modules in your project.
 An AI agent like [Junie](https://www.jetbrains.com//junie/) can easily help with that.
 For Jetcaster, the simplified graph of module dependencies looked like this:
@@ -272,7 +272,8 @@ This suggests the following sequence, for example:
 
 #### Configure :core:data and migrate database code
 
-Jetcaster uses Room as the database library. Since Room is multiplatform starting with version 2.7.0,
+Jetcaster uses [Room](https://developer.android.com/training/data-storage/room) as the database library.
+Since Room is multiplatform starting with version 2.7.0,
 we only need to update the code to work across platforms.
 At this point we don't have the iOS app yet, but we can already write platform-specific code that will be called
 when we set up an iOS entry point.
@@ -405,8 +406,8 @@ Guided by the screens diagram above, we started with the podcast details screen:
 
 4. To demonstrate another way to atomize the migration, we partially migrated navigation.
    We can combine screens in common code with an Android native screen.
-   So the `PlayerScreen` is still in the `mobile` module, and is included in navigation only for the Android entry point,
-   being injected in the overarching multiplatform navigation.
+   The `PlayerScreen` is still located in the `mobile` module, and is included in navigation only for the Android entry point.
+   It is injected into the overarching multiplatform navigation.
 
    > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2e0107dd4d217346b38cc9b3d5180fedcc12fb8b).
    
@@ -463,6 +464,6 @@ In this migration, we followed general steps for turning a pure Android app into
 
 This sequence is not set in stone. It's possible to start with entry points for other platforms,
 and gradually build the foundation under them until they work.
-In the Jetcaster example, we opted for a clearer sequence of changes.
+In the Jetcaster example, we chose a clearer sequence of changes that is easy to follow step by step.
 
 If you have any feedback on the guide or demonstrated solutions, create an issue in [YouTrack](https://kotl.in/issue). 
