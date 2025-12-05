@@ -427,7 +427,7 @@ This optional step helps to:
 With all the UI code shared, adding a new entry point for a desktop JVM app is a matter
 of creating a `main()` function and integrating it with the DI framework.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/5c32ba408ba0f34dde8454237603fb690fca1fcd).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/af033dbf39188ef3991466727d155b988c30f1d3).
 
 ## Add an iOS entry point
 
@@ -444,7 +444,7 @@ tutorial.
 In the iOS app, we need to connect the Swift UI code with our Compose Multiplatform code.
 We do that by adding a function that returns a `UIViewController` with the embedded `JetcasterApp` composable to the iOS app.
 
-> See the added iOS project and the corresponding code updates in the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/4d76b8ee3868aeea82238d27ec3cd193c996c939).
+> See the added iOS project and the corresponding code updates in the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2b2c412596e199b140089efc73de03e46f5c1d77).
 
 ## Run the app
 
