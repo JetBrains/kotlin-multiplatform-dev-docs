@@ -42,6 +42,103 @@ When configuring your project, check the compatibility of a particular version o
 
 This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 2.0.0−%kotlinVersion%.
 
+<anchor name="android-target-rename"/>
+### Migrate to Google's plugin for Android targets
+
+**What's changed?**
+
+Before Kotlin 2.3.0, we provided support for the Android target through the `com.android.application` and `com.android.library` plugins.
+This was a temporary solution while the Android team at Google developed a separate plugin tailored to Kotlin Multiplatform.
+
+Initially, we used the `android` block, but later transitioned to the `androidTarget` block so that the `android` block could be
+reserved for use by the new plugin.
+
+Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.android.com/kotlin/multiplatform/plugin) is available from the Android team, and you can use it with the
+original `android` blocks.
+
+**What's the best practice now?**
+
+Migrate to the new `com.android.kotlin.multiplatform.library` plugin. Rename all occurrences of the `androidTarget` block to `android`.
+For detailed instructions on how to migrate, see Google's [migration guide](https://developer.android.com/kotlin/multiplatform/plugin#migrate).
+
+**When do the changes take effect?**
+
+Here's the deprecation cycle for the Kotlin Multiplatform Gradle plugin:
+
+* 1.9.0: introduce a deprecation warning when the `android` name is used in Kotlin Multiplatform projects
+* 2.1.0: raise this warning to an error
+* 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
+* 2.3.0: introduce a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects
+
+<anchor name="compilation-source-deprecation"/>
+### Removed API for adding Kotlin source sets directly to the Kotlin compilation {initial-collapse-state="collapsed" collapsible="true"}
+
+**What's changed?**
+
+The access to `KotlinCompilation.source` has been removed. Code like this is no longer supported:
+
+```kotlin
+kotlin {
+    jvm()
+    js()
+    iosArm64()
+    iosSimulatorArm64()
+    
+    sourceSets {
+        val commonMain by getting
+        val myCustomIntermediateSourceSet by creating {
+            dependsOn(commonMain)
+        }
+        
+        targets["jvm"].compilations["main"].source(myCustomIntermediateSourceSet)
+    }
+}
+```
+
+**What's the best practice now?**
+
+To replace `KotlinCompilation.source(someSourceSet)`, add the `dependsOn` relation from the
+default source set of the `KotlinCompilation` to `someSourceSet`. We recommend referring to the source directly using `by getting`,
+which is shorter and more readable. However, you can also use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
+which is applicable in all cases.
+
+You can change the code above in one of the following ways:
+
+```kotlin
+kotlin {
+    jvm()
+    js()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val commonMain by getting
+        val myCustomIntermediateSourceSet by creating {
+            dependsOn(commonMain)
+        }
+        
+        // Option #1. Shorter and more readable, use it when possible. 
+        // Usually, the name of the default source set 
+        // is a simple concatenation of the target name and the compilation name:
+        val jvmMain by getting {
+            dependsOn(myCustomIntermediateSourceSet)
+        }
+        
+        // Option #2. Generic solution, use it if your build script requires a more advanced approach:
+        targets["jvm"].compilations["main"].defaultSourceSet.dependsOn(myCustomIntermediateSourceSet)
+    }
+}
+```
+
+**When do the changes take effect?**
+
+Here's the deprecation cycle:
+
+* 1.9.0: introduce a deprecation warning when `KotlinComplation.source` is used
+* 1.9.20: raise this warning to an error
+* 2.3.0: remove `KotlinCompilation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
+  reference" errors during the buildscript compilation
+
 ### Deprecated bitcode embedding
 
 **What's changed?**
@@ -116,33 +213,6 @@ Here's the planned deprecation cycle:
 * Gradle >8.6: introduce a deprecation warning for any previous version of Kotlin in multiplatform projects using the `withJava()` function.
 * Gradle 9.0: raise this warning to an error.
 * 2.1.20: introduce a deprecation warning when using the `withJava()` function with any version of Gradle.
-
-<anchor name="android-target-rename"/>
-### Rename of `android` target to `androidTarget`
-
-**What's changed?**
-
-We continue our efforts to make Kotlin Multiplatform more stable. An essential step in this direction is to provide first-class
-support for the Android target. In the future, this support will be provided via a separate plugin, developed by the
-Android team from Google.
-
-To open the way for the new solution, we're renaming the `android` block to `androidTarget` in the current
-Kotlin DSL. This is a temporary change that is necessary to free the short `android` name for the upcoming DSL
-from Google.
-
-**What's the best practice now?**
-
-Rename all the occurrences of the `android` block to `androidTarget`. When the new plugin for the Android target support
-is available, migrate to the DSL from Google. It will be the preferred option to work with Android in Kotlin Multiplatform
-projects.
-
-**When do the changes take effect?**
-
-Here's the planned deprecation cycle:
-
-* 1.9.0: introduce a deprecation warning when the `android` name is used in Kotlin Multiplatform projects
-* 2.1.0: raise this warning to an error
-* 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
 
 <anchor name="declaring-multiple-targets"/>
 ### Declaring several similar targets
@@ -276,7 +346,7 @@ Here's the planned deprecation cycle:
 * 2.1.0: report an error in such cases, except for Kotlin/JS targets; to learn more about this exception, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47038/KJS-MPP-Split-JS-target-into-JsBrowser-and-JsNode)
 
 <anchor name="deprecate-pre-hmpp-dependencies"/>
-### Deprecated support of multiplatform libraries published in the legacy mode
+### Deprecated support of multiplatform libraries published in legacy mode
 
 **What's changed?**
 
@@ -482,78 +552,44 @@ Kotlin 2.0.10 are already available in the [Participate in the Kotlin Early Acce
 
 For more information, see the [corresponding issue in YouTrack](https://youtrack.jetbrains.com/issue/KT-68257).
 
-## Kotlin 1.9.0−1.9.25
+### Deprecated old mode of multiplatform IDE import
 
-This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 1.9.0−1.9.25.
+**What's the issue?**
 
-<anchor name="compilation-source-deprecation"/>
-### Deprecated API for adding Kotlin source sets directly to the Kotlin compilation {initial-collapse-state="collapsed" collapsible="true"}
-
-**What's changed?**
-
-The access to `KotlinCompilation.source` has been deprecated. A code like this produces a deprecation warning:
-
-```kotlin
-kotlin {
-    jvm()
-    js()
-    iosArm64()
-    iosSimulatorArm64()
-    
-    sourceSets {
-        val commonMain by getting
-        val myCustomIntermediateSourceSet by creating {
-            dependsOn(commonMain)
-        }
-        
-        targets["jvm"].compilations["main"].source(myCustomIntermediateSourceSet)
-    }
-}
-```
+Before Kotlin 2.3.0, we supported multiple modes of multiplatform IDE import. Now, the older mode is deprecated,
+leaving only one mode available. Previously, the old mode was enabled using the `kotlin.mpp.import.enableKgpDependencyResolution=false`
+Gradle property. Using this property now triggers a deprecation warning.
 
 **What's the best practice now?**
 
-To replace `KotlinCompilation.source(someSourceSet)`, add the  `dependsOn` relation from the
-default source set of the `KotlinCompilation` to `someSourceSet`. We recommend referring to the source directly using `by getting`,
-which is shorter and more readable. However, you can also use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
-which is applicable in all cases.
-
-You can change the code above in one of the following ways:
-
-```kotlin
-kotlin {
-    jvm()
-    js()
-    iosArm64()
-    iosSimulatorArm64()
-
-    sourceSets {
-        val commonMain by getting
-        val myCustomIntermediateSourceSet by creating {
-            dependsOn(commonMain)
-        }
-        
-        // Option #1. Shorter and more readable, use it when possible. 
-        // Usually, the name of the default source set 
-        // is a simple concatenation of the target name and the compilation name:
-        val jvmMain by getting {
-            dependsOn(myCustomIntermediateSourceSet)
-        }
-        
-        // Option #2. Generic solution, use it if your build script requires a more advanced approach:
-        targets["jvm"].compilations["main"].defaultSourceSet.dependsOn(myCustomIntermediateSourceSet)
-    }
-}
-```
+Remove the `kotlin.mpp.import.enableKgpDependencyResolution=false` Gradle property from your `gradle.properties` file.
 
 **When do the changes take effect?**
 
 Here's the planned deprecation cycle:
 
-* 1.9.0: introduce a deprecation warning when `KotlinComplation.source` is used
-* 1.9.20: raise this warning to an error
-* 2.2.0: remove `KotlinComplation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
-  reference" errors during the buildscript compilation
+* 2.3.0: report a warning when the `kotlin.mpp.import.enableKgpDependencyResolution=false` Gradle property is used
+
+### Remove `kotlin.mpp.resourcesResolutionStrategy` Gradle property
+
+**What's the issue?**
+
+The `kotlin.mpp.resourcesResolutionStrategy` Gradle property is removed because it isn't used.
+
+**What's the best practice now?**
+
+Remove the `kotlin.mpp.resourcesResolutionStrategy` Gradle property from your `gradle.properties` file.
+
+**When do the changes take effect?**
+
+Here's the deprecation cycle:
+
+* 2.2.0: report a configuration-time diagnostic when the `kotlin.mpp.resourcesResolutionStrategy` Gradle property is used
+* 2.3.0: remove the Gradle property
+
+## Kotlin 1.9.0−1.9.25
+
+This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 1.9.0−1.9.25.
 
 <anchor name="kotlin-js-plugin-deprecation"/>
 ### Migration from `kotlin-js` Gradle plugin to `kotlin-multiplatform` Gradle plugin {initial-collapse-state="collapsed" collapsible="true"}
