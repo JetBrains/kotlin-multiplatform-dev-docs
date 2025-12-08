@@ -84,6 +84,9 @@ app behavior across platforms.
 
 **Case studies:**
 
+* [Touchlab](https://touchlab.co/) specializes in cross-platform development and advisory work with Kotlin Multiplatform.
+  Touchlab also creates tools that improve your iOS development experience, such as [SKIE](https://github.com/touchlab/SKIE)
+ and the [Kotlin plugin for Xcode](https://github.com/touchlab/xcode-kotlin).
 * [IceRock](https://icerockdev.com/) is an outsourcing company that uses Kotlin Multiplatform to develop apps for its clients. 
   Its app portfolio spans various business requirements, complemented by a substantial collection of open-source 
   Kotlin Multiplatform libraries that enhance the Kotlin Multiplatform development process.
