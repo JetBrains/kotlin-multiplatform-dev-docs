@@ -15,11 +15,11 @@ You can find the full list of changes for this release on [GitHub](https://githu
     * [Foundation 1.10.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.10.0)
     * [Material 1.10.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.10.0)
 
-* Compose Material3 libraries `org.jetbrains.compose.material3:material3*:1.10.0-alpha05`. Based on [Jetpack Compose Material3 1.5.0-alpha08](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha08).
+* Compose Material3 library `org.jetbrains.compose.material3:material3*:1.10.0-alpha05`. Based on [Jetpack Compose Material3 1.5.0-alpha08](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha08).
 
   To use the [Expressive theme](whats-new-compose-190.md#material-3-expressive-theme), include the experimental version of Material 3:
     ```kotlin
-    implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+    implementation("org.jetbrains.compose.material3:material3:1.9.0-alpha05")
     ```
 * Compose Material3 Adaptive libraries `org.jetbrains.compose.material3.adaptive:adaptive*:1.3.0-alpha02`. Based on [Jetpack Compose Material3 Adaptive 1.3.0-alpha03](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.3.0-alpha03)
 * Lifecycle libraries `org.jetbrains.androidx.lifecycle:lifecycle-*:2.10.0-alpha06`. Based on [Jetpack Lifecycle 2.10.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.10.0)
