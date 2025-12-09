@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Compose Multiplatform 1.10.0-rc01)
+[//]: # (title: What's new in Compose Multiplatform 1.10.0-rc02)
 
 Here are the highlights for this EAP feature release:
  * [Unified `@Preview` annotation](#unified-preview-annotation)
