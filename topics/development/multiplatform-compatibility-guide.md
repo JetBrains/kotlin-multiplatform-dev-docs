@@ -71,7 +71,7 @@ Here's the deprecation cycle for the Kotlin Multiplatform Gradle plugin:
 * 2.3.0: introduce a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects
 
 <anchor name="compilation-source-deprecation"/>
-### Removed API for adding Kotlin source sets directly to the Kotlin compilation {initial-collapse-state="collapsed" collapsible="true"}
+### Removed API for adding Kotlin source sets directly to the Kotlin compilation
 
 **What's changed?**
 
@@ -97,10 +97,12 @@ kotlin {
 
 **What's the best practice now?**
 
-To replace `KotlinCompilation.source(someSourceSet)`, add the `dependsOn` relation from the
-default source set of the `KotlinCompilation` to `someSourceSet`. We recommend referring to the source directly using `by getting`,
-which is shorter and more readable. However, you can also use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
-which is applicable in all cases.
+To replace `KotlinCompilation.source(someSourceSet)`, add your sources directly to the appropriate source set using the
+`.srcDir()` function. Alternatively, you can create a new source set by adding the `dependsOn` relation from the
+default source set of the `KotlinCompilation` to `someSourceSet`. You can also refer to the source directly using
+[source set conventions](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.dsl/-kotlin-multiplatform-source-set-conventions/)
+which are IDE-friendly and considered the most robust approach. Finally, you can use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
+which works in all cases.
 
 You can change the code above in one of the following ways:
 
@@ -112,19 +114,27 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting
         val myCustomIntermediateSourceSet by creating {
-            dependsOn(commonMain)
+            // The commonMain source set needs to be accessed with the 
+            // .get() function
+            dependsOn(commonMain.get())
         }
-        
-        // Option #1. Shorter and more readable, use it when possible. 
-        // Usually, the name of the default source set 
-        // is a simple concatenation of the target name and the compilation name:
-        val jvmMain by getting {
+
+        // Option #1. Add your sources directly to the appropriate source
+        // set:
+        commonMain {
+            kotlin.srcDir(layout.projectDirectory.dir("src/commonMain/my-custom-kotlin"))
+        }
+
+        // Option #2. Use the conventions provided with default
+        // Kotlin Multiplatform targets for their main and test
+        // source sets:
+        jvmMain {
             dependsOn(myCustomIntermediateSourceSet)
         }
-        
-        // Option #2. Generic solution, use it if your build script requires a more advanced approach:
+
+        // Option #3. A more generic solution. Use it if your build script 
+        // requires a more advanced approach:
         targets["jvm"].compilations["main"].defaultSourceSet.dependsOn(myCustomIntermediateSourceSet)
     }
 }
