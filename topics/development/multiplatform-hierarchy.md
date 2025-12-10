@@ -32,7 +32,7 @@ Consider the following `build.gradle(.kts)` file in the project's module that co
 
 ```kotlin
 kotlin {
-    androidTarget()
+    android()
     iosArm64()
     iosSimulatorArm64()
 }
@@ -43,7 +43,7 @@ kotlin {
 
 ```groovy
 kotlin {
-    androidTarget()
+    android()
     iosArm64()
     iosSimulatorArm64()
 }
@@ -52,7 +52,7 @@ kotlin {
 </tab>
 </tabs>
 
-When you declare the targets `androidTarget`, `iosArm64`, and `iosSimulatorArm64` in your code, the Kotlin Gradle plugin finds
+When you declare the targets `android`, `iosArm64`, and `iosSimulatorArm64` in your code, the Kotlin Gradle plugin finds
 suitable shared source sets from the template and creates them for you. The resulting hierarchy looks like this:
 
 ![An example of using the default hierarchy template](default-hierarchy-example.svg)
@@ -75,7 +75,7 @@ target first, you'll see a warning:
 
 ```kotlin
 kotlin {
-    androidTarget()
+    android()
     iosArm64()
     iosSimulatorArm64()
 
@@ -94,7 +94,7 @@ kotlin {
 
 ```groovy
 kotlin {
-    androidTarget()
+    android()
     iosArm64()
     iosSimulatorArm64()
 

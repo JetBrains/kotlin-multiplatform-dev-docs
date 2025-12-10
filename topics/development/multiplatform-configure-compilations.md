@@ -198,7 +198,7 @@ Custom compilations are also necessary in other cases. For example, if you want 
 JVM versions in your final artifact, or you have already set up source sets in Gradle and want to migrate to a
 multiplatform project.
 
-> To create custom compilations for the [`androidTarget`](#compilation-for-android), set up build variants
+> To create custom compilations for the [`android`](#compilation-for-android), set up build variants
 > through the [Android Gradle plugin](https://developer.android.com/build/build-variants).
 > 
 {style="tip"}
@@ -384,7 +384,7 @@ for each build variant, a Kotlin compilation is created under the same name.
 
 Then, for each [Android source set](https://developer.android.com/build/build-variants#sourcesets) compiled for 
 each of the variants, a Kotlin source set is created under that source set name prepended by the target name, like the 
-Kotlin source set `androidDebug` for an Android source set `debug` and the Kotlin target named `androidTarget`.
+Kotlin source set `androidDebug` for an Android source set `debug` and the Kotlin target named `android`.
 These Kotlin source sets are added to the variants' compilations accordingly.
 
 The default source set `commonMain` is added to each production (application or library) variant's compilation. 
@@ -396,7 +396,7 @@ than within Kotlin source set dependencies.
 
 ```kotlin
 kotlin {
-    androidTarget { /* ... */ }
+    android { /* ... */ }
 }
 
 dependencies {

@@ -44,14 +44,14 @@ Moving what was a top-level dependency in an Android project to a specific sourc
 might be difficult if the top-level dependency had a non-trivial configuration name. For example, to move
 a `debugImplementation` dependency from the top level of an Android project, you'll need to add an implementation
 dependency to the source set named `androidDebug`. To minimize the effort you have to put in to deal with migration
-problems like this, you can add a `dependencies {}` block inside the `androidTarget {}` block:
+problems like this, you can add a `dependencies {}` block inside the `android {}` block:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 kotlin {
-    androidTarget {
+    android {
         //...
         dependencies {
             implementation("com.example.android:app-magic:12.3")
@@ -65,7 +65,7 @@ kotlin {
 
 ```groovy
 kotlin {
-    androidTarget {
+    android {
         //...
         dependencies {
             implementation 'com.example.android:app-magic:12.3'
