@@ -26,6 +26,9 @@
                 <toc-element topic="whats-new-compose-170.md" toc-title="Compose Multiplatform 1.7.3"/>
                 <toc-element topic="whats-new-compose-1610.md" toc-title="Compose Multiplatform 1.6.10"/>
                 <toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
+				<toc-element toc-title="Redirect to blog post" hidden="true"
+							 accepts-web-file-names="cool-feature.html"
+							 target-for-accept-web-file-names="https://my.company.com/blog/about-cool-feature"/>
             </toc-element>
 		</toc-element>
         <toc-element toc-title="Compose Multiplatform and Jetpack Compose">
