@@ -22,8 +22,13 @@ The sample is a fully featured app that relies on:
 * Compose Navigation.
 * The latest Material Expressive components.
 
-All of these features can be adapted into a cross-platform app using Kotlin Multiplatform and
-the Compose Multiplatform framework.
+All of these features can be adapted into a cross-platform app using Kotlin Multiplatform (KMP) and
+the Compose Multiplatform UI framework.
+
+> You can jump straight into the [repository for the KMP version of Jetcaster](https://github.com/kotlin-hands-on/jetcaster-kmp-migration).
+> Check out the commit history to follow the steps we took to migrate the app from Android-only.
+> 
+{style="note"}
 
 To prepare to make your Android app work on other platforms, you can:
 
@@ -263,14 +268,12 @@ This suggests the following sequence, for example:
 
 1. `:core:data`
 2. `:core:data-testing`
-4. `:core:domain`
-5. `:core:domain-testing`
-1. `:core:designsystem` — while it doesn't have module dependencies, this is a UI helper module,
-   so we tackle it only when we're ready to move UI code into a shared module. 
+3. `:core:domain`
+4. `:core:domain-testing`
+5. `:core:designsystem` — while it doesn't have module dependencies, this is a UI helper module,
+   so we tackle it only when we're ready to move UI code into a shared module.
 
-### Migrate :core:data
-
-#### Configure :core:data and migrate database code
+### Configure :core:data and migrate database code
 
 Jetcaster uses [Room](https://developer.android.com/training/data-storage/room) as the database library.
 Since Room is multiplatform starting with version 2.7.0,
@@ -293,7 +296,7 @@ See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migr
 It only requires updating the Gradle configuration and moving to the source set
 folder structure.
 
-#### Configure and migrate :core:domain
+### Configure and migrate :core:domain
 
 If all dependencies are already accounted for and migrated to multiplatform, the only thing we have to do
 is move the code and reconfigure the module.
@@ -304,12 +307,13 @@ Similarly to `:core:data-testing`, we can easily update the `:core:domain-testin
 
 > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/a46f0a98b8d95656e664dca0d95da196034f2ec3).
 
-#### Configure and migrate :core:designsystem
+### Configure and migrate :core:designsystem
 
-With only UI code left to migrate, we start transitioning the `:core:designsystem` module, with the font resources
-and typography.
-Apart from configuring the KMP module and creating the `commonMain` source set, we made the `JetcasterTypography` argument
-for the `MaterialExpressiveTheme` into a composable, encapsulating the calls to multiplatform fonts.
+With only UI code left to migrate, we transition the `:core:designsystem` module into KMP, with the font resources
+and typography:
+* We configured the module and created the `commonMain` source set.
+* We made the `JetcasterTypography` argument for the `MaterialExpressiveTheme` into a composable,
+  encapsulating the calls to multiplatform fonts.
 
 > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/4aa92e3f38d06aa64444163d865753e47e9b2a97).
 
