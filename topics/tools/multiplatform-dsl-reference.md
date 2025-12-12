@@ -1065,8 +1065,8 @@ The following language settings are available:
 kotlin {
     sourceSets.all {
         languageSettings.apply {
-            languageVersion = "%languageVersion%" // possible values: "1.8", "1.9", "2.0", "2.1"
-            apiVersion = "%apiVersion%" // possible values: "1.8", "1.9", "2.0", "2.1"
+            languageVersion = "%languageVersion%" // possible values: "1.9", "2.0", "2.1", "2.2", "2.3", "2.4" (EXPERIMENTAL)
+            apiVersion = "%apiVersion%" // possible values: "1.9", "2.0", "2.1", "2.2", "2.3", "2.4" (EXPERIMENTAL)
             enableLanguageFeature("InlineClasses") // language feature name
             optIn("kotlin.ExperimentalUnsignedTypes") // annotation FQ-name
             progressiveMode = true // false by default
@@ -1082,8 +1082,8 @@ kotlin {
 kotlin {
     sourceSets.all {
         languageSettings {
-            languageVersion = '%languageVersion%' // possible values: '1.8', '1.9', '2.0', '2.1'
-            apiVersion = '%apiVersion%' // possible values: '1.8', '1.9', '2.0', '2.1'
+            languageVersion = '%languageVersion%' // possible values: '1.9', '2.0', '2.1', '2.2', '2.3', '2.4' (EXPERIMENTAL)
+            apiVersion = '%apiVersion%' // possible values: '1.9', '2.0', '2.1', '2.2', '2.3', '2.4' (EXPERIMENTAL)
             enableLanguageFeature('InlineClasses') // language feature name
             optIn('kotlin.ExperimentalUnsignedTypes') // annotation FQ-name
             progressiveMode = true // false by default
