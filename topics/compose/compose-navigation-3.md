@@ -10,7 +10,7 @@ Starting with the version 1.10, Compose Multiplatform helps adopt Navigation 3 i
 Navigation 3 is more than a new version of the library — in a lot of ways it's a new library entirely.
 To dive deeper into the philosophy behind it, see the [Android Developers blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
 
-In short, the major changes in the new library are:
+The major changes in the new library are:
 
 * **User-owned back stack**. Instead of operating a single library back stack,
   you create and manage a `SnapshotStateList` of states which is observed by the UI.
@@ -18,18 +18,18 @@ In short, the major changes in the new library are:
   in implementing your own navigation components and behavior.
 * **Adaptive layout system** that allows to display multiple destinations at the same time and seamlessly switch between layouts. 
 
+Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
+
+## Multiplatform support
+
 Navigation 3 is closely aligned with Compose and therefore a navigation implementation written for Android works in common
 Compose Multiplatform code almost without changes.
 The only thing you need to add to support non-JVM platforms like web and iOS is implement
 [polymorphic serialization for destination keys](#polymorphic-serialization-for-destination-keys). 
 
-> You can compare extensive examples of Android and multiplatform implementations on GitHub:
-> * [original Android repository with Navigation 3 recipes](https://github.com/android/nav3-recipes)
-> * [Compose Multiplatform project with most of the same recipes](https://github.com/terrakok/nav3-recipes)
-> 
-{style="tip"}
-
-Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
+You can compare extensive examples of Android-only and multiplatform apps using Navigation 3 on GitHub:
+* [original Android repository with Navigation 3 recipes](https://github.com/android/nav3-recipes)
+* [Compose Multiplatform project with most of the same recipes](https://github.com/terrakok/nav3-recipes)
 
 ### Polymorphic serialization for destination keys
 
@@ -42,8 +42,7 @@ To take this into account, the library has two overloads for the `rememberNavBac
   also takes a `SavedStateConfiguration` parameter that allows you to provide a `SerializersModule` and handle open polymorphism
   correctly across all platforms.
 
-In the multiplatform examples of Navigation 3 this looks [like this](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40),
-for example:
+In the multiplatform examples of Navigation 3 it can look [like this](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40):
 
 ```kotlin
 @Serializable
@@ -51,7 +50,6 @@ private data object RouteA : NavKey
 
 @Serializable
 private data class RouteB(val id: String) : NavKey
-
 
 private val config = SavedStateConfiguration {
     serializersModule = SerializersModule {
@@ -73,10 +71,9 @@ fun BasicDslActivity() {
 }
 ```
 
-## Setup of the dependencies
+## Dependencies setup
 
-To try out the multiplatform implementation of Navigation 3,
-add the following dependency to your version catalog:
+To try out the multiplatform implementation of Navigation 3, add the following dependency to your version catalog:
 
 ```text
 [versions]
