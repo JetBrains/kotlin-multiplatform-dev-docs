@@ -23,9 +23,11 @@ Compose Multiplatform code almost without changes.
 The only thing you need to add to support non-JVM platforms like web and iOS is implement
 [polymorphic serialization for destination keys](#polymorphic-serialization-for-destination-keys). 
 
-> You can find and compare extensive examples of Android and multiplatform implementations on GitHub:
+> You can compare extensive examples of Android and multiplatform implementations on GitHub:
 > * [original Android repository with Navigation 3 recipes](https://github.com/android/nav3-recipes)
 > * [Compose Multiplatform project with most of the same recipes](https://github.com/terrakok/nav3-recipes)
+> 
+{style="tip"}
 
 Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
 
