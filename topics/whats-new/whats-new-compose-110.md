@@ -48,19 +48,42 @@ gesture to other platforms.
 With the release of Navigation 3 the old implementation was made obsolete with the new `NavigationEvent` class and APIs
 built around it.
 Specifically, instead of the `PredictiveBackHandler()` function there is a new `NavigationBackHandler()` that wraps
-the general `NavigationEventHandler()` function for cases when forward navigation is not relevant.
+the general `NavigationEventHandler()` function.
 
 The simplest migration can look like this:
 
 <compare type="top-bottom">
     <code-block lang="kotlin">
-        PredictiveBackHandler() { /* handle everything about the back gesture */ }
+     PredictiveBackHandler(enabled = true) { progress ->
+        try {
+            progress.collect { event ->
+                // Animate the back gesture progress
+            }
+            // Process the completed back gesture
+        } catch(e: Exception) {
+            // Process the canceled back gesture
+        }
+    }
     </code-block>
     <code-block lang="kotlin">
-        NavigationBackHandler(
-            state = NavigationEventInfo.None,
-            onBackCancelled = { /* handle a cancelled back gesture */ },
-        ) { /* handle a completed back gesture */ }
+    val navState = rememberNavigationEventState(NavigationEventInfo.None)
+    NavigationBackHandler(
+        state = navState,
+        isBackEnabled = true,
+        onBackCancelled = {
+            // Process the canceled back gesture
+        },
+        onBackCompleted = {
+          // Process the completed back gesture
+        }
+    )
+    LaunchedEffect(navState.transitionState) {
+        val transitionState = navState.transitionState
+        if (transitionState is NavigationEventTransitionState.InProgress) {
+            val progress = transitionState.latestEvent.progress
+            // Animate the back gesture progress
+        }
+    }
     </code-block>
 </compare>
 
