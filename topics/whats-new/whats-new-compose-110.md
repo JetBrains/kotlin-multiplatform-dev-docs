@@ -93,6 +93,7 @@ Here:
   But if you don't have any information to store for now, you can use `NavigationEventInfo.None` as a stub.
 * The `onBack` parameter is broken up into `onBackCancelled` and `onBackCompleted` so you don't need to track canceled
   gestures separately.
+* The `NavigationEventState.transitionState` property helps to track the progress of the physical gesture.
 
 For details on the general function, see the [NavigationEventHandler KDoc](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:navigationevent/navigationevent-compose/src/commonMain/kotlin/androidx/navigationevent/compose/NavigationEventHandler.kt;l=28;drc=fba1459ebd11b27fbfb12ed1925e8f87b32e1594).
 
