@@ -29,7 +29,7 @@ You can find the full list of changes for this release on [GitHub](https://githu
 * Savedstate library `org.jetbrains.androidx.savedstate:savedstate*:1.4.0`. Based on [Jetpack Savedstate 1.4.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0)
 * WindowManager Core library `org.jetbrains.androidx.window:window-core:1.5.1`. Based on [Jetpack WindowManager 1.5.1](https://developer.android.com/jetpack/androidx/releases/window#1.5.1)
 
-## Breaking changes
+## Breaking changes and deprecations
 
 ### Deprecated dependency aliases
 
@@ -40,6 +40,38 @@ Specific references are suggested in the corresponding deprecation notices.
 
 This change should make dependency management for Compose Multiplatform libraries a bit more transparent.
 In the future, we hope to provide a BOM for Compose Multiplatform to simplify setting up compatible versions.
+
+### Deprecated `PredictiveBackHandler()`
+
+The `PredictiveBackHandler()` function was introduced in Compose Multiplatform to bring native Android back navigation
+gesture to other platforms.
+With the release of Navigation 3 the old implementation was made obsolete with the new `NavigationEvent` class and APIs
+built around it.
+Specifically, instead of the `PredictiveBackHandler()` function there is a new `NavigationBackHandler()` that wraps
+the general `NavigationEventHandler()` function for cases when forward navigation is not relevant.
+
+The simplest migration can look like this:
+
+<compare type="top-bottom">
+    <code-block lang="kotlin">
+        PredictiveBackHandler() { /* handle everything about the back gesture */ }
+    </code-block>
+    <code-block lang="kotlin">
+        NavigationBackHandler(
+            state = NavigationEventInfo.None,
+            onBackCancelled = { /* handle a cancelled back gesture */ },
+        ) { /* handle a completed back gesture */ }
+    </code-block>
+</compare>
+
+Here:
+
+* The `state` parameter is mandatory: `NavigationEventInfo` is designed to hold contextual information about the UI state.
+  But if you don't have any information to store for now, you can use `NavigationEventInfo.None` as a stub.
+* The `onBack` parameter is broken up into `onBackCancelled` and `onBackCompleted` so you don't need to track canceled
+  gestures separately.
+
+For details on the general function, see the [NavigationEventHandler KDoc](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:navigationevent/navigationevent-compose/src/commonMain/kotlin/androidx/navigationevent/compose/NavigationEventHandler.kt;l=28;drc=fba1459ebd11b27fbfb12ed1925e8f87b32e1594).
 
 ### Minimum Kotlin version increased for web
 
