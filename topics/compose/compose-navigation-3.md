@@ -51,6 +51,7 @@ private data object RouteA : NavKey
 @Serializable
 private data class RouteB(val id: String) : NavKey
 
+// Creates the required serializing configuration for open polymorphism
 private val config = SavedStateConfiguration {
     serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
@@ -62,6 +63,7 @@ private val config = SavedStateConfiguration {
 
 @Composable
 fun BasicDslActivity() {
+    // Consumes the serializing configuration
     val backStack = rememberNavBackStack(config, RouteA)
 
     NavDisplay(
@@ -83,6 +85,12 @@ compose-multiplatform-navigation3 = "1.0.0-alpha05"
 jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "compose-multiplatform-navigation3" }
 ```
 
+> While Navigation 3 is released as two artifacts, `navigation3:navigation3-ui` and `navigation3:navigation3-common`,
+> only `navigation-ui` needs a separate Compose Multiplatform implementation.
+> A dependency on `navigation3-common` is added implicitly.
+> 
+{style="note"}
+
 Additional support for Navigation 3 is implemented in Material 3 Adaptive and ViewModel.
 If you're using these libraries, add the navigation support artifacts as well:
 ```text
@@ -91,7 +99,7 @@ compose-multiplatform-adaptive = "1.3.0-alpha02"
 compose-multiplatform-lifecycle = "2.10.0-alpha05"
 
 [libraries]
-jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "androidx-adaptive" }
+jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "compose-multiplatform-adaptive" }
 jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "compose-multiplatform-lifecycle" }
 ```
 
@@ -100,10 +108,10 @@ authored by a JetBrains engineer that adds support for Navigation 3 to web targe
 
 ```text
 [versions]
-navigation3-browser = "0.2.0"
+compose-multiplatform-navigation3-browser = "0.2.0"
 
 [libraries]
-navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "navigation3-browser" }
+navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
 ```
 
 > Web support is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0. 
