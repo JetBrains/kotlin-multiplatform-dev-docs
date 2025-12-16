@@ -54,36 +54,36 @@ The simplest migration can look like this:
 
 <compare type="top-bottom">
     <code-block lang="kotlin">
-     PredictiveBackHandler(enabled = true) { progress ->
-        try {
-            progress.collect { event ->
-                // Animate the back gesture progress
+         PredictiveBackHandler(enabled = true) { progress ->
+            try {
+                progress.collect { event ->
+                    // Animate the back gesture progress
+                }
+                // Process the completed back gesture
+            } catch(e: Exception) {
+                // Process the canceled back gesture
             }
-            // Process the completed back gesture
-        } catch(e: Exception) {
-            // Process the canceled back gesture
         }
-    }
     </code-block>
     <code-block lang="kotlin">
-    val navState = rememberNavigationEventState(NavigationEventInfo.None)
-    NavigationBackHandler(
-        state = navState,
-        isBackEnabled = true,
-        onBackCancelled = {
-            // Process the canceled back gesture
-        },
-        onBackCompleted = {
-          // Process the completed back gesture
+        val navState = rememberNavigationEventState(NavigationEventInfo.None)
+        NavigationBackHandler(
+            state = navState,
+            isBackEnabled = true,
+            onBackCancelled = {
+                // Process the canceled back gesture
+            },
+            onBackCompleted = {
+              // Process the completed back gesture
+            }
+        )
+        LaunchedEffect(navState.transitionState) {
+            val transitionState = navState.transitionState
+            if (transitionState is NavigationEventTransitionState.InProgress) {
+                val progress = transitionState.latestEvent.progress
+                // Animate the back gesture progress
+            }
         }
-    )
-    LaunchedEffect(navState.transitionState) {
-        val transitionState = navState.transitionState
-        if (transitionState is NavigationEventTransitionState.InProgress) {
-            val progress = transitionState.latestEvent.progress
-            // Animate the back gesture progress
-        }
-    }
     </code-block>
 </compare>
 
