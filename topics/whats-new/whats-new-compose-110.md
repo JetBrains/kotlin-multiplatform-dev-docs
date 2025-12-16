@@ -45,10 +45,10 @@ In the future, we hope to provide a BOM for Compose Multiplatform to simplify se
 
 The `PredictiveBackHandler()` function was introduced in Compose Multiplatform to bring native Android back navigation
 gesture to other platforms.
-With the release of Navigation 3 the old implementation was made obsolete with the new `NavigationEvent` class and APIs
-built around it.
-Specifically, instead of the `PredictiveBackHandler()` function there is a new `NavigationBackHandler()` that wraps
-the general `NavigationEventHandler()` function.
+With the release of Navigation 3 the old implementation was made obsolete with the new [Navigation Event](https://developer.android.com/jetpack/androidx/releases/navigationevent)
+library and its APIs.
+Specifically, instead of the `PredictiveBackHandler()` function there is a new `NavigationBackHandler()` function that wraps
+the more general `NavigationEventHandler()` implementation.
 
 The simplest migration can look like this:
 
