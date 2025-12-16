@@ -3,7 +3,8 @@
 
 [Android's Navigation library](https://developer.android.com/guide/navigation) is upgraded to Navigation 3, a redesigned approach to navigation that works with
 Compose and takes into account feedback to the previous version of the library.
-Starting with the version 1.10, Compose Multiplatform helps adopt Navigation 3 into multiplatform projects.
+Starting with the version 1.10, Compose Multiplatform helps adopt Navigation 3 into multiplatform projects on all supported platforms:
+Android, iOS, desktop, and web.
 
 ## General overview
 
@@ -26,15 +27,15 @@ To try out the multiplatform implementation of Navigation 3, add the following d
 
 ```text
 [versions]
-compose-multiplatform-navigation3 = "1.0.0-alpha05"
+multiplatform-nav3-ui = "1.0.0-alpha05"
 
 [libraries]
-jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "compose-multiplatform-navigation3" }
+jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
 ```
 
 > While Navigation 3 is released as two artifacts, `navigation3:navigation3-ui` and `navigation3:navigation3-common`,
 > only `navigation-ui` needs a separate Compose Multiplatform implementation.
-> A dependency on `navigation3-common` is added implicitly.
+> A dependency on `navigation3-common` is added transitively.
 >
 {style="note"}
 
@@ -51,7 +52,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 ```
 
 Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
-authored by a JetBrains engineer that adds support for Navigation 3 to web targets:
+authored by a JetBrains engineer that integrates the multiplatform Navigation 3 with browser history navigation:
 
 ```text
 [versions]
@@ -61,9 +62,7 @@ compose-multiplatform-navigation3-browser = "0.2.0"
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
 ```
 
-> Web support is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0.
->
-{style="note"}
+Support for browser history navigation is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0.
 
 ## Multiplatform support
 
