@@ -52,7 +52,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 ```
 
 Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
-authored by a JetBrains engineer that integrates the multiplatform Navigation 3 with browser history navigation:
+authored by a JetBrains engineer that integrates the multiplatform Navigation 3 with browser history navigation on the web:
 
 ```text
 [versions]
