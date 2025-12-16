@@ -66,6 +66,7 @@ The simplest migration can look like this:
         }
     </code-block>
     <code-block lang="kotlin">
+        // Use an empty state as a stub to satisfy the required argument
         val navState = rememberNavigationEventState(NavigationEventInfo.None)
         NavigationBackHandler(
             state = navState,
