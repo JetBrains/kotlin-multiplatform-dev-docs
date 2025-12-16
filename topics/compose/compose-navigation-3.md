@@ -62,7 +62,7 @@ compose-multiplatform-navigation3-browser = "0.2.0"
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
 ```
 
-Support for browser history navigation is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0.
+Browser history navigation is expected to be supported by the base multiplatform Navigation 3 library in version 1.1.0.
 
 ## Multiplatform support
 
