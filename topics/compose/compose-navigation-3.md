@@ -20,6 +20,51 @@ The major changes in the new library are:
 
 Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
 
+## Dependencies setup
+
+To try out the multiplatform implementation of Navigation 3, add the following dependency to your version catalog:
+
+```text
+[versions]
+compose-multiplatform-navigation3 = "1.0.0-alpha05"
+
+[libraries]
+jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "compose-multiplatform-navigation3" }
+```
+
+> While Navigation 3 is released as two artifacts, `navigation3:navigation3-ui` and `navigation3:navigation3-common`,
+> only `navigation-ui` needs a separate Compose Multiplatform implementation.
+> A dependency on `navigation3-common` is added implicitly.
+>
+{style="note"}
+
+Additional support for Navigation 3 is implemented in Material 3 Adaptive and ViewModel.
+If you're using these libraries, add the navigation support artifacts as well:
+```text
+[versions]
+compose-multiplatform-adaptive = "1.3.0-alpha02"
+compose-multiplatform-lifecycle = "2.10.0-alpha05"
+
+[libraries]
+jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "compose-multiplatform-adaptive" }
+jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "compose-multiplatform-lifecycle" }
+```
+
+Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
+authored by a JetBrains engineer that adds support for Navigation 3 to web targets:
+
+```text
+[versions]
+compose-multiplatform-navigation3-browser = "0.2.0"
+
+[libraries]
+navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
+```
+
+> Web support is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0.
+>
+{style="note"}
+
 ## Multiplatform support
 
 Navigation 3 is closely aligned with Compose and therefore a navigation implementation written for Android works in common
@@ -73,57 +118,15 @@ fun BasicDslActivity() {
 }
 ```
 
-## Dependencies setup
-
-To try out the multiplatform implementation of Navigation 3, add the following dependency to your version catalog:
-
-```text
-[versions]
-compose-multiplatform-navigation3 = "1.0.0-alpha05"
-
-[libraries]
-jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "compose-multiplatform-navigation3" }
-```
-
-> While Navigation 3 is released as two artifacts, `navigation3:navigation3-ui` and `navigation3:navigation3-common`,
-> only `navigation-ui` needs a separate Compose Multiplatform implementation.
-> A dependency on `navigation3-common` is added implicitly.
-> 
-{style="note"}
-
-Additional support for Navigation 3 is implemented in Material 3 Adaptive and ViewModel.
-If you're using these libraries, add the navigation support artifacts as well:
-```text
-[versions]
-compose-multiplatform-adaptive = "1.3.0-alpha02"
-compose-multiplatform-lifecycle = "2.10.0-alpha05"
-
-[libraries]
-jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "compose-multiplatform-adaptive" }
-jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "compose-multiplatform-lifecycle" }
-```
-
-Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
-authored by a JetBrains engineer that adds support for Navigation 3 to web targets:
-
-```text
-[versions]
-compose-multiplatform-navigation3-browser = "0.2.0"
-
-[libraries]
-navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
-```
-
-> Web support is expected to be added to the base multiplatform Navigation 3 library in version 1.1.0. 
->
-{style="note"}
-
 ## What's next
 
-Compose navigation is covered in-depth on the Android Developer portal.
+Navigation 3 is covered in-depth on the Android Developer portal.
 Sometimes this documentation uses Android-only examples,
 but fundamental guidance and navigation principles are the same for Multiplatform:
 
-* [Overview of navigation with Compose](https://developer.android.com/develop/ui/compose/navigation).
-* [Starting page for Jetpack Navigation](https://developer.android.com/guide/navigation) with subpages about
-    navigation graphs, moving around them, and other navigation use cases.
+* [Overview of Navigation 3](https://developer.android.com/guide/navigation/navigation-3)
+  with advice on managing state, modularizing navigation code, and animation.
+* [Migration from Navigation 2 to Navigation 3](https://developer.android.com/guide/navigation/navigation-3/migration-guide).
+  It's easier to see Navigation 3 as a new library than a new version of the existing library,
+  so it's less of a migration and more of a rewrite.
+  But the guide points out the general steps to take.
