@@ -96,7 +96,7 @@ Here:
   gestures separately.
 * The `NavigationEventState.transitionState` property helps to track the progress of the physical gesture.
 
-For details on the general function, see the [NavigationEventHandler KDoc](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:navigationevent/navigationevent-compose/src/commonMain/kotlin/androidx/navigationevent/compose/NavigationEventHandler.kt;l=28;drc=fba1459ebd11b27fbfb12ed1925e8f87b32e1594).
+For details on the implementation, see the [NavigationEventHandler page in the Navigation Event API reference](https://developer.android.com/reference/kotlin/androidx/navigationevent/NavigationEventHandler).
 
 ### Minimum Kotlin version increased for web
 
