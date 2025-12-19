@@ -1,7 +1,7 @@
 [//]: # (title: Navigation 3 in Compose Multiplatform)
 <primary-label ref="alpha"/>
 
-[Android's Navigation library](https://developer.android.com/guide/navigation) is upgraded to Navigation 3, a redesigned approach to navigation that works with
+[Android's Navigation library](https://developer.android.com/guide/navigation) has been upgraded to Navigation 3, introducing a redesigned approach to navigation that works with
 Compose and takes into account feedback to the previous version of the library.
 Starting with the version 1.10, Compose Multiplatform helps adopt Navigation 3 into multiplatform projects on all supported platforms:
 Android, iOS, desktop, and web.
@@ -9,12 +9,12 @@ Android, iOS, desktop, and web.
 ## General overview
 
 Navigation 3 is more than a new version of the library — in a lot of ways it's a new library entirely.
-To dive deeper into the philosophy behind it, see the [Android Developers blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
+To learn more about the philosophy behind this redesign, see the [Android Developers blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
 
 The major changes in the new library are:
 
 * **User-owned back stack**. Instead of operating a single library back stack,
-  you create and manage a `SnapshotStateList` of states which is observed by the UI.
+  you create and manage a `SnapshotStateList` of states, which the UI observes directly.
 * **Low-level building blocks**. Thanks to closer integration with Compose, the library allows more flexibility
   in implementing your own navigation components and behavior.
 * **Adaptive layout system** that allows to display multiple destinations at the same time and seamlessly switch between layouts. 
@@ -39,8 +39,7 @@ jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:naviga
 >
 {style="note"}
 
-Additional support for Navigation 3 is implemented in Material 3 Adaptive and ViewModel.
-If you're using these libraries, add the navigation support artifacts as well:
+For projects using the Material 3 Adaptive and ViewModel libraries, also add the following navigation support artifacts:
 ```text
 [versions]
 compose-multiplatform-adaptive = "1.3.0-alpha02"
@@ -52,7 +51,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 ```
 
 Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
-authored by a JetBrains engineer that integrates the multiplatform Navigation 3 with browser history navigation on the web:
+created by a JetBrains engineer. The library integrates the multiplatform Navigation 3 with browser history navigation on the web:
 
 ```text
 [versions]
@@ -66,8 +65,8 @@ Browser history navigation is expected to be supported by the base multiplatform
 
 ## Multiplatform support
 
-Navigation 3 is closely aligned with Compose and therefore a navigation implementation written for Android works in common
-Compose Multiplatform code almost without changes.
+Navigation 3 is closely aligned with Compose, allowing an Android navigation implementation to work in common
+Compose Multiplatform code with minimal changes.
 The only thing you need to add to support non-JVM platforms like web and iOS is implement
 [polymorphic serialization for destination keys](#polymorphic-serialization-for-destination-keys). 
 
@@ -86,7 +85,7 @@ To take this into account, the library has two overloads for the `rememberNavBac
   also takes a `SavedStateConfiguration` parameter that allows you to provide a `SerializersModule` and handle open polymorphism
   correctly across all platforms.
 
-In the multiplatform examples of Navigation 3 it can look [like this](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40):
+In the Navigation 3 multiplatform examples, polymorphic serialization can look [like this](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40):
 
 ```kotlin
 @Serializable
@@ -120,8 +119,8 @@ fun BasicDslActivity() {
 ## What's next
 
 Navigation 3 is covered in-depth on the Android Developer portal.
-Sometimes this documentation uses Android-only examples,
-but fundamental guidance and navigation principles are the same for Multiplatform:
+While some of the documentation uses Android-specific examples,
+the core concepts and navigation principles remain consistent across all platforms:
 
 * [Overview of Navigation 3](https://developer.android.com/guide/navigation/navigation-3)
   with advice on managing state, modularizing navigation code, and animation.
