@@ -3,21 +3,22 @@
 
 [Android's Navigation library](https://developer.android.com/guide/navigation) has been upgraded to Navigation 3, introducing a redesigned approach to navigation that works with
 Compose and takes into account feedback to the previous version of the library.
-Starting with the version 1.10, Compose Multiplatform helps adopt Navigation 3 into multiplatform projects on all supported platforms:
+Starting with version 1.10, Compose Multiplatform supports adopting Navigation 3 in multiplatform projects for all supported platforms:
 Android, iOS, desktop, and web.
 
-## General overview
+## Key changes
 
 Navigation 3 is more than a new version of the library — in a lot of ways it's a new library entirely.
 To learn more about the philosophy behind this redesign, see the [Android Developers blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
 
-The major changes in the new library are:
+Key changes in Navigation 3 include:
 
 * **User-owned back stack**. Instead of operating a single library back stack,
   you create and manage a `SnapshotStateList` of states, which the UI observes directly.
 * **Low-level building blocks**. Thanks to closer integration with Compose, the library allows more flexibility
   in implementing your own navigation components and behavior.
-* **Adaptive layout system** that allows to display multiple destinations at the same time and seamlessly switch between layouts. 
+* **Adaptive layout system**. With adaptive design, you can display multiple destinations at the same time
+  and seamlessly switch between layouts. 
 
 Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
 
@@ -67,7 +68,7 @@ Browser history navigation is expected to be supported by the base multiplatform
 
 Navigation 3 is closely aligned with Compose, allowing an Android navigation implementation to work in common
 Compose Multiplatform code with minimal changes.
-The only thing you need to add to support non-JVM platforms like web and iOS is implement
+To support non-JVM platforms like web and iOS, the only thing you need is to implement
 [polymorphic serialization for destination keys](#polymorphic-serialization-for-destination-keys). 
 
 You can compare extensive examples of Android-only and multiplatform apps using Navigation 3 on GitHub:
@@ -80,7 +81,7 @@ On Android, Navigation 3 relies on reflection-based serialization, which is not 
 To take this into account, the library has two overloads for the `rememberNavBackStack()` function:
 
 * [The first overload](https://developer.android.com/reference/kotlin/androidx/navigation3/runtime/package-summary#rememberNavBackStack(kotlin.Array))
-  only takes a set of `NavKey` and requires a reflection-based serializer.
+  only takes a set of `NavKey` references and requires a reflection-based serializer.
 * [The second overload](https://developer.android.com/reference/kotlin/androidx/navigation3/runtime/package-summary#rememberNavBackStack(androidx.savedstate.serialization.SavedStateConfiguration,kotlin.Array))
   also takes a `SavedStateConfiguration` parameter that allows you to provide a `SerializersModule` and handle open polymorphism
   correctly across all platforms.
