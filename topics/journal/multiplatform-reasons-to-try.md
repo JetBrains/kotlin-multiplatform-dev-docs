@@ -11,7 +11,7 @@ facilitating code reuse across them while maintaining the advantages of native p
 In this article, we'll explore ten reasons why developers should consider using 
 Kotlin Multiplatform in their existing or new projects and why KMP continues to gain a lot of traction.
 
-**Adoption is rising steadily:** According to the last two [Developer Ecosystem surveys](https://devecosystem-2025.jetbrains.com/), Kotlin Multiplatform usage more than doubled in just a year – increasing from 7% in 2024 to 18% in 2025. This rapid growth highlights the technology’s expanding momentum and the confidence developers place in it.
+**Adoption is rising steadily:** According to the last two [Developer Ecosystem surveys](https://devecosystem-2025.jetbrains.com/), Kotlin Multiplatform usage more than doubled in just a year – increasing from 7% in 2024 to 18% in 2025. This rapid growth highlights the technology’s increasing momentum and the confidence developers place in it.
 
 ![KMP usage increased from 7% in 2024 to 18% in 2025 among respondents to the last two Developer Ecosystem surveys](kmp-growth-deveco.svg){width=700}
 
@@ -186,7 +186,7 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 
 * **IntelliJ IDEA**. With IntelliJ IDEA 2025.2.2, you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform?_gl=1*1bztzm5*_gcl_au*MTcxNzEyMzc1MS4xNzU5OTM3NDgz*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NjU4MDcyMzckbzkxJGcxJHQxNzY1ODA3MjM4JGo1OSRsMCRoMA..), which offers basic launching and debugging capabilities for iOS apps, preflight environment checks, and other helpful KMP functionality.
 * **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. With Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
-* **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly visualize and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
+* **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
 
 ![Compose Hot Reload](compose-hot-reload.gif){width=350}
 
@@ -211,7 +211,7 @@ Kotlin and Kotlin Multiplatform have a very supportive community. Here are a few
   subscribe to our regular newsletter!
 
 The Kotlin Multiplatform ecosystem is thriving. It's enthusiastically nurtured by numerous Kotlin developers globally.
-To help the community navigate this growing landscape, [klibs.io](http://klibs.io) provides a curated directory of Kotlin Multiplatform libraries, making it easier to discover reliable solutions for common use cases.
+To help the community navigate this expanding landscape, [klibs.io](http://klibs.io) provides a curated directory of Kotlin Multiplatform libraries, making it easier to discover reliable solutions for common use cases.
 
 Here is a diagram showing the number of Kotlin Multiplatform libraries created per year:
 
@@ -232,7 +232,7 @@ Here's a breakdown of the key reasons why Kotlin Multiplatform might be the righ
   you can enable your multiplatform app to access platform-specific APIs.
 * **Great cross-platform performance**. Shared code written in Kotlin is compiled into different output formats for different targets:
   Java bytecode for Android and native binaries for iOS, ensuring good performance across all platforms.
-* **AI- powered code generation**. You can speed up multiplatform development with code generation powered by [Junie](https://www.jetbrains.com/junie/), the JetBrains coding agent, that supports a more efficient workflow across shared and platform-specific code.
+* **AI-powered code generation**. You can speed up multiplatform development with code generation powered by [Junie](https://www.jetbrains.com/junie/), the JetBrains coding agent that supports a more efficient workflow across shared and platform-specific code.
 
 If you've already decided to try Kotlin Multiplatform, here are a few tips that will help you get started:
 
