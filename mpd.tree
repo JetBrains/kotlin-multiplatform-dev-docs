@@ -48,6 +48,7 @@
 		<toc-element topic="compose-viewmodel.md"/>
 		<toc-element toc-title="Navigation">
 			<toc-element topic="compose-navigation.md"/>
+			<toc-element toc-title="Navigation 3 in Compose" topic="compose-navigation-3.md"/>
 			<toc-element topic="compose-navigation-routing.md"/>
       <toc-element topic="compose-navigation-deep-links.md"/>
 		</toc-element>
