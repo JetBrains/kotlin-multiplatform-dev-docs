@@ -45,9 +45,9 @@ In the future, we hope to provide a BOM for Compose Multiplatform to simplify se
 
 The `PredictiveBackHandler()` function was introduced in Compose Multiplatform to bring native Android back navigation
 gesture to other platforms.
-With the release of Navigation 3 the old implementation was made obsolete with the new [Navigation Event](https://developer.android.com/jetpack/androidx/releases/navigationevent)
+With the release of Navigation 3, the old implementation has been deprecated in favor of the new [Navigation Event](https://developer.android.com/jetpack/androidx/releases/navigationevent)
 library and its APIs.
-Specifically, instead of the `PredictiveBackHandler()` function there is a new `NavigationBackHandler()` function that wraps
+Specifically, instead of using the `PredictiveBackHandler()` function, you should now use the new `NavigationBackHandler()` function that wraps
 the more general `NavigationEventHandler()` implementation.
 
 The simplest migration can look like this:
@@ -91,8 +91,8 @@ The simplest migration can look like this:
 Here:
 
 * The `state` parameter is mandatory: `NavigationEventInfo` is designed to hold contextual information about the UI state.
-  But if you don't have any information to store for now, you can use `NavigationEventInfo.None` as a stub.
-* The `onBack` parameter is broken up into `onBackCancelled` and `onBackCompleted` so you don't need to track canceled
+  If you don't have any information to store for now, you can use `NavigationEventInfo.None` as a stub.
+* The `onBack` parameter has been split into `onBackCancelled` and `onBackCompleted`, so you don't need to track canceled
   gestures separately.
 * The `NavigationEventState.transitionState` property helps to track the progress of the physical gesture.
 
