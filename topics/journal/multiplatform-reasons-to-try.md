@@ -169,7 +169,7 @@ You can begin incrementally, starting with simple elements like constants and gr
 You can also write or migrate your business logic, such as transaction processes or user authentication, for instance.
 
 > Together with the Google team and using Jetcaster as an example, we’ve created a practical migration guide that includes a repo where every commit represents a working state. 
-> See how to move from Android to Kotlin Multiplatform gradually.
+> [See how to move from Android to Kotlin Multiplatform gradually](migrate-from-android.md).
 {style="note"}
 
 ### 8. Kotlin Multiplatform is already used by global companies
