@@ -132,18 +132,24 @@ When you're done choosing platforms, click the **Finish** button and wait for th
 </tab>
 </tabs>
 
+## Update before Running
+To avoid compatibility issues:
+1. **Update Gradle:** JBR 25 (At the time of the update) may have compatibility issues with previous Gradle versions. Use the following the following command in your IDE terminal
+   On macOS/Linux
+    ```shell
+    ./gradlew wrapper --gradle-version latest
+    ```
+    On Windows
+    ```shell
+    .\gradlew.bat wrapper --gradle-version latest
+    ```
+
+
 ## Consult the preflight checks
 
-You can make sure there are no environment issues with the project setup by opening
-the **Project Environment Preflight Checks** tool window:
-click the preflight checks icon on the right sidebar or the bottom bar ![Preflight checks icon with a plane](ide-preflight-checks.png){width="20"}
+When you open a project, the plugin runs environment checks automatically. It verifies your OS, Java setup, Android SDK, Xcode installation, and Gradle configuration. If anything’s missing or outdated, you’ll get recommendations on how to fix it. (Source: [Jetbrains Blog](https://blog.jetbrains.com/kotlin/2025/05/kotlin-multiplatform-tooling-now-in-intellij-idea-and-android-studio/))
 
-In this tool window, you can see the messages related to these checks, rerun them, or change their settings. 
-
-Preflight checks commands are also available in the **Search Everywhere** dialog.
-Press double <shortcut>Shift</shortcut> and search for commands containing the word "preflight":
-
-![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png){width=600}
+![Consult preflight checks](preflight-checks.png){width=600}
 
 ## Run the sample apps
 
@@ -158,8 +164,8 @@ To run the Android app, start the **composeApp** run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
-To create an Android run configuration manually, choose **Android App** as the run configuration template
-and select the module **[project name].composeApp**.
+To create an Android run configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Android App** as the run configuration template.
+![Android configuration](android_config.png){width=300}
 
 By default, it runs on the first available virtual device:
 
@@ -189,12 +195,8 @@ The default run configuration for a desktop app is created as **composeApp [desk
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
-To create a desktop run configuration manually, choose a **Gradle** run configuration template and point to
-the **[app name]:composeApp** Gradle project with the following command:
-
-```shell
-desktopRun -DmainClass=com.example.myapplication.MainKt --quiet
-```
+To create a desktop configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include `:composeApp:run` in "Run".
+![Android configuration](desktop_config.png){width=300}
 
 With this configuration you can run the JVM desktop app:
 
@@ -207,12 +209,8 @@ The default run configuration for a web app is created as **composeApp [wasmJs]*
 
 ![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
-To create a web run configuration manually, choose a **Gradle** run configuration template and point to
-the **[app name]:composeApp** Gradle project with the following command:
-
-```shell
-wasmJsBrowserDevelopmentRun
-```
+To create a Wen run configuration manually, choose **Edit Configurations...** | **Add New Configuration** | **Gradle** as the run configuration template. Include `:composeApp:wasmJsBrowserDevelopmentRun` in "Run".
+![Android configuration](web_config.png){width=300}
 
 When you run this configuration, the IDE builds the Kotlin/Wasm app and opens it in the default browser:
 
@@ -229,15 +227,33 @@ Common issues with Java:
 
 * Some tools may not find a Java version to run or use a wrong version.
   To solve this:
-    * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed.
+    * Set the `JAVA_HOME` environment variable to the directory where the appropriate JDK/JBR is installed. This will make the tools available in the terminal. Refer to the beginning of this documen in section "Set up the environment" where the `ANDROID_HOME` variable is created for reference
   
       > We recommend using [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime),
       > an OpenJDK fork that supports class redefinition.
       >
       {style="note"}
   
-    * Append the path to the `bin` folder inside your `JAVA_HOME` to the `PATH` variable,
-      so that the tools included in JDK are available in the terminal.
+    * **If using JDK:** Append the path to the `bin` folder. Typically found in:
+  
+    On macOS
+    ```shell
+    /Library/Java/JavaVirtualMachines/jdk-<version>.jdk/Contents/Home
+    ```
+    On Windows
+    ```shell
+    C:\Program Files\Java\jdk<version>
+    ```
+    * **If using JBR (Jetbrains Routine)**: Use the path to JBR inside the IntelliJ directory. Typically found in:
+    * 
+    On macOS
+    ```shell
+   ~/Library/Application Support/JetBrains/IntelliJIdea<version>/jbr
+    ```
+    On Windows
+    ```shell
+    C:\Program Files\JetBrains\IntelliJ IDEA 202X.x.x\jbr
+    ```
 * If you encounter issues with Gradle JDK in Android Studio, make sure it's configured correctly:
   select **Settings** | **Build, Execution, Deployment** | **Build Tools** | **Gradle**.
 
