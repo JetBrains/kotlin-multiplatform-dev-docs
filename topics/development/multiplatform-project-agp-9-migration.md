@@ -131,20 +131,24 @@ Configure the Gradle build script for the new module:
    ```
 
 5. Copy the entire `android {}` block with Android-specific configuration from the `composeApp/build.gradle.kts`
-   file to the `androidApp/build.gradle.kts` file.
-6. To avoid the `Inconsistent JVM Target Compatibility Between Java and Kotlin Tasks` Gradle error, make sure that
-   your Gradle JVM is in sync with the Java version specified in the `android.compileOptions {}` block.
-   For example, if your Gradle JVM is set to JetBrains Runtime 21, adjust the version accordingly in the `androidApp/build.gradle.kts` file:
+   file to the `androidApp/build.gradle.kts` file. 
+
+6. Copy the compiler options from the `androidTarget {}` block of the `composeApp/build.gradle.kts` file to 
+ the `target {}` block of the `androidApp/build.gradle.kts` file:
 
     ```kotlin
-    android {
-        // ...
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_21
-            targetCompatibility = JavaVersion.VERSION_21
+    target {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
     ```
+
+> If there are any other plugins or properties set up in the `composeApp` build script, 
+> make sure to migrate those to the `androidApp` build script as well.
+>
+{style="note"}
+
 7. Change the configuration of the `composeApp` module from an Android application to an Android library,
    since that's what it effectively becomes. In `composeApp/build.gradle.kts`:
    * Change the reference to the Gradle plugin:
@@ -234,7 +238,7 @@ Now migrate to the new multiplatform library plugin:
         compileSdk = libs.versions.android.compileSdk.get().toInt()
     
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_11
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     
         androidResources {
