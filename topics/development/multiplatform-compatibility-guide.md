@@ -20,7 +20,8 @@ When configuring your project, check the compatibility of a particular version o
 
 | Kotlin Multiplatform plugin version | Gradle                                | Android Gradle plugin                               | Xcode   |
 |-------------------------------------|---------------------------------------|-----------------------------------------------------|---------|
-| 2.2.21                              | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.3.0                               | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.2.21                              | 7.6.3–8.14                            | 7.3.1–8.11.1                                        | 26      |
 | 2.2.20                              | 7.6.3–8.14                            | 7.3.1–8.11.1                                        | 16.4    |
 | 2.2.0-2.2.10                        | 7.6.3–8.14                            | 7.3.1–8.10.0                                        | 16.3    |
 | 2.1.21                              | 7.6.3–8.12.1                          | 7.3.1–8.7.2                                         | 16.3    |
@@ -41,6 +42,34 @@ When configuring your project, check the compatibility of a particular version o
 ## Kotlin 2.0.0 and later
 
 This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 2.0.0−%kotlinVersion%.
+
+<anchor name="android-target-rename"/>
+### Migrate to Google's plugin for Android targets
+
+**What's changed?**
+
+Before Kotlin 2.3.0, we provided support for the Android target through the `com.android.application` and `com.android.library` plugins.
+This was a temporary solution while the Android team at Google developed a separate plugin tailored to Kotlin Multiplatform.
+
+Initially, we used the `android` block, but later transitioned to the `androidTarget` block so that the `android` name could be
+reserved for use by the new plugin.
+
+Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.android.com/kotlin/multiplatform/plugin) is available from the Android team, and you can use it with the
+original `android` blocks.
+
+**What's the best practice now?**
+
+Migrate to the new `com.android.kotlin.multiplatform.library` plugin. Rename all occurrences of the `androidTarget` block to `android`.
+For detailed instructions on how to migrate, see Google's [migration guide](https://developer.android.com/kotlin/multiplatform/plugin#migrate).
+
+**When do the changes take effect?**
+
+Here's the deprecation cycle for the Kotlin Multiplatform Gradle plugin:
+
+* 1.9.0: introduce a deprecation warning when the `android` name is used in Kotlin Multiplatform projects
+* 2.1.0: raise this warning to an error
+* 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
+* 2.3.0: the new Android plugin is available; introduce a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects.
 
 ### Deprecated bitcode embedding
 
@@ -116,33 +145,6 @@ Here's the planned deprecation cycle:
 * Gradle >8.6: introduce a deprecation warning for any previous version of Kotlin in multiplatform projects using the `withJava()` function.
 * Gradle 9.0: raise this warning to an error.
 * 2.1.20: introduce a deprecation warning when using the `withJava()` function with any version of Gradle.
-
-<anchor name="android-target-rename"/>
-### Rename of `android` target to `androidTarget`
-
-**What's changed?**
-
-We continue our efforts to make Kotlin Multiplatform more stable. An essential step in this direction is to provide first-class
-support for the Android target. In the future, this support will be provided via a separate plugin, developed by the
-Android team from Google.
-
-To open the way for the new solution, we're renaming the `android` block to `androidTarget` in the current
-Kotlin DSL. This is a temporary change that is necessary to free the short `android` name for the upcoming DSL
-from Google.
-
-**What's the best practice now?**
-
-Rename all the occurrences of the `android` block to `androidTarget`. When the new plugin for the Android target support
-is available, migrate to the DSL from Google. It will be the preferred option to work with Android in Kotlin Multiplatform
-projects.
-
-**When do the changes take effect?**
-
-Here's the planned deprecation cycle:
-
-* 1.9.0: introduce a deprecation warning when the `android` name is used in Kotlin Multiplatform projects
-* 2.1.0: raise this warning to an error
-* 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
 
 <anchor name="declaring-multiple-targets"/>
 ### Declaring several similar targets
@@ -276,7 +278,7 @@ Here's the planned deprecation cycle:
 * 2.1.0: report an error in such cases, except for Kotlin/JS targets; to learn more about this exception, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47038/KJS-MPP-Split-JS-target-into-JsBrowser-and-JsNode)
 
 <anchor name="deprecate-pre-hmpp-dependencies"/>
-### Deprecated support of multiplatform libraries published in the legacy mode
+### Deprecated support of multiplatform libraries published in legacy mode
 
 **What's changed?**
 
@@ -487,11 +489,11 @@ For more information, see the [corresponding issue in YouTrack](https://youtrack
 This section covers incompatible changes that end their deprecation cycle and come into effect in Kotlin 1.9.0−1.9.25.
 
 <anchor name="compilation-source-deprecation"/>
-### Deprecated API for adding Kotlin source sets directly to the Kotlin compilation {initial-collapse-state="collapsed" collapsible="true"}
+### Removed API for adding Kotlin source sets directly to the Kotlin compilation {initial-collapse-state="collapsed" collapsible="true"}
 
 **What's changed?**
 
-The access to `KotlinCompilation.source` has been deprecated. A code like this produces a deprecation warning:
+The access to `KotlinCompilation.source` has been removed. Code like this is no longer supported:
 
 ```kotlin
 kotlin {
@@ -513,10 +515,12 @@ kotlin {
 
 **What's the best practice now?**
 
-To replace `KotlinCompilation.source(someSourceSet)`, add the  `dependsOn` relation from the
-default source set of the `KotlinCompilation` to `someSourceSet`. We recommend referring to the source directly using `by getting`,
-which is shorter and more readable. However, you can also use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
-which is applicable in all cases.
+To replace `KotlinCompilation.source(someSourceSet)`, add your sources directly to the appropriate source set using the
+`.srcDir()` function. Alternatively, you can create a new source set by adding the `dependsOn` relation from the
+default source set of the `KotlinCompilation` to `someSourceSet`. You can also refer to the source directly using
+[source set conventions](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.dsl/-kotlin-multiplatform-source-set-conventions/)
+which are IDE-friendly and considered the most robust approach. Finally, you can use `KotlinCompilation.defaultSourceSet.dependsOn(someSourceSet)`,
+which works in all cases.
 
 You can change the code above in one of the following ways:
 
@@ -528,19 +532,27 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting
         val myCustomIntermediateSourceSet by creating {
-            dependsOn(commonMain)
+            // The commonMain source set needs to be accessed with the 
+            // .get() function
+            dependsOn(commonMain.get())
         }
-        
-        // Option #1. Shorter and more readable, use it when possible. 
-        // Usually, the name of the default source set 
-        // is a simple concatenation of the target name and the compilation name:
-        val jvmMain by getting {
+
+        // Option #1. Add your sources directly to the appropriate source
+        // set:
+        commonMain {
+            kotlin.srcDir(layout.projectDirectory.dir("src/commonMain/my-custom-kotlin"))
+        }
+
+        // Option #2. Use the conventions provided with default
+        // Kotlin Multiplatform targets for their main and test
+        // source sets:
+        jvmMain {
             dependsOn(myCustomIntermediateSourceSet)
         }
-        
-        // Option #2. Generic solution, use it if your build script requires a more advanced approach:
+
+        // Option #3. A more generic solution. Use it if your build script 
+        // requires a more advanced approach:
         targets["jvm"].compilations["main"].defaultSourceSet.dependsOn(myCustomIntermediateSourceSet)
     }
 }
@@ -548,11 +560,11 @@ kotlin {
 
 **When do the changes take effect?**
 
-Here's the planned deprecation cycle:
+Here's the deprecation cycle:
 
-* 1.9.0: introduce a deprecation warning when `KotlinComplation.source` is used
+* 1.9.0: introduce a deprecation warning when `KotlinCompilation.source` is used
 * 1.9.20: raise this warning to an error
-* 2.2.0: remove `KotlinComplation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
+* 2.3.0: remove `KotlinCompilation.source` from the Kotlin Gradle plugin, attempts to use it lead to "unresolved
   reference" errors during the buildscript compilation
 
 <anchor name="kotlin-js-plugin-deprecation"/>

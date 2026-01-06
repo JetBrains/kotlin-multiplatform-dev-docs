@@ -58,21 +58,35 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    ![Add run script phase](xcode-run-script-phase-1.png){width=700}
 
-5. Adjust the following script and paste the result in the run script field:
+5. Adjust the following script and paste it in the script text field of the new phase:
 
    ```bash
+   if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+       echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
+       exit 0
+   fi
    cd "<Path to the root of the multiplatform project>"
-   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode 
+   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode
    ```
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
-
-   ![Add the script](xcode-run-script-phase-2.png){width=700}
+   
+   When you start an iOS run configuration, IntelliJ IDEA and Android Studio build the Kotlin framework dependency
+     before starting the Xcode build, and set the `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable to "YES".
+     The provided shell script checks this variable and prevents the Kotlin framework from being built a second time from Xcode.
+     
+   > When you launch an iOS run configuration for a project that does not support this,
+     the IDE suggests a fix to set up the build guard.
+   >
+   {style="note"}
 
 6. Disable **Based on dependency analysis** option.
 
+   ![Add the script](xcode-run-script-phase-2.png){width=700}
+
    This ensures that Xcode runs the script during every build and doesn't warn about missing output dependencies every time.
+
 7. Move the **Run Script** phase higher, placing it before the **Compile Sources** phase.
 
    ![Drag the Run Script phase](xcode-run-script-phase-3.png){width=700}

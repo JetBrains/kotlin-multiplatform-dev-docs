@@ -11,6 +11,10 @@ facilitating code reuse across them while maintaining the advantages of native p
 In this article, we'll explore ten reasons why developers should consider using 
 Kotlin Multiplatform in their existing or new projects and why KMP continues to gain a lot of traction.
 
+**Adoption is rising steadily:** According to the last two [Developer Ecosystem surveys](https://devecosystem-2025.jetbrains.com/), Kotlin Multiplatform usage more than doubled in just a year – increasing from 7% in 2024 to 18% in 2025. This rapid growth highlights the technology’s increasing momentum and the confidence developers place in it.
+
+![KMP usage increased from 7% in 2024 to 18% in 2025 among respondents to the last two Developer Ecosystem surveys](kmp-growth-deveco.svg){width=700}
+
 ## Why you should try Kotlin Multiplatform in your projects
 
 Whether you're looking to make your development more efficient or explore new technologies,
@@ -54,7 +58,7 @@ The experiment turned out to be very successful, resulting in the following:
 * A reduction in their maintenance and testing costs.
 * Significantly improved productivity within the team.
 
-[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
 
@@ -78,9 +82,7 @@ Here's how using KMP benefited the Quizlet team:
 * Enhanced developer experience.
 * Increased interest from team members, including Android, iOS, backend, and web developers, in writing shared code.
 
-> [Discover the full range of capabilities offered by Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
-> 
-{style="tip"}
+![Get started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}
 
 ### 3. Kotlin provides simplified code-sharing mechanisms
 
@@ -104,25 +106,25 @@ which means it prioritizes the following features:
   By detecting issues during compilation or while writing code in IDEs, 
   Kotlin enhances software reliability, minimizing the risk of runtime errors.
 
-We conduct annual Kotlin surveys to help us learn about users' experiences with the language. 
-This year, 92% of respondents reported having a positive experience, a notable increase from 86% a year earlier.
-
-![Kotlin satisfaction rate for 2023 and 2024](kotlin-satisfaction-rate.png){width=700}
-
 The key takeaway is that Kotlin’s emphasis on readability, reuse, interoperability, and safety 
 makes the language a compelling choice for developers and increases their productivity.
 
 ### 4. Kotlin Multiplatform allows for flexible multiplatform development
 
-With Kotlin Multiplatform, developers no longer need to decide between native and cross-platform development 
+With Kotlin Multiplatform, developers no longer need to decide between native and cross-platform development. 
 They can choose what to share and what to write natively.
 
 Before Kotlin Multiplatform, developers had to write everything natively.
 
 ![Before Kotlin Multiplatform: writing all code natively](before-kotlin-multiplatform.svg){width=700}
 
-Kotlin Multiplatform allows developers to share business logic, presentation logic, or even UI logic, 
-thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/).
+Kotlin Multiplatform lets you choose the level of code sharing that works for your project.
+
+1) [Share both logic and UI](compose-multiplatform-create-first-app.md): For maximum reuse and faster delivery, you can share not only business and presentation logic but also user interface code by combining Kotlin Multiplatform with [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/). This makes it possible to maintain a unified codebase across Android, iOS, desktop, and web while still integrating with platform-specific APIs where needed. This approach helps streamline development and ensures consistent behavior across platforms.
+
+2) [Share logic while keeping a native UI](multiplatform-create-first-app.md): If platform-specific visual behavior or UX fidelity is a priority, you can choose to share only the data and business logic. With this structure, each platform retains its native UI layer while benefiting from a common, consistent logic implementation. This approach is well-suited for teams that want to reduce duplication without changing their existing UI workflows.
+
+3) [Share a small part of the logic](multiplatform-ktor-sqldelight.md): Kotlin Multiplatform can also be introduced gradually by sharing a focused subset of logic, such as validation, domain calculations, or authentication flows. This option works well when you want to improve consistency and stability across platforms without making large architectural changes.
 
 ![With Kotlin Multiplatform and Compose Multiplatform:  developers can share business logic, presentation logic, or even UI logic](with-compose-multiplatform.svg){width=700}
 
@@ -143,7 +145,7 @@ There is also a community sample, the [New York Times App](https://github.com/xx
 which runs even on Wear OS for watches, the smartwatch operating system. 
 Check this list of [Kotlin Multiplatform and Compose Multiplatform samples](multiplatform-samples.md) to see more examples.
 
-[![Explore Compose Multiplatform](explore-compose.svg){width="700"}](https://www.jetbrains.com/compose-multiplatform/)
+[![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
 
 ### 6. You can use Kotlin Multiplatform in existing and new projects
 
@@ -166,27 +168,28 @@ Let's take a look at the following two scenarios:
 You can begin incrementally, starting with simple elements like constants and gradually migrating common utilities like email validation.
 You can also write or migrate your business logic, such as transaction processes or user authentication, for instance.
 
-At JetBrains, we frequently conduct Kotlin Multiplatform surveys and ask our community about what parts of code they share between different platforms.
-These surveys revealed that data models, data serialization, networking, analytics 
-and internal utilities were among the key areas where this technology makes a significant impact. 
-
-![Parts of code users are able to share between platforms with Kotlin Multiplatform: survey results](parts-of-code-share.png){width=700}
+> Together with the Google team and using Jetcaster as an example, we’ve created a practical migration guide that includes a repo where every commit represents a working state. 
+> [See how to move from Android to Kotlin Multiplatform gradually](migrate-from-android.md).
+{style="note"}
 
 ### 8. Kotlin Multiplatform is already used by global companies
 
 KMP is already used by many large companies all around the world, including Forbes, Philips, Cash App, Meetup, Autodesk,
 and many others. You can read all of their stories on the [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
 
-In November 2023, JetBrains announced that Kotlin Multiplatform is now [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/),
-attracting the interest of more companies and teams in the technology.
+In November 2023, JetBrains announced that Kotlin Multiplatform is now Stable,
+attracting the interest of more companies and teams in the technology. At Google I/O 2024, Google announced [official support for using Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) to share business logic between Android and iOS.
 
 ### 9. Kotlin Multiplatform provides powerful tooling support
 
 When working with Kotlin Multiplatform projects, you have powerful tooling at your fingertips.
 
-* **Android Studio**. This integrated development (IDE) environment is built upon IntelliJ Community Edition
-  and is widely regarded as the industry standard for Android development. 
-  Android Studio provides a comprehensive suite of features for coding, debugging, and performance monitoring.
+* **IntelliJ IDEA**. With IntelliJ IDEA 2025.2.2, you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform?_gl=1*1bztzm5*_gcl_au*MTcxNzEyMzc1MS4xNzU5OTM3NDgz*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NjU4MDcyMzckbzkxJGcxJHQxNzY1ODA3MjM4JGo1OSRsMCRoMA..), which offers basic launching and debugging capabilities for iOS apps, preflight environment checks, and other helpful KMP functionality.
+* **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. With Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
+* **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
+
+![Compose Hot Reload](compose-hot-reload.gif){width=350}
+
 * **Xcode**. Apple's IDE can be used to create the iOS part of Kotlin Multiplatform apps.
   Xcode is the standard for iOS app development, offering a plethora of tools for coding, debugging, and configuration.
   However, Xcode is Mac only.
@@ -203,21 +206,24 @@ Kotlin and Kotlin Multiplatform have a very supportive community. Here are a few
 * [Kotlin X](https://twitter.com/kotlin). Here, you'll find quick expert insights and the latest news, including myriad multiplatform tips.
 * [Kotlin YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw).
   Our YouTube channel provides practical tutorials, livestreams with experts, and other excellent educational content for visual learners.
-* [Kotlin Roundup](https://lp.jetbrains.com/subscribe-to-kotlin-news/). 
+* [Kodee's Kotlin Roundup](https://lp.jetbrains.com/subscribe-to-kotlin-news/). 
   If you want to stay in the loop with the latest updates across the dynamic Kotlin and Kotlin Multiplatform ecosystems,
   subscribe to our regular newsletter!
 
 The Kotlin Multiplatform ecosystem is thriving. It's enthusiastically nurtured by numerous Kotlin developers globally.
+To help the community navigate this expanding landscape, [klibs.io](http://klibs.io) provides a curated directory of Kotlin Multiplatform libraries, making it easier to discover reliable solutions for common use cases.
+
 Here is a diagram showing the number of Kotlin Multiplatform libraries created per year:
 
-![The number of Kotlin Multiplatform libraries over the years.](kmp-libs-over-years.png){width=700}
+![Kotlin Multiplatform libraries created per year](kmp-libs-over-years.png){width=700}
 
 As you can see, there was a definite uptick in 2021, and the number of libraries hasn't stopped growing since.
 
 ## Why choose Kotlin Multiplatform over other cross-platform technologies?
 
 When choosing between [different cross-platform solutions](cross-platform-frameworks.md), 
-it's essential to weigh up both their advantages and disadvantages. 
+it's essential to weigh up both their advantages and disadvantages. You can also explore side-by-side comparisons of Kotlin Multiplatform with other technologies, including [React Native](kotlin-multiplatform-react-native.topic) and [Flutter](kotlin-multiplatform-flutter.md).
+
 Here's a breakdown of the key reasons why Kotlin Multiplatform might be the right choice for you:
 
 * **Excellent tooling, easy to use**. Kotlin Multiplatform leverages Kotlin, offering excellent tooling and ease of use for developers.
@@ -226,6 +232,7 @@ Here's a breakdown of the key reasons why Kotlin Multiplatform might be the righ
   you can enable your multiplatform app to access platform-specific APIs.
 * **Great cross-platform performance**. Shared code written in Kotlin is compiled into different output formats for different targets:
   Java bytecode for Android and native binaries for iOS, ensuring good performance across all platforms.
+* **AI-powered code generation**. You can speed up multiplatform development with code generation powered by [Junie](https://www.jetbrains.com/junie/), the JetBrains coding agent that supports a more efficient workflow across shared and platform-specific code.
 
 If you've already decided to try Kotlin Multiplatform, here are a few tips that will help you get started:
 
@@ -238,7 +245,7 @@ If you've already decided to try Kotlin Multiplatform, here are a few tips that 
   If it worked for you, you might want to expand the scope and share even more code.
   If not, you need to understand the reasons why this experiment didn't work out.
 
-[![See Kotlin Multiplatform in action! Get Started now](kmp-get-started-action.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+[![See Kotlin Multiplatform in action! Get Started now](see-kmp-in-action.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 For those who want to help their team get started with Kotlin Multiplatform, we prepared a [detailed guide](multiplatform-introduce-your-team.md) with practical tips.
 

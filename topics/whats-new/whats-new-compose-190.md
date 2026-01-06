@@ -352,4 +352,4 @@ Compose Multiplatform introduces support for version 9.0.0 of the Android Gradle
 For compatibility with the new AGP version, make sure you upgrade to Compose Multiplatform 1.9.3 or 1.10.0.
 
 To make the update process smoother in the long term,
-we recommend changing your project structure to isolate AGP usage to a dedicated Android module.
+we recommend changing your project structure to use a dedicated Android application module.

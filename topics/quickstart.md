@@ -90,8 +90,8 @@ Use the IDE wizard to create a new KMP project:
     * For iOS, you can choose one of two implementations:
         * shared UI code, with Compose Multiplatform,
         * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
-    * The desktop target includes a Beta version of [](compose-hot-reload.md) functionality that allows you to see UI changes
-      as soon as you alter corresponding code.
+    * The desktop target includes [](compose-hot-reload.md) functionality that allows you to see UI changes
+      as soon as you save changes to your code.
       Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
       writing UI code.
 
@@ -101,10 +101,6 @@ When you're done choosing platforms, click the **Create** button and wait for th
 
 </tab>
 <tab title= "Android Studio">
-
-The Kotlin Multiplatform IDE plugin relies heavily on K2 functionality and is not going to work as described without it.
-So, before you start, make sure K2 mode is enabled:
-**Settings** | **Languages & Frameworks** | **Kotlin** | **Enable K2 mode**.
 
 Use the IDE wizard to create a new KMP project:
 

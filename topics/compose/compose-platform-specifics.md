@@ -107,6 +107,10 @@ _Previews_ are non-interactable layout presentations of composables available in
 To see a preview for a composable:
 
 1. Add an Android target to your project if there isn't one (the preview mechanism uses an Android library).
+   > Starting with Compose Multiplatform [1.10.0](whats-new-compose-110.md#unified-preview-annotation), 
+   > you can use the `@Preview` annotation for all target platforms in the `commonMain` source set.
+   >
+   >{style="note"}
 2. Mark composables that you would like to be previewable with the `@Preview` annotation in common code.
 3. Switch to the **Split** or **Design** view in the editor window.
      It prompts you to build the project for the first time if you haven't done that yet.
