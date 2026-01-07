@@ -29,6 +29,40 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
     </tr>
     <tr>
         <td>
+            <strong><a href="https://github.com/JetBrains/kotlinconf-app">Official KotlinConf application</a></strong>
+        </td>
+        <td>A companion application for <a href="https://kotlinconf.com/">KotlinConf</a>.
+            The client application for Android, iOS, desktop, and web is built with shared UI using Compose Multiplatform.
+            The backend application is powered by the <a href="https://ktor.io/">Ktor</a> server-side framework
+            and the <a href="https://www.jetbrains.com/help/exposed/home.html">Exposed</a> database library.
+        </td>
+        <td>
+            <list>
+                <li>UI</li>
+                <li>Model</li>
+                <li>Networking</li>
+                <li>Data storage</li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li><code>kotlinx-serialization</code></li>
+                <li><code>kotlinx-datetime</code></li>
+                <li><code>kotlinx-coroutines</code></li>
+                <li><code>ktor-client</code></li>
+                <li><code>ktor-server</code></li>
+                <li><code>multiplatform-settings</code></li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li>Jetpack Compose on Android</li>
+                <li>Compose Multiplatform on iOS, desktop, and web</li>
+            </list>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <strong><a href="https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer">Image Viewer</a></strong>
         </td>
         <td>An application for capturing, viewing, and storing pictures. Includes support for maps. Uses Compose
