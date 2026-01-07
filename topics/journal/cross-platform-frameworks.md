@@ -28,6 +28,25 @@ The choice of a framework largely depends on your particular project and your go
 
 Nevertheless, we've tried to pick out some of the best frameworks for cross-platform mobile development to give you a starting point for your decision.
 
+### Kotlin Multiplatform
+
+Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that allows sharing code across platforms while retaining the benefits of native programming. It enables developers to reuse as much code as they want, write native code if needed, and seamlessly integrate shared Kotlin code into any project. You can use Use Kotlin with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework, to share up to 100% of your app code, including UI.
+
+**Programming language:** Kotlin.
+
+**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](https://kotlinlang.org/case-studies/?type=multiplatform).
+
+**Key features:**
+
+* Developers can reuse code across Android, iOS, web, desktop, and server-side while keeping native code if needed.
+* Kotlin Multiplatform can be seamlessly integrated into any project. Developers can utilize platform-specific APIs while making the most of both native and cross-platform development.
+* Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), developers have full code-sharing flexibility and the ability to share both the logic and the UI.
+* There's no need to introduce a new language to your codebase when you already use Kotlin for Android. You can reuse your Kotlin code and expertise, which makes migrating to Kotlin Multiplatform less risky compared to other technologies.
+
+Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to Stable. At Google I/O 2024, Google announced [official support for using Kotlin Multiplatform to share business logic between Android and iOS](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html). Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](https://kotlinlang.org/case-studies/?type=multiplatform) to develop multiplatform apps with a native-like user experience.
+
+[![Kick off your Kotlin Multiplatform journey](kmp-journey-start.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+
 ### Flutter
 
 Released by Google in 2017, Flutter is a popular framework for building mobile, web, and desktop apps from a single codebase. 
@@ -67,25 +86,6 @@ An open-source UI software framework, React Native was developed in 2015 (a bit 
 * In versions 0.62 and later, integration between React Native and the mobile app debugger Flipper is enabled by default. Flipper is used to debug Android, iOS, and React native apps, and it provides tools like a log viewer, an interactive layout inspector, and a network inspector.
 
 As one of the most popular cross-platform app development frameworks, React Native has a large and strong community of developers who share their technical knowledge. Thanks to this community, you can get the support you need when building mobile apps with the framework.
-
-### Kotlin Multiplatform
-
-Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that allows sharing code across platforms while retaining the benefits of native programming. It enables developers to reuse as much code as they want, write native code if needed, and seamlessly integrate shared Kotlin code into any project.
-
-**Programming language:** Kotlin.
-
-**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](https://kotlinlang.org/case-studies/?type=multiplatform).
-
-**Key features:**
-
-* Developers can reuse code across Android, iOS, web, desktop, and server-side while keeping native code if needed.
-* Kotlin Multiplatform can be seamlessly integrated into any project. Developers can utilize platform-specific APIs while making the most of both native and cross-platform development.
-* Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework by JetBrains, developers have full code-sharing flexibility and the ability to share both the logic and the UI.
-* There's no need to introduce a new language to your codebase when you already use Kotlin for Android. You can reuse your Kotlin code and expertise, which makes migrating to Kotlin Multiplatform less risky compared to other technologies.
-
-Even though this cross-platform mobile development framework is one of the youngest on our list, it has a mature community. In November 2023, JetBrains promoted it to [Stable](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-stable/). It's growing fast and is already making a distinct impression on today's market. Thanks to its regularly updated [documentation](get-started.topic) and community support, you can always find answers to your questions. What's more, many [global companies and startups already use Kotlin Multiplatform](https://kotlinlang.org/case-studies/?type=multiplatform) to develop multiplatform apps with a native-like user experience.
-
-[![Kick off your Kotlin Multiplatform journey](kmp-journey-start.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 ### Ionic
 
