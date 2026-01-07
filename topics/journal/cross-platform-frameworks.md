@@ -30,11 +30,11 @@ Nevertheless, we've tried to pick out some of the best frameworks for cross-plat
 
 ### Kotlin Multiplatform
 
-Kotlin Multiplatform (KMP) is an open-source technology built by JetBrains that allows sharing code across platforms while retaining the benefits of native programming. It enables developers to reuse as much code as they want, write native code if needed, and seamlessly integrate shared Kotlin code into any project. You can use Use Kotlin with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework, to share up to 100% of your app code, including UI.
+[Kotlin Multiplatform (KMP)](https://kotlinlang.org/multiplatform/) is an open-source technology built by JetBrains that allows sharing code across platforms while retaining the benefits of native programming. It enables developers to reuse as much code as they want, write native code if needed, and seamlessly integrate shared Kotlin code into any project. You can use Use Kotlin with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a modern declarative cross-platform UI framework, to share up to 100% of your app code, including UI.
 
 **Programming language:** Kotlin.
 
-**Mobile app examples:** McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](https://kotlinlang.org/case-studies/?type=multiplatform).
+**Mobile app examples:** Duolingo, McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. [Read more about Kotlin Multiplatform case studies](https://kotlinlang.org/case-studies/?type=multiplatform).
 
 **Key features:**
 
