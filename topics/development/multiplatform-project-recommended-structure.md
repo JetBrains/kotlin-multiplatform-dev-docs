@@ -249,8 +249,7 @@ After the configuration is complete, move the code of the web app to the new dir
 In the example app, both UI and business logic code are being shared, so it only needs a single shared module
 to hold all common code: you can simply repurpose `composeApp` as the common code module.
 
-For an overview of other project configurations and ways of dealing with them, see our blogpost about
-the new recommended project structure TODO link
+[//]: # (TODO For an overview of other project configurations and ways of dealing with them, see our blogpost about the new recommended project structure [link])
 
 The only thing you need to adjust in the Gradle configuration that is not related to connections with entry point modules
 is the new Android Library Gradle plugin.
@@ -613,6 +612,4 @@ In this example, you can leave it inside `shared`:
 
 3. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
 
-## What's next
-
-TODO up for suggestions here — the first thought is to link platform-specific guidance.
+[//]: # (TODO ## What's next: up for suggestions here — the first thought is to link platform-specific guidance)
