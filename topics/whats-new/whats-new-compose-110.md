@@ -219,6 +219,20 @@ UIKitViewController(
 Keep in mind that this configuration renders the view on top of the Compose UI layer; 
 consequently, it will visually cover any other composables located in the same area.
 
+## Web
+
+### Resource caching
+<primary-label ref="Experimental"/>
+
+Compose Multiplatform now uses the [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) 
+to cache successful responses for static assets and string resources.
+This approach avoids the delays associated with the browser's default cache, 
+which validates stored content through repeated HTTP requests and can be particularly slow on low-bandwidth connections. 
+The cache is cleared on every app launch or page refresh to ensure resources remain consistent with the application's current state.
+
+For more details, see the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/5379)
+and [Caching web resources](compose-multiplatform-resources-usage.md#caching-web-resources).
+
 ## Desktop
 
 ### Compose Hot Reload integration
