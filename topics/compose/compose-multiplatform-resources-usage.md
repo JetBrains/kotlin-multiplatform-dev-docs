@@ -557,7 +557,7 @@ Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
-## Preloading resources for web targets
+## Preloading of resources for web targets
 
 The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with 
 slower network connections, resource fetching can cause visual glitches, such as [FOUT](https://fonts.google.com/knowledge/glossary/fout) 
