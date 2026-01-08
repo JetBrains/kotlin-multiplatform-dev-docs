@@ -557,7 +557,7 @@ Both resource files in this example are located in the `commonMain` source set:
 
 ![File structure of the composeResources directory](compose-resources-android-webview.png){width="230"}
 
-## Preloading of resources for web targets
+## Preloading resources for web targets
 
 The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with 
 slower network connections, resource fetching can cause visual glitches, such as [FOUT](https://fonts.google.com/knowledge/glossary/fout) 
@@ -670,6 +670,22 @@ fun main() {
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))"}
+
+## Caching web resources
+<primary-label ref="Experimental"/>
+
+Compose Multiplatform uses the [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) to cache successful responses
+and avoid redundant HTTP revalidations typically performed by the browser's default caching mechanism.
+
+The cache is cleared globally at the start of each new application session (i.e., on every page refresh). 
+Resetting the cache at this stage ensures resource consistency, 
+as reusing the cache across multiple sessions could lead to outdated or incompatible resources
+that may result in application crashes or logical inconsistencies.
+
+To prevent redundant concurrent fetches for the same resource, the implementation uses resource-specific locks. 
+Each request is guarded by a per-resource mutex, 
+allowing parallel requests for different resources while serializing duplicate requests for the same path. 
+This design minimizes unnecessary network traffic and eliminates race conditions during cache population.
 
 ## Interaction with other libraries and resources
 
