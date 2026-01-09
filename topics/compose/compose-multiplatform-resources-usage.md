@@ -22,7 +22,7 @@ Read on for details about the following topics:
 * [Using multiplatform resources as Android assets](#compose-multiplatform-resources-as-android-assets).
 * Web-specific resource handling:
   * [Preloading of resources](#preloading-of-resources-for-web-targets) using browser features and the preload API,
-  * [Caching web resources](#caching-web-resources)
+  * [Caching web resources](#caching-web-resources).
 * Working with external resources: 
   [from external libraries](#accessing-multiplatform-resources-from-external-libraries), 
   [remote files](#remote-files), and [Java resources](#using-java-resources).
