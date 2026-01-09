@@ -58,6 +58,8 @@ add the dependency explicitly to your `build.gradle.kts`, for example:
 implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
 ```
 
+You can also [use the vector Android XML icons](compose-multiplatform-resources-usage.md#icons) from the Material Symbols library.
+
 ### Migration from Bundle to SavedState in Navigation
 
 Navigation in Compose Multiplatform 1.8.2,
