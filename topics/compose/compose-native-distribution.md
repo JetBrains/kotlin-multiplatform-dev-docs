@@ -222,7 +222,7 @@ To define a package version, follow these rules:
         <td><code>MAJOR[.MINOR][.PATCH]</code></td>
         <td>
             <ul>
-                <li><code>MAJOR</code> is an integer > 0</li>
+                <li><code>MAJOR</code> is a non-negative integer</li>
                 <li><code>MINOR</code> is an optional non-negative integer</li>
                 <li><code>PATCH</code> is an optional non-negative integer</li>
             </ul>
