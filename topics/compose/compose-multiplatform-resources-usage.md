@@ -8,6 +8,25 @@ To regenerate the `Res` class and all the resource accessors, build the project 
 
 After that, you can use the generated class to access the configured multiplatform resources from your code or from external libraries.
 
+Read on for details about the following topics:
+
+* [Importing the generated `Res` class](#importing-the-generated-class).
+* [Customizing the accessor class generation](#customizing-accessor-class-generation): how to make it public, assign to a package, or generate it unconditionally.
+* Working with specific resource types: 
+  * [Drawable resources](#images), such as simple images, rasterized images, or XML vectors,
+  * [Vector Android XML icons](#icons) from the Material Symbols library, 
+  * [Strings](#strings), including simple strings, templates, arrays, and plurals,
+  * [Storing and loading custom fonts](#fonts),
+  * [Raw files](#raw-files) and converting byte arrays into images. 
+* [Accessing resources mapped with string IDs](#generated-maps-for-resources-and-string-ids).
+* [Using multiplatform resources as Android assets](#compose-multiplatform-resources-as-android-assets).
+* Web-specific resource handling:
+  * [Preloading of resources](#preloading-of-resources-for-web-targets) using browser features and the preload API,
+  * [Caching web resources](#caching-web-resources)
+* Working with external resources: 
+  [from external libraries](#accessing-multiplatform-resources-from-external-libraries), 
+  [remote files](#remote-files), and [Java resources](#using-java-resources).
+
 ## Importing the generated class
 
 To use the prepared resources, import the generated class, for example:
