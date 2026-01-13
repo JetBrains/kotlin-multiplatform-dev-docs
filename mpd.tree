@@ -110,7 +110,9 @@
 	<toc-element toc-title="Explore project structure">
 		<toc-element toc-title="Basic project structure" topic="multiplatform-discover-project.md"/>
 		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
-        <toc-element toc-title="General structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
+
+		<!-- This should be published only when IntelliJ IDEA supports AGP 9 -->
+		<!--<toc-element toc-title="General structure recommendations" topic="multiplatform-project-recommended-structure.md"/>-->
 		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
