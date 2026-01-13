@@ -28,7 +28,7 @@ the same as described in the [iOS developer documentation](https://developer.app
 {style="note"}
 
 What is specific to Kotlin Multiplatform projects is compiling the shared Kotlin module into a framework and linking it to the Xcode project.
-Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform).
+Generally, integration between the shared module and the Xcode project is done automatically by the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform).
 However, if you don't use the plugin, bear in mind the following when building and bundling the iOS project in Xcode:
 
 * The shared Kotlin library compiles down to the native framework.

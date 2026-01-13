@@ -487,7 +487,7 @@ Create a class that will connect the application to the API:
     This class executes network requests and deserializes JSON responses into entities from the `com.jetbrains.spacetutorial.entity` package.
     The Ktor `HttpClient` instance initializes and stores the `httpClient` property. 
 
-    This code uses the [Ktor `ContentNegotiation` plugin](https://ktor.io/docs/serialization-client.html)
+    This code uses the [`ContentNegotiation`](https://ktor.io/docs/serialization-client.html) Ktor plugin
     to deserialize the result of a `GET` request. The plugin processes the request and the response payload as JSON,
     serializing and deserializing them as needed.
 

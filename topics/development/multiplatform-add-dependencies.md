@@ -177,8 +177,8 @@ their dependencies to your project.
 
 ### Library shared for all source sets
 
-If you want to use a library from all source sets, you can add it only to the common source set. The Kotlin
-Multiplatform plugin automatically adds the corresponding parts to any other source sets.
+If you want to use a library from all source sets, you can add it only to the common source set.
+The Kotlin Multiplatform Gradle plugin automatically adds the corresponding parts to any other source sets.
 
 > You cannot set dependencies on platform-specific libraries in the common source set.
 >

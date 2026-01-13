@@ -860,7 +860,7 @@ As a result, links like `compose://foo/bar` can now be redirected from a browser
 The Compose Multiplatform Gradle plugin includes built-in support for [ProGuard](https://www.guardsquare.com/proguard). 
 ProGuard is an [open-source tool](https://github.com/Guardsquare/proguard) for code minification and obfuscation.
 
-For each *default* (without ProGuard) packaging task, the Gradle plugin provides a *release* task (with ProGuard):
+For each *default* packaging task (without ProGuard), the Gradle plugin provides a *release* task (with ProGuard):
 
 <table>
   <tr>
