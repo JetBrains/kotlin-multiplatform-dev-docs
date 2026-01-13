@@ -2,6 +2,8 @@
 
 In this article, you'll learn how to use platform-specific APIs when developing multiplatform applications and libraries.
 
+<video src="https://www.youtube.com/watch?v=bSNumV04y_w"/>
+
 ## Kotlin multiplatform libraries
 
 Before writing code that uses a platform-specific API, check whether you can use a multiplatform library instead.
