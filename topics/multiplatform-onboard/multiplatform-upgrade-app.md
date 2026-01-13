@@ -164,7 +164,7 @@ data class RocketLaunch (
     }
     ```
 
-   * The [ContentNegotiation Ktor plugin](https://ktor.io/docs/serialization-client.html#register_json) and the JSON serializer deserialize the result of the GET request.
+   * The [`ContentNegotiation`](https://ktor.io/docs/serialization-client.html#register_json) Ktor plugin and the JSON serializer deserialize the result of the GET request.
    * The JSON serializer here is configured in a way that it prints JSON in a more readable manner with the `prettyPrint` property. It
      is more flexible when reading malformed JSON with `isLenient`,
      and it ignores keys that haven't been declared in the rocket launch model with `ignoreUnknownKeys`.

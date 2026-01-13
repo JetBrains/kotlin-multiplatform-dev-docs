@@ -62,7 +62,7 @@ The Kotlin Multiplatform plugin was rebuilt from the ground up:
 * Automatically generated run configurations for all supported platforms, with the device selector for iOS and Android.
 * Cross-language support: cross-language navigation and debugging for Swift and Kotlin, along with Swift syntax highlighting
     and quick documentation.
-* Compose Multiplatform support: the Kotlin Multiplatform plugin now supports Compose Multiplatform resources,
+* Compose Multiplatform support: the Kotlin Multiplatform IDE plugin now supports Compose Multiplatform resources,
     autocompletion, and UI previews for common code (the [previous Compose Multiplatform plugin](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
     can be safely uninstalled).
 * Compose Hot Reload: instantly see UI changes without restarting the app (with a desktop JVM target).
