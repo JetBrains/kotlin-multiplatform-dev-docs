@@ -10,7 +10,7 @@ After that, you can use the generated class to access the configured multiplatfo
 
 Read on for details about the following topics:
 
-* [Importing the generated `Res` class](#importing-the-generated-class).
+* [Importing the generated `Res` class and accessors](#importing-the-generated-class).
 * [Customizing the accessor class generation](#customizing-accessor-class-generation): how to make it public, assign to a package, or generate it unconditionally.
 * Working with specific resource types: 
   * [Drawable resources](#images), such as simple images, rasterized images, or XML vectors,
@@ -20,7 +20,7 @@ Read on for details about the following topics:
   * [Raw files](#raw-files) and converting byte arrays into images. 
 * [Accessing resources mapped with string IDs](#generated-maps-for-resources-and-string-ids).
 * [Using multiplatform resources as Android assets](#compose-multiplatform-resources-as-android-assets).
-* Web-specific resource handling:
+* Handling web-specific resources:
   * [Preloading of resources](#preloading-of-resources-for-web-targets) using browser features and the preload API,
   * [Caching web resources](#caching-web-resources).
 * Working with external resources: 
