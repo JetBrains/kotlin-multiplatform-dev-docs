@@ -11,7 +11,7 @@
     <var name="apiVersion" value="2.3"/>
 
     <!-- Compose Multiplatform -->
-    <var name="org.jetbrains.compose" value="1.9.3"/>
+    <var name="org.jetbrains.compose" value="1.10.0"/>
     <var name="org.jetbrains.compose-eap" value="1.10.0-rc02"/>
     <var name="org.jetbrains.androidx.navigation" value="2.9.1"/>
     <var name="org.jetbrains.androidx.lifecycle" value="2.9.6"/>
@@ -19,7 +19,7 @@
     <var name="org.jetbrains.compose.material3" value="1.9.0"/>
 
     <!-- Jetpack Compose -->
-    <var name="androidx.compose" value="1.9.4"/>
+    <var name="androidx.compose" value="1.10.0"/>
     <var name="androidx.compose.material3-stable" value="1.4.0"/>
 
     <!-- Compose Hot Reload -->

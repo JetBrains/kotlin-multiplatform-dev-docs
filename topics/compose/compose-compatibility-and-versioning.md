@@ -90,6 +90,7 @@ The following table lists Jetpack Compose artifact versions used by each version
 
 | Compose Multiplatform version                                                     | Jetpack Compose version | Jetpack Compose Material3 version |
 |-----------------------------------------------------------------------------------|-------------------------|-----------------------------------|
+| [1.10.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0) | 1.10.0                  | 1.5.0-alpha08                     |
 | [1.9.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.3)   | 1.9.4                   | 1.4.0                             |
 | [1.8.2](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.2)   | 1.8.2                   | 1.3.2                             |
 | [1.7.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.7.3)   | 1.7.6                   | 1.3.1                             |
