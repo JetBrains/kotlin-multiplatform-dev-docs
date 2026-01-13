@@ -294,7 +294,8 @@ When all of your code works with the new configuration:
 
 Congratulations! You have upgraded your project to be compatible with AGP 9.
 
+<!-- Commented out for now
 ## What's next
 
 Check out the [recommended project structure](multiplatform-project-recommended-structure.md)
-which follows the logic of separating entry points for any app target you might have.
+which follows the logic of separating entry points for any app target you might have. -->
