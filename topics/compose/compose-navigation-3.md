@@ -1,5 +1,5 @@
 [//]: # (title: Navigation 3 in Compose Multiplatform)
-<primary-label ref="alpha"/>
+<primary-label ref="beta"/>
 
 [Android's Navigation library](https://developer.android.com/guide/navigation) has been upgraded to Navigation 3, introducing a redesigned approach to navigation that works with
 Compose and takes into account feedback to the previous version of the library.
