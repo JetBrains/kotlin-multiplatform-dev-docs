@@ -2,7 +2,7 @@
 
 In this article, you'll learn how to use platform-specific APIs when developing multiplatform applications and libraries.
 
-<video src="https://www.youtube.com/watch?v=bSNumV04y_w"/>
+<video src="https://www.youtube.com/v/bSNumV04y_w" title="Using Platform-Specific APIs in KMP Apps"/>
 
 ## Kotlin multiplatform libraries
 
