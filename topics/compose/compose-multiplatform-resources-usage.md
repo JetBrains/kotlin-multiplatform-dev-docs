@@ -677,7 +677,7 @@ fun main() {
 Compose Multiplatform uses the [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) to cache successful responses
 and avoid redundant HTTP revalidations typically performed by the browser's default caching mechanism.
 
-The cache is cleared globally at the start of each new application session (i.e., on every page refresh). 
+The cache is cleared globally on every app launch and page refresh. 
 Resetting the cache at this stage ensures resource consistency, 
 as reusing the cache across multiple sessions could lead to outdated or incompatible resources
 that may result in application crashes or logical inconsistencies.
