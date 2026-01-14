@@ -2,6 +2,8 @@
 
 In this article, you'll learn how to use platform-specific APIs when developing multiplatform applications and libraries.
 
+<video src="https://www.youtube.com/v/bSNumV04y_w" title="Using Platform-Specific APIs in KMP Apps"/>
+
 ## Kotlin multiplatform libraries
 
 Before writing code that uses a platform-specific API, check whether you can use a multiplatform library instead.
@@ -268,5 +270,4 @@ Multiplatform module can't be self-sufficient, and you'll need to implement the 
 
 ## What's next?
 
-* See a video walkthrough of [Using Platform-Specific APIs in KMP Apps](https://youtu.be/bSNumV04y_w).
-* For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
+For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
