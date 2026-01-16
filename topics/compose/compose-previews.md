@@ -6,7 +6,7 @@ Previews are a [part of core functionality of Jetpack Compose](https://developer
 Compose Multiplatform first implemented a limited `@Preview` annotation as a custom library,
 but with version 1.10.0 this implementation is deprecated as the original AndroidX annotation became fully multiplatform.
 
-On this page, you can learn:
+On this page, you can find:
 * [how to enable previews](#preview-setup) in common code for different project configurations,
 * [overview of possible combinations](#possible-configurations) of Compose Multiplatform, AGP, and annotations.
 
