@@ -1,4 +1,4 @@
-[//]: # (title: Preview your UI)
+[//]: # (title: Compose UI previews)
 
 You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
 Previews are a [part of core functionality of Jetpack Compose](https://developer.android.com/develop/ui/compose/tooling/previews).
@@ -28,12 +28,12 @@ The annotation dependency should point to one of the `@Preview` implementations,
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            // The new annotation, available in CMP 1.10 and later
+            // The new annotation, available in CMP 1.10.0 and later
             implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.0")
             // To import the new annotation:
             // import androidx.compose.ui.tooling.preview.Preview
 
-            // The old annotation, deprecated in CMP 1.10
+            // The old annotation, deprecated in CMP 1.10.0
             implementation("org.jetbrains.compose.components:components-ui-tooling-preview:1.10.0")
             // To import the old annotation:
             // import org.jetbrains.compose.ui.tooling.preview.Preview
