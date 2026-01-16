@@ -72,6 +72,10 @@ combinations that you can use to enable Compose previews:
 * Compose Multiplatform 1.10, with the new `@Preview` annotation and Android configured with `androidLibrary {}` with AGP 9.0.
   See our [AGP 9.0 migration guide](multiplatform-project-agp-9-migration.md) for details on upgrading your KMP apps.
 
+> Support for AGP 9.0 is coming soon to IntelliJ IDEA, expected to arrive in Q1 2026.
+>
+{style="note"}
+
 ### Available annotations
 
 There are two `@Preview` annotations available in Compose Multiplatform:
@@ -100,3 +104,8 @@ For Android Gradle plugin 9.0, there is a new [KMP Android library plugin](https
 (`com.android.kotlin.multiplatform.library`)
 which introduces the `androidLibrary {}` block for Android configuration.
 While it's also possible to use this plugin with AGP 8.x, that combination has known issues and is not recommended. 
+
+> AGP 9.0 is supported in the latest stable Android Studio, but not supported in IntelliJ IDEA yet.
+> For details on compatibility and upgrading to AGP 9.0, see [our migration page](multiplatform-project-agp-9-migration.md).
+> 
+{style="note"}
