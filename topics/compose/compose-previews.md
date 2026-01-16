@@ -3,6 +3,11 @@
 You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
 Previews are a [part of core functionality of Jetpack Compose](https://developer.android.com/develop/ui/compose/tooling/previews).
 
+> To enable Compose previews in common code of your Kotlin Multiplatform project,
+> you need an Android target, since previews rely on Android libraries.
+> 
+{style="note"}
+
 Compose Multiplatform first implemented a limited `@Preview` annotation as a custom library,
 but with version 1.10.0 this implementation is deprecated as the original AndroidX annotation became fully multiplatform.
 
