@@ -105,7 +105,8 @@ For Android Gradle plugin 9.0, there is a new [KMP Android library plugin](https
 which introduces the `androidLibrary {}` block for Android configuration.
 While it's also possible to use this plugin with AGP 8.x, that combination has known issues and is not recommended. 
 
-> AGP 9.0 is supported in the latest stable Android Studio, but not supported in IntelliJ IDEA yet.
-> For details on compatibility and upgrading to AGP 9.0, see [our migration page](multiplatform-project-agp-9-migration.md).
+> AGP 9.0 is supported in the latest stable Android Studio,
+> but not supported in IntelliJ IDEA yet and expected to arrive in Q1 2026.
+> For details on upgrading to AGP 9.0, see [our migration page](multiplatform-project-agp-9-migration.md).
 > 
 {style="note"}
