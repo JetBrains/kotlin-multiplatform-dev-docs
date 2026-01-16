@@ -1,7 +1,7 @@
 [//]: # (title: Updating multiplatform projects with Android apps to use AGP 9)
 <show-structure for="chapter,procedure" depth="3"/>
 
-When used along with Android Gradle plugin 9 or newer,
+When used along with Android Gradle plugin 9.0 or newer,
 the Kotlin Multiplatform Gradle plugin stops being compatible with the `com.android.application` and the `com.android.library` plugins.
 
 To update your project:
@@ -61,7 +61,7 @@ The sample consists of a single Gradle module (`composeApp`) that contains all t
 points,
 and the `iosApp` project with the iOS-specific code and configuration.
 
-To prepare for the AGP 9 migration, you will:
+To prepare for the AGP 9.0 migration, you will:
 
 * [Extract the Android app entry point](#android-app) into a separate `androidApp` module.
 * [Reconfigure the module with shared code](#configure-the-shared-module-to-use-the-android-kmp-library-plugin) (`composeApp`) to use the Android-KMP library plugin 
@@ -271,7 +271,7 @@ When all of your code works with the new configuration:
     ```text
     distributionUrl=https\://services.gradle.org/distributions/gradle-9.1.0-bin.zip
     ```
-4. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9](https://developer.android.com/build/migrate-to-built-in-kotlin)
+4. Remove this line from the `androidApp/build.gradle.kts` file, since [Kotlin support is built-in with AGP 9.0](https://developer.android.com/build/migrate-to-built-in-kotlin)
    and applying the Kotlin Android plugin is no longer necessary:
 
     ```kotlin
@@ -292,7 +292,7 @@ When all of your code works with the new configuration:
 
 7. Check that your app builds and runs with the new AGP version.
 
-Congratulations! You have upgraded your project to be compatible with AGP 9.
+Congratulations! You have upgraded your project to be compatible with AGP 9.0.
 
 <!-- Commented out for now
 ## What's next
