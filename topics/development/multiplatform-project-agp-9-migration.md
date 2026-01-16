@@ -10,8 +10,8 @@ To update your project:
 * Migrate your shared code module to use the new [Android-KMP library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
   built specifically for multiplatform projects.
 
-> Android Studio supports AGP 9.0 starting with Otter 3 Feature Drop 2025.2.3.
-> IntelliJ IDEA support for AGP 9.0 is coming soon and is expected in Q1 2026.
+> Android Studio supports AGP 9.0.0 starting with Otter 3 Feature Drop 2025.2.3.
+> IntelliJ IDEA support for AGP 9.0.0 is expected in Q1 2026.
 > 
 {style="note"}
 
@@ -264,7 +264,7 @@ When all of your code works with the new configuration:
 
     ```text
     [versions]
-    agp = "9.0.0-beta03"
+    agp = "9.0.0"
     ```
 3. Update the Gradle version in the `gradle/wrapper/gradle-wrapper.properties` file to at least 9.1.0:
 
