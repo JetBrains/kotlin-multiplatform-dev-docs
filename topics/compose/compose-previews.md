@@ -8,8 +8,8 @@ Previews are a [part of core functionality of Jetpack Compose](https://developer
 > 
 {style="note"}
 
-Compose Multiplatform first implemented a limited `@Preview` annotation as a custom library,
-but with version 1.10.0 this implementation is deprecated as the original AndroidX annotation became fully multiplatform.
+Compose Multiplatform initially implemented a limited `@Preview` annotation as a custom library,
+but starting with version 1.10.0, this implementation has been deprecated as the original AndroidX annotation is now fully multiplatform.
 
 On this page, you can find:
 * [how to enable previews](#preview-setup) in common code for different project configurations,
@@ -17,7 +17,7 @@ On this page, you can find:
 
 ## Preview setup
 
-To add support for previews in your IDE, add necessary dependencies in the `build.gradle.kts` file of your KMP module:
+To enable preview support in your IDE, add the necessary dependencies to the `build.gradle.kts` file of your KMP module:
 
 1. The annotation dependency for the `commonMain` source set: the old or the new one, depending on the Compose Multiplatform version.
 2. The tooling dependency on the classpath, whose declaration depends on the Android configuration.
@@ -63,7 +63,7 @@ depending on your [Android target configuration](#android-target-configurations)
 
 ## Supported configurations
 
-Depending on the version of dependencies and style of configuration of your project, there are several supported 
+Depending on the version of your dependencies and the configuration style of your project, there are several supported 
 combinations that you can use to enable Compose previews:
 
 * Compose Multiplatform 1.9, with the old `@Preview` annotation and Android configured with `androidTarget {}`.
@@ -82,8 +82,8 @@ There are two `@Preview` annotations available in Compose Multiplatform:
   * The necessary runtime dependency is `org.jetbrains.compose.ui:ui-tooling-preview`.
   * This is the recommended annotation to use going forward. 
 * `org.jetbrains.compose.ui.tooling.preview.Preview`
-  * This was the first multiplatform implementation of the annotation, emulating the pure Android experience.
-    It supports a limited number of parameters, but provides base preview functionality.
+  * This was the first multiplatform implementation of the annotation, emulating the Android-only experience.
+    It supports a limited number of parameters, but provides basic preview functionality.
   * The necessary runtime dependency is `org.jetbrains.compose.components:components-ui-tooling-preview`.
   * This annotation is now deprecated in Compose Multiplatform 1.10.
 

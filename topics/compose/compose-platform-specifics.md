@@ -105,7 +105,7 @@ Once all necessary shaders are cached, subsequent launches are not delayed by co
 _Previews_ are layout presentations of composables annotated with `@Preview` that can be rendered alongside the shared UI code
 in IntelliJ IDEA and Android Studio.
 
-Previews require a specific project configuration and a couple of explicit dependencies.
+Previews require a specific project configuration with explicit dependencies.
 See [](compose-previews.md) to learn how to enable previews in your project.
 
 ### Hot reload
