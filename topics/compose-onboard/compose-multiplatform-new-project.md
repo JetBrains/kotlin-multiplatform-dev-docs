@@ -82,7 +82,7 @@ To get started, implement a new `App` composable:
     ```kotlin
    fun main() = application {
        val state = rememberWindowState(
-           size = DpSize(400.dp, 250.dp),
+           size = DpSize(400.dp, 350.dp),
            position = WindowPosition(300.dp, 300.dp)
        )
        Window(
@@ -112,7 +112,7 @@ To get started, implement a new `App` composable:
 Now let users enter the name of a city to see the time at that location. The simplest way to achieve this is by adding
 a `TextField` composable:
 
-1. Replace the current implementation of `App` with the one below:
+1. Replace the current implementation of `App()` in `commonMain/kotlin/compose.project.demo/App.kt` with the one below:
 
     ```kotlin
     @Composable
@@ -159,7 +159,8 @@ The next step is to use the given input to calculate time. To do this, create a 
 1. Return to the `App.kt` file and add the following function:
 
     ```kotlin
-    fun currentTimeAt(location: String): String? {
+   @OptIn(ExperimentalTime::class) 
+   fun currentTimeAt(location: String): String? {
         fun LocalTime.formatted() = "$hour:$minute:$second"
 
         return try {
@@ -291,6 +292,7 @@ list.
     ```kotlin
     data class Country(val name: String, val zone: TimeZone)
     
+    @OptIn(ExperimentalTime::class)
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
     
@@ -396,7 +398,7 @@ modify the build file.
 To support images in your project, you'll need to download image files, store them in the correct directory, and add
 code to load and display them:
 
-1. Using an external resource, such as [Flag CDN](https://flagcdn.com/), download flags to match the list of countries
+1. Download flag images from [Flag CDN](https://flagcdn.com/) to match the list of countries
    you have already created. In this case, these
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
@@ -410,14 +412,15 @@ code to load and display them:
 4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
 
     ```kotlin
-    import compose.project.demo.generated.resources.eg
-    import compose.project.demo.generated.resources.fr
-    import compose.project.demo.generated.resources.id
-    import compose.project.demo.generated.resources.jp
-    import compose.project.demo.generated.resources.mx
+    import demo.composeapp.generated.resources.jp
+    import demo.composeapp.generated.resources.mx
+    import demo.composeapp.generated.resources.eg
+    import demo.composeapp.generated.resources.fr
+    import demo.composeapp.generated.resources.id
    
-   data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
+    data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
+    @OptIn(ExperimentalTime::class)
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
 
