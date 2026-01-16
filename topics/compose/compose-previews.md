@@ -1,34 +1,44 @@
 [//]: # (title: Preview your UI)
 
-You can create _preview_ composables to be able to see your UI rendered in the IDE without running an emulator.
+You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
 Previews are a [part of core functionality of Jetpack Compose](https://developer.android.com/develop/ui/compose/tooling/previews).
 
 Compose Multiplatform first implemented a limited `@Preview` annotation as a custom library,
 but with version 1.10.0 this implementation is deprecated as the original AndroidX annotation became fully multiplatform.
 
-On this page, you can learn about possible project configurations that make previews for common code work
-in IntelliJ IDEA and Android Studio.
+On this page, you can learn:
+* [how to enable previews](#preview-setup) in common code for different project configurations,
+* [overview of possible combinations](#possible-configurations) of Compose Multiplatform, AGP, and annotations.
 
 ## Preview setup
 
 To add support for previews in your IDE, add necessary dependencies in the `build.gradle.kts` file of your KMP module:
 
-* The annotation dependency for the `commonMain` source set.
-* The tooling dependency on the classpath, whose declaration depends on the Android configuration.
+1. The annotation dependency for the `commonMain` source set: the old or the new one, depending on the Compose Multiplatform version.
+2. The tooling dependency on the classpath, whose declaration depends on the Android configuration.
 
-The annotation dependency should point to [one of the `@Preview` implementations](#available-annotations), for example:
+The annotation dependency should point to one of the `@Preview` implementations, for example:
 
 ```kotlin
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            // The new annotation
             implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.0")
+            // To import the new annotation:
+            // import androidx.compose.ui.tooling.preview.Preview
+
+            // The old annotation
+            implementation("org.jetbrains.compose.components:components-ui-tooling-preview:1.10.0")
+            // To import the old annotation:
+            // import org.jetbrains.compose.ui.tooling.preview.Preview
         }
     }
 }
 ```
 
-The tooling dependency should be declared in the root `dependencies {}` block in one of two ways,
+The tooling dependency should be declared in the root `dependencies {}` block of the `build.gradle.kts` file in your KMP module
+in one of two ways,
 depending on your [Android target configuration](#android-target-configurations):
 
 * If using the `com.android.application` or `com.android.library` plugin:
@@ -55,9 +65,8 @@ Compose previews:
 * Compose Multiplatform 1.10, with the old `@Preview` annotation and Android configured as `androidTarget {}`.
   You can upgrade to the 1.10 version without changing anything else.
 * Compose Multiplatform 1.10, with the new `@Preview` annotation and Android configured as `androidTarget {}`.
-* Compose Multiplatform 1.10, with the new `@Preview` annotation and Android configured as `androidLibrary {}` with AGP 9.
-
-Read on to learn about the differences between annotations and Android configurations.
+* Compose Multiplatform 1.10, with the new `@Preview` annotation and Android configured as `androidLibrary {}` with AGP 9.0.
+  See our [AGP 9.0 migration guide](multiplatform-project-agp-9-migration.md) for details on upgrading your KMP apps.
 
 ### Available annotations
 
@@ -78,11 +87,11 @@ source set, [as shown above](#preview-setup).
 
 ### Android target configurations
 
-If your project uses Android Gradle plugin 8, the Kotlin Multiplatform part of the project should use either
+If your project uses Android Gradle plugin 8.*, the Kotlin Multiplatform part of the project should use either
 the Android application (`com.android.application`) or the Android library (`com.android.library`) plugin,
 and the Android configuration is contained in the `androidTarget {}` block of your `build.gradle.kts` file.
 
-For Android Gradle plugin 9, there is the new [KMP Android library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
+For Android Gradle plugin 9.0, there is the new [KMP Android library plugin](https://developer.android.com/kotlin/multiplatform/plugin)
 (`com.android.kotlin.multiplatform.library`)
 which introduces the `androidLibrary {}` block for Android configuration.
-While it's possible to use this plugin with AGP 8, that combination has significant issues and is not recommended. 
+While it's possible to use this plugin with AGP 8.*, that combination has significant issues and is not recommended. 
