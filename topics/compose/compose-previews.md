@@ -107,6 +107,7 @@ While it's also possible to use this plugin with AGP 8.x, that combination has k
 
 > AGP 9.0 is supported in the latest stable Android Studio,
 > but not supported in IntelliJ IDEA yet and is expected in Q1 2026.
-> For details on upgrading to AGP 9.0, see [our migration page](multiplatform-project-agp-9-migration.md).
-> 
+>
 {style="note"}
+
+For details on upgrading to AGP 9.0, see [our migration page](multiplatform-project-agp-9-migration.md).
