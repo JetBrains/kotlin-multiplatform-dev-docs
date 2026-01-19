@@ -1,7 +1,8 @@
 [//]: # (title: Compatibility and versions)
 
 Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose releases. This page contains information
-about Compose Multiplatform releases, Compose release cycles, and component compatibility. 
+about Compose Multiplatform releases, Compose release cycles, and component compatibility.
+For details about supported tooling versions, refer to [](recommended-ides.md).
 
 ## Supported platforms
 
@@ -15,8 +16,6 @@ Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 | Windows  | Windows 10 (x86-64, arm64)                                                     |
 | Linux    | Ubuntu 20.04 (x86-64, arm64)                                                   |
 | Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-configuration.html#browser-versions) |
-
-[//]: # (https://youtrack.jetbrains.com/issue/CMP-7539)
 
 > All Compose Multiplatform releases support only 64-bit platforms. 
 > 
@@ -32,16 +31,16 @@ Compose Multiplatform requires the Compose Compiler Gradle plugin applied with t
 as the Kotlin Multiplatform plugin.
 See [](compose-compiler.md#migrating-a-compose-multiplatform-project) for details.
 
-> Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
-> So, to use the latest Compose Multiplatform release, you should:
-> * use at least Kotlin 2.1.0 for your projects,
-> * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
-> 
-> As a workaround for backward compatibility problems until all your dependencies are updated,
-> you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
-> This will increase compilation time.
->
-{style="warning"}
+Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler.
+To use the latest Compose Multiplatform release:
+
+ * use at least Kotlin 2.1.0 for your projects,
+ * depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0,
+ * upgrade to Kotlin **2.2.20** for projects targeting platforms with rapidly evolving support, such as iOS and web.
+ 
+As a workaround for backward compatibility problems until all your dependencies are updated,
+you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
+This will increase compilation time.
 
 ## Limitations of Compose Multiplatform for desktop releases
 
