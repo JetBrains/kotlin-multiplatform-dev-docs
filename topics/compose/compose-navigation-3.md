@@ -35,7 +35,7 @@ jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:naviga
 ```
 
 > While Navigation 3 is released as two artifacts, `navigation3:navigation3-ui` and `navigation3:navigation3-common`,
-> only `navigation-ui` needs a separate Compose Multiplatform implementation.
+> only `navigation3-ui` has a separate Compose Multiplatform implementation.
 > A dependency on `navigation3-common` is added transitively.
 >
 {style="note"}
