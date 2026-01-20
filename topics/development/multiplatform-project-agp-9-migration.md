@@ -186,7 +186,13 @@ Configure the Gradle build script for the new module:
 
 #### Move the code and run the Android app
 
-1. Move the `composeApp/src/androidMain` directory into the `androidApp/src/` directory.
+1. Move the `composeApp/src/androidMain` directory into the `androidApp/src/` directory,
+   but mind the code that should remain cross-platform:
+   
+   * Entry point code, like `MainActivity.kt` in our sample, needs to be in the `androidApp` module to properly build the Android app.
+   * All [expected and actual declarations](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html)
+     need to stay in the source sets of the common module (`composeApp` in our example) to be available for all platforms.
+   
 2. Rename the `androidApp/src/androidMain` directory to `main`.
 3. If everything is configured correctly, the imports in the `androidApp/src/main/.../MainActivity.kt` file work
    and the code compiles.
