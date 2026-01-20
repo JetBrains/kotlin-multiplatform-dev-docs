@@ -47,8 +47,11 @@ Below is a general tutorial for migrating a sample app, where you can see:
 The example project that you will prepare for the migration is a Compose Multiplatform app that is the result of the
 [](compose-multiplatform-new-project.md)
 tutorial.
-The sample with the example of an app that needs to be updated is in the [main](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main)
-branch of the sample repository.
+* The sample with the example of an app that needs to be updated is in the [main](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main)
+  branch of the sample repository.
+* A final state of the app, with `androidApp` isolated, is available in the [new-project-structure](https://github.com/kotlin-hands-on/get-started-with-cm/tree/new-project-structure)
+  branch.
+  (There you can also see examples of isolated app modules for other platforms.)
 
 <!-- When the new structure is implemented in the wizard, this is going to change: 
      following the tutorial will bring you to the new structure already.
