@@ -2,7 +2,7 @@
 
 Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose releases. This page contains information
 about Compose Multiplatform releases, Compose release cycles, and component compatibility.
-For details about supported tooling versions, refer to [](recommended-ides.md).
+For details about supported IDE versions, refer to [](recommended-ides.md).
 
 ## Supported platforms
 
@@ -40,7 +40,7 @@ To use the latest Compose Multiplatform release:
  
 As a workaround for backward compatibility problems until all your dependencies are updated,
 you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
-This will increase compilation time.
+This will ensure compatibility with older libraries, but will increase compilation time.
 
 ## Limitations of Compose Multiplatform for desktop releases
 
