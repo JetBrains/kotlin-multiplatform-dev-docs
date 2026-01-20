@@ -125,7 +125,7 @@ Configure the Gradle build script for the new module:
        dependencies { 
            implementation(projects.composeApp)
            implementation(libs.androidx.activity.compose)
-           implementation(compose.components.uiToolingPreview)
+           implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.0")
        }
    }
    ```
@@ -246,13 +246,13 @@ Now migrate to the new multiplatform library plugin:
         }
     }
     ```
-5. Remove both the `android {}` and the `dependencies {}` block from the `composeApp/build.gradle.kts` file.
-   * The `android {}` block is replaced with the `kotlin.androidLibrary {}` configuration.
-   * The only root dependency (`debugImplementation(compose.uiTooling)`) conflicts with the new plugin that doesn't
+5. Remove both the `android {}` block from the `composeApp/build.gradle.kts` file as it's replaced with the `kotlin.androidLibrary {}` configuration.
+6. In the `dependencies {}` block, replace the `debugImplementation(compose.uiTooling)` line with
+   `androidRuntimeClasspath("org.jetbrains.compose.ui:ui-tooling:1.10.0")` as the new Android KMP library plugin doesn't
    support build variants.
-6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
+7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
-7. Check that the Android app is running as expected.
+8. Check that the Android app is running as expected.
 
 ### Update the Android Gradle plugin version
 
