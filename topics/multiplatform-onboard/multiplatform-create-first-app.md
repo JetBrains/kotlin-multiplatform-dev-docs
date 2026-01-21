@@ -20,8 +20,8 @@ Here you will learn how to create and run your first Kotlin Multiplatform applic
 Kotlin Multiplatform technology simplifies the development of cross-platform projects.
 Kotlin Multiplatform applications can work on a variety of platforms like iOS, Android, macOS, Windows, Linux, web, and others.
 
-One of the major Kotlin Multiplatform use cases is sharing code between mobile platforms.
-You can share application logic between iOS and Android apps and write platform-specific code only when you need to implement a native UI or work with platform APIs.
+In this tutorial, you will share application logic between Android, iOS, and web, while writing platform-specific code
+only when you need to implement a native UI or work with platform APIs.
 
 ## Create a project
 
@@ -35,8 +35,8 @@ You can share application logic between iOS and Android apps and write platform-
    
    ![Create Compose Multiplatform project](create-first-multiplatform-app.png){width=800}
 
-5. Select **Android** and **iOS** targets.
-6. For iOS, select the **Do not share UI** option to keep the UI native.
+5. Select **Android**, **iOS**, and **Web** targets.
+6. For iOS and Web, select the **Do not share UI** options to keep the UI native.
 7. Once you've specified all the fields and targets, click **Create**.
 
 > The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
@@ -58,20 +58,23 @@ This Kotlin Multiplatform project includes three modules:
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](multiplatform-cocoapods-overview.md).
   By default, Kotlin Multiplatform projects created in IntelliJ IDEA use the regular framework dependency.
+* _webApp_ is a React project that builds into a web application. It depends on and uses the shared module as a 
+regular TypeScript library via NPM dependencies.
 
 ![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
 
-The shared module consists of three source sets: `androidMain`, `commonMain`, and `iosMain`. _Source set_ is a Gradle
+The shared module consists of four source sets: `androidMain`, `commonMain`, `jsMain` and `iosMain`. _Source set_ is a Gradle
 concept for a number of files logically grouped together where each group has its own dependencies.
 In Kotlin Multiplatform, different source sets in a shared module can target different platforms.
 
 The common source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
-Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
+[Kotlin/JVM](/docs/android-overview.html) is used for `androidMain`, [Kotlin/Native](/docs/native-overview.html) for `iosMain`, and [Kotlin/JS](/docs/js-overview.html) for `jsMain`:
 
 ![Source sets and modules structure](basic-project-structure-2.png){width=350}
 
-When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
-When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
+When the shared module is built into an Android library, common Kotlin code is treated as [Kotlin/JVM](/docs/android-overview.html).
+When it is built into an iOS framework, common Kotlin is treated as [Kotlin/Native](/docs/native-overview.html),
+and when it is built into a TypeScript library, common Kotlin is treated as [Kotlin/JS](/docs/js-overview.html),:
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png)
 
@@ -117,7 +120,7 @@ Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mecha
 ### Check out platform-specific implementations
 
 The common source set can define expected declarations (interfaces, classes, and so on).
-Then each platform source set, in this case `androidMain` and `iosMain`,
+Then each platform source set, in this case `androidMain`, `iosMain`, and `jsMain`,
 has to provide actual platform-specific implementations for the expected declarations.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
@@ -134,8 +137,8 @@ and generates a single declaration with actual implementations.
 
    It's a common `Platform` interface with information about the platform.
 
-2. Switch between the `androidMain` and the `iosMain` modules.
-   You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
+2. Switch between the `androidMain`, the `iosMain`, and the `jsMain` modules.
+   You'll see that they have different implementations of the same functionality for the Android, the iOS and the Web source sets:
     
     ```kotlin
     // Platform.android.kt in the androidMain module:
@@ -156,11 +159,28 @@ and generates a single declaration with actual implementations.
     }
     ```
 
+    ```kotlin
+    // Platform.js.kt in the jsMain module:
+    import web.navigator.navigator
+    
+    class JsPlatform: Platform {
+       private val userAgent = navigator.userAgent
+       private val browserList = listOf("Chrome", "Firefox", "Safari", "Edge")
+
+       override val name: String = userAgent.findAnyOf(browserList, ignoreCase = true)
+               ?.let { (startIndex) -> userAgent.substring(startIndex).substringBefore(" ") }
+               ?: "Unknown"
+    }
+    ```
+
     * The `name` property implementation from `AndroidPlatform` uses the Android-specific code, namely the `android.os.Build`
       dependency. This code is written in Kotlin/JVM. If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
     * The `name` property implementation from `IOSPlatform` uses iOS-specific code, namely the `platform.UIKit.UIDevice`
       dependency. It's written in Kotlin/Native, meaning you can write iOS code in Kotlin. This code becomes a part of the iOS
       framework, which you will later call from Swift in your iOS application.
+    * The `name` property implementation from `JsPlatform` uses browser-specific code, namely the `web.navigator.navigator`
+      API from [kotlin-wrappers](https://github.com/JetBrains/kotlin-wrappers?tab=readme-ov-file). It's written in Kotlin/JS, meaning you can write browser 
+      code in Kotlin. This code becomes a part of the NPM dependency, which you will later use from TypeScript in your React application.
 
 3. Check the `getPlatform()` function in different source sets. Its expected declaration doesn't have a body,
    and actual implementations are provided in the platform code:
@@ -179,9 +199,14 @@ and generates a single declaration with actual implementations.
     // Platform.ios.kt in the iosMain source set
     actual fun getPlatform(): Platform = IOSPlatform()
     ```
+   
+    ```kotlin
+    // Platform.js.kt in the jsMain source set
+    actual fun getPlatform(): Platform = JsPlatform()
+    ```
 
 Here, the common source set defines an expected `getPlatform()` function and has actual implementations,
-`AndroidPlatform()` for the Android app and `IOSPlatform()` for the iOS app, in the platform source sets.
+`AndroidPlatform()` for the Android app, `IOSPlatform()` for the iOS app, and `JsPlatform()` for the web app, in the platform source sets.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 into a single `getPlatform()` function with its actual implementations.
@@ -225,8 +250,14 @@ such as properties and classes. Let's implement an expected property:
    ```kotlin
    actual val num: Int = 2
    ```
+   
+5. Now provide the implementation for the `jsMain` module. Add the following to `jsMain/Platform.js.kt`:
 
-5. In the `commonMain/Greeting.kt` file, add the `num` property to the `greet()` function to see the differences:
+   ```kotlin
+   actual val num: Int = 3
+   ```
+
+6. In the `commonMain/Greeting.kt` file, add the `num` property to the `greet()` function to see the differences:
 
    ```kotlin
    fun greet(): String {
@@ -238,11 +269,11 @@ such as properties and classes. Let's implement an expected property:
 
 ## Run your application
 
-You can run your multiplatform application for both [Android](#run-your-application-on-android)
-or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
+You can run your multiplatform application for [Android](#run-your-application-on-android),
+[iOS](#run-your-application-on-ios), or [browsers](#run-your-application-on-browser) from IntelliJ IDEA.
 
 If you have explored the expect/actual mechanism earlier, you can see "[1]" added to the greeting for Android
-and "[2]" added for iOS.
+,"[2]" added for iOS, and "[3]" added for browsers.
 
 ### Run your application on Android
 
@@ -271,6 +302,20 @@ If you don't have an available iOS configuration in the list, add a [new run con
 ![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
 
 <include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
+
+### Run your application in a browser
+
+For IntelliJ IDEA Ultimate:
+1. In the list of run configurations, select **webApp**.
+2. After the build completes, the web app opens in your default browser.
+
+For IntelliJ IDEA Community and Android studio:
+1. If you don't have Node.js installed, install it from [here](https://nodejs.org/en/download/).
+2. In the terminal, run `npm install` to install the dependencies.
+3. Run `npm start` to start the development server.
+4. After the build completes, the web app opens in your default browser.
+
+![First web multiplatform app in a browser](first-multiplatform-project-in-browser-1.png){width=300}
 
 ## Next step
 
