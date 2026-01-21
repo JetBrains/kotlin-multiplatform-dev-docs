@@ -259,7 +259,7 @@ Now migrate to the new multiplatform library plugin:
     ```
 5. Remove both the `android {}` block from the `composeApp/build.gradle.kts` file as it's replaced with the `kotlin.androidLibrary {}` configuration.
 6. In the `dependencies {}` block, replace the `debugImplementation(libs.compose.uiTooling)` line with
-   `androidRuntimeClasspath(libs.compose.uiTooling)` as the new Android KMP library plugin doesn't
+   `androidRuntimeClasspath(libs.compose.uiTooling)`, as the new Android KMP library plugin doesn't
    support build variants.
 7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
