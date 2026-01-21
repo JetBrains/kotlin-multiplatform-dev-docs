@@ -120,7 +120,7 @@ Configure the Gradle build script for the new module:
     ```
 
 4. To add the necessary dependencies, copy existing dependencies from the `androidMain.dependencies {}` block
-   of the `composeApp` build script, and add the dependency on the `composeApp` itself. 
+   of the `composeApp` build script and add the dependency on the `composeApp` module itself. 
    In this example, the result should look like this:
 
    ```kotlin
@@ -128,7 +128,7 @@ Configure the Gradle build script for the new module:
        dependencies { 
            implementation(projects.composeApp)
            implementation(libs.androidx.activity.compose)
-           implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.0")
+           implementation(libs.compose.uiToolingPreview)
        }
    }
    ```
@@ -137,7 +137,7 @@ Configure the Gradle build script for the new module:
    file to the `androidApp/build.gradle.kts` file. 
 
 6. Copy the compiler options from the `androidTarget {}` block of the `composeApp/build.gradle.kts` file to 
- the `target {}` block of the `androidApp/build.gradle.kts` file:
+   the `target {}` block of the `androidApp/build.gradle.kts` file:
 
     ```kotlin
     target {
@@ -147,10 +147,10 @@ Configure the Gradle build script for the new module:
     }
     ```
 
-> If there are any other plugins or properties set up in the `composeApp` build script, 
-> make sure to migrate those to the `androidApp` build script as well.
->
-{style="note"}
+   > If there are any other plugins or properties set up in the `composeApp` build script, 
+   > make sure to migrate those to the `androidApp` build script as well.
+   >
+   {style="note"}
 
 7. Change the configuration of the `composeApp` module from an Android application to an Android library,
    since that's what it effectively becomes. In `composeApp/build.gradle.kts`:
@@ -195,6 +195,8 @@ Configure the Gradle build script for the new module:
    * Entry point code, like `MainActivity.kt` in our sample, needs to be in the `androidApp` module to properly build the Android app.
    * All [expected and actual declarations](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html)
      need to stay in the source sets of the common module (`composeApp` in our example) to be available for all platforms.
+     As you set up the dependency of `androidApp` on `composeApp`, the declarations are going to be available in entry point
+     code as well.
    
 2. Rename the `androidApp/src/androidMain` directory to `main`.
 3. If everything is configured correctly, the imports in the `androidApp/src/main/.../MainActivity.kt` file work
@@ -256,8 +258,8 @@ Now migrate to the new multiplatform library plugin:
     }
     ```
 5. Remove both the `android {}` block from the `composeApp/build.gradle.kts` file as it's replaced with the `kotlin.androidLibrary {}` configuration.
-6. In the `dependencies {}` block, replace the `debugImplementation(compose.uiTooling)` line with
-   `androidRuntimeClasspath("org.jetbrains.compose.ui:ui-tooling:1.10.0")` as the new Android KMP library plugin doesn't
+6. In the `dependencies {}` block, replace the `debugImplementation(libs.compose.uiTooling)` line with
+   `androidRuntimeClasspath(libs.compose.uiTooling)` as the new Android KMP library plugin doesn't
    support build variants.
 7. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
    editor.
