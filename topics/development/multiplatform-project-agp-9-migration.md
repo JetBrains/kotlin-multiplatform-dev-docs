@@ -51,7 +51,7 @@ tutorial.
   branch of the sample repository.
 * A final state of the app, with `androidApp` isolated, is available in the [new-project-structure](https://github.com/kotlin-hands-on/get-started-with-cm/tree/new-project-structure)
   branch.
-  (There you can also see examples of isolated app modules for other platforms.)
+This branch also has examples of isolated app modules for other platforms.
 
 <!-- When the new structure is implemented in the wizard, this is going to change: 
      following the tutorial will bring you to the new structure already.
@@ -190,11 +190,11 @@ Configure the Gradle build script for the new module:
 #### Move the code and run the Android app
 
 1. Move the `composeApp/src/androidMain` directory into the `androidApp/src/` directory,
-   but mind the code that should remain cross-platform:
+   but keep in mind the code that should remain cross-platform:
    
-   * Entry point code, like `MainActivity.kt` in our sample, needs to be in the `androidApp` module to properly build the Android app.
+   * Entry point code, like `MainActivity.kt` in our sample, must be in the `androidApp` module to properly build the Android app.
    * All [expected and actual declarations](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html)
-     need to stay in the source sets of the common module (`composeApp` in our example) to be available for all platforms.
+     must remain in the source sets of the common module (`composeApp` in our example) to be available for all platforms.
      As you set up the dependency of `androidApp` on `composeApp`, the declarations are going to be available in entry point
      code as well.
    
@@ -257,7 +257,7 @@ Now migrate to the new multiplatform library plugin:
         }
     }
     ```
-5. Remove both the `android {}` block from the `composeApp/build.gradle.kts` file as it's replaced with the `kotlin.androidLibrary {}` configuration.
+5. Remove the `android {}` block from the `composeApp/build.gradle.kts` file, as it is now replaced with the `kotlin.androidLibrary {}` configuration.
 6. In the `dependencies {}` block, replace the `debugImplementation(libs.compose.uiTooling)` line with
    `androidRuntimeClasspath(libs.compose.uiTooling)`, as the new Android KMP library plugin doesn't
    support build variants.
