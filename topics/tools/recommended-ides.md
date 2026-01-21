@@ -9,6 +9,13 @@ you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.
 
+Apart from base Kotlin Multiplatform features, the plugin also provides support for Compose Multiplatform
+libraries, enabling more comfortable UI development:
+
+* Quality-of-life automation for multiplatform resources.
+* Support for the `@Preview` annotation which works in common Compose code.
+* Support for Compose Hot Reload run configurations. TODO add more about CHR here?
+
 ## Android Studio
 
 [Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
