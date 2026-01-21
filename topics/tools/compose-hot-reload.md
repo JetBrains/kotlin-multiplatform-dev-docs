@@ -5,7 +5,7 @@
 The bundled Compose Hot Reload Gradle plugin 
 requires Kotlin 2.1.20+ and a JVM target compatible with Java 21 or earlier.
 
-While we explore adding support for other targets, you can use the desktop app as your sandbox
+While we explore adding support for other targets, you can already use the desktop app as your sandbox
 to quickly experiment with UI changes in common code without interrupting your flow.
 
 <img src="KotlinConf_hot_reload.animated.gif" alt="Compose Hot Reload" width="600" preview-src="KotlinConf_hot_reload.png"/>
@@ -15,7 +15,7 @@ to quickly experiment with UI changes in common code without interrupting your f
 Compose Hot Reload can be added in two ways, by:
 
 * [Creating a project from scratch in IntelliJ IDEA or Android Studio](#from-scratch)
-* [Adding it to an existing project](#to-an-existing-project)
+* [Adding a Gradle plugin to an existing project](#to-an-existing-project)
 
 ### From scratch
 
@@ -36,15 +36,15 @@ the Compose Hot Reload plugin is [bundled](whats-new-compose-110.md#compose-hot-
 and enabled by default for all projects that include a **desktop target**. 
 
 If your project already includes a desktop target, 
-you can upgrade to Compose Multiplatform version 1.10.0 <!-- or later --> and enjoy Compose Hot Reload functionality out-of-the-box. 
+you can upgrade to Compose Multiplatform version 1.10.0 or later and enjoy Compose Hot Reload functionality out-of-the-box. 
 
 While it is enabled by default, 
-you can still explicitly declare the Compose Hot Reload plugin if you need to use a specific version.
+you can still explicitly declare the Compose Hot Reload plugin to use a specific older version.
 
 #### Earlier versions of Compose Multiplatform {initial-collapse-state="collapsed" collapsible="true"}
 
 For multiplatform projects using a Compose Multiplatform version earlier than 1.10.0,
-you must have a desktop target configured and then explicitly add the Compose Hot Reload plugin dependency.
+you must have a desktop target configured and then explicitly add the Compose Hot Reload plugin.
 The steps refer to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
 1. Introduce the desktop target: create the `jvmMain` directory, define a `main()` function,
