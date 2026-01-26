@@ -79,7 +79,7 @@ For details on the implementation, see the [NavigationEventHandler page in the N
 
 ### Minimum Kotlin version increased
 
-If your project includes native or web targets, the latest features require an upgrade to Kotlin 2.2.10.
+If your project includes native or web targets, the latest features require an upgrade to Kotlin 2.2.20.
 
 ## Across platforms
 
