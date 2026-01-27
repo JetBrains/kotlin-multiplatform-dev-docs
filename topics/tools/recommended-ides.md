@@ -4,8 +4,8 @@
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/) provides full Kotlin Multiplatform support.
 [Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
-Since both are built on the IntelliJ platform, they generally share the same features; however, specific updates
-may not be released simultaneously.
+Since both are built on the IntelliJ platform, they generally share the same features.
+However, specific updates may not be released simultaneously.
 
 Starting with IntelliJ IDEA 2025.2.2 or Android Studio Otter 2025.2.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
