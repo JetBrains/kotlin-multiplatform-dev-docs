@@ -1,10 +1,13 @@
 [//]: # (title: Recommended IDEs and code editors)
 
-## IntelliJ IDEA
+## IntelliJ IDEA and Android Studio
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/) provides full Kotlin Multiplatform support.
+[Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
+Both are based on the IntelliJ platform, so generally they share the same features, although specific updates
+may not arrive simultaneously.
 
-With IntelliJ IDEA 2025.2.2,
+Starting with IntelliJ IDEA 2025.2.2 or Android Studio Otter 2025.2.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 that provides basic launching and debugging capabilities for iOS apps,
 preflight environment checks, and other helpful KMP functionality.
@@ -14,16 +17,9 @@ libraries, enabling more comfortable UI development:
 
 * Quality-of-life automation for multiplatform resources.
 * Support for the `@Preview` annotation which works in common Compose code.
-* Support for Compose Hot Reload run configurations. TODO add more about CHR here?
-
-## Android Studio
-
-[Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
-
-With Android Studio Otter 2025.2.1,
-you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-that provides basic launching and debugging capabilities for iOS apps,
-preflight environment checks, and other helpful KMP functionality.
+* Support for [Compose Hot Reload](compose-hot-reload.md): automatic detection of hot reload run configurations,
+  IDE integration with logs and settings for Compose Hot Reload,
+  IDE actions and toolbars making the experience smoother in general.
 
 ## Xcode
 
