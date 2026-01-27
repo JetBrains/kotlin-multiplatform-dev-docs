@@ -4,17 +4,21 @@ Compose Multiplatform releases ship separately from Kotlin and Jetpack Compose r
 about Compose Multiplatform releases, Compose release cycles, and component compatibility.
 For details about supported IDE versions, refer to [](recommended-ides.md).
 
+Since Compose Multiplatform is built on top of Kotlin Multiplatform, it is also affected by version compatibility
+of Kotlin Multiplatform Gradle plugin, Gradle, Android Gradle Plugin, and Xcode listed
+in the [](multiplatform-compatibility-guide.md).
+
 ## Supported platforms
 
 Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 
-| Platform | Minimum version                                                                |
-|----------|--------------------------------------------------------------------------------|
-| Android  | Android 5.0 (API level 21)                                                     |
-| iOS      | iOS 13                                                                         |
-| macOS    | macOS 12 x64, macOS 13 arm64                                                   |
-| Windows  | Windows 10 (x86-64, arm64)                                                     |
-| Linux    | Ubuntu 20.04 (x86-64, arm64)                                                   |
+| Platform | Minimum version                                                                                      |
+|----------|------------------------------------------------------------------------------------------------------|
+| Android  | Android 5.0 (API level 21)                                                                           |
+| iOS      | iOS 13                                                                                               |
+| macOS    | macOS 12 x64, macOS 13 arm64                                                                         |
+| Windows  | Windows 10 (x86-64, arm64)                                                                           |
+| Linux    | Ubuntu 20.04 (x86-64, arm64)                                                                         |
 | Web      | Browsers with [WasmGC support](https://kotlinlang.org/docs/wasm-configuration.html#browser-versions) |
 
 > All Compose Multiplatform releases support only 64-bit platforms. 
