@@ -4,8 +4,8 @@
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/) provides full Kotlin Multiplatform support.
 [Android Studio](https://developer.android.com/studio) is another stable solution for Kotlin Multiplatform.
-Both are based on the IntelliJ platform, so generally they share the same features, although specific updates
-may not arrive simultaneously.
+Since both are built on the IntelliJ platform, they generally share the same features; however, specific updates
+may not be released simultaneously.
 
 Starting with IntelliJ IDEA 2025.2.2 or Android Studio Otter 2025.2.1,
 you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
@@ -17,9 +17,9 @@ libraries, enabling more comfortable UI development:
 
 * Quality-of-life automation for multiplatform resources.
 * Support for the `@Preview` annotation which works in common Compose code.
-* Support for [Compose Hot Reload](compose-hot-reload.md): automatic detection of hot reload run configurations,
-  IDE integration with logs and settings for Compose Hot Reload,
-  IDE actions and toolbars making the experience smoother in general.
+* Support for [Compose Hot Reload](compose-hot-reload.md), including automatic detection of hot reload run configurations,
+  IDE integration with logs and settings, and
+  tailored IDE actions and toolbars to make the overall experience smoother.
 
 ## Xcode
 
