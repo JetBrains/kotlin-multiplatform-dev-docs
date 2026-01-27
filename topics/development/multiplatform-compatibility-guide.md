@@ -58,7 +58,7 @@ Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.a
 original `android` blocks.
 
 Kotlin 2.3.0 introduces a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects. If you
-need more time to migrate to the `android` block, use Kotlin 2.3.10, where the warning doesn't appear.
+need more time to migrate to the `android` block, use Kotlin 2.3.10 with AGP 8.x, where the warning doesn't appear.
 
 **What's the best practice now?**
 
