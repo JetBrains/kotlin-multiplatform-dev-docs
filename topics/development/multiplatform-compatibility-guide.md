@@ -5,6 +5,12 @@
 This guide summarizes [incompatible changes](https://kotlinlang.org/docs/kotlin-evolution-principles.html#incompatible-changes) you might encounter while
 developing projects with Kotlin Multiplatform.
 
+> For information about Compose Multiplatform,
+> see the [Compose Multiplatform What's new](https://kotlinlang.org/docs/multiplatform/whats-new-compose.html) pages
+> and the [page on Kotlin and Jetpack compatibility](compose-compatibility-and-versioning.md).
+> 
+{style="note"}
+
 The current Stable version of Kotlin is %kotlinVersion%. Mind the deprecation cycle of a specific change in relation to
 the Kotlin version you have in your projects, for example:
 
