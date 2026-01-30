@@ -88,10 +88,10 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
             <strong><a href="https://github.com/kotlin-hands-on/jetcaster-kmp-migration">Jetcaster Multiplatform</a></strong>
         </td>
         <td>The Compose sample <a href="https://github.com/android/compose-samples/tree/main/Jetcaster">Jetcaster</a> app
-            made multiplatform, with added iOS and desktop targets added to the original Android.
+            made multiplatform, with iOS and desktop targets added to the original Android version.
             The UI is migrated to use Compose Multiplatform, and several libraries are swapped for their multiplatform analogues.
             The migration reasoning and process are described
-            in the <a href="https://kotlinlang.org/docs/multiplatform/migrate-from-android.html">Jetcaster migration tutorial</a>
+            in the <a href="https://kotlinlang.org/docs/multiplatform/migrate-from-android.html">Jetcaster migration tutorial</a>.
         </td>
         <td>
             <list>
