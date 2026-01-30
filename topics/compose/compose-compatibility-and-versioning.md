@@ -5,7 +5,7 @@ about Compose Multiplatform releases, Compose release cycles, and component comp
 For details about supported IDE versions, refer to [](recommended-ides.md).
 
 Since Compose Multiplatform is built on top of Kotlin Multiplatform, it is also affected by version compatibility
-of Kotlin Multiplatform Gradle plugin, Gradle, Android Gradle Plugin, and Xcode listed
+with the Kotlin Multiplatform Gradle plugin, Gradle, Android Gradle Plugin, and Xcode listed
 in the [](multiplatform-compatibility-guide.md).
 
 ## Supported platforms
