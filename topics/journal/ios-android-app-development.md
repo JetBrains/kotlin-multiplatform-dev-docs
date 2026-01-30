@@ -71,7 +71,7 @@ Kotlin Multiplatform is an open-source technology from JetBrains that lets you s
 * It comes with good tooling – IntelliJ IDEA and Android Studio offer smart IDE support for KMP via the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform), which includes common UI previews, [hot reload for Compose Multiplatform](compose-hot-reload.md), cross-language navigation, refactorings, and tools for debugging across Kotlin and Swift code. Additionally, Junie, the JetBrains AI coding agent, handles KMP tasks so your team can move faster and focus on features.
 * It delivers native performance – Kotlin Multiplatform uses Kotlin/Native to generate native binaries and access platform APIs directly in situations where virtual machines are undesirable or unavailable, such as on iOS. This allows for near-native performance while creating platform-agnostic code:
 
-![Compose Multiplatform Benchmarks](compose-multiplatform-benchmarks.svg){width="700"}
+![Compose Multiplatform Benchmarks](compose-multiplatform-benchmarks.png){width="700"}
 
 ### Scenarios where Kotlin Multiplatform is particularly helpful
 
