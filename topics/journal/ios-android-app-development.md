@@ -18,7 +18,7 @@ Instead of treating iOS and Android as entirely separate, many teams now combine
 
 Cross-platform development is no longer a compromise but a strategic choice. Before exploring today’s cross-platform technologies, let’s recap why they’ve become such a game-changer for teams building for both iOS and Android.
 
-[![Discover Kotlin Multiplatform](discover-kmp.svg){width="700"}](https://www.jetbrains.com/kotlin-multiplatform/)
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="700" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 ## 11 pains teams face when developing for iOS and Android separately
 
@@ -142,8 +142,10 @@ For example, comparing the performance of Compose Multiplatform 1.8.0 for iOS wi
 
 ### Learning curve
 
-Evaluate the volume and quality of available learning resources about a framework. For example, Kotlin Multiplatform developers can use a rich library of educational materials – [here’s an overview](kmp-learning-resources).
-Assess the cost of ownership
+Evaluate the volume and quality of available learning resources about a framework. 
+For example, Kotlin Multiplatform developers can use a rich library of educational materials – [here’s an overview](kmp-learning-resources.md).
+
+### Assess the cost of ownership
 
 Aside from initial development, every framework comes with hidden costs. Talent availability influences hiring delays and salaries. Custom plugins may need to be built and maintained in underdeveloped libraries.
 
@@ -164,7 +166,7 @@ A good example comes from Duolingo, which ships weekly on iOS and Android to mor
 
 If you’d like to see the full story, you can watch the [case study video](https://youtu.be/RJtiFt5pbfs?si=2bSmGci5NXNNfYUn).
 
-[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="700" style="block"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
 ### Consider the supporting organization to ensure longevity
 
