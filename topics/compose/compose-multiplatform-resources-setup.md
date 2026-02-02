@@ -80,6 +80,8 @@ compose.resources {
 ```
 {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="directoryProvider = tasks.register<DownloadRemoteFiles>"}
 
+Learn more about customizing access to resources in [Access and usage](compose-multiplatform-resources-usage.md#customizing-accessor-class-generation).
+
 ### Custom web resource paths
 
 You can specify paths and URLs for your web resources using the `configureWebResources()` function:
@@ -139,13 +141,15 @@ The library supports (in the order of priority) the following qualifiers: [langu
 ### Language and regional qualifiers
 
 You can combine language and region qualifiers:
+
 * The language is defined by a two-letter (ISO 639-1)
     or a three-letter (ISO 639-2) [language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
 * You can add a two-letter [ISO 3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
     regional code to your language code.
-    The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`
+    The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`.
 
 The language and regional codes are case-sensitive.
+Learn more about working with region-specific formats in [Localization](compose-regional-format.md).
 
 ### Theme qualifier
 
