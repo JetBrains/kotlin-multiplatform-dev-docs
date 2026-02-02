@@ -119,6 +119,42 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
     </tr>
     <tr>
         <td>
+            <strong><a href="https://github.com/kotlin-hands-on/jetcaster-kmp-migration">Jetcaster Multiplatform</a></strong>
+        </td>
+        <td>The Compose sample <a href="https://github.com/android/compose-samples/tree/main/Jetcaster">Jetcaster</a> app
+            made multiplatform, with added iOS and desktop targets added to the original Android version.
+            The UI is migrated to use Compose Multiplatform, and several libraries are replaced with their multiplatform versions
+            or alternatives.
+            The migration reasoning and process are described
+            in the <a href="https://kotlinlang.org/docs/multiplatform/migrate-from-android.html">Jetcaster migration tutorial</a>.
+        </td>
+        <td>
+            <list>
+                <li>Model</li>
+                <li>Networking</li>
+                <li>UI</li>
+                <li>Data storage</li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li><code>coil</code></li>
+                <li><code>koin</code></li>
+                <li><code>kotlinx-coroutines</code></li>
+                <li><code>kotlinx-datetime</code></li>
+                <li><code>kotlin-test</code></li>
+                <li><code>ktor-client</code></li>
+                <li>Room</li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li>Compose Multiplatform on Android, iOS, and desktop</li>
+            </list>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <strong><a href="https://github.com/Kotlin/kmm-production-sample">KMM RSS Reader</a></strong>
         </td>
         <td>A sample application for consuming RSS feeds designed to show how Kotlin Multiplatform can be used in
