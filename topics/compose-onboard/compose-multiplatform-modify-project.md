@@ -37,8 +37,7 @@ To use the `kotlinx-datetime` library:
       For simplicity, you can include the version number directly instead of adding it to the version catalog.
     * For the web target, timezone support requires the `js-joda` library. 
       Add a reference to the npm package in the `webMain` dependencies.
-      See the [`webMain` source set](https://github.com/kotlin-hands-on/get-started-with-cm/blob/c82fa45d390201ceab6ecb3b708144963f84e515/composeApp/src/webMain/kotlin/compose/project/demo/composedemo/main.kt) for an example of its usage.
-
+      
     ```kotlin
     kotlin {
         // ...
@@ -65,6 +64,29 @@ To use the `kotlinx-datetime` library:
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
+ 
+4. In the `webMain` source set, use the `@JsModule` annotation to import the `js-joda` module: 
+
+    ```kotlin
+    import androidx.compose.ui.ExperimentalComposeUiApi
+    import androidx.compose.ui.window.ComposeViewport
+    import kotlin.js.ExperimentalWasmJsInterop
+    import kotlin.js.JsModule
+
+    @OptIn(ExperimentalWasmJsInterop::class)
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    
+    @OptIn(ExperimentalComposeUiApi::class)
+    fun main() {
+        ComposeViewport {
+            App()
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
 ## Enhance the user interface
 
