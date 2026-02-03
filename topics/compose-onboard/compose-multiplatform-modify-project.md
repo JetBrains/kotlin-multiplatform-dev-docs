@@ -31,7 +31,13 @@ you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetim
 
 To use the `kotlinx-datetime` library:
 
-1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
+1. Open the `composeApp/build.gradle.kts` file and add the dependencies to the project:
+
+    * Add the main `kotlinx-datetime` dependency to the section that configures the common code source set.
+      For simplicity, you can include the version number directly instead of adding it to the version catalog.
+    * For the web target, timezone support requires the `js-joda` library. 
+      Add a reference to the npm package in the `webMain` dependencies.
+      See the [`webMain` source set](https://github.com/kotlin-hands-on/get-started-with-cm/blob/c82fa45d390201ceab6ecb3b708144963f84e515/composeApp/src/webMain/kotlin/compose/project/demo/composedemo/main.kt) for an example of its usage.
 
     ```kotlin
     kotlin {
@@ -49,11 +55,7 @@ To use the `kotlinx-datetime` library:
     }
     
     ```
-
-    * The main dependency is added to the section that configures the common code source set.
-    * For simplicity, the version number is included directly instead of being added to the version catalog.
-    * To support timezones in the web target, the reference to the necessary npm package is included in `webMain` dependencies.
-
+    
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 3. In the **Terminal** tool window, run the following command:
