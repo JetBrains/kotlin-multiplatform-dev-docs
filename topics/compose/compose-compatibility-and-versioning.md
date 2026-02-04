@@ -80,7 +80,7 @@ These builds are not available in [Maven Central](https://central.sonatype.com/)
 To access them, add this line to your list of repositories:
 
 ```kotlin
-maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+maven("https://redirector.kotlinlang.org/maven/compose-dev")
 ```
 
 ### Jetpack Compose artifacts used
