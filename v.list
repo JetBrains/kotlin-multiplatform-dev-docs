@@ -43,8 +43,8 @@
     <var name="koinVersion" value="4.1.1"/>
     <var name="skieVersion" value="0.10.9"/>
     <var name="kmpncVersion" value="1.0.0-ALPHA-45"/>
-    <var name="kspVersion" value="2.3.4"/>
-    <var name="vanniktechPublishPlugin" value="0.34.0"/>
+    <var name="kspVersion" value="2.3.5"/>
+    <var name="vanniktechPublishPlugin" value="0.36.0"/>
 
     <var name="rubyVersion" value="3.4.7"/>
 </vars>
