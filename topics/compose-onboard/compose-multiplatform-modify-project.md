@@ -31,8 +31,13 @@ you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetim
 
 To use the `kotlinx-datetime` library:
 
-1. Open the `composeApp/build.gradle.kts` file and add it as a dependency to the project.
+1. Open the `composeApp/build.gradle.kts` file and add the dependencies to the project:
 
+    * Add the main `kotlinx-datetime` dependency to the section that configures the common code source set.
+      For simplicity, you can include the version number directly instead of adding it to the version catalog.
+    * For the web target, timezone support requires the `js-joda` library. 
+      Add a reference to the `js-joda` npm package in the `webMain` dependencies.
+      
     ```kotlin
     kotlin {
         // ...
@@ -49,11 +54,7 @@ To use the `kotlinx-datetime` library:
     }
     
     ```
-
-    * The main dependency is added to the section that configures the common code source set.
-    * For simplicity, the version number is included directly instead of being added to the version catalog.
-    * To support timezones in the web target, the reference to the necessary npm package is included in `webMain` dependencies.
-
+    
 2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
 3. In the **Terminal** tool window, run the following command:
@@ -63,6 +64,29 @@ To use the `kotlinx-datetime` library:
     ```
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
+ 
+4. In the `webMain` source set, use the `@JsModule` annotation to import the `js-joda` npm package: 
+
+    ```kotlin
+    import androidx.compose.ui.ExperimentalComposeUiApi
+    import androidx.compose.ui.window.ComposeViewport
+    import kotlin.js.ExperimentalWasmJsInterop
+    import kotlin.js.JsModule
+
+    @OptIn(ExperimentalWasmJsInterop::class)
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    
+    @OptIn(ExperimentalComposeUiApi::class)
+    fun main() {
+        ComposeViewport {
+            App()
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
 ## Enhance the user interface
 
