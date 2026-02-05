@@ -36,7 +36,7 @@ To use the `kotlinx-datetime` library:
     * Add the main `kotlinx-datetime` dependency to the section that configures the common code source set.
       For simplicity, you can include the version number directly instead of adding it to the version catalog.
     * For the web target, timezone support requires the `js-joda` library. 
-      Add a reference to the npm package in the `webMain` dependencies.
+      Add a reference to the `js-joda` npm package in the `webMain` dependencies.
       
     ```kotlin
     kotlin {
@@ -65,7 +65,7 @@ To use the `kotlinx-datetime` library:
 
    This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
  
-4. In the `webMain` source set, use the `@JsModule` annotation to import the `js-joda` module: 
+4. In the `webMain` source set, use the `@JsModule` annotation to import the `js-joda` npm package: 
 
     ```kotlin
     import androidx.compose.ui.ExperimentalComposeUiApi
