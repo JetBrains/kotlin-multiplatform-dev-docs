@@ -26,7 +26,8 @@ When configuring your project, check the compatibility of a particular version o
 
 | Kotlin Multiplatform plugin version | Gradle                                | Android Gradle plugin                               | Xcode   |
 |-------------------------------------|---------------------------------------|-----------------------------------------------------|---------|
-| 2.3.0                               | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.3.10                              | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.3.0                               | 7.6.3–9.0.0                           | 8.2.2–8.13.0                                        | 26.0    |
 | 2.2.21                              | 7.6.3–8.14                            | 7.3.1–8.11.1                                        | 26.0    |
 | 2.2.20                              | 7.6.3–8.14                            | 7.3.1–8.11.1                                        | 16.4    |
 | 2.2.0-2.2.10                        | 7.6.3–8.14                            | 7.3.1–8.10.0                                        | 16.3    |
@@ -63,6 +64,9 @@ reserved for use by the new plugin.
 Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.android.com/kotlin/multiplatform/plugin) is available from the Android team, and you can use it with the
 original `android` blocks.
 
+Kotlin 2.3.0 introduces a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects. If you
+need more time to migrate to the `android` block, use Kotlin 2.3.10 with AGP 8.x, where the warning doesn't appear.
+
 **What's the best practice now?**
 
 Migrate to the new `com.android.kotlin.multiplatform.library` plugin. Rename all occurrences of the `androidTarget` block to `android`.
@@ -76,6 +80,7 @@ Here's the deprecation cycle for the Kotlin Multiplatform Gradle plugin:
 * 2.1.0: raise this warning to an error
 * 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
 * 2.3.0: the new Android plugin is available; introduce a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects.
+* 2.3.10: revert the deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects.
 
 ### Deprecated bitcode embedding
 

@@ -4,8 +4,8 @@
 
 <vars>
     <!-- Kotlin -->
-    <var name="kotlinVersion" value="2.3.0"/>
-    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.3.0"/>
+    <var name="kotlinVersion" value="2.3.10"/>
+    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.3.10"/>
     <var name="kmpLatestUrl" value="https://github.com/JetBrains/compose-multiplatform/releases"/>
     <var name="languageVersion" value="2.3"/>
     <var name="apiVersion" value="2.3"/>
@@ -30,21 +30,21 @@
     <var name="maxGradleVersion" value="9.0.0"/>
 
     <var name="minAndroidGradleVersion" value="8.2.2"/>
-    <var name="maxAndroidGradleVersion" value="8.13.0"/>
+    <var name="maxAndroidGradleVersion" value="9.0.0"/>
 
     <var name="xcode" value="26.0"/>
 
     <!-- Libraries and Frameworks -->
     <var name="coroutinesVersion" value="1.10.2"/>
-    <var name="serializationVersion" value="1.9.0"/>
+    <var name="serializationVersion" value="1.10.0"/>
     <var name="sqlDelightVersion" value="2.2.1"/>
-    <var name="ktorVersion" value="3.3.3"/>
+    <var name="ktorVersion" value="3.4.0"/>
     <var name="dateTimeVersion" value="0.7.1"/>
-    <var name="koinVersion" value="4.1.0"/>
-    <var name="skieVersion" value="0.10.6"/>
+    <var name="koinVersion" value="4.1.1"/>
+    <var name="skieVersion" value="0.10.9"/>
     <var name="kmpncVersion" value="1.0.0-ALPHA-45"/>
-    <var name="kspVersion" value="2.3.3"/>
-    <var name="vanniktechPublishPlugin" value="0.34.0"/>
+    <var name="kspVersion" value="2.3.5"/>
+    <var name="vanniktechPublishPlugin" value="0.36.0"/>
 
     <var name="rubyVersion" value="3.4.7"/>
 </vars>
