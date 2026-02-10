@@ -18,7 +18,7 @@
 	<toc-element toc-title="Compose Multiplatform UI framework">
 		<toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
-            <toc-element topic="whats-new-compose-110.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.10.0"/>
+            <toc-element topic="whats-new-compose-110.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.10.1"/>
             <toc-element toc-title="Earlier versions">
                 <toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3"/>
                 <toc-element topic="whats-new-compose-180.md" toc-title="Compose Multiplatform 1.8.2"/>
