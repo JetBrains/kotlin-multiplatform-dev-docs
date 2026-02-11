@@ -33,7 +33,7 @@ produce JVM `.class` files and native executable files from the same Kotlin file
 ![Common code](common-code-diagram.svg){width=700}
 
 Not every piece of Kotlin code can be compiled to all platforms. The Kotlin compiler prevents you from using
-platform-specific functions or classes in your common code since this code can't be compiled to a different platform.
+platform-specific functions or classes in your common code if this code can't be compiled to a different platform.
 
 For instance, you can't use the `java.io.File` dependency from the common code. It's a part of the JDK,
 while common code is also compiled to native code, where the JDK classes are not available:
@@ -82,6 +82,14 @@ With the `jvm` and `iosArm64` targets declared, the common code in `commonMain` 
 To understand which code is going to be compiled to a specific target, you can think of a target as a label attached
 to Kotlin source files. Kotlin uses these labels to determine how to compile your code, which binaries to produce, and
 which language constructions and dependencies are allowed in that code.
+
+> If your project only has a single target (for example, JVM),
+> you can access target-specific symbols with appropriate visibility from common code.
+> But as soon as you add a second target,
+> target-specific symbols become unavailable in common code.
+> Be aware of this limitation during migrations and other intermediary project states.
+> 
+{style="note"}
 
 If you want to compile the `greeting.kt` file to `.js` as well, you only need to declare the JS target. The code
 in `commonMain` then receives an additional `js` label, corresponding to the JS target, which instructs Kotlin to
