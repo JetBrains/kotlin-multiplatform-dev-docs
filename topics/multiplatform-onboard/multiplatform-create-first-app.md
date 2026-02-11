@@ -34,6 +34,7 @@ You can share application logic between iOS and Android apps and write platform-
    * **Artifact**: greetingkmp
    
    ![Create Compose Multiplatform project](create-first-multiplatform-app.png){width=800}
+    TODO update the screenshot
 
 5. Select **Android** and **iOS** targets.
 6. For iOS, select the **Do not share UI** option to keep the UI native.
@@ -49,26 +50,32 @@ You can share application logic between iOS and Android apps and write platform-
 
 In IntelliJ IDEA, expand the `GreetingKMP` folder.
 
-This Kotlin Multiplatform project includes three modules:
+This Kotlin Multiplatform project includes the following modules:
 
-* _shared_ is a Kotlin module that contains the logic common for both Android and iOS applications – the code you share
-  between platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system to help automate your build process.
-* _composeApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
+* _sharedLogic_ is the multiplatform module that contains the logic common for both Android and iOS applications.
+* _sharedUI_ is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
+  but it is a multiplatform module that can be used by other targets whenever you are ready for that.
+* _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The composeApp module depends on and uses the shared module as a regular Android library.
-* _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
-  framework. The shared module can be used as a regular framework or as a [CocoaPods dependency](multiplatform-cocoapods-overview.md).
-  By default, Kotlin Multiplatform projects created in IntelliJ IDEA use the regular framework dependency.
+* _iosApp_ is an Xcode project that builds into an iOS application.
+  It depends on and uses the `sharedLogic` module as an iOS framework.
+  By default, Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
+  [direct integration](multiplatform-direct-integration.md).
+
+Every module except for `iosApp` uses Gradle as the build system.
 
 ![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
 
-The shared module consists of three source sets: `androidMain`, `commonMain`, and `iosMain`. _Source set_ is a Gradle
-concept for a number of files logically grouped together where each group has its own dependencies.
+The shared module consists of three source sets:
+`androidMain`, `commonMain`, and `iosMain`.
+_Source set_ is a Gradle concept for a set of files logically grouped together where each set has its own dependencies.
 In Kotlin Multiplatform, different source sets in a shared module can target different platforms.
 
-The common source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
+The `commonMain` source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
 ![Source sets and modules structure](basic-project-structure-2.png){width=350}
+TODO screenshot is outdated
 
 When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
 When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
@@ -81,50 +88,36 @@ The common source set contains shared code that can be used across multiple targ
 It's designed to contain code that is platform-independent. If you try to use platform-specific APIs in the common source set,
 the IDE will show a warning:
 
-1. Open the `shared/src/commonMain/.../Greeting.kt` file
-    where you can find an automatically generated `Greeting` class with a `greet()` function:
+1. Open the `sharedLogic/src/commonMain/.../Greeting.kt` file
+    where you can find the automatically generated `Greeting` class with a `greet()` function.
+2. Let's add a bit of variety to the greeting. Navigate to the definition of the `sayHello()` function in the `GreetingUtil.kt` file.
+
+3. Update the shared code with randomization and the `reversed()` call from the Kotlin standard library to reverse
+   the received string:
 
     ```kotlin
-    class Greeting {
-        private val platform = getPlatform()
+    fun sayHello(to: String): String {
+        val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
 
-        fun greet(): String {
-            return "Hello, ${platform.name}!"
-        }
+        return "$firstWord Guess what this is! > ${to.reversed()}!"
     }
     ```
-
-2. Let's add a bit of variety to the greeting.
-   Update the shared code with randomization and the `reversed()` call from the Kotlin standard library to reverse the text:
-
-    ```kotlin
-    class Greeting {
-        private val platform: Platform = getPlatform()
-
-        fun greet(): String {
-            //
-            val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
-
-            return "$firstWord Guess what this is! > ${platform.name.reversed()}!"
-        }
-    }
-    ```
-3. Import the `kotlin.random.Random` class following the IDE's suggestion.
+4. Import the `kotlin.random.Random` class following the IDE's suggestion.
 
 Writing the code only in common Kotlin has obvious limitations because it can't use any platform-specific functionality.
-Using interfaces and the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.
+Using common interfaces with platform-specific implementations using the [expect/actual](multiplatform-connect-to-apis.md) mechanism solves this.
 
 ### Check out platform-specific implementations
 
-The common source set can define expected declarations (interfaces, classes, and so on).
-Then each platform source set, in this case `androidMain` and `iosMain`,
-has to provide actual platform-specific implementations for the expected declarations.
+The common source set can define expected declarations — interfaces, classes, and so on.
+In each platform source set, in this case `androidMain` and `iosMain`,
+you have to provide actual platform-specific implementations for the expected declarations.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 and generates a single declaration with actual implementations.
 
 1. When creating a Kotlin Multiplatform project with IntelliJ IDEA,
-   you get a template with the `Platform.kt` file in the `commonMain` module:
+   you get a `Platform.kt` file in the `commonMain` module:
 
     ```kotlin
     interface Platform {
@@ -132,13 +125,12 @@ and generates a single declaration with actual implementations.
     }
     ```
 
-   It's a common `Platform` interface with information about the platform.
+   It's a common `Platform` interface supposed to include information about a platform.
 
-2. Switch between the `androidMain` and the `iosMain` modules.
-   You'll see that they have different implementations of the same functionality for the Android and the iOS source sets:
+2. You can find the platform-specific classes that implement the interface in the `androidMain` and the `iosMain` source sets:
     
     ```kotlin
-    // Platform.android.kt in the androidMain module:
+    // Platform.android.kt in the androidMain source set
     import android.os.Build
 
     class AndroidPlatform : Platform {
@@ -147,7 +139,7 @@ and generates a single declaration with actual implementations.
     ```
    
     ```kotlin
-    // Platform.ios.kt in the iosMain module:
+    // Platform.ios.kt in the iosMain source set
     import platform.UIKit.UIDevice
     
     class IOSPlatform: Platform {
@@ -156,14 +148,15 @@ and generates a single declaration with actual implementations.
     }
     ```
 
-    * The `name` property implementation from `AndroidPlatform` uses the Android-specific code, namely the `android.os.Build`
-      dependency. This code is written in Kotlin/JVM. If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
-    * The `name` property implementation from `IOSPlatform` uses iOS-specific code, namely the `platform.UIKit.UIDevice`
-      dependency. It's written in Kotlin/Native, meaning you can write iOS code in Kotlin. This code becomes a part of the iOS
-      framework, which you will later call from Swift in your iOS application.
+    * The `name` property of the `AndroidPlatform` class uses the Android-specific code, namely the `android.os.Build`
+      dependency. This code is interpreted as Kotlin/JVM.
+      If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
+    * The `name` property of the `IOSPlatform` class uses iOS-specific code, namely the `platform.UIKit.UIDevice`
+      dependency. This code is interpreted as Kotlin/Native, meaning that you can refer to iOS declarations in Kotlin.
+      The code becomes a part of the iOS framework, which is imported in the Swift code of the `iosApp` module.
 
-3. Check the `getPlatform()` function in different source sets. Its expected declaration doesn't have a body,
-   and actual implementations are provided in the platform code:
+3. Each source set includes a `getPlatform()` function.
+   Its expected declaration doesn't have a body, and actual implementations are provided in the platform code:
 
     ```kotlin
     // Platform.kt in the commonMain source set
@@ -184,15 +177,15 @@ Here, the common source set defines an expected `getPlatform()` function and has
 `AndroidPlatform()` for the Android app and `IOSPlatform()` for the iOS app, in the platform source sets.
 
 While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
-into a single `getPlatform()` function with its actual implementations.
+into a single `getPlatform()` function with the correct implementation.
 
 That's why expected and actual declarations should be defined in the same package – they are merged into one declaration
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
-calls a correct actual implementation.
+should refer to the correct actual implementation.
 
 Now you can run the apps and see all of this in action.
 
-#### Explore the expect/actual mechanism (optional) {initial-collapse-state="collapsed" collapsible="true"}
+#### Create an expect/actual variable (optional) {initial-collapse-state="collapsed" collapsible="true"}
 
 The template project uses the expect/actual mechanism for functions, but it also works for most Kotlin declarations,
 such as properties and classes. Let's implement an expected property:
@@ -213,40 +206,39 @@ such as properties and classes. Let's implement an expected property:
 
    You'll get an error saying that expected declarations must not have a body, in this case an initializer.
    The implementations must be provided in actual platform modules. Remove the initializer.
-3. Hover the `num` property and click **Create missed actuals...**.
-   Choose the `androidMain` source set. You can then complete the implementation in `androidMain/Platform.android.kt`:
+3. Hover over the `expect` keyword for the `num` property and click **Create missed actuals...** in the IDE quick fix suggestion.
+4. Choose the `androidMain` source set. Complete the implementation in `androidMain/Platform.android.kt` to be as follows:
 
    ```kotlin
    actual val num: Int = 1
     ```
 
-4. Now provide the implementation for the `iosMain` module. Add the following to `iosMain/Platform.ios.kt`:
+5. Now provide the actual implementation for `num` in the `iosMain` module. Add the following to the `iosMain/Platform.ios.kt` file:
 
    ```kotlin
    actual val num: Int = 2
    ```
 
-5. In the `commonMain/Greeting.kt` file, add the `num` property to the `greet()` function to see the differences:
+6. In the `commonMain/GreetingUtil.kt` file, add the `num` property to the string formed by the `sayHello()` function:
 
-   ```kotlin
-   fun greet(): String {
-       val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
-  
-       return "$firstWord [$num] Guess what this is! > ${platform.name.reversed()}!"
-   }
-   ```
+    ```kotlin
+    fun sayHello(to: String): String {
+        val firstWord = if (Random.nextBoolean()) "Hi!" else "Hello!"
+
+        return "$firstWord [$num] Guess what this is! > ${to.reversed()}!"
+    }
+    ```
 
 ## Run your application
 
-You can run your multiplatform application for both [Android](#run-your-application-on-android)
-or [iOS](#run-your-application-on-ios) from IntelliJ IDEA.
+You can run your multiplatform application for both Android and iOS from IntelliJ IDEA.
 
-If you have explored the expect/actual mechanism earlier, you can see "[1]" added to the greeting for Android
+If you have created the optional expect/actual variable earlier, you should see "[1]" added to the greeting for Android
 and "[2]" added for iOS.
 
 ### Run your application on Android
 
-1. In the list of run configurations, select **composeApp**.
+1. In the list of run configurations, select **androidApp**.
 2. Choose an Android virtual device next to the list of configurations and click **Run**.
 
    If you don't have a device in the list, create a [new Android virtual device](https://developer.android.com/studio/run/managing-avds#createavd).
