@@ -264,11 +264,9 @@ If you don't have an available iOS configuration in the list, add a [new run con
 
 <include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
 
-## Next step
+## [Next step](multiplatform-update-ui.md)
 
 In the next part of the tutorial, you'll learn how to update the UI elements using platform-specific libraries.
-
-**[Proceed to the next part](multiplatform-update-ui.md)**
 
 ### See also
 
