@@ -15,8 +15,8 @@
     </p>
 </tldr>
 
-You've already created your first cross-platform Kotlin Multiplatform project! Now let's learn how to add dependencies
-to third-party libraries, which is necessary for building successful cross-platform applications.
+You've created and tweaked your first Kotlin Multiplatform project!
+Now let's learn how to add dependencies to third-party libraries, which is necessary for building successful cross-platform applications.
 
 ## Dependency types
 
@@ -26,14 +26,16 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
   common source set, `commonMain`.
 
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
-  [Apollo](https://www.apollographql.com/), and [Okio](https://square.github.io/okio/). Find more multiplatform libraries on [klibs.io](https://klibs.io/),
-  an experimental search service from JetBrains for discovering Kotlin Multiplatform libraries.
+  [Coil](https://coil-kt.github.io/coil/), and [SQLDelight](https://sqldelight.github.io/sqldelight/latest/).
+  Find more multiplatform libraries on [klibs.io](https://klibs.io/),
+  a search service offered by JetBrains for discovering Kotlin Multiplatform libraries.
 
-* _Native dependencies_. These are regular libraries from relevant ecosystems. In native projects you usually work with them
-  using Gradle for Android and using CocoaPods or another dependency manager for iOS. 
+* _Native dependencies_. These are regular libraries from specific ecosystems.
+  In native projects you usually work with them, for example, using Gradle for Android and Swift Package Manager for iOS. 
   
-  When you work with a shared module, typically, you still need native dependencies when you want to use platform APIs
-  such as security storage. You can add native dependencies to the native source sets, `androidMain` and `iosMain`.
+  When you work with a multiplatform project module, typically, you still need native dependencies to use platform APIs
+  such as security storage, specific system calls, and so on.
+  In the build script, you specify native dependencies in the configuration of native source sets, for example, `androidMain` and `iosMain`.
 
 For both types of dependencies, you can use local and external repositories.
 
@@ -44,17 +46,20 @@ For both types of dependencies, you can use local and external repositories.
 >
 {style="tip"}
 
-Let's go back to the app and make the greeting a little more festive. In addition to the device information, add a
-function to display the number of days left until New Year's Day. The `kotlinx-datetime` library, which has full
-multiplatform support, is the most convenient way to work with dates in your shared code.
+Let's go back to the app and make the greeting a little more festive:
+In addition to the OS version, add a function to display the number of days left until New Year's Day.
+The `kotlinx-datetime` library, which has full multiplatform support, is the most convenient way to work with dates in your shared code.
 
-1. Open the `build.gradle.kts` file located in the `shared` directory.
+1. Open the `build.gradle.kts` file located in the `sharedLogic` directory.
 2. Add the following dependency and the Kotlin time opt-in to the `commonMain` source set dependencies:
 
     ```kotlin
     kotlin {
         //... 
         sourceSets {
+            // Opt-in necessary to use experimental kotlin.time APIs
+            // from the standard Kotlin library,
+            // distinct from the kotlinx-datetime library.
             all { languageSettings.optIn("kotlin.time.ExperimentalTime") }
    
             commonMain.dependencies {
@@ -66,9 +71,9 @@ multiplatform support, is the most convenient way to work with dates in your sha
 
 3. Select the **Build | Sync Project with Gradle Files** menu item
    or click the **Sync Gradle Changes** button in the build script editor to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
-4. Right-click the `shared/src/commonMain/.../greetingkmp` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
-5. Update the file with a short function that calculates
-   the number of days from today until the New Year using the `datetime` date arithmetic:
+4. Right-click the `sharedLogic/src/commonMain/.../greeting` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
+5. In that file, add two functions that calculate
+   the number of days from today until the start of next year using the `datetime` date arithmetic and form the phrase to be displayed:
    
    ```kotlin
    @OptIn(ExperimentalTime::class)
@@ -95,7 +100,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
     }
     ```
 
-8. To see the results, re-run your **composeApp** and **iosApp** configurations from IntelliJ IDEA:
+8. To see the results, re-run your **androidApp** and **iosApp** run configurations from IntelliJ IDEA:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
