@@ -33,16 +33,15 @@ and display the date of the last successful launch of a SpaceX rocket.
 
 You'll need to add the following multiplatform libraries in your project:
 
-* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for asynchronous code,
-  which allows simultaneous operations.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses into objects of entity classes used to process
+* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for simultaneous operations.
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the SpaceX API into objects of entity classes used to process
   network operations.
-* [Ktor](https://ktor.io/), a framework to create an HTTP client for retrieving data over the internet.
+* [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 
 ### kotlinx.coroutines
 
 To add `kotlinx.coroutines` to your project, specify a dependency in the common source set. To do so, add the following
-line to the `shared/build.gradle.kts` file:
+line to the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 kotlin {
@@ -56,13 +55,13 @@ kotlin {
 }
 ```
 
-The Kotlin Multiplatform Gradle plugin automatically adds a dependency to the platform-specific (iOS and Android) parts
+The Kotlin Multiplatform Gradle plugin automatically adds a dependency on the platform-specific (iOS and Android) artifacts
 of `kotlinx.coroutines`.
 
 ### kotlinx.serialization
 
 To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
-To do that, add the following line to the existing `plugins {}` block at the very beginning of the `shared/build.gradle.kts` file:
+To do that, add the following line to the existing `plugins {}` block at the very beginning of the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 plugins {
@@ -73,10 +72,10 @@ plugins {
 
 ### Ktor
 
-You need to add the core dependency (`ktor-client-core`) to the common source set of the shared module.
-You also need to add supporting dependencies:
+Add the base Ktor client dependency (`ktor-client-core`) to the common source set of the shared module,
+along with these supporting dependencies:
 
-* Add the `ContentNegotiation` functionality (`ktor-client-content-negotiation`), which allows serializing and deserializing
+* Add the `ContentNegotiation` library (`ktor-client-content-negotiation`), which allows serializing and deserializing
   the content in a specific format.
 * Add the `ktor-serialization-kotlinx-json` dependency to instruct Ktor to use the JSON format and `kotlinx.serialization`
   as a serialization library. Ktor will expect JSON data and deserialize it into a data class when receiving responses.
@@ -108,14 +107,14 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
-## Create API requests
+## Set up API requests
 
-You'll need the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data, and you'll use a single method to
-get the list of all launches from the **v4/launches** endpoint.
+You'll use the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data,
+specifically the list of all launches from the **v4/launches** endpoint.
 
-### Add a data model
+### Create a data model
 
-In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
+In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketLaunch.kt` file
 and add a data class which stores data from the SpaceX API:
 
 ```kotlin
@@ -135,14 +134,14 @@ data class RocketLaunch (
 )
 ```
 
-* The `RocketLaunch` class is marked with the `@Serializable` annotation, so that the `kotlinx.serialization` plugin can
+* The `RocketLaunch` class is marked with the `@Serializable` annotation so that the `kotlinx.serialization` plugin can
   automatically generate a default serializer for it.
-* The `@SerialName` annotation allows you to redefine field names, making it possible to declare properties in data classes
-  with more readable names.
+* The `@SerialName` annotation allows you to redefine field names, making it possible to declare properties with more readable names
+  in data classes.
 
 ### Connect HTTP client
 
-1. In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
+1. In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -165,28 +164,14 @@ data class RocketLaunch (
     ```
 
    * The [`ContentNegotiation`](https://ktor.io/docs/serialization-client.html#register_json) Ktor plugin and the JSON serializer deserialize the result of the GET request.
-   * The JSON serializer here is configured in a way that it prints JSON in a more readable manner with the `prettyPrint` property. It
-     is more flexible when reading malformed JSON with `isLenient`,
+   * The JSON serializer here is configured in such a way that it prints JSON in a more readable manner with the `prettyPrint` property.
+     This is more flexible when reading malformed JSON with `isLenient`,
      and it ignores keys that haven't been declared in the rocket launch model with `ignoreUnknownKeys`.
 
-3. Add the `getDateOfLastSuccessfulLaunch()` suspending function to `RocketComponent`:
+3. Add the `getDateOfLastSuccessfulLaunch()` [suspending function](https://kotlinlang.org/docs/coroutines-basics.html) to `RocketComponent`,
+   which will retrieve information about rocket launches asynchronously:
 
    ```kotlin
-   class RocketComponent {
-       // ...
-       
-       private suspend fun getDateOfLastSuccessfulLaunch(): String {
-       
-       }
-   }
-   ```
-
-4. Call the `httpClient.get()` function to retrieve information about rocket launches:
-
-   ```kotlin
-   import io.ktor.client.request.get
-   import io.ktor.client.call.body
-
    class RocketComponent {
        // ...
        
@@ -198,10 +183,12 @@ data class RocketLaunch (
 
    * `httpClient.get()` is also a suspending function
      because it needs to retrieve data over the network asynchronously without blocking threads.
-   * Suspending functions can only be called from coroutines or other suspending functions. This is why `getDateOfLastSuccessfulLaunch()`
-     was marked with the `suspend` keyword. The network request is executed in the HTTP client's thread pool.
+   * Suspending functions can only be called from coroutines or other suspending functions.
+     This is why `getDateOfLastSuccessfulLaunch()` was marked with the `suspend` keyword.
+     The network request is executed in the HTTP client's thread pool.
 
-5. Update the function again to find the last successful launch in the list:
+4. After the HTTP request call, add the call to get the last successful launch in the list
+   (the list of launches is sorted by date from oldest to newest):
 
    ```kotlin
    class RocketComponent {
@@ -214,9 +201,7 @@ data class RocketLaunch (
    }
    ```
 
-   The list of rocket launches is sorted by date from oldest to newest.
-
-6. Convert the launch date from UTC to your local date and format the output:
+5. Convert the launch date from UTC to your local date, then format the output:
 
    ```kotlin
    import kotlinx.datetime.TimeZone
@@ -227,7 +212,6 @@ data class RocketLaunch (
    class RocketComponent {
        // ...
        
-       @OptIn(ExperimentalTime::class)
        private suspend fun getDateOfLastSuccessfulLaunch(): String {
            val rockets: List<RocketLaunch> =
                httpClient.get("https://api.spacexdata.com/v4/launches").body()
@@ -240,10 +224,10 @@ data class RocketLaunch (
    }
    ```
 
-   The date will be in the "MMMM DD, YYYY" format, for example, OCTOBER 5, 2022.
+   The date will be in the "MMMM DD, YYYY" format, for example, "OCTOBER 5, 2022".
 
-7. Add another suspending function, `launchPhrase()`, which will create a message using the `getDateOfLastSuccessfulLaunch()`
-   function:
+6. To the same class, add another suspending function, `launchPhrase()`,
+   which will create a message using the `getDateOfLastSuccessfulLaunch()` function:
 
     ```kotlin
     class RocketComponent {
@@ -261,8 +245,8 @@ data class RocketLaunch (
 
 ### Create the flow
 
-You can use flows instead of suspending functions. They emit a sequence of values instead of a single value that
-suspending functions return.
+You can use [flows](https://kotlinlang.org/docs/flow.html) instead of simply calling suspending functions.
+Flows can emit a sequence of values as the values are coming instead of returning a single value like suspending functions.
 
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
 2. Add a `rocketComponent` property to the `Greeting` class. The property will store the message with the last successful launch date:
@@ -538,7 +522,7 @@ wrappers.
     }
     ```
 
-3. Also in the `shared/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
+3. Also, in the `shared/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
     kotlin {

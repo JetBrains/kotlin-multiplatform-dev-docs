@@ -76,7 +76,6 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
    the number of days from today until the start of next year using the `datetime` date arithmetic and form the phrase to be displayed:
    
    ```kotlin
-   @OptIn(ExperimentalTime::class)
    fun daysUntilNewYear(): Int {
        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
        val closestNewYear = LocalDate(today.year + 1, 1, 1)
