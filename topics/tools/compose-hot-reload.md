@@ -143,6 +143,9 @@ The steps refer to the project from the [Create an app with shared logic and UI]
 
    ![Compose Hot Reload](compose-hot-reload.gif){width=350}
 
+   Alternatively,trigger the reload explicitly by pressing the assigned shortcut key or clicking the **Reload UI** button.
+   You can modify the trigger behavior on the **Settings | Tools | Compose Hot Reload** page.
+
 Congratulations! You've seen Compose Hot Reload in action. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration after every change.
 
