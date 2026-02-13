@@ -22,14 +22,14 @@ you store the data in the `phrases` variable and later iterate over it to produc
 
 ## Update the Android part
 
-The `composeApp` module contains an Android application, defines its main activity and the UI views, and uses the
-`shared` module as a regular Android library. The UI of the application uses the Compose Multiplatform framework.
+The `androidApp` module contains an Android application and defines its main activity.
+The Compose Multiplatform UI code is implemented in the `sharedUI` module, which the Android app uses as an Android library.
+The UI of the application uses the Compose Multiplatform framework.
 
 Make some changes and see how they are reflected in the UI:
 
-1. Navigate to the `App.kt` file in the `composeApp/src/androidMain/.../greetingkmp` directory.
+1. Navigate to the `App.kt` file in the `sharedUI/src/commonMain/.../greeting` directory. TODO make sure that directory names are correct
 2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it, and select **Go To** | **Declaration or Usages**.
-   You'll see that it's the same class from the `shared` module you edited in the previous step.
 3. In the `Greeting.kt` file, update the `Greeting` class so that the `greet()` function returns a list of strings:
 
    ```kotlin
@@ -43,8 +43,8 @@ Make some changes and see how they are reflected in the UI:
        }
    }
    ```
-
-4. Go back to the `App.kt` file and update the `App()` implementation:
+4. Import the `kotlin.random.Random` package as the IDE suggests.
+5. Go back to the `App.kt` file and update the `App()` implementation to display the list of strings:
 
    ```kotlin
    @Composable
@@ -71,27 +71,22 @@ Make some changes and see how they are reflected in the UI:
 
    Here the `Column` composable shows each of the `Text` items, adding padding around them and space between them.
 
-5. Follow IntelliJ IDEA's suggestions to import the missing dependencies.
-6. Now you can run the Android app to see how it displays the list of strings:
+6. Follow the IDE's suggestions to import the missing dependencies.
+7. Now you can run the Android app to see how it displays the list of strings:
 
    ![Updated UI of Android multiplatform app](first-multiplatform-project-on-android-2.png){width=300}
 
 ## Work with the iOS module
 
-The `iosApp` directory builds into an iOS application. It depends on and uses the `shared` module as an iOS
-framework. The UI of the app is written in Swift.
+The `iosApp` directory builds into an iOS application.
+It depends on and uses the `sharedLogic` module as an iOS framework.
+The UI of the app is written in Swift.
 
-Implement the same changes as in the Android app:
+Implement the same changes as in the Android app to account for the update in common code:
 
 1. In IntelliJ IDEA, find the `iosApp/iosApp` folder at the root of your project in the **Project** tool window.
-2. Open the `iosApp/ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Definition**.
-
-    You'll see the Objective-C declarations for the Kotlin functions defined in the `shared` module. Kotlin types are
-    represented as Objective-C types when used from Objective-C/Swift. Here the `greet()` function
-    returns `List<String>` in Kotlin and is seen from Swift as returning `NSArray<NSString>`. For more on type mappings,
-    see [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
-
-3. Update the SwiftUI code to display a list of items in the same way as in the Android app:
+2. Open the `iosApp/ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Declaration or Usages**.
+3. To display a list of strings in the same way as in the Android app, replace the code for the `ContentView` structure with the following:
 
     ```Swift
     struct ContentView: View {
@@ -116,12 +111,12 @@ Implement the same changes as in the Android app:
 
 ### Xcode reports errors in the code calling the shared framework
 
-If you are using Xcode, your Xcode project may still be using an old version of the framework.
+If you work in Xcode, your Xcode project may be using an old version of the framework.
 To resolve this, return to IntelliJ IDEA and rebuild the project or start the iOS run configuration.
 
 ### Xcode reports an error when importing the shared framework
 
-If you are using Xcode, it may need to clear cached binaries: try resetting the environment by choosing
+If you are using Xcode, you may need to clear cached binaries: try resetting the environment by choosing
 **Product | Clean Build Folder** in the main menu.
 
 ## Next step
