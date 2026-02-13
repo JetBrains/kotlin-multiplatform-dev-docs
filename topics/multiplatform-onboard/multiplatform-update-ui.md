@@ -86,7 +86,10 @@ Implement the same changes as in the Android app to account for the update in co
 
 1. In IntelliJ IDEA, find the `iosApp/iosApp` folder at the root of your project in the **Project** tool window.
 2. Open the `iosApp/ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Declaration or Usages**.
-3. To display a list of strings in the same way as in the Android app, replace the code for the `ContentView` structure with the following:
+   You can see that IDEA correctly matches the Swift call with the Kotlin declaration.
+3. Open the `ContentView.swift` file again.
+   To display a list of strings in the same way as in the Android app,
+   replace the code for the `ContentView` structure with the following:
 
     ```Swift
     struct ContentView: View {
