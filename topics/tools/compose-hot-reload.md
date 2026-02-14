@@ -4,6 +4,9 @@
 
 The bundled Compose Hot Reload Gradle plugin 
 requires Kotlin 2.1.20+ and a JVM target compatible with Java 21 or earlier.
+To use the full functionality of Compose Hot Reload, 
+we recommend installing the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+available for IntelliJ IDEA starting with version 2025.2.2 and Android Studio starting with Otter 2025.2.1.
 
 While we explore adding support for other targets, you can already use the desktop app as your sandbox
 to quickly experiment with UI changes in common code without interrupting your flow.
@@ -23,9 +26,9 @@ This section walks you through the steps to create a multiplatform project with 
 Android Studio. When your project is created, Compose Hot Reload is automatically added.
 
 1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
-2. In IntelliJ IDEA, select **File** | **New** | **Project**.
+2. In the IDE, select **File** | **New** | **Project**.
 3. In the panel on the left, select **Kotlin Multiplatform**.
-4. Specify the **Name**, **Group**, and **Artifact** fields in the **New Project** window
+4. Specify the **Name**, **Group**, and **Artifact** fields in the **New Project** window.
 5. Select the **Desktop** target and click **Create**.
    ![Create multiplatform project with desktop target](create-desktop-project.png){width=600 style="block"}
 
@@ -75,8 +78,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
    }
    ```
 
-5. To use the full functionality of Compose Hot Reload, your project must run on [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR), an OpenJDK fork that supports enhanced class redefinition.
+5. Your project must run on [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)(JBR), an OpenJDK fork that supports enhanced class redefinition.
    Compose Hot Reload can automatically provision a compatible JBR for your project.
 
    > The latest JetBrains Runtime supports only Java 21:
@@ -140,6 +142,9 @@ The steps refer to the project from the [Create an app with shared logic and UI]
    to see the desktop app update automatically.
 
    ![Compose Hot Reload](compose-hot-reload.gif){width=350}
+
+   Alternatively,trigger the reload explicitly by pressing the assigned shortcut key or clicking the **Reload UI** button.
+   You can modify the trigger behavior on the **Settings | Tools | Compose Hot Reload** page.
 
 Congratulations! You've seen Compose Hot Reload in action. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration after every change.
