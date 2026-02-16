@@ -85,9 +85,9 @@ which language constructions and dependencies are allowed in that code.
 
 > If your project only has a single target (for example, JVM),
 > you can access target-specific symbols with appropriate visibility from common code.
-> But as soon as you add a second target,
+> However, as soon as you add a second target,
 > target-specific symbols become unavailable in common code.
-> Be aware of this limitation during migrations and other intermediary project states.
+> Keep this limitation in mind during migrations and other intermediary project states.
 > 
 {style="note"}
 
