@@ -40,5 +40,6 @@
         <external-links-in-new-tab>false</external-links-in-new-tab>
         <property-cleanup>[:,.;]$|\.{3}$|[^a-zA-Z0-9}')]+$</property-cleanup>
     </variables>
+    <llms-txt/>
     <build-profile instance="mpd"/>
 </buildprofiles>
