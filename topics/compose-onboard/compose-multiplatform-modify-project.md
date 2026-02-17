@@ -93,7 +93,6 @@ To use the `kotlinx-datetime` library:
 1. Open the `composeApp/src/commonMain/kotlin/App.kt` file and add the following function which returns a string containing the current date:
 
    ```kotlin
-   @OptIn(ExperimentalTime::class)
    fun todaysDate(): String {
        fun LocalDateTime.format() = toString().substringBefore('T')
 

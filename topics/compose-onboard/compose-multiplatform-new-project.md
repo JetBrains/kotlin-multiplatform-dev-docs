@@ -71,7 +71,7 @@ To get started, implement a new `App` composable:
 3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md):
    1. In the `composeApp/src/jvmMain/kotlin/main.kt` file, click the **Run** icon in the gutter.
    2. Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
-   ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+   ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350 style="block"}
 
    The app works, but the window is clearly too large for the UI:
 
@@ -159,7 +159,6 @@ The next step is to use the given input to calculate time. To do this, create a 
 1. Return to the `App.kt` file and add the following function:
 
     ```kotlin
-   @OptIn(ExperimentalTime::class) 
    fun currentTimeAt(location: String): String? {
         fun LocalTime.formatted() = "$hour:$minute:$second"
 
@@ -175,8 +174,26 @@ The next step is to use the given input to calculate time. To do this, create a 
     ```
 
     This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
+    If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet included, open the `composeApp/build.gradle.kts` file 
+    and add the `kotlinx-datetime` dependency to the section that configures the common code source set.
+    For simplicity, you can include the version number directly instead of adding it to the version catalog:
 
-2. Follow the IDE's instructions to import the missing dependencies.
+    ```kotlin
+    kotlin {
+        // ...
+        sourceSets {
+            // ...
+            commonMain.dependencies {
+                // ...
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+            }
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")'}
+   
+2. Follow the IDE's instructions to import the missing dependencies. 
+   Make sure to import the `Clock` class from `kotlin.time`, not `kotlinx.datetime`.
 3. Adjust your `App` composable to invoke `currentTimeAt()`:
 
     ```kotlin
@@ -292,7 +309,6 @@ list.
     ```kotlin
     data class Country(val name: String, val zone: TimeZone)
     
-    @OptIn(ExperimentalTime::class)
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
     
@@ -420,7 +436,6 @@ code to load and display them:
    
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
-    @OptIn(ExperimentalTime::class)
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
 
@@ -489,7 +504,7 @@ code to load and display them:
         }
     }
     ```
-    {initial-collapse-state="collapsed" collapsible="true"  collapsed-title="data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)"}
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)"}
 
     * The `Country` type stores the path to the associated image.
     * The list of countries passed to the `App` includes these paths.
