@@ -1,10 +1,13 @@
 [//]: # (title: Configure continuous integration for a Kotlin Multiplatform application)
 
-<web-summary>Learn how to set up continuous integration (CI/CD) for Kotlin Multiplatform (KMP) apps with GitHub Actions. Run shared tests, build Android and iOS artifacts, and streamline CI for cross-platform projects.</web-summary>
+<web-summary>Learn how to set up continuous integration (CI/CD) for Kotlin Multiplatform (KMP) apps with GitHub Actions.
+Run shared tests, build Android and iOS artifacts, and streamline CI for cross-platform projects.</web-summary>
 
 This guide shows how to configure continuous integration for a Kotlin Multiplatform application by using GitHub Actions. You set up a workflow that runs shared tests once and builds artifacts for Android and iOS. The workflow runs on every push or pull request to the main branch.
 
-This guide is based on the [Jetcaster sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/pull/1/changes/fef86abd0bd461ab8dfd5ce9826918398c24a541). For a complete CI configuration and example artifacts, see the Jetcaster repository.
+This guide is based on the [Jetcaster KMP sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/).
+You can see the [action and workflow configuration in the repository](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/tree/main/.github)
+or follow the steps below for a detailed description.
 
 ## Overview of the CI structure
 
@@ -15,7 +18,8 @@ The CI setup contains two main parts:
 
 ## Create a composite action for Gradle setup
 
-Create a [composite action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action) to standardize Java and Gradle configuration across jobs. This action installs Java 17 and configures Gradle so that it can be reused for multiple workflows.
+Create a [composite action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action) to synchronize Java and Gradle configuration across jobs.
+This action installs Java 17 and configures Gradle so that it can be reused for multiple workflows.
 
 Create the file `.github/actions/gradle-setup/action.yml`:
 
