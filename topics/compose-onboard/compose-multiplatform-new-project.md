@@ -174,7 +174,7 @@ The next step is to use the given input to calculate time. To do this, create a 
     ```
 
     This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
-    If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet included, open the `composeApp/build.gradle.kts` file 
+    If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet added to the project, open the `composeApp/build.gradle.kts` file 
     and add the `kotlinx-datetime` dependency to the section that configures the common code source set.
     For simplicity, you can include the version number directly instead of adding it to the version catalog:
 
