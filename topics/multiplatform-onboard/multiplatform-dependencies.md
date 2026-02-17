@@ -71,7 +71,6 @@ multiplatform support, is the most convenient way to work with dates in your sha
    the number of days from today until the New Year using the `datetime` date arithmetic:
    
    ```kotlin
-   @OptIn(ExperimentalTime::class)
    fun daysUntilNewYear(): Int {
        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
        val closestNewYear = LocalDate(today.year + 1, 1, 1)
