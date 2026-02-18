@@ -215,7 +215,7 @@ kotlin {
     android()
     iosArm64()   // 64-bit iPhone devices
     macosArm64() // Modern Apple Silicon-based Macs
-    watchosX64() // Modern 64-bit Apple Watch devices
+    watchosArm64() // Modern 64-bit Apple Watch devices
     tvosArm64()  // Modern Apple TV devices  
 }
 ```
@@ -236,7 +236,7 @@ but `platform.Foundation.NSUUID` is an Apple-specific API that's not available o
 try to reference `NSUUID` in `commonMain`.
 
 You could copy and paste this code to each Apple-specific source
-set: `iosArm64Main`, `macosArm64Main`, `watchosX64Main`, and `tvosArm64Main`. But this approach is not recommended
+set: `iosArm64Main`, `macosArm64Main`, `watchosArm64Main`, and `tvosArm64Main`. But this approach is not recommended
 because duplicating code like this is prone to errors.
 
 To solve this issue, you can use _intermediate source sets_. An intermediate source set is a Kotlin source set that
@@ -291,8 +291,8 @@ Kotlin code for iOS devices and simulators is normally the same. You can use onl
 set to share code among all of them.
 
 The same applies to other non-Mac Apple targets. For example, if you have the `tvosArm64` device target for Apple TV and
-the `tvosSimulatorArm64` and `tvosX64` simulator targets for Apple TV simulators on Apple silicon and Intel-based
-devices, respectively, you can use the `tvosMain` intermediate source set for all of them.
+the `tvosSimulatorArm64` simulator target for Apple TV simulators on Apple silicon devices,
+you can use the `tvosMain` intermediate source set for all of them.
 
 ## Integration with tests
 
