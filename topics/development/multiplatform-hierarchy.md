@@ -283,7 +283,7 @@ Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosArm64`):
     
             linuxX64Main.get().dependsOn(myDesktopMain)
             mingwX64Main.get().dependsOn(myDesktopMain)
-            macosArm64X64Main.get().dependsOn(myDesktopMain)
+            macosArm64.get().dependsOn(myDesktopMain)
         }
     }
     ```
