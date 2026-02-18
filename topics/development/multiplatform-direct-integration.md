@@ -73,7 +73,7 @@ To connect the Kotlin framework generated from the multiplatform project to your
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
    
    When you start an iOS run configuration, IntelliJ IDEA and Android Studio build the Kotlin framework dependency
-     before starting the Xcode build, and set the `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable to "YES".
+     before starting the Xcode build and set the `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable to "YES".
      The provided shell script checks this variable and prevents the Kotlin framework from being built a second time from Xcode.
      
    > When you launch an iOS run configuration for a project that does not support this,
@@ -105,9 +105,14 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
 9. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 
-> If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
-> tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
->
+   If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
+   tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
+
+> A general `Command PhaseScriptExecution failed with a nonzero exit code` error may arise if your Xcode does not have
+> access to a Java runtime required to run the Gradle build.
+> You can fix this by adding the path to your JDK to the `JAVA_HOME` environment variable,
+> or by adding the same path to Xcode custom paths (**Xcode | Settings | Locations | Custom Paths**).
+> 
 {style="note"}
 
 ## What's next?
