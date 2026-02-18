@@ -1,24 +1,25 @@
 [//]: # (title: Configure continuous integration for a Kotlin Multiplatform application)
 
 <web-summary>Learn how to set up continuous integration (CI/CD) for Kotlin Multiplatform (KMP) apps with GitHub Actions.
-Run shared tests, build Android and iOS artifacts, and streamline CI for cross-platform projects.</web-summary>
+Use CI to run shared tests and build artifacts for iOS, Android, and desktop.</web-summary>
 
-This guide shows how to configure continuous integration for a Kotlin Multiplatform application by using GitHub Actions. You set up a workflow that runs shared tests once and builds artifacts for Android and iOS. The workflow runs on every push or pull request to the main branch.
+This guide shows an example of continuous integration for a Kotlin Multiplatform application set up with GitHub Actions.
+You'll set up a workflow that runs shared tests and builds artifacts for Android, iOS, and desktop on every push or pull request to the `main` branch.
 
 This guide is based on the [Jetcaster KMP sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/).
 You can see the [action and workflow configuration in the repository](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/tree/main/.github)
-or follow the steps below for a detailed description.
+or follow the steps below for a step-by-step description.
 
-This guide suggests setting up CI as two parts:
+This guide suggests setting up CI in two parts:
 
-* [A reusable composite GitHub Action that sets up Java and Gradle](#create-a-composite-action-for-gradle-setup)
-* [A GitHub Actions workflow](#define-the-build-workflow) that runs tests and platform-specific builds on every push or pull request
-  to the `main` branch.
+* [Reusable composite GitHub Action that sets up Java and Gradle](#create-a-composite-action-for-gradle-setup)
+* [Main GitHub Actions workflow](#define-the-build-workflow) that runs tests and starts platform-specific builds
+  on every push or pull request to the `main` branch.
 
 ## Create a composite action for Gradle setup
 
 Create a [composite action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action) to synchronize Java and Gradle configuration across jobs.
-You will be able to reuse this action in multiple workflows to make sure that the same configuration is used for all builds.
+You will reuse this action in workflow jobs to make sure that the same configuration is used for all builds.
 
 In this example, the action installs Java 17 and configures the default Gradle version.
 To set up the action, create the file `.github/actions/gradle-setup/action.yml`:
@@ -137,7 +138,7 @@ jobs:
 
 ### Build the iOS simulator application
 
-To avoid configuring signing, this job targets iOS simulator.
+This job targets the iOS Simulator to avoid having to properly sign the app.
 The application is built using `xcodebuild`:
 
 1. Check out the repository to build the application from.
@@ -183,16 +184,16 @@ jobs:
 ## Push and test your CI
 
 The CI workflow is going to be triggered for the first time when you push the workflow configuration to the `main` branch 
-or create a pull request with these files.
+or create a pull request with these configuration files.
 
-Check the workflow results in the **Actions** tab of your repository to verify that everything works correctly.
+You can check the workflow results in the **Actions** tab of your repository to verify that everything works correctly.
 
 Remember that you can also trigger the workflow manually: select the workflow in the list of actions on the left
 and click **Run workflow**.
 
 ## What’s next
 
-For exact CI configurations, see the [Jetcaster sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/pull/1/changes/fef86abd0bd461ab8dfd5ce9826918398c24a541#r2758188651),
+For complete CI configurations, see the [Jetcaster sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/tree/main/.github),
 which also includes jobs to build desktop JVM applications for macOS, Windows, and Linux.
 
 For guidance on publishing applications to app stores with GitHub Actions, see [Marco Gomiero’s series of posts on the subject](https://www.marcogomiero.com/posts/2024/kmp-ci-ios/).
