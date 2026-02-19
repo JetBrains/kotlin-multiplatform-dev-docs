@@ -68,7 +68,7 @@ import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
 import components.resources.demo.shared.generated.resources.*
 import components.resources.demo.shared.generated.resources.NotoColorEmoji
 import components.resources.demo.shared.generated.resources.Res
@@ -85,7 +85,7 @@ fun main() {
         // Overrides the resource location
         resourcePathMapping { path -> "./$path" }
     }
-    CanvasBasedWindow("Resources + K/Wasm") {
+    ComposeViewport(viewportContainerId = "composeApplication") {
         val font1 by preloadFont(Res.font.Workbench_Regular)
         val font2 by preloadFont(Res.font.font_awesome, FontWeight.Normal, FontStyle.Normal)
         val emojiFont = preloadFont(Res.font.NotoColorEmoji).value
