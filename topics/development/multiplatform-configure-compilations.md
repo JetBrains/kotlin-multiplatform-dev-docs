@@ -149,12 +149,12 @@ kotlin {
                         /* ... */
                     }
                 }
-                
-                // Create a test task to run the tests produced by this compilation:
-                testRuns.create("integration") {
-                    // Configure the test task
-                    setExecutionSourceFrom(integrationTest)
-                }
+            }
+
+            // Create a test task to run the tests produced by this compilation:
+            testRuns.create("integration") {
+                // Configure the test task
+                setExecutionSourceFrom(integrationTest)
             }
         }
     }
@@ -177,12 +177,12 @@ kotlin {
                     /* ... */
                 }
             }
+        }
 
-            // Create a test task to run the tests produced by this compilation
-            testRuns.create('integration') {
-                // Configure the test task
-                setExecutionSourceFrom(compilations.integrationTest)
-            }
+        // Create a test task to run the tests produced by this compilation
+        testRuns.create('integration') {
+            // Configure the test task
+            setExecutionSourceFrom(compilations.integrationTest)
         }
     }
 }
