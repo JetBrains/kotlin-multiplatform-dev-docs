@@ -13,7 +13,7 @@ or follow the steps below for a step-by-step description.
 This guide suggests setting up CI in two parts:
 
 * [Reusable composite GitHub Action that sets up Java and Gradle](#create-a-composite-action-for-gradle-setup)
-* [Main GitHub Actions workflow](#define-the-build-workflow) that runs tests and starts platform-specific builds
+* [Main GitHub Actions workflow](#define-the-build-workflow) that runs tests and triggers platform-specific builds
   on every push or pull request to the `main` branch.
 
 ## Create a composite action for Gradle setup
@@ -72,7 +72,7 @@ This job runs tests using the `jvmTest` Gradle task to validate changes before b
 
 1. Check out the repository to run tests for.
 2. Use the composite `gradle-setup` action that you prepared earlier to set up Java and Gradle.
-3. Run the tests with a `./gradlew` command.
+3. Run the tests with the `./gradlew` command.
 4. Upload test reports as an artifact to the `**/build/reports/tests/` directory.
 
 To set up this job, add the following to the `.github/workflows/build.yml` file:
@@ -107,7 +107,7 @@ This job builds the Android debug APK using the `:mobile:assembleDebug` Gradle t
 
 1. Check out the repository to build the package from.
 2. Use the composite `gradle-setup` action that you prepared earlier to set up Java and Gradle.
-3. Build the APK with a `./gradlew` command.
+3. Build the APK with the `./gradlew` command.
 4. Upload the built package from the `mobile/build/outputs/apk/debug/` directory.
 
 Add the following to the `.github/workflows/build.yml` file, continuing the `jobs` section:
@@ -148,7 +148,7 @@ The application is built using `xcodebuild`:
 
 The iOS application is built on a macOS runner (`macos-latest`), which includes `xcodebuild`. 
 
-Continue in `.github/workflows/build.yml`:
+Continue modifying the `.github/workflows/build.yml` file:
 
 ```yaml
 jobs:
@@ -193,7 +193,7 @@ and click **Run workflow**.
 
 ## What’s next
 
-For complete CI configurations, see the [Jetcaster sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/tree/main/.github),
+For a complete CI configuration example, see the [Jetcaster sample](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/tree/main/.github),
 which also includes jobs to build desktop JVM applications for macOS, Windows, and Linux.
 
 For guidance on publishing applications to app stores with GitHub Actions, see [Marco Gomiero’s series of posts on the subject](https://www.marcogomiero.com/posts/2024/kmp-ci-ios/).
