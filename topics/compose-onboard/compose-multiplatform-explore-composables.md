@@ -20,38 +20,9 @@ platform-specific code that launches this UI on each platform.
 
 ## Implementing composable functions
 
-In the `composeApp/src/commonMain/kotlin/App.kt` file, take a look at the `App()` function:
+In the `shared/src/commonMain/kotlin/App.kt` file, take a look at the `App()` function:
 
-```kotlin
-@Composable
-@Preview
-fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
-    }
-}
-```
+<include from="compose-multiplatform-create-first-app.md" element-id="common-app-composable" />
 
 The `App()` function is a regular Kotlin function annotated with `@Composable`. These kinds of functions are referred to
 as _composable
@@ -65,15 +36,17 @@ A composable function has the following general structure:
   the `AnimatedVisibility` composable.
 * The `Button` contains the `Text` composable, which renders some text.
 * The `AnimatedVisibility` shows and hides the `Image` using an animation.
-* The `painterResource` loads a vector icon stored in an XML resource.
+* The `painterResource` loads a vector icon stored as an XML file.
 
 The `horizontalAlignment` parameter of the `Column` centers its content. But for this to have any effect, the column
 should take up the full width of its container. This is achieved using the `modifier` parameter.
 
-Modifiers are a key component of Compose Multiplatform. This is a primary mechanism you use to adjust the appearance or
-behavior of composables in the UI. Modifiers are created using methods of the `Modifier` type. When you chain these
+Modifiers are a key component of Jetpack Compose and Compose Multiplatform.
+This is the primary mechanism you use to adjust the appearance or behavior of composables in the UI.
+Modifiers are created using methods of the `Modifier` type. When you chain these
 methods, each call can change the `Modifier` returned from the previous call, making the order significant.
-See the [JetPack Compose documentation](https://developer.android.com/jetpack/compose/modifiers) for more details.
+See the [Compose Multiplatform introduction to modifiers](https://kotlinlang.org/docs/multiplatform/compose-layout-modifiers.html#built-in-modifiers)
+and the extensive [Jetpack Compose modifier documentation](https://developer.android.com/jetpack/compose/modifiers) for more details.
 
 ### Managing the state
 
@@ -102,7 +75,7 @@ controller; on the desktop, by a window; and on the web, by a container. Let's e
 
 ### On Android
 
-For Android, open the `MainActivity.kt` file in `composeApp/src/androidMain/kotlin`:
+For Android, open the `MainActivity.kt` file within `androidApp/src/main/kotlin`:
 
 ```kotlin
 class MainActivity : ComponentActivity() {
@@ -122,38 +95,42 @@ called `MainActivity` that invokes the `App` composable.
 
 ### On iOS
 
-For iOS, open the `MainViewController.kt` file in `composeApp/src/iosMain/kotlin`:
+For iOS, open the `MainViewController.kt` file within `shared/src/iosMain/kotlin`:
 
 ```kotlin
 fun MainViewController() = ComposeUIViewController { App() }
 ```
 
 This is a [view controller](https://developer.apple.com/documentation/uikit/view_controllers) that performs the same
-role as an activity on Android. Notice that both the iOS and Android types simply invoke the `App` composable.
+role as an activity on Android. Notice that both the iOS and Android types simply invoke the `App` composable from common code.
 
 ### On desktop
 
-For desktop, look at the `main()` function in `composeApp/src/jvmMain/kotlin`:
+For desktop, look for the `main.kt` file in `desktopApp/src/main/kotlin`:
 
 ```kotlin
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication, title = "ComposeDemo") {
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "ComposeDemo"
+    ) {
         App()
     }
 }
 ```
 
 * Here, the `application()` function launches a new desktop application.
-* This function takes a lambda, where you initialize the UI. Typically, you create a `Window` and specify properties and
-  instructions that dictate how the program should react when the window is closed. In this case, the whole application shuts down.
-* Inside this window, you can place your content. As with Android and iOS, the only content is the `App()` function.
+* This function takes a lambda, which initializes the UI. Typically, you create a `Window` and specify properties and
+  instructions that dictate how the program should react when the window is closed (`onCloseRequest`).
+  In this case, the whole application shuts down.
+* Inside this window, you can place your content. As with Android and iOS, the only content is the UI provided by the `App()` function.
 
-Currently, the `App` function doesn't declare any parameters. In a larger application, you typically pass parameters to
-platform-specific dependencies. These dependencies could be created by hand or using a dependency injection library.
+In this example, the `App()` function doesn't declare any parameters. In a larger application, you typically pass parameters to
+platform-specific dependencies. These dependencies could be written manually or passed using a dependency injection library.
 
 ### On web
 
-In the `composeApp/src/webMain/kotlin/main.kt` file, take a look at the `main()` function:
+In the `main.kt` file within the `webApp/src/webMain/kotlin/` directory, take a look at the `main()` function:
 
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
@@ -164,14 +141,11 @@ fun main() {
 }
 ```
 
-* The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using an API marked as
+* The `@OptIn(ExperimentalComposeUiApi::class)` annotation tells the compiler that you are using a Compose API marked as
   experimental and may change in future releases.
 * The `ComposeViewport{}` function sets up the Compose environment for the application.
 * The web app is inserted into the container specified as a parameter for the `ComposeViewport` function.
 * The `App()` function is responsible for building the UI components of your application using Jetpack Compose.
-
-The `main.kt` file is located
-in the `webMain` directory, which contains common code for the web targets.
 
 ## Next step
 

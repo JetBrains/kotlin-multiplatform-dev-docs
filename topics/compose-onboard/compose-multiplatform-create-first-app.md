@@ -71,39 +71,42 @@ If you didn't select iOS in the wizard, you won't have the folders whose names b
 
 The project contains two modules:
 
-* _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, iOS, and web applications – the code
+* _shared_ is a Kotlin module that contains the logic shared among the Android, desktop, iOS, and web applications – the code
   you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
   you automate your build process.
+* _androidApp_ is the module that builds into an Android application.
 * _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
 
   ![Compose Multiplatform project structure](compose-project-structure.png)
+* _desktopApp_ is the module that builds into a desktop JVM application. It depends on the `shared` module.
+* _webApp_ is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
 
-The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
-`jvmMain`, `wasmJsMain`, and `webMain` (with `commonTest` if you chose to include tests).
+The **shared** module contains the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
+`jvmMain`, and `wasmJsMain` (with `-Test` companion source sets if you chose to include tests).
+
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
 dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
 
 The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
-target: 
+target:
 
 * `jvmMain` is the source file for desktop, which uses Kotlin/JVM.
 * `androidMain` also uses Kotlin/JVM.
 * `iosMain` uses Kotlin/Native.
 * `jsMain` uses Kotlin/JS.
 * `wasmJsMain` uses Kotlin/Wasm.
-* `webMain` is the web [intermediate source set](multiplatform-hierarchy.md#manual-configuration) that includes `jsMain` and `wasmJsMain`.
 
-When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
+When the `shared` module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
 into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
-Kotlin code can be treated as Kotlin/Wasm and Kotlin/JS.
+Kotlin code can be treated as Kotlin/Wasm or Kotlin/JS.
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.svg){width=700}
 
 In general, write your implementation as common code whenever possible instead of duplicating functionality
 in platform-specific source sets.
 
-In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `shared/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
 ```kotlin
@@ -129,14 +132,14 @@ fun App() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text("Compose: ${greeting}")
                 }
             }
         }
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="fun App()"}
+{id="common-app-composable"}
 
 Let's run the application on all supported platforms.
 
@@ -155,7 +158,7 @@ order, so start with whichever platform you are most familiar with.
 
 1. In the list of run configurations, select **composeApp**.
 2. Choose your Android virtual device and then click **Run**: Your IDE starts the selected virtual device if it
-   is powered down, and runs the app.
+   is powered down and runs the app.
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
 
@@ -265,7 +268,7 @@ in IntelliJ IDEA and select your device in the **Execution target** list. Run th
 
 ### Run your application on desktop
 
-Select **composeApp [desktop]** in the list of run configurations and click **Run**. By default, the run configuration
+Select **desktopApp** (TODO verify) in the list of run configurations and click **Run**. By default, the run configuration
 starts a desktop app in its own OS window:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
@@ -276,8 +279,8 @@ starts a desktop app in its own OS window:
 
 1. In the list of run configurations, select:
 
-   * **composeApp[js]**: To run your Kotlin/JS application.
-   * **composeApp[wasmJs]**: To run your Kotlin/Wasm application.
+   * **webApp[js]**: To run your Kotlin/JS application.
+   * **webApp[wasmJs]**: To run your Kotlin/Wasm application.
 
    ![Run the Compose Multiplatform app on web](web-run-configuration.png){width=400}
 
