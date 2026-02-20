@@ -5,9 +5,9 @@ as well as caching web resources.
   
 ## Preloading of resources for web targets
 
-The web resources like fonts and images are loaded asynchronously using the `fetch` API. During the initial load or with
-slower network connections, resource fetching can cause visual glitches, such as [FOUT](https://fonts.google.com/knowledge/glossary/fout)
-or displaying placeholders instead of images.
+The web resources like fonts and images are loaded asynchronously using the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+During the initial load or with slower network connections, resource fetching can cause visual glitches, 
+such as [FOUT](https://fonts.google.com/knowledge/glossary/fout) or displaying placeholders instead of images.
 
 A typical example of this issue is when a `Text()` component contains text in a custom font, but the font with the
 necessary glyphs is still loading. In this case, users may temporarily see the text in default font or even empty boxes and
