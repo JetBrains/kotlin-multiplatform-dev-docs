@@ -210,7 +210,7 @@ which validates stored content through repeated HTTP requests and can be particu
 The cache is cleared on every app launch or page refresh to ensure resources remain consistent with the application's current state.
 
 For more details, see the [pull request](https://github.com/JetBrains/compose-multiplatform/pull/5379)
-and the [Caching web resources](compose-multiplatform-resources-usage.md#caching-web-resources) documentation.
+and the [Caching web resources](compose-web-resources.md#caching-web-resources) documentation.
 
 ## Desktop
 
