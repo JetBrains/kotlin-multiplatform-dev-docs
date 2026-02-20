@@ -421,7 +421,7 @@ The following functions are now available for loading and caching resources:
 * `preloadImageBitmap()`, which preloads bitmap images.
 * `preloadImageVector()`, which preloads vector images.
 
-See the [documentation](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api) for details.
+See the [documentation](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api) for details.
 
 ## Desktop
 

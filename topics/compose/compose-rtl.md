@@ -266,7 +266,7 @@ LaunchedEffect(Unit) {
 ```
 
 For details on preloading resources for web targets, refer to the section about the
-[preload API](compose-multiplatform-resources-usage.md#preload-resources-using-the-compose-multiplatform-preload-api).
+[preload API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api).
 
 ## Accessibility in RTL layouts
 
