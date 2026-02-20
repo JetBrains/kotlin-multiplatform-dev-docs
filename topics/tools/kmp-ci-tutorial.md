@@ -1,4 +1,4 @@
-[//]: # (title: Configure continuous integration for a Kotlin Multiplatform application)
+[//]: # (title: Configure GitHub Actions for continuous integration of a Kotlin Multiplatform application)
 
 <web-summary>Learn how to set up continuous integration (CI/CD) for Kotlin Multiplatform (KMP) apps with GitHub Actions.
 Use CI to run shared tests and build artifacts for iOS, Android, and desktop.</web-summary>
