@@ -80,6 +80,7 @@ multiplatform support, is the most convenient way to work with dates in your sha
    fun daysPhrase(): String = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
    ```
 6. Add all necessary imports as suggested by the IDE.
+   Make sure you import the `Clock` class from the `kotlin.time` package.
 7. In the `Greeting.kt` file, update the `Greeting` class to see the result:
     
     ```kotlin
