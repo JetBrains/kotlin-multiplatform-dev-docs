@@ -250,7 +250,7 @@ and see if there are any updates for the iOS simulator.
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* A series of tutorials about working with the shared UI code using Compose Multiplatform: [](compose-multiplatform-create-first-app.md)
+* A series of tutorials about working with shared UI code using Compose Multiplatform: [](compose-multiplatform-create-first-app.md)
 * A series of tutorials about working with shared code in a project with a native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation:
   * [Project configuration](multiplatform-project-configuration.md)
