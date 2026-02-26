@@ -2,7 +2,7 @@
 
 <web-summary>JetBrains provides official Kotlin IDE support for IntelliJ IDEA and Android Studio.</web-summary>
 
-With this tutorial, you can get a simple Kotlin Multiplatform app, with Compose Multiplatform UI, up and running.
+In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform app with a Compose Multiplatform UI.
 
 ## Set up the environment
 
@@ -82,14 +82,14 @@ Use the IDE wizard to create a new KMP project:
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
    for the corresponding target.
 
-   > Desktop target includes [](compose-hot-reload.md) functionality that allows you to see UI changes
-   > as soon as you save changes to your code.
+   > The desktop target automatically includes [](compose-hot-reload.md) functionality that allows you to see UI changes
+   > as soon as you save changes in your code.
    > Even if you're not planning on making a desktop app, you may want to add the desktop target to your project to speed up
    > iterating on UI code.
    > 
    {style="note"}
 
-6. When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
+6. When you've chosen your platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
 ![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=600}
 
@@ -108,14 +108,14 @@ Use the IDE wizard to create a new KMP project:
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
    for the corresponding target.
 
-   > Desktop target includes [](compose-hot-reload.md) functionality that allows you to see UI changes
-   > as soon as you save changes to your code.
+   > The desktop target automatically includes [](compose-hot-reload.md) functionality that allows you to see UI changes
+   > as soon as you save changes in your code.
    > Even if you're not planning on making a desktop app, you may want to add the desktop target to your project to speed up
    > iterating on UI code.
    >
    {style="note"}
 
-5. When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
+5. When you've chosen your platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
 ![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=600}
 
