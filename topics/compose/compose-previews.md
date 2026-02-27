@@ -42,7 +42,7 @@ kotlin {
 }
 ```
 
-The tooling dependency should be declared in the root `dependencies {}` block of the `build.gradle.kts` file in your KMP module
+The tooling dependency should be declared in the root `dependencies {}` block of the `build.gradle.kts` file in your common code module
 in one of two ways,
 depending on your [Android target configuration](#android-target-configurations):
 
