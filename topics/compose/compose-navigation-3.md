@@ -130,7 +130,7 @@ This is the most straightforward approach as Kotlin serialization handles the hi
 
 ```kotlin
 @Serializable
-sealed interface Route
+sealed interface Route : NavKey
 
 @Serializable
 data object RouteA : Route
