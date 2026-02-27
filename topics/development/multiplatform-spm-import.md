@@ -2,7 +2,7 @@
 <primary-label ref="alpha"/>
 
 <tldr>
-   Swift Package Manager fulfills the same role as <a href="multiplatform-cocoapods-overview.md">CocoaPods</a>:
+   Swift Package Manager fulfills the same role as CocoaPods:
    it lets you transparently orchestrate native iOS dependencies of your iOS app.
    Here you can learn how to set up an SPM dependency in your KMP project,
    and how to migrate your KMP setup from CocoaPods to SPM if necessary.
@@ -182,9 +182,11 @@ kotlin {
 
 Some SwiftPM dependencies may not compile or provide valid APIs for all targets in your build script.
 For example, the Google Maps SDK currently only supports iOS targets.
+So, while your project only targets iOS, you don't have to declare platforms explicitly.
+But as soon as you add another target, for example, macOS, you need to specify the platform constraint for each dependency.
 
 To make sure that a dependency is applied only for relevant compilations,
-specify the correct targets in the `platforms` parameter of the `product` specification:
+specify the correct targets in the `platforms` parameter of a `product` specification:
 
 ```kotlin
 kotlin {
@@ -235,6 +237,60 @@ import swiftPMImport.groupName.subproject.FIRApp
 ```
 
 ## Additional import options
+
+### Importing local Swift packages
+
+TODO do we need two examples like in the draft?
+
+The SwiftPM import mechanism also allows importing Swift packages from the local file system.
+
+For example, you have a Swift package with the following manifest, located in the `/path/to/ExamplePackage` directory:
+
+```swift
+// /path/to/ExamplePackage/Package.swift
+let package = Package(
+  name: "ExamplePackage",
+  platforms: [.iOS("15.0")],
+  products: [
+    .library(name: "ExamplePackage", targets: ["ExamplePackage"]),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/grpc/grpc-swift.git", exact: "1.27.0",),
+  ],
+  targets: [
+    // This target can be implemented in Swift with @objc API or in Objective-C
+    .target(name: "ExamplePackage", dependencies: [.product(name: "GRPC", package: "grpc-swift")]),
+  ]
+)
+```
+{collapsible="true" collapsed-title-line-number="3"}
+
+To import it in your Kotlin build script, use the `localPackage` API:
+
+```kotlin
+// <projectDir>/shared/build.gradle.kts
+kotlin {
+    swiftPMDependencies {
+        localPackage(
+            directory = project.layout.projectDirectory.dir("/path/to/ExamplePackage/"),
+            products = listOf("ExamplePackage")
+        )
+    }
+}
+```
+
+Sync the Gradle files to perform SwiftPM import, then use the imported APIs in your Kotlin code:
+
+```kotlin
+// /path/to/shared/src/appleMain/kotlin/useExamplePackage.kt
+
+@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+fun useExamplePackage() {
+    // If the Swift package is successfully imported,
+    // the IDE suggests the correct import for the class
+    HelloFromExamplePackage().hello()
+}
+```
 
 ### Specific deployment versions
 
