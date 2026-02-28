@@ -897,7 +897,7 @@ Free
 </td>
 <td>
 
-[Publish to Maven Central](multiplatform-publish-libraries.md)
+[Publish to Maven Central](multiplatform-publish-libraries-to-maven.md)
 
 Tutorial
 
