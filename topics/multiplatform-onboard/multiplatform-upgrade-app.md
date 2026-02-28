@@ -20,8 +20,8 @@ requests and data serialization are the [most popular use cases](https://kotlinl
 Multiplatform. Learn how to implement these in your first application, so that after completing this onboarding journey
 you can use them in future projects.
 
-The updated app will retrieve data over the internet from the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs)
-and display the date of the last successful launch of a SpaceX rocket.
+The updated app will retrieve data over the internet from the [LaunchLibrary 2](https://lldev.thespacedevs.com/docs)
+API and display the date of the last successful launch of a SpaceX rocket.
 
 > You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
@@ -33,16 +33,15 @@ and display the date of the last successful launch of a SpaceX rocket.
 
 You'll need to add the following multiplatform libraries in your project:
 
-* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for asynchronous code,
-  which allows simultaneous operations.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses into objects of entity classes used to process
+* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for simultaneous operations.
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the SpaceX API into objects of entity classes used to process
   network operations.
-* [Ktor](https://ktor.io/), a framework to create an HTTP client for retrieving data over the internet.
+* [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 
 ### kotlinx.coroutines
 
 To add `kotlinx.coroutines` to your project, specify a dependency in the common source set. To do so, add the following
-line to the `shared/build.gradle.kts` file:
+line to the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 kotlin {
@@ -56,13 +55,13 @@ kotlin {
 }
 ```
 
-The Kotlin Multiplatform Gradle plugin automatically adds a dependency to the platform-specific (iOS and Android) parts
+The Kotlin Multiplatform Gradle plugin automatically adds a dependency on the platform-specific (iOS and Android) artifacts
 of `kotlinx.coroutines`.
 
 ### kotlinx.serialization
 
 To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
-To do that, add the following line to the existing `plugins {}` block at the very beginning of the `shared/build.gradle.kts` file:
+To do that, add the following line to the existing `plugins {}` block at the very beginning of the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 plugins {
@@ -73,10 +72,10 @@ plugins {
 
 ### Ktor
 
-You need to add the core dependency (`ktor-client-core`) to the common source set of the shared module.
-You also need to add supporting dependencies:
+Add the base Ktor client dependency (`ktor-client-core`) to the common source set of the shared module,
+along with these supporting dependencies:
 
-* Add the `ContentNegotiation` functionality (`ktor-client-content-negotiation`), which allows serializing and deserializing
+* Add the `ContentNegotiation` library (`ktor-client-content-negotiation`), which allows serializing and deserializing
   the content in a specific format.
 * Add the `ktor-serialization-kotlinx-json` dependency to instruct Ktor to use the JSON format and `kotlinx.serialization`
   as a serialization library. Ktor will expect JSON data and deserialize it into a data class when receiving responses.
@@ -108,14 +107,14 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
-## Create API requests
+## Set up API requests
 
-You'll need the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data, and you'll use a single method to
-get the list of all launches from the **v4/launches** endpoint.
+You'll use the [Launch Library API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data,
+specifically the list of all launches from the **/2.3.0/launches** endpoint.
 
-### Add a data model
+### Create a data model
 
-In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
+In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketLaunch.kt` file
 and add a data class which stores data from the SpaceX API:
 
 ```kotlin
@@ -123,26 +122,40 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RocketLaunch (
-    @SerialName("flight_number")
-    val flightNumber: Int,
+data class RocketLaunch(
+    @SerialName("id")
+    val id: String,
     @SerialName("name")
     val missionName: String,
-    @SerialName("date_utc")
+    @SerialName("net")
     val launchDateUTC: String,
-    @SerialName("success")
-    val launchSuccess: Boolean?,
+    @SerialName("status")
+    val status: LaunchStatus,
+)
+
+@Serializable
+data class LaunchStatus(
+    @SerialName("id")
+    val id: Int,
+    @SerialName("name")
+    val name: String,
+)
+
+@Serializable
+data class LaunchListResponse(
+    @SerialName("results")
+    val results: List<RocketLaunch>,
 )
 ```
 
-* The `RocketLaunch` class is marked with the `@Serializable` annotation, so that the `kotlinx.serialization` plugin can
+* The `RocketLaunch` class is marked with the `@Serializable` annotation so that the `kotlinx.serialization` plugin can
   automatically generate a default serializer for it.
-* The `@SerialName` annotation allows you to redefine field names, making it possible to declare properties in data classes
-  with more readable names.
+* The `@SerialName` annotation allows you to redefine field names, making it possible to declare properties with more readable names
+  in data classes.
 
 ### Connect HTTP client
 
-1. In the `shared/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
+1. In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -165,28 +178,14 @@ data class RocketLaunch (
     ```
 
    * The [`ContentNegotiation`](https://ktor.io/docs/serialization-client.html#register_json) Ktor plugin and the JSON serializer deserialize the result of the GET request.
-   * The JSON serializer here is configured in a way that it prints JSON in a more readable manner with the `prettyPrint` property. It
-     is more flexible when reading malformed JSON with `isLenient`,
+   * The JSON serializer here is configured in such a way that it prints JSON in a more readable manner with the `prettyPrint` property.
+     This is more flexible when reading malformed JSON with `isLenient`,
      and it ignores keys that haven't been declared in the rocket launch model with `ignoreUnknownKeys`.
 
-3. Add the `getDateOfLastSuccessfulLaunch()` suspending function to `RocketComponent`:
+3. Add the `getDateOfLastSuccessfulLaunch()` [suspending function](https://kotlinlang.org/docs/coroutines-basics.html) to `RocketComponent`,
+   which will retrieve information about rocket launches asynchronously:
 
    ```kotlin
-   class RocketComponent {
-       // ...
-       
-       private suspend fun getDateOfLastSuccessfulLaunch(): String {
-       
-       }
-   }
-   ```
-
-4. Call the `httpClient.get()` function to retrieve information about rocket launches:
-
-   ```kotlin
-   import io.ktor.client.request.get
-   import io.ktor.client.call.body
-
    class RocketComponent {
        // ...
        
@@ -198,25 +197,26 @@ data class RocketLaunch (
 
    * `httpClient.get()` is also a suspending function
      because it needs to retrieve data over the network asynchronously without blocking threads.
-   * Suspending functions can only be called from coroutines or other suspending functions. This is why `getDateOfLastSuccessfulLaunch()`
-     was marked with the `suspend` keyword. The network request is executed in the HTTP client's thread pool.
+   * Suspending functions can only be called from coroutines or other suspending functions.
+     This is why `getDateOfLastSuccessfulLaunch()` was marked with the `suspend` keyword.
+     The network request is executed in the HTTP client's thread pool.
 
-5. Update the function again to find the last successful launch in the list:
+4. After the HTTP request call, add the call to get the last successful launch in the list
+   (the list of launches is sorted by date from oldest to newest):
 
    ```kotlin
    class RocketComponent {
        // ...
        
        private suspend fun getDateOfLastSuccessfulLaunch(): String {
-           val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
-           val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
+           val response: LaunchListResponse =
+               httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
+           val lastSuccessLaunch = response.results.first { it.status.id == 3 }
        }
    }
    ```
 
-   The list of rocket launches is sorted by date from oldest to newest.
-
-6. Convert the launch date from UTC to your local date and format the output:
+5. Convert the launch date from UTC to your local date, then format the output:
 
    ```kotlin
    import kotlinx.datetime.TimeZone
@@ -228,9 +228,9 @@ data class RocketLaunch (
        // ...
        
        private suspend fun getDateOfLastSuccessfulLaunch(): String {
-           val rockets: List<RocketLaunch> =
-               httpClient.get("https://api.spacexdata.com/v4/launches").body()
-           val lastSuccessLaunch = rockets.last { it.launchSuccess == true }
+           val response: LaunchListResponse =
+               httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
+           val lastSuccessLaunch = response.results.first { it.status.id == 3 }
            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
                .toLocalDateTime(TimeZone.currentSystemDefault())
        
@@ -239,10 +239,10 @@ data class RocketLaunch (
    }
    ```
 
-   The date will be in the "MMMM DD, YYYY" format, for example, OCTOBER 5, 2022.
+   The date will be in the "MMMM DD, YYYY" format, for example, "OCTOBER 5, 2022".
 
-7. Add another suspending function, `launchPhrase()`, which will create a message using the `getDateOfLastSuccessfulLaunch()`
-   function:
+6. To the same class, add another suspending function, `launchPhrase()`,
+   which will create a message using the `getDateOfLastSuccessfulLaunch()` function:
 
     ```kotlin
     class RocketComponent {
@@ -258,10 +258,11 @@ data class RocketLaunch (
     }
     ```
 
-### Create the flow
+### Create a coroutine flow
 
-You can use flows instead of suspending functions. They emit a sequence of values instead of a single value that
-suspending functions return.
+Instead of simply calling a suspending function, you can use [flows](https://kotlinlang.org/docs/flow.html)
+when you need to produce a sequence of values.
+Flows can emit a sequence of values as the values are produced instead of returning a single value like suspending functions.
 
 1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
 2. Add a `rocketComponent` property to the `Greeting` class. The property will store the message with the last successful launch date:
@@ -295,25 +296,9 @@ suspending functions return.
    * The `Flow` emits strings with a delay of one second between each emission. The last element is only emitted after
      the network response returns, so the exact delay depends on your network.
 
-### Add internet access permission
-
-To access the internet, the Android application needs the appropriate permission. Since all network requests are made from the
-shared module, it makes sense to add the internet access permission to its manifest.
-
-Update your `composeApp/src/androidMain/AndroidManifest.xml` file with the access permission:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    ...
-</manifest>
-```
-
-You've already updated the API of the shared module by changing the return type of the `greet()` function to `Flow`.
+You've updated the API of the shared module by changing the return type of the `greet()` function to `Flow`.
 Now you need to update native parts of the project so that they can properly handle the result of calling
 the `greet()` function.
-
 
 ## Update native Android UI
 
@@ -321,12 +306,14 @@ As both the shared module and the Android application are written in Kotlin, usi
 
 ### Introduce a view model
 
-Now that the application is becoming more complex, it's time to introduce a view model to the [Android activity](https://developer.android.com/guide/components/activities/intro-activities)
-called `MainActivity`. It invokes the `App()` function that implements the UI.
-The view model will manage the data from the activity and won't disappear when the activity undergoes a lifecycle change.
+View models are a popular pattern in Android development that helps manage data and other app components that should
+persist through [Android activity](https://developer.android.com/guide/components/activities/intro-activities) lifecycle.
+Now that the application is becoming more complex, it's time to introduce a view model into our app as well.
+It will store the data received from the SpaceX API and make it available to the UI.
 
-1. In the `composeApp/src/androidMain/.../greetingkmp` directory,
-    create a new `MainViewModel` Kotlin class:
+Create the view model class in the Android platform code:
+
+1. In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` Kotlin class:
 
     ```kotlin
     import androidx.lifecycle.ViewModel
@@ -336,7 +323,7 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-   This class extends Android's `ViewModel` class, which ensures the correct behavior regarding lifecycle and configuration changes.
+   This class extends Android's `ViewModel` class to align with the platform's expectations regarding lifecycle and configuration changes.
 
 2. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
    type and its backing property:
@@ -354,7 +341,7 @@ The view model will manage the data from the activity and won't disappear when t
    * `StateFlow` here extends the `Flow` interface but has a single value or state.
    * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
 
-3. In the `init` function of the View Model, collect all the strings from the `Greeting().greet()` flow:
+3. In the `init` function of the view model, collect all the strings from the `Greeting().greet()` flow:
 
     ```kotlin
    import androidx.lifecycle.viewModelScope
@@ -374,10 +361,11 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-   Since the `collect()` function is suspended, the `launch` coroutine is used within the view model's scope.
+   Since the `Flow.collect()` function is suspending, the `launch` coroutine is used within the view model's scope.
    This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
 
-4. Inside the `collect` trailing lambda, update the value of `_greetingList` to append the collected `phrase` to the list of phrases in `list`:
+4. Inside the `collect` trailing lambda, append the collected `phrase` to the list of phrases in `_greetingList` using
+   the `update()` function:
 
     ```kotlin
     import kotlinx.coroutines.flow.update
@@ -395,11 +383,10 @@ The view model will manage the data from the activity and won't disappear when t
     }
     ```
 
-   The `update()` function will update the value automatically.
-
 ### Use the view model's flow
 
-1. In `composeApp/src/androidMain/kotlin`, open the `App.kt` file and update it, replacing the previous implementation:
+1. In `sharedUI/src/commonMain/.../greetingkmp`, open the `App.kt` file and update it,
+   replacing the previous implementation to use the newly implemented view model:
 
     ```kotlin
     import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -429,19 +416,36 @@ The view model will manage the data from the activity and won't disappear when t
 
    * The `collectAsStateWithLifecycle()` function calls on `greetingList` to collect the value from the ViewModel's flow
      and represent it as a composable state in a lifecycle-aware manner.
-   * When a new flow is created, the compose state will change and display a scrollable `Column` with greeting phrases
+   * When a new flow is created, the composition state will change and display a scrollable `Column` with greeting phrases
      arranged vertically and separated by dividers.
 
-2. To see the results, rerun your **composeApp** configuration:
+### Add internet access permission
 
-   ![Final results](multiplatform-mobile-upgrade-android.png){width=300}
+To access the internet, the Android application needs the appropriate permission. Since all network requests are made from the
+shared module, it makes sense to add the internet access permission to its manifest.
+
+Update your `androidApp/src/main/AndroidManifest.xml` file with the access permission:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    ...
+</manifest>
+```
+
+### Run the app
+
+To see the final result, rerun your **androidApp** run configuration:
+
+![Final result for Android](multiplatform-mobile-upgrade-android.png){width=300}
 
 ## Update native iOS UI
 
 For the iOS part of the project, you'll make use of the [Model–view–viewmodel](https://en.wikipedia.org/wiki/Model–view–viewmodel)
-pattern again to connect the UI to the shared module, which contains all the business logic.
+pattern, like you did for the Android app, to connect the UI to the `sharedLogic` module.
 
-The module is already imported in the `ContentView.swift` file with the `import Shared` declaration.
+The module is already imported in the `ContentView.swift` file with the `import SharedLogic` declaration.
 
 ### Introducing a ViewModel
 
@@ -450,7 +454,7 @@ Call the `startObserving()` function within a `task()` call to support concurren
 
 ```swift
 import SwiftUI
-import Shared
+import SharedLogic
 
 struct ContentView: View {
     @ObservedObject private(set) var viewModel: ViewModel
@@ -485,12 +489,14 @@ struct ListView: View {
 
 * `ViewModel` is declared as an extension to `ContentView`, as they are closely connected.
 * `ViewModel` has a `greetings` property that is an array of `String` phrases.
-  SwiftUI connects the ViewModel (`ContentView.ViewModel`) with the view (`ContentView`).
-* `ContentView.ViewModel` is declared as an `ObservableObject`.
-* The `@Published` wrapper is used for the `greetings` property.
-* The `@ObservedObject` property wrapper is used to subscribe to the ViewModel.
 
-This ViewModel will emit signals whenever this property changes.
+SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`):
+
+* `ContentView.ViewModel` is declared as an `ObservableObject`.
+  The `@ObservedObject` wrapper for the `viewModel` property in `ContentView` subscribes the view to the view model.
+* The `greetings` property of the view model uses the `@Published` wrapper.
+  It allows SwiftUI to automatically update the view when this property changes.
+
 Now you need to implement the `startObserving()` function to consume flows.
 
 ### Choose a library to consume flows from iOS
@@ -522,22 +528,20 @@ wrappers.
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp").version("%kspVersion%").apply(false)
         id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
     }
     ```
 
-2. In the `shared/build.gradle.kts` file, add the KMP-NativeCoroutines plugin:
+2. In the `sharedLogic/build.gradle.kts` file, add the KMP-NativeCoroutines plugin:
 
     ```kotlin
     plugins {
         // ...
-        id("com.google.devtools.ksp")
         id("com.rickclephas.kmp.nativecoroutines")
     }
     ```
 
-3. Also in the `shared/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
+3. Also, in the `sharedLogic/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
     kotlin {
@@ -577,6 +581,8 @@ wrappers.
 
 #### Import the library using SPM in XCode
 
+Installs the parts of the KMP-NativeCoroutines Swift package necessary to work with the `async/await` mechanism.
+
 1. Go to **File** | **Open Project in Xcode**.
 2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
 3. In the search bar, enter the package name:
@@ -592,8 +598,6 @@ wrappers.
 6. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
-
-This should install the parts of the KMP-NativeCoroutines package necessary to work with the `async/await` mechanism.
 
 #### Consume the flow using the KMP-NativeCoroutines library
 
@@ -646,23 +650,24 @@ every time the flow emits a value.
 
 ### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
-To set up the library, specify the SKIE plugin in `shared/build.gradle.kts` and click the **Sync Gradle Changes** button.
+To set up the library, specify the SKIE plugin in `sharedLogic/build.gradle.kts` and click the **Sync Gradle Changes** button.
 
 ```kotlin
 plugins {
    id("co.touchlab.skie") version "%skieVersion%"
 }
 ```
-
-> The 0.10.6 version of SKIE latest at the moment of writing does not support the latest Kotlin.
-> To use it, downgrade your Kotlin version to 2.2.10 in the `gradle/libs.versions.toml` file.
-> 
-{style="warning"}
+TODO make version catalogs examples
 
 #### Consume the flow using SKIE
 
 You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
 property every time the flow emits a value.
+
+> IntelliJ IDEA and Android Studio can incorrectly report Swift errors in calls to Kotlin code while using SKIE.
+> This is a known issue with the library, which doesn't affect building and running the app.
+>
+{style="warning"}
 
 Make sure `ViewModel` is marked with the `@MainActor` annotation.
 The annotation ensures that all asynchronous operations within `ViewModel` run on the main thread
