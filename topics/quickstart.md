@@ -2,17 +2,13 @@
 
 <web-summary>JetBrains provides official Kotlin IDE support for IntelliJ IDEA and Android Studio.</web-summary>
 
-With this tutorial, you can get a simple Kotlin Multiplatform app up and running.
+In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform app with a Compose Multiplatform UI.
 
 ## Set up the environment
 
-Kotlin Multiplatform (KMP) projects need a specific environment,
-but most of the requirements are made clear through preflight checks in the IDE.
-
 Start with an IDE and necessary plugins:
 
-1. Choose and install the IDE.
-    Kotlin Multiplatform is supported in IntelliJ IDEA and Android Studio, so you can use the IDE you prefer.
+1. Choose and install the IDE: Kotlin Multiplatform is fully supported in IntelliJ IDEA and Android Studio.
     
     The [JetBrains Toolbox App](https://www.jetbrains.com/toolbox/app/) is the recommended tool to install IDEs.
     It allows you to manage multiple products or versions, including
@@ -24,13 +20,11 @@ Start with an IDE and necessary plugins:
     The plugins necessary for Kotlin Multiplatform require at least
     **IntelliJ IDEA 2025.2.2** or **Android Studio Otter 2025.2.1**.
 
-2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-    (not to be confused with the Kotlin Multiplatform Gradle plugin).
+2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform).
     
-3. Installing the Kotlin Multiplatform IDE plugin for IntelliJ IDEA also installs all necessary dependencies if you don't have them yet
-    (Android Studio has all necessary plugins bundled).
+   The IDE plugin also installs any necessary dependencies your IDE does not have yet.
     
-4. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
+3. If you don't have the `ANDROID_HOME` environment variable set, configure your system to recognize it:
 
     <tabs>
     <tab title= "Bash or Zsh">
@@ -59,7 +53,7 @@ Start with an IDE and necessary plugins:
     </tab>
     </tabs>
 
-5. To create iOS applications, you need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
+4. To create iOS applications, you need a macOS host with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed.
     Your IDE will run Xcode under the hood to build iOS frameworks.
 
     Make sure to launch Xcode at least once before starting to work with KMP projects so that it goes
@@ -84,18 +78,18 @@ Use the IDE wizard to create a new KMP project:
    (JBR) as the JDK for your project, as it provides important fixes, particularly for improving the compatibility
    of desktop KMP apps.
    Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
-5. Choose platforms that you would like to see as part of the project:
-    * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
-      (except for the server module that doesn't have UI code).
-    * For iOS, you can choose one of two implementations:
-        * shared UI code, with Compose Multiplatform,
-        * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.
-    * The desktop target includes [](compose-hot-reload.md) functionality that allows you to see UI changes
-      as soon as you save changes to your code.
-      Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
-      writing UI code.
+5. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
+   Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
+   for the corresponding target.
 
-When you're done choosing platforms, click the **Create** button and wait for the IDE to generate and import the project.
+   > The desktop target automatically includes [](compose-hot-reload.md) functionality that allows you to see UI changes
+   > as soon as you save changes in your code.
+   > Even if you're not planning on making a desktop app, you may want to add the desktop target to your project to speed up
+   > iterating on UI code.
+   > 
+   {style="note"}
+
+6. When you've chosen your platforms, click the **Create** button and wait for the IDE to generate and import the project.
 
 ![IntelliJ IDEA Wizard with default settings and Android, iOS, desktop, and web platforms selected](idea-wizard-1step.png){width=600}
 
@@ -110,22 +104,18 @@ Use the IDE wizard to create a new KMP project:
     ![First new project step in Android Studio](as-wizard-1.png){width="400"}
 
 3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
-4. Choose platforms that you would like to see as part of the project:
-    * All target platforms can be set up for using Compose Multiplatform to share UI code from the start
-      (except for the server module that doesn't have UI code).
-    * For iOS, you can choose one of two implementations: 
-      * shared UI code, with Compose Multiplatform,
-      * fully native UI, made with SwiftUI and connected to the Kotlin module with shared logic.  
-    * The desktop target includes a Beta version of [](compose-hot-reload.md) functionality that allows you to see UI changes
-      as soon as you alter corresponding code.
-      Even if you're not planning on making desktop apps, you may want to use the desktop version to speed up
-      writing UI code.
-5. When the project is generated, we recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR) as the JDK for your project because it provides important fixes, particularly for  improving the compatibility
-   of desktop KMP apps.
-   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
+4. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
+   Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
+   for the corresponding target.
 
-When you're done choosing platforms, click the **Finish** button and wait for the IDE to generate and import the project.
+   > The desktop target automatically includes [](compose-hot-reload.md) functionality that allows you to see UI changes
+   > as soon as you save changes in your code.
+   > Even if you're not planning on making a desktop app, you may want to add the desktop target to your project to speed up
+   > iterating on UI code.
+   >
+   {style="note"}
+
+5. When you've chosen your platforms, click the **Finish** button and wait for the IDE to generate and import the project.
 
 ![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=600}
 
@@ -136,9 +126,9 @@ When you're done choosing platforms, click the **Finish** button and wait for th
 
 You can make sure there are no environment issues with the project setup by opening
 the **Project Environment Preflight Checks** tool window:
-click the preflight checks icon on the right sidebar or the bottom bar ![Preflight checks icon with a plane](ide-preflight-checks.png){width="20"}
+click the preflight checks icon on the right sidebar or the bottom bar ![Project Environment Preflight Checks icon with a plane](ide-preflight-checks.png){width="20"}
 
-In this tool window, you can see the messages related to these checks, rerun them, or change their settings. 
+In this tool window, you can see messages related to these checks, rerun them, or change their settings. 
 
 Preflight checks commands are also available in the **Search Everywhere** dialog.
 Press double <shortcut>Shift</shortcut> and search for commands containing the word "preflight":
@@ -168,7 +158,7 @@ By default, it runs on the first available virtual device:
 </tab>
 <tab title="iOS">
 
-> You need a macOS host to build iOS apps.
+> You need a macOS host and Xcode installed to build iOS apps.
 >
 {style="note"}
 
@@ -260,8 +250,8 @@ and see if there are any updates for the iOS simulator.
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* A series of tutorials about working with the shared UI code: [](compose-multiplatform-create-first-app.md)
-* A series of tutorials about working with shared code along with a native UI: [](multiplatform-create-first-app.md)
+* A series of tutorials about working with shared UI code using Compose Multiplatform: [](compose-multiplatform-create-first-app.md)
+* A series of tutorials about working with shared code in a project with a native UI: [](multiplatform-create-first-app.md)
 * Take a deep dive into the Kotlin Multiplatform documentation:
   * [Project configuration](multiplatform-project-configuration.md)
   * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
