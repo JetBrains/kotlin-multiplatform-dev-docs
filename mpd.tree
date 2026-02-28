@@ -133,6 +133,7 @@
 		<toc-element toc-title="Choose integration method" topic="multiplatform-ios-integration-overview.md"/>
 		<toc-element topic="multiplatform-direct-integration.md"/>
 		<toc-element toc-title="Remote SPM export" topic="multiplatform-spm-export.md"/>
+		<toc-element toc-title="Importing a Swift package" topic="multiplatform-spm-import.md"/>
 		<toc-element toc-title="CocoaPods integration">
 			<toc-element topic="multiplatform-cocoapods-overview.md"/>
 			<toc-element topic="multiplatform-cocoapods-libraries.md"/>
