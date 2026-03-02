@@ -68,7 +68,7 @@ Browser history navigation is expected to be supported by the base multiplatform
 
 Navigation 3 is closely aligned with Compose, allowing an Android navigation implementation to work in shared
 Compose Multiplatform code with minimal changes.
-To support non-JVM platforms like web and iOS, the only thing you need is to implement
+To support non-JVM platforms like web and iOS, you need to implement
 [polymorphic serialization for destination keys](#polymorphic-serialization-for-destination-keys). 
 
 You can compare extensive examples of Android-only and multiplatform apps using Navigation 3 on GitHub:
@@ -84,10 +84,10 @@ To address this limitation, the library has two overloads for the `rememberNavBa
   only takes a set of `NavKey` references and requires a reflection-based serializer.
 * [The second overload](https://developer.android.com/reference/kotlin/androidx/navigation3/runtime/package-summary#rememberNavBackStack(androidx.savedstate.serialization.SavedStateConfiguration,kotlin.Array))
   also takes a `SavedStateConfiguration` parameter that allows you to provide a `SerializersModule` and handle open polymorphism
-  correctly across all platforms.
+  across all platforms.
 
-In the Navigation 3 [multiplatform examples](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40), 
-you define your routes and a `SavedStateConfiguration` to register them:
+The Navigation 3 [multiplatform examples](https://github.com/terrakok/nav3-recipes/blob/8ff455499877225b638d5fcd82b232834f819422/sharedUI/src/commonMain/kotlin/com/example/nav3recipes/basicdsl/BasicDslActivity.kt#L40) 
+define routes and register them with a `SavedStateConfiguration`, as shown below:
 
 ```kotlin
 @Serializable
@@ -125,7 +125,7 @@ Depending on your project's complexity and modularization, use one of the follow
 
 #### Single module with sealed type
 
-For small projects where all routes exist in one module, use a sealed interface. 
+For small projects where all routes exist in one module, use a `sealed interface`. 
 This is the most straightforward approach as Kotlin serialization handles the hierarchy automatically:
 
 ```kotlin
@@ -187,7 +187,7 @@ private val config = SavedStateConfiguration {
 val backStack = rememberNavBackStack(config, RouteA1)
 ```
 
-With Dependency Injection (DI), you can also use DI containers to collect sealed-type serializers 
+With Dependency Injection (DI), you can also use DI containers to collect serializers for sealed types 
 from each module into a `Set<KSerializer>` dynamically.
 
 #### Multi-module with individual route registration
@@ -226,7 +226,8 @@ val backStack = rememberNavBackStack(config, RouteA1)
 ```
 
 This approach offers a high level of flexibility and decoupling, though it requires more manual maintenance.
-Similar to the one sealed type per module approach, DI can also help assemble the list of serializers dynamically, 
+Similar to the [multi-module with aggregated sealed types](#multi-module-with-aggregated-sealed-types) approach, 
+you can use DI to assemble the list of serializers dynamically, 
 which can improve flexibility.
 
 ## What's next
