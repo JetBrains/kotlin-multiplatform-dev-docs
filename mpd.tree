@@ -135,6 +135,7 @@
 		<toc-element toc-title="SPM integration">
 			<toc-element toc-title="Remote SPM export" topic="multiplatform-spm-export.md"/>
 			<toc-element toc-title="SPM import" topic="multiplatform-spm-import.md"/>
+			<toc-element toc-title="Migrating from CocoaPods to SPM" topic="multiplatform-cocoapods-spm-migration.md"/>
 		</toc-element>
 		<toc-element toc-title="CocoaPods integration">
 			<toc-element topic="multiplatform-cocoapods-overview.md"/>
