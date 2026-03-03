@@ -103,32 +103,32 @@ If you are using the CocoaPods Gradle plugin (`kotlin(“native.cocoapods”)`),
 you need to reconfigure your Xcode project to [direct integration](multiplatform-direct-integration.md) before switching to SPM.
 The SwiftPM import tooling can generate the shell command to make the necessary changes to your .xcodeproj file.
 
-1. Build the Xcode project (**Product** | **Build**).
-   The build will fail, but in the build output you will see the command to run
-   to reconfigure the project, which looks like this:
+1. Open the project in Xcode (in IntelliJ IDEA, select **File** | **Open Project in Xcode**).
+2. Build the project in Xcode (**Product** | **Build**).
+   The build will fail, but the build error will contain the necessary command.
+   To see the build errors in Xcode, select **View** | **Navigators** | **Report**, then choose **Errors Only** in the filter at the top.
+   The command looks like this and includes the correct paths to your project:
 
     ```text
     XCODEPROJ_PATH='/path/to/project/iosApp/iosApp.xcodeproj' GRADLE_PROJECT_PATH=':kotlin-library' '/path/to/project/gradlew' -p '/path/to/project' ':kotlin-library:integrateEmbedAndSign' ':kotlin-library:integrateLinkagePackage'
     ```
    
-    You can generate the same command by building the project from the terminal.
-    Run the following command in the `/path/to/project/iosApp` directory:
-
-    ```shell
-    xcodebuild -scheme "$(echo -n *.xcworkspace | python3 -c 'import sys, json; from subprocess import check_output; print(list(set(json.loads(check_output(["xcodebuild", "-workspace", sys.stdin.readline(), "-list", "-json"]))["workspace"]["schemes"]) - set(json.loads(check_output(["xcodebuild", "-project", "Pods/Pods.xcodeproj", "-list", "-json"]))["project"]["schemes"]))[0])')" -workspace *.xcworkspace -destination 'generic/platform=iOS Simulator' ARCHS=arm64 | grep -A5 'What went wrong'
-    ```
+    > You can generate the same command without opening Xcode, by building the project from the terminal.
+    > Run the following command in the `/path/to/project/iosApp` directory:
+    > 
+    > ```shell
+    > xcodebuild -scheme "$(echo -n *.xcworkspace | python3 -c 'import sys, json; from subprocess import check_output; print(list(set(json.loads(check_output(["xcodebuild", "-workspace", sys.stdin.readline(), "-list", "-json"]))["workspace"]["schemes"]) - set(json.loads(check_output(["xcodebuild", "-project", "Pods/Pods.xcodeproj", "-list", "-json"]))["project"]["schemes"]))[0])')" -workspace *.xcworkspace -destination 'generic/platform=iOS Simulator' ARCHS=arm64 | grep -A5 'What went wrong'
+    > ```
+    {style="note"}
    
-    The `grep` call in the end finds the specific error message that contains the command which you need to run.
+    The `grep` call in the end finds the specific error message with the command which you need to run.
 
-2. Run the provided command in a terminal.
-   It will modify the .xcodeproj file of your `iosApp` to trigger the `embedAndSignAppleFrameworkForXcode` task
-   during the build, which inserts a Kotlin Multiplatform phase into your iOS build.
+3. Run the generated command in a terminal in the `/path/to/project/iosApp` directory.
+   It will modify the .xcodeproj file of your `iosApp` project to trigger the `embedAndSignAppleFrameworkForXcode` task
+   during the build, which inserts a Kotlin Multiplatform compilation phase into your iOS build.
 
-3. Select **Tools** | **Swift Package Manager** | **Resolve Dependencies** to resolve the SwiftPM dependencies
+4. In IntelliJ IDEA, select **Tools** | **Swift Package Manager** | **Resolve Dependencies** to resolve the SwiftPM dependencies
    declared in your `build.gradle.kts` file.
-
-> Whenever you change your SwiftPM configuration, you need to update the generated code using the import tooling.
-> You can do that by pressing the 
 
 Now the iOS app is switched over to SwiftPM dependencies.
 You can disable the CocoaPods plugin and deintegrate the pod.
@@ -138,9 +138,9 @@ You can disable the CocoaPods plugin and deintegrate the pod.
 If you fully replace your CocoaPods dependencies with Swift packages, you can deintegrate the pod by running
 the following command in the `/path/to/project/iosApp` directory:
 
-     ```shell
-     pod deintegrate
-     ```
+```shell
+pod deintegrate
+```
 
 If you want to continue using CocoaPods for dependencies that don't intersect with SwiftPM dependencies,
 edit your `Podfile` to remove only the line that mentions the KMP module and run `pod install`.
@@ -155,7 +155,7 @@ target 'iosApp' do
 end
 ```
 
-Finally, remove mentions of CocoaPods from your build configuration:
+Finally, remove mentions of CocoaPods from your Gradle build configuration:
 
 1. Remove the entire `cocoapods {}` block from the `build.gradle.kts` file in your shared code module,
    since all dependencies are now managed by SwiftPM import tooling.
