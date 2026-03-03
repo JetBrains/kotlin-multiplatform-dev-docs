@@ -104,12 +104,21 @@ you need to reconfigure your Xcode project to [direct integration](multiplatform
 The SwiftPM import tooling can generate the shell command to make the necessary changes to your .xcodeproj file.
 
 1. Build the Xcode project (**Product** | **Build**).
-   The build should fail, but in the build output you will see the command to run
-   to reconfigure the project which should look like this:
+   The build will fail, but in the build output you will see the command to run
+   to reconfigure the project, which looks like this:
 
     ```text
     XCODEPROJ_PATH='/path/to/project/iosApp/iosApp.xcodeproj' GRADLE_PROJECT_PATH=':kotlin-library' '/path/to/project/gradlew' -p '/path/to/project' ':kotlin-library:integrateEmbedAndSign' ':kotlin-library:integrateLinkagePackage'
     ```
+   
+    You can generate the same command by building the project from the terminal.
+    Run the following command in the `/path/to/project/iosApp` directory:
+
+    ```shell
+    xcodebuild -scheme "$(echo -n *.xcworkspace | python3 -c 'import sys, json; from subprocess import check_output; print(list(set(json.loads(check_output(["xcodebuild", "-workspace", sys.stdin.readline(), "-list", "-json"]))["workspace"]["schemes"]) - set(json.loads(check_output(["xcodebuild", "-project", "Pods/Pods.xcodeproj", "-list", "-json"]))["project"]["schemes"]))[0])')" -workspace *.xcworkspace -destination 'generic/platform=iOS Simulator' ARCHS=arm64 | grep -A5 'What went wrong'
+    ```
+   
+    The `grep` call in the end finds the specific error message that contains the command which you need to run.
 
 2. Run the provided command in a terminal.
    It will modify the .xcodeproj file of your `iosApp` to trigger the `embedAndSignAppleFrameworkForXcode` task
