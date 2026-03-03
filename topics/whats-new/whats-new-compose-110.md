@@ -6,7 +6,8 @@ Here are the highlights for this feature release:
  * [Support for Navigation 3](#support-for-navigation-3)
  * [Bundled Compose Hot Reload](#compose-hot-reload-integration)
 
-You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0-beta01).
+You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.0).
+For details about specific component versions, refer to the [Dependencies](#dependencies) section.
 
 ## Breaking changes and deprecations
 
