@@ -269,7 +269,7 @@ Sync the consumer project and start using your library!
 
 We encourage you to explore multiplatform development further:
 
-* [Publish your library to Maven Central](multiplatform-publish-libraries.md)
+* [Publish your library to Maven Central](multiplatform-publish-libraries-to-maven.md)
 * [Check the library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html)
 
 

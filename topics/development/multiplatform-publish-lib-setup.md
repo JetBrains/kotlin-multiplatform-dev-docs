@@ -4,7 +4,7 @@ You can set up the publication of your multiplatform library to different locati
 
 * [To a local Maven repository](#publishing-to-a-local-maven-repository)
 * To the Maven Central repository. Learn how to set up account credentials, customize library metadata, and configure
-  the publication plugin in [our tutorial](multiplatform-publish-libraries.md).
+  the publication plugin in [our tutorial](multiplatform-publish-libraries-to-maven.md).
 * To a GitHub repository. For more information, see GitHub's documentation on [GitHub packages](https://docs.github.com/en/packages).
 
 ## Publishing to a local Maven repository
@@ -286,5 +286,5 @@ see [FAQ](https://klibs.io/faq).
 
 ## What's next
 
-* [Learn how to publish your Kotlin Multiplatform library to the Maven Central repository](multiplatform-publish-libraries.md)
+* [Learn how to publish your Kotlin Multiplatform library to the Maven Central repository](multiplatform-publish-libraries-to-maven.md)
 * [See the Library authors' guidelines for best practices and tips on designing a library for Kotlin Multiplatform](https://kotlinlang.org/docs/api-guidelines-build-for-multiplatform.html)
