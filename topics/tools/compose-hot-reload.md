@@ -1,6 +1,8 @@
 [//]: # (title: Compose Hot Reload)
 
-[Compose Hot Reload](https://github.com/JetBrains/compose-hot-reload) helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
+Compose Hot Reload helps you visualize and experiment with UI changes while working on a Compose Multiplatform project.
+Unlike standard [Compose previews](compose-previews.md), which are helpful for viewing isolated components with test data,
+Compose Hot Reload directly applies your code changes to the running application.
 
 The bundled Compose Hot Reload Gradle plugin 
 requires Kotlin 2.1.20+ and a JVM target compatible with Java 21 or earlier.
