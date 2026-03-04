@@ -3,7 +3,7 @@
 You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
 This [core Jetpack Compose feature](https://developer.android.com/develop/ui/compose/tooling/previews) allows 
 you to easily visualize individual components with test data in various configurations.
-Additionally, you can use [Compose Hot Reload](compose-hot-reload.md) to instantly see code changes reflected in a full 
+Additionally, you can use [Compose Hot Reload](compose-hot-reload.md) to instantly see code changes reflected in a live 
 application running on the desktop JVM target.
 
 > To enable Compose previews in common code of your Kotlin Multiplatform project,
