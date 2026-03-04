@@ -241,16 +241,17 @@ kotlin {
 
 For binary configuration, the following parameters are available:
 
-| **Name**      | **Description**                                                                                                                                                   | 
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `compilation` | The compilation from which the binary is built. By default, `test` binaries are based on the `test` compilation while other binaries - on the `main` compilation. |
-| `linkerOpts`  | Options passed to a system linker during binary building.                                                                                                         |
-| `baseName`    | Custom base name for the output file. The final file name will be formed by adding system-dependent prefix and postfix to this base name.                         |
-| `entryPoint`  | The entry point function for executable binaries. By default, it's `main()` in the root package.                                                                  |
-| `outputFile`  | Access to the output file.                                                                                                                                        |
-| `linkTask`    | Access to the link task.                                                                                                                                          |
-| `runTask`     | Access to the run task for executable binaries. For targets other than `linuxX64`, `macosX64`, or `mingwX64` the value is `null`.                                 |
-| `isStatic`    | For Objective-C frameworks. Includes a static library instead of a dynamic one.                                                                                   |
+| **Name**             | **Description**                                                                                                                                                                                                                                              | 
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `compilation`        | The compilation from which the binary is built. By default, `test` binaries are based on the `test` compilation while other binaries - on the `main` compilation.                                                                                            |
+| `linkerOpts`         | Options passed to a system linker during binary building.                                                                                                                                                                                                    |
+| `baseName`           | Custom base name for the output file. The final file name will be formed by adding system-dependent prefix and postfix to this base name.                                                                                                                    |
+| `entryPoint`         | The entry point function for executable binaries. By default, it's `main()` in the root package.                                                                                                                                                             |
+| `outputFile`         | Access to the output file.                                                                                                                                                                                                                                   |
+| `linkTask`           | Access to the link task.                                                                                                                                                                                                                                     |
+| `runTask`            | Access to the run task for executable binaries. For targets other than `linuxX64`, `macosX64`, or `mingwX64` the value is `null`.                                                                                                                            |
+| `isStatic`           | For Objective-C frameworks. Includes a static library instead of a dynamic one.                                                                                                                                                                              |
+| `disableNativeCache` | <p>Disables compilation cache. Use only in exceptional cases as it increases compilation time.</p><p>Must include the Kotlin `version`, for which cache is disabled, and `reason`. Optionally, you can specify a URL to the `issue` in your bug tracker.</p> |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -284,6 +285,13 @@ binaries {
     framework("my_framework" listOf(RELEASE)) {
         // Include a static library instead of a dynamic one into the framework.
         isStatic = true
+
+        // Disable compilation cache for this binary
+        disableNativeCache(
+            version = DisableCacheInKotlinVersion.2_3_0,
+            reason = "Cache bug",
+            issue = URI("https://youtrack.com/YY-1111")
+        )
     }
 }
 ```
@@ -320,6 +328,13 @@ binaries {
     framework('my_framework' [RELEASE]) {
         // Include a static library instead of a dynamic one into the framework.
         isStatic = true
+
+        // Disable compilation cache for this binary
+        disableNativeCache(
+            version = DisableCacheInKotlinVersion .2_3_0,
+            reason = 'Cache bug',
+            issue = URI('https://youtrack.com/YY-1111')
+        )
     }
 }
 ```
