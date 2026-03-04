@@ -3,8 +3,8 @@
 You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
 This [core Jetpack Compose feature](https://developer.android.com/develop/ui/compose/tooling/previews) allows 
 you to easily visualize individual components with test data in various configurations.
-Additionally, you can use [Compose Hot Reload](compose-hot-reload.md) to instantly see code changes reflected in a full, 
-live application running on the desktop JVM target.
+Additionally, you can use [Compose Hot Reload](compose-hot-reload.md) to instantly see code changes reflected in a full 
+application running on the desktop JVM target.
 
 > To enable Compose previews in common code of your Kotlin Multiplatform project,
 > you need an Android target, since previews rely on Android libraries.
@@ -77,8 +77,8 @@ depending on your [Android target configuration](#android-target-configurations)
 
 ## Use previews
 
-Compose Multiplatform fully adopts the general preview functionality provided by Android tooling.
-You can interact with previews just as you would on a device running your app, 
+Compose Multiplatform allows to use the full preview functionality provided by Android tooling.
+You can make previews interactive, 
 copy a preview as an image, or display multiple versions of the same `@Preview` composable with different parameters.
 For more details on available features, 
 check out the [Android guide on previews](https://developer.android.com/develop/ui/compose/tooling/previews).
@@ -86,14 +86,14 @@ check out the [Android guide on previews](https://developer.android.com/develop/
 <video src="compose_preview_interactive_mode.mp4" alt="Interactive mode" width="350" preview-src="compose_preview_interactive_mode.png"/>
 
 By configuring additional parameters, you can control how a `@Composable` function is rendered in design-time previews.
-Compose Multiplatform includes the following parameters for the `@Preview` annotation:
+Compose Multiplatform supports the following parameters for the `@Preview` annotation:
 
 * `name`: The display name of the preview.
 * `group`: The group name for the preview, enabling the logical organization and selective display of related previews.
-* `widthDp`: The maximum width (in dp).
-* `heightDp`: The maximum height (in dp).
+* `widthDp`: The maximum width, in [dp](https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp).
+* `heightDp`: The maximum height, in dp.
 * `locale`: The current locale of the application.
-* `showBackground`: A flag to apply the default background color to the preview.
+* `showBackground`: A flag that determines whether to apply the default background color to the preview.
 * `backgroundColor`: A 32-bit ARGB color integer defining the preview’s background color.
 
 ## Supported configurations
