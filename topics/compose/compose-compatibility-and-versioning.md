@@ -43,8 +43,8 @@ To use the latest Compose Multiplatform release:
  * upgrade to Kotlin **2.2.20** for projects targeting platforms with rapidly evolving support, such as iOS and web.
  
 As a workaround for backward compatibility problems until all your dependencies are updated,
-you may turn off Gradle cache by adding `kotlin.native.cacheKind=none` to your `gradle.properties` file.
-This will ensure compatibility with older libraries, but will increase compilation time.
+you may turn off Gradle cache by using the [`disableNativeCache`](multiplatform-dsl-reference.md#binaries) DSL in your Gradle build file.
+This will ensure compatibility with older libraries but will increase compilation time.
 
 ## Limitations of Compose Multiplatform for desktop releases
 
