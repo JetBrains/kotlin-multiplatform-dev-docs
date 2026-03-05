@@ -113,7 +113,7 @@ The complete list of available targets is the following:
 kotlin {
     jvm()
     iosArm64()
-    macosX64()
+    macosArm64()
     js().browser()
 }
 ```
