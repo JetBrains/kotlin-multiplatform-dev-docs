@@ -144,7 +144,8 @@ kotlin {
 
 SPM integration is based on importing Clang modules.
 By default, the import mechanism automatically discovers Clang modules available in specified Swift packages
-and makes all discovered modules accessible to Kotlin code — similar to how API visibility works in Swift and Objective-C. TODO link to where it is explained?
+and makes all discovered modules accessible to Kotlin code — similar to how API visibility works in Swift and Objective-C.
+<!-- TODO link to where it is explained? -->
 
 To disable the default behavior and automatic module discovery, set the `discoverModulesImplicitly` to `false`.
 When module discovery is disabled, SPM import uses product names as Clang module names.
@@ -239,8 +240,6 @@ import swiftPMImport.groupName.subproject.FIRApp
 ## Additional import options
 
 ### Importing local Swift packages
-
-TODO do we need two examples like in the draft?
 
 The SwiftPM import mechanism also allows importing Swift packages from the local file system.
 

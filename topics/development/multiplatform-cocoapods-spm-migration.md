@@ -9,6 +9,14 @@
 
 </tldr>
 
+If you have a KMP module with CocoaPods dependencies and you want to switch to Swift packages using [SwiftPM import](multiplatform-spm-import.md),
+follow the steps described below.
+
+> You can hand over the CocoaPods to SwiftPM migration to your AI agent of choice using the [prepared skill](https://github.com/Kotlin/kmp-cocoapods-to-spm-migration/blob/master/SKILL.md).
+> Keep in mind that results of AI processing are not entirely predictable.
+>
+{style="note"}
+
 General migration sequence:
 
 1. Update your build script with SwiftPM dependencies and corresponding configuration.
