@@ -1,5 +1,5 @@
 [//]: # (title: Switch Kotlin Multiplatform project from CocoaPods to SPM dependencies)
-<primary-label ref="experimental"/>
+<primary-label ref="Experimental"/>
 
 <tldr>
 
