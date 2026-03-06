@@ -1,5 +1,5 @@
 [//]: # (title: Adding Swift packages as dependencies to KMP modules)
-<primary-label ref="alpha"/>
+<primary-label ref="experimental"/>
 
 <tldr>
    Swift Package Manager fulfills the same role as CocoaPods:
