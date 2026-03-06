@@ -4,18 +4,24 @@
 <tldr>
    Swift Package Manager fulfills the same role as CocoaPods:
    it lets you transparently orchestrate native iOS dependencies of your iOS app.
-   Here you can learn how to set up an SPM dependency in your KMP project,
-   and how to migrate your KMP setup from CocoaPods to SPM if necessary.
+   Here you can learn how to set up an SwiftPM dependency in your KMP project,
+   and how to migrate your KMP setup from CocoaPods to SwiftPM if necessary.
 </tldr>
 
+> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
+> Please share any problems or feedback you have in the dedicated Kotlin Slack channel: [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C)
+>
+{style="note"}
+
 Kotlin Gradle plugin with Swift Package Manager import integration allows you to import Objective-C APIs
-from Objective-C and Swift code of SPM dependencies declared for your Apple targets.
+from Objective-C and Swift code of SwiftPM dependencies declared for your Apple targets.
 
 For transitive dependencies (projects that depend on those that use SwiftPM import),
 Kotlin Gradle plugin automatically provisions the necessary machine code from SwiftPM dependencies.
 So, for example, you don't need to do any additional configuration when running Kotlin/Native tests or linking a framework.
 
 You cannot, however, [export](multiplatform-spm-export.md) the KMP module that uses SwiftPM import as a Swift package itself.
+This is going to be remedied in future releases — follow this YouTrack issue to stay tuned: [KT-84420](https://youtrack.jetbrains.com/issue/KT-84420)
 
 To configure your project:
 
@@ -25,7 +31,7 @@ To configure your project:
 
 ## Environment setup
 
-Since SPM import functionality is still in the Alpha stage, you need to request an EAP Kotlin version to try it out.
+Since SwiftPM import functionality is still in the Alpha stage, you need to request an EAP Kotlin version to try it out.
 
 To do that:
 
@@ -61,7 +67,7 @@ To do that:
 3. Sync the Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file
    of your KMP module.
    If the `swiftPMDependencies` name cannot be resolved, add the following block to the root `build.gradle.kts` file
-   to add the necessary symbols to the classpath directly:
+   to force applying the experimental Kotlin Gradle Plugin version:
 
     ```kotlin
     buildscript {
@@ -103,16 +109,16 @@ kotlin {
 }
 ```
 
-## Add and call SPM dependencies
+## Add and call SwiftPM dependencies
 
 > For working examples, see our sample projects.
-> In the `master` branch each project is set up using CocoaPods, while the `spm_import` branch uses SPM:
+> In the `master` branch each project is set up using CocoaPods, while the `spm_import` branch uses SwiftPM:
 * [SwiftUI and Firebase example app](https://github.com/Kotlin/kmp-with-cocoapods-firebase-sample/tree/spm_import)
 * [Compose Multiplatform iOS example app](https://github.com/Kotlin/kmp-with-cocoapods-compose-sample/tree/spm_import)
 
 ### Build configuration
 
-Specific SPM dependencies can be added in the `swiftPMDependencies` block of the `build.gradle.kts` file,
+Specific SwiftPM dependencies can be added in the `swiftPMDependencies` block of the `build.gradle.kts` file,
 where your Apple targets are declared.
 For example, for Firebase:
 
@@ -124,7 +130,7 @@ kotlin {
 
     swiftPMDependencies {
         // Import FirebaseAnalytics into your Kotlin code
-        `package`(
+        `swiftPackage`(
             url = url("https://github.com/firebase/firebase-ios-sdk.git"),
             version = from("12.5.0"),
             products = listOf(product("FirebaseAnalytics")),
@@ -132,7 +138,7 @@ kotlin {
         // swift-protobuf is a transitive Firebase dependency,
         // so you only need to include it
         // if you want to use a specific version
-        `package`(
+        `swiftPackage`(
             url = url("https://github.com/apple/swift-protobuf.git"),
             version = exact("1.32.0"),
             products = listOf(),
@@ -142,33 +148,33 @@ kotlin {
 ```
 
 
-SPM integration is based on importing Clang modules.
+SwiftPM integration is based on importing Clang modules.
 By default, the import mechanism automatically discovers Clang modules available in specified Swift packages
 and makes all discovered modules accessible to Kotlin code — similar to how API visibility works in Swift and Objective-C.
 <!-- TODO link to where it is explained? -->
 
-To disable the default behavior and automatic module discovery, set the `discoverModulesImplicitly` to `false`.
-When module discovery is disabled, SPM import uses product names as Clang module names.
-To import Clang modules whose names differ from product names, use the `importedModules` parameter.
+To disable the default behavior and automatic module discovery, set the `discoverClangModulesImplicitly` to `false`.
+When module discovery is disabled, SwiftPM import uses product names as Clang module names.
+To import Clang modules whose names differ from product names, use the `importedClangModules` parameter.
 
 Example of 
 
 ```kotlin
 kotlin {
     swiftPMDependencies {
-        // If 'discoverModulesImplicitly' was set to 'true', 
-        // the 'importedModules' parameter below would be ignored
-        discoverModulesImplicitly = false
+        // If 'discoverClangModulesImplicitly' was set to 'true',
+        // the 'importedClangModules' parameter below would be ignored
+        discoverClangModulesImplicitly = false
 
         // Imported packages, their products and Clang modules
-        `package`(
+        `swiftPackage`(
             url = url("https://github.com/firebase/firebase-ios-sdk.git"),
             version = from("12.5.0"),
             products = listOf(
                 product("FirebaseAnalytics"),
                 product("FirebaseFirestore")
             ),
-            importedModules = listOf(
+            importedClangModules = listOf(
                 "FirebaseAnalytics", 
                 // Objective-C APIs of FirebaseFirestore are located
                 // in the 'FirebaseFirestoreInternal' Clang module
@@ -197,7 +203,7 @@ kotlin {
     macosArm64()
 
     swiftPMDependencies {
-        `package`(
+        `swiftPackage`(
             url = url("https://github.com/googlemaps/ios-maps-sdk.git"),
             version = exact("10.3.0"),
             products = listOf(
@@ -294,25 +300,25 @@ fun useExamplePackage() {
 ### Specific deployment versions
 
 If your dependencies require a higher [deployment version](https://developer.apple.com/documentation/packagedescription/supportedplatform),
-specify it in a `*DeploymentVersion` parameter, for example, for iOS:
+specify it in a `*MinimumDeploymentTarget` parameter, for example, for iOS:
 
 ```kotlin
 kotlin {
     swiftPMDependencies {
-        iosDeploymentVersion.set("16.0")
+        iosMinimumDeploymentTarget.set("16.0")
     }
 }
 ```
 
 ### Location and version of a Swift package
 
-Similar to a `Package.swift` manifest, you can specify the location and version of a Swift package in a `package` call.
+Similar to a `Package.swift` manifest, you can specify the location and version of a Swift package in a `swiftPackage()` call.
 Both have a couple of mutually exclusive options to choose from. 
 
-For the location, you can use a URL or an [SPM registry ID](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/usingswiftpackageregistry):
+For the location, you can use a URL or an [SwiftPM registry ID](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/usingswiftpackageregistry):
 
 ```kotlin
-`package`(
+`swiftPackage`(
     // Option 1, URL string
     // Points to the Git repository of the package
     url = url("https://github.com/firebase/firebase-ios-sdk.git")
@@ -326,7 +332,7 @@ For the location, you can use a URL or an [SPM registry ID](https://docs.swift.o
 For the version, you can use the following Gradle- and Git-style version specifications:
 
 ```kotlin
-`package`(
+`swiftPackage`(
     // Similar to the Gradle 'require' version constraint,
     // starting with the specified version
     version = from("1.0")

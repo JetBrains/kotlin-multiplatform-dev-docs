@@ -1,4 +1,4 @@
-[//]: # (title: Switch Kotlin Multiplatform project from CocoaPods to SPM dependencies)
+[//]: # (title: Switch Kotlin Multiplatform project from CocoaPods to SwiftPM dependencies)
 <primary-label ref="Experimental"/>
 
 <tldr>
@@ -109,7 +109,7 @@ For example, if you are using the `FirebaseAnalytics` pod:
 ## Reconfigure your Xcode project
 
 If you are using the CocoaPods Gradle plugin (`kotlin(“native.cocoapods”)`),
-you need to reconfigure your Xcode project to [direct integration](multiplatform-direct-integration.md) before switching to SPM.
+you need to reconfigure your Xcode project to [direct integration](multiplatform-direct-integration.md) before switching to SwiftPM.
 The SwiftPM import tooling can generate the shell command to make the necessary changes to your .xcodeproj file.
 
 1. Open the project in Xcode (in IntelliJ IDEA, select **File** | **Open Project in Xcode**).
