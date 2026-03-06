@@ -58,13 +58,12 @@ To do that:
     ```
    
 2. In your version catalog, apply the experimental version of the Kotlin Multiplatform Gradle plugin, for example:
-   TODO check the final release version
 
     ```text
-    kotlin = "2.4.0-titan-214"
+    kotlin = "2.3.20-titan-222"
    
     [plugins]
-    kotlin-multiplatform = "2.4.0-titan-214"
+    kotlin-multiplatform = "2.3.20-titan-222"
     ```
 
 3. Sync the Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file

@@ -27,8 +27,7 @@ General migration sequence:
 
 ## Update your build script
 
-Before doing anything else, update the version of your Kotlin Multiplatform Gradle plugin to the version **2.4.0-Beta1 or newer**.
-<!--TODO check version-->
+Before doing anything else, update the version of your Kotlin Multiplatform Gradle plugin to the version **2.3.20-titan-222**.
 
 Without disabling the CocoaPods plugin or removing CocoaPods dependencies,
 add the necessary SwiftPM dependencies to your `build.gradle.kts` file as per the [SwiftPM import page](multiplatform-spm-import.md).
