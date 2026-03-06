@@ -31,7 +31,10 @@ To configure your project:
 
 ## Environment setup
 
-Since SwiftPM import functionality is still in the Alpha stage, you need to request an EAP Kotlin version to try it out.
+To try out the SwiftPM import functionality, you need to request a specific development Kotlin version to try it out.
+Keep in mind, this version is **not** intended for production use!
+<!-- This will be invalidated when 2.4.0-Beta1 comes out
+     This is when we specify the feature stability level and change the page label. -->
 
 To do that:
 
@@ -54,7 +57,7 @@ To do that:
     }
     ```
    
-2. In your version catalog, apply the EAP version of the Kotlin Multiplatform Gradle plugin, for example:
+2. In your version catalog, apply the experimental version of the Kotlin Multiplatform Gradle plugin, for example:
    TODO check the final release version
 
     ```text
