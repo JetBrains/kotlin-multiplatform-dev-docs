@@ -1,7 +1,10 @@
 [//]: # (title: Compose UI previews)
 
 You can create _preview_ composables to see your UI rendered in the IDE (IntelliJ IDEA and Android Studio) without running an emulator.
-Previews are a [part of core functionality of Jetpack Compose](https://developer.android.com/develop/ui/compose/tooling/previews).
+This [core Jetpack Compose feature](https://developer.android.com/develop/ui/compose/tooling/previews) allows 
+you to easily visualize individual components with test data in various configurations.
+Additionally, you can use [Compose Hot Reload](compose-hot-reload.md) to instantly see code changes reflected in a live 
+application running on the desktop JVM target.
 
 > To enable Compose previews in common code of your Kotlin Multiplatform project,
 > you need an Android target, since previews rely on Android libraries.
@@ -12,12 +15,23 @@ Compose Multiplatform initially implemented a limited `@Preview` annotation as a
 but starting with version 1.10.0, this implementation has been deprecated as the original AndroidX annotation is now fully multiplatform.
 
 On this page, you can find:
+
 * [how to enable previews](#preview-setup) in common code for different project configurations,
+* [how to use and customize previews](#use-previews) with additional parameters,
 * [overview of supported combinations](#supported-configurations) of Compose Multiplatform, AGP, and annotations.
 
 ## Preview setup
 
-To enable preview support in your IDE, add the necessary dependencies to the `build.gradle.kts` file of your KMP module:
+If you're starting from scratch, you can create a **new project** using the IDE wizard, which comes pre-configured
+
+To get started, simply install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+available for both IntelliJ IDEA and Android Studio.
+The new project will include a ready-to-use `App` function annotated with `@Preview`:
+
+![Preview composables in IDE](compose-preview-split.png){width=700 style="block"}
+
+To enable preview support in an **existing project**,
+add the necessary dependencies to the `build.gradle.kts` file of your KMP module:
 
 1. The annotation dependency for the `commonMain` source set: the old or the new one, depending on the Compose Multiplatform version.
 2. The tooling dependency on the classpath, whose declaration depends on the Android configuration.
@@ -42,7 +56,7 @@ kotlin {
 }
 ```
 
-The tooling dependency should be declared in the root `dependencies {}` block of the `build.gradle.kts` file in your KMP module
+The tooling dependency should be declared in the root `dependencies {}` block of the `build.gradle.kts` file in your common code module
 in one of two ways,
 depending on your [Android target configuration](#android-target-configurations):
 
@@ -60,6 +74,27 @@ depending on your [Android target configuration](#android-target-configurations)
         androidRuntimeClasspath("org.jetbrains.compose.ui:ui-tooling:1.10.0")
     }
     ```
+
+## Use previews
+
+Compose Multiplatform allows to use the full preview functionality provided by Android tooling.
+You can make previews interactive, 
+copy a preview as an image, or display multiple versions of the same `@Preview` composable with different parameters.
+For more details on available features, 
+check out the [Android guide on previews](https://developer.android.com/develop/ui/compose/tooling/previews).
+
+<video src="compose_preview_interactive_mode.mp4" alt="Interactive mode" width="350" preview-src="compose_preview_interactive_mode.png"/>
+
+By configuring additional parameters, you can control how a `@Composable` function is rendered in design-time previews.
+Compose Multiplatform supports the following parameters for the `@Preview` annotation:
+
+* `name`: The display name of the preview.
+* `group`: The group name for the preview, enabling the logical organization and selective display of related previews.
+* `widthDp`: The maximum width, in [dp](https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp).
+* `heightDp`: The maximum height, in dp.
+* `locale`: The current locale of the application.
+* `showBackground`: A flag that determines whether to apply the default background color to the preview.
+* `backgroundColor`: A 32-bit ARGB color integer defining the preview’s background color.
 
 ## Supported configurations
 
