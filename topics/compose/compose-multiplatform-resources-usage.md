@@ -172,7 +172,12 @@ Image(
 Store all string resources in XML files in `composeResources/values` directories.
 A static accessor is generated for each item in each file.
 
-For more information on how to localize strings for different locales, refer to the 
+Compose Multiplatform supports an Emmet-like shorthand syntax for adding string resources, 
+string arrays, and plurals directly in XML files.
+For example, when you type `test{Example}` or `s.test{Example}`
+in `strings.xml` and press **Tab**, it will automatically expand into `<string name="test">Example</string>`.
+
+To learn how to localize strings for different locales, refer to the 
 [guide on localizing strings](compose-localize-strings.md).
 
 #### Simple strings
@@ -234,6 +239,12 @@ You can use special symbols in string resources:
 You don't need to escape special XML characters like "@" or "?"
 as you do [for Android strings](https://developer.android.com/guide/topics/resources/string-resource#escaping_quotes). 
 
+> Use Emmet-like syntax and press **Tab** to expand the abbreviation into string tags:
+> * `test` → `<string name="test"></string>`
+> * `test{Example}` → `<string name="test">Example</string>`
+>
+{style="note"}
+
 #### String templates
 
 Currently, arguments have basic support for string resources.
@@ -260,6 +271,12 @@ You can put the `%1$s` placeholder in the resource string and use it to display 
 ```kotlin
 Text(stringResource(Res.string.str_template, "User_name", 100.1f))
 ```
+
+> Instead of manually typing `%1$s` or `%2$d` for placeholders, you can use inline numeric shortcuts. 
+> For example, when you type `1` or `1s` within the string value, it expands into `%1$s`.
+> Similarly, when you type `2d`, it expands into `%2$d`.
+> 
+{style="note"}
 
 #### String arrays
 
@@ -311,6 +328,18 @@ coroutineScope.launch {
 
 </tab>
 </tabs>
+
+> You can use Emmet-like syntax to quickly define string arrays.
+> Use `string-array`, `sa`, or the `>` operator to generate an empty array template.
+> For a named array with a predefined number of items and starting text, type `test>2{Hello}` and press **Tab**:
+> ```xml
+> <string-array name="test">
+>    <item>Hello</item>
+>    <item>Hello</item>
+> </string-array>
+> ```
+>
+{style="note"}
 
 #### Plurals
 
@@ -381,6 +410,20 @@ coroutineScope.launch {
 
 </tab>
 </tabs>
+
+> You can use Emmet-like syntax to generate plural resources.
+> For example, use `plurals`, `p`, or `:` to generate a default empty string template.
+> If you work in `values-en/strings.xml`, the IDE automatically detects locale, the required quantities,
+> and that English only requires `one` and `other`.
+> Type `p.test` or `plurals.test `and press **Tab** to expand the abbreviation into the `plurals` block:
+> ```xml
+> <plurals name="test">
+>     <item quantity="one"></item>
+>     <item quantity="other"></item>
+> </plurals>
+> ```
+>
+{style="note"}
 
 ### Fonts
 
