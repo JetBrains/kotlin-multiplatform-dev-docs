@@ -274,13 +274,13 @@ let package = Package(
 ```
 {collapsible="true" collapsed-title-line-number="3"}
 
-To import it in your Kotlin build script, use the `localPackage` API:
+To import it in your Kotlin build script, use the `localSwiftPackage` API:
 
 ```kotlin
 // <projectDir>/shared/build.gradle.kts
 kotlin {
     swiftPMDependencies {
-        localPackage(
+        localSwiftPackage(
             directory = project.layout.projectDirectory.dir("/path/to/ExamplePackage/"),
             products = listOf("ExamplePackage")
         )
