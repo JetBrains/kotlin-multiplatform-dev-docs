@@ -5,12 +5,12 @@
 
    * You want to separate the codebase of your final application from the common codebase.
    * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
-   * You use the Swift package manager for handling dependencies in your iOS project.<br/>
+   * You use the Swift Package Manager for handling dependencies in your iOS project.<br/>
 
    [Choose the integration method that suits you best](multiplatform-ios-integration-overview.md)
 </tldr>
 
-You can set up the Kotlin/Native output for an Apple target to be consumed as a Swift package manager (SPM) dependency.
+You can set up the Kotlin/Native output for an Apple target to be consumed as a Swift Package Manager (SwiftPM) dependency.
 
 Consider a Kotlin Multiplatform project that has an iOS target. You may want to make this iOS binary available
 as a dependency to iOS developers working on native Swift projects. Using Kotlin Multiplatform tooling, you can provide
@@ -39,10 +39,10 @@ However, you can configure your project differently. Consider the following opti
   This allows versioning the Swift manifest separately from the project the file describes. This is the recommended approach:
   it allows scaling and is generally easier to maintain.
 * Put the `Package.swift` file next to your Kotlin Multiplatform code. This is a more straightforward approach, but
-  keep in mind that, in this case, the Swift package and the code will use the same versioning. SPM uses
+  keep in mind that, in this case, the Swift package and the code will use the same versioning. SwiftPM uses
   Git tags for versioning packages, which can conflict with tags used for your project.
 * Store the `Package.swift` file within the consumer project's repository. This helps to avoid versioning and maintenance issues.
-  However, this approach can cause problems with multi-repository SPM setups of the consumer project and further automation:
+  However, this approach can cause problems with multi-repository SwiftPM setups of the consumer project and further automation:
 
   * In a multi-package project, only one consumer package can depend on the external module (to avoid dependency conflicts
     within the project). So, all the logic that depends on your Kotlin Multiplatform module should be encapsulated in a

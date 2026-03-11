@@ -3,7 +3,7 @@
 <tldr>
    This is a local integration method. It can work for you if:<br/>
 
-   * You have an iOS app with local SPM modules.
+   * You have an iOS app with local SwiftPM modules.
    * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
    * Your existing iOS project has a static linking type.<br/>
 
@@ -11,7 +11,7 @@
 </tldr>
 
 In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
-package using the Swift package manager (SPM).
+package using the Swift Package Manager (SwiftPM).
 
 ![Direct integration diagram](direct-integration-scheme.svg){width=700}
 
@@ -43,9 +43,9 @@ The tutorial assumes that your project is using the [direct integration](multipl
 approach with the `embedAndSignAppleFrameworkForXcode` task in the project's build phase. If you're connecting a Kotlin
 framework through the CocoaPods plugin or through Swift package with `binaryTarget`, migrate first.
 
-### Migrate from SPM binaryTarget integration {initial-collapse-state="collapsed" collapsible="true"}
+### Migrate from SwiftPM binaryTarget integration {initial-collapse-state="collapsed" collapsible="true"}
 
-To migrate from the SPM integration with `binaryTarget`:
+To migrate from the SwiftPM integration with `binaryTarget`:
 
 1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
    <shortcut>Cmd + Shift + K</shortcut> shortcut.
@@ -55,7 +55,7 @@ To migrate from the SPM integration with `binaryTarget`:
 ### Migrate from the CocoaPods plugin {initial-collapse-state="collapsed" collapsible="true"}
 
 > If you have dependencies on other Pods in the `cocoapods {}` block, you have to resort to the CocoaPods integration approach.
-> Currently, it's impossible to both have dependencies on Pods and on the Kotlin framework in a multimodal SPM project. 
+> Currently, it's impossible to both have dependencies on Pods and on the Kotlin framework in a multimodal SwiftPM project. 
 >
 {style="warning"}
 
@@ -115,7 +115,7 @@ project to your Xcode project:
    }
    ```
 
-   ![SPM usage](xcode-spm-usage.png){width=700}
+   ![SwiftPM usage](xcode-spm-usage.png){width=700}
 
 6. In the `ContentView.swift` file of your iOS project, you can now use this function by importing the local package:
 
