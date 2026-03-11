@@ -139,7 +139,7 @@ Now the iOS app uses SwiftPM dependencies. You can disable the CocoaPods plugin 
 
 ## Remove the CocoaPods KMP integration
 
-If you want to completely replace your CocoaPods dependencies with Swift packages, you can deintegrate the pod by running
+If you have replaced all your CocoaPods dependencies with Swift packages, you can now deintegrate the pod by running
 the following command in the `/path/to/project/iosApp` directory:
 
 ```shell

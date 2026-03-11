@@ -8,17 +8,17 @@
    and how to migrate your KMP setup from CocoaPods to SwiftPM if necessary.</p>
 </tldr>
 
-> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained) and not intended for production.
+> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained) and **not** intended for production.
 > Please share any problems or feedback you have in the dedicated Kotlin Slack channel: [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C)
 >
 {style="warning"}
 
-Kotlin Gradle plugin with Swift Package Manager import integration allows you to import Objective-C APIs
-from Objective-C and Swift code of SwiftPM dependencies declared for your Apple targets.
+Kotlin Gradle plugin with SwiftPM import integration allows you to import Objective-C APIs
+from Objective-C and Swift code using SwiftPM dependencies declared for your Apple targets.
 
 For transitive dependencies (projects that depend on those that use SwiftPM import), the
-Kotlin Gradle plugin automatically provisions the necessary machine code from SwiftPM dependencies.
-So, for example, you don't need to do any additional configuration when running Kotlin/Native tests or linking a framework.
+Kotlin Gradle plugin automatically provides the necessary machine code from SwiftPM dependencies.
+For example, you don't need to do any additional configuration when running Kotlin/Native tests or linking a framework.
 
 > The [export](multiplatform-spm-export.md) of KMP modules that use SwiftPM import as a Swift package itself is not yet supported and might not work.
 > See this [YouTrack issue](https://youtrack.jetbrains.com/issue/KT-84420) for more details, and let us know about your use case.
@@ -33,11 +33,11 @@ To configure your project:
 
 ## Set up environment
 
-To try out the SwiftPM import functionality, you need to use a specific development Kotlin version to try it out.
+To try out the SwiftPM import functionality, you need to use a specific development version of Kotlin.
 Keep in mind, this version is **not** intended for production.
 <!-- This will be invalidated when 2.4.0-Beta1 comes out. This is when we specify the feature stability level and change the page label. -->
 
-To do that:
+To set up the Kotlin Multiplatform Gradle plugin:
 
 1. In your `settings.gradle.kts` file, add the development package repository for dependencies and plugins:
 
@@ -67,8 +67,8 @@ To do that:
     kotlin-multiplatform = "%spmImport%"
     ```
 
-3. Sync the Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file
-   of your KMP module.
+3. Sync Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file in your KMP module.
+
    If the `swiftPMDependencies` name cannot be resolved, add the following block to the root `build.gradle.kts` file
    to force the experimental Kotlin Multiplatform Gradle plugin version:
 
@@ -82,7 +82,7 @@ To do that:
 
 ### Set up KMP IDE plugin
 
-If you are using the [Kotlin Multiplatform IDE plugin]() recommended for any KMP project,
+If you are using the [Kotlin Multiplatform IDE plugin]() recommended for KMP projects,
 explicitly specify the path to the iOS project that is built from the KMP module.
 
 In the `build.gradle.kts` file where you call the `iosTarget.binaries.framework` API,
@@ -122,7 +122,7 @@ kotlin {
 >
 {type="tip"}
 
-### Build configuration
+### Configure build file
 
 Specific SwiftPM dependencies can be added in the `swiftPMDependencies` block of the `build.gradle.kts` file,
 where your Apple targets are declared.
@@ -160,9 +160,8 @@ and makes all available modules accessible to Kotlin code — similar to how API
 
 To disable the default behavior and automatic module discovery, set the `discoverClangModulesImplicitly` to `false`.
 When module discovery is disabled, SwiftPM import uses product names as Clang module names.
-To import Clang modules whose names differ from product names, use the `importedClangModules` parameter.
 
-Example of 
+To import Clang modules whose names differ from product names, use the `importedClangModules` parameter, for example:
 
 ```kotlin
 kotlin {
@@ -194,6 +193,7 @@ kotlin {
 
 Some SwiftPM dependencies may not compile or provide valid APIs for all targets in your build script.
 For example, the Google Maps SDK currently only supports iOS targets.
+
 So, while your project only targets iOS, you don't need to declare platforms explicitly.
 But as soon as you add another target, for example, macOS, you need to specify the platform constraint for each dependency.
 
@@ -239,7 +239,7 @@ group = "groupName"
 ```
 
 Here, `groupName` is the Gradle group name of the project, and `subproject` is the project name.
-Now we can import Firebase APIs in the `iosMain` source set of that module:
+Now you can import Firebase APIs in the `iosMain` source set of that module:
 
 ```kotlin
 // subproject/src/iosMain/kotlin/useFirebaseAnalytics.kt
@@ -253,7 +253,7 @@ import swiftPMImport.groupName.subproject.FIRApp
 
 The SwiftPM import mechanism also allows importing Swift packages from the local file system.
 
-For example, you have a Swift package with the following manifest, located in the `/path/to/ExamplePackage` directory:
+Let's consider a Swift package with the following manifest, located in the `/path/to/ExamplePackage` directory:
 
 ```swift
 // /path/to/ExamplePackage/Package.swift
@@ -304,7 +304,7 @@ fun useExamplePackage() {
 ### Specific deployment versions
 
 If your dependencies require a higher [deployment version](https://developer.apple.com/documentation/packagedescription/supportedplatform),
-specify it in a `*MinimumDeploymentTarget` parameter, for example, for iOS:
+specify it in the `*MinimumDeploymentTarget` parameter. For example, for iOS:
 
 ```kotlin
 kotlin {
@@ -316,10 +316,10 @@ kotlin {
 
 ### Location and version of Swift packages
 
-Similar to a `Package.swift` manifest, you can specify the location and version of a Swift package in a `swiftPackage()` call.
+Similar to `Package.swift` manifest files, you can specify the location and version of your Swift package in the `swiftPackage()` call.
 Both have a couple of mutually exclusive options. 
 
-For the location, you can use a URL or a [SwiftPM registry ID](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/usingswiftpackageregistry):
+To set the location, you can use a URL or a [SwiftPM registry ID](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/usingswiftpackageregistry):
 
 ```kotlin
 swiftPackage(
@@ -333,7 +333,7 @@ swiftPackage(
 )
 ```
 
-For the version, you can use the following Gradle- and Git-style version specifications:
+To specify the version, use the following Gradle- and Git-style version specifications:
 
 ```kotlin
 swiftPackage(
@@ -384,3 +384,7 @@ kotlin {
 If you encountered any of these issues, need to keep `isStatic=false`, or if changing this property didn't help resolve
 build failures, let us know in our Slack channel. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
 and join [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C).
+
+## What's next?
+
+Learn more about [switching from CocoaPods to SwiftPM dependencies in your KMP project](multiplatform-cocoapods-spm-migration.md).
