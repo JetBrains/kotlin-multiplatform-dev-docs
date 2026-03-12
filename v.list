@@ -33,6 +33,7 @@
     <var name="maxAndroidGradleVersion" value="9.0.0"/>
 
     <var name="xcode" value="26.0"/>
+    <var name="spmImport" value="2.3.20-titan-222"/>
 
     <!-- Libraries and Frameworks -->
     <var name="coroutinesVersion" value="1.10.2"/>

@@ -71,7 +71,7 @@ For that, you generate an iOS framework and then add it as a local or remote dep
 
 * **Local integration**: connect your multiplatform and Xcode projects directly with a special script or use the CocoaPods
   dependency manager for setups involving local Pod dependencies.
-* **Remote integration**: set up an SPM dependency using XCFrameworks or distribute shared modules through CocoaPods.
+* **Remote integration**: set up a SwiftPM dependency using XCFrameworks or distribute shared modules through CocoaPods.
 
 For more details on this topic, see [iOS integration methods](multiplatform-ios-integration-overview.md).
 

@@ -47,12 +47,12 @@ For more information, see [CocoaPods overview and setup](multiplatform-cocoapods
 
 ## Remote integration
 
-For remote integration, your project might use the Swift Package Manager (SPM) or the CocoaPods dependency manager to
+For remote integration, your project might use the Swift Package Manager (SwiftPM) or the CocoaPods dependency manager to
 connect the iOS framework from a Kotlin Multiplatform project.
 
-### Swift package manager with XCFrameworks
+### SwiftPM with XCFrameworks
 
-You can set up a Swift package manager (SPM) dependency using XCFrameworks to connect the iOS framework from the Kotlin
+You can set up a SwiftPM dependency using XCFrameworks to connect the iOS framework from the Kotlin
 Multiplatform project.
 
 For more information, see [Swift package export setup](multiplatform-spm-export.md).
