@@ -66,13 +66,12 @@ In TeamCity UI, click a job tile to edit its settings, or the darker region bene
 
 ### Common pipeline settings
 
-Pipeline settings affect all jobs it owns.
+This tutorial does not require setting up any global pipeline options. Refer to [this article](https://www.jetbrains.com/help/teamcity/pipeline-settings.html) for more information on settings that affect all jobs owned by a pipeline, such as:
 
-* The **Auto-run pipelines** section allows you to set up your pipeline to run automatically whenever a new change is committed to a remote repository (enabled by default), when a new pull request is sent to this repo, or on a given schedule.
-* The **Repository** section allows you to check out and process multiple different repositories from multiple VCS hosting providers.
-* The **Integrations** section lets you connect external NPM and Docker registries. Note that if you plan to run certain build steps inside public Dockerhub images, you do not need to set up a corresponding integration (unless your pipeline will run frequently enough to violate Dockerhub rate limits for anonymous pulls).
+* **Auto-run pipelines** — allows you to set up your pipeline to run automatically whenever a new change is committed to a remote repository (enabled by default), when a new pull request is sent to this repo, or on a given schedule.
+* **Repository** — allows you to check out and process multiple different repositories from multiple VCS hosting providers.
+**Integrations** — lets you connect external NPM and Docker registries. Note that if you plan to run certain build steps inside public Dockerhub images, you do not need to set up a corresponding integration (unless your pipeline will run frequently enough to violate Dockerhub rate limits for anonymous pulls).
 
-This tutorial does not require setting any additional pipeline settings. For more information, refer to this article: [Pipeline settings](https://www.jetbrains.com/help/teamcity/pipeline-settings.html).
 
 ### Agent settings
 
