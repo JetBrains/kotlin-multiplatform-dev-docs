@@ -18,7 +18,7 @@ just share it in the common source set.
 ![Code shared for all platforms](flat-structure.svg)
 
 Some dependencies for source sets are set by default. You don't need to specify any `dependsOn` relations manually:
-* For all platform-specific source sets that depend on the common source set, such as `jvmMain`, `macosX64Main`, and others. 
+* For all platform-specific source sets that depend on the common source set, such as `jvmMain`, `macosArm64Main`, and others. 
 * Between the `main` and `test` source sets of a particular target, such as `androidMain` and `androidUnitTest`.
 
 If you need to access platform-specific APIs from the shared code, use the Kotlin mechanism of [expected and actual 
