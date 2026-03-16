@@ -229,7 +229,7 @@ kotlin {
             api("org.example:not-exported-library:1.0")
         }
     }
-    macosX64("macos").binaries {
+    macosArm64("macos").binaries {
         framework {
             export(project(":dependency"))
             export("org.example:exported-library:1.0")
@@ -257,7 +257,7 @@ kotlin {
             api 'org.example:not-exported-library:1.0'
         }
     }
-    macosX64("macos").binaries {
+    macosArm64("macos").binaries {
         framework {
             export project(':dependency')
             export 'org.example:exported-library:1.0'
