@@ -39,6 +39,12 @@ With this code, your application should look like this:
 
 ![UIKit](uikit.png){width=300}
 
+> Compose Multiplatform rendering requires high refresh rates to be explicitly enabled:
+> add the `CADisableMinimumFrameDurationOnPhone` key to your app's `Info.plist` file.
+> Without it, the app will crash at runtime.
+>
+{style="note"}
+
 Explore this code in
 the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
 
