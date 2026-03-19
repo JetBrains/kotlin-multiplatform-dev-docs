@@ -418,7 +418,12 @@ but they are beyond the scope of this tutorial.
    >
    {style="note"}
 
-9. Build the project in Xcode (**Product** | **Build** in the main menu).
+9. Customize the `Info.plist` file:
+
+   * Enable the high refresh rate using the `CADisableMinimumFrameDurationOnPhone` key.
+   * Grant camera access permissions using the `NSCameraUsageDescription` key if your app uses the device's camera.
+
+10. Build the project in Xcode (**Product** | **Build** in the main menu).
     If everything is configured correctly, the project should build successfully 
     (you can safely ignore the "build phase will be run during every build" warning)
    
