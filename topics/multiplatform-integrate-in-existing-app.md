@@ -418,7 +418,7 @@ but they are beyond the scope of this tutorial.
    >
    {style="note"}
 
-9. Customize the `Info.plist` file:
+9. Edit the `Info.plist` file:
 
    * Enable the high refresh rate using the `CADisableMinimumFrameDurationOnPhone` key.
    * Grant camera access permissions using the `NSCameraUsageDescription` key if your app uses the device's camera.

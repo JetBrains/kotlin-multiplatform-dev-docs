@@ -39,7 +39,8 @@ With this code, your application should look like this:
 
 ![UIKit](uikit.png){width=300}
 
-> To enable the high refresh rate, add the `CADisableMinimumFrameDurationOnPhone` key to your app's `Info.plist` file.
+> Compose Multiplatform rendering requires high refresh rates to be explicitly enabled:
+> add the `CADisableMinimumFrameDurationOnPhone` key to your app's `Info.plist` file.
 > Without it, the app will crash at runtime.
 >
 {style="note"}

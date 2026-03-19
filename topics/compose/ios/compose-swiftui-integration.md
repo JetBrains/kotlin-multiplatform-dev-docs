@@ -30,7 +30,8 @@ fun MainViewController(): UIViewController =
 is a Compose Multiplatform library function that accepts a composable function as the `content` argument.
 The function passed in this way can call other composable functions, for example, `Text()`.
 
-> To enable the high refresh rate, add the `CADisableMinimumFrameDurationOnPhone` key to your app's `Info.plist` file.
+> Compose Multiplatform rendering requires high refresh rates to be explicitly enabled:
+> add the `CADisableMinimumFrameDurationOnPhone` key to your app's `Info.plist` file.
 > Without it, the app will crash at runtime.
 >
 {style="note"}
