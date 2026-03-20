@@ -17,7 +17,7 @@ To update your project:
 > 
 {style="note"}
 
-## Migrate to the Android-KMP library plugin
+## Migration to the Android-KMP library plugin
 
 Previously, to configure an Android target in a multiplatform module you needed to use
 the KMP plugin (`org.jetbrains.kotlin.multiplatform`)
@@ -27,15 +27,7 @@ the Android application (`com.android.application`) or the Android library (`com
 With AGP 9.0, these plugins are no longer compatible with KMP,
 so you need to migrate to the new Android-KMP library plugin built specifically for KMP.
 
-> To make your project work with AGP 9.0 in the short term, you can manually enable the deprecated APIs.
-> To do this, in the `gradle.properties` file of your project, add the following property:
-> `android.enableLegacyVariantApi=true`.
->
-> The legacy APIs are going to be [removed completely in AGP 10](https://developer.android.com/build/releases/gradle-plugin-roadmap#agp-10),
-> which is likely to come out in the second half of 2026.
-> Make sure you finish the migration before then.
->
-{style="note"}
+### How to migrate
 
 For library migration steps, see the [guide in Android documentation](https://developer.android.com/kotlin/multiplatform/plugin#migrate).
 
@@ -43,6 +35,21 @@ To migrate an Android app project, you need to have the Android entry point and 
 Below is a general tutorial for migrating a sample app, where you can see:
 * [How to extract the Android app entry point into a separate module](#android-app)
 * [How to update the configuration of a shared module](#configure-the-shared-module-to-use-the-android-kmp-library-plugin)
+
+> You can hand over the migration to your AI agent of choice using our [prepared skill](https://github.com/Kotlin/kotlin-agent-skills/blob/main/skills/kotlin-tooling-agp9-migration/SKILL.md).
+> Keep in mind that AI processing results are not entirely predictable.
+>
+{style="note"}
+
+### Enabling the legacy APIs until AGP 10
+
+You can make your project work with AGP 9.0 in the short term by manually enabling the deprecated APIs.
+To do this, in the `gradle.properties` file of your project, add the following property:
+`android.enableLegacyVariantApi=true`.
+
+The legacy APIs are going to be [removed completely in AGP 10](https://developer.android.com/build/releases/gradle-plugin-roadmap#agp-10),
+which is likely to come out in the second half of 2026.
+Make sure you finish the migration before then.
 
 ## Migration of a sample app
 
