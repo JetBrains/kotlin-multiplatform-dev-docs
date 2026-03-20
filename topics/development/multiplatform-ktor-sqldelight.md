@@ -67,14 +67,14 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
    ```
    [versions]
-   agp = "8.7.3"
+   agp = "9.1.0"
    ...
    coroutinesVersion = "%coroutinesVersion%"
    dateTimeVersion = "%dateTimeVersion%"
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
-   material3 = "1.3.2"
+   material3 = "1.3.2" #TODO check the version and whether it's generated
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
 
