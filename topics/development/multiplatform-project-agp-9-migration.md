@@ -44,11 +44,11 @@ Below is a general tutorial for migrating a sample app, where you can see:
 ### Enabling the legacy APIs until AGP 10
 
 You can make your project work with AGP 9.0 in the short term by manually enabling the deprecated APIs.
-To do this, in the `gradle.properties` file of your project, add the following property:
+To do this, add the following property to the `gradle.properties` file of your project:
 `android.enableLegacyVariantApi=true`.
 
 The legacy APIs are going to be [removed completely in AGP 10](https://developer.android.com/build/releases/gradle-plugin-roadmap#agp-10),
-which is likely to come out in the second half of 2026.
+which is likely to be released in the second half of 2026.
 Make sure you finish the migration before then.
 
 ## Migration of a sample app
