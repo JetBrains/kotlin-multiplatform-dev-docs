@@ -246,7 +246,7 @@ import swiftPMImport.groupName.subproject.FIRApp
 ## Generating a Package.resolved file
 
 To make your builds depending on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
-the `Package.resolved` file generated during the initial package resolution is extracted into the project's directory
+the `Package.resolved` file generated during the initial package resolution is copied into the project's directory
 and reused for subsequent builds.
 
 The lock file is updated automatically when you change the set or versions of SwiftPM dependencies in your build script.
