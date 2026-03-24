@@ -26,7 +26,7 @@ kotlin {
 
 To see the Compose Multiplatform navigation library in action, check out the [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake),
 which was converted from the [Navigate between screens with Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0)
-Android codelab.
+Android codelab. For a more complex example, see the official [KotlinConf](https://github.com/JetBrains/kotlinconf-app) application.
 
 Just as with Jetpack Compose, to implement navigation, you should:
 1. [List routes](https://github.com/JetBrains/compose-multiplatform/blob/a6961385ccf0dee7b6d31e3f73d2c8ef91005f1a/examples/nav_cupcake/composeApp/src/commonMain/kotlin/org/jetbrains/nav_cupcake/CupcakeScreen.kt#L50)
