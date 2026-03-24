@@ -388,3 +388,11 @@ Then:
     it calls the singleton and navigates to the deep link matching the cached URI.
   * If the app handling the deep link is open, the listener is already set up, so when the singleton receives the URI
     the app immediately navigates to it.
+
+## What's next
+
+Check out the projects that showcase the Compose Multiplatform navigation library in action:
+
+* Basic example: The [nav_cupcake project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake), 
+  which was converted from the [Navigate between screens with Compose](https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0) Android codelab. 
+* Advanced example: The official [KotlinConf](https://github.com/JetBrains/kotlinconf-app) application.
