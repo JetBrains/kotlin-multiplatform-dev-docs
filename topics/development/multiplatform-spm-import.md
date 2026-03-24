@@ -82,7 +82,7 @@ To set up the Kotlin Multiplatform Gradle plugin:
 
 ### Set up KMP IDE plugin
 
-If you are using the [Kotlin Multiplatform IDE plugin]() recommended for KMP projects,
+If you are using the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform/) recommended for KMP projects,
 explicitly specify the path to the iOS project that is built from the KMP module.
 
 In the `build.gradle.kts` file where you call the `iosTarget.binaries.framework` API,
