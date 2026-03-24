@@ -1,11 +1,11 @@
-[//]: # (title: Publish your library to NPM – tutorial)
+[//]: # (title: Publish your library to npm – tutorial)
 
-In this tutorial, you'll learn how to publish your Kotlin Multiplatform library targeting JS or WasmJS to the [NPM](https://www.npmjs.com/)
+In this tutorial, you'll learn how to publish your Kotlin Multiplatform library targeting JS or WasmJS to the [npm](https://www.npmjs.com/)
 repository.
 
 To publish your library, you'll need to:
 
-1. Set up credentials, including [an account on NPM](https://docs.npmjs.com/creating-a-new-npm-user-account) and [an access token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
+1. Set up credentials, including [an account on npm](https://docs.npmjs.com/creating-a-new-npm-user-account) and [an access token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 2. Configure the publishing plugin in your library's project.
 3. Provide the access token (and one-time password if two-factor authentication is enabled) to the publishing plugin so it can upload your artifacts.
 4. Run the publication task, either locally or using continuous integration.
@@ -14,7 +14,7 @@ This tutorial assumes that you are:
 
 * Creating an open-source library.
 * Storing the code for your library in a GitHub repository.
-* Either not registered on NPM yet or have an existing account.
+* Either not registered on npm yet or have an existing account.
 * Using GitHub Actions for continuous integration.
 
 ## Sample library
@@ -26,7 +26,7 @@ If you'd like to reuse the code, you **must replace all example values** with th
 
 ## Prepare accounts and credentials
 
-To get started with publishing to NPM, [sign in](https://www.npmjs.com/login) (or [create a new account](https://docs.npmjs.com/creating-a-new-npm-user-account)) on the [NPM](https://www.npmjs.com/)
+To get started with publishing to npm, [sign in](https://www.npmjs.com/login) (or [create a new account](https://docs.npmjs.com/creating-a-new-npm-user-account)) on the [npm](https://www.npmjs.com/)
 portal.
 
 ### Create a simple organization
@@ -38,14 +38,14 @@ To create a new organization, follow the guide [here](https://docs.npmjs.com/cre
 
 #### Generate an access token
 
-To publish to NPM, you'll need an access token that allows publishing a package under your newly created organization.
+To publish to npm, you'll need an access token that allows publishing a package under your newly created organization.
 To generate such a token, follow the steps [here](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 
-> For the sake of simplicity, set the scope to `read-write` for the newly created organization and check the `Bypass two-factor authentication (2FA)` checkbox.
->
-{style="note"}
+For this tutorial, use a simplified security configuration:
+* check **Bypass two-factor authentication (2FA)** checkbox,
+* set the general permissions and organization permissions for the token to **Read and write**.
 
-As soon as you have the organization name and the access token, you're ready to set up your library to be published on NPM.
+As soon as you have the organization name and the access token, you're ready to publish your library as an npm package.
 
 ## Configure the project
 
@@ -55,94 +55,98 @@ If you started developing your library from a template project, now is a good ti
 project to match your own library's name. This includes the name of your library module and the name of the root project
 in your top-level `build.gradle.kts` file.
 
-
 ### Set up the publishing plugin
 
 This tutorial uses the official [npm-publish plugin](https://github.com/Kotlin/npm-publish)
-to help with publishing to NPM.
+to help with publishing to npm.
 See the [plugin's documentation](https://npm-publish.petuska.dev)
 to learn more about its usage and available configuration options.
 
-To add the plugin to your project, add the following line to the `plugins {}` block of your library module's `build.gradle.kts` file:
+To add the plugin to your project:
 
-```kotlin
-// <module directory>/build.gradle.kts
+1. Add the following line to the `plugins {}` block of your library module's `build.gradle.kts` file:
 
-plugins {
-    kotlin("npm-publish") version "%npmPublishPlugin%" 
-}
-```
-
-> For the latest available version of the plugin, check its [Releases page](https://github.com/Kotlin/npm-publish/releases).
-> 
-{style="note"}
-
-In the same file, add the following configuration, making sure to customize all the values for your library:
-
-```kotlin
-// <module directory>/build.gradle.kts
-npmPublish {
-    organization = "YOUR_ORGANIZATION_NAME_WITHOUT_AT_SIGN"
+    ```kotlin
+    // <module directory>/build.gradle.kts
     
-    registries {
-        npmjs {
-            authToken = System.getenv("NPM_TOKEN")
-        }
+    plugins {
+        kotlin("npm-publish") version "%npmPublishPlugin%"
     }
+    ```
+    
+    > For the latest available version of the plugin, check the [Releases](https://github.com/Kotlin/npm-publish/releases) page.
+    > 
+    {style="note"}
 
-    packages {
-        named("js") {
-            version = "0.0.1"
-            packageName = "greetings"
-            readme = file("../README.md")
+2. In the same file, add the following configuration, making sure to customize all the values for your library:
 
-            packageJson {
-                license = "Apache 2.0"
-                homepage = "https://github.com/Kotlin/kotlin-multiplatform-web-library#readme"
-                description = "Shared Kotlin/JS Greetings library"
-                keywords = listOf("kotlin", "kotlin-js", "greetings", "shared", "api")
-                author {
-                    name = "Kotlin Developer Advocate"
-                    url = "https://github.com/kotlin-hands-on/"
-                }
-                repository {
-                    type = "git"
-                    url = "https://github.com/Kotlin/kotlin-multiplatform-web-library.git"
+    ```kotlin
+    // <module directory>/build.gradle.kts
+    npmPublish {
+        organization = "organization_name_without_the_@_sign"
+        
+        registries {
+            npmjs {
+                authToken = System.getenv("NPM_TOKEN")
+            }
+        }
+    
+        packages {
+            named("js") {
+                version = "0.0.1"
+                packageName = "greetings"
+                readme = file("../README.md")
+    
+                packageJson {
+                    license = "Apache 2.0"
+                    homepage = "https://github.com/Kotlin/kotlin-multiplatform-web-library#readme"
+                    description = "Shared Kotlin/JS Greetings library"
+                    keywords = listOf("kotlin", "kotlin-js", "greetings", "shared", "api")
+                    author {
+                        name = "Kotlin Developer Advocate"
+                        url = "https://github.com/kotlin-hands-on/"
+                    }
+                    repository {
+                        type = "git"
+                        url = "https://github.com/Kotlin/kotlin-multiplatform-web-library.git"
+                    }
                 }
             }
         }
     }
-}
-```
+    ```
 
-> To configure this, you can also use [Gradle properties](https://docs.gradle.org/current/userguide/build_environment.html).
-> 
-{style="tip"}
+    > To configure this, you can also use [Gradle properties](https://docs.gradle.org/current/userguide/build_environment.html).
+    > 
+    {style="tip"}
 
-The most important settings here are:
+The most important settings are:
 
-* The `registries`, which specify to which registry the library is going to be published.
-* The `organization`, `packageName` (by default, the name of the module is taken), and `version` (by default, the version specified in the module is taken) of your library.
-* The `license`, under which your library is published.
-* The `author`, which specifies the author of the library (you can also add `contributors`).
-* The `repository`, which specifies where the library's source code is hosted.
-* The `readme`, which specifies which file should be added as the library's README.
+* The `registries {}` block specifies the registry where the library should be published.
+* The `organization`, `packageName` and `version` parameters define the corresponding values for the package:
+  * The `organization` parameter is optional unless you'd like to publish an organization-scoped package.
+  * The `packageName` parameter can be omitted to use the name of your module as the default value.
+  * The `version` parameter can be omitted to use the module version as the default value.
+* The `license` parameter specifies the license under which your library should be published.
+* The `author {}` block describes the author of the library (you can also add `contributors`).
+* The `repository {}` block specifies where the library's source code is hosted.
+* The `readme` parameter specifies which file should be used as the library's README.
 
 ### Publish locally
 
-Let's try to publish the library to NPM from the local machine.
+Let's try to publish the library to npm from the local machine.
 
 To do so, run the following command:
 ```bash
 NPM_TOKEN=YOUR_ACCESS_TOKEN ./gradlew :shared:publishJsPackageToNpmjsRegistry
 ```
 
-After the library is published, you can verify its presence on the NPM registry by visiting the package's page on [npmjs.com](https://www.npmjs.com/).
+After the library is published, you can verify its presence on the npm registry by visiting the package's page on [npmjs.com](https://www.npmjs.com/).
 Your package URL should look like `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings`.
 
-![Published library on NPM](published_on_npm.png){width=700}
+![Published library on npm](published_on_npm.png){width=700}
 
-## Publish to NPM using continuous integration
+## Publish to npm using continuous integration
 
 ### Add a GitHub Actions workflow to your project
 
@@ -161,7 +165,7 @@ on:
     types: [released, prereleased]
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write  # Required for npm trusted publishing with OIDC
   contents: read
 
 jobs:
@@ -178,7 +182,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
 
-      - name: Publish to NPM
+      - name: Publish to npm
         run: ./gradlew :shared:publishJsPackageToNpmjsRegistry
 ```
 
@@ -188,10 +192,10 @@ and then runs the `publishJsPackageToNpmjsRegistry` Gradle task.
 
 You can also configure the workflow to [trigger when a tag is pushed](https://stackoverflow.com/a/61892639) to your repository.
 
-### Add a Trusted Publisher for your NPM package
+### Add a Trusted Publisher for your npm package
 
 As you can see, we haven't provided any credentials to the workflow.
-This is because NPM has a special integration with popular CI/CD services called [Trusted Publisher](https://docs.npmjs.com/trusted-publishers).
+This is because npm has a special integration with popular CI/CD services called [Trusted Publisher](https://docs.npmjs.com/trusted-publishers).
 
 So let's add our newly created workflow as a trusted publisher. 
 
@@ -202,7 +206,7 @@ So let's add our newly created workflow as a trusted publisher.
 5. Enter the name of the workflow file (in this tutorial, we've created [publish.yml](https://github.com/Kotlin/kotlin-multiplatform-web-library/blob/main/.github/workflows/publish.yml)).
 6. Click the "Setup connection" button.
 
-After that, you should see your repository listed in the "Trusted Publishers" section, which means that the workflow is now authorized to publish to NPM.
+After that, you should see your repository listed in the "Trusted Publishers" section, which means that the workflow is now authorized to publish to npm.
 
 ### Create a release on GitHub
 
@@ -215,7 +219,8 @@ that will trigger the publication of your library.
 3. In the right sidebar, click **Releases**.
 4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for
    this repository before).
-5. Each release has a tag. Create a new tag in the tag dropdown, and set the release title (the tag name and
+5. Each release needs to have a corresponding Git tag.
+   Create a new tag in the tag dropdown and set the release title (the tag name and
    the title can be identical).
    
    You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
@@ -227,15 +232,15 @@ that will trigger the publication of your library.
 7. Use the checkboxes below the description to mark a release as a pre-release (useful for early access versions such as
    alpha, beta, or RC).
    
-   You can also mark the release as the latest one (if you already made a release for this repository before).
+   You can also mark the release as the latest one if you already made a release for this repository before.
 8. Click the **Publish release** button to create the new release.
 9. Click the **Actions** tab at the top of your GitHub repository's page. Here, you'll see that the new release
    triggered your publishing workflow.
     
    You can click on the workflow to see the outputs of the publication task.
-10. After the workflow run is complete, your new version should be available on the NPM registry (under the `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings` URL).
+10. After the workflow run is complete, your new version should be available on the npm registry (under the `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings` URL).
 
-![Published library on NPM from CI/CD](published_second_version_on_npm.png){width=700}
+![Published library on npm from CI/CD](published_second_version_on_npm.png){width=700}
 
 ## What's next
 

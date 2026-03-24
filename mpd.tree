@@ -149,7 +149,8 @@
 	<toc-element toc-title="Publish your multiplatform project">
 		<toc-element topic="multiplatform-publish-apps.md"/>
 		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
-		<toc-element topic="multiplatform-publish-libraries.md"/>
+		<toc-element topic="multiplatform-publish-libraries-to-maven.md" accepts-web-file-names="multiplatform-publish-libraries.html"/>
+		<toc-element topic="multiplatform-publish-libraries-to-npm.md"/>
 		<toc-element toc-title="App Store privacy manifest" topic="multiplatform-privacy-manifest.md"/>
 	</toc-element>
 	<toc-element toc-title="KMP tooling">
