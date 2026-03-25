@@ -33,31 +33,10 @@ To configure your project:
 
 ## Set up the environment
 
-To try out the SwiftPM import functionality, use the %kotlinEapVersion% of Kotlin.
-To properly set up the Kotlin Multiplatform Gradle plugin:
+To try out the SwiftPM import functionality, make sure that you are using the **%kotlinEapVersion%** version of Kotlin
+and the Kotlin Multiplatform Gradle plugin.
 
-1. In your version catalog, apply the EAP version of the Kotlin Multiplatform Gradle plugin:
-
-    ```text
-    kotlin = "%kotlinEapVersion%"
-
-    [plugins]
-    kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-    ```
-
-2. Sync Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file in your KMP module.
-
-   If the `swiftPMDependencies` name cannot be resolved, add the following block to the **root** `build.gradle.kts` file of your project,
-   to force the correct Kotlin Multiplatform Gradle plugin version:
-
-    ```kotlin
-    buildscript {
-        dependencies.constraints {
-            "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:%kotlinEapVersion%")
-        }
-    }
-    ```
-
+<!-- TODO remove this?
 ### Set up KMP IDE plugin
 
 If you are using the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform/)
@@ -90,6 +69,7 @@ kotlin {
     }
 }
 ```
+-->
 
 ## Add and use SwiftPM dependencies
 
