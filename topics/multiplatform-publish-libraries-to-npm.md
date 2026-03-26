@@ -1,68 +1,60 @@
 [//]: # (title: Publish your library to npm – tutorial)
 
-In this tutorial, you'll learn how to publish your Kotlin Multiplatform library targeting JS or WasmJS to the [npm](https://www.npmjs.com/)
-repository.
+In this tutorial, you'll learn how to publish your Kotlin Multiplatform library targeting JS or WasmJS as an [npm](https://www.npmjs.com/)
+package.
 
 To publish your library, you'll need to:
 
-1. Set up credentials, including [an account on npm](https://docs.npmjs.com/creating-a-new-npm-user-account) and [an access token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
-2. Configure the publishing plugin in your library's project.
-3. Provide the access token (and one-time password if two-factor authentication is enabled) to the publishing plugin so it can upload your artifacts.
-4. Run the publication task, either locally or using continuous integration.
+1. Prepare credentials, including [an account on npm](https://docs.npmjs.com/creating-a-new-npm-user-account) and [an access token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
+2. Configure the publishing plugin in your Kotlin Multiplatform project.
+3. Provide the credentials to the publishing plugin or set up a Trusted Publisher for continuous integration. (and one-time password if two-factor authentication is enabled) to the publishing plugin so it can upload your artifacts.
+4. Run the publication task, either locally or using CI.
 
-This tutorial assumes that you are:
-
-* Creating an open-source library.
-* Storing the code for your library in a GitHub repository.
-* Either not registered on npm yet or have an existing account.
-* Using GitHub Actions for continuous integration.
+In this tutorial, we'll use GitHub as hosting for the project code and as the CI tool.
 
 ## Sample library
 
-In this tutorial, you'll use the [simple web](https://github.com/Kotlin/kotlin-multiplatform-web-library) library as an example.
-You can refer to the code of that repository to see how the publishing setup works.
+You can use a [sample web library](https://github.com/Kotlin/kotlin-multiplatform-web-library)
+to try the process out and refer to its code for an example of a working npm publishing configuration.
 
-If you'd like to reuse the code, you **must replace all example values** with those specific to your project.
+If you'd like to reuse the code, remember to **replace all example values** with those specific to your project.
 
 ## Prepare accounts and credentials
 
-To get started with publishing to npm, [sign in](https://www.npmjs.com/login) (or [create a new account](https://docs.npmjs.com/creating-a-new-npm-user-account)) on the [npm](https://www.npmjs.com/)
-portal.
+To get started with publishing to npm, you need to be [signed in at npm portal](https://www.npmjs.com/login)
+([create a new account](https://docs.npmjs.com/creating-a-new-npm-user-account) if you don't have one).
 
 ### Create a simple organization
 
-In this tutorial, to avoid spending much time on choosing a unique name for the library,
-we'll create a new organization and publish the library under this organization with any name.
+In this tutorial, we'll create a new organization and publish the library under this organization,
+to avoid coming up with a unique name for the npm package.
 
-To create a new organization, follow the guide [here](https://docs.npmjs.com/creating-an-organization).
+To create a new organization, follow the [npm documentation](https://docs.npmjs.com/creating-an-organization).
 
 #### Generate an access token
 
-To publish to npm, you'll need an access token that allows publishing a package under your newly created organization.
-To generate such a token, follow the steps [here](https://docs.npmjs.com/creating-and-viewing-access-tokens).
+To publish to npm manually, you need an access token that allows publishing a package under your newly created organization.
+To generate such a token, follow the [npm guide](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 
 For this tutorial, use a simplified security configuration:
-* check **Bypass two-factor authentication (2FA)** checkbox,
-* set the general permissions and organization permissions for the token to **Read and write**.
+* use the **Bypass two-factor authentication (2FA)** option,
+* set both the general permissions and organization permissions for the token to **Read and write**.
 
 As soon as you have the organization name and the access token, you're ready to publish your library as an npm package.
 
-## Configure the project
+## Configure the library project
 
-### Prepare your library project
-
-If you started developing your library from a template project, now is a good time to change any default names in the
-project to match your own library's name. This includes the name of your library module and the name of the root project
-in your top-level `build.gradle.kts` file.
+If you started developing your library from the [sample project](https://github.com/Kotlin/kotlin-multiplatform-web-library),
+now is a good time to change any default names if you'd like.
+This includes the name of your library module and the name of the root project in your top-level `settings.gradle.kts` file.
 
 ### Set up the publishing plugin
 
 This tutorial uses the official [npm-publish plugin](https://github.com/Kotlin/npm-publish)
 to help with publishing to npm.
-See the [plugin's documentation](https://npm-publish.petuska.dev)
-to learn more about its usage and available configuration options.
+If you'd like to learn more about the plugin and available configuration options, see the [plugin's documentation](https://npm-publish.petuska.dev).
 
-To add the plugin to your project:
+Add the plugin to your Kotlin Multiplatform project:
 
 1. Add the following line to the `plugins {}` block of your library module's `build.gradle.kts` file:
 
@@ -106,6 +98,13 @@ To add the plugin to your project:
                         name = "Kotlin Developer Advocate"
                         url = "https://github.com/kotlin-hands-on/"
                     }
+                    contributors = listOf(
+                        Person {
+                            name = "John Smith"
+                            email = "john.smith@example.com"
+                            url = "https://github.com/johnsmith"
+                        },
+                    )
                     repository {
                         type = "git"
                         url = "https://github.com/Kotlin/kotlin-multiplatform-web-library.git"
@@ -120,40 +119,44 @@ To add the plugin to your project:
     > 
     {style="tip"}
 
-The most important settings are:
+The most important settings in the `npmPublish {}` block are:
 
 * The `registries {}` block specifies the registry where the library should be published.
+  For manual publishing, you'll specify the value of the `NPM_TOKEN` variable when running the publishing task.
 * The `organization`, `packageName` and `version` parameters define the corresponding values for the package:
   * The `organization` parameter is optional unless you'd like to publish an organization-scoped package.
   * The `packageName` parameter can be omitted to use the name of your module as the default value.
   * The `version` parameter can be omitted to use the module version as the default value.
 * The `license` parameter specifies the license under which your library should be published.
-* The `author {}` block describes the author of the library (you can also add `contributors`).
+* The `author {}` block describes the author of the library, and the `contributors` collection holds the contributors' contact info.
 * The `repository {}` block specifies where the library's source code is hosted.
 * The `readme` parameter specifies which file should be used as the library's README.
 
-### Publish locally
+### Publish manually
 
-Let's try to publish the library to npm from the local machine.
+Now you can publish the library to npm from the local machine.
+To do so, run the following command, pasting the access token you generated earlier in place of `YOUR_ACCESS_TOKEN`:
 
-To do so, run the following command:
 ```bash
 NPM_TOKEN=YOUR_ACCESS_TOKEN ./gradlew :shared:publishJsPackageToNpmjsRegistry
 ```
 
-After the library is published, you can verify its presence on the npm registry by visiting the package's page on [npmjs.com](https://www.npmjs.com/).
-Your package URL should look like `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings`.
+When the library is published, you should be able to see it in the npm registry.
+Open your nmp organization page — it should be present in the **Packages** tab
+(but not on your personal **Packages** page).
 
 ![Published library on npm](published_on_npm.png){width=700}
 
 ## Publish to npm using continuous integration
 
-### Add a GitHub Actions workflow to your project
-
-You can set up continuous integration to build and publish your library automatically.
+You can also set up continuous integration to build and publish your library automatically.
 We'll use [GitHub Actions](https://docs.github.com/en/actions) as an example.
 
-To get started, add the following workflow to your repository in the `.github/workflows/publish.yml` file:
+This requires both setting up a GitHub workflow and authorizing GitHub to publish packages with your npm account.
+
+### Add a GitHub Actions workflow to your project
+
+To get started, you need a workflow that configures the GitHub action, for example:
 
 ```yaml
 # .github/workflows/publish.yml
@@ -165,7 +168,8 @@ on:
     types: [released, prereleased]
 
 permissions:
-  id-token: write  # Required for npm trusted publishing with OIDC
+  id-token: write  # Required for GitHub Actions
+                   # to integrate with npm trusted publishing
   contents: read
 
 jobs:
@@ -186,59 +190,62 @@ jobs:
         run: ./gradlew :shared:publishJsPackageToNpmjsRegistry
 ```
 
-Once you commit and push this file, the workflow will run automatically whenever you create a release (including a pre-release)
-in the GitHub repository hosting your project. The workflow checks out the current version of your code, sets up a JDK,
+Once you commit and push this file into the GitHub repository hosting your project,
+the workflow will run automatically whenever you create a release (including a pre-release)
+in that repository.
+The workflow checks out the current version of your code, sets up a JDK,
 and then runs the `publishJsPackageToNpmjsRegistry` Gradle task.
 
 You can also configure the workflow to [trigger when a tag is pushed](https://stackoverflow.com/a/61892639) to your repository.
 
 ### Add a Trusted Publisher for your npm package
 
-As you can see, we haven't provided any credentials to the workflow.
-This is because npm has a special integration with popular CI/CD services called [Trusted Publisher](https://docs.npmjs.com/trusted-publishers).
+Now that you have a workflow published, you can use the GitHub Action as a [Trusted Publisher](https://docs.npmjs.com/trusted-publishers) on npm:
 
-So let's add our newly created workflow as a trusted publisher. 
+1. Open the page of the package you [published manually](#publish-manually).
+2. Navigate to the **Settings** tab.
+3. Under "Select your publisher", click the **GitHub Actions** button.
+4. Enter your GitHub name (or organization) and the repository name.
+5. Enter the name of the workflow file (in this tutorial, we've used [publish.yml](#add-a-github-actions-workflow-to-your-project)).
+6. Click the **Setup connection** button.
 
-1. Navigate to the published package from the ["Publish locally" step](#publish-locally): `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings`.
-2. Navigate to the "Settings" tab.
-3. Click the button "GitHub Actions" under "Select your publisher".
-4. Set your GitHub name (or organization) and repository name.
-5. Enter the name of the workflow file (in this tutorial, we've created [publish.yml](https://github.com/Kotlin/kotlin-multiplatform-web-library/blob/main/.github/workflows/publish.yml)).
-6. Click the "Setup connection" button.
+> [npm does not verify the provided coordinates](https://docs.npmjs.com/trusted-publishers#troubleshooting),
+> so make sure you enter the details correctly.
+> 
+{style="warning"}
 
-After that, you should see your repository listed in the "Trusted Publishers" section, which means that the workflow is now authorized to publish to npm.
+The created connection should be listed in the **Trusted Publishers** section of your package's settings,
+which means that the workflow with the specified coordinates is now authorized to publish to npm.
 
 ### Create a release on GitHub
 
-With the workflow and secrets set up, you're now ready to [create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
-that will trigger the publication of your library.
+With the workflow and secrets set up, you're now ready to trigger publishing by [creating a GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release):
 
 1. Make sure that the version number specified in the `build.gradle.kts` file for your library is the one you would
    like to publish (if you've already published a version of your library, please update the version number).
+
+   > npm will not allow publishing if the version number is already in use, or lower than an already published version.
+   > 
+   > {style="note"}
+
 2. Go to your GitHub repository's main page.
 3. In the right sidebar, click **Releases**.
 4. Click the **Draft a new release** button (or the **Create a new release** button if you haven't created a release for
    this repository before).
-5. Each release needs to have a corresponding Git tag.
-   Create a new tag in the tag dropdown and set the release title (the tag name and
-   the title can be identical).
+5. Each release needs to have a corresponding Git tag: you can create a new tag immediately in the tag dropdown
+6. and set the release title (the tag name and the title can be identical).
    
-   You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
+   To keep track of everything, you may want for the version in the tag to be the same as the version number of the library
+   that you specified in the `build.gradle.kts` file.
 
    ![Create a release on GitHub](create_release_and_tag_for_npm.png){width=700}
 
-6. Double-check the branch you want to target with the release (especially if it's not the default branch) and add
-   appropriate release notes for your new version.
-7. Use the checkboxes below the description to mark a release as a pre-release (useful for early access versions such as
-   alpha, beta, or RC).
-   
-   You can also mark the release as the latest one if you already made a release for this repository before.
-8. Click the **Publish release** button to create the new release.
-9. Click the **Actions** tab at the top of your GitHub repository's page. Here, you'll see that the new release
-   triggered your publishing workflow.
+7. Click the **Publish release** button to create the new release.
+8. Click the **Actions** tab at the top of your GitHub repository's page.
+   You should see that the newly published release triggered a run of the publishing workflow.
     
-   You can click on the workflow to see the outputs of the publication task.
-10. After the workflow run is complete, your new version should be available on the npm registry (under the `https://www.npmjs.com/package/YOUR_ORGANIZATION_NAME/greetings` URL).
+   Click on the workflow to see the logs of the publication task.
+9. After the workflow run is complete, the new version of your package should be listed on your package's page in the npm registry.
 
 ![Published library on npm from CI/CD](published_second_version_on_npm.png){width=700}
 
