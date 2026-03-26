@@ -119,7 +119,7 @@ Add the plugin to your Kotlin Multiplatform project:
     > 
     {style="tip"}
 
-The most important settings in the `npmPublish {}` block are:
+The important settings in the `npmPublish {}` block are:
 
 * The `registries {}` block specifies the registry where the library should be published.
   For manual publishing, you'll specify the value of the `NPM_TOKEN` variable when running the publishing task.
