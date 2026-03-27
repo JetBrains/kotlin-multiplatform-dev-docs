@@ -1,6 +1,6 @@
-[//]: # (title: The Six Most Popular Cross-Platform App Development Frameworks)
+[//]: # (title: The Seven Most Popular Cross-Platform App Development Frameworks)
 
-[//]: # (description:This article identifies the six most popular cross-platform app development frameworks and explains key things to consider when choosing a cross-platform tool for your project.)
+[//]: # (description:This article identifies the seven most popular cross-platform app development frameworks and explains key things to consider when choosing a cross-platform tool for your project.)
 
 Over the years, cross-platform app development has become one of the most popular ways to build mobile applications. 
 A cross-platform, or multiplatform, approach allows developers to create apps that run similarly on different mobile platforms.
@@ -118,6 +118,21 @@ There's constant activity on the Ionic Framework Forum, where community members 
 * With the support for .NET hot reload, developers can modify their managed source code while the app is running.
 
 Even though .NET MAUI is still a relatively new framework, it has already gained traction among developers and has an active community on Stack Overflow and Microsoft Q&A.
+
+### Uno Platform
+
+Uno Platform is a flexible open-source technology stack for building modern cross-platform .NET apps from single shared codebase. With enterprise-grade Design and contextual AI tools, Uno Platform enables developer productivity towards building native mobile, desktop, embedded and WebAssembly applications using C#/XAML. Uno Platform is best known for bringing the WinUI/UWP programming models to multiple platforms beyond Windows, allowing .NET developers to reuse skills and code across a wide range of targets.
+
+**Programming languages:** C#, XAML.
+
+**App examples:** Migrated Apps from Toyota & Kahua, TradeZero, SkiaSharp-based enterprise applications.
+
+**Key features:**
+
+* Uno Platform allows developers to access native platform capabilities while sharing a single UI and business logic layer across platforms, including Android, iOS, WebAssembly (WASM), macOS, Linux, and Windows. It supports a single codebase and project structure, with multi-targeting used to run the same application on multiple platforms using WinUI-compatible APIs. 
+* Paired with Uno Platform Studio, .NET developers can get a serious boost in productivity with Hot Design visual designer with Hot Reload for fastest C#/XAML dev loop, dependable AI Agents/MCP tools for contextual AI intelligence and flexibility in technology stack – all towards building cross-platform apps from any OS/IDE/AI Agent.
+
+Uno Platform has a strong open-source community and is widely adopted for enterprise and line-of-business applications, especially by teams already invested in the .NET ecosystem.
 
 ### NativeScript
 
