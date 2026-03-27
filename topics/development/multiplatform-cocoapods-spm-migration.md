@@ -26,12 +26,12 @@ follow these steps:
 
 To update your `build.gradle.kts` file, follow the instructions on the SwiftPM import page:
 
-1. [Change the Kotlin Multiplatform Gradle plugin version to **%spmImport%**](multiplatform-spm-import.md#set-up-environment)
-2. [Add the necessary SwiftPM dependencies without disabling the CocoaPods plugin or removing CocoaPods dependencies](multiplatform-spm-import.md#add-and-call-swiftpm-dependencies)
+1. [Change the Kotlin Multiplatform Gradle plugin version to **%spmImport%**](multiplatform-spm-import.md#set-up-the-environment)
+2. [Add the necessary SwiftPM dependencies without disabling the CocoaPods plugin or removing CocoaPods dependencies](multiplatform-spm-import.md#add-and-use-swiftpm-dependencies)
 
 For example, if you are using the `FirebaseAnalytics` pod:
 
-1. Ensure you've [set up the Kotlin Multiplatform Gradle plugin](multiplatform-spm-import.md#set-up-environment) to use version **%spmImport%**. 
+1. Ensure you've [set up the Kotlin Multiplatform Gradle plugin](multiplatform-spm-import.md#set-up-the-environment) to use version **%spmImport%**. 
 2. Add the `FirebaseAnalytics` Swift package to the `swiftPMDependencies {}` block:
 
    ```kotlin
