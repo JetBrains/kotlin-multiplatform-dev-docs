@@ -1,7 +1,8 @@
 [//]: # (title: Publish your library to npm – tutorial)
 
-In this tutorial, you'll learn how to publish your Kotlin Multiplatform library targeting JS or WasmJS as an [npm](https://www.npmjs.com/)
-package.
+<tldr>
+This tutorial explains how to publish your Kotlin Multiplatform library targeting JS or WasmJS as an npm package.
+</tldr>
 
 To publish your library, you'll need to:
 
@@ -10,24 +11,22 @@ To publish your library, you'll need to:
 3. Provide the credentials to the publishing plugin or set up a Trusted Publisher for continuous integration. (and one-time password if two-factor authentication is enabled) to the publishing plugin so it can upload your artifacts.
 4. Run the publication task, either locally or using CI.
 
-In this tutorial, we'll use GitHub as hosting for the project code and as the CI tool.
+In this tutorial, we use GitHub to host the project and run CI via GitHub Actions.
 
 ## Sample library
 
-You can use a [sample web library](https://github.com/Kotlin/kotlin-multiplatform-web-library)
-to try the process out and refer to its code for an example of a working npm publishing configuration.
+You can use a [sample library project](https://github.com/Kotlin/kotlin-multiplatform-web-library)
+to follow along and see a working configuration.
 
-If you'd like to reuse the code, remember to **replace all example values** with those specific to your project.
+If you reuse the code, make sure to **replace all example values** with values specific to your project.
 
 ## Prepare accounts and credentials
 
-To get started with publishing to npm, you need to be [signed in at npm portal](https://www.npmjs.com/login)
-([create a new account](https://docs.npmjs.com/creating-a-new-npm-user-account) if you don't have one).
+To publish to npm, you need to be [signed in at the npm portal](https://www.npmjs.com/login).
 
 ### Create a simple organization
 
-In this tutorial, we'll create a new organization and publish the library under this organization,
-to avoid coming up with a unique name for the npm package.
+In this tutorial, we publish the library under an npm organization to avoid naming conflicts.
 
 To create a new organization, follow the [npm documentation](https://docs.npmjs.com/creating-an-organization).
 
@@ -37,8 +36,8 @@ To publish to npm manually, you need an access token that allows publishing a pa
 To generate such a token, follow the [npm guide](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 
 For this tutorial, use a simplified security configuration:
-* use the **Bypass two-factor authentication (2FA)** option,
-* set both the general permissions and organization permissions for the token to **Read and write**.
+* Enable the **Bypass two-factor authentication (2FA)** option.
+* Set both the general permissions and organization permissions for the token to **Read and write**.
 
 As soon as you have the organization name and the access token, you're ready to publish your library as an npm package.
 
