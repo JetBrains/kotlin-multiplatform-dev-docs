@@ -27,49 +27,22 @@ For example, you don't need to do any additional configuration when running Kotl
 
 To configure your project:
 
-1. [Set up your development environment](#set-up-the-environment)
-2. [Add the SwiftPM dependencies to your KMP module](#add-and-use-swiftpm-dependencies)
-3. [Use the imported APIs in your Kotlin code](#use-imported-apis)
+1. [Set up your development environment](#set-the-kotlin-multiplatform-gradle-plugin-version)
+2. [Add and use the SwiftPM dependencies in your KMP module](#add-and-use-swiftpm-dependencies)
+3. [Generate a compound `Package.resolved` file](#generate-a-package-resolved-file)
 
-## Set up the environment
+## Set the Kotlin Multiplatform Gradle plugin version
 
-To try out the SwiftPM import functionality, make sure that you are using the **%kotlinEapVersion%** version of Kotlin
-and the Kotlin Multiplatform Gradle plugin.
+To try out the SwiftPM import functionality, make sure that you are using the **%kotlinEapVersion%** version
+of the Kotlin Multiplatform Gradle plugin:
 
-<!-- TODO remove this?
-### Set up KMP IDE plugin
+```text
+[versions]
+kotlin = "%kotlinEapVersion%"
 
-If you are using the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform/)
-recommended for KMP projects,
-explicitly specify the path to the iOS project that is built from the KMP module.
-
-In the `build.gradle.kts` file where you call the `iosTarget.binaries.framework` API,
-also call the API that sets the project path:
-
-```kotlin
-kotlin {
-    // Example of iOS targets configuration
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64(),
-        iosX64(),
-    ).forEach { iosTarget ->
-            iosTarget.binaries.framework { 
-                baseName = "Shared"
-                isStatic = false
-            } 
-    }
-
-    swiftPMDependencies { 
-        // Specify the path to the .xcodeproj file that uses
-        // the `:embedAndSignAppleFrameworkForXcode` integration
-        xcodeProjectPathForKmpIJPlugin.set(
-            layout.projectDirectory.file("../iosApp/iosApp.xcodeproj")
-        )
-    }
-}
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ```
--->
 
 ## Add and use SwiftPM dependencies
 
@@ -198,9 +171,10 @@ XCODEPROJ_PATH='/path/to/project/iosApp/iosApp.xcodeproj' ./gradlew :kotlin-libr
 ```
 
 The command will generate the SwiftPM package and perform the necessary changes in the Xcode project.
-Make sure to commit the generated package as well as the updated Xcode project into your repository.
+Make sure to commit the generated package, as well as the updated Xcode project, to your repository.
 
-After the initial integration, the synthetic package is going to be updated automatically.
+After the initial integration, the synthetic package will be updated automatically
+every time you change the set of SwiftPM dependencies or their versions.
 
 ### Use imported APIs
 
@@ -223,9 +197,9 @@ import swiftPMImport.groupName.subproject.FIRAnalytics
 import swiftPMImport.groupName.subproject.FIRApp
 ```
 
-## Generating a Package.resolved file
+## Generate a `Package.resolved` file
 
-To make your builds depending on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
+To make builds that depend on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
 the `Package.resolved` file generated during the initial package resolution is copied into the project's directory
 and reused for subsequent builds.
 
