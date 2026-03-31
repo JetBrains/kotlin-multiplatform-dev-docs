@@ -48,11 +48,11 @@ You will use the following multiplatform libraries in the project:
    * **Group**: com.jetbrains
    * **Artifact**: spacetutorial
 
-   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
-
 5. Select **Android** and **iOS** targets.
 6. For iOS, select the **Do not share UI** option. You will implement a native UI for both platforms.
 7. Once you've specified all the fields and targets, click **Create**.
+
+   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
 
 ## Add Gradle dependencies
 
@@ -67,14 +67,15 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
    ```
    [versions]
-   agp = "9.1.0"
+   agp = "9.0.1"
+   material3 = "1.10.0-alpha05"
    ...
    coroutinesVersion = "%coroutinesVersion%"
    dateTimeVersion = "%dateTimeVersion%"
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
-   material3 = "1.3.2" #TODO check the version and whether it's generated
+   
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
 
@@ -84,7 +85,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    [libraries]
    ...
    android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-   koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
    koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
    kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTimeVersion" }
@@ -95,9 +95,9 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
    native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
    runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-   androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[libraries]"}
+   <!-- TODO removed koin-androidx-compose and androidx-compose-material3 since they appear unused in the final project -->
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
@@ -110,7 +110,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 4. Once the dependencies are added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
-5. At the very beginning of the `shared/build.gradle.kts` file, add the following lines to the
+5. At the very beginning of the `sharedLogic/build.gradle.kts` file, add the following lines to the
    `plugins {}` block:
 
    ```kotlin
@@ -125,7 +125,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
     to use `kotlinx.serialization` for processing network requests and responses.
     The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
-    In the same `shared/build.gradle.kts` file, add all the required dependencies:
+    In the same `sharedLogic/build.gradle.kts` file, add all the required dependencies:
 
     ```kotlin
     kotlin {
@@ -154,6 +154,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
     ```
 
 7. At the beginning of the `sourseSets` block, opt in for the experimental time API of the standard Kotlin library:
+   <!-- TODO this doesn't seem necessary with the stabilization of kotlin.time APIs -->
 
     ```kotlin
     kotlin {
@@ -194,13 +195,13 @@ The application data model will have three entity classes with:
 
 Create the necessary data classes:
 
-1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` package,
+1. In the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` package,
    then create the `Entity.kt` file inside that package. 
 2. Declare all the data classes for basic entities:
 
    ```kotlin
    ```
-   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-41" }
+   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-40" }
 
 Each serializable class must be marked with the `@Serializable` annotation. The `kotlinx.serialization` plugin
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
@@ -216,7 +217,7 @@ using more readable identifiers.
 The SQLDelight library allows you to generate a type-safe Kotlin database API from SQL queries. During compilation, the
 generator validates the SQL queries and turns them into Kotlin code that can be used in the shared module.
 
-The SQLDelight dependency is already included in the project. To configure the library, open the `shared/build.gradle.kts` file
+The SQLDelight dependency is already included in the project. To configure the library, open the `sharedLogic/build.gradle.kts` file
 and add the `sqldelight {}` block in the end. This block contains a list of databases and their parameters:
 
 ```kotlin
@@ -244,14 +245,14 @@ Sync the Gradle project files when prompted, or press double <shortcut>Shift</sh
 First, create the `.sq` file with all the necessary SQL queries. By default, the SQLDelight plugin looks for
 `.sq` files in the `sqldelight` folder of the source set:
 
-1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory.
+1. In the `sharedLogic/src/commonMain` directory, create a new `sqldelight` directory.
 2. Inside the `sqldelight` directory, create a new directory with the name `com/jetbrains/spacetutorial/cache`
    to create nested directories for the package.
 3. Inside the `cache` directory, create the `AppDatabase.sq` file (with the same name as the database you specified
    in the `build.gradle.kts` file).
    All the SQL queries for your application will be stored in this file.
 4. The database will contain a table with data about launches.
-   Add the following code for creating the table to the `AppDatabase.sq` file:
+   Add the following code to the `AppDatabase.sq` file to create the table and define several functions which you will use later:
 
    ```text
    import kotlin.Boolean;
@@ -266,39 +267,32 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
        patchUrlLarge TEXT,
        articleUrl TEXT
    );
-   ```
-
-5. Add the `insertLaunch` function for inserting data into the table:
-
-   ```text
+   
    insertLaunch:
    INSERT INTO Launch(flightNumber, missionName, details, launchSuccess, launchDateUTC, patchUrlSmall, patchUrlLarge, articleUrl)
    VALUES(?, ?, ?, ?, ?, ?, ?, ?);
-   ```
-
-6. Add the `removeAllLaunches` function for clearing data in the table:
-
-   ```text
+   
    removeAllLaunches:
    DELETE FROM Launch;
-   ```
-
-7. Declare the `selectAllLaunchesInfo` function for retrieving data:
-
-   ```text
+   
    selectAllLaunchesInfo:
    SELECT Launch.*
    FROM Launch;
    ```
-8. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
+   
+   The functions are:
+   * `insertLaunch`, for inserting data into the `Launch` table.
+   * `removeAllLaunches`, for clearing all data from the `Launch` table.
+   * `selectAllLaunchesInfo`, for retrieving data.
+
+5. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
    To do that, run the following command in the terminal:
 
    ```shell
    ./gradlew generateCommonMainAppDatabaseInterface
    ```
 
-   The generated Kotlin code is stored in the `shared/build/generated/sqldelight` directory.
-
+   The generated Kotlin code is stored in the `sharedLogic/build/generated/sqldelight` directory.
 
 ### Create factories for platform-specific database drivers
 
