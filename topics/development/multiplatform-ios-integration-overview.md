@@ -65,7 +65,7 @@ connect the iOS framework from a Kotlin Multiplatform project.
 You can both export your XCFramework from a Kotlin Multiplatform project and import remote Swift packages as dependencies
 into a KMP project:
 * For instructions on how to make and distribute a Swift package out of your XCFramework, see [Swift package export setup](multiplatform-spm-export.md).
-* To learn how to add Swift packages as dependencies, see [Adding Swift packages as dependencies](multiplatform-spm-import.md).
+* To learn how to add Swift packages as dependencies, see the [Swift PM import documenation](multiplatform-spm-import.md).
 
 ### CocoaPods integration with XCFrameworks
 
