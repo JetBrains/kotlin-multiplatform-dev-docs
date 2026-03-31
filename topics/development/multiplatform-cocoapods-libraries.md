@@ -13,7 +13,7 @@ To add a Pod dependency, call the `pod()` function in the shared module's `build
 Each dependency requires a separate function call. You can specify the parameters for the dependency in
 the configuration block of the function.
 
-> The CocoaPods Gradle plugin is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
+> The CocoaPods integration approach is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
 > A single project can't employ both of these approaches at once.
 >
 {style="warning"}

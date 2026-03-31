@@ -12,7 +12,7 @@
 Kotlin/Native provides integration with the [CocoaPods dependency manager](https://cocoapods.org/). You can add dependencies
 on Pod libraries as well as use a Kotlin project as a CocoaPods dependency.
 
-> The CocoaPods Gradle plugin is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
+> The CocoaPods integration approach is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
 > A single project can't employ both of these approaches at once.
 > 
 {style="warning"}
