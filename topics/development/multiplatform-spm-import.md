@@ -8,7 +8,7 @@
    and how to migrate your KMP setup from CocoaPods to SwiftPM if necessary.</p>
 </tldr>
 
-> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained) and **not** intended for production.
+> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
 > Please share any problems or feedback you have in the dedicated Kotlin Slack channel: [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C)
 >
 {style="warning"}
@@ -21,98 +21,30 @@ Kotlin Gradle plugin automatically provides the necessary machine code from Swif
 For example, you don't need to do any additional configuration when running Kotlin/Native tests or linking a framework.
 
 > The [export](multiplatform-spm-export.md) of KMP modules that use SwiftPM import as a Swift package itself is not yet supported and might not work.
-> See this [YouTrack issue](https://youtrack.jetbrains.com/issue/KT-84420) for more details, and let us know about your use case.
+> See this [YouTrack issue](https://youtrack.jetbrains.com/issue/KT-84420) for more details and let us know about your use case.
 >
 {style="note"}
 
 To configure your project:
 
-1. [Set up your development environment](#set-up-environment)
-2. [Add the SwiftPM dependencies to your KMP module](#add-and-call-swiftpm-dependencies)
-3. [Use the imported APIs in your Kotlin code](#use-imported-apis)
+1. [Set up your development environment](#set-the-kotlin-multiplatform-gradle-plugin-version)
+2. [Add and use the SwiftPM dependencies in your KMP module](#add-and-use-swiftpm-dependencies)
 
-## Set up environment
+## Set the Kotlin Multiplatform Gradle plugin version
 
-To try out the SwiftPM import functionality, you need to use a specific development version of Kotlin.
-Keep in mind, this version is **not** intended for production.
-<!-- This will be invalidated when 2.4.0-Beta1 comes out. This is when we specify the feature stability level and change the page label. -->
+To try out the SwiftPM import functionality, make sure that you are using the **%kotlinEapVersion%** version
+of the Kotlin Multiplatform Gradle plugin.
+Example for a `gradle/libs.versions.toml` file:
 
-To set up the Kotlin Multiplatform Gradle plugin:
+```text
+[versions]
+kotlin = "%kotlinEapVersion%"
 
-1. In your `settings.gradle.kts` file, add the development package repository for dependencies and plugins:
-
-    ```kotlin
-    dependencyResolutionManagement {
-        repositories {
-            maven("https://packages.jetbrains.team/maven/p/kt/dev")
-            mavenCentral()
-        }
-    }
-
-    pluginManagement {
-        repositories {
-            maven("https://packages.jetbrains.team/maven/p/kt/dev")
-            mavenCentral()
-            gradlePluginPortal()
-        }
-    }
-    ```
-
-2. In your version catalog, apply the experimental version of the Kotlin Multiplatform Gradle plugin:
-
-    ```text
-    kotlin = "%spmImport%"
-
-    [plugins]
-    kotlin-multiplatform = "%spmImport%"
-    ```
-
-3. Sync Gradle files and try adding a `kotlin.swiftPMDependencies {}` block to the `build.gradle.kts` file in your KMP module.
-
-   If the `swiftPMDependencies` name cannot be resolved, add the following block to the root `build.gradle.kts` file
-   to force the experimental Kotlin Multiplatform Gradle plugin version:
-
-    ```kotlin
-    buildscript {
-        dependencies.constraints {
-            "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:%spmImport%")
-        }
-    }
-    ```
-
-### Set up KMP IDE plugin
-
-If you are using the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform/) recommended for KMP projects,
-explicitly specify the path to the iOS project that is built from the KMP module.
-
-In the `build.gradle.kts` file where you call the `iosTarget.binaries.framework` API,
-add the API call that sets the path:
-
-```kotlin
-kotlin {
-    // Example of iOS targets configuration
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64(),
-        iosX64(),
-    ).forEach { iosTarget ->
-            iosTarget.binaries.framework { 
-                baseName = "Shared"
-                isStatic = false
-            } 
-    }
-
-    swiftPMDependencies { 
-        // Specify the path to the .xcodeproj file that uses
-        // the `:embedAndSignAppleFrameworkForXcode` integration
-        xcodeProjectPathForKmpIJPlugin.set(
-            layout.projectDirectory.file("../iosApp/iosApp.xcodeproj")
-        )
-    }
-}
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ```
 
-## Add and call SwiftPM dependencies
+## Add and use SwiftPM dependencies
 
 > For working examples, see our sample projects.
 > On the `master` branch, each project is set up using CocoaPods, while the `spm_import` branch uses SwiftPM:
@@ -122,9 +54,9 @@ kotlin {
 >
 {type="tip"}
 
-### Configure build file
+### Configure the build
 
-Specific SwiftPM dependencies can be added in the `swiftPMDependencies` block of the `build.gradle.kts` file,
+Specific SwiftPM dependencies can be added in the `swiftPMDependencies {}` block of the `build.gradle.kts` file,
 where your Apple targets are declared.
 For example, for Firebase:
 
@@ -194,8 +126,8 @@ kotlin {
 Some SwiftPM dependencies may not compile or provide valid APIs for all targets in your build script.
 For example, the Google Maps SDK currently only supports iOS targets.
 
-So, while your project only targets iOS, you don't need to declare platforms explicitly.
-But as soon as you add another target, for example, macOS, you need to specify the platform constraint for each dependency.
+If your project only targets iOS, you don't need to declare platforms explicitly.
+But as soon as you add another target (for example, macOS), you need to specify the platform constraint for each dependency.
 
 To make sure that a dependency is applied only for relevant compilations,
 specify the correct targets in the `platforms` parameter of a `product` specification:
@@ -226,6 +158,24 @@ kotlin {
 }
 ```
 
+### Run the SwiftPM integration task
+
+SwiftPM import tooling generates an intermediary package to keep track of the list of the current SwiftPM dependencies.
+When you add a SwiftPM dependency to your project for the first time,
+you need to link your Xcode project with the generated package.
+
+To do that, run the special Gradle task with the following command in your project's directory:
+
+```shell
+XCODEPROJ_PATH='/path/to/project/iosApp/iosApp.xcodeproj' ./gradlew :kotlin-library:integrateLinkagePackage
+```
+
+The command will generate the SwiftPM package and perform the necessary changes in the Xcode project.
+Make sure to commit the generated package, as well as the updated Xcode project, to your repository.
+
+After the initial integration, the synthetic package will be updated automatically
+every time you change the set of SwiftPM dependencies or their versions.
+
 ### Use imported APIs
 
 Imported Objective-C APIs are contained in namespaces that start with the `swiftPMImport` prefix
@@ -239,13 +189,26 @@ group = "groupName"
 ```
 
 Here, `groupName` is the Gradle group name of the project, and `subproject` is the project name.
-Now you can import Firebase APIs in the `iosMain` source set of that module:
+Now you can import Firebase APIs in the `iosMain` source set of that module, for example:
 
 ```kotlin
 // subproject/src/iosMain/kotlin/useFirebaseAnalytics.kt
 import swiftPMImport.groupName.subproject.FIRAnalytics
 import swiftPMImport.groupName.subproject.FIRApp
 ```
+
+## Generated `Package.resolved` file
+
+To make builds that depend on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
+the `Package.resolved` file generated during the initial package resolution is copied into the project's directory
+and reused for subsequent builds.
+
+The lock file is updated automatically when you change the set or versions of SwiftPM dependencies in your build script.
+
+If you want to force an update of the lock file manually:
+
+1. Delete the `build` directory and the existing `Package.resolved` file.
+2. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
 
 ## Additional import options
 
