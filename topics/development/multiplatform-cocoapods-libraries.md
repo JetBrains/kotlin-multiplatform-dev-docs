@@ -13,6 +13,11 @@ To add a Pod dependency, call the `pod()` function in the shared module's `build
 Each dependency requires a separate function call. You can specify the parameters for the dependency in
 the configuration block of the function.
 
+> The CocoaPods Gradle plugin is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
+> A single project can't employ both of these approaches at once.
+>
+{style="warning"}
+
 * When you add a new dependency and re-import the project in your IDE, the library will be connected automatically.
 * To use your Kotlin project with Xcode, [make changes in your project's Podfile](multiplatform-cocoapods-overview.md#update-podfile-for-xcode) first.
 
