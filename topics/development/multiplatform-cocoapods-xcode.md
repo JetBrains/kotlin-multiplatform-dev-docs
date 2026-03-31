@@ -11,8 +11,8 @@ You can use an entire Kotlin project as a Pod dependency. To do that, you'll nee
 a dependency in the Podfile of your project, specifying its name and the path to the project directory with the
 generated Podspec.
 
-> The CocoaPods integration approach is incompatible with the `embedAndSignAppleFrameworkForXcode` mechanism used for [direct integration](multiplatform-direct-integration.md).
-> A single project can't employ both of these approaches at once.
+> The CocoaPods integration approach can't be used together with the `embedAndSignAppleFrameworkForXcode` mechanism
+> used for [direct integration](multiplatform-direct-integration.md).
 >
 {style="warning"}
 
