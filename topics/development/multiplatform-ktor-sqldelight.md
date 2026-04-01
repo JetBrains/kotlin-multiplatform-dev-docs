@@ -453,7 +453,7 @@ and a single method to retrieve the list of all launches from the `v5/launches` 
 
 Create a class that will connect the application to the API:
 
-1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
+1. In the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
 2. Inside the `network` directory, create the `SpaceXApi` class:
 
     ```kotlin
@@ -500,9 +500,9 @@ Create a class that will connect the application to the API:
     ```
 
 The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`.
-     The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
-     coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-   
+The `HttpClient.get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from
+a coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
+
 The URL for sending a GET request is passed as an argument to the `get()` function.
 
 ## Build an SDK
@@ -510,7 +510,7 @@ The URL for sending a GET request is passed as an argument to the `get()` functi
 Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
 public class, `SpaceXSDK`.
 
-1. In the common source set `shared/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
+1. In the common source set `sharedLogic/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
    the `SpaceXSDK` class.
    This class will be the facade for the `Database` and `SpaceXApi` classes.
 
@@ -568,19 +568,14 @@ All Kotlin exceptions are unchecked, while Swift has only checked errors (see [I
 IntelliJ IDEA handles the initial Gradle configuration for you, so the `shared` module is already
 connected to your Android application.
 
-Before implementing the UI and the presentation logic, add all the required UI dependencies to
-the `composeApp/build.gradle.kts` file:
+Before implementing the UI and the presentation logic, add the required UI dependency to
+the `androidApp/build.gradle.kts` file:
 
 ```kotlin
 kotlin {
 // ...
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-        }
-        // ... 
+    dependencies {
+       implementation(libs.koin.androidx.compose)
     }
 }
 ```
