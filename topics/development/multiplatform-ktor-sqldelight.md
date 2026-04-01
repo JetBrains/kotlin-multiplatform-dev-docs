@@ -301,7 +301,7 @@ separately for each platform.
 While you can achieve this with [expected and actual interfaces](multiplatform-expect-actual.md),
 in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
-1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
+1. Create an interface for database drivers. To do this, in the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
    create the `cache` package.
 2. Create the `DatabaseDriverFactory` interface inside the `cache` package:
 
@@ -315,7 +315,7 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
+3. Create the class implementing this interface for Android: in the `sharedLogic/src/androidMain/kotlin` directory,
    create the `com.jetbrains.spacetutorial.cache` package, then create the `DatabaseDriverFactory.kt` file inside it.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
@@ -350,14 +350,14 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-You will implement instances of these drivers later in the platform-specific code of your project.
+You will use these factories later in the platform-specific parts of your project.
 
 ### Implement cache
 
 So far, you have added factories for platform database drivers and an `AppDatabase` interface to perform database operations.
 Now, create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
 
-1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
+1. In the common source set `sharedLogic/src/commonMain/kotlin`, create a new `Database` class in
    the `com.jetbrains.spacetutorial.cache` package. It will contain logic common to both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` instance to the `Database`
