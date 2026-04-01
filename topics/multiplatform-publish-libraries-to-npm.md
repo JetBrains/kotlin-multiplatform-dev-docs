@@ -157,7 +157,7 @@ When the library is published, you should be able to see it in the npm registry.
 Open your npm organization page and check the **Packages** tab
 (but not on your personal **Packages** page).
 
-![Published library on npm](published_on_npm.png){width=700}
+![Published library on npm](published-on-npm.png){width=700}
 
 ### Troubleshooting
 
@@ -265,7 +265,7 @@ With the workflow and the Trusted Publisher connection set up, you're now ready 
    To keep track of everything, you may want for the version in the tag to be the same as the version number of the library
    that you specified in the `build.gradle.kts` file.
 
-   ![Create a release on GitHub](create_release_and_tag_for_npm.png){width=700}
+   ![Create a release on GitHub](create-release-and-tag-for-npm.png){width=700}
 
 7. Click the **Publish release** button.
 
@@ -275,7 +275,7 @@ Click on the workflow to see the logs of the publication task.
 
 When the workflow run is complete, the new version of your package should be listed on your package's page in the npm registry.
 
-![Published library on npm from CI/CD](published_second_version_on_npm.png){width=700}
+![Published library on npm from CI/CD](published-second-version-on-npm.png){width=700}
 
 ## What's next
 
