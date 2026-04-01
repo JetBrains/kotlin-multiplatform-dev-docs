@@ -422,7 +422,7 @@ you need to store these values as secrets.
    * `SIGNING_PASSWORD` is the passphrase you've provided when generating your GPG key.
    * `GPG_KEY_CONTENTS` should contain the entire contents of [your `key.gpg` file](#export-your-private-key).
 
-   ![Add secrets to GitHub](github_secrets.png){width=700}
+   ![Add secrets to GitHub](github-secrets.png){width=700}
 
 You'll use the names for these secrets in the CI configuration in the next step.
 
@@ -499,7 +499,7 @@ that will trigger the publication of your library.
    
    You probably want these to be the same as the version number of the library that you specified in the `build.gradle.kts` file.
 
-   ![Create a release on GitHub](create_release_and_tag.png){width=700}
+   ![Create a release on GitHub](create-release-and-tag.png){width=700}
 
 6. Double-check the branch you want to target with the release (especially if it's not the default branch) and add
    appropriate release notes for your new version.
@@ -520,7 +520,7 @@ that will trigger the publication of your library.
 11. Once your deployment is in the _validated_ state, check that it contains all the artifacts you've uploaded.
     If everything looks correct, click the **Publish** button to release these artifacts.
 
-    ![Publishing settings](published_on_maven_central.png){width=700}
+    ![Publishing settings](published-on-maven-central.png){width=700}
 
     > It will take some time (usually about 15–30 minutes, but can be several hours) after the release for the artifacts to be available publicly in
     > the Maven Central repository. It may take longer for them to be indexed and become searchable on the [Maven Central website](https://central.sonatype.com/).

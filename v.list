@@ -49,4 +49,5 @@
     <var name="vanniktechPublishPlugin" value="0.36.0"/>
 
     <var name="rubyVersion" value="3.4.7"/>
+    <var name="npmPublishPlugin" value="3.6.0"/>
 </vars>

@@ -13,7 +13,7 @@ available for IntelliJ IDEA starting with version 2025.2.2 and Android Studio st
 While we explore adding support for other targets, you can already use the desktop app as your sandbox
 to quickly experiment with UI changes in common code without interrupting your flow.
 
-<img src="KotlinConf_hot_reload.animated.gif" alt="Compose Hot Reload" width="600" preview-src="KotlinConf_hot_reload.png"/>
+<img src="KotlinConf-hot-reload.animated.gif" alt="Compose Hot Reload" width="600" preview-src="KotlinConf-hot-reload.png"/>
 
 ## Add Compose Hot Reload to your project
 
@@ -59,7 +59,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
  
 2. Update the version catalog with the latest version of Compose Hot Reload (see [Releases](https://github.com/JetBrains/compose-hot-reload/releases)).
    In `gradle/libs.versions.toml`, add the following code:
-   ```kotlin
+   ```text
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
 
