@@ -1,7 +1,7 @@
 [//]: # (title: Publish your library to npm – tutorial)
 
 <tldr>
-Publish your Kotlin Multiplatform library to npm with the npm-publish Gradle plugin, manually or using GitHub Actions.
+<p>Publish your Kotlin Multiplatform library to npm with the <a href="https://npm-publish.petuska.dev/latest/">npm-publish Gradle plugin</a>, manually or using GitHub Actions.</p>
 </tldr>
 
 To publish your library, you'll need to:
