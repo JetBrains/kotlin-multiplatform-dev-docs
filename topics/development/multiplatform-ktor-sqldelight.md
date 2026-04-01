@@ -268,22 +268,20 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
        articleUrl TEXT
    );
    
+   -- Inserts data into the 'Launch' table
    insertLaunch:
    INSERT INTO Launch(flightNumber, missionName, details, launchSuccess, launchDateUTC, patchUrlSmall, patchUrlLarge, articleUrl)
    VALUES(?, ?, ?, ?, ?, ?, ?, ?);
    
+   -- Clears all data from the 'Launch' table
    removeAllLaunches:
    DELETE FROM Launch;
    
+   -- Retrieves information about all launches
    selectAllLaunchesInfo:
    SELECT Launch.*
    FROM Launch;
    ```
-   
-   The functions are:
-   * `insertLaunch`, for inserting data into the `Launch` table.
-   * `removeAllLaunches`, for clearing all data from the `Launch` table.
-   * `selectAllLaunchesInfo`, for retrieving data.
 
 5. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
    To do that, run the following command in the terminal:
