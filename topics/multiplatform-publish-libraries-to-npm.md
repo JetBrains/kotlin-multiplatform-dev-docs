@@ -1,7 +1,8 @@
 [//]: # (title: Publish your library to npm – tutorial)
 
 <tldr>
-This tutorial explains how to publish your Kotlin Multiplatform library targeting JS or WasmJS as an npm package.
+Publish your Kotlin Multiplatform library to npm using the <a href="https://npm-publish.petuska.dev/latest/">npm-publish Gradle plugin</a>,
+manually or through GitHub Actions.
 </tldr>
 
 To publish your library, you'll need to:
@@ -153,7 +154,7 @@ NPM_TOKEN=YOUR_ACCESS_TOKEN ./gradlew :shared:publishJsPackageToNpmjsRegistry
 ```
 
 When the library is published, you should be able to see it in the npm registry.
-Open your nmp organization page and check the **Packages** tab
+Open your npm organization page and check the **Packages** tab
 (but not on your personal **Packages** page).
 
 ![Published library on npm](published_on_npm.png){width=700}
@@ -225,13 +226,13 @@ the workflow runs whenever you create a GitHub release in that repository.
 Now that you have a workflow published, you can use the GitHub Action to add a [Trusted Publisher](https://docs.npmjs.com/trusted-publishers)
 to your npm package:
 
-1. Open the page of the package you [published manually](#publish-manually).
+1. Open the [published package](#publish-manually) page.
 2. Open the **Settings** tab and find the **Trusted Publisher** section.
 3. Under **Select your publisher**, click the **GitHub Actions** button.
 4. Fill out the form:
    * your GitHub name (or organization)
    * the repository name
-   * the name of the workflow file (in this tutorial, we've used [publish.yml](#create-a-github-actions-workflow-file).
+   * the name of the workflow file (in this tutorial, we've used [publish.yml](#create-a-github-actions-workflow-file)).
 5. Click the **Setup connection** button.
 
 ![npm Trusted Publisher setup for GitHub Actions](npm-trusted-publisher-github.png)
