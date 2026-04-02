@@ -586,7 +586,7 @@ Sync the Gradle project files when prompted, or press double <shortcut>Shift</sh
 ### Add internet access permission
 
 To access the internet, an Android application needs the appropriate permission.
-In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-permission>` tag:
+In the `androidApp/src/main/AndroidManifest.xml` file, add the `<uses-permission>` tag:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -605,7 +605,7 @@ Then, you will start Koin for each native UI using the corresponding module.
 
 Declare a Koin module that will contain the components for the Android app:
 
-1. In the `composeApp/src/androidMain/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
+1. In the `androidApp/src/main/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
 
    In that file, declare the module as two [singletons](https://insert-koin.io/docs/reference/koin-core/definitions#defining-a-singleton),
    one for the `SpaceXApi` class and one for the `SpaceXSDK` class:
@@ -636,7 +636,7 @@ Declare a Koin module that will contain the components for the Android app:
 
 2. Create a custom `Application` class, which will start the Koin module.
 
-   Next to the `AppModule.kt` file, create the `Application.kt` file with the following code, specifying the module
+   Next to the `AppModule.kt` file you created, create the `Application.kt` file with the following code, specifying the module
    you declared in the `modules()` function call:
 
    ```kotlin
@@ -679,7 +679,7 @@ You will implement the Android UI using Jetpack Compose and Material 3. First, y
 uses the SDK to get the list of launches. Then, you'll set up the Material theme, and finally, you'll write the composable
 function that brings it all together.
 
-1. In the `composeApp/src/androidMain` source set, in the `com.jetbrains.spacetutorial` package, create
+1. In the `androidApp/src/main/kotlin` directory, in the `com.jetbrains.spacetutorial` package, create
    the `RocketLaunchViewModel.kt` file:
 
    ```kotlin
@@ -760,8 +760,8 @@ You will build your main `App()` composable around the `AppTheme` function suppl
    Pick your colors, pick your fonts, then click **Export theme** in the bottom right corner.
 2. On the export screen, click the **Export** dropdown and select the **Jetpack Compose (Theme.kt)**
    option.
-3. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
-   directory.
+3. Unpack the archive and copy the `theme` folder into the `androidApp/src/main/kotlin/com/jetbrains/spacetutorial`
+   directory:
 
    ![theme directory location](theme-directory.png){width=299}
 
@@ -955,8 +955,8 @@ For the iOS part of the project, you'll make use of [SwiftUI](https://developer.
 interface and the [Model View View-Model](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
 
 IntelliJ IDEA generates an iOS project that is already connected to the shared module. The Kotlin module
-is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
-using a regular `import` statement: `import Shared`.
+is exported with the name specified in the `sharedLogic/build.gradle.kts` file (`baseName = "SharedLogic"`), and imported
+using a regular `import` statement: `import SharedLogic`.
 
 ### Add the dynamic linking flag for SQLDelight
 
@@ -979,8 +979,7 @@ system-provided SQLite binary:
 To use Koin classes and functions in Swift code, create a special `KoinComponent` class and declare the Koin
 module for iOS.
 
-1. In the `shared/src/iosMain/kotlin/` source set, create a file with the name `com/jetbrains/spacetutorial/KoinHelper.kt`
-   (it will appear next to the `cache` folder).
+1. In the `sharedLogic/src/iosMain/kotlin/` source set, create the `KoinHelper.kt` file.
 2. Add the `KoinHelper` class, which will wrap the `SpaceXSDK` class with a lazy Koin injection:
 
     ```kotlin
@@ -1035,7 +1034,7 @@ data.
 
     ```Swift
     import SwiftUI
-    import Shared
+    import SharedLogic
     
     struct RocketLaunchRow: View {
         var rocketLaunch: RocketLaunch
@@ -1154,7 +1153,6 @@ It will allow you to call the SDK function with the correct database driver.
    ```Swift
    extension ContentView {
        // ...
-       @MainActor
        class ViewModel: ObservableObject {
            // ...
            let helper: KoinHelper = KoinHelper()
@@ -1198,7 +1196,7 @@ It will allow you to call the SDK function with the correct database driver.
 
     ```Swift
     import SwiftUI
-    import Shared
+    import SharedLogic
     
     @main
     struct iOSApp: App {
