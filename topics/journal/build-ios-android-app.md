@@ -1,4 +1,4 @@
-[//]: # (title: How to build Android and iOS apps (and when to use Kotlin Multiplatform))
+[//]: # (title: How to build Android and iOS apps and when to use Kotlin Multiplatform)
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
@@ -91,7 +91,7 @@ The main benefit of this approach is **platform fidelity**. Native apps use the 
 
 Another major advantage is **quick access to platform APIs**. When Apple or Google introduces new system features, SDKs, or hardware capabilities, native apps can immediately incorporate them. There is no need to wait for a cross-platform layer to catch up or expose those APIs, which is important for products that require cutting-edge OS capabilities or deep system integration.
 
-#### Considerations
+**Considerations**
 
 One of the trade-off is **increased maintenance costs**. Two codebases inevitably lead to redundant effort in feature development, bug fixes, testing, and long-term evolution. Maintaining two codebases also requires hiring specialists for each platform, which increases costs and slows down improvements that need to be implemented everywhere at once.
 
@@ -105,7 +105,7 @@ The most obvious advantage is **increased UI reuse**. Large chunks of code, some
 
 This paradigm is particularly appealing when **consistency and delivery speed are more important than fine-grained platform differences**. A unified UI layer eliminates collaboration overhead between platform teams while also simplifying planning, testing, and release management. From a product standpoint, it also reduces the risk of one platform falling behind the other in functionality or visual design.
 
-#### Considerations
+**Considerations**
 
 However, cross-platform frameworks come with **abstraction trade-offs**. The rendering layer resides between your code and the operating system, so you're not directly working with platform UI frameworks. While this abstraction smooths out many differences, it may make certain native behaviors, interactions, or edge cases more difficult to define or tune. When you need to go beyond what the abstraction provides, you frequently have to drop down into platform-specific code.
 
@@ -129,7 +129,7 @@ In practice, Kotlin Multiplatform isn’t about choosing “native” vs. “cro
 
 [![Learn from Kotlin Multiplatform success stories](kmp-success-stories.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 
-#### Considerations
+**Considerations**
 
 * **Requires clear architecture boundaries:** Teams need to decide what belongs in shared vs. platform code, which adds some architectural planning.
 * **Cross-platform coordination:** Shared modules mean Android and iOS teams need to align on releases and changes to shared logic.
