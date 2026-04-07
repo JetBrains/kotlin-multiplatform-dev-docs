@@ -1,11 +1,9 @@
-[//]: # (title: How to build Android and iOS apps and when to use Kotlin Multiplatform)
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
 id="build-ios-android-app"
-title="How to build Android and iOS apps (and when to use Kotlin Multiplatform)"
+title="How to build Android and iOS apps and when to use Kotlin Multiplatform"
 version="1.0"
 date="2024-01-20"
 author="jetbrains"
