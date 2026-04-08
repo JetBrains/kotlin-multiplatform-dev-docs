@@ -28,7 +28,7 @@ Fully Native Development treats iOS and Android as different products. You creat
 
 ![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png){width="700"}
 
-[![Discover Kotlin Multiplatform](discover-kmp.svg){width="500" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
+[![Discover Kotlin Multiplatform](discover-kmp.svg){width="600" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
 In the following sections, we'll look at how these three approaches work in real projects and what they mean for day-to-day development.
 
@@ -62,7 +62,7 @@ There is also **ecosystem and plugin dependence**. The framework and its accompa
 
 In short, cross-platform frameworks optimize for cross-platform reuse and synchronization, with clear benefits as well as structural limits.
 
-## Kotlin Multiplatform: Flexible code sharing across logic and UI
+## Kotlin Multiplatform: flexible code sharing
 
 Kotlin Multiplatform works like a range of options rather than a single architectural choice. It doesn’t require an all-or-nothing commitment to a shared codebase. Teams can decide which parts of their code to share and when to share them.
 
@@ -158,9 +158,10 @@ With Kotlin Multiplatform, you can choose what to share. You can use Kotlin with
 
 Yes, Kotlin Multiplatform is used in production by numerous teams to share business logic and, in certain cases, UI. The core tooling and language support remain stable, while the maturity of specialized libraries and use cases varies. As with any architecture decision, it is critical to test it against your product's technical and organizational needs.
 
+[![Get Started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+
 ### Conclusion
 
 There is no single “correct” way to build Android and iOS apps. The key is to treat this as an architectural decision rather than a tooling preference. Platform-native UX requirements, the need for consistent business logic, and the cost of future change should guide where you draw the boundary between shared and platform-specific code.
 
 Rather than optimizing for maximum reuse, optimize for adaptability. Approaches like Kotlin Multiplatform that let you adjust what is shared over time tend to age better as products evolve. The right choice supports today’s goals while keeping tomorrow’s changes manageable.
-
