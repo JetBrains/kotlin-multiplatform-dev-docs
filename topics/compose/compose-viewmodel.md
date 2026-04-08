@@ -3,7 +3,21 @@
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 approach to building UI can be implemented in common code using Compose Multiplatform.
 
-## Adding the common ViewModel to your project
+## Set up dependencies
+
+In the `gradle/libs.versions.toml` file, define the dependencies:
+
+```
+[versions]
+androidx-viewmodel = "2.11.0-alpha01"
+
+[libraries]
+# For shared ViewModels:
+androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-viewmodel" }
+
+# For separate ViewModel for each platform:
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-viewmodel" }
+```
 
 To use the multiplatform `ViewModel` implementation, add the following dependency to your `commonMain` source set:
 
@@ -13,14 +27,25 @@ kotlin {
     sourceSets {
         // ...
         commonMain.dependencies {
-            // ...
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%org.jetbrains.androidx.lifecycle%")
+            // For shared ViewModels:
+            implementation(libs.androidx-lifecycle-viewmodel-compose)
+            // For separate ViewModel for each platform:
+            api(libs.androidx.lifecycle.viewmodel)
         }
         // ...
     }
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:%org.jetbrains.androidx.lifecycle%"}
+
+## Fully shared UI and ViewModel
+(For projects using Compose Multiplatform for shared UIs)
+
+## Shared ViewModel, platform-specific UI
+(For projects combining shared business logic with Jetpack Compose for Android and SwiftUI for iOS)
+
+## Shared repo/data layer, platform-specific ViewModels
+(For projects where only repository/data layers are shared)
 
 ## Using ViewModel in common code
 
@@ -67,3 +92,13 @@ you need to provide at least an initializer as an argument.
 If only an initializer is provided, the library creates a default factory under the hood.
 But you can implement your own factories and call more explicit versions of the common `viewModel(...)` function,
 just like [with Jetpack Compose](https://developer.android.com/topic/libraries/architecture/viewmodel#jetpack-compose).
+
+
+## Dependency Injection for ViewModels
+<primary-label ref="advanced"/>
+
+## Observing Kotlin flows in SwiftUI
+<primary-label ref="advanced"/>
+
+## Exporting dependencies to iOS
+<primary-label ref="advanced"/>
