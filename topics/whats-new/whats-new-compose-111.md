@@ -3,7 +3,7 @@
 Here are the highlights for this EAP feature release:
 
 * [Native iOS text input](#native-text-input)
-* [Compose UI tests v2](#compose-ui-tests-v2)
+* [v2 version of Compose UI testing API](#compose-ui-tests-v2)
 * [Improved scroll on web targets](#scroll-on-web-targets-brought-in-line-with-native-ui)
 
 You can find the full list of changes on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0-beta02).
@@ -44,15 +44,15 @@ As a result, the `iosX64` and `macosX64` targets have been fully removed from al
 
 ### Compose UI tests v2
 
-Compose Multiplatform introduces support for v2 `ComposeUiTest` APIs on non-Android targets. 
-These new APIs use `StandardTestDispatcher` as the default test dispatcher instead of `UnconfinedTestDispatcher`. 
+Compose Multiplatform introduces support for [v2 `ComposeUiTest` APIs](https://developer.android.com/develop/ui/compose/testing/migrate-v2) 
+on non-Android targets. These new APIs use `StandardTestDispatcher` as the default test dispatcher instead of `UnconfinedTestDispatcher`. 
 This change ensures coroutines are executed in order based on the event queue, improving test reliability and 
 alignment with production behavior.
 
 We've also added support for the `effectContext` parameter in Compose UI tests v2.
 This parameter allows you to specify a custom coroutine context when running compositions.
 
-The previous test APIs, such as `runComposeUiTest`, `runSkikoComposeUiTest`, and `runDesktopComposeUiTest`, 
+The previously offered test APIs, such as `runComposeUiTest`, `runSkikoComposeUiTest`, and `runDesktopComposeUiTest`, 
 are now deprecated in favor of their v2 versions.
 
 ### Skia updated to Milestone 144
