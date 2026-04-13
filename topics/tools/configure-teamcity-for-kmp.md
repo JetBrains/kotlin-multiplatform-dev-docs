@@ -3,12 +3,13 @@
 <web-summary>Learn how to configure a TeamCity Cloud or On-Premises project for Kotlin Multiplatform (KMP). 
 This tutorial uses TeamCity pipelines that support on-the-fly YAML configuration editing and an intuitive visual editor.</web-summary>
 
-This article explains how to configure [TeamCity](https://www.jetbrains.com/teamcity/) to build, test, and deploy your KMP applications. 
+This article explains how to configure [TeamCity](https://www.jetbrains.com/teamcity/?source=google&medium=cpc&campaign=EMEA_en_DE_TeamCity_Branded&term=jetbrains%20teamcity&content=771411250243&gad_source=1&gad_campaignid=12704027475&gbraid=0AAAAADloJzi5LQxd_2GSPDer8jKk00xHY&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9u9Gprgz8eDZs4p-aG14ZSEn3A3JARU_VXxZaEFPMrxGydCbvNJdxoCmToQAvD_BwE)
+to build, test, and deploy your KMP applications. 
 TeamCity supports all major VCS providers (GitHub, GitLab, Bitbucket, Azure DevOps, Perforce, and more), 
 enables highly scalable hybrid workflows with both local and cloud agents, and includes powerful features such as 
 multi-node setups for high availability, advanced user management, issue tracker integrations, and an AI assistant.
 
-Grab your free TeamCity trial [here](https://www.jetbrains.com/teamcity/download/): 
+Grab your [free TeamCity trial](https://www.jetbrains.com/teamcity/download/): 
 choose the Cloud version with JetBrains-hosted agents preconfigured with major build tools and SDKs, 
 or opt for TeamCity On-Premises for maximum control and a free lifetime Professional license.
 
