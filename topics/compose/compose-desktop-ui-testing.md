@@ -40,7 +40,7 @@ Create the test source set and add the necessary dependencies:
     import androidx.compose.ui.Modifier
     import androidx.compose.ui.test.*
     import androidx.compose.ui.platform.testTag
-    import androidx.compose.ui.test.junit4.createComposeRule
+    import androidx.compose.ui.test.junit4.v2.createComposeRule
     import org.junit.Rule
     import org.junit.Test
     
