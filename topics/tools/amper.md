@@ -30,7 +30,7 @@ Android, and iOS applications:
 ```yaml
 product:
   type: lib
-  platforms: [ jvm, android, iosArm64, iosSimulatorArm64, iosX64 ]
+  platforms: [ jvm, android, iosArm64, iosSimulatorArm64 ]
 
 # Shared Compose Multiplatform dependencies:
 dependencies:

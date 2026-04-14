@@ -192,7 +192,7 @@ There are three important concepts in dependency resolution:
    it will be automatically added to all source sets that declare `dependsOn` relations directly or indirectly in `commonMain`.
 
    In this case, the dependency was indeed automatically added to all the `*Main` source sets: `iosMain`, `jvmMain`,
-   `iosSimulatorArm64Main`, and `iosX64Main`. All these source sets inherit the `kotlin-coroutines-core` dependency from
+   `iosSimulatorArm64Main`, and `iosArm64Main`. All these source sets inherit the `kotlin-coroutines-core` dependency from
    the `commonMain` source set, so you don't have to copy and paste it in all of them manually:
 
    ![Propagation of multiplatform dependencies](dependency-propagation-diagram.svg){width=700}
@@ -220,17 +220,17 @@ There are three important concepts in dependency resolution:
    Each dependency source set in that collection must have _compatible targets_. A dependency source set
    has compatible targets if it compiles to _at least the same targets_ as the consumer source set.
 
-   Consider an example where `commonMain` in the sample project compiles to `android`, `iosX64`, and `iosSimulatorArm64`:
+   Consider an example where `commonMain` in the sample project compiles to `android`, `iosArm64`, and `iosSimulatorArm64`:
 
     * First, it resolves a dependency on `kotlinx-coroutines-core.commonMain`. This happens because `kotlinx-coroutines-core`
       compiles to all possible Kotlin targets. Therefore, its `commonMain` compiles to all possible targets,
-      including the required `android`, `iosX64`, and `iosSimulatorArm64`.
+      including the required `android`, `iosArm64`, and `iosSimulatorArm64`.
     * Second, `commonMain` depends on `kotlinx-coroutines-core.concurrentMain`.
       Since `concurrentMain` in `kotlinx-coroutines-core` compiles to all the targets except for JS,
       it matches the targets of the consumer project's `commonMain`.
 
-   However, source sets like `iosX64Main` from coroutines are incompatible with the consumer's `commonMain`.
-   Even though `iosX64Main` compiles to one of the targets of `commonMain`, namely, `iosX64`,
+   However, source sets like `iosArm64Main` from coroutines are incompatible with the consumer's `commonMain`.
+   Even though `iosArm64Main` compiles to one of the targets of `commonMain`, namely, `iosArm64`,
    it doesn't compile either to `android` or to `iosSimulatorArm64`.
 
    The results of the dependency resolution directly affect which of the code in `kotlinx-coroutines-core` is visible:

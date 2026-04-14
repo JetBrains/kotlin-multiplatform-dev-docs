@@ -20,7 +20,7 @@ Here's an outline of the process:
 For example, "Navigation artifacts for iOS" refers to the collection of the following multiplatform artifacts:
 * `org.jetbrains.androidx.navigation.navigation-compose-uikitarm64`
 * `org.jetbrains.androidx.navigation.navigation-compose-uikitsimarm64`
-* `org.jetbrains.androidx.navigation.navigation-common-iosx64`
+* `org.jetbrains.androidx.navigation.navigation-common-iosarm64`
 * `org.jetbrains.androidx.navigation.navigation-runtime-iossimulatorarm64`
 * And so on.
 

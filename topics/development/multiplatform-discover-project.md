@@ -280,13 +280,12 @@ mobile projects need at least two targets:
 * **Device target** is used to generate binaries that can be executed on iOS devices. There's currently only one
   device target for iOS: `iosArm64`.
 * **Simulator target** is used to generate binaries for the iOS simulator launched on your machine. If you have an Apple
-  silicon Mac computer, choose `iosSimulatorArm64` as a simulator target. Use `iosX64` if you have an Intel-based Mac
-  computer.
+  silicon Mac computer, choose `iosSimulatorArm64` as a simulator target.
 
 If you declare only the `iosArm64` device target, you won't be able to run and debug your application and tests on your
 local machine.
 
-Platform-specific source sets like `iosArm64Main`, `iosSimulatorArm64Main`, and `iosX64Main` are usually empty, as
+Platform-specific source sets like `iosArm64Main` and `iosSimulatorArm64Main` are usually empty, as
 Kotlin code for iOS devices and simulators is normally the same. You can use only the `iosMain` intermediate source
 set to share code among all of them.
 

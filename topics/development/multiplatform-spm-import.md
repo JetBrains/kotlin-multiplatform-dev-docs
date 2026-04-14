@@ -64,7 +64,6 @@ For example, for Firebase:
 kotlin {
     iosArm64()
     iosSimulatorArm64()
-    iosX64()
 
     swiftPMDependencies {
         // Import FirebaseAnalytics into your Kotlin code
@@ -136,7 +135,6 @@ specify the correct targets in the `platforms` parameter of a `product` specific
 kotlin {
     iosArm64()
     iosSimulatorArm64()
-    iosX64()
     macosArm64()
 
     swiftPMDependencies {

@@ -71,7 +71,6 @@ To set up the publishing of an XCFramework:
        val xcf = XCFramework(xcframeworkName)
    
        listOf(
-           iosX64(),
            iosArm64(),
            iosSimulatorArm64(),
        ).forEach { 
@@ -242,7 +241,6 @@ For example, you have a `network` and a `database` module, which you combine in 
         val xcf = XCFramework(frameworkName)
     
         listOf(
-            iosX64(),
             iosArm64(),
             iosSimulatorArm64()
         ).forEach { iosTarget ->
@@ -275,7 +273,6 @@ For example, you have a `network` and a `database` module, which you combine in 
             //...
         }
         
-        iosX64()
         iosArm64()
         iosSimulatorArm64()
         
