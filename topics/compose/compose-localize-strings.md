@@ -60,7 +60,7 @@ To display strings in your app's UI, use the `stringResource()` composable funct
 This function retrieves the correct text based on the user's current locale:
 
 ```kotlin
-import project.composeapp.generated.resources.Res
+import project.sharedui.generated.resources.Res
 
 @Composable
 fun MyApp() {

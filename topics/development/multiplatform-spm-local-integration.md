@@ -97,7 +97,7 @@ project to your Xcode project:
    ```
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
-   * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
+   * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:sharedLogic`.
   
 4. Choose your app's target in the **Provide build settings from** section:
 

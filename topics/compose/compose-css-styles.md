@@ -25,7 +25,7 @@ Then, initialize the entry point in the `main` function of your web source set:
 ```kotlin
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(viewportContainerId = "composeApp") {
+    ComposeViewport(viewportContainerId = "webApp") {
         App()
     }
 }
