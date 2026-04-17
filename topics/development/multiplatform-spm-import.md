@@ -200,15 +200,97 @@ import swiftPMImport.groupName.subproject.FIRApp
 ## Generated `Package.resolved` file
 
 To make builds that depend on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
-the `Package.resolved` file generated during the initial package resolution is copied into the project's directory
-and reused for subsequent builds.
+`Package.resolved` files are generated for each subproject during the initial package resolution.
+These files are copied into each subproject's directory and reused for subsequent builds.
 
-The lock file is updated automatically when you change the set or versions of SwiftPM dependencies in your build script.
+The lock files are updated automatically when you change the set or versions of SwiftPM dependencies in your build script.
 
 If you want to force an update of the lock file manually:
 
 1. Delete the `build` directory and the existing `Package.resolved` file.
 2. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
+
+### Tracking package versions across subprojects
+
+If different subprojects use the same SwiftPM dependencies,
+the SwiftPM import tooling will by default try to resolve them to the same versions and merge the `Package.resolved` files
+for all subprojects into a single lock file.
+This helps avoid ending up with different versions of the same SwiftPM dependency in the same project by accident.
+
+The merge behavior is controlled by the `packageResolvedSynchronization` option in the `swiftDependencies {}` block:
+
+```kotlin
+kotlin {
+    swiftDependencies {
+        // When no value is set for `packageResolvedSynchronization`, 
+        // the subproject is assigned a default group identifier
+        // as if it was set like this: 
+        // packageResolvedSynchronization = identifier("default")
+    }
+}
+```
+
+To customize this, you can assign to each subproject a non-default identifier of a group.
+For example, subprojects `one` and `two` use the same custom set of package versions, while `three` uses the default:
+
+<tabs>
+<tab title="First subproject">
+
+```kotlin
+// one/build.gradle.kts
+
+kotlin {
+    swiftDependencies {
+        packageResolvedSynchronization = identifier("custom-sync-id"),
+        ...
+    }
+}
+```
+</tab>
+
+<tab title="Second subproject">
+
+```kotlin
+// two/build.gradle.kts
+
+kotlin {
+    swiftDependencies {
+        packageResolvedSynchronization = identifier("custom-sync-id"),
+        ...
+    }
+}
+```
+
+</tab>
+
+<tab title="Third subproject">
+
+```kotlin
+// three/build.gradle.kts
+
+kotlin {
+    swiftDependencies {
+        ...
+    }
+}
+```
+
+</tab>
+
+</tabs>
+
+If you'd like to turn off the synchronization mechanism for a subproject altogether,
+use a `noSynchronization()` call instead of `identifier()`:
+
+```kotlin
+kotlin {
+    swiftDependencies { 
+        // The Package.resolved file for this subproject
+        // won't be merged with any other
+        packageResolvedSynchronization = noSynchronization()
+    }
+}
+```
 
 ## Additional import options
 
