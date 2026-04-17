@@ -197,20 +197,19 @@ import swiftPMImport.groupName.subproject.FIRAnalytics
 import swiftPMImport.groupName.subproject.FIRApp
 ```
 
-## Generated `Package.resolved` file
+## Generated `Package.resolved` files
 
 To make builds that depend on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
 `Package.resolved` files are generated for each subproject during the initial package resolution.
-These files are copied into each subproject's directory and reused for subsequent builds.
 
-The lock files are updated automatically when you change the set or versions of SwiftPM dependencies in your build script.
+By default, these files are merged into a single `Package.resolved` file placed in the root directory of the project.
+This shared lock file is then used to build the project, making sure that all subprojects use the same versions of Swift packages.
+You can customize this behavior by [grouping subprojects or excluding them from synchronization](#customize-aggregation-of-swift-package-versions).
 
-If you want to force an update of the lock file manually:
+The lock files are updated automatically when you change the set or versions of SwiftPM dependencies in your build scripts.
+You can also [force an update of a lock file manually](#force-an-update-of-the-lock-file).
 
-1. Delete the `build` directory and the existing `Package.resolved` file.
-2. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
-
-### Tracking package versions across subprojects
+### Customize aggregation of Swift package versions
 
 If different subprojects use the same SwiftPM dependencies,
 the SwiftPM import tooling will by default try to resolve them to the same versions and merge the `Package.resolved` files
@@ -293,6 +292,16 @@ kotlin {
     }
 }
 ```
+
+### Force an update of the lock file
+
+If you want to force an update of a lock file manually:
+
+1. Delete the `build` directory and the existing `Package.resolved` file.
+   If you [customized the synchronization mechanism](#customize-aggregation-of-swift-package-versions),
+   make sure to delete the correct lock files since there might be more than one.
+2. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
+
 
 ## Additional import options
 
