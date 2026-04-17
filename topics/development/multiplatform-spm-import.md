@@ -270,6 +270,8 @@ kotlin {
 
 kotlin {
     swiftDependencies {
+        // The default identifier is used, as if the following is set:
+        // packageResolvedSynchronization = identifier("default")
         ...
     }
 }
