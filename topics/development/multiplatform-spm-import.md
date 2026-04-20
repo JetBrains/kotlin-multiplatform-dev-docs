@@ -205,7 +205,7 @@ To make builds that depend on Swift packages more stable, SwiftPM import tooling
 By default, these files are merged into a single `Package.resolved` file placed as part of a synthetic package
 in the `.swiftpm-locks/default/swiftImport` directory.
 This shared lock file is then used to build the project, making sure that all subprojects use the same versions of Swift packages.
-The lock file should be committed to your repository to make sure that all builds use the same dependencies.
+The lock file (but not the entire folder) should be committed to your repository to make sure that all builds use the same dependencies.
 You can customize lock-file merging behavior by [grouping subprojects or excluding them from synchronization](#customize-aggregation-of-swift-package-versions).
 
 The lock files are updated automatically when you change the set or versions of SwiftPM dependencies in your build scripts.
@@ -296,7 +296,8 @@ kotlin {
 Subprojects with the synchronization disabled will have their own `Package.resolved` lock file,
 placed in the subproject directory next to the `build.gradle.kts` file.
 
-Just like with the default synchronization, all `Package.resolved` files for customized subprojects should be committed to your repository.
+Just like with the default synchronization, all `Package.resolved` files for customized subprojects
+(but not the entire enclosing folders) should be committed to your repository.
 
 ### Force an update of the lock file
 
