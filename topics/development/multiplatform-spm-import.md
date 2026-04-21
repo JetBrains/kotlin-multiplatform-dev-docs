@@ -199,18 +199,18 @@ import swiftPMImport.groupName.subproject.FIRApp
 
 ## Generated `Package.resolved` files
 
-To make builds that depend on Swift packages more stable, SwiftPM import tooling introduces a locking mechanism:
-`Package.resolved` files are generated for each subproject during the initial package resolution.
+To make builds that depend on Swift packages more stable, the SwiftPM import tooling introduces a locking mechanism with
+`Package.resolved` files. They are generated for each subproject during the initial package resolution.
 
 By default, these files are merged into a single `Package.resolved` file placed as part of a synthetic package
 in the `.swiftpm-locks/default/swiftImport` directory.
 This shared lock file is then used to build the project, making sure that all subprojects use the same versions of Swift packages.
 You can customize lock-file merging behavior by [grouping subprojects or excluding them from synchronization](#customize-aggregation-of-swift-package-versions).
 
-The lock file should be committed to your repository to make sure that all builds use the same dependencies.
-To simplify file management, you can commit the entire `.swiftpm-locks` directory to your repository:
-only the `Package.resolved` files are crucial for dependency synchronization,
-but having the rest of the directory can speed up resolution during the first build. 
+You should commit the lock file to your repository to ensure that all builds use the same dependencies.
+To simplify file management, you can commit the entire `.swiftpm-locks` directory to your repository.
+Although only the `Package.resolved` files are crucial for dependency synchronization,
+having the entire directory can speed up resolution during the first build. 
 
 The lock files are updated automatically when you change the set or versions of SwiftPM dependencies in your build scripts.
 You can also [force an update of a lock file manually](#force-an-update-of-the-lock-file).
@@ -227,13 +227,13 @@ kotlin {
     swiftDependencies {
         // When no value is set for `packageResolvedSynchronization`, 
         // the subproject is assigned a default group identifier
-        // as if it was set like this: 
+        // as if it were set like this: 
         // packageResolvedSynchronization = identifier("default")
     }
 }
 ```
 
-To customize this, assign a non-default identifier of a group to each subproject.
+To customize the merge behavior, assign a non-default group identifier to each subproject.
 For example, subprojects `one` and `two` use the same custom set of package versions, while `three` uses the default:
 
 <tabs>
@@ -284,7 +284,7 @@ kotlin {
 
 </tabs>
 
-If you'd like to turn off the synchronization mechanism for a subproject altogether,
+If you'd like to disable the synchronization mechanism for a subproject altogether,
 use a `noSynchronization()` call instead of `identifier()`:
 
 ```kotlin
@@ -297,7 +297,7 @@ kotlin {
 }
 ```
 
-Subprojects with the synchronization disabled will have their own `Package.resolved` lock file,
+Subprojects with disabled synchronization will have their own `Package.resolved` lock file,
 placed in the subproject directory next to the `build.gradle.kts` file.
 
 Just like with the default synchronization, all `Package.resolved` files for customized subprojects
