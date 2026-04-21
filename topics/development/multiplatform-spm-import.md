@@ -238,7 +238,7 @@ In the following example, subprojects `one` and `two` use the same `custom` set 
 while the subproject `three` uses the default set:
 
 <tabs>
-<tab title="Subproject `one`">
+<tab title="Subproject &quot;one&quot;">
 
 ```kotlin
 // one/build.gradle.kts
@@ -252,7 +252,7 @@ kotlin {
 ```
 </tab>
 
-<tab title="Subproject `two`">
+<tab title="Subproject &quot;two&quot;">
 
 ```kotlin
 // two/build.gradle.kts
@@ -267,7 +267,7 @@ kotlin {
 
 </tab>
 
-<tab title="Subproject `three`">
+<tab title="Subproject &quot;three&quot;">
 
 ```kotlin
 // three/build.gradle.kts
