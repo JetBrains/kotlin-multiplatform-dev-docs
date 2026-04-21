@@ -307,11 +307,12 @@ should be committed to your repository.
 
 If you want to force an update of a lock file manually:
 
-1. Delete the `build` directory and the existing `Package.resolved` file.
-   If you [customized the synchronization mechanism](#customize-aggregation-of-swift-package-versions),
-   make sure to delete the correct lock files since there might be more than one.
-2. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
-
+1. Delete the `build` directory for every subproject whose lock files should be updated.
+2. Remove the existing `Package.resolved` file:
+   * For subprojects without a specific synchronization configuration, delete the `.swiftpm-locks/default/` directory.
+   * For subprojects with a [custom synchronization group](#customize-aggregation-of-swift-package-versions), find and delete the `.swiftpm-locks/<group-name>/` directory.
+   * For subprojects with `noSynchronization()` set, find and delete the `Package.resolved` file in the subproject directory.
+3. Run the dependency resolution task again: `./gradlew :yourModuleName:fetchSyntheticImportProjectPackages`.
 
 ## Additional import options
 
