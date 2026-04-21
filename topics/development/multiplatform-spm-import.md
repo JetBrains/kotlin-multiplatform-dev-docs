@@ -202,7 +202,7 @@ import swiftPMImport.groupName.subproject.FIRApp
 To make builds that depend on Swift packages more stable, the SwiftPM import tooling introduces a locking mechanism with
 `Package.resolved` files. They are generated for each subproject during the initial package resolution.
 
-By default, these files are merged into a single `Package.resolved` file placed as part of a synthetic package
+By default, these files are merged into a single `Package.resolved` file placed inside a synthetic package
 in the `.swiftpm-locks/default/swiftImport` directory.
 This shared lock file is then used to build the project, making sure that all subprojects use the same versions of Swift packages.
 You can customize lock-file merging behavior by [grouping subprojects or excluding them from synchronization](#customize-aggregation-of-swift-package-versions).
@@ -234,10 +234,11 @@ kotlin {
 ```
 
 To customize the merge behavior, assign a non-default group identifier to each subproject.
-For example, subprojects `one` and `two` use the same custom set of package versions, while `three` uses the default:
+In the following example, subprojects `one` and `two` use the same `custom` set of package versions,
+while the subproject `three` uses the default set:
 
 <tabs>
-<tab title="First subproject">
+<tab title="Subproject `one`">
 
 ```kotlin
 // one/build.gradle.kts
@@ -251,7 +252,7 @@ kotlin {
 ```
 </tab>
 
-<tab title="Second subproject">
+<tab title="Subproject `two`">
 
 ```kotlin
 // two/build.gradle.kts
@@ -266,7 +267,7 @@ kotlin {
 
 </tab>
 
-<tab title="Third subproject">
+<tab title="Subproject `three`">
 
 ```kotlin
 // three/build.gradle.kts
