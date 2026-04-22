@@ -145,37 +145,41 @@
 
 <table style="header-row">
     <tr>
-        <td>Approach</td>
-        <td>Code sharing</td>
-        <td>UI Strategy</td>
-        <td>API Access</td>
-        <td>Best Fit</td>
-        <td>Main Tradeoff</td>
-    </tr>
-    <tr>
+        <td></td>
         <td><b>Fully Native Development (Swift + Kotlin)</b></td>
-        <td>None</td>
-        <td>Fully native for each platform (SwiftUI/UIKit, Compose/Views)</td>
-        <td>Full, immediate access to all platform APIs</td>
-        <td>Apps where platform-specific UX, performance, or deep OS</td>
-        <td>Duplicate business logic, higher development and maintenance costs</td>
-    </tr>
-    <tr>
         <td><b>Cross-platform Frameworks (e.g., Flutter, React Native)</b></td>
-        <td>Most or all code shared</td>
-        <td>Single shared UI layer rendered or bridged to native</td>
-        <td>Indirect, via plugins/bridges</td>
-        <td>Teams prioritizing one codebase and faster feature parity across platforms</td>
-        <td>Less control over native UX and reliance on framework/plugin ecosystem</td>
+        <td><b>Flexible Code Sharing (Kotlin Multiplatform)</b></td>
     </tr>
     <tr>
-        <td><b>Flexible Code Sharing (Kotlin Multiplatform)</b></td>
+        <td><b>Code sharing</b></td>
+        <td>None</td>
+        <td>Most or all code shared</td>
         <td>Selective: from small modules to most of the app</td>
-        <td>Either fully native UIs or shared UI with Compose Multiplatform</td>
-        <td>Full access through platform layers; shared code stays platform-agnostic</td>
-        <td>Teams that want native UX but also want to reduce duplication in business logic</td>
-        <td>Requires clear architectural boundaries and some cross-platform coordination</td>
     </tr>
+    <<tr>
+         <td><b>UI Strategy</b></td>
+         <td>Fully native for each platform (SwiftUI/UIKit, Compose/Views)</td>
+         <td>Single shared UI layer rendered or bridged to native</td>
+         <td>Either fully native UIs or shared UI with Compose Multiplatform</td>
+       </tr>
+       <tr>
+         <td><b>API Access</b></td>
+         <td>Full, immediate access to all platform APIs</td>
+         <td>Indirect, via plugins/bridges</td>
+         <td>Full access through platform layers; shared code stays platform-agnostic</td>
+       </tr>
+       <tr>
+         <td><b>Best Fit</b></td>
+         <td>Apps where platform-specific UX, performance, or deep OS</td>
+         <td>Teams prioritizing one codebase and faster feature parity across platforms</td>
+         <td>Teams that want native UX but also want to reduce duplication in business logic</td>
+       </tr>
+       <tr>
+         <td><b>Main Tradeoff</b></td>
+         <td>Duplicate business logic, higher development and maintenance costs</td>
+         <td>Less control over native UX and reliance on framework/plugin ecosystem</td>
+         <td>Requires clear architectural boundaries and some cross-platform coordination</td>
+       </tr>
 </table>
 
 <p>With Kotlin Multiplatform, teams choose what to share and when. Maybe you want to start small, with just business logic or a portion of your UI, and then gradually integrate more over time. This makes sharing incremental and reversible rather than a one-time bet, turning architecture into a flexible, evolving decision instead of a fixed commitment.</p>
