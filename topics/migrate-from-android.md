@@ -129,7 +129,7 @@ you'll need to rewrite that code in the new paradigm and using the new framework
 This is obviously easier when done in advance.
 
 Google has been advancing and enriching Compose for a long time. Check out the [Jetpack Compose migration guides](https://developer.android.com/develop/ui/compose/migrate)
-for help with the most common scenarios.
+for help with the most common scenarios or try the [agent skill to migrate with AI](https://github.com/android/skills/blob/main/jetpack-compose/migration/migrate-xml-views-to-jetpack-compose/SKILL.md).
 You can also use Views-Compose interoperability, but just like with Java code, this code must be isolated in your
 `androidMain` source set.
 
