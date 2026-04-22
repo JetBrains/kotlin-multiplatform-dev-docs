@@ -46,7 +46,9 @@
 
 <p>This is not just a theoretical debate. According to the <a href="https://devecosystem-2025.jetbrains.com/">State of Developer Ecosystem 2025</a>, the use of cross-platform and shared-code techniques more than doubled between 2024 and 2025, which suggests that more teams are looking for ways to reuse code while maintaining native-quality experiences.</p>
 
-![KMP usage increased from 7% in 2024 to 18% in 2025 among respondents to the last two Developer Ecosystem surveys](kmp-growth-deveco.svg){width=700}
+<!--![KMP usage increased from 7% in 2024 to 18% in 2025 among respondents to the last two Developer Ecosystem surveys](kmp-growth-deveco.svg){width=700}-->
+
+    <img src="kmp-growth-deveco.svg" alt="KMP usage increased from 7% in 2024 to 18% in 2025 among respondents to the last two Developer Ecosystem surveys" width="700"/>
 
 <p>In this article, we'll take a look at native and cross-platform approaches in practical terms. Rather than offering a one-size-fits-all solution, we'll go over the trade-offs teams encounter in planning, architecture, and delivery. You will get a clearer comparison and a better basis for choosing the option that best suits your product, team, and constraints.</p>
 
@@ -70,9 +72,11 @@
 
 <p><a href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform (KMP)</a> offers a broader range of code-sharing options. Instead of requiring an all-or-nothing decision, it enables teams to share only what is relevant to their product while maintaining the flexibility to build fully native experiences.</p>
 
-![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png){width="700"}
+<!--![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png){width="700"}-->
+<img src="kmp-graphic.png" alt="Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI" width="700"/>
 
-[![Discover Kotlin Multiplatform](discover-kmp.svg){width="600" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
+<a href="https://kotlinlang.org/multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="600" style="block"/></a>
+<!--[![Discover Kotlin Multiplatform](discover-kmp.svg){width="600" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)-->
 
 <p>In the following sections, we'll look at how these three approaches work in real projects and what they mean for day-to-day development.</p>
 </chapter>
@@ -114,15 +118,18 @@
 
 <p>At one end of this range, <a href="https://kotlinlang.org/compose-multiplatform/">Compose Multiplatform</a>, a declarative UI framework within the Kotlin Multiplatform ecosystem, allows teams to share user interfaces across multiple platforms. This can be useful when a project benefits from a unified design system, consistent interaction patterns, and a single presentation layer across iOS and Android, while still compiling to native targets. In this setup, screens, navigation, and UI state reside in shared code, while each platform retains its application entry points and OS-specific integrations.</p>
 
-[![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)
+<!--[![Explore Compose Multiplatform](explore-compose.svg){width="500"}](https://www.jetbrains.com/compose-multiplatform/)-->
 
+    <a href="https://kotlinlang.org/compose-multiplatform/"><img src="explore-compose.svg" alt="Explore Compose Multiplatform" width="500"/></a>
 <p>You can limit sharing to a small, well-defined part of the system, like a pricing engine, validation module, or sync policy, where identical behavior is required on both platforms. This enables incremental adoption: teams can start with a single shared module, measure its impact, and expand over time. The boundary between shared and platform-specific code can shift as requirements change.</p>
 
 <p>This is a logical choice for teams with Kotlin experience. Android stays in Kotlin, iOS stays native by using Swift or SwiftUI. The goal isn’t to maximize code sharing, but to share code as needed to lower cost or risk without constraining product decisions.</p>
 
 <p>In practice, Kotlin Multiplatform isn’t about choosing “native” vs. “cross-platform.” It’s about keeping architecture flexible and sharing code only where it delivers clear, practical value.</p>
 
-[![Learn from Kotlin Multiplatform success stories](kmp-success-stories.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
+<!--[![Learn from Kotlin Multiplatform success stories](kmp-success-stories.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)-->
+
+    <a href="https://kotlinlang.org/case-studies/?type=multiplatform"><img src="kmp-success-stories.svg" alt="Learn from Kotlin Multiplatform success stories" width="500"/></a>
 
 <p><b>Considerations</b></p>
 
@@ -238,7 +245,9 @@
 
 <p>Yes, Kotlin Multiplatform is used in production by numerous teams to share business logic and, in certain cases, UI. The core tooling and language support remain stable, while the maturity of specialized libraries and use cases varies. As with any architecture decision, it is critical to test it against your product's technical and organizational needs.</p>
 
-[![Get Started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+<!--[![Get Started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)-->
+
+    <a href="get-started.topic"><img src="get-started-with-kmp.svg" alt="Get Started with Kotlin Multiplatform" width="500"/></a>
 </chapter>
 <chapter title="Conclusion" id="conclusion">
 
