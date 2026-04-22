@@ -1,13 +1,8 @@
-"@type": "Answer",
-"text": "At Google I/O 2024, Google announced official support for using Kotlin Multiplatform on Android to share business logic between Android and iOS."
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
-id="build-ios-android-app"
-title="How to build Android and iOS apps (and when to use Kotlin Multiplatform)">
+xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd" id="build-ios-android-app"  title="How to build Android and iOS apps (and when to use Kotlin Multiplatform)">
 <include-in-head>
-<![CDATA[
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,10 +38,7 @@ title="How to build Android and iOS apps (and when to use Kotlin Multiplatform)"
       }]
     }
     </script>
-]]>
 </include-in-head>
-
-[//]: # (title: How to Build Android and iOS Apps (and When to Use Kotlin Multiplatform))
 
 <web-summary>Explore how to build Android and iOS apps, compare architectures and frameworks, and see where Kotlin Multiplatform fits.</web-summary>
 
@@ -213,3 +205,5 @@ Yes, Kotlin Multiplatform is used in production by numerous teams to share busin
 There is no single “correct” way to build Android and iOS apps. The key is to treat this as an architectural decision rather than a tooling preference. Platform-native UX requirements, the need for consistent business logic, and the cost of future change should guide where you draw the boundary between shared and platform-specific code.
 
 Rather than optimizing for maximum reuse, optimize for adaptability. Approaches like Kotlin Multiplatform that let you adjust what is shared over time tend to age better as products evolve. The right choice supports today’s goals while keeping tomorrow’s changes manageable.
+
+</topic>
