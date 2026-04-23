@@ -4,9 +4,9 @@
 
 <vars>
     <!-- Kotlin -->
-    <var name="kotlinVersion" value="2.3.20"/>
+    <var name="kotlinVersion" value="2.3.21"/>
     <var name="kotlinEapVersion" value="2.4.0-Beta2"/>
-    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.3.20"/>
+    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.3.21"/>
     <var name="kmpLatestUrl" value="https://github.com/JetBrains/compose-multiplatform/releases"/>
     <var name="languageVersion" value="2.3"/>
     <var name="apiVersion" value="2.3"/>
