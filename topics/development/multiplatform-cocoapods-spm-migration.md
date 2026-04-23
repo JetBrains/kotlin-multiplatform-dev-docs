@@ -17,7 +17,7 @@ follow these steps:
 2. [Reconfigure your Xcode project to use direct integration with the help of SwiftPM import tooling](#reconfigure-your-xcode-project)
 3. [Disable the CocoaPods integration entirely or partially, depending on your project structure](#remove-the-cocoapods-kmp-integration)
 
-> You can hand over the CocoaPods to SwiftPM migration to your AI agent of choice using our [prepared skill](https://github.com/Kotlin/kmp-cocoapods-to-spm-migration/blob/master/SKILL.md).
+> You can hand over the CocoaPods to SwiftPM migration to your AI agent of choice using our [prepared skill](https://github.com/Kotlin/kotlin-agent-skills/tree/main/skills/kotlin-tooling-cocoapods-spm-migration).
 > Keep in mind that AI processing results are not entirely predictable.
 >
 {style="note"}
