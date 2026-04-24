@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       id="cross-platform-mobile-development"
+       title="What is cross-platform mobile development?"
+       help-id="cross-platform-mobile-development">
+
+    <include-in-head>
+        <![CDATA[
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "What is cross-platform mobile development?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cross-platform mobile development (also called cross-platform app development) is an approach that lets you build applications that run on multiple operating systems (like iOS and Android) using one codebase. By sharing code across platforms, developers reduce costs and get to market faster."
+            }
+          }, {
+            "@type": "Question",
+            "name": "How do I choose a cross-platform framework?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Choose a cross-platform framework based on your team’s skills, project requirements, and long-term product goals. For example, Kotlin Multiplatform is particularly attractive for teams focused on performance, maintainability, and a native look and feel, especially when using Compose Multiplatform for shared UI code. React Native is often preferred by teams experienced with JavaScript and React, especially for rapid prototyping. .NET MAUI is a strong choice for developers working in the .NET ecosystem."
+            }
+          }, {
+            "@type": "Question",
+            "name": "What is the difference between Kotlin Multiplatform and Compose Multiplatform?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kotlin Multiplatform is the core technology that lets you share code across multiple platforms, including Android, iOS, desktop, web, and server. It focuses on code reuse without replacing the native UI unless you want it to. Compose Multiplatform is an optional UI framework built on top of Kotlin Multiplatform. It allows you to share your user interface across platforms using a modern, declarative approach similar to Jetpack Compose on Android. You can use it to build visually appealing, responsive UIs for Android, iOS, desktop, and web from a single codebase."
+            }
+          }, {
+            "@type": "Question",
+            "name": "What is the most popular mobile development framework?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Popular frameworks for cross-platform mobile app development include Kotlin Multiplatform, Flutter, React Native, .NET MAUI, and others. You can check out the overview of the most popular cross-platform technologies."
+            }
+          }]
+        }
+        </script>
+    ]]>
+    </include-in-head>
+
+    <web-summary>Explore cross-platform mobile development, including its definition, a framework comparison (Kotlin Multiplatform, Flutter, React Native), and case studies.</web-summary>
+
+    <p>Nowadays, many companies are facing the challenge of building mobile apps for multiple platforms, specifically for both Android and iOS. This is why cross-platform mobile development solutions have emerged as one of the most popular software development trends.</p>
+
+    <p>According to recent <a href="https://42matters.com/stats">app marketplace data</a>, the Google Play Store hosts over 2.3 million apps and the Apple App Store offers around 2.2 million apps, with Android and iOS continuing to dominate <a href="https://gs.statcounter.com/os-market-share/mobile/worldwide">global mobile app distribution and usage</a>.</p>
+
+    <p>How do you go about creating a mobile app that can reach Android and iOS audiences? In this article, you will find out why more and more mobile engineers are choosing a cross-platform, or multiplatform, mobile development approach.</p>
+
+    <chapter title="Cross-platform mobile development: definition and solutions" id="cross-platform-mobile-development-definition-and-solutions">
+        <p>Cross-platform mobile development (also known as multiplatform mobile development) is an approach that allows teams to build applications for both Android and iOS using a single shared codebase. Instead of developing and maintaining two completely separate native apps, engineers write common code that can be reused across platforms.</p>
+
+        <p>Modern <a href="cross-platform-frameworks.md">cross-platform frameworks</a> allow developers to write most of their app’s logic once and share it across both Android and iOS, significantly reducing duplicated effort and accelerating delivery. For example, <a href="kmp-overview.md">Kotlin Multiplatform</a> lets engineers reuse all of their business logic and, with Compose Multiplatform, even UI code across platforms.</p>
+
+        <p><a href="https://kotlinlang.org/multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="600"/></a></p>
+
+        <p>This high level of code sharing helps ensure a consistent user experience across platforms, reduces duplicated development effort, and lowers long-term maintenance costs. At the same time, modern frameworks allow developers to retain access to native APIs and platform-specific capabilities when needed.</p>
+
+        <p>By combining code reuse with native integration, cross-platform development provides a balanced solution for companies aiming to reach both Android and iOS users efficiently.</p>
+
+        <chapter title="Different approaches to mobile app development" id="different-approaches-to-mobile-app-development">
+            <p>Cross-platform solutions have evolved significantly over the past decade. Early hybrid tools such as Apache Cordova and Ionic enabled web-based code to be shared across platforms, but often offered limited performance and a poor user experience. Modern compiled frameworks like Kotlin Multiplatform and Flutter deliver near-native performance with broad code reuse while providing deeper access to native platform capabilities.</p>
+
+            <p>There are four main ways to create an application for both Android and iOS.</p>
+
+            <chapter title="1. Separate native apps for each operating system" id="1-separate-native-apps-for-each-operating-system">
+                <p>When creating native apps, developers build an application for a particular operating system and rely on tools and programming languages designed specifically for one platform: Kotlin or Java for Android, Objective-C or Swift for iOS.</p>
+
+                <p>These tools and languages give you access to the features and capabilities of a given OS and allow you to craft responsive apps with intuitive interfaces. But if you want to reach both Android and iOS audiences, you will have to create separate applications, and that takes a lot of time and effort.</p>
+            </chapter>
+
+            <chapter title="2. Progressive web apps (PWAs)" id="2-progressive-web-apps-pwas">
+                <p>Progressive web apps combine the features of mobile apps with solutions used in web development. Roughly speaking, they offer a mix of a website and a mobile application. Developers build PWAs using web technologies, such as JavaScript, HTML, CSS, and WebAssembly.</p>
+
+                <p>Web applications do not require separate bundling or distribution and can be published online. They are accessible via the browser on your computer, smartphone, and tablet, and don't need to be installed via Google Play or the App Store.</p>
+
+                <p>The drawback here is that users cannot utilize all of their device's functionality while using the app, such as contacts, calendars, the phone, and other assets, which results in a limited user experience. In terms of app performance, native apps have the lead.</p>
+            </chapter>
+
+            <chapter title="3. Cross-platform apps" id="3-cross-platform-apps">
+                <p>As mentioned earlier, multiplatform apps are designed to run identically on different mobile platforms. Cross-platform frameworks allow you to write shareable and reusable code for the purpose of developing such apps.</p>
+
+                <p>This approach has several benefits, such as efficiency with respect to both time and cost. We'll take a closer look at the pros and cons of cross-platform mobile development in a later section.</p>
+            </chapter>
+
+            <chapter title="4. Hybrid apps" id="4-hybrid-apps">
+                <p>When browsing websites and forums, you may notice that some people use the terms <i>"cross-platform mobile development"</i> and <i>"hybrid mobile development"</i> interchangeably. Doing so, however, is not entirely accurate.</p>
+
+                <p>When it comes to cross-platform apps, mobile engineers can write code once and then reuse it on different platforms. Hybrid app development, on the other hand, is an approach that combines native and web technologies. It requires you to embed code written in a web development language, like HTML, CSS, or JavaScript, into a native app. You can do this with the help of frameworks, such as Ionic Capacitor and Apache Cordova, using additional plugins to access the native functionalities of platforms.</p>
+
+                <p>The only similarity between cross-platform and hybrid development is code shareability. In terms of performance, hybrid applications are not on par with native apps. Because hybrid apps deploy a single codebase, some features are specific to a particular OS and don't function well on others.</p>
+            </chapter>
+        </chapter>
+
+        <chapter title="Native or cross-platform app development: a longstanding debate" id="native-or-cross-platform-app-development-a-longstanding-debate">
+            <p><a href="native-and-cross-platform.md">The debate around native and cross-platform development</a> remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.</p>
+
+            <p>Some experts still prefer native mobile development over multiplatform solutions, identifying the stronger performance and better user experience of native apps as some of the most important benefits.</p>
+
+            <p>However, many modern businesses need to ship features faster across both Android and iOS. This is where cross-platform development technologies like Kotlin Multiplatform can help. Companies like <a href="https://youtu.be/RJtiFt5pbfs?si=jNBydHcHPw-IIEVZ">Duolingo are already seeing the impact</a>. As John Rodriguez from the Client Platform team notes:</p>
+
+            <note>
+                <p>One exciting trend for Duolingo is that the more that we use Kotlin Multiplatform internally, the more we find ourselves speeding up in terms of shipping. It turns out after you learn something, you get really good at it. […] Now there's a lot more confidence behind it and we're building up that knowledge.</p>
+            </note>
+
+            <p><a href="https://kotlinlang.org/case-studies/?type=multiplatform"><img src="kmp-use-cases-1.svg" alt="Explore Kotlin Multiplatform Case Studies" width="600"/></a></p>
+        </chapter>
+    </chapter>
+
+    <chapter title="Is cross-platform mobile development right for you?" id="is-cross-platform-mobile-development-right-for-you">
+        <p>Cross-platform development is often chosen not only for technical reasons, but also for its business advantages. By sharing code across platforms, teams can reduce duplicated development effort, accelerate feature delivery, and simplify long-term maintenance.</p>
+
+        <chapter title="Benefits of cross-platform mobile development" id="benefits-of-cross-platform-mobile-development">
+            <p>There are plenty of reasons businesses choose this approach over other options.</p>
+
+            <chapter title="1. Reusable code" id="1-reusable-code">
+                <p>With cross-platform programming, mobile engineers don't need to write new code for every operating system. Using a single codebase allows developers to cut down on time spent doing repetitive tasks, such as API calls, data storage, data serialization, and analytics implementation.</p>
+
+                <p>Technologies like Kotlin Multiplatform allow you to implement the data, business, and presentation layers of your app just once. Alternatively, you can adopt KMP gradually. Choose a piece of logic that changes frequently and usually goes out of sync, such as filtering, or sorting, make it cross-platform, and then connect it to your project as a microlibrary.</p>
+
+                <p>At JetBrains, we regularly conduct Kotlin Multiplatform surveys and ask our community members about what parts of code they share between different platforms.</p>
+
+                <img src="survey-results-q1-q2-22.png" alt="Parts of code Kotlin Multiplatform users can share between platforms" width="700"/>
+            </chapter>
+
+            <chapter title="2. Time savings" id="2-time-savings">
+                <p>Because large portions of the application logic can be shared across platforms, developers can cut back on duplicate functionality. This reduces development effort and allows teams to deliver new features to both platforms faster.</p>
+            </chapter>
+
+            <chapter title="3. Effective resource management" id="3-effective-resource-management">
+                <p>Having a single codebase helps teams manage their resources more efficiently. Instead of maintaining separate codebases and development workflows for Android and iOS, teams can collaborate on shared components and focus on building product features rather than duplicating work.</p>
+            </chapter>
+
+            <chapter title="4. Attractive opportunities for developers" id="4-attractive-opportunities-for-developers">
+                <p>Many mobile engineers view modern cross-platform technologies as desirable elements in a product's tech stack. Developers may get bored at work when having to perform repetitive and routine tasks, such as JSON parsing. However, new technologies and tasks can bring back their excitement, motivation, and joy for work. In this way, having a modern tech stack can actually make it easier for you to both staff your mobile development team and keep it engaged and enthusiastic for longer.</p>
+            </chapter>
+
+            <chapter title="5. Opportunity to reach wider audiences" id="5-opportunity-to-reach-wider-audiences">
+                <p>You don't have to choose between different platforms. Since your app is compatible with multiple operating systems, you can satisfy the needs of both Android and iOS audiences and maximize your reach.</p>
+            </chapter>
+
+            <chapter title="6. Quicker time to market and customization" id="6-quicker-time-to-market-and-customization">
+                <p>Since you don't need to build different apps for different platforms, you can develop and launch your product much faster. What's more, if your application needs to be customized or transformed, it will be easier for programmers to make small changes to specific parts of your codebase. This will also allow you to be more responsive to user feedback.</p>
+            </chapter>
+        </chapter>
+
+        <chapter title="Challenges of a cross-platform development approach" id="challenges-of-a-cross-platform-development-approach">
+            <p>All solutions come with their own limitations. Some in the tech community argue that cross-platform programming still struggles with glitches related to performance. Furthermore, project leads might have fears that their focus on optimizing the development process might negatively impact the app's user experience.</p>
+
+            <p>With improvements to the underlying technologies, however, cross-platform solutions are becoming increasingly stable, adaptable, and flexible.</p>
+
+            <p>Another commonly voiced concern is that multiplatform development makes it impossible to seamlessly support the native features of platforms. With Kotlin Multiplatform, however, you can use Kotlin's <a href="multiplatform-expect-actual.md">expected and actual declarations</a> to enable your multiplatform app to access platform-specific APIs. Expected and actual declarations allow you to define in common code that you "expect" to be able to call the same function across multiple platforms and provide the "actual" implementations, which can interact with any platform-specific libraries thanks to Kotlin's interoperability with Java and Objective-C/Swift.</p>
+
+            <p>As modern multiplatform frameworks continue to evolve, they increasingly allow mobile engineers to craft a native-like experience. If an application is well-written, the user will not be able to notice the difference. However, the quality of your product will heavily depend on the cross-platform app development tools you choose.</p>
+        </chapter>
+    </chapter>
+
+    <chapter title="Cross-platform framework comparison" id="cross-platform-framework-comparison">
+        <p>Several frameworks allow developers to build cross-platform mobile applications using a shared codebase. While they all aim to reduce duplicated work between Android and iOS development, they differ in programming languages, rendering approaches, performance characteristics, and ecosystem maturity.</p>
+
+        <p>The following overview compares some of the most widely used cross-platform frameworks today.</p>
+
+        <table style="header-row">
+            <tr>
+                <td></td>
+                <td><b>Language</b></td>
+                <td><b>Code sharing across platforms</b></td>
+                <td><b>Community maturity</b></td>
+                <td><b>App examples</b></td>
+            </tr>
+            <tr>
+                <td><b>Kotlin Multiplatform</b></td>
+                <td>Kotlin</td>
+                <td>
+                    Flexible code sharing across<br/>
+                    platforms, including business logic<br/>
+                    and UI, while keeping native<br/>
+                    platform code where needed.
+                </td>
+                <td>Growing rapidly</td>
+                <td>
+                    Duolingo, McDonald's,<br/>
+                    Forbes, Philips,<br/>
+                    H&amp;M, Bolt
+                </td>
+            </tr>
+            <tr>
+                <td><b>Flutter</b></td>
+                <td>Dart</td>
+                <td>
+                    Most application logic and UI<br/>
+                    shared within a single<br/>
+                    Dart codebase.
+                </td>
+                <td>Large and mature</td>
+                <td>
+                    eBay Motors, Alibaba,<br/>
+                    Google Pay,<br/>
+                    ByteDance apps
+                </td>
+            </tr>
+            <tr>
+                <td><b>React Native</b></td>
+                <td>
+                    JavaScript<br/>
+                    TypeScript
+                </td>
+                <td>
+                    Business logic and UI components<br/>
+                    shared across platforms,<br/>
+                    from individual features<br/>
+                    to complete applications.
+                </td>
+                <td>Large and mature</td>
+                <td>
+                    Microsoft Office, Teams,<br/>
+                    Xbox Game Pass;<br/>
+                    Facebook, Instagram
+                </td>
+            </tr>
+            <tr>
+                <td><b>.NET MAUI</b></td>
+                <td>C#, XAML</td>
+                <td>
+                    Business logic and UI shared<br/>
+                    across platforms within a single<br/>
+                    C# codebase.
+                </td>
+                <td>Established</td>
+                <td>
+                    NBC Sports Next,<br/>
+                    Escola Agil,<br/>
+                    Azure App
+                </td>
+            </tr>
+            <tr>
+                <td><b>Ionic</b></td>
+                <td>JavaScript</td>
+                <td>
+                    Most application logic and UI<br/>
+                    shared through a single web-based<br/>
+                    codebase, with native functionality<br/>
+                    accessed via plugins.
+                </td>
+                <td>Mature</td>
+                <td>
+                    T-Mobile,<br/>
+                    BBC (children's apps),<br/>
+                    EA Games
+                </td>
+            </tr>
+            <tr>
+                <td><b>NativeScript</b></td>
+                <td>
+                    JavaScript<br/>
+                    TypeScript
+                </td>
+                <td>
+                    Most application logic and UI<br/>
+                    shared across platforms<br/>
+                    within a single JavaScript<br/>
+                    or TypeScript codebase.
+                </td>
+                <td>Established</td>
+                <td>
+                    Daily Nanny,<br/>
+                    Groov, Breethe
+                </td>
+            </tr>
+        </table>
+
+        <p>You can also check out a more detailed overview of the <a href="cross-platform-frameworks.md">most popular cross-platform technologies</a>.</p>
+
+        <p><b>Kotlin Multiplatform</b></p>
+        <p>Kotlin Multiplatform enables teams to share application logic across platforms using Kotlin. With Compose Multiplatform, developers can share up to 100% of their application code, including the UI, while still integrating with native APIs when needed. This approach allows teams to build applications for Android, iOS, desktop, and web from a single codebase while maintaining native capabilities.</p>
+
+        <p><a href="get-started.topic"><img src="get-started-with-kmp.svg" alt="Get Started with Kotlin Multiplatform" width="600"/></a></p>
+
+        <p><b>Flutter</b></p>
+        <p>Flutter is a cross-platform framework created by Google that uses the Dart programming language and its own rendering engine. Because it controls the UI rendering layer, Flutter can deliver consistent visuals and strong performance across different platforms. Explore <a href="kotlin-multiplatform-flutter.md">Kotlin Multiplatform and Flutter</a> in detail to better understand their capabilities and determine the right fit for your cross-platform project.</p>
+
+        <p><b>React Native</b></p>
+        <p>React Native enables developers to build mobile apps using JavaScript and the React library. It renders native UI components while executing logic through a JavaScript runtime, which makes it popular among teams with web development experience. Check out the <a href="kotlin-multiplatform-react-native.topic">Kotlin Multiplatform and React Native</a> overview, which might help you choose the right fit for your product and team.</p>
+
+        <p><b>.NET MAUI</b></p>
+        <p>.NET MAUI is Microsoft’s cross-platform framework for building native mobile and desktop applications using C# and the .NET ecosystem. It enables developers to target Android, iOS, macOS, and Windows from a single codebase and integrates closely with tools such as Visual Studio.</p>
+
+        <p><b>Ionic</b></p>
+        <p>Ionic is a hybrid mobile framework that uses web technologies such as HTML, CSS, and JavaScript. Applications run inside a WebView and access device features through plugins or native bridges, making Ionic a good option for teams with strong web development backgrounds.</p>
+
+        <p><b>NativeScript</b></p>
+        <p>NativeScript is an open-source framework for building native mobile apps using JavaScript or TypeScript. It renders real native UI components and provides direct access to platform APIs, allowing developers to create cross-platform apps with native performance and user experience.</p>
+    </chapter>
+
+    <chapter title="Real-world Kotlin Multiplatform examples" id="real-world-kotlin-multiplatform-examples">
+        <p>Duolingo, McDonald's, Netflix, 9GAG, VMware, Cash App, Philips, and many other large companies are <a href="use-cases-examples.md">increasingly adopting Kotlin Multiplatform</a> to benefit from these efficiencies while maintaining native performance and platform-specific user experiences. Some of them opt to enhance their app stability by sharing specific, crucial segments of their existing Kotlin code. Others aim to maximize code reuse without compromising app quality and share all application logic across mobile, desktop, web, and TV, while preserving native UIs on each platform. The benefits of this approach are apparent from the stories of the companies that have already adopted it.</p>
+
+        <p><b>Duolingo</b></p>
+        <p>Duolingo uses Kotlin Multiplatform to help accelerate development across its mobile platforms. The company ships updates weekly on both Android and iOS to more than 40 million daily active users in 176 countries, and the team reports that Kotlin Multiplatform is increasingly helping them deliver features faster across platforms. <a href="https://youtu.be/RJtiFt5pbfs?si=b8mndETdH-tplZQA">Watch the full video</a>.</p>
+
+        <p><b>McDonald’s</b></p>
+        <p>The Umain team behind the McDonald’s app initially adopted Kotlin Multiplatform for its payments feature and later expanded it across its mobile application. After introducing shared Kotlin code, the team reported fewer crashes and improved performance across platforms. The transition also helped the team move from separate Android and iOS teams to a more unified mobile development team. <a href="https://youtu.be/uCkYZ-PvCmw?si=eLG2rmq5Hw3yvt0i">Watch the full video</a>.</p>
+
+        <p><b>Forbes</b></p>
+        <p>By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms, while also keeping the flexibility to customize features based on the specific platform. This allows the team to innovate and respond to market needs faster. <a href="https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/">Read the full story</a>.</p>
+
+        <p><a href="https://kotlinlang.org/case-studies/?type=multiplatform"><img src="kmp-use-cases-1.svg" alt="Explore Kotlin Multiplatform Case Studies" width="600"/></a></p>
+
+        <p>You can also explore <a href="multiplatform-reasons-to-try.md">reasons why developers should consider using Kotlin Multiplatform in their existing or new projects</a> and why it continues to gain traction.</p>
+    </chapter>
+
+    <chapter title="Frequently asked questions" id="frequently-asked-questions">
+        <p><b>Q: What is cross-platform mobile development?</b></p>
+        <p>A: Cross-platform mobile development (also called cross-platform app development) is an approach that lets you build applications that run on multiple operating systems (like iOS and Android) using one codebase. By sharing code across platforms, developers reduce costs and get to market faster.</p>
+
+        <p><b>Q: How do I choose a cross-platform framework?</b></p>
+        <p>A: Choose a cross-platform framework based on your team’s skills, project requirements, and long-term product goals. For example, Kotlin Multiplatform is particularly attractive for teams focused on performance, maintainability, and a native look and feel, especially when using Compose Multiplatform for shared UI code. React Native is often preferred by teams experienced with JavaScript and React, especially for rapid prototyping. .NET MAUI is a strong choice for developers working in the .NET ecosystem.</p>
+
+        <p><b>Q: What is the difference between Kotlin Multiplatform and Compose Multiplatform?</b></p>
+        <p>A: <a href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform</a> is the core technology that lets you share code across multiple platforms, including Android, iOS, desktop, web, and server. It focuses on code reuse without replacing the native UI unless you want it to. <a href="https://kotlinlang.org/compose-multiplatform/">Compose Multiplatform</a> is an optional UI framework built on top of Kotlin Multiplatform. It allows you to share your user interface across platforms using a modern, declarative approach similar to Jetpack Compose on Android. You can use it to build visually appealing, responsive UIs for Android, iOS, desktop, and web from a single codebase.</p>
+
+        <p><b>Q: What is the most popular mobile development framework?</b></p>
+        <p>A: Popular frameworks for cross-platform mobile app development include Kotlin Multiplatform, Flutter, React Native, .NET MAUI, and others. You can check out the <a href="cross-platform-frameworks.md">overview of the most popular cross-platform technologies</a> to find the one that best suits your needs.</p>
+
+        <p>If your team needs help adopting a new multiplatform technology, we recommend reviewing our guide on <a href="multiplatform-introduce-your-team.md"><i>How to introduce multiplatform development to your team</i></a>.</p>
+
+        <p><a href="get-started.topic"><img src="get-started-with-kmp.svg" alt="Get Started with Kotlin Multiplatform" width="600"/></a></p>
+    </chapter>
+
+    <chapter title="Conclusion" id="conclusion">
+        <p>As cross-platform development solutions continue to evolve, their limitations have begun to pale in comparison to the benefits they provide. A variety of technologies are available on the market, all suited to different sets of workflows and requirements. Each of the tools discussed in this article offers extensive support for teams thinking about giving cross-platform a try.</p>
+
+        <p>Ultimately, carefully considering your specific business needs, objectives, and tasks, and developing clear goals that you want to achieve with your app, will help you identify the best solution for you.</p>
+    </chapter>
+</topic>
