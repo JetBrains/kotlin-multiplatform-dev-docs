@@ -59,11 +59,11 @@
 
     <chapter title="Fully native development" id="fully-native-development">
 
-      <p>Fully Native Development treats iOS and Android as different products. You create one app with Apple's tools and frameworks and another with Google's, using each platform's native languages, UI systems, and SDKs. The two codebases may share ideas and designs, but they remain technically distinct, and each platform evolves within its own ecosystem and release cycle.</p>
+      <p>Fully native development treats iOS and Android as different products. You create one app with Apple's tools and frameworks and another with Google's, using each platform's native languages, UI systems, and SDKs. The two codebases may share ideas and designs, but they remain technically distinct, and each platform evolves within its own ecosystem and release cycle.</p>
 
     </chapter>
 
-    <chapter title="Cross-platform frameworks (Flutter and React Native)" id="cross-platform-frameworks">
+    <chapter title="Cross-platform frameworks (Flutter, React Native etc.)" id="cross-platform-frameworks">
 
       <p><a href="cross-platform-frameworks.md">Cross-platform frameworks</a>, such as Flutter and React Native, aim to unify development around a single codebase. This approach allows teams to share both business logic and UI code, with a cross-platform layer rendering the app across operating systems. The promise is straightforward: one codebase, two platforms, and a more efficient path from idea to release.</p>
     </chapter>
@@ -85,9 +85,9 @@
 
     <p>Fully native development involves creating two distinct applications: one for iOS with Apple's tools and one for Android with Google's. Each platform has its own codebase, development pipeline, and release process. In practice, you're building two products that solve the same problem but live within different ecosystems.</p>
 
-    <p>The main benefit of this approach is <b>platform fidelity</b>. Native apps use the platform's UI frameworks, interaction patterns, and accessibility technologies directly, which makes it easier to develop experiences that feel "at home" on any device. Since there is no abstraction layer in between, animations, gestures, navigation, and performance characteristics all work as expected.</p>
+    <p>The main benefit of this approach is <b>platform fidelity</b>. Native apps use the platform's UI frameworks, interaction patterns, and accessibility technologies directly, which makes it easier to develop experiences that feel good on each device. Since there is no abstraction layer in between, animations, gestures, and navigation all work as expected with no performance overhead.</p>
 
-    <p>Another major advantage is <b>quick access to platform APIs</b>. When Apple or Google introduces new system features, SDKs, or hardware capabilities, native apps can immediately incorporate them. There is no need to wait for a cross-platform layer to catch up or expose those APIs, which is important for products that require cutting-edge OS capabilities or deep system integration.</p>
+    <p>Another major advantage is <b>quick access to platform APIs</b>. When Apple or Google introduces new system features, SDKs, or hardware capabilities, native apps can immediately incorporate them. There is no need to wait for a cross-platform layer to catch up and expose those APIs, which is important for products that require cutting-edge OS capabilities or deep system integration.</p>
 
     <chapter title="Considerations" id="native-considerations">
       <p>One of the trade-offs is <b>increased maintenance costs</b>. Two codebases inevitably lead to redundant effort in feature development, bug fixes, testing, and long-term evolution. Maintaining two codebases also requires hiring specialists for each platform, which increases costs and slows down improvements that need to be implemented everywhere at once.</p>
@@ -102,9 +102,9 @@
 
     <p>Cross-platform frameworks take a straightforward approach to cross-platform development: rather than creating two different interfaces, they use a single rendering layer to power the app on both iOS and Android. Teams create a single set of UI components and a generally consistent application layer, which the framework converts into something that each platform can display and interact with. In practice, the user interface is as reusable as the business logic.</p>
 
-    <p>The most obvious advantage is <b>increased UI reuse</b>. Large chunks of code, sometimes even the majority, can be included in a single codebase. This makes it much easier to align features and roll out updates to both platforms simultaneously. As a result, teams often achieve faster parity between iOS and Android, since new features, fixes, and UI upgrades are typically implemented only once.</p>
+    <p>The most obvious advantage is <b>increased UI code reuse</b>. Large chunks of code, sometimes even the majority, can be included in a single codebase. This makes it much easier to align features and roll out updates to both platforms simultaneously. As a result, teams often achieve faster parity between iOS and Android, since new features, fixes, and UI upgrades are typically implemented only once.</p>
 
-    <p>This paradigm is particularly appealing when <b>consistency and delivery speed are more important than fine-grained platform differences</b>. A unified UI layer eliminates collaboration overhead between platform teams while also simplifying planning, testing, and release management. From a product standpoint, it also reduces the risk of one platform falling behind the other in functionality or visual design.</p>
+    <p>This paradigm is particularly appealing when <b>consistency and delivery speed are more important than fine-grained platform specifics</b>. A unified UI layer eliminates collaboration overhead between platform teams while also simplifying planning, testing, and release management. From a product standpoint, it also reduces the risk of one platform falling behind the other in functionality or visual design.</p>
 
     <chapter title="Considerations" id="cross-platform-considerations">
 
@@ -126,7 +126,7 @@
 
     <p>This is a logical choice for teams with Kotlin experience. Android stays in Kotlin, iOS stays native by using Swift or SwiftUI. The goal isn’t to maximize code sharing, but to share code as needed to lower cost or risk without constraining product decisions.</p>
 
-    <p>In practice, Kotlin Multiplatform isn’t about choosing “native” vs. “cross-platform.” It’s about keeping architecture flexible and sharing code only where it delivers clear, practical value.</p>
+    <p>In practice, Kotlin Multiplatform isn’t about choosing between native and cross-platform. It’s about keeping architecture flexible and sharing code only where it delivers clear, practical value.</p>
 
     <a href="https://kotlinlang.org/case-studies/?type=multiplatform"><img src="kmp-success-stories.svg" alt="Learn from Kotlin Multiplatform success stories" width="500"/></a>
 
@@ -146,8 +146,8 @@
     <table style="both">
       <tr>
         <td></td>
-        <td>Fully native development (Swift + Kotlin)</td>
-        <td>Cross-platform frameworks (e.g., Flutter, React Native)</td>
+        <td>Fully native development</td>
+        <td>Cross-platform frameworks (Flutter, React Native)</td>
         <td>Flexible code sharing (Kotlin Multiplatform)</td>
       </tr>
       <tr>
@@ -186,8 +186,8 @@
 
     <p>You can dive deeper into Kotlin Multiplatform in these comparisons: <a href="https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-flutter.html">Kotlin Multiplatform and Flutter</a>, and <a href="https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-react-native.html">Kotlin Multiplatform vs. React Native</a>.</p>
   </chapter>
-  <chapter title="How to choose the right architecture for Android and iOS apps"
-           id="how-to-choose-the-right-architecture">
+  <chapter title="How to choose the right approach for Android and iOS apps"
+           id="how-to-choose-the-right-approach">
 
     <p>The choice between fully native development and different cross-platform solutions is a key architectural decision.</p>
 
@@ -197,7 +197,7 @@
     </chapter>
     <chapter title="Degree of logic sharing required" id="degree-of-logic-sharing-required">
 
-      <p>The next step is to examine the required level of logic sharing. Some products require similar business rules, data models, and workflows across platforms, while others benefit from sharing major portions of the UI layer. You and your team need to clarify which components of the system must perform identically and which are expected to differ. This helps to prevent both under-sharing (duplicated critical logic) and over-sharing (forcing false homogeneity).</p>
+      <p>Another consideration is the required level of logic sharing. Some products require similar business rules, data models, and workflows across platforms, while others benefit from sharing major portions of the UI layer. You and your team need to clarify which components of the system must perform identically and which are expected to differ. This helps to prevent both under-sharing (duplicated critical logic) and over-sharing (forcing false homogeneity).</p>
     </chapter>
     <chapter title="Reversibility of architectural decisions" id="reversibility-of-architectural-decisions">
 
@@ -213,7 +213,7 @@
 
     <chapter title="Treating platforms as identical" id="treating-platforms-as-identical">
 
-      <p>One of the most common mistakes is treating all platforms as identical. iOS and Android have different user expectations, system behaviors, and technical limits. Using the same interaction patterns or flows on both platforms can make the experience feel slightly "off" everywhere, even when feature parity is achieved. Functional consistency is more important than visual or behavioral homogeneity.</p>
+      <p>One of the most common mistakes is treating all platforms as identical. iOS and Android have different user expectations, system behaviors, and technical limits. Using the same interaction patterns or flows on both platforms can make the experience feel slightly off everywhere, even when feature parity is achieved. Functional consistency is more important than visual or behavioral homogeneity.</p>
     </chapter>
 
     <chapter title="Oversharing UI without UX consideration" id="oversharing-ui-without-ux-consideration">
