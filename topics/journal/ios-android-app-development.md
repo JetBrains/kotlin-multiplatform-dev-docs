@@ -16,7 +16,7 @@ Instead of treating iOS and Android as entirely separate, many teams now combine
 
 ![Illustration of gradual KMP adoption: share part of logic and none of the UI, share all logic without UI, share logic and UI](kmp-graphic.png){width="700"}
 
-Cross-platform development is no longer a compromise but a strategic choice. Before exploring today’s cross-platform technologies, let’s recap why they’ve become such a game-changer for teams [building for both iOS and Android](build-ios-android-app-converted.topic).
+Cross-platform development is no longer a compromise but a strategic choice. Before exploring today’s cross-platform technologies, let’s recap why they’ve become such a game-changer for teams [building for both iOS and Android](build-ios-android-app.topic).
 
 [![Discover Kotlin Multiplatform](discover-kmp.svg){width="700" style="block"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
