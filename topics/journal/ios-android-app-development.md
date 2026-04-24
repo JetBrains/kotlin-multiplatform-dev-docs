@@ -40,7 +40,7 @@ Luckily, when it comes to mitigating these issues, you have several cross-platfo
 
 ## Cross-platform development to the rescue
 
-Cross-platform mobile development reduces duplicated work in iOS and Android apps by sharing code across platforms. Different approaches offer different tradeoffs, flexibility, and native integration. For a deeper introduction, see our overview of [what cross-platform mobile development is](cross-platform-mobile-development.md).
+Cross-platform mobile development reduces duplicated work in iOS and Android apps by sharing code across platforms. Different approaches offer different tradeoffs, flexibility, and native integration. For a deeper introduction, see our overview of [what cross-platform mobile development is](cross-platform-mobile-development.topic).
 
 ### Web-based and hybrid solutions
 
