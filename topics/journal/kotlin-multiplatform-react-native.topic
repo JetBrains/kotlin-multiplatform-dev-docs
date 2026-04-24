@@ -1,5 +1,3 @@
-              "@type": "Answer",
-              "text": "At Google I/O 2024, Google announced official support for using Kotlin Multiplatform on Android to share business logic between Android and iOS."
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -30,6 +28,8 @@
             "@type": "Question",
             "name": "Does Google support Kotlin Multiplatform?",
             "acceptedAnswer": {
+            "@type": "Answer",
+              "text": "At Google I/O 2024, Google announced official support for using Kotlin Multiplatform on Android to share business logic between Android and iOS."
             }
           }, {
             "@type": "Question",
