@@ -46,7 +46,7 @@ The only similarity between cross-platform and hybrid development is code sharea
 
 ### Native or cross-platform app development: a longstanding debate
 
-[The debate around native and cross-platform development](native-and-cross-platform.md) remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.
+[The debate around native and cross-platform development](native-and-cross-platform.topic) remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.
 
 Some experts still prefer native mobile development over multiplatform solutions, identifying the stronger performance and better user experience of native apps as some of the most important benefits.
 
