@@ -1,4 +1,4 @@
-[//]: # (title: Common ViewModel)
+[//]: # (title: Multiplatform ViewModel)
 
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) connects the business logic of your app with the UI components.
 With Compose Multiplatform, you can also use ViewModels in common code.
@@ -7,7 +7,7 @@ With Compose Multiplatform, you can also use ViewModels in common code.
 
 To share the ViewModel implementation and UI across platforms:
 
-1. Define the dependency in the `gradle/libs.versions.toml` file:
+1. Define the dependencies in the `gradle/libs.versions.toml` file:
 
     ```toml
     [versions]
@@ -15,9 +15,10 @@ To share the ViewModel implementation and UI across platforms:
     
     [libraries]
     androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-viewmodel" }
+    androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-viewmodel" }
     ```
 
-2. In the `build.gradle.kts` file, add the following dependency to the `commonMain` source set:
+2. In the `build.gradle.kts` file, add the following dependencies to the `commonMain` source set:
 
     ```kotlin
     kotlin {
@@ -26,6 +27,7 @@ To share the ViewModel implementation and UI across platforms:
             // ...
             commonMain.dependencies {
                 implementation(libs.androidx.lifecycle.viewmodel.compose)
+                implementation(libs.androidx.lifecycle.viewmodel.navigation3)
             }
             // ...
         }
@@ -33,21 +35,33 @@ To share the ViewModel implementation and UI across platforms:
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="implementation(libs.androidx.lifecycle.viewmodel.compose)"}
 
-3. If you have a desktop target, add the `kotlinx-coroutines-swing` dependency:
+3. If you have a desktop target, add the `kotlinx-coroutines-swing` dependency.
+
+   In the `libs.versions.toml` file:
+
+    ```toml
+    [versions]
+    kotlinx-coroutines = "1.10.2"
     
+    [libraries]
+    kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+    ```
+
+   In the `build.gradle.kts` file:
+
     ```kotlin
     kotlin {
         // ...
         sourceSets {
             // ...
-            desktopMain.dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.10.2")
+            jvmMain.dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:kotlinx-coroutines")
             }
             // ...
         }
     }
     ```
-    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="implementation('org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.10.2')"}
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="implementation('org.jetbrains.kotlinx:kotlinx-coroutines-swing:kotlinx-coroutines')"}
 
     When running coroutines in a `ViewModel`, `ViewModel.viewModelScope` is tied
     to `Dispatchers.Main.immediate`, which might be unavailable on desktop by default.
@@ -97,6 +111,84 @@ just like [with Jetpack Compose](https://developer.android.com/topic/libraries/a
         // ...
     }
     ```
+
+## ViewModel scoping with Navigation 3
+
+When using ViewModels with Navigation 3 in a multiplatform project,
+ViewModels are not automatically scoped to navigation entries by default. 
+Without explicit scoping, the ViewModel will be tied to `Activity` rather than the screen, 
+even after the user has navigated away.
+
+To scope ViewModels and saveable Compose state per navigation entry, 
+pass the Navigation 3 entry decorators to `NavDisplay` when defining the navigation destinations:
+
+```kotlin
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+
+//...
+
+NavDisplay(
+    entryDecorators = listOf(
+        // Saves Compose state per entry
+        rememberSaveableStateHolderNavEntryDecorator(),
+        // Scopes ViewModel per entry
+        rememberViewModelStoreNavEntryDecorator()
+    ),
+    backStack = backStack,
+    entryProvider = entryProvider { }
+)
+```
+
+## ViewModel and Dependency Injection
+
+A dependency injection (DI) framework allows you to inject different dependencies into components 
+based on the current environment or target platform.
+To manage ViewModels, you can use Koin, Metro, or another DI framework that supports Kotlin Multiplatform.
+
+For an advanced example of dependency injection usage, 
+see the [Share data access layer](multiplatform-ktor-sqldelight.md) tutorial.
+
+### Koin
+
+Koin is a runtime DI framework that uses a DSL to declare modules. 
+To use Koin with Compose ViewModels, add the following packages:
+
+* `koin-core-viewmodel`
+* `koin-compose-viewmodel`
+
+You can then inject a ViewModel into a Composable function using `koinViewModel()`:
+
+```kotlin
+@Composable
+fun CupcakeApp(
+    viewModel: UserViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+    // ...
+}
+```
+
+For implementation details, see the [Koin ViewModel documentation](https://insert-koin.io/docs/reference/koin-compose/compose-viewmodel).
+
+### Metro
+
+Metro is a compile-time DI framework implemented as a Kotlin compiler plugin.
+To use Metro with Compose ViewModels, add the following packages:
+
+* `metrox-viewmodel`
+* `metrox-viewmodel-compose`
+
+Then you can inject a ViewModel into a Composable function using `metroViewModel()`:
+
+```kotlin
+@Composable
+fun CupcakeApp(viewModel: HomeViewModel = metroViewModel()) {
+    // ...
+}
+```
+
+For implementation details, see the [MetroX ViewModel Compose documentation](https://zacsweers.github.io/metro/latest/metrox-viewmodel-compose/).
 
 ## Levels of code sharing
 
@@ -201,69 +293,62 @@ Learn more in [Set up ViewModel for Kotlin Multiplatform](https://developer.andr
       }
       ```
    
-   2. There is no built-in `ViewModelStoreOwner` on iOS. Define a simple one to manage the ViewModel's lifecycle:
+   2. There is no built-in `ViewModelStoreOwner` on iOS. We recommend using [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel), 
+   which lets SwiftUI observe Kotlin Multiplatform ViewModels directly and also handles the required ViewModel lifecycle/store-owner boilerplate for iOS.
 
-       ```kotlin
-       // iosMain
-       class IosViewModelOwner : ViewModelStoreOwner {
-           override val viewModelStore = ViewModelStore()
-           fun clear() = viewModelStore.clear()
-       }
-       
-       fun createOrderViewModel(owner: ViewModelStoreOwner): OrderViewModel =
-           ViewModelProvider.create(owner, factory)[OrderViewModel::class]
-       ```
-   
-      To expose the `OrderViewModel` to SwiftUI, create an `ObservableObject` wrapper to turn the Kotlin `Flow` into a SwiftUI `@Published` property:
+   First, define your ViewModel in shared Kotlin code using KMP-ObservableViewModel APIs:
 
-       ```swift
-       class OrderObserver: ObservableObject {
-           let owner = IosViewModelOwner()
-           let viewModel: OrderViewModel
-           @Published var state: OrderUiState
+    ```kotlin    
+    // commonMain
+    import com.rickclephas.kmp.observableviewmodel.ViewModel
+    import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+    import kotlinx.coroutines.flow.MutableStateFlow
+    import kotlinx.coroutines.flow.StateFlow
+    import kotlinx.coroutines.flow.asStateFlow
     
-           init() {
-               let vm = OrderViewModelKt.createOrderViewModel(owner: owner)
-               self.viewModel = vm
-               self.state = vm.uiState.value
-            
-               Task { @MainActor in
-                   for await s in vm.uiState { self.state = s }
-               }
-           }
-       }
-       ```
-
-      Then you can use it in the iOS UI entry point:
-
-       ```swift
-       @main
-       struct iOSCupcakeApp: App {
-           var body: some Scene {
-               WindowGroup {
-                   CupcakeView()
-               }
-           }
-       }
+    class OrderViewModel : ViewModel() {
+        private val _uiState = MutableStateFlow(OrderUiState())
     
-       struct CupcakeView: View {
-           @StateObject private var obs = OrderObserver()
+        @NativeCoroutinesState
+        val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+    
+        fun setQuantity(n: Int) {
+            _uiState.value = _uiState.value.copy(quantity = n)
+        }
+    }
+    ```
+    
+    Then you can use the ViewModel in the iOS UI entry point:
 
-           var body: some View {
-               VStack {
-                   Text("Quantity: \(obs.state.quantity)")
-                   Text("Price: \(obs.state.price)")
-                
-                   Button("Set Quantity to 6") {
-                       obs.viewModel.setQuantity(n: 6)
-                   }
-               }
-               .onDisappear {
-                   obs.owner.clear()
-               }
-           }
-       }
-       ```
+    ```swift
+    import SwiftUI
+    import shared
+    import KMPObservableViewModelSwiftUI
+    
+    @main
+    struct iOSCupcakeApp: App {
+        var body: some Scene {
+            WindowGroup {
+                CupcakeView()
+            }
+        }
+    }
+    
+    struct CupcakeView: View {
+        @StateViewModel private var viewModel = OrderViewModel()
+    
+        var body: some View {
+            VStack {
+                Text("Quantity: \(viewModel.uiState.quantity)")
+                Text("Price: \(viewModel.uiState.price)")
+    
+                Button("Set Quantity to '6'") {
+                    viewModel.setQuantity(n: 6)
+                }
+            }
+        }
+    }
+    ```
 
 ### Shared repo/data layer, platform-specific ViewModels and UI
 
