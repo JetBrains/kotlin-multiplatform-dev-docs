@@ -230,10 +230,10 @@ flowchart TB
   %% classDef Module fill:#e6f7ff,stroke:#0086c9,stroke-width:1px,color:#003a52
 
   %% Modules
-  M_MOBILE[":mobile ."]
-  M_CORE_DATA[":core:data ."]
+  M_MOBILE[":mobile"]
+  M_CORE_DATA[":core:data"]
   M_CORE_DATA_TESTING[":core:data-testing"]
-  M_CORE_DOMAIN[":core:domain ."]
+  M_CORE_DOMAIN[":core:domain"]
   M_CORE_DOMAIN_TESTING[":core:domain-testing"]
   M_CORE_DESIGNSYSTEM[":core:designsystem"]
 
