@@ -232,10 +232,10 @@ flowchart TB
   %% Modules
   M_MOBILE[":mobile ."]
   M_CORE_DATA[":core:data ."]
-  M_CORE_DATA_TESTING[":core:data-testing .."]
+  M_CORE_DATA_TESTING[":core:data-testing"]
   M_CORE_DOMAIN[":core:domain ."]
-  M_CORE_DOMAIN_TESTING[":core:domain-testing .."]
-  M_CORE_DESIGNSYSTEM[":core:designsystem ."]
+  M_CORE_DOMAIN_TESTING[":core:domain-testing"]
+  M_CORE_DESIGNSYSTEM[":core:designsystem"]
 
   class M_MOBILE,M_CORE_DATA,M_CORE_DATA_TESTING,M_CORE_DOMAIN,M_CORE_DOMAIN_TESTING,M_CORE_DESIGNSYSTEM Module
 
@@ -330,10 +330,10 @@ config:
 ---
 flowchart TB
   %% Nodes (plain labels, no quotes/parentheses/braces)
-  %% Start[Start .]
-  Home[Home .]
+  %% Start[Start]
+  Home[Home]
   Player[Player]
-  PodcastDetailsRoute[PodcastDetails .]
+  PodcastDetailsRoute[PodcastDetails]
   %% DeepLinkEpisodes[Deep link to player]
   %% DeepLinkPodcasts[Deep link to podcast]
 
