@@ -48,11 +48,11 @@ You will use the following multiplatform libraries in the project:
    * **Group**: com.jetbrains
    * **Artifact**: spacetutorial
 
-   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
-
 5. Select **Android** and **iOS** targets.
 6. For iOS, select the **Do not share UI** option. You will implement a native UI for both platforms.
 7. Once you've specified all the fields and targets, click **Create**.
+
+   ![Create Ktor and SQLDelight Multiplatform project](create-ktor-sqldelight-multiplatform-project.png){width=800}
 
 ## Add Gradle dependencies
 
@@ -67,14 +67,15 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
    ```
    [versions]
-   agp = "8.7.3"
+   agp = "9.0.1"
+   material3 = "1.10.0-alpha05"
    ...
    coroutinesVersion = "%coroutinesVersion%"
    dateTimeVersion = "%dateTimeVersion%"
    koin = "%koinVersion%"
    ktor = "%ktorVersion%"
    sqlDelight = "%sqlDelightVersion%"
-   material3 = "1.3.2"
+   
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[versions]"}
 
@@ -84,7 +85,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    [libraries]
    ...
    android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-   koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
    koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
    kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTimeVersion" }
@@ -95,9 +95,9 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
    native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
    runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-   androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref="material3" }
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[libraries]"}
+   <!-- TODO removed koin-androidx-compose and androidx-compose-material3 since they appear unused in the final project -->
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
@@ -110,7 +110,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 4. Once the dependencies are added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
 
-5. At the very beginning of the `shared/build.gradle.kts` file, add the following lines to the
+5. At the very beginning of the `sharedLogic/build.gradle.kts` file, add the following lines to the
    `plugins {}` block:
 
    ```kotlin
@@ -125,7 +125,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
     to use `kotlinx.serialization` for processing network requests and responses.
     The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
-    In the same `shared/build.gradle.kts` file, add all the required dependencies:
+    In the same `sharedLogic/build.gradle.kts` file, add all the required dependencies:
 
     ```kotlin
     kotlin {
@@ -154,6 +154,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
     ```
 
 7. At the beginning of the `sourseSets` block, opt in for the experimental time API of the standard Kotlin library:
+   <!-- TODO this doesn't seem necessary with the stabilization of kotlin.time APIs -->
 
     ```kotlin
     kotlin {
@@ -194,13 +195,13 @@ The application data model will have three entity classes with:
 
 Create the necessary data classes:
 
-1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` package,
+1. In the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial` directory, create the `entity` package,
    then create the `Entity.kt` file inside that package. 
 2. Declare all the data classes for basic entities:
 
    ```kotlin
    ```
-   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-41" }
+   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-40" }
 
 Each serializable class must be marked with the `@Serializable` annotation. The `kotlinx.serialization` plugin
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
@@ -216,7 +217,7 @@ using more readable identifiers.
 The SQLDelight library allows you to generate a type-safe Kotlin database API from SQL queries. During compilation, the
 generator validates the SQL queries and turns them into Kotlin code that can be used in the shared module.
 
-The SQLDelight dependency is already included in the project. To configure the library, open the `shared/build.gradle.kts` file
+The SQLDelight dependency is already included in the project. To configure the library, open the `sharedLogic/build.gradle.kts` file
 and add the `sqldelight {}` block in the end. This block contains a list of databases and their parameters:
 
 ```kotlin
@@ -244,14 +245,14 @@ Sync the Gradle project files when prompted, or press double <shortcut>Shift</sh
 First, create the `.sq` file with all the necessary SQL queries. By default, the SQLDelight plugin looks for
 `.sq` files in the `sqldelight` folder of the source set:
 
-1. In the `shared/src/commonMain` directory, create a new `sqldelight` directory.
+1. In the `sharedLogic/src/commonMain` directory, create a new `sqldelight` directory.
 2. Inside the `sqldelight` directory, create a new directory with the name `com/jetbrains/spacetutorial/cache`
    to create nested directories for the package.
 3. Inside the `cache` directory, create the `AppDatabase.sq` file (with the same name as the database you specified
    in the `build.gradle.kts` file).
    All the SQL queries for your application will be stored in this file.
 4. The database will contain a table with data about launches.
-   Add the following code for creating the table to the `AppDatabase.sq` file:
+   Add the following code to the `AppDatabase.sq` file to create the table and define several functions which you will use later:
 
    ```text
    import kotlin.Boolean;
@@ -266,39 +267,30 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
        patchUrlLarge TEXT,
        articleUrl TEXT
    );
-   ```
-
-5. Add the `insertLaunch` function for inserting data into the table:
-
-   ```text
+   
+   -- Inserts data into the 'Launch' table
    insertLaunch:
    INSERT INTO Launch(flightNumber, missionName, details, launchSuccess, launchDateUTC, patchUrlSmall, patchUrlLarge, articleUrl)
    VALUES(?, ?, ?, ?, ?, ?, ?, ?);
-   ```
-
-6. Add the `removeAllLaunches` function for clearing data in the table:
-
-   ```text
+   
+   -- Clears all data from the 'Launch' table
    removeAllLaunches:
    DELETE FROM Launch;
-   ```
-
-7. Declare the `selectAllLaunchesInfo` function for retrieving data:
-
-   ```text
+   
+   -- Retrieves information about all launches
    selectAllLaunchesInfo:
    SELECT Launch.*
    FROM Launch;
    ```
-8. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
+
+5. Generate the corresponding `AppDatabase` interface (which you will initialize with database drivers later on).
    To do that, run the following command in the terminal:
 
    ```shell
    ./gradlew generateCommonMainAppDatabaseInterface
    ```
 
-   The generated Kotlin code is stored in the `shared/build/generated/sqldelight` directory.
-
+   The generated Kotlin code is stored in the `sharedLogic/build/generated/sqldelight` directory.
 
 ### Create factories for platform-specific database drivers
 
@@ -309,7 +301,7 @@ separately for each platform.
 While you can achieve this with [expected and actual interfaces](multiplatform-expect-actual.md),
 in this project, you will use [Koin](https://insert-koin.io/) to try dependency injection in Kotlin Multiplatform.
 
-1. Create an interface for database drivers. To do this, in the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
+1. Create an interface for database drivers. To do this, in the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory,
    create the `cache` package.
 2. Create the `DatabaseDriverFactory` interface inside the `cache` package:
 
@@ -323,7 +315,7 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-3. Create the class implementing this interface for Android: in the `shared/src/androidMain/kotlin` directory,
+3. Create the class implementing this interface for Android: in the `sharedLogic/src/androidMain/kotlin` directory,
    create the `com.jetbrains.spacetutorial.cache` package, then create the `DatabaseDriverFactory.kt` file inside it.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
@@ -358,14 +350,14 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    }
    ```
 
-You will implement instances of these drivers later in the platform-specific code of your project.
+You will use these factories later in the platform-specific parts of your project.
 
 ### Implement cache
 
 So far, you have added factories for platform database drivers and an `AppDatabase` interface to perform database operations.
 Now, create a `Database` class, which will wrap the `AppDatabase` interface and contain the caching logic.
 
-1. In the common source set `shared/src/commonMain/kotlin`, create a new `Database` class in
+1. In the common source set `sharedLogic/src/commonMain/kotlin`, create a new `Database` class in
    the `com.jetbrains.spacetutorial.cache` package. It will contain logic common to both platforms.
 
 2. To provide a driver for `AppDatabase`, pass an abstract `DatabaseDriverFactory` instance to the `Database`
@@ -461,7 +453,7 @@ and a single method to retrieve the list of all launches from the `v5/launches` 
 
 Create a class that will connect the application to the API:
 
-1. In the `shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
+1. In the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
 2. Inside the `network` directory, create the `SpaceXApi` class:
 
     ```kotlin
@@ -508,9 +500,9 @@ Create a class that will connect the application to the API:
     ```
 
 The `getAllLaunches` function has the `suspend` modifier because it contains a call of the suspend function `HttpClient.get()`.
-     The `get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from a
-     coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
-   
+The `HttpClient.get()` function includes an asynchronous operation to retrieve data over the internet and can only be called from
+a coroutine or another suspend function. The network request will be executed in the HTTP client's thread pool.
+
 The URL for sending a GET request is passed as an argument to the `get()` function.
 
 ## Build an SDK
@@ -518,7 +510,7 @@ The URL for sending a GET request is passed as an argument to the `get()` functi
 Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
 public class, `SpaceXSDK`.
 
-1. In the common source set `shared/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
+1. In the common source set `sharedLogic/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
    the `SpaceXSDK` class.
    This class will be the facade for the `Database` and `SpaceXApi` classes.
 
@@ -576,19 +568,14 @@ All Kotlin exceptions are unchecked, while Swift has only checked errors (see [I
 IntelliJ IDEA handles the initial Gradle configuration for you, so the `shared` module is already
 connected to your Android application.
 
-Before implementing the UI and the presentation logic, add all the required UI dependencies to
-the `composeApp/build.gradle.kts` file:
+Before implementing the UI and the presentation logic, add the required UI dependency to
+the `androidApp/build.gradle.kts` file:
 
 ```kotlin
 kotlin {
 // ...
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-        }
-        // ... 
+    dependencies {
+       implementation(libs.koin.androidx.compose)
     }
 }
 ```
@@ -599,7 +586,7 @@ Sync the Gradle project files when prompted, or press double <shortcut>Shift</sh
 ### Add internet access permission
 
 To access the internet, an Android application needs the appropriate permission.
-In the `composeApp/src/androidMain/AndroidManifest.xml` file, add the `<uses-permission>` tag:
+In the `androidApp/src/main/AndroidManifest.xml` file, add the `<uses-permission>` tag:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -618,7 +605,7 @@ Then, you will start Koin for each native UI using the corresponding module.
 
 Declare a Koin module that will contain the components for the Android app:
 
-1. In the `composeApp/src/androidMain/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
+1. In the `androidApp/src/main/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
 
    In that file, declare the module as two [singletons](https://insert-koin.io/docs/reference/koin-core/definitions#defining-a-singleton),
    one for the `SpaceXApi` class and one for the `SpaceXSDK` class:
@@ -649,7 +636,7 @@ Declare a Koin module that will contain the components for the Android app:
 
 2. Create a custom `Application` class, which will start the Koin module.
 
-   Next to the `AppModule.kt` file, create the `Application.kt` file with the following code, specifying the module
+   Next to the `AppModule.kt` file you created, create the `Application.kt` file with the following code, specifying the module
    you declared in the `modules()` function call:
 
    ```kotlin
@@ -692,7 +679,7 @@ You will implement the Android UI using Jetpack Compose and Material 3. First, y
 uses the SDK to get the list of launches. Then, you'll set up the Material theme, and finally, you'll write the composable
 function that brings it all together.
 
-1. In the `composeApp/src/androidMain` source set, in the `com.jetbrains.spacetutorial` package, create
+1. In the `androidApp/src/main/kotlin` directory, in the `com.jetbrains.spacetutorial` package, create
    the `RocketLaunchViewModel.kt` file:
 
    ```kotlin
@@ -773,8 +760,8 @@ You will build your main `App()` composable around the `AppTheme` function suppl
    Pick your colors, pick your fonts, then click **Export theme** in the bottom right corner.
 2. On the export screen, click the **Export** dropdown and select the **Jetpack Compose (Theme.kt)**
    option.
-3. Unpack the archive and copy the `theme` folder into the `composeApp/src/androidMain/kotlin/com/jetbrains/spacetutorial`
-   directory.
+3. Unpack the archive and copy the `theme` folder into the `androidApp/src/main/kotlin/com/jetbrains/spacetutorial`
+   directory:
 
    ![theme directory location](theme-directory.png){width=299}
 
@@ -968,8 +955,8 @@ For the iOS part of the project, you'll make use of [SwiftUI](https://developer.
 interface and the [Model View View-Model](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
 
 IntelliJ IDEA generates an iOS project that is already connected to the shared module. The Kotlin module
-is exported with the name specified in the `shared/build.gradle.kts` file (`baseName = "Shared"`), and imported
-using a regular `import` statement: `import Shared`.
+is exported with the name specified in the `sharedLogic/build.gradle.kts` file (`baseName = "SharedLogic"`), and imported
+using a regular `import` statement: `import SharedLogic`.
 
 ### Add the dynamic linking flag for SQLDelight
 
@@ -992,8 +979,7 @@ system-provided SQLite binary:
 To use Koin classes and functions in Swift code, create a special `KoinComponent` class and declare the Koin
 module for iOS.
 
-1. In the `shared/src/iosMain/kotlin/` source set, create a file with the name `com/jetbrains/spacetutorial/KoinHelper.kt`
-   (it will appear next to the `cache` folder).
+1. In the `sharedLogic/src/iosMain/kotlin/` source set, create the `KoinHelper.kt` file.
 2. Add the `KoinHelper` class, which will wrap the `SpaceXSDK` class with a lazy Koin injection:
 
     ```kotlin
@@ -1048,7 +1034,7 @@ data.
 
     ```Swift
     import SwiftUI
-    import Shared
+    import SharedLogic
     
     struct RocketLaunchRow: View {
         var rocketLaunch: RocketLaunch
@@ -1167,7 +1153,6 @@ It will allow you to call the SDK function with the correct database driver.
    ```Swift
    extension ContentView {
        // ...
-       @MainActor
        class ViewModel: ObservableObject {
            // ...
            let helper: KoinHelper = KoinHelper()
@@ -1211,7 +1196,7 @@ It will allow you to call the SDK function with the correct database driver.
 
     ```Swift
     import SwiftUI
-    import Shared
+    import SharedLogic
     
     @main
     struct iOSApp: App {
