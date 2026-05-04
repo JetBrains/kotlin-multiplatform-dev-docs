@@ -37,7 +37,7 @@ There are various open-source [frameworks for cross-platform mobile app developm
 
 [![Discover Kotlin Multiplatform](discover-kmp.svg){width="700"}](https://www.jetbrains.com/kotlin-multiplatform/)
 
-These are just a few of the key advantages of cross-platform app development. You can learn more about its benefits and use cases from global companies in our article about [cross-platform mobile development](cross-platform-mobile-development.md). As for the challenges of the approach – we'll discuss those in the following section.
+These are just a few of the key advantages of cross-platform app development. You can learn more about its benefits and use cases from global companies in our article about [cross-platform mobile development](cross-platform-mobile-development.topic). As for the challenges of the approach – we'll discuss those in the following section.
 
 ### Debugging some popular myths about cross-platform app development 
 
