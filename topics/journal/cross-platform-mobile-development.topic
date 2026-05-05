@@ -127,6 +127,15 @@
         <chapter title="Benefits of cross-platform mobile development" id="benefits-of-cross-platform-mobile-development">
             <p>There are plenty of reasons businesses choose this approach over other options.</p>
 
+              <list type="none">
+                  <li><a href="#1-reusable-code">Reusable code</a></li>
+                  <li><a href="#2-time-savings">Time savings</a></li>
+                  <li><a href="#3-effective-resource-management">Effective resource management</a></li>
+                  <li><a href="#4-attractive-opportunities-for-developers">Attractive opportunities for developers</a></li>
+                  <li><a href="#5-opportunity-to-reach-wider-audiences">Opportunity to reach wider audiences</a></li>
+                  <li><a href="#6-quicker-time-to-market-and-customization">Quicker time to market and customization</a></li>
+              </list>
+
             <chapter title="1. Reusable code" id="1-reusable-code">
                 <p>With cross-platform programming, mobile engineers don't need to write new code for every operating system. Using a single codebase allows developers to cut down on time spent doing repetitive tasks, such as API calls, data storage, data serialization, and analytics implementation.</p>
 
