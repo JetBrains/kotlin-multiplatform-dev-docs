@@ -68,7 +68,7 @@
         <chapter title="Different approaches to mobile app development" id="different-approaches-to-mobile-app-development">
             <p>Cross-platform solutions have evolved significantly over the past decade. Early hybrid tools such as Apache Cordova and Ionic enabled web-based code to be shared across platforms, but often offered limited performance and a poor user experience. Modern compiled frameworks like Kotlin Multiplatform and Flutter deliver near-native performance with broad code reuse while providing deeper access to native platform capabilities.</p>
 
-            <p>There are four main ways to create an application for both Android and iOS.</p>
+            <p>There are several main ways to create an application for both Android and iOS.</p>
 
             <chapter title="1. Separate native apps for each operating system" id="1-separate-native-apps-for-each-operating-system">
                 <p>When creating native apps, developers build an application for a particular operating system and rely on tools and programming languages designed specifically for one platform: Kotlin or Java for Android, Objective-C or Swift for iOS.</p>
