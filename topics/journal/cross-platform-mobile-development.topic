@@ -167,7 +167,7 @@
 
         <p>The following overview compares some of the most widely used cross-platform frameworks today.</p>
 
-        <table style="header-row">
+        <table style="header-row" style="header-column">
             <tr>
                 <td></td>
                 <td><b>Language</b></td>
