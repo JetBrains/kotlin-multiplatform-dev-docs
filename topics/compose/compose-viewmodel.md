@@ -3,6 +3,15 @@
 The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) connects the business logic of your app with the UI components.
 With Compose Multiplatform, you can also use ViewModels in common code.
 
+This page walks you through setting up and working with ViewModels in a multiplatform project:
+
+* [Set up dependencies](#set-up-dependencies).
+* [Use ViewModel in common code](#using-viewmodel-in-common-code).
+* [Scope ViewModels to navigation destinations](#viewmodel-scoping-with-navigation-3).
+* [Inject dependencies with Koin or Metro](#viewmodel-and-dependency-injection).
+* [Choose how much of your ViewModel and UI code to share](#levels-of-code-sharing): 
+  from a fully shared approach to sharing only the repo/data layer.
+
 ## Set up dependencies
 
 To share the ViewModel implementation and UI across platforms:
@@ -89,15 +98,19 @@ just like [with Jetpack Compose](https://developer.android.com/topic/libraries/a
     data class OrderUiState(val quantity: Int = 0, val price: String = "$0.00")
     
     class OrderViewModel : ViewModel() {
-        private val _uiState = MutableStateFlow(OrderUiState())
-        val uiState = _uiState.asStateFlow()
+        val uiState: StateFlow<OrderUiState>
+            field = MutableStateFlow(OrderUiState())
     
         fun setQuantity(n: Int) {
-            _uiState.update { it.copy(quantity = n, price = "$${n * 2}.00") } 
+            field.update { it.copy(quantity = n, price = "$${n * 2}.00") }
         }
-        // ...
     }
     ```
+   
+    > This example uses explicit backing fields, stabilized in Kotlin 2.4.0. On earlier versions, 
+    > add the `-Xexplicit-backing-fields` compiler option or use the `_uiState`/`uiState` pattern with `.asStateFlow()` instead.
+    > 
+    {style="note"}
 
 2. Add the ViewModel to your composable function:
 
@@ -169,7 +182,8 @@ fun CupcakeApp(
 }
 ```
 
-For implementation details, see the [Koin ViewModel documentation](https://insert-koin.io/docs/reference/koin-compose/compose-viewmodel).
+For details, see the Koin documentation on [ViewModel support](https://insert-koin.io/docs/reference/koin-core/viewmodel) 
+and [injecting ViewModels in Compose](https://insert-koin.io/docs/reference/koin-compose/compose-viewmodel).
 
 ### Metro
 
@@ -188,7 +202,8 @@ fun CupcakeApp(viewModel: HomeViewModel = metroViewModel()) {
 }
 ```
 
-For implementation details, see the [MetroX ViewModel Compose documentation](https://zacsweers.github.io/metro/latest/metrox-viewmodel-compose/).
+For details, see the MetroX documentation on [ViewModel integration](https://zacsweers.github.io/metro/latest/metrox-viewmodel/) 
+and [accessing ViewModels in Compose](https://zacsweers.github.io/metro/latest/metrox-viewmodel-compose/).
 
 ## Levels of code sharing
 
@@ -370,13 +385,15 @@ or `ObservableObject` with Combine for iOS.
 
       ```kotlin
       class AndroidOrderViewModel(private val repo: OrderRepository) : ViewModel() {
-          private val _uiState = MutableStateFlow(OrderUiState())
-          val uiState = _uiState.asStateFlow()
-
-          fun setQuantity(n: Int) { 
-              _uiState.update { it.copy(quantity = n, price = repo.calculatePrice(n)) }
-          }
-          // ...
+    
+        val uiState: StateFlow<OrderUiState>
+            field = MutableStateFlow(OrderUiState())
+    
+        fun setQuantity(n: Int) {
+            uiState.update { 
+                it.copy(quantity = n, price = repo.calculatePrice(n)) 
+            }
+        }
       }
       ```
 
