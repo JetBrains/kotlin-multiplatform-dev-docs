@@ -91,7 +91,7 @@
             </chapter>
 
             <chapter title="4. Hybrid apps" id="4-hybrid-apps">
-                <p>When browsing websites and forums, you may notice that some people use the terms <i>"cross-platform mobile development"</i> and <i>"hybrid mobile development"</i> interchangeably. Doing so, however, is not entirely accurate.</p>
+                <p>When browsing websites and forums, you may notice that some people use the terms <i>cross-platform mobile development</i> and <i>hybrid mobile development</i> interchangeably. Doing so, however, is not entirely accurate.</p>
 
                 <p>When it comes to cross-platform apps, mobile engineers can write code once and then reuse it on different platforms. Hybrid app development, on the other hand, is an approach that combines native and web technologies. It requires you to embed code written in a web development language, like HTML, CSS, or JavaScript, into a native app. You can do this with the help of frameworks, such as Ionic Capacitor and Apache Cordova, using additional plugins to access the native functionalities of platforms.</p>
 
