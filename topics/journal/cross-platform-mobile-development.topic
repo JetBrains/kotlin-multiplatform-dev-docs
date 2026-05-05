@@ -152,7 +152,7 @@
         </chapter>
 
         <chapter title="Challenges of a cross-platform development approach" id="challenges-of-a-cross-platform-development-approach">
-            <p>All solutions come with their own limitations. Some in the tech community argue that cross-platform programming still struggles with glitches related to performance. Furthermore, project leads might have fears that their focus on optimizing the development process might negatively impact the app's user experience.</p>
+            <p>All solutions come with their own limitations. Some in the tech community argue that cross-platform programming still struggles with performance. Furthermore, project leads might have fears that their focus on optimizing the development process might negatively impact the app's user experience.</p>
 
             <p>With improvements to the underlying technologies, however, cross-platform solutions are becoming increasingly stable, adaptable, and flexible.</p>
 
