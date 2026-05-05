@@ -55,7 +55,7 @@
     <p>How do you go about creating a mobile app that can reach both Android and iOS audiences? In this article, you will find out why more and more mobile engineers are choosing a cross-platform, or multiplatform, mobile development approach.</p>
 
     <chapter title="Cross-platform mobile development: definition and solutions" id="cross-platform-mobile-development-definition-and-solutions">
-        <p>Cross-platform mobile development (also known as multiplatform mobile development) is an approach that allows teams to build applications for both Android and iOS using a single shared codebase. Instead of developing and maintaining two completely separate native apps, engineers write common code that can be reused across platforms.</p>
+        <p>Cross-platform mobile development (also known as multiplatform mobile development) is an approach that allows teams to build applications for several platforms using a single shared codebase. Instead of developing and maintaining two completely separate native apps, engineers write common code that can be reused across platforms.</p>
 
         <p>Modern <a href="cross-platform-frameworks.md">cross-platform frameworks</a> allow developers to write most of their app’s logic once and share it across both Android and iOS, significantly reducing duplicated effort and accelerating delivery. For example, <a href="kmp-overview.md">Kotlin Multiplatform</a> lets engineers reuse all of their business logic and, with Compose Multiplatform, even UI code across platforms.</p>
 
