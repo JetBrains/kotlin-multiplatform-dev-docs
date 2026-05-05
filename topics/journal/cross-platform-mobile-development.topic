@@ -52,7 +52,7 @@
 
     <p>According to recent <a href="https://42matters.com/stats">app marketplace data</a>, the Google Play Store hosts over 2.3 million apps and the Apple App Store offers around 2.2 million apps, with Android and iOS continuing to dominate <a href="https://gs.statcounter.com/os-market-share/mobile/worldwide">global mobile app distribution and usage</a>.</p>
 
-    <p>How do you go about creating a mobile app that can reach Android and iOS audiences? In this article, you will find out why more and more mobile engineers are choosing a cross-platform, or multiplatform, mobile development approach.</p>
+    <p>How do you go about creating a mobile app that can reach both Android and iOS audiences? In this article, you will find out why more and more mobile engineers are choosing a cross-platform, or multiplatform, mobile development approach.</p>
 
     <chapter title="Cross-platform mobile development: definition and solutions" id="cross-platform-mobile-development-definition-and-solutions">
         <p>Cross-platform mobile development (also known as multiplatform mobile development) is an approach that allows teams to build applications for both Android and iOS using a single shared codebase. Instead of developing and maintaining two completely separate native apps, engineers write common code that can be reused across platforms.</p>
