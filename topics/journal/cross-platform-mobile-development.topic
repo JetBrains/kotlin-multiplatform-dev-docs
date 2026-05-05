@@ -71,7 +71,7 @@
             <p>There are several main ways to create an application for both Android and iOS.</p>
 
             <chapter title="1. Separate native apps for each operating system" id="1-separate-native-apps-for-each-operating-system">
-                <p>When creating native apps, developers build an application for a particular operating system and rely on tools and programming languages designed specifically for one platform: Kotlin or Java for Android, Objective-C or Swift for iOS.</p>
+                <p>When creating native apps, developers build an application for a particular operating system and rely on tools and programming languages designed specifically for one platform: Kotlin or Java for Android, Swift or Objective-C for iOS.</p>
 
                 <p>These tools and languages give you access to the features and capabilities of a given OS and allow you to craft responsive apps with intuitive interfaces. But if you want to reach both Android and iOS audiences, you will have to create separate applications, and that takes a lot of time and effort.</p>
             </chapter>
