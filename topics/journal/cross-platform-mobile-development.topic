@@ -104,7 +104,7 @@
 
             <p>Some experts still prefer native mobile development over multiplatform solutions, identifying the stronger performance and better user experience of native apps as some of the most important benefits.</p>
 
-            <p>However, many modern businesses need to ship features faster across both Android and iOS. This is where cross-platform development technologies like Kotlin Multiplatform can help. Companies like <a href="https://youtu.be/RJtiFt5pbfs?si=jNBydHcHPw-IIEVZ">Duolingo are already seeing the impact</a>. As John Rodriguez from the Client Platform team notes:</p>
+            <p>However, many modern businesses need to ship features faster across both Android and iOS. This is where cross-platform development technologies like Kotlin Multiplatform can help. Companies like Duolingo are already <a href="https://youtu.be/RJtiFt5pbfs?si=jNBydHcHPw-IIEVZ">seeing the impact</a>. As John Rodriguez from their Client Platform team notes:</p>
 
             <note>
                 <p>One exciting trend for Duolingo is that the more that we use Kotlin Multiplatform internally, the more we find ourselves speeding up in terms of shipping. It turns out after you learn something, you get really good at it. […] Now there's a lot more confidence behind it and we're building up that knowledge.</p>
