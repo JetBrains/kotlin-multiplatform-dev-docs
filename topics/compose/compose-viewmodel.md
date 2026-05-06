@@ -26,13 +26,11 @@ To share ViewModels and UI across platforms:
     [libraries]
     androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-viewmodel" }
     androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-viewmodel" }
-    ```
-    
+    ``` 
     > You can track changes to the multiplatform ViewModel implementation in our [What's new](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html)
     > or follow EAP releases in the [Compose Multiplatform changelog](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md).
     >
     {style="tip"}
-
 2. In the `build.gradle.kts` file of the KMP module, add the following dependencies to the `commonMain` source set:
 
     ```kotlin
@@ -83,7 +81,7 @@ To share ViewModels and UI across platforms:
      
     See the [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
-For details on different levels of code sharing, refer to the [](#levels-of-code-sharing) section.
+Dependencies may differ depending on your code-sharing approach. See [](#levels-of-code-sharing) for details.
 
 ## Using ViewModel in common code
 
