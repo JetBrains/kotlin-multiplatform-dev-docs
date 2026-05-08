@@ -258,7 +258,7 @@
             graphics engine. This makes KMP particularly appealing for teams who prioritize native look and feel,
             maintainability, and performance while still benefiting from code sharing.</p>
         <p>You can find more guidance in our detailed article on how to choose the right <a
-                href="cross-platform-frameworks.md">cross-platform development frameworks</a> for your next project.</p>
+                href="cross-platform-frameworks.topic">cross-platform development frameworks</a> for your next project.</p>
     </chapter>
 
     <chapter title="Frequently Asked Questions" id="frequently-asked-questions">
