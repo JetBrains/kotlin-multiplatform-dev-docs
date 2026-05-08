@@ -31,9 +31,18 @@ you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetim
 
 To use the `kotlinx-datetime` library:
 
-1. Open the `shared/build.gradle.kts` file and add the main `kotlinx-datetime` dependency to the section that configures
-   the common code source set.
-   For simplicity, you can include the version number directly instead of adding it to the version catalog.
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
+
+    ```text
+    [versions]
+    kotlinx-datetime = "0.8.0"
+    
+    [libraries]
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+    ```
+
+2. Open the `shared/build.gradle.kts` file and add a reference to that library entry
+   to the section that configures the common code source set:
       
     ```kotlin
     kotlin {
@@ -42,13 +51,13 @@ To use the `kotlinx-datetime` library:
             // ...
             commonMain.dependencies {
                 // ...
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+                implementation(libs.kotlinx.datetime)
             }
         }
     }
     
     ```
-2. For the web target, timezone support requires the `js-joda` library.
+3. For the web target, timezone support requires the `js-joda` library.
    Add a reference to the `js-joda` npm package to the `webApp/build.gradle.kts file`:
 
     ```kotlin
@@ -58,25 +67,25 @@ To use the `kotlinx-datetime` library:
             // ...
             commonMain.dependencies {
                 // ...
-                implementation(npm("@js-joda/timezone", "2.22.0"))
+                implementation(npm("@js-joda/timezone", "2.25.1"))
             }
         }
     }
     
     ```
 
-    Adding the dependency to the `commonMain` source set makes the library available both to the `wasmJs` and `js` targets.
+    Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
 
-3. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
+4. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
    or press double **Shift** and execute the **Sync Project with Gradle Files** command.
 
-4. In the **Terminal** tool window, run the following command to ensure that the `yarn.lock` file is updated with the latest dependency versions:
+5. In the **Terminal** tool window, run the following command to ensure that the `yarn.lock` file is updated with the latest dependency versions:
 
     ```shell
     ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
     ```
  
-5. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package: 
+6. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package: 
 
     ```kotlin
     import androidx.compose.ui.ExperimentalComposeUiApi
@@ -99,6 +108,11 @@ To use the `kotlinx-datetime` library:
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
+> When commiting your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
+> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
+> 
+{style="note"}
+
 ## Enhance the user interface
 
 1. Open the `shared/src/commonMain/kotlin/App.kt` file and after the `App()` composable add the following function
@@ -113,7 +127,9 @@ To use the `kotlinx-datetime` library:
        return now.toLocalDateTime(zone).format()
    }
    ```
-2. Add the imports that are suggested by the IDE. Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
+2. Add the imports that are suggested by the IDE.
+   
+   Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
 3. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
    
     ```kotlin
@@ -163,10 +179,10 @@ using the same run configurations for Android, iOS, desktop, and web:
         <img src="first-compose-project-on-android-ios-2.png" alt="First Compose Multiplatform app on Android and iOS" width="500"/>
     </tab>
     <tab id="desktop-app" title="Desktop">
-        <img src="first-compose-project-on-desktop-2.png" alt="First Compose Multiplatform app on desktop" width="400"/>
+        <img src="first-compose-project-on-desktop-2.png" alt="First Compose Multiplatform app on desktop" width="600"/>
     </tab>
     <tab id="web-app" title="Web">
-        <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="400"/>
+        <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="600"/>
     </tab>
 </tabs>
 
