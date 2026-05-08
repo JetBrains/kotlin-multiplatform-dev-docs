@@ -221,7 +221,7 @@ As you can see, there was a definite uptick in 2021, and the number of libraries
 
 ## Why choose Kotlin Multiplatform over other cross-platform technologies?
 
-When choosing between [different cross-platform solutions](cross-platform-frameworks.md), 
+When choosing between [different cross-platform solutions](cross-platform-frameworks.topic), 
 it's essential to weigh up both their advantages and disadvantages. You can also explore side-by-side comparisons of Kotlin Multiplatform with other technologies, including [React Native](kotlin-multiplatform-react-native.topic) and [Flutter](kotlin-multiplatform-flutter.md).
 
 Here's a breakdown of the key reasons why Kotlin Multiplatform might be the right choice for you:
