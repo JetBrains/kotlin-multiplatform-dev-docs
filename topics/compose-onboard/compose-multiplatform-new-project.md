@@ -33,7 +33,7 @@ specific platforms that best suit your needs.
 
 To get started, implement a new `App` composable:
 
-1. In `composeApp/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
+1. In `shared/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
    composable:
 
     ```kotlin
@@ -66,34 +66,31 @@ To get started, implement a new `App` composable:
 
    ![New Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-3.png){width=500}
 
-   When you run your application and click the button, the hardcoded time is displayed.
+   When you run your application and click the button, the hardcoded time, 13:30, is displayed.
 
-3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md):
-   1. In the `composeApp/src/jvmMain/kotlin/main.kt` file, click the **Run** icon in the gutter.
-   2. Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
-   ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350 style="block"}
-
-   The app works, but the window is clearly too large for the UI:
+3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the **desktopApp [hot] 🔥**
+   run configuration.
+   The app works, but the window looks mismatched with the UI:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-4. To fix this, update the `main.kt` file as follows:
+4. To fix this, update the `main.kt` file in the `desktopApp/src/kotlin` directory as follows:
 
     ```kotlin
-   fun main() = application {
-       val state = rememberWindowState(
-           size = DpSize(400.dp, 350.dp),
-           position = WindowPosition(300.dp, 300.dp)
-       )
-       Window(
-           title = "Local Time App", 
-           onCloseRequest = ::exitApplication, 
-           state = state,
-           alwaysOnTop = true
-       ) {
-           App()
-       }
-   }
+    fun main() = application {
+        val state = rememberWindowState(
+            size = DpSize(400.dp, 350.dp),
+            position = WindowPosition(300.dp, 300.dp)
+        )
+        Window(
+            title = "Local Time App", 
+            onCloseRequest = ::exitApplication, 
+            state = state,
+            alwaysOnTop = true
+        ) {
+            App()
+        }
+    }
     ```
 
     Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
@@ -103,7 +100,7 @@ To get started, implement a new `App` composable:
 
 6. To see the app automatically update, save any modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>). Its appearance should improve:
 
-   ![Improved appearance of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
+   ![Smaller window of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
 
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
@@ -140,8 +137,9 @@ a `TextField` composable:
     The new code adds both the `TextField` and a `location` property. As the user types into the text field, the value of
     the property is incrementally updated using the `onValueChange` event handler.
 
-2. Follow the IDE's instructions to import the missing dependencies.
-3. Run the application on each platform you're targeting:
+2. Follow the IDE's suggestions to import the missing dependencies.
+3. Run the application on each platform you're targeting. The time displayed is still hardcoded,
+   but now you can enter a timezone in the text field: 
 
 <tabs>
     <tab id="mobile-user-input" title="Android and iOS">
@@ -150,13 +148,16 @@ a `TextField` composable:
     <tab id="desktop-user-input" title="Desktop">
         <img src="first-compose-project-on-desktop-5.png" alt="User input in the Compose Multiplatform app on desktop" width="350"/>
     </tab>
+    <tab id="web-user-input" title="Web">
+        <img src="first-compose-project-on-web-3.png" alt="User input in the Compose Multiplatform app on the web" width="500"/>
+    </tab>
 </tabs>
 
 ## Calculate time
 
 The next step is to use the given input to calculate time. To do this, create a `currentTimeAt()` function:
 
-1. Return to the `App.kt` file and add the following function:
+1. Return to the `shared/src/commonMain/kotlin/compose.project.demo/App.kt` file and add the following function:
 
     ```kotlin
    fun currentTimeAt(location: String): String? {
@@ -174,23 +175,11 @@ The next step is to use the given input to calculate time. To do this, create a 
     ```
 
     This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
-    If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet added to the project, open the `composeApp/build.gradle.kts` file 
-    and add the `kotlinx-datetime` dependency to the section that configures the common code source set.
-    For simplicity, you can include the version number directly instead of adding it to the version catalog:
 
-    ```kotlin
-    kotlin {
-        // ...
-        sourceSets {
-            // ...
-            commonMain.dependencies {
-                // ...
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-            }
-        }
-    }
-    ```
-   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")'}
+    > If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet added to the project,
+    > follow the instructions in the [Add a new dependency](compose-multiplatform-modify-project.md#add-a-new-dependency) section.
+    >
+    {style="note"}
    
 2. Follow the IDE's instructions to import the missing dependencies. 
    Make sure to import the `Clock` class from `kotlin.time`, not `kotlinx.datetime`.
@@ -228,6 +217,9 @@ The next step is to use the given input to calculate time. To do this, create a 
     </tab>
     <tab id="desktop-time-display" title="Desktop">
         <img src="first-compose-project-on-desktop-6.png" alt="Time display in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+    <tab id="web-time-display" title="Web">
+        <img src="first-compose-project-on-web-4.png" alt="Time display in the Compose Multiplatform app on the web" width="500"/>
     </tab>
 </tabs>
 
@@ -279,7 +271,6 @@ time message could be rendered more prominently.
     * The `style` parameter customizes the appearance of the `Text`.
 
 2. Follow the IDE's instructions to import the missing dependencies.
-    For `Alignment`, use the `androidx.compose.ui` version.
 
 3. Run the application to see how the appearance has improved:
 
@@ -290,21 +281,18 @@ time message could be rendered more prominently.
     <tab id="desktop-improved-style" title="Desktop">
         <img src="first-compose-project-on-desktop-7.png" alt="Improved style of the Compose Multiplatform app on desktop" width="350"/>
     </tab>
+    <tab id="web-improved-style" title="Web">
+        <img src="first-compose-project-on-web-5.png" alt="Improved style of the Compose Multiplatform app on the web" width="500"/>
+    </tab>
 </tabs>
 
-<!--
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage2).
->
-{style="tip"}
--->
-
-## Refactor the design
+## Refactor the UI
 
 The application works, but it's susceptible to typos. For example, if a user enters "Franse" instead of "France",
-the app won't be able to process that input. It would be preferable to ask users to select the country from a predefined
+the app won't be able to process that input. It would be easier for users to pick countries from a predefined
 list.
 
-1. To achieve this, change the design in the `App` composable:
+1. To achieve this, update the `App()` composable and the `currentTimeAt()` function, adding an auxiliary data class:
 
     ```kotlin
     data class Country(val name: String, val zone: TimeZone)
@@ -378,6 +366,7 @@ list.
      of the `DropdownMenu`. There is a `DropdownMenuItem` for each country.
 
 2. Follow the IDE's instructions to import the missing dependencies.
+   When importing `Row()`, pick the `@Composable` version.
 3. Run the application to see the redesigned version:
 
 <tabs>
@@ -387,13 +376,10 @@ list.
     <tab id="desktop-country-list" title="Desktop">
         <img src="first-compose-project-on-desktop-8.png" alt="The country list in the Compose Multiplatform app on desktop" width="350"/>
     </tab>
+   <tab id="web-country-list" title="Web">
+        <img src="first-compose-project-on-web-6.png" alt="The country list in the Compose Multiplatform app on the web" width="500"/>
+    </tab>
 </tabs>
-
-<!--
-> You can find this state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/tree/main/ComposeDemoStage3).
->
-{style="tip"}
--->
 
 > You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
 > to build and inject the table of locations. If the data is stored externally,
@@ -404,12 +390,11 @@ list.
 
 ## Introduce images
 
-The list of country names works, but it's not visually appealing. You can improve it by replacing the names with images
-of national flags.
+The list of country names works, but it's not a great user experience.
+You can improve the list by adding images of national flags next to country names.
 
 Compose Multiplatform provides a library for accessing resources through common code across all platforms. The Kotlin
-Multiplatform wizard has already added and configured this library, so you can start loading resources without having to
-modify the build file.
+Multiplatform wizard has already added and configured this library, so you can start loading resources right away.
 
 To support images in your project, you'll need to download image files, store them in the correct directory, and add
 code to load and display them:
@@ -521,8 +506,10 @@ code to load and display them:
     <tab id="desktop-flags" title="Desktop">
         <img src="first-compose-project-on-desktop-9.png" alt="The country flags in the Compose Multiplatform app on desktop" width="350"/>
     </tab>
+   <tab id="web-flags" title="Web">
+        <img src="first-compose-project-on-web-7.png" alt="The country flags in the Compose Multiplatform app on the web" width="500"/>
+    </tab>
 </tabs>
-
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
