@@ -58,7 +58,7 @@ The experiment turned out to be very successful, resulting in the following:
 * A reduction in their maintenance and testing costs.
 * Significantly improved productivity within the team.
 
-[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
+[![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="500"}](https://kotlinlang.org/case-studies/)
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
 
@@ -82,7 +82,7 @@ Here's how using KMP benefited the Quizlet team:
 * Enhanced developer experience.
 * Increased interest from team members, including Android, iOS, backend, and web developers, in writing shared code.
 
-![Get started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}
+[![Get started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}](get-started.topic)
 
 ### 3. Kotlin provides simplified code-sharing mechanisms
 
