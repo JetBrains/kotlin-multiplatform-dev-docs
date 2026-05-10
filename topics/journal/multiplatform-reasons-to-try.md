@@ -82,7 +82,7 @@ Here's how using KMP benefited the Quizlet team:
 * Enhanced developer experience.
 * Increased interest from team members, including Android, iOS, backend, and web developers, in writing shared code.
 
-![Get started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}
+[![Get started with Kotlin Multiplatform](get-started-with-kmp.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
 ### 3. Kotlin provides simplified code-sharing mechanisms
 
