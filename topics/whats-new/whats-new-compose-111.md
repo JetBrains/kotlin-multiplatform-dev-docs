@@ -1,12 +1,12 @@
-[//]: # (title: What's new in Compose Multiplatform 1.11.0-beta02)
+[//]: # (title: What's new in Compose Multiplatform 1.11.0)
 
-Here are the highlights for this EAP feature release:
+Here are the highlights for this feature release:
 
 * [Native iOS text input](#native-text-input)
 * [v2 version of Compose UI testing API](#compose-ui-tests-v2)
 * [Improved scroll on web targets](#scroll-on-web-targets-brought-in-line-with-native-ui)
 
-You can find the full list of changes on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0-beta02).
+You can find the full list of changes on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0).
 Specific component versions for this release are listed in the [Dependencies](#dependencies) section.
 
 ## Breaking changes and deprecations
@@ -26,10 +26,12 @@ Migration steps:
 
 If your project includes native or web targets, the latest features require an upgrade to Kotlin 2.3.10.
 
-### Dropped support for Apple x86_64 targets
+### Changes to iOS target support
 
 Compose Multiplatform no longer supports Apple x86_64 targets, as they were deprecated in Kotlin. 
 As a result, the `iosX64` and `macosX64` targets have been fully removed from all modules.
+
+We've also raised the minimum supported iOS version from 13.0 to 14.0.
 
 ### Deprecations
 
@@ -92,6 +94,13 @@ BasicTextField(
 
 The new native text input supports both the `BasicTextField(TextFieldValue)` and `BasicTextField(TextFieldState)` APIs, 
 and is also compatible with the new context menu API enabled via the `isNewContextMenuEnabled` flag.
+
+### Concurrent rendering enabled by default
+
+In Compose Multiplatform 1.8, 
+we [introduced](whats-new-compose-180.md#opt-in-concurrent-rendering) experimental offloading of rendering tasks to a dedicated render thread as an opt-in feature.
+
+Starting with Compose Multiplatform 1.11, concurrent rendering is enabled by default.
 
 ## Web
 

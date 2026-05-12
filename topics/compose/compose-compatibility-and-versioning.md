@@ -15,7 +15,7 @@ Compose Multiplatform %org.jetbrains.compose% supports the following platforms:
 | Platform | Minimum version                                                                                      |
 |----------|------------------------------------------------------------------------------------------------------|
 | Android  | Android 5.0 (API level 21)                                                                           |
-| iOS      | iOS 13                                                                                               |
+| iOS      | iOS 14                                                                                               |
 | macOS    | macOS 13 arm64                                                                                       |
 | Windows  | Windows 10 (x86-64, arm64)                                                                           |
 | Linux    | Ubuntu 20.04 (x86-64, arm64)                                                                         |
@@ -91,6 +91,7 @@ The following table lists Jetpack Compose artifact versions used by each version
 
 | Compose Multiplatform version                                                     | Jetpack Compose version |
 |-----------------------------------------------------------------------------------|-------------------------|
+| [1.11.0](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0) | 1.11.0                  |
 | [1.10.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.10.3) | 1.10.5                  |
 | [1.9.3](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.3)   | 1.9.4                   |
 | [1.8.2](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.8.2)   | 1.8.2                   |

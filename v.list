@@ -12,7 +12,7 @@
     <var name="apiVersion" value="2.3"/>
 
     <!-- Compose Multiplatform -->
-    <var name="org.jetbrains.compose" value="1.10.3"/>
+    <var name="org.jetbrains.compose" value="1.11.0"/>
     <var name="org.jetbrains.compose-eap" value="1.11.0-beta02"/>
     <var name="org.jetbrains.androidx.navigation" value="2.9.2"/>
     <var name="org.jetbrains.androidx.lifecycle" value="2.10.0"/>
