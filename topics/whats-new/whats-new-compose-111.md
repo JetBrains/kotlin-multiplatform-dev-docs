@@ -37,7 +37,7 @@ We've also raised the minimum supported iOS version from 13.0 to 14.0.
 
 * In Compose Multiplatform 1.9.0, we [introduced the `WebElementView`](https://kotlinlang.org/docs/multiplatform/whats-new-compose-190.html#new-api-for-embedding-html-content) 
   composable to seamlessly integrate HTML elements into your web application. 
-  It turned out that the chosen name was a bit unclear, and we renamed it to `HtmlElementView` to better reflect its 
+  It turned out that the chosen name was a bit unclear, so we renamed it to `HtmlElementView` to better reflect its 
   HTML-specific purpose. The `WebElementView` version has been deprecated in favor of `HtmlElementView`.
 * `Key.Home` has been deprecated as it was incorrectly mapped. 
   Use `Key.MoveHome` for keyboard navigation or `Key.SystemHome` for system-level actions.
@@ -48,8 +48,8 @@ We've also raised the minimum supported iOS version from 13.0 to 14.0.
 
 Compose Multiplatform introduces support for [v2 `ComposeUiTest` APIs](https://developer.android.com/develop/ui/compose/testing/migrate-v2) 
 on non-Android targets. These new APIs use `StandardTestDispatcher` as the default test dispatcher instead of `UnconfinedTestDispatcher`. 
-This change ensures coroutines are executed in order based on the event queue, improving test reliability and 
-alignment with production behavior.
+This change ensures coroutines are executed in order according to the event queue, improving test reliability and 
+aligning with production behavior.
 
 We've also added support for the `effectContext` parameter in Compose UI tests v2.
 This parameter allows you to specify a custom coroutine context when running compositions.
@@ -76,7 +76,7 @@ like `Autofill`, `Translate`, and `Search`. The new approach aligns with the nat
 improving compatibility with future Apple updates.
 
 While the existing Compose Multiplatform text input remains the stable choice for consistency across platforms, 
-the native approach focuses on a user experience specifically tailored for iOS.
+the native approach focuses on a user experience tailored specifically for iOS.
 
 To enable the new text input, use the `usingNativeTextInput` option in the iOS source set:
 
