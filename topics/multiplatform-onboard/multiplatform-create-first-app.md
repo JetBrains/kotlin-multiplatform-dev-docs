@@ -30,15 +30,13 @@ You can share application logic between iOS and Android apps and write platform-
 3. In the panel on the left, select **Kotlin Multiplatform**.
 4. Specify the following fields in the **New Project** window:
    * **Name**: GreetingKMP
-   * **Group**: com.jetbrains.greeting
-   * **Artifact**: greetingkmp
-   
-   ![Create Compose Multiplatform project](create-first-multiplatform-app.png){width=800}
-    TODO update the screenshot
+   * **Project ID**: com.jetbrains.greetingkmp
 
 5. Select **Android** and **iOS** targets.
 6. For iOS, select the **Do not share UI** option to keep the UI native.
 7. Once you've specified all the fields and targets, click **Create**.
+
+![Create Kotlin Multiplatform project](create-first-multiplatform-app.png){width=700}
 
 > The IDE may automatically suggest upgrading the Android Gradle plugin in the project to the latest version.
 > We don't recommend upgrading as Kotlin Multiplatform is not compatible with the latest AGP version
@@ -52,30 +50,29 @@ In IntelliJ IDEA, expand the `GreetingKMP` folder.
 
 This Kotlin Multiplatform project includes the following modules:
 
-* _sharedLogic_ is the multiplatform module that contains the logic common for both Android and iOS applications.
-* _sharedUI_ is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
-  but it is a multiplatform module that can be used by other targets whenever you are ready for that.
 * _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
   The composeApp module depends on and uses the shared module as a regular Android library.
 * _iosApp_ is an Xcode project that builds into an iOS application.
-  It depends on and uses the `sharedLogic` module as an iOS framework.
-  By default, Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
+  It depends on the `sharedLogic` module, which is exported as an iOS framework.
+  Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
   [direct integration](multiplatform-direct-integration.md).
+* _sharedLogic_ is the multiplatform module that contains the logic common for both Android and iOS applications.
+* _sharedUI_ is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
+  but it is a multiplatform module that can be used by other targets whenever you are ready for that.
 
 Every module except for `iosApp` uses Gradle as the build system.
 
 ![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
+<!-- TODO need to redo the diagram: ios depends on sharedLogic while android on both sharedLogic and sharedUI -->
 
-The shared module consists of three source sets:
-`androidMain`, `commonMain`, and `iosMain`.
 _Source set_ is a Gradle concept for a set of files logically grouped together where each set has its own dependencies.
 In Kotlin Multiplatform, different source sets in a shared module can target different platforms.
 
+The `sharedLogic` module contains the `androidMain`, `commonMain`, and `iosMain` source sets.
 The `commonMain` source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
 ![Source sets and modules structure](basic-project-structure-2.png){width=350}
-TODO screenshot is outdated
 
 When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
 When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
@@ -89,7 +86,7 @@ It's designed to contain code that is platform-independent. If you try to use pl
 the IDE will show a warning:
 
 1. Open the `sharedLogic/src/commonMain/.../Greeting.kt` file
-    where you can find the automatically generated `Greeting` class with a `greet()` function.
+    where you can find the generated `Greeting` class with a `greet()` function.
 2. Let's add a bit of variety to the greeting. Navigate to the definition of the `sayHello()` function in the `GreetingUtil.kt` file.
 
 3. Update the shared code with randomization and the `reversed()` call from the Kotlin standard library to reverse
@@ -117,7 +114,7 @@ While generating the code for a specific platform, the Kotlin compiler merges ex
 and generates a single declaration with actual implementations.
 
 1. When creating a Kotlin Multiplatform project with IntelliJ IDEA,
-   you get a `Platform.kt` file in the `commonMain` module:
+   you get a `Platform.kt` file in the `sharedLogic/src/commonMain` module:
 
     ```kotlin
     interface Platform {
@@ -176,12 +173,12 @@ and generates a single declaration with actual implementations.
 Here, the common source set defines an expected `getPlatform()` function and has actual implementations,
 `AndroidPlatform()` for the Android app and `IOSPlatform()` for the iOS app, in the platform source sets.
 
-While generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
+When generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
 into a single `getPlatform()` function with the correct implementation.
 
 That's why expected and actual declarations should be defined in the same package – they are merged into one declaration
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
-should refer to the correct actual implementation.
+then refers to the correct actual implementation.
 
 Now you can run the apps and see all of this in action.
 
@@ -204,22 +201,24 @@ such as properties and classes. Let's implement an expected property:
    expect val num: Int = 42
    ```
 
-   You'll get an error saying that expected declarations must not have a body, in this case an initializer.
-   The implementations must be provided in actual platform modules. Remove the initializer.
-3. Hover over the `expect` keyword for the `num` property and click **Create missed actuals...** in the IDE quick fix suggestion.
-4. Choose the `androidMain` source set. Complete the implementation in `androidMain/Platform.android.kt` to be as follows:
+   You'll get an error saying "Expected property cannot have an initializer",
+   because `expect` declarations must not have a body.
+   The implementations must be provided in actual platform modules.
+3. Remove the initializer.
+4. Add the Android implementation in the `androidMain/.../Platform.android.kt` as follows:
 
-   ```kotlin
-   actual val num: Int = 1
+    ```kotlin
+    actual val num: Int = 1
     ```
 
-5. Now provide the actual implementation for `num` in the `iosMain` module. Add the following to the `iosMain/Platform.ios.kt` file:
+5. Now provide an actual implementation for `num` in the `iosMain` module.
+   Add the following to the `iosMain/.../Platform.ios.kt` file:
 
-   ```kotlin
-   actual val num: Int = 2
-   ```
+    ```kotlin
+    actual val num: Int = 2
+    ```
 
-6. In the `commonMain/GreetingUtil.kt` file, add the `num` property to the string formed by the `sayHello()` function:
+6. In the `commonMain/.../GreetingUtil.kt` file, use the `num` property in the string formed by the `sayHello()` function:
 
     ```kotlin
     fun sayHello(to: String): String {
@@ -233,7 +232,7 @@ such as properties and classes. Let's implement an expected property:
 
 You can run your multiplatform application for both Android and iOS from IntelliJ IDEA.
 
-If you have created the optional expect/actual variable earlier, you should see "[1]" added to the greeting for Android
+If you have created the optional expect/actual property earlier, you should see "[1]" added to the greeting for Android
 and "[2]" added for iOS.
 
 ### Run your application on Android
@@ -260,7 +259,7 @@ If you don't have an available iOS configuration in the list, add a [new run con
 
 ![Run multiplatform app on iOS](compose-run-ios.png){width=350}
 
-![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=300}
+![First mobile multiplatform app on iOS](first-multiplatform-project-on-ios-1.png){width=350}
 
 <include from="compose-multiplatform-create-first-app.md" element-id="run_ios_other_devices"/>
 

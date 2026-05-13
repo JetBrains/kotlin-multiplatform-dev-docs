@@ -23,18 +23,18 @@ you store the data in the `phrases` variable and later iterate over it to produc
 ## Update the Android part
 
 The `androidApp` module contains an Android application and defines its main activity.
-The Compose Multiplatform UI code is implemented in the `sharedUI` module, which the Android app uses as an Android library.
-The UI of the application uses the Compose Multiplatform framework.
+The UI code is mostly contained in the `sharedUI` module, which the Android app uses as an Android library.
+The UI is implemented using the Compose Multiplatform framework.
 
 Make some changes and see how they are reflected in the UI:
 
-1. Navigate to the `App.kt` file in the `sharedUI/src/commonMain/.../greeting` directory. TODO make sure that directory names are correct
-2. Find the `Greeting` class invocation. Select the `greet()` function, right-click it, and select **Go To** | **Declaration or Usages**.
+1. Navigate to the `App.kt` file in the `sharedUI/src/commonMain/.../greetingkmp` directory.
+2. Find the `Greeting().greet()` function call. Right-click the `greet()` and select **Go To** | **Declaration or Usages**.
+   The IDE will open the `sharedLogic/src/commonMain/.../Greeting.kt` file.
 3. In the `Greeting.kt` file, update the `Greeting` class so that the `greet()` function returns a list of strings:
 
    ```kotlin
    class Greeting {
-   
        private val platform: Platform = getPlatform()
    
        fun greet(): List<String> = buildList {
@@ -44,7 +44,7 @@ Make some changes and see how they are reflected in the UI:
    }
    ```
 4. Import the `kotlin.random.Random` package as the IDE suggests.
-5. Go back to the `App.kt` file and update the `App()` implementation to display the list of strings:
+5. Go back to the `sharedUI/src/commonMain/.../App.kt` file and update the `App()` implementation to display the list of strings:
 
    ```kotlin
    @Composable
@@ -76,7 +76,7 @@ Make some changes and see how they are reflected in the UI:
 
    ![Updated UI of Android multiplatform app](first-multiplatform-project-on-android-2.png){width=300}
 
-## Work with the iOS module
+## Update the iOS part
 
 The `iosApp` directory builds into an iOS application.
 It depends on and uses the `sharedLogic` module as an iOS framework.
@@ -87,7 +87,7 @@ Implement the same changes as in the Android app to account for the update in co
 1. In IntelliJ IDEA, find the `iosApp/iosApp` folder at the root of your project in the **Project** tool window.
 2. Open the `iosApp/ContentView.swift` file, right-click the `Greeting().greet()` call, and select **Go To** | **Declaration or Usages**.
    You can see that IDEA correctly matches the Swift call with the Kotlin declaration.
-3. Open the `ContentView.swift` file again.
+3. Return to the `ContentView.swift` file.
    To display a list of strings in the same way as in the Android app,
    replace the code for the `ContentView` structure with the following:
 
@@ -108,7 +108,7 @@ Implement the same changes as in the Android app to account for the update in co
 
 4. Start the iOS run configuration to see the changes:
 
-    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=300}
+    ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=350}
 
 ## Possible issues and solutions
 
