@@ -42,28 +42,31 @@ For both types of dependencies, you can use local and external repositories.
 ## Add a multiplatform dependency
 
 > If you have experience developing Android apps, adding a multiplatform dependency is similar to adding a
-> Gradle dependency in a regular Android project. The only difference is that you need to specify the source set.
+> Gradle dependency in a regular Android project. The only difference is that you need to add it to a specific source set.
 >
 {style="tip"}
 
-Let's go back to the app and make the greeting a little more festive:
+Let's make the greeting a little more festive:
 In addition to the OS version, add a function to display the number of days left until New Year's Day.
 The `kotlinx-datetime` library, which has full multiplatform support, is the most convenient way to work with dates in your shared code.
 
-1. Open the `build.gradle.kts` file located in the `sharedLogic` directory.
-2. Add the following dependency and the Kotlin time opt-in to the `commonMain` source set dependencies:
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
+    ```text
+    [versions]
+    kotlinx-datetime = "0.8.0"
+    
+    [libraries]
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+    ```
+2. Open the `sharedLogic/build.gradle.kts` file and add a reference to that library entry
+    to the section that configures the common code source set:
 
     ```kotlin
     kotlin {
         //... 
         sourceSets {
-            // Opt-in necessary to use experimental kotlin.time APIs
-            // from the standard Kotlin library,
-            // distinct from the kotlinx-datetime library.
-            all { languageSettings.optIn("kotlin.time.ExperimentalTime") }
-   
             commonMain.dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
+                implementation(libs.kotlinx.datetime)
             } 
         }
     }
@@ -71,8 +74,13 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
 
 3. Select the **Build | Sync Project with Gradle Files** menu item
    or click the **Sync Gradle Changes** button in the build script editor to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
-4. Right-click the `sharedLogic/src/commonMain/.../greeting` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
-5. In that file, add two functions that calculate
+
+## Call a kotlinx-datetime API
+
+With the dependency added, you can add date and time calculations to your common code:
+
+1. Right-click the `sharedLogic/src/commonMain/.../greetingkmp` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
+2. In that file, add two functions that calculate
    the number of days from today until the start of next year using the `datetime` date arithmetic and form the phrase to be displayed:
    
    ```kotlin
@@ -84,9 +92,9 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
    
    fun daysPhrase(): String = "There are only ${daysUntilNewYear()} days left until New Year! 🎆"
    ```
-6. Add all necessary imports as suggested by the IDE.
-   Make sure you import the `Clock` class from the `kotlin.time` package.
-7. In the `Greeting.kt` file, update the `Greeting` class to see the result:
+3. Add all necessary imports as suggested by the IDE.
+   Make sure to import `kotlin.time.Clock`, not `kotlinx.datetime.Clock`. 
+4. In the `Greeting.kt` file, update the `Greeting` class to see the result:
     
     ```kotlin
     class Greeting {
@@ -100,7 +108,7 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
     }
     ```
 
-8. To see the results, re-run your **androidApp** and **iosApp** run configurations from IntelliJ IDEA:
+5. To see the results, re-run your **androidApp** and **iosApp** run configurations from IntelliJ IDEA:
 
 ![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
 
