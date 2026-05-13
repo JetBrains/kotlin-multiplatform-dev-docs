@@ -5,7 +5,7 @@
 
 * To switch from the CocoaPods Gradle plugin to SwiftPM, you need to first reconfigure your Xcode project.
 * Check out these sample projects which use CocoaPods in the `main` branch and SwiftPM in the `spm-import` branch:
-  * [Firebase sample](https://github.com/Kotlin/kmp-with-cocoapods-multitarget-xcode-sample)
+  * [Firebase sample](https://github.com/Kotlin/kmp-with-cocoapods-firebase-sample/)
   * [Compose Multiplatform sample](https://github.com/Kotlin/kmp-with-cocoapods-compose-sample/)
 
 </tldr>
