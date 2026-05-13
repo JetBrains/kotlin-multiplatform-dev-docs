@@ -116,8 +116,9 @@ route object so Swift doesn't need to call back into Kotlin to fetch it.
     data class SettingsScreen(override val title: String = "") : AppRoute
     ```
 
-4. Pass the localized title at the call site. Because `stringResource` is a `@Composable` function, hoist it to the
-   enclosing `entry` scope — not inside a click callback:
+4. Pass the localized title at the call site in the `NavHost.kt` file.
+   Since `stringResource` is a `@Composable` function, add it to the
+   enclosing `entry` scope, not inside a click callback:
 
     ```kotlin
     entry<InfoScreen> {
@@ -170,7 +171,7 @@ internal fun NavHost(
     onNavigate: ((AppRoute) -> Unit)? = null,
     onActivate: ((TopLevelRoute) -> Unit)? = null,
 ) {
-    // ...
+    // Replace "val startRoute = remember {" : 
 
     // Intercepts detail routes: forward to Swift and remove from Compose's stack
     if (onNavigate != null) {
@@ -203,7 +204,7 @@ internal fun NavHost(
 Compose screens render their own back buttons, headers, and bottom tab bar. 
 When iOS owns navigation, hide those to avoid duplication.
 
-1. Declare the composition local in `NavHost.kt`:
+1. Declare the composition local in `NavHost.kt` before the `NavHost` function:
 
     ```kotlin
     val LocalUseNativeNavigation = staticCompositionLocalOf { false }
@@ -216,21 +217,33 @@ When iOS owns navigation, hide those to avoid duplication.
     val useNativeNavigation = onNavigate != null
 
     CompositionLocalProvider(LocalUseNativeNavigation provides useNativeNavigation) {
-        if (useNativeNavigation) {
-            NavDisplay(entries = ..., onBack = ...)
-        } else {
-            NavScaffold(...) {
-                NavDisplay(entries = ..., onBack = ...)
+        Box(
+            // ...
+        ) {
+            val content = @Composable {
+                NavDisplay(
+                    entries = navState.toDecoratedEntries(entryProvider),
+                    onBack = navigator::goBack,
+                )
+            }
+            if (useNativeNavigation) {
+                content()
+            } else {
+                NavScaffold(
+                    navState = navState,
+                    navigator = navigator,
+                    showGoldenKodee = showGoldenKodee,
+                    content = content,
+                )
             }
         }
-    }
+   }
     ```
 
-3. Read the flag in `BaseScreens.kt` to conditionally hide the Compose back button and title bar:
+3. Read the flag in `BaseScreens.kt` to conditionally hide the Compose back button and title bar.
+   In the `ScreenWithTitle` function, move `MainHeaderTitleBar` and `HorizontalDivider` to the `if (!useNativeNavigation)`:
 
     ```kotlin
-    // BaseScreens.kt — ScreenWithTitle
-
     val useNativeNavigation = LocalUseNativeNavigation.current
 
     if (!useNativeNavigation) {
