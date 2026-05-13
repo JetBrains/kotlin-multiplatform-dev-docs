@@ -258,7 +258,7 @@ Free
 </td>
 <td>
 
-[KMP for Android Developers](https://nsmirosh.gumroad.com/l/tmmqwa)
+[KMP for Android Developers](https://learnkmp.com/)
 
 Video course
 
@@ -271,7 +271,7 @@ Gumroad
 
 <td>
 How to extend your existing Android development skills to iOS by mastering KMP fundamentals like expect/actual and source sets,
-as well as building a complete app stack using modern libraries like Ktor for networking and Room for persistence.
+as well as building a complete app stack using modern libraries like Ktor for networking, Koin for dependency injection, Nav3, and Room for persistence.
 </td>
 <td>
 ~$60
