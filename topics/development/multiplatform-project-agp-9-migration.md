@@ -149,9 +149,11 @@ Configure the Gradle build script for the new module:
    the `target {}` block of the `androidApp/build.gradle.kts` file:
 
     ```kotlin
-    target {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+    kotlin {
+        target {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_11)
+            }
         }
     }
     ```
