@@ -80,7 +80,7 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
 With the dependency added, you can add date and time calculations to your common code:
 
 1. Right-click the `sharedLogic/src/commonMain/.../greetingkmp` directory and select **New | Kotlin Class/File** to create a new file, `NewYear.kt`.
-2. In that file, add two functions that calculate
+2. In `NewYear.kt`, add two functions that calculate
    the number of days from today until the start of next year using the `datetime` date arithmetic and form the phrase to be displayed:
    
    ```kotlin
@@ -110,7 +110,7 @@ With the dependency added, you can add date and time calculations to your common
 
 5. To see the results, re-run your **androidApp** and **iosApp** run configurations from IntelliJ IDEA:
 
-![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=500}
+![Updated mobile multiplatform app with external dependencies](first-multiplatform-project-3.png){width=600}
 
 ## Next step
 

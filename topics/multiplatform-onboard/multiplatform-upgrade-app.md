@@ -38,68 +38,61 @@ You'll need to add the following multiplatform libraries in your project:
   network operations.
 * [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 
-### kotlinx.coroutines
+### Update the Gradle version catalog
 
-To add `kotlinx.coroutines` to your project, specify a dependency in the common source set. To do so, add the following
-line to the `sharedLogic/build.gradle.kts` file:
+Add the following entries to `gradle/libs.versions.toml`, then sync Gradle files to make the references available
+in build configuration code:
 
-```kotlin
-kotlin {
-    // ... 
-    sourceSets {
-        commonMain.dependencies {
-           // ...
-           implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
-        }
-    }
-}
+```text
+[versions]
+coroutinesVersion = "%coroutinesVersion%"
+ktorVersion = "%ktorVersion%"
+# A Kotlin version should already be set in the catalog
+kotlin = "%kotlinVersion%"
+
+[libraries]
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVersion" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorVersion" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+
+[plugins]
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ```
 
-The Kotlin Multiplatform Gradle plugin automatically adds a dependency on the platform-specific (iOS and Android) artifacts
-of `kotlinx.coroutines`.
+### Add dependencies to corresponding source sets
 
-### kotlinx.serialization
-
-To use the `kotlinx.serialization` library, set up a corresponding Gradle plugin.
-To do that, add the following line to the existing `plugins {}` block at the very beginning of the `sharedLogic/build.gradle.kts` file:
+Add the library references to corresponding source sets in the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 plugins {
     // ...
-    kotlin("plugin.serialization") version "%kotlinVersion%"
+    alias(libs.plugins.kotlinSerialization)
 }
-```
 
-### Ktor
-
-Add the base Ktor client dependency (`ktor-client-core`) to the common source set of the shared module,
-along with these supporting dependencies:
-
-* Add the `ContentNegotiation` library (`ktor-client-content-negotiation`), which allows serializing and deserializing
-  the content in a specific format.
-* Add the `ktor-serialization-kotlinx-json` dependency to instruct Ktor to use the JSON format and `kotlinx.serialization`
-  as a serialization library. Ktor will expect JSON data and deserialize it into a data class when receiving responses.
-* Provide the platform engines by adding dependencies on the corresponding artifacts in the platform source sets
-  (`ktor-client-android`, `ktor-client-darwin`).
-
-```kotlin
 kotlin {
-    // ...
-    val ktorVersion = "%ktorVersion%"
-
     sourceSets {
         commonMain.dependencies {
             // ...
-
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
-            implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+            // The Kotlin Multiplatform Gradle plugin adds
+            // platform-specific coroutines artifacts automatically
+            implementation(libs.kotlinx.coroutines.core)
+            // Main Ktor dependency
+            implementation(libs.ktor.client.core)
+            // Dependencies that allow Ktor to use serialization
+            // with a specific format
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
         androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:$ktorVersion")
+            // Provides the Android engine for Ktor
+            implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+            // Provides the Darwin engine for Ktor
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
@@ -114,7 +107,7 @@ specifically the list of all launches from the **/2.3.0/launches** endpoint.
 
 ### Create a data model
 
-In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketLaunch.kt` file
+In the `sharedLogic/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
 and add a data class which stores data from the SpaceX API:
 
 ```kotlin
@@ -155,7 +148,7 @@ data class LaunchListResponse(
 
 ### Connect HTTP client
 
-1. In the `sharedLogic/src/commonMain/.../greeting` directory, create a new `RocketComponent` class.
+1. In the `sharedLogic/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
 2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
 
     ```kotlin
@@ -186,11 +179,19 @@ data class LaunchListResponse(
    which will retrieve information about rocket launches asynchronously:
 
    ```kotlin
+   import io.ktor.client.request.get
+   import io.ktor.client.call.body
+   
    class RocketComponent {
        // ...
        
        private suspend fun getDateOfLastSuccessfulLaunch(): String {
            val rockets: List<RocketLaunch> = httpClient.get("https://api.spacexdata.com/v4/launches").body()
+   
+           // Initialized with a stub date for now
+           val date: String = "October 5, 2026"
+        
+           return "$date"
        }
    }
    ```
@@ -212,11 +213,15 @@ data class LaunchListResponse(
            val response: LaunchListResponse =
                httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
            val lastSuccessLaunch = response.results.first { it.status.id == 3 }
+           val date: String = "October 5, 2026"
+           
+           return "$date"
        }
    }
    ```
 
-5. Convert the launch date from UTC to your local date, then format the output:
+5. Conversion the UTC date and time of a launch to your local date and assign the result to `date`.
+   Then return the formatted output:
 
    ```kotlin
    import kotlinx.datetime.TimeZone
@@ -239,7 +244,7 @@ data class LaunchListResponse(
    }
    ```
 
-   The date will be in the "MMMM DD, YYYY" format, for example, "OCTOBER 5, 2022".
+   The date will be displayed in the "MMMM DD, YYYY" format, for example, "OCTOBER 5, 2022".
 
 6. To the same class, add another suspending function, `launchPhrase()`,
    which will create a message using the `getDateOfLastSuccessfulLaunch()` function:
@@ -268,7 +273,10 @@ Flows can emit a sequence of values as the values are produced instead of return
 2. Add a `rocketComponent` property to the `Greeting` class. The property will store the message with the last successful launch date:
 
    ```kotlin
-   private val rocketComponent = RocketComponent()
+   class Greeting {
+       private val rocketComponent = RocketComponent()
+       //...
+   }
    ```
 
 3. Change the `greet()` function to return a `Flow`:
@@ -438,7 +446,7 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 
 To see the final result, rerun your **androidApp** run configuration:
 
-![Final result for Android](multiplatform-mobile-upgrade-android.png){width=300}
+![Final result for Android](multiplatform-mobile-upgrade-android.png){width=350}
 
 ## Update native iOS UI
 
@@ -506,14 +514,14 @@ to help you work with flows in iOS.
 Both are open-source solutions that support cancellation and generics with flows,
 which the Kotlin/Native compiler doesn't yet provide by default:
 
+* The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
+  wrappers.
+  KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
+  Using KMP-NativeCoroutines requires adding a SwiftPM or CocoaPod dependency in iOS projects.
 * The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
 Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
-* The KMP-NativeCoroutines library helps you consume suspending functions and flows from iOS by generating the necessary
-wrappers.
-  KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
-  Using KMP-NativeCoroutines requires adding a SwiftPM or CocoaPod dependency in iOS projects.
 
 ### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
@@ -522,26 +530,36 @@ wrappers.
 >
 {style="note"}
 
-1. In the root `build.gradle.kts` file of your project (**not** the `shared/build.gradle.kts` file),
-   add the KSP (Kotlin Symbol Processor) and KMP-NativeCoroutines plugins to the `plugins {}` block:
+1. Add the KMP-NativeCoroutines version and plugin reference to the Gradle version catalog:
+
+    ```text
+    [versions]
+    kmpNativeCoroutines = "%kmpncVersion%"
+    
+    [plugins]
+    kmpNativeCoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
+    ```
+
+2. In the root `build.gradle.kts` file of your project (**not** the `shared/build.gradle.kts` file),
+   add the KMP-NativeCoroutines plugin to the `plugins {}` block:
 
     ```kotlin
     plugins {
         // ...
-        id("com.rickclephas.kmp.nativecoroutines").version("%kmpncVersion%").apply(false)
+        alias(libs.plugins.kmpNativeCoroutines) apply false
     }
     ```
 
-2. In the `sharedLogic/build.gradle.kts` file, add the KMP-NativeCoroutines plugin:
+3. In the `sharedLogic/build.gradle.kts` file, add the KMP-NativeCoroutines plugin to the `plugins {}` block:
 
     ```kotlin
     plugins {
         // ...
-        id("com.rickclephas.kmp.nativecoroutines")
+        alias(libs.plugins.kmpNativeCoroutines)
     }
     ```
 
-3. Also, in the `sharedLogic/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
+4. In the same `sharedLogic/build.gradle.kts` file, opt-in to the experimental `@ObjCName` annotation:
 
     ```kotlin
     kotlin {
@@ -550,7 +568,6 @@ wrappers.
             all {
                 languageSettings {
                     optIn("kotlin.experimental.ExperimentalObjCName")
-                    optIn("kotlin.time.ExperimentalTime")
                 }
             }
             // ...
@@ -558,11 +575,11 @@ wrappers.
     }
     ```
 
-4. Click the **Sync Gradle Changes** button to synchronize the Gradle files.
+5. Click the **Sync Gradle Changes** button to synchronize the Gradle files.
 
 #### Mark the flow with KMP-NativeCoroutines
 
-1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
+1. Open the `Greeting.kt` file in the `sharedLogic/src/commonMain/kotlin` directory.
 2. Add the `@NativeCoroutines` annotation to the `greet()` function. This will ensure that the plugin generates the right
    code to support correct flow handling on iOS:
 
@@ -657,7 +674,6 @@ plugins {
    id("co.touchlab.skie") version "%skieVersion%"
 }
 ```
-TODO make version catalogs examples
 
 #### Consume the flow using SKIE
 
@@ -706,7 +722,7 @@ struct iOSApp: App {
 
 Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
 
-![Final results](multiplatform-mobile-upgrade-ios.png){width=300}
+![Final results](multiplatform-mobile-upgrade-ios.png){width=350}
 
 > You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
