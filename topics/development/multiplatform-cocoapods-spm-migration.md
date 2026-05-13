@@ -78,7 +78,6 @@ For example, if you are using the `FirebaseAnalytics` pod:
    kotlin {
        iosArm64()
        iosSimulatorArm64()
-       iosX64()
 
        cocoapods {
            framework {
@@ -93,7 +92,6 @@ For example, if you are using the `FirebaseAnalytics` pod:
        listOf(
            iosArm64(),
            iosSimulatorArm64(),
-           iosX64(),
        ).forEach { iosTarget ->
            iosTarget.binaries.framework {
                baseName = "Shared"

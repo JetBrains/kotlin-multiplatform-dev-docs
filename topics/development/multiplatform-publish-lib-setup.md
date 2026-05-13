@@ -56,7 +56,6 @@ version = "1.0"
 
 kotlin {
     jvm()
-    iosX64()
     iosArm64()
 }
 ```
@@ -66,7 +65,6 @@ This setup generates the following Maven publications:
 **Target-specific publications**
 
 * For the `jvm` target:`test:lib-jvm:1.0`
-* For the `iosX64` target: `test:lib-iosx64:1.0`
 * For the `iosArm64` target:`test:lib-iosarm64:1.0`
 
 Each target-specific publication is independent. For example, running `publishJvmPublicationTo<MavenRepositoryName>`

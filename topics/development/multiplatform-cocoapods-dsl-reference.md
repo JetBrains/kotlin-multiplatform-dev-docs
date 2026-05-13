@@ -60,7 +60,7 @@ You can use the following blocks, functions, and properties inside it:
 |---------------------|--------------|----------------------|-------------------------|
 | `iosArm64`          | `macosArm64` | `tvosArm64`          | `watchosArm64`          |
 | `iosSimulatorArm64` |              | `tvosSimulatorArm64` | `watchosSimulatorArm64` |
-|  `iosX64`           |              |                      | `watchosArm32`          |
+|                     |              |                      | `watchosArm32`          |
 |                     |              |                      | `watchosDeviceArm64`    |
 
 For each target, use the `deploymentTarget` property to specify the minimum target version for the Pod library.

@@ -1,12 +1,12 @@
-[//]: # (title: What's new in Compose Multiplatform 1.11.0-rc01)
+[//]: # (title: What's new in Compose Multiplatform 1.11.0)
 
-Here are the highlights for this EAP feature release:
+Here are the highlights for this feature release:
 
 * [Native iOS text input](#native-text-input)
 * [v2 version of Compose UI testing API](#compose-ui-tests-v2)
 * [Improved scroll on web targets](#scroll-on-web-targets-brought-in-line-with-native-ui)
 
-You can find the full list of changes on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0-beta03).
+You can find the full list of changes on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.11.0).
 Specific component versions for this release are listed in the [Dependencies](#dependencies) section.
 
 ## Breaking changes and deprecations
@@ -26,16 +26,18 @@ Migration steps:
 
 If your project includes native or web targets, the latest features require an upgrade to Kotlin 2.3.10.
 
-### Dropped support for Apple x86_64 targets
+### Changes to iOS target support
 
 Compose Multiplatform no longer supports Apple x86_64 targets, as they were deprecated in Kotlin. 
 As a result, the `iosX64` and `macosX64` targets have been fully removed from all modules.
+
+We've also raised the minimum supported iOS version from 13.0 to 14.0.
 
 ### Deprecations
 
 * In Compose Multiplatform 1.9.0, we [introduced the `WebElementView`](https://kotlinlang.org/docs/multiplatform/whats-new-compose-190.html#new-api-for-embedding-html-content) 
   composable to seamlessly integrate HTML elements into your web application. 
-  It turned out that the chosen name was a bit unclear, and we renamed it to `HtmlElementView` to better reflect its 
+  It turned out that the chosen name was a bit unclear, so we renamed it to `HtmlElementView` to better reflect its 
   HTML-specific purpose. The `WebElementView` version has been deprecated in favor of `HtmlElementView`.
 * `Key.Home` has been deprecated as it was incorrectly mapped. 
   Use `Key.MoveHome` for keyboard navigation or `Key.SystemHome` for system-level actions.
@@ -46,8 +48,8 @@ As a result, the `iosX64` and `macosX64` targets have been fully removed from al
 
 Compose Multiplatform introduces support for [v2 `ComposeUiTest` APIs](https://developer.android.com/develop/ui/compose/testing/migrate-v2) 
 on non-Android targets. These new APIs use `StandardTestDispatcher` as the default test dispatcher instead of `UnconfinedTestDispatcher`. 
-This change ensures coroutines are executed in order based on the event queue, improving test reliability and 
-alignment with production behavior.
+This change ensures coroutines are executed in order according to the event queue, improving test reliability and 
+aligning with production behavior.
 
 We've also added support for the `effectContext` parameter in Compose UI tests v2.
 This parameter allows you to specify a custom coroutine context when running compositions.
@@ -74,7 +76,7 @@ like `Autofill`, `Translate`, and `Search`. The new approach aligns with the nat
 improving compatibility with future Apple updates.
 
 While the existing Compose Multiplatform text input remains the stable choice for consistency across platforms, 
-the native approach focuses on a user experience specifically tailored for iOS.
+the native approach focuses on a user experience tailored specifically for iOS.
 
 To enable the new text input, use the `usingNativeTextInput` option in the iOS source set:
 
@@ -93,6 +95,13 @@ BasicTextField(
 The new native text input supports both the `BasicTextField(TextFieldValue)` and `BasicTextField(TextFieldState)` APIs, 
 and is also compatible with the new context menu API enabled via the `isNewContextMenuEnabled` flag.
 
+### Concurrent rendering enabled by default
+
+In Compose Multiplatform 1.8.0, 
+we [introduced](whats-new-compose-180.md#opt-in-concurrent-rendering) experimental offloading of rendering tasks to a dedicated render thread as an opt-in feature.
+
+Starting with Compose Multiplatform 1.11.0, concurrent rendering is enabled by default.
+
 ## Web
 
 ### Scroll on web targets brought in line with native UI
@@ -109,17 +118,17 @@ The list of fixes, along with the explanations and demos of improvements, is ava
 
 ## Dependencies
 
-| Library            | Maven coordinates                                                           | Based on Jetpack version                                                                                                             |
-|--------------------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.11.0-rc01`                        | [Runtime 1.11.0](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.11.0)                                     |
-| UI                 | `org.jetbrains.compose.ui:ui*:1.11.0-rc01`                                  | [UI 1.11.0](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.11.0)                                               |
-| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.11.0-rc01`                  | [Foundation 1.11.0](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.11.0)                               |
-| Material           | `org.jetbrains.compose.material:material*:1.11.0-rc01`                      | [Material 1.11.0](https://developer.android.com/jetpack/androidx/releases/compose-material#1.11.0)                                   |
-| Material3          | `org.jetbrains.compose.material3:material3*:1.11.0-alpha07`                 | [Material3 1.5.0-alpha17](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha17)                   |
-| Material3 Adaptive | `org.jetbrains.compose.material3.adaptive:adaptive*:1.3.0-alpha07`          | [Material3 Adaptive 1.3.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.3.0-alpha10) |
-| Lifecycle          | `org.jetbrains.androidx.lifecycle:lifecycle-*:2.11.0-beta01`                | [Lifecycle 2.11.0-beta01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0-beta01)                           |
-| Navigation         | `org.jetbrains.androidx.navigation:navigation-*:2.9.2`                      | [Navigation 2.9.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.7)                                         |
-| Navigation3        | `org.jetbrains.androidx.navigation3:navigation3-*:1.1.1`                    | [Navigation3 1.1.1](https://developer.android.com/jetpack/androidx/releases/navigation3#1.1.1)                                       |
-| Navigation Event   | `org.jetbrains.androidx.navigationevent:navigationevent-compose:1.1.0-rc01` | [Navigation Event 1.1.0](https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.0)                              |
-| Savedstate         | `org.jetbrains.androidx.savedstate:savedstate*:1.4.0`                       | [Savedstate 1.4.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0)                                         |
-| WindowManager Core | `org.jetbrains.androidx.window:window-core:1.5.1`                           | [WindowManager 1.5.1](https://developer.android.com/jetpack/androidx/releases/window#1.5.1)                                          |
+| Library            | Maven coordinates                                                      | Based on Jetpack version                                                                                                             |
+|--------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.11.0`                        | [Runtime 1.11.1](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.11.1)                                     |
+| UI                 | `org.jetbrains.compose.ui:ui*:1.11.0`                                  | [UI 1.11.1](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.11.1)                                               |
+| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.11.0`                  | [Foundation 1.11.1](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.11.1)                               |
+| Material           | `org.jetbrains.compose.material:material*:1.11.0`                      | [Material 1.11.1](https://developer.android.com/jetpack/androidx/releases/compose-material#1.11.1)                                   |
+| Material3          | `org.jetbrains.compose.material3:material3*:1.11.0-alpha07`            | [Material3 1.5.0-alpha17](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-alpha17)                   |
+| Material3 Adaptive | `org.jetbrains.compose.material3.adaptive:adaptive*:1.3.0-alpha07`     | [Material3 Adaptive 1.3.0-alpha10](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.3.0-alpha10) |
+| Lifecycle          | `org.jetbrains.androidx.lifecycle:lifecycle-*:2.11.0-beta01`           | [Lifecycle 2.11.0-beta01](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0-beta01)                           |
+| Navigation         | `org.jetbrains.androidx.navigation:navigation-*:2.9.2`                 | [Navigation 2.9.7](https://developer.android.com/jetpack/androidx/releases/navigation#2.9.7)                                         |
+| Navigation3        | `org.jetbrains.androidx.navigation3:navigation3-*:1.1.1`               | [Navigation3 1.1.1](https://developer.android.com/jetpack/androidx/releases/navigation3#1.1.1)                                       |
+| Navigation Event   | `org.jetbrains.androidx.navigationevent:navigationevent-compose:1.1.0` | [Navigation Event 1.1.1](https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.1)                              |
+| Savedstate         | `org.jetbrains.androidx.savedstate:savedstate*:1.4.0`                  | [Savedstate 1.4.0](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0)                                         |
+| WindowManager Core | `org.jetbrains.androidx.window:window-core:1.5.1`                      | [WindowManager 1.5.1](https://developer.android.com/jetpack/androidx/releases/window#1.5.1)                                          |

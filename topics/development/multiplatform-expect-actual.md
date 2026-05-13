@@ -33,7 +33,7 @@ Every use of the expected declaration in the common code calls the correct actua
 resulting platform code.
 
 You can declare actual declarations when you use intermediate source sets shared between different target platforms.
-Consider, for example, `iosMain` as an intermediate source set shared between the `iosX64Main`, `iosArm64Main`,
+Consider, for example, `iosMain` as an intermediate source set shared between the `iosArm64Main`
 and `iosSimulatorArm64Main` platform source sets. Only `iosMain` typically contains the actual declarations and not the
 platform source sets. The Kotlin compiler will then use these actual declarations to produce the resulting code for the
 corresponding platforms.
