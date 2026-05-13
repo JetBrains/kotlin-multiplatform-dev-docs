@@ -97,10 +97,10 @@ and is also compatible with the new context menu API enabled via the `isNewConte
 
 ### Concurrent rendering enabled by default
 
-In Compose Multiplatform 1.8, 
+In Compose Multiplatform 1.8.0, 
 we [introduced](whats-new-compose-180.md#opt-in-concurrent-rendering) experimental offloading of rendering tasks to a dedicated render thread as an opt-in feature.
 
-Starting with Compose Multiplatform 1.11, concurrent rendering is enabled by default.
+Starting with Compose Multiplatform 1.11.0, concurrent rendering is enabled by default.
 
 ## Web
 
