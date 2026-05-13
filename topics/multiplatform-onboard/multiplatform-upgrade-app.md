@@ -667,11 +667,28 @@ every time the flow emits a value.
 
 ### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
-To set up the library, specify the SKIE plugin in `sharedLogic/build.gradle.kts` and click the **Sync Gradle Changes** button.
+To set up the library, add the SKIE version and plugin reference to your Gradle version catalog:
+
+```text
+[versions]
+skie = "%skieVersion%"
+
+[plugins]
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
+```
+
+> SKIE may not support the latest Kotlin version.
+> If your Kotlin version is too new, this is reported during Gradle sync along with the list of versions you can safely
+> downgrade to.
+> 
+{style="note"}
+
+Then add it to the list of plugins in the `sharedLogic/build.gradle.kts` file and click the **Sync Gradle Changes** button:
 
 ```kotlin
 plugins {
-   id("co.touchlab.skie") version "%skieVersion%"
+    //...
+    alias(libs.plugins.skie)
 }
 ```
 
