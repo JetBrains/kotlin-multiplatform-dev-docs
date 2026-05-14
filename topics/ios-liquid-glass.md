@@ -420,6 +420,7 @@ fun MainViewController(
 ): UIViewController = ComposeUIViewController(
     configure = { onFocusBehavior = OnFocusBehavior.DoNothing }
 ) {
+    // `onGoBack` and `onSet` were for API symmetry with `ScreenViewController`
     App(appGraph, topLevelRoute, onNavigate = onNavigate, onActivate = onActivate)
 }
 
@@ -678,6 +679,12 @@ struct NativeNavContentView: View {
     }
 }
 ```
+
+`.tint(Color(.accent))` applies an accent color to the tab bar. 
+`Color(.accent)` resolves to the `AccentColor` asset in your Xcode project's asset catalog. 
+Define this asset by creating `Assets.xcassets/AccentColor.colorset/Contents.json`: you can use [`Contents.json`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json)
+from the sample project as a starting point and replace the component values with your own colors.
+
 
 With two tabs, the app renders as follows:
 
