@@ -526,7 +526,8 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
 ### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
 > We recommend using the latest version of the library.
-> Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases) to see whether a newer version of the plugin is available.
+> Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
+> to see whether a newer version of the plugin is available and whether it is compatible with your Kotlin version.
 >
 {style="note"}
 
@@ -600,7 +601,7 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
 
 Installs the parts of the KMP-NativeCoroutines Swift package necessary to work with the `async/await` mechanism.
 
-1. Go to **File** | **Open Project in Xcode**.
+1. Go to **File | Open Project in Xcode**.
 2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
 3. In the search bar, enter the package name:
 
@@ -611,10 +612,13 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
    ![Importing KMP-NativeCoroutines](multiplatform-import-kmp-nativecoroutines.png){width=700}
 
 4. In the **Dependency Rule** dropdown, select the **Exact Version** item and enter the `%kmpncVersion%` version in the adjacent field.
-5. Click the **Add Package** button: Xcode will fetch the package from GitHub and open another window to choose package products.
+5. Click the **Add Package** button. Xcode will fetch the package from GitHub and open another window to choose package products.
 6. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
+7. Return to IntelliJ IDEA and select the **Tools | Swift Package Manager | Resolve Dependencies menu item**.
+   This creates a `Package.resolved` lock file that is used by the Kotlin build
+   and can be commited to the repository to keep the versions of Swift packages consistent.  
 
 #### Consume the flow using the KMP-NativeCoroutines library
 
