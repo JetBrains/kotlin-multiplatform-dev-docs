@@ -73,7 +73,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
    ```
    This prevents the Compose Hot Reload plugin from being loaded multiple times in each of your subprojects.
 
-4. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/composeApp/build.gradle.kts`), add the following code to your `plugins {}` block:
+4. In the `build.gradle.kts` of the subproject containing your multiplatform application (`ComposeDemo/sharedUI/build.gradle.kts`), add the following code to your `plugins {}` block:
    ```kotlin
    plugins { 
        alias(libs.plugins.composeHotReload)
@@ -145,7 +145,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
 
    ![Compose Hot Reload](compose-hot-reload.gif){width=350}
 
-   Alternatively,trigger the reload explicitly by pressing the assigned shortcut key or clicking the **Reload UI** button.
+   Alternatively, trigger the reload explicitly by pressing the assigned shortcut key or clicking the **Reload UI** button.
    You can modify the trigger behavior on the **Settings | Tools | Compose Hot Reload** page.
 
 Congratulations! You've seen Compose Hot Reload in action. Now you can experiment with changing text, images, formatting, 
