@@ -1,82 +1,94 @@
-[//]: # (title: Native iOS Navigation with Liquid Glass in a Compose Multiplatform App)
+[//]: # (title: Liquid Glass in a Compose Multiplatform app)
+<show-structure depth="1"/>
 
-This tutorial walks through migrating an iOS app from full Compose-driven navigation to native SwiftUI navigation with
-iOS 26 liquid glass styling, while keeping Compose rendering each screen's content.
+Liquid Glass is Apple's new visual design introduced in iOS 26, bringing translucency, depth, 
+and dynamic blur to UI elements. 
+To adopt it in a Compose Multiplatform app, you need a native SwiftUI shell, because 
+Liquid Glass effects are rendered by the system through native `TabView`, `NavigationStack`, and toolbar APIs.
 
-![Shared UI](ios-kotlinconf-no-liquid-glass.png){ width="250" style="inline"}
-![Native iOS UI with liquid glass](ios-kotlinconf-liquid-glass.png){ width="250" style="inline"}
+This tutorial walks you through migrating an iOS app from fully Compose-driven navigation to native SwiftUI navigation with
+iOS 26 Liquid Glass styling, while keeping Compose in charge of rendering each screen's content.
+The Liquid Glass effects themselves are applied automatically by the system once the app uses native `TabView` and `NavigationStack`,
+so you don't need to write any Liquid Glass-specific code.
 
-Sample project: [KotlinConfApp](https://github.com/JetBrains/kotlinconf-app)
+We'll use the official KotlinConf app as our example:
 
-* [main branch](https://github.com/JetBrains/kotlinconf-app/tree/main) — starting state with Compose-driven navigation
-* [lg-nav branch](https://github.com/JetBrains/kotlinconf-app/tree/lg-nav) — final state after this migration
-  Clone the repo and check out either branch to follow along, or compare them side by side: [main...lg-nav](https://github.com/JetBrains/kotlinconf-app/compare/main...lg-nav).
+![Shared UI with Material 3 design](ios-kotlinconf-no-liquid-glass.png){ width="250" style="inline"}
+![Native iOS UI with Liquid Glass](ios-kotlinconf-liquid-glass.png){ width="250" style="inline"}
 
-Prerequisites: Xcode 26+ with the iOS 26 SDK.
-Tooling versions (Kotlin, Compose Multiplatform, Gradle)
-clone the repo first and verify the app builds before starting the migration.
+* [KotlinConfApp](https://github.com/JetBrains/kotlinconf-app) — sample project.
+* [`main` branch](https://github.com/JetBrains/kotlinconf-app/tree/main) — starting state, with the Material 3 Expressive design.
+* [`lg-nav` branch](https://github.com/JetBrains/kotlinconf-app/tree/lg-nav) — final state, with the Liquid Glass design.
+  
+Clone the repo and check out either branch to follow along, or compare them side by side: 
+[`main...lg-nav`](https://github.com/JetBrains/kotlinconf-app/compare/main...lg-nav). You'll need Xcode 26 or later with the iOS 26 SDK.
 
-The example uses a simplified two-tab app (**Schedule** and **Info**), but the same pattern scales to any number of tabs.
+For simplicity, we'll migrate a two-tab version of the app (**Schedule** and **Info**), 
+but the same pattern scales to any number of tabs.
 
-## The plan
+## Migration plan
 
 In a standard Compose Multiplatform setup, a single `ComposeUIViewController` owns the entire iOS app:
 tabs, navigation stack, back gestures, and screen content. 
 
-This works, but it means:
+This approach works, but with trade-offs:
 
-* The tab bar and navigation transitions look like Compose, not native iOS
-* You can't use iOS 26's liquid glass tab bar or system `NavigationStack` behavior
+* The tab bar and navigation transitions look like Material 3, not native iOS.
+* You can't use iOS 26's Liquid Glass tab bar or system `NavigationStack` behavior.
 
-The solution is to hand navigation *ownership* back to SwiftUI while keeping Compose for screen content.
-Kotlin's `NavHost` gets *escape hatch callbacks* (`onNavigate`, `onActivate`).
-Instead of navigating internally, it calls these and Swift handles the stack.
+The solution is to hand navigation over to SwiftUI, letting the system render the tab bar and navigation stack natively 
+while Compose continues to render each screen's content.
 
 **Before:**
 
 ```
 Swift: ContentView
-  └── ComposeUIViewController  (owns everything: tabs, navigation, screens)
+  └── ComposeUIViewController (Compose Multiplatform)
 ```
 
 **After:**
 
 ```
 Swift: ContentView
-  └── TabView  (liquid glass, iOS 26)
+  └── TabView  (Liquid Glass, iOS 26)
         ├── Tab: Schedule
         │     └── NavigationStack
         │           ├── NativeNavComposeView  ← Kotlin tab root
-        │           └── DetailComposeView     ← Kotlin detail screen (per destination)
+        │           └── DetailComposeView     ← Kotlin detail screen, one per destination
         └── Tab: Info
               └── NavigationStack
                     ├── NativeNavComposeView  ← Kotlin tab root
-                    └── DetailComposeView     ← Kotlin detail screen
+                    └── DetailComposeView     ← Kotlin detail screen, one per destination
 ```
 
-To complete the migration, you will:
+Here's how navigation flows in the new setup:
 
-1. [Add `title` and `subtitle` properties to route objects](#add-title-metadata-to-routes) so Swift can display
-   navigation bar titles without calling back into Kotlin.
-2. [Add `topLevelRoute`, `onNavigate`, and `onActivate` parameters to `App()`](#add-navigation-callbacks-to-app) so the
-   iOS layer can control which tab opens and receive push events.
-3. [Intercept navigation in `NavHost`](#intercept-navigation-in-navhost) so any route added to Compose's back stack is
-   immediately forwarded to Swift and removed from Compose.
-4. [Add `LocalUseNativeNavigation`](#add-localusenativenavigation) and use it to hide Compose's own back buttons, title
-   bars, and bottom tab bar when Swift owns navigation.
-5. [Extract `ScreenContent`](#extract-screencontent) — a flat `when` expression that renders any detail route as a
-   standalone composable, used by Swift for each `NavigationStack` destination.
-6. [Add `SingleScreenApp`](#add-singlescreenapp-ios-source-set) to the iOS source set, wrapping `ScreenContent` with the
-   full DI and theme setup.
-7. [Expose two new Kotlin entry points](#expose-ios-entry-points-in-main-ios-kt) — `MainViewController` (with callbacks)
-   and `ScreenViewController` — that Swift calls to create each `UIViewController`.
-8. [Build the Swift navigation layer](#build-the-swift-navigation-layer): `TabView`, per-tab `NavigationStack`, and the
-   `UIViewControllerRepresentable` bridges.
+* SwiftUI creates a `TabView` and a `NavigationStack` per tab.
+* Compose still renders each screen's content but no longer manages the back stack.
+* When the user triggers navigation from a Compose screen (for example, taps a list row), the event is forwarded to Swift via `onNavigate`.
+* The Swift coordinator pushes the route onto its `NavigationStack`, which creates a new `UIViewController` hosting a single Compose screen.
+
+The migration touches both the shared Compose Multiplatform code and the native iOS code.
+In the shared Kotlin code:
+
+* [Add title metadata to routes](#add-title-metadata-to-routes) so SwiftUI can render navigation bar titles without calling back into Kotlin.
+* [Add navigation callbacks to the iOS entry point](#add-navigation-callbacks-to-the-ios-entry-point) so the iOS layer can control which tab is active and respond to navigation events.
+* [Intercept navigation at the Compose level](#intercept-navigation-at-the-compose-level) so detail routes are forwarded to Swift instead of being handled by Compose.
+  This tutorial shows the Nav3 implementation — adapt this step if you use a different navigation library.
+* [Build a standalone screen renderer for iOS](#build-a-standalone-screen-renderer-for-ios) — a function that renders any detail route as a self-contained composable,
+    wrapped with the theme and DI setup needed to run outside the full `App()`.
+* [Hide Compose's built-in navigation UI](#hide-compose-s-built-in-navigation-ui) when SwiftUI is in charge, using a new `LocalUseNativeNavigation` composition local.
+* [Expose new iOS entry points](#expose-new-ios-entry-points) for creating the root view controller and individual screen view controllers.
+
+In the native iOS code (Swift):
+
+* [Build the SwiftUI navigation layer](#build-the-swiftui-navigation-layer) with `TabView`, per-tab `NavigationStack`, and the bridges that embed Compose screens.
 
 ## Add title metadata to routes
 
-Swift's `NavigationStack` shows a navigation bar title for each pushed destination. Carry the title directly on the
-route object so Swift doesn't need to call back into Kotlin to fetch it.
+SwiftUI's `NavigationStack` displays a navigation bar title for each pushed destination. 
+We'll store titles directly on the route objects,
+so each route is self-describing and Swift can read the title without round-trips to Kotlin.
 
 1. In the `navigation/Routes.kt` file, add `title` and `subtitle` properties to `AppRoute`:
 
@@ -88,8 +100,8 @@ route object so Swift doesn't need to call back into Kotlin to fetch it.
     }
     ```
 
-2. Add `title` to routes that appear as detail screens. For routes that already carry data, add it as an optional
-   parameter:
+2. Override `title` (and `subtitle` where useful) on routes that appear as detail screens. 
+   For routes that already carry data, add it as an optional parameter:
 
     ```kotlin
     @Serializable
@@ -97,28 +109,25 @@ route object so Swift doesn't need to call back into Kotlin to fetch it.
         val sessionId: SessionId,
         override val title: String? = null,
     ) : AppRoute
-    
-    @Serializable
-    data class SpeakerDetailScreen(
-        val speakerId: SpeakerId,
-        override val title: String = "",
-        override val subtitle: String = "",  // speaker role / company
-    ) : AppRoute
     ```
+   
+   For the full set of updated route definitions, see [`Routes.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/commonMain/kotlin/org/jetbrains/kotlinconf/navigation/Routes.kt).
 
-3. For routes that were `data object` and need a title, convert them to `data class`:
+3. Routes that were `data object` also need a title, but a `data object` can't carry per-instance title state.
+   Convert them to `data class`:
 
-    ```kotlin
-    // Before:
-    data object SettingsScreen : AppRoute
-    
-    // After:
-    data class SettingsScreen(override val title: String = "") : AppRoute
-    ```
+    <compare type="top-bottom">
+        <code-block lang="kotlin">
+            data object SettingsScreen : AppRoute
+        </code-block>
+        <code-block lang="kotlin">
+            data class SettingsScreen(override val title: String = "") : AppRoute
+        </code-block>
+    </compare>
 
 4. Pass the localized title at the call site in the `NavHost.kt` file.
-   Since `stringResource` is a `@Composable` function, add it to the
-   enclosing `entry` scope, not inside a click callback:
+   Since `stringResource` is a `@Composable` function, resolve it inside the entry scope and capture it in the click callback,
+   not inside the callback itself:
 
     ```kotlin
     entry<InfoScreen> {
@@ -130,17 +139,24 @@ route object so Swift doesn't need to call back into Kotlin to fetch it.
     }
     ```
 
-## Add navigation callbacks to `App()`
+## Add navigation callbacks to the iOS entry point
 
-`App()` is the Kotlin entry point for iOS calls. 
-In the `App.kt` file, add a `topLevelRoute` parameter so iOS can specify which tab to open, 
-and two optional callbacks for navigation events:
+`App()` is the Kotlin entry point that iOS calls into. To let Swift drive navigation, 
+it needs a way to do three things:
+
+* Choose the starting tab when the app launches via a new `topLevelRoute` parameter.
+* React to navigation pushes from Compose (for example, when a list item is tapped) via an `onNavigate` callback.
+* React to tab switches initiated from Compose via an `onActivate` callback.
+
+The new callbacks are optional and default to `null`, so Android, desktop, and web targets are unaffected.
+
+In the `App.kt` file, update the signature of `App()` accordingly:
 
 ```kotlin
 @Composable
 fun App(
     appGraph: AppGraph,
-    topLevelRoute: TopLevelRoute = ScheduleScreen,
+    topLevelRoute: TopLevelRoute,
     onThemeChange: ((isDarkTheme: Boolean) -> Unit)? = null,
     onNavigate: ((AppRoute) -> Unit)? = null,
     onActivate: ((TopLevelRoute) -> Unit)? = null,
@@ -153,12 +169,25 @@ fun App(
 }
 ```
 
-Both callback parameters default to `null`, so Android, Desktop, and Web remain unchanged.
+For the full implementation, see [`App.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/commonMain/kotlin/org/jetbrains/kotlinconf/App.kt).
 
-## Intercept navigation in `NavHost`
+## Intercept navigation at the Compose level
 
-Update `NavHost` to accept the new parameters, then intercept any detail routes before Compose can manage them.
-In `navigation/NavHost.kt`:
+Now that `App()` exposes navigation callbacks, `NavHost` needs to use them. 
+Whenever a detail route appears on Compose's back stack, hand it off to Swift and immediately remove 
+it from Compose. This way, Compose only renders detail screens only when invoked from Swift.
+
+Two flows need to be set up:
+
+* Detail pushes → Swift. Whenever a non-root route lands on the back stack, 
+  forward it through `onNavigate` and remove it from Compose's back stack so SwiftUI's `NavigationStack` becomes the single source of truth.
+* Tab switches → Swift. When the top-level route changes from inside Compose, notify Swift via `onActivate` so the SwiftUI `TabView` selection stays in sync.
+
+This step is specific to the Navigation 3 library. 
+The same interception pattern applies to any Compose navigation library, 
+but the exact API (back stack access, current destination observation) will differ.
+
+In `navigation/NavHost.kt`, add the new parameters and the two interception effects:
 
 ```kotlin
 import androidx.compose.runtime.snapshotFlow
@@ -171,9 +200,7 @@ internal fun NavHost(
     onNavigate: ((AppRoute) -> Unit)? = null,
     onActivate: ((TopLevelRoute) -> Unit)? = null,
 ) {
-    // Replace "val startRoute = remember {" : 
-
-    // Intercepts detail routes: forward to Swift and remove from Compose's stack
+    // Forwards detail routes to Swift and removes them from Compose's stack
     if (onNavigate != null) {
         LaunchedEffect(navState) {
             snapshotFlow { navState.currentBackstack.toList() }.collect { backstack ->
@@ -185,7 +212,6 @@ internal fun NavHost(
             }
         }
     }
-
     // Notifies Swift when the user switches tabs from within Compose
     if (onActivate != null) {
         LaunchedEffect(navState) {
@@ -194,76 +220,25 @@ internal fun NavHost(
             }
         }
     }
-
     // ...
 }
 ```
 
-## Add `LocalUseNativeNavigation`
+For the full file, see [`NavHost.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/commonMain/kotlin/org/jetbrains/kotlinconf/navigation/NavHost.kt).
 
-Compose screens render their own back buttons, headers, and bottom tab bar. 
-When iOS owns navigation, hide those to avoid duplication.
+## Build a standalone screen renderer for iOS
 
-1. Declare the composition local in `NavHost.kt` before the `NavHost` function:
+When SwiftUI owns the `NavigationStack`, Compose only needs to render the content of each pushed screen.
+`NavHost` is built for managing a back stack, transitions, and lifecycle, 
+so we need a lighter-weight entry point for rendering a single route.
 
-    ```kotlin
-    val LocalUseNativeNavigation = staticCompositionLocalOf { false }
-    ```
+### Add a flat screen renderer
 
-2. Set it based on whether native navigation callbacks are active, and skip `NavScaffold` (the Compose bottom bar) when
-   they are:
+`ScreenContent` is that smaller entry point: a flat `when` expression that maps a single detail route to its composable,
+with no navigation state of its own. Tab roots are still handled by the full `App()` / `NavHost`. 
+SwiftUI creates one view controller per pushed destination, each hosting a single `ScreenContent` call.
 
-    ```kotlin
-    val useNativeNavigation = onNavigate != null
-
-    CompositionLocalProvider(LocalUseNativeNavigation provides useNativeNavigation) {
-        Box(
-            // ...
-        ) {
-            val content = @Composable {
-                NavDisplay(
-                    entries = navState.toDecoratedEntries(entryProvider),
-                    onBack = navigator::goBack,
-                )
-            }
-            if (useNativeNavigation) {
-                content()
-            } else {
-                NavScaffold(
-                    navState = navState,
-                    navigator = navigator,
-                    showGoldenKodee = showGoldenKodee,
-                    content = content,
-                )
-            }
-        }
-   }
-    ```
-
-3. Read the flag in `BaseScreens.kt` to conditionally hide the Compose back button and title bar.
-   In the `ScreenWithTitle` function, move `MainHeaderTitleBar` and `HorizontalDivider` to the `if (!useNativeNavigation)`:
-
-    ```kotlin
-    val useNativeNavigation = LocalUseNativeNavigation.current
-
-    if (!useNativeNavigation) {
-        MainHeaderTitleBar(...)
-        HorizontalDivider(...)
-    }
-    ```
-
-## Extract `ScreenContent`
-
-`ScreenContent` is a flat `when` expression that renders a single detail `AppRoute` as a standalone composable. Swift
-calls `ScreenViewController` for each destination it pushes, which internally calls `ScreenContent`.
-
-> `ScreenContent` only handles detail routes — screens pushed onto a `NavigationStack`. Top-level tab
-> roots (`ScheduleScreen`, `InfoScreen`) are never passed here; they are rendered by the full `App()/NavHost` inside
-`NativeNavComposeView`.
-> 
-> {style="note"}
-
-In `navigation/NavHost.kt`:
+Add the following to `navigation/NavHost.kt`:
 
 ```kotlin
 @Composable
@@ -293,21 +268,41 @@ fun ScreenContent(
             onLicenses = { onNavigate(LicensesScreen) },
             // ...
         )
-        // ... all other detail routes
+        // All other detail routes
         else -> {}
     }
 }
 ```
 
-The `title` for each pushed screen (for example, a `SettingsScreen`'s title) is embedded in the route object when the
-route is created — Swift reads `wrapper.route.title` directly for the navigation bar.
+Titles don't appear in this function: they were attached to the route objects back in the
+[Add title metadata to routes](#add-title-metadata-to-routes) step, 
+so Swift reads `wrapper.route.title` directly when configuring the navigation bar.
 
-## Add `SingleScreenApp` (iOS source set)
+### Signal to Compose that SwiftUI owns navigation
 
-`SingleScreenApp` wraps `ScreenContent` with the same DI, theme, and window setup as `App()`, but provides
-`LocalUseNativeNavigation = true` so screens automatically hide their Compose chrome.
+`ScreenContent` runs in a context where SwiftUI renders the navigation bar and back button. 
+Compose screens that draw their own title bars or back buttons must skip that chrome.
 
-In `iosMain/SingleScreenApp.kt`: 
+To avoid duplication inside the composition tree, use a `CompositionLocal`.
+Each screen reads it locally without depending on iOS-specific code.
+
+Declare it in `NavHost.kt`, before the `NavHost` function:
+
+```kotlin
+val LocalUseNativeNavigation = staticCompositionLocalOf { false }
+```
+
+### Wrap the renderer for iOS
+
+`ScreenContent` renders a route, but it needs a wrapper that sets the same theme, dependency injection,
+and app-wide composition locals that `App()` usually sets up.
+
+Add the `SingleScreenApp` wrapper. It mirrors the setup from `App()` and additionally sets 
+`LocalUseNativeNavigation` to `true`, so each screen automatically hides its Compose-rendered title bar 
+and back button (introduced in the [Hide Compose's built-in navigation UI](#hide-compose-s-built-in-navigation-ui) step).
+
+In the `iosMain` source set, create `SingleScreenApp.kt`: 
+
 ```kotlin
 @Composable
 internal fun SingleScreenApp(
@@ -318,13 +313,12 @@ internal fun SingleScreenApp(
     onSet: (AppRoute) -> Unit,
     onActivate: (TopLevelRoute) -> Unit,
 ) {
-    // ... theme and flags setup
-
+    // Sets theme and flags
     CompositionLocalProvider(
         LocalUseNativeNavigation provides true,
         LocalFlags provides flags,
         LocalAppGraph provides appGraph,
-        // ... other providers
+        // Other providers
     ) {
         KotlinConfTheme(colors = colors) {
             Box(Modifier.fillMaxSize().background(KotlinConfTheme.colors.mainBackground)) {
@@ -335,9 +329,74 @@ internal fun SingleScreenApp(
 }
 ```
 
-## Expose iOS entry points in `main.ios.kt`
+### Apply the flag to tab roots
 
-In `iosMain/main.ios.kt`, add three Kotlin functions that Swift can call:
+Tab roots still go through the regular `NavHost`, so they also need to honor `LocalUseNativeNavigation`.
+Provide it based on whether native navigation callbacks are active.
+When they are active, render the navigation content directly and skip `NavScaffold` (the Compose bottom bar):
+
+```kotlin
+val useNativeNavigation = onNavigate != null
+
+CompositionLocalProvider(LocalUseNativeNavigation provides useNativeNavigation) {
+    Box(
+        // ...
+    ) {
+        val content = @Composable {
+            NavDisplay(
+                entries = navState.toDecoratedEntries(entryProvider),
+                onBack = navigator::goBack,
+            )
+        }
+        if (useNativeNavigation) {
+            content()
+        } else {
+            NavScaffold(
+                navState = navState,
+                navigator = navigator,
+                showGoldenKodee = showGoldenKodee,
+                content = content,
+            )
+        }
+    }
+}
+```
+
+For full implementations, see [`NavHost.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/commonMain/kotlin/org/jetbrains/kotlinconf/navigation/NavHost.kt)
+and [`SingleScreenApp.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/iosMain/kotlin/org/jetbrains/kotlinconf/SingleScreenApp.kt).
+
+## Hide Compose's built-in navigation UI
+
+With `LocalUseNativeNavigation` set wherever SwiftUI owns navigation, 
+individual screens now need to read it and hide their own chrome. 
+Otherwise, the user sees two title bars stacked on top of each other and two competing back buttons.
+
+In `BaseScreens.kt`, wrap the title bar and divider in `ScreenWithTitle` so they're skipped when Swift is in charge:
+
+```kotlin
+val useNativeNavigation = LocalUseNativeNavigation.current
+
+if (!useNativeNavigation) {
+    MainHeaderTitleBar(...)
+    HorizontalDivider(...)
+}
+```
+
+Apply the same pattern to any other screens that draw their own back buttons or headers.
+
+For the full implementation, see [`BaseScreens.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/commonMain/kotlin/org/jetbrains/kotlinconf/BaseScreens.kt).
+
+## Expose new iOS entry points
+
+Swift needs three Kotlin entry points to build the new navigation structure:
+
+* `MainViewController` with callbacks, for each tab root. 
+  Compose runs the full `App()` and `NavHost`, but navigation events are forwarded to Swift instead of being handled internally.
+* `ScreenViewController`, for each pushed detail screen. Renders a single route via `SingleScreenApp`, with `LocalUseNativeNavigation = true` so Compose chrome is hidden.
+* `MainViewController` without callbacks, as a pre-iOS 26 fallback. Liquid Glass APIs require iOS 26, so Swift falls back 
+  to the original full-Compose setup on older versions. Without this overload, the `#available` branch in Swift won't compile.
+
+In `iosMain/main.ios.kt`, add the three functions:
 
 ```kotlin
 // Pre-iOS 26 fallback: full Compose navigation, no native callbacks
@@ -379,15 +438,29 @@ fun ScreenViewController(
 }
 ```
 
-The first `MainViewController` overload (no nav callbacks) is required for the pre-iOS 26 `ComposeView`
-fallback in Swift. Without it, the `#available` branch for older iOS versions won't compile.
+For the full implementation, see [`main.ios.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/iosMain/kotlin/org/jetbrains/kotlinconf/main.ios.kt).
 
-## Build the Swift navigation layer
+## Build the SwiftUI navigation layer
 
-### Make `AppRoute` hashable
+This is the iOS side of the migration. All the Kotlin changes from the previous steps prepare the app for what happens here: 
+a SwiftUI `TabView` with per-tab `NavigationStack`s that host Compose views as their destinations.
+To build that, complete the following:
 
-`NavigationStack` requires its path elements to be `Hashable`. `AppRoute` is a Kotlin sealed interface, 
-so wrap it in a Swift struct:
+1. [Make Kotlin routes usable in `NavigationStack`](#make-kotlin-routes-usable-in-navigationstack).
+2. [Track tab and navigation state](#track-tab-and-navigation-state).
+3. [Embed Compose screens as SwiftUI views](#embed-compose-screens-as-swiftui-views).
+4. [Set up navigation within each tab](#set-up-navigation-within-each-tab).
+5. [Build the tab bar](#build-the-tab-bar).
+6. [Fall back on older iOS versions](#fall-back-on-older-ios-versions).
+
+Note that none of the code in this section applies Liquid Glass effects directly. 
+iOS 26 renders Liquid Glass automatically for native `TabView` and `NavigationStack`,
+and the migration itself is what unlocks it.
+
+### Make Kotlin routes usable in `NavigationStack`
+
+`NavigationStack` requires its path elements to be `Hashable` and identifiable.
+`AppRoute` is a Kotlin sealed interface, so wrap it in a Swift struct:
 
 ```swift
 @available(iOS 26.0, *)
@@ -405,10 +478,14 @@ struct RouteWrapper: Hashable, Identifiable {
 }
 ```
 
-Using `UUID` as the identity (not the route's content) means pushing the same route twice creates two distinct stack
-entries, which is the correct behavior.
+Pushing the same route twice should create two distinct stack entries, 
+matching the expected navigation behavior. 
+To achieve this, identity is based on `UUID` rather than the route's content.
 
-### Create per-tab and app-level coordinators
+### Track tab and navigation state
+
+Each tab has its own navigation stack, and the app tracks which tab is currently selected. 
+Add two `@Observable` classes to handle this:
 
 ```swift
 @available(iOS 26.0, *)
@@ -430,7 +507,10 @@ class TabNavigationCoordinator {
         path.removeAll()
     }
 }
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="@Observable class TabNavigationCoordinator { "}
 
+```swift
 @available(iOS 26.0, *)
 @Observable
 class AppNavigationCoordinator {
@@ -451,10 +531,14 @@ class AppNavigationCoordinator {
     }
 }
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="@Observable class AppNavigationCoordinator { "}
 
-### Bridge Kotlin views into SwiftUI
+### Embed Compose screens as SwiftUI views
 
-`NativeNavComposeView` renders a tab root (Compose NavHost) and forwards navigation events to Swift:
+Two `UIViewControllerRepresentable` types connect the Kotlin entry points from the previous step to SwiftUI: 
+one for tab roots, one for detail screens. 
+
+`NativeNavComposeView` hosts a tab root (Compose's `NavHost`) and forwards its navigation events:
 
 ```swift
 @available(iOS 26.0, *)
@@ -485,7 +569,7 @@ struct NativeNavComposeView: UIViewControllerRepresentable {
 }
 ```
 
-`DetailComposeView` renders a single detail screen for each `NavigationStack` destination:
+`DetailComposeView` hosts a single detail screen, one instance per `NavigationStack` destination:
 
 ```swift
 @available(iOS 26.0, *)
@@ -516,7 +600,12 @@ struct DetailComposeView: UIViewControllerRepresentable {
 }
 ```
 
-### Wrap each tab in a `NavigationStack`
+### Set up navigation within each tab
+
+At the tab level, a `NavigationStack` uses the Compose tab content as its root and renders detail screens as destinations.
+
+Note that `.navigationTitle(title)` must be set on the tab root even when `.navigationBarHidden(true)` is also applied. 
+iOS 26 reads this value to label the tab in the floating tab bar, and if it's missing, the label will be blank.
 
 ```swift
 @available(iOS 26.0, *)
@@ -537,8 +626,8 @@ struct TabContentView: View {
                 appCoordinator: appCoordinator
             )
                 .ignoresSafeArea(.all)
-                .navigationTitle(title)    // read by iOS 26 for the tab bar label
-                .navigationBarHidden(true) // Compose renders its own tab root header
+                .navigationTitle(title)
+                .navigationBarHidden(true)
                 .navigationDestination(for: RouteWrapper.self) { wrapper in
                     DetailComposeView(
                         route: wrapper.route,
@@ -555,10 +644,11 @@ struct TabContentView: View {
 }
 ```
 
-`.navigationTitle(title)` must be set on the tab root view even when `.navigationBarHidden(true)` is
-applied. iOS 26 reads this value to label the tab in the floating tab bar.
+### Build the tab bar
 
-### Assemble the `TabView`
+The top-level container is a `TabView` with one `Tab` per top-level route.
+`.tabBarMinimizeBehavior(.automatic)` enables the Liquid Glass floating tab bar. 
+Without it, the result is a standard fixed tab bar.
 
 ```swift
 @available(iOS 26.0, *)
@@ -583,20 +673,23 @@ struct NativeNavContentView: View {
                                appCoordinator: appCoordinator, title: String(localized: "Info"))
             }
         }
-        // Enables the liquid glass floating tab bar
         .tabBarMinimizeBehavior(.automatic) 
         .tint(Color(.accent))
     }
 }
 ```
 
-With two tabs, the app will look as follows:
+With two tabs, the app renders as follows:
 
 ![Two tabs](ios-kotlinconf-two-tabs.png){ width="250" style="block"}
 
-The same pattern scales to any number of tabs.
+The translucency, depth, and floating tab bar are all applied by iOS 26 — no additional styling code is needed.
 
-### Add the iOS version gate in `ContentView`
+### Fall back on older iOS versions
+
+Liquid Glass and the new `TabView` APIs are iOS 26 only. 
+On older versions, the app falls back to the previous Compose-driven setup using the no-callback `MainViewController`
+overload added in the previous step:
 
 ```swift
 struct ContentView: View {
@@ -611,7 +704,20 @@ struct ContentView: View {
 }
 ```
 
-The complete file is at [`app/iosApp/iosApp/ContentView.swift`](https://github.com/JetBrains/kotlinconf-app/blob/lg-nav/app/iosApp/iosApp/ContentView.swift).
+See the complete file: [`ContentView.swift`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/iosApp/iosApp/ContentView.swift).
+
+## Alternative approaches
+
+The migration in this tutorial favors native SwiftUI navigation, 
+which gives you Liquid Glass and other system behaviors out of the box. 
+If this approach doesn't fit your project, consider one of these alternatives:
+
+* **Compose-driven navigation with native interop controls**. Keep navigation in Compose, but embed native UI controls 
+  such as `UITabBar` and `UINavigationBar` for a closer-to-native look. 
+  This avoids the SwiftUI layer entirely but doesn't give you Liquid Glass styling.
+* **Compose-only navigation with imitated Liquid Glass effects**. Render everything in Compose and approximate Liquid Glass 
+  visually, for example, with a library like [KMP Liquid Glass](https://github.com/Kashif-E/KMPLiquidGlass).
+  This approach keeps all UI on the Compose side, with the effect visually similar but not identical to system Liquid Glass.
 
 ## What's next
 
