@@ -28,7 +28,7 @@ For example, to enable in-browser preloading of a font:
 1. Build your application's web distribution:
 
 ```console
-   ./gradlew :composeApp:wasmJsBrowserDistribution
+   ./gradlew :shared:wasmJsBrowserDistribution
 ```
 
 2. Find the required resource in the generated `dist` directory and save the path.
@@ -36,7 +36,7 @@ For example, to enable in-browser preloading of a font:
 4. Set the `href` attribute to the resource path:
 
 ```html
-<link rel="preload" href="./composeResources/username.composeapp.generated.resources/font/FiraMono-Regular.ttf" as="fetch" type="font/ttf" crossorigin/>
+<link rel="preload" href="./composeResources/username.shared.generated.resources/font/FiraMono-Regular.ttf" as="fetch" type="font/ttf" crossorigin/>
 ```
 
 ### Preload resources using the Compose Multiplatform preload API
