@@ -133,7 +133,7 @@ add some common code to be shared in the `shared/src/commonMain/kotlin/com.jetbr
     }
     ```
 
-2. Replace the code in created files with the following:
+2. Replace the code in existing files with the following:
 
      * In `commonMain/Platform.kt`:
 
