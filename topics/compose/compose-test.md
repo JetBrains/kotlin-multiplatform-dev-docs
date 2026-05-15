@@ -117,7 +117,7 @@ Now, you are ready to write and run common tests for the Compose Multiplatform U
 
 ### Write and run common tests
 
-In the `composeApp/src/commonTest/kotlin/<package>` directory, create a file named `ExampleTest.kt` and copy the following code into it:
+In the `shared/src/commonTest/kotlin/<package>` directory, create a file named `ExampleTest.kt` and copy the following code into it:
 
 ```kotlin
 import androidx.compose.material3.Button
@@ -176,7 +176,7 @@ There are two options:
 * Run the following command in the terminal:
 
    ```shell
-   ./gradlew :composeApp:iosSimulatorArm64Test
+   ./gradlew :shared:iosSimulatorArm64Test
    ```
 
 </tab>
@@ -185,7 +185,7 @@ There are two options:
 Run this command in the terminal:
 
 ```shell
-./gradlew :composeApp:connectedAndroidTest
+./gradlew :shared:connectedAndroidTest
 ```
 
 Currently, you cannot run common Compose Multiplatform tests using `android (local)` test configurations, so gutter icons in
@@ -199,7 +199,7 @@ You have two options:
 * Run the following command in the terminal:
 
    ```shell
-   ./gradlew :composeApp:jvmTest
+   ./gradlew :shared:jvmTest
    ```
 
 </tab>
@@ -208,7 +208,7 @@ You have two options:
 Run this command in the terminal:
 
 ```shell
-./gradlew :composeApp:wasmJsTest
+./gradlew :shared:wasmJsTest
 ```
 
 </tab>
