@@ -13,7 +13,7 @@ To properly configure the project to use multiplatform resources:
 
 To access resources in your multiplatform projects, add the library dependency and organize files within your project directory:
 
-1. In the `build.gradle.kts` file in the `composeApp` directory, add a dependency to the `commonMain` source set:
+1. In the `build.gradle.kts` file in the `sharedUI` directory, add a dependency to the `commonMain` source set:
 
    ```kotlin
    kotlin {

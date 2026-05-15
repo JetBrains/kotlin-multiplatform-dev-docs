@@ -2,7 +2,7 @@
 <show-structure for="chapter,procedure" depth="3"/>
 
 The overviews of [basic](multiplatform-discover-project.md) and [advanced](multiplatform-advanced-project-structure.md)
-project structure concepts should give you and understanding of source sets and dependency management.
+project structure concepts should give you an understanding of source sets and dependency management.
 What about modules which organize the source sets and rely on the dependencies?
 
 > The article talks specifically about KMP projects.
@@ -19,16 +19,16 @@ The general approach can be outlined as follows:
 * The shared code is generally divided into business logic and UI, and the strategy is to avoid unnecessary dependencies:
   * If all of your apps produced by the KMP project are using shared UI code as well as shared business logic,
     a single `shared` module for all of your shared code can be sufficient.
-  * If UI for any one of your apps is written using native code (for example, you implemented the iOS UI in pure Swift),
+  * If the UI for any one of your apps is written using native code (for example, you implemented the iOS UI in pure Swift),
     it makes sense to separate UI code from business logic to avoid Compose Multiplatform dependencies where they are not needed.
-    So you can have a `sharedLogic` and a `sharedUI` module, and add them as dependencies to entry point modules as needed.
+    So you can have a `sharedLogic` and a `sharedUI` module and add them as dependencies to entry point modules as needed.
 * If your project includes server code which should share logic with client apps, the recommended way to structure it is:
   * An `app` folder with entry point modules and client common code modules organized as described above.
   * A `server` module with the server-specific code.
   * A `core` module for code shared between the server and clients, such as models and validation.
 
-If your project uses older structure, with app entry points and shared code contained in a single module,
-you can follow guides below to extract the entry points into separate modules.
+If your project uses an older structure, with app entry points and shared code contained in a single module,
+you can follow the guides below to extract the entry points into separate modules.
 
 > It is mandatory to separate your Android app entry points from common code if you intend to use Android Gradle Plugin 9 or newer.
 > See our [AGP 9 migration article](multiplatform-project-agp-9-migration.md) for details.
@@ -605,11 +605,11 @@ In this example, you can leave it inside `shared`:
         ./gradlew :shared:embedAndSignAppleFrameworkForXcode
         ```
    
-    5. Note that the import in the `ContentView.swift` file needs to stay the same, because it matches the `baseName` parameter from
+    5. Note that the import in the `ContentView.swift` file needs to stay the same because it matches the `baseName` parameter from
        Gradle configuration of the iOS target,
-       not actual name of the module.
+       not the actual name of the module.
        If you change the framework name in the `shared/build.gradle.kts` file, you need to change the import directive accordingly.
 
 3. Run the app from Xcode or using the **iosApp** run configuration in IntelliJ IDEA
 
-[//]: # (TODO ## What's next: up for suggestions here — the first thought is to link platform-specific guidance)
+<!-- ## What's next -->

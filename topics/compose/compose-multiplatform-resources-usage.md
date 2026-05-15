@@ -32,13 +32,13 @@ Read on for details about the following topics:
 To use the prepared resources, import the generated class, for example:
 
 ```kotlin
-import project.composeapp.generated.resources.Res
-import project.composeapp.generated.resources.example_image
+import project.shared.generated.resources.Res
+import project.shared.generated.resources.example_image
 ```
 
 Here:
 * `project` is the name of your project
-* `composeapp` is the module where you placed the resource directories
+* `shared` is the module where you placed the resource directories
 * `Res` is the default name for the generated class
 * `example_image` is the name of an image file in the `composeResources/drawable` directory (`example_image.png`, for example).
 

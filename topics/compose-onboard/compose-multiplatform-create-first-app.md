@@ -45,12 +45,7 @@ Things to keep in mind for this tutorial:
 4. Specify the following fields in the **New Project** window:
 
     * **Name**: ComposeDemo
-    * **Group**: compose.project
-    * **Artifact**: demo
-
-    > If using the web wizard, specify "ComposeDemo" as **Project Name** and "compose.project.demo" as **Project ID**.
-    >
-    {style="note"}
+    * **Project ID** (used as the package name): compose.project.demo
 
 5. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
     Make sure that the **Share UI** option is selected for iOS and web.
@@ -69,41 +64,46 @@ If you didn't select iOS in the wizard, you won't have the folders whose names b
 >
 {style="note"}
 
-The project contains two modules:
+The project contains the following modules:
 
-* _composeApp_ is a Kotlin module that contains the logic shared among the Android, desktop, iOS, and web applications – the code
-  you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
+* **shared** is a Kotlin Multiplatform module that contains the logic shared among the Android, desktop, iOS, and web applications
+  – the code you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
   you automate your build process.
-* _iosApp_ is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
+* **androidApp** is the module that builds into an Android application.
+* **iosApp** is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
+* **desktopApp** is the module that builds into a desktop JVM application. It depends on the `shared` module.
+* **webApp** is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
 
-  ![Compose Multiplatform project structure](compose-project-structure.png)
+![Compose Multiplatform project structure](compose-project-structure.png){width=400}
 
-The **composeApp** module consists of the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
-`jvmMain`, `wasmJsMain`, and `webMain` (with `commonTest` if you chose to include tests).
+The **shared** module contains the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
+`jvmMain`, and `wasmJsMain` (with `-Test` companion source sets if you chose to include tests).
+
 A _source set_ is a Gradle concept for a number of files logically grouped together, where each group has its own
-dependencies. In Kotlin Multiplatform, different source sets can target different platforms.
+dependencies. In Kotlin Multiplatform, different source sets usually target different platforms.
 
 The `commonMain` source set uses the common Kotlin code, and platform source sets use Kotlin code specific to each
-target: 
+target:
 
-* `jvmMain` is the source file for desktop, which uses Kotlin/JVM.
-* `androidMain` also uses Kotlin/JVM.
-* `iosMain` uses Kotlin/Native.
-* `jsMain` uses Kotlin/JS.
-* `wasmJsMain` uses Kotlin/Wasm.
-* `webMain` is the web [intermediate source set](multiplatform-hierarchy.md#manual-configuration) that includes `jsMain` and `wasmJsMain`.
+* `jvmMain` contains source files for the desktop target, which uses Kotlin/JVM.
+* `androidMain` contains Android source files and targets Kotlin/JVM.
+* `iosMain` contains Kotlin code for iOS and targets Kotlin/Native.
+* `jsMain` contains JavaScript-specific Kotlin code and targets Kotlin/JS.
+* `wasmJsMain` contains Wasm-specific Kotlin code and targets Kotlin/Wasm.
 
-When the shared module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM. When it is built
-into an iOS framework, common Kotlin code gets treated as Kotlin/Native. When the shared module is built into a web app, common 
-Kotlin code can be treated as Kotlin/Wasm and Kotlin/JS.
+This way, when the `shared` module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM, and
+when it is built into an iOS framework, common Kotlin code gets treated as Kotlin/Native.
+When the shared module is built into a web app, common Kotlin code can be treated as Kotlin/Wasm or Kotlin/JS
+as necessary.
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](module-structure.svg){width=700}
 
-In general, write your implementation as common code whenever possible instead of duplicating functionality
-in platform-specific source sets.
+In general, write your implementation as common code whenever possible,
+to take advantage of implementing only once the functionality that should work the same across platforms.
+Platform-specific source sets ideally contain only platform-specific API calls and UX flows.
 
-In the `composeApp/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
+In the `shared/src/commonMain/kotlin` directory, open the `App.kt` file. It contains the `App()` function, which implements a
 minimalistic but complete Compose Multiplatform UI:
 
 ```kotlin
@@ -136,7 +136,7 @@ fun App() {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true"  collapsed-title="fun App()"}
+{id="common-app-composable"}
 
 Let's run the application on all supported platforms.
 
@@ -145,21 +145,21 @@ Let's run the application on all supported platforms.
 You can run the application on Android, iOS, desktop, and web. You don't have to run the applications in any particular
 order, so start with whichever platform you are most familiar with.
 
-> You don't need to use the Gradle build task. In a multiplatform application, this will build debug and release versions
-> of all the supported targets. Depending on the platforms selected in the Multiplatform wizard, this can take some time.
-> Using a run configuration is much faster; only the selected target is built in this case.
+> The provided run configurations are more efficient than the general Gradle build task.
+> Run configurations only trigger builds for corresponding targets while the default Gradle task
+> builds debug and release versions of all targets.
 >
 {style="tip"}
 
 ### Run your application on Android
 
-1. In the list of run configurations, select **composeApp**.
+1. In the list of run configurations, select **androidApp**.
 2. Choose your Android virtual device and then click **Run**: Your IDE starts the selected virtual device if it
-   is powered down, and runs the app.
+   is powered down and runs the app.
 
-![Run the Compose Multiplatform app on Android](compose-run-android.png){width=350}
+![Run the Compose Multiplatform app on Android](compose-run-android.png){width=352}
 
-![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=300}
+![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=352}
 
 <snippet id="run_android_other_devices">
 
@@ -179,31 +179,12 @@ If you haven't launched Xcode as part of the initial setup, do that before runni
 
 In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
 and click **Run**.
-If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
 
-![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=350}
+![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=405}
 
-![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=300}
+![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=411}
 
 <snippet id="run_ios_other_devices">
-
-#### Run on a new iOS simulated device {initial-collapse-state="collapsed" collapsible="true"}
-
-If you want to run your application on a simulated device, you can add a new run configuration.
-
-1. In the list of run configurations, click **Edit Configurations**.
-
-   ![Edit run configurations](ios-edit-configurations.png){width=450}
-
-2. Click the **+** button above the list of configurations and then select **Xcode Application**.
-
-   ![New run configuration for iOS application](ios-new-configuration.png)
-
-3. Name your configuration.
-4. Select the **Working directory**. To do so, navigate to your project, for example, **KotlinMultiplatformSandbox**,
-   in the `iosApp` folder.
-
-5. Click **Run** to run your application on the new simulated device.
 
 #### Run on a real iOS device {initial-collapse-state="collapsed" collapsible="true"}
 
@@ -212,36 +193,24 @@ you'll need to set the Team ID associated with your [Apple ID](https://support.a
 
 ##### Set your Team ID
 
-To set the Team ID in your project, you can either use the KDoctor tool in IntelliJ IDEA or choose your team in Xcode.
+To set new Team ID for your project for the first time, open the project in Xcode
+(**File | Open Project in Xcode**):
 
-For KDoctor:
-
-1. In IntelliJ IDEA, run the following command in the terminal:
-
-   ```none
-   kdoctor --team-ids 
-   ```
-
-   KDoctor will list all Team IDs currently configured on your system, for example:
-
-   ```text
-   3ABC246XYZ (Max Sample)
-   ZABCW6SXYZ (SampleTech Inc.)
-   ```
-
-2. In IntelliJ IDEA, open the `iosApp/Configuration/Config.xcconfig` and specify your Team ID.
-
-Alternatively, choose the team in Xcode:
-
-1. Go to Xcode and select **Open a project or file**.
-2. Navigate to the `iosApp/iosApp.xcworkspace` file of your project.
-3. In the left-hand menu, select `iosApp`.
-4. Navigate to **Signing & Capabilities**.
-5. In the **Team** list, select your team.
+1. In the Project navigator on the left-hand side, select **iosApp**.
+2. Select **iosApp** under **Targets** and switch to the **Signing & Capabilities** tab.
+3. In the **Team** list, select your team.
 
    If you haven't set up your team yet, use the **Add an Account** option in the **Team** list and follow Xcode instructions.
 
-6. Make sure that the Bundle Identifier is unique and the Signing Certificate is successfully assigned.
+4. Make sure that the Bundle Identifier is unique and a Signing Certificate is successfully assigned.
+
+After you set up a team in Xcode, you can set or change the team in IntelliJ IDEA:
+
+1. Edit the run configuration for **iosApp**:
+
+   ![Edit iOS run configuration](ios-edit-configurations.png){width=450}
+
+2. Switch to the **Options** tab and make the necessary changes in the **Development team** dropdown, then click **OK**.
 
 ##### Run the app
 
@@ -254,19 +223,18 @@ In short, you should:
 1. Connect your iPhone with a cable.
 2. On your iPhone, enable the developer mode in **Settings** | **Privacy & Security**.
 3. In Xcode, go to the top menu and choose **Window** | **Devices and Simulators**.
-4. Click on the plus sign. Select your connected iPhone and click **Add**.
-5. Sign in with your Apple ID to enable development capabilities on the device.
-6. Follow the on-screen instructions to complete the pairing process.
+4. If your iPhone is not shown as connected, click the plus sign at the bottom left and select it.
+5. Follow the on-screen instructions to complete the pairing process.
 
-Once you've registered your iPhone in Xcode, [create a new run configuration](#run-on-a-new-ios-simulated-device)
-in IntelliJ IDEA and select your device in the **Execution target** list. Run the corresponding `iosApp` configuration.
+Once you've registered your iPhone in Xcode, it will become available in the list of available devices in IntelliJ IDEA
+when you select the **iosApp** run configuration.
 
 </snippet>
 
 ### Run your application on desktop
 
-Select **composeApp [desktop]** in the list of run configurations and click **Run**. By default, the run configuration
-starts a desktop app in its own OS window:
+Select **desktopApp [hot] 🔥** in the list of run configurations and click **Run**.
+By default, the run configuration starts a desktop app in its own OS window with [Compose Hot Reload](compose-hot-reload.md) running:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
 
@@ -276,21 +244,16 @@ starts a desktop app in its own OS window:
 
 1. In the list of run configurations, select:
 
-   * **composeApp[js]**: To run your Kotlin/JS application.
-   * **composeApp[wasmJs]**: To run your Kotlin/Wasm application.
-
-   ![Run the Compose Multiplatform app on web](web-run-configuration.png){width=400}
+   * **webApp[js]**: To run your Kotlin/JS application.
+   * **webApp[wasmJs]**: To run your Kotlin/Wasm application.
 
 2. Click **Run**.
 
-The web application opens automatically in your browser. 
-Alternatively, you can type the following URL in your browser when the run is finished:
+The web application opens automatically in your default browser
+and is available by default at `http://localhost:8080/`. 
 
-```shell
-   http://localhost:8080/
-```
-> The port number can vary because the 8080 port may be unavailable.
-> You can find the actual port number in the Gradle build console.
+> The port number can vary because port 8080 may be unavailable.
+> You can find the actual port number in the Gradle build console by searching for the phrase "Project is running at".
 >
 {style="tip"}
 
@@ -305,7 +268,7 @@ This mode is achieved through cross-compilation for both the `js` and `wasmJs` t
 To enable compatibility mode for your web application:
 
 1. Open the Gradle tool window by selecting **View | Tool Windows | Gradle**.
-2. In **composedemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
+2. In **ComposeDemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
 
    > You need at least Java 11 as your Gradle JVM for the tasks to load successfully, and we recommend at least
    > JetBrains Runtime 17 for Compose Multiplatform projects in general.

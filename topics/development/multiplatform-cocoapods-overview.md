@@ -124,7 +124,7 @@ The following steps show the configuration on a freshly generated project:
    alias(libs.plugins.kotlinCocoapods) apply false
    ```
 
-4. Open the module where you want to integrate CocoaPods, for example the `composeApp` module, and add the following alias
+4. Open the module where you want to integrate CocoaPods, for example, the `sharedLogic` module, and add the following alias
    to the `plugins {}` block of the `build.gradle.kts` file:
 
    ```kotlin

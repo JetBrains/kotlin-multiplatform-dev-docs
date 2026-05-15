@@ -321,7 +321,7 @@ For iOS, in Swift code add an `application()` variant that handles incoming URIs
 
 ```swift
 // Imports the KMP module to access the singleton
-import ComposeApp
+import SharedUI
 
 func application(
     _ application: UIApplication,

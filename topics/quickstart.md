@@ -144,12 +144,12 @@ The specific Gradle commands for each platform are listed below.
 <tabs>
 <tab title="Android">
 
-To run the Android app, start the **composeApp** run configuration:
+To run the Android app, start the **androidApp** run configuration:
 
 ![Dropdown with the Android run configuration highlighted](run-android-configuration.png){width=250}
 
 To create an Android run configuration manually, choose **Android App** as the run configuration template
-and select the module **[project name].composeApp**.
+and select the module **[project name].androidApp**.
 
 By default, it runs on the first available virtual device:
 
@@ -175,15 +175,15 @@ The very first build collects native dependencies for compilation and warms up t
 </tab>
 <tab title="Desktop">
 
-The default run configuration for a desktop app is created as **composeApp [desktop]**:
+The default run configuration for a desktop app is created as **desktopApp [hot] 🔥**:
 
 ![Dropdown with the default desktop run configuration highlighted](run-desktop-configuration.png){width=250}
 
-To create a desktop run configuration manually, choose a **Gradle** run configuration template and point to
-the **[app name]:composeApp** Gradle project with the following command:
+To create a desktop run configuration with Hot Reload manually, choose a **Gradle** run configuration template and point to
+the **[app name]:desktopApp** Gradle project with the following command:
 
 ```shell
-desktopRun -DmainClass=com.example.myapplication.MainKt --quiet
+hotRun --mainClass "com.example.demo.MainKt"
 ```
 
 With this configuration you can run the JVM desktop app:
@@ -193,12 +193,12 @@ With this configuration you can run the JVM desktop app:
 </tab>
 <tab title="Web">
 
-The default run configuration for a web app is created as **composeApp [wasmJs]**:
+The default run configuration for a web app is created as **webApp [wasmJs]**:
 
 ![Dropdown with the default Wasm run configuration highlighted](run-wasm-configuration.png){width=250}
 
 To create a web run configuration manually, choose a **Gradle** run configuration template and point to
-the **[app name]:composeApp** Gradle project with the following command:
+the **[app name]:webApp** Gradle project with the following command:
 
 ```shell
 wasmJsBrowserDevelopmentRun

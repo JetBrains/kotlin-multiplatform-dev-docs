@@ -1,6 +1,6 @@
 # Manage local resource environment
 
-You may need to manage in-app settings that allow users customize their experience, such as changing the language or theme.
+You may need to manage in-app settings that allow users to customize their experience, such as changing the language or theme.
 To dynamically update the application's resource environment, you can configure the following resource-related 
 settings used by the application:
 
@@ -164,7 +164,7 @@ provide the corresponding declarations for each platform using the platform-spec
             ...
         </head>
         <body></body>
-        <script src="composeApp.js"></script>
+        <script src="webApp.js"></script>
     </html>
     ```  
 
