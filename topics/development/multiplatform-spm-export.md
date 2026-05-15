@@ -98,10 +98,10 @@ To set up the publishing of an XCFramework:
    > In case you work with a Compose Multiplatform project, use the following Gradle task:
    >
    > ```shell
-   > ./gradlew :composeApp:assembleSharedXCFramework
+   > ./gradlew :sharedUI:assembleSharedXCFramework
    > ```
    >
-   > You can then find the resulting framework in the `composeApp/build/XCFrameworks/release/Shared.xcframework` folder.
+   > You can then find the resulting framework in the `sharedUI/build/XCFrameworks/release/Shared.xcframework` folder.
    >
    {style="tip"}
 

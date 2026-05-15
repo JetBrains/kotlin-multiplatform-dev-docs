@@ -102,7 +102,7 @@ Now, you can use this configuration to run the task:
 
 ![Run the Wasm distribution task](compose-run-wasm-distribution-task.png){width=350}
 
-Once the task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
+Once the task completes, you can find the generated artifacts in the `sharedUI/build/dist/wasmJs/productionExecutable`
 directory:
 
 ![Artifacts directory](compose-web-artifacts.png){width=400}
