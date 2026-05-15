@@ -40,7 +40,7 @@ This `App()` function is used as the base of the UI architecture for the app and
 
 The `horizontalAlignment` parameter of the `Column()` function centers the column's content.
 For this to come into effect, the column should take up the full width of its container.
-This is achieved using the `modifier` parameter.
+You can achieve this by using the `modifier` parameter.
 
 Modifiers are a key component of Jetpack Compose and Compose Multiplatform.
 They provide the primary mechanism to adjust the appearance or behavior of composables in the UI.
@@ -51,8 +51,8 @@ and the extensive [Jetpack Compose modifier documentation](https://developer.and
 
 ## Managing the state
 
-There is a persistent quality to the loaded image: it should consistently be either visible or hidden across recompositions
-unless the button is clicked.
+There is a persistent quality to the loaded image: it should consistently remain either visible or hidden across recompositions
+unless user clicks the button.
 The `showContent` property in the `App()` composable is built using the `mutableStateOf()` function,
 which means it's a state object that can be observed:
 
@@ -74,8 +74,14 @@ because the parent `AnimatedVisibility()` composable observes `showContent`.
 
 ## Launching UI on different platforms
 
-The `App()` function is executed differently on each platform. On Android, it's managed by an activity; on iOS, by a view 
-controller; on the desktop, by a window; and on the web, by a container. Let's examine each of them.
+The `App()` function is executed differently on each platform:
+
+* On Android, it's managed by an activity.
+* On iOS, by a view controller.
+* On the desktop, by a window.
+* On the web, by a container.
+
+Let's examine each of them.
 
 ### On Android
 
@@ -125,7 +131,7 @@ fun main() = application {
 
 * Here, the `application()` function launches a new desktop application.
   This function takes a lambda, which initializes the UI.
-* Typically, within `application()` you create a `Window` and specify its properties
+* Typically, within the `application()` function, you create a `Window` and specify its properties
   as well as instructions for the program that should be executed when the window is closed (`onCloseRequest`).
   In the default project, the whole application shuts down (`::exitApplication`).
 * Inside the window, you can place your content.

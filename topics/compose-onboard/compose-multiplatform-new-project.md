@@ -31,9 +31,9 @@ specific platforms that best suit your needs.
 
 ## Lay the foundation
 
-To get started, implement a new `App` composable:
+To get started, implement a new `App()` composable:
 
-1. In `shared/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App`
+1. In `shared/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App()`
    composable:
 
     ```kotlin

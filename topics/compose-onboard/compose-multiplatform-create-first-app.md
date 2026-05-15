@@ -64,7 +64,7 @@ If you didn't select iOS in the wizard, you won't have the folders whose names b
 >
 {style="note"}
 
-The project contains two modules:
+The project contains the following modules:
 
 * **shared** is a Kotlin Multiplatform module that contains the logic shared among the Android, desktop, iOS, and web applications
   – the code you use for all the platforms. It uses [Gradle](https://kotlinlang.org/docs/gradle.html) as the build system that helps
@@ -94,7 +94,7 @@ target:
 * `jsMain` contains JavaScript-specific Kotlin code and targets Kotlin/JS.
 * `wasmJsMain` contains Wasm-specific Kotlin code and targets Kotlin/Wasm.
 
-This way, when the `shared` module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM;
+This way, when the `shared` module is built into an Android library, common Kotlin code gets treated as Kotlin/JVM, and
 when it is built into an iOS framework, common Kotlin code gets treated as Kotlin/Native.
 When the shared module is built into a web app, common Kotlin code can be treated as Kotlin/Wasm or Kotlin/JS
 as necessary.
@@ -147,7 +147,7 @@ Let's run the application on all supported platforms.
 You can run the application on Android, iOS, desktop, and web. You don't have to run the applications in any particular
 order, so start with whichever platform you are most familiar with.
 
-> The provided run configurations are more efficient than the general Gradle build task:
+> The provided run configurations are more efficient than the general Gradle build task.
 > Run configurations only trigger builds for corresponding targets while the default Gradle task
 > builds debug and release versions of all targets.
 >
@@ -212,7 +212,7 @@ After you set up a team in Xcode, you can set or change the team in IntelliJ IDE
 
    ![Edit iOS run configuration](ios-edit-configurations.png){width=450}
 
-2. Switch to the **Options** tab and make necessary changes in the **Development team** dropdown, then click **OK**.
+2. Switch to the **Options** tab and make the necessary changes in the **Development team** dropdown, then click **OK**.
 
 ##### Run the app
 
@@ -229,7 +229,7 @@ In short, you should:
 5. Follow the on-screen instructions to complete the pairing process.
 
 Once you've registered your iPhone in Xcode, it will become available in the list of available devices in IntelliJ IDEA
-when the **iosApp** run configuration is selected.
+when you select the **iosApp** run configuration.
 
 </snippet>
 
@@ -252,10 +252,10 @@ By default, the run configuration starts a desktop app in its own OS window with
 2. Click **Run**.
 
 The web application opens automatically in your default browser
-and is available by default at http://localhost:8080/ 
+and is available by default at `http://localhost:8080/`. 
 
-> The port number can vary because the 8080 port may be unavailable.
-> You can find the actual port number in the Gradle build console searching for the phrase "Project is running at".
+> The port number can vary because port 8080 may be unavailable.
+> You can find the actual port number in the Gradle build console by searching for the phrase "Project is running at".
 >
 {style="tip"}
 
