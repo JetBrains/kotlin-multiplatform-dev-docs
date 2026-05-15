@@ -30,11 +30,10 @@ but the same pattern scales to any number of tabs.
 
 In a standard Compose Multiplatform setup, a single `ComposeUIViewController` owns the entire iOS app:
 tabs, navigation stack, back gestures, and screen content. 
+Compose Multiplatform's navigation transitions on iOS are designed to feel native,
+but some platform-level features, such as iOS 26's Liquid Glass tab bar styling, 
+are only available through native iOS components.
 
-This approach works, but with trade-offs:
-
-* The tab bar and navigation transitions look like Material 3, not native iOS.
-* You can't use iOS 26's Liquid Glass tab bar or system `NavigationStack` behavior.
 
 The solution is to hand navigation over to SwiftUI, letting the system render the tab bar and navigation stack natively 
 while Compose continues to render each screen's content.
@@ -71,7 +70,7 @@ Here's how navigation flows in the new setup:
 The migration touches both the shared Compose Multiplatform code and the native iOS code.
 In the shared Kotlin code:
 
-* [Add title metadata to routes](#add-title-metadata-to-routes) so SwiftUI can render navigation bar titles without calling back into Kotlin.
+* [Add title metadata to routes](#add-title-metadata-to-routes) so SwiftUI can render navigation bar titles and back stack entries without calling back into Kotlin.
 * [Add navigation callbacks to the iOS entry point](#add-navigation-callbacks-to-the-ios-entry-point) so the iOS layer can control which tab is active and respond to navigation events.
 * [Intercept navigation at the Compose level](#intercept-navigation-at-the-compose-level) so detail routes are forwarded to Swift instead of being handled by Compose.
   This tutorial shows the Nav3 implementation — adapt this step if you use a different navigation library.
@@ -86,9 +85,10 @@ In the native iOS code (Swift):
 
 ## Add title metadata to routes
 
-SwiftUI's `NavigationStack` displays a navigation bar title for each pushed destination. 
-We'll store titles directly on the route objects,
-so each route is self-describing and Swift can read the title without round-trips to Kotlin.
+On iOS, each pushed destination has a title that appears in the navigation bar, 
+as well as in the back stack revealed by long-pressing the back button.
+We'll store titles directly on the route objects, so each route is self-describing 
+and Swift can read the title without round-trips to Kotlin.
 
 1. In the `navigation/Routes.kt` file, add `title` and `subtitle` properties to `AppRoute`:
 
@@ -720,8 +720,8 @@ which gives you Liquid Glass and other system behaviors out of the box.
 If this approach doesn't fit your project, consider one of these alternatives:
 
 * **Compose-driven navigation with native interop controls**. Keep navigation in Compose, but embed native UI controls 
-  such as `UITabBar` and `UINavigationBar` for a closer-to-native look. 
-  This avoids the SwiftUI layer entirely but doesn't give you Liquid Glass styling.
+  such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
+  between native overlays and Compose content.
 * **Compose-only navigation with imitated Liquid Glass effects**. Render everything in Compose and approximate Liquid Glass 
   visually, for example, with a library like [KMP Liquid Glass](https://github.com/Kashif-E/KMPLiquidGlass).
   This approach keeps all UI on the Compose side, with the effect visually similar but not identical to system Liquid Glass.
