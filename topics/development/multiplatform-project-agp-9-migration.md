@@ -62,12 +62,8 @@ tutorial.
   branch.
 This branch also has examples of isolated app modules for other platforms.
 
-<!-- When the new structure is implemented in the wizard, this is going to change: 
-     following the tutorial will bring you to the new structure already.
-     So when the update hits we update with the following:
-
-The sample with an example of older structure is in the [old-project-structure](https://github.com/kotlin-hands-on/get-started-with-cm/tree/old-project-structure)
-branch of the sample repository. -->
+The sample with an example of a project as it was structured by default previously
+is in the [old-project-structure](https://github.com/kotlin-hands-on/get-started-with-cm/tree/old-project-structure) branch.
 
 The sample consists of a single Gradle module (`composeApp`) that contains all the shared code and KMP entry
 points,
@@ -299,7 +295,7 @@ When all of your code works with the new configuration:
     ```kotlin
     alias(libs.plugins.kotlinAndroid)
     ```
-5. In the `composeApp/build.gradle.kts` file update the namespace in the `kotlin.androidLibrary {}` block
+5. In the `composeApp/build.gradle.kts` file, update the namespace in the `kotlin.androidLibrary {}` block
    so that it doesn't conflict with the app's namespace. For example:
 
     ```kotlin
@@ -307,6 +303,8 @@ When all of your code works with the new configuration:
         androidLibrary {
             namespace = "compose.project.demo.composedemolibrary"
             // ...
+        }
+    }
     ```
    
 6. Select **Build | Sync Project with Gradle Files** in the main menu, or click the Gradle refresh button in the
@@ -316,8 +314,7 @@ When all of your code works with the new configuration:
 
 Congratulations! You have upgraded your project to be compatible with AGP 9.0.
 
-<!-- Commented out for now
 ## What's next
 
 Check out the [recommended project structure](multiplatform-project-recommended-structure.md)
-which follows the logic of separating entry points for any app target you might have. -->
+which follows the logic of separating entry points for any app target you might have.
