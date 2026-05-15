@@ -36,12 +36,12 @@ for developing Kotlin Multiplatform libraries. This template helps create librar
 various platforms.
 
 In the template project, `library` serves as the core module and contains the main source code and build resources for 
-the Multiplatform library.
+the multiplatform library.
 
 ![Multiplatform library project structure](multiplatform-library-template-project.png){width=350}
 
 The `library` module is structured to accommodate shared code as well as platform-specific implementations. 
-Here's a breakdown of the contents in its main source code (`src`):
+Here's a breakdown of its source code:
 
 * **`commonMain`:** contains Kotlin code shared across all target platforms. This is where you place code that doesn't 
      rely on any platform-specific APIs.
@@ -104,7 +104,8 @@ The other platforms follow the same pattern, with variations in the values of `f
 Now that you're familiar with how shared and platform-specific code work in the template, let's extend the project by adding support for an additional platform.
 
 Configure support for the [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-overview.html) platform by using 
-the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties). You can implement platform-specific functionality for the `firstElement` and `secondElement` properties.
+the [expect / actual mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties),
+then implement platform-specific functionality for the `firstElement` and `secondElement` properties.
 
 ### Add the Kotlin/Wasm target to your project
 
@@ -116,16 +117,13 @@ the [`expect`/`actual` mechanism](multiplatform-connect-to-apis.md#expected-and-
         @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
         wasmJs {
             browser()
-            // ...
             binaries.executable()
         }
         // ...
         sourceSets {
             //...
-            val wasmJsMain by getting {
-                dependencies {
-                    // Wasm-specific dependencies
-                }
+            wasmJsMain.dependencies {
+                // Wasm-specific dependencies
             }
         }
     }
@@ -190,13 +188,13 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
       }
    ```
 
-2. Locate the `mavenPublishing { }` block and comment out the `signAllPublications()`
-   method to indicate that the publication is local-only:
+2. Locate the `mavenPublishing {}` block and comment out the `signAllPublications()`
+   call to indicate that the publication is local-only:
 
     ```kotlin
-    mavenPublishing{
+    mavenPublishing {
         // ...
-        // Comment out the following method:
+        // Comment out the following call:
         // signAllPublications()
     }
     ```
@@ -216,31 +214,25 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 
 Your library is published to the local Maven repository. 
 
-To locate your published library, use your file explorer or terminal and navigate to `.m2\repository\io\github\kotlin\library\1.0.0\`
-in your user home directory.
+To locate the published artifacts, use your file explorer or terminal and navigate
+to the `~\.m2\repository\io\github\kotlin\library\1.0.0\` directory.
 
 ## Add your library as a dependency in another project
 
 After publishing your Multiplatform library to the local Maven repository, you can use it in other Kotlin projects on the same machine.
 
-In your consumer project's `build.gradle.kts` file, add a dependency on the published library:
+In your consumer project's `settings.gradle.kts` file, add the option to look for packages in the local repository: 
 
 ```kotlin
-repositories {
-    // ...
-    mavenLocal()
-}
-
-dependencies {
-    // ...
-    implementation("io.github.kotlin:library:1.0.0")
+dependencyResolutionManagement {
+    repositories {
+        // ...
+        mavenLocal()
+    }
 }
 ```
 
-The `repositories{}` block tells Gradle to resolve the library from the local Maven repository and make it available in shared code.
-
-The `implementation` dependency consists of your library's group and version specified in its `build.gradle.kts` file.
-
+In a module's `build.gradle.kts` file, add a dependency on the published library.
 If you're adding it to another multiplatform project, you can add it to shared or platform-specific source sets:
 
 ```kotlin
@@ -248,22 +240,27 @@ kotlin {
     //...
     sourceSets {
         // For all platforms
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
                 implementation("io.github.kotlin:library:1.0.0")
-            }
         }
-        // Or for specific platforms
-        val wasmJsMain by getting {
-            dependencies {
-                implementation("io.github.kotlin:library:1.0.0")
-            }
+        // Or for a specific platforms
+        wasmJsMain.dependencies {
+            implementation("io.github.kotlin:library:1.0.0")
         }
     }
 }
 ```
 
-Sync the consumer project and start using your library!
+The `implementation()` call accepts your library's group, name, and version specified in its `build.gradle.kts` file.
+
+Sync the consumer project and start using your library, for example:
+
+```kotlin
+import io.github.kotlin.fibonacci.generateFibi
+
+val seq = generateFibi()
+println(seq.elementAt(3))
+```
 
 ## What's next
 
