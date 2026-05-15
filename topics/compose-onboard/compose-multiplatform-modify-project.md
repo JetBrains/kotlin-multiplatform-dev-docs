@@ -25,18 +25,24 @@ But we recommend that you use this approach only when there's no Kotlin Multipla
 you can rely on the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library.
 
 > You can explore Kotlin Multiplatform libraries available for your target platforms on [klibs.io](https://klibs.io/),
-> an experimental search service from JetBrains for discovering multiplatform libraries.
+> a search service by JetBrains for discovering multiplatform libraries.
 >
 {style="tip"}
 
 To use the `kotlinx-datetime` library:
 
-1. Open the `composeApp/build.gradle.kts` file and add the dependencies to the project:
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
 
-    * Add the main `kotlinx-datetime` dependency to the section that configures the common code source set.
-      For simplicity, you can include the version number directly instead of adding it to the version catalog.
-    * For the web target, timezone support requires the `js-joda` library. 
-      Add a reference to the `js-joda` npm package in the `webMain` dependencies.
+    ```text
+    [versions]
+    kotlinx-datetime = "0.8.0"
+    
+    [libraries]
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+    ```
+
+2. Open the `shared/build.gradle.kts` file and add a reference to that library entry
+   to the section that configures the common code source set:
       
     ```kotlin
     kotlin {
@@ -45,27 +51,41 @@ To use the `kotlinx-datetime` library:
             // ...
             commonMain.dependencies {
                 // ...
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
-            }
-            webMain.dependencies {
-                implementation(npm("@js-joda/timezone", "2.22.0"))
+                implementation(libs.kotlinx.datetime)
             }
         }
     }
     
     ```
-    
-2. Once the dependency is added, you're prompted to resync the project. Click the **Sync Gradle Changes** button to synchronize Gradle files: ![Synchronize Gradle files](gradle-sync.png){width=50}
+3. For the web target, timezone support requires the `js-joda` library.
+   Add a reference to the `js-joda` npm package to the `webApp/build.gradle.kts file`:
 
-3. In the **Terminal** tool window, run the following command:
+    ```kotlin
+    kotlin {
+        // ...
+        sourceSets {
+            // ...
+            commonMain.dependencies {
+                // ...
+                implementation(npm("@js-joda/timezone", "2.25.1"))
+            }
+        }
+    }
+    
+    ```
+
+    Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
+
+4. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
+   or press double **Shift** and execute the **Sync Project with Gradle Files** command.
+
+5. In the **Terminal** tool window, run the following command to ensure that the `yarn.lock` file is updated with the latest dependency versions:
 
     ```shell
     ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
     ```
-
-   This Gradle task ensures that the `yarn.lock` file is updated with the latest dependency versions.
  
-4. In the `webMain` source set, use the `@JsModule` annotation to import the `js-joda` npm package: 
+6. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package: 
 
     ```kotlin
     import androidx.compose.ui.ExperimentalComposeUiApi
@@ -88,9 +108,15 @@ To use the `kotlinx-datetime` library:
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
+> When commiting your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
+> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
+> 
+{style="note"}
+
 ## Enhance the user interface
 
-1. Open the `composeApp/src/commonMain/kotlin/App.kt` file and add the following function which returns a string containing the current date:
+1. Open the `shared/src/commonMain/kotlin/App.kt` file and after the `App()` composable add the following function
+   which returns a string containing the current date:
 
    ```kotlin
    fun todaysDate(): String {
@@ -101,7 +127,9 @@ To use the `kotlinx-datetime` library:
        return now.toLocalDateTime(zone).format()
    }
    ```
-2. Add the imports that are suggested by the IDE. Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
+2. Add the imports that are suggested by the IDE.
+   
+   Make sure to import the `Clock` class from `kotlin.time`, **not** `kotlinx.datetime`. 
 3. In the same file, modify the `App()` composable to include the `Text()` composable that invokes this function and displays the result:
    
     ```kotlin
@@ -138,8 +166,6 @@ To use the `kotlinx-datetime` library:
     ```
 
 4. Follow the IDE's suggestions to import the missing dependencies.
-   Make sure to import all the missing dependencies for the `todaysDate()` function from the updated packages, and
-   opt in when prompted by the IDE.
 
    ![Unresolved references](compose-unresolved-references.png)
 
@@ -153,10 +179,10 @@ using the same run configurations for Android, iOS, desktop, and web:
         <img src="first-compose-project-on-android-ios-2.png" alt="First Compose Multiplatform app on Android and iOS" width="500"/>
     </tab>
     <tab id="desktop-app" title="Desktop">
-        <img src="first-compose-project-on-desktop-2.png" alt="First Compose Multiplatform app on desktop" width="400"/>
+        <img src="first-compose-project-on-desktop-2.png" alt="First Compose Multiplatform app on desktop" width="600"/>
     </tab>
     <tab id="web-app" title="Web">
-        <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="400"/>
+        <img src="first-compose-project-on-web-2.png" alt="First Compose Multiplatform app on web" width="600"/>
     </tab>
 </tabs>
 

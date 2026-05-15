@@ -264,7 +264,8 @@ If you haven't launched Xcode as part of the initial setup, do that before runni
 In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
 and click **Run**.
 
-If you don't have an available iOS configuration in the list, add a [new run configuration](#run-on-a-new-ios-simulated-device).
+If you don't have an available iOS configuration in the list, start Xcode to populate the available simulators
+and restart IntelliJ IDEA.
 
 ![Run multiplatform app on iOS](compose-run-ios.png){width=350}
 
