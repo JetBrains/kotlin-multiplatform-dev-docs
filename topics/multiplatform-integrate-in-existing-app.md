@@ -89,6 +89,8 @@ Create a shared module to connect to both the existing Android application and y
    as the `shared` module will be used as a library for the Android application:
 
     ```kotlin
+    import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
     kotlin {
         androidLibrary {
             namespace = "com.jetbrains.simplelogin.shared"
@@ -448,7 +450,7 @@ You can set up integration between the iOS app and the framework built by Kotlin
    {style="note"}
 
 9. On the **Info** tab, add a custom `CADisableMinimumFrameDurationOnPhone` property and set it to `YES`
-   to enable the high refresh rate on iOS.
+   to enable the high refresh rates on iOS.
 
 10. On the **Signing & Capabilities** tab, select your development team or create one if you haven't already.
     This enables signing the `shared` framework produced by the KMP module.
