@@ -215,7 +215,7 @@ To publish your library, use the [`maven-publish`](https://docs.gradle.org/curre
 Your library is published to the local Maven repository. 
 
 To locate the published artifacts, use your file explorer or terminal and navigate
-to the`~\.m2\repository\io\github\kotlin\library\1.0.0\` directory.
+to the `~\.m2\repository\io\github\kotlin\library\1.0.0\` directory.
 
 ## Add your library as a dependency in another project
 
