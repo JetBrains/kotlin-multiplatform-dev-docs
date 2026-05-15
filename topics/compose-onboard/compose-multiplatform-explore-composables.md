@@ -51,7 +51,7 @@ and the extensive [Jetpack Compose modifier documentation](https://developer.and
 
 ## Managing the state
 
-There is a persistent quality to the loaded image: it should consistently remain either visible or hidden across recompositions
+The loaded image has a persistent quality: it should consistently remain either visible or hidden across recompositions
 unless user clicks the button.
 The `showContent` property in the `App()` composable is built using the `mutableStateOf()` function,
 which means it's a state object that can be observed:

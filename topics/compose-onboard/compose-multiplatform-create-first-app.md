@@ -75,8 +75,6 @@ The project contains the following modules:
 * **desktopApp** is the module that builds into a desktop JVM application. It depends on the `shared` module.
 * **webApp** is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
 
-<!-- TODO update the screenshot -->
-
 ![Compose Multiplatform project structure](compose-project-structure.png){width=400}
 
 The **shared** module contains the following source sets: `androidMain`, `commonMain`, `iosMain`, `jsMain`, 
