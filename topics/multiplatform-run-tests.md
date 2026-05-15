@@ -35,24 +35,19 @@ that requires tests both for common and platform-specific code.
 3. In the panel on the left, select **Kotlin Multiplatform**.
 4. Specify the following fields in the **New Project** window:
 
-    * **Name**: KotlinProject
-    * **Group**: kmp.project.demo
-    * **Artifact**: kotlinproject
-    * **JDK**: Amazon Corretto version 17
-        > This JDK version is required for one of the tests that you add later to run successfully.
-        >
-        {style="note"}
+    * **Name**: KMP testing
+    * **Project ID**: kmp.project.testing
 
 5. Select the **Android** target.
-    * If you're using a Mac, select **iOS** as well. Make sure that the **Do not share UI** option is selected.
+   If you're using a Mac, select **iOS** as well. Make sure to select the **Do not share UI** option.
 6. Deselect **Include tests** and click **Create**.
 
    ![Create simple multiplatform project](create-test-multiplatform-project.png){width=800}
 
 ### Write code
 
-In the `shared/src/commonMain/kotlin` directory, create a new `common.example.search` directory.
-In this directory, create a Kotlin file, `Grep.kt`, with the following function:
+In the `sharedLogic/src/commonMain/kotlin` directory, create a new `common.example.search` package.
+In this package, create a Kotlin file, `Grep.kt`, with the following function:
 
 ```kotlin
 fun grep(lines: List<String>, pattern: String, action: (String) -> Unit) {
@@ -71,7 +66,7 @@ the pattern.
 Now, let's test the common code. An essential part will be a source set for common tests,
 which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API library as a dependency.
 
-1. In the `shared/build.gradle.kts` file, check that there is a dependency on the `kotlin.test` library:
+1. In the `sharedLogic/build.gradle.kts` file, check that there is a dependency on the `kotlin.test` library:
 
     ```kotlin
    sourceSets {
@@ -84,7 +79,7 @@ which has the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) AP
    
 2. The `commonTest` source set stores all common tests. You need to create a directory with the same name in your project:
 
-    1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
+    1. Right-click the `sharedLogic/src` directory and select **New | Directory**. The IDE presents a list of options.
     2. Start typing the `commonTest/kotlin` path to narrow down the selection, then choose it from the list:
 
       ![Creating common test directory](create-common-test-dir.png){width=350}
@@ -170,8 +165,8 @@ For example, it might have the values "OpenJDK" and "17.0" for Android unit test
 An instance of `CurrentRuntime` should be created with the name and version of the platform as strings, where the
 version is optional. When the version is present, you only need the number at the start of the string, if available.
 
-1. In the `commonMain/kotlin` directory, create a new `org.kmp.testing` directory.
-2. In this directory, create the `CurrentRuntime.kt` file and update it with the following implementation:
+1. In the `commonMain/kotlin` directory, create a new `org.kmp.testing` package.
+2. In this package, create the `CurrentRuntime.kt` file and update it with the following implementation:
 
     ```kotlin
     class CurrentRuntime(val name: String, rawVersion: String?) {
@@ -260,15 +255,17 @@ As well as implementing this function on each platform, you should provide tests
     }
     ```
 
-3. Create a directory for tests inside the `shared/src` directory:
+3. Create a directory for tests inside the `sharedLogic/src` directory:
  
-   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
-   2. Start typing the `androidUnitTest/kotlin` path to narrow down the selection, then choose it from the list:
+   1. Right-click the `sharedLogic/src` directory and select **New | Directory**. The IDE presents a list of options.
+   2. Start typing the `androidHostTest/kotlin` path to narrow down the selection, then choose it from the list:
 
-   ![Creating Android test directory](create-android-test-dir.png){width=350}
+      ![Creating Android test directory](create-android-test-dir.png){width=350}
 
-4. In the `kotlin` directory, create a new `org.kmp.testing` package.
-5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test:
+4. In the `androidHostTest/kotlin` directory, create a new `org.kmp.testing` package.
+5. In this package, create the `AndroidRuntimeTest.kt` file and update it with the following Android test.
+   To make the test pass, make sure to set the actual name and version of the runtime
+   (but it is also useful to see how a test fails):
 
     ```kotlin
     import kotlin.test.Test
@@ -280,15 +277,11 @@ As well as implementing this function on each platform, you should provide tests
         fun shouldDetectAndroid() {
             val runtime = determineCurrentRuntime()
             assertContains(runtime.name, "OpenJDK")
-            assertEquals(runtime.version, "17.0")
+            assertEquals(runtime.version, "21.0")
         }
     }
     ```
    
-   > If you chose a different JDK version at the beginning of the tutorial, you may need to change the `name` and `version` for the test to run successfully.
-   > 
-   {style="note"}
-
 It may seem strange that an Android-specific test is run on a local JVM. This is because these tests run as local unit
 tests on the current machine. As described in the [Android Studio documentation](https://developer.android.com/studio/test/test-in-android-studio),
 these tests differ from instrumented tests, which run on a device or an emulator.
@@ -312,12 +305,10 @@ You can add other types of tests to your project. To learn about instrumented te
     }
     ```
 
-3. Create a new directory in the `shared/src` directory:
+3. Create a new directory in the `sharedLogic/src` directory:
    
-   1. Right-click the `shared/src` directory and select **New | Directory**. The IDE presents a list of options.
+   1. Right-click the `sharedLogic/src` directory and select **New | Directory**. The IDE presents a list of options.
    2. Start typing the `iosTest/kotlin` path to narrow down the selection, then choose it from the list:
-
-   ![Creating iOS test directory](create-ios-test-dir.png){width=350}
 
 4. In the `iosTest/kotlin` directory, create a new `org.kmp.testing` directory.
 5. In this directory, create the `IOSRuntimeTest.kt` file and update it with the following iOS test:
@@ -349,7 +340,7 @@ example, if you run the `allTests` Gradle task, every test in your project will 
 ![Gradle test tasks](gradle-alltests.png){width=700}
 
 When you run tests, in addition to the output in your IDE, HTML reports are generated. You can find them in
-the `shared/build/reports/tests` directory:
+the `sharedLogic/build/reports/tests` directory:
 
 ![HTML reports for multiplatform tests](shared-tests-folder-reports.png){width=300}
 
