@@ -266,7 +266,7 @@ Video course
 <td>
 Mykola Miroshnychenko
 
-Gumroad
+PayHip
 </td>
 
 <td>
@@ -274,7 +274,7 @@ How to extend your existing Android development skills to iOS by mastering KMP f
 as well as building a complete app stack using modern libraries like Ktor for networking, Koin for dependency injection, Nav3, and Room for persistence.
 </td>
 <td>
-~$60
+$39
 </td>
 <td>
 8–12 h
