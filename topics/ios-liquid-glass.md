@@ -1,7 +1,7 @@
 [//]: # (title: Liquid Glass in a Compose Multiplatform app)
 <show-structure depth="1"/>
 
-Liquid Glass is Apple's new visual design introduced in iOS 26, bringing translucency, depth, 
+Liquid Glass is Apple's visual design introduced in iOS 26, bringing translucency, depth, 
 and dynamic blur to UI elements. 
 To adopt it in a Compose Multiplatform app, you need a native SwiftUI shell, because 
 Liquid Glass effects are rendered by the system through native `TabView`, `NavigationStack`, and toolbar APIs.
@@ -723,7 +723,7 @@ If this approach doesn't fit your project, consider one of these alternatives:
   such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
   between native overlays and Compose content.
 * **Compose-only navigation with imitated Liquid Glass effects**. Render everything in Compose and approximate Liquid Glass 
-  visually, for example, with a library like [KMP Liquid Glass](https://github.com/Kashif-E/KMPLiquidGlass).
+  visually, for example, with libraries like [AndroidLiquidGlass](https://klibs.io/project/Kyant0/AndroidLiquidGlass),[Calf](https://klibs.io/project/MohamedRejeb/Calf) or [Liquid](https://klibs.io/project/FletchMcKee/liquid).
   This approach keeps all UI on the Compose side, with the effect visually similar but not identical to system Liquid Glass.
 
 ## What's next
