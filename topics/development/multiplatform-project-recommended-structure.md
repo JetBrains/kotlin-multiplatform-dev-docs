@@ -154,7 +154,7 @@ After the configuration is complete, move the code of the desktop app to the new
 
 #### Create and configure the web app module
 
-To create a desktop app module (`webApp`):
+To create a web app module (`webApp`):
 
 1. Create the `webApp` directory at the root of the project.
 2. Inside that directory, create an empty `build.gradle.kts` file and the `src` directory.
@@ -166,7 +166,7 @@ To create a desktop app module (`webApp`):
 
 #### Configure the build script for the web app
 
-To make the desktop app build script work:
+To make the web app build script work:
 
 1. In the `webApp/build.gradle.kts` file, specify the plugins necessary for the shared UI module:
 
