@@ -65,7 +65,8 @@
 		<toc-element toc-title="iOS-specific features">
 			<toc-element toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html" topic="compose-swiftui-integration.md"/>
 			<toc-element toc-title="Integration with UIKit" topic="compose-uikit-integration.md"/>
-			<toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
+            <toc-element toc-title="Liquid Glass" topic="ios-liquid-glass.md"/>
+            <toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
 			<toc-element toc-title="Accessibility support" topic="compose-ios-accessibility.md"/>
 			<toc-element topic="compose-ios-migration.md"/>
 		</toc-element>
