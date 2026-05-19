@@ -117,7 +117,7 @@ Let's define a ViewModel and wire it into a composable:
    ```
 
     > This example uses [explicit backing fields](https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields),
-    > stabilized in Kotlin 2.4.0. When using earlier versions, add
+    > stabilized in Kotlin 2.4.0-RC. When using earlier versions, add
     > the `-Xexplicit-backing-fields` compiler option or use the old backing fields pattern with `.asStateFlow()` instead.
     >
     {style="note"}
@@ -280,7 +280,7 @@ Since the UI is not shared in this case, you can switch from the Compose Multipl
 
 #### Android implementation
 
-On Android, integration is straightforward: Jetpack Compose automatically finds the `ViewModelStoreOwner` 
+On Android, Jetpack Compose automatically finds the `ViewModelStoreOwner` 
 provided by the `Activity` and supplies the `OrderViewModel`.
 
 ```kotlin
@@ -303,7 +303,7 @@ fun AndroidCupcakeApp(
 #### iOS implementation
 
 On iOS, there is no built-in `ViewModelStoreOwner`, so the ViewModel's lifecycle must be tied to SwiftUI manually.
-We recommend using [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel),
+We recommend using the [KMP-ObservableViewModel](https://klibs.io/project/rickclephas/KMP-ObservableViewModel) library,
 which lets SwiftUI observe Kotlin Multiplatform ViewModels directly and handles the required ViewModel lifecycle/store-owner boilerplate for iOS.
 
 1. Export ViewModel APIs for access from Swift:
