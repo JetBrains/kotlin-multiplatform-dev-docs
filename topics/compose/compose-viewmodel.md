@@ -294,7 +294,7 @@ fun AndroidCupcakeApp(
        Text("Quantity: ${uiState.quantity}")
        Text("Price: ${uiState.price}")
        Button(onClick = { viewModel.setQuantity(6) }) {
-           Text("Set Quantity to 6")
+           Text("Set Quantity to '6'")
        }
    }
 }
@@ -468,6 +468,6 @@ or `ObservableObject` with Combine for iOS.
 
 ## What's next
 
-* Check out the [full navigation sample](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake).
+* Check out the [full sample](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/nav_cupcake).
 * See [Set up ViewModel for Kotlin Multiplatform](https://developer.android.com/kotlin/multiplatform/viewmodel) for additional Android-focused guidance.
 * Learn how to [integrate Compose Multiplatform with SwiftUI](compose-swiftui-integration.md) when using shared ViewModels with native UI.
