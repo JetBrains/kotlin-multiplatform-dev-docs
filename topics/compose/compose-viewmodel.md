@@ -27,6 +27,7 @@ To share ViewModels and UI across platforms:
     androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-viewmodel" }
     androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-viewmodel" }
     ``` 
+   
     > You can track changes to the multiplatform ViewModel implementation in our [What's new](https://www.jetbrains.com/help/kotlin-multiplatform-dev/whats-new-compose.html)
     > or follow EAP releases in the [Compose Multiplatform changelog](https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md).
     >
@@ -48,12 +49,16 @@ To share ViewModels and UI across platforms:
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="implementation(libs.androidx.lifecycle.viewmodel.compose)"}
 
-3. If you have a desktop target, add the `kotlinx-coroutines-swing` dependency as well. 
-   When running coroutines in a `ViewModel`, `ViewModel.viewModelScope` is tied to `Dispatchers.Main.immediate`, 
-   which might be unavailable on desktop by default. The Kotlinx Coroutines Swing library makes ViewModel coroutines 
-   work correctly with Compose Multiplatform.
+> Dependencies may differ depending on your code-sharing approach. See [](#levels-of-code-sharing) for details.
+>
+{style="note"}
+
+If you have a desktop target, add the `kotlinx-coroutines-swing` dependency as well.
+When running coroutines in a `ViewModel`, `ViewModel.viewModelScope` is tied to `Dispatchers.Main.immediate`, 
+which might be unavailable on desktop by default. The Kotlinx Coroutines Swing library makes ViewModel coroutines 
+work correctly with Compose Multiplatform.
     
-    In the Gradle version catalog:
+1. In the Gradle version catalog:
 
     ```toml
     [versions]
@@ -62,9 +67,9 @@ To share ViewModels and UI across platforms:
     [libraries]
     kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
     ```
-    
-    In the `build.gradle.kts` file:
-    
+
+2. In the `build.gradle.kts` file:
+
     ```kotlin
     kotlin {
        // ...
@@ -81,12 +86,10 @@ To share ViewModels and UI across platforms:
      
     See the [`Dispatchers.Main` documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for details.
 
-Dependencies may differ depending on your code-sharing approach. See [](#levels-of-code-sharing) for details.
-
 ## Using ViewModel in common code
 
 Compose Multiplatform provides a common `ViewModelStoreOwner` implementation, so using the `ViewModel` class
-in common code is not much different from Android best practices.
+in common code is not much different from [Android best practices](https://developer.android.com/topic/libraries/architecture/viewmodel#best-practices).
 
 However, there is an important difference on non-JVM platforms, where type reflection for instantiating objects is not available. 
 You cannot call the `viewModel()` function without parameters in common code.
@@ -98,8 +101,7 @@ just like [with Jetpack Compose](https://developer.android.com/topic/libraries/a
 
 Let's define a ViewModel and wire it into a composable:
 
-1. Define an `OrderViewModel` class, 
-   based on the [navigation sample](https://github.com/JetBrains/compose-multiplatform/tree/0e38f58b42d23ff6d0ad30b119d34fa1cd6ccedb/examples/nav_cupcake):
+1. Define a simple `OrderViewModel` class that manages the UI state, including the quantity and price of the ordered item:
 
    ```kotlin
    data class OrderUiState(val quantity: Int = 0, val price: String = "$0.00")
@@ -114,8 +116,9 @@ Let's define a ViewModel and wire it into a composable:
    }
    ```
 
-    > This example uses explicit backing fields, stabilized in Kotlin 2.4.0. When using earlier versions,
-    > add the `-Xexplicit-backing-fields` compiler option or use the old backing fields pattern with `.asStateFlow()` instead.
+    > This example uses [explicit backing fields](https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields),
+    > stabilized in Kotlin 2.4.0. When using earlier versions, add
+    > the `-Xexplicit-backing-fields` compiler option or use the old backing fields pattern with `.asStateFlow()` instead.
     >
     {style="note"}
 
@@ -164,7 +167,7 @@ NavDisplay(
 
 A dependency injection (DI) framework allows you to inject different dependencies into components
 based on the current environment or target platform.
-To manage ViewModels, you can use Koin, Metro, or another DI framework that supports Kotlin Multiplatform.
+To manage ViewModels, you can use Koin, Metro, or any other DI framework that supports Kotlin Multiplatform.
 
 For an advanced example of dependency injection usage,
 see the [Share data access layer](multiplatform-ktor-sqldelight.md) tutorial.
@@ -247,10 +250,10 @@ fun CupcakeApp(
 In this approach, the `ViewModel` (business logic) is shared, but platforms have native UI implementations.
 Learn more in [Set up ViewModel for Kotlin Multiplatform](https://developer.android.com/kotlin/multiplatform/viewmodel).
 
-1. Since the UI is not shared in this case, you can switch from the Compose Multiplatform version of the ViewModel library to the `androidx.lifecycle` library.
+Since the UI is not shared in this case, you can switch from the Compose Multiplatform version of the ViewModel library to the `androidx.lifecycle` library.
 
-    Update the dependencies in the Gradle version catalog:
-    
+1. Update the dependencies in the Gradle version catalog:
+
     ```toml
     [versions]
     androidx-viewmodel = "2.10.0"
@@ -258,9 +261,9 @@ Learn more in [Set up ViewModel for Kotlin Multiplatform](https://developer.andr
     [libraries]
     androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-viewmodel" }
     ```
-    
-    In the `build.gradle.kts` file, declare the dependency as `api`, as it needs to be exported to the binary framework:
-    
+
+2. In the `build.gradle.kts` file, declare the dependency as `api`, as it needs to be exported to the binary framework:
+
     ```kotlin
     kotlin {
        // ...
@@ -275,96 +278,101 @@ Learn more in [Set up ViewModel for Kotlin Multiplatform](https://developer.andr
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="api(libs.androidx.lifecycle.viewmodel)"}
 
-2. On Android, Jetpack Compose automatically finds the `ViewModelStoreOwner` provided by the `Activity` and supplies the `OrderViewModel`:
+#### Android implementation
 
-    ```kotlin
-    @Composable
-    fun AndroidCupcakeApp(
-       viewModel: OrderViewModel = viewModel { OrderViewModel() }
-    ) {
-       val uiState by viewModel.uiState.collectAsState()
-    
-       Column {
-           Text("Quantity: ${uiState.quantity}")
-           Text("Price: ${uiState.price}")
-           Button(onClick = { viewModel.setQuantity(6) }) {
-               Text("Set Quantity to 6")
-           }
+On Android, integration is straightforward: Jetpack Compose automatically finds the `ViewModelStoreOwner` 
+provided by the `Activity` and supplies the `OrderViewModel`.
+
+```kotlin
+@Composable
+fun AndroidCupcakeApp(
+   viewModel: OrderViewModel = viewModel { OrderViewModel() }
+) {
+   val uiState by viewModel.uiState.collectAsState()
+
+   Column {
+       Text("Quantity: ${uiState.quantity}")
+       Text("Price: ${uiState.price}")
+       Button(onClick = { viewModel.setQuantity(6) }) {
+           Text("Set Quantity to 6")
        }
-    }
-    ```
+   }
+}
+```
 
-3. On iOS, there is no built-in `ViewModelStoreOwner`, so the ViewModel's lifecycle must be tied to SwiftUI manually.
-   We recommend using [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel),
-   which lets SwiftUI observe Kotlin Multiplatform ViewModels directly and also handles the required ViewModel lifecycle/store-owner boilerplate for iOS.
+#### iOS implementation
 
-   1. Export ViewModel APIs for access from Swift:
+On iOS, there is no built-in `ViewModelStoreOwner`, so the ViewModel's lifecycle must be tied to SwiftUI manually.
+We recommend using [KMP-ObservableViewModel](https://github.com/rickclephas/KMP-ObservableViewModel),
+which lets SwiftUI observe Kotlin Multiplatform ViewModels directly and handles the required ViewModel lifecycle/store-owner boilerplate for iOS.
+
+1. Export ViewModel APIs for access from Swift:
     
-      ```kotlin
-      listOf(
-         iosArm64(),
-         iosSimulatorArm64(),
-      ).forEach {
-         it.binaries.framework {
-            export(libs.androidx.lifecycle.viewmodel)
-            baseName = "shared"
-         }
+   ```kotlin
+   listOf(
+      iosArm64(),
+      iosSimulatorArm64(),
+   ).forEach {
+      it.binaries.framework {
+         export(libs.androidx.lifecycle.viewmodel)
+         baseName = "shared"
       }
-      ```
+   }
+   ```
 
-   2. Define your ViewModel in `commonMain` using KMP-ObservableViewModel's ViewModel base class 
-     and the `@NativeCoroutinesState` annotation:
+2. Define your ViewModel in `commonMain` using KMP-ObservableViewModel's ViewModel base class 
+   and the `@NativeCoroutinesState` annotation:
     
-      ```kotlin
-       import com.rickclephas.kmp.observableviewmodel.ViewModel
-       import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
-       import kotlinx.coroutines.flow.MutableStateFlow
-       import kotlinx.coroutines.flow.StateFlow
-       import kotlinx.coroutines.flow.asStateFlow
+   ```kotlin
+    import com.rickclephas.kmp.observableviewmodel.ViewModel
+    import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+    import kotlinx.coroutines.flow.MutableStateFlow
+    import kotlinx.coroutines.flow.StateFlow
+    import kotlinx.coroutines.flow.asStateFlow
      
-       class OrderViewModel : ViewModel() {
-           private val _uiState = MutableStateFlow(OrderUiState())
+    class OrderViewModel : ViewModel() {
+        private val _uiState = MutableStateFlow(OrderUiState())
 
-           @NativeCoroutinesState
-           val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+        @NativeCoroutinesState
+        val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
 
-           fun setQuantity(n: Int) {
-               _uiState.value = _uiState.value.copy(quantity = n)
-           }
-       }
-      ```
+        fun setQuantity(n: Int) {
+            _uiState.value = _uiState.value.copy(quantity = n)
+        }
+    }
+   ```
     
-   3. Use the ViewModel in the iOS UI entry point:
+3. Use the ViewModel in the iOS UI entry point:
     
-      ```swift
-       import SwiftUI
-       import shared
-       import KMPObservableViewModelSwiftUI
+   ```swift
+    import SwiftUI
+    import shared
+    import KMPObservableViewModelSwiftUI
 
-       @main
-       struct iOSCupcakeApp: App {
-           var body: some Scene {
-               WindowGroup {
-                   CupcakeView()
-               }
-           }
-       }
+    @main
+    struct iOSCupcakeApp: App {
+        var body: some Scene {
+            WindowGroup {
+                CupcakeView()
+            }
+        }
+    }
 
-       struct CupcakeView: View {
-           @StateViewModel private var viewModel = OrderViewModel()
+    struct CupcakeView: View {
+        @StateViewModel private var viewModel = OrderViewModel()
 
-           var body: some View {
-               VStack {
-                   Text("Quantity: \(viewModel.uiState.quantity)")
-                   Text("Price: \(viewModel.uiState.price)")
+        var body: some View {
+            VStack {
+                Text("Quantity: \(viewModel.uiState.quantity)")
+                Text("Price: \(viewModel.uiState.price)")
 
-                   Button("Set Quantity to '6'") {
-                       viewModel.setQuantity(n: 6)
-                   }
-               }
-           }
-       }
-      ```
+                Button("Set Quantity to '6'") {
+                    viewModel.setQuantity(n: 6)
+                }
+            }
+        }
+    }
+   ```
 
 ### Shared repo/data layer, platform-specific ViewModels and UI
 
