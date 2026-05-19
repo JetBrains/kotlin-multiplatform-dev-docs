@@ -116,7 +116,7 @@ As modern multiplatform frameworks continue to evolve, they increasingly allow m
 
 ## The most popular cross-platform solutions
 
-[The most popular cross-platform frameworks](cross-platform-frameworks.md) include Flutter, React Native, and Kotlin Multiplatform. Each of these frameworks has its own capabilities and strengths. Depending on the tool you use, your development process and the outcome may vary.
+[The most popular cross-platform frameworks](cross-platform-frameworks.topic) include Flutter, React Native, and Kotlin Multiplatform. Each of these frameworks has its own capabilities and strengths. Depending on the tool you use, your development process and the outcome may vary.
 
 ### Flutter
 
