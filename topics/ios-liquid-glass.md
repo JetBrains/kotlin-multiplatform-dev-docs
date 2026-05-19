@@ -17,7 +17,7 @@ We'll use the official KotlinConf app as our example:
 ![Native iOS UI with Liquid Glass](ios-kotlinconf-liquid-glass.png){ width="250" style="inline"}
 
 * [KotlinConfApp](https://github.com/JetBrains/kotlinconf-app) — sample project.
-* [`main` branch](https://github.com/JetBrains/kotlinconf-app/tree/main) — starting state, with the Material 3 Expressive design.
+* [`main` branch](https://github.com/JetBrains/kotlinconf-app/tree/main) — starting state, with a custom theme fully implemented in Compose.
 * [`lg-nav` branch](https://github.com/JetBrains/kotlinconf-app/tree/lg-nav) — final state, with the Liquid Glass design.
   
 Clone the repo and check out either branch to follow along, or compare them side by side: 
@@ -723,7 +723,8 @@ If this approach doesn't fit your project, consider one of these alternatives:
   such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
   between native overlays and Compose content.
 * **Compose-only navigation with imitated Liquid Glass effects**. Render everything in Compose and approximate Liquid Glass 
-  visually, for example, with libraries like [AndroidLiquidGlass](https://klibs.io/project/Kyant0/AndroidLiquidGlass),[Calf](https://klibs.io/project/MohamedRejeb/Calf) or [Liquid](https://klibs.io/project/FletchMcKee/liquid).
+  visually, for example, with libraries like [AndroidLiquidGlass](https://klibs.io/project/Kyant0/AndroidLiquidGlass),
+  [Calf](https://klibs.io/project/MohamedRejeb/Calf), or [Liquid](https://klibs.io/project/FletchMcKee/liquid).
   This approach keeps all UI on the Compose side, with the effect visually similar but not identical to system Liquid Glass.
 
 ## What's next
