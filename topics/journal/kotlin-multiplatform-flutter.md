@@ -8,7 +8,7 @@ Each project is unique and has specific requirements. This article aims to help 
 
 ## Cross-platform development: a unified approach to modern application building
 
-Cross-platform development offers a way to build applications that run across multiple platforms with a single codebase, eliminating the need to rewrite the same functionality for each system. While often associated with [mobile development](cross-platform-mobile-development.md) – targeting both Android and iOS – this approach extends far beyond mobile, covering web, desktop, and even server-side environments.
+Cross-platform development offers a way to build applications that run across multiple platforms with a single codebase, eliminating the need to rewrite the same functionality for each system. While often associated with [mobile development](cross-platform-mobile-development.topic) – targeting both Android and iOS – this approach extends far beyond mobile, covering web, desktop, and even server-side environments.
 
 The core idea is to maximize code reuse while ensuring platform-specific features can still be implemented when necessary, streamlining the development process and reducing maintenance efforts. Teams can speed up development cycles, reduce costs, and ensure consistency across platforms, making cross-platform development a smart choice in today's increasingly diverse application landscape.
 
