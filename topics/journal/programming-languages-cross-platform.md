@@ -10,7 +10,7 @@ If you’re wondering which programming language would best equip you to get sta
 
 Cross-platform application development refers to the development approach where a single codebase can be used to create software that runs on multiple platforms, such as iOS, Android, Windows, macOS, and web browsers, among others. This approach has gained popularity in recent years, thanks in large part to the growing demand for mobile apps. Mobile engineers can share some or all of the source code between iOS and Android instead of developing separate applications for each platform.
 
-We have a dedicated guide where you can read more about the benefits and limitations of both [native and cross-platform development](native-and-cross-platform.md) and how to choose between these two approaches. Some of the main advantages of cross-platform development include:
+We have a dedicated guide where you can read more about the benefits and limitations of both [native and cross-platform development](native-and-cross-platform.topic) and how to choose between these two approaches. Some of the main advantages of cross-platform development include:
 
 1. **Cost-effectiveness.** Building separate apps for each platform can be expensive in terms of both time and resources. With cross-platform development, developers can write code once and deploy it across multiple platforms, reducing development costs.
 
