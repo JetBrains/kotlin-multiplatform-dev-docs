@@ -49,7 +49,7 @@ in their signatures, but their behavior is applicable for other platforms as wel
   For more information, see [Images and resources](compose-multiplatform-resources.md).
 * [Navigation](https://developer.android.com/jetpack/compose/navigation).
   For more information, see [Navigation and routing](compose-navigation-routing.md).
-* [`ViewModel`](https://developer.android.com/jetpack/compose/libraries#viewmodel) class.
+* [`ViewModel`](https://developer.android.com/jetpack/compose/libraries#viewmodel) class. For more information, see [Multiplatform ViewModel](compose-viewmodel.md).
 * [Paging](https://developer.android.com/jetpack/compose/libraries#paging) library.
 * [`ConstraintLayout`](https://developer.android.com/reference/androidx/constraintlayout/widget/ConstraintLayout) layout.
 * [Maps](https://developer.android.com/jetpack/compose/libraries#maps) library.
