@@ -77,14 +77,13 @@ In the shared Kotlin code:
 * [Add navigation callbacks to the iOS entry point](#add-navigation-callbacks-to-the-ios-entry-point) so the iOS layer can control which tab is active and respond to navigation events.
 * [Intercept navigation at the Compose level](#intercept-navigation-at-the-compose-level) so detail routes are forwarded to Swift instead of being handled by Compose.
   This tutorial shows the Navigation 3 implementation — adapt this step if you use a different navigation library.
-* [Build a standalone screen renderer for iOS](#build-a-standalone-screen-renderer-for-ios) — a function that renders any detail route as a self-contained composable,
-  wrapped with the theme and DI setup needed to run outside the full `App()`.
-* [Hide Compose's built-in navigation UI](#hide-compose-s-built-in-navigation-ui) when SwiftUI is in charge, using a new `LocalUseNativeNavigation` composition local.
+* [Build a standalone screen renderer for iOS](#build-a-standalone-screen-renderer-for-ios) so SwiftUI can render any detail route on its own outside the full `App()`.
+* [Hide Compose's built-in navigation UI](#hide-compose-s-built-in-navigation-ui) when SwiftUI is in charge so users don't see duplicate title bars and back buttons.
 * [Expose new iOS entry points](#expose-new-ios-entry-points) for creating the root view controller and individual screen view controllers.
 
 In the native iOS code (Swift):
 
-* [Build the SwiftUI navigation layer](#build-the-swiftui-navigation-layer) with `TabView`, per-tab `NavigationStack`, and the bridges that embed Compose screens.
+* [Build the SwiftUI navigation layer](#build-the-swiftui-navigation-layer) with native `TabView` and `NavigationStack` views, and the bridges that embed Compose screens.
 
 ## Add title metadata to routes
 
@@ -290,7 +289,7 @@ Compose screens that draw their own title bars or back buttons must skip them.
 To avoid duplication inside the composition tree, use a `CompositionLocal`
 that each screen can read without depending on iOS-specific code.
 
-Declare the `LocalUseNativeNavigation` composition local in the `NavHost.kt` file, 
+Declare `LocalUseNativeNavigation` as a `CompositionLocal` in the `NavHost.kt` file, 
 before the `NavHost()` function:
 
 ```kotlin
@@ -300,7 +299,7 @@ val LocalUseNativeNavigation = staticCompositionLocalOf { false }
 ### Wrap the renderer for iOS
 
 `ScreenContent` renders a route, but it needs a wrapper that sets the same theme, dependency injection,
-and app-wide composition locals that `App()` usually sets up.
+and app-wide `CompositionLocal` values that `App()` usually sets up.
 
 Add the `SingleScreenApp` wrapper. It mirrors the setup from `App()` and additionally sets 
 `LocalUseNativeNavigation` to `true`, so each screen automatically hides its Compose-rendered title bar 
@@ -413,7 +412,7 @@ In `iosMain/main.ios.kt`, add the three functions:
 
 * `MainViewController` with callbacks, called by SwiftUI for each tab root. 
   Compose runs the full `App()` and `NavHost`, but navigation events are forwarded to SwiftUI instead of being handled internally.
-  The signature includes `onGoBack` and `onSet` for API symmetry with `ScreenViewController`, though they aren't used in this overload.
+  The signature includes `onGoBack` and `onSet` for API symmetry with `ScreenViewController`, although they aren't used in this overload.
 
     ```kotlin
     // Tab root: Compose runs NavHost but hands navigation events to SwiftUI
