@@ -5,7 +5,8 @@ If you have a KMP module with CocoaPods dependencies and want to switch to Swift
 you can use AI to help you.
 This guide shows how you can use Junie and Kotlin AI skills to make this process easier.
 
-> Although this guide uses Junie, you can use any AI tool with Kotlin AI skills to complete the process.
+> Although this guide uses Junie, you can use any AI tool with [Kotlin AI skills](https://kotlinlang.org/docs/kotlin-ai-skills.html)
+> to complete the process.
 > 
 {style="tip"}
 
@@ -27,7 +28,9 @@ or use an external LLM:
 junie
 ```
 
-![Junie CLI login prompt](cocoapods-spm-junie-login.png)
+![Junie CLI login prompt](cocoapods-spm-junie-login.png){width="500"}
+
+See Junie documentation to learn more about [authentication options](https://junie.jetbrains.com/docs/junie-cli.html#step-3-authenticate).
 
 ## Install the AI skill
 
@@ -67,14 +70,16 @@ Junie recognizes that the skill you installed is appropriate for the task and st
 
 ## Review and test the changes
 
-Review all the changes made by Junie in the project git history. Use IntelliJ IDEA’s side-by-side viewer to easily see the differences.
+Review all the changes made by Junie in the project git history.
+Use your Git client's side-by-side diff viewer to easily review the changes made.
+For example, in IntelliJ IDEA:
 
 ![Side-by-side diff of changes made to the CocoaPods-dependent code](cocoapods-spm-junie-diff.png)
 
 A successful migration modifies:
 * `build.gradle.kts` files in the modules that depend on CocoaPods: the `cocoapods {}` blocks should be replaced with
   `swiftPMDependencies {}` blocks.
-* Kotlin files that contain import directives referring to CocoaPods APIs, replacing them with SwiftPM API imports
+* Kotlin files that contain import directives referring to CocoaPods APIs replacing them with SwiftPM API imports
 
 Test whether your project runs as it did before.
 If you encounter problems, inspect the error messages in the logs and ask Junie to resolve them.
