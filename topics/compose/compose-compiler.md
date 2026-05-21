@@ -30,7 +30,7 @@ module that uses the `org.jetbrains.compose` plugin:
 
 1. Add the Compose compiler Gradle plugin to the [Gradle version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml):
 
-    ```
+    ```toml
     [versions]
     # ...
     kotlin = "%kotlinVersion%"

@@ -29,7 +29,7 @@ To use deep links with Compose Multiplatform, set up the dependencies as follows
 
 List these versions, libraries, and plugins in your Gradle catalog:
 
-```ini
+```toml
 [versions]
 compose-multiplatform = "%org.jetbrains.compose%"
 agp = "8.9.0"

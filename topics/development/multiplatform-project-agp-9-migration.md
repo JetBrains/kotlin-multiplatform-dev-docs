@@ -280,7 +280,7 @@ When all of your code works with the new configuration:
       You can delete obsolete run configurations associated with the `composeApp` module.
 2. In the `gradle/libs.versions.toml` file, update the AGP to a 9.* version, for example:
 
-    ```text
+    ```toml
     [versions]
     agp = "9.0.0"
     ```

@@ -25,7 +25,7 @@ Learn more about general design of Navigation 3 in [Android documentation](https
 
 To try out the multiplatform implementation of Navigation 3, add the following dependency to your version catalog:
 
-```text
+```toml
 [versions]
 multiplatform-nav3-ui = "1.0.0-alpha05"
 
@@ -40,7 +40,7 @@ jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:naviga
 {style="note"}
 
 For projects using the Material 3 Adaptive and ViewModel libraries, also add the following navigation support artifacts:
-```text
+```toml
 [versions]
 compose-multiplatform-adaptive = "1.3.0-alpha02"
 compose-multiplatform-lifecycle = "2.10.0-alpha05"
@@ -53,7 +53,7 @@ jetbrains-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.li
 Finally, you can try out the [proof-of-concept library](https://github.com/terrakok/navigation3-browser)
 created by a JetBrains engineer. The library integrates the multiplatform Navigation 3 with browser history navigation on the web:
 
-```text
+```toml
 [versions]
 compose-multiplatform-navigation3-browser = "0.2.0"
 
