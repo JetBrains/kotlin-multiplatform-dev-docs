@@ -3,11 +3,11 @@
 You can apply scrollbars to scrollable components. The scrollbar and scrollable components share a common state to
 synchronize with each other.
 
-> Each provided snippet is a full, runnable desktop app. To try it:
+> Each provided snippet is a runnable desktop app. To try it:
 > 1. Create a Compose Multiplatform project using the
 > [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 > or the [online wizard](https://kmp.jetbrains.com/?android=true&desktop=true&includeTests=false).
-> 2. Open the main desktop entry-point file. For example, `desktopApp/src/main/kotlin/com/example/my_desktop_app/main.kt`.
+> 2. Open the desktop entry-point file. For example, `desktopApp/src/main/kotlin/com/example/my_desktop_app/main.kt`.
 > 3. Replace its contents with the snippet below.
 >
 {style="note" id="desktop-snippets-intro"}
