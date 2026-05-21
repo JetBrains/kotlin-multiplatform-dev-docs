@@ -3,9 +3,19 @@
 You can apply scrollbars to scrollable components. The scrollbar and scrollable components share a common state to
 synchronize with each other.
 
+> Each provided snippet is a full, runnable desktop app. To try it:
+> 1. Create a Compose Multiplatform project using the
+> [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+> or the [online wizard](https://kmp.jetbrains.com/?android=true&desktop=true&includeTests=false).
+> 2. Open the main desktop entry-point file. For example, `desktopApp/src/main/kotlin/com/example/my_desktop_app/main.kt`.
+> 3. Replace its contents with the snippet below.
+>
+{style="note" id="desktop-snippets-intro"}
+
 ## Scroll modifiers
 
-The `verticalScroll` and `horizontalScroll` modifiers provide the simplest way to allow the user to scroll an element when the bounds of its contents are larger than its maximum size constraints.
+The `verticalScroll` and `horizontalScroll` modifiers provide the simplest way to allow the user to scroll 
+an element when the bounds of its contents are larger than its maximum size constraints.
 You can attach the `VerticalScrollbar` composable to a scrollable component with the `verticalScroll` modifier 
 and the `HorizontalScrollbar` composable to a scrollable component with the `horizontalScroll` modifier:
 
@@ -142,7 +152,6 @@ fun LazyScrollable() {
             .background(color = Color(180, 180, 180))
             .padding(10.dp)
     ) {
-
         val state = rememberLazyListState()
 
         LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), state) {

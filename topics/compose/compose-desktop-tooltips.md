@@ -3,6 +3,8 @@
 You can add a tooltip to any component using the `TooltipArea` composable. `TooltipArea` is similar to the `Box`
 component and can show a tooltip.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 The `TooltipArea` composable has the following main parameters:
 
 * `tooltip`, composable content of the tooltip.

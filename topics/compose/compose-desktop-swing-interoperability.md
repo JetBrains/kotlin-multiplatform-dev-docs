@@ -10,6 +10,8 @@ The interoperability between Compose Multiplatform and Swing aims to help you:
 In many cases, it's more effective to implement a missing component directly in Compose Multiplatform (and contribute it to the community) 
 rather than using a Swing component within a Compose Multiplatform application.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 ## Swing interop use cases and limitations
 
 ### Compose Multiplatform component in a Swing app
@@ -26,7 +28,6 @@ Therefore, consider replacing these components with Swing-based implementations,
 
 [Separate platform views for popups, dialogs, and dropdowns](#experimental-separate-views-for-popups)
 : Popups are no longer limited by the initial composable canvas or the app window.
-
 
 Here are several scenarios for using `ComposePanel`:
 * Embed animated objects or a whole panel of animated objects into your application (for example, selection of emoticons or a toolbar with animated reactions to events).

@@ -5,6 +5,8 @@ In Compose Multiplatform for desktop, you can manage keyboard events by setting 
 * Event handlers based on the focused element.
 * Event handlers in the window scope.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 ## Events in a focused component
 
 This approach implies that pressing a key on a keyboard triggers event handlers for the currently focused component.
