@@ -96,7 +96,7 @@ Configure the Gradle build script for the new module:
 
 1. In the `gradle/libs.versions.toml` file, add the Kotlin Android Gradle plugin to your version catalog:
 
-    ```text
+    ```toml
     [plugins]
     kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
     ```
@@ -228,7 +228,7 @@ Now migrate to the new multiplatform library plugin:
 1. In `gradle/libs.versions.toml`,
    add the Android-KMP library plugin to your version catalog:
 
-    ```text
+    ```toml
     [plugins]
     androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
     ```

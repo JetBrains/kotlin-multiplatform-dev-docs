@@ -59,7 +59,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
  
 2. Update the version catalog with the latest version of Compose Hot Reload (see [Releases](https://github.com/JetBrains/compose-hot-reload/releases)).
    In `gradle/libs.versions.toml`, add the following code:
-   ```text
+   ```toml
    composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload"}
    ```
 

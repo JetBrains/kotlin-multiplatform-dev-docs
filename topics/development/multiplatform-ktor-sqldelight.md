@@ -99,9 +99,9 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
-   ```
+   ```toml
    [plugins]
-   ...
+   # ...
    kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```
