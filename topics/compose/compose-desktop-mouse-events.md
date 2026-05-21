@@ -2,6 +2,8 @@
 
 In your desktop project, you can listen to various mouse events, like clicking, moving, scrolling, or entering and exiting the input region.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 ## Click listeners
 
 Click listeners are available in both Compose Multiplatform for Android and Compose Multiplatform for desktop, so your code will work on both platforms.

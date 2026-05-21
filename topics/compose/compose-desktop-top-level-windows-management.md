@@ -3,6 +3,8 @@
 Compose Multiplatform for desktop provides various features for managing windows. You can hide windows in the tray, 
 make them draggable, adapt size, change position, and so on.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 ## Open and close windows
 
 You can use the `Window()` function to create a regular window. To put it in a composable scope, use `Window()` in the `application` entry point:

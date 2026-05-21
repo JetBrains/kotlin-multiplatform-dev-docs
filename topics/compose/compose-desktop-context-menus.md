@@ -3,6 +3,8 @@
 Compose Multiplatform for desktop provides out-of-the-box support for text context menus and allows you to
 conveniently tailor any context menus by adding more items, setting up themes, and customizing text.
 
+<include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
+
 ## Context menu in a custom area
 
 You can create a context menu for any arbitrary area of your application. Use `ContextMenuArea` to define a container where
