@@ -43,7 +43,7 @@ You'll need to add the following multiplatform libraries in your project:
 Add the following entries to `gradle/libs.versions.toml`, then sync Gradle files to make the references available
 in build configuration code:
 
-```text
+```toml
 [versions]
 coroutinesVersion = "%coroutinesVersion%"
 ktorVersion = "%ktorVersion%"
@@ -533,7 +533,7 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
 
 1. Add the KMP-NativeCoroutines version and plugin reference to the Gradle version catalog:
 
-    ```text
+    ```toml
     [versions]
     kmpNativeCoroutines = "%kmpncVersion%"
     
@@ -673,7 +673,7 @@ every time the flow emits a value.
 
 To set up the library, add the SKIE version and plugin reference to your Gradle version catalog:
 
-```text
+```toml
 [versions]
 skie = "%skieVersion%"
 

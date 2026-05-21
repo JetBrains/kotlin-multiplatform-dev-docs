@@ -64,11 +64,11 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 1. In the `[versions]` block, check the AGP version and add the rest:
 
-   ```text
+   ```toml
    [versions]
    agp = "9.0.1"
    material3 = "1.11.0-alpha07"
-   ...
+   # ...
    coroutinesVersion = "%coroutinesVersion%"
    dateTimeVersion = "%dateTimeVersion%"
    koin = "%koinVersion%"
@@ -99,9 +99,9 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
 
 3. In the `[plugins]` block, specify the necessary Gradle plugins:
 
-   ```
+   ```toml
    [plugins]
-   ...
+   # ...
    kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
    sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
    ```

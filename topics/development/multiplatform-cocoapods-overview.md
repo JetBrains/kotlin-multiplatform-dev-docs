@@ -111,10 +111,11 @@ The following steps show the configuration on a freshly generated project:
 1. Generate a new project for Android and iOS using the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
    or the [Kotlin Multiplatform web wizard](https://kmp.jetbrains.com).
    If using the web wizard, unpack the archive and import the project in your IDE.
-2. In the `gradle/libs.versions.toml` file, add the Kotlin CocoaPods Gradle plugin to 
-   the `[plugins]` block:
+2. Add the Kotlin CocoaPods Gradle plugin to the version catalog
+   (the `gradle/libs.versions.toml` file):
 
-   ```text
+   ```toml
+   [plugins]
    kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
    ```
 

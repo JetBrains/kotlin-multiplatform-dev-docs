@@ -33,7 +33,7 @@ To use the `kotlinx-datetime` library:
 
 1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
 
-    ```text
+    ```toml
     [versions]
     kotlinx-datetime = "0.8.0"
     

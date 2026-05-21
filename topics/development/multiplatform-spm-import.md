@@ -36,7 +36,7 @@ To try out the SwiftPM import functionality, make sure that you are using the **
 of the Kotlin Multiplatform Gradle plugin.
 Example for a `gradle/libs.versions.toml` file:
 
-```text
+```toml
 [versions]
 kotlin = "%kotlinEapVersion%"
 

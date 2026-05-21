@@ -28,13 +28,14 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
   Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
   [Coil](https://coil-kt.github.io/coil/), and [SQLDelight](https://sqldelight.github.io/sqldelight/latest/).
   Find more multiplatform libraries on [klibs.io](https://klibs.io/),
-  a search service offered by JetBrains for discovering Kotlin Multiplatform libraries.
+  a search service by JetBrains for discovering Kotlin Multiplatform libraries.
 
-* _Native dependencies_. These are regular libraries from specific ecosystems.
-  In native projects you usually work with them, for example, using Gradle for Android and Swift Package Manager for iOS. 
+* _Native dependencies_. These are platform-specific libraries from corresponding ecosystems.
+  In native projects, you typically manage these libraries through platform-specific tools
+  such as Gradle for Android and Swift Package Manager for iOS.
   
   When you work with a multiplatform project module, typically, you still need native dependencies to use platform APIs
-  such as security storage, specific system calls, and so on.
+  such as secure storage, system calls, and so on.
   In the build script, you specify native dependencies in the configuration of native source sets, for example, `androidMain` and `iosMain`.
 
 For both types of dependencies, you can use local and external repositories.
@@ -42,7 +43,8 @@ For both types of dependencies, you can use local and external repositories.
 ## Add a multiplatform dependency
 
 > If you have experience developing Android apps, adding a multiplatform dependency is similar to adding a
-> Gradle dependency in a regular Android project. The only difference is that you need to add it to a specific source set.
+> Gradle dependency to a regular Android project.
+> The only difference is that you need to add the dependency to a specific source set rather than to the module as a whole.
 >
 {style="tip"}
 
@@ -51,7 +53,7 @@ In addition to the OS version, add a function to display the number of days left
 The `kotlinx-datetime` library, which has full multiplatform support, is the most convenient way to work with dates in your shared code.
 
 1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
-    ```text
+    ```toml
     [versions]
     kotlinx-datetime = "0.8.0"
     

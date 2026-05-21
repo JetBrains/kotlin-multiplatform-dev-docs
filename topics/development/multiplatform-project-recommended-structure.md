@@ -69,7 +69,7 @@ To make the desktop app build script work:
 
 1. In the `gradle/libs.versions.toml` file, add the Kotlin JVM Gradle plugin to your version catalog:
 
-    ```text
+    ```toml
     [plugins]
     kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
     ```
@@ -260,7 +260,7 @@ Here are the necessary changes:
 1. In `gradle/libs.versions.toml`,
    add the Android-KMP library plugin to your version catalog:
 
-    ```text
+    ```toml
     [plugins]
     androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
     ```
@@ -335,7 +335,7 @@ Isolate the corresponding code in a `sharedLogic` module:
 
     1. In the `gradle/libs.versions.toml` file, add the Android-KMP library plugin to your version catalog:
 
-        ```text
+        ```toml
         [plugins]
         androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
         ```
@@ -448,7 +448,7 @@ Extract shared code implementing common UI elements in the `sharedUI` module:
     1. If you haven't done this for the `sharedLogic` module, in `gradle/libs.versions.toml`,
        add the Android-KMP library plugin to your version catalog:
 
-        ```text
+        ```toml
         [plugins]
         androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
         ```

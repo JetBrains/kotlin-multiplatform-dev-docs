@@ -50,26 +50,25 @@ In IntelliJ IDEA, expand the `GreetingKMP` folder.
 
 This Kotlin Multiplatform project includes the following modules:
 
-* _androidApp_ is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
-  The composeApp module depends on and uses the shared module as a regular Android library.
-* _iosApp_ is an Xcode project that builds into an iOS application.
+* `androidApp` is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
+  The `androidApp` module depends on and uses the shared module as a regular Android library.
+* `iosApp` is an Xcode project that builds into an iOS application.
   It depends on the `sharedLogic` module, which is exported as an iOS framework.
   Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
   [direct integration](multiplatform-direct-integration.md).
-* _sharedLogic_ is the multiplatform module that contains the logic common for both Android and iOS applications.
-* _sharedUI_ is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
-  but it is a multiplatform module that can be used by other targets whenever you are ready for that.
+* `sharedLogic` is the multiplatform module that contains the logic common for both Android and iOS applications.
+* `sharedUI` is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
+  but it is a multiplatform module and can be used by other targets when needed.
 
 Every module except for `iosApp` uses Gradle as the build system.
 
 ![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
-<!-- TODO need to redo the diagram: ios depends on sharedLogic while android on both sharedLogic and sharedUI -->
 
 _Source set_ is a Gradle concept for a set of files logically grouped together where each set has its own dependencies.
 In Kotlin Multiplatform, different source sets in a shared module can target different platforms.
 
 The `sharedLogic` module contains the `androidMain`, `commonMain`, and `iosMain` source sets.
-The `commonMain` source set contains shared Kotlin code, and platform source sets use Kotlin code specific to each target.
+The `commonMain` source set contains shared Kotlin code, while the platform-specific source sets contain code limited to each platform.
 Kotlin/JVM is used for `androidMain` and Kotlin/Native for `iosMain`:
 
 ![Source sets and modules structure](basic-project-structure-2.png){width=350}
@@ -146,14 +145,14 @@ and generates a single declaration with actual implementations.
     ```
 
     * The `name` property of the `AndroidPlatform` class uses the Android-specific code, namely the `android.os.Build`
-      dependency. This code is interpreted as Kotlin/JVM.
+      class. This code is interpreted as Kotlin/JVM.
       If you try to access a JVM-specific class, such as `java.util.Random` here, this code will compile.
     * The `name` property of the `IOSPlatform` class uses iOS-specific code, namely the `platform.UIKit.UIDevice`
-      dependency. This code is interpreted as Kotlin/Native, meaning that you can refer to iOS declarations in Kotlin.
+      class. This code is interpreted as Kotlin/Native, meaning that you can refer to iOS declarations in Kotlin.
       The code becomes a part of the iOS framework, which is imported in the Swift code of the `iosApp` module.
 
 3. Each source set includes a `getPlatform()` function.
-   Its expected declaration doesn't have a body, and actual implementations are provided in the platform code:
+   Its `expect` declaration doesn't have a body, and `actual` implementations are provided in the platform code:
 
     ```kotlin
     // Platform.kt in the commonMain source set
@@ -173,10 +172,10 @@ and generates a single declaration with actual implementations.
 Here, the common source set defines an expected `getPlatform()` function and has actual implementations,
 `AndroidPlatform()` for the Android app and `IOSPlatform()` for the iOS app, in the platform source sets.
 
-When generating the code for a specific platform, the Kotlin compiler merges expected and actual declarations
+When generating the code for a specific platform, the Kotlin compiler merges `expect` and `actual` declarations
 into a single `getPlatform()` function with the correct implementation.
 
-That's why expected and actual declarations should be defined in the same package – they are merged into one declaration
+That's why `expect` and `actual` declarations need to be defined in the same package – they are merged into one declaration
 in the resulting platform code. Any invocation of the expected `getPlatform()` function in the generated platform code
 then refers to the correct actual implementation.
 
