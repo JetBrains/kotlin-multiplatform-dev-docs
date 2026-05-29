@@ -1,5 +1,5 @@
 [//]: # (title: Adding Swift packages as dependencies to KMP modules)
-<primary-label ref="Experimental"/>
+<primary-label ref="alpha"/>
 
 <tldr>
    <p>Swift Package Manager (SwiftPM) fulfills the same role as CocoaPods:
@@ -8,10 +8,10 @@
    and how to migrate your KMP setup from CocoaPods to SwiftPM if necessary.</p>
 </tldr>
 
-> This feature is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
+> This feature is [Alpha](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
 > Please share any problems or feedback you have in the dedicated Kotlin Slack channel: [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C)
 >
-{style="warning"}
+{style="note"}
 
 Kotlin Gradle plugin with SwiftPM import integration allows you to import Objective-C APIs
 from Objective-C and Swift code using SwiftPM dependencies declared for your Apple targets.
