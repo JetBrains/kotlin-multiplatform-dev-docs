@@ -711,7 +711,10 @@ load on the Kotlin team. We encourage you to migrate to the `kotlin-multiplatfor
 
 **When do the changes take effect?**
 
-In 1.9.0, the use of the `kotlin-js` Gradle plugin produces a deprecation warning.
+Here's the deprecation cycle for the `kotlin-js` Gradle plugin:
+
+* 1.9.0: produce a deprecation warning when the `kotlin-js` plugin is used
+* 2.4.0: [raise the warning to an error](https://youtrack.jetbrains.com/issue/KT-59305)
 
 <anchor name="jvmWithJava-preset-deprecation"/>
 ### Deprecated `jvmWithJava` preset {initial-collapse-state="collapsed" collapsible="true"}
@@ -760,7 +763,7 @@ Here's the planned deprecation cycle:
 * <=1.9.0: report a warning when `kotlin.mpp.androidSourceSetLayoutVersion=1` is used; the warning can be suppressed with
   `kotlin.mpp.androidSourceSetLayoutVersion1.nowarn=true` Gradle property
 * 1.9.20: raise this warning to an error; the error **cannot** be suppressed
-* &gt;1.9.20: remove support for `kotlin.mpp.androidSourceSetLayoutVersion=1`; the Kotlin Gradle plugin ignores the property
+* 2.4.0: remove support for the legacy Android source set layout and remove the `kotlin.mpp.androidSourceSetLayoutVersion=1` Gradle property
 
 <anchor name="common-sourceset-with-dependson-deprecation"/>
 ### Deprecated `commonMain` and `commonTest` with custom `dependsOn` {initial-collapse-state="collapsed" collapsible="true"}
