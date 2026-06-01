@@ -8,7 +8,7 @@
    and how to migrate your KMP setup from CocoaPods to SwiftPM if necessary.</p>
 </tldr>
 
-> This feature is [Alpha](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
+> This feature is in [Alpha](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
 > Please share any problems or feedback you have in the dedicated Kotlin Slack channel: [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C)
 >
 {style="note"}
