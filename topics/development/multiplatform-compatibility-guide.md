@@ -758,12 +758,12 @@ now triggers a deprecation diagnostic.
 
 **When do the changes take effect?**
 
-Here's the planned deprecation cycle:
+Here's the deprecation cycle:
 
 * <=1.9.0: report a warning when `kotlin.mpp.androidSourceSetLayoutVersion=1` is used; the warning can be suppressed with
   `kotlin.mpp.androidSourceSetLayoutVersion1.nowarn=true` Gradle property
 * 1.9.20: raise this warning to an error; the error **cannot** be suppressed
-* 2.4.0: remove support for the legacy Android source set layout and [remove the `kotlin.mpp.androidSourceSetLayoutVersion=1` Gradle property](https://youtrack.jetbrains.com/issue/KT-82265))
+* 2.4.0: remove support for the legacy Android source set layout and [remove the `kotlin.mpp.androidSourceSetLayoutVersion=1` Gradle property](https://youtrack.jetbrains.com/issue/KT-82265)
 
 <anchor name="common-sourceset-with-dependson-deprecation"/>
 ### Deprecated `commonMain` and `commonTest` with custom `dependsOn` {initial-collapse-state="collapsed" collapsible="true"}
