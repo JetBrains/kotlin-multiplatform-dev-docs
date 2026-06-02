@@ -389,6 +389,30 @@ pod("NearbyMessages") {
 Check the [CocoaPods documentation](https://guides.cocoapods.org/) for more information. If nothing works, and you still
 encounter this error, report an issue in [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt).
 
+### Missing resources in the app bundle {initial-collapse-state="collapsed" collapsible="true"}
+
+If your iOS app builds successfully but crashes on launch, or if resources such as custom fonts and 
+images are missing from the final `.ipa` package, 
+there might be an issue with how a Pod integrates with your project.
+
+**To prevent the issue**: Instead of running the `pod install` command directly,
+use the Gradle `podInstall` task provided by the Kotlin CocoaPods Gradle plugin.
+This task creates the required directories and configures everything for you:
+
+```bash
+./gradlew podInstall
+open iosApp/iosApp.xcworkspace
+```
+
+**Why the issue happens**: When you run the native `pod install` command on a clean project
+(for example, after cloning the repository or when working in a CI/CD pipeline),
+the resources directory has not been created yet.
+The Compose Multiplatform Gradle plugin specifies where resources are located
+in the generated `.podspec` file:
+`spec.resources = ['build/compose/cocoapods/compose-resources']`, but that path only exists after a build.
+As a result, CocoaPods ignores the missing directory and configures the Xcode project without these resources.
+When the project is built and resources are generated, Xcode does not copy them into the final bundle.
+
 ### Rsync error {initial-collapse-state="collapsed" collapsible="true"}
 
 You might encounter the `rsync error: some files could not be transferred` error. It's a [known issue](https://github.com/CocoaPods/CocoaPods/issues/11946)
