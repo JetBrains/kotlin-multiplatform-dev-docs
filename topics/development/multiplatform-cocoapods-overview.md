@@ -392,24 +392,25 @@ encounter this error, report an issue in [YouTrack](https://youtrack.jetbrains.c
 
 If your iOS app builds successfully but crashes on launch, or if resources such as custom fonts and 
 images are missing from the final `.ipa` package, 
-the issue could be related to how CocoaPods integrates with your project.
+there might be an issue with how a Pod integrates with your project.
 
-The Compose Multiplatform Gradle plugin specifies where resources are located in the generated `podspec` file: 
-`spec.resources = ['build/compose/cocoapods/compose-resources']`.
-However, when you run the native `pod install` command on a clean project 
-(for example, after cloning the repository or when working in a CI/CD pipeline), 
-this directory does not yet exist on disk.
-As a result, CocoaPods ignores the missing directory and configures the Xcode project without these resources. 
-When the project is built and resources are generated, Xcode does not copy them into the final bundle.
-
-To prevent this issue, instead of running the `pod install` command directly,
-use the Gradle `podInstall` task provided by the Kotlin CocoaPods Gradle plugin. 
+**To prevent the issue**: Instead of running the `pod install` command directly,
+use the Gradle `podInstall` task provided by the Kotlin CocoaPods Gradle plugin.
 This task creates the required directories and configures everything for you:
 
 ```bash
 ./gradlew podInstall
 open iosApp/iosApp.xcworkspace
 ```
+
+**Why the issue happens**: When you run the native `pod install` command on a clean project
+(for example, after cloning the repository or when working in a CI/CD pipeline),
+the resources directory has not been created yet.
+The Compose Multiplatform Gradle plugin specifies where resources are located
+in the generated `.podspec` file:
+`spec.resources = ['build/compose/cocoapods/compose-resources']`, but that path only exists after a build.
+As a result, CocoaPods ignores the missing directory and configures the Xcode project without these resources.
+When the project is built and resources are generated, Xcode does not copy them into the final bundle.
 
 ### Rsync error {initial-collapse-state="collapsed" collapsible="true"}
 
