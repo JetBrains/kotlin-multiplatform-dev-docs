@@ -1,5 +1,5 @@
 [//]: # (title: Switch Kotlin Multiplatform project from CocoaPods to SwiftPM dependencies)
-<primary-label ref="Experimental"/>
+<primary-label ref="alpha"/>
 
 <tldr>
 

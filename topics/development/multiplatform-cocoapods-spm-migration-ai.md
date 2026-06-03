@@ -1,5 +1,5 @@
 [//]: # (title: Switch Kotlin Multiplatform project from CocoaPods to SwiftPM dependencies with Junie)
-<primary-label ref="Experimental"/>
+<primary-label ref="alpha"/>
 
 If you have a KMP module with CocoaPods dependencies and want to switch to Swift packages using [SwiftPM import](multiplatform-spm-import.md),
 you can use AI to help you.
