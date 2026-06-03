@@ -303,7 +303,7 @@ This will allow using the code for both Android and iOS.
    val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
    ```
    
-   Even though the Kotlin standard library provides an [experimental class for UUID generation](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.uuid/-uuid/),
+   Even though the Kotlin standard library provides a [class for UUID generation](https://kotlinlang.org/docs/uuids.html),
    let's use platform-specific functionality for this case to practice doing that.
    
    Provide the `expect` declaration for the `randomUUID()` function in the shared code and its `actual` implementations for
