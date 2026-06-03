@@ -26,7 +26,8 @@ When configuring your project, check the compatibility of a particular version o
 
 | Kotlin Multiplatform plugin version | Gradle                                | Android Gradle plugin                               | Xcode   |
 |-------------------------------------|---------------------------------------|-----------------------------------------------------|---------|
-| 2.3.20–2.3.21                       | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.4.0                               | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% | %xcode% |
+| 2.3.20–2.3.21                       | 7.6.3–9.3.0                           | 8.2.2–9.0.0                                         | 26.0    |
 | 2.3.10                              | 7.6.3–9.0.0                           | 8.2.2–9.0.0                                         | 26.0    |
 | 2.3.0                               | 7.6.3–9.0.0                           | 8.2.2–8.13.0                                        | 26.0    |
 | 2.2.21                              | 7.6.3–8.14                            | 7.3.1–8.11.1                                        | 26.0    |
@@ -710,7 +711,10 @@ load on the Kotlin team. We encourage you to migrate to the `kotlin-multiplatfor
 
 **When do the changes take effect?**
 
-In 1.9.0, the use of the `kotlin-js` Gradle plugin produces a deprecation warning.
+Here's the deprecation cycle for the `kotlin-js` Gradle plugin:
+
+* 1.9.0: produce a deprecation warning when the `kotlin-js` plugin is used
+* 2.4.0: [raise the warning to an error](https://youtrack.jetbrains.com/issue/KT-59305)
 
 <anchor name="jvmWithJava-preset-deprecation"/>
 ### Deprecated `jvmWithJava` preset {initial-collapse-state="collapsed" collapsible="true"}
@@ -754,12 +758,12 @@ now triggers a deprecation diagnostic.
 
 **When do the changes take effect?**
 
-Here's the planned deprecation cycle:
+Here's the deprecation cycle:
 
 * <=1.9.0: report a warning when `kotlin.mpp.androidSourceSetLayoutVersion=1` is used; the warning can be suppressed with
   `kotlin.mpp.androidSourceSetLayoutVersion1.nowarn=true` Gradle property
 * 1.9.20: raise this warning to an error; the error **cannot** be suppressed
-* &gt;1.9.20: remove support for `kotlin.mpp.androidSourceSetLayoutVersion=1`; the Kotlin Gradle plugin ignores the property
+* 2.4.0: remove support for the legacy Android source set layout and [remove the `kotlin.mpp.androidSourceSetLayoutVersion=1` Gradle property](https://youtrack.jetbrains.com/issue/KT-82265)
 
 <anchor name="common-sourceset-with-dependson-deprecation"/>
 ### Deprecated `commonMain` and `commonTest` with custom `dependsOn` {initial-collapse-state="collapsed" collapsible="true"}
