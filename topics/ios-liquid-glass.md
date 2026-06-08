@@ -1,6 +1,9 @@
 [//]: # (title: Liquid Glass in a Compose Multiplatform app)
 <show-structure depth="1"/>
 
+<web-summary>Step-by-step tutorial on adopting iOS 26 Liquid Glass in a Compose Multiplatform app 
+by migrating navigation to native SwiftUI.</web-summary>
+
 [Liquid Glass](https://developer.apple.com/documentation/TechnologyOverviews/liquid-glass) is Apple's visual design 
 system introduced in iOS 26, bringing glass-like translucency and fluidity to UI elements.
 To adopt it in a Compose Multiplatform app, you need a native SwiftUI shell, because 
@@ -739,9 +742,11 @@ If this approach doesn't fit your project, consider one of these alternatives:
 * **Compose-driven navigation with native interop controls**. Keep navigation in Compose, but embed native UI controls 
   such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
   between native overlays and Compose content.
+* **Compose-driven navigation with third-party solutions for adaptive UI**. Use libraries like [Calf](https://klibs.io/project/MohamedRejeb/Calf)
+  to render adaptive UI components that are native to the platform the app is running on.
+  This approach reduces the complexity of handling platform differences yourself and provides native behaviors like Liquid Glass on iOS out of the box.
 * **Compose-only navigation with imitated Liquid Glass effects**. Render everything in Compose and approximate Liquid Glass 
-  visually, for example, with libraries like [AndroidLiquidGlass](https://klibs.io/project/Kyant0/AndroidLiquidGlass),
-  [Calf](https://klibs.io/project/MohamedRejeb/Calf), or [Liquid](https://klibs.io/project/FletchMcKee/liquid).
+  visually, for example, with libraries like [AndroidLiquidGlass](https://klibs.io/project/Kyant0/AndroidLiquidGlass) or [Liquid](https://klibs.io/project/FletchMcKee/liquid).
   This approach keeps all UI on the Compose side, with the effect visually similar although not identical to system Liquid Glass.
 
 ## What's next

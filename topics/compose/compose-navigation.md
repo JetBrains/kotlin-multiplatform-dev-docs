@@ -266,6 +266,9 @@ there are third-party alternatives to evaluate:
 | [Appyx](https://bumble-tech.github.io/appyx/)       | Model-driven navigation with gesture control                                                                                                                    |
 | [PreCompose](https://tlaster.github.io/PreCompose/) | A navigation and view model inspired by Jetpack Lifecycle, ViewModel, LiveData, and Navigation                                                                  |
 
+If you're targeting iOS and want system-rendered effects like [Liquid Glass](https://developer.apple.com/documentation/technologyoverviews/liquid-glass) 
+in your navigation UI, consider [migrating navigation to native SwiftUI](ios-liquid-glass.md)
+while keeping Compose for screen content.
 
 ## What's next
 

@@ -416,4 +416,5 @@ The `AdvancedWebView` and `WebViewContainer` perform the following tasks:
 
 ## What's next
 
-You can also explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-uikit-integration.md).
+* Explore the way Compose Multiplatform can be [integrated with the UIKit framework](compose-uikit-integration.md).
+* Learn how to use [native SwiftUI navigation for system-rendered Liquid Glass effects](ios-liquid-glass.md) while Compose renders the screen content.
