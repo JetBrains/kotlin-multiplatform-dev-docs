@@ -116,8 +116,8 @@ Let's define a ViewModel and wire it into a composable:
    }
    ```
 
-    > This example uses [explicit backing fields](https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields),
-    > stabilized in Kotlin 2.4.0-RC. When using earlier versions, add
+    > This example uses [explicit backing fields](https://kotlinlang.org/docs/properties.html#explicit-backing-fields),
+    > stabilized in Kotlin 2.4.0. When using earlier versions, add
     > the `-Xexplicit-backing-fields` compiler option or use the old backing fields pattern with `.asStateFlow()` instead.
     >
     {style="note"}
