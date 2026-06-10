@@ -68,13 +68,13 @@ To get started, implement a new `App()` composable:
 
    When you run your application and click the button, the hardcoded time, 13:30, is displayed.
 
-3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the **desktopApp [hot] 🔥**
+3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "🔥desktopApp"
    run configuration.
    The app works, but the window looks mismatched with the UI:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-4. To fix this, update the `main.kt` file in the `desktopApp/src/kotlin` directory as follows:
+4. To fix this, update the `main.kt` file in the `desktopApp` source set as follows:
 
     ```kotlin
     fun main() = application {

@@ -188,7 +188,7 @@ When working with Kotlin Multiplatform projects, you have powerful tooling at yo
 * **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. With Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
 * **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
 
-![Compose Hot Reload](compose-hot-reload.gif){width=350}
+![Compose Hot Reload](compose-hot-reload.animated.gif){width=500 preview-src="compose-hot-reload.png"}
 
 * **Xcode**. Apple's IDE can be used to create the iOS part of Kotlin Multiplatform apps.
   Xcode is the standard for iOS app development, offering a plethora of tools for coding, debugging, and configuration.

@@ -52,7 +52,7 @@ For multiplatform projects using a Compose Multiplatform version earlier than 1.
 you must have a desktop target configured and then explicitly add the Compose Hot Reload plugin.
 The steps refer to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
 
-1. Introduce the desktop target: create the `jvmMain` directory, define a `main()` function,
+1. Introduce the desktop target: create the `desktopApp` directory, define a `main()` function,
    and provide the `actual` implementations.
    If your project already includes a desktop target, you can skip this step.
    For reference, see the sample in [Add a JVM entry point](migrate-from-android.md#optional-add-a-jvm-entry-point).
@@ -101,7 +101,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
 
 ## Use Compose Hot Reload
 
-1. In the `jvmMain` directory, open the `main.kt` file and update the `main()` function:
+1. In the `desktopApp` source set, open the `main.kt` file and update the `main()` function:
    ```kotlin
    fun main() = application {
        Window(
@@ -134,16 +134,16 @@ The steps refer to the project from the [Create an app with shared logic and UI]
    ```
 
 4.  Open the `main.kt` file and click the **Run** icon in the gutter. 
-    Select **Run 'composeApp [jvm]' with Compose Hot Reload**.
+    Select **Run 'desktopApp' with Compose Hot Reload**.
 
-    ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350}
+    ![Run Compose Hot Reload from gutter](compose-hot-reload-gutter-run.png){width=350 border-effect="line"}
 
-    ![First Compose Hot Reload on desktop app](compose-hot-reload-hello.png){width=500}
+    ![First Compose Hot Reload on desktop app](compose-hot-reload-hello.png){width=500 border-effect="line"}
 
 5. Update the string returned from the `greet()` function, then save all files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>)
    to see the desktop app update automatically.
 
-   ![Compose Hot Reload](compose-hot-reload.gif){width=350}
+   ![Compose Hot Reload](compose-hot-reload.animated.gif){width=500 preview-src="compose-hot-reload.png"}
 
    Alternatively, trigger the reload explicitly by pressing the assigned shortcut key or clicking the **Reload UI** button.
    You can modify the trigger behavior on the **Settings | Tools | Compose Hot Reload** page.
