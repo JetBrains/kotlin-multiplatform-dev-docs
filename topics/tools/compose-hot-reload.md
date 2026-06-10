@@ -101,7 +101,7 @@ The steps refer to the project from the [Create an app with shared logic and UI]
 
 ## Use Compose Hot Reload
 
-1. In the `desktopApp` directory, open the `main.kt` file and update the `main()` function:
+1. In the `desktopApp` source set, open the `main.kt` file and update the `main()` function:
    ```kotlin
    fun main() = application {
        Window(

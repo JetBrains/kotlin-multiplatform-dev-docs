@@ -74,7 +74,7 @@ To get started, implement a new `App()` composable:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-4. To fix this, update the `main.kt` file in the `desktopApp/src/kotlin` directory as follows:
+4. To fix this, update the `main.kt` file in the `desktopApp` source set as follows:
 
     ```kotlin
     fun main() = application {
