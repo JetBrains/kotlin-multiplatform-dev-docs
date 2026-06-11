@@ -175,7 +175,7 @@
         <toc-element toc-title="Upgrading to AGP 9" topic="multiplatform-project-agp-9-migration.md"/>
 	</toc-element>
 	<toc-element toc-title="Multiplatform journal">
-		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.md"/>
+		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.topic"/>
 		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
 		<toc-element toc-title="Six popular cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
 		<toc-element topic="multiplatform-introduce-your-team.md"/>

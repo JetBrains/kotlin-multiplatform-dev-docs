@@ -28,7 +28,7 @@
             "@type": "Question",
             "name": "Does Google support Kotlin Multiplatform?",
             "acceptedAnswer": {
-              "@type": "Answer",
+            "@type": "Answer",
               "text": "At Google I/O 2024, Google announced official support for using Kotlin Multiplatform on Android to share business logic between Android and iOS."
             }
           }, {
