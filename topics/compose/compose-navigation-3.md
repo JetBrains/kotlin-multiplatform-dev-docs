@@ -5,9 +5,13 @@ Compose and takes into account feedback to the previous version of the library.
 Starting with version 1.10, Compose Multiplatform supports adopting Navigation 3 in multiplatform projects for all supported platforms:
 Android, iOS, desktop, and web.
 
+> For the core navigation concepts, see [](compose-navigation.md).
+>
+{style="tip"}
+
 ## Key changes
 
-Navigation 3 is more than a new version of the library — in a lot of ways it's a new library entirely.
+Navigation 3 is more than a new version of the library — in many ways, it's a new library entirely.
 To learn more about the philosophy behind this redesign, see the [Android Developers blog post](https://android-developers.googleblog.com/2025/05/announcing-jetpack-navigation-3-for-compose.html).
 
 Key changes in Navigation 3 include:
@@ -19,7 +23,7 @@ Key changes in Navigation 3 include:
 * **Adaptive layout system**. With adaptive design, you can display multiple destinations at the same time
   and seamlessly switch between layouts. 
 
-Learn more about general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
+Learn more about the general design of Navigation 3 in [Android documentation](https://developer.android.com/guide/navigation/navigation-3).
 
 ## Dependencies setup
 
