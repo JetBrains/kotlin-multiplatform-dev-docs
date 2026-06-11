@@ -65,7 +65,7 @@
 
     <chapter title="Cross-platform frameworks (Flutter, React Native etc.)" id="cross-platform-frameworks">
 
-      <p><a href="cross-platform-frameworks.md">Cross-platform frameworks</a>, such as Flutter and React Native, aim to unify development around a single codebase. This approach allows teams to share both business logic and UI code, with a cross-platform layer rendering the app across operating systems. The promise is straightforward: one codebase, two platforms, and a more efficient path from idea to release.</p>
+      <p><a href="cross-platform-frameworks.topic">Cross-platform frameworks</a>, such as Flutter and React Native, aim to unify development around a single codebase. This approach allows teams to share both business logic and UI code, with a cross-platform layer rendering the app across operating systems. The promise is straightforward: one codebase, two platforms, and a more efficient path from idea to release.</p>
     </chapter>
 
     <chapter title="Flexible code sharing (Kotlin Multiplatform)" id="flexible-code-sharing">

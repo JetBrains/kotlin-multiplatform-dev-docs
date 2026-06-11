@@ -54,7 +54,7 @@ Over time, constraints in rendering, responsiveness, and native integration can 
 
 Cross-platform frameworks like React Native and Flutter aim to reduce fragmentation by offering a shared UI layer that runs on both iOS and Android. They help teams improve feature parity, speed up prototyping, and reduce duplicated effort through shared UI logic, hot reload, and rich component libraries supported by large plugin ecosystems.
 
-The tradeoff is an additional abstraction layer on top of native platforms. As OS versions evolve, this layer can introduce new failure points, uneven library quality, and extra complexity when integrating native APIs or performance-critical features. For a closer look at widely used options, see our overview of some of the [most popular cross-platform app development frameworks](cross-platform-frameworks.md).
+The tradeoff is an additional abstraction layer on top of native platforms. As OS versions evolve, this layer can introduce new failure points, uneven library quality, and extra complexity when integrating native APIs or performance-critical features. For a closer look at widely used options, see our overview of some of the [most popular cross-platform app development frameworks](cross-platform-frameworks.topic).
 
 ### Kotlin Multiplatform: Shared code and UIs with Compose Multiplatform
 
