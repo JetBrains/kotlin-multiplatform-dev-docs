@@ -1,10 +1,5 @@
 [//]: # (title: Drag-and-drop operations)
 
-> Currently, drag-and-drop operations are not supported in Compose Multiplatform for web.
-> Stay tuned for future releases.
->
-{style="note"}
-
 You can enable your Compose Multiplatform app to accept data that users drag into it from other applications 
 or allow users to drag data out of your app.
 To implement this, use the `dragAndDropSource` and `dragAndDropTarget` modifiers to specify particular composables
@@ -17,16 +12,18 @@ as potential sources or destinations for drag operations.
 ## Creating a drag source
 
 To prepare a composable to be a drag source:
-1. Choose the trigger for the drag event with the `detectDragGestures()` function (for example, `onDragStart`).
-2. Call the `startTransfer()` function and describe the drag-and-drop session with a `DragAndDropTransferData()` call.
+1. Apply the `dragAndDropSource` modifier to your composable.
+2. Add a `drawDragDecoration` lambda to render the visual representation shown while the user drags the data.
 3. Describe the data that is supposed to be dragged to the target with a `DragAndDropTransferable()` call.
 
-Example of a `Box()` composable that allows users to drag a string from it:
+The following example sets up a `Box` composable as a drag source that exports a string:
 
 ```kotlin
 val exportedText = "Hello, drag and drop!"
 
 Box(Modifier
+    .size(200.dp)
+    .background(Color.LightGray)
     .dragAndDropSource(
         // Creates a visual representation of the data being dragged
         // (white rectangle with the exportedText string centered on it).
@@ -49,39 +46,30 @@ Box(Modifier
                 )
             )
         }
-    ) {
-        detectDragGestures(
-            onDragStart = { offset ->
-                startTransfer(
-                    // Defines transferable data and supported transfer actions.
-                    // When an action is concluded, prints the result into
-                    // system output with onTransferCompleted().    
-                    DragAndDropTransferData(
-                        transferable = DragAndDropTransferable(
-                            StringSelection(exportedText)
-                        ),
+    ) { offset ->
+        // Defines transferable data and supported transfer actions.
+        // When an action is concluded, prints the result into
+        // system output with onTransferCompleted().    
+        DragAndDropTransferData(
+            transferable = DragAndDropTransferable(
+                StringSelection(exportedText)
+            ),
 
-                        // List of actions supported by this drag source. A type of action
-                        // is passed to the drop target together with data.
-                        // The target can use this to reject an inappropriate drop operation
-                        // or to interpret user expectations.
-                        supportedActions = listOf(
-                            DragAndDropTransferAction.Copy,
-                            DragAndDropTransferAction.Move,
-                            DragAndDropTransferAction.Link,
-                        ),
-                        dragDecorationOffset = offset,
-                        onTransferCompleted = { action -> 
-                            println("Action at the source: $action")
-                        }
-                    )
-                )
-            },
-            onDrag = { _, _ -> },
+            // List of actions supported by this drag source. A type of action
+            // is passed to the drop target together with data.
+            // The target can use this to reject an inappropriate drop operation
+            // or to interpret user expectations.
+            supportedActions = listOf(
+                DragAndDropTransferAction.Copy,
+                DragAndDropTransferAction.Move,
+                DragAndDropTransferAction.Link,
+            ),
+            dragDecorationOffset = offset,
+            onTransferCompleted = { action -> 
+                println("Action at the source: $action")
+            }
         )
     }
-    .size(200.dp)
-    .background(Color.LightGray)
 ) {
     Text("Drag Me", Modifier.align(Alignment.Center))
 }
@@ -92,16 +80,19 @@ Box(Modifier
 
 To prepare a composable to be a drag-and-drop target:
 
-1. Describe the conditions for the composable to be the target of a drop in the `shouldStartDragAndDrop` lambda.
-2. Create (and `remember`) the `DragAndDropTarget` object that will contain your overrides for drag event handlers.
-3. Write the necessary overrides: for example, `onDrop` for parsing the received data or `onEntered` when a draggable
-   object enters the composable.
+1. Create (and `remember`) a `DragAndDropTarget` object with overrides for the drag
+   events you want to handle, such as `onStarted`, `onEnded`, and `onDrop`.
+2. Apply the `dragAndDropTarget` modifier to your composable. Pass a
+   `shouldStartDragAndDrop` lambda that determines whether the target accepts the
+   session, along with the `DragAndDropTarget` object.
+3. In `onDrop`, read the dropped data from the `DragAndDropEvent` and return `true`
+   to indicate that the drop was accepted.
 
-Example of a `Box()` composable that is ready to display text dropped into it:
+The following desktop example sets up a `Box` composable as a drop target that displays text dropped into it:
 
 ```kotlin
 var showTargetBorder by remember { mutableStateOf(false) }
-var targetText by remember { mutableStateOf("Drop Here") }
+var targetText by remember { mutableStateOf("Drop here") }
 val coroutineScope = rememberCoroutineScope()
 val dragAndDropTarget = remember {
     object: DragAndDropTarget {
@@ -133,7 +124,7 @@ val dragAndDropTarget = remember {
             // Reverts the text of the drop target to the initial
             // value after 2 seconds.
             coroutineScope.launch {
-                delay(2000)
+                delay(2.seconds)
                 targetText = "Drop here"
             }
             return result
