@@ -68,14 +68,14 @@
         <p>Before choosing a development approach, it’s important to understand how native, cross-platform, and hybrid
             apps differ in terms of architecture, performance, and development process.</p>
         <p>
-            <control>Native app development:</control>
+            <b>Native app development:</b>
             Native apps are built specifically for a single platform, such as iOS or Android, using platform-specific
             languages and tools like Swift, Objective-C, Kotlin, or Java. This approach delivers the highest level of
             performance, full access to device hardware, and a user experience that feels fully integrated with the
             operating system.
         </p>
         <p>
-            <control>Cross-platform app development:</control>
+            <b>Cross-platform app development:</b>
             <a href="cross-platform-mobile-development.md">Cross-platform development</a> allows teams to build
             applications for multiple platforms using a shared codebase. Modern frameworks such as <a
                 href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform (KMP)</a>, Flutter, and React Native
@@ -86,7 +86,7 @@
                                                                 alt="Discover Kotlin Multiplatform" width="600"/></a>
         </p>
         <p>
-            <control>Hybrid app development:</control>
+            <b>Hybrid app development:</b>
             Hybrid apps are essentially web applications built with HTML, CSS, and JavaScript, wrapped inside a native
             container. While this approach is fast and cost-effective to implement, it often comes with limitations in
             performance, responsiveness, and access to device features.
@@ -110,7 +110,7 @@
             <p>Cross-platform development allows teams to share a significant portion of code, often between 60% and
                 95%, across multiple platforms. There are various open-source frameworks for cross-platform mobile app
                 development available today. Tools such as Kotlin Multiplatform, Flutter, and React Native allow
-                developers to reuse business logic while maintaining flexibility in implementation.</p>
+                developers to reuse code while maintaining flexibility in implementation.</p>
             <p>This approach reduces the need to build and maintain separate codebases, which can significantly speed up
                 development and lower overall costs. Teams can deliver features faster, reuse existing logic, and apply
                 updates across platforms simultaneously, making cross-platform development especially effective for
@@ -140,14 +140,14 @@
         <list>
             <li>
                 <p>
-                    <control>You are targeting a single platform.</control>
+                    <b>You are targeting a single platform.</b>
                     If your product is focused only on iOS or Android, building natively can simplify development and
                     allow you to fully optimize for that ecosystem.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Your app is hardware-intensive.</control>
+                    <b>Your app is hardware-intensive.</b>
                     Applications that rely heavily on device capabilities, such as camera processing, GPS, sensors, or
                     real-time interactions, benefit from full access to platform APIs. This includes use cases like
                     augmented reality (AR), gaming, and video processing.
@@ -155,16 +155,17 @@
             </li>
             <li>
                 <p>
-                    <control>The user interface is critical to your application.</control>
+                    <b>The user interface is critical to your application.</b>
                     If your product depends on delivering a highly polished, platform-specific interface, native
-                    development allows you to fully leverage platform design patterns and UI capabilities. However, you
-                    don’t necessarily have to give up code sharing, since modern multiplatform solutions like Kotlin
+                    development allows you to fully leverage platform design patterns and UI capabilities.
+                    However, even in this case you
+                    don’t have to give up code sharing entirely, since modern multiplatform solutions like Kotlin
                     Multiplatform let you share business logic across platforms while keeping the UI fully native.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>You depend on platform-specific features or frequent OS updates.</control>
+                    <b>You depend on platform-specific features or frequent OS updates.</b>
                     If your app needs to quickly adopt new iOS or Android features, native development allows you to
                     integrate updates without waiting for third-party framework support.
                 </p>
@@ -183,35 +184,35 @@
         <list>
             <li>
                 <p>
-                    <control>You are targeting both iOS and Android.</control>
+                    <b>You are targeting both iOS and Android.</b>
                     If your product needs to reach users across multiple platforms, cross-platform development lets you
                     build and maintain a single codebase rather than managing separate applications.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Time to market is essential.</control>
+                    <b>Time to market is essential.</b>
                     Sharing code across platforms reduces development effort and speeds up delivery. This makes it
                     easier to release new features faster and respond quickly to user feedback.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>You want to optimize development and maintenance costs.</control>
+                    <b>You want to optimize development and maintenance costs.</b>
                     With a shared codebase, teams can reduce duplication of work and simplify long-term maintenance,
                     which is especially important for startups and growing products.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Your application has complex business logic.</control>
+                    <b>Your application has complex business logic.</b>
                     Cross-platform solutions are particularly effective when much of your application logic can be
                     reused across platforms, such as networking, data processing, or domain logic.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>You want to balance code sharing with native capabilities.</control>
+                    <b>You want to balance code sharing with native capabilities.</b>
                     Not all cross-platform approaches are the same. For example, Kotlin Multiplatform allows you to
                     share business logic while keeping the UI native, giving you flexibility without sacrificing
                     performance or user experience. If you also want to share UI across platforms, <a
@@ -234,36 +235,36 @@
         <list>
             <li>
                 <p>
-                    <control>Kotlin Multiplatform (KMP)</control>
-                    – An open-source technology from JetBrains that allows developers to share Kotlin code across
+                    <b>Kotlin Multiplatform (KMP)</b>.
+                    An open-source technology from JetBrains that allows developers to share Kotlin code across
                     Android, iOS, desktop, web, and server while retaining the advantages of native development.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Flutter</control>
-                    – An open-source framework by Google for building natively compiled, multiplatform applications from
+                    <b>Flutter</b>.
+                    An open-source framework by Google for building natively compiled, multiplatform applications from
                     a single codebase. It’s known for fast development and a large community.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>React Native</control>
-                    – An open-source framework by Meta that allows you to build mobile apps using JavaScript and React.
+                    <b>React Native</b>.
+                    An open-source framework by Meta that allows you to build mobile apps using JavaScript and React.
                     It offers fast iteration and a broad ecosystem of libraries and tools.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>.NET Multiplatform App UI (.NET MAUI)</control>
-                    – A cross-platform solution for developers working in the Microsoft ecosystem. This framework
+                    <b>.NET Multiplatform App UI (.NET MAUI)</b>.
+                    A cross-platform solution for developers working in the Microsoft ecosystem. This framework
                     enables the creation of native mobile and desktop apps with C# and XAML.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Ionic</control>
-                    – An open-source UI toolkit for building cross-platform mobile apps using web technologies (HTML,
+                    <b>Ionic</b>.
+                    An open-source UI toolkit for building cross-platform mobile apps using web technologies (HTML,
                     CSS, and JavaScript), with integrations for frameworks like Angular, React, and Vue, enabling
                     development from a single codebase.
                 </p>
@@ -279,21 +280,21 @@
         <list>
             <li>
                 <p>
-                    <control>Share logic and UI.</control>
+                    <b>Share logic and UI.</b>
                     You can use Kotlin with Compose Multiplatform to share up to 100% of your app code, including UIs,
                     while still integrating with native APIs.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Share logic, keep a native UI.</control>
+                    <b>Share logic, keep a native UI.</b>
                     Share data and business logic while maintaining a fully native UI on each platform – ideal when
                     platform-specific behavior and UX fidelity are priorities.
                 </p>
             </li>
             <li>
                 <p>
-                    <control>Share a small part of the logic.</control>
+                    <b>Share a small part of the logic.</b>
                     Start gradually by sharing selected components, such as validation, domain logic, or authentication,
                     to improve consistency without major architectural changes.
                 </p>
@@ -302,27 +303,27 @@
         <img src="with-compose-multiplatform.svg"
              alt="With Kotlin Multiplatform and Compose Multiplatform: developers can share business logic, presentation logic, or even UI logic"
              width="700"/>
-        <p>You can share almost anything, except for platform-specific code.</p>
+        <p>You can share almost anything except platform-specific code.</p>
         <p>What teams achieve in practice:</p>
         <p>
-            <control>High code reuse with full flexibility.</control>
+            <b>High code reuse with full flexibility.</b>
             Teams often share up to
-            <control>90%–95% of their codebase</control>
+            <b>90%–95% of their codebase</b>
             , reducing duplication while keeping platform-specific implementations where necessary. For example, <a
                 href="https://kotlinlang.org/case-studies/#bitkey-by-block">Bitkey by Block shares 95%</a> of its mobile
             codebase with Kotlin Multiplatform, ensuring consistency in its open-source Bitcoin wallet.
         </p>
         <p>
-            <control>Faster delivery and iteration.</control>
+            <b>Faster delivery and iteration.</b>
             By reusing core logic, teams can reduce development cycles and deliver features faster, often reporting up
             to
-            <control>30% shorter release timelines</control>
-            . Using Kotlin and Compose Multiplatform, <a href="https://kotlinlang.org/case-studies/#music-work">Music
+            <b>30% shorter release timelines</b>.
+            Using Kotlin and Compose Multiplatform, <a href="https://kotlinlang.org/case-studies/#music-work">Music
             Work has reduced development and maintenance costs by 30%</a>, while significantly accelerating their
             deployment cycles.
         </p>
         <p>
-            <control>Improved collaboration between teams.</control>
+            <b>Improved collaboration between teams.</b>
             Android and iOS developers can work on a shared codebase while continuing to use their preferred tools and
             workflows. For example, <a href="https://kotlinlang.org/case-studies/#prezzee">the Prezzee team shared their
             Kotlin Multiplatform journey</a>, through which they transformed their mobile development approach and built
@@ -336,73 +337,73 @@
         <p>Choosing between native and cross-platform development depends on your product goals, technical requirements,
             and team setup. Use the following steps to guide your decision:</p>
         <p>
-            <control>1. Define your target platforms</control>
+            <b>1. Define your target platforms</b>
         </p>
         <p>Decide whether your app will run on Android, iOS, or both. If you’re targeting multiple platforms from the
             start, cross-platform development can help reduce duplication and simplify maintenance.</p>
         <p>
-            <control>2. Assess performance and feature requirements</control>
+            <b>2. Assess performance and feature requirements</b>
         </p>
         <p>Consider how demanding your application is in terms of performance, graphics, and hardware access. Apps that
             rely heavily on device capabilities, such as real-time processing, sensors, or complex animations, may
             benefit from a native approach.</p>
         <p>
-            <control>3. Evaluate your team’s expertise</control>
+            <b>3. Evaluate your team’s expertise</b>
         </p>
         <p>Take into account the programming languages and tools your team is already familiar with. Native development
             typically requires platform-specific skills: Developers need to know Objective-C or Swift to create native
             apps for iOS, and they need to know Kotlin or Java for Android. On the other hand, the cross-platform
             framework Flutter requires knowledge of Dart. If you use Kotlin Multiplatform, Kotlin syntax is easy for iOS
-            developers to learn because it follows concepts similar to Swift. With Kotlin Multiplatform, teams can reuse
-            Kotlin skills across platforms, which can simplify adoption.</p>
+            developers to learn because it follows concepts similar to Swift and for Android developers, since it's the primary language of modern Android apps.
+            With Kotlin Multiplatform, teams can reuse Kotlin skills across platforms, which can simplify adoption.</p>
         <p>
-            <control>4. Balance timeline, budget, and maintenance</control>
+            <b>4. Balance timeline, budget, and maintenance</b>
         </p>
         <p>Cross-platform development can reduce development time and cost by sharing code across platforms, while
             native development may require separate implementations. Consider not only initial development effort but
             also long-term maintenance and scalability.</p>
         <p>
-            <control>5. Consider long-term viability and ecosystem</control>
+            <b>5. Consider long-term viability and ecosystem</b>
         </p>
         <p>Look at the maturity of the technology, community support, and available learning resources. A strong
             ecosystem with active development and documentation helps ensure long-term stability and faster
             problem-solving. You can check out our curated list of <a href="kmp-learning-resources.md">Kotlin
                 Multiplatform (KMP) and Compose Multiplatform learning materials</a>.</p>
         <p>
-            <control>6.Future-proof your architecture</control>
+            <b>6. Future-proof your architecture</b>
         </p>
         <p>Choose an approach that allows flexibility as your product evolves. Solutions like Kotlin Multiplatform let
             you start small, sharing only part of your code, and expand gradually, helping you adapt to changing
             requirements without major rewrites.</p>
     </chapter>
-    <chapter title="Frequently asked question" id="frequently-asked-question">
+    <chapter title="Frequently asked questions" id="frequently-asked-question">
         <p>
-            <control>Q: What is cross-platform mobile app development?</control>
+            <b>Q: What is cross-platform mobile app development?</b>
         </p>
         <p>A: Cross-platform mobile app development is the process of building applications that run on multiple
             platforms, such as Android and iOS, using a shared codebase. Developers can reuse part of the code across
             platforms, reducing development time and maintenance effort.</p>
         <p>
-            <control>Q: Which is better: Native or cross-platform?</control>
+            <b>Q: Which is better: Native or cross-platform?</b>
         </p>
         <p>A: There is no one-size-fits-all answer. Native development offers the best performance and full access to
             platform features, while cross-platform development enables faster delivery and lower maintenance costs
             through code sharing. The right choice depends on your project’s requirements, timeline, and team
             expertise.</p>
         <p>
-            <control>Q: What are the advantages of native apps?</control>
+            <b>Q: What are the advantages of native apps?</b>
         </p>
         <p>A: Native apps provide high performance, smooth and responsive interactions, and full access to device
             hardware and platform APIs. They also follow platform-specific design guidelines, resulting in a more
             consistent and intuitive user experience.</p>
         <p>
-            <control>Q: What frameworks are used for cross-platform apps?</control>
+            <b>Q: What frameworks are used for cross-platform apps?</b>
         </p>
         <p>A: Popular cross-platform frameworks include Kotlin Multiplatform, Flutter, React Native, .NET MAUI (formerly
             Xamarin), and Ionic. Each framework offers a different balance between code sharing, performance, and access
             to native features.</p>
         <p>
-            <control>Q: How much code can be shared between platforms?</control>
+            <b>Q: How much code can be shared between platforms?</b>
         </p>
         <p>A: The amount of shared code depends on the approach and tools used. With modern cross-platform solutions,
             teams can typically share between 60%–95% of their code, especially when it comes to business logic and data
