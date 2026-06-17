@@ -100,6 +100,6 @@ Adopting a cross-platform framework in a team can be a challenge.
 To learn about the benefits and solutions to potential problems, take a look at our high-level overviews
 of cross-platform development:
 
-* [](cross-platform-mobile-development.md): Provides an overview of the different approaches and implementations for cross-platform applications.
+* [](cross-platform-mobile-development.topic): Provides an overview of the different approaches and implementations for cross-platform applications.
 * [](multiplatform-introduce-your-team.md): Offers strategies to introduce cross-platform development in a team.
 * [](multiplatform-reasons-to-try.md): Lists reasons to adopt Kotlin Multiplatform as your cross-platform solution.

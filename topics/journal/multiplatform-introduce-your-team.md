@@ -2,7 +2,7 @@
 
 <web-summary>Learn how to introduce multiplatform mobile app development to your team with these six recommendations for smooth and efficient adoption.</web-summary>
 
-Implementing new technologies and tools into an organization comes with challenges. How do you help your team adopt a [multiplatform approach to mobile app development](cross-platform-mobile-development.md) to optimize and streamline your workflow? Here are some recommendations and best practices to help you effectively introduce your team to [Kotlin Multiplatform (KMP)](https://www.jetbrains.com/kotlin-multiplatform/), an open-source technology built by JetBrains that allows developers to share code across platforms while retaining the benefits of native programming.
+Implementing new technologies and tools into an organization comes with challenges. How do you help your team adopt a [multiplatform approach to mobile app development](cross-platform-mobile-development.topic) to optimize and streamline your workflow? Here are some recommendations and best practices to help you effectively introduce your team to [Kotlin Multiplatform (KMP)](https://www.jetbrains.com/kotlin-multiplatform/), an open-source technology built by JetBrains that allows developers to share code across platforms while retaining the benefits of native programming.
 
 * [Start with empathy](#start-with-empathy)
 * [Explain how Kotlin Multiplatform works](#explain-how-kotlin-multiplatform-works)

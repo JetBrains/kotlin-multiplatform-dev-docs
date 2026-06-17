@@ -2,7 +2,7 @@
 
 <web-summary>Explore key considerations in choosing a language for cross-platform development, comparisons of popular technologies, and real-life case studies.</web-summary>
 
-You’ve probably started to notice the term [cross-platform development](cross-platform-mobile-development.md) popping up more and more frequently these days. Indeed, cross-platform programming is becoming increasingly popular in the context of software development. It is particularly prevalent in the area of mobile apps, but its use is by no means limited to these types of applications. As businesses strive to reach broader audiences across multiple devices and operating systems, developers are turning to versatile languages and frameworks that erase platform barriers.
+You’ve probably started to notice the term [cross-platform development](cross-platform-mobile-development.topic) popping up more and more frequently these days. Indeed, cross-platform programming is becoming increasingly popular in the context of software development. It is particularly prevalent in the area of mobile apps, but its use is by no means limited to these types of applications. As businesses strive to reach broader audiences across multiple devices and operating systems, developers are turning to versatile languages and frameworks that erase platform barriers.
 
 If you’re wondering which programming language would best equip you to get started with cross-platform development, this overview article will steer you in the right direction, offering insights and real use-case examples.
 
