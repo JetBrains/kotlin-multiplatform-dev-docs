@@ -68,7 +68,7 @@
         <chapter title="Different approaches to mobile app development" id="different-approaches-to-mobile-app-development">
             <p>Cross-platform solutions have evolved significantly over the past decade. Early hybrid tools such as Apache Cordova and Ionic enabled web-based code to be shared across platforms, but often offered limited performance and a poor user experience. Modern compiled frameworks like Kotlin Multiplatform and Flutter deliver near-native performance with broad code reuse while providing deeper access to native platform capabilities.</p>
 
-            <p>There are several main ways to create an application for both Android and iOS.</p>
+            <p>There are several main ways to create an application for both Android and iOS:</p>
 
               <list type="none">
                   <li><a href="#1-separate-native-apps-for-each-operating-system">Separate native apps</a></li>
@@ -98,7 +98,7 @@
             </chapter>
 
             <chapter title="4. Hybrid apps" id="4-hybrid-apps">
-                <p>When browsing websites and forums, you may notice that some people use the terms <i>cross-platform mobile development</i> and <i>hybrid mobile development</i> interchangeably. Doing so, however, is not entirely accurate.</p>
+                <p>When browsing websites and forums, you may notice that some people use the terms <emphasis>cross-platform mobile development</emphasis> and <emphasis>hybrid mobile development</emphasis> interchangeably. Doing so, however, is not entirely accurate.</p>
 
                 <p>When it comes to cross-platform apps, mobile engineers can write code once and then reuse it on different platforms. Hybrid app development, on the other hand, is an approach that combines native and web technologies. It requires you to embed code written in a web development language, like HTML, CSS, or JavaScript, into a native app. You can do this with the help of frameworks, such as Ionic Capacitor and Apache Cordova, using additional plugins to access the native functionalities of platforms.</p>
 
@@ -125,7 +125,7 @@
         <p>Cross-platform development is often chosen not only for technical reasons, but also for its business advantages. By sharing code across platforms, teams can reduce duplicated development effort, accelerate feature delivery, and simplify long-term maintenance.</p>
 
         <chapter title="Benefits of cross-platform mobile development" id="benefits-of-cross-platform-mobile-development">
-            <p>There are plenty of reasons businesses choose this approach over other options.</p>
+            <p>There are plenty of reasons businesses choose this approach over other options:</p>
 
               <list type="none">
                   <li><a href="#1-reusable-code">Reusable code</a></li>
@@ -139,7 +139,7 @@
             <chapter title="1. Reusable code" id="1-reusable-code">
                 <p>With cross-platform programming, mobile engineers don't need to write new code for every operating system. Using a single codebase allows developers to cut down on time spent doing repetitive tasks, such as API calls, data storage, data serialization, and analytics implementation.</p>
 
-                <p>Technologies like Kotlin Multiplatform allow you to implement the data, business, and presentation layers of your app just once. Alternatively, you can adopt KMP gradually. Choose a piece of logic that changes frequently and usually goes out of sync, such as filtering, or sorting, make it cross-platform, and then connect it to your project as a microlibrary.</p>
+                <p>Technologies like Kotlin Multiplatform allow you to implement the data, business, and presentation layers of your app just once. Alternatively, you can adopt KMP gradually. Choose a piece of logic that changes frequently and usually goes out of sync, such as filtering, or sorting, make it cross-platform, and then connect it to your project as a shared module.</p>
 
                 <p>At JetBrains, we regularly conduct Kotlin Multiplatform surveys and ask our community members about what parts of code they share between different platforms.</p>
 
@@ -173,7 +173,6 @@
             <p>With improvements to the underlying technologies, however, cross-platform solutions are becoming increasingly stable, adaptable, and flexible.</p>
 
             <p>Another commonly voiced concern is that multiplatform development makes it impossible to seamlessly support the native features of platforms. With Kotlin Multiplatform, however, you can use Kotlin's <a href="multiplatform-expect-actual.md">expected and actual declarations</a> to enable your multiplatform app to access platform-specific APIs. Expected and actual declarations allow you to define in common code that you "expect" to be able to call the same function across multiple platforms and provide the "actual" implementations, which can interact with any platform-specific libraries thanks to Kotlin's interoperability with Java and Objective-C/Swift.</p>
-
             <p>As modern multiplatform frameworks continue to evolve, they increasingly allow mobile engineers to craft a native-like experience. If an application is well-written, the user will not be able to notice the difference. However, the quality of your product will heavily depend on the cross-platform app development tools you choose.</p>
         </chapter>
     </chapter>
@@ -183,27 +182,26 @@
 
         <p>The following overview compares some of the most widely used cross-platform frameworks today.</p>
 
-        <table style="header-row" style="header-column">
+        <table style="both">
             <tr>
-                <td></td>
-                <td><b>Language</b></td>
-                <td><b>Code sharing across platforms</b></td>
-                <td><b>Community maturity</b></td>
-                <td><b>App examples</b></td>
+                <td width="160"></td>
+                <td width="50"><b>Language</b></td>
+                <td width="230"><b>Code sharing across platforms</b></td>
+                <td width="140"><b>Community maturity</b></td>
+                <td width="130"><b>App examples</b></td>
             </tr>
             <tr>
                 <td><b>Kotlin Multiplatform</b></td>
                 <td>Kotlin</td>
                 <td>
-                    Flexible code sharing across<br/>
-                    platforms, including business logic<br/>
-                    and UI, while keeping native<br/>
-                    platform code where needed.
+                    Flexible code sharing of business logic
+                    and UI across platforms,
+                    while keeping native platform code where needed.
                 </td>
                 <td>Growing rapidly</td>
                 <td>
-                    Duolingo, McDonald's,<br/>
-                    Forbes, Philips,<br/>
+                    Duolingo, McDonald's,
+                    Forbes, Philips,
                     H&amp;M, Bolt
                 </td>
             </tr>
@@ -211,33 +209,33 @@
                 <td><b>Flutter</b></td>
                 <td>Dart</td>
                 <td>
-                    Most application logic and UI<br/>
-                    shared within a single<br/>
+                    Most application logic and UI
+                    shared within a single
                     Dart codebase.
                 </td>
                 <td>Large and mature</td>
                 <td>
-                    eBay Motors, Alibaba,<br/>
-                    Google Pay,<br/>
+                    eBay Motors, Alibaba,
+                    Google Pay,
                     ByteDance apps
                 </td>
             </tr>
             <tr>
                 <td><b>React Native</b></td>
                 <td>
-                    JavaScript<br/>
+                    JavaScript,
                     TypeScript
                 </td>
                 <td>
-                    Business logic and UI components<br/>
-                    shared across platforms,<br/>
-                    from individual features<br/>
+                    Business logic and UI components
+                    shared across platforms,
+                    from individual features
                     to complete applications.
                 </td>
                 <td>Large and mature</td>
                 <td>
-                    Microsoft Office, Teams,<br/>
-                    Xbox Game Pass;<br/>
+                    Microsoft Office, Teams,
+                    Xbox Game Pass;
                     Facebook, Instagram
                 </td>
             </tr>
@@ -245,14 +243,14 @@
                 <td><b>.NET MAUI</b></td>
                 <td>C#, XAML</td>
                 <td>
-                    Business logic and UI shared<br/>
-                    across platforms within a single<br/>
+                    Business logic and UI shared
+                    across platforms within a single
                     C# codebase.
                 </td>
                 <td>Established</td>
                 <td>
-                    NBC Sports Next,<br/>
-                    Escola Agil,<br/>
+                    NBC Sports Next,
+                    Escola Agil,
                     Azure App
                 </td>
             </tr>
@@ -260,33 +258,33 @@
                 <td><b>Ionic</b></td>
                 <td>JavaScript</td>
                 <td>
-                    Most application logic and UI<br/>
-                    shared through a single web-based<br/>
-                    codebase, with native functionality<br/>
+                    Most application logic and UI
+                    shared through a single web-based
+                    codebase, with native functionality
                     accessed via plugins.
                 </td>
                 <td>Mature</td>
                 <td>
-                    T-Mobile,<br/>
-                    BBC (children's apps),<br/>
+                    T-Mobile,
+                    BBC (children's apps),
                     EA Games
                 </td>
             </tr>
             <tr>
                 <td><b>NativeScript</b></td>
                 <td>
-                    JavaScript<br/>
+                    JavaScript,
                     TypeScript
                 </td>
                 <td>
-                    Most application logic and UI<br/>
-                    shared across platforms<br/>
-                    within a single JavaScript<br/>
+                    Most application logic and UI
+                    shared across platforms
+                    within a single JavaScript
                     or TypeScript codebase.
                 </td>
                 <td>Established</td>
                 <td>
-                    Daily Nanny,<br/>
+                    Daily Nanny,
                     Groov, Breethe
                 </td>
             </tr>
