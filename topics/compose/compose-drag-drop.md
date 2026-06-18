@@ -14,12 +14,41 @@ as potential sources or destinations for drag-and-drop operations.
 The `dragAndDropSource` and `dragAndDropTarget` modifiers are part of the common API,
 but the transferred data is wrapped in platform-specific types:
 
-* **Android** uses Android's `ClipData` object. See Android's [Drag and drop](https://developer.android.com/develop/ui/compose/touch-input/user-interactions/drag-and-drop) documentation.
-* **iOS** uses UIKit's `UIDragItem`. See the [iOS drag-and-drop sample](https://github.com/JetBrains/compose-multiplatform-core/blob/e01d9d26a36cc65966b2d736b95d826b9ed19e85/compose/mpp/demo/src/iosMain/kotlin/androidx/compose/mpp/demo/components/DragAndDropExample.ios.kt).
-* **Desktop** uses AWT's `datatransfer.Transferable`. See the [desktop drag-and-drop sample](https://github.com/JetBrains/compose-multiplatform-core/blob/7bd466e8eaf4e075421035930294cbb2609235b3/compose/mpp/demo/src/desktopMain/kotlin/androidx/compose/mpp/demo/components/DragAndDropExample.desktop.kt).
-* **Web** uses the `DataTransfer` object. See the [web drag-and-drop sample](https://github.com/JetBrains/compose-multiplatform-core/blob/e01d9d26a36cc65966b2d736b95d826b9ed19e85/compose/mpp/demo/src/webMain/kotlin/androidx/compose/mpp/demo/components/DragAndDropExample.web.kt).
-
-The examples below use desktop APIs. The implementation remains consistent across all platforms, with only the wrapping data types varying.
+* **Android** uses Android's `ClipData` object.
+    ```kotlin
+    Modifier.dragAndDropSource { _ ->
+        DragAndDropTransferData(
+            ClipData.newPlainText(
+                "text", text
+            )
+        )
+    }
+    ```
+* **iOS** uses UIKit's `UIDragItem`.
+    ```kotlin
+    Modifier.dragAndDropSource {
+        DragAndDropTransferData(
+            listOf(UIDragItem.fromString(text)))
+        }
+    ```
+* **Desktop** uses AWT's `datatransfer.Transferable`.
+    ```kotlin
+    Modifier.dragAndDropSource { offset ->
+        DragAndDropTransferData(
+            transferable = DragAndDropTransferable(
+                StringSelection(text)
+            )
+        )
+    }
+    ```
+* **Web** uses the `DataTransfer` object.
+    ```kotlin
+    Modifier.dragAndDropSource { _: Offset ->
+        val dataTransfer = createDataTransfer()
+        dataTransfer.setData("text/plain", text)
+        DragAndDropTransferData(dataTransfer)
+    }
+    ```
 
 ## Creating a drag source
 
@@ -33,8 +62,8 @@ The following desktop example sets up a `Box` composable as a drag source that p
 
 ```kotlin
 val exportedText = "Hello, drag and drop!"
+// Measures and centers the text drawn on the drag box
 val textMeasurer = rememberTextMeasurer()
-
 Box(Modifier
     .size(200.dp)
     .background(Color.LightGray)
@@ -47,17 +76,10 @@ Box(Modifier
                 topLeft = Offset(x = 0f, y = size.height/4),
                 size = Size(size.width, size.height/2)
             )
-            val textLayoutResult = textMeasurer.measure(
-                text = AnnotatedString(exportedText),
-                layoutDirection = layoutDirection,
-                density = this
-            )
             drawText(
-                textLayoutResult = textLayoutResult,
-                topLeft = Offset(
-                    x = (size.width - textLayoutResult.size.width) / 2,
-                    y = (size.height - textLayoutResult.size.height) / 2,
-                )
+                textMeasurer = textMeasurer,
+                text = exportedText,
+                topLeft = Offset(x = 16.dp.toPx(), y = size.height / 2 - 8.dp.toPx())
             )
         }
     ) { offset ->
@@ -68,7 +90,6 @@ Box(Modifier
             transferable = DragAndDropTransferable(
                 StringSelection(exportedText)
             ),
-
             // List of actions supported by this drag source. The action type
             // is passed to the drop target together with the data, so
             // the target can reject inappropriate drops or interpret user expectations.
@@ -89,6 +110,8 @@ Box(Modifier
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.dragAndDropSource"}
 
+The implementation remains consistent across all platforms, with only the wrapping data types varying.
+
 ## Creating a drop target
 
 To prepare a composable to be a drop target:
@@ -107,7 +130,6 @@ var targetText by remember { mutableStateOf("Drop here") }
 val coroutineScope = rememberCoroutineScope()
 val dragAndDropTarget = remember {
     object: DragAndDropTarget {
-
         // Highlights the border of a potential drop target
         override fun onStarted(event: DragAndDropEvent) {
             showTargetBorder = true
@@ -121,7 +143,7 @@ val dragAndDropTarget = remember {
             // Prints the type of action to system output every time
             // a drag-and-drop operation is concluded.
             println("Action at the target: ${event.action}")
-
+            val result = (targetText == "Drop Here")
             // Changes the text to the value dropped into the composable.
             targetText = event.awtTransferable.let {
                 if (it.isDataFlavorSupported(DataFlavor.stringFlavor))
@@ -129,14 +151,13 @@ val dragAndDropTarget = remember {
                 else
                     it.transferDataFlavors.first().humanPresentableName
             }
-
             // Reverts the text of the drop target to the initial
             // value after 2 seconds.
             coroutineScope.launch {
                 delay(2.seconds)
                 targetText = "Drop here"
             }
-            return true
+            return result
         }
     }
 }
@@ -161,6 +182,20 @@ Box(Modifier
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.dragAndDropTarget"}
+
+To see drag-and-drop in action, place both `Box` composables side by side in a `Row`:
+
+```kotlin
+Row(
+    horizontalArrangement = Arrangement.SpaceEvenly,
+    verticalAlignment = Alignment.CenterVertically,
+    modifier = Modifier.fillMaxSize()
+) {
+    Box(Modifier.dragAndDropSource( /* ... */ )
+
+    Box(Modifier.dragAndDropTarget( /* ... */ )
+}
+```
 
 ## What's next
 
