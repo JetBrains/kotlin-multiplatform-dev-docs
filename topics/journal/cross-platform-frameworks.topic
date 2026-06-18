@@ -72,11 +72,10 @@
     <p>Interest has steadily increased over the period from 2010 to date, as this Google Trends chart illustrates:</p>
     <img src="google-trends-cross-platform-new.png"
          alt="Google Trends chart illustrating the interest in cross-platform app development" width="700"/>
-    <p>The growing popularity of the rapidly advancing <a href="cross-platform-mobile-development.md"
-                                                          anchor="kotlin-multiplatform">cross-platform mobile
+    <p>The growing popularity of the rapidly advancing <a href="cross-platform-mobile-development.topic">cross-platform mobile
         development</a> technology has resulted in many new tools emerging on the market.
         With many options available, it can be challenging to pick the one that will best suit your needs.
-        To help you find the right tool, we've put together a list of the six best cross-platform app development
+        To help you find the right tool, we've put together a list of the best cross-platform app development
         frameworks and the features that make them great.
         At the end of this article, you will also find a few key things to pay attention to when choosing a
         multiplatform development framework for your business.</p>
@@ -102,7 +101,7 @@
             <p><a href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform (KMP)</a> is an open-source
                 technology built by JetBrains that allows sharing code across platforms while retaining the benefits of
                 native programming. It enables developers to reuse as much code as they want, write native code if
-                needed, and seamlessly integrate shared Kotlin code into any project. You can use Use Kotlin with <a
+                needed, and seamlessly integrate shared Kotlin code into any project. Use Kotlin with <a
                         href="https://www.jetbrains.com/lp/compose-multiplatform/">Compose Multiplatform</a>, a modern
                 declarative cross-platform UI framework, to share up to 100% of your app code, including UI.</p>
             <p>
@@ -112,7 +111,7 @@
             <p>
                 <control>Mobile app examples:</control>
                 Duolingo, McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips. <a
-                    href="https://kotlinlang.org/case-studies/?type=multiplatform">Read more about Kotlin Multiplatform
+                    href="https://kotlinlang.org/case-studies/?type=multiplatform">See more Kotlin Multiplatform
                 case studies</a>.
             </p>
             <p>
@@ -174,12 +173,12 @@
                     Overflow Trends</a>, the usage of Flutter has been trending up over time, based on the increasing
                 use of the corresponding tag.</p>
             <note>
-                <p>Take a closer look at <a href="kotlin-multiplatform-flutter.md">Kotlin Multiplatform and Flutter</a>
+                <p>Take a <a href="kotlin-multiplatform-flutter.md">closer look at Kotlin Multiplatform and Flutter</a>
                     to understand their strengths and choose the best fit for your cross-platform development.</p>
             </note>
         </chapter>
         <chapter title="React Native" id="react-native">
-            <p>An open-source UI software framework, React Native was developed in 2015 (a bit earlier than Flutter) by
+            <p>An open-source UI software framework, React Native was developed in 2015 by
                 Meta Platforms, formerly Facebook. It's based on Facebook's JavaScript library React and allows
                 developers to build natively rendered cross-platform mobile apps.</p>
             <p>
@@ -377,6 +376,7 @@
                 smooth your experience will be when working with it. Comprehensive official <a href="get-started.topic">documentation</a>,
                 online and offline conferences, and educational courses are a good sign that you will be able to find
                 enough essential information about a product when you need it.</p>
+            <p>For example, we compiled a <a href="kmp-learning-resources.md">comprehensive list of Kotlin Multiplatform learning materials</a>. </p>
         </chapter>
     </chapter>
     <chapter title="Key takeaways" id="key-takeaways">
