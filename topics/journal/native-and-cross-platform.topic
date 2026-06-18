@@ -76,7 +76,7 @@
         </p>
         <p>
             <b>Cross-platform app development:</b>
-            <a href="cross-platform-mobile-development.md">Cross-platform development</a> allows teams to build
+            <a href="cross-platform-mobile-development.topic">Cross-platform development</a> allows teams to build
             applications for multiple platforms using a shared codebase. Modern frameworks such as <a
                 href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform (KMP)</a>, Flutter, and React Native
             enable developers to reuse business logic across iOS and Android. This approach speeds up development and
