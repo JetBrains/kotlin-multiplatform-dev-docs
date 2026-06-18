@@ -42,7 +42,7 @@
 
   <web-summary>Explore how to build Android and iOS apps, compare architectures and frameworks, and see where Kotlin Multiplatform fits.</web-summary>
 
-  <p>When developing for both iOS and Android, the first major decision is architectural: do you go fully native or share code using a cross-platform approach? That choice affects time-to-market, costs, and the level of complexity your team will face over time. Native development maximizes platform control and polish, but it also requires maintaining two codebases. <a href="cross-platform-mobile-development.md">Cross-platform</a> promises faster delivery and reduced costs via shared logic, but also raises valid concerns about performance, flexibility, and long-term maintainability.</p>
+  <p>When developing for both iOS and Android, the first major decision is architectural: do you go fully native or share code using a cross-platform approach? That choice affects time-to-market, costs, and the level of complexity your team will face over time. Native development maximizes platform control and polish, but it also requires maintaining two codebases. <a href="cross-platform-mobile-development.topic">Cross-platform</a> promises faster delivery and reduced costs via shared logic, but also raises valid concerns about performance, flexibility, and long-term maintainability.</p>
 
   <p>This is not just a theoretical debate. According to the <a href="https://devecosystem-2025.jetbrains.com/">State of Developer Ecosystem 2025</a>, the use of cross-platform and shared-code techniques more than doubled between 2024 and 2025, which suggests that more teams are looking for ways to reuse code while maintaining native-quality experiences.</p>
 
