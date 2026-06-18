@@ -107,7 +107,7 @@
         </chapter>
 
         <chapter title="Native or cross-platform app development: a longstanding debate" id="native-or-cross-platform-app-development-a-longstanding-debate">
-            <p><a href="native-and-cross-platform.md">The debate around native and cross-platform development</a> remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.</p>
+            <p><a href="native-and-cross-platform.topic">The debate around native and cross-platform development</a> remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.</p>
 
             <p>Some experts still prefer native mobile development over multiplatform solutions, identifying the stronger performance and better user experience of native apps as some of the most important benefits.</p>
 
