@@ -65,7 +65,7 @@
             among others. This approach has gained popularity in recent years, thanks in large part to the growing
             demand for mobile apps. Mobile engineers can share some or all of the source code between iOS and Android
             instead of developing separate applications for each platform.</p>
-        <p>We have a dedicated guide where you can read more about the <a href="native-and-cross-platform.md">benefits and limitations of
+        <p>We have a dedicated guide where you can read more about the <a href="native-and-cross-platform.topic">benefits and limitations of
                 native and cross-platform development</a> and how to choose between
             these two approaches. Main advantages of cross-platform development include:</p>
         <list type="decimal">
