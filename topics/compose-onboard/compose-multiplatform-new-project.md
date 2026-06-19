@@ -166,7 +166,7 @@ The next step is to use the given input to calculate time. To do this, create a 
     This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
 
     > If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet added to the project,
-    > follow the instructions in the [Add a new dependency](compose-multiplatform-modify-project.md#add-a-new-dependency) section.
+    > follow the instructions in the [Add a new dependency] section. <!-- TODO -->
     >
     {style="note"}
    

@@ -739,12 +739,6 @@ Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logi
 >
 {style="note"}
 
-## Next step
-
-In the final part of the tutorial, you'll wrap up your project and see what steps to take next.
-
-**[Proceed to the next part](multiplatform-wrap-up.md)**
-
 ### See also
 
 * Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).
