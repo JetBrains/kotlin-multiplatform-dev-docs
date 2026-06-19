@@ -94,33 +94,30 @@
 		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
 	</toc-element>
 	<toc-element toc-title="Choose your use case">
-	<toc-element toc-title="Shared UI and logic">
-		<toc-element topic="compose-multiplatform-first-app.md"/>
-		<toc-element topic="build-and-run-kmp.md"/>
-		<toc-element topic="add-dependency.md"/>
-	</toc-element>
-		<toc-element toc-title="Create an app with shared logic and UI">
-			<toc-element toc-title="1. Create your Compose Multiplatform app" accepts-web-file-names="compose-multiplatform-getting-started.html" topic="compose-multiplatform-create-first-app.md"/>
-			<toc-element toc-title="2. Explore composable code" topic="compose-multiplatform-explore-composables.md"/>
-			<toc-element toc-title="3. Modify the project" topic="compose-multiplatform-modify-project.md"/>
-			<toc-element toc-title="4. Create your own application" topic="compose-multiplatform-new-project.md"/>
+		<toc-element toc-title="Shared UI and logic">
+			<toc-element topic="compose-multiplatform-first-app.md"/> <!--create a base project & tweak UI to see it work everywhere at once -->
+			<toc-element topic="compose-multiplatform-new-project.md"/> <!-- from the wizard to the final CMP sample -->
 		</toc-element>
-		<toc-element toc-title="Create an app with shared logic and native UI">
-			<toc-element toc-title="1. Create your Kotlin Multiplatform app" accepts-web-file-names="multiplatform-getting-started.html" topic="multiplatform-create-first-app.md"/>
-			<toc-element toc-title="2. Update UI" topic="multiplatform-update-ui.md"/>
-			<toc-element toc-title="3. Add dependencies" topic="multiplatform-dependencies.md"/>
-			<toc-element toc-title="4. Share more logic" topic="multiplatform-upgrade-app.md"/>
-			<toc-element toc-title="5. Wrap up your project" topic="multiplatform-wrap-up.md"/>
+		<toc-element toc-title="Shared logic and native UI">
+			<toc-element topic="kotlin-multiplatform-first-app.md"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
+			<toc-element topic="multiplatform-upgrade-app.md"/> <!-- from the wizard to the final KMP sample -->
 		</toc-element>
-		<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
-        <toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>
+		<toc-element toc-title="Migrating to KMP from Android">
+			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
+			<toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>
+		</toc-element>
 		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
 		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
 	</toc-element>
-	<toc-element toc-title="Explore project structure">
-		<toc-element toc-title="Basic project structure" topic="multiplatform-discover-project.md"/>
-		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
-        <toc-element toc-title="General structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
+	<toc-element toc-title="Manage project structure">
+		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
+
+		<!-- TODO combine these -->
+		<toc-element toc-title="Adding dependencies" topic="multiplatform-dependencies.md"/>
+		<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md"/>
+
+		<toc-element toc-title="Source set hierarchy" topic="multiplatform-advanced-project-structure.md"/>
+        <toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
 		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
@@ -130,9 +127,8 @@
 		<toc-element topic="multiplatform-hierarchy.md"/>
 	</toc-element>
 	<toc-element toc-title="Add dependencies">
-		<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md"/>
-		<toc-element toc-title="For Android target platforms" topic="multiplatform-android-dependencies.md"/>
-		<toc-element toc-title="For iOS target platforms" topic="multiplatform-ios-dependencies.md"/>
+		<toc-element toc-title="For Android target platforms" topic="multiplatform-android-dependencies.md"/> <!-- TODO is this necessary? Move to the dependencies page in project structure? -->
+		<toc-element toc-title="For iOS target platforms" topic="multiplatform-ios-dependencies.md"/> <!-- TODO Combine / move to iOS integration? -->
 	</toc-element>
 	<toc-element toc-title="Set up iOS integration">
 		<toc-element toc-title="Choose integration method" topic="multiplatform-ios-integration-overview.md"/>

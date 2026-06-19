@@ -20,6 +20,13 @@ access layers will be implemented only once in the shared module, while the UI o
 
 ![Emulator and Simulator](android-and-ios.png){width=600}
 
+<!-- TODO instead of the following list, let's talk about what we're achieving here:
+* Shared networking
+* Shared database access
+* Shared serialization
+* DI via Koin
+-->
+
 You will use the following multiplatform libraries in the project:
 
 * [Ktor](https://ktor.io/docs/create-client.html) as an HTTP client for retrieving data over the internet.
@@ -954,7 +961,7 @@ system-provided SQLite binary:
 
 1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
 2. In Xcode, click the project name to open its settings.
-3. Switch to the **Build Settings** tab, there switch to the **All** list and search for the **Other Linker Flags** field.
+3. Switch to the **Build Settings** tab, there switch to the **All** list, and search for the **Other Linker Flags** field.
 4. Expand the field, press the plus sign next to the **Debug** field,
    and paste the `-lsqlite3` string into the **Any Architecture | Any SDK**.
 5. Repeat the process for the **Other Linker Flags** | **Release** field.
