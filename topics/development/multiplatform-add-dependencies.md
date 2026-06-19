@@ -348,4 +348,3 @@ Check out other resources on adding dependencies in multiplatform projects and l
 
 * [Adding Android dependencies](multiplatform-android-dependencies.md)
 * [Adding iOS dependencies](multiplatform-ios-dependencies.md)
-* [Adding dependencies in a Compose Multiplatform project targeting iOS, Android, desktop, and web](compose-multiplatform-modify-project.md#add-a-new-dependency)
