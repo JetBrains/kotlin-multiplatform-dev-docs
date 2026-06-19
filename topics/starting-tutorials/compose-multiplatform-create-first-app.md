@@ -91,8 +91,8 @@ The KMP IDE plugin provides ready-to-go run configurations for all selected targ
   If that port is in use, the build automatically selects another available port.
   You can find the selected port in the Gradle build output. 
 
-For more details on possible app running use cases (like using real mobile devices),
-see [](build-and-run-kmp.md).
+<!-- TODO For more details on possible app running use cases (like using real mobile devices),
+see [](build-and-run-kmp.md). -->
 
 ## Updating the UI
 
