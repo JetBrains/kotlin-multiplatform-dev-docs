@@ -57,7 +57,7 @@
     <chapter title="Cross-platform mobile development: definition and solutions" id="cross-platform-mobile-development-definition-and-solutions">
         <p>Cross-platform mobile development (also known as multiplatform mobile development) is an approach that allows teams to build applications for several platforms using a single shared codebase. Instead of developing and maintaining two completely separate native apps, engineers write common code that can be reused across platforms.</p>
 
-        <p>Modern <a href="cross-platform-frameworks.md">cross-platform frameworks</a> allow developers to write most of their app’s logic once and share it across both Android and iOS, significantly reducing duplicated effort and accelerating delivery. For example, <a href="kmp-overview.md">Kotlin Multiplatform</a> lets engineers reuse all of their business logic and, with Compose Multiplatform, even UI code across platforms.</p>
+        <p>Modern <a href="cross-platform-frameworks.topic">cross-platform frameworks</a> allow developers to write most of their app’s logic once and share it across both Android and iOS, significantly reducing duplicated effort and accelerating delivery. For example, <a href="kmp-overview.md">Kotlin Multiplatform</a> lets engineers reuse all of their business logic and, with Compose Multiplatform, even UI code across platforms.</p>
 
         <p><a href="https://kotlinlang.org/multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="600"/></a></p>
 
@@ -290,7 +290,7 @@
             </tr>
         </table>
 
-        <p>You can also check out a more detailed overview of the <a href="cross-platform-frameworks.md">most popular cross-platform technologies</a>.</p>
+        <p>You can also check out a more detailed overview of the <a href="cross-platform-frameworks.topic">most popular cross-platform technologies</a>.</p>
 
         <p><b>Kotlin Multiplatform</b></p>
         <p>Kotlin Multiplatform enables teams to share application logic across platforms using Kotlin. With Compose Multiplatform, developers can share up to 100% of their application code, including the UI, while still integrating with native APIs when needed. This approach allows teams to build applications for Android, iOS, desktop, and web from a single codebase while maintaining native capabilities.</p>
@@ -341,7 +341,7 @@
         <p>A: <a href="https://kotlinlang.org/multiplatform/">Kotlin Multiplatform</a> is the core technology that lets you share code across multiple platforms, including Android, iOS, desktop, web, and server. It focuses on code reuse without replacing the native UI unless you want it to. <a href="https://kotlinlang.org/compose-multiplatform/">Compose Multiplatform</a> is an optional UI framework built on top of Kotlin Multiplatform. It allows you to share your user interface across platforms using a modern, declarative approach similar to Jetpack Compose on Android. You can use it to build visually appealing, responsive UIs for Android, iOS, desktop, and web from a single codebase.</p>
 
         <p><b>Q: What is the most popular mobile development framework?</b></p>
-        <p>A: Popular frameworks for cross-platform mobile app development include Kotlin Multiplatform, Flutter, React Native, .NET MAUI, and others. You can check out the <a href="cross-platform-frameworks.md">overview of the most popular cross-platform technologies</a> to find the one that best suits your needs.</p>
+        <p>A: Popular frameworks for cross-platform mobile app development include Kotlin Multiplatform, Flutter, React Native, .NET MAUI, and others. You can check out the <a href="cross-platform-frameworks.topic">overview of the most popular cross-platform technologies</a> to find the one that best suits your needs.</p>
 
         <p>If your team needs help adopting a new multiplatform technology, we recommend reviewing our guide on <a href="multiplatform-introduce-your-team.md"><i>How to introduce multiplatform development to your team</i></a>.</p>
 
