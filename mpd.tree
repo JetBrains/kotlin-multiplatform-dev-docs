@@ -121,13 +121,13 @@
 
 		<toc-element toc-title="Source set hierarchy" topic="multiplatform-advanced-project-structure.md"/>
         <toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
-		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
+		<toc-element toc-title="Project organization options" topic="multiplatform-project-configuration.md"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
 		<toc-element topic="multiplatform-share-on-platforms.md"/>
 		<toc-element topic="multiplatform-expect-actual.md"/>
 		<toc-element toc-title="Platform-specific APIs" topic="multiplatform-connect-to-apis.md"/>
-		<toc-element topic="multiplatform-hierarchy.md"/>
+		<toc-element topic="multiplatform-hierarchy.md"/> <!-- TODO shouldn't this be next to source set hierarchies? Or vice versa, move it out of "Project structure"?-->
 	</toc-element>
 	<toc-element toc-title="Add dependencies">
 		<toc-element toc-title="For Android target platforms" topic="multiplatform-android-dependencies.md"/> <!-- TODO is this necessary? Move to the dependencies page in project structure? -->
