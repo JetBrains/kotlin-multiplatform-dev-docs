@@ -11,10 +11,10 @@ as potential sources or destinations for drag-and-drop operations.
 
 ## Platform-specific data handling
 
-The `dragAndDropSource` and `dragAndDropTarget` modifiers are part of the common API,
-but the transferred data is wrapped in platform-specific types:
+Although the `dragAndDropSource` and `dragAndDropTarget` modifiers are part of the common API,
+you wrap the transferred data in platform-specific types:
 
-* **Android** uses Android's `ClipData` object.
+* For Android, wrap your data in Android's `ClipData` object.
     ```kotlin
     Modifier.dragAndDropSource { _ ->
         DragAndDropTransferData(
@@ -24,14 +24,14 @@ but the transferred data is wrapped in platform-specific types:
         )
     }
     ```
-* **iOS** uses UIKit's `UIDragItem`.
+* For iOS, wrap your data in UIKit's `UIDragItem`.
     ```kotlin
     Modifier.dragAndDropSource {
         DragAndDropTransferData(
             listOf(UIDragItem.fromString(text)))
         }
     ```
-* **Desktop** uses AWT's `datatransfer.Transferable`.
+* For desktop, wrap your data in AWT's `datatransfer.Transferable`.
     ```kotlin
     Modifier.dragAndDropSource { offset ->
         DragAndDropTransferData(
@@ -41,7 +41,7 @@ but the transferred data is wrapped in platform-specific types:
         )
     }
     ```
-* **Web** uses the `DataTransfer` object.
+* For web, wrap your data in a `DataTransfer` object.
     ```kotlin
     Modifier.dragAndDropSource { _: Offset ->
         val dataTransfer = createDataTransfer()
@@ -55,10 +55,11 @@ but the transferred data is wrapped in platform-specific types:
 To prepare a composable to be a drag source:
 
 1. Apply the `dragAndDropSource` modifier to your composable.
-2. Add a `drawDragDecoration` lambda to render the visual representation shown while the user drags the data.
+2. (Optional) Add a `drawDragDecoration` lambda to customize the visual representation shown while the user drags the data.
 3. Return a `DragAndDropTransferData` instance describing the data to transfer, supported actions, and completion handling.
 
-The following desktop example sets up a `Box` composable as a drag source that provides a string for transfer:
+The following desktop example sets up a `Box()` composable as a drag source that provides a string for transfer.
+The implementation remains consistent across all platforms, with only the wrapping data types varying.
 
 ```kotlin
 val exportedText = "Hello, drag and drop!"
@@ -110,19 +111,17 @@ Box(Modifier
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.dragAndDropSource"}
 
-The implementation remains consistent across all platforms, with only the wrapping data types varying.
-
 ## Creating a drop target
 
 To prepare a composable to be a drop target:
 
 1. Create (and `remember`) a `DragAndDropTarget` object with overrides for the drag
-   events you want to handle, such as `onStarted`, `onEnded`, and `onDrop`.
+   events you want to handle. In our example, we will override `onStarted`, `onEnded`, and `onDrop`.
 2. Apply the `dragAndDropTarget` modifier to your composable. Pass a
    `shouldStartDragAndDrop` lambda that determines whether the target accepts the
    session, along with the `DragAndDropTarget` object.
 
-The following desktop example sets up a `Box` composable as a drop target that displays text dropped into it:
+The following desktop example sets up a `Box()` composable as a drop target that displays text dropped into it:
 
 ```kotlin
 var showTargetBorder by remember { mutableStateOf(false) }
@@ -183,7 +182,8 @@ Box(Modifier
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(Modifier.dragAndDropTarget"}
 
-To see drag-and-drop in action, place both `Box` composables side by side in a `Row`:
+To see drag-and-drop in action, place both `Box()` composables with 
+specified `dragAndDropSource` and `dragAndDropTarget` side by side in a `Row()`:
 
 ```kotlin
 Row(
