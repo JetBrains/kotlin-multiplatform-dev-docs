@@ -1,4 +1,4 @@
-[//]: # (title: Create your first Compose Multiplatform app)
+[//]: # (title: Create your first Kotlin Multiplatform app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
@@ -6,6 +6,8 @@
 <tldr>
     <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
+
+<!-- rewrite for KMP, this is copy-pasted -->
 
 With the [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) UI framework,
 you can implement the user interface once and then use it for all [supported platforms](compose-compatibility-and-versioning.md#supported-platforms).
@@ -96,7 +98,7 @@ see [](build-and-run-kmp.md).
 
 ## Updating the UI
 
-<!-- TODO: tweak the UI and run the app to see the changes in all targets -->
+<!-- TODO: tweak the common code and run the app to see the changes in all targets -->
 
 ## Get help
 
