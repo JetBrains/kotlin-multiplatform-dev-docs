@@ -270,7 +270,7 @@
                 </p>
             </li>
         </list>
-        <p>You can read a more detailed overview of popular <a href="cross-platform-frameworks.md">cross-platform
+        <p>You can read a more detailed overview of popular <a href="cross-platform-frameworks.topic">cross-platform
             frameworks</a> in our article.</p>
     </chapter>
     <chapter title="How Kotlin Multiplatform bridges the gap" id="how-kotlin-multiplatform-bridges-the-gap">
