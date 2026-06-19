@@ -20,6 +20,13 @@ access layers will be implemented only once in the shared module, while the UI o
 
 ![Emulator and Simulator](android-and-ios.png){width=600}
 
+<!-- TODO instead of the following list, let's talk about what we're achieving here:
+* Shared networking
+* Shared database access
+* Shared serialization
+* DI via Koin
+-->
+
 You will use the following multiplatform libraries in the project:
 
 * [Ktor](https://ktor.io/docs/create-client.html) as an HTTP client for retrieving data over the internet.
