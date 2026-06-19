@@ -19,15 +19,17 @@
 		<toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
             <toc-element topic="whats-new-compose-111.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.11.1"/>
-            <toc-element topic="whats-new-compose-110.md" toc-title="Compose Multiplatform 1.10.3"/>
+            <toc-element topic="whats-new-compose-112.md" accepts-web-file-names="whats-new-compose-eap.html" toc-title="Compose Multiplatform %org.jetbrains.compose-eap%"/>
             <toc-element toc-title="Earlier versions">
-                <toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3"/>
+                <toc-element toc-title="Compose Multiplatform 1.10.3" topic="whats-new-compose-110.md"/>
+                <toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3">
+                </toc-element>
                 <toc-element topic="whats-new-compose-180.md" toc-title="Compose Multiplatform 1.8.2"/>
                 <toc-element topic="whats-new-compose-170.md" toc-title="Compose Multiplatform 1.7.3"/>
                 <toc-element topic="whats-new-compose-1610.md" toc-title="Compose Multiplatform 1.6.10"/>
                 <toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
             </toc-element>
-		</toc-element>
+        </toc-element>
         <toc-element toc-title="Compose Multiplatform and Jetpack Compose">
             <toc-element topic="compose-multiplatform-and-jetpack-compose.md" toc-title="Relationship between frameworks"/>
             <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform artifacts for Compose libraries"/>
