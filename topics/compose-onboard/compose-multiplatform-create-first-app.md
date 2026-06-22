@@ -33,7 +33,7 @@ Things to keep in mind for this tutorial:
 
 ## Create a project
 
-1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md#set-up-the-environment).
+1. In the [quickstart](quickstart.md), complete the instructions to [set up your environment for Kotlin Multiplatform development](quickstart.md).
 2. In IntelliJ IDEA, select **File** | **New** | **Project**.
 3. In the panel on the left, select **Kotlin Multiplatform**.
 
@@ -287,13 +287,6 @@ Once the Gradle task completes, compatible artifacts are generated in the
 `composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
 You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
 working on both the `js` and `wasmJs` targets.
-
-## Next step
-
-In the next part of the tutorial, you'll learn how to implement composable functions and launch your application on each
-platform.
-
-**[Proceed to the next part](compose-multiplatform-explore-composables.md)**
 
 ## Get help
 
