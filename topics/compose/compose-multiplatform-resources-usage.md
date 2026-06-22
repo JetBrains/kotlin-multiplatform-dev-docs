@@ -430,7 +430,7 @@ coroutineScope.launch {
 
 Store custom fonts in the `composeResources/font` directory.
 Compose Multiplatform supports TTF, OTF, TTC, and variable font formats on all platforms.
-WOFF and WOFF2 are available on Web and macOS only.
+WOFF and WOFF2 are available on web and macOS only.
 
 To load a font as a `Font` type, use the `Font()` composable function:
 
