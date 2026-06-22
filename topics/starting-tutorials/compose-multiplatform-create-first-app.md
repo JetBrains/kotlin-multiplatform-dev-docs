@@ -1,4 +1,4 @@
-[//]: # (title: Create your first Compose Multiplatform app)
+[//]: # (title: Your first Compose Multiplatform app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
