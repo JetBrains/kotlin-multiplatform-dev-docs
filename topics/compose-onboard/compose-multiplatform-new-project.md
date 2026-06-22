@@ -1,7 +1,14 @@
-[//]: # (title: Create your own application)
+[//]: # (title: Simple timezone picker app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
+
+Let's build an application that implements a more complex shared UI using additional dependencies and images as multiplatform resources.
+In this tutorial, you will:
+
+1. Add and use the common `kotlinx-datetime` dependency.
+2. Implement a common UI for a timezone picker for all supported platforms: iOS, Android, desktop, and web.
+3. Import and use images in the common UI as multiplatform resources.
 
 Now that you've explored and enhanced the sample project created by the wizard, you can create your own application from
 scratch, using concepts you already know and introducing some new ones.

@@ -1,4 +1,4 @@
-[//]: # (title: Share code on platforms)
+[//]: # (title: Share code between platforms)
 
 With Kotlin Multiplatform, you can share the code using the mechanisms Kotlin provides: 
  
