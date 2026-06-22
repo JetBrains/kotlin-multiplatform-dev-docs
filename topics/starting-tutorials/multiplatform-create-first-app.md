@@ -1,4 +1,4 @@
-[//]: # (title: Create your first Kotlin Multiplatform app)
+[//]: # (title: Your first Kotlin Multiplatform app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>

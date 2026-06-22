@@ -1,11 +1,19 @@
-[//]: # (title: Share more logic between iOS and Android)
+[//]: # (title: Shared logic for REST API requests)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
+Let's build a more complex application that shares the code for network requests and data serialization between iOS and Android.
+In this tutorial, you will:
+
+1. Add common and platform-specific dependencies.
+2. Implement network requests and data serialization in common code.
+3. Implement a coroutine flow to handle the results of network requests.
+4. Consume the data provided by the common module in the UI of iOS and Android apps.
+
 Now that you've implemented common logic using external dependencies, you can start adding more complex logic. Network
 requests and data serialization are the [most popular use cases](https://kotlinlang.org/lp/multiplatform/) for sharing code using Kotlin
-Multiplatform. Learn how to implement these in your first application, so that after completing this onboarding journey
+Multiplatform. Learn how to implement these in your first application so that after completing this onboarding journey, 
 you can use them in future projects.
 
 The updated app will retrieve data over the internet from the [LaunchLibrary 2](https://lldev.thespacedevs.com/docs)
@@ -450,7 +458,7 @@ Call the `startObserving()` function within a `task()` call to support concurren
 
 ```swift
 import SwiftUI
-import SharedLogic
+import SharedLogic/*  */
 
 struct ContentView: View {
     @ObservedObject private(set) var viewModel: ViewModel
