@@ -1,7 +1,7 @@
 [//]: # (title: Handling web resources)
 
 Here you can find information about preloading resources using browser features and the `preload` API,
-as well as caching web resources.
+caching web resources, and automatic font fallback.
   
 ## Preloading of resources for web targets
 
@@ -45,77 +45,68 @@ For example, to enable in-browser preloading of a font:
 Even if you preloaded the resources in the browser, they are cached as raw bytes that still need to be converted into a
 format suitable for rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource
 for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience,
-Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, that can also be preloaded.
+Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, which can also be preloaded.
 
 Compose Multiplatform 1.8.0 introduced an experimental API for preloading font and image resources on
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
 Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
-To specify a fallback font, use the `FontFamily.Resolver.preload()` method.
+To specify a fallback font manually, use the `FontFamily.Resolver.preload()` method.
+Web targets support TTF, OTF, TTC, variable, and WOFF/WOFF2 font formats.
+For automatic fallback font downloading, see [Automatic font fallback](#automatic-font-fallback).
 
-The following example demonstrates how to use preloading and a fallback font:
+The following example demonstrates how to use preloading of a vector image:
 
 ```kotlin
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFontFamilyResolver
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.window.ComposeViewport
-import components.resources.demo.shared.generated.resources.*
-import components.resources.demo.shared.generated.resources.NotoColorEmoji
-import components.resources.demo.shared.generated.resources.Res
-import components.resources.demo.shared.generated.resources.Workbench_Regular
-import components.resources.demo.shared.generated.resources.font_awesome
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.configureWebResources
-import org.jetbrains.compose.resources.demo.shared.UseResources
-import org.jetbrains.compose.resources.preloadFont
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class)
+@Composable
+fun App() {
+    val icon by preloadImageVector(Res.drawable.heavy_vector_icon)
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class, InternalComposeUiApi::class)
-fun main() {
-    configureWebResources {
-        // Overrides the resource location
-        resourcePathMapping { path -> "./$path" }
-    }
-    ComposeViewport(viewportContainerId = "composeApplication") {
-        val font1 by preloadFont(Res.font.Workbench_Regular)
-        val font2 by preloadFont(Res.font.font_awesome, FontWeight.Normal, FontStyle.Normal)
-        val emojiFont = preloadFont(Res.font.NotoColorEmoji).value
-        var fontsFallbackInitialized by remember { mutableStateOf(false) }
-
-        // Uses the preloaded resource for the app's content
-        UseResources()
-
-        if (font1 != null && font2 != null && emojiFont != null && fontsFallbackInitialized) {
-            println("Fonts are ready")
-        } else {
-            // Displays the progress indicator to address a FOUT or the app being temporarily non-functional during loading
-            Box(modifier = Modifier.fillMaxSize().background(Color.White.copy(alpha = 0.8f)).clickable {  }) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
-            println("Fonts are not ready yet")
-        }
-
-        val fontFamilyResolver = LocalFontFamilyResolver.current
-        LaunchedEffect(fontFamilyResolver, emojiFont) {
-            if (emojiFont != null) {
-                // Preloads a fallback font with emojis to render missing glyphs that are not supported by the bundled font
-                fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))
-                fontsFallbackInitialized = true
-            }
+    if (icon != null) {
+        MainScreen()
+    } else {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 }
+
+@Composable
+fun MainScreen() {
+    // The icon is taken from the cache
+    Image(painter = painterResource(Res.drawable.heavy_vector_icon), contentDescription = null)
+}
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="fontFamilyResolver.preload(FontFamily(listOf(emojiFont)))"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="val icon by preloadImageVector(Res.drawable.heavy_vector_icon)"}
+
+## Automatic font fallback
+<primary-label ref="Experimental"/>
+
+By default, characters not covered by the application's loaded fonts are displayed as replacement glyphs (□, known as "tofu").
+
+[//]: # (TODO update version for stable release)
+
+Starting with Compose Multiplatform 1.12.0-beta01, when you enable automatic font fallback, Compose monitors unresolved
+characters during rendering and downloads the required Noto font subsets on demand. 
+Once the fonts are available, the affected text is recomposed. 
+Note that tofu may briefly appear during the download.
+
+For CJK characters (Chinese, Japanese, and Korean), the correct font variant is selected automatically based on the browser's language setting.
+
+To enable automatic font fallback, call `installFallbackFontDownloader()` at the top level of your web app composable:
+
+```kotlin
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun App() {
+    installFallbackFontDownloader()
+    // ...
+}
+```
+
+> If you are already using `fontFamilyResolver.preload()` to manually provide a fallback font,
+> `installFallbackFontDownloader()` is a simpler alternative that requires no manual font bundling.
 
 ## Caching web resources
 <primary-label ref="Experimental"/>

@@ -22,6 +22,7 @@ Read on for details about the following topics:
 * [Using multiplatform resources as Android assets](#compose-multiplatform-resources-as-android-assets).
 * Handling web-specific resources:
   * [Preloading of resources](compose-web-resources.md#preloading-of-resources-for-web-targets) using browser features and the preload API,
+  * [Automatic font fallback](compose-web-resources.md#automatic-font-fallback) for missing characters,
   * [Caching web resources](compose-web-resources.md#caching-web-resources).
 * Working with external resources: 
   [from external libraries](#accessing-multiplatform-resources-from-external-libraries), 
@@ -427,7 +428,9 @@ coroutineScope.launch {
 
 ### Fonts
 
-Store custom fonts in the `composeResources/font` directory as `*.ttf` or `*.otf` files.
+Store custom fonts in the `composeResources/font` directory.
+Compose Multiplatform supports TTF, OTF, TTC, and variable font formats on all platforms.
+WOFF and WOFF2 are available on Web and macOS only.
 
 To load a font as a `Font` type, use the `Font()` composable function:
 
@@ -478,8 +481,10 @@ private fun InterTypography(): Typography {
 >
 {style="note"}
 
-To support special characters like emojis or Arabic script in web targets, you need to add the corresponding fonts
-to resources and [preload fallback fonts](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api).
+To support special characters like emojis or Arabic script in web targets, you can either:
+* Use [automatic font fallback](compose-web-resources.md#automatic-font-fallback) to download Noto fonts on demand.
+* Bundle a specific font and register it manually using the [preload API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api)
+  if you need full control over which font is used for fallback.
 
 ### Raw files
 
