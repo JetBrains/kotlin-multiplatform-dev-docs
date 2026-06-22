@@ -3,6 +3,7 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
+<!-- TODO combine with multiplatform-add-dependencies.md -->
 
 You've created and tweaked your first Kotlin Multiplatform project!
 Now let's learn how to add dependencies to third-party libraries, which is necessary for building successful cross-platform applications.
