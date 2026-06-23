@@ -404,20 +404,24 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
 4. Add the `clearAndCreateLaunches()` function to clear the database and insert new data:
 
     ```kotlin
-    internal fun clearAndCreateLaunches(launches: List<RocketLaunch>) {
-        dbQuery.transaction {
-            dbQuery.removeAllLaunches()
-            launches.forEach { launch ->
-                dbQuery.insertLaunch(
-                    flightNumber = launch.id,
-                    missionName = launch.missionName,
-                    launchDateUTC = launch.launchDateUTC,
-                    imageSmall = launch.image.small,
-                    imageLarge = launch.image.large,
-                    statusId = launch.status.id.toLong(),
-                    statusName = launch.status.name,
-                    statusDescription = launch.status.description,
-                )
+    internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
+        // ...
+    
+        internal fun clearAndCreateLaunches(launches: List<RocketLaunch>) {
+            dbQuery.transaction {
+                dbQuery.removeAllLaunches()
+                launches.forEach { launch ->
+                    dbQuery.insertLaunch(
+                        flightNumber = launch.id,
+                        missionName = launch.missionName,
+                        launchDateUTC = launch.launchDateUTC,
+                        imageSmall = launch.image.small,
+                        imageLarge = launch.image.large,
+                        statusId = launch.status.id.toLong(),
+                        statusName = launch.status.name,
+                        statusDescription = launch.status.description,
+                    )
+                }
             }
         }
     }
@@ -426,7 +430,7 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
 ## Implement the API service
 
 To retrieve data over the internet, you'll use the [Launch Library public API](https://lldev.thespacedevs.com/docs)
-and a single method to retrieve the list of all launches from the `2.3.0/launches` endpoint.
+and a single method to retrieve the list of all launches from the `/2.3.0/launches` endpoint.
 
 Create a class that will connect the application to the API:
 
@@ -811,110 +815,108 @@ Create the main `App()` composable for your application and call it from the `Co
 
 3. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
 
-```kotlin
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.jetbrains.spacetutorial.entity.RocketLaunch
-import com.jetbrains.spacetutorial.theme.AppTheme
-import com.jetbrains.spacetutorial.theme.app_theme_successful
-import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
-import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-@Preview
-fun App() {
-    val viewModel = koinViewModel<RocketLaunchViewModel>()
-    val state by remember { viewModel.state }
-    val coroutineScope = rememberCoroutineScope()
-    var isRefreshing by remember { mutableStateOf(false) }
-    val pullToRefreshState = rememberPullToRefreshState()
-
-    AppTheme {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            "Space Launches",
-                            style = MaterialTheme.typography.headlineLarge
-                        )
-                    }
-                )
-            }
-        ) { padding ->
-            PullToRefreshBox(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                state = pullToRefreshState,
-                isRefreshing = isRefreshing,
-                onRefresh = {
-                    isRefreshing = true
-                    coroutineScope.launch {
-                        viewModel.loadLaunches()
-                        isRefreshing = false
-                    }
+    ```kotlin
+    import androidx.compose.foundation.layout.Arrangement
+    import androidx.compose.foundation.layout.Column
+    import androidx.compose.foundation.layout.fillMaxSize
+    import androidx.compose.foundation.layout.padding
+    import androidx.compose.foundation.lazy.LazyColumn
+    import androidx.compose.foundation.lazy.items
+    import androidx.compose.material3.*
+    import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+    import androidx.compose.runtime.*
+    import androidx.compose.ui.Alignment
+    import androidx.compose.ui.Modifier
+    import androidx.compose.ui.tooling.preview.Preview
+    import androidx.compose.ui.unit.dp
+    import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import com.jetbrains.spacetutorial.theme.AppTheme
+    import com.jetbrains.spacetutorial.theme.app_theme_successful
+    import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
+    import kotlinx.coroutines.launch
+    import org.koin.androidx.compose.koinViewModel
+    
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    @Preview
+    fun App() {
+        val viewModel = koinViewModel<RocketLaunchViewModel>()
+        val state by remember { viewModel.state }
+        val coroutineScope = rememberCoroutineScope()
+        var isRefreshing by remember { mutableStateOf(false) }
+        val pullToRefreshState = rememberPullToRefreshState()
+    
+        AppTheme {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                "Space Launches",
+                                style = MaterialTheme.typography.headlineLarge
+                            )
+                        }
+                    )
                 }
-            ) {
-                if (state.isLoading && !isRefreshing) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text("Loading...", style = MaterialTheme.typography.bodyLarge)
+            ) { padding ->
+                PullToRefreshBox(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    state = pullToRefreshState,
+                    isRefreshing = isRefreshing,
+                    onRefresh = {
+                        isRefreshing = true
+                        coroutineScope.launch {
+                            viewModel.loadLaunches()
+                            isRefreshing = false
+                        }
                     }
-                } else {
-                    LazyColumn {
-                        items(state.launches) { launch: RocketLaunch ->
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
-                                modifier = Modifier.padding(16.dp)
-                            ) {
-                                Text(
-                                    text = launch.missionName,
-                                    style = MaterialTheme.typography.headlineSmall
-                                )
-                                Text(
-                                    text = if (launch.status.id == 3) "Successful" else "Unsuccessful",
-                                    color = if (launch.status.id == 3) app_theme_successful else app_theme_unsuccessful
-                                )
-                                Text(
-                                    text = "Launch year: ${launch.launchYear}"
-                                )
-                                val details = launch.status.description
-                                if (details.isNotBlank()) {
-                                    Text(details)
+                ) {
+                    if (state.isLoading && !isRefreshing) {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text("Loading...", style = MaterialTheme.typography.bodyLarge)
+                        }
+                    } else {
+                        LazyColumn {
+                            items(state.launches) { launch: RocketLaunch ->
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                    modifier = Modifier.padding(16.dp)
+                                ) {
+                                    Text(
+                                        text = launch.missionName,
+                                        style = MaterialTheme.typography.headlineSmall
+                                    )
+                                    Text(
+                                        text = if (launch.status.id == 3) "Successful" else "Unsuccessful",
+                                        color = if (launch.status.id == 3) app_theme_successful else app_theme_unsuccessful
+                                    )
+                                    Text(
+                                        text = "Launch year: ${launch.launchYear}"
+                                    )
+                                    val details = launch.status.description
+                                    if (details.isNotBlank()) {
+                                        Text(details)
+                                    }
                                 }
+                                HorizontalDivider()
                             }
-                            HorizontalDivider()
                         }
                     }
                 }
             }
         }
     }
-}
+    
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
-
-   <!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
-      the `setContent()` function refers to the `App()` composable you just created in that package.-->
 4. Finally, in the `androidApp/src/main/AndroidManifest.xml`, specify your `MainActivity` class in the `<activity>` tag:
 
     ```xml
