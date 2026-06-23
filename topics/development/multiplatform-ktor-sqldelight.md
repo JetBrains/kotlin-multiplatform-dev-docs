@@ -1036,10 +1036,13 @@ data.
         var body: some View {
             HStack() {
                 VStack(alignment: .leading, spacing: 10.0) {
-                    Text("\(rocketLaunch.missionName) - \(String(rocketLaunch.launchYear))").font(.system(size: 18)).bold()
+                    Text("\(rocketLaunch.missionName)")
+                        .font(.system(size: 18))
+                        .bold()
+                        .fixedSize(horizontal: false, vertical: true)
                     Text(launchText).foregroundColor(launchColor)
                     Text("Launch year: \(String(rocketLaunch.launchYear))")
-                    Text("\(rocketLaunch.details ?? "")")
+                    Text("\(rocketLaunch.status.description_)")
                 }
                 Spacer()
             }
@@ -1048,19 +1051,13 @@ data.
     
     extension RocketLaunchRow {
         private var launchText: String {
-            if let isSuccess = rocketLaunch.launchSuccess {
-                return isSuccess.boolValue ? "Successful" : "Unsuccessful"
-            } else {
-                return "No data"
-            }
+            let isSuccess = rocketLaunch.status.id == 3
+            return isSuccess ? "Successful" : "Unsuccessful"
         }
     
         private var launchColor: Color {
-            if let isSuccess = rocketLaunch.launchSuccess {
-                return isSuccess.boolValue ? Color.green : Color.red
-            } else {
-                return Color.gray
-            }
+            let isSuccess = rocketLaunch.status.id == 3
+            return isSuccess ? Color.green : Color.red
         }
     }
     ```
@@ -1089,7 +1086,7 @@ data.
     * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
  property changes.
 
-5. Remove the `ContentView_Previews` structure: you won't need to implement a preview that should be compatible with
+5. Remove the `ContentView_Previews` structure: you won't implement a preview that should be compatible with
    your view model.
 
 6. Update the body of the `ContentView` class to display the list of launches and add the reload functionality.
