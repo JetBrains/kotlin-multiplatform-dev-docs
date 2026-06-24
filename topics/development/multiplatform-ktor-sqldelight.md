@@ -11,9 +11,9 @@ This tutorial demonstrates how to use IntelliJ IDEA to create an advanced mobile
 Kotlin Multiplatform.
 This application is going to:
 
-* Retrieve data over the internet from the public [SpaceX API](https://docs.spacexdata.com/?version=latest) using Ktor
+* Retrieve data over the internet from the public [Launch Library](https://lldev.thespacedevs.com/docs) using Ktor
 * Save the data in a local database using SQLDelight.
-* Display a list of SpaceX rocket launches together with the launch date, results, and a detailed description of the launch.
+* Display a list of space rocket launches together with the launch date, results, and a detailed description of the launch.
 
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
@@ -55,12 +55,12 @@ You will use the following multiplatform libraries in the project:
 
 ## Add Gradle dependencies
 
-To add a multiplatform library to the shared module, you need to add dependency instructions (`implementation`)
-to the `dependencies {}` block of the relevant source sets in the `build.gradle.kts` file.
+To add a multiplatform library to the shared module, add dependency instructions (`implementation`)
+to the `dependencies {}` block of the relevant source sets in the module's `build.gradle.kts` file.
 
-Both the `kotlinx.serialization` and SQLDelight libraries also require additional configuration.
+`kotlinx.serialization` and SQLDelight libraries also require additional configuration.
 
-Change or add lines in the version catalog in the `gradle/libs.versions.toml` file to reflect all needed dependencies:
+Change or add lines in the version catalog in the `gradle/libs.versions.toml` file to reflect all necessary dependencies:
 
 1. In the `[versions]` block, check the AGP version and add the rest:
 
@@ -82,7 +82,6 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ```
    [libraries]
    ...
-   android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
    koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
    koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
    kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
@@ -92,8 +91,9 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
    ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
    ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-   native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
-   runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+   sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+   sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+   sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
    ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="[libraries]"}
 
@@ -121,7 +121,7 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
    ```
 
 6. The common source set requires a core artifact of each library, as well as the Ktor [serialization feature](https://ktor.io/docs/serialization-client.html)
-    to use `kotlinx.serialization` for processing network requests and responses.
+    to use `kotlinx.serialization`.
     The iOS and Android source sets also need SQLDelight and Ktor platform drivers.
 
     In the same `sharedLogic/build.gradle.kts` file, add all the required dependencies:
@@ -136,17 +136,17 @@ Change or add lines in the version catalog in the `gradle/libs.versions.toml` fi
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.serialization.kotlinx.json)
-                implementation(libs.runtime)
+                implementation(libs.sqldelight.runtime)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
             }
             androidMain.dependencies {
                 implementation(libs.ktor.client.android)
-                implementation(libs.android.driver)
+                implementation(libs.sqldelight.android.driver)
             }
             iosMain.dependencies {
                 implementation(libs.ktor.client.darwin)
-                implementation(libs.native.driver)
+                implementation(libs.sqldelight.native.driver)
             }
         }
     }
@@ -162,7 +162,7 @@ After the Gradle sync, you are done with the project configuration and can start
 
 ## Create an application data model
 
-The tutorial app will contain the public `SpaceXSDK` class as the facade over networking and cache services.
+The tutorial app will contain the public `SpaceSDK` class as the facade over networking and cache services.
 The application data model will have three entity classes with:
 
 * General information about the launch
@@ -183,7 +183,7 @@ Create the necessary data classes:
 
    ```kotlin
    ```
-   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-41" }
+   {src="multiplatform-tutorial/Entity.kt" initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class RocketLaunch" include-lines="3-48" }
 
 Each serializable class must be marked with the `@Serializable` annotation. The `kotlinx.serialization` plugin
 automatically generates a default serializer for `@Serializable` classes unless you explicitly pass a link to a
@@ -237,30 +237,27 @@ First, create the `.sq` file with all the necessary SQL queries. By default, the
 4. The database will contain a table with data about launches.
    Add the following code to the `AppDatabase.sq` file to create the table and define several functions which you will use later:
 
-   ```text
+   ```sql
    import kotlin.Boolean;
    
    CREATE TABLE Launch (
-       flightNumber INTEGER NOT NULL,
+       flightNumber TEXT NOT NULL,
        missionName TEXT NOT NULL,
-       details TEXT,
-       launchSuccess INTEGER AS Boolean DEFAULT NULL,
        launchDateUTC TEXT NOT NULL,
-       patchUrlSmall TEXT,
-       patchUrlLarge TEXT,
-       articleUrl TEXT
+       imageSmall TEXT NOT NULL,
+       imageLarge TEXT NOT NULL,
+       statusId INTEGER NOT NULL,
+       statusName TEXT NOT NULL,
+       statusDescription TEXT NOT NULL
    );
    
-   -- Inserts data into the 'Launch' table
    insertLaunch:
-   INSERT INTO Launch(flightNumber, missionName, details, launchSuccess, launchDateUTC, patchUrlSmall, patchUrlLarge, articleUrl)
+   INSERT INTO Launch(flightNumber, missionName, launchDateUTC, imageSmall, imageLarge, statusId, statusName, statusDescription)
    VALUES(?, ?, ?, ?, ?, ?, ?, ?);
    
-   -- Clears all data from the 'Launch' table
    removeAllLaunches:
    DELETE FROM Launch;
    
-   -- Retrieves information about all launches
    selectAllLaunchesInfo:
    SELECT Launch.*
    FROM Launch;
@@ -299,7 +296,7 @@ in this project, you will use [Koin](https://insert-koin.io/) to try dependency 
    ```
 
 3. Create the class implementing this interface for Android: in the `sharedLogic/src/androidMain/kotlin` directory,
-   create the `com.jetbrains.spacetutorial.cache` package, then create the `DatabaseDriverFactory.kt` file inside it.
+   create the `com.jetbrains.spacetutorial.cache` package, then create the `AndroidDatabaseDriverFactory.kt` file inside it.
 4. On Android, the SQLite driver is implemented by the `AndroidSqliteDriver` class. In the `DatabaseDriverFactory.kt` file,
    pass the database information and the context link to the `AndroidSqliteDriver` class constructor:
 
@@ -359,51 +356,52 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
    which means it is only accessible from within the multiplatform module.
 
 3. Inside the `Database` class, implement some data handling operations.
-   First, create the `getAllLaunches` function to return a list of all the rocket launches.
-   The `mapLaunchSelecting` function is used to map the result of the database query to `RocketLaunch` objects:
+   First, create the `getAllLaunches()` function to return a list of all the rocket launches.
+   The `mapLaunchSelecting()` function is used to map the result of the database query to `RocketLaunch` objects:
 
     ```kotlin
-    import com.jetbrains.spacetutorial.entity.Links
-    import com.jetbrains.spacetutorial.entity.Patch
+    import com.jetbrains.spacetutorial.entity.Image
+    import com.jetbrains.spacetutorial.entity.LaunchStatus
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     
     internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
-        // ...
+        private val database = AppDatabase(databaseDriverFactory.createDriver())
+        private val dbQuery = database.appDatabaseQueries
     
         internal fun getAllLaunches(): List<RocketLaunch> {
             return dbQuery.selectAllLaunchesInfo(::mapLaunchSelecting).executeAsList()
         }
     
         private fun mapLaunchSelecting(
-            flightNumber: Long,
+            flightNumber: String,
             missionName: String,
-            details: String?,
-            launchSuccess: Boolean?,
             launchDateUTC: String,
-            patchUrlSmall: String?,
-            patchUrlLarge: String?,
-            articleUrl: String?
+            imageSmall: String,
+            imageLarge: String,
+            statusId: Long,
+            statusName: String,
+            statusDescription: String
         ): RocketLaunch {
             return RocketLaunch(
-                flightNumber = flightNumber.toInt(),
+                id = flightNumber,
                 missionName = missionName,
-                details = details,
                 launchDateUTC = launchDateUTC,
-                launchSuccess = launchSuccess,
-                links = Links(
-                    patch = Patch(
-                        small = patchUrlSmall,
-                        large = patchUrlLarge
-                    ),
-                    article = articleUrl
+                image = Image(
+                    small = imageSmall,
+                    large = imageLarge
+                ),
+                status = LaunchStatus(
+                    id = statusId.toInt(),
+                    name = statusName,
+                    description = statusDescription
                 )
             )
         }
     }
     ```
-   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="internal fun getAllLaunches()"}
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="internal fun getAllLaunches()"}
 
-4. Add the `clearAndCreateLaunches` function to clear the database and insert new data:
+4. Add the `clearAndCreateLaunches()` function to clear the database and insert new data:
 
     ```kotlin
     internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
@@ -414,14 +412,14 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
                 dbQuery.removeAllLaunches()
                 launches.forEach { launch ->
                     dbQuery.insertLaunch(
-                        flightNumber = launch.flightNumber.toLong(),
+                        flightNumber = launch.id,
                         missionName = launch.missionName,
-                        details = launch.details,
-                        launchSuccess = launch.launchSuccess ?: false,
                         launchDateUTC = launch.launchDateUTC,
-                        patchUrlSmall = launch.links.patch?.small,
-                        patchUrlLarge = launch.links.patch?.large,
-                        articleUrl = launch.links.article
+                        imageSmall = launch.image.small,
+                        imageLarge = launch.image.large,
+                        statusId = launch.status.id.toLong(),
+                        statusName = launch.status.name,
+                        statusDescription = launch.status.description,
                     )
                 }
             }
@@ -431,13 +429,13 @@ Now, create a `Database` class, which will wrap the `AppDatabase` interface and 
 
 ## Implement the API service
 
-To retrieve data over the internet, you'll use the [SpaceX public API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs)
-and a single method to retrieve the list of all launches from the `v5/launches` endpoint.
+To retrieve data over the internet, you'll use the [Launch Library public API](https://lldev.thespacedevs.com/docs)
+and a single method to retrieve the list of all launches from the `/2.3.0/launches` endpoint.
 
 Create a class that will connect the application to the API:
 
 1. In the `sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/` directory, create a `network` package.
-2. Inside the `network` directory, create the `SpaceXApi` class:
+2. Inside the `network` directory, create the `SpaceApi` class:
 
     ```kotlin
     package com.jetbrains.spacetutorial.network
@@ -447,7 +445,7 @@ Create a class that will connect the application to the API:
     import io.ktor.serialization.kotlinx.json.json
     import kotlinx.serialization.json.Json
     
-    class SpaceXApi {
+    class SpaceApi {
         private val httpClient = HttpClient {
             install(ContentNegotiation) {
                 json(Json {
@@ -470,14 +468,15 @@ Create a class that will connect the application to the API:
 
     ```kotlin
     import com.jetbrains.spacetutorial.entity.RocketLaunch
+    import com.jetbrains.spacetutorial.entity.LaunchListResponse
     import io.ktor.client.request.get
     import io.ktor.client.call.body
     
-    class SpaceXApi {
+    class SpaceApi {
         // ...
         
         suspend fun getAllLaunches(): List<RocketLaunch> {
-            return httpClient.get("https://api.spacexdata.com/v5/launches").body()
+            return (httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&format=json").body() as LaunchListResponse).results
         }
     }
     ```
@@ -490,12 +489,12 @@ The URL for sending a GET request is passed as an argument to the `get()` functi
 
 ## Build an SDK
 
-Your iOS and Android applications will communicate with the SpaceX API through the shared module, which will provide a
-public class, `SpaceXSDK`.
+Your iOS and Android applications will communicate with the space API through the shared module, which will provide a
+public class, `SpaceSDK`.
 
 1. In the common source set `sharedLogic/src/commonMain/kotlin`, in the `com.jetbrains.spacetutorial` package, create
-   the `SpaceXSDK` class.
-   This class will be the facade for the `Database` and `SpaceXApi` classes.
+   the `SpaceSDK` class.
+   This class will be the facade for the `Database` and `SpaceApi` classes.
 
    To create a `Database` class instance, provide a `DatabaseDriverFactory` instance:
 
@@ -504,21 +503,21 @@ public class, `SpaceXSDK`.
    
    import com.jetbrains.spacetutorial.cache.Database
    import com.jetbrains.spacetutorial.cache.DatabaseDriverFactory
-   import com.jetbrains.spacetutorial.network.SpaceXApi
+   import com.jetbrains.spacetutorial.network.SpaceApi
 
-   class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) { 
+   class SpaceSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceApi) { 
        private val database = Database(databaseDriverFactory)
    }
    ```
 
-   You will inject the correct database driver in the platform-specific code through the `SpaceXSDK` class constructor.
+   You will inject the correct database driver in the platform-specific code through the `SpaceSDK` class constructor.
 
-2. Add the `getLaunches` function, which uses the created database and the API to get the launches list:
+2. Add the `getLaunches` function, which uses the created database and the API to request and store the launches list:
 
     ```kotlin
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     
-    class SpaceXSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceXApi) {
+    class SpaceSDK(databaseDriverFactory: DatabaseDriverFactory, val api: SpaceApi) {
         // ...
    
         @Throws(Exception::class)
@@ -551,20 +550,6 @@ All Kotlin exceptions are unchecked, while Swift has only checked errors (see [I
 IntelliJ IDEA handles the initial Gradle configuration for you, so the `sharedUI` and `sharedLogic` modules are already
 connected to your Android application (`androidApp`).
 
-Before implementing the UI and the presentation logic, add the Koin Android dependency to
-the `sharedUI/build.gradle.kts` file:
-
-```kotlin
-kotlin {
-// ...
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.androidx.compose)
-        }
-    }
-}
-```
-
 Sync the Gradle project files when prompted, or press double <shortcut>Shift</shortcut> and search for the
 **Sync All Gradle, Swift Package Manager projects**.
 
@@ -590,39 +575,65 @@ Then, you will start Koin for each native UI using the corresponding module.
 
 Declare a Koin module that will contain the components for the Android app:
 
-1. In the `sharedUI/src/androidMain/kotlin` directory, create the `AppModule.kt` file in the `com.jetbrains.spacetutorial` package.
-
-   In that file, declare the module as two [singletons](https://insert-koin.io/docs/reference/koin-core/definitions#defining-a-singleton),
-   one for the `SpaceXApi` class and one for the `SpaceXSDK` class:
+1. Add the Koin Android dependency for the `androidMain` source set to the `sharedUI/build.gradle.kts` file:
 
    ```kotlin
-   package com.jetbrains.spacetutorial
-   
-   import com.jetbrains.spacetutorial.cache.AndroidDatabaseDriverFactory
-   import com.jetbrains.spacetutorial.network.SpaceXApi
-   import org.koin.android.ext.koin.androidContext
-   import org.koin.dsl.module
-   
-   val appModule = module { 
-       single<SpaceXApi> { SpaceXApi() }
-       single<SpaceXSDK> {
-           SpaceXSDK(
-               databaseDriverFactory = AndroidDatabaseDriverFactory(
-                   androidContext()
-               ), api = get()
-           )
+   kotlin {
+       // ...
+       sourceSets {
+           androidMain.dependencies {
+               // ...
+               implementation(libs.koin.androidx.compose)
+           }
        }
    }
    ```
 
-   The `SpaceXSDK` class constructor is injected with the platform-specific `AndroidDatabaseDriverFactory` class.
-   The `get()` function resolves dependencies within the module: in place of the `api` parameter for `SpaceXSDK()`,
-   Koin will pass the `SpaceXApi` singleton declared earlier.
+2. Create the `sharedUI/src/androidMain/kotlin` directory for Android-specific UI code.
+3. In the `sharedUI/src/androidMain/kotlin` directory, create the `com.jetbrains.spacetutorial` package.
+4. Remove the `commonMain` and `commonTest` source sets from the `sharedUI` modules, since the Android UI is not being shared.
+5. In the `sharedUI/src/androidMain/kotlin/com.jetbrains.spacetutorial` package, create the `AppModule.kt` file.
 
-2. Create a custom `Application` class, which will start the Koin module.
+   In that file, declare the Koin module as two [singletons](https://insert-koin.io/docs/reference/koin-core/definitions#defining-a-singleton),
+   one for the `SpaceApi` class and one for the `SpaceSDK` class:
 
-   Next to the `AppModule.kt` file you created, create the `Application.kt` file with the following code, specifying the module
-   you declared in the `modules()` function call:
+    ```kotlin
+    import com.jetbrains.spacetutorial.cache.AndroidDatabaseDriverFactory
+    import com.jetbrains.spacetutorial.network.SpaceApi
+    import org.koin.android.ext.koin.androidContext
+    import org.koin.dsl.module
+    
+    val appModule = module {
+        single<SpaceApi> { SpaceApi() }
+        single<SpaceSDK> {
+            SpaceSDK(
+                databaseDriverFactory = AndroidDatabaseDriverFactory(androidContext()),
+                api = get()
+            )
+        }
+    }
+    ```
+
+   The `SpaceSDK` class constructor is injected with the platform-specific `AndroidDatabaseDriverFactory` class.
+   The `get()` function resolves dependencies within the module: in place of the `api` parameter for `SpaceSDK()`,
+   Koin will pass the `SpaceApi` singleton declared earlier.
+
+6. In the `androidApp/build.gradle.kts` file, add the Koin Android dependency for the `androidApp` module: 
+
+   ```kotlin
+   kotlin {
+       // ...
+       dependencies {
+           // ...
+           implementation(libs.koin.androidx.compose)
+       }
+   }
+   ```
+
+7. In the `androidApp` module, in the `src/main/kotlin/com/jetbrains/spacetutorial` directory,
+   create a `MainApplication` class, which will start the Koin module.
+
+   Pass the module you declared in the `AppModule.kt` file to the `modules()` function:
 
    ```kotlin
    package com.jetbrains.spacetutorial
@@ -643,7 +654,7 @@ Declare a Koin module that will contain the components for the Android app:
    }
    ```
 
-3. Specify the `MainApplication` class you created in the `<application>` tag of your `AndroidManifest.xml` file:
+8. Specify the `MainApplication` class you created in the `<application>` tag of your `AndroidManifest.xml` file:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -675,7 +686,7 @@ function that brings it all together.
    import androidx.lifecycle.ViewModel
    import com.jetbrains.spacetutorial.entity.RocketLaunch
     
-   class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+   class RocketLaunchViewModel(private val sdk: SpaceSDK) : ViewModel() {
        private val _state = mutableStateOf(RocketLaunchScreenState())
        val state: State<RocketLaunchScreenState> = _state
     
@@ -696,7 +707,7 @@ function that brings it all together.
    import androidx.lifecycle.viewModelScope
    import kotlinx.coroutines.launch
    
-   class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+   class RocketLaunchViewModel(private val sdk: SpaceSDK) : ViewModel() {
        //...
        
        fun loadLaunches() {
@@ -705,7 +716,7 @@ function that brings it all together.
                try {
                    val launches = sdk.getLaunches(forceReload = true)
                    _state.value = _state.value.copy(isLoading = false, launches = launches)
-               } catch (e: Exception) {
+               } catch (_: Exception) {
                    _state.value = _state.value.copy(isLoading = false, launches = emptyList())
                }
            }
@@ -717,7 +728,7 @@ function that brings it all together.
    to request data from the API as soon as a `RocketLaunchViewModel` object is created:
 
     ```kotlin
-    class RocketLaunchViewModel(private val sdk: SpaceXSDK) : ViewModel() {
+    class RocketLaunchViewModel(private val sdk: SpaceSDK) : ViewModel() {
         // ...
 
         init {
@@ -768,9 +779,8 @@ You will build your main `App()` composable around the `AppTheme` function suppl
 
 Create the main `App()` composable for your application and call it from the `ComponentActivity` class:
 
-1. Delete the `commonMain` and `commonTest` source sets from the `sharedUI` modules, since the Android UI is not being shared.
-2. Create the `App.kt` file in the `sharedUI/src/androidApp/kotlin/com/jetbrains/spacetutorial` directory.
-3. Open the `App.kt` file and insert the following code:
+1. Create the `App.kt` file in the `sharedUI/src/androidApp/kotlin/com/jetbrains/spacetutorial` directory.
+2. Open the `App.kt` file and insert the following code:
 
     ```kotlin
     package com.jetbrains.spacetutorial
@@ -803,38 +813,31 @@ Create the main `App()` composable for your application and call it from the `Co
    Here, you are using the [Koin ViewModel API](https://insert-koin.io/docs/reference/koin-compose/compose-viewmodel)
    to refer to the `viewModel` you declared in the Android Koin module.
 
-4. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
+3. Now add the UI code that will implement the loading screen, the column of launch results, and the pull-to-refresh action:
 
     ```kotlin
-    package com.jetbrains.spacetutorial
-    
     import androidx.compose.foundation.layout.Arrangement
     import androidx.compose.foundation.layout.Column
-    import androidx.compose.foundation.layout.Spacer
     import androidx.compose.foundation.layout.fillMaxSize
-    import androidx.compose.foundation.layout.height
     import androidx.compose.foundation.layout.padding
     import androidx.compose.foundation.lazy.LazyColumn
     import androidx.compose.foundation.lazy.items
-    import androidx.compose.material3.HorizontalDivider
-    import androidx.compose.material3.MaterialTheme
-    import androidx.compose.material3.Scaffold
-    import androidx.compose.material3.Text
-    import androidx.compose.material3.TopAppBar
+    import androidx.compose.material3.*
     import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+    import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+    import androidx.compose.runtime.*
     import androidx.compose.ui.Alignment
     import androidx.compose.ui.Modifier
+    import androidx.compose.ui.tooling.preview.Preview
     import androidx.compose.ui.unit.dp
     import com.jetbrains.spacetutorial.entity.RocketLaunch
     import com.jetbrains.spacetutorial.theme.AppTheme
     import com.jetbrains.spacetutorial.theme.app_theme_successful
     import com.jetbrains.spacetutorial.theme.app_theme_unsuccessful
     import kotlinx.coroutines.launch
-    ...
+    import org.koin.androidx.compose.koinViewModel
     
-    @OptIn(
-        ExperimentalMaterial3Api::class
-    )
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     @Preview
     fun App() {
@@ -850,7 +853,7 @@ Create the main `App()` composable for your application and call it from the `Co
                     TopAppBar(
                         title = {
                             Text(
-                                "SpaceX Launches",
+                                "Space Launches",
                                 style = MaterialTheme.typography.headlineLarge
                             )
                         }
@@ -882,19 +885,23 @@ Create the main `App()` composable for your application and call it from the `Co
                     } else {
                         LazyColumn {
                             items(state.launches) { launch: RocketLaunch ->
-                                Column(modifier = Modifier.padding(16.dp)) {
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                    modifier = Modifier.padding(16.dp)
+                                ) {
                                     Text(
-                                        text = "${launch.missionName} - ${launch.launchYear}",
+                                        text = launch.missionName,
                                         style = MaterialTheme.typography.headlineSmall
                                     )
-                                    Spacer(Modifier.height(8.dp))
                                     Text(
-                                        text = if (launch.launchSuccess == true) "Successful" else "Unsuccessful",
-                                        color = if (launch.launchSuccess == true) app_theme_successful else app_theme_unsuccessful
+                                        text = if (launch.status.id == 3) "Successful" else "Unsuccessful",
+                                        color = if (launch.status.id == 3) app_theme_successful else app_theme_unsuccessful
                                     )
-                                    Spacer(Modifier.height(8.dp))
-                                    val details = launch.details
-                                    if (details != null && details.isNotBlank()) {
+                                    Text(
+                                        text = "Launch year: ${launch.launchYear}"
+                                    )
+                                    val details = launch.status.description
+                                    if (details.isNotBlank()) {
                                         Text(details)
                                     }
                                 }
@@ -906,12 +913,11 @@ Create the main `App()` composable for your application and call it from the `Co
             }
         }
     }
+    
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import com.jetbrains.spacetutorial.theme.AppTheme"}
 
-   <!--3. Remove the `import App` line in the `MainActivity.kt` file in the `com.jetbrains.spacetutorial` package so that
-      the `setContent()` function refers to the `App()` composable you just created in that package.-->
-5. Finally, in the `androidApp/src/main/AndroidManifest.xml`, specify your `MainActivity` class in the `<activity>` tag:
+4. Finally, in the `androidApp/src/main/AndroidManifest.xml`, specify your `MainActivity` class in the `<activity>` tag:
 
     ```xml
     <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -927,14 +933,14 @@ Create the main `App()` composable for your application and call it from the `Co
     </manifest>
     ```
 
-6. Run your Android app: select **composeApp** from the run configurations menu, choose an emulator, and click the run button.
+5. Run your Android app: select **androidApp** from the run configurations menu, choose an emulator, and click the run button.
    The app automatically runs the API request and displays the list of launches (the background color depends on
    the Material Theme you generated):
 
    ![Android application](android-application.png){width=350}
 
 You've just created an Android application that has its business logic implemented in the Kotlin Multiplatform module,
-and its UI made using native Jetpack Compose.
+and its UI runs on native Jetpack Compose.
 
 ## Create the iOS application
 
@@ -954,7 +960,7 @@ system-provided SQLite binary:
 
 1. In IntelliJ IDEA, select the **File** | **Open Project in Xcode** option to open your project in Xcode.
 2. In Xcode, click the project name to open its settings.
-3. Switch to the **Build Settings** tab, there switch to the **All** list and search for the **Other Linker Flags** field.
+3. Switch to the **Build Settings** tab, there switch to the **All** list, and search for the **Other Linker Flags** field.
 4. Expand the field, press the plus sign next to the **Debug** field,
    and paste the `-lsqlite3` string into the **Any Architecture | Any SDK**.
 5. Repeat the process for the **Other Linker Flags** | **Release** field.
@@ -968,7 +974,7 @@ To use Koin classes and functions in Swift code, create a special `KoinComponent
 module for iOS.
 
 1. In the `sharedLogic/src/iosMain/kotlin/com/jetbrains/spacetutorial` directory, create the `KoinHelper.kt` file.
-2. Add the `KoinHelper` class, which will wrap the `SpaceXSDK` class with a lazy Koin injection:
+2. Add the `KoinHelper` class, which will wrap the `SpaceSDK` class with a lazy Koin injection:
 
     ```kotlin
     package com.jetbrains.spacetutorial
@@ -978,7 +984,7 @@ module for iOS.
     import org.koin.core.component.inject
 
     class KoinHelper : KoinComponent {
-        private val sdk: SpaceXSDK by inject<SpaceXSDK>()
+        private val sdk: SpaceSDK by inject<SpaceSDK>()
 
         suspend fun getLaunches(forceReload: Boolean): List<RocketLaunch> {
             return sdk.getLaunches(forceReload = forceReload)
@@ -990,16 +996,16 @@ module for iOS.
 
     ```kotlin
     import com.jetbrains.spacetutorial.cache.IOSDatabaseDriverFactory
-    import com.jetbrains.spacetutorial.network.SpaceXApi
+    import com.jetbrains.spacetutorial.network.SpaceApi
     import org.koin.core.context.startKoin
     import org.koin.dsl.module
     
     fun initKoin() {
         startKoin {
             modules(module {
-                single<SpaceXApi> { SpaceXApi() }
-                single<SpaceXSDK> {
-                    SpaceXSDK(
+                single<SpaceApi> { SpaceApi() }
+                single<SpaceSDK> {
+                    SpaceSDK(
                         databaseDriverFactory = IOSDatabaseDriverFactory(), api = get()
                     )
                 }
@@ -1008,7 +1014,7 @@ module for iOS.
     }
     ```
 
-Now, you can start the Koin module in your iOS app to use the native database driver with the common `SpaceXSDK` class.
+Now, you can start the Koin module in your iOS app to use the native database driver with the common `SpaceSDK` class.
 
 ### Implement the UI
 
@@ -1030,10 +1036,13 @@ data.
         var body: some View {
             HStack() {
                 VStack(alignment: .leading, spacing: 10.0) {
-                    Text("\(rocketLaunch.missionName) - \(String(rocketLaunch.launchYear))").font(.system(size: 18)).bold()
+                    Text("\(rocketLaunch.missionName)")
+                        .font(.system(size: 18))
+                        .bold()
+                        .fixedSize(horizontal: false, vertical: true)
                     Text(launchText).foregroundColor(launchColor)
                     Text("Launch year: \(String(rocketLaunch.launchYear))")
-                    Text("\(rocketLaunch.details ?? "")")
+                    Text("\(rocketLaunch.status.description_)")
                 }
                 Spacer()
             }
@@ -1042,19 +1051,13 @@ data.
     
     extension RocketLaunchRow {
         private var launchText: String {
-            if let isSuccess = rocketLaunch.launchSuccess {
-                return isSuccess.boolValue ? "Successful" : "Unsuccessful"
-            } else {
-                return "No data"
-            }
+            let isSuccess = rocketLaunch.status.id == 3
+            return isSuccess ? "Successful" : "Unsuccessful"
         }
     
         private var launchColor: Color {
-            if let isSuccess = rocketLaunch.launchSuccess {
-                return isSuccess.boolValue ? Color.green : Color.red
-            } else {
-                return Color.gray
-            }
+            let isSuccess = rocketLaunch.status.id == 3
+            return isSuccess ? Color.green : Color.red
         }
     }
     ```
@@ -1083,7 +1086,7 @@ data.
     * The `@Published` attribute is used for the `launches` property, so the view model will emit signals whenever this
  property changes.
 
-5. Remove the `ContentView_Previews` structure: you won't need to implement a preview that should be compatible with
+5. Remove the `ContentView_Previews` structure: you won't implement a preview that should be compatible with
    your view model.
 
 6. Update the body of the `ContentView` class to display the list of launches and add the reload functionality.
@@ -1098,7 +1101,7 @@ data.
        var body: some View {
            NavigationView {
                listView()
-               .navigationBarTitle("SpaceX Launches")
+               .navigationBarTitle("Space Launches")
                .navigationBarItems(trailing:
                    Button("Reload") {
                        self.viewModel.loadLaunches(forceReload: true)
@@ -1156,7 +1159,7 @@ It will allow you to call the SDK function with the correct database driver.
    ```
 
 2. In the `loadLaunches()` function, call the `KoinHelper.getLaunches()` function
-   (which will proxy the call to the `SpaceXSDK` class)
+   (which will proxy the call to the `SpaceSDK` class)
    and save the result in the `launches` property:
 
     ```Swift
