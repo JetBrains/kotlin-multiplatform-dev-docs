@@ -71,7 +71,7 @@ A: There's actually no need. There are various ways to organize the work process
 
 When only the Android part of the team works with shared code, the iOS developers don't even need to learn Kotlin. But when you are ready for your team to move to the next stage, where everyone contributes to the shared code, making the transition won't take much time. The similarities between the syntax and functionality of Swift and Kotlin greatly reduce the work required to learn how to read and write shared Kotlin code. [Try it yourself with Kotlin Koans](https://play.kotlinlang.org/koans/overview), a series of exercises to familiarize yourself with Kotlin syntax and some idioms.
 
-At the end of 2023, JetBrains introduced [Amper](https://blog.jetbrains.com/blog/2023/11/09/amper-improving-the-build-tooling-user-experience/), a new experimental project configuration tool focused on usability, onboarding, and IDE support. To get more insights into Amper's functionality, take a look at its [tutorial](amper.md).
+At the end of 2023, JetBrains introduced [Amper](https://blog.jetbrains.com/blog/2023/11/09/amper-improving-the-build-tooling-user-experience/), a new experimental project configuration tool focused on usability, onboarding, and IDE support. To get more insights into Amper's functionality, take a look at its [tutorial](kotlin-toolchain.md).
 
 ### Q: Is Kotlin Multiplatform production ready?
 

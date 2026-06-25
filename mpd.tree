@@ -162,7 +162,7 @@
 		<toc-element topic="recommended-ides.md"/>
 		<toc-element topic="compose-hot-reload.md"/>
 		<toc-element toc-title="Multiplatform Gradle DSL" topic="multiplatform-dsl-reference.md"/>
-		<toc-element toc-title="Kotlin Toolchain" topic="amper.md"/>
+		<toc-element toc-title="Kotlin Toolchain" topic="kotlin-toolchain.md" accepts-web-file-names="amper.html"/>
 		<toc-element toc-title="Configure CI for a KMP app">
 			<toc-element toc-title="Configure GitHub Actions" topic="github-actions-for-kmp.md" accepts-web-file-names="kmp-ci-tutorial.html"/>
 			<toc-element toc-title="Configure TeamCity" topic="configure-teamcity-for-kmp.md"/>
