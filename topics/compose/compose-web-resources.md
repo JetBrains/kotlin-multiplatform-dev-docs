@@ -50,9 +50,12 @@ Compose Multiplatform resources have their own internal cache for higher-level r
 Compose Multiplatform 1.8.0 introduced an experimental API for preloading font and image resources on
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
-Additionally, you can use fallback fonts different from the default bundled option if you require special characters like emojis.
-When unresolved characters are encountered during rendering, a fallback font containing the missing characters is [downloaded automatically](#automatic-font-fallback).
-To specify a fallback font manually, use the `FontFamily.Resolver.preload()` method.
+When unresolved characters are encountered during rendering, a fallback font containing the missing 
+characters is [downloaded automatically](#automatic-font-fallback), so special characters like emojis 
+are supported out of the box.
+
+If you want to control which fallback font is used instead of relying on the automatic
+one, specify it manually with the `FontFamily.Resolver.preload()` method.
 Web targets support TTF, OTF, TTC, variable, and WOFF/WOFF2 font formats.
 
 The following example demonstrates how to use preloading of a vector image:

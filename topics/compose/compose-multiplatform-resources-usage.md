@@ -481,10 +481,12 @@ private fun InterTypography(): Typography {
 >
 {style="note"}
 
-To support special characters like emojis or Arabic script in web targets, you can either:
-* Rely on [automatic font fallback](compose-web-resources.md#automatic-font-fallback) to download Noto fonts on demand.
-* Bundle a specific font and register it manually using the [preload API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api)
-  if you need full control over which font is used for fallback.
+Special characters like emojis and Arabic script are supported automatically in web
+targets through [automatic font fallback](compose-web-resources.md#automatic-font-fallback),
+which downloads the required Noto fonts on demand.
+
+If you need full control over which font is used, bundle a specific font and register it
+manually with the [preload API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api).
 
 ### Raw files
 
