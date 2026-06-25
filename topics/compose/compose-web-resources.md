@@ -50,10 +50,10 @@ Compose Multiplatform resources have their own internal cache for higher-level r
 Compose Multiplatform 1.8.0 introduced an experimental API for preloading font and image resources on
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
-Additionally, you can set fallback fonts different from the default bundled option if you require special characters like emojis.
+Additionally, you can use fallback fonts different from the default bundled option if you require special characters like emojis.
+When unresolved characters are encountered during rendering, a fallback font containing the missing characters is [downloaded automatically](#automatic-font-fallback).
 To specify a fallback font manually, use the `FontFamily.Resolver.preload()` method.
 Web targets support TTF, OTF, TTC, variable, and WOFF/WOFF2 font formats.
-For automatic fallback font downloading, see [Automatic font fallback](#automatic-font-fallback).
 
 The following example demonstrates how to use preloading of a vector image:
 
@@ -87,26 +87,12 @@ By default, characters not covered by the application's loaded fonts are display
 
 [//]: # (TODO update version for stable release)
 
-Starting with Compose Multiplatform 1.12.0-beta01, when you enable automatic font fallback, Compose monitors unresolved
+Starting with Compose Multiplatform 1.12.0-beta01, Compose monitors unresolved
 characters during rendering and downloads the required Noto font subsets on demand. 
 Once the fonts are available, the affected text is recomposed. 
 Note that tofu may briefly appear during the download.
 
 For CJK characters (Chinese, Japanese, and Korean), the correct font variant is selected automatically based on the browser's language setting.
-
-To enable automatic font fallback, call `installFallbackFontDownloader()` at the top level of your web app composable:
-
-```kotlin
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun App() {
-    installFallbackFontDownloader()
-    // ...
-}
-```
-
-> If you are already using `fontFamilyResolver.preload()` to manually provide a fallback font,
-> `installFallbackFontDownloader()` is a simpler alternative that requires no manual font bundling.
 
 ## Caching web resources
 <primary-label ref="Experimental"/>

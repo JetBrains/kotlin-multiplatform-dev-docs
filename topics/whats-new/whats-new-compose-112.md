@@ -20,14 +20,12 @@ For details about specific component versions, refer to the [Dependencies](#depe
 ### Automatic font fallback
 <primary-label ref="Experimental"/>
 
-By default, characters not covered by the application's loaded fonts are displayed as replacement glyphs (□, known as "tofu").
+Previously, characters not covered by the application's loaded fonts were displayed as replacement glyphs (□, known as "tofu").
 
-Compose Multiplatform for Web can automatically download the required Noto font subsets on demand when unresolved characters are encountered during rendering. 
+Compose Multiplatform for Web now automatically downloads the required Noto font subsets 
+on demand when unresolved characters are encountered during rendering. 
 After the fonts are downloaded, Compose recomposes the affected text. 
 Note that tofu may briefly appear until the required font is fetched.
-
-To enable automatic font fallback, call `installFallbackFontDownloader()` at the top level of your web app composable.
-For more details, see [Automatic font fallback](compose-web-resources.md#automatic-font-fallback).
 
 ## Desktop
 
