@@ -74,7 +74,7 @@ fun App() {
 
 @Composable
 fun MainScreen() {
-    // The icon is taken from the cache
+    // The icon is loaded from the cache
     Image(painter = painterResource(Res.drawable.heavy_vector_icon), contentDescription = null)
 }
 ```
@@ -83,16 +83,19 @@ fun MainScreen() {
 ## Automatic font fallback
 <primary-label ref="Experimental"/>
 
-By default, characters not covered by the application's loaded fonts are displayed as replacement glyphs (□, known as "tofu").
+By default, characters not covered by the application's loaded fonts are displayed as replacement glyphs 
+(□, known as "[tofu](https://fonts.google.com/knowledge/glossary/tofu)").
 
 [//]: # (TODO update version for stable release)
 
-Starting with Compose Multiplatform 1.12.0-beta01, Compose monitors unresolved
-characters during rendering and downloads the required Noto font subsets on demand. 
+Starting with version 1.12.0-beta01, Compose Multiplatform monitors unresolved
+characters during rendering and downloads the required Noto font subsets on demand.
+The name Noto is short for "no tofu", as these fonts are designed to eliminate tofu glyphs.
+
 Once the fonts are available, the affected text is recomposed. 
 Note that tofu may briefly appear during the download.
 
-For CJK characters (Chinese, Japanese, and Korean), the correct font variant is selected automatically based on the browser's language setting.
+For CJK (Chinese, Japanese, and Korean) characters, the correct font variant is selected automatically based on the browser's language setting.
 
 ## Caching web resources
 <primary-label ref="Experimental"/>

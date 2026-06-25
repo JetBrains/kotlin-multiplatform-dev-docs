@@ -13,19 +13,19 @@ Read on for details about the following topics:
 * [Importing the generated `Res` class and accessors](#importing-the-generated-class).
 * [Customizing the accessor class generation](#customizing-accessor-class-generation): how to make it public, assign to a package, or generate it unconditionally.
 * Working with specific resource types: 
-  * [Drawable resources](#images), such as simple images, rasterized images, or XML vectors,
-  * [Vector Android XML icons](#icons) from the Material Symbols library, 
-  * [Strings](#strings), including simple strings, templates, arrays, and plurals,
-  * [Storing and loading custom fonts](#fonts),
+  * [Drawable resources](#images), such as simple images, rasterized images, or XML vectors.
+  * [Vector Android XML icons](#icons) from the Material Symbols library. 
+  * [Strings](#strings), including simple strings, templates, arrays, and plurals.
+  * [Storing and loading custom fonts](#fonts).
   * [Raw files](#raw-files) and converting byte arrays into images. 
 * [Accessing resources mapped with string IDs](#generated-maps-for-resources-and-string-ids).
 * [Using multiplatform resources as Android assets](#compose-multiplatform-resources-as-android-assets).
 * Handling web-specific resources:
-  * [Preloading of resources](compose-web-resources.md#preloading-of-resources-for-web-targets) using browser features and the preload API,
-  * [Automatic font fallback](compose-web-resources.md#automatic-font-fallback) for missing characters,
+  * [Preloading of resources](compose-web-resources.md#preloading-of-resources-for-web-targets) using browser features and the preload API.
+  * [Automatic font fallback](compose-web-resources.md#automatic-font-fallback) for missing characters.
   * [Caching web resources](compose-web-resources.md#caching-web-resources).
 * Working with external resources: 
-  [from external libraries](#accessing-multiplatform-resources-from-external-libraries), 
+  [from external libraries](#accessing-multiplatform-resources-from-external-libraries),
   [remote files](#remote-files), and [Java resources](#using-java-resources).
 
 ## Importing the generated class
