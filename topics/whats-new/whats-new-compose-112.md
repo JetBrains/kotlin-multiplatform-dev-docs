@@ -2,7 +2,7 @@
 
 Here are the highlights for this EAP release:
 
- * 
+ * [Automatic font fallback for web](#automatic-font-fallback)
  * 
  * 
 
@@ -16,6 +16,16 @@ For details about specific component versions, refer to the [Dependencies](#depe
 ## iOS
 
 ## Web
+
+### Automatic font fallback
+<primary-label ref="Experimental"/>
+
+Previously, characters not covered by the application's loaded fonts were displayed as replacement glyphs (□, known as "tofu").
+
+Compose Multiplatform for Web now automatically downloads the required Noto font subsets 
+on demand when unresolved characters are encountered during rendering. 
+After the fonts are downloaded, Compose recomposes the affected text. 
+Note that tofu may briefly appear until the required font is fetched.
 
 ## Desktop
 
