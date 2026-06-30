@@ -151,6 +151,62 @@ The steps refer to the project from the [Create an app with shared logic and UI]
 Congratulations! You've seen Compose Hot Reload in action. Now you can experiment with changing text, images, formatting, 
 UI structure, and more, without having to restart the desktop run configuration after every change.
 
+## MCP server for AI agents
+<primary-label ref="Experimental"/>
+
+[//]: # (TODO update version for stable release)
+
+Starting with Compose Multiplatform 1.2.0-beta01, Compose Hot Reload includes a built-in
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server. 
+The MCP server lets AI coding agents interact with your running Compose application: 
+trigger Compose Hot Reload, see the rendered UI, inspect the semantic structure, simulate user input, and read runtime logs.
+For applications with multiple windows, the agent can list windows and target any of them.
+
+This closes the feedback loop for AI agents when editing Compose code. 
+Instead of relying on you to manually check the result after every edit, 
+the agent can iterate on your code autonomously and verify each change.
+
+### Connect an AI agent
+
+To let an AI agent interact with your Compose application:
+
+1. Start the MCP server alongside your application using the Gradle task:
+    ```shell
+    ./gradlew :composeApp:hotMcpServerJvm
+    ```
+   The task name follows the standard naming convention `hotMcpServer<TargetName>`.
+   For example, a custom JVM target named `desktop` would use the task `:composeApp:hotMcpServerDesktop`.
+2. Point your AI agent's MCP client configuration to the Gradle task. For example, in `.mcp.json`:
+    ```json
+    {
+      "mcpServers": {
+        "compose-hot-reload": {
+          "command": "./gradlew",
+          "args": [
+            "--no-daemon",
+            "--quiet",
+            "--console=plain",
+            "hotMcpServer"
+          ]
+        }
+      }
+    }
+    ```
+
+### Available MCP tools
+
+The MCP server exposes a range of tools the agent can invoke, including:
+
+* `reload` — recompiles the project and hot-reloads the changed classes.
+* `take_screenshot` — captures the current state of an application window.
+* `get_semantic_tree` — returns the Compose [semantic tree](compose-accessibility.md#semantic-properties), 
+   so the agent can understand the UI structure.
+* `get_logs` — returns recent log output from the running application, including runtime exceptions.
+* `click`, `type_text`, and `scroll` — simulate user input to test interactive flows.
+
+For the full list of MCP tools and their parameters, see the
+[Compose Hot Reload README](https://github.com/JetBrains/compose-hot-reload#mcp-server-for-ai-agents).
+
 ## Get help
 
 If you encounter any problems using Compose Hot Reload, let us know by [creating a GitHub issue](https://github.com/JetBrains/compose-hot-reload/issues).

@@ -3,7 +3,7 @@
 Here are the highlights for this EAP release:
 
  * [Automatic font fallback for web](#automatic-font-fallback)
- * 
+ * [MCP server for AI agents in Compose Hot Reload](#mcp-server-for-ai-agents-in-compose-hot-reload)
  * 
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.12.0-beta01).
@@ -44,6 +44,21 @@ After the fonts are downloaded, Compose recomposes the affected text.
 Note that tofu may briefly appear until the required font is fetched.
 
 ## Desktop
+
+## MCP server for AI agents in Compose Hot Reload
+<primary-label ref="Experimental"/>
+
+Compose Hot Reload now ships with an experimental [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
+server that lets AI coding agents interact directly with your running Compose application.
+
+Until now, when an AI agent edited Compose code, there was no reliable way to verify the result: the agent couldn't
+confirm that the hot reload succeeded, couldn't see the rendered UI, and couldn't read runtime logs or
+exceptions. With the MCP server, agents can trigger reloads, take screenshots, inspect the
+semantic tree, simulate clicks and input, and read application logs without requiring your manual intervention.
+
+To start the MCP server alongside your application, run the `hotMcpServerJvm` Gradle task.
+For the full list of MCP tools available to the AI agent and how to connect it, see
+[MCP server for AI agents](compose-hot-reload.md#mcp-server-for-ai-agents).
 
 ## Gradle
 
