@@ -2,6 +2,7 @@
 <!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 <instance-profile id="mpd" name="Kotlin Multiplatform" status="release" start-page="get-started.topic">
 	<toc-element toc-title="Get started" topic="get-started.topic"/>
+    <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
 	<toc-element toc-title="Kotlin Multiplatform overview">
 		<toc-element toc-title="What is Kotlin Multiplatform" topic="kmp-overview.md"/>
 		<toc-element toc-title="Supported platforms" topic="supported-platforms.md"/>
@@ -14,7 +15,6 @@
                      accepts-web-file-names="kotlin-multiplatform-roadmap.html"
                      target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
-    <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
 	<toc-element toc-title="Compose Multiplatform UI framework">
 		<toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
