@@ -15,6 +15,12 @@ For details about specific component versions, refer to the [Dependencies](#depe
 
 ## iOS
 
+### Improved lazy layout scrolling performance
+
+Compose Multiplatform for iOS now supports `OutOfFrameExecutor`, improving the scrolling performance of lazy layouts. 
+With this change, list item deactivations are executed outside the drawing phase, 
+allowing it to complete faster and resulting in smoother scrolling.
+
 ## Web
 
 ### Automatic font fallback
