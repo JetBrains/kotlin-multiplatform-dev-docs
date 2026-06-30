@@ -17,7 +17,7 @@ For details about specific component versions, refer to the [Dependencies](#depe
 
 The version of Skia used by Compose Multiplatform, via Skiko, has been updated to Milestone 150.
 
-The previous version of Skia used was Milestone 144.
+The previous version, used in Compose Multiplatform 1.11, was Milestone 144.
 You can see the changes made between these versions in the [release notes](https://skia.googlesource.com/skia/+/refs/heads/chrome/m150/RELEASE_NOTES.md).
 
 This update also resolves duplicate symbol conflicts on iOS for apps that already bundle their own Skia library 
