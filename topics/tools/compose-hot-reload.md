@@ -154,10 +154,12 @@ UI structure, and more, without having to restart the desktop run configuration 
 ## MCP server for AI agents
 <primary-label ref="Experimental"/>
 
-Starting with version 1.2.0-alpha01, Compose Hot Reload includes a built-in
+[//]: # (TODO update version for stable release)
+
+Starting with Compose Multiplatform 1.2.0-beta01, Compose Hot Reload includes a built-in
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server. 
 The MCP server lets AI coding agents interact with your running Compose application: 
-trigger Compose Hot Reload, see the rendered UI, inspect the UI structure, simulate user input, and read runtime logs.
+trigger Compose Hot Reload, see the rendered UI, inspect the semantic structure, simulate user input, and read runtime logs.
 For applications with multiple windows, the agent can list windows and target any of them.
 
 This closes the feedback loop for AI agents when editing Compose code. 
@@ -172,7 +174,8 @@ To let an AI agent interact with your Compose application:
     ```shell
     ./gradlew :composeApp:hotMcpServerJvm
     ```
-    For a custom JVM target named `desktop`, the task would be `:composeApp:hotMcpServerDesktop`.
+   The task name follows the standard naming convention `hotMcpServer<TargetName>`.
+   For example, a custom JVM target named `desktop` would use the task `:composeApp:hotMcpServerDesktop`.
 2. Point your AI agent's MCP client configuration to the Gradle task. For example, in `.mcp.json`:
     ```json
     {
@@ -196,7 +199,8 @@ The MCP server exposes a range of tools the agent can invoke, including:
 
 * `reload` — recompiles the project and hot-reloads the changed classes.
 * `take_screenshot` — captures the current state of an application window.
-* `get_semantic_tree` — returns the Compose semantic/accessibility tree, so the agent can understand the UI structure.
+* `get_semantic_tree` — returns the Compose [semantic tree](compose-accessibility.md#semantic-properties), 
+   so the agent can understand the UI structure.
 * `get_logs` — returns recent log output from the running application, including runtime exceptions.
 * `click`, `type_text`, and `scroll` — simulate user input to test interactive flows.
 
