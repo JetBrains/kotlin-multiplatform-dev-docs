@@ -41,11 +41,11 @@ Compose Multiplatform's navigation transitions on iOS are designed to feel nativ
 but some platform-level features, such as iOS 26's Liquid Glass tab bar styling, 
 are only available through native iOS components.
 
-The solution is to hand navigation over to SwiftUI, letting the system render the tab bar and navigation stack natively 
-while Compose continues to render each screen's content.
-This tutorial follows the KotlinConf sample's SwiftUI shell because it maps cleanly to Apple's Liquid Glass APIs.
-An alternative that achieves the same native chrome is to drive `UITabBarController` and `UINavigationController` 
-from Kotlin via **expect/actual coordinators** — see [UIKit coordinators with expect/actual](#uikit-coordinators-with-expectactual) below.
+The fix is to let native iOS own the tab bar and navigation stack while Compose continues to render each screen's content.
+This tutorial follows the KotlinConf sample, which uses a SwiftUI shell — `TabView` and `NavigationStack` — as a direct path 
+to Liquid Glass on iOS 26.
+You can reach the same result without SwiftUI by driving `UITabBarController` and `UINavigationController` from Kotlin 
+through **expect/actual coordinators**; see [UIKit coordinators with expect/actual](#uikit-coordinators-with-expectactual).
 
 **Before:**
 
