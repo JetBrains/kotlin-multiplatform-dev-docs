@@ -12,7 +12,7 @@ you can implement the user interface once and then use it for all [supported pla
 
 On this page, you'll learn:
 * To create a basic Compose Multiplatform app and run it on Android, iOS, desktop, and web.
-* To run the app on various platforms.
+* To build and run the app on various platforms.
 * To change the UI on all platforms at once by leveraging common code.
 
 ## Requirements
@@ -20,7 +20,7 @@ On this page, you'll learn:
 To complete this tutorial, you'll need IntelliJ IDEA or Android Studio and the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform).
 To build and run iOS apps, you'll also need a macOS machine with Xcode installed (an Apple requirement).
 
-No previous experience with Compose Multiplatform, Android, or iOS is required,
+No previous experience with Compose Multiplatform is required,
 although we do recommend that you familiarize yourself with the [fundamentals of Kotlin](https://kotlinlang.org/docs/getting-started.html) before starting.
 
 ## Create a project
@@ -48,11 +48,11 @@ If you pick all client targets, you'll see the following directories in the **Pr
 
 There's a module for each target application and the shared module with multiplatform code:
 
-* **shared** is a Kotlin Multiplatform module that contains the code common for the Android, desktop, iOS, and web applications.
 * **androidApp** is the module that builds into an Android application.
+* **desktopApp** is the module that builds into a desktop JVM application.
 * **iosApp** is an Xcode project that builds into an iOS application. It depends on and uses the shared module as an iOS
   framework.
-* **desktopApp** is the module that builds into a desktop JVM application.
+* **shared** is a Kotlin Multiplatform module that contains the code common for the Android, desktop, iOS, and web applications.
 * **webApp** is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
 
 When using Gradle, Kotlin Multiplatform makes use of Gradle _source sets_ for organizing shared code.
