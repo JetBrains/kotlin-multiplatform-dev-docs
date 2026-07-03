@@ -825,5 +825,3 @@ For embedding Compose inside `UITabBarController`, see [Integration with the UIK
 * See [Adopting Liquid Glass](https://developer.apple.com/documentation/TechnologyOverviews/adopting-liquid-glass), Apple's overview of the new material and adoption checklist.
 * Refer to [Integration with the SwiftUI framework](compose-swiftui-integration.md) for the official guidance on using Compose Multiplatform inside 
 SwiftUI and embedding SwiftUI inside a Compose Multiplatform app.
-* For a UIKit-first entry point with expect/actual coordinators, see 
-  [Native Navigation with Compose Multiplatform — Coordinator Pattern Specification](https://github.com/markst/weatherdrive-app/blob/main/docs/NATIVE_NAVIGATION_SPEC.md).
