@@ -43,6 +43,9 @@ are only available through native iOS components.
 
 The solution is to hand navigation over to SwiftUI, letting the system render the tab bar and navigation stack natively 
 while Compose continues to render each screen's content.
+This tutorial follows the KotlinConf sample's SwiftUI shell because it maps cleanly to Apple's Liquid Glass APIs.
+An alternative that achieves the same native chrome is to drive `UITabBarController` and `UINavigationController` 
+from Kotlin via **expect/actual coordinators** — see [UIKit coordinators with expect/actual](#uikit-coordinators-with-expectactual) below.
 
 **Before:**
 
@@ -454,6 +457,16 @@ In `iosMain/main.ios.kt`, add the three functions:
 
 For the full implementation, see [`main.ios.kt`](https://github.com/JetBrains/kotlinconf-app/blob/3982334f1c3712fb959f0d20b563d6c8b81e9bbd/app/shared/src/iosMain/kotlin/org/jetbrains/kotlinconf/main.ios.kt).
 
+> SwiftUI `TabView` and `NavigationStack` are backed by `UITabBarController` and `UINavigationController` under the hood.
+> The SwiftUI layer in this tutorial adds `RouteWrapper` identity workarounds, `@Observable` path state mirrored from Kotlin 
+> callbacks, and `UIViewControllerRepresentable` wrappers with empty `updateUIViewController` implementations.
+> If you own the iOS entry point, imperative UIKit navigation — coordinator `pushViewController(_:animated:)` and 
+> `popViewController(animated:)` — is often simpler and avoids duplicating navigation state across Swift and Kotlin.
+> Liquid Glass on iOS 26 applies to native tab and navigation bars whether you declare them in SwiftUI or configure them 
+> in UIKit through `UITabBarAppearance` and `UINavigationBarAppearance`.
+>
+{style="tip"}
+
 ## Build the SwiftUI navigation layer
 
 This is the iOS side of the migration. All the Kotlin changes from the previous steps prepare the app for what happens here: 
@@ -739,6 +752,52 @@ The migration in this tutorial favors native SwiftUI navigation,
 which gives you Liquid Glass and other system behaviors out of the box. 
 If this approach doesn't fit your project, consider one of these alternatives:
 
+### UIKit coordinators with expect/actual
+
+You can get native navigation chrome and shared Compose screen content by declaring navigation contracts in `commonMain` 
+as `expect class` coordinators, with `actual` implementations on each platform.
+
+```
+SceneDelegate
+  └── UIWindow.rootViewController = UITabBarController
+        ├── UINavigationController (Schedule)
+        │     ├── ComposeUIViewController  ← tab root
+        │     └── ComposeUIViewController  ← detail, push/pop in Kotlin
+        └── UINavigationController (Info)
+              └── ...
+```
+
+Conceptually, the SwiftUI pieces in this tutorial map to UIKit coordinators as follows:
+
+* SwiftUI `TabView` / `NavigationStack` → `UITabBarController` / `UINavigationController`
+* `TabNavigationCoordinator` and `RouteWrapper` → Kotlin `actual` coordinator `push` / `pop`
+* `NativeNavComposeView` / `DetailComposeView` → `ComposeUIViewController { Screen(...) }` inside the coordinator
+* `ContentView` SwiftUI shell → `SceneDelegate` sets `window.rootViewController`
+
+```kotlin
+// commonMain
+expect class ScheduleCoordinator() {
+    fun navigateToDetail(route: AppRoute)
+    fun navigateBack()
+    @Composable fun Content()
+}
+
+// iosMain — push/pop on UINavigationController, showTopBar = false
+```
+
+On iOS, create the coordinator from `SceneDelegate` and set the tab bar controller as the window's root view controller — 
+no SwiftUI `App` or `ContentView` wrapper required.
+For the full pattern — including Android `actual` implementations, bar appearance, and file structure — see 
+[Native Navigation with Compose Multiplatform — Coordinator Pattern Specification](https://github.com/markst/weatherdrive-app/blob/main/docs/NATIVE_NAVIGATION_SPEC.md).
+For embedding Compose inside `UITabBarController`, see [Integration with the UIKit framework](compose/ios/compose-uikit-integration.md).
+
+**When to choose which:**
+
+* **SwiftUI path (this tutorial):** you already have a SwiftUI `App` / `ContentView`, want the KotlinConf-style callback 
+  bridge, or your team prefers a declarative Swift shell.
+* **UIKit coordinator path:** greenfield iOS entry, navigation logic belongs in Kotlin `iosMain`, or you want to avoid 
+  duplicate navigation state and `UIViewControllerRepresentable` boilerplate.
+
 * **Compose-driven navigation with native interop controls**. Keep navigation in Compose, but embed native UI controls 
   such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
   between native overlays and Compose content.
@@ -755,3 +814,5 @@ If this approach doesn't fit your project, consider one of these alternatives:
 * See [Adopting Liquid Glass](https://developer.apple.com/documentation/TechnologyOverviews/adopting-liquid-glass), Apple's overview of the new material and adoption checklist.
 * Refer to [Integration with the SwiftUI framework](compose-swiftui-integration.md) for the official guidance on using Compose Multiplatform inside 
 SwiftUI and embedding SwiftUI inside a Compose Multiplatform app.
+* For a UIKit-first entry point with expect/actual coordinators, see 
+  [Native Navigation with Compose Multiplatform — Coordinator Pattern Specification](https://github.com/markst/weatherdrive-app/blob/main/docs/NATIVE_NAVIGATION_SPEC.md).
