@@ -787,6 +787,14 @@ expect class ScheduleCoordinator() {
 
 On iOS, create the coordinator from `SceneDelegate` and set the tab bar controller as the window's root view controller — 
 no SwiftUI `App` or `ContentView` wrapper required.
+
+The linked spec implements this coordinator pattern entirely in Kotlin `iosMain` using UIKit interop — 
+`UITabBarController`, `UINavigationController`, and `ComposeUIViewController` wired together in the `actual` coordinators.
+An alternative split is to expose screen factories from `iosMain` — for example, `MainViewController` and `ScreenViewController` 
+that return `ComposeUIViewController` instances with navigation closures — and assemble the tab bar and navigation stacks 
+in native Swift. You get the same flat UIKit hierarchy without SwiftUI or `UIViewControllerRepresentable`, while keeping 
+the coordinator logic in Swift if that fits your team better.
+
 For the full pattern — including Android `actual` implementations, bar appearance, and file structure — see 
 [Native Navigation with Compose Multiplatform — Coordinator Pattern Specification](https://github.com/markst/weatherdrive-app/blob/main/docs/NATIVE_NAVIGATION_SPEC.md).
 For embedding Compose inside `UITabBarController`, see [Integration with the UIKit framework](compose/ios/compose-uikit-integration.md).
@@ -795,8 +803,11 @@ For embedding Compose inside `UITabBarController`, see [Integration with the UIK
 
 * **SwiftUI path (this tutorial):** you already have a SwiftUI `App` / `ContentView`, want the KotlinConf-style callback 
   bridge, or your team prefers a declarative Swift shell.
-* **UIKit coordinator path:** greenfield iOS entry, navigation logic belongs in Kotlin `iosMain`, or you want to avoid 
+* **UIKit coordinator path (Kotlin):** greenfield iOS entry, navigation logic belongs in Kotlin `iosMain`, or you want to avoid 
   duplicate navigation state and `UIViewControllerRepresentable` boilerplate.
+* **UIKit coordinator path (Swift):** expose `ComposeUIViewController` screen factories from `iosMain` with navigation closures, 
+  but wire `UITabBarController` / `UINavigationController` push and pop in native Swift — useful when iOS navigation code 
+  should stay in Swift while screen content remains shared Compose.
 
 * **Compose-driven navigation with native interop controls**. Keep navigation in Compose, but embed native UI controls 
   such as `UITabBar` and `UINavigationBar`, including Liquid Glass styling. The trade-off is some interop limitations 
