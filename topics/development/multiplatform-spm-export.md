@@ -95,15 +95,16 @@ To set up the publishing of an XCFramework:
   
    The resulting framework will be created as the `shared/build/XCFrameworks/release/Shared.xcframework` folder in your project directory.
 
-   > In case you work with a Compose Multiplatform project, use the following Gradle task:
+   > If your project consumes SwiftPM dependencies, the task also generates a set of SwiftPM-related files
+   > next to the XCFramework.
+   > As explained below, you can distribute the generated `Package.swift` along with the framework
+   > instead of writing one from scratch.
    >
-   > ```shell
-   > ./gradlew :sharedUI:assembleSharedXCFramework
-   > ```
-   >
-   > You can then find the resulting framework in the `sharedUI/build/XCFrameworks/release/Shared.xcframework` folder.
-   >
-   {style="tip"}
+   {style="note"} 
+
+3. If you have more than one module with shared code that you'd like to export
+   (for example, a shared logic module and a shared UI module),
+   [combine them under a single new module](#exporting-multiple-modules-as-an-xcframework) and distribute this umbrella module instead.
 
 ### Prepare the XCFramework and the Swift package manifest
 
@@ -140,7 +141,10 @@ To set up the publishing of an XCFramework:
     curl <downloadable link to the uploaded XCFramework ZIP file>
     ```
 
-4. Choose any directory and locally create a `Package.swift` file with the following code:
+4. If your project consumes SwiftPM dependencies, the `assembleSharedXCFramework` Gradle task generates a `Package.swift` file
+   next to the XCFramework.
+
+   If that's not the case, you can create a `Package.swift` file manually, starting with the following code:
 
    ```Swift
    // swift-tools-version:5.3
@@ -163,7 +167,10 @@ To set up the publishing of an XCFramework:
    )
    ```
    
-5. In the `url` field, specify the link to your ZIP archive with the XCFramework.
+5. Specify the missing fields:
+   * In the `url` field, specify the link to your ZIP archive with the XCFramework.
+   * In the `checksum` field, specify the checksum calculated for the ZIP file earlier.
+
 6. [Recommended] To validate the resulting manifest, you can run the following shell command in the directory
    with the `Package.swift` file:
 
