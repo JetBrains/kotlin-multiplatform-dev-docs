@@ -925,65 +925,85 @@ For each *default* packaging task (without ProGuard), the Gradle plugin provides
   </tr>
 </table>
 
-The default configuration enables some pre-defined ProGuard rules:
+The default configuration enables several predefined ProGuard rules:
 
 * The application image is minified, meaning unused classes are removed.
 * `compose.desktop.application.mainClass` is used as the entry point.
 * Several `keep` rules are included to ensure the Compose runtime remains functional.
 
-In most cases, you don't need any additional configurations to get a minified application. 
-However, ProGuard might not track certain usages in bytecode, for example, when a class is used via reflection. 
-If you encounter issues that occur only after ProGuard processing, you may need to add custom rules.
+In most cases, you don't need any additional configuration to produce a minified application. 
+However, ProGuard might not track certain usages in bytecode, for example, when a class is accessed via reflection. 
+If you encounter issues that appear only after ProGuard processing, you may need to add custom rules.
 
-To specify a custom configuration file, use the DSL as follows:
+You can configure ProGuard with the Gradle DSL inside the `buildTypes.release.proguard` block
+using the following options:
 
-```kotlin
-compose.desktop {
-    application {
-        buildTypes.release.proguard {
-            configurationFiles.from(project.file("compose-desktop.pro"))
+* `configurationFiles` specifies custom ProGuard configuration files.
+    ```kotlin
+    compose.desktop {
+        application {
+            buildTypes.release.proguard {
+                configurationFiles.from(project.file("compose-desktop.pro"))
+            }
         }
     }
-}
-```
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='configurationFiles.from(project.file("compose-desktop.pro"))'}
 
-For more information about ProGuard rules and configuration options, refer to the Guardsquare [manual](https://www.guardsquare.com/manual/configuration/usage).
-
-Obfuscation is disabled by default. To enable it, set the following property via the Gradle DSL:
-
-```kotlin
-compose.desktop {
-    application {
-        buildTypes.release.proguard {
-            obfuscate.set(true)
+* `obfuscate` enables code obfuscation. Obfuscation is disabled by default.
+    ```kotlin
+    compose.desktop {
+        application {
+            buildTypes.release.proguard {
+                obfuscate.set(true)
+            }
         }
     }
-}
-```
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="obfuscate.set(true)"}
 
-ProGuard's optimizations are enabled by default. To disable them, set the following property via the Gradle DSL:
-
-```kotlin
-compose.desktop {
-    application {
-        buildTypes.release.proguard {
-            optimize.set(false)
+* `optimize` controls ProGuard optimizations. Optimizations are enabled by default.
+    ```kotlin
+    compose.desktop {
+        application {
+            buildTypes.release.proguard {
+                optimize.set(false)
+            }
         }
     }
-}
-```
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="optimize.set(false)"}
 
-Producing an uber JAR is disabled by default, and ProGuard produces a corresponding `.jar` file for every input `.jar`. To enable it, set the following property via the Gradle DSL:
-
-```kotlin
-compose.desktop {
-    application {
-        buildTypes.release.proguard {
-            joinOutputJars.set(true)
+* `joinOutputJars` produces a single uber JAR. By default, 
+  ProGuard produces a separate `.jar` file for each input `.jar`.
+    ```kotlin
+    compose.desktop {
+        application {
+            buildTypes.release.proguard {
+                joinOutputJars.set(true)
+            }
         }
     }
-}
-```
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="joinOutputJars.set(true)"}
+
+[//]: # (TODO update version for stable release)
+
+* `version` sets a specific ProGuard version. Starting with Compose Multiplatform 1.12.0-beta01, the default ProGuard version is 7.8.0.
+  If you use an earlier version of Compose Multiplatform and build with JDK 25, explicitly set the version to `7.8.0`:
+    ```kotlin
+    compose.desktop {
+        application {
+            buildTypes.release.proguard {
+                version.set("7.8.0")
+            }
+        }
+    }
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='version.set("7.8.0")'}
+
+For the full list of ProGuard rules and configuration options, see the [ProGuard manual](https://www.guardsquare.com/manual/configuration/usage)
+from Guardsquare.
 
 ## What's next?
 
