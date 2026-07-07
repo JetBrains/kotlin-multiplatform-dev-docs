@@ -7,8 +7,6 @@
     <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-<!-- rewrite for KMP, this is copy-pasted -->
-
 With the Kotlin Multiplatform,
 you can implement business logic once in common code and keep the UI for each app native.
 If you'd like to share the UI code as well, see our [Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md).
