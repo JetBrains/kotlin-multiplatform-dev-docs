@@ -31,7 +31,7 @@ To try out the multiplatform implementation of Navigation 3, add the following d
 
 ```toml
 [versions]
-multiplatform-nav3-ui = "1.0.0-alpha05"
+multiplatform-nav3-ui = "1.1.1"
 
 [libraries]
 jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
@@ -46,8 +46,8 @@ jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:naviga
 For projects using the Material 3 Adaptive and ViewModel libraries, also add the following navigation support artifacts:
 ```toml
 [versions]
-compose-multiplatform-adaptive = "1.3.0-alpha02"
-compose-multiplatform-lifecycle = "2.10.0-alpha05"
+compose-multiplatform-adaptive = "1.3.0-beta02"
+compose-multiplatform-lifecycle = "2.10.0"
 
 [libraries]
 jetbrains-material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "compose-multiplatform-adaptive" }
@@ -59,13 +59,14 @@ created by a JetBrains engineer. The library integrates the multiplatform Naviga
 
 ```toml
 [versions]
-compose-multiplatform-navigation3-browser = "0.2.0"
+compose-multiplatform-navigation3-browser = "1.1.0"
 
 [libraries]
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "compose-multiplatform-navigation3-browser" }
 ```
 
-Browser history navigation is expected to be supported by the base multiplatform Navigation 3 library in version 1.1.0.
+Browser history navigation support is planned for the base multiplatform Navigation 3 library in a future release.
+Track the progress in [CMP-8924](https://youtrack.jetbrains.com/projects/CMP/issues/CMP-8924/Integrate-Browser-History-with-Nav3).
 
 ## Multiplatform support
 
