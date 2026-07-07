@@ -19,8 +19,8 @@ To build the user interface, you'll use the [Compose Multiplatform](https://www.
 for the Android part of your project and [SwiftUI](https://developer.apple.com/xcode/swiftui/) for the iOS one.
 These are both declarative UI frameworks, and you'll see similarities in the UI implementations. In both cases,
 you store the data in the `phrases` variable and later iterate over it to produce a list of `Text` items.
-
 ## Update the Android part
+
 
 The `androidApp` module contains an Android application and defines its main activity.
 The UI code is mostly contained in the `sharedUI` module, which the Android app uses as an Android library.
@@ -109,18 +109,6 @@ Implement the same changes as in the Android app to account for the update in co
 4. Start the iOS run configuration to see the changes:
 
     ![Updated UI of your iOS multiplatform app](first-multiplatform-project-on-ios-2.png){width=350}
-
-## Possible issues and solutions
-
-### Xcode reports errors in the code calling the shared framework
-
-If you work in Xcode, your Xcode project may be using an old version of the framework.
-To resolve this, return to IntelliJ IDEA and rebuild the project or start the iOS run configuration.
-
-### Xcode reports an error when importing the shared framework
-
-If you are using Xcode, you may need to clear cached binaries: try resetting the environment by choosing
-**Product | Clean Build Folder** in the main menu.
 
 ## Next step
 
