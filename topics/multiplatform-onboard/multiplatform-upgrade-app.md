@@ -21,7 +21,7 @@ Multiplatform. Learn how to implement these in your first application, so that a
 you can use them in future projects.
 
 The updated app will retrieve data over the internet from the [LaunchLibrary 2](https://lldev.thespacedevs.com/docs)
-API and display the date of the last successful launch of a SpaceX rocket.
+API and display descriptions of latest space launches.
 
 > You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
