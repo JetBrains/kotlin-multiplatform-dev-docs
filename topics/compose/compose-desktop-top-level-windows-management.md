@@ -238,7 +238,7 @@ Compose Multiplatform for desktop provides two ways to display secondary UI on t
 * **Dialogs** are separate OS-level windows with their own title bar. 
   Use `DialogWindow()` for confirmations, file pickers, or any interaction that should have its own window.
 * **Popups** are overlays rendered inside the current window, without a separate OS window or a title bar.
-  Use `Popup()` for floating UI anchored to the main window, like dropdowns or custom overlays.
+  Use `Popup()` for floating UI anchored to a component in the main window, like dropdowns or custom overlays.
 
 ### Dialogs
 
@@ -247,6 +247,8 @@ Use the `DialogWindow()` composable for a modal window that locks its parent unt
 The following code sample combines a regular window with a modal dialog:
 
 ```kotlin
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
@@ -254,6 +256,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.DialogWindow
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
@@ -263,6 +266,7 @@ import androidx.compose.ui.window.rememberDialogState
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
+        title = "Main window"
     ) {
         var isDialogOpen by remember { mutableStateOf(false) }
 
@@ -273,76 +277,36 @@ fun main() = application {
         if (isDialogOpen) {
             DialogWindow(
                 onCloseRequest = { isDialogOpen = false },
-                state = rememberDialogState(position = WindowPosition(Alignment.Center))
+                state = rememberDialogState(position = WindowPosition(Alignment.Center)),
+                title = "Dialog"
             ) {
-                // Content of the window
-            }
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow(onCloseRequest = { isDialogOpen = false },"}
-
-### Popups
-
-A `Popup()` renders content on top of the current UI as a lightweight overlay. 
-Unlike a [`DialogWindow()`](#dialogs), it doesn't create a separate OS-level window: 
-it's part of the current window, has no title bar or scrim, and can be positioned relative to another component.
-
-Basic positioning uses the `alignment` parameter. The following example centers a popup inside its parent:
-
-```kotlin
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.material.Button
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication {
-    var isPopupOpen by remember { mutableStateOf(false) }
-
-    Box(Modifier.fillMaxSize()) {
-        Button(onClick = { isPopupOpen = !isPopupOpen }) {
-            Text("Toggle popup")
-        }
-
-        if (isPopupOpen) {
-            Popup(
-                alignment = Alignment.Center,
-                onDismissRequest = { isPopupOpen = false },
-                focusable = true
-            ) {
-                Box(
-                    Modifier
-                        .size(200.dp, 50.dp)
-                        .background(Color(0xFFEEEEEE))
-                ) {
-                    Text("Centered popup", Modifier.padding(16.dp))
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                    Text("This is a dialog")
                 }
             }
         }
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Popup(alignment = Alignment.Center"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow("}
 
-For anchored popups like a menu that appears directly below its trigger, pass a custom `PopupPositionProvider`:
+### Popups
+
+A `Popup()` renders content on top of the current UI as a lightweight overlay. 
+Unlike a [`DialogWindow()`](#dialogs), it doesn't create a separate OS-level window and has no title bar or scrim.
+
+By default, popups do not receive focus. To make a popup focusable, explicitly pass `PopupProperties(focusable = true)`.
+They can be positioned freely either with a simple `alignment` or with a custom `PopupPositionProvider` 
+that anchors the popup to its parent component.
+
+The following example shows a popup anchored directly below a button:
 
 ```kotlin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
@@ -350,6 +314,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
@@ -358,46 +323,53 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
-import androidx.compose.ui.window.singleWindowApplication
+import androidx.compose.ui.window.PopupProperties
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
 
-fun main() = singleWindowApplication {
-var isPopupOpen by remember { mutableStateOf(false) }
+fun main() = application {
+    Window(onCloseRequest = ::exitApplication, title = "Popup example") {
+        var isPopupOpen by remember { mutableStateOf(false) }
 
-    val belowAnchor = remember {
-        object : PopupPositionProvider {
-            override fun calculatePosition(
-                anchorBounds: IntRect,
-                windowSize: IntSize,
-                layoutDirection: LayoutDirection,
-                popupContentSize: IntSize
-            ) = IntOffset(x = anchorBounds.left, y = anchorBounds.bottom)
-        }
-    }
-
-    Box(Modifier.padding(24.dp)) {
-        Button(onClick = { isPopupOpen = !isPopupOpen }) {
-            Text("Toggle menu")
+        val belowAnchor = remember {
+            object : PopupPositionProvider {
+                override fun calculatePosition(
+                    anchorBounds: IntRect,
+                    windowSize: IntSize,
+                    layoutDirection: LayoutDirection,
+                    popupContentSize: IntSize
+                ) = IntOffset(x = anchorBounds.left, y = anchorBounds.bottom)
+            }
         }
 
-        if (isPopupOpen) {
-            Popup(
-                popupPositionProvider = belowAnchor,
-                onDismissRequest = { isPopupOpen = false },
-                focusable = true
-            ) {
-                Box(Modifier.background(Color(0xFFEEEEEE)).padding(12.dp)) {
-                    Text("Anchored below the button")
+        Column(Modifier.padding(24.dp)) {
+            Box {
+                Button(onClick = { isPopupOpen = !isPopupOpen }) {
+                    Text("Toggle menu")
+                }
+
+                if (isPopupOpen) {
+                    Popup(
+                        popupPositionProvider = belowAnchor,
+                        onDismissRequest = { isPopupOpen = false },
+                        properties = PopupProperties(focusable = true)
+                    ) {
+                        Box(
+                            Modifier
+                                .shadow(4.dp, RoundedCornerShape(4.dp))
+                                .background(Color.White, RoundedCornerShape(4.dp))
+                                .padding(12.dp)
+                        ) {
+                            Text("Anchored below the button")
+                        }
+                    }
                 }
             }
         }
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Popup(popupPositionProvider = belowAnchor"}
-
-Set `focusable = true` if the popup contains interactive elements or needs to dismiss on click-outside via `onDismissRequest`.
-
-For common patterns, Compose Multiplatform provides dedicated components like `TooltipArea` and `ContextMenuArea`.
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isPopupOpen) { Popup(popupPositionProvider = belowAnchor,"}
 
 ## Window state
 
