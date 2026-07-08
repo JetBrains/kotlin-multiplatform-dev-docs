@@ -974,7 +974,7 @@ using the following options:
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="optimize.set(false)"}
 
-* `joinOutputJars` produces a single uber JAR. By default, 
+* `joinOutputJars` produces a single uber-JAR. By default, 
   ProGuard produces a separate `.jar` file for each input `.jar`.
     ```kotlin
     compose.desktop {
@@ -989,8 +989,9 @@ using the following options:
 
 [//]: # (TODO update version for stable release)
 
-* `version` sets a specific ProGuard version. Starting with Compose Multiplatform 1.12.0-beta01, the default ProGuard version is 7.8.0.
-  If you use an earlier version of Compose Multiplatform and build with JDK 25, explicitly set the version to `7.8.0`:
+* `version` sets a specific ProGuard version. JDK 25 requires at least ProGuard 7.8.0, 
+  which is the default starting with Compose Multiplatform 1.12.0-beta01.
+  If you use an earlier version of Compose Multiplatform and build with JDK 25, explicitly set this property to `7.8.0`:
     ```kotlin
     compose.desktop {
         application {
