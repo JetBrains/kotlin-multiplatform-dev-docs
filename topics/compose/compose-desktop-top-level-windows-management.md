@@ -231,18 +231,17 @@ private class MyWindowState(
 
 For a more complex example, see the [Code Viewer](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/codeviewer) sample.
 
-## Dialogs and popups
+## Dialogs
 
-Compose Multiplatform for desktop provides two ways to display secondary UI on top of a window:
+You can use `DialogWindow()` for displaying a separate OS-level window with its own title bar for confirmations, 
+file pickers, or any interaction that should have its own window.
 
-* **Dialogs** are separate OS-level windows with their own title bar. 
-  Use `DialogWindow()` for confirmations, file pickers, or any interaction that should have its own window.
-* **Popups** are overlays rendered inside the current window, without a separate OS window or a title bar.
-  Use `Popup()` for floating UI anchored to a component in the main window, like dropdowns or custom overlays.
+The `DialogWindow()` composable creates a modal window that locks its parent until the user closes it.
 
-### Dialogs
-
-Use the `DialogWindow()` composable for a modal window that locks its parent until the user closes it.
+> For overlay UI that stays inside the current window (dropdowns, tooltips, and
+> custom overlays), use the multiplatform [Popup()](compose-popups.md) composable.
+>
+{style="tip"}
 
 The following code sample combines a regular window with a modal dialog:
 
@@ -289,87 +288,6 @@ fun main() = application {
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow("}
-
-### Popups
-
-A `Popup()` renders content on top of the current UI as a lightweight overlay. 
-Unlike a [`DialogWindow()`](#dialogs), it doesn't create a separate OS-level window and has no title bar or scrim.
-
-By default, popups do not receive focus. To make a popup focusable, explicitly pass `PopupProperties(focusable = true)`.
-They can be positioned freely either with a simple `alignment` or with a custom `PopupPositionProvider` 
-that anchors the popup to its parent component.
-
-The following example shows a popup anchored directly below a button:
-
-```kotlin
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.IntRect
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupPositionProvider
-import androidx.compose.ui.window.PopupProperties
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
-
-fun main() = application {
-    Window(onCloseRequest = ::exitApplication, title = "Popup example") {
-        var isPopupOpen by remember { mutableStateOf(false) }
-
-        val belowAnchor = remember {
-            object : PopupPositionProvider {
-                override fun calculatePosition(
-                    anchorBounds: IntRect,
-                    windowSize: IntSize,
-                    layoutDirection: LayoutDirection,
-                    popupContentSize: IntSize
-                ) = IntOffset(x = anchorBounds.left, y = anchorBounds.bottom)
-            }
-        }
-
-        Column(Modifier.padding(24.dp)) {
-            Box {
-                Button(onClick = { isPopupOpen = !isPopupOpen }) {
-                    Text("Toggle menu")
-                }
-
-                if (isPopupOpen) {
-                    Popup(
-                        popupPositionProvider = belowAnchor,
-                        onDismissRequest = { isPopupOpen = false },
-                        properties = PopupProperties(focusable = true)
-                    ) {
-                        Box(
-                            Modifier
-                                .shadow(4.dp, RoundedCornerShape(4.dp))
-                                .background(Color.White, RoundedCornerShape(4.dp))
-                                .padding(12.dp)
-                        ) {
-                            Text("Anchored below the button")
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isPopupOpen) { Popup(popupPositionProvider = belowAnchor,"}
 
 ## Window state
 
