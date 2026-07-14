@@ -57,6 +57,25 @@ To start the MCP server alongside your application, run the `hotMcpServerJvm` Gr
 For the full list of MCP tools available to the AI agent and how to connect it, see
 [MCP server for AI agents](compose-hot-reload.md#mcp-server-for-ai-agents).
 
+### New Window and Dialog APIs
+<primary-label ref="Experimental"/>
+
+Compose Multiplatform introduces a new set of Window and Dialog APIs that address several
+limitations of the current API. 
+Key improvements include:
+
+* An explicit asynchronous state model, where requesting a change (for example, `requestPosition()` or `requestBounds()`)
+  is clearly separated from observing the actual, applied state.
+* The ability to specify the screen on which a window is placed.
+* Flexible, provider-based window positioning through `WindowPositionProvider`, including alignment relative to the screen
+  or the parent window.
+* Flexible, provider-based window sizing through `WindowSizeProvider`, including intrinsic content-based sizing.
+* New `minSize` and `maxSize` parameters for the `Window()` and `DialogWindow()` composables.
+
+The new API lives alongside the previous one in the `androidx.compose.ui.window.v2` subpackage.
+
+For details and code samples, see [Top-level windows management](compose-desktop-top-level-windows-management.md).
+
 ## Dependencies
 
 | Library            | Maven coordinates                                                      | Based on Jetpack version                                                                                                           |
