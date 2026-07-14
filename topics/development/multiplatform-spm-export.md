@@ -104,7 +104,7 @@ To set up the publishing of an XCFramework:
 
 3. If you have more than one module with shared code that you'd like to export
    (for example, a shared logic module and a shared UI module),
-   [combine them under a single new module](#exporting-multiple-modules-as-an-xcframework) and distribute this umbrella module instead.
+   [combine them into a single new module](#exporting-multiple-modules-as-an-xcframework) and distribute this umbrella module instead.
 
 ### Prepare the XCFramework and the Swift package manifest
 
