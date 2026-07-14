@@ -168,30 +168,24 @@ the agent can iterate on your code autonomously and verify each change.
 
 ### Connect an AI agent
 
-To let an AI agent interact with your Compose application:
+To connect an AI agent, point the agent's MCP client configuration to the `hotMcpServer` Gradle task. 
+For example, in `.mcp.json`:
 
-1. Start the MCP server alongside your application using the Gradle task:
-    ```shell
-    ./gradlew :composeApp:hotMcpServerJvm
-    ```
-   The task name follows the standard naming convention `hotMcpServer<TargetName>`.
-   For example, a custom JVM target named `desktop` would use the task `:composeApp:hotMcpServerDesktop`.
-2. Point your AI agent's MCP client configuration to the Gradle task. For example, in `.mcp.json`:
-    ```json
-    {
-      "mcpServers": {
-        "compose-hot-reload": {
-          "command": "./gradlew",
-          "args": [
-            "--no-daemon",
-            "--quiet",
-            "--console=plain",
-            "hotMcpServer"
-          ]
-        }
-      }
+```json
+{
+  "mcpServers": {
+    "compose-hot-reload": {
+      "command": "./gradlew",
+      "args": [
+        "--no-daemon",
+        "--quiet",
+        "--console=plain",
+        "hotMcpServer"
+      ]
     }
-    ```
+  }
+}
+```
 
 ### Available MCP tools
 
