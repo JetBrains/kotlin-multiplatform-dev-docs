@@ -95,10 +95,10 @@ To set up the publishing of an XCFramework:
   
    The resulting framework will be created as the `shared/build/XCFrameworks/release/Shared.xcframework` folder in your project directory.
 
-   > If your project consumes SwiftPM dependencies, the task also generates a set of SwiftPM-related files
-   > next to the XCFramework.
-   > As explained below, you can distribute the generated `Package.swift` along with the framework
-   > instead of writing one from scratch.
+   > If your project consumes SwiftPM dependencies, starting with Kotlin %kotlinEapVersion%
+   > the task also generates a set of SwiftPM-related files next to the XCFramework.
+   > As explained [below](#prepare-the-xcframework-and-the-swift-package-manifest),
+   > you can distribute the generated `Package.swift` along with the framework instead of writing a manifest from scratch.
    >
    {style="note"} 
 
@@ -141,10 +141,10 @@ To set up the publishing of an XCFramework:
     curl <downloadable link to the uploaded XCFramework ZIP file>
     ```
 
-4. If your project consumes SwiftPM dependencies, the `assembleSharedXCFramework` Gradle task generates a `Package.swift` file
-   next to the XCFramework.
+4. If your project consumes SwiftPM dependencies, starting with Kotin %kotlinEapVersion%
+   the `assembleSharedXCFramework` Gradle task generates a `Package.swift` file next to the XCFramework.
 
-   If that's not the case, you can create a `Package.swift` file manually, starting with the following code:
+   If that's not the case, you can create a `Package.swift` file manually, using the following template:
 
    ```Swift
    // swift-tools-version:5.3
