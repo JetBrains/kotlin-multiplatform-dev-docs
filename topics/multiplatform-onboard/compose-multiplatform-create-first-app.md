@@ -90,7 +90,7 @@ Now check out how changes in common UI code update the UI in every app.
 
 Add a new text line to the greeting that is displayed after the button press:
 
-1. In the `shared/src/commonMain/kotlin/App.kt` file, update the `App()` composable
+1. In the `shared/src/commonMain/kotlin/compose.project.demo/App.kt` file, update the `App()` composable
    to include a new `Text()`:
 
     ```kotlin
