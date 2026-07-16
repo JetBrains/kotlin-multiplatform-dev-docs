@@ -560,8 +560,8 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
 #### Mark the flow with KMP-NativeCoroutines
 
 1. Open the `Greeting.kt` file in the `sharedLogic/src/commonMain/kotlin` directory.
-2. Add the `@NativeCoroutines` annotation to the `greet()` function. This will ensure that the plugin generates the right
-   code to support correct flow handling on iOS:
+2. Add the `@NativeCoroutines` annotation to the `greet()` function.
+   This makes the plugin generate the code to support correct flow handling on iOS:
 
    ```kotlin
     import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
