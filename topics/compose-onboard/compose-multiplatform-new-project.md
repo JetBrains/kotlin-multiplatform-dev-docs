@@ -449,7 +449,8 @@ code to load and display them:
     import demo.shared.generated.resources.eg
     import demo.shared.generated.resources.fr
     import demo.shared.generated.resources.id
-   
+    
+    // The type now also holds a reference to the flag image
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
@@ -461,6 +462,8 @@ code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
+    // The list is initialized with the addition of Compose Multiplatform
+    // resource references
     val defaultCountries = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
@@ -492,9 +495,13 @@ code to load and display them:
                         onDismissRequest = { showCountries = false }
                     ) {
                         countries.forEach { (name, zone, image) ->
+                            // Each country is displayed in a 'DropdownMenuItem'
+                            // as a flag ('Image()') and a name ('Text()')
                             DropdownMenuItem(
                                 text = { Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
+                                        // 'painterResource()' supplies the Painter object
+                                        // required by 'Image()'
                                         painterResource(image),
                                         modifier = Modifier.size(50.dp).padding(end = 10.dp),
                                         contentDescription = "$name flag"
@@ -519,11 +526,6 @@ code to load and display them:
     }
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)"}
-
-    * The `Country` type stores the path to the associated image.
-    * The list of countries passed to the `App` includes these paths.
-    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` composable with the name of a country.
-    * Each `Image` requires a `Painter` object to fetch the data.
 
 5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the application to see the new behavior:
