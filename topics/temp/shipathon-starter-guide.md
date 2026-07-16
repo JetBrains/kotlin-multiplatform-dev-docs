@@ -35,9 +35,8 @@ There are different ways to share code in a KMP project, with some platform spec
     * [for native UI and shared logic](multiplatform-create-first-app.md)
     * [for shared UI and logic](compose-multiplatform-create-first-app.md)
 * [How to access platform-specific APIs](multiplatform-connect-to-apis.md):
-    * includes a video on the subject
-    * use multiplatform libraries when possible
-    * use the expect/actual mechanism when no multiplatform library is available.
+    * Use multiplatform libraries when possible.
+    * Use the `expect`/`actual` mechanism when no suitable multiplatform library is available.
 * While calling shared Kotlin from Android Kotlin is relatively straightforward, iOS interoperability takes some getting to know it:
     * [Learn how to integrate your shared code with the iOS app](multiplatform-ios-integration-overview.md#local-integration) (all samples referenced in this doc have examples of iOS integration set up).
       > CocoaPods is generally being phased out in favor of Swift Package Manager and is not something we recommend using in new projects.
