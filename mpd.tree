@@ -193,4 +193,5 @@
 	<toc-element toc-title="Redirect the old tutorial to Fleet" hidden="true"
 				 accepts-web-file-names="fleet.html"
 				 target-for-accept-web-file-names="https://www.jetbrains.com/help/fleet/getting-started.html"/>
+	<toc-element hidden="true" topic="shipathon-starter-guide.md"/>
 </instance-profile>
