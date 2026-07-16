@@ -3,17 +3,19 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-Let's build an application that implements a more complex shared UI using additional dependencies and images as multiplatform resources.
+Let's build an application that implements a relatively complex shared UI using external dependencies
+and images as multiplatform resources.
+
+You'll create an application where users can select a country to see the time in the capital city of that country.
+All the functionality of your Compose Multiplatform app will be implemented in common code using multiplatform libraries.
+It'll load and display images within a dropdown menu and will use Compose events, styles, themes, modifiers, and layouts.
+
 In this tutorial, you will:
 
 1. Add and use the common `kotlinx-datetime` dependency.
-2. Implement a common UI for a timezone picker for all supported platforms: iOS, Android, desktop, and web.
-3. Import and use images in the common UI as multiplatform resources.
-
-You'll create an application where users can enter their country and city, and the app will display the time
-in the capital city of that country. All the functionality of your Compose Multiplatform app will be implemented in common
-code using multiplatform libraries. It'll load and display images within a dropdown menu and will use events, styles, themes,
-modifiers, and layouts.
+2. Implement a common UI for a country picker for all supported platforms: iOS, Android, desktop, and web.
+3. Practice using Compose Hot Reload, a tool for quickly iterating on your UI.
+4. Import and use images in the common UI as multiplatform resources.
 
 At each stage, you can run the application on all supported platforms (iOS, Android, desktop, and web), or you can focus on the
 specific platforms that best suit your needs.
@@ -24,8 +26,9 @@ specific platforms that best suit your needs.
 
 ## Create a project
 
-Create the same project as in the [basic Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md):
-Targeting all platforms you're interested in, with the **Share UI** option selected for iOS and web.
+Create the same project as in the [basic Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md).
+If you already have a project, make sure it targets all platforms you're interested in,
+with the **Share UI** option selected for iOS and web.
 
 ## Add the time dependency
 
@@ -37,7 +40,7 @@ While `kotlin.time` is always available as part of the standard library,
 `kotlinx-datetime` needs to be configured as an explicit dependency.
 It is a multiplatform library, so you will use it only in common code and need to specify the dependency only once:
 
-1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
 
     ```toml
     [versions]
@@ -67,11 +70,16 @@ It is a multiplatform library, so you will use it only in common code and need t
 
 Now you can refer to `kotlinx-datetime` APIs in your common code.
 
+> For more general information on how to manage multiplatform dependencies,
+> see [](multiplatform-add-dependencies.md).
+> 
+{style="tip"}
+
 ## Lay the foundation
 
 To get started, implement a new `App()` composable with the basic layout:
 
-1. In `shared/src/commonMain/kotlin`, open the `App.kt` file and replace the code
+1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file and replace the code
    with the following `App()` composable:
 
     ```kotlin
@@ -83,6 +91,8 @@ To get started, implement a new `App()` composable with the basic layout:
    
             // The UI is a column that holds a Text and a Button
             Column(
+                // Basic layout improvements that make sure that the Column()
+                // fills all available space without overlapping the system bars
                 modifier = Modifier
                     .safeContentPadding()
                     .fillMaxSize(),
@@ -98,6 +108,12 @@ To get started, implement a new `App()` composable with the basic layout:
         }
     }
     ```
+   
+    The `remember` API implements Compose-specific state management,
+    for an in-depth introduction see [Managing state](https://developer.android.com/develop/ui/compose/state)
+    in Jetpack Compose documentation.  
+
+2. Follow the IDE's instructions to import the missing dependencies.
 
 2. Run the application on Android and iOS:
 
@@ -115,7 +131,7 @@ To get started, implement a new `App()` composable with the basic layout:
 
 You can fix the desktop UI and verify the fix without rerunning the build:
 
-1. Update the `main.kt` file in the `desktopApp/src/kotlin` directory as follows:
+1. Update the `main.kt` file under the `desktopApp/src/` directory as follows:
 
     ```kotlin
     fun main() = application {
@@ -131,6 +147,8 @@ You can fix the desktop UI and verify the fix without rerunning the build:
             title = "Local Time App", 
             onCloseRequest = ::exitApplication, 
             state = state,
+            // Makes sure that the window is always on top
+            // to make debug and UI iteration easier
             alwaysOnTop = true
         ) {
             App()
@@ -205,9 +223,9 @@ To do this, create a `currentTimeAt()` function:
 1. Return to the `shared/src/commonMain/kotlin/compose.project.demo/App.kt` file and add the following function:
 
     ```kotlin
-   fun currentTimeAt(location: String): String? {
+    fun currentTimeAt(location: String): String? {
         fun LocalTime.formatted() = "$hour:$minute:$second"
-
+    
         return try {
             val time = Clock.System.now()
             val zone = TimeZone.of(location)
@@ -293,7 +311,7 @@ and the time message could be rendered more prominently.
                     // Adds padding before the button
                     modifier = Modifier.padding(top = 10.dp)
                 ) {
-                    Text("Show Time")
+                    Text("Show Time At Location")
                 }
             }
         }
@@ -375,9 +393,9 @@ fun App(countries: List<Country> = countries()) {
                   onDismissRequest = { showCountries = false }
               ) {
                   // Creates a dropdown menu item for each country
-                  countries().forEach { (name, zone) ->
+                  countries.forEach { (name, zone) ->
                       DropdownMenuItem(
-                          text = {   Text(name)},
+                          text = { Text(name) },
                           onClick = {
                               timeAtLocation = currentTimeAt(name, zone)
                               showCountries = false
@@ -444,11 +462,12 @@ code to load and display them:
 4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
 
     ```kotlin
-    import demo.shared.generated.resources.jp
-    import demo.shared.generated.resources.mx
+    import composedemo.shared.generated.resources.Res
     import demo.shared.generated.resources.eg
     import demo.shared.generated.resources.fr
     import demo.shared.generated.resources.id
+    import demo.shared.generated.resources.jp
+    import demo.shared.generated.resources.mx
     
     // The type now also holds a reference to the flag image
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
@@ -494,7 +513,7 @@ code to load and display them:
                         expanded = showCountries,
                         onDismissRequest = { showCountries = false }
                     ) {
-                        countries.forEach { (name, zone, image) ->
+                        defaultCountries.forEach { (name, zone, image) ->
                             // Each country is displayed in a 'DropdownMenuItem'
                             // as a flag ('Image()') and a name ('Text()')
                             DropdownMenuItem(

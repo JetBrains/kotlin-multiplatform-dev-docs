@@ -6,21 +6,19 @@
 In this tutorial you will start with the wizard-generated KMP project and build a more complex application
 that shares the code for network requests and data serialization between iOS and Android.
 
-In the course of the tutorial, you will:
+In the course of the tutorial, you will consume the data provided by the common module in the UI of iOS and Android apps:
 
 1. Add common and platform-specific dependencies.
 2. Implement network requests and data serialization in common code.
 3. Implement a coroutine flow to handle the results of network requests.
-4. Consume the data provided by the common module in the UI of iOS and Android apps.
+4. Update the UI of iOS and Android apps to format and display the data.
 
 Network requests and data serialization are the [most popular use cases](https://kotlinlang.org/lp/multiplatform/) for sharing code using Kotlin
 Multiplatform.
-You will implement both in the shared module of the final project:
-An app that retrieves data over the internet from the [LaunchLibrary 2](https://lldev.thespacedevs.com/docs)
-API and displays the date of the latest successful launch.
+You will implement both in the shared module of the final project.
 
-The updated app will retrieve data over the internet from the [LaunchLibrary 2](https://lldev.thespacedevs.com/docs)
-API and display descriptions of latest space launches.
+The updated app will retrieve data over the internet from the [Launch Library 2](https://lldev.thespacedevs.com/docs)
+API and display descriptions of the latest space launches.
 
 > You can find the final state of the project in two branches of our GitHub repository, with different iOS coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
@@ -31,7 +29,8 @@ API and display descriptions of latest space launches.
 ## Create a project
 
 Create the same project as in the [basic KMP tutorial](multiplatform-create-first-app.md):
-Targeting Android and iOS, with the **Do not share UI** option selected for iOS.
+If you already have a project, make sure it targets all platforms you're interested in,
+with the **Do not share UI** option selected for iOS.
 
 ## Add dependencies
 
@@ -40,7 +39,7 @@ You'll need to add the following multiplatform libraries in your project:
 * [`kotlinx-datetime`](https://github.com/Kotlin/kotlinx-datetime), to process and format timestamps.
 * [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for simultaneous operations.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the SpaceX API into objects of entity classes used to process
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the API into objects of entity classes used to process
   network operations.
 
 ### Update the Gradle version catalog
@@ -116,20 +115,24 @@ see [](multiplatform-add-dependencies.md).
 
 ## Set up API requests
 
-You'll use the [Launch Library API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data,
+You'll use the [Launch Library API](https://lldev.thespacedevs.com/docs) to retrieve data,
 specifically the list of all launches from the **/2.3.0/launches** endpoint.
 
 ### Create a data model
 
 In the `sharedLogic/src/commonMain/.../greetingkmp` directory, create a new `RocketLaunch.kt` file
-and add a data class which stores data from the SpaceX API:
+and add a data class which stores data from the Launch Library API:
 
 ```kotlin
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+// @Serializable directs the kotlinx.serialization plugin
+// to automatically generate a default serializer for the class
 @Serializable
 data class RocketLaunch(
+    // @SerialName redefines field names, making property names
+    // more readable in serialized format
     @SerialName("id")
     val id: String,
     @SerialName("name")
@@ -155,15 +158,10 @@ data class LaunchListResponse(
 )
 ```
 
-* The `RocketLaunch` class is marked with the `@Serializable` annotation so that the `kotlinx.serialization` plugin can
-  automatically generate a default serializer for it.
-* The `@SerialName` annotation allows you to redefine field names, making it possible to declare properties with more readable names
-  in data classes.
-
 ### Connect HTTP client
 
 1. In the `sharedLogic/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
-2. Add the `httpClient` property to retrieve rocket launch information through an HTTP GET request:
+2. Add the `httpClient` property and use it to build the final string from the result of a HTTP GET request:
 
     ```kotlin
     import io.ktor.client.HttpClient
@@ -199,16 +197,16 @@ data class LaunchListResponse(
            // Asynchronously retrieves information about rocket launches
            val response: LaunchListResponse =
                httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
-           // Gets the latest successful launch
-           // (in the response they are sorted from newest to oldest)
+           // Gets the latest launch (in the response they are sorted from newest to oldest)
+           // that was successful (API marks these with status.id 3)
            val lastSuccessLaunch = response.results.first { it.status.id == 3 }
-           // Converts the launch timestamp to local time.
-           // Date is displayed in the "MMMM DD, YYYY" format,
-           // for example, "OCTOBER 5, 2022"
+           // Converts the launch timestamp to local time
            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
                .toLocalDateTime(TimeZone.currentSystemDefault())
         
-           return "$date"
+           // Date is displayed in the "MMMM DD, YYYY" format,
+           // for example, "JULY 5, 2026"
+           return "${date.month} ${date.day}, ${date.year}"
        }
    
        // Builds the final string for the UI using
@@ -233,7 +231,7 @@ Instead of simply calling a suspending function, you can use [flows](https://kot
 when you need to produce a sequence of values.
 Flows can emit a sequence of values as the values are produced instead of returning a single value like suspending functions.
 
-1. Open the `Greeting.kt` file in the `shared/src/commonMain/kotlin` directory.
+1. Open the `Greeting.kt` file in the `sharedLogic/src/commonMain/kotlin` directory.
 2. Update the `greet()` function in the `Greeting` class to return a `Flow` of strings,
    primarily to accommodate the network request.
    As a part of the `Flow`, emit the launch date using a `RocketComponent` property:
@@ -276,12 +274,11 @@ As both the shared module and the Android application are written in Kotlin, usi
 View models are a popular pattern in Android development that helps manage data and other app components that should
 persist through [Android activity](https://developer.android.com/guide/components/activities/intro-activities) lifecycle.
 Now that the application is becoming more complex, it's time to introduce a view model into our app as well.
-It will store the data received from the SpaceX API and make it available to the UI.
+It will store the data received from the Launch Library API and make it available to the UI.
 
-Create the view model class in the Android platform code:
-
-In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends Android's `ViewModel`
-to use the platform's lifecycle mechanism and configuration tracking:
+In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends `ViewModel`
+from the multiplatform [AndroidX Lifecycle library](https://developer.android.com/topic/libraries/architecture/lifecycle)
+to use Android's lifecycle mechanism and configuration tracking:
 
 ```kotlin
 import androidx.lifecycle.ViewModel
@@ -353,8 +350,7 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
 
 ### Add internet access permission
 
-To access the internet, the Android application needs the appropriate permission. Since all network requests are made from the
-shared module, it makes sense to add the internet access permission to its manifest.
+To access the internet, the Android application needs the appropriate permission:
 
 Update your `androidApp/src/main/AndroidManifest.xml` file with the access permission:
 
@@ -382,13 +378,16 @@ The module is already imported in the `ContentView.swift` file with the `import 
 ### Introducing a ViewModel
 
 In `iosApp/ContentView.swift`, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
-Call the `startObserving()` function within a `task()` call to support concurrency:
+Call the `startObserving()` function within a [`task()`](https://developer.apple.com/documentation/swiftui/view/task(name:priority:file:line:_:))
+modifier to support concurrency:
 
 ```swift
 import SwiftUI
 import SharedLogic
 
 struct ContentView: View {
+    // Subscribes the view to the view model
+    // that is declared below as ObservableObject
     @ObservedObject private(set) var viewModel: ViewModel
 
     var body: some View {
@@ -426,7 +425,7 @@ struct ListView: View {
 
 SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`ContentView`):
 
-* `ContentView.ViewModel` is declared as an `ObservableObject`.
+* The `ContentView.ViewModel` class is declared as an `ObservableObject`.
   The `@ObservedObject` wrapper for the `viewModel` property in `ContentView` subscribes the view to the view model.
 * The `greetings` property of the view model uses the `@Published` wrapper.
   It allows SwiftUI to automatically update the view when this property changes.
@@ -436,7 +435,7 @@ using one of the available KMP libraries that allow that.
 
 ### Choose a library to consume flows from iOS
 
-In this tutorial, you can use [SKIE](https://skie.touchlab.co/) the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library
+In this tutorial, you can use [SKIE](https://skie.touchlab.co/) or the [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) library
 to help you work with flows in iOS.
 Both are open-source solutions that support cancellation and generics with flows,
 which the Kotlin/Native compiler doesn't yet provide by default:
@@ -458,7 +457,7 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
 >
 {style="note"}
 
-1. Add the KMP-NativeCoroutines version and plugin reference to the Gradle version catalog:
+1. Add the KMP-NativeCoroutines version and plugin reference to the Gradle [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
 
     ```toml
     [versions]
@@ -543,9 +542,9 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
 6. Add "KMPNativeCoroutinesAsync" and "KMPNativeCoroutinesCore" to your app as shown, then click **Add Package**:
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
-7. Return to IntelliJ IDEA and select the **Tools | Swift Package Manager | Resolve Dependencies menu item**.
+7. Return to IntelliJ IDEA and select **Tools | Swift Package Manager | Resolve Dependencies**.
    This creates a `Package.resolved` lock file that is used by the Kotlin build
-   and can be commited to the repository to keep the versions of Swift packages consistent.  
+   and can be committed to the repository to keep the versions of Swift packages consistent.  
 
 #### Consume the flow using the KMP-NativeCoroutines library
 
@@ -568,8 +567,9 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
    The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
 every time the flow emits a value.
 
-2. Make sure `ViewModel` is marked with the `@MainActor` annotation. The annotation ensures that all asynchronous operations within
-   `ViewModel` run on the main thread to comply with the Kotlin/Native requirement:
+2. Make sure `ViewModel` is marked with the `@MainActor` annotation.
+   The annotation ensures that all asynchronous operations within `ViewModel` run on the main thread
+   to comply with the Kotlin/Native requirement:
 
     ```Swift
     // ...
