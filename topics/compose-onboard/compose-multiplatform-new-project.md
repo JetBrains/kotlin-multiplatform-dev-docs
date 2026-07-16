@@ -105,7 +105,7 @@ To get started, implement a new `App()` composable with the basic layout:
 
    When you run your application and click the button, the app displays the hardcoded time — 13:30.
 
-3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "🔥desktopApp"
+3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "desktopApp [hot] 🔥"
    run configuration.
    The app works, but the window looks mismatched with the UI:
 
