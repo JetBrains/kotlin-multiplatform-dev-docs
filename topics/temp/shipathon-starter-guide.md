@@ -3,7 +3,7 @@
 ## Where to start
 
 1. Learn about Kotlin Multiplatform (KMP) and Compose Multiplatform (CMP):
-   What it is, [advantages and use cases](kmp-overview.md).
+   What they are, their [advantages and use cases](kmp-overview.md).
 2. [Try KMP out on a sample project](quickstart.md) to see how it's organized and how it runs on different platforms.
 
 ## Learn KMP basics
@@ -17,7 +17,7 @@ The basics include:
 * [Adding a dependency to a KMP project](multiplatform-add-dependencies.md).
     * For a practical example of multiplatform and platform-specific dependency organization, see our [sample](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main).
     * The tutorial that leads to the final state of that sample is [available in the documentation](multiplatform-upgrade-app.md).
-* If you were already familiar with KMP, make sure you're up to date with the [recommended project structure](multiplatform-project-recommended-structure.md)
+* If you are already familiar with KMP, make sure you're up to date with the [recommended project structure](multiplatform-project-recommended-structure.md)
   for an average project.
   It takes into account how the release of Android Gradle plugin 9.0 affected the requirements for a KMP project
   and covers:
@@ -39,12 +39,12 @@ There are different ways to share code in a KMP project, with some platform spec
     * use multiplatform libraries when possible
     * use the expect/actual mechanism when no multiplatform library is available.
 * While calling shared Kotlin from Android Kotlin is relatively straightforward, iOS interoperability takes some getting to know it:
-    * [Learn how to integrate your shared code with the iOS app](https://kotlinlang.org/docs/multiplatform/multiplatform-ios-integration-overview.html#local-integration) (all samples referenced in this doc have examples of iOS integration set up).
+    * [Learn how to integrate your shared code with the iOS app](multiplatform-ios-integration-overview.md#local-integration) (all samples referenced in this doc have examples of iOS integration set up).
       > CocoaPods is generally being phased out in favor of Swift Package Manager and is not something we recommend using in new projects.
       >
       {style="note"}   
-    * Check out the [sample and tutorial](https://kotlinlang.org/docs/multiplatform/multiplatform-upgrade-app.html#add-more-dependencies) that includes making Kotlin coroutines work with iOS.
-    * See the guide on using existing [SPM packages in your KMP iOS app](multiplatform-spm-import.md)
+    * Check out the [sample and tutorial](multiplatform-upgrade-app.md#add-more-dependencies) that includes making Kotlin coroutines work with iOS.
+    * See the guide on using existing [SPM packages in your KMP iOS app](multiplatform-spm-import.md).
     * Read the [in-depth explanation of calling Swift / ObjC from Kotlin](https://kotlinlang.org/docs/native-objc-interop.html) and vice versa.
     * Learn about the more straightforward [Swift export](https://kotlinlang.org/docs/native-swift-export.html) approach (currently in Alpha).
     * In general, the less interop, the better, so for a smoother experience we recommend relying on Compose Multiplatform to build the bulk of your UI for all platforms.
