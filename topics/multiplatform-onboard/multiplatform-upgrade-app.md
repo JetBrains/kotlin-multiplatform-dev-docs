@@ -109,6 +109,11 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
+### Check out the general dependency guide
+
+For more general information on how to manage multiplatform dependencies,
+see [](multiplatform-add-dependencies.md).
+
 ## Set up API requests
 
 You'll use the [Launch Library API](https://github.com/r-spacex/SpaceX-API/tree/master/docs#rspacex-api-docs) to retrieve data,
@@ -275,98 +280,40 @@ It will store the data received from the SpaceX API and make it available to the
 
 Create the view model class in the Android platform code:
 
-1. In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends Android's `ViewModel`
-   to use the platform's lifecycle mechanism and configuration tracking:
+In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends Android's `ViewModel`
+to use the platform's lifecycle mechanism and configuration tracking:
 
-    ```kotlin
-    import androidx.lifecycle.ViewModel
-    import androidx.lifecycle.viewModelScope
-    import kotlinx.coroutines.flow.MutableStateFlow
-    import kotlinx.coroutines.flow.StateFlow
-    import kotlinx.coroutines.flow.update
-    import kotlinx.coroutines.launch
-    
-    class MainViewModel: ViewModel() {
-        // StateFlow extends the Flow interface
-        // but has a single value or state
-        val greetingList: StateFlow<List<String>>
-            field = MutableStateFlow<List<String>>(listOf())
-    
-        // Collects all strings emitted by a Greeting().greet() call
-        init {
-            // Wraps the call to the suspending Flow.collect() function.
-            // The launch() coroutine is used within the ViewModel scope,
-            // so it will run only in correct phases of the lifecycle
-            viewModelScope.launch {
-                // Appends each new phrase to greetingList
-                Greeting().greet().collect { phrase ->
-                    greetingList.update { list -> list + phrase }
-                }
+```kotlin
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+class MainViewModel: ViewModel() {
+    // StateFlow extends the Flow interface
+    // but has a single value or state
+    val greetingList: StateFlow<List<String>>
+        field = MutableStateFlow<List<String>>(listOf())
+
+    // Collects all strings emitted by a Greeting().greet() call
+    init {
+        // Wraps the call to the suspending Flow.collect() function.
+        // The launch() coroutine is used within the ViewModel scope,
+        // so it will run only in correct phases of the lifecycle
+        viewModelScope.launch {
+            // Appends each new phrase to greetingList
+            Greeting().greet().collect { phrase ->
+                greetingList.update { list -> list + phrase }
             }
         }
     }
-    ```
-   
-    The `greetingList` property is declared with an [explicit backing field](https://kotlinlang.org/docs/properties.html#explicit-backing-fields)
-    to make sure that it is read-only outside the class and mutable internally.
+}
+```
 
-2. Create a `greetingList` value of the [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
-   type and its backing property:
-
-    ```kotlin
-    import kotlinx.coroutines.flow.MutableStateFlow
-    import kotlinx.coroutines.flow.StateFlow
-    
-    class MainViewModel : ViewModel() {
-        private val _greetingList = MutableStateFlow<List<String>>(listOf())
-        val greetingList: StateFlow<List<String>> get() = _greetingList
-    }
-    ```
-
-   * `StateFlow` here extends the `Flow` interface but has a single value or state.
-   * The private backing property `_greetingList` ensures that only clients of this class can access the read-only `greetingList` property.
-
-3. In the `init` function of the view model, collect all the strings from the `Greeting().greet()` flow:
-
-    ```kotlin
-   import androidx.lifecycle.viewModelScope
-   import kotlinx.coroutines.launch
-   
-   class MainViewModel : ViewModel() {
-       private val _greetingList = MutableStateFlow<List<String>>(listOf())
-       val greetingList: StateFlow<List<String>> get() = _greetingList
-       
-       init {
-           viewModelScope.launch {
-               Greeting().greet().collect { phrase ->
-                    //...
-               }
-           }
-       }
-    }
-    ```
-
-   Since the `Flow.collect()` function is suspending, the `launch` coroutine is used within the view model's scope.
-   This means that the launch coroutine will run only during the correct phases of the view model's lifecycle.
-
-4. Inside the `collect` trailing lambda, append the collected `phrase` to the list of phrases in `_greetingList` using
-   the `update()` function:
-
-    ```kotlin
-    import kotlinx.coroutines.flow.update
-   
-    class MainViewModel : ViewModel() {
-        //...
-   
-        init {
-            viewModelScope.launch {
-                Greeting().greet().collect { phrase ->
-                    _greetingList.update { list -> list + phrase }
-                }
-            }
-        }
-    }
-    ```
+The `greetingList` property is declared with an [explicit backing field](https://kotlinlang.org/docs/properties.html#explicit-backing-fields)
+to make sure that it is read-only outside the class and mutable internally.
 
 ### Use the view model's flow
 
@@ -484,7 +431,8 @@ SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`Conten
 * The `greetings` property of the view model uses the `@Published` wrapper.
   It allows SwiftUI to automatically update the view when this property changes.
 
-Now you need to implement the `startObserving()` function to consume flows.
+Now you need to implement the `startObserving()` function to consume flows
+using one of the available KMP libraries that allow that.
 
 ### Choose a library to consume flows from iOS
 
