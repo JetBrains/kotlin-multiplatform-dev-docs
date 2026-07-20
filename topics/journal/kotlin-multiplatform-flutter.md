@@ -74,7 +74,7 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     <tr>
         <td><b>Packages, dependencies, and ecosystem</b></td>
         <td>Packages are available from <a href="https://central.sonatype.com/">Maven Central</a> and other repositories, including
-            <p><a href="http://klibs.io">klibs.io</a> (Alpha version), which is designed to simplify the search for KMP libraries.</p>
+            <p><a href="http://klibs.io">klibs.io</a>, which is designed to simplify the search for KMP libraries.</p>
             <p>This <a href="https://github.com/terrakok/kmp-awesome">list</a> contains some of the most popular KMP libraries and tools.</p> </td>
         <td>Packages are available from <a href="https://pub.dev/">Pub.dev.</a></td>
     </tr>
