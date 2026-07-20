@@ -72,7 +72,7 @@
             <li>Easily use platform-specific views like MapKit or AVFoundation straight from your Kotlin code.</li>
         </list>
 
-        <p><a href="https://kotlinlang.org/multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="600"/></a></p>
+        <p><a href="https://kotlinlang.org/multiplatform/"><img src="discover-kmp.svg" alt="Discover Kotlin Multiplatform" width="600" style="block"/></a></p>
 
         <p><b>Is KMP merely another cross-platform abstraction layer?</b></p>
 
@@ -128,7 +128,7 @@
     <chapter title="Myth: Kotlin Multiplatform is a niche or risky technology" id="myth-kotlin-multiplatform-is-a-niche-or-risky-technology">
         <p>You might think that Kotlin Multiplatform is experimental or unsuitable for commercial use, especially if you haven't seen it in action. But KMP is <a href="https://kotlinlang.org/case-studies/?type=multiplatform&amp;platforms=ios">already employed</a> in real-world, large-scale iOS applications by well-known companies such as <a href="https://www.youtube.com/watch?v=HSIhkB5bGJs">McDonald's</a>, <a href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Philips</a>, <a href="https://2025.kotlinconf.com/talks/812400/">Duolingo</a>, <a href="https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d">Booking.com</a>, and <a href="https://youtu.be/5lkZj4v4-ks?si=OHg0v60urRqxuZZi">Google</a>. According to the Kotlin Multiplatform Survey 2025, KMP has crossed the trust threshold and is now seen as production-viable, with ~70% of plugin users satisfied or very satisfied, and ~80% using Compose Multiplatform.</p>
 
-        <p><a href="https://kotlinlang.org/case-studies/?type=multiplatform&amp;platforms=ios"><img src="kmp-use-cases-1.svg" alt="Explore more Kotlin Multiplatform case studies" width="600"/></a></p>
+        <p><a href="https://kotlinlang.org/case-studies/?type=multiplatform&amp;platforms=ios"><img src="kmp-use-cases-1.svg" alt="Explore more Kotlin Multiplatform case studies" width="600" style="block"/></a></p>
 
         <p>KMP is supported by JetBrains, the developers of Kotlin. It's not a side project but a strategic investment that will continue to evolve with robust tooling, regular updates, and growing ecosystem support.</p>
 
@@ -259,7 +259,7 @@
         <p>Importantly, there's interoperability between Compose Multiplatform and traditional iOS UIs, meaning you can embed shared components alongside native views or gradually adopt them over time. This allows teams to evolve their UI strategy without committing to a single approach upfront.</p>
     </chapter>
 
-    <p><a href="https://kotlinlang.org/compose-multiplatform/"><img src="explore-compose.svg" alt="Explore Compose Multiplatform" width="600"/></a></p>
+    <p><a href="https://kotlinlang.org/compose-multiplatform/"><img src="explore-compose.svg" alt="Explore Compose Multiplatform" width="600" style="block"/></a></p>
 
     <chapter title="Myth: Adopting Kotlin Multiplatform means no more Swift" id="myth-adopting-kotlin-multiplatform-means-no-more-swift">
         <p>A common fear is that introducing Kotlin Multiplatform will render Swift obsolete. But KMP isn't here to replace it – Swift will remain an essential component of iOS development.</p>
@@ -299,7 +299,7 @@
         <p>Choose one isolated problem, keep the scope restricted, and regard KMP as an addition to the project rather than a reset.</p>
     </chapter>
 
-    <p><a href="get-started.topic"><img src="get-started-with-kmp.svg" alt="Get Started with Kotlin Multiplatform" width="600"/></a></p>
+    <p><a href="get-started.topic"><img src="get-started-with-kmp.svg" alt="Get Started with Kotlin Multiplatform" width="600" style="block"/></a></p>
 
     <chapter title="When Kotlin Multiplatform makes sense (and when it doesn't)" id="when-kotlin-multiplatform-makes-sense-and-when-it-doesnt">
         <p>Kotlin Multiplatform makes sense when there is significant overlap between iOS and Android logic, and this duplication is beginning to bite. It's especially valuable for teams that want to maintain a native iOS experience while sharing business rules, networking, data processing, or domain logic across platforms.</p>
