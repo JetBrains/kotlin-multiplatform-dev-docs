@@ -171,7 +171,7 @@ You can add dependencies on libraries that have adopted Kotlin Multiplatform tec
 as [SQLDelight](https://github.com/cashapp/sqldelight). The authors of these libraries usually provide guides for adding
 their dependencies to your project.
 
-> Explore the available Kotlin Multiplatform libraries on the [JetBrains' search platform](https://klibs.io/).
+> Explore the available Kotlin Multiplatform libraries on [klibs.io](https://klibs.io/), a search platform maintained by JetBrains.
 >
 {style="tip"}
 

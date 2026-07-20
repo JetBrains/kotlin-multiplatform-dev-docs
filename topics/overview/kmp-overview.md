@@ -97,7 +97,7 @@ Dig into technical details
 
 Thousands of multiplatform libraries are available for networking, storage, dependency injection, testing, UI, serialization, and more.
 
-Browse them on [klibs.io](https://klibs.io), JetBrains' search platform for Kotlin Multiplatform libraries.
+Browse them on [klibs.io](https://klibs.io), a search platform maintained by JetBrains.
 
 ## Adopt Kotlin Multiplatform at scale
 

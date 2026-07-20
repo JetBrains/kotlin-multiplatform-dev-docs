@@ -48,7 +48,7 @@ For example, `kotlinx.coroutines` is a Kotlin Multiplatform library that support
 platform-specific part that converts `kotlinx.coroutines` concurrent primitives to JDK concurrent primitives,
 like `fun CoroutinesDispatcher.asExecutor(): Executor`. This additional part of the API isn't available in `commonMain`.
 
-To explore what Kotlin Mutliplatform libraries are available, see [klibs.io](https://klibs.io).
+To explore available Kotlin Mutliplatform libraries, see [klibs.io](https://klibs.io).
 
 ## Targets
 
