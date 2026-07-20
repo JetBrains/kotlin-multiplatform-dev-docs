@@ -111,7 +111,7 @@ Let's define a ViewModel and wire it into a composable:
           field = MutableStateFlow(OrderUiState())
 
       fun setQuantity(n: Int) {
-          field.update { it.copy(quantity = n, price = "$${n * 2}.00") }
+          uiState.update { it.copy(quantity = n, price = "$${n * 2}.00") }
       }
    }
    ```
