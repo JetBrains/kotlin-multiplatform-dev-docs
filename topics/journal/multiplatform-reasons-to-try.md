@@ -69,7 +69,7 @@ These platforms include Android, iOS, desktop, web (JavaScript and WebAssembly),
 _Quizlet_, a popular educational platform that aids learning and practice through quizzes, 
 serves as another case study highlighting the benefits of Kotlin Multiplatform.
 The platform has approximately 50 million active users per month, with 10 million of them on Android. 
-The app ranks inside the top 10 in the education category on Apple's App Store.
+The app ranks inside the top 10 in the education category on Apple App Store.
 
 The Quizlet team experimented with technologies like JavaScript, React Native, C++, Rust, and Go, 
 but faced various challenges, including performance, stability, and varying implementations across platforms. 

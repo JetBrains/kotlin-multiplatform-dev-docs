@@ -786,8 +786,8 @@ you can include a snippet of raw XML as a workaround. This XML will be appended 
 
 1. Define a custom URL scheme in the `build.gradle.kts` file:
 
-  ``` kotlin
-  compose.desktop {
+    ``` kotlin
+    compose.desktop {
       application {
           mainClass = "MainKt"
           nativeDistributions {
@@ -801,9 +801,9 @@ you can include a snippet of raw XML as a workaround. This XML will be appended 
               }
           }
       }
-  }
-  
-  val macExtraPlistKeys: String
+    }
+    
+    val macExtraPlistKeys: String
       get() = """
         <key>CFBundleURLTypes</key>
         <array>
@@ -817,23 +817,23 @@ you can include a snippet of raw XML as a workaround. This XML will be appended 
           </dict>
         </array>
       """
-  ```
-  {initial-collapse-state="collapsed" collapsible="true" collapsed-title="infoPlist { extraKeysRawXml = macExtraPlistKeys"}
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="infoPlist { extraKeysRawXml = macExtraPlistKeys"}
 
 2. Use the `java.awt.Desktop` class to set up a URI handler in the `src/main/main.kt` file:
 
-  ``` kotlin 
-  import androidx.compose.material.MaterialTheme
-  import androidx.compose.material.Text
-  import androidx.compose.runtime.getValue
-  import androidx.compose.runtime.mutableStateOf
-  import androidx.compose.runtime.setValue
-  import androidx.compose.ui.window.singleWindowApplication
-  import java.awt.Desktop
-  
-  fun main() {
+    ``` kotlin 
+    import androidx.compose.material.MaterialTheme
+    import androidx.compose.material.Text
+    import androidx.compose.runtime.getValue
+    import androidx.compose.runtime.mutableStateOf
+    import androidx.compose.runtime.setValue
+    import androidx.compose.ui.window.singleWindowApplication
+    import java.awt.Desktop
+    
+    fun main() {
       var text by mutableStateOf("Hello, World!")
-  
+    
       try {
           Desktop.getDesktop().setOpenURIHandler { event ->
               text = "Open URI: " + event.uri
@@ -841,15 +841,15 @@ you can include a snippet of raw XML as a workaround. This XML will be appended 
       } catch (e: UnsupportedOperationException) {
           println("setOpenURIHandler is unsupported")
       }
-  
+    
       singleWindowApplication {
           MaterialTheme {
               Text(text)
           }
       }
-  }
-  ```
-  {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Desktop.getDesktop().setOpenURIHandler { event ->"}
+    }
+    ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Desktop.getDesktop().setOpenURIHandler { event ->"}
 
 3. Execute the `runDistributable` task: `./gradlew runDistributable`.
 

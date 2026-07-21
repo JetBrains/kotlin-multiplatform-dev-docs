@@ -18,7 +18,7 @@ This also makes it possible to release features simultaneously on multiple platf
 it easier to transfer knowledge between team members, and reduce duplication of effort between dedicated platform teams.
 
 In addition to faster time to market, **55%** users reported improved collaboration after adopting KMP
-and **65%** of teams reported improved performance and quality, (in the KMP Survey Q2 2024).
+and **65%** of teams reported improved performance and quality (in the KMP Survey Q2 2024).
 
 KMP is used in production by organizations of all sizes, from startups to global enterprises.
 Companies like Google, Duolingo, Forbes, Philips, McDonald's, Bolt, H&M, Baidu, Kuaishou, and Bilibili have adopted KMP for its flexibility, native performance, ability to deliver native user experiences,

@@ -186,7 +186,7 @@ the **[app name]:desktopApp** Gradle project with the following command:
 hotRun --mainClass "com.example.demo.MainKt"
 ```
 
-With this configuration you can run the JVM desktop app:
+With this configuration, you can run the JVM desktop app:
 
 ![JVM app ran on a virtual device](run-desktop-app.png){width=600}
 

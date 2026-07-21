@@ -273,7 +273,7 @@ every `*Test` source set will be compiled with the `kotlinx.coroutines-*:1.8.0` 
 Contrary to single-platform projects, Kotlin Multiplatform projects require multiple compiler launches to build all the artifacts.
 Each compiler launch is a _Kotlin compilation_.
 
-For example, here's how binaries for iPhone devices are generate during this Kotlin compilation mentioned earlier:
+For example, here's how binaries for iPhone devices are generated during this Kotlin compilation mentioned earlier:
 
 ![Kotlin compilation for iOS](ios-compilation-diagram.svg){width=700}
 

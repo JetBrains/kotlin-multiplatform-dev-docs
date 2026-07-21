@@ -10,7 +10,7 @@ for entering a username and password. The credentials are validated and saved to
 
 To make your application work on both iOS and Android,
 you'll first make your code cross-platform by moving some of it to a shared module.
-After that you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
+After that, you'll use your cross-platform code in the Android application, and then you'll use the same code in a new iOS application.
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [create a cross-platform application from scratch](quickstart.md)
 > first.
@@ -33,7 +33,7 @@ After that you'll use your cross-platform code in the Android application, and t
    ```
 
    The `master` branch contains the project's initial state – a simple Android application.
-   To see the final state, with the iOS application and the shared module, switch to the `final` branch.
+   To see the final state with the iOS application and the shared module, switch to the `final` branch.
    
 3. Switch to the **Project** view:
 

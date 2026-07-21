@@ -101,7 +101,7 @@ The other platforms follow the same pattern, with variations in the values of `f
 
 ## Add a new platform
 
-Now that you're familiar with how shared and platform-specific code work in the template, let's extend the project by adding support for an additional platform.
+Now that you're familiar with how shared and platform-specific code works in the template, let's extend the project by adding support for an additional platform.
 
 Configure support for the [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-overview.html) platform by using 
 the [expect / actual mechanism](multiplatform-connect-to-apis.md#expected-and-actual-functions-and-properties),

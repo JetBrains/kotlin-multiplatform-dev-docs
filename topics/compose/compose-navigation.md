@@ -202,7 +202,7 @@ You can:
     (by adding a `popUpTo()` argument to a `.navigate()` call).
 * Process popping an empty back stack (which would land the user on an empty screen).
 * Maintain several back stacks for different parts of the app.
-    For example, for apps with bottom navigation you can maintain separate nested graphs for each tab
+    For example, for apps with bottom navigation, you can maintain separate nested graphs for each tab
     while saving and restoring navigation states when switching between tabs.
     Alternatively, you can create separate NavHosts for each tab, which makes the setup a bit more complex but
     may be easier to keep track of in some cases.

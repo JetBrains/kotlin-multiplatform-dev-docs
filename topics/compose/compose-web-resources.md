@@ -27,9 +27,9 @@ For example, to enable in-browser preloading of a font:
 
 1. Build your application's web distribution:
 
-```console
-   ./gradlew :shared:wasmJsBrowserDistribution
-```
+    ```console
+       ./gradlew :shared:wasmJsBrowserDistribution
+    ```
 
 2. Find the required resource in the generated `dist` directory and save the path.
 3. Open the `wasmJsMain/resources/index.html` file and add a `<link>` tag inside the `<head>` element.

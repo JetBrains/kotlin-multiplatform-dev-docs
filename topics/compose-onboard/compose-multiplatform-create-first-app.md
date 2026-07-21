@@ -193,7 +193,7 @@ you'll need to set the Team ID associated with your [Apple ID](https://support.a
 
 ##### Set your Team ID
 
-To set new Team ID for your project for the first time, open the project in Xcode
+To set a new Team ID for your project for the first time, open the project in Xcode
 (**File | Open Project in Xcode**):
 
 1. In the Project navigator on the left-hand side, select **iosApp**.

@@ -185,7 +185,7 @@ it from Compose. This way, Compose renders detail screens only when invoked from
 Two flows need to be set up:
 
 * Detail pushes → Swift. Whenever a non-root route lands on the back stack, 
-  forward it through `onNavigate` and remove it from Compose's back stack so SwiftUI's `NavigationStack` becomes the single source of truth.
+  forward it through `onNavigate` and remove it from Compose's back stack, so SwiftUI's `NavigationStack` becomes the single source of truth.
 * Tab switches → Swift. When the top-level route changes from inside Compose, notify Swift via `onActivate` so the SwiftUI `TabView` selection stays in sync.
 
 This step is specific to the Navigation 3 library. 

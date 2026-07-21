@@ -141,7 +141,7 @@ To set up the publishing of an XCFramework:
     curl <downloadable link to the uploaded XCFramework ZIP file>
     ```
 
-4. If your project consumes SwiftPM dependencies, starting with Kotin %kotlinEapVersion%
+4. If your project consumes SwiftPM dependencies, starting with Kotlin %kotlinEapVersion%
    the `assembleSharedXCFramework` Gradle task generates a `Package.swift` file next to the XCFramework.
 
    If that's not the case, you can create a `Package.swift` file manually, using the following template:
