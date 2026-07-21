@@ -3,17 +3,7 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-<tldr>
-    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
-    <br/>   
-    <p>This is the third part of the <strong>Create a Kotlin Multiplatform app with shared logic and native UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="multiplatform-create-first-app.md">Create your Kotlin Multiplatform app</a><br/>
-        <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="multiplatform-update-ui.md">Update the user interface</a><br/>
-        <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add dependencies</strong><br/>
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share more logic<br/>
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step"/> Wrap up your project<br/>
-    </p>
-</tldr>
+<!-- TODO combine with multiplatform-add-dependencies.md -->
 
 You've created and tweaked your first Kotlin Multiplatform project!
 Now let's learn how to add dependencies to third-party libraries, which is necessary for building successful cross-platform applications.
