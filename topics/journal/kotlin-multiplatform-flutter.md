@@ -69,12 +69,12 @@ Our dedicated article outlines the relationship between [Compose Multiplatform a
     <tr>
         <td><b>Flexibility and code reuse</b></td>
         <td>Share whichever part of your codebase you want to, including business logic and/or UI, from 1% to 100%.</td>
-        <td>Сontrol every pixel of an application to create customized and adaptive designs with 100% code sharing across all platforms.</td>
+        <td>Control every pixel of an application to create customized and adaptive designs with 100% code sharing across all platforms.</td>
     </tr>
     <tr>
         <td><b>Packages, dependencies, and ecosystem</b></td>
         <td>Packages are available from <a href="https://central.sonatype.com/">Maven Central</a> and other repositories, including
-            <p><a href="http://klibs.io">klibs.io</a>, which is designed to simplify the search for KMP libraries.</p>
+            <p><a href="https://klibs.io">klibs.io</a>, which is designed to simplify the search for KMP libraries.</p>
             <p>This <a href="https://github.com/terrakok/kmp-awesome">list</a> contains some of the most popular KMP libraries and tools.</p> </td>
         <td>Packages are available from <a href="https://pub.dev/">Pub.dev.</a></td>
     </tr>

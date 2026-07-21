@@ -60,8 +60,8 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 
 <img src="compose-mouse-click-listeners.animated.gif" alt="Mouse click listeners" width="600" preview-src="compose-mouse-click-listeners.png"/>
 
-The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently, 
-see the [`Modifier.onClick`](#experimental-onclick-handlers) section.
+The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently,
+see the [`Modifier.onClick`](#onclick-handlers) section.
 
 ## Move listeners
 
@@ -211,7 +211,7 @@ fun main() = singleWindowApplication(title = "Mouse scroll listeners") {
 
 <img src="compose-mouse-scroll-listeners.animated.gif" alt="Mouse scroll listeners" width="600" preview-src="compose-mouse-scroll-listeners.png"/>
 
-## Experimental onClick handlers
+## Experimental onClick handlers {id="onclick-handlers"}
 
 > The `onClick` modifier is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels) and supported in desktop projects only. Opt-in is required (see details below),
 > and you should use it only for evaluation purposes.
@@ -517,7 +517,7 @@ fun main() = singleWindowApplication(title = "Raw AWT events") {
 
 ## Listening for raw events in common code via pointerInput
 
-In the snippets above we use the `Modifier.onPointerEvent` function, which is a helper function that subscribes to a type of pointer events. It is a new and short variant of the `Modifier.pointerInput` function. 
+In the snippets above, we use the `Modifier.onPointerEvent` function, which is a helper function that subscribes to a type of pointer events. It is a new and short variant of the `Modifier.pointerInput` function. 
 It is currently experimental and desktop-only, so you can't use it in common code.
 
 If you need to subscribe to events in common code, or if you need a stable API, you can use the `Modifier.pointerInput` function:

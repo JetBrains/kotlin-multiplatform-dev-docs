@@ -225,7 +225,7 @@ The configuration is complex because Ktor-based and OkHttp-based implementations
 _in the same Gradle project_. In many cases, it's possible to extract those parts into separate Gradle projects.
 Here's a general outline of such as a refactoring:
 
-1. Replace two duplicated targets from the original project with a single target. If you had a shared source set between
+1. Replace two duplicated targets from the original project with a single target. If you have a shared source set between
    these targets, move its sources and configuration to the default source set of the newly created target:
 
     ```kotlin

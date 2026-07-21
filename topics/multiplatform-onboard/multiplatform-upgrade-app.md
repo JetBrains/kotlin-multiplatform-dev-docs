@@ -618,7 +618,7 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 7. Return to IntelliJ IDEA and select the **Tools | Swift Package Manager | Resolve Dependencies menu item**.
    This creates a `Package.resolved` lock file that is used by the Kotlin build
-   and can be commited to the repository to keep the versions of Swift packages consistent.  
+   and can be committed to the repository to keep the versions of Swift packages consistent.  
 
 #### Consume the flow using the KMP-NativeCoroutines library
 

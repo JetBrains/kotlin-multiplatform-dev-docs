@@ -447,7 +447,7 @@ kotlin {
 }
 ```
 
-If you encountered any of these issues, need to keep `isStatic=false`, or if changing this property didn't help resolve
+If you encountered any of these issues, you need to keep `isStatic=false`, or if changing this property didn't help resolve
 build failures, let us know in our Slack channel. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
 and join [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09TW68099C).
 

@@ -97,7 +97,7 @@ To make the desktop app build script work:
 
 4. To add the necessary dependencies on other modules, copy existing dependencies from the
    `commonMain.dependencies {}` and `jvmMain.dependencies {}` blocks
-   of the `composeApp` build script. In this example the end result should look like this:
+   of the `composeApp` build script. In this example, the end result should look like this:
 
    ```kotlin
    kotlin {
@@ -265,7 +265,7 @@ Here are the necessary changes:
     androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
     ```
 
-2. In the `composeApp/build.gradle.kts` file, add the plugin the plugins necessary for the shared UI module:
+2. In the `composeApp/build.gradle.kts` file, add the plugins necessary for the shared UI module:
 
     ```kotlin
     plugins {
@@ -304,7 +304,7 @@ Here are the necessary changes:
 ### (Optional) Separate shared logic and shared UI {collapsible="true"}
 
 If some of the targets in your project implement native UI, it may be a good idea to separate common code
-into `sharedLogic` and a `sharedUI` modules, so that app modules with native UI don't need to depend on Compose Multiplatform
+into `sharedLogic` and `sharedUI` modules, so that app modules with native UI don't need to depend on Compose Multiplatform
 to use shared code.
 
 Below is an example of how you can approach this, based on the same sample app.

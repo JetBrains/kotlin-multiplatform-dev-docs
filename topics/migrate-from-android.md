@@ -263,9 +263,9 @@ This suggests the following sequence, for example:
 
 1. `:core:data`
 2. `:core:data-testing`
-4. `:core:domain`
-5. `:core:domain-testing`
-1. `:core:designsystem` — while it doesn't have module dependencies, this is a UI helper module,
+3. `:core:domain`
+4. `:core:domain-testing`
+5. `:core:designsystem` — while it doesn't have module dependencies, this is a UI helper module,
    so we tackle it only when we're ready to move UI code into a shared module. 
 
 ### Migrate :core:data

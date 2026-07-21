@@ -5,7 +5,7 @@ to other platforms besides Android.
 As shown on the [Android Developers website](https://developer.android.com/kotlin/multiplatform),
 many Jetpack libraries (like `androidx.annotation`) are published by the Android team fully multiplatform
 and can be used in KMP projects as is.
-Others, such as, Compose itself, Navigation, Lifecycle, and ViewModel, need additional support to work in common code.
+Others, such as Compose itself, Navigation, Lifecycle, and ViewModel, need additional support to work in common code.
 
 The Compose Multiplatform team at JetBrains produces artifacts for such libraries for platforms besides Android,
 and then publishes them all together with original Android artifacts under a single group ID.
