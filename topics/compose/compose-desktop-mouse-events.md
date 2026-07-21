@@ -60,8 +60,8 @@ fun main() = singleWindowApplication(title = "Mouse clicks") {
 
 <img src="compose-mouse-click-listeners.animated.gif" alt="Mouse click listeners" width="600" preview-src="compose-mouse-click-listeners.png"/>
 
-The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently, 
-see the [section](#onclick-handlers) about `Modifier.onClick`.
+The `combinedClickable` modifier supports only the primary button (left mouse button) and touch events. If you need to handle buttons differently,
+see the [`Modifier.onClick`](#onclick-handlers) section.
 
 ## Move listeners
 
