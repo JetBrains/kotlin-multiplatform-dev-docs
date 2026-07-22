@@ -11,50 +11,54 @@ make them draggable, adapt size, change position, and so on.
 [//]: # (TODO update version for stable release)
 
 Starting with Compose Multiplatform 1.12.0-beta02, a redesigned `WindowState` and `DialogState` API is available 
-in the `androidx.compose.ui.window.v2` sub-package.
+in the `androidx.compose.ui.window.v2` subpackage.
+
+The new API separates requesting a window state from observing the state actually applied by the window manager.
 It coexists with the existing API described in the rest of this page, so you can migrate individual windows at your own pace. 
-The snippets in this section illustrate individual API features.
+The examples in this section demonstrate the main API features.
 
-### Requesting and observing state
+### Specifying and observing state
 
-The new API distinguishes between requesting a change to the window and observing its actual state.
+The new API explicitly separates specifying the desired state from observing the actual state.
 
-To request a change of the window state, you can:
-* pass an initial provider to `rememberWindowState()`:
-    ```kotlin
-    val windowState = rememberWindowState(
-        initialScreenProvider = { defaultScreen },
-        initialBoundsProvider = WindowBoundsProvider(
-            positionProvider = 
-                WindowPositionProvider.AlignedToScreen(Alignment.Center),
-            sizeProvider = 
-                WindowSizeProvider.Fixed(DpSize(800.dp, 600.dp))
-        )
+To specify the initial state of a window, pass providers to `rememberWindowState()`:
+
+```kotlin
+val windowState = rememberWindowState(
+    initialScreenProvider = { defaultScreen },
+    initialBoundsProvider = WindowBoundsProvider(
+        positionProvider = 
+            WindowPositionProvider.AlignedToScreen(Alignment.Center),
+        sizeProvider = 
+            WindowSizeProvider.Fixed(DpSize(800.dp, 600.dp))
     )
-    ```
+)
+```
 
-* or call the requesting method on `WindowState` later:
-    ```kotlin
-    windowState.requestScreen { defaultScreen }
-    windowState.requestBounds(
-        WindowBoundsProvider(
-            positionProvider = 
-                WindowPositionProvider.AlignedToScreen(Alignment.TopStart),
-            sizeProvider = 
-                WindowSizeProvider.Fixed(DpSize(1024.dp, 768.dp))
-        )
+To request a state change after the window has been created, call the corresponding method on `WindowState`:
+
+```kotlin
+windowState.requestScreen { defaultScreen }
+windowState.requestBounds(
+    WindowBoundsProvider(
+        positionProvider = 
+            WindowPositionProvider.AlignedToScreen(Alignment.TopStart),
+        sizeProvider = 
+            WindowSizeProvider.Fixed(DpSize(1024.dp, 768.dp))
     )
-    ```
+)
+```
 
-To observe the actual screen and bounds of a window (which may differ from what was requested,
-and may change over time), read `WindowState.screenId` and `WindowState.bounds`:
+Applying a request is asynchronous. The windowing system may adjust the requested state, and the actual state may change later,
+for example, when you move or resize the window.
+Observe the actual state of a window through `WindowState.screenId` and `WindowState.bounds`:
 
 ```kotlin
 Text("Current screen: ${windowState.screenId}")
 Text("Current bounds: ${windowState.bounds}")
 ```
 
-The same request-and-observe model is available for dialogs through `DialogState` and `rememberDialogState()`.
+The same explicitly asynchronous model is available for dialogs through `DialogState` and `rememberDialogState()`.
 
 ### Choosing a screen
 
@@ -62,7 +66,8 @@ You can request the screen on which a window should appear either by passing an 
 to `rememberWindowState()` or by calling `WindowState.requestScreen` later.
 The screen the window is actually placed on is observable via `WindowState.screenId`.
 
-For example, the window will try to appear on a screen whose available width is at least `1024.dp`:
+For example, the window requests on a screen whose available width is at least `1024.dp`,
+falling back to the default screen otherwise:
 
 ```kotlin
 windowState.requestScreen { 
@@ -73,7 +78,7 @@ windowState.requestScreen {
 
 ### Positioning
 
-To change where and how the window is placed, either pass an `initialBoundsProvider`
+To change the window position, either pass an `initialBoundsProvider`
 to `rememberWindowState()` or call `WindowState.requestBounds` later.
 The actual bounds of the window are observable via `WindowState.bounds`.
 
@@ -85,7 +90,7 @@ Along with the built-in `Default` and `Absolute` variants, two alignment-based p
     ```kotlin
     WindowPositionProvider.AlignedToParentWindow(
         anchor = Alignment.TopEnd,
-        alignment = Alignment.BottomEnd
+        alignment = Alignment.Center
     )
     ```
   
@@ -97,7 +102,7 @@ Sizing is also part of the window bounds, so it is configured through the same
 The new API uses `WindowSizeProvider` to get information about the screen and parent window sizes, as well as
 query the content of the window for its intrinsic sizes.
 
-Common built-in options include `Fixed()` for a specific window size and `Default` for the standard `800×600dp` size.
+Common built-in options include `Fixed()` for a specific window size and `Default` for the standard `800×600 dp` size.
 
 For custom sizing, a `WindowSizeProvider` lambda has access to screen metrics and,
 for dialogs, parent window metrics:
@@ -110,16 +115,16 @@ WindowSizeProvider {
 ```
 
 You can size the window to the content's preferred size while still allowing content
-using modifiers such as `fillMaxSize()` to fill the window when it is larger:
+that uses modifiers such as `fillMaxSize()` to fill the window when it is larger:
 
 ```kotlin
 WindowSizeProvider {
-    val screenHeightPx = 
-        windowMetrics.screen.availableBounds.height.roundToPx()
-    val width = windowContent.maxIntrinsicWidth(screenHeightPx)
-    val height = windowContent.maxIntrinsicHeight(width)
+    val screenHeight = windowMetrics.screen.availableBounds.height
+    val width = measureWindowContent(maxHeight = screenHeight).width
+    val height = measureWindowContent(maxWidth = width).height
+
     contentToWindowSize(
-        DpSize(width.toDp(), height.toDp())
+        DpSize(width, height)
     )
 }
 ```
