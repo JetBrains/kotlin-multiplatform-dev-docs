@@ -74,6 +74,27 @@ If you decide to create apps which share code by using a multiplatform library, 
 * Read the [general article on publishing KMP apps](multiplatform-publish-apps.md).
 * Don't forget about the [privacy manifest](multiplatform-privacy-manifest.md) required by the Apple App Store.
 
+## Using AI for KMP development
+
+### Before you start
+
+#### Free tokens
+
+For shipathon participants, JetBrains offers free access to the EAP version of the Junie CLI agent.
+
+<a as="button" href="https://surveys.jetbrains.com/s3/Build-with-Junie-at-Shipaton-2026-Application-Form" mode="outline" icon="arrow-left" icon-position="left">Claim your Junie access</a>
+
+#### AGENTS.MD
+
+#### Useful MCP servers
+
+These MCP servers can be useful for an AI agent trying to build an app in the KMP context:
+
+* The [klibs.io](https://github.com/JetBrains/klibs-io/blob/master/integrations/mcp/README.md) server
+  helps to look for a suitable multiplatform library.
+* The [Compose Hot Reload](compose-hot-reload.md#mcp-server-for-ai-agents) server
+  allows the agent to quickly iterate on the UI
+
 ## Learning resources catalog
 
 All of the mentioned resources, along with more in-depth guides and third-party content, are catalogued
