@@ -17,6 +17,10 @@ The new API separates requesting a window state from observing the state actuall
 It coexists with the existing API described in the rest of this page, so you can migrate individual windows at your own pace. 
 The examples in this section demonstrate the main API features.
 
+The redesigned API also unlocks scenarios that weren't possible before, such as sizing a window to its content's 
+preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger. 
+See [Sizing](#sizing) for details.
+
 ### Specifying and observing state
 
 The new API explicitly separates specifying the desired state from observing the actual state.
@@ -66,7 +70,7 @@ You can request the screen on which a window should appear either by passing an 
 to `rememberWindowState()` or by calling `WindowState.requestScreen` later.
 The screen the window is actually placed on is observable via `WindowState.screenId`.
 
-For example, the window requests on a screen whose available width is at least `1024.dp`,
+For example, the window requests placement on a screen whose available width is at least `1024.dp`,
 falling back to the default screen otherwise:
 
 ```kotlin
@@ -93,7 +97,8 @@ Along with the built-in `Default` and `Absolute` variants, two alignment-based p
         alignment = Alignment.Center
     )
     ```
-  
+    Here, `anchor` specifies the point in the parent bounds relative to which `alignment` is applied.
+
 ### Sizing
 
 Sizing is also part of the window bounds, so it is configured through the same
@@ -114,19 +119,17 @@ WindowSizeProvider {
 }
 ```
 
-You can size the window to the content's preferred size while still allowing content
-that uses modifiers such as `fillMaxSize()` to fill the window when it is larger:
+A common scenario that wasn't possible with the old API is sizing a window to its content's preferred size, 
+while still letting the content fill the window when the user makes it larger.
+Use the built-in `WindowSizeProvider.Unconstrained`, which measures the content with unconstrained (infinite) constraints 
+to determine its preferred size, adds the window insets, and caps the result at the screen's available size. 
+Since sizing is decoupled from layout, content that uses `fillMaxSize()` still expands to fill the window if the user resizes it larger.
 
 ```kotlin
-WindowSizeProvider {
-    val screenHeight = windowMetrics.screen.availableBounds.height
-    val width = measureWindowContent(maxHeight = screenHeight).width
-    val height = measureWindowContent(maxWidth = width).height
-
-    contentToWindowSize(
-        DpSize(width, height)
-    )
-}
+WindowBoundsProvider(
+    sizeProvider = WindowSizeProvider.Unconstrained,
+    positionProvider = WindowPositionProvider.CenteredOnScreen,
+)
 ```
 
 The `Window()` and `DialogWindow()` composables accept `minSize` and `maxSize` parameters. 

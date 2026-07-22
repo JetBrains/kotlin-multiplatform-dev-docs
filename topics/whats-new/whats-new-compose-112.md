@@ -63,12 +63,12 @@ For the full list of MCP tools available to the AI agent and how to connect it, 
 
 We've introduced a new experimental API for `WindowState` and `DialogState` on desktop, 
 addressing several limitations of the existing API.
-It lives alongside the current API in the `androidx.compose.ui.window.v2` sub-package, 
+It lives alongside the current API in the `androidx.compose.ui.window.v2` subpackage, 
 so you can adopt it gradually.
 
 The new API gives you more control over how windows and dialogs are placed and sized: 
 you can select the screen they appear on, 
-provide custom positioning and sizing logic (including based on the content's intrinsic size), 
+provide custom positioning and sizing logic (including logic based on the content's intrinsic size), 
 set minimum and maximum window sizes, and position dialogs relative to their parent window. 
 It also makes the asynchronous nature of window state changes explicit, 
 cleanly separating requested state from actual state.
@@ -99,7 +99,9 @@ fun main() = application {
 }
 ```
 
-For a full overview, see the [dedicated documentation](compose-desktop-top-level-windows-management.md#new-window-and-dialog-api) section.
+The redesigned API also unlocks scenarios that weren't possible before, such as sizing a window to its 
+content's preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger.
+See the [dedicated documentation](compose-desktop-top-level-windows-management.md#new-window-and-dialog-api) for details.
 
 ## Dependencies
 
