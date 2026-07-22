@@ -3,7 +3,7 @@
 ## Where to start
 
 1. Learn about Kotlin Multiplatform (KMP) and Compose Multiplatform (CMP):
-   What they are, their [advantages and use cases](kmp-overview.md).
+   What they are, their [advantages, and use cases](kmp-overview.md).
 2. [Try KMP out on a sample project](quickstart.md) to see how it's organized and how it runs on different platforms.
 
 ## Learn KMP basics
@@ -73,6 +73,105 @@ If you decide to create apps which share code by using a multiplatform library, 
 
 * Read the [general article on publishing KMP apps](multiplatform-publish-apps.md).
 * Don't forget about the [privacy manifest](multiplatform-privacy-manifest.md) required by the Apple App Store.
+
+## Using AI for KMP development
+
+### Before you start
+
+#### Use the free Junie access
+
+Junie is a JetBrains AI agent.
+For Shipaton participants, JetBrains offers free access to the EAP version of the Junie CLI agent.
+You can also use your Junie agent through the [AI chat feature in IntelliJ IDEs](https://www.jetbrains.com/ai-ides/#getstarted).
+
+<a as="button" href="https://surveys.jetbrains.com/s3/Build-with-Junie-at-Shipaton-2026-Application-Form" mode="classic" icon="arrow-right" icon-position="right">Claim your Junie access</a>
+
+#### Set up and commit AGENTS.md
+
+AI agents heavily rely on AGENTS.md files when exploring an unfamiliar codebase,
+so accurate and comprehensive context can noticeably improve the quality of their insights and generated code.
+For example, simply noting that your project uses Kotlin Multiplatform can help avoid a lot of cross-platform issues.
+
+To learn about the format and see examples, check out the [AGENTS.md](https://agents.md/) website.
+
+#### Configure useful MCP servers
+
+These MCP servers can be useful for an AI agent building an app in the KMP context:
+
+* The [klibs.io](https://github.com/JetBrains/klibs-io/blob/master/integrations/mcp/README.md) server
+  helps to look for a suitable multiplatform library.
+* The [Compose Hot Reload](compose-hot-reload.md#mcp-server-for-ai-agents) server
+  allows the agent to quickly iterate on the UI.
+
+### Build features
+
+#### Use planning mode
+
+For larger tasks and distributed work, most agents support a **planning mode** which can help break down the task
+and generate a clear step-by-step instruction that you can verify before the code generation starts in earnest.
+
+Spending time to review and refine the results of the work done in planning mode usually produces significantly better results
+for implementing:
+* user-facing features from scratch,
+* architectural changes,
+* library integrations,
+* large refactorings.
+
+#### Validate AI-generated changes
+
+On top of the general AI non-determinism, Kotlin Multiplatform introduces multifaceted context that is hard to cover comprehensively.
+For example, it is common for changes to be implemented well and working for one platform and breaking another.
+
+To address this, it's a good idea to define specific acceptance criteria:
+
+* Run target-specific tests after introducing changes, whenever such tests are available.
+* Verify that all configured KMP targets successfully build before considering a task complete.
+* Review the implementation for platform-specific APIs leaking into common code:
+  this can lead agents (and humans) to use these APIs in later stages. 
+
+#### Use Kotlin AI skills
+
+The Kotlin team builds and maintains AI skills aimed at solving Kotlin-specific problems.
+See the [skills repository](https://github.com/Kotlin/kotlin-agent-skills) and install the skills for your agent.
+
+#### Use Swift Package Manager to integrate native iOS libraries
+
+For iOS functionality that does not yet have a multiplatform library supporting it,
+you may need to integrate native iOS libraries.
+We recommend using SwiftPM packages and the [corresponding DSL](multiplatform-spm-import.md) for configuring such dependencies.
+
+The Kotlin team maintains an [AI skill aimed at CocoaPods to SwiftPM migration](https://github.com/Kotlin/kotlin-agent-skills/tree/main/skills/kotlin-tooling-cocoapods-spm-migration),
+which can also be useful for setting up SwiftPM integration from scratch. 
+
+#### Set up agent orchestration
+
+JetBrains Air offers agent orchestration which can help speed up work by coordinating multiple agents
+working on different parts of the project simultaneously.
+
+<a as="button" href="https://air.dev/" mode="classic" icon="arrow-right" icon-position="right">Try out Air</a>
+
+### Iterate on UI
+
+#### Use Figma to generate UI designs and Compose code
+
+The [Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
+can help with converting designs into Compose code.
+
+For generating UI designs from scratch, consider [Google Stitch](https://stitch.withgoogle.com/) or [Figma Make](https://www.figma.com/make/).
+
+#### Use Gemini CLI as the agent for Compose UI tasks
+
+We have seen consistently good results when generating Compose code with Google's model, including models in the [Flash family](https://ai.google.dev/gemini-api/docs/models#gemini-3-stable).
+It offers a good balance of generation speed, token consumption, and UI quality.
+
+#### Use Compose Hot Reload to iterate on UI
+
+[Compose Hot Reload](compose-hot-reload.md) enables almost real-time UI updates that reflect changes
+you — or your agent — make in the Compose code.
+
+To help agents work with UI, you can add the [Compose Hot Reload MCP server](compose-hot-reload.md#mcp-server-for-ai-agents)
+to your agent configuration.
+It enables the agent to trigger reloads directly, take screenshots, and even interact with the UI.
 
 ## Learning resources catalog
 
