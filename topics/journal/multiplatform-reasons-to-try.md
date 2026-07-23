@@ -116,7 +116,7 @@ They can choose what to share and what to write natively.
 
 Before Kotlin Multiplatform, developers had to write everything natively.
 
-![Before Kotlin Multiplatform: writing all code natively](before-kotlin-multiplatform.svg){width=700}
+![Before Kotlin Multiplatform: writing all code natively](kmp-before-new.svg){width=700}
 
 Kotlin Multiplatform lets you choose the level of code sharing that works for your project.
 
@@ -126,7 +126,7 @@ Kotlin Multiplatform lets you choose the level of code sharing that works for yo
 
 3) [Share a small part of the logic](multiplatform-ktor-sqldelight.md): Kotlin Multiplatform can also be introduced gradually by sharing a focused subset of logic, such as validation, domain calculations, or authentication flows. This option works well when you want to improve consistency and stability across platforms without making large architectural changes.
 
-![With Kotlin Multiplatform and Compose Multiplatform:  developers can share business logic, presentation logic, or even UI logic](with-compose-multiplatform.svg){width=700}
+![With Kotlin Multiplatform and Compose Multiplatform: developers can share business logic, presentation logic, or even UI logic](kmp-after-new.svg){width=700}
 
 Now, you can share almost anything, except for platform-specific code.
 
