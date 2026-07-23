@@ -10,7 +10,7 @@ Before writing code that uses a platform-specific API, check whether you can use
 This type of library provides a common Kotlin API that has a different implementation for different platforms.
 
 There are already many libraries available that you can use to implement networking, logging, and analytics, as well as access device
-functionality and more. For more information, see [this curated list](https://github.com/terrakok/kmm-awesome).
+functionality and more. Browse libraries on [klibs.io](https://klibs.io), the Kotlin Multiplatform library search platform.
 
 ## Expected and actual functions and properties
 
