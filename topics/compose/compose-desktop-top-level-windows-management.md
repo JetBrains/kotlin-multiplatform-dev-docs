@@ -5,7 +5,26 @@ make them draggable, adapt size, change position, and so on.
 
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
-## Open and close windows
+## Single-window applications
+
+You can create a single window application by calling the `singleWindowApplication()` function.
+
+The `singleWindowApplication()` function is easier to use but has the following limitations:
+* The application can have only one window.
+* You cannot add custom closing logic.
+* You cannot change the attributes of the window in runtime.
+
+```kotlin
+import androidx.compose.ui.window.singleWindowApplication
+
+fun main() = singleWindowApplication {
+    // Content of the window
+}
+```
+
+For the fully customizable window, use the [`Window()` composable](#opening-and-closing-windows) in the `application` entry point.
+
+## Opening and closing windows
 
 You can use the `Window()` function to create a regular window. To put it in a composable scope, use `Window()` in the `application` entry point:
 
@@ -47,7 +66,7 @@ fun main() = application {
 
 <img src="compose-window-properties.animated.gif" alt="Window properties: change title" preview-src="compose-window-properties.png" width="600"/>
 
-### Add conditions
+### Conditional windows
 
 You can also open and close windows using simple `if` conditions. In the following code sample, the application window is automatically closed after completing a task:
 
@@ -92,6 +111,8 @@ fun main() = application {
 
 <img src="compose-window-condition.animated.gif" alt="Windows with conditions" preview-src="compose-window-condition.png" width="600"/>
 
+### Close confirmation
+
 If you want to use custom logic on application exit, such as showing a dialog, you can override the close action using the `onCloseRequest` callback.
 In the following code sample, instead of an imperative approach (`window.close()`), we use a declarative approach and close the window in response to the state change (`isOpen = false`).
 
@@ -135,7 +156,7 @@ fun main() = application {
 
 <img src="compose-window-ask-to-close.animated.gif" alt="Close with confirmation" preview-src="compose-window-ask-to-close.png" width="600"/>
 
-## Work with multiple windows
+## Multiple windows
 
 If an application has multiple windows, you can create a separate class for the application state and open or close windows in response to the `mutableStateListOf` changes:
 
@@ -210,132 +231,67 @@ private class MyWindowState(
 
 For a more complex example, see the [Code Viewer](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/codeviewer) sample.
 
-## Minimize a window to the system tray
+## Dialogs
 
-To hide the window instead of closing it, you can change the `windowState.isVisible` state:
+You can use `DialogWindow()` for displaying a separate OS-level window with its own title bar for confirmations, 
+file pickers, or any interaction that should have its own window.
+
+The `DialogWindow()` composable creates a modal window that locks its parent until the user closes it.
+
+> For overlay UI that stays inside the current window (dropdowns, tooltips, and
+> custom overlays), use the multiplatform [Popup()](compose-popups.md) composable.
+>
+{style="tip"}
+
+The following code sample combines a regular window with a modal dialog:
 
 ```kotlin
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.window.Tray
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
-import kotlinx.coroutines.delay
-
-fun main() = application {
-    var isVisible by remember { mutableStateOf(true) }
-
-    Window(
-        onCloseRequest = { isVisible = false },
-        visible = isVisible,
-        title = "Counter",
-    ) {
-        var counter by remember { mutableStateOf(0) }
-        LaunchedEffect(Unit) {
-            while (true) {
-                counter++
-                delay(1000)
-            }
-        }
-        Text(counter.toString())
-    }
-
-    if (!isVisible) {
-        Tray(
-            TrayIcon,
-            tooltip = "Counter",
-            onAction = { isVisible = true },
-            menu = {
-                Item("Exit", onClick = ::exitApplication)
-            },
-        )
-    }
-}
-
-object TrayIcon : Painter() {
-    override val intrinsicSize = Size(256f, 256f)
-
-    override fun DrawScope.onDraw() {
-        drawOval(Color(0xFFFFA500))
-    }
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isVisible = false },"}
-
-<img src="compose-window-hide-tray.animated.gif" alt="Hide instead of closing" preview-src="compose-window-hide-tray.png" width="600"/>
-
-## singleWindowApplication() function
-
-You can create a single window application by calling the `singleWindowApplication()` function.
-
-The `singleWindowApplication()` function is easier to use but has the following limitations:
-* The application can have only one window.
-* You cannot add custom closing logic.
-* You cannot change the attributes of the window in runtime.
-
-```kotlin
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication {
-    // Content of the window
-}
-```
-
-As an alternative, you can use the [`Window()` composable](#open-and-close-windows) in the `application` entry point.
-
-## Adaptive window size
-
-When you don't know the size of the expected content and cannot specify the optimal window dimensions in advance, 
-you can set one or both dimensions of `WindowSize` to `Dp.Unspecified`. Compose Multiplatform for desktop will automatically adjust the initial size of your window 
-to fit the content:
-
-```kotlin
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogWindow
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.window.rememberDialogState
 
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified),
-        title = "Adaptive size",
-        resizable = false
+        title = "Main window"
     ) {
-        Column(Modifier.background(Color(0xFFEEEEEE))) {
-            Row {
-                Text("label 1", Modifier.size(100.dp, 100.dp).padding(10.dp).background(Color.White))
-                Text("label 2", Modifier.size(150.dp, 200.dp).padding(5.dp).background(Color.White))
-                Text("label 3", Modifier.size(200.dp, 300.dp).padding(25.dp).background(Color.White))
+        var isDialogOpen by remember { mutableStateOf(false) }
+
+        Button(onClick = { isDialogOpen = true }) {
+            Text(text = "Open dialog")
+        }
+
+        if (isDialogOpen) {
+            DialogWindow(
+                onCloseRequest = { isDialogOpen = false },
+                state = rememberDialogState(position = WindowPosition(Alignment.Center)),
+                title = "Dialog"
+            ) {
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                    Text("This is a dialog")
+                }
             }
         }
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified)"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow("}
 
-<img src="compose-window-adaptive-size.png" alt="Adaptive window size" width="451"/>
+## Window state
 
-## Changing the window state
-
-`WindowState` is a separate API class for the window placement, current position, and size. The placement attribute allows you to specify how the window is placed on the screen: 
+`WindowState` is a separate API class for the window placement, current position, and size. The placement attribute allows you to specify how the window is placed on the screen:
 floating, maximized/minimized, or fullscreen.
 Any change of the state triggers automatic recomposition. To change the window state, use callbacks or observe it in composables:
 
@@ -416,9 +372,51 @@ fun main() = application {
 
 <img src="compose-window-minimize.animated.gif" alt="Changing the state" preview-src="compose-window-minimize.png" width="600"/>
 
-## Listen to the window state
+### Adaptive window size
 
-If you need to react to the state changes and send a value to another non-composable application level, for example, write it to the database, you can use the `snapshotFlow()` function. 
+When you don't know the size of the expected content and cannot specify the optimal window dimensions in advance,
+you can set one or both dimensions of `WindowSize` to `Dp.Unspecified`. Compose Multiplatform for desktop will automatically adjust the initial size of your window
+to fit the content:
+
+```kotlin
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
+
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified),
+        title = "Adaptive size",
+        resizable = false
+    ) {
+        Column(Modifier.background(Color(0xFFEEEEEE))) {
+            Row {
+                Text("label 1", Modifier.size(100.dp, 100.dp).padding(10.dp).background(Color.White))
+                Text("label 2", Modifier.size(150.dp, 200.dp).padding(5.dp).background(Color.White))
+                Text("label 3", Modifier.size(200.dp, 300.dp).padding(25.dp).background(Color.White))
+            }
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified)"}
+
+<img src="compose-window-adaptive-size.png" alt="Adaptive window size" width="451"/>
+
+### Listening to window state
+
+If you need to react to the state changes and send a value to another non-composable application level, for example, write it to the database, you can use the `snapshotFlow()` function.
 This function captures the current value of a composable's state.
 
 ```kotlin
@@ -460,48 +458,67 @@ private fun onWindowRelocate(position: WindowPosition) {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="LaunchedEffect(state) { snapshotFlow { state.size } .onEach(::onWindowResize)"}
 
-## Dialogs
+## System tray
 
-You can use the `Window()` composable to create a regular window and the `DialogWindow()` composable for a modal window that locks its parent until the user closes the modal window.
-
-The following code sample demonstrates how to use these composables to combine regular and modal windows:
+To hide the window instead of closing it, you can change the `windowState.isVisible` state:
 
 ```kotlin
-import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.window.DialogWindow
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberDialogState
+import kotlinx.coroutines.delay
 
 fun main() = application {
+    var isVisible by remember { mutableStateOf(true) }
+
     Window(
-        onCloseRequest = ::exitApplication,
+        onCloseRequest = { isVisible = false },
+        visible = isVisible,
+        title = "Counter",
     ) {
-        var isDialogOpen by remember { mutableStateOf(false) }
-
-        Button(onClick = { isDialogOpen = true }) {
-            Text(text = "Open dialog")
-        }
-
-        if (isDialogOpen) {
-            DialogWindow(
-                onCloseRequest = { isDialogOpen = false },
-                state = rememberDialogState(position = WindowPosition(Alignment.Center))
-            ) {
-                // Content of the window
+        var counter by remember { mutableStateOf(0) }
+        LaunchedEffect(Unit) {
+            while (true) {
+                counter++
+                delay(1000)
             }
         }
+        Text(counter.toString())
+    }
+
+    if (!isVisible) {
+        Tray(
+            TrayIcon,
+            tooltip = "Counter",
+            onAction = { isVisible = true },
+            menu = {
+                Item("Exit", onClick = ::exitApplication)
+            },
+        )
+    }
+}
+
+object TrayIcon : Painter() {
+    override val intrinsicSize = Size(256f, 256f)
+
+    override fun DrawScope.onDraw() {
+        drawOval(Color(0xFFFFA500))
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow(onCloseRequest = { isDialogOpen = false },"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(onCloseRequest = { isVisible = false },"}
+
+<img src="compose-window-hide-tray.animated.gif" alt="Hide instead of closing" preview-src="compose-window-hide-tray.png" width="600"/>
 
 ## Draggable window area
 
@@ -560,9 +577,9 @@ private fun WindowScope.AppWindowTitleBar() = WindowDraggableArea {
 
 <img src="compose-window-draggable-area.animated.gif" alt="Draggable area" preview-src="compose-window-draggable-area.png" width="600"/>
 
-## Transparent windows and other customizations
+## Transparent windows
 
-To create a transparent window, pass two parameters to the `Window()` function: `transparent=true` and `undecorated=true`. 
+To create a transparent window, pass two parameters to the `Window()` function: `transparent=true` and `undecorated=true`.
 The window must be undecorated because it is impossible to decorate a transparent window.
 
 The following code sample demonstrates how to combine composables to create a transparent window with rounded corners:
