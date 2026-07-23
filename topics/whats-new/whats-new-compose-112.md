@@ -4,6 +4,7 @@ Here are the highlights for this EAP release:
 
  * [Automatic font fallback for web](#automatic-font-fallback)
  * [MCP server for AI agents in Compose Hot Reload](#mcp-server-for-ai-agents-in-compose-hot-reload)
+ * [New window and dialog API for desktop](#new-window-and-dialog-api)
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.12.0-beta01).
 For details about specific component versions, refer to the [Dependencies](#dependencies) section.
@@ -55,6 +56,51 @@ semantic tree, simulate clicks and input, and read application logs without requ
 
 For the full list of MCP tools available to the AI agent and how to connect it, see
 [MCP server for AI agents](compose-hot-reload.md#mcp-server-for-ai-agents).
+
+### New window and dialog API
+<primary-label ref="Experimental"/>
+
+We've introduced a new experimental API for `WindowState` and `DialogState` on desktop, 
+addressing several limitations of the existing API.
+It lives alongside the current API in the `androidx.compose.ui.window.v2` subpackage, 
+so you can adopt it gradually.
+
+The new API gives you more control over how windows and dialogs are placed and sized: 
+you can select the screen they appear on, 
+provide custom positioning and sizing logic (including logic based on the content's intrinsic size), 
+set minimum and maximum window sizes, and position dialogs relative to their parent window. 
+It also makes the asynchronous nature of window state changes explicit, 
+cleanly separating requested state from actual state.
+
+For example, to open a window centered on the screen at a fixed size:
+
+```kotlin
+import androidx.compose.ui.window.v2.*
+...
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() = application {
+    val windowState = rememberWindowState(
+        initialBoundsProvider = WindowBoundsProvider(
+            positionProvider = 
+                WindowPositionProvider.AlignedToScreen(Alignment.Center),
+            sizeProvider = 
+                WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+        )
+    )
+
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = windowState,
+    ) {
+        Text("Hello, World!", fontSize = 48.sp)
+    }
+}
+```
+
+The redesigned API also unlocks scenarios that weren't possible before, such as sizing a window to its 
+content's preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger.
+See the [dedicated documentation](compose-desktop-top-level-windows-management.md#new-window-and-dialog-api) for details.
 
 ## Dependencies
 
