@@ -21,6 +21,11 @@ in the [Android developer documentation](https://developer.android.com/studio/pu
 The iOS app from a Kotlin Multiplatform project is built from a typical Xcode project, so the main stages involved in publishing it are
 the same as described in the [iOS developer documentation](https://developer.apple.com/ios/submit/).
 
+> You can [Configure an iOS delivery pipeline](ios-ci-cd-teamcity.md) to automate your iOS release process
+> with TeamCity Cloud.
+>
+{style="tip"}
+
 > With Spring'24 changes to App Store policy, missing or incomplete privacy manifests may lead to warnings or even rejection
 > for your app.
 > For details and workarounds, particularly for Kotlin Multiplatform apps, see [Privacy manifest for iOS apps](https://kotlinlang.org/docs/apple-privacy-manifest.html). 
@@ -78,6 +83,14 @@ By default, the release versions of iOS frameworks produced from the shared Kotl
 file. This helps you analyze crashes that happen in the shared module's code.
 
 For more information on crash report symbolication, see the [Kotlin/Native documentation](https://kotlinlang.org/docs/native-debugging.html#debug-ios-applications).
+
+### Automate publishing to TestFlight
+
+Instead of manually building, signing, and uploading your app through Xcode, 
+you can automate the entire release process.
+
+To learn how to set up a TeamCity Cloud pipeline that automatically builds and deploys your iOS app to TestFlight 
+directly from your IDE, see [Configure an iOS delivery pipeline](ios-ci-cd-teamcity.md).
 
 ## Web app
 
