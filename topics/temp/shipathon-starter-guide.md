@@ -3,7 +3,7 @@
 ## Where to start
 
 1. Learn about Kotlin Multiplatform (KMP) and Compose Multiplatform (CMP):
-   What they are, their [advantages, and use cases](kmp-overview.md).
+   [What they are, their advantages, and use cases](kmp-overview.md)
 2. [Try KMP out on a sample project](quickstart.md) to see how it's organized and how it runs on different platforms.
 
 ## Learn KMP basics
@@ -38,15 +38,17 @@ There are different ways to share code in a KMP project, with some platform spec
     * Use multiplatform libraries when possible.
     * Use the `expect`/`actual` mechanism when no suitable multiplatform library is available.
 * While calling shared Kotlin from Android Kotlin is relatively straightforward, iOS interoperability takes some getting to know it:
+    * In general, the less interop, the better, so for a smoother experience we recommend relying on Compose Multiplatform to build the bulk of your UI for all platforms.
     * [Learn how to integrate your shared code with the iOS app](multiplatform-ios-integration-overview.md#local-integration) (all samples referenced in this doc have examples of iOS integration set up).
-      > CocoaPods is generally being phased out in favor of Swift Package Manager and is not something we recommend using in new projects.
+      > The CocoaPods package manager is generally being phased out in favor of Swift Package Manager
+      > and is not something we recommend using in new projects.
       >
       {style="note"}   
     * Check out the [sample and tutorial](multiplatform-upgrade-app.md#add-more-dependencies) that includes making Kotlin coroutines work with iOS.
     * See the guide on using existing [SPM packages in your KMP iOS app](multiplatform-spm-import.md).
     * Read the [in-depth explanation of calling Swift / ObjC from Kotlin](https://kotlinlang.org/docs/native-objc-interop.html) and vice versa.
     * Learn about the more straightforward [Swift export](https://kotlinlang.org/docs/native-swift-export.html) approach (currently in Alpha).
-    * In general, the less interop, the better, so for a smoother experience we recommend relying on Compose Multiplatform to build the bulk of your UI for all platforms.
+    
 
 ## Discover the ecosystem
 
@@ -63,7 +65,7 @@ A comprehensive catalog of multiplatform libraries is available at [klibs.io](ht
 
 ## Create a KMP library
 
-If you decide to create apps which share code by using a multiplatform library, check out these documentation pages:
+If you decide to pack your shared code into a multiplatform library, check out these documentation pages:
 
 * [Basic library tutorial](create-kotlin-multiplatform-library.md)
 * [Publishing configuration for a KMP library](multiplatform-publish-lib-setup.md)
