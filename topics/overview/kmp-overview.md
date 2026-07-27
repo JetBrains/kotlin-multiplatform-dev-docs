@@ -69,7 +69,6 @@ Look at how companies and developers already enjoy the benefits of shared Kotlin
 
 * Learn how companies have successfully adopted KMP in their codebases on our [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
 * Check out a wide range of sample apps in our [curated sample list](multiplatform-samples.md) and the GitHub [kotlin-multiplatform-sample](https://github.com/topics/kotlin-multiplatform-sample) topic.
-* Search for specific multiplatform libraries among the thousands already present on [klibs.io](https://klibs.io/).
 
 ## Learn the basics
 
@@ -92,7 +91,13 @@ Dig into technical details
   * Learn how KMP [compiles code](multiplatform-configure-compilations.md) and [builds binaries](multiplatform-build-native-binaries.md)
     for various targets.
   * Read about [publishing a multiplatform app](multiplatform-publish-apps.md)
-    or a [multiplatform library](multiplatform-publish-lib-setup.md). 
+    or a [multiplatform library](multiplatform-publish-lib-setup.md).
+
+## Explore the Kotlin Mutliplatform library ecosystem
+
+Thousands of multiplatform libraries are available for networking, storage, dependency injection, testing, UI, serialization, and more.
+
+Browse them on [klibs.io](https://klibs.io), a search platform maintained by JetBrains.
 
 ## Adopt Kotlin Multiplatform at scale
 
