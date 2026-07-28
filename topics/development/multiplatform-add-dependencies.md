@@ -4,13 +4,15 @@ Every program requires a set of libraries to operate successfully.
 A Kotlin Multiplatform project can depend on cross-platform libraries that support multiple target platforms,
 platform-specific libraries, and other multiplatform projects.
 
-This page describes management of multiplatform dependencies.
+This page describes the management of multiplatform dependencies.
 Some platform specifics are covered in [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md). 
+
+## Adding a multiplatform dependency
 
 To add a dependency on a multiplatform library, update the `build.gradle(.kts)` file that configures the shared code module.
 Set a dependency of the required [type](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types)
 (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
-block:
+block of the `commonMain` source set configuration:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -47,24 +49,25 @@ kotlin {
 </tab>
 </tabs>
 
-## Dependency on a core Kotlin library
+## Dependencies on core Kotlin libraries
 
 ### Standard library
 
-Each source set automatically depends on the standard library (`stdlib`).
-The version of the standard library is the same as the version of the `kotlin-multiplatform` Gradle plugin.
+Each source set automatically depends on the Kotlin standard library (`kotlin-stdlib`).
+The version of the standard library is the same as the version of the `kotlin-multiplatform` Gradle plugin used in the project.
 
-For platform-specific source sets, the corresponding platform-specific variant of the library is used, while a common
-standard library is added to the rest. The Kotlin Gradle plugin will select the appropriate JVM standard library
+For platform-specific source sets, Gradle automatically uses the corresponding platform-specific variant of the library,
+while the common standard library is added to the rest.
+For JVM targets, the Kotlin Gradle plugin selects the appropriate JVM standard library
 depending on the `compilerOptions.jvmTarget` [compiler option](https://kotlinlang.org/docs/gradle-compiler-options.html) of your Gradle build script.
 
-Learn how to [change the default behavior](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-on-the-standard-library).
+Learn how to [change the default `kotlin-stdlib` dependency resolution](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-on-the-standard-library).
 
 ### Test libraries
 
 For multiplatform tests, the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API is available.
 As it is a multiplatform library,
-you can add test dependencies to all source sets by specifying a single dependency in `commonTest`:
+you can add test dependencies to all source sets by specifying a single dependency for the `commonTest` source set:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -101,21 +104,24 @@ kotlin {
 </tab>
 </tabs>
 
-### kotlinx libraries
+### `kotlinx` libraries
 
 kotlinx libraries are multiplatform libraries maintained by the core Kotlin team at JetBrains
-([kotlinx.serialization](https://github.com/kotlin/kotlinx.serialization)
-and [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
-are primary examples).
+(primary examples are [kotlinx.serialization](https://github.com/kotlin/kotlinx.serialization)
+and [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)).
 
-Just like with [any multiplatform library](#dependency-on-kotlin-multiplatform-libraries),
+Just like with any other multiplatform library,
 to add a dependency, refer to a library artifact in the corresponding source set.
 
-## Dependency on Kotlin Multiplatform libraries
+> `kotlinx` libraries sometimes require a more involved setup, for example, for web targets.
+> Refer to the library's documentation for comprehensive instructions.
+{style="note"}
 
-You can add dependencies on libraries that have adopted Kotlin Multiplatform technology, such
-as [SQLDelight](https://github.com/cashapp/sqldelight). The authors of these libraries usually provide guides for adding
-their dependencies to your project.
+## Dependencies on Kotlin Multiplatform libraries
+
+You can add dependencies on libraries that have adopted Kotlin Multiplatform,
+such as [SQLDelight](https://github.com/cashapp/sqldelight).
+The authors of such libraries usually provide guides for adding their dependencies to your project.
 
 > Explore the available Kotlin Multiplatform libraries on [klibs.io](https://klibs.io/).
 >
@@ -176,20 +182,20 @@ kotlin {
 </tab>
 </tabs>
 
-> You can also configure a common library in a top-level `dependencies {}` block. See [Configure dependencies at the top level](multiplatform-dsl-reference.md#configure-dependencies-at-the-top-level).
+> You can also configure a common library in a top-level `dependencies {}` block.
+> See [Configure dependencies at the top level](multiplatform-dsl-reference.md#configure-dependencies-at-the-top-level).
 > 
 {style="tip"}
 
-### Library used in specific source sets
+### Libraries to be used in specific source sets
 
 If you want to use a multiplatform library just for specific source sets, you can add it exclusively to them.
 The library declarations will then only be available in those source sets.
 
-> Use a common library name in such cases, not a platform-specific one.
-> Like with SQLDelight in the example below, use `native-driver`, not `native-driver-iosx64`.
-> Find the exact name in the library's documentation.
->
-{style="note"}
+Use a common library name in such cases, not a platform-specific one:
+the Kotlin Multiplatform Gradle plugin resolves such references automatically.
+For example, the example below uses `native-driver`, not `native-driver-iosx64` for platform-specific SQLDelight
+(find the exact name in the library's documentation):
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -250,8 +256,8 @@ kotlin {
 
 ## Dependency on another multiplatform project
 
-You can connect one multiplatform project to another as a dependency. To do this, add a project-type dependency to the
-source set that needs it.
+One multiplatform project can depend on another.
+To implement this, add a project-type dependency to the source set that needs it.
 If you want to use a dependency in all source sets, add it to the common one.
 In this case, other source sets will get their versions automatically.
 
