@@ -1,12 +1,16 @@
 [//]: # (title: Popups)
 
 A `Popup()` is a floating container that renders its content on top of the current UI.
-Unlike a modal dialog, a popup is non-modal, has no scrim, and is not centered by default, 
-which makes it suitable for dropdowns, tooltips, and custom overlays anchored to a component.
 
-`Popup()` and its `PopupProperties` are part of the common API. However,
-some properties are only available in platform-specific source sets. For example, on iOS,
-`PopupProperties` provides `usePlatformInsets`, which limits the popup's content to the platform insets (the safe area).
+Unlike the `Dialog()` API — a modal container that takes focus, centers its
+content, and uses a dimmed scrim to block interaction with the rest of the UI — a `Popup()` is non-modal. 
+It has no scrim, does not restrict its width, and allows users to continue interacting with the underlying UI.
+A popup is not centered by default and requires explicit positioning to anchor it to a component.
+
+Use `Dialog()` when you need to interrupt the user and require a decision before they continue, 
+such as confirmations, alerts, or short forms. 
+Use `Popup()` for lightweight, non-blocking overlays that stay anchored to a component, 
+such as dropdowns, tooltips, and menus.
 
 ## Positioning a popup
 
@@ -97,8 +101,12 @@ With `PopupProperties`, you can control how the popup handles focus and dismissa
   enabled by default. Requires `focusable = true`.
 * `dismissOnClickOutside` dismisses the popup when the user presses outside its bounds, enabled by default.
 
+`Popup()` and its `PopupProperties` are part of the common API. However,
+some properties are only available in platform-specific source sets. For example, on iOS,
+`PopupProperties` provides `usePlatformInsets`, which limits the popup's content to the platform insets (the safe area).
+
 ## What's next
 
-For more details, see the
-[`Popup()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/window/Popup.composable) API
-reference in the Jetpack Compose documentation.
+For full API details, see the references in the Jetpack Compose documentation:
+* [`Popup()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/window/Popup.composable)
+* [`Dialog()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/window/Dialog.composable)
