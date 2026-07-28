@@ -28,6 +28,13 @@ With this workflow, TeamCity Cloud:
 3. If the TeamCity plugin is not installed, the IDE prompts you to install it.
    Click **Install plugin to set up CI/CD**, then return to the setup flow.
    ![Install plugin to set up CI/CD](ios-pipeline-install-plugin.png){width=700 style="block"}
+
+<!-- TODO: Add link to marketplace
+    > You can also install the [Plugin Name](link) plugin from JetBrains Marketplace.
+    >
+    {style="note"}
+-->
+
 4. When the IDE displays **Pipeline is ready**, the initial pipeline configuration is complete. 
    The generated files remain local until you commit them to your repository. Click **Continue**.
 
