@@ -39,10 +39,18 @@ val windowState = rememberWindowState(
 )
 ```
 
-To request a state change after the window has been created, call the corresponding method on `WindowState`:
+To request a state change after the window has been created, call the corresponding method on `WindowState`.
+You can specify the exact size and position directly:
 
 ```kotlin
 windowState.requestScreen { defaultScreen }
+windowState.requestSize(DpSize(1024.dp, 768.dp))
+windowState.requestPosition(DpOffset(100.dp, 100.dp))
+```
+
+For relative positioning or to calculate dimensions dynamically, use providers:
+
+```kotlin
 windowState.requestBounds(
     WindowBoundsProvider(
         positionProvider = 
