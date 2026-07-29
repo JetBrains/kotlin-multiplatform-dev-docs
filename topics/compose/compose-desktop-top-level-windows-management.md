@@ -233,17 +233,23 @@ For a more complex example, see the [Code Viewer](https://github.com/JetBrains/c
 
 ## Dialogs
 
-You can use `DialogWindow()` for displaying a separate OS-level window with its own title bar for confirmations, 
-file pickers, or any interaction that should have its own window.
+You can use `DialogWindow()` to display a separate OS-level window with its own title bar.
+This is useful for confirmations, file pickers, or any interaction that requires a dedicated window.
 
-The `DialogWindow()` composable creates a modal window that locks its parent until the user closes it.
+You can control whether the dialog blocks interaction with other windows by using the `modalityType` parameter. 
+The following options are available:
+
+* `Modeless` does not block any other windows.
+* `DocumentModal` blocks the parent top-level window and any other windows attached to it, except for the dialog's own descendants.
+* `ApplicationModal` blocks all other windows in the same application.
+
 
 > For overlay UI that stays inside the current window (dropdowns, tooltips, and
 > custom overlays), use the multiplatform [Popup()](compose-popups.md) composable.
 >
 {style="tip"}
 
-The following code sample combines a regular window with a modal dialog:
+The following code sample combines a regular window with an `ApplicationModal` dialog:
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
@@ -261,6 +267,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberDialogState
+import androidx.compose.ui.window.DialogModalityType
 
 fun main() = application {
     Window(
@@ -277,7 +284,8 @@ fun main() = application {
             DialogWindow(
                 onCloseRequest = { isDialogOpen = false },
                 state = rememberDialogState(position = WindowPosition(Alignment.Center)),
-                title = "Dialog"
+                title = "Dialog",
+                modalityType = DialogModalityType.ApplicationModal
             ) {
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
                     Text("This is a dialog")
@@ -374,9 +382,9 @@ fun main() = application {
 
 ### Adaptive window size
 
-When you don't know the size of the expected content and cannot specify the optimal window dimensions in advance,
-you can set one or both dimensions of `WindowSize` to `Dp.Unspecified`. Compose Multiplatform for desktop will automatically adjust the initial size of your window
-to fit the content:
+To size a window based on its content without providing dimensions in advance, 
+set one or both dimensions of `WindowSize` to `Dp.Unspecified`. 
+Compose Multiplatform will then automatically adjust the initial window size to fit your content:
 
 ```kotlin
 import androidx.compose.foundation.background

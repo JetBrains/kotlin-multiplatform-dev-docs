@@ -1,15 +1,16 @@
 [//]: # (title: Popups)
 
-A `Popup()` is a floating container that renders its content on top of the current UI.
+A `Popup()` is a floating container that renders its content on top of the current UI within the same window.
 
-Unlike the `Dialog()` API — a modal container that takes focus, centers its
-content, and uses a dimmed scrim to block interaction with the rest of the UI — a `Popup()` is non-modal. 
+Unlike the multiplatform `Dialog()` API — which acts as a modal container that takes focus, centers its content, 
+and uses a dimmed scrim to block interaction with the rest of the UI — a `Popup()` is non-modal. 
 It has no scrim, does not restrict its width, and allows users to continue interacting with the underlying UI.
 A popup is not centered by default and requires explicit positioning to anchor it to a component.
 
 Use `Dialog()` when you need to interrupt the user and require a decision before they continue, 
-such as confirmations, alerts, or short forms. 
-Use `Popup()` for lightweight, non-blocking overlays that stay anchored to a component, 
+such as confirmations, alerts, or short forms. For separate OS-level dialogs on desktop, 
+see [`DialogWindow()`](compose-desktop-top-level-windows-management.md#dialogs).
+Use `Popup()` for lightweight, non-blocking overlays that stay anchored to a component inside the current window, 
 such as dropdowns, tooltips, and menus.
 
 ## Positioning a popup
