@@ -24,13 +24,13 @@ With this workflow, TeamCity Cloud:
 2. Click **Configure CI**.
    ![The Configure CI tooltip appears after pushing changes](ios-pipeline-Configure-CI.png){width=450 style="block"}
    The plugin generates the files required to build and test your iOS app on a hosted macOS agent.
-   These files are added to your local project but are not committed automatically.
-3. If the TeamCity plugin is not installed, the IDE prompts you to install it.
+   These files are added to your local project but are not committed.
+3. If the TeamCity plugin is not installed, the IDE prompts you to install it automatically.
    Click **Install plugin to set up CI/CD**, then return to the setup flow.
    ![Install plugin to set up CI/CD](ios-pipeline-install-plugin.png){width=700 style="block"}
 
 <!-- TODO: Add link to marketplace
-    > You can also install the [Plugin Name](link) plugin from JetBrains Marketplace.
+    > You can also install the [Plugin Name](link) plugin from JetBrains Marketplace directly.
     >
     {style="note"}
 -->
@@ -83,7 +83,10 @@ The `.p8` file can only be downloaded once, so store it securely.
 3. Right-click the certificate and choose **Export** to save it as a `.p12` file.
 4. Set and save an export password.
 
-> If you do not have access to a Mac, you can generate a Certificate Signing Request (CSR) and convert the resulting 
+> If you do not have access to a Mac, you can 
+> [generate](https://www.ssl.com/how-to/manually-generate-a-certificate-signing-request-csr-using-openssl/)
+> a Certificate Signing Request (CSR) and 
+> [convert](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/) the resulting 
 > certificate to a `.p12` file using OpenSSL on Windows or Linux.
 >
 {style="note"}
