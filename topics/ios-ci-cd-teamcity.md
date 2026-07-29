@@ -1,12 +1,12 @@
 [//]: # (title: Configure an iOS delivery pipeline for your Kotlin Multiplatform project)
 
 In this tutorial, you'll learn how to set up TeamCity Cloud for a Kotlin Multiplatform project with an iOS target.
-You'll create a CI pipeline that builds and tests your iOS app on hosted macOS agents,
-configure Apple signing credentials, upload a build to TestFlight, and automate the process to trigger new builds
+You'll create a CI pipeline that builds and tests your iOS app on a hosted macOS agent,
+configure Apple signing credentials, upload a build to TestFlight, and automate the process to start a new build
 on every push to your repository.
 
 The [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) walks you through
-the entire setup directly from your development environment — 
+the entire setup directly from your IDE — 
 from connecting your project to TeamCity Cloud to publishing your iOS application.
 
 With this workflow, TeamCity Cloud:
@@ -21,12 +21,12 @@ With this workflow, TeamCity Cloud:
 ### Start CI setup from the IDE
 
 1. Commit and push your project changes. If CI has not been configured yet,
-    the Kotlin Multiplatform IDE plugin displays a tooltip prompting you to start CI setup.
+   the Kotlin Multiplatform IDE plugin displays a tooltip prompting you to start CI setup.
 2. Click **Configure CI**.
    ![The Configure CI tooltip appears after pushing changes](ios-pipeline-Configure-CI.png){width=450 style="block"}
    The plugin generates the files required to build and test your iOS app on a hosted macOS agent.
    These files are added to your local project but are not committed.
-3. If the TeamCity plugin is not installed, the IDE prompts you to install it automatically.
+3. If the TeamCity plugin is not installed, the IDE prompts you to install it.
    Click **Install plugin to set up CI/CD**, then return to the setup flow.
    ![Install plugin to set up CI/CD](ios-pipeline-install-plugin.png){width=700 style="block"}
 
@@ -37,7 +37,8 @@ With this workflow, TeamCity Cloud:
 -->
 
 4. When the IDE displays **Pipeline is ready**, the initial pipeline configuration is complete. 
-   The generated files remain local until you commit them to your repository. Click **Continue**.
+   Click **Continue** and, when prompted, allow the IDE to add the generated files to Git. 
+   These files remain local until you commit them to your repository.
 
 ### Create or connect a TeamCity Cloud workspace
 
@@ -49,7 +50,7 @@ TeamCity requires a Cloud workspace to run builds on hosted macOS agents.
 
     > TeamCity Cloud is hosted by JetBrains and provides a free starting tier.
     > The free tier includes a monthly allowance of build minutes and storage,
-    > which is enough to get started and test this pipeline at no cost. 
+    > which is enough to get started and test this pipeline at no cost.
     > You can upgrade your plan at any time as your CI/CD needs grow.
     >
     {style="note"}
@@ -57,18 +58,19 @@ TeamCity requires a Cloud workspace to run builds on hosted macOS agents.
 3. In the browser, click **Authorize JetBrains** to authorize the integration.
 
 TeamCity creates or connects to the workspace and prepares the build environment.
-Workspace preparation usually takes less than 30 seconds.
+This usually takes less than 30 seconds.
 
 ## Build the iOS app
 
-When workspace preparation is complete, open the **TeamCity** tab in the IDE:
+When the workspace is ready, the IDE automatically opens the **TeamCity** tab and starts your first build.
 
-1. Run the build to start the pipeline.
-    TeamCity checks out the project on a hosted macOS agent, builds the iOS application, and runs the configured tests.
-    This build verifies that TeamCity can build and test your project without a local macOS build environment.
-    ![iOS build succeeded](ios-pipeline-first-build.png){width=700 style="block"}
+For this first run, TeamCity uses your local, uncommitted project files. 
+It builds the iOS application and runs the configured tests on a hosted macOS agent. 
+This lets you verify that the pipeline works as expected before you commit any generated files to your repository.
 
-2. When the build succeeds, click **Publish to TestFlight** to configure signing and deployment.
+![iOS build succeeded](ios-pipeline-first-build.png){width=700 style="block"}
+
+When the automated build succeeds, click **Publish to TestFlight** to configure signing and deployment.
 
 ## Configure Apple signing and TestFlight
 
@@ -82,15 +84,15 @@ To upload builds to TestFlight, TeamCity needs credentials for App Store Connect
 4. Download the private key (`.p8` file).
 5. Note the **Issuer ID** and **Key ID** displayed for the key.
 
-The `.p8` file can only be downloaded once, so store it securely.
+You can download the `.p8` file only once, so store it securely.
 
 ### Export an Apple Distribution certificate
 
-1. Go to **Settings** | **Accounts** in Xcode, or open the [Apple Developer Portal](https://developer.apple.com/account/),
-   and create or locate your Apple Distribution certificate.
+1. In Xcode, Go to **Settings** | **Accounts**, or open the [Apple Developer Portal](https://developer.apple.com/account/),
+   and then create or locate your Apple Distribution certificate.
 2. On a Mac, open **Keychain Access** and find the certificate under **My Certificates**.
 3. Right-click the certificate and choose **Export** to save it as a `.p12` file.
-4. Set and save an export password.
+4. Set an export password and store it securely; you'll need it later.
 
 > If you do not have access to a Mac, you can 
 > [generate](https://www.ssl.com/how-to/manually-generate-a-certificate-signing-request-csr-using-openssl/)
@@ -127,10 +129,10 @@ After you add the credentials, the pipeline includes signing and deployment step
 
 ### Connect the repository
 
-To run the pipeline automatically when you push changes, connect your GitHub repository to the TeamCity project.
+To automate this process, authorize TeamCity to monitor your GitHub repository and trigger new builds on every push.
 
-1. In the IDE, click **Connect repository**.
-2. In the browser, click **Authorize JetBrains** to authorize the IDE integration.
+1. After the first deployment pipeline finishes successfully, click **Connect repository** in the IDE.
+2. In the browser, click **Authorize JetBrains** to grant access to your repository.
 3. Select the repository and branch that TeamCity should monitor.
 4. Commit and push the generated pipeline configuration files.
 
@@ -138,7 +140,7 @@ TeamCity can now trigger the pipeline when changes are pushed to the configured 
 
 ### Verify the pipeline
 
-Your iOS delivery pipeline is now ready! Every push to the configured branch will trigger TeamCity to:
+Your iOS delivery pipeline is now ready! Every push to the configured branch triggers TeamCity to:
 
 1. Start a build on a hosted macOS agent.
 2. Build the Kotlin Multiplatform project.
@@ -150,7 +152,7 @@ Your iOS delivery pipeline is now ready! Every push to the configured branch wil
 
 Click **Done** to close the setup flow.
 
-From now on, just push your code, and TeamCity will handle the rest.
+From now on, push your code and TeamCity handles the rest.
 
 ## What's next
 
