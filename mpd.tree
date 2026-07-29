@@ -120,7 +120,7 @@
 			<!-- TODO combine with prev -->
 			<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md" hidden="true"/>
 
-			<toc-element toc-title="Android-specific dependencies" topic="multiplatform-android-dependencies.md"/> <!-- TODO is this necessary? Move to the dependencies page in project structure? -->
+			<toc-element toc-title="Android-specific dependencies" topic="multiplatform-android-dependencies.md"/>
 			<toc-element toc-title="iOS-specific dependencies" topic="multiplatform-ios-dependencies.md"/> <!-- TODO Combine / move to iOS integration? -->
 		</toc-element>
 
