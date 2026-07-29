@@ -3,7 +3,7 @@
 ## Where to start
 
 1. Learn about Kotlin Multiplatform (KMP) and Compose Multiplatform (CMP):
-   [What they are, their advantages, and use cases](kmp-overview.md)
+   [What they are, their advantages, and use cases](kmp-overview.md).
 2. [Try KMP out on a sample project](quickstart.md) to see how it's organized and how it runs on different platforms.
 
 ## Learn KMP basics
