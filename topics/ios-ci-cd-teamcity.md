@@ -14,6 +14,7 @@ With this workflow, TeamCity Cloud:
 * Provides hosted macOS agents, so you don't need to provision a Mac yourself.
 * Generates the required pipeline configuration for you.
 * Signs your builds and publishes them to [TestFlight](https://developer.apple.com/testflight/).
+* Provides a free starting tier with a monthly allowance of build minutes and storage.
 
 ## Create the TeamCity pipeline
 
@@ -45,6 +46,14 @@ TeamCity requires a Cloud workspace to run builds on hosted macOS agents.
 1. Review and accept the TeamCity Cloud Terms of Service.
 2. Click **Create free account** to create a TeamCity Cloud account,
    or click **I already have an account** to connect an existing account.
+
+    > TeamCity Cloud is hosted by JetBrains and provides a free starting tier.
+    > The free tier includes a monthly allowance of build minutes and storage,
+    > which is enough to get started and test this pipeline at no cost. 
+    > You can upgrade your plan at any time as your CI/CD needs grow.
+    >
+    {style="note"}
+
 3. In the browser, click **Authorize JetBrains** to authorize the integration.
 
 TeamCity creates or connects to the workspace and prepares the build environment.
