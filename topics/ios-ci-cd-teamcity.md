@@ -154,5 +154,7 @@ From now on, just push your code, and TeamCity will handle the rest.
 
 ## What's next
 
-* Learn more about [publishing a multiplatform app](multiplatform-publish-apps.md).
+* Read more about [TeamCity Cloud pipelines](https://www.jetbrains.com/help/teamcity/cloud/create-and-edit-pipelines.html) 
+  to customize your setup further: create more projects, set up build agent requirements, and more.
+* Learn how to [publish a multiplatform app](multiplatform-publish-apps.md).
 * [Configure GitHub Actions](github-actions-for-kmp.md) for continuous integration of a Kotlin Multiplatform application.
