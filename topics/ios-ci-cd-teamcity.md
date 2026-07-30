@@ -3,7 +3,7 @@
 In this tutorial, you'll learn how to set up TeamCity Cloud for a Kotlin Multiplatform project with an iOS target.
 You'll create a CI pipeline that builds and tests your iOS app on a hosted macOS agent,
 configure Apple signing credentials, upload a build to TestFlight, and automate the process to start a new build
-on every push to your repository.
+on every push to your GitHub repository.
 
 The [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) walks you through
 the entire setup directly from your IDE — 
@@ -27,7 +27,7 @@ With this workflow, TeamCity Cloud:
    The plugin generates the files required to build and test your iOS app on a hosted macOS agent.
    These files are added to your local project but are not committed.
 3. If the TeamCity plugin is not installed, the IDE prompts you to install it.
-   Click **Install plugin to set up CI/CD**, then return to the setup flow.
+   Click **Install TeamCity plugin**, then return to the setup flow.
    ![Install plugin to set up CI/CD](ios-pipeline-install-plugin.png){width=700 style="block"}
 
 <!-- TODO: Add link to marketplace
@@ -45,8 +45,7 @@ With this workflow, TeamCity Cloud:
 TeamCity requires a Cloud workspace to run builds on hosted macOS agents.
 
 1. Review and accept the TeamCity Cloud Terms of Service.
-2. Click **Create free account** to create a TeamCity Cloud account,
-   or click **I already have an account** to connect an existing account.
+2. Click **Create free account** to create a TeamCity Cloud account.
 
     > TeamCity Cloud is hosted by JetBrains and provides a free starting tier.
     > The free tier includes a monthly allowance of build minutes and storage,
@@ -129,14 +128,14 @@ After you add the credentials, the pipeline includes signing and deployment step
 
 ### Connect the repository
 
-To automate this process, authorize TeamCity to monitor your GitHub repository and trigger new builds on every push.
+To automate this process, connect your GitHub repository to TeamCity so that every push triggers a new build.
 
 1. After the first deployment pipeline finishes successfully, click **Connect repository** in the IDE.
-2. In the browser, click **Authorize JetBrains** to grant access to your repository.
-3. Select the repository and branch that TeamCity should monitor.
-4. Commit and push the generated pipeline configuration files.
+   TeamCity opens in the browser and confirms that the repository is authorized.
+   It detects your repository and branch automatically and attaches them to the pipeline.
+2. Return to the IDE, then commit and push the generated pipeline configuration files.
 
-TeamCity can now trigger the pipeline when changes are pushed to the configured branch.
+TeamCity now triggers the pipeline whenever you push changes to the configured branch.
 
 ### Verify the pipeline
 
