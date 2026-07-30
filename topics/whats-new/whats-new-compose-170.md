@@ -381,6 +381,6 @@ The `skiko.js` file is now redundant for Kotlin/Wasm applications built with Com
 You can remove it from the `index.html` file and improve the load times of your app.
 `skiko.js` will be removed from the Kotlin/Wasm distribution completely in future releases.
 
-> The `skiko.js` file is still necessary for Kotlin/JS applications.
-> 
+> The `skiko.js` file is still necessary for Kotlin/JS applications, up to Compose Multiplatform 1.9.0.
+> See [What's new in Compose Multiplatform 1.9.3](whats-new-compose-190.md#skikojs-is-no-longer-needed) for when that changed.
 {style="note"}
