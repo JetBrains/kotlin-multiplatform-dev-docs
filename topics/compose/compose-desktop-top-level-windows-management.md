@@ -161,7 +161,8 @@ For a fully customizable window, use the [`Window()` composable](#opening-and-cl
 
 ## Manage window state
 
-`WindowState` is a separate API class for the window placement, current position, and size. The placement attribute allows you to specify how the window is placed on the screen:
+The `WindowState` class holds window placement, current position, and size. 
+The placement attribute allows you to specify how the window is placed on the screen:
 floating, maximized/minimized, or fullscreen.
 Any change of the state triggers automatic recomposition. To change the window state, use callbacks or observe it in composables:
 
@@ -246,7 +247,7 @@ fun main() = application {
 
 To size a window based on its content without providing dimensions in advance, 
 set one or both dimensions of the window to `Dp.Unspecified`. 
-Compose Multiplatform will then automatically adjust the initial window size to fit your content:
+Compose Multiplatform automatically adjusts the initial window size to fit your content:
 
 ```kotlin
 import androidx.compose.foundation.background
@@ -742,4 +743,4 @@ private fun FileDialog(
 
 ## What's next
 
-Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
+Explore the tutorials about [other desktop components](compose-desktop-components.md).

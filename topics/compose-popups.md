@@ -37,7 +37,7 @@ Box(Modifier.padding(24.dp)) {
             // Positions the popup relative to the button
             alignment = Alignment.TopStart,
             // Shifts the popup by (x, y) in pixels
-            offset = IntOffset(0, 120),
+            offset = IntOffset(30, 70),
             // Hides the popup when it is dismissed,
             // for example, when the user clicks outside it
             onDismissRequest = { isPopupOpen = false }
@@ -47,7 +47,7 @@ Box(Modifier.padding(24.dp)) {
                     .background(Color.LightGray, RoundedCornerShape(4.dp))
                     .padding(12.dp)
             ) {
-                Text("Popup content")
+                Text("Popup content on top of UI")
             }
         }
     }
@@ -66,7 +66,7 @@ val belowAnchor = remember {
             windowSize: IntSize,
             layoutDirection: LayoutDirection,
             popupContentSize: IntSize
-        ) = IntOffset(x = anchorBounds.left, y = anchorBounds.bottom)
+        ) = IntOffset(x = anchorBounds.left - 20, y = anchorBounds.bottom - 20)
     }
 }
 
@@ -87,7 +87,7 @@ Column(Modifier.padding(24.dp)) {
                         .background(Color.White, RoundedCornerShape(4.dp))
                         .padding(12.dp)
                 ) {
-                    Text("Anchored below the button")
+                    Text("Anchored to the button")
                 }
             }
         }
@@ -100,7 +100,6 @@ Column(Modifier.padding(24.dp)) {
 With `PopupProperties`, you can control how the popup handles focus and dismissal:
 
 * `focusable` determines whether the popup receives key events, disabled by default.
-  It must be enabled for `dismissOnBackPress` to work.
 * `dismissOnBackPress` dismisses the popup on Android's back button or the **Esc** key on desktop, 
   enabled by default. Requires `focusable = true`.
 * `dismissOnClickOutside` dismisses the popup when the user presses outside its bounds, enabled by default.
