@@ -1,19 +1,23 @@
 [//]: # (title: Popups)
 
-A `Popup()` is a floating container that renders its content on top of the current UI within the same window.
+<web-summary>Learn how to create, position, and customize popups in Compose Multiplatform for dropdowns, tooltips, and menus.</web-summary>
 
-Unlike the multiplatform `Dialog()` API — which acts as a modal container that takes focus, centers its content, 
-and uses a dimmed scrim to block interaction with the rest of the UI — a `Popup()` is non-modal. 
-It has no scrim, does not restrict its width, and allows users to continue interacting with the underlying UI.
-A popup is not centered by default and requires explicit positioning to anchor it to a component.
+A popup in Compose Multiplatform is a floating container that renders its content on top of the current UI within the same window.
 
-Use `Dialog()` when you need to interrupt the user and require a decision before they continue, 
+Unlike the multiplatform `Dialog()` API, a `Popup()` is non-modal. 
+A dialog in Compose Multiplatform acts as a modal container that takes focus, centers its content, 
+and uses a dimmed scrim to block interaction with the rest of the UI.
+A popup, on the other hand, has no scrim, does not restrict its width, and allows users to continue interacting with the underlying UI.
+It is not centered by default and requires additional arguments to anchor it to a component.
+
+Use [`Dialog()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/window/Dialog.composable)
+when you need to interrupt the user and require a decision before they continue, 
 such as confirmations, alerts, or short forms. For separate OS-level dialogs on desktop, 
 see [`DialogWindow()`](compose-desktop-top-level-windows-management.md#dialogs).
 Use `Popup()` for lightweight, non-blocking overlays that stay anchored to a component inside the current window, 
 such as dropdowns, tooltips, and menus.
 
-## Positioning a popup
+## Position a popup
 
 To position a popup, use either an `alignment` and `offset`, or a custom
 `PopupPositionProvider` for anchored placement.
@@ -32,11 +36,11 @@ Box(Modifier.padding(24.dp)) {
         Popup(
             // Positions the popup relative to the button
             alignment = Alignment.TopStart,
+            // Shifts the popup by (x, y) in pixels
             offset = IntOffset(0, 120),
-            // Hides the popup when the user presses outside of it
-            onDismissRequest = { isPopupOpen = false },
-            // Makes the popup focusable so it can receive key events
-            properties = PopupProperties(focusable = true)
+            // Hides the popup when it is dismissed,
+            // for example, when the user clicks outside it
+            onDismissRequest = { isPopupOpen = false }
         ) {
             Box(
                 Modifier
@@ -75,8 +79,7 @@ Column(Modifier.padding(24.dp)) {
         if (isPopupOpen) {
             Popup(
                 popupPositionProvider = belowAnchor,
-                onDismissRequest = { isPopupOpen = false },
-                properties = PopupProperties(focusable = true)
+                onDismissRequest = { isPopupOpen = false }
             ) {
                 Box(
                     Modifier
@@ -92,7 +95,7 @@ Column(Modifier.padding(24.dp)) {
 }
 ```
 
-## Customizing behavior
+## Customize behavior
 
 With `PopupProperties`, you can control how the popup handles focus and dismissal:
 
@@ -102,9 +105,10 @@ With `PopupProperties`, you can control how the popup handles focus and dismissa
   enabled by default. Requires `focusable = true`.
 * `dismissOnClickOutside` dismisses the popup when the user presses outside its bounds, enabled by default.
 
-`Popup()` and its `PopupProperties` are part of the common API. However,
-some properties are only available in platform-specific source sets. For example, on iOS,
-`PopupProperties` provides `usePlatformInsets`, which limits the popup's content to the platform insets (the safe area).
+`Popup()` and its `PopupProperties` are part of the common API. 
+However, some properties are not available in the common source set. 
+For example, `usePlatformInsets` is available on iOS and desktop. Its primary use case is on iOS, 
+where it limits the popup's content to the platform insets (the safe area).
 
 ## What's next
 
