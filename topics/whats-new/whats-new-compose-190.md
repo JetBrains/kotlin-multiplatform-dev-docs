@@ -9,7 +9,7 @@ Here are the highlights for this feature release:
 * [Frame rate configuration on iOS](#frame-rate-configuration)
 * [Compose Multiplatform for web in Beta](#compose-multiplatform-for-web-in-beta)
 * [Accessibility support on web targets](#accessibility-support)
-* [skiko.js no longer needed for Kotlin/JS](#skikojs-is-no-longer-needed)
+* [skiko.js no longer needed for Kotlin/JS](#skiko-js-is-no-longer-needed)
 * [New API for embedding HTML content](#new-api-for-embedding-html-content)
 
 See the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.9.0).
