@@ -5,155 +5,6 @@ make them draggable, adapt size, change position, and so on.
 
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
-## New window and dialog API
-<primary-label ref="Experimental"/>
-
-[//]: # (TODO update version for stable release)
-
-Starting with Compose Multiplatform 1.12.0-beta02, a redesigned `WindowState` and `DialogState` API is available 
-in the `androidx.compose.ui.window.v2` subpackage.
-
-The new API separates requesting a window state from observing the state actually applied by the window manager.
-It coexists with the existing API described in the rest of this page, so you can migrate individual windows at your own pace. 
-The examples in this section demonstrate the main API features.
-
-The redesigned API also unlocks scenarios that weren't possible before, such as sizing a window to its content's 
-preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger. 
-See [Sizing](#sizing) for details.
-
-### Specifying and observing state
-
-The new API explicitly separates specifying the desired state from observing the actual state.
-
-To specify the initial state of a window, pass providers to `rememberWindowState()`:
-
-```kotlin
-val windowState = rememberWindowState(
-    initialScreenProvider = { defaultScreen },
-    initialBoundsProvider = WindowBoundsProvider(
-        positionProvider = 
-            WindowPositionProvider.AlignedToScreen(Alignment.Center),
-        sizeProvider = 
-            WindowSizeProvider.Fixed(DpSize(800.dp, 600.dp))
-    )
-)
-```
-
-To request a state change after the window has been created, call the corresponding method on `WindowState`.
-You can specify the exact size and position directly:
-
-```kotlin
-windowState.requestScreen { defaultScreen }
-windowState.requestSize(DpSize(1024.dp, 768.dp))
-windowState.requestPosition(DpOffset(100.dp, 100.dp))
-```
-
-For relative positioning or to calculate dimensions dynamically, use providers:
-
-```kotlin
-windowState.requestBounds(
-    WindowBoundsProvider(
-        positionProvider = 
-            WindowPositionProvider.AlignedToScreen(Alignment.TopStart),
-        sizeProvider = 
-            WindowSizeProvider.Fixed(DpSize(1024.dp, 768.dp))
-    )
-)
-```
-
-Applying a request is asynchronous. The windowing system may adjust the requested state, and the actual state may change later,
-for example, when you move or resize the window.
-Observe the actual state of a window through `WindowState.screenId` and `WindowState.bounds`:
-
-```kotlin
-Text("Current screen: ${windowState.screenId}")
-Text("Current bounds: ${windowState.bounds}")
-```
-
-The same explicitly asynchronous model is available for dialogs through `DialogState` and `rememberDialogState()`.
-
-### Choosing a screen
-
-You can request the screen on which a window should appear either by passing an `initialScreenProvider`
-to `rememberWindowState()` or by calling `WindowState.requestScreen` later.
-The screen the window is actually placed on is observable via `WindowState.screenId`.
-
-For example, the window requests placement on a screen whose available width is at least `1024.dp`,
-falling back to the default screen otherwise:
-
-```kotlin
-windowState.requestScreen { 
-    screens.firstOrNull { it.availableBounds.width >= 1024.dp } 
-        ?: defaultScreen
-}
-```
-
-### Positioning
-
-To change the window position, either pass an `initialBoundsProvider`
-to `rememberWindowState()` or call `WindowState.requestBounds` later.
-The actual bounds of the window are observable via `WindowState.bounds`.
-
-The new API uses `WindowPositionProvider` to get information about the screen and parent window geometry.
-Along with the built-in `Default` and `Absolute` variants, two alignment-based providers cover most cases:
-
-* `AlignedToScreen` aligns the new window on the screen with an extra offset parameter.
-* `AlignedToParentWindow` aligns the new window relative to the parent window, particularly useful for dialogs.
-    ```kotlin
-    WindowPositionProvider.AlignedToParentWindow(
-        anchor = Alignment.TopEnd,
-        alignment = Alignment.Center
-    )
-    ```
-    Here, `anchor` specifies the point in the parent bounds relative to which `alignment` is applied.
-
-### Sizing
-
-Sizing is also part of the window bounds, so it is configured through the same
-`initialBoundsProvider`/`WindowState.requestBounds` mechanism.
-
-The new API uses `WindowSizeProvider` to get information about the screen and parent window sizes, as well as
-query the content of the window for its intrinsic sizes.
-
-Common built-in options include `Fixed()` for a specific window size and `Default` for the standard `800×600 dp` size.
-
-For custom sizing, a `WindowSizeProvider` lambda has access to screen metrics and,
-for dialogs, parent window metrics:
-
-```kotlin
-WindowSizeProvider {
-    val height = parentWindowMetrics!!.bounds.height
-    DpSize(300.dp, height)
-}
-```
-
-A common scenario that wasn't possible with the old API is sizing a window to its content's preferred size, 
-while still letting the content fill the window when the user makes it larger.
-Use the built-in `WindowSizeProvider.Unconstrained`, which measures the content with unconstrained (infinite) constraints 
-to determine its preferred size, adds the window insets, and caps the result at the screen's available size. 
-Since sizing is decoupled from layout, content that uses `fillMaxSize()` still expands to fill the window if the user resizes it larger.
-
-```kotlin
-WindowBoundsProvider(
-    sizeProvider = WindowSizeProvider.Unconstrained,
-    positionProvider = WindowPositionProvider.CenteredOnScreen,
-)
-```
-
-The `Window()` and `DialogWindow()` composables accept `minSize` and `maxSize` parameters. 
-Where the underlying window manager supports it, the user will not be able to resize the window past these bounds:
-
-```kotlin
-DialogWindow(
-    onCloseRequest = { showDialog = false },
-    state = dialogState,
-    minSize = DpSize(250.dp, 250.dp),
-    maxSize = DpSize(500.dp, 500.dp),
-) {
-    // ...
-}
-```
-
 ## Open and close windows
 
 You can use the `Window()` function to create a regular window. To put it in a composable scope, use `Window()` in the `application` entry point:
@@ -852,6 +703,169 @@ private fun FileDialog(
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="@Composable private fun FileDialog( parent: Frame? = null, "}
 
+## Window and dialog API v2
+<primary-label ref="Experimental"/>
+
+[//]: # (TODO update version for stable release)
+
+Starting with Compose Multiplatform 1.12.0-beta02, the redesigned `WindowState` and `DialogState` classes are available
+in the `androidx.compose.ui.window.v2` subpackage.
+
+The v2 API separates requesting a window state from observing the state actually applied by the window manager.
+The v2 API is available along with the existing API described in the rest of this page, 
+so you can migrate individual windows at your own pace.
+
+The v2 API also unlocks scenarios that weren't possible before, such as sizing a window to its content's
+preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger.
+See [Specify size](#specify-size) for details.
+
+### Specify and observe state
+
+The v2 API explicitly separates specifying the desired state from observing the actual state.
+
+To specify the initial state of a window, pass providers to `rememberWindowState()`:
+
+```kotlin
+val windowState = rememberWindowState(
+    initialScreenProvider = { defaultScreen },
+    initialBoundsProvider = WindowBoundsProvider(
+        positionProvider = WindowPositionProvider.CenteredOnScreen,
+        sizeProvider = WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+    )
+)
+```
+
+To request a state change after the window has been created, call the corresponding method on `WindowState`.
+You can specify the exact size and position directly:
+
+```kotlin
+windowState.requestScreen { defaultScreen }
+windowState.requestSize(DpSize(1024.dp, 768.dp))
+windowState.requestPosition(DpOffset(100.dp, 100.dp))
+```
+
+For relative positioning or to calculate dimensions dynamically, use providers:
+
+```kotlin
+windowState.requestBounds(
+    WindowBoundsProvider(
+        positionProvider = WindowPositionProvider.CenteredOnScreen,
+        sizeProvider = WindowSizeProvider.Fixed(DpSize(1024.dp, 768.dp))
+    )
+)
+```
+
+Applying a request is asynchronous. The windowing system may adjust the requested state, and the actual state may change later,
+for example, when you move or resize the window.
+Observe the actual state of a window via `WindowState.screenId` and `WindowState.bounds`:
+
+```kotlin
+if (windowState.isInitialized) {
+    Text("Current screen: ${windowState.screenId}")
+    Text("Current bounds: ${windowState.bounds}")
+}
+```
+
+The same asynchronous model is available for dialogs via `DialogState` and `rememberDialogState()`.
+
+### Choose a screen
+
+You can request the screen on which a window should appear either by passing an `initialScreenProvider`
+to `rememberWindowState()` or by calling `WindowState.requestScreen()` later.
+The screen the window is actually placed on is observable via `WindowState.screenId`.
+
+For example, you can request a window to be placed on a screen whose available width is at least `1024.dp`,
+falling back to the default screen:
+
+```kotlin
+windowState.requestScreen {
+    screens.firstOrNull { it.availableBounds.width >= 1024.dp }
+        ?: defaultScreen
+}
+```
+
+### Specify position
+
+To change the window position, either pass an `initialBoundsProvider`
+to `rememberWindowState()` or call `WindowState.requestBounds()` later.
+The actual bounds of the window are observable via `WindowState.bounds`.
+
+The v2 API uses `WindowPositionProvider` to get information about the screen and parent window geometry.
+
+For standard placements, you can use the built-in properties:
+
+* `Default` applies the operating system's standard cascading behavior.
+* `Current` maintains the current position of the window.
+* `CenteredOnScreen` centers the window within the screen.
+* `CenteredInParentWindow` centers the window within its parent window.
+
+For more control, use position provider functions:
+
+* `Absolute()` places the window at specified `x` and `y` coordinates.
+* `AlignedToScreen()` aligns the window relative to the screen and includes an optional offset parameter.
+    ```kotlin
+    WindowPositionProvider.AlignedToScreen(
+        alignment = Alignment.Center,
+        offset = DpOffset(x = 16.dp, y = 16.dp)
+    )
+    ```
+* `AlignedToParentWindow()` anchors the window to the parent window, typically useful for dialogs.
+    ```kotlin
+    WindowPositionProvider.AlignedToParentWindow(
+        // Anchors to the top-start point of the parent window
+        anchor = Alignment.TopStart,
+        // Applies alignment relative to the anchor point
+        alignment = Alignment.Center
+    )
+    ```
+
+### Specify size
+
+Sizing is also part of the window bounds, so it is configured through the same
+`initialBoundsProvider`/`WindowState.requestBounds()` mechanism.
+
+The v2 API uses `WindowSizeProvider` to get information about the screen and parent window sizes, as well as
+to query the content of the window for its intrinsic sizes.
+
+Common built-in options include `Fixed()` for a specific window size and `Default` for the standard 800×600 dp size.
+
+For custom sizing, a `WindowSizeProvider` lambda has access to screen metrics and,
+for dialogs, parent window metrics:
+
+```kotlin
+WindowSizeProvider {
+    val height = parentWindowMetrics!!.bounds.height
+    DpSize(300.dp, height)
+}
+```
+
+A common scenario that wasn't possible without the v2 API is sizing a window to its content's preferred size,
+while still letting the content fill the window when the user makes it larger.
+`WindowSizeProvider.Unconstrained` calculates the content's size, adds the window insets,
+and caps the result at the available screen size.
+Since sizing is decoupled from layout, content that uses `fillMaxSize()` still expands to fill the window if the user resizes it.
+
+```kotlin
+WindowBoundsProvider(
+    positionProvider = WindowPositionProvider.CenteredOnScreen,
+    sizeProvider = WindowSizeProvider.Unconstrained
+)
+```
+
+The v2 versions of the `Window()` and `DialogWindow()` composables accept `minSize` and `maxSize` parameters.
+Where the underlying window manager supports it, the user will not be able to resize the window past these bounds:
+
+```kotlin
+DialogWindow(
+    onCloseRequest = { showDialog = false },
+    state = dialogState,
+    minSize = DpSize(250.dp, 250.dp),
+    maxSize = DpSize(500.dp, 500.dp)
+) {
+    // ...
+}
+```
+
 ## What's next
 
-Explore the tutorials about [other desktop components](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials#desktop).
+Explore the tutorials about [other desktop components](compose-desktop-components.md).
