@@ -3,6 +3,8 @@
 Compose Multiplatform for desktop provides various features for managing windows. You can hide windows in the tray, 
 make them draggable, adapt size, change position, and so on.
 
+See also the new experimental [window and dialog API v2](#window-and-dialog-api-v2).
+
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
 ## Open and close windows
@@ -711,13 +713,13 @@ private fun FileDialog(
 Starting with Compose Multiplatform 1.12.0-beta02, the redesigned `WindowState` and `DialogState` classes are available
 in the `androidx.compose.ui.window.v2` subpackage.
 
-The v2 API separates requesting a window state from observing the state actually applied by the window manager.
-The v2 API is available along with the existing API described in the rest of this page, 
-so you can migrate individual windows at your own pace.
-
-The v2 API also unlocks scenarios that weren't possible before, such as sizing a window to its content's
+The v2 window and dialog API separates requesting a state from observing the state actually applied by the window manager.
+It also unlocks scenarios that weren't possible before, such as sizing a window to its content's
 preferred size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger.
 See [Specify size](#specify-size) for details.
+
+The v2 API is available alongside the existing API described in the rest of this page, 
+so you can migrate individual windows at your own pace.
 
 ### Specify and observe state
 
@@ -726,14 +728,36 @@ The v2 API explicitly separates specifying the desired state from observing the 
 To specify the initial state of a window, pass providers to `rememberWindowState()`:
 
 ```kotlin
-val windowState = rememberWindowState(
-    initialScreenProvider = { defaultScreen },
-    initialBoundsProvider = WindowBoundsProvider(
-        positionProvider = WindowPositionProvider.CenteredOnScreen,
-        sizeProvider = WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+import androidx.compose.material.Text
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.v2.Window
+import androidx.compose.ui.window.v2.WindowBoundsProvider
+import androidx.compose.ui.window.v2.WindowPositionProvider
+import androidx.compose.ui.window.v2.WindowSizeProvider
+import androidx.compose.ui.window.v2.rememberWindowState
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() = application {
+    val windowState = rememberWindowState(
+        initialBoundsProvider = WindowBoundsProvider(
+            positionProvider = WindowPositionProvider.CenteredOnScreen,
+            sizeProvider = WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+        )
     )
-)
+
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = windowState,
+    ) {
+        Text("Hello, World!", fontSize = 48.sp)
+    }
+}
 ```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="val windowState = rememberWindowState(initialBoundsProvider = WindowBoundsProvider("}
 
 To request a state change after the window has been created, call the corresponding method on `WindowState`.
 You can specify the exact size and position directly:
@@ -801,7 +825,7 @@ For standard placements, you can use the built-in properties:
 
 For more control, use position provider functions:
 
-* `Absolute()` places the window at specified `x` and `y` coordinates.
+* `Absolute()` places the window starting corner at specified `x` and `y` coordinates.
 * `AlignedToScreen()` aligns the window relative to the screen and includes an optional offset parameter.
     ```kotlin
     WindowPositionProvider.AlignedToScreen(
@@ -812,7 +836,7 @@ For more control, use position provider functions:
 * `AlignedToParentWindow()` anchors the window to the parent window, typically useful for dialogs.
     ```kotlin
     WindowPositionProvider.AlignedToParentWindow(
-        // Anchors to the top-start point of the parent window
+        // Anchors to the starting corner of the parent window
         anchor = Alignment.TopStart,
         // Applies alignment relative to the anchor point
         alignment = Alignment.Center
@@ -829,7 +853,7 @@ to query the content of the window for its intrinsic sizes.
 
 Common built-in options include `Fixed()` for a specific window size and `Default` for the standard 800×600 dp size.
 
-For custom sizing, a `WindowSizeProvider` lambda has access to screen metrics and,
+For custom sizing, a `WindowSizeProvider()` lambda has access to screen metrics and,
 for dialogs, parent window metrics:
 
 ```kotlin
@@ -839,8 +863,8 @@ WindowSizeProvider {
 }
 ```
 
-A common scenario that wasn't possible without the v2 API is sizing a window to its content's preferred size,
-while still letting the content fill the window when the user makes it larger.
+The v2 API enables one commonly requested scenario: 
+size a window to its content's preferred size while still letting the content fill the window when the user makes it larger.
 `WindowSizeProvider.Unconstrained` calculates the content's size, adds the window insets,
 and caps the result at the available screen size.
 Since sizing is decoupled from layout, content that uses `fillMaxSize()` still expands to fill the window if the user resizes it.

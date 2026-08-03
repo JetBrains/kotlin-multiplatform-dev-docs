@@ -71,7 +71,7 @@ The v2 API gives you more control over how windows and dialogs are placed and si
 * Set minimum and maximum window sizes
 * Position dialogs relative to their parent window
 
-It also makes the asynchronous nature of window state changes explicit, separating requested state from actual state.
+The v2 API also makes the asynchronous nature of window state changes explicit, separating requested state from actual state.
 
 For example, to open a window centered on the screen with a fixed size:
 
@@ -82,7 +82,11 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.application
-import androidx.compose.ui.window.v2.*
+import androidx.compose.ui.window.v2.Window
+import androidx.compose.ui.window.v2.WindowBoundsProvider
+import androidx.compose.ui.window.v2.WindowPositionProvider
+import androidx.compose.ui.window.v2.WindowSizeProvider
+import androidx.compose.ui.window.v2.rememberWindowState
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() = application {
@@ -95,7 +99,7 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        state = windowState
+        state = windowState,
     ) {
         Text("Hello, World!", fontSize = 48.sp)
     }
