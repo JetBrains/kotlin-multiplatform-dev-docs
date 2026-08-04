@@ -142,12 +142,9 @@ fun main() = application {
 
 ## Create a single-window application
 
-You can create a single window application by calling the `singleWindowApplication()` function.
-
-The `singleWindowApplication()` function is easier to use but has the following limitations:
-* The application can have only one window.
-* You cannot add custom closing logic.
-* You cannot change the attributes of the window at runtime.
+For a simple application with one top-level window, you don't need the full `application`
+entry point with a `Window()` composable – the `singleWindowApplication()` function
+wraps both into a single call:
 
 ```kotlin
 import androidx.compose.ui.window.singleWindowApplication
@@ -157,7 +154,8 @@ fun main() = singleWindowApplication {
 }
 ```
 
-For a fully customizable window, use the [`Window()` composable](#opening-and-closing-windows) in the `application` entry point.
+For more than one top-level window, custom closing logic, or changing window attributes at runtime,
+use the [`Window()` composable](#open-and-close-windows) in the `application` entry point.
 
 ## Manage window state
 
@@ -287,7 +285,7 @@ fun main() = application {
 
 ### Listen to state changes
 
-If you need to react to state changes and send a value to a non-composable part of your application
+To react to state changes and send a value to a non-composable part of your application
 (for example, to write it to a database), you can use the `snapshotFlow()` function.
 This function captures the current value of a composable's state.
 
@@ -332,7 +330,7 @@ private fun onWindowRelocate(position: WindowPosition) {
 
 ## Manage multiple windows
 
-If an application has multiple windows, you can create a separate class for the application state and open or close windows in response to the `mutableStateListOf` changes:
+To manage multiple windows, you can create a separate class for the application state and open or close windows in response to the `mutableStateListOf` changes:
 
 ```kotlin
 import androidx.compose.runtime.Composable
@@ -407,11 +405,11 @@ For a more complex example, see the [Code Viewer](https://github.com/JetBrains/c
 
 ## Show dialogs
 
-You can use `DialogWindow()` to display a separate OS-level window with its own title bar.
+You can use the `DialogWindow()` composable to display a separate OS-level window with its own title bar.
 This is useful for confirmations, file pickers, or any interaction the user must complete before continuing.
 
 You can use the experimental `modalityType` parameter to control whether the dialog blocks interaction with other windows.
-You can set it to one of the following values:
+Set it to one of the `DialogModalityType` values:
 
 * `Modeless` does not block any other windows.
 * `DocumentModal` blocks the parent top-level window and any other windows attached to it, except for the dialog's own descendants.
@@ -471,11 +469,11 @@ fun main() = application {
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow("}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="if (isDialogOpen) { DialogWindow( ... ) }"}
 
 ## Hide windows to the system tray
 
-By default, closing the window exits the application. To hide the window to the system tray instead, 
+By default, closing the window exits the application. To hide the window to the system tray or menu bar instead, 
 you can intercept `onCloseRequest` to change the window's visibility state.
 
 In the following example, closing the window sets `isVisible` to `false`, 

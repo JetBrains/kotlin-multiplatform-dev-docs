@@ -12,8 +12,8 @@ It is not centered by default and requires additional arguments to anchor it to 
 
 Use [`Dialog()`](https://developer.android.com/reference/kotlin/androidx/compose/ui/window/Dialog.composable)
 when you need to interrupt the user and require a decision before they continue, 
-such as confirmations, alerts, or short forms. For separate OS-level dialogs on desktop, 
-see [`DialogWindow()`](compose-desktop-top-level-windows-management.md#dialogs).
+for example, react to confirmations, alerts, or short forms. For separate OS-level dialogs on desktop, 
+see [`DialogWindow()`](compose-desktop-top-level-windows-management.md#show-dialogs).
 Use `Popup()` for lightweight, non-blocking overlays that stay anchored to a component inside the current window, 
 such as dropdowns, tooltips, and menus.
 
@@ -106,8 +106,7 @@ With `PopupProperties`, you can control how the popup handles focus and dismissa
 
 `Popup()` and its `PopupProperties` are part of the common API. 
 However, some properties are not available in the common source set. 
-For example, `usePlatformInsets` is available on iOS and desktop. Its primary use case is on iOS, 
-where it limits the popup's content to the platform insets (the safe area).
+For example, `usePlatformInsets` is available on iOS, where it limits the popup's content to the platform insets (the safe area).
 
 ## What's next
 
