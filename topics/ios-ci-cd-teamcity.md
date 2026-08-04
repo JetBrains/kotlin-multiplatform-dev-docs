@@ -30,11 +30,9 @@ With this workflow, TeamCity Cloud:
    Click **Install TeamCity plugin**, then return to the setup flow.
    ![Install plugin to set up CI/CD](ios-pipeline-install-plugin.png){width=700 style="block"}
 
-<!-- TODO: Add link to marketplace
-    > You can also install the [Plugin Name](link) plugin from JetBrains Marketplace directly.
+    > You can also install the [TeamCity](https://plugins.jetbrains.com/plugin/25142) plugin from JetBrains Marketplace directly.
     >
     {style="note"}
--->
 
 4. When the IDE displays **Pipeline is ready**, the initial pipeline configuration is complete. 
    Click **Continue** and, when prompted, allow the IDE to add the generated files to Git. 
