@@ -4,6 +4,7 @@ Here are the highlights for this EAP release:
 
  * [Automatic font fallback for web](#automatic-font-fallback)
  * [MCP server for AI agents in Compose Hot Reload](#mcp-server-for-ai-agents-in-compose-hot-reload)
+ * [Window and dialog API v2 for desktop](#window-and-dialog-api-v2)
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.12.0-beta01).
 For details about specific component versions, refer to the [Dependencies](#dependencies) section.
@@ -55,6 +56,58 @@ semantic tree, simulate clicks and input, and read application logs without requ
 
 For the full list of MCP tools available to the AI agent and how to connect it, see
 [MCP server for AI agents](compose-hot-reload.md#mcp-server-for-ai-agents).
+
+### Window and dialog API v2
+<primary-label ref="Experimental"/>
+
+We've introduced a new experimental v2 API for `WindowState` and `DialogState` on desktop, 
+addressing several limitations of the existing API.
+The v2 API is available in the `androidx.compose.ui.window.v2` subpackage.
+
+The v2 API gives you more control over how windows and dialogs are placed and sized. You can: 
+* Select the screen a window appears on
+* Provide custom positioning and sizing logic, including logic based on the content's intrinsic size
+* Set minimum and maximum window sizes
+* Position dialogs relative to their parent window
+
+The v2 API also makes the asynchronous nature of window state changes explicit, separating requested state from actual state.
+
+For example, to open a window centered on the screen with a fixed size:
+
+```kotlin
+import androidx.compose.material.Text
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.v2.Window
+import androidx.compose.ui.window.v2.WindowBoundsProvider
+import androidx.compose.ui.window.v2.WindowPositionProvider
+import androidx.compose.ui.window.v2.WindowSizeProvider
+import androidx.compose.ui.window.v2.rememberWindowState
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() = application {
+    val windowState = rememberWindowState(
+        initialBoundsProvider = WindowBoundsProvider(
+            positionProvider = WindowPositionProvider.CenteredOnScreen,
+            sizeProvider = WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+        )
+    )
+
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = windowState,
+    ) {
+        Text("Hello, World!", fontSize = 48.sp)
+    }
+}
+```
+
+The v2 API also unlocks scenarios that weren't possible before, such as sizing a window to its 
+content's size while still letting the content expand (via modifiers like `fillMaxSize()`) when the window is larger.
+See the [Window and dialog API v2](compose-desktop-top-level-windows-management.md#window-and-dialog-api-v2) documentation page for details.
 
 ## Dependencies
 
