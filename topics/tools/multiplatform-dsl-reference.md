@@ -150,12 +150,13 @@ environment:
 Learn more about [configuring Kotlin/JS projects](https://kotlinlang.org/docs/js-project-setup.html).
 
 A separate `wasmWasi {}` block describes the configuration of Kotlin/Wasm targets that support the WASI system interface.
-Here, only the [`nodejs`](#node-js) execution environment is available:
+It supports the `nodejs` and `wasmtime` execution environments:
 
 ```kotlin
 kotlin {
     wasmWasi {
         nodejs()
+        wasmtime()
         binaries.executable()
     }
 }
