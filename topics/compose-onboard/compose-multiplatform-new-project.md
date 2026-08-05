@@ -26,9 +26,16 @@ specific platforms that best suit your needs.
 
 ## Create a project
 
-Create the same project as in the [basic Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md).
-If you already have a project, make sure it targets all platforms you're interested in,
-with the **Share UI** option selected for iOS and web.
+Create a fresh project using the Kotlin Multiplatform project template in your IDE
+(it is available if you have the [KMP IDE plugin installed](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)):
+
+1. Select **File** | **New** | **Project**, then **Kotlin Multiplatform** in the list of template options.
+2. To follow the tutorial exactly, name the project "ComposeDemo" and set **Project ID** to "compose.project.demo".
+3. The tutorial covers all platforms, but you can select only the ones you're interested in.
+   Select the option to **Share UI** where it is present.
+
+The first import takes a couple of minutes.
+After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
 ## Add the time dependency
 
