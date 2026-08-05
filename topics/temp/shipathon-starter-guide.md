@@ -42,7 +42,7 @@ There are different ways to share code in a KMP project, with some platform spec
       > CocoaPods is generally being phased out in favor of Swift Package Manager and is not something we recommend using in new projects.
       >
       {style="note"}   
-    * Check out the [sample and tutorial](multiplatform-upgrade-app.md#add-more-dependencies) that includes making Kotlin coroutines work with iOS.
+    * Check out the [sample and tutorial](multiplatform-upgrade-app.md) that includes making Kotlin coroutines work with iOS.
     * See the guide on using existing [SPM packages in your KMP iOS app](multiplatform-spm-import.md).
     * Read the [in-depth explanation of calling Swift / ObjC from Kotlin](https://kotlinlang.org/docs/native-objc-interop.html) and vice versa.
     * Learn about the more straightforward [Swift export](https://kotlinlang.org/docs/native-swift-export.html) approach (currently in Alpha).

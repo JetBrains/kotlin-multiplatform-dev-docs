@@ -1,40 +1,139 @@
-[//]: # (title: Create your own application)
+[//]: # (title: Simple timezone picker app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-<tldr>
-    <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
-    <br/>   
-    <p>This is the final part of the <strong>Create a Compose Multiplatform app with shared logic and UI</strong> tutorial. Before proceeding, make sure you've completed previous steps.</p>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="compose-multiplatform-create-first-app.md">Create your Compose Multiplatform app</a><br/>
-       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="compose-multiplatform-explore-composables.md">Explore composable code</a><br/>
-       <img src="icon-3-done.svg" width="20" alt="Third step"/> <a href="compose-multiplatform-modify-project.md">Modify the project</a><br/>
-       <img src="icon-4.svg" width="20" alt="Fourth step"/> <strong>Create your own application</strong><br/>
-    </p>
-</tldr>
+Let's build an application that implements a relatively complex shared UI using external dependencies
+and images as multiplatform resources.
 
-Now that you've explored and enhanced the sample project created by the wizard, you can create your own application from
-scratch, using concepts you already know and introducing some new ones.
+You'll create an application where users can select a country to see the time in the capital city of that country.
+All the functionality of your Compose Multiplatform app will be implemented in common code using multiplatform libraries.
+It'll load and display images within a dropdown menu and will use Compose events, styles, themes, modifiers, and layouts.
 
-You'll create a "Local time application" where users can enter their country and city, and the app will display the time
-in the capital city of that country. All the functionality of your Compose Multiplatform app will be implemented in common
-code using multiplatform libraries. It'll load and display images within a dropdown menu and will use events, styles, themes,
-modifiers, and layouts.
+In this tutorial, you will:
 
-At each stage, you can run the application on all three platforms (iOS, Android, and desktop), or you can focus on the
+1. Add and use a multiplatform library dependency.
+2. Implement a common Compose UI for a country picker for all supported platforms: iOS, Android, desktop, and web.
+3. Practice using Compose Hot Reload, a tool for quickly iterating on your UI without rebuilding the entire app.
+4. Import and use images in the common UI as multiplatform resources.
+
+At each stage, you can run the application on all supported platforms (iOS, Android, desktop, and web), or you can focus on the
 specific platforms that best suit your needs.
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
 {style="note"}
 
+## Create a project
+
+Create the same project as in the [basic Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md).
+If you already have a project, make sure it targets all platforms you're interested in,
+with the **Share UI** option selected for iOS and web.
+
+## Add the time dependency
+
+To work with timezones and time calculation, you'll use the [kotlin.time](https://kotlinlang.org/docs/time-measurement.html)
+classes together with the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime)
+library.
+
+While `kotlin.time` is always available as part of the standard library,
+`kotlinx-datetime` needs to be configured as an explicit dependency.
+It is a multiplatform library, so you will use it only in common code and need to specify the dependency only once:
+
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
+
+    ```toml
+    [versions]
+    kotlinx-datetime = "%dateTimeVersion%"
+    
+    [libraries]
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+    ```
+
+2. Open the `shared/build.gradle.kts` file and add a reference to the version catalog entry
+   to the section that configures the `commonMain` source set:
+
+    ```kotlin
+    kotlin {
+        // ... 
+        sourceSets {
+            commonMain.dependencies {
+                // ...
+                implementation(libs.kotlinx.datetime)
+            } 
+        }
+    }
+    ```
+
+3. For the web target, timezone support requires the `js-joda` library.
+   Add a reference to the `js-joda` npm package to the `webApp/build.gradle.kts file`:
+
+    ```kotlin
+    kotlin {
+        // ...
+        sourceSets {
+            // ...
+            webMain.dependencies {
+                // ...
+                implementation(npm("@js-joda/timezone", "%js-joda-timezone%"))
+            }
+        }
+    }
+    
+    ```
+
+   Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
+
+4. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
+   or press double **Shift** and execute the **Sync Project with Gradle Files** command.
+
+5. In the **Terminal** tool window, run the following command to update the `yarn.lock` file with the latest dependency versions:
+
+    ```shell
+    ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
+    ```
+
+6. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package:
+
+    ```kotlin
+    import androidx.compose.ui.ExperimentalComposeUiApi
+    import androidx.compose.ui.window.ComposeViewport
+    import kotlin.js.ExperimentalWasmJsInterop
+    import kotlin.js.JsModule
+
+    @OptIn(ExperimentalWasmJsInterop::class)
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    
+    @OptIn(ExperimentalComposeUiApi::class)
+    fun main() {
+        ComposeViewport {
+            App()
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
+
+> When commiting your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
+> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
+>
+{style="note"}
+
+Now you can use `kotlinx-datetime` APIs in your common code.
+
+> For more general information on how to manage multiplatform dependencies,
+> see [](multiplatform-add-dependencies.md).
+>
+{style="tip"}
+
 ## Lay the foundation
 
-To get started, implement a new `App()` composable:
+To get started, implement a new `App()` composable with the basic layout:
 
-1. In `shared/src/commonMain/kotlin`, open the `App.kt` file and replace the code with the following `App()`
-   composable:
+1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file and replace the code
+   with the following `App()` composable:
 
     ```kotlin
     @Composable
@@ -43,12 +142,18 @@ To get started, implement a new `App()` composable:
         MaterialTheme {
             var timeAtLocation by remember { mutableStateOf("No location selected") }
    
+            // The UI is a column that holds a Text and a Button
             Column(
+                // Basic layout improvements that make sure that the Column()
+                // fills all available space without overlapping the system bars
                 modifier = Modifier
                     .safeContentPadding()
                     .fillMaxSize(),
             ) {
+                // The Text composable observes the timeAtLocation state
                 Text(timeAtLocation)
+                // The Button composable also uses the timeAtLocation state
+                // but shows a hardcoded time for now
                 Button(onClick = { timeAtLocation = "13:30" }) {
                     Text("Show Time At Location")
                 }
@@ -56,36 +161,47 @@ To get started, implement a new `App()` composable:
         }
     }
     ```
+   
+    The `remember` API implements Compose-specific state management,
+    for an in-depth introduction see [Managing state](https://developer.android.com/develop/ui/compose/state)
+    in Jetpack Compose documentation.  
 
-   * The layout is a column containing two composables. The first is a `Text` composable, and the second is a `Button`.
-   * The two composables are linked by a single shared state, namely the `timeAtLocation` property. The `Text`
-     composable is an observer of this state.
-   * The `Button` composable changes the state using the `onClick` event handler.
+2. Follow the IDE's instructions to import the missing dependencies.
 
-2. Run the application on Android and iOS:
+3. Run the application on Android and iOS:
 
    ![New Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-3.png){width=500}
 
-   When you run your application and click the button, the hardcoded time, 13:30, is displayed.
+   When you run your application and click the button, the app displays the hardcoded time — 13:30.
 
-3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "🔥desktopApp"
+4. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "desktopApp [hot] 🔥"
    run configuration.
    The app works, but the window looks mismatched with the UI:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-4. To fix this, update the `main.kt` file in the `desktopApp` source set as follows:
+## Use Compose Hot Reload to quickly iterate on UI
+
+You can fix the desktop UI and verify the fix without rerunning the build:
+
+1. Update the `main.kt` file under the `desktopApp/src/` directory as follows:
 
     ```kotlin
     fun main() = application {
+        // Sets the initial size and position
+        // of the window on screen
         val state = rememberWindowState(
             size = DpSize(400.dp, 350.dp),
             position = WindowPosition(300.dp, 300.dp)
         )
+        // Sets the title of the application window
+        // and uses the window state initialized above
         Window(
             title = "Local Time App", 
             onCloseRequest = ::exitApplication, 
             state = state,
+            // Makes sure that the window is always on top
+            // to make debug and UI iteration easier
             alwaysOnTop = true
         ) {
             App()
@@ -93,281 +209,104 @@ To get started, implement a new `App()` composable:
     }
     ```
 
-    Here, you set the title of the window and use the `WindowState` type to give the window an initial size and position on
-    the screen.
+2. Follow the IDE's instructions to import the missing dependencies.
 
-5. Follow the IDE's instructions to import the missing dependencies.
+3. To see the app automatically update, save the modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>).
+   The window should adjust:
 
-6. To see the app automatically update, save any modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>). Its appearance should improve:
-
-   ![Smaller window of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}
+   <!--![Smaller window of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}-->
 
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
 ## Support user input
 
-Now let users enter the name of a city to see the time at that location. The simplest way to achieve this is by adding
-a `TextField` composable:
+For simplicity, you won't implement a complicated logic of specifying and validating time zones.
+The app will offer several countries to choose from and display the time in the capital of the country.
 
-1. Replace the current implementation of `App()` in `commonMain/kotlin/compose.project.demo/App.kt` with the one below:
+> For examples closer to production applications you can see the [Share data access layer tutorial](multiplatform-ktor-sqldelight.md)
+> or the [Jetcaster migration guide](migrate-from-android.md).
+> 
+{style="tip"}
 
-    ```kotlin
-    @Composable
-    @Preview
-    fun App() {
-        MaterialTheme {
-            var location by remember { mutableStateOf("Europe/Paris") }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
-            Column(
-                modifier = Modifier
-                    .safeContentPadding()
-                    .fillMaxSize(),
-            ) {
-                Text(timeAtLocation)
-                TextField(value = location, onValueChange = { location = it })
-                Button(onClick = { timeAtLocation = "13:30" }) {
-                    Text("Show Time At Location")
-                }
-            }
-        }
-    }
-    ```
+To achieve this, update the `App()` composable and the `currentTimeAt()` function, adding an auxiliary data class:
 
-    The new code adds both the `TextField` and a `location` property. As the user types into the text field, the value of
-    the property is incrementally updated using the `onValueChange` event handler.
+ ```kotlin
+// Simplified representation of timezones for this example 
+data class Country(val name: String, val zone: TimeZone)
+ 
+// Takes TimeZone as a parameter to calculate time with
+fun currentTimeAt(location: String, zone: TimeZone): String {
+  fun LocalTime.formatted() = "$hour:$minute:$second"
 
-2. Follow the IDE's suggestions to import the missing dependencies.
-3. Run the application on each platform you're targeting. The time displayed is still hardcoded,
-   but now you can enter a timezone in the text field: 
+  val time = Clock.System.now()
+  val localTime = time.toLocalDateTime(zone).time
 
-<tabs>
-    <tab id="mobile-user-input" title="Android and iOS">
-        <img src="first-compose-project-on-android-ios-4.png" alt="User input in the Compose Multiplatform app on Android and iOS" width="500"/>
-    </tab>
-    <tab id="desktop-user-input" title="Desktop">
-        <img src="first-compose-project-on-desktop-5.png" alt="User input in the Compose Multiplatform app on desktop" width="350"/>
-    </tab>
-    <tab id="web-user-input" title="Web">
-        <img src="first-compose-project-on-web-3.png" alt="User input in the Compose Multiplatform app on the web" width="500"/>
-    </tab>
-</tabs>
+  return "The time in $location is ${localTime.formatted()}"
+}
 
-## Calculate time
+// Defines a list of supported countries
+// with specific associated timezones
+fun countries() = listOf(
+  Country("Japan", TimeZone.of("Asia/Tokyo")),
+  Country("France", TimeZone.of("Europe/Paris")),
+  Country("Mexico", TimeZone.of("America/Mexico_City")),
+  Country("Indonesia", TimeZone.of("Asia/Jakarta")),
+  Country("Egypt", TimeZone.of("Africa/Cairo")),
+)
 
-The next step is to use the given input to calculate time. To do this, create a `currentTimeAt()` function:
+// Now requires a list of countries to display in the dropdown menu
+@Composable
+@Preview
+fun App(countries: List<Country> = countries()) {
+  MaterialTheme {
+      var showCountries by remember { mutableStateOf(false) }
+      var timeAtLocation by remember { mutableStateOf("No location selected") }
 
-1. Return to the `shared/src/commonMain/kotlin/compose.project.demo/App.kt` file and add the following function:
 
-    ```kotlin
-   fun currentTimeAt(location: String): String? {
-        fun LocalTime.formatted() = "$hour:$minute:$second"
+      // Composables receive .padding() modifiers to add some space
+      // between controls and around them
+      Column(
+          modifier = Modifier
+              .padding(20.dp)
+              .safeContentPadding()
+              .fillMaxSize(),
+      ) {
+          Text(
+              timeAtLocation,
+              style = TextStyle(fontSize = 20.sp),
+          )
+          Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
+              DropdownMenu(
+                  // Uses a remembered value to control
+                  // the visibility of the  dropdown menu
+                  expanded = showCountries,
+                  onDismissRequest = { showCountries = false }
+              ) {
+                  // Creates a dropdown menu item for each country
+                  countries.forEach { (name, zone) ->
+                      DropdownMenuItem(
+                          text = { Text(name) },
+                          onClick = {
+                              timeAtLocation = currentTimeAt(name, zone)
+                              showCountries = false
+                          }
+                      )
+                  }
+              }
+          }
 
-        return try {
-            val time = Clock.System.now()
-            val zone = TimeZone.of(location)
-            val localTime = time.toLocalDateTime(zone).time
-            "The time in $location is ${localTime.formatted()}"
-        } catch (ex: IllegalTimeZoneException) {
-            null
-        }
-    }
-    ```
+          Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
+              onClick = { showCountries = !showCountries }) {
+              Text("Select Location")
+          }
+      }
+  }
+}
+```
 
-    This function is similar to `todaysDate()`, which you created earlier and which is no longer required.
+Follow the IDE's instructions to import the missing dependencies. When importing `Row()`, pick the `@Composable` version.
 
-    > If the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) library is not yet added to the project,
-    > follow the instructions in the [Add a new dependency](compose-multiplatform-modify-project.md#add-a-new-dependency) section.
-    >
-    {style="note"}
-   
-2. Follow the IDE's instructions to import the missing dependencies. 
-   Make sure to import the `Clock` class from `kotlin.time`, not `kotlinx.datetime`.
-3. Adjust your `App` composable to invoke `currentTimeAt()`:
-
-    ```kotlin
-   @Composable
-   @Preview
-   fun App() {
-   MaterialTheme { 
-       var location by remember { mutableStateOf("Europe/Paris") }
-       var timeAtLocation by remember { mutableStateOf("No location selected") }
-   
-       Column(
-           modifier = Modifier
-               .safeContentPadding()
-               .fillMaxSize()
-           ) {
-               Text(timeAtLocation)
-               TextField(value = location, onValueChange = { location = it })
-               Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
-                   Text("Show Time At Location")
-               }
-           }
-       }
-   }
-    ```
-
-4. Run the application again and enter a valid timezone.
-5. Click the button. You should see the correct time:
-
-<tabs>
-    <tab id="mobile-time-display" title="Android and iOS">
-        <img src="first-compose-project-on-android-ios-5.png" alt="Time display in the Compose Multiplatform app on Android and iOS" width="500"/>
-    </tab>
-    <tab id="desktop-time-display" title="Desktop">
-        <img src="first-compose-project-on-desktop-6.png" alt="Time display in the Compose Multiplatform app on desktop" width="350"/>
-    </tab>
-    <tab id="web-time-display" title="Web">
-        <img src="first-compose-project-on-web-4.png" alt="Time display in the Compose Multiplatform app on the web" width="500"/>
-    </tab>
-</tabs>
-
-## Improve the style
-
-The application is working, but there are issues with its appearance. The composables could be spaced better, and the
-time message could be rendered more prominently.
-
-1. To address these issues, use the following version of the `App` composable:
-
-    ```kotlin
-    @Composable
-    @Preview
-    fun App() {
-        MaterialTheme {
-            var location by remember { mutableStateOf("Europe/Paris") }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-   
-            Column(
-                modifier = Modifier
-                    .padding(20.dp)
-                    .safeContentPadding()
-                    .fillMaxSize(),
-            ) {
-                Text(
-                    timeAtLocation,
-                    style = TextStyle(fontSize = 20.sp),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
-                )
-                TextField(
-                    value = location,
-                    onValueChange = { location = it },
-                    modifier = Modifier.padding(top = 10.dp)
-                )
-                Button(
-                    onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" },
-                    modifier = Modifier.padding(top = 10.dp)
-                ) {
-                    Text("Show Time")
-                }
-            }
-        }
-    }
-    ```
-
-    * The `modifier` parameter adds padding all around the `Column`, as well as at the top of the `Button` and the `TextField`.
-    * The `Text` composable fills the available horizontal space and centers its content.
-    * The `style` parameter customizes the appearance of the `Text`.
-
-2. Follow the IDE's instructions to import the missing dependencies.
-
-3. Run the application to see how the appearance has improved:
-
-<tabs>
-    <tab id="mobile-improved-style" title="Android and iOS">
-        <img src="first-compose-project-on-android-ios-6.png" alt="Improved style of the Compose Multiplatform app on Android and iOS" width="500"/>
-    </tab>
-    <tab id="desktop-improved-style" title="Desktop">
-        <img src="first-compose-project-on-desktop-7.png" alt="Improved style of the Compose Multiplatform app on desktop" width="350"/>
-    </tab>
-    <tab id="web-improved-style" title="Web">
-        <img src="first-compose-project-on-web-5.png" alt="Improved style of the Compose Multiplatform app on the web" width="500"/>
-    </tab>
-</tabs>
-
-## Refactor the UI
-
-The application works, but it's susceptible to typos. For example, if a user enters "Franse" instead of "France",
-the app won't be able to process that input. It would be easier for users to pick countries from a predefined
-list.
-
-1. To achieve this, update the `App()` composable and the `currentTimeAt()` function, adding an auxiliary data class:
-
-    ```kotlin
-    data class Country(val name: String, val zone: TimeZone)
-    
-    fun currentTimeAt(location: String, zone: TimeZone): String {
-        fun LocalTime.formatted() = "$hour:$minute:$second"
-    
-        val time = Clock.System.now()
-        val localTime = time.toLocalDateTime(zone).time
-    
-        return "The time in $location is ${localTime.formatted()}"
-    }
-    
-    fun countries() = listOf(
-        Country("Japan", TimeZone.of("Asia/Tokyo")),
-        Country("France", TimeZone.of("Europe/Paris")),
-        Country("Mexico", TimeZone.of("America/Mexico_City")),
-        Country("Indonesia", TimeZone.of("Asia/Jakarta")),
-        Country("Egypt", TimeZone.of("Africa/Cairo")),
-    )
-    
-    @Composable
-    @Preview
-    fun App(countries: List<Country> = countries()) {
-        MaterialTheme {
-            var showCountries by remember { mutableStateOf(false) }
-            var timeAtLocation by remember { mutableStateOf("No location selected") }
-    
-            Column(
-                modifier = Modifier
-                    .padding(20.dp)
-                    .safeContentPadding()
-                    .fillMaxSize(),
-            ) {
-                Text(
-                    timeAtLocation,
-                    style = TextStyle(fontSize = 20.sp),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
-                )
-                Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
-                    DropdownMenu(
-                        expanded = showCountries,
-                        onDismissRequest = { showCountries = false }
-                    ) {
-                        countries().forEach { (name, zone) ->
-                            DropdownMenuItem(
-                                text = {   Text(name)},
-                                onClick = {
-                                    timeAtLocation = currentTimeAt(name, zone)
-                                    showCountries = false
-                                }
-                            )
-                        }
-                    }
-                }
-    
-                Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
-                    onClick = { showCountries = !showCountries }) {
-                    Text("Select Location")
-                }
-            }
-        }
-    }
-    ```
-
-   * There is a `Country` type, consisting of a name and a timezone.
-   * The `currentTimeAt()` function takes a `TimeZone` as its second parameter.
-   * The `App` now requires a list of countries as a parameter. The `countries()` function provides the list.
-   * `DropdownMenu` has replaced the `TextField`. The value of the `showCountries` property determines the visibility
-     of the `DropdownMenu`. There is a `DropdownMenuItem` for each country.
-
-2. Follow the IDE's instructions to import the missing dependencies.
-   When importing `Row()`, pick the `@Composable` version.
-3. Run the application to see the redesigned version:
+Run the application to see the redesigned version:
 
 <tabs>
     <tab id="mobile-country-list" title="Android and iOS">
@@ -388,6 +327,63 @@ list.
 >
 {style="note"}
 
+## Calculate time
+
+The next step is to match the user input with a timezone and calculate time.
+To do this, create a `currentTimeAt()` function:
+
+1. Return to the `shared/src/commonMain/kotlin/compose.project.demo/App.kt` file and add the following function:
+
+    ```kotlin
+    fun currentTimeAt(location: String): String? {
+        fun LocalTime.formatted() = "$hour:$minute:$second"
+    
+        return try {
+            val time = Clock.System.now()
+            val zone = TimeZone.of(location)
+            val localTime = time.toLocalDateTime(zone).time
+            "The time in $location is ${localTime.formatted()}"
+        } catch (ex: IllegalTimeZoneException) {
+            null
+        }
+    }
+    ```
+
+2. Follow the IDE's instructions to import the missing dependencies.
+   Make sure to import the `Clock` class from `kotlin.time`, not `kotlinx.datetime`.
+
+3. Call the `currentTimeAt()` function from your `App()` composable
+   instead of using the hardcoded value:
+
+   <compare type="top-bottom">
+   <code-block lang="kotlin">
+   Button(onClick = { timeAtLocation = "13:30" }) {
+       Text("Show Time At Location")
+   }
+   </code-block>
+   <code-block lang="kotlin">
+   Button(onClick = { timeAtLocation = currentTimeAt(location) ?: "Invalid Location" }) {
+       Text("Show Time At Location")
+   }
+   </code-block>
+   </compare>
+
+4. Run the application again and enter a [valid timezone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
+   (from the "TZ identifier" column).
+5. Click the button. You should see the correct time:
+
+<tabs>
+    <tab id="mobile-time-display" title="Android and iOS">
+        <img src="first-compose-project-on-android-ios-5.png" alt="Time display in the Compose Multiplatform app on Android and iOS" width="500"/>
+    </tab>
+    <tab id="desktop-time-display" title="Desktop">
+        <img src="first-compose-project-on-desktop-6.png" alt="Time display in the Compose Multiplatform app on desktop" width="350"/>
+    </tab>
+    <tab id="web-time-display" title="Web">
+        <img src="first-compose-project-on-web-4.png" alt="Time display in the Compose Multiplatform app on the web" width="500"/>
+    </tab>
+</tabs>
+
 ## Introduce images
 
 The list of country names works, but it's not a great user experience.
@@ -404,7 +400,7 @@ code to load and display them:
    are [Japan](https://flagcdn.com/w320/jp.png), [France](https://flagcdn.com/w320/fr.png), [Mexico](https://flagcdn.com/w320/mx.png), [Indonesia](https://flagcdn.com/w320/id.png),
    and [Egypt](https://flagcdn.com/w320/eg.png).
 
-2. Move the images to the `composeApp/src/commonMain/composeResources/drawable` directory so that the same flags are available on all platforms:
+2. Move the images to the `shared/src/commonMain/composeResources/drawable` directory so that the same flags are available on all platforms:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
@@ -413,12 +409,14 @@ code to load and display them:
 4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
 
     ```kotlin
-    import demo.composeapp.generated.resources.jp
-    import demo.composeapp.generated.resources.mx
-    import demo.composeapp.generated.resources.eg
-    import demo.composeapp.generated.resources.fr
-    import demo.composeapp.generated.resources.id
-   
+    import composedemo.shared.generated.resources.Res
+    import demo.shared.generated.resources.eg
+    import demo.shared.generated.resources.fr
+    import demo.shared.generated.resources.id
+    import demo.shared.generated.resources.jp
+    import demo.shared.generated.resources.mx
+    
+    // The type now also holds a reference to the flag image
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
@@ -430,6 +428,8 @@ code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
+    // The list is initialized with the addition of Compose Multiplatform
+    // resource references
     val defaultCountries = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
@@ -454,18 +454,20 @@ code to load and display them:
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
                 )
                 Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                     DropdownMenu(
                         expanded = showCountries,
                         onDismissRequest = { showCountries = false }
                     ) {
-                        countries.forEach { (name, zone, image) ->
+                        defaultCountries.forEach { (name, zone, image) ->
+                            // Each country is displayed in a 'DropdownMenuItem'
+                            // as a flag ('Image()') and a name ('Text()')
                             DropdownMenuItem(
                                 text = { Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
+                                        // 'painterResource()' supplies the Painter object
+                                        // required by 'Image()'
                                         painterResource(image),
                                         modifier = Modifier.size(50.dp).padding(end = 10.dp),
                                         contentDescription = "$name flag"
@@ -491,11 +493,6 @@ code to load and display them:
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)"}
 
-    * The `Country` type stores the path to the associated image.
-    * The list of countries passed to the `App` includes these paths.
-    * The `App` displays an `Image` in each `DropdownMenuItem`, followed by a `Text` composable with the name of a country.
-    * Each `Image` requires a `Painter` object to fetch the data.
-
 5. Follow the IDE's instructions to import the missing dependencies.
 6. Run the application to see the new behavior:
 
@@ -517,20 +514,22 @@ code to load and display them:
 
 ## What's next
 
-We encourage you to explore multiplatform development further and try out more projects:
-
-* [Make your Android app cross-platform](multiplatform-integrate-in-existing-app.md)
-* [Create a multiplatform app using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-* [Share business logic between iOS and Android while keeping the UI native](multiplatform-create-first-app.md)
-* [Create a Compose Multiplatform app with Kotlin/Wasm](https://kotlinlang.org/docs/wasm-get-started.html)
-* [See the curated list of sample projects](multiplatform-samples.md)
+This tutorial only covers the basic building blocks of a multiplatform project.
+To dive deeper into specific parts:
+* Learn about the [fundamentals of Compose layouts](compose-layout.md)
+* Learn about [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md)
+* See the [general documentation on adding multiplatform dependencies](multiplatform-add-dependencies.md)
+* Follow more complicated tutorials to take a look at samples which are closer to production applications:
+  * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
+  * [Migrate an advanced Android app to KMP](migrate-from-android.md)
+* [See the curated list of sample multiplatform projects](multiplatform-samples.md)
 
 Join the community:
 
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
+  Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
 * ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
-* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get
-  an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel
 * ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
   the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
 * ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
