@@ -111,12 +111,14 @@
     </chapter>
 
     <chapter title="Myth: Cross-platform frameworks compromise iOS performance and experience" id="myth-cross-platform-frameworks-compromise-ios-performance-and-experience">
+        <p><format style="bold">Reality: Kotlin Multiplatform allows you to share code without compromising on app performance or user experience.</format></p>
         <p>A common concern is that Kotlin Multiplatform will hurt an iOS app's performance or experience. That assumption is often based on prior experience with frameworks that use bridges or proprietary runtimes, such as React Native.</p>
 
         <p>KMP operates differently. It generates shared code for iOS with LLVM, the same toolchain family as Swift. There's no JavaScript bridge, no integrated runtime layer, and no abstraction between your code and iOS. This means your app continues to function as a fully native binary, with performance characteristics consistent with typical iOS development.</p>
     </chapter>
 
     <chapter title="Myth: Kotlin Multiplatform is a niche or risky technology" id="myth-kotlin-multiplatform-is-a-niche-or-risky-technology">
+        <p><format style="bold">Reality: Kotlin Multiplatform is used in real-world, large-scale applications by well-known companies such as Google, Duolingo, Booking.com, and Sony.</format></p>
         <p>You might still associate Kotlin Multiplatform with its early experimental days. However, Kotlin Multiplatform officially reached Stable status in November 2023 and is production-ready across all supported platforms. KMP is <a href="https://kotlinlang.org/case-studies/?type=multiplatform&amp;platforms=ios">already used</a> in real-world, large-scale iOS applications by well-known companies such as <a href="https://youtu.be/5lkZj4v4-ks?si=OHg0v60urRqxuZZi">Google</a>, <a href="https://2025.kotlinconf.com/talks/812400/">Duolingo</a>, <a href="https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d">Booking.com</a>, <a href="https://youtu.be/VVf6txPZk3Y?si=6PVoeS8Pa0-QHUsT">Sony</a>, <a href="https://www.youtube.com/watch?v=hZPL8QqiLi8">Philips</a>, and <a href="https://www.youtube.com/watch?v=HSIhkB5bGJs">McDonald's</a>.</p>
         <p>The ecosystem has continued to mature as well: Compose Multiplatform for iOS reached Stable status in 2025, making it possible to build production-ready shared UIs in addition to shared business logic. According to the Kotlin Multiplatform Survey 2025, KMP is now seen as production-viable, with ~70% of plugin users satisfied or very satisfied, and ~80% using Compose Multiplatform.</p>
 
@@ -142,6 +144,7 @@
     </chapter>
 
     <chapter title="Myth: Kotlin Multiplatform is only for Android developers" id="myth-kotlin-multiplatform-is-only-for-android-developers">
+        <p><format style="bold">Reality: Kotlin is a general-purpose language, and Kotlin Multiplatform is designed for cross-platform teams, allowing iOS developers to shape shared code.</format></p>
         <p>Kotlin Multiplatform is often perceived as "Android-first", with iOS developers just along for the ride.</p>
 
         <p>Kotlin is a general-purpose language, and shared code in KMP is simply another aspect of the codebase, not something owned by a single platform. iOS developers can read and contribute to it, shape APIs, and impact cross-platform design.</p>
@@ -156,6 +159,7 @@
     </chapter>
 
     <chapter title="Myth: My iOS workflow will become more complicated" id="myth-my-ios-workflow-will-become-more-complicated">
+        <p><format style="bold">Reality: You don’t lose your flow – you gain new skills. Kotlin Multiplatform is designed to be adopted incrementally rather than all at once.</format></p>
         <p>One of the main concerns about KMP is that it may disturb an established iOS workflow. If you've already gone through shifts like Objective-C → Swift → SwiftUI and ongoing toolchain changes, the idea of adding "one more thing" can feel exhausting. This concern is valid, which is why Kotlin Multiplatform is designed to be adopted incrementally rather than all at once.</p>
 
         <p>You don't have to embrace a completely new toolchain overnight. For many iOS developers, KMP can start by just consuming a shared module. This means that your day-to-day workflow can remain relatively unaffected as you assess its usefulness.</p>
@@ -184,6 +188,7 @@
     </chapter>
 
     <chapter title="Myth: Kotlin Multiplatform produces non-idiomatic Swift APIs" id="myth-kotlin-multiplatform-produces-non-idiomatic-swift-apis">
+        <p><format style="bold">Reality: Swifty APIs are possible with teamwork and the right tools. With newer tooling like Swift Export, Kotlin is moving toward even more direct and idiomatic integration with Swift.</format></p>
         <p>Swift interoperability in Kotlin Multiplatform remains a relevant concern. For now, Kotlin code is presented to iOS via an Objective-C bridge, which can make Swift APIs feel less natural, particularly in naming, nullability, generics, or async patterns.</p>
 
         <p>Yes, it can feel unlike Swift if not managed properly. However, good Swift APIs are possible when shared code is developed with iOS in mind. Here are a few best practices:</p>
@@ -203,6 +208,7 @@
     </chapter>
 
     <chapter title="Myth: Sharing UI means losing native iOS experience" id="myth-sharing-ui-means-losing-native-ios-experience">
+        <p><format style="bold">Reality: UI sharing is optional. Teams can keep a fully native UI with SwiftUI or UIKit, introduce a shared UI with Compose Multiplatform, or combine both approaches depending on your needs.</format></p>
         <p>A prevalent misperception is that using Kotlin Multiplatform requires giving up a fully native iOS UI. It doesn't.</p>
 
         <p>KMP doesn't require a shared UI at all. You can share only the underlying functionality and keep the rest native:</p>
@@ -212,8 +218,6 @@
             <li>Animations and interactions can stay completely native.</li>
             <li>Platform APIs are accessed directly and without wrappers.</li>
         </list>
-
-    </chapter>
 
         <chapter title="So, will your app no longer feel like an iOS app?" id="so-will-your-app-no-longer-feel-like-an-ios-app">
 
@@ -228,11 +232,13 @@
 
         <p>Importantly, there's interoperability between Compose Multiplatform and traditional iOS UIs, meaning you can embed shared components alongside native views or gradually adopt them over time. This allows teams to evolve their UI strategy without committing to a single approach upfront.</p>
         </chapter>
+    </chapter>
 
     <p><a as="button" href="https://kotlinlang.org/compose-multiplatform/" mode="rock" icon="arrow-right" icon-position="right">Explore Compose Multiplatform</a>
         </p>
 
     <chapter title="Myth: Adopting Kotlin Multiplatform means no more Swift" id="myth-adopting-kotlin-multiplatform-means-no-more-swift">
+        <p><format style="bold">Reality: Swift remains essential for native iOS development, while Kotlin Multiplatform adds a shared layer for the parts of the application that benefit from code reuse.</format></p>
         <p>A common fear is that introducing Kotlin Multiplatform will render Swift obsolete. But KMP isn't here to replace it – Swift remains essential for iOS development.</p>
 
         <p>You continue to code Swift for everything that makes an iOS app feel like iOS:</p>
@@ -288,7 +294,7 @@
         </p>
 
     <chapter title="When Kotlin Multiplatform makes sense (and when it doesn't)" id="when-kotlin-multiplatform-makes-sense-and-when-it-doesnt">
-        <p>Kotlin Multiplatform makes sense when there is a overlap between iOS and Android logic, and this duplication is beginning to bite. It's especially valuable for teams that want to maintain a native iOS experience while sharing business rules, networking, data processing, or domain logic across platforms.</p>
+        <p>Kotlin Multiplatform makes sense when there is an overlap between iOS and Android logic, and this duplication is beginning to bite. It's especially valuable for teams that want to maintain a native iOS experience while sharing business rules, networking, data processing, or domain logic across platforms.</p>
 
         <p>KMP is usually a <b>good match</b> when:</p>
 
