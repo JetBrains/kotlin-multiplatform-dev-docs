@@ -6,6 +6,9 @@
 In this tutorial you will start with the wizard-generated KMP project and build a more complex application
 that shares the code for network requests and data serialization between iOS and Android.
 
+The app will retrieve data over the internet from the [Launch Library 2](https://lldev.thespacedevs.com/docs)
+API and display descriptions of the latest successful space launch among other messages.
+
 In the course of the tutorial, you will consume the data provided by the common module in the UI of iOS and Android apps:
 
 1. Add common and platform-specific dependencies.
@@ -16,9 +19,6 @@ In the course of the tutorial, you will consume the data provided by the common 
 Network requests and data serialization are the [most popular use cases](https://kotlinlang.org/lp/multiplatform/) for sharing code using Kotlin
 Multiplatform.
 You will implement both in the shared module of the final project.
-
-The updated app will retrieve data over the internet from the [Launch Library 2](https://lldev.thespacedevs.com/docs)
-API and display descriptions of the latest space launches.
 
 > You can find the final state of the project in two branches of our GitHub repository, with different iOS coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
@@ -34,13 +34,19 @@ with the **Do not share UI** option selected for iOS.
 
 ## Add dependencies
 
-You'll need to add the following multiplatform libraries in your project:
+You'll use the following multiplatform libraries in your project:
 
 * [`kotlinx-datetime`](https://github.com/Kotlin/kotlinx-datetime), to process and format timestamps.
 * [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to use coroutines for simultaneous operations.
 * [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the API into objects of entity classes used to process
   network operations.
+
+All platform-specific code is wrapped in platform artifacts of the libraries,
+so you don't have to implement platform-specific calls yourself.
+
+Native iOS UI will require an additional library to bridge asynchronous code between Swift and Kotlin.
+This configuration is covered after the common API is ready for consumption, in the [](#update-native-ios-ui) section.
 
 ### Update the Gradle version catalog
 
@@ -49,6 +55,7 @@ in build configuration code:
 
 ```toml
 [versions]
+# ...
 kotlinx-coroutines = "%coroutinesVersion%"
 kotlinx-datetime = "%dateTimeVersion%"
 ktor = "%ktorVersion%"
@@ -56,6 +63,7 @@ ktor = "%ktorVersion%"
 kotlin = "%kotlinVersion%"
 
 [libraries]
+# ...
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -65,6 +73,7 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 
 [plugins]
+# ...
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ```
 
@@ -108,7 +117,7 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
-### Check out the general dependency guide
+### Check out the dependency management overview
 
 For more general information on how to manage multiplatform dependencies,
 see [](multiplatform-add-dependencies.md).
@@ -197,8 +206,9 @@ data class LaunchListResponse(
            // Asynchronously retrieves information about rocket launches
            val response: LaunchListResponse =
                httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
-           // Gets the latest launch (in the response they are sorted from newest to oldest)
-           // that was successful (API marks these with status.id 3)
+           // Gets the latest successful launch.
+           // In the response launches are sorted from newest to oldest,
+           // and successful launches are marked with 'status.id' 3
            val lastSuccessLaunch = response.results.first { it.status.id == 3 }
            // Converts the launch timestamp to local time
            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
@@ -324,6 +334,9 @@ arranged vertically and separated by dividers:
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.unit.dp
 
 @Composable
 @Preview
