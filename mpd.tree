@@ -16,6 +16,22 @@
                      accepts-web-file-names="kotlin-multiplatform-roadmap.html"
                      target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
+	<toc-element toc-title="Create KMP apps">
+		<toc-element toc-title="Share both logic and UI">
+			<toc-element topic="compose-multiplatform-create-first-app.md"/> <!--create a base project & tweak UI to see it work everywhere at once -->
+			<toc-element topic="compose-multiplatform-new-project.md"/> <!-- from the wizard to the final CMP sample -->
+		</toc-element>
+		<toc-element toc-title="Share logic and native UI">
+			<toc-element topic="multiplatform-create-first-app.md"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
+			<toc-element topic="multiplatform-upgrade-app.md"/> <!-- from the wizard to the final KMP sample -->
+		</toc-element>
+		<toc-element toc-title="Migrate to KMP from Android">
+			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
+			<toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>
+		</toc-element>
+		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
+		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
+	</toc-element>
 	<toc-element toc-title="Compose Multiplatform UI framework">
         <toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
@@ -97,22 +113,7 @@
 		<toc-element topic="compose-compatibility-and-versioning.md"/>
 		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
 	</toc-element>
-	<toc-element toc-title="Create KMP apps">
-		<toc-element toc-title="Sample sharing both logic and UI">
-			<toc-element topic="compose-multiplatform-create-first-app.md"/> <!--create a base project & tweak UI to see it work everywhere at once -->
-			<toc-element topic="compose-multiplatform-new-project.md"/> <!-- from the wizard to the final CMP sample -->
-		</toc-element>
-		<toc-element toc-title="Sample with shared logic and native UI">
-			<toc-element topic="multiplatform-create-first-app.md"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
-			<toc-element topic="multiplatform-upgrade-app.md"/> <!-- from the wizard to the final KMP sample -->
-		</toc-element>
-		<toc-element toc-title="Migrate to KMP from Android">
-			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
-			<toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>
-		</toc-element>
-		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
-		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
-	</toc-element>
+
 	<toc-element toc-title="Manage project structure">
 		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
 
