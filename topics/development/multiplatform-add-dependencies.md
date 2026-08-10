@@ -36,6 +36,8 @@ For both types of dependencies, you can use local and external repositories.
 
 ## Local multiplatform dependencies
 
+### Dependency on a local multiplatform library
+
 To add a dependency on a multiplatform library, update the `build.gradle(.kts)` file of the dependent shared code module.
 Set a dependency of the required [type](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types)
 (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
@@ -67,6 +69,56 @@ kotlin {
         commonMain {
             dependencies {
                 implementation 'com.example:my-library:1.0'
+            }
+        }
+    }
+}
+```
+
+</tab>
+</tabs>
+
+### Dependency on another multiplatform project
+
+One multiplatform project can depend on another.
+To set this up, add a project-type dependency to the source set that needs it.
+If you want to use a dependency in all source sets, add it to the common one.
+In this case, other source sets will get their versions automatically.
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+kotlin {
+    //...
+    sourceSets {
+        commonMain.dependencies {
+            implementation(project(":some-other-multiplatform-module"))
+        }
+        androidMain.dependencies {
+            // Platform-specific declarations of :some-other-multiplatform-module
+            // will be resolved automatically
+        }
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+kotlin {
+    //...
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(':some-other-multiplatform-module')
+            }
+        }
+        androidMain {
+            dependencies {
+                // Platform-specific declarations of :some-other-multiplatform-module
+                // will be resolved automatically
             }
         }
     }
@@ -281,59 +333,15 @@ kotlin {
 </tab>
 </tabs>
 
-## Dependency on another multiplatform project
-
-One multiplatform project can depend on another.
-To implement this, add a project-type dependency to the source set that needs it.
-If you want to use a dependency in all source sets, add it to the common one.
-In this case, other source sets will get their versions automatically.
-
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-kotlin {
-    //...
-    sourceSets {
-        commonMain.dependencies {
-            implementation(project(":some-other-multiplatform-module"))
-        }
-        androidMain.dependencies {
-            // Platform-specific declarations of :some-other-multiplatform-module
-            // will be resolved automatically
-        }
-    }
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-kotlin {
-    //...
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation project(':some-other-multiplatform-module')
-            }
-        }
-        androidMain {
-            dependencies {
-                // Platform-specific declarations of :some-other-multiplatform-module
-                // will be resolved automatically
-            }
-        }
-    }
-}
-```
-
-</tab>
-</tabs>
-
 ## What's next?
 
 Check out other resources on adding dependencies in multiplatform projects and learn more about:
 
 * [Adding Android dependencies](multiplatform-android-dependencies.md)
 * [Adding iOS dependencies](multiplatform-ios-dependencies.md)
+* Check out the examples of [how to use Android and iOS libraries](multiplatform-samples.md) in sample projects.
+
+## Get help
+
+* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).

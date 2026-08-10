@@ -117,10 +117,8 @@
 	<toc-element toc-title="Manage project structure">
 		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
 
-		<toc-element toc-title="Dependencies">
-			<toc-element toc-title="Adding dependencies" topic="multiplatform-dependencies.md"/>
-			<!-- TODO combine with prev -->
-			<toc-element toc-title="On multiplatform libraries" topic="multiplatform-add-dependencies.md" hidden="true"/>
+		<toc-element toc-title="Multiplatform dependencies">
+			<toc-element toc-title="Adding dependencies" topic="multiplatform-add-dependencies.md"/>
 
 			<toc-element toc-title="Android-specific dependencies" topic="multiplatform-android-dependencies.md"/>
 			<toc-element toc-title="iOS-specific dependencies" topic="multiplatform-ios-dependencies.md"/> <!-- TODO Combine / move to iOS integration? -->
