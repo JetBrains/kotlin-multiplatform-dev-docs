@@ -117,11 +117,6 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
-### Check out the dependency management overview
-
-For more general information on how to manage multiplatform dependencies,
-see [](multiplatform-add-dependencies.md).
-
 ## Set up API requests
 
 You'll use the [Launch Library API](https://lldev.thespacedevs.com/docs) to retrieve data,
@@ -380,6 +375,7 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 To see the final result, rerun your **androidApp** run configuration:
 
 ![Final result for Android](multiplatform-mobile-upgrade-android.png){width=350}
+<!-- TODO the new year stuff is out, update the screenshot -->
 
 ## Update native iOS UI
 
@@ -700,16 +696,20 @@ To resolve this, return to IntelliJ IDEA and rebuild the project or start the iO
 
 ### Xcode reports an error when importing the shared framework
 
-If you are using Xcode, you may need to clear cached binaries: try resetting the environment by choosing
+If you are using Xcode, you may need to clear cached binaries: Try resetting the environment by choosing
 **Product | Clean Build Folder** in the main menu.
 
-### See also
+### What's next
 
+* For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
 * Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).
-* Learn more about the [interoperability with Objective-C frameworks and libraries](https://kotlinlang.org/docs/native-objc-interop.html).
-* Complete this tutorial on [networking and data storage](multiplatform-ktor-sqldelight.md).
+* Learn how Kotlin implements [interoperability with Objective-C frameworks and libraries](https://kotlinlang.org/docs/native-objc-interop.html).
+* Create a more complex KMP app following the tutorial on [networking and data storage](multiplatform-ktor-sqldelight.md).
+* [See the curated list of sample multiplatform projects](multiplatform-samples.md).
 
 ## Get help
 
-* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
+  Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
 * **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).

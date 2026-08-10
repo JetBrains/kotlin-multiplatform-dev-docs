@@ -1,29 +1,41 @@
-[//]: # (title: Build and run KMP application)
+[//]: # (title: Build and run Kotlin Multiplatform application)
 
-KMP uses Gradle as a build system.
+Kotlin Multiplatform uses Gradle as a build system.
 The KMP IDE plugin detects targets declared in the build script and provides run configurations for all supported targets.
 
-## Building
+The [KMP IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+for IntelliJ IDEs provides further support,
+automatically creating tailored run configurations, handling Compose Hot Reload integration, and so on.
+
+## Build and run KMP applications
 
 To build your KMP apps, you only need Gradle and Java.
 However, IntelliJ IDEA and Android Studio provide a lot of quality-of-life features for KMP development,
 from managing the environment to writing build scripts and multiplatform code.
 
-The KMP plugin for IntelliJ IDEs provides further support,
-automatically creating tailored run configurations, handling Compose Hot Reload integration, and so on.
+You can run the application on any supported platform using the same IDE:
+* the Android app runs on available Android Virtual Devices,
+* the iOS app runs on iOS Simulator (you need a macOS machine to be able to run apps on Apple targets),
+* the desktop app runs on the system JVM,
+* the web app runs in the default browser.
 
-## Running
+The run configurations provided by the KMP IDE plugin are more efficient than the general Gradle build task:
+They only trigger builds for corresponding targets while the default Gradle build task
+builds debug and release versions of all targets.
 
-You can run the application on Android, iOS, desktop, and web. You don't have to run the applications in any particular
-order, so start with whichever platform you are most familiar with.
+### Run your application on Android Emulator
 
-> The run configurations provided by the KMP IDE plugin are more efficient than the general Gradle build task:
-> They only trigger builds for corresponding targets while the default Gradle build task
-> builds debug and release versions of all targets.
+The default run configuration automatically suggests the list of available Android virtual devices.
+If there are none, or you'd like to simulate a different device, you can configure one using the Android Device Manager
+(in IDEA, **View | Tool Window | Device Manager**,
+or following the [Android Studio guide](https://developer.android.com/studio/run/managing-avds)).
+
+> The Device Manager in Android Studio usually offers a wider set of available devices,
+> but after you create a device, it is available system-wide — including run configurations in IntelliJ IDEA.
 >
 {style="tip"}
 
-### Run your application on Android
+The device will be available to the run configuration as soon as it is created.
 
 1. In the list of run configurations, select **androidApp**.
 2. Choose your Android virtual device and then click **Run**: Your IDE starts the selected virtual device if it
@@ -31,32 +43,24 @@ order, so start with whichever platform you are most familiar with.
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=352}
 
-![First Compose Multiplatform app on Android](first-compose-project-on-android-1.png){width=352}
+### Run on a real Android device
 
-<snippet id="run_android_other_devices">
+To make a hardware Android device available to KMP run configurations,
+[configure it and connect it to your machine](https://developer.android.com/studio/run/device).
 
-#### Run on a different Android simulated device {initial-collapse-state="collapsed" collapsible="true"}
+When it's set up correctly, it will show up in the list of available devices along with the virtual devices.
 
-Learn how to [configure the Android Emulator and run your application on a different simulated device](https://developer.android.com/studio/run/emulator#runningapp).
-
-#### Run on a real Android device {initial-collapse-state="collapsed" collapsible="true"}
-
-Learn how to [configure and connect a hardware device and run your application on it](https://developer.android.com/studio/run/device).
-
-</snippet>
-
-### Run your application on iOS
+### Run your application on iOS Simulator
 
 If you haven't launched Xcode as part of the initial setup, do that before running the iOS app.
+You need the iOS platform support installed:
+In Xcode, check **Xcode | Settings | Components** to make sure at least one iOS simulator is installed.
 
-In IntelliJ IDEA, select **iosApp** in the list of run configurations, select a simulated device next to the run configuration,
-and click **Run**.
+In your Kotlin Multiplatform IDE, select the iOS entry in the list of run configurations
+and select a simulated device from the list next to it,
+then click **Run**:
 
 ![Run the Compose Multiplatform app on iOS](compose-run-ios.png){width=405}
-
-![First Compose Multiplatform app on iOS](first-compose-project-on-ios-1.png){width=411}
-
-<snippet id="run_ios_other_devices">
 
 #### Run on a real iOS device {initial-collapse-state="collapsed" collapsible="true"}
 
@@ -101,33 +105,29 @@ In short, you should:
 Once you've registered your iPhone in Xcode, it will become available in the list of available devices in IntelliJ IDEA
 when you select the **iosApp** run configuration.
 
-</snippet>
-
 ### Run your application on desktop
 
-Select **desktopApp [hot] 🔥** in the list of run configurations and click **Run**.
-By default, the run configuration starts a desktop app in its own OS window with [Compose Hot Reload](compose-hot-reload.md) running:
+Select **desktopApp [hot] 🔥** in the list of run configurations and click **Run**:
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
 
-![First Compose Multiplatform app on desktop](first-compose-project-on-desktop-1.png){width=500}
+By default, the app starts with a [Compose Hot Reload](compose-hot-reload.md) running.
+This allows reloading the UI almost instantly as soon as you manually save the file with the changes.
 
 ### Run your web application
 
-1. In the list of run configurations, select:
+The default options for web targets are:
 
-   * **webApp[js]**: To run your Kotlin/JS application.
-   * **webApp[wasmJs]**: To run your Kotlin/Wasm application.
-
-2. Click **Run**.
+* **webApp[js]**: To run your Kotlin/JS application.
+* **webApp[wasmJs]**: To run your Kotlin/Wasm application.
 
 The web application opens automatically in your default browser
-and is available by default at `http://localhost:8080/`. 
+and is available by default at [http://localhost:8080/](http://localhost:8080/). 
 
-> The port number can vary because port 8080 may be unavailable.
-> You can find the actual port number in the Gradle build console by searching for the phrase "Project is running at".
+> Port 8080 may be unavailable, in this case the build picks another one.
+> You can always find the actual port number in the Gradle build console by searching for the phrase "Project is running at".
 >
-{style="tip"}
+{style="note"}
 
 ![Compose web application](first-compose-project-on-web.png){width=600}
 
@@ -143,19 +143,19 @@ To enable compatibility mode for your web application:
 2. In **ComposeDemo | Tasks | compose**, select and run the **composeCompatibilityBrowserDistribution** task.
 
    > You need at least Java 11 as your Gradle JVM for the tasks to load successfully, and we recommend at least
-   > JetBrains Runtime 17 for Compose Multiplatform projects in general.
+   > Java 17 for Compose Multiplatform projects in general.
    >
    {style="note"}
 
    ![Run compatibility task](web-compatibility-gradle-task.png){width=500}
 
-   Alternatively, you can run the following command in the terminal from the `ComposeDemo` root directory:
+   Alternatively, you can run the following command in the terminal from the root project directory:
 
     ```bash
     ./gradlew composeCompatibilityBrowserDistribution
     ```
 
-Once the Gradle task completes, compatible artifacts are generated in the
-`composeApp/build/dist/composeWebCompatibility/productionExecutable` directory.
+Once the Gradle task completes, compatible artifacts are generated in the web application module directory, for example
+`webApp/build/dist/composeWebCompatibility/productionExecutable`.
 You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
-working on both the `js` and `wasmJs` targets.
+for both the `js` and `wasmJs` targets.

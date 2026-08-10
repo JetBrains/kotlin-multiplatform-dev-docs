@@ -36,7 +36,7 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
 
 4. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
     Make sure that the **Share UI** option is selected for iOS and web.
-5. Once you've specified all the fields and targets, click **Create** (**Download** in the web wizard).
+5. Once you've specified all the fields and targets, click **Create**.
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
@@ -151,8 +151,18 @@ using the same run configurations for Android, iOS, desktop, and web:
     </tab>
 </tabs>
 
+## What's next
+
+* Based on the project you created, you can follow [another tutorial](compose-multiplatform-new-project.md) to create a functional app
+  implementing a more complex UI, using image resources and additional libraries.
+* To understand the basic Compose code used in the project, see [Compose Multiplatform layout basics](compose-layout.md).
+* Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
+* Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md).
+
 ## Get help
 
-* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
+  Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
+  and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
 * **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).

@@ -470,11 +470,11 @@ and add code to load and display them:
 
 ## What's next
 
-This tutorial only covers the basic building blocks of a multiplatform project.
-To dive deeper into specific parts:
-* Learn about the [fundamentals of Compose layouts](compose-layout.md)
-* Learn about [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md)
-* See the [general documentation on adding multiplatform dependencies](multiplatform-add-dependencies.md)
+This tutorial covers the basic building blocks of a multiplatform project.
+To dive deeper into specifics:
+* Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
+* Learn about [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md).
+* For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
 * Follow more complicated tutorials to take a look at samples which are closer to production applications:
   * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
   * [Migrate an advanced Android app to KMP](migrate-from-android.md)
@@ -484,7 +484,8 @@ Join the community:
 
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
   Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+  [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
+  and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
 * ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
 * ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
   the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)

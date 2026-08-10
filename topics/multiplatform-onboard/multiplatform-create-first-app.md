@@ -113,8 +113,17 @@ You will alter the common code and then run the apps again to see how native UIs
 
 <!-- TODO needs screenshots in tabs, like for CMP -->
 
+## What's next
+
+* Based on the project you created, you can follow [another tutorial](multiplatform-upgrade-app.md) to create a functional app
+  implementing network access in common code and bridging Kotlin coroutines with both Android and iOS native UIs.
+* Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
+* Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md).
+
 ## Get help
 
-* **Kotlin Slack**. Get an [invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
+* ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
+  Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
+  [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
+  and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
 * **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).

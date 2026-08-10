@@ -27,20 +27,28 @@ annotations. This section focuses on using expected and actual functions and pro
 
 ![Using expected and actual functions and properties](expect-functions-properties.svg){width=700}
 
-In this example, you'll define an expected `platform()` function in the common source set and provide the actual
-implementations in the platform source sets. While generating the code for a specific platform, the Kotlin compiler merges
-the expected and actual declarations. It generates one `platform()` function with its actual implementation. The expected and
-actual declarations should be defined in the same package and merged into _one declaration_ in the resulting
-platform code. Any invocation of the expected `platform()` function in the generated platform code will call the correct
+In this example, an expected `platform()` function is defined in the common source set and has actual
+implementations in the platform source sets.
+While generating the code for a specific platform, the Kotlin compiler merges
+the expected and actual declarations.
+The result is one `platform()` function with the implementation that is actually going to be run on the target device.
+
+The expected and actual declarations must be defined in the same package to be merged into _one declaration_ in the resulting
+platform code.
+This way, any invocation of the expected `platform()` function in common code will correspond to the correct
 actual implementation.
 
-### Example: generate a UUID
+Similar to expected and actual functions, expected and actual properties allow you to use different values on
+different platforms. Expected and actual functions and properties are most useful for simple cases.
 
-Let's assume that you are developing iOS and Android applications using Kotlin Multiplatform and you want to generate a
-universally unique identifier (UUID).
+### Example: Generate a UUID
+
+Let's assume that you are developing iOS and Android applications using Kotlin Multiplatform,
+and you need a mechanism to generate a universally unique identifier (UUID).
 
 To do so, declare the expected function `randomUUID()` with the `expect` keyword in the common source set of
-your Kotlin Multiplatform module. Do **not** include any implementation code.
+your Kotlin Multiplatform module.
+Do **not** include any implementation code with the `expect` declaration.
 
 ```kotlin
 // In the common source set:
@@ -76,21 +84,22 @@ While producing the resulting platform code for Android, the Kotlin compiler aut
 declarations and generates a single `randomUUID()` function with its actual Android-specific implementation. The same
 process is repeated for iOS.
 
-For simplicity, this and the following examples use the simplified source set names "common", "ios", and "android".
-Typically, this implies `commonMain`, `iosMain`, and `androidMain`, and similar logic can be defined in the test source
-sets `commonTest`, `iosTest`, and `androidTest`.
+### Further reading on expect/actual declarations
 
-Similar to expected and actual functions, expected and actual properties allow you to use different values on
-different platforms. Expected and actual functions and properties are most useful for simple cases.
+* To see expect/actual declarations in action, check out the [basic KMP app example](compose-multiplatform-create-first-app.md)
+with the example of a function that returns the platform name for each target.
+* For a deep dive on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
 
 ## Interfaces in common code
 
-If the platform-specific logic is too big and complex, you can simplify your code by defining an interface to represent
-it in the common code and then providing different implementations in the platform source sets.
+The [inheritance](https://kotlinlang.org/docs/inheritance.html) mechanism in Kotlin helps implement a more flexible
+code sharing structure.
+For example, you can define an interface in common code that holds abstract platform-independent declarations 
+and then provide implementations of that interface in the platform source sets.
 
 ![Using interfaces](expect-interfaces.svg){width=700}
 
-The implementations in the platform source sets use their corresponding dependencies:
+A name of the platform is going to be stored as a `String` regardless of the platform:
 
 ```kotlin
 // In the commonMain source set:
@@ -98,6 +107,8 @@ interface Platform {
     val name: String
 }
 ```
+
+Then you can assign a value to that `String` by overriding the declaration with an Android system call: 
 
 ```kotlin
 // In the androidMain source set:
@@ -108,6 +119,8 @@ class AndroidPlatform : Platform {
 }
 ```
 
+Or an iOS system call:
+
 ```kotlin
 // In the iosMain source set:
 import platform.UIKit.UIDevice
@@ -117,7 +130,8 @@ class IOSPlatform : Platform {
 }
 ```
 
-To inject the appropriate platform implementations when you need a common interface, you can choose one of the following options, each of which is explained in more detail below:
+To inject the appropriate platform implementations when using a common interface,
+you can choose one of the following options:
 
 * [Use expected and actual functions](#expected-and-actual-functions)
 * [Provide implementations through different entry points](#different-entry-points)
@@ -125,7 +139,9 @@ To inject the appropriate platform implementations when you need a common interf
 
 ### Expected and actual functions
 
-Define an expected function that returns a value of this interface, and then define actual functions that return its subclasses:
+You can combine a common interface with [expect/actual declarations](#expected-and-actual-functions-and-properties).  
+Define an `expect` function that returns a value of this interface and then define `actual` functions
+that return platform-specific classes implementing the interface:
 
 ```kotlin
 // In the commonMain source set:
@@ -148,14 +164,21 @@ class IOSPlatform : Platform
 actual fun platform() = IOSPlatform()
 ```
 
-When you call the `platform()` function in the common code, it can work with an object of the `Platform` type.
-When you run this common code on Android, the `platform()` call returns an instance of the `AndroidPlatform` class.
-When you run it on iOS, `platform()` returns an instance of the `IOSPlatform` class.
+Calls of the `platform()` function in the common code work with objects of the `Platform` type.
+When the compiler merges the expected and actual declarations,
+a `platform()` call returns an instance of the `AndroidPlatform` class on Android and 
+an instance of the `IOSPlatform` class on iOS.
+
+> This is the approach used in projects generated by the Kotlin Multiplatform IDE wizard (also available [on the web](https://kmp.jetbrains.com/)).
+> Check out the [](compose-multiplatform-create-first-app.md) tutorial to create a project
+> and see the implementation at work.
+> 
+{style="tip"}
 
 ### Different entry points
 
 If you control the entry points, you can construct implementations of each platform artifact without using
-expected and actual declarations. To do so, define the platform implementations in the shared Kotlin Multiplatform module,
+expected and actual declarations. To do so, define the platform implementations in the shared Kotlin Multiplatform module 
 but instantiate them in the platform modules:
 
 ```kotlin
@@ -192,7 +215,7 @@ class MyApp : Application() {
 ```
 
 ```Swift
-// In the iosApp platform module (in Swift):
+// In the Swift code of the iOS app:
 import shared
 
 @main
@@ -208,17 +231,19 @@ should similarly create and pass an instance of `IOSPlatform`. These entry point
 applications, but this is where you can call the specific functionality of your shared module.
 
 Providing the right implementations with expected and actual functions or directly through entry points works well for
-simple scenarios. However, if you use a dependency injection framework in your project,
-we recommend using it in simple cases to ensure consistency.
+simple scenarios.
+However, if you use a dependency injection framework in your project,
+we recommend also using it in simple cases to ensure consistency.
 
 ### Dependency injection framework
 
-A modern application typically uses a dependency injection (DI) framework to create a loosely coupled architecture. The
-DI framework allows injecting dependencies into components based on the current environment.
+A modern application can use a dependency injection (DI) framework to decide which implementation to use on the fly
+and create a loosely coupled architecture this way.
+Any DI framework that supports Kotlin Multiplatform can help you inject different dependencies into your components
+at runtime depending on the platform.
 
-Any DI framework that supports Kotlin Multiplatform can help you inject different dependencies for different platforms.
-
-For example, [Koin](https://insert-koin.io/) is a dependency injection framework that supports Kotlin Multiplatform:
+For example, [Koin](https://insert-koin.io/) is a dependency injection framework that supports Kotlin Multiplatform.
+You can implement the `Platform` example using Koin as follows:
 
 ```kotlin
 // In the common source set:
@@ -267,7 +292,3 @@ This approach only works if you put the implementations in the platform modules.
 Multiplatform module can't be self-sufficient, and you'll need to implement the common interface in a different module.
 
 <!-- If you're interested in having this functionality expanded to a shared module, please vote for this issue in Youtrack and describe your use case. -->
-
-## What's next?
-
-For more examples and information on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).

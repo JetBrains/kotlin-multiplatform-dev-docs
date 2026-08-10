@@ -4,12 +4,39 @@ Every program requires a set of libraries to operate successfully.
 A Kotlin Multiplatform project can depend on cross-platform libraries that support multiple target platforms,
 platform-specific libraries, and other multiplatform projects.
 
-This page describes the management of multiplatform dependencies.
-Some platform specifics are covered in [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md). 
+If you have experience developing Android apps, adding a multiplatform dependency is similar to adding a
+Gradle dependency to a regular Android project.
+The main difference is that you need to add the dependency to a specific source set rather than to the module as a whole.
 
-## Adding a multiplatform dependency
+This page describes the general management of dependencies in a multiplatform project.
+Some platform specifics are covered in [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md).
 
-To add a dependency on a multiplatform library, update the `build.gradle(.kts)` file that configures the shared code module.
+## Dependency types
+
+There are two types of dependencies that you can use in Kotlin Multiplatform projects:
+
+* _Multiplatform dependencies_. These are multiplatform libraries that support multiple targets and can be used in the
+  common source set.
+
+  Many modern Android libraries already have multiplatform support, like [Koin](https://insert-koin.io/),
+  [Coil](https://coil-kt.github.io/coil/), and [SQLDelight](https://sqldelight.github.io/sqldelight/latest/).
+  
+  Find more multiplatform libraries on [klibs.io](https://klibs.io/),
+  a catalog of published Kotlin Multiplatform libraries.
+
+* _Native dependencies_. These are platform-specific libraries from corresponding ecosystems.
+  In native projects, you typically manage these libraries through platform-specific tools
+  such as Gradle for Android and Swift Package Manager for iOS.
+
+  When you work with a multiplatform project module, typically, you still need native dependencies to use platform APIs
+  such as secure storage, system calls, and so on.
+  In the build script, you specify native dependencies in the configuration of native source sets, for example, `androidMain` and `iosMain`.
+
+For both types of dependencies, you can use local and external repositories.
+
+## Local multiplatform dependencies
+
+To add a dependency on a multiplatform library, update the `build.gradle(.kts)` file of the dependent shared code module.
 Set a dependency of the required [type](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types)
 (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
 block of the `commonMain` source set configuration:
@@ -53,8 +80,8 @@ kotlin {
 
 ### Standard library
 
-Each source set automatically depends on the Kotlin standard library (`kotlin-stdlib`).
-The version of the standard library is the same as the version of the `kotlin-multiplatform` Gradle plugin used in the project.
+Each source set in a Kotlin Multiplatform project automatically depends on the Kotlin standard library (`kotlin-stdlib`).
+The version of the standard library is the same as the version of the applied [Kotlin Multiplatform Gradle plugin](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#id-and-version).
 
 For platform-specific source sets, Gradle automatically uses the corresponding platform-specific variant of the library,
 while the common standard library is added to the rest.
@@ -63,7 +90,7 @@ depending on the `compilerOptions.jvmTarget` [compiler option](https://kotlinlan
 
 Learn how to [change the default `kotlin-stdlib` dependency resolution](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-on-the-standard-library).
 
-### Test libraries
+### Testing libraries
 
 For multiplatform tests, the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API is available.
 As it is a multiplatform library,
