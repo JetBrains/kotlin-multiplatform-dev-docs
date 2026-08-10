@@ -174,9 +174,14 @@ To get started, implement the basic layout in the common `App()` composable:
     }
     ```
    
-    The `remember` API implements Compose-specific state management,
-    for an in-depth introduction see [Managing state](https://developer.android.com/develop/ui/compose/state)
-    in Jetpack Compose documentation.  
+    > The `remember` API implements Compose-specific state management.
+    > The state object is wrapped in a `remember()` call, meaning that it's built once and then
+    > retained by the framework.
+    > When the value of the state changes, any composables that observe it are re-invoked and redrawn.
+    > This is called a _recomposition_. 
+    >
+    > For an in-depth introduction, see [Managing state](https://developer.android.com/develop/ui/compose/state)
+    > in Jetpack Compose documentation.  
 
 2. Follow the IDE's instructions to import the missing dependencies.
 

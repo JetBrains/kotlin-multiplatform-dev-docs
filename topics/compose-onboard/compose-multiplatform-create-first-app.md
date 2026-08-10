@@ -46,6 +46,8 @@ If you pick all client targets, you'll see the following directories in the **Pr
 
 ![Compose Multiplatform project structure](compose-project-structure.png){width=400}
 
+### Modules
+
 There's a module for each target application and the shared module with multiplatform code:
 
 * **androidApp** is the module that builds into an Android application.
@@ -55,16 +57,25 @@ There's a module for each target application and the shared module with multipla
 * **shared** is a Kotlin Multiplatform module that contains the code common for the Android, desktop, iOS, and web applications.
 * **webApp** is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
 
-When using Gradle, Kotlin Multiplatform makes use of Gradle _source sets_ for organizing shared code.
+During a build, the `shared` module is treated appropriately for each target.
+For example, it's treated as Kotlin/JVM for building an Android app and as Kotlin/Native for building an iOS app.
+
+> For more on how common UI code is called from native applications, see [](compose-multiplatform-entry-points.md).
+> 
+{style="tip"}
+
+### Source sets
+
+When using Gradle, Kotlin Multiplatform uses Gradle [source sets](https://docs.gradle.org/current/userguide/building_java_projects.html#sec:java_source_sets)
+to organize shared code.
 In short, every target can have a corresponding source set that contains platform-specific code intended for that target.
-Source sets also have a default hierarchy to make it possible to share code between related targets (Wasm and JS, for example).
+Source sets also have a default hierarchy to make it easier to share code between related targets.
+For example, the `webMain` source set works for both Wasm and JS,
+and `iosMain` holds code for all iOS targets (devices as well as simulators).
 
 > Learn more about source set organization in Kotlin Multiplatform in [](multiplatform-discover-project.md).
 > 
 {style="note"}
-
-During a build, the `shared` module is treated appropriately for each target.
-For example, it's treated as Kotlin/JVM for building an Android app and as Kotlin/Native for building an iOS app.
 
 ## Run your application
 

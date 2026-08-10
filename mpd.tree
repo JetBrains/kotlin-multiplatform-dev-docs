@@ -52,6 +52,7 @@
             <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform artifacts for Compose libraries"/>
         </toc-element>
         <toc-element toc-title="Platform differences" topic="compose-platform-specifics.md"/>
+		<toc-element toc-title="App entry points" topic="compose-multiplatform-entry-points.md"/>
 		<toc-element toc-title="Implementing layouts">
 			<toc-element topic="compose-layout.md"/>
 			<toc-element topic="compose-layout-modifiers.md"/>
