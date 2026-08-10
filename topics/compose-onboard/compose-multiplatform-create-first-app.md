@@ -75,7 +75,7 @@ and `iosMain` holds code for all iOS targets (devices as well as simulators).
 
 > Learn more about source set organization in Kotlin Multiplatform in [](multiplatform-discover-project.md).
 > 
-{style="note"}
+{style="tip"}
 
 ## Run your application
 
@@ -91,8 +91,9 @@ The Kotlin Multiplatform IDE plugin provides ready-to-go run configurations for 
   By default, the web app is launched at `http://localhost:8080/` a successful build opens this address in your default browser.
   If that port is in use, the build automatically selects another available port and communicates that in the Gradle build output. 
 
-<!-- TODO For more details on possible app running use cases (like using real mobile devices),
-see [](build-and-run-kmp.md). -->
+> For details on creating new emulators or connecting to physical devices see [](build-and-run-kmp.md).
+> 
+{style=tip}
 
 ## Update the UI
 
