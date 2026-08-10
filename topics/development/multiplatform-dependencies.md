@@ -45,7 +45,7 @@ The `kotlinx-datetime` library, which has full multiplatform support, is the mos
 1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the version catalog:
     ```toml
     [versions]
-    kotlinx-datetime = "0.8.0"
+    kotlinx-datetime = "%dateTimeVersion%"
     
     [libraries]
     kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
