@@ -88,8 +88,9 @@ The KMP IDE plugin provides ready-to-go run configurations for selected targets:
 
 <!-- TODO needs a new screenshot -->
 
-<!-- TODO For more details on possible app running use cases (like using real mobile devices),
-see [](build-and-run-kmp.md).-->
+> For details on creating new emulators or connecting to physical devices, see [](build-and-run-kmp.md).
+>
+{style="tip"}
 
 ## Update shared code
 
@@ -118,6 +119,8 @@ You will alter the common code and then run the apps again to see how native UIs
 * Based on the project you created, you can follow [another tutorial](multiplatform-upgrade-app.md) to create a functional app
   implementing network access in common code and bridging Kotlin coroutines with both Android and iOS native UIs.
 * Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
+* To learn of the various approaches to sharing code that Kotlin Multiplatform supports,
+  see [](multiplatform-share-on-platforms.md).
 * Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md).
 
 ## Get help

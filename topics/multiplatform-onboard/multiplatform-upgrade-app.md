@@ -117,6 +117,11 @@ kotlin {
 
 Synchronize the Gradle files by clicking the **Sync Gradle Changes** button.
 
+> For more information on how to manage multiplatform dependencies,
+> see [](multiplatform-add-dependencies.md).
+>
+{style="tip"}
+
 ## Set up API requests
 
 You'll use the [Launch Library API](https://lldev.thespacedevs.com/docs) to retrieve data,
@@ -267,8 +272,11 @@ Flows can emit a sequence of values as the values are produced instead of return
     builder function that wraps a suspendable block.
 
 The `greet()` function now returns a `Flow` of strings instead of a single string.
-To make the native UI parts of the project work,
-update them to handle the new result of calling the `greet()` function.
+This is the updated shared code:
+your native UIs are going to import the `Greeting` class and call the `greet()` function.
+
+To make the native UIs work,
+you need to update them to handle the new result of calling the `greet()` function.
 
 ## Update native Android UI
 
@@ -701,11 +709,13 @@ If you are using Xcode, you may need to clear cached binaries: Try resetting the
 
 ### What's next
 
+* To learn of the various approaches to sharing code that Kotlin Multiplatform supports,
+  see [](multiplatform-share-on-platforms.md).
 * For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
-* Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).
 * Learn how Kotlin implements [interoperability with Objective-C frameworks and libraries](https://kotlinlang.org/docs/native-objc-interop.html).
 * Create a more complex KMP app following the tutorial on [networking and data storage](multiplatform-ktor-sqldelight.md).
 * [See the curated list of sample multiplatform projects](multiplatform-samples.md).
+* Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).
 
 ## Get help
 

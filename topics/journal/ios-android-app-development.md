@@ -162,7 +162,7 @@ A good example comes from Duolingo, which ships weekly on iOS and Android to mor
 > It turns out after you learn something, you get really good at it. […] 
 > Now there's a lot more confidence behind it and we're building up that knowledge.
 >
-> {style="tip"}
+{style="tip"}
 
 If you’d like to see the full story, you can watch the [case study video](https://youtu.be/RJtiFt5pbfs?si=2bSmGci5NXNNfYUn).
 
