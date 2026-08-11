@@ -91,9 +91,9 @@ The Kotlin Multiplatform IDE plugin provides ready-to-go run configurations for 
   By default, the web app is launched at `http://localhost:8080/` a successful build opens this address in your default browser.
   If that port is in use, the build automatically selects another available port and communicates that in the Gradle build output. 
 
-> For details on creating new emulators or connecting to physical devices see [](build-and-run-kmp.md).
+> For details on creating new emulators or connecting to physical devices, see [](build-and-run-kmp.md).
 > 
-{style=tip}
+{style="tip"}
 
 ## Update the UI
 

@@ -301,7 +301,7 @@ The app will offer several countries to choose from and display the time in the 
                       onDismissRequest = { showCountries = false }
                   ) {
                       // Creates a dropdown menu item for each country
-                      defaultCountries.forEach { (name, zone) ->
+                      countries.forEach { (name, zone) ->
                           DropdownMenuItem(
                               text = { Text(name) },
                               onClick = {
@@ -373,11 +373,11 @@ and add code to load and display them:
 
     ```kotlin
     import composedemo.shared.generated.resources.Res
-    import demo.shared.generated.resources.eg
-    import demo.shared.generated.resources.fr
-    import demo.shared.generated.resources.id
-    import demo.shared.generated.resources.jp
-    import demo.shared.generated.resources.mx
+    import composedemo.shared.generated.resources.eg
+    import composedemo.shared.generated.resources.fr
+    import composedemo.shared.generated.resources.id
+    import composedemo.shared.generated.resources.jp
+    import composedemo.shared.generated.resources.mx
     
     // The type now also holds a reference to the flag image
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
@@ -391,8 +391,9 @@ and add code to load and display them:
         return "The time in $location is ${localTime.formatted()}"
     }
 
-    // The list is initialized with imported Compose Multiplatform resources
-    val defaultCountries = listOf(
+    // Initializes the list with imported Compose Multiplatform resources
+    // and returns it
+    fun defaultCountries() = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo"), Res.drawable.jp),
         Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
         Country("Mexico", TimeZone.of("America/Mexico_City"), Res.drawable.mx),
@@ -422,7 +423,7 @@ and add code to load and display them:
                         expanded = showCountries,
                         onDismissRequest = { showCountries = false }
                     ) {
-                        defaultCountries.forEach { (name, zone, image) ->
+                        countries.forEach { (name, zone, image) ->
                             // Each country is displayed in a 'DropdownMenuItem'
                             // as a flag ('Image()') and a name ('Text()')
                             DropdownMenuItem(

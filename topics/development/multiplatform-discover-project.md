@@ -61,7 +61,7 @@ binaries, available language constructions, and allowed dependencies.
 > Targets can also be referred to as platforms. See the
 > full [list of supported targets](multiplatform-dsl-reference.md#targets).
 >
-> {style="note"}
+{style="note"}
 
 You should first _declare_ a target to instruct Kotlin to compile code for that specific target. In Gradle, you declare
 targets using predefined DSL calls inside the `kotlin {}` block:

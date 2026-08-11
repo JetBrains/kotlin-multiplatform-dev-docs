@@ -18,12 +18,12 @@
 	</toc-element>
 	<toc-element toc-title="Create KMP apps">
 		<toc-element toc-title="Share both logic and UI">
-			<toc-element topic="compose-multiplatform-create-first-app.md"/> <!--create a base project & tweak UI to see it work everywhere at once -->
-			<toc-element topic="compose-multiplatform-new-project.md"/> <!-- from the wizard to the final CMP sample -->
+			<toc-element topic="compose-multiplatform-create-first-app.md" accepts-web-file-names="compose-multiplatform-getting-started.html"/> <!--create a base project & tweak UI to see it work everywhere at once -->
+			<toc-element topic="compose-multiplatform-new-project.md" accepts-web-file-names="compose-multiplatform-modify-project.html"/> <!-- from the wizard to the final CMP sample -->
 		</toc-element>
 		<toc-element toc-title="Share logic and native UI">
-			<toc-element topic="multiplatform-create-first-app.md"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
-			<toc-element topic="multiplatform-upgrade-app.md"/> <!-- from the wizard to the final KMP sample -->
+			<toc-element topic="multiplatform-create-first-app.md" accepts-web-file-names="multiplatform-getting-started.html"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
+			<toc-element topic="multiplatform-upgrade-app.md" accepts-web-file-names="multiplatform-update-ui.html,multiplatform-wrap-up.html"/> <!-- from the wizard to the final KMP sample -->
 		</toc-element>
 		<toc-element toc-title="Migrate to KMP from Android">
 			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
@@ -52,7 +52,7 @@
             <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform artifacts for Compose libraries"/>
         </toc-element>
         <toc-element toc-title="Platform differences" topic="compose-platform-specifics.md"/>
-		<toc-element toc-title="App entry points" topic="compose-multiplatform-entry-points.md"/>
+		<toc-element toc-title="App entry points" topic="compose-multiplatform-entry-points.md" accepts-web-file-names="compose-multiplatform-explore-composables.html"/>
 		<toc-element toc-title="Implementing layouts">
 			<toc-element topic="compose-layout.md"/>
 			<toc-element topic="compose-layout-modifiers.md"/>
@@ -119,7 +119,7 @@
 		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
 
 		<toc-element toc-title="Multiplatform dependencies">
-			<toc-element toc-title="Adding dependencies" topic="multiplatform-add-dependencies.md"/>
+			<toc-element toc-title="Adding dependencies" topic="multiplatform-add-dependencies.md" accepts-web-file-names="multiplatform-dependencies.html"/>
 
 			<toc-element toc-title="Android-specific dependencies" topic="multiplatform-android-dependencies.md"/>
 			<toc-element toc-title="iOS-specific dependencies" topic="multiplatform-ios-dependencies.md"/> <!-- TODO Combine / move to iOS integration? -->
