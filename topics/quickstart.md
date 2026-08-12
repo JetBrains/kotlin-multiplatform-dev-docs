@@ -116,6 +116,9 @@ Use the IDE wizard to create a new KMP project:
    {style="note"}
 
 5. When you've chosen your platforms, click the **Finish** button and wait for the IDE to generate and import the project.
+6. You can find the code being shared between platforms in the `shared` module.
+   The `Platform.kt` file contains an `expect` declaration that sets up requesting the platform name in the native code.
+7. When you run the various apps, you can see the same UI layout with different platform names supplied by the native calls:
 
 ![Last step in the Android Studio wizard with Android, iOS, desktop, and web platforms selected](as-wizard-3step.png){width=600}
 

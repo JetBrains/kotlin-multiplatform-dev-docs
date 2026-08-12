@@ -34,99 +34,36 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
 
 For both types of dependencies, you can use local and external repositories.
 
-## Local multiplatform dependencies
+## Gradle version catalogs
 
-### Dependency on a local multiplatform library
+When using Gradle, we recommend using [version catalogs](https://docs.gradle.org/current/userguide/version_catalogs.html)
+to manage dependencies.
 
-To add a dependency on a multiplatform library, update the `build.gradle(.kts)` file of the dependent shared code module.
-Set a dependency of the required [type](https://kotlinlang.org/docs/gradle-configure-project.html#dependency-types)
-(for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
-block of the `commonMain` source set configuration:
+With version catalogs, you define the artifact name and the version in the catalog and then reference this definition
+in build script files.
 
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
+For example, here's a basic catalog file:
+
+```toml
+# libs.versions.toml, a default catalog file
+[versions]
+my-library = "1.0"
+
+[libraries]
+my-library = {module = "com.example:my-library", version.ref = "my-library"}
+```
+
+And here's an example of using that catalog to add a dependency:
 
 ```kotlin
-kotlin {
-    //...
-    sourceSets {
-        // Makes my-library classes available in all source sets
-        commonMain.dependencies {
-            implementation("com.example:my-library:1.0")
-        }
-    }
+// build.gradle.kts
+dependencies {
+    // 'libs' is the first part of the catalog file name
+    // 'my.library' is the name of the artifact without
+    // the namespace and dots instead of dashes
+    implementation(libs.my.library)
 }
 ```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-kotlin {
-    //...
-    sourceSets {
-        // Makes my-library classes available in all source sets
-        commonMain {
-            dependencies {
-                implementation 'com.example:my-library:1.0'
-            }
-        }
-    }
-}
-```
-
-</tab>
-</tabs>
-
-### Dependency on another multiplatform project
-
-One multiplatform project can depend on another.
-To set this up, add a project-type dependency to the source set that needs it.
-If you want to use a dependency in all source sets, add it to the common one.
-In this case, other source sets will get their versions automatically.
-
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-kotlin {
-    //...
-    sourceSets {
-        commonMain.dependencies {
-            implementation(project(":some-other-multiplatform-module"))
-        }
-        androidMain.dependencies {
-            // Platform-specific declarations of :some-other-multiplatform-module
-            // will be resolved automatically
-        }
-    }
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-kotlin {
-    //...
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation project(':some-other-multiplatform-module')
-            }
-        }
-        androidMain {
-            dependencies {
-                // Platform-specific declarations of :some-other-multiplatform-module
-                // will be resolved automatically
-            }
-        }
-    }
-}
-```
-
-</tab>
-</tabs>
 
 ## Dependencies on core Kotlin libraries
 
@@ -198,17 +135,33 @@ to add a dependency, refer to a library artifact in the corresponding source set
 
 ## Dependencies on Kotlin Multiplatform libraries
 
+
 You can add dependencies on libraries that have adopted Kotlin Multiplatform,
 such as [SQLDelight](https://github.com/cashapp/sqldelight).
 The authors of such libraries usually provide guides for adding their dependencies to your project.
 
-> Explore the available Kotlin Multiplatform libraries on [klibs.io](https://klibs.io/).
->
-{style="tip"}
+<a as="button" href="https://klibs.io/" mode="classic" icon="arrow-right" icon-position="right">Look for Kotlin Multiplatform libraries on klibs.io</a>
+
+### Sample Gradle version catalog
+
+When using Gradle, it's recommended to use [version catalogs](#gradle-version-catalogs).
+Below is the version catalog with all libraries used in the examples below:
+
+```toml
+[versions]
+ktor = "%ktorVersion%"
+kotlinx-coroutines = "%coroutinesVersion%"
+sqlDelight = "%sqlDelightVersion%"
+
+[libraries]
+ktor-clientCore = { module = "io.ktor:ktor-client-core", version.ref = "%ktorVersion%" }
+kotlinx-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "%coroutinesVersion%" }
+sqldelight-nativeDriver = { module = "com.squareup.sqldelight:native-driver", version.ref = "%sqlDelightVersion%" }
+```
 
 ### Library shared for all source sets
 
-If you want to have access to the library from all source sets,
+If you want to have access to the library from all source sets
 or to write shared code using it, add it only for the common source set.
 The Kotlin Multiplatform Gradle plugin automatically resolves the corresponding platform-specific artifacts
 for other declared source sets.
@@ -226,7 +179,7 @@ kotlin {
     //...
     sourceSets {
         commonMain.dependencies {
-            implementation("io.ktor:ktor-client-core:%ktorVersion%")
+            implementation(libs.ktor.clientCore)
         }
         androidMain.dependencies {
             // Dependency to a platform part of ktor-client
@@ -245,7 +198,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'io.ktor:ktor-client-core:%ktorVersion%'
+                implementation(libs.ktor.clientCore)
             }
         }
         androidMain {
@@ -285,14 +238,15 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // kotlinx.coroutines will be available in all source sets
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+            implementation(libs.kotlinx.coroutinesCore)
         }
         androidMain.dependencies {
 
         }
         iosMain.dependencies {
-            // SQLDelight will be available only in the iOS source set, but not in Android or common
-            implementation("com.squareup.sqldelight:native-driver:%sqlDelightVersion%")
+            // SQLDelight will be available only in the iOS source set,
+            // but not in Android or common
+            implementation(sqldelight.nativeDriver)
         }
         wasmJsMain.dependencies {
             
@@ -311,7 +265,7 @@ kotlin {
         commonMain {
             dependencies {
                 // kotlinx.coroutines will be available in all source sets
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
+                implementation(libs.kotlinx.coroutinesCore)
             }
         }
         androidMain {
@@ -320,7 +274,7 @@ kotlin {
         iosMain {
             dependencies {
                 // SQLDelight will be available only in the iOS source set, but not in Android or common
-                implementation 'com.squareup.sqldelight:native-driver:%sqlDelightVersion%'
+                implementation(sqldelight.nativeDriver)
             }
         }
         wasmJsMain {
@@ -332,6 +286,58 @@ kotlin {
 
 </tab>
 </tabs>
+
+
+## Dependency on another multiplatform project
+
+One multiplatform project can depend on another.
+To set this up, add a project-type dependency to the source set that needs it.
+If you want to use a dependency in all source sets, add it to the common one.
+In this case, other source sets will get their versions automatically.
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+kotlin {
+    //...
+    sourceSets {
+        commonMain.dependencies {
+            implementation(project(":some-other-multiplatform-module"))
+        }
+        androidMain.dependencies {
+            // Platform-specific declarations of :some-other-multiplatform-module
+            // will be resolved automatically
+        }
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+kotlin {
+    //...
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(':some-other-multiplatform-module')
+            }
+        }
+        androidMain {
+            dependencies {
+                // Platform-specific declarations of :some-other-multiplatform-module
+                // will be resolved automatically
+            }
+        }
+    }
+}
+```
+
+</tab>
+</tabs>
+
 
 ## What's next?
 

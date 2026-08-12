@@ -7,7 +7,7 @@
     <p>This tutorial uses IntelliJ IDEA, but you can also follow it in Android Studio – both IDEs share the same core functionality and Kotlin Multiplatform support.</p>
 </tldr>
 
-With the Kotlin Multiplatform,
+With Kotlin Multiplatform,
 you can implement business logic once in common code and keep the UI for each app native.
 If you'd like to share the UI code as well, see our [Compose Multiplatform tutorial](compose-multiplatform-create-first-app.md).
 
@@ -26,7 +26,7 @@ although we do recommend that you become familiar with the [fundamentals of Kotl
 
 ## Create a project
 
-With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Compose Multiplatform project:
+With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Kotlin Multiplatform project:
 
 1. In IntelliJ IDEA, select **File** | **New** | **Project**.
 2. In the panel on the left, select **Kotlin Multiplatform**.
@@ -40,6 +40,9 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
 5. Click **Create**.
 
    ![Create Kotlin Multiplatform project](create-first-multiplatform-app.png){width=700}
+
+The first import takes a couple of minutes.
+After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
 ## Examine the project structure
 
@@ -80,7 +83,7 @@ When it is built into an iOS framework, common Kotlin is treated as Kotlin/Nativ
 
 The KMP IDE plugin provides ready-to-go run configurations for selected targets:
 
-* Run **androidApp** to launch the Anroid app on an emulator.
+* Run **androidApp** to launch the Android app on an emulator.
   If you don't have a virtual Android device yet, open the **Device Manager** (**View | Tool Windows | Device Manager**)
   and create one.
 * Run **iosApp** to launch the iOS app on the iPhone Simulator.
@@ -97,9 +100,9 @@ The KMP IDE plugin provides ready-to-go run configurations for selected targets:
 The **sharedLogic** code generates a greeting, which is then displayed in the UI of both apps.
 You will alter the common code and then run the apps again to see how native UIs use the updated functionality:
 
-1. Open the `sharedLogic/src/commonMain/.../Greeting.kt` file where you can find the generated `Greeting` class with a `greet()` function.
-2. Change the greeting a little:
-   Navigate to the definition of the `sayHello()` function in the `GreetingUtil.kt` file.
+1. Open the `sharedLogic/src/commonMain/.../Greeting.kt` file where you can find the `Greeting` class with a `greet()` function.
+2. To change the greeting, navigate to the definition of the `sayHello()` function in the `GreetingUtil.kt` file
+   (right-click on the function call and select **Go To | Declaration or Usages**).
 3. Randomize the first word and reverse the name of the platform:
 
     ```kotlin
@@ -116,7 +119,7 @@ You will alter the common code and then run the apps again to see how native UIs
 
 ## What's next
 
-* Based on the project you created, you can follow [another tutorial](multiplatform-upgrade-app.md) to create a functional app
+* You can follow [another tutorial to create a more functional app](multiplatform-upgrade-app.md)
   implementing network access in common code and bridging Kotlin coroutines with both Android and iOS native UIs.
 * Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
 * To learn of the various approaches to sharing code that Kotlin Multiplatform supports,

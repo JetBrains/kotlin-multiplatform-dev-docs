@@ -1,6 +1,6 @@
 [//]: # (title: Build and run Kotlin Multiplatform application)
 
-Kotlin Multiplatform uses Gradle as a build system.
+Kotlin Multiplatform (KMP) uses Gradle as a build system.
 The KMP IDE plugin detects targets declared in the build script and provides run configurations for all supported targets.
 
 The [KMP IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)

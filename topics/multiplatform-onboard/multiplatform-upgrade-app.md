@@ -3,7 +3,7 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-In this tutorial you will start with the wizard-generated KMP project and build a more complex application
+In this tutorial you will start with the wizard-generated Kotlin Multiplatform (KMP) project and build a more complex application
 that shares the code for network requests and data serialization between iOS and Android.
 
 The app will retrieve data over the internet from the [Launch Library 2](https://lldev.thespacedevs.com/docs)
@@ -26,11 +26,7 @@ You will implement both in the shared module of the final project.
 >
 {style="note"}
 
-## Create a project
-
-Create the same project as in the [basic KMP tutorial](multiplatform-create-first-app.md):
-If you already have a project, make sure it targets all platforms you're interested in,
-with the **Do not share UI** option selected for iOS.
+<include from="multiplatform-create-first-app.md" element-id="create-a-project"></include>
 
 ## Add dependencies
 
@@ -420,7 +416,7 @@ extension ContentView {
     class ViewModel: ObservableObject {
         // This property will hold the greeting phrases
         // emitted by the ViewModel's flow
-        @Published var greetings: Array<String> = []
+        @Published var greetings: [String] = []
         
         func startObserving() {
             // The implementation will depend
