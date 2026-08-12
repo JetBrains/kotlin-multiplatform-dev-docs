@@ -38,7 +38,7 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
     Make sure that the **Share UI** option is selected for iOS and web.
 5. Once you've specified all the fields and targets, click **Create**.
 
-   ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
+   ![Create a Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
 The first import takes a couple of minutes.
 After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).

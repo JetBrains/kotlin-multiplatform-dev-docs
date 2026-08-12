@@ -89,7 +89,7 @@ The KMP IDE plugin provides ready-to-go run configurations for selected targets:
 * Run **iosApp** to launch the iOS app on the iPhone Simulator.
   To run the iOS app, you need Xcode installed and the latest iOS SDK downloaded through Xcode.
 
-<!-- TODO needs a new screenshot -->
+![Running iOS and Android apps](first-run-ios-android.png){width="700"}
 
 > For details on creating new emulators or connecting to physical devices, see [](build-and-run-kmp.md).
 >
@@ -115,7 +115,7 @@ You will alter the common code and then run the apps again to see how native UIs
 4. Import the `kotlin.random.Random` class following the IDE's suggestion.
 5. Run your apps again to see the new greeting produced both in iOS and Android:
 
-<!-- TODO needs screenshots in tabs, like for CMP -->
+![Running iOS and Android apps with the updated greeting](first-run-ios-android-updated.png){width="700"}
 
 ## What's next
 
