@@ -109,7 +109,7 @@ object AboutIcon : Painter() {
 On Windows and Linux, the menu bar is part of the window. On macOS, it's displayed in the system menu bar at the top of
 the screen when the window is active.
 
-## What's next?
+## What's next
 
 * Learn how to add an application icon and a menu to the [system tray](compose-desktop-tray.md).
 * Explore the tutorials about [other desktop components](compose-desktop-components.md).
