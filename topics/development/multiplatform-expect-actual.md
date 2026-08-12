@@ -563,3 +563,5 @@ error.
 ## What's next?
 
 For general recommendations on different ways to use platform-specific APIs, see [Use platform-specific APIs](multiplatform-connect-to-apis.md).
+
+When substantial iOS behavior should stay in Swift (and optionally ship as its own Swift package) instead of living entirely in `iosMain` Kotlin, see [Build multipurpose shared modules with native platform code](multiplatform-multipurpose-modules.md).
