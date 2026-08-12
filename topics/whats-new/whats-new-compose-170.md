@@ -39,8 +39,6 @@ So, when you update to Compose Multiplatform 1.7.3, you may have to upgrade your
 
 ### Java resources API is deprecated in favor of the multiplatform resource library
 
-<!-- TODO additional copy editing -->
-
 In this release, we explicitly deprecate the Java resources APIs available in the `compose.ui` package:
 the `painterResource()`, `loadImageBitmap()`, `loadSvgPainter()`, and `loadXmlImageVector()` functions, as well as
 the `ClassLoaderResourceLoader` class and functions relying on it.
@@ -75,8 +73,6 @@ if the `CADisableMinimumFrameDurationOnPhone` property in the `Info.plist` file 
 You can disable this behavior by setting the `ComposeUIViewControllerConfiguration.enforceStrictPlistSanityCheck` property to `false`.
 
 ### Deprecated Modifier.onExternalDrag on desktop
-
-<!-- TODO additional copy editing -->
 
 The experimental `Modifier.onExternalDrag` and related APIs have been deprecated in favor of the new `Modifier.dragAndDropTarget`.
 The `DragData` interface was moved into the `compose.ui.draganddrop` package.
@@ -310,8 +306,6 @@ It is tricky to scroll the list when most of the screen is taken up by a video t
 
 ### Native performance improvements
 
-<!-- TODO additional copy editing -->
-
 With Kotlin 2.0.20, the Kotlin/Native team made a lot of progress in making Compose apps on iOS perform faster and smoother.
 Compose Multiplatform 1.7.3 release makes use of these optimizations, as well as brings performance improvements
 from Jetpack Compose 1.7.0.
@@ -374,8 +368,6 @@ The default behavior stays the same: The `ComposePanel` attempts to synchronize 
 ## Web
 
 ### skiko.js is redundant for Kotlin/Wasm applications
-
-<!-- TODO additional copy editing -->
 
 The `skiko.js` file is now redundant for Kotlin/Wasm applications built with Compose Multiplatform.
 You can remove it from the `index.html` file and improve the load times of your app.
