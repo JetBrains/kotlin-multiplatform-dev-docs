@@ -123,19 +123,20 @@ Add a new text line to the greeting that is displayed after the button press:
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Displays the same text on all platforms
+                Text(
+                    text = "Cross-platform greeting!",
+                    modifier = Modifier.padding(20.dp),
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center
+                )
                 Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
-                    // TODO: this code is likely wrong
-                    Text(
-                        text = "Today's date is ...",
-                        modifier = Modifier.padding(20.dp),
-                        fontSize = 24.sp,
-                        textAlign = TextAlign.Center
-                    )
+                    Text("Click me")
                 }
                 AnimatedVisibility(showContent) {
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                         Image(painterResource(Res.drawable.compose_multiplatform), null)
+                        // Displays a platform-specific phrase
                         Text("Compose: $greeting")
                     }
                 }
@@ -146,12 +147,9 @@ Add a new text line to the greeting that is displayed after the button press:
 
 2. Follow the IDE's suggestions to import the missing dependencies.
 
-   <!-- TODO: screenshot needs updating -->
    ![Unresolved references](compose-unresolved-references.png)
 
 ## Rerun the application
-
-<!-- TODO all screenshots will be outdated as the sample UI update is different (not using the datetime API) -->
 
 You can now [rerun the application](#run-your-application)
 using the same run configurations for Android, iOS, desktop, and web:
