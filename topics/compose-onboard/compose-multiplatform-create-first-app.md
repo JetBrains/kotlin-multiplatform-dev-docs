@@ -40,6 +40,9 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
 
    ![Create Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
+The first import takes a couple of minutes.
+After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
+
 ## Examine the project structure
 
 If you pick all client targets, you'll see the following directories in the **Project** view:
@@ -81,7 +84,7 @@ and `iosMain` holds code for all iOS targets (devices as well as simulators).
 
 The Kotlin Multiplatform IDE plugin provides ready-to-go run configurations for all selected targets:
 
-* Run **androidApp** to launch the Anroid app on an emulator.
+* Run **androidApp** to launch the Android app on an emulator.
   If you don't have a virtual Android device yet, open the **Device Manager** (**View | Tool Windows | Device Manager**)
   and create one.
 * Run **iosApp** to launch the iOS app on the iPhone Simulator.
@@ -110,6 +113,8 @@ Add a new text line to the greeting that is displayed after the button press:
     @Preview
     fun App() {
         MaterialTheme {
+            // Makes values observable by composables
+            // by using the `remember` API
             var showContent by remember { mutableStateOf(false) }
             val greeting = remember { Greeting().greet() }
             Column(
@@ -148,7 +153,7 @@ Add a new text line to the greeting that is displayed after the button press:
 
 <!-- TODO all screenshots will be outdated as the sample UI update is different (not using the datetime API) -->
 
-You can now [rerun the application](compose-multiplatform-create-first-app.md#run-your-application)
+You can now [rerun the application](#run-your-application)
 using the same run configurations for Android, iOS, desktop, and web:
 
 <tabs>
@@ -165,8 +170,8 @@ using the same run configurations for Android, iOS, desktop, and web:
 
 ## What's next
 
-* Based on the project you created, you can follow [another tutorial](compose-multiplatform-new-project.md) to create a functional app
-  implementing a more complex UI, using image resources and additional libraries.
+* You can follow [another tutorial to create a more functional app](compose-multiplatform-new-project.md)
+  with a more complex UI, using image resources and additional libraries.
 * To understand the basic Compose code used in the project, see [Compose Multiplatform layout basics](compose-layout.md).
 * Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
 * Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md).

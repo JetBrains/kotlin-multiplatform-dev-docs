@@ -117,7 +117,7 @@
 
 	<toc-element toc-title="Manage project structure">
 		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
-
+		<toc-element topic="multiplatform-hierarchy.md"/>
 		<toc-element toc-title="Multiplatform dependencies">
 			<toc-element toc-title="Adding dependencies" topic="multiplatform-add-dependencies.md" accepts-web-file-names="multiplatform-dependencies.html"/>
 
@@ -125,8 +125,8 @@
 			<toc-element toc-title="iOS-specific dependencies" topic="multiplatform-ios-dependencies.md"/> <!-- TODO Combine / move to iOS integration? -->
 		</toc-element>
 
-		<toc-element toc-title="Source set hierarchy" topic="multiplatform-advanced-project-structure.md"/>
-		<toc-element topic="multiplatform-hierarchy.md"/>
+		<toc-element toc-title="Understanding dependencies between source sets" topic="multiplatform-advanced-project-structure.md"/>
+
         <toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
 		<toc-element toc-title="Project organization options" topic="multiplatform-project-configuration.md"/>
 	</toc-element>
@@ -165,7 +165,7 @@
 		<toc-element topic="multiplatform-publish-libraries-to-npm.md"/>
 		<toc-element toc-title="App Store privacy manifest" topic="multiplatform-privacy-manifest.md"/>
 	</toc-element>
-	<toc-element toc-title="KMP tooling">
+	<toc-element toc-title="Kotlin Multiplatform tooling">
 		<toc-element topic="recommended-ides.md"/>
 		<toc-element topic="build-and-run-kmp.md"/>
 		<toc-element topic="compose-hot-reload.md"/>

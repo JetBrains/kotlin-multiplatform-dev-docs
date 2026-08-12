@@ -19,7 +19,7 @@ This function is then called on each platform:
 >
 {style="tip"}
 
-### On Android
+## On Android
 
 For Android, the call is made from within the `setContent()` lambda in the [Android activity](https://developer.android.com/guide/components/activities/intro-activities) called `MainActivity`:
 
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
 Compose Multiplatform provides access to all Jetpack Compose APIs,
 but [some of them are only available for Android apps](compose-android-only-components.md).
 
-### On iOS
+## On iOS
 
 For iOS, the common `App()` composable is called within a [view controller](https://developer.apple.com/documentation/uikit/view_controllers)
 that performs the same role as an activity on Android:
@@ -54,7 +54,7 @@ Both the iOS and Android types simply invoke the `App()` composable from common 
 For more on Compose Multiplatform integration with iOS UI frameworks,
 see [](compose-swiftui-integration.md) and [](compose-uikit-integration.md).
 
-### On desktop
+## On desktop
 
 On desktop Compose Multiplatform is built into a JVM app.
 The call to the common `App()` composable is made in the `main()` function,
@@ -80,7 +80,7 @@ As with Android and iOS, the `App()` composable is responsible for the entire UI
 Learn more about [desktop-specific Compose Multiplatform components](compose-desktop-components.md)
 and [Swing interoperability](compose-desktop-swing-interoperability.md).
 
-### On web
+## On web
 
 The web application, whose code is located in the `webApp` module in the default project,
 calls the common `App()` composable from the `main()` function in the `main.kt` file:

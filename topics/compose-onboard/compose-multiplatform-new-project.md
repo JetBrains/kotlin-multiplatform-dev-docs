@@ -8,7 +8,7 @@ and images as multiplatform resources.
 
 You'll create an application where users can select a country to see the time in the capital city of that country.
 All the functionality of your Compose Multiplatform app will be implemented in common code using multiplatform libraries.
-It'll load and display images within a dropdown menu and will use Compose events, styles, themes, modifiers, and layouts.
+It'll load and display images within a dropdown menu and will use a Compose layout with events, styles, themes, and modifiers.
 
 In this tutorial, you will:
 
@@ -24,18 +24,7 @@ specific platforms that best suit your needs.
 >
 {style="note"}
 
-## Create a project
-
-Create a fresh project using the Kotlin Multiplatform project template in your IDE
-(it is available if you have the [KMP IDE plugin installed](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)):
-
-1. Select **File** | **New** | **Project**, then **Kotlin Multiplatform** in the list of template options.
-2. To follow the tutorial exactly, name the project "ComposeDemo" and set **Project ID** to "compose.project.demo".
-3. The tutorial covers all platforms, but you can select only the ones you're interested in.
-   Select the option to **Share UI** where it is present.
-
-The first import takes a couple of minutes.
-After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
+<include from="compose-multiplatform-create-first-app.md" element-id="create-a-project"></include>
 
 ## Add the time dependency
 
@@ -123,7 +112,7 @@ It is a multiplatform library, so you will use it only in common code and need t
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
-> When commiting your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
+> When committing your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
 > This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
 >
 {style="note"}
@@ -478,9 +467,12 @@ and add code to load and display them:
 
 This tutorial covers the basic building blocks of a multiplatform project.
 To dive deeper into specifics:
-* Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
-* Learn about [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md).
-* For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
+* **Kotlin Multiplatform**
+  * For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
+* **Compose Multiplatform**
+  * Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
+  * Learn about the [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md).
+
 * Follow more complicated tutorials to take a look at samples which are closer to production applications:
   * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
   * [Migrate an advanced Android app to KMP](migrate-from-android.md)
