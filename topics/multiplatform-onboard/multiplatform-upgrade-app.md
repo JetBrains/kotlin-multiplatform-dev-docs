@@ -8,7 +8,7 @@ For an example of sharing both logic and UI, see [](compose-multiplatform-new-pr
 
 Following the steps below, you'll create an application which requests and displays data from a REST API
 (the latest successful launch from [Launch Library 2](https://lldev.thespacedevs.com/docs)).
-The networking and data serialization code will be shared between iOS and Android. ndroid.
+The networking and data serialization code will be shared between iOS and Android.
 
 To get from a wizard-generated project to the final result, you will:
 
@@ -25,8 +25,6 @@ To get from a wizard-generated project to the final result, you will:
 > * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
 >
 {style="note"}
-
-<!--<include from="multiplatform-create-first-app.md" element-id="create-a-project"></include>-->
 
 ## Create a project
 
@@ -47,6 +45,26 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
 
 The first import takes a couple of minutes.
 After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
+
+## Examine the project structure
+
+In IntelliJ IDEA, expand the `GreetingKMP` folder.
+
+The Kotlin Multiplatform project includes the following modules:
+
+* **androidApp** is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
+  The **androidApp** module depends on and uses the **sharedLogic** module as a regular Android library.
+* **iosApp** is the Xcode project that builds into an iOS application.
+  It depends on the **sharedLogic** module, which is exported as an iOS framework.
+  Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
+  [direct integration](multiplatform-direct-integration.md).
+* **sharedLogic** is the multiplatform module that contains the logic common for both Android and iOS applications.
+* **sharedUI** is the module with Compose UI code: in this project, it is used only by the Android app,
+  but it is implemented with Compose Multiplatform and can be used by other targets whenever you need that.
+  On Android, [Compose Multiplatform calls directly translate into Jetpack Compose](compose-multiplatform-jetpack-libraries.md),
+  so there is no overhead.
+
+Every module except for **iosApp** uses Gradle as the build system.
 
 ## Add dependencies
 
@@ -396,7 +414,11 @@ Update your `androidApp/src/main/AndroidManifest.xml` file with the access permi
 
 ### Run the app
 
-To see the final result, rerun your **androidApp** run configuration:
+To see the final result, rerun your **androidApp** run configuration.
+
+> For details on creating new emulators or running apps on physical devices, see [](build-and-run-kmp.md).
+>
+{style="note"}
 
 ![Final result for Android](multiplatform-mobile-upgrade-android.png){width=350}
 <!-- TODO the new year stuff is out, update the screenshot -->
@@ -701,15 +723,19 @@ struct iOSApp: App {
 }
 ```
 
-Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced:
+Run the **iosApp** configuration from IntelliJ IDEA to make sure your app's logic is synced.
+
+> For details on creating new emulators or running apps on physical devices, see [](build-and-run-kmp.md).
+>
+{style="note"}
 
 ![Final results](multiplatform-mobile-upgrade-ios.png){width=350}
 
-> You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
-> * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
-> * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
->
-{style="note"}
+## Final state of the project
+
+You can find the final state of the project in two branches of our GitHub repository, with different coroutine solutions:
+* the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
+* the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
 
 ## Possible issues and solutions
 
@@ -727,8 +753,9 @@ If you are using Xcode, you may need to clear cached binaries: Try resetting the
 
 * To learn of the various approaches to sharing code that Kotlin Multiplatform supports,
   see [](multiplatform-share-on-platforms.md).
+* Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
 * For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
-* Learn how Kotlin implements [interoperability with Objective-C frameworks and libraries](https://kotlinlang.org/docs/native-objc-interop.html).
+* See how a Kotlin Multiplatform project can be [integrated with an iOS app](multiplatform-ios-integration-overview.md). 
 * Create a more complex KMP app following the tutorial on [networking and data storage](multiplatform-ktor-sqldelight.md).
 * [See the curated list of sample multiplatform projects](multiplatform-samples.md).
 * Explore various approaches to [composition of suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html).

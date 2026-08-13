@@ -138,6 +138,24 @@ Press double <shortcut>Shift</shortcut> and search for commands containing the w
 
 ![The Search Everywhere menu with the word "preflight" entered](double-shift-preflight-checks.png){width=600}
 
+### Modules
+
+Depending on the set of platforms you select in the Kotlin Multiplatform project wizard,
+you'll see the following modules after project import:
+
+* **androidApp** is the module that builds into an Android application.
+* **desktopApp** is the module that builds into a desktop JVM application.
+* **iosApp** is an Xcode project that builds into an iOS application. It depends on and uses the **shared** module as an iOS
+  framework.
+* **shared** is a Kotlin Multiplatform module that contains the code common for the Android, desktop, iOS, and web applications.
+* **webApp** is the module that builds into web applications, both Kotlin/JS and Kotlin/Wasm.
+* **server** and **core** modules are created only for the server platform:
+  **core** holds code shared between the server and client apps,
+  **server** configures an endpoint.
+
+During a build, the `shared` module is treated appropriately for each target.
+For example, it's treated as Kotlin/JVM for building an Android app and as Kotlin/Native for building an iOS app.
+
 ## Run the sample apps
 
 The project created by the IDE wizard includes generated run configurations for iOS, Android,
