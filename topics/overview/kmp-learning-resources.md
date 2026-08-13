@@ -95,7 +95,7 @@ Free
 </td>
 <td>
 
-[Create Your First KMP App](multiplatform-create-first-app.md)
+[Create Your First KMP App](multiplatform-upgrade-app.md)
 
 Tutorial
 

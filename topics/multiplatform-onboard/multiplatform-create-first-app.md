@@ -44,25 +44,6 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
 The first import takes a couple of minutes.
 After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
-## Examine the project structure
-
-In IntelliJ IDEA, expand the `GreetingKMP` folder.
-
-The Kotlin Multiplatform project includes the following modules:
-
-* **androidApp** is a Kotlin module that builds into an Android application. It uses Gradle as the build system.
-  The **androidApp** module depends on and uses the **sharedLogic** module as a regular Android library.
-* **iosApp** is the Xcode project that builds into an iOS application.
-  It depends on the **sharedLogic** module, which is exported as an iOS framework.
-  Kotlin Multiplatform projects created using the IDE wizard use the regular framework dependency through
-  [direct integration](multiplatform-direct-integration.md).
-* **sharedLogic** is the multiplatform module that contains the logic common for both Android and iOS applications.
-* **sharedUI** is the module with Compose Multiplatform UI code: in this project, it is used only by the Android app,
-  but it is a multiplatform module that can be used by other targets whenever you need that.
-
-Every module except for **iosApp** uses Gradle as the build system.
-
-![Basic Multiplatform project structure](basic-project-structure.svg){width=700}
 <!-- TODO need to redo the diagram: ios depends on sharedLogic while android on both sharedLogic and sharedUI -->
 
 _Source set_ is a Gradle concept for a set of files logically grouped together where each set has its own dependencies.

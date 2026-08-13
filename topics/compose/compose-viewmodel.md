@@ -217,7 +217,7 @@ You can choose which parts of your code to share and which to keep platform-spec
 * To share both UI and business logic between platforms,
   see the [shared logic and UI tutorial](compose-multiplatform-new-project.md).
 * To share some code without sharing UI implementation,
-  see the [shared logic tutorial](multiplatform-create-first-app.md).
+  see the [shared logic tutorial](multiplatform-upgrade-app.md).
 
 The following examples show how to use ViewModel at different levels of code sharing.
 All examples are based on the `OrderViewModel` class introduced above.

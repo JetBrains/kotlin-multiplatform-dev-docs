@@ -81,7 +81,7 @@ follow the [shared logic and UI tutorial](compose-multiplatform-new-project.md).
   * To see how an Android app can be turned into a multiplatform app,
   check out our [migration tutorial](multiplatform-integrate-in-existing-app.md).
   * To see how you can share some code without sharing UI implementation,
-  follow the [shared logic tutorial](multiplatform-create-first-app.md).
+  follow the [shared logic tutorial](multiplatform-upgrade-app.md).
 
 Dig into technical details
 : * Start with the [basic project structure](multiplatform-discover-project.md).

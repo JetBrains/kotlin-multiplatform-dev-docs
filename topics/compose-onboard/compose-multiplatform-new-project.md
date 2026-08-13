@@ -1,4 +1,4 @@
-[//]: # (title: Shared UI: Shared logic for time calculation)
+[//]: # (title: Shared UI: Timezone picker app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
@@ -27,8 +27,6 @@ Since code is shared almost entirely, you can follow the tutorial for all platfo
 {style="note"}
 <!-- TODO the project will be a bit different, but can be synced later -->
 
-<!--<include from="compose-multiplatform-create-first-app.md" element-id="create-a-project"></include>-->
-
 ## Create a project
 
 With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Compose Multiplatform project:
@@ -52,9 +50,14 @@ After it is done, make sure that preflight checks are all green (**View | Tool W
 ## Lay the foundation
 
 UI in a template Compose Multiplatform project is organized in several app modules
-and a shared UI module, feeding the main `App()` composable into the entry points defined in app modules.
+and a shared UI module, feeding the main `App()` composable into the entry points defined in application modules.
 In this tutorial, you are not doing anything that requires updating the platform-specific code:
 all changes in the common UI code are seamlessly propagated across the apps.
+
+> To learn how shared UI code is attached to system entry points on different platforms,
+> see [](compose-multiplatform-entry-points.md).
+>
+{style="tip"}
 
 To get started, implement the basic layout in the common `App()` composable:
 
@@ -165,8 +168,11 @@ Following the instructions from the [library's repository](https://github.com/Ko
 1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
 
     ```toml
+    [versions]
+    kotlinx-datetime = "%dateTimeVersion%"
+
     [libraries]
-    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "%dateTimeVersion%" }
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
     ```
 
 2. Open the `shared/build.gradle.kts` file and add a reference to the version catalog entry
@@ -356,10 +362,7 @@ Run the application to see the redesigned version:
     </tab>
 </tabs>
 
-> You can further improve the design using a dependency injection framework, such as [Koin](https://insert-koin.io/),
-> to build and inject the table of locations. If the data is stored externally,
-> you can use the [Ktor](https://ktor.io/docs/create-client.html) library to fetch it over the network or
-> the [SQLDelight](https://github.com/cashapp/sqldelight) library to fetch it from a database.
+> For details on creating new emulators or running apps on physical devices, see [](build-and-run-kmp.md).
 >
 {style="note"}
 
@@ -496,6 +499,8 @@ and add code to load and display them:
 This tutorial covers the basic building blocks of a multiplatform project.
 To dive deeper into specifics:
 * **Kotlin Multiplatform**
+  * Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md). 
+  * Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
   * For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
 * **Compose Multiplatform**
   * Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
