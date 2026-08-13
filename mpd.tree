@@ -17,14 +17,16 @@
                      target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
 	<toc-element toc-title="Create KMP apps">
-		<toc-element toc-title="Share both logic and UI">
-			<toc-element topic="compose-multiplatform-create-first-app.md" accepts-web-file-names="compose-multiplatform-getting-started.html"/> <!--create a base project & tweak UI to see it work everywhere at once -->
-			<toc-element topic="compose-multiplatform-new-project.md" accepts-web-file-names="compose-multiplatform-modify-project.html"/> <!-- from the wizard to the final CMP sample -->
+		<toc-element topic="compose-multiplatform-new-project.md" accepts-web-file-names="compose-multiplatform-getting-started.html,compose-multiplatform-create-first-app.html,compose-multiplatform-modify-project.html"/> <!-- from the wizard to the final CMP sample -->
+		<toc-element topic="multiplatform-upgrade-app.md" accepts-web-file-names="multiplatform-getting-started.html,multiplatform-create-first-app,multiplatform-update-ui.html,multiplatform-wrap-up.html"/> <!-- from the wizard to the final KMP sample -->
+		<!--<toc-element toc-title="Share both logic and UI">
+			<toc-element topic="compose-multiplatform-create-first-app.md" accepts-web-file-names="compose-multiplatform-getting-started.html"/>
+
 		</toc-element>
 		<toc-element toc-title="Share logic and native UI">
-			<toc-element topic="multiplatform-create-first-app.md" accepts-web-file-names="multiplatform-getting-started.html"/> <!--create a base project & tweak common code to see how it works everywhere at once -->
-			<toc-element topic="multiplatform-upgrade-app.md" accepts-web-file-names="multiplatform-update-ui.html,multiplatform-wrap-up.html"/> <!-- from the wizard to the final KMP sample -->
-		</toc-element>
+			<toc-element topic="multiplatform-create-first-app.md" accepts-web-file-names="multiplatform-getting-started.html"/>
+
+		</toc-element>-->
 		<toc-element toc-title="Migrate to KMP from Android">
 			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
 			<toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>

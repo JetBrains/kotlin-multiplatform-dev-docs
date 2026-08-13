@@ -149,7 +149,7 @@ Free
 </td>
 <td>
 
-[Create Your First Compose Multiplatform App](compose-multiplatform-create-first-app.md)
+[Create Your First Compose Multiplatform App](compose-multiplatform-new-project.md)
 
 Tutorial
 

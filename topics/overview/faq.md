@@ -137,7 +137,7 @@ It has the same UI as Compose Multiplatform for iOS, Android, and desktop.
 
 ### How do I create a new Compose Multiplatform project?
 
-The [Create a Compose Multiplatform app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial provides step-by-step
+The [Create a Compose Multiplatform app with shared logic and UI](compose-multiplatform-new-project.md) tutorial provides step-by-step
 instructions for creating a Kotlin Multiplatform project with Compose Multiplatform for Android, iOS, and desktop.
 You can also watch a [video tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4) on YouTube created by a Kotlin
 Developer Advocate, Sebastian Aigner.

@@ -50,7 +50,7 @@ you can still explicitly declare the Compose Hot Reload plugin to use a specific
 
 For multiplatform projects using a Compose Multiplatform version earlier than 1.10.0,
 you must have a desktop target configured and then explicitly add the Compose Hot Reload plugin.
-The steps refer to the project from the [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md) tutorial as a reference.
+The steps refer to the project from the [quickstart](quickstart.md) tutorial as a reference.
 
 1. Introduce the desktop target: create the `desktopApp` directory, define a `main()` function,
    and provide the `actual` implementations.

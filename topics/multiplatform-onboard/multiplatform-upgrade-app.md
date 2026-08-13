@@ -1,24 +1,24 @@
-[//]: # (title: Shared logic for REST API requests)
+[//]: # (title: Native UI: Shared logic for REST API requests)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-In this tutorial you will start with the wizard-generated Kotlin Multiplatform (KMP) project and build a more complex application
-that shares the code for network requests and data serialization between iOS and Android.
+This tutorial shows how to share code for certain business logic while implementing separate UIs in native code.
+For an example of sharing both logic and UI, see [](compose-multiplatform-new-project.md).
 
-The app will retrieve data over the internet from the [Launch Library 2](https://lldev.thespacedevs.com/docs)
-API and display descriptions of the latest successful space launch among other messages.
+Following the steps below, you'll create an application which requests and displays data from a REST API
+(the latest successful launch from [Launch Library 2](https://lldev.thespacedevs.com/docs)).
+The networking and data serialization code will be shared between iOS and Android. ndroid.
 
-In the course of the tutorial, you will consume the data provided by the common module in the UI of iOS and Android apps:
+To get from a wizard-generated project to the final result, you will:
 
-1. Add common and platform-specific dependencies.
-2. Implement network requests and data serialization in common code.
-3. Implement a coroutine flow to handle the results of network requests.
-4. Update the UI of iOS and Android apps to format and display the data.
-
-Network requests and data serialization are the [most popular use cases](https://kotlinlang.org/lp/multiplatform/) for sharing code using Kotlin
-Multiplatform.
-You will implement both in the shared module of the final project.
+1. [Configure common and platform-specific dependencies](#add-dependencies)
+2. [Set up API requests and the data model for storing responses](#set-up-api-requests)
+3. Consume and display the data in native UIs:
+   * [Update the Android UI](#update-native-android-ui) 
+   * [Update the iOS UI](#update-native-ios-ui).
+     You will be able to try out two different libraries for integrating Kotlin coroutines
+     into Swift code.
 
 > You can find the final state of the project in two branches of our GitHub repository, with different iOS coroutine solutions:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
@@ -26,7 +26,27 @@ You will implement both in the shared module of the final project.
 >
 {style="note"}
 
-<include from="multiplatform-create-first-app.md" element-id="create-a-project"></include>
+<!--<include from="multiplatform-create-first-app.md" element-id="create-a-project"></include>-->
+
+## Create a project
+
+With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Kotlin Multiplatform project:
+
+1. In IntelliJ IDEA, select **File** | **New** | **Project**.
+2. In the panel on the left, select **Kotlin Multiplatform**.
+3. Specify the following fields in the **New Project** window:
+
+    * **Name**: GreetingKMP
+    * **Project ID** (used as the package name): com.jetbrains.greetingkmp
+
+4. Select the **Android** and **iOS** targets.
+   For iOS, select the **Do not share UI** option to keep the UI native.
+5. Click **Create**.
+
+   ![Create Kotlin Multiplatform project](create-first-multiplatform-app.png){width=700}
+
+The first import takes a couple of minutes.
+After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
 ## Add dependencies
 

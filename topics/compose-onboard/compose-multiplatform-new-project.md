@@ -1,128 +1,53 @@
-[//]: # (title: Simple timezone picker app)
+[//]: # (title: Shared UI: Shared logic for time calculation)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-Let's build an application that implements a relatively complex shared UI using external dependencies
-and images as multiplatform resources.
+This tutorial focuses on sharing as much code as possible:
+the UI is implemented in common code using Compose Multiplatform,
+and the functionality is based on multiplatform libraries.
+For an example of sharing only the logic and keeping the UI native, see [](multiplatform-upgrade-app.md).
 
-You'll create an application where users can select a country to see the time in the capital city of that country.
-All the functionality of your Compose Multiplatform app will be implemented in common code using multiplatform libraries.
-It'll load and display images within a dropdown menu and will use a Compose layout with events, styles, themes, and modifiers.
+Following the steps below, you'll create an application where users can select a country to see the time in the capital city of that country.
+The app will load and display images within a dropdown menu and will employ a typical Compose layout with events, styles, themes, and modifiers.
 
-In this tutorial, you will:
+To get from a wizard-generated project to the final result, you will:
 
-1. Add and use a multiplatform library dependency.
-2. Implement a common Compose UI for a country picker for all supported platforms: iOS, Android, desktop, and web.
-3. Practice using Compose Hot Reload, a tool for quickly iterating on your UI without rebuilding the entire app.
-4. Import and use images in the common UI as multiplatform resources.
+1. [Lay the foundation for a Compose UI](#lay-the-foundation)
+2. [Try out the Compose Hot Reload](#use-compose-hot-reload-to-quickly-iterate-on-ui)
+3. [Add the multiplatform library dependency for time calculation](#add-the-time-dependency)
+4. Put the app together:
+   * [Support user input](#support-user-input)
+   * [Add and import image resources](#introduce-images)
 
-At each stage, you can run the application on all supported platforms (iOS, Android, desktop, and web), or you can focus on the
-specific platforms that best suit your needs.
+Since code is shared almost entirely, you can follow the tutorial for all platforms at once, or pick and choose platforms you are interested in.
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
 {style="note"}
+<!-- TODO the project will be a bit different, but can be synced later -->
 
-<include from="compose-multiplatform-create-first-app.md" element-id="create-a-project"></include>
+<!--<include from="compose-multiplatform-create-first-app.md" element-id="create-a-project"></include>-->
 
-## Add the time dependency
+## Create a project
 
-To work with timezones and time calculation, you'll use the [kotlin.time](https://kotlinlang.org/docs/time-measurement.html)
-classes together with the [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime)
-library.
+With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Compose Multiplatform project:
 
-While `kotlin.time` is always available as part of the standard library,
-`kotlinx-datetime` needs to be configured as an explicit dependency.
-It is a multiplatform library, so you will use it only in common code and need to specify the dependency only once:
+1. In IntelliJ IDEA, select **File** | **New** | **Project**.
+2. In the panel on the left, select **Kotlin Multiplatform**.
+3. Specify the following fields in the **New Project** window:
 
-1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
+    * **Name**: ComposeDemo
+    * **Project ID** (used as the package name): compose.project.demo
 
-    ```toml
-    [versions]
-    kotlinx-datetime = "%dateTimeVersion%"
-    
-    [libraries]
-    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
-    ```
+4. Select the **Android**, **iOS**, **Desktop**, and **Web** targets.
+   Make sure that the **Share UI** option is selected for iOS and web.
+5. Once you've specified all the fields and targets, click **Create**.
 
-2. Open the `shared/build.gradle.kts` file and add a reference to the version catalog entry
-   to the section that configures the `commonMain` source set:
+   ![Create a Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
-    ```kotlin
-    kotlin {
-        // ... 
-        sourceSets {
-            commonMain.dependencies {
-                // ...
-                implementation(libs.kotlinx.datetime)
-            } 
-        }
-    }
-    ```
-
-3. For the web target, timezone support requires the `js-joda` library.
-   Add a reference to the `js-joda` npm package to the `webApp/build.gradle.kts file`:
-
-    ```kotlin
-    kotlin {
-        // ...
-        sourceSets {
-            // ...
-            webMain.dependencies {
-                // ...
-                implementation(npm("@js-joda/timezone", "%js-joda-timezone%"))
-            }
-        }
-    }
-    
-    ```
-
-   Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
-
-4. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
-   or press double **Shift** and execute the **Sync Project with Gradle Files** command.
-
-5. In the **Terminal** tool window, run the following command to update the `yarn.lock` file with the latest dependency versions:
-
-    ```shell
-    ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
-    ```
-
-6. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package:
-
-    ```kotlin
-    import androidx.compose.ui.ExperimentalComposeUiApi
-    import androidx.compose.ui.window.ComposeViewport
-    import kotlin.js.ExperimentalWasmJsInterop
-    import kotlin.js.JsModule
-
-    @OptIn(ExperimentalWasmJsInterop::class)
-    @JsModule("@js-joda/timezone")
-    external object JsJodaTimeZoneModule
-    
-    private val jsJodaTz = JsJodaTimeZoneModule
-    
-    @OptIn(ExperimentalComposeUiApi::class)
-    fun main() {
-        ComposeViewport {
-            App()
-        }
-    }
-    ```
-   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
-
-> When committing your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
-> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
->
-{style="note"}
-
-Now you can use `kotlinx-datetime` APIs in your common code.
-
-> For more general information on how to manage multiplatform dependencies,
-> see [](multiplatform-add-dependencies.md).
->
-{style="tip"}
+The first import takes a couple of minutes.
+After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
 ## Lay the foundation
 
@@ -223,6 +148,109 @@ You can fix the desktop UI and verify the fix without rerunning the build:
    <!--![Smaller window of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}-->
 
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
+
+## Add the time dependency
+
+To work with timezones and time calculation, you'll use the [kotlin.time](https://kotlinlang.org/docs/time-measurement.html)
+classes together with the multiplatform [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime)
+library.
+
+While `kotlin.time` is always available as part of the standard library,
+`kotlinx-datetime` needs to be configured as an explicit dependency.
+It is a multiplatform library, and you will use it only in common code,
+so you need to specify the dependency only once, with [additional configuration needed only for web](#add-kotlinx-datetime-dependency-for-a-web-app).
+
+Following the instructions from the [library's repository](https://github.com/Kotlin/kotlinx-datetime#gradle):
+
+1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
+
+    ```toml
+    [libraries]
+    kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "%dateTimeVersion%" }
+    ```
+
+2. Open the `shared/build.gradle.kts` file and add a reference to the version catalog entry
+   to the section that configures the `commonMain` source set:
+
+    ```kotlin
+    kotlin {
+        // ... 
+        sourceSets {
+            commonMain.dependencies {
+                // ...
+                implementation(libs.kotlinx.datetime)
+            } 
+        }
+    }
+    ```
+
+Now you can use `kotlinx-datetime` APIs in your common code.
+If you added the web target, make sure to configure it as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app)
+to work around the limitations of timezone support in JavaScript and Wasm/JS.
+
+> For more general information on how to manage multiplatform dependencies,
+> see [](multiplatform-add-dependencies.md).
+>
+{style="tip"}
+
+### Add `kotlinx-datetime` dependency for a web app {collapsible="true"}
+
+For the web target, timezone support also requires the `js-joda` npm package.
+
+1. Add a reference to the package in the `webApp/build.gradle.kts` file:
+
+    ```kotlin
+    kotlin {
+        // ...
+        sourceSets {
+            // ...
+            webMain.dependencies {
+                // ...
+                implementation(npm("@js-joda/timezone", "%js-joda-timezone%"))
+            }
+        }
+    }
+    
+    ```
+
+   Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
+
+2. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
+   or press double **Shift** and execute the **Sync Project with Gradle Files** command.
+
+3. In the **Terminal** tool window, run the following command to update the `yarn.lock` file with the latest dependency versions:
+
+    ```shell
+    ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
+    ```
+
+4. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package:
+
+    ```kotlin
+    import androidx.compose.ui.ExperimentalComposeUiApi
+    import androidx.compose.ui.window.ComposeViewport
+    import kotlin.js.ExperimentalWasmJsInterop
+    import kotlin.js.JsModule
+
+    @OptIn(ExperimentalWasmJsInterop::class)
+    @JsModule("@js-joda/timezone")
+    external object JsJodaTimeZoneModule
+    
+    private val jsJodaTz = JsJodaTimeZoneModule
+    
+    @OptIn(ExperimentalComposeUiApi::class)
+    fun main() {
+        ComposeViewport {
+            App()
+        }
+    }
+    ```
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
+
+> When committing your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
+> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
+>
+{style="note"}
 
 ## Support user input
 
@@ -472,11 +500,10 @@ To dive deeper into specifics:
 * **Compose Multiplatform**
   * Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
   * Learn about the [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md).
-
-* Follow more complicated tutorials to take a look at samples which are closer to production applications:
+* **Tutorials for more advanced projects**
   * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
   * [Migrate an advanced Android app to KMP](migrate-from-android.md)
-* [See the curated list of sample multiplatform projects](multiplatform-samples.md)
+* [Look through the curated list of sample multiplatform projects](multiplatform-samples.md)
 
 Join the community:
 

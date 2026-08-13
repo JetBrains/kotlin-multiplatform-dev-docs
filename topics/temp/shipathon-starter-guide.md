@@ -33,7 +33,7 @@ There are different ways to share code in a KMP project, with some platform spec
 
 * The basic examples of calling common code from app modules are covered in onboarding tutorials:
     * [for native UI and shared logic](multiplatform-create-first-app.md)
-    * [for shared UI and logic](compose-multiplatform-create-first-app.md)
+    * [for shared UI and logic](compose-multiplatform-new-project.md)
 * [How to access platform-specific APIs](multiplatform-connect-to-apis.md):
     * Use multiplatform libraries when possible.
     * Use the `expect`/`actual` mechanism when no suitable multiplatform library is available.
