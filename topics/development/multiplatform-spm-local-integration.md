@@ -24,7 +24,7 @@ that adds the script to the build phase and requires rebuilding both the Kotlin 
 the changes from the common code.
 
 > If you aren't familiar with Kotlin Multiplatform, learn how to [set up the environment](quickstart.md)
-> and [create a cross-platform application from scratch](compose-multiplatform-create-first-app.md) first.
+> and [create a cross-platform application from scratch](compose-multiplatform-new-project.md) first.
 >
 {style="tip"}
 

@@ -12,7 +12,7 @@
             A declarative framework developed by JetBrains for sharing Kotlin UI code across multiple platforms.
         </description>
         <spotlight>
-            <a href="compose-multiplatform-create-first-app.md" summary="Compose Multiplatform tutorial for creating and exploring a first app" type="cross-platform">Create your first Compose Multiplatform app</a>
+            <a href="compose-multiplatform-new-project.md" summary="Compose Multiplatform tutorial for creating and exploring a first app" type="cross-platform">Create your first Compose Multiplatform app</a>
             <a href="compose-layout.md" type="learn" summary="Learn the basics of making UIs with Compose">Compose Multiplatform basics</a>
         </spotlight>
         <primary>

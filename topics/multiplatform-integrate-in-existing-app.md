@@ -596,7 +596,7 @@ You can use Compose Multiplatform to create a unified UI across all platforms:
 
 * [Learn about Compose Multiplatform and Jetpack Compose](compose-multiplatform-and-jetpack-compose.md)
 * [Explore available resources for Compose Multiplatform](compose-multiplatform-resources.md)
-* [Create an app with shared logic and UI](compose-multiplatform-create-first-app.md)
+* [Create an app with shared logic and UI](compose-multiplatform-new-project.md)
 
 You can also check out community resources:
 

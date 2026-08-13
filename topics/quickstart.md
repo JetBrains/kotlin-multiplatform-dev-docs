@@ -253,14 +253,14 @@ and see if there are any updates for the iOS simulator.
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* A series of tutorials about working with shared UI code using Compose Multiplatform: [](compose-multiplatform-create-first-app.md)
-* A series of tutorials about working with shared code in a project with a native UI: [](multiplatform-create-first-app.md)
-* Take a deep dive into the Kotlin Multiplatform documentation:
-  * [Project configuration](multiplatform-project-configuration.md)
+* A starting level tutorial about working with shared UI code using Compose Multiplatform: [](compose-multiplatform-new-project.md)
+  * Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features:
+  [](compose-multiplatform-and-jetpack-compose.md). 
+* A starting level tutorial about working with shared code in a project with a native UI: [](multiplatform-upgrade-app.md)
+  Take a deep dive into specific Kotlin Multiplatform use cases:
   * [Working with multiplatform dependencies](https://kotlinlang.org/docs/multiplatform-add-dependencies.html)
-* Learn about the Compose Multiplatform UI framework, its fundamentals, and platform-specific features:
-    [](compose-multiplatform-and-jetpack-compose.md).
-
+  * [Organizing code and artifacts around multiplatform artifacts](multiplatform-project-configuration.md)
+  
 Discover code already written for KMP:
 * Our [Samples](multiplatform-samples.md) page, with official JetBrains samples as well as a curated list of
     projects showcasing KMP capabilities.
