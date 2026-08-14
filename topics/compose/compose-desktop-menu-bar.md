@@ -104,7 +104,13 @@ object AboutIcon : Painter() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(MenuBar { Menu( "}
 
-<img src="compose-desktop-menu-bar.animated.gif" alt="Menu bar" width="600"/>
+<img src="compose-desktop-menu-bar.animated.gif" alt="The GIF showcases the Menu bar behavior. The main app window states 
+the last user action, currently None; the Menu bar has two items: File and Actions. The user clicks the File 
+menu item, the corresponding dropdown menu has two buttons: Copy (Control + C) and Paste (Control + V). The user 
+clicks the Action menu item; the corresponding dropdown menu has three buttons: Advanced settings, About with a yellow 
+circle icon and Exit. The user clicks the Advanced settings button. This adds a Settings section in the current 
+dropdown menu, which was not previously available. The user clicks the Setting 1 button, and the main window now displays 
+'Last action: Setting 1'." width="600"/>
 
 On Windows and Linux, the menu bar is part of the window. On macOS, it's displayed in the system menu bar at the top of
 the screen when the window is active.

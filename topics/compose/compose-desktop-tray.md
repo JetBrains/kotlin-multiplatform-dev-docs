@@ -116,7 +116,11 @@ object TrayIcon : Painter() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Tray(state = trayState, icon = TrayIcon, menu = { Item( "}
 
-<img src="compose-desktop-tray.animated.gif" alt="Tray" width="600"/>
+<img src="compose-desktop-tray.animated.gif" alt="The GIF showcases the Tray behavior. The main app window shows the value
+of a counter, currently 0. The user clicks a yellow circle icon in the macOS tray. There are three items available in the 
+corresponding dropdown menu: Increment value, Send notification, and Exit. The user clicks the Increment value item, and 
+the value of the counter increases; the user clicks the Send notification item, and a notification appears on the right 
+side of the screen." width="600"/>
 
 Not every desktop environment has a system tray. If the platform doesn't support one, `Tray` outputs an error to the
 standard error stream instead of throwing an exception. Check the `isTraySupported` property before you show
