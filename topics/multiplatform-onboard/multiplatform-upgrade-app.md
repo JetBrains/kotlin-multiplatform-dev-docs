@@ -650,6 +650,12 @@ every time the flow emits a value.
     }
     ```
 
+> If you're getting build errors, make sure the versions of Kotlin and KMP-NativeCoroutines are compatible:
+> both the Gradle plugin version and the Swift package version should be set
+> according to the [compatibility matrix](https://github.com/rickclephas/KMP-NativeCoroutines#compatibility).
+>
+{style="warning"}
+
 ### Option 2. Configure SKIE {initial-collapse-state="collapsed" collapsible="true"}
 
 To set up the library, add the SKIE version and plugin reference to your Gradle version catalog:
