@@ -421,7 +421,6 @@ To see the final result, rerun your **androidApp** run configuration.
 {style="note"}
 
 ![Final result for Android](multiplatform-mobile-upgrade-android.png){width=350}
-<!-- TODO the new year stuff is out, update the screenshot -->
 
 ## Update native iOS UI
 
