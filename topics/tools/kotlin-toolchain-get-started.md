@@ -371,5 +371,6 @@ or run the following CLI command:
 ## What's next
 
 * If you're not sure what Kotlin Toolchain is and what purpose it serves, check out the [product FAQ](https://kotlin-toolchain.org/dev/faq/).
-* To learn more about how Kotlin Toolchain works, see the general [Getting started guide](https://kotlin-toolchain.org/dev/getting-started/)
-  and a thorough [User guide](https://kotlin-toolchain.org/dev/user-guide/).
+* A [more thorough tutorial](https://kotlin-toolchain.org/dev/getting-started/tutorial/) shows how to start a Kotlin Toolchain project from a literal "Hello, World!" to a multiplatform project
+  with a complex templated configuration.
+* To learn more about how Kotlin Toolchain works, see the [User guide](https://kotlin-toolchain.org/dev/user-guide/).
