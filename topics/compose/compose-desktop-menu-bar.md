@@ -12,7 +12,7 @@ You can use the following components in `MenuBar`:
 * `Item` – a clickable menu item
 * `CheckboxItem` – an item with a checkbox
 * `RadioButtonItem` – an item with a radio button
-* `Separator` – a horizontal line that groups items
+* `Separator` – a horizontal line that separates groups of items
 
 Items and menus accept a `mnemonic` parameter, a character that opens the menu or triggers the item when pressed
 together with <shortcut>Alt</shortcut>. If the character occurs in the text, its first occurrence is underlined.
