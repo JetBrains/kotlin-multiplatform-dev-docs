@@ -24,7 +24,8 @@ To get from a wizard-generated project to the final result, you will:
 > * the [`main`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main) branch includes a KMP-NativeCoroutines implementation,
 > * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE implementation.
 >
-{style="note"}
+{style="tip"}
+<!-- TODO the project will be a bit different, but can be synced later -->
 
 ## Create a project
 

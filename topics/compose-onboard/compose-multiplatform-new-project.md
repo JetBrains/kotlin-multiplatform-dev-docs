@@ -24,7 +24,7 @@ Since code is shared almost entirely, you can follow the tutorial for all platfo
 
 > You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
-{style="note"}
+{style="tip"}
 <!-- TODO the project will be a bit different, but can be synced later -->
 
 ## Create a project
