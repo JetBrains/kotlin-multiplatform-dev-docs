@@ -1,5 +1,6 @@
 [//]: # (title: Tray and notifications)
-[//]: # (description: Learn how to add an application icon to the system tray and send system notifications in Compose Multiplatform for desktop.)
+<web-summary>Learn how to add an application icon to the system tray and send system notifications in Compose 
+Multiplatform for desktop.</web-summary>
 
 In Compose Multiplatform for desktop, you can add an application icon to the system tray and send system
 notifications through it.
@@ -8,10 +9,10 @@ notifications through it.
 
 ## System tray
 
-Use the `Tray` composable to add an application icon to the system tray. `Tray` is available in the scope of the
+Use the `Tray()` composable to add an application icon to the system tray. `Tray()` is available in the scope of the
 `application()` function, so it can be called next to the application windows or on its own.
 
-The `Tray` composable has the following parameters:
+The `Tray()` composable has the following parameters:
 
 * `icon` – the `Painter` that draws the tray icon.
 * `menu` – the contents of the tray menu. The menu opens on a right-click on Windows and on a left-click on macOS.
@@ -21,9 +22,9 @@ The `Tray` composable has the following parameters:
 * `onAction` – the action triggered by clicking the icon: a double click on Windows and a right-click on macOS.
 
 The following example creates an application icon in the tray with three menu items: 
-* **Increment value** that changes the state shown in the window
-* **Send notification**
-* **Exit** that closes the application
+* **Increment value** changes the state shown in the window.
+* **Send notification** sends a system notification.
+* **Exit** closes the application.
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
@@ -116,19 +117,15 @@ object TrayIcon : Painter() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Tray(state = trayState, icon = TrayIcon, menu = { Item( "}
 
-<img src="compose-desktop-tray.animated.gif" alt="The GIF showcases the Tray behavior. The main app window shows the value
-of a counter, currently 0. The user clicks a yellow circle icon in the macOS tray. There are three items available in the 
-corresponding dropdown menu: Increment value, Send notification, and Exit. The user clicks the Increment value item, and 
-the value of the counter increases; the user clicks the Send notification item, and a notification appears on the right 
-side of the screen." width="600"/>
+<img src="compose-desktop-tray.animated.gif" alt="Tray menu and notification" width="600" preview-src="compose-desktop-tray.png"/>
 
-Not every desktop environment has a system tray. If the platform doesn't support one, `Tray` outputs an error to the
+Not every desktop environment has a system tray. If the platform doesn't support one, `Tray()` outputs an error to the
 standard error stream instead of throwing an exception. Check the `isTraySupported` property before you show
 tray-related options in your application.
 
 ### Tray without a window
 
-An application doesn't need a window to have a tray icon. If only the `Tray` function is called, the application lives 
+An application doesn't need a window to have a tray icon. If only the `Tray()` function is called, the application runs 
 entirely in the system tray:
 
 ```kotlin
@@ -166,21 +163,17 @@ Because there is no window to close, `exitApplication()` should be called from a
 ## Notifications
 
 To send a system notification, create it with `rememberNotification()` and pass it to `TrayState.sendNotification()`,
-as the [system tray example](#system-tray) does. Notifications are delivered through the `TrayState` passed to a `Tray` composable. 
+as the [system tray example](#system-tray) does. Notifications are delivered through the `TrayState` passed to a `Tray()` composable. 
 If the state isn't attached to a tray, the notification is lost.
 
-A notification consists of a title, a message, and a type. The type defines the icon and the sound of the notification:
-
-* `Notification.Type.None` – a simple notification, the default option
-* `Notification.Type.Info`
-* `Notification.Type.Warning`
-* `Notification.Type.Error`
+A notification consists of a title, a message, and a type, which defines the icon and the sound of the notification. 
+The available types are `None` (the default option), `Info`, `Warning`, and `Error`.
 
 The specific assets used for the icon and the sound depend on the platform.
 
 > To test the notifications on macOS, the app must be packaged. Otherwise, the notifications will not be shown.
 >
-{style="warning"}
+{style="note"}
 
 ## What's next
 

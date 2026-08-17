@@ -1,18 +1,18 @@
 [//]: # (title: Menu bar)
-[//]: # (description: Learn how to create a menu bar for a specific window in Compose Multiplatform for desktop.)
+<web-summary>Learn how to create a menu bar for a specific window with Compose Multiplatform for desktop.</web-summary>
 
-You can create a menu bar for a specific window using the `MenuBar` composable. `MenuBar` is available in the scope 
-of the `Window` composable, so each window can have its own menu bar.
+You can create a menu bar for a specific window using the `MenuBar()` composable. `MenuBar()` is available in the scope 
+of the `Window()` composable, so each window can have its own menu bar.
 
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
-You can use the following components in `MenuBar`:
+You can use the following components in `MenuBar()`:
 
-* `Menu` – a menu or a submenu
-* `Item` – a clickable menu item
-* `CheckboxItem` – an item with a checkbox
-* `RadioButtonItem` – an item with a radio button
-* `Separator` – a horizontal line that separates groups of items
+* `Menu()` – a menu or a submenu
+* `Item()` – a clickable menu item
+* `CheckboxItem()` – an item with a checkbox
+* `RadioButtonItem()` – an item with a radio button
+* `Separator()` – a horizontal line that separates groups of items
 
 Items and menus accept a `mnemonic` parameter, a character that opens the menu or triggers the item when pressed
 together with <shortcut>Alt</shortcut>. If the character occurs in the text, its first occurrence is underlined.
@@ -23,7 +23,7 @@ Items also accept a `shortcut` parameter – a `KeyShortcut` that triggers the a
 >
 {style="tip"}
 
-Menu content is composable, so you can use conditions and loops inside `MenuBar` to decide which items exist. When the 
+Menu content is composable, so you can use conditions and loops inside `MenuBar()` to decide which items exist. When the 
 state they read changes, the menu updates. In the following example, the **Settings** submenu only exists while the 
 **Advanced settings** checkbox is selected:
 
@@ -104,13 +104,7 @@ object AboutIcon : Painter() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(MenuBar { Menu( "}
 
-<img src="compose-desktop-menu-bar.animated.gif" alt="The GIF showcases the Menu bar behavior. The main app window states 
-the last user action, currently None; the Menu bar has two items: File and Actions. The user clicks the File 
-menu item, the corresponding dropdown menu has two buttons: Copy (Control + C) and Paste (Control + V). The user 
-clicks the Action menu item; the corresponding dropdown menu has three buttons: Advanced settings, About with a yellow 
-circle icon and Exit. The user clicks the Advanced settings button. This adds a Settings section in the current 
-dropdown menu, which was not previously available. The user clicks the Setting 1 button, and the main window now displays 
-'Last action: Setting 1'." width="600"/>
+<img src="compose-desktop-menu-bar.animated.gif" alt="Desktop menu bar" width="600" preview-src="compose-desktop-menu-bar.png"/>
 
 On Windows and Linux, the menu bar is part of the window. On macOS, it's displayed in the system menu bar at the top of
 the screen when the window is active.
