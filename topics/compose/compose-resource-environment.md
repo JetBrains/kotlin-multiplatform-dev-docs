@@ -19,7 +19,9 @@ provide the corresponding declarations for each platform using the platform-spec
 * **desktop**: [`Locale.getDefault()`](https://developer.android.com/reference/java/util/Locale#getDefault(java.util.Locale.Category))
 * **web**: [`window.navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages)
 
-1. In the common source set, define the expected `LocalAppLocale` object with the `expect` keyword:
+1. In the common source set, define the expected `LocalAppLocale` object with the `expect` keyword.
+   Locales are specified as BCP 47 language tags, such as `es`, `es-ES`, or `zh-Hans`. 
+   Set `customAppLocale` to `null` to use the system locale:
 
     ```kotlin
     var customAppLocale by mutableStateOf<String?>(null)

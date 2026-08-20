@@ -149,7 +149,30 @@ You can combine language and region qualifiers:
     The regional code must have a lowercase `r` prefix, for example: `drawable-spa-rMX`.
 
 The language and regional codes are case-sensitive.
+
+To specify a script, or any other BCP 47 subtag, use the `b+` prefix with `+` as a separator,
+for example: `values-b+zh+Hans` and `values-b+zh+Hant`.
+
 Learn more about working with region-specific formats in [Localization](compose-regional-format.md).
+
+#### Fallback for languages with multiple scripts
+
+On Android and desktop, the current locale may not include script info, so the system requests
+`zh` with an empty script instead of specific `zh-Hans` or `zh-Hant`.
+If you provide only script-specific resources, both of the options match such a request 
+and the resource cannot be resolved, so the app fails with an error.
+To avoid the ambiguity, add a script-less directory for every language that has script-specific resources:
+
+```
+commonMain/composeResources/
+├── values/                 # Default resources
+├── values-zh/              # Resources for `zh` without a script
+├── values-b+zh+Hans/
+└── values-b+zh+Hant/
+```
+
+The same applies to all languages that have more than one script, such as Serbian
+(`sr-Cyrl`, `sr-Latn`) or Uzbek (`uz-Cyrl`, `uz-Latn`).
 
 ### Theme qualifier
 
