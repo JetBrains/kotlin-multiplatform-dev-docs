@@ -36,9 +36,13 @@ The `WindowSizeClass` API allows you to change your app's layout based on the av
 For example, you can manage visibility of the top app bar depending on the window height:
 
 ```kotlin
+import androidx.window.core.layout.WindowSizeClass
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
+...
+
 @Composable
 fun MyApp(
-    windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+    windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
 ) {
     // Determines whether the top app bar should be displayed
     val showTopAppBar = windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
