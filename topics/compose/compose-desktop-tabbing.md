@@ -20,7 +20,7 @@ Focusable components include:
 * `IconButton()`
 * `MenuItem()`
 
-For example, here's a window where users can navigate between five text fields using standard shortcuts:
+For example, here's a window where the user can navigate between five text fields using standard shortcuts:
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
@@ -80,8 +80,8 @@ To change the appearance of the component when it receives focus, pass `MutableI
 modifier and read the focus state from the interaction source with `collectIsFocusedAsState()`. To make the component 
 react to keyboard presses, handle key events with the `onPreviewKeyEvent()` modifier.
 
-The following example turns a `Box()` composable into a button-like component. It is highlighted when focused, and both
-<shortcut>Enter</shortcut> and <shortcut>Space</shortcut> trigger its action:
+The following example turns a `Box()` composable into a button-like component. The box is highlighted when focused, and 
+pressing <shortcut>Enter</shortcut> or <shortcut>Space</shortcut> triggers the related action:
 
 ```kotlin
 import androidx.compose.foundation.background
@@ -204,11 +204,9 @@ To move focus in an order other than the order of appearance, combine two modifi
 * `focusRequester()` attaches a `FocusRequester` handle to a focusable component. If the component [is not focusable by
   default](#custom-focusable-components), the `focusable()` modifier should be applied _after_ `focusRequester()`.
 * `focusProperties()` sets the `next` and `previous` elements in the tabbing order: components with a `FocusRequester` 
-  handle that <shortcut>Tab</shortcut> and <shortcut>Shift+Tab</shortcut> move the focus to.
+  handle that are focused by pressing <shortcut>Tab</shortcut> or <shortcut>Shift+Tab</shortcut>.
 
-The following example creates a `FocusRequester` for each of the five text fields and reverses the default order.
-<shortcut>Tab</shortcut> moves the focus to the previous field, <shortcut>Shift+Tab</shortcut> moves it to the next one,
-and both wrap around at the ends of the list:
+The following example creates a `FocusRequester` for each of the five text fields and reverses the default tabbing order:
 
 ```kotlin
 import androidx.compose.foundation.layout.Box
@@ -274,7 +272,7 @@ fun main() = application {
 ## Moving focus from code
 
 To put a component into focus without user interaction, attach a `FocusRequester` handle to a focusable component using 
-the `focusRequester()` modifier to and call `FocusRequester.requestFocus()`. If the component [is not focusable by
+the `focusRequester()` modifier and call `FocusRequester.requestFocus()`. If the component [is not focusable by
 default](#custom-focusable-components), the `focusable()` modifier should be applied _after_ `focusRequester()`.
 
 In the following example, a button moves the focus to a text field and back to itself:
@@ -353,7 +351,8 @@ fun main() = application {
 
 ## Moving focus from multiline text fields
 
-In multiline text fields, <shortcut>Tab</shortcut> inserts a tab character instead of moving the focus to the next component.
+In multiline text fields, pressing <shortcut>Tab</shortcut> inserts a tab character instead of moving the focus to the 
+next component:
 
 ```kotlin
 Column {
