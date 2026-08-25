@@ -241,9 +241,11 @@ the `icon` parameter, while the Dock icon comes from the `.icns` file declared i
 
 <img src="compose-desktop-images-window-icon.png" alt="A packaged application and its Dock icon" width="426"/>
 
+### Single-window application icon
+
 The `icon` parameter of the `singleWindowApplication()` function is evaluated outside composition, where
-`painterResource()` isn't available. Read the resource with `Res.readBytes()`, which takes a file path inside the
-`composeResources` directory, and decode it into a painter instead:
+`painterResource()` isn't available. Instead, read the resource with `Res.readBytes()`, which takes a file path inside the
+`composeResources` directory, and decode it into a `BitmapPainter`:
 
 ```kotlin
 import androidx.compose.material.Text

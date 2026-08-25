@@ -679,7 +679,7 @@ You can load remote files from the internet using their URL using specialized li
 
 If you download or read the bytes of an image yourself, convert them into an image with the
 [decoding functions](#convert-byte-arrays-into-images) of the resources library.
-For an example of loading images from the local file system and from the network in a desktop application, see
+For an example of loading images from the network in a desktop application, see
 the tutorial for [using images in Compose Multiplatform for Desktop](compose-desktop-images.md#loading-images-from-the-file-system-or-the-network).
 
 ### Using Java resources
