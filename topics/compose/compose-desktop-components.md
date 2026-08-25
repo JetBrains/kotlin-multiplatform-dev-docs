@@ -5,45 +5,13 @@ overview of the desktop-specific components and events. Each section includes a 
 
 ## Components
 
-<!-- * [Images and icons](#images-and-icons) -->
+* [Images and app icons](compose-desktop-images.md)
 * [Windows and dialogs](compose-desktop-top-level-windows-management.md)
 * [Context menus](compose-desktop-context-menus.md)
 * [Tray and notifications](compose-desktop-tray.md)
 * [Menu bar](compose-desktop-menu-bar.md)
 * [Scrollbars](compose-desktop-scrollbars.md)
 * [Tooltips](compose-desktop-tooltips.md)
-
-<!-- ### Images and icons
-
-You can use the `Image` composable and the `painterResource()` function to display images stored as resources in your
-application:
-
-```kotlin
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.window.singleWindowApplication
-
-fun main() = singleWindowApplication {
-    Image(
-        painter = painterResource("sample.png"),
-        contentDescription = "Sample",
-        modifier = Modifier.fillMaxSize()
-    )
-}
-```
-
-`painterResource()` supports rasterized image formats, such as `.png`, `.jpg`, `.bmp`, `.webp`, and the Android XML vector
-drawable format. You can also use images stored in the device memory, load images from the network,
-or create them in your project using `Canvas()`.
-
-With Compose Multiplatform, you can set the application window icon and the application tray icon as well.
-
-* For more information on working with images using Compose Multiplatform in desktop projects, see
-  the [Image and in-app icon manipulations](https://github.com/JetBrains/compose-multiplatform/tree/master/tutorials/Image_And_Icons_Manipulations)
-  tutorial.
-* For more information on using resources in common code in Compose Multiplatform projects, see [Images and resources](compose-multiplatform-resources.md). -->
 
 ## Events
 
