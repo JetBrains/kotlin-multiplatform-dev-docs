@@ -744,9 +744,7 @@ private fun FileDialog(
 ## Window and dialog API v2
 <primary-label ref="Experimental"/>
 
-[//]: # (TODO update version for stable release)
-
-Starting with Compose Multiplatform 1.12.0-beta02, the redesigned `WindowState` and `DialogState` classes are available
+Starting with Compose Multiplatform 1.12.0, the redesigned `WindowState` and `DialogState` classes are available
 in the `androidx.compose.ui.window.v2` subpackage.
 
 The v2 window and dialog API separates requesting a state from observing the state actually applied by the window manager.

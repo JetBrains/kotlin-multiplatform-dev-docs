@@ -89,9 +89,7 @@ fun MainScreen() {
 By default, characters not covered by the application's loaded fonts are displayed as replacement glyphs 
 (□, known as "[tofu](https://fonts.google.com/knowledge/glossary/tofu)").
 
-[//]: # (TODO update version for stable release)
-
-Starting with version 1.12.0-beta01, Compose Multiplatform monitors unresolved
+Starting with version 1.12.0, Compose Multiplatform monitors unresolved
 characters during rendering and downloads the required Noto font subsets on demand.
 The name Noto is short for "no tofu", as these fonts are designed to eliminate tofu glyphs.
 

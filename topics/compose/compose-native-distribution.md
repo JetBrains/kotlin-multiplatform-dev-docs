@@ -987,10 +987,8 @@ using the following options:
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="joinOutputJars.set(true)"}
 
-[//]: # (TODO update version for stable release)
-
 * `version` sets a specific ProGuard version. JDK 25 requires at least ProGuard 7.8.0, 
-  which is the default starting with Compose Multiplatform 1.12.0-beta01.
+  which is the default starting with Compose Multiplatform 1.12.0.
   If you use an earlier version of Compose Multiplatform and build with JDK 25, explicitly set this property to `7.8.0`:
     ```kotlin
     compose.desktop {
