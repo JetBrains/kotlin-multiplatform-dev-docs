@@ -154,7 +154,7 @@ UI structure, and more, without having to restart the desktop run configuration 
 ## MCP server for AI agents
 <primary-label ref="Experimental"/>
 
-Starting with Compose Multiplatform 1.2.0, Compose Hot Reload includes a built-in
+Starting with Compose Multiplatform 1.12.0, Compose Hot Reload includes a built-in
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server. 
 The MCP server lets AI coding agents interact with your running Compose application: 
 trigger Compose Hot Reload, see the rendered UI, inspect the semantic structure, simulate user input, and read runtime logs.
