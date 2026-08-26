@@ -23,17 +23,14 @@ Focusable components include:
 For example, here's a window where the user can navigate between five text fields using standard shortcuts:
 
 ```kotlin
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.TextField
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
@@ -52,23 +49,21 @@ fun main() = application {
             contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.padding(50.dp)
+                modifier = Modifier.padding(50.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 repeat(5) {
-                    var text by remember { mutableStateOf("") }
-                    OutlinedTextField(
-                        value = text,
-                        singleLine = true,
-                        onValueChange = { text = it }
+                    TextField(
+                        state = rememberTextFieldState(),
+                        lineLimits = TextFieldLineLimits.SingleLine
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
         }
     }
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column() { repeat(5) { OutlinedTextField("}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column() { repeat(5) { TextField(state = rememberTextFieldState()"}
 
 <img src="compose-desktop-tabbing-default.animated.gif" alt="Default tabbing order" width="450" preview-src="compose-desktop-tabbing-default.png"/>
 
@@ -76,9 +71,10 @@ fun main() = application {
 
 To include a component that isn't focusable by default in the tabbing order, apply the `focusable()` modifier.
 
-To change the appearance of the component when it receives focus, pass `MutableInteractionSource()` to the `focusable()` 
-modifier and read the focus state from the interaction source with `collectIsFocusedAsState()`. To make the component 
-react to keyboard presses, handle key events with the `onPreviewKeyEvent()` modifier.
+To change the appearance of the component when it receives focus, pass a `MutableInteractionSource` to the `focusable()`
+modifier, read the focus state from it with `collectIsFocusedAsState()`, and use that state to change the style of the
+component: a different background, a border, or any other highlight. To make the component react to keyboard presses,
+handle key events with the `onKeyEvent()` modifier.
 
 The following example turns a `Box()` composable into a button-like component. The box is highlighted when focused, and 
 pressing <shortcut>Enter</shortcut> or <shortcut>Space</shortcut> triggers the related action:
@@ -88,16 +84,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -112,7 +107,7 @@ import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
@@ -128,7 +123,7 @@ fun main() = application {
         state = WindowState(size = DpSize(350.dp, 450.dp))
     ) {
         MaterialTheme(
-            colors = MaterialTheme.colors.copy(
+            colorScheme = MaterialTheme.colorScheme.copy(
                 primary = Color(10, 132, 232),
                 secondary = Color(150, 232, 150)
             )
@@ -139,13 +134,12 @@ fun main() = application {
                 contentAlignment = Alignment.Center
             ) {
                 Column(
-                    modifier = Modifier.padding(40.dp)
+                    modifier = Modifier.padding(40.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     Text(text = "Clicks: $clicks")
-                    Spacer(modifier = Modifier.height(20.dp))
                     repeat(5) { index ->
                         FocusableBox("Button ${index + 1}", onClick = { clicks++ })
-                        Spacer(modifier = Modifier.height(20.dp))
                     }
                 }
             }
@@ -164,9 +158,9 @@ fun FocusableBox(
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val backgroundColor = when {
-        isFocused && isKeyPressed -> lerp(MaterialTheme.colors.secondary, Color(64, 64, 64), 0.3f)
-        isFocused -> MaterialTheme.colors.secondary
-        else -> MaterialTheme.colors.primary
+        isFocused && isKeyPressed -> lerp(MaterialTheme.colorScheme.secondary, Color(64, 64, 64), 0.3f)
+        isFocused -> MaterialTheme.colorScheme.secondary
+        else -> MaterialTheme.colorScheme.primary
     }
     Box(
         modifier = Modifier
@@ -174,7 +168,7 @@ fun FocusableBox(
             .background(backgroundColor)
             .size(size)
             .onPointerEvent(PointerEventType.Press) { onClick() }
-            .onPreviewKeyEvent {
+            .onKeyEvent {
                 if (it.key == Key.Enter || it.key == Key.Spacebar) {
                     when (it.type) {
                         KeyEventType.KeyDown -> isKeyPressed = true
@@ -197,6 +191,11 @@ fun FocusableBox(
 
 <img src="compose-desktop-tabbing-custom-focusable.animated.gif" alt="A custom focusable component" width="450" preview-src="compose-desktop-tabbing-custom-focusable.png"/>
 
+> `onKeyEvent()` receives a key press after the focused component and its children. Use `onPreviewKeyEvent()` when you 
+> need to handle a key _before_ a child component does, as in [Moving focus from multiline text fields](#moving-focus-from-multiline-text-fields).
+>
+{style="tip"}
+
 ## Custom tabbing order
 
 To move focus in an order other than the order of appearance, combine two modifiers:
@@ -209,17 +208,15 @@ To move focus in an order other than the order of appearance, combine two modifi
 The following example creates a `FocusRequester` for each of the five text fields and reverses the default tabbing order:
 
 ```kotlin
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -242,14 +239,13 @@ fun main() = application {
             contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.padding(50.dp)
+                modifier = Modifier.padding(50.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 focusRequesters.forEachIndexed { index, focusRequester ->
-                    var text by remember { mutableStateOf("") }
-                    OutlinedTextField(
-                        value = text,
-                        singleLine = true,
-                        onValueChange = { text = it },
+                    TextField(
+                        state = rememberTextFieldState(),
+                        lineLimits = TextFieldLineLimits.SingleLine,
                         modifier = Modifier
                             .focusRequester(focusRequester)
                             .focusProperties {
@@ -258,7 +254,6 @@ fun main() = application {
                                 previous = focusRequesters[(index + 1) % focusRequesters.size]
                             }
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
         }
@@ -278,16 +273,17 @@ default](#custom-focusable-components), the `focusable()` modifier should be app
 In the following example, a button moves the focus to a text field and back to itself:
 
 ```kotlin
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -310,13 +306,13 @@ fun main() = application {
         val buttonFocusRequester = remember { FocusRequester() }
         val textFieldFocusRequester = remember { FocusRequester() }
         var isTextFieldFocused by remember { mutableStateOf(false) }
-        var text by remember { mutableStateOf("") }
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.padding(50.dp)
+                modifier = Modifier.padding(50.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Button(
                     onClick = {
@@ -333,11 +329,9 @@ fun main() = application {
                 ) {
                     Text(text = "Focus switcher")
                 }
-                Spacer(modifier = Modifier.height(20.dp))
-                OutlinedTextField(
-                    value = text,
-                    singleLine = true,
-                    onValueChange = { text = it },
+                TextField(
+                    state = rememberTextFieldState(),
+                    lineLimits = TextFieldLineLimits.SingleLine,
                     modifier = Modifier.focusRequester(textFieldFocusRequester)
                 )
             }
@@ -349,6 +343,73 @@ fun main() = application {
 
 <img src="compose-desktop-tabbing-move-focus-from-code.animated.gif" alt="Moving focus from code" width="450" preview-src="compose-desktop-tabbing-move-focus-from-code.png"/>
 
+### Focusing a component when it appears
+
+Forms and dialogs commonly focus their first input right away, so the user can start typing without reaching for the
+mouse. 
+
+In this use-case, the focus should be requested from a `LaunchedEffect(Unit)` block, which runs once after the 
+component enters the composition. Requesting focus directly in the composable body instead fails, because at that point 
+the modifier isn't attached to a component yet.
+
+In the following example, the first text field is focused as soon as the window opens:
+
+```kotlin
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.application
+
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = WindowState(size = DpSize(350.dp, 300.dp))
+    ) {
+        val focusRequester = remember { FocusRequester() }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier.padding(50.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                TextField(
+                    state = rememberTextFieldState(),
+                    lineLimits = TextFieldLineLimits.SingleLine,
+                    modifier = Modifier.focusRequester(focusRequester)
+                )
+                TextField(
+                    state = rememberTextFieldState(),
+                    lineLimits = TextFieldLineLimits.SingleLine
+                )
+            }
+        }
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="LaunchedEffect(Unit) { focusRequester.requestFocus()"}
+
+<img src="compose-desktop-tabbing-focus-on-appearance.animated.gif" alt="Focus text field on appearance" width="450" preview-src="compose-desktop-tabbing-focus-on-appearance.png"/>
+
 ## Moving focus from multiline text fields
 
 In multiline text fields, pressing <shortcut>Tab</shortcut> inserts a tab character instead of moving the focus to the 
@@ -357,35 +418,31 @@ next component:
 ```kotlin
 Column {
     repeat(5) {
-        var text by remember { mutableStateOf("Hello, World!") }
-
-        OutlinedTextField(
-            value = text,
-            // By default, `singleLine` is `false`
-            singleLine = false,
-            onValueChange = { text = it },
+        TextField(
+            state = rememberTextFieldState("Hello, World!"),
+            // MultiLine is the default value of lineLimits
+            lineLimits = TextFieldLineLimits.MultiLine(),
             modifier = Modifier.padding(8.dp)
         )
     }
 }
 ```
 
-> This issue affects any text field that doesn't explicitly set `singleLine` to `true`.
+> This issue affects any text field that accepts more than one line, which is the default behavior.
 > 
-{ style="note" }
+{style="note"}
 
-This is a known issue, [CMP-5822](https://youtrack.jetbrains.com/issue/CMP-5822). As a workaround, intercept the <shortcut>Tab</shortcut> key with the 
-`onPreviewKeyEvent` modifier and move the focus using the `FocusManager` from `LocalFocusManager`:
+This is a known issue, [CMP-5822](https://youtrack.jetbrains.com/issue/CMP-5822). As a workaround, intercept the 
+<shortcut>Tab</shortcut> key with the `onPreviewKeyEvent` modifier and move the focus using the `FocusManager` from 
+`LocalFocusManager`:
 
 ```kotlin
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.input.key.Key
@@ -401,12 +458,9 @@ import androidx.compose.ui.window.singleWindowApplication
 fun main() = singleWindowApplication(title = "Multiline text fields") {
     Column {
         repeat(5) {
-            var text by remember { mutableStateOf("Hello, World!") }
-
-            OutlinedTextField(
-                value = text,
-                singleLine = false,
-                onValueChange = { text = it },
+            TextField(
+                state = rememberTextFieldState("Hello, World!"),
+                lineLimits = TextFieldLineLimits.MultiLine(),
                 modifier = Modifier.padding(8.dp).moveFocusOnTab()
             )
         }
