@@ -191,11 +191,6 @@ fun FocusableBox(
 
 <img src="compose-desktop-tabbing-custom-focusable.animated.gif" alt="A custom focusable component" width="450" preview-src="compose-desktop-tabbing-custom-focusable.png"/>
 
-> `onKeyEvent()` receives a key press after the focused component and its children. Use `onPreviewKeyEvent()` when you 
-> need to handle a key _before_ a child component does, as in [Moving focus from multiline text fields](#moving-focus-from-multiline-text-fields).
->
-{style="tip"}
-
 ## Custom tabbing order
 
 To move focus in an order other than the order of appearance, combine two modifiers:
@@ -346,11 +341,8 @@ fun main() = application {
 ### Focusing a component when it appears
 
 Forms and dialogs commonly focus their first input right away, so the user can start typing without reaching for the
-mouse. 
-
-In this use-case, the focus should be requested from a `LaunchedEffect(Unit)` block, which runs once after the 
-component enters the composition. Requesting focus directly in the composable body instead fails, because at that point 
-the modifier isn't attached to a component yet.
+mouse. In this use-case, the focus should be requested from a `LaunchedEffect(Unit)` block, which runs once after the 
+component enters the composition.
 
 In the following example, the first text field is focused as soon as the window opens:
 
