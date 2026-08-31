@@ -113,6 +113,32 @@ Image(
 )
 ```
 
+#### Drawing images on a canvas
+
+To draw a resource image yourself instead of showing it with the `Image()` composable, load it as an `ImageBitmap` or
+an `ImageVector` and use it in a `DrawScope`:
+
+* To draw an `ImageBitmap`, use `DrawScope.drawImage()`.
+* To draw an `ImageVector`, create a `Painter` with `rememberVectorPainter()` and use `Painter.draw()`.
+
+Specify offsets and sizes in a `DrawScope` in pixels:
+
+```kotlin
+val myImageRaster = imageResource(Res.drawable.my_image_raster)
+val myImageVectorPainter = rememberVectorPainter(vectorResource(Res.drawable.my_image_vector))
+
+Canvas(modifier = Modifier.fillMaxSize()) {
+    // Inside the lambda, `this` is an instance of `DrawScope`, which provides `drawImage()` and `translate()`
+    drawImage(image = myImageRaster, topLeft = Offset(20f, 20f))
+    translate(left = 20f, top = myImageRaster.height + 40f) {
+        // The `Painter.draw()` function uses both the `DrawScope` and `Painter` as receivers
+        with(myImageVectorPainter) {
+            draw(Size(200f, 200f))
+        }
+    }
+}
+```
+
 ### Icons
 
 You can use the vector Android XML icons from the Material Symbols library:
@@ -652,6 +678,15 @@ You can load remote files from the internet using their URL using specialized li
 * [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 * [Kamel](https://github.com/Kamel-Media/Kamel)
 * [Ktor client](https://ktor.io/)
+
+If you manually download an image or read its bytes, use the resources library's [decoding functions](#convert-byte-arrays-into-images) 
+to convert them. For an example of loading network images in a desktop app, see
+[using images in Compose Multiplatform for desktop](compose-desktop-images.md#loading-images-from-the-file-system-or-the-network).
+
+If you download or read the bytes of an image yourself, convert them into an image with the
+[decoding functions](#convert-byte-arrays-into-images) of the resources library.
+For an example of loading images from the network in a desktop application, see
+the tutorial for [using images in Compose Multiplatform for Desktop](compose-desktop-images.md#loading-images-from-the-file-system-or-the-network).
 
 ### Using Java resources
 
