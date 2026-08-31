@@ -1,26 +1,21 @@
-[//]: # (title: Tabbing navigation and keyboard focus)
-<web-summary>Learn how to move keyboard focus between components with the Tab shortcut in Compose Multiplatform for desktop.</web-summary>
+[//]: # (title: Tab navigation and keyboard focus)
+<web-summary>Learn how to navigate between components with the Tab key in Compose Multiplatform for desktop.</web-summary>
 
 In Compose Multiplatform for desktop, you can set up navigation between components with the <shortcut>Tab</shortcut>
 keyboard shortcut for the next component and <shortcut>Shift+Tab</shortcut> for the previous one.
 
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
-## Default tabbing
+## Default tab navigation
 
-By default, tabbing navigation enables the user to move between focusable components in the order of their appearance.
+By default, tab navigation allows users to move between focusable components in the order of their appearance.
 This functionality is enabled by default and doesn't require any additional code.
 
-Focusable components include:
+Focusable components include anything that uses the `clickable()`, `selectable()`, `toggleable()`, or 
+`focusable()` modifiers in its implementation. For example, text fields, buttons, sliders, navigation items, 
+selection controls with a non-null callback, `onClick` overloads of `Card()`, `Surface()`, and `ListItem()`.
 
-* `TextField()`
-* `OutlinedTextField()`
-* `BasicTextField()`
-* `Button()`
-* `IconButton()`
-* `MenuItem()`
-
-For example, here's a window where the user can navigate between five text fields using standard shortcuts:
+Here is a window where the user can navigate between five text fields using standard shortcuts:
 
 ```kotlin
 import androidx.compose.foundation.layout.Arrangement
@@ -65,11 +60,11 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Column() { repeat(5) { TextField(state = rememberTextFieldState()"}
 
-<img src="compose-desktop-tabbing-default.animated.gif" alt="Default tabbing order" width="450" preview-src="compose-desktop-tabbing-default.png"/>
+<img src="compose-desktop-tab-navigation-default.animated.gif" alt="Default tab order" width="450" preview-src="compose-desktop-tab-navigation-default.png"/>
 
 ## Custom focusable components
 
-To include a component that isn't focusable by default in the tabbing order, apply the `focusable()` modifier.
+To include a component that isn't focusable by default in the tab order, apply the `focusable()` modifier.
 
 To change the appearance of the component when it receives focus, pass a `MutableInteractionSource` to the `focusable()`
 modifier, read the focus state from it with `collectIsFocusedAsState()`, and use that state to change the style of the
@@ -189,18 +184,18 @@ fun FocusableBox(
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Box(modifier = Modifier.focusable(interactionSource = interactionSource)"}
 
-<img src="compose-desktop-tabbing-custom-focusable.animated.gif" alt="A custom focusable component" width="450" preview-src="compose-desktop-tabbing-custom-focusable.png"/>
+<img src="compose-desktop-tab-navigation-custom-focusable.animated.gif" alt="A custom focusable component" width="450" preview-src="compose-desktop-tab-navigation-custom-focusable.png"/>
 
-## Custom tabbing order
+## Custom tab order
 
 To move focus in an order other than the order of appearance, combine two modifiers:
 
 * `focusRequester()` attaches a `FocusRequester` handle to a focusable component. If the component [is not focusable by
-  default](#custom-focusable-components), the `focusable()` modifier should be applied _after_ `focusRequester()`.
-* `focusProperties()` sets the `next` and `previous` elements in the tabbing order: components with a `FocusRequester` 
+  default](#custom-focusable-components), apply the `focusable()` modifier _after_ `focusRequester()`.
+* `focusProperties()` sets the `next` and `previous` elements in the tab order: components with a `FocusRequester` 
   handle that are focused by pressing <shortcut>Tab</shortcut> or <shortcut>Shift+Tab</shortcut>.
 
-The following example creates a `FocusRequester` for each of the five text fields and reverses the default tabbing order:
+The following example creates a `FocusRequester` for each of the five text fields and reverses the default tab order:
 
 ```kotlin
 import androidx.compose.foundation.layout.Arrangement
@@ -257,11 +252,11 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Modifier.focusRequester(focusRequester).focusProperties { next ="}
 
-<img src="compose-desktop-tabbing-custom-order.animated.gif" alt="Custom tabbing order" width="450" preview-src="compose-desktop-tabbing-custom-order.png"/>
+<img src="compose-desktop-tab-navigation-custom-order.animated.gif" alt="Custom tab order" width="450" preview-src="compose-desktop-tab-navigation-custom-order.png"/>
 
 ## Moving focus from code
 
-To put a component into focus without user interaction, attach a `FocusRequester` handle to a focusable component using 
+To bring a component into focus without user interaction, attach `FocusRequester` to a focusable component using 
 the `focusRequester()` modifier and call `FocusRequester.requestFocus()`. If the component [is not focusable by
 default](#custom-focusable-components), the `focusable()` modifier should be applied _after_ `focusRequester()`.
 
@@ -336,12 +331,12 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Button(onClick = { textFieldFocusRequester.requestFocus()"}
 
-<img src="compose-desktop-tabbing-move-focus-from-code.animated.gif" alt="Moving focus from code" width="450" preview-src="compose-desktop-tabbing-move-focus-from-code.png"/>
+<img src="compose-desktop-tab-navigation-move-focus-from-code.animated.gif" alt="Moving focus from code" width="450" preview-src="compose-desktop-tab-navigation-move-focus-from-code.png"/>
 
 ### Focusing a component when it appears
 
 Forms and dialogs commonly focus their first input right away, so the user can start typing without reaching for the
-mouse. In this use-case, the focus should be requested from a `LaunchedEffect(Unit)` block, which runs once after the 
+mouse. In this use case, request focus from a `LaunchedEffect(Unit)` block, which runs once after the 
 component enters the composition.
 
 In the following example, the first text field is focused as soon as the window opens:
@@ -400,7 +395,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="LaunchedEffect(Unit) { focusRequester.requestFocus()"}
 
-<img src="compose-desktop-tabbing-focus-on-appearance.animated.gif" alt="Focus text field on appearance" width="450" preview-src="compose-desktop-tabbing-focus-on-appearance.png"/>
+<img src="compose-desktop-tab-navigation-focus-on-appearance.animated.gif" alt="Focus text field on appearance" width="450" preview-src="compose-desktop-tab-navigation-focus-on-appearance.png"/>
 
 ## Moving focus from multiline text fields
 
@@ -420,13 +415,9 @@ Column {
 }
 ```
 
-> This issue affects any text field that accepts more than one line, which is the default behavior.
-> 
-{style="note"}
-
-This is a known issue, [CMP-5822](https://youtrack.jetbrains.com/issue/CMP-5822). As a workaround, intercept the 
-<shortcut>Tab</shortcut> key with the `onPreviewKeyEvent` modifier and move the focus using the `FocusManager` from 
-`LocalFocusManager`:
+This is a known issue, [CMP-5822](https://youtrack.jetbrains.com/issue/CMP-5822). It affects any text field that accepts more than one line, which is the 
+default behavior. As a workaround, intercept the <shortcut>Tab</shortcut> key with the `onPreviewKeyEvent` modifier and 
+move the focus using the `FocusManager` from `LocalFocusManager`:
 
 ```kotlin
 import androidx.compose.foundation.layout.Column
