@@ -2,9 +2,9 @@
 <web-summary>Learn how to display images, load them from the file system or the network, and use them as window and 
 tray icons in Compose Multiplatform for desktop.</web-summary>
 
-In Compose Multiplatform for desktop, images are loaded from the [multiplatform resources](compose-multiplatform-resources.md)
-library, the same as on other platforms. On top of that, desktop applications can read images from the file system or
-the network with JVM APIs and use images as window and tray icons.
+Compose Multiplatform for desktop loads images from the [multiplatform resources](compose-multiplatform-resources.md)
+library, just like other platforms. Desktop applications can also read images from the file system or the network 
+with JVM APIs and use images as window and tray icons.
 
 <include from="compose-desktop-scrollbars.md" element-id="desktop-snippets-intro"/>
 
@@ -28,8 +28,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import org.jetbrains.compose.resources.painterResource
-import project.composeapp.generated.resources.Res
-import project.composeapp.generated.resources.kotlin_logo
+import com.example.composeapp.generated.resources.Res
+import com.example.composeapp.generated.resources.kotlin_logo
 
 fun main() = application {
     Window(
@@ -54,7 +54,7 @@ Android XML vector drawable format. For details on accessing resources as `Image
 using icons, fonts, and strings, see [Using multiplatform resources in your app](compose-multiplatform-resources-usage.md).
 
 > Resources don't have to be stored in the common source set. Any source set or module can use its own `composeResources`
-> directory, so images that only the desktop application needs can be stored next to the desktop-related code.
+> directory, so you can store images specific to the desktop application next to the desktop-related code.
 > 
 > To use resources declared in another module, make the generated `Res` class of that module
 > [public](compose-multiplatform-resources-usage.md#customizing-accessor-class-generation).
@@ -72,7 +72,7 @@ resources. Read their bytes with any JVM API and decode them with one of the fol
 | XML vector   | `decodeToImageVector()`  | `ImageVector` |
 | SVG          | `decodeToSvgPainter()`   | `Painter`     |
 
-Reading a file or a network response blocks the calling thread, so it should be performed outside the UI thread. 
+Reading a file or a network response blocks the calling thread, so always perform these operations outside the UI thread.
 
 The following example declares an `AsyncImage()` composable that loads an image in the `Dispatchers.IO` context and 
 shows the image when it's ready:
@@ -212,8 +212,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import org.jetbrains.compose.resources.painterResource
-import project.composeapp.generated.resources.Res
-import project.composeapp.generated.resources.compose_logo
+import com.example.composeapp.generated.resources.Res
+import com.example.composeapp.generated.resources.compose_logo
 
 fun main() = application {
     val icon = painterResource(Res.drawable.compose_logo)
@@ -230,7 +230,7 @@ fun main() = application {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Window(icon = painterResource(Res.drawable.compose_logo)"}
 
-Where the icon appears depends on the operating system:
+The icon's location depends on the operating system:
 
 * On Windows and Linux, it's the icon of the window and of its taskbar entry.
 * On macOS, the application icon comes from the application bundle. To change the icon in the Dock, set it in the
@@ -243,8 +243,8 @@ the `icon` parameter, while the Dock icon comes from the `.icns` file declared i
 
 ### Single-window application icon
 
-The `icon` parameter of the `singleWindowApplication()` function is evaluated outside composition, where
-`painterResource()` isn't available. Instead, read the resource with `Res.readBytes()`, which takes a file path inside the
+The `singleWindowApplication()` function evaluates its `icon` parameter outside composition, where `painterResource()` 
+isn't available. Instead, read the resource with `Res.readBytes()`, which takes a file path inside the 
 `composeResources` directory, and decode it into a `BitmapPainter`:
 
 ```kotlin
@@ -253,7 +253,7 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.window.singleWindowApplication
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.decodeToImageBitmap
-import project.composeapp.generated.resources.Res
+import com.example.composeapp.generated.resources.Res
 
 fun main() {
     val iconBytes = runBlocking { Res.readBytes("drawable/kotlin-logo.png") }
@@ -315,7 +315,7 @@ fun main() = application {
 }
 ```
 
-On macOS, the tray icon is placed in the menu bar:
+On macOS, the tray icon appears in the menu bar:
 
 <img src="compose-desktop-images-tray-icon.png" alt="A tray icon in the macOS menu bar" width="430"/>
 
