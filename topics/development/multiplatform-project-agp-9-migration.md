@@ -1,4 +1,4 @@
-[//]: # (title: Updating multiplatform projects with Android apps to use AGP 9)
+ [//]: # (title: Updating multiplatform projects with Android apps to use AGP 9)
 <show-structure for="chapter,procedure" depth="3"/>
 
 When used along with Android Gradle plugin 9.0 or newer,
