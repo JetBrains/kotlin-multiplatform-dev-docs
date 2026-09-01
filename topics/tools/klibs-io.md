@@ -8,7 +8,7 @@ and land on the right library for your use case.
 Each library page renders the project's README and enriches it with additional information,
 like the number of dependents, project activity, and licenses.
 
-<a as="button" href="https://klibs.io" mode="classic" icon="arrow-right" icon-position="right">Find the right library in seconds</a>
+<a as="button" href="https://klibs.io" mode="classic" icon="arrow-right" icon-position="right">Browse multiplatfrom libraries</a>
 
 ## klibs.io in your AI workflow
 
