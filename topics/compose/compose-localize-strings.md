@@ -27,7 +27,7 @@ commonMain/composeResources/
 └── ... (other locale directories)
 ```
 
-If a language has more than one script, such as Chinese or Serbian, add a script-less
+If a language has more than one script (for example, Chinese or Serbian), add a script-less
 directory (`values-zh`) in addition to the script-specific ones (`values-b+zh+Hans`, `values-b+zh+Hant`).
 Otherwise, the resource cannot be resolved when the system reports the locale without a script.
 See [Language and regional qualifiers](compose-multiplatform-resources-setup.md#language-and-regional-qualifiers) for details.

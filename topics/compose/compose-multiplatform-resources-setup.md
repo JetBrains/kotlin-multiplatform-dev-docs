@@ -150,17 +150,17 @@ You can combine language and region qualifiers:
 
 The language and regional codes are case-sensitive.
 
-To specify a script, or any other BCP 47 subtag, use the `b+` prefix with `+` as a separator,
+To specify a script, or any other BCP 47 subtag, use the `b+` prefix and replace all subsequent subtag hyphens (`-`) with a `+` sign,
 for example: `values-b+zh+Hans` and `values-b+zh+Hant`.
 
 Learn more about working with region-specific formats in [Localization](compose-regional-format.md).
 
 #### Fallback for languages with multiple scripts
 
-On Android and desktop, the current locale may not include script info, so the system requests
+On Android and desktop, the system may request locale with an empty script, for example,
 `zh` with an empty script instead of specific `zh-Hans` or `zh-Hant`.
-If you provide only script-specific resources, both of the options match such a request 
-and the resource cannot be resolved, so the app fails with an error.
+If you provide only script-specific resources, all of them match such a script-less request 
+and the resource cannot be resolved, so the app throws an exception.
 To avoid the ambiguity, add a script-less directory for every language that has script-specific resources:
 
 ```
