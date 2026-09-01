@@ -5,7 +5,7 @@
 <vars>
     <!-- Kotlin -->
     <var name="kotlinVersion" value="2.4.20"/>
-    <var name="kotlinEapVersion" value="2.4.20-RC2"/>
+    <var name="kotlinEapVersion" value="2.4.20-RC3"/>
     <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.4.20"/>
     <var name="kmpLatestUrl" value="https://github.com/JetBrains/compose-multiplatform/releases"/>
     <var name="languageVersion" value="2.4"/>
