@@ -3,33 +3,35 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-This tutorial focuses on sharing as much code as possible:
+This tutorial focuses on sharing as much code between platforms as possible:
 the UI is implemented in common code using Compose Multiplatform,
 and the functionality is based on multiplatform libraries.
 For an example of sharing only the logic and keeping the UI native, see [](multiplatform-upgrade-app.md).
 
-Following the steps below, you'll create an application where users can select a country to see the time in the capital city of that country.
-The app will load and display images within a dropdown menu and will employ a typical Compose layout with events, styles, themes, and modifiers.
+You'll create an application where users can select a country to see the time in the capital city of that country.
+The app will load and display images within a dropdown menu and employ a typical Compose layout with events, styles, themes, and modifiers.
 
 To get from a wizard-generated project to the final result, you will:
 
-1. [Lay the foundation for a Compose UI](#lay-the-foundation)
-2. [Try out the Compose Hot Reload](#use-compose-hot-reload-to-quickly-iterate-on-ui)
-3. [Add the multiplatform library dependency for time calculation](#add-the-time-dependency)
+1. [Implement the basic Compose UI layout](#implement-the-basic-layout)
+2. [Try out the Compose Hot Reload](#use-compose-hot-reload-to-quickly-iterate-on-the-ui)
+3. [Add the multiplatform library dependency for time calculation](#add-the-kotlinx-datetime-dependency)
 4. Put the app together:
    * [Support user input](#support-user-input)
    * [Add and import image resources](#introduce-images)
 
-Since code is shared almost entirely, you can follow the tutorial for all platforms at once, or pick and choose platforms you are interested in.
+The tutorial builds a demo application for all supported platforms simultaneously, since code is shared almost entirely.
+But for the same reason you can freely pick and choose only platforms you are interested in.
 
-> You can find the final state of the project in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
+> The final state of the project is available in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
 >
 {style="tip"}
 <!-- TODO the project will be a bit different, but can be synced later -->
 
 ## Create a project
 
-With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a new Compose Multiplatform project:
+With the IDE and the Kotlin Multiplatform IDE plugin installed,
+create a new Compose Multiplatform project:
 
 1. In IntelliJ IDEA, select **File** | **New** | **Project**.
 2. In the panel on the left, select **Kotlin Multiplatform**.
@@ -45,19 +47,21 @@ With the IDE and the Kotlin Multiplatform IDE plugin installed, you can create a
    ![Create a Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
 The first import takes a couple of minutes.
-After it is done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
+After it's done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
 
-## Lay the foundation
+## Implement the basic layout
 
-UI in a template Compose Multiplatform project is organized in several app modules
-and a shared UI module, feeding the main `App()` composable into the entry points defined in application modules.
-In this tutorial, you are not doing anything that requires updating the platform-specific code:
-all changes in the common UI code are seamlessly propagated across the apps.
+The template Compose Multiplatform project is organized in platform-specific app modules
+and a shared UI module.
+Each application module defines an entry point that calls the shared `App()` composable.
 
 > To learn how shared UI code is attached to system entry points on different platforms,
 > see [](compose-multiplatform-entry-points.md).
 >
 {style="tip"}
+
+In this tutorial, you are not doing anything that requires updating the platform-specific code:
+all changes in the common UI code are seamlessly propagated across the apps.
 
 To get started, implement the basic layout in the common `App()` composable:
 
@@ -65,13 +69,16 @@ To get started, implement the basic layout in the common `App()` composable:
    with the following `App()` composable:
 
     ```kotlin
+    // @Composable marks a composable function:
+    // a function that emits UI elements in Compose
     @Composable
     @Preview
     fun App() {
         MaterialTheme {
             var timeAtLocation by remember { mutableStateOf("No location selected") }
    
-            // The UI is a column that holds a Text and a Button
+            // Declares the UI as a column that holds
+            // a text label above a button
             Column(
                 // Basic layout improvements that make sure that the Column()
                 // fills all available space without overlapping the system bars
@@ -79,9 +86,9 @@ To get started, implement the basic layout in the common `App()` composable:
                     .safeContentPadding()
                     .fillMaxSize(),
             ) {
-                // The Text composable observes the timeAtLocation state
+                // Declares a Text() that observes the timeAtLocation state
                 Text(timeAtLocation)
-                // The Button composable also uses the timeAtLocation state
+                // Declares a Button() that also observes the timeAtLocation state
                 // but shows a hardcoded time for now
                 Button(onClick = { timeAtLocation = "13:30" }) {
                     Text("Show Time At Location")
@@ -114,7 +121,7 @@ To get started, implement the basic layout in the common `App()` composable:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-## Use Compose Hot Reload to quickly iterate on UI
+### Use Compose Hot Reload to quickly iterate on the UI
 
 You can fix the desktop UI and verify the fix without rerunning the build:
 
@@ -152,16 +159,16 @@ You can fix the desktop UI and verify the fix without rerunning the build:
 
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
-## Add the time dependency
+## Add the `kotlinx-datetime` dependency
 
-To work with timezones and time calculation, you'll use the [kotlin.time](https://kotlinlang.org/docs/time-measurement.html)
-classes together with the multiplatform [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime)
+To work with timezones and time calculation, you'll use the [`kotlin.time`](https://kotlinlang.org/docs/time-measurement.html)
+classes together with the multiplatform [`kotlinx-datetime`](https://github.com/Kotlin/kotlinx-datetime)
 library.
 
 While `kotlin.time` is always available as part of the standard library,
 `kotlinx-datetime` needs to be configured as an explicit dependency.
-It is a multiplatform library, and you will use it only in common code,
-so you need to specify the dependency only once, with [additional configuration needed only for web](#add-kotlinx-datetime-dependency-for-a-web-app).
+It is a multiplatform library, and you'll use it only in common code.
+Therefore, you have to specify the dependency only once, with [additional configuration needed only for web](#add-kotlinx-datetime-dependency-for-a-web-app).
 
 Following the instructions from the [library's repository](https://github.com/Kotlin/kotlinx-datetime#gradle):
 
@@ -191,17 +198,17 @@ Following the instructions from the [library's repository](https://github.com/Ko
     ```
 
 Now you can use `kotlinx-datetime` APIs in your common code.
-If you added the web target, make sure to configure it as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app)
-to work around the limitations of timezone support in JavaScript and Wasm/JS.
+For the web target, you need to work around the limitations of timezone support in JavaScript and Wasm/JS
+as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app).
 
 > For more general information on how to manage multiplatform dependencies,
 > see [](multiplatform-add-dependencies.md).
 >
 {style="tip"}
 
-### Add `kotlinx-datetime` dependency for a web app {collapsible="true"}
+### Add `kotlinx-datetime` dependency for a web app
 
-For the web target, timezone support also requires the `js-joda` npm package.
+For the web target, timezone support also requires the [`js-joda`](https://js-joda.github.io/js-joda/) npm package:
 
 1. Add a reference to the package in the `webApp/build.gradle.kts` file:
 
@@ -221,8 +228,8 @@ For the web target, timezone support also requires the `js-joda` npm package.
 
    Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
 
-2. Once the dependency is added, accept the IDE suggestion to sync the Gradle configuration
-   or press double **Shift** and execute the **Sync Project with Gradle Files** command.
+2. Once you add the dependency,
+   press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
 
 3. In the **Terminal** tool window, run the following command to update the `yarn.lock` file with the latest dependency versions:
 
@@ -253,8 +260,8 @@ For the web target, timezone support also requires the `js-joda` npm package.
     ```
    {initial-collapse-state="collapsed" collapsible="true" collapsed-title='@JsModule("@js-joda/timezone")'}
 
-> When committing your project to version control, include the `yarn.lock` files generated in the `kotlin-js-store` directory.
-> This helps ensure that the same versions of JavaScript dependencies are used wherever the project is built.
+> When committing your project to version control, include the `yarn.lock` file generated in the `kotlin-js-store` directory.
+> A synchronized `yarn.lock` ensures that anyone who builds the project uses the same versions of JavaScript dependencies.
 >
 {style="note"}
 
@@ -263,36 +270,41 @@ For the web target, timezone support also requires the `js-joda` npm package.
 For simplicity, you won't implement a complicated logic of specifying and validating time zones.
 The app will offer several countries to choose from and display the time in the capital of the country:
 
-1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file and add the supporting code,
-   a data class to hold country information and a `currentTimeAt()` function that calculates local time for a given zone:
+1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file
+   and add a data class to hold country information below the `App()` composable:
 
     ```kotlin
     // Simplified representation of timezones for this example 
     data class Country(val name: String, val zone: TimeZone)
-     
-    // Takes TimeZone as a parameter to calculate time with
-    fun currentTimeAt(location: String, zone: TimeZone): String {
-      fun LocalTime.formatted() = "$hour:$minute:$second"
     
-      val time = Clock.System.now()
-      val localTime = time.toLocalDateTime(zone).time
-    
-      return "The time in $location is ${localTime.formatted()}"
-    }
-    
-    // Defines a list of supported countries
+    // Hard-codes the list of supported countries
     // with specific associated timezones
     fun defaultCountries() = listOf(
-      Country("Japan", TimeZone.of("Asia/Tokyo")),
-      Country("France", TimeZone.of("Europe/Paris")),
-      Country("Mexico", TimeZone.of("America/Mexico_City")),
-      Country("Indonesia", TimeZone.of("Asia/Jakarta")),
-      Country("Egypt", TimeZone.of("Africa/Cairo")),
+        Country("Japan", TimeZone.of("Asia/Tokyo")),
+        Country("France", TimeZone.of("Europe/Paris")),
+        Country("Mexico", TimeZone.of("America/Mexico_City")),
+        Country("Indonesia", TimeZone.of("Asia/Jakarta")),
+        Country("Egypt", TimeZone.of("Africa/Cairo")),
     )
     ```
 
-2. Replace the `App()` composable to account for this change.
-   The list of countries is presented as a dropdown and time is calculated instead of hardcoded:
+2. In the same `App.kt` file, add a `currentTimeAt()` function that calculates local time for a given time zone:
+
+    ```kotlin
+    // Takes TimeZone as a parameter to calculate time with
+    fun currentTimeAt(location: String, zone: TimeZone): String {
+        fun LocalTime.formatted() = "$hour:$minute:$second"
+    
+        val time = Clock.System.now()
+        val localTime = time.toLocalDateTime(zone).time
+    
+        return "The time in $location is ${localTime.formatted()}"
+    }
+    ```
+
+3. Update the `App()` composable to use the added functionality:
+   Present the list of countries as a dropdown and calculate time instead of hardcoding it.
+   Replace the entire function with the following:
 
     ```kotlin
     // Now requires a list of countries to display in the dropdown menu
@@ -346,7 +358,7 @@ The app will offer several countries to choose from and display the time in the 
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="defaultCountries.forEach { (name, zone) ->"}
    
-3. Follow the IDE's instructions to import the missing dependencies. When importing `Row()`, pick the `@Composable` version.
+4. Follow the IDE's instructions to import the missing dependencies. When importing `Row()`, pick the `@Composable` version.
 
 Run the application to see the redesigned version:
 
@@ -368,15 +380,10 @@ Run the application to see the redesigned version:
 
 ## Introduce images
 
-The list of country names works, but it's not a great user experience.
-You can improve the list by adding images of national flags next to country names.
+To better present different countries, add flag images to country names in the dropdown.
 
-Compose Multiplatform provides a library for accessing resources through common code across all platforms.
-The library is automatically added and configured along with Compose Multiplatform itself,
-so you can start loading resources right away.
-
-To support images in your project, download image files, store them in the correct directory,
-and add code to load and display them:
+To do that, place images in the correct directory,
+then add code to load and display them:
 
 1. Download flag images from [Flag CDN](https://flagcdn.com/) to match the list of countries
    you have already created. In this case, these
@@ -389,7 +396,8 @@ and add code to load and display them:
 
 3. Build or run the application to generate the `Res` class with accessors for the added resources.
 
-4. Update the code in the `commonMain/kotlin/.../App.kt` file to support images:
+4. Update the UI code to use images.
+   Replace the entire code in the `commonMain/kotlin/.../App.kt` file (excluding imports) with the following:
 
     ```kotlin
     import composedemo.shared.generated.resources.Res
@@ -423,7 +431,7 @@ and add code to load and display them:
 
     @Composable
     @Preview
-    fun App(countries: List<Country> = defaultCountries) {
+    fun App(countries: List<Country> = defaultCountries()) {
         MaterialTheme {
             var showCountries by remember { mutableStateOf(false) }
             var timeAtLocation by remember { mutableStateOf("No location selected") }
@@ -499,6 +507,7 @@ and add code to load and display them:
 This tutorial covers the basic building blocks of a multiplatform project.
 To dive deeper into specifics:
 * **Kotlin Multiplatform**
+  * See an [alternative tutorial](multiplatform-upgrade-app.md), where the application UI is native and only business logic is shared. 
   * Read in depth about [mechanisms for sharing code available with Kotlin Multiplatform](multiplatform-share-on-platforms.md). 
   * Learn about the [principles behind the structure of a Kotlin Multiplatform project](multiplatform-discover-project.md).
   * For more information on how to manage multiplatform dependencies, see [](multiplatform-add-dependencies.md).
@@ -506,9 +515,9 @@ To dive deeper into specifics:
   * Learn about the [fundamentals of Compose layouts](compose-layout.md) and [working with Compose modifiers](compose-layout-modifiers.md).
   * Learn about the [possibilities and challenges of multiplatform resources in Compose](compose-multiplatform-resources.md).
 * **Tutorials for more advanced projects**
-  * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md)
-  * [Migrate an advanced Android app to KMP](migrate-from-android.md)
-* [Look through the curated list of sample multiplatform projects](multiplatform-samples.md)
+  * [Share data and network logic using Ktor and SQLDelight](multiplatform-ktor-sqldelight.md).
+  * [Migrate an advanced Android app to KMP](migrate-from-android.md).
+* Look through the [curated list of sample multiplatform projects](multiplatform-samples.md).
 
 Join the community:
 
