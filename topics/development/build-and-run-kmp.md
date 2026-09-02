@@ -14,14 +14,14 @@ However, IntelliJ IDEA and Android Studio provide a lot of quality-of-life featu
 from managing the environment to writing build scripts and multiplatform code.
 
 You can run the application on any supported platform using the same IDE:
-* the Android app runs on available Android Virtual Devices,
-* the iOS app runs on iOS Simulator (you need a macOS machine to be able to run apps on Apple targets),
-* the desktop app runs on the system JVM,
-* the web app runs in the default browser.
+* The Android app runs on available Android Virtual Devices.
+* The iOS app runs on iOS Simulator (you need a macOS machine with Xcode to be able to run apps on Apple targets).
+* The desktop app runs on the system JVM.
+* The web app runs in the default browser.
 
 The run configurations provided by the KMP IDE plugin are more efficient than the general Gradle build task:
 They only trigger builds for corresponding targets while the default Gradle build task
-builds debug and release versions of all targets.
+always builds debug and release versions of all targets.
 
 ### Run your application on Android Emulator
 
