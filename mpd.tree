@@ -175,6 +175,7 @@
 			<toc-element toc-title="Configure TeamCity" topic="configure-teamcity-for-kmp.md"/>
             <toc-element toc-title="Configure iOS delivery pipeline" topic="ios-ci-cd-teamcity.md"/>
         </toc-element>
+		<toc-element topic="klibs-io.md"/>
     </toc-element>
 	<toc-element toc-title="Compatibility">
 		<toc-element toc-title="Compatibility guide" topic="multiplatform-compatibility-guide.md"/>
