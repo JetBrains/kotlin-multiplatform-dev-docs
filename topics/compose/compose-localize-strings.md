@@ -27,6 +27,11 @@ commonMain/composeResources/
 └── ... (other locale directories)
 ```
 
+If a language has more than one script (for example, Chinese or Serbian), add a script-less
+directory (`values-zh`) in addition to the script-specific ones (`values-b+zh+Hans`, `values-b+zh+Hant`).
+Otherwise, the resource cannot be resolved when the system reports the locale without a script.
+See [Language and regional qualifiers](compose-multiplatform-resources-setup.md#language-and-regional-qualifiers) for details.
+
 Within the `values` directories and its localized variants, define string resources in `strings.xml` files using key-value pairs.
 For example, add English texts to `commonMain/composeResources/values/strings.xml`:
 

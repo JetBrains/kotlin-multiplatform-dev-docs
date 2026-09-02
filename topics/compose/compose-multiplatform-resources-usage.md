@@ -381,8 +381,8 @@ about best practices and nuances of using plurals in your project.
 * The supported variants are `zero`, `one`, `two`, `few`, `many`, and `other`. Note that not all variants are even 
   considered for every language: for example, `zero` is ignored for English because it is the same as any other plural
   except 1. Rely on a language specialist to know what distinctions the language actually insists upon.
-* It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1".
-  If this doesn't worsen the user experience, 
+* It's often possible to avoid quantity strings by using quantity-neutral formulations such as "Books: 1",
+  if this doesn't worsen the user experience.
 
 To define a plural, add a `<plurals>` element to any `.xml` file in your `composeResources/values` directory.
 A `plurals` collection is a simple resource referenced using the name attribute (not the name of the XML file).

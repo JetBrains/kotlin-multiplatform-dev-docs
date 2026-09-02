@@ -76,3 +76,5 @@ To avoid common localization issues, consider these locale-specific cases:
   and number formatting.
 * Validate [RTL and LTR behavior](compose-rtl.md), ensuring that right-to-left languages like Arabic and Hebrew display strings, 
   layouts, and alignment properly.
+* Test languages that have more than one script: set the locale to `zh-Hans`, `zh-Hant`, and `zh`,
+  and verify that each one resolves to a resource.
