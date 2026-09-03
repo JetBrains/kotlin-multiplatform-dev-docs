@@ -124,6 +124,7 @@
 		<toc-element toc-title="Advanced project structure" topic="multiplatform-advanced-project-structure.md"/>
         <toc-element toc-title="General structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
 		<toc-element toc-title="Project configuration options" topic="multiplatform-project-configuration.md"/>
+		<toc-element toc-title="Multipurpose shared modules" topic="multiplatform-multipurpose-modules.md"/>
 	</toc-element>
 	<toc-element toc-title="Share code">
 		<toc-element topic="multiplatform-share-on-platforms.md"/>
