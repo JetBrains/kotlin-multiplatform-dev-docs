@@ -75,11 +75,11 @@ provide the corresponding declarations for each platform using the platform-spec
 3. In the iOS source set, add the `actual` implementation that modifies `NSLocale.preferredLanguages`:
  
     ```kotlin
-    @OptIn(InternalComposeUiApi::class)
     actual object LocalAppLocale {
         private const val LANG_KEY = "AppleLanguages"
         private val default = NSLocale.preferredLanguages.first() as String
         private val LocalAppLocale = staticCompositionLocalOf { default }
+   
         actual val current: String
             @Composable get() = LocalAppLocale.current
     
@@ -175,11 +175,11 @@ provide the corresponding declarations for each platform using the platform-spec
 Compose Multiplatform defines the current theme via `isSystemInDarkTheme()`. 
 Themes are handled differently across platforms:
 
-* Android defines the theme via the following bitwise operation: 
+* On Android, `isSystemInDarkTheme()` derives from `Configuration.uiMode`, evaluating the following bitwise operation: 
     ```kotlin
         Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK
     ```
-* iOS, desktop, and web platforms use `LocalSystemTheme.current`.
+* On iOS, desktop, and web platforms, `isSystemInDarkTheme()` uses platform-specific APIs internally to determine the current theme.
 
 As a temporary workaround, until a common public API is implemented, 
 you can address this difference using the `expect-actual` mechanism to manage platform-specific theme customization:
@@ -188,6 +188,7 @@ you can address this difference using the `expect-actual` mechanism to manage pl
  
     ```kotlin
     var customAppThemeIsDark by mutableStateOf<Boolean?>(null)
+   
     expect object LocalAppTheme {
         val current: Boolean @Composable get
         @Composable infix fun provides(value: Boolean?): ProvidedValue<*>
@@ -198,19 +199,18 @@ you can address this difference using the `expect-actual` mechanism to manage pl
         CompositionLocalProvider(
             LocalAppTheme provides customAppThemeIsDark,
         ) {
-            key(customAppThemeIsDark) {
-                content()
-            }
+            content()
         }
     }
     ```
 
-2. In Android code, add the actual implementation that uses the `LocalConfiguration` API:
+2. In the Android code, add the actual implementation that uses the `LocalConfiguration` API:
 
    ```kotlin
     actual object LocalAppTheme {
         actual val current: Boolean
-            @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
+            @Composable get() =
+                (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
     
         @Composable
         actual infix fun provides(value: Boolean?): ProvidedValue<*> {
@@ -219,7 +219,7 @@ you can address this difference using the `expect-actual` mechanism to manage pl
             } else {
                 Configuration(LocalConfiguration.current).apply {
                     uiMode = when (value) {
-                        true -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
+                        true  -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
                         false -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
                     }
                 }
@@ -229,24 +229,18 @@ you can address this difference using the `expect-actual` mechanism to manage pl
     }
     ```
 
-3. On iOS, desktop, and web platforms, you can change `LocalSystemTheme` directly:
+3. On iOS, desktop, and web platforms, add the actual implementation that overrides the theme via a `LocalIsDarkTheme` composition local with an `isSystemInDarkTheme()` fallback:
 
     ```kotlin
-    @OptIn(InternalComposeUiApi::class)
+    private val LocalIsDarkTheme = staticCompositionLocalOf<Boolean?> { null }
+    
     actual object LocalAppTheme {
         actual val current: Boolean
-            @Composable get() = LocalSystemTheme.current == SystemTheme.Dark
+            @Composable get() = LocalIsDarkTheme.current ?: isSystemInDarkTheme()
     
         @Composable
-        actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-            val new = when(value) {
-                true -> SystemTheme.Dark
-                false -> SystemTheme.Light
-                null -> LocalSystemTheme.current
-            }
-    
-            return LocalSystemTheme.provides(new)
-        }
+        actual infix fun provides(value: Boolean?): ProvidedValue<*> =
+            LocalIsDarkTheme.provides(value)
     }
     ```
 
