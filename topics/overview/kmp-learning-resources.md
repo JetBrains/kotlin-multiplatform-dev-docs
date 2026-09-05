@@ -95,7 +95,7 @@ Free
 </td>
 <td>
 
-[Create Your First KMP App](multiplatform-create-first-app.md)
+[Create Your First KMP App](multiplatform-upgrade-app.md)
 
 Tutorial
 
@@ -149,7 +149,7 @@ Free
 </td>
 <td>
 
-[Create Your First Compose Multiplatform App](compose-multiplatform-create-first-app.md)
+[Create Your First Compose Multiplatform App](compose-multiplatform-new-project.md)
 
 Tutorial
 

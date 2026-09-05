@@ -1,4 +1,4 @@
-[//]: # (title: Hierarchical project structure)
+[//]: # (title: Source set hierarchy)
 
 Kotlin Multiplatform projects support hierarchical source set structures.
 This means you can arrange a hierarchy of intermediate source sets for sharing the common code among some, but not all,

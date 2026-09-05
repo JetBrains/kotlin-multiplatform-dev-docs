@@ -61,7 +61,7 @@ binaries, available language constructions, and allowed dependencies.
 > Targets can also be referred to as platforms. See the
 > full [list of supported targets](multiplatform-dsl-reference.md#targets).
 >
-> {style="note"}
+{style="note"}
 
 You should first _declare_ a target to instruct Kotlin to compile code for that specific target. In Gradle, you declare
 targets using predefined DSL calls inside the `kotlin {}` block:
@@ -104,7 +104,7 @@ See [Source sets](#source-sets) to learn how to write platform-specific code.
 
 ## Source sets
 
-A _Kotlin source set_ is a set of source files with its own targets, dependencies, and compiler options. It's the main
+A _Gradle source set_ is a set of source files with its own targets, dependencies, and compiler options. It's the main
 way to share code in multiplatform projects.
 
 Each source set in a multiplatform project:
@@ -115,13 +115,19 @@ Each source set in a multiplatform project:
   constructions and dependencies are available in this source set.
 * Defines its own dependencies and the compiler options.
 
-Kotlin provides a bunch of predefined source sets. One of them is `commonMain`, which is present in all multiplatform
+Kotlin Multiplatform provides a number of predefined source sets. One of them is `commonMain`, which is present in all multiplatform
 projects and compiles to all declared targets.
 
 You interact with source sets as directories inside `src` in Kotlin Multiplatform projects.
-For example, a project with the `commonMain`, `iosMain`, and `jvmMain` source sets has the following structure:
+For example, a `shared` module with the `commonMain`, `iosMain`, and `androidMain` source sets
+has the following structure:
 
 ![Shared sources](src-directory-diagram.png){width=350}
+
+When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
+When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
+
+![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png)
 
 In Gradle scripts, you access source sets by name inside the `kotlin.sourceSets {}` block:
 

@@ -11,24 +11,16 @@ This tutorial demonstrates how to use IntelliJ IDEA to create an advanced mobile
 Kotlin Multiplatform.
 This application is going to:
 
-* Retrieve data over the internet from the public [Launch Library](https://lldev.thespacedevs.com/docs) using Ktor
-* Save the data in a local database using SQLDelight.
+* Retrieve data over the internet from the public [Launch Library](https://lldev.thespacedevs.com/docs) using [Ktor](https://ktor.io/docs/create-client.html)
+  and [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization).
+* Save the data in a local database using [SQLDelight](https://github.com/cashapp/sqldelight).
 * Display a list of space rocket launches together with the launch date, results, and a detailed description of the launch.
+* Provide platform-specific database drivers using [Koin](https://insert-koin.io/).
 
 The application will include a module with shared code for both the iOS and Android platforms. The business logic and data
 access layers will be implemented only once in the shared module, while the UI of both applications will be native.
 
 ![Emulator and Simulator](android-and-ios.png){width=600}
-
-You will use the following multiplatform libraries in the project:
-
-* [Ktor](https://ktor.io/docs/create-client.html) as an HTTP client for retrieving data over the internet.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization) to deserialize JSON responses into objects
-  of entity classes.
-* [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines) to write asynchronous code.
-* [SQLDelight](https://github.com/cashapp/sqldelight) to generate Kotlin code from SQL queries and create a type-safe
-  database API.
-* [Koin](https://insert-koin.io/) to provide platform-specific database drivers via dependency injection.
 
 > You can find the [template project](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage) as well as the
 > source code of the [final application](https://github.com/kotlin-hands-on/kmm-networking-and-data-storage/tree/final)
