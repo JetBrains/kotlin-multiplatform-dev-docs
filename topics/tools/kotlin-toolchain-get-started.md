@@ -65,7 +65,7 @@ that Kotlin Toolchain uses to mark platform-specific source files and configurat
 
 In IntelliJ IDEA, select **File | Open** and choose the directory with the files.
 Since configuration files are empty, the project is not recognized fully as a Kotlin Toolchain project,
-but the IDE can already help set it up.`
+but the IDE can already help set it up.
 
 ## Configure modules within the project
 
@@ -101,12 +101,12 @@ Copy the following configurations to respective `module.yaml` files:
 product: android/app
 
 dependencies:
-- ../shared
+    - ../shared
 # Set up integration of common UI code with the Android activity
 - androidx.activity:activity-compose:1.13.0
 
 settings:
-compose: enabled
+    compose: enabled
 android:
 namespace: org.example.project
 applicationId: org.example.project
