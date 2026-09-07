@@ -108,6 +108,7 @@ To get started, implement the basic layout in the common `App()` composable:
     > in Jetpack Compose documentation.  
 
 2. Follow the IDE's instructions to import the missing dependencies.
+   When multiple imports are suggested, choose `@Composable` options.
 
 3. Run the application on Android and iOS:
 
@@ -121,9 +122,11 @@ To get started, implement the basic layout in the common `App()` composable:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
+   Thanks to Compose Hot Reload, you can fix this without rebuilding the app. 
+
 ### Use Compose Hot Reload to quickly iterate on the UI
 
-You can fix the desktop UI and verify the fix without rerunning the build:
+You can fix the desktop UI and verify the fix without building the app again:
 
 1. Update the `main.kt` file under the `desktopApp/src/` directory as follows:
 
@@ -197,6 +200,8 @@ Following the instructions from the [library's repository](https://github.com/Ko
     }
     ```
 
+3. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
+
 Now you can use `kotlinx-datetime` APIs in your common code.
 For the web target, you need to work around the limitations of timezone support in JavaScript and Wasm/JS
 as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app).
@@ -218,7 +223,6 @@ For the web target, timezone support also requires the [`js-joda`](https://js-jo
         sourceSets {
             // ...
             webMain.dependencies {
-                // ...
                 implementation(npm("@js-joda/timezone", "%js-joda-timezone%"))
             }
         }
@@ -228,8 +232,7 @@ For the web target, timezone support also requires the [`js-joda`](https://js-jo
 
    Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
 
-2. Once you add the dependency,
-   press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
+2. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
 
 3. In the **Terminal** tool window, run the following command to update the `yarn.lock` file with the latest dependency versions:
 
@@ -237,11 +240,10 @@ For the web target, timezone support also requires the [`js-joda`](https://js-jo
     ./gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock
     ```
 
-4. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package:
+4. In the `webApp/src/webMain/kotlin/.../main.kt` file, use the `@JsModule` annotation to import the `js-joda` npm package.
+   Replace the `main()` function with the following code:
 
     ```kotlin
-    import androidx.compose.ui.ExperimentalComposeUiApi
-    import androidx.compose.ui.window.ComposeViewport
     import kotlin.js.ExperimentalWasmJsInterop
     import kotlin.js.JsModule
 
@@ -358,7 +360,9 @@ The app will offer several countries to choose from and display the time in the 
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="defaultCountries.forEach { (name, zone) ->"}
    
-4. Follow the IDE's instructions to import the missing dependencies. When importing `Row()`, pick the `@Composable` version.
+4. Follow the IDE's instructions to import the missing dependencies:
+   * When importing `Row()`, pick the `@Composable` version.
+   * When importing `Clock`, pick the version from the `kotlin.time` package.
 
 Run the application to see the redesigned version:
 
@@ -394,9 +398,10 @@ then add code to load and display them:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
-3. Build or run the application to generate the `Res` class with accessors for the added resources.
+    <!--3. Build or run the application to generate the `Res` class with accessors for the added resources.-->
+    <!-- Doesn't seem to be necessary? -->
 
-4. Update the UI code to use images.
+3. Update the UI code to use images.
    Replace the entire code in the `commonMain/kotlin/.../App.kt` file (excluding imports) with the following:
 
     ```kotlin
@@ -483,8 +488,10 @@ then add code to load and display them:
     }
     ```
 
-5. Follow the IDE's instructions to import the missing dependencies.
-6. Run the application to see the new behavior:
+4. Follow the IDE's instructions to import the missing dependencies:
+   * Pick `@Composable` versions of functions where possible.
+   * When importing `Alignment`, select the `androidx.compose.ui` version.
+5. Run the application to see the new behavior:
 
 <tabs>
     <tab id="mobile-flags" title="Android and iOS">
