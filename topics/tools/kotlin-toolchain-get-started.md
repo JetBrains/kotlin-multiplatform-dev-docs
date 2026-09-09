@@ -24,7 +24,7 @@ installed.
 
 ### JDK
 
-Kotlin Toolchain automatically provisions JDK 25 if it's not available in your JAVA_HOME,
+Kotlin Toolchain automatically provisions JDK 25 if it's not available in your `JAVA_HOME`,
 so you don't need to do anything to run the tool.
 
 You can, however, [customize the provisioning behavior when necessary](https://kotlin-toolchain.org/0.12/user-guide/advanced/jdk-provisioning/).
@@ -64,8 +64,11 @@ For Kotlin Multiplatform applications, specify the exact application module you 
 for example:
 
 ```shell
+# Build and run the iOS app
 kotlin run -m ios-app
+# Build and run the Android app
 kotlin run -m android-app
+# Build and run the JVM desktop application
 kotlin run -m jvm-app
 ```
 
@@ -81,6 +84,18 @@ You can pre-install the necessary plugins:
 
 They enable code completion and navigation for the Kotlin Toolchain configuration files
 and automatically import declared modules as IDE run configurations.
+
+### Create a project directly in the IDE
+
+With the Kotlin Multiplatform and Kotlin Toolchain plugins installed,
+you can also create a new project directly in the IDE:
+
+1. Open IntelliJ IDEA or Android Studio.
+2. Select **File** | **New** | **Project**.
+3. Select **Kotlin Multiplatform** and choose **Kotlin Toolchain** in the **Build system** switch.
+4. Fill in the rest of the project details and click **Create**.
+
+The resulting project is similar to the one created with the [`kotlin init` command](#generate-a-new-project).
 
 <!-- ## Publish the artifacts
 
