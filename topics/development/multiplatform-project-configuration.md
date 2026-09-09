@@ -32,6 +32,9 @@ To review all available options for iOS integration, see [](multiplatform-ios-in
 There are two module configuration options that you can use in Kotlin Multiplatform projects: single module or several
 shared modules.
 
+If a shared module should also ship as a standalone Swift package with iOS implementation owned in Swift, see
+[Build multipurpose shared modules with native platform code](multiplatform-multipurpose-modules.md).
+
 ### Single shared module
 
 The simplest module configuration contains only a single shared Kotlin Multiplatform module in the project:
