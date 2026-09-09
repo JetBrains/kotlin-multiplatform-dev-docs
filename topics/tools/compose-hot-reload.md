@@ -166,7 +166,7 @@ the agent can iterate on your code autonomously and verify each change.
 
 ### Connect an AI agent
 
-To connect an AI agent, point the agent's MCP client configuration to the `hotMcpServer` Gradle task. 
+To connect an AI agent, configure the MCP client to run the `hotMcpServer` Gradle task.
 For example, in `.mcp.json`:
 
 ```json
@@ -184,6 +184,13 @@ For example, in `.mcp.json`:
   }
 }
 ```
+
+Gradle searches for tasks across all subprojects and matches the short name `hotMcpServer` to target-specific variants
+such as `hotMcpServerJvm` or `hotMcpServerDesktop`.
+
+If your module defines multiple JVM targets,
+specify the fully qualified task name to avoid ambiguity: `:<module>:hotMcpServer<Target>`, 
+for example `:app:hotMcpServerDesktop` or `:composeApp:hotMcpServerJvm`.
 
 ### Available MCP tools
 
