@@ -14,7 +14,7 @@
         <spotlight>
             <a href="quickstart.md" type="cross-platform" summary="Set up and run your first KMP project">Kotlin Multiplatform quickstart</a>
             <!--<a href="kmp-overview.md" summary="Learn about features and benefits of Kotlin Multiplatform" type="idea">What is Kotlin Multiplatform</a>-->
-            <a href="kotlin-toolchain-get-started.md" type="experiment" summary="A new build system created with Kotlin Multiplatform in mind">Try Kotlin Toolchain</a>
+            <a href="kotlin-toolchain.md" type="experiment" summary="A new build system created with Kotlin Multiplatform in mind">Try Kotlin Toolchain</a>
         </spotlight>
         <primary>
             <title>Popular use cases</title>
