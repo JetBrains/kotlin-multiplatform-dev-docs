@@ -20,7 +20,7 @@ To get from a wizard-generated project to the final result, you will:
    * [Support user input](#support-user-input)
    * [Add and import image resources](#introduce-images)
 
-The tutorial builds a demo application for all supported platforms simultaneously, since code is shared almost entirely.
+The tutorial helps create a demo application for all supported platforms simultaneously, since code is shared almost entirely.
 But for the same reason you can freely pick and choose only platforms you are interested in.
 
 > The final state of the project is available in our [GitHub repository](https://github.com/kotlin-hands-on/get-started-with-cm/).
@@ -60,13 +60,13 @@ Each application module defines an entry point that calls the shared `App()` com
 >
 {style="tip"}
 
-In this tutorial, you are not doing anything that requires updating the platform-specific code:
-all changes in the common UI code are seamlessly propagated across the apps.
+In this tutorial, all functional changes in the common UI code are seamlessly propagated across the apps,
+but you will see a couple of changes required to make the platform setup work.
 
 To get started, implement the basic layout in the common `App()` composable:
 
-1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file and replace the code
-   with the following `App()` composable:
+1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file and replace the `App()` composable
+   with the new implementation:
 
     ```kotlin
     // @Composable marks a composable function:
@@ -107,7 +107,7 @@ To get started, implement the basic layout in the common `App()` composable:
     > For an in-depth introduction, see [Managing state](https://developer.android.com/develop/ui/compose/state)
     > in Jetpack Compose documentation.  
 
-2. Follow the IDE's instructions to import the missing dependencies.
+2. Follow the IDE's suggestions to import the missing symbols.
    When multiple imports are suggested, choose `@Composable` options.
 
 3. Run the application on Android and iOS:
@@ -122,11 +122,11 @@ To get started, implement the basic layout in the common `App()` composable:
 
    ![New Compose Multiplatform app on desktop](first-compose-project-on-desktop-3.png){width=400}
 
-   Thanks to Compose Hot Reload, you can fix this without rebuilding the app. 
+   Thanks to Compose Hot Reload, you can fix this without a full restart. 
 
 ### Use Compose Hot Reload to quickly iterate on the UI
 
-You can fix the desktop UI and verify the fix without building the app again:
+You can fix the desktop UI and verify the fix without restarting the app:
 
 1. Update the `main.kt` file under the `desktopApp/src/` directory as follows:
 
@@ -153,7 +153,7 @@ You can fix the desktop UI and verify the fix without building the app again:
     }
     ```
 
-2. Follow the IDE's instructions to import the missing dependencies.
+2. Follow the IDE's suggestions to import the missing symbols.
 
 3. To see the app automatically update, save the modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>).
    The window should adjust:
@@ -329,11 +329,13 @@ The app will offer several countries to choose from and display the time in the 
               Text(
                   timeAtLocation,
                   style = TextStyle(fontSize = 20.sp),
+                  textAlign = TextAlign.Center,
+                  modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally),
               )
               Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                   DropdownMenu(
                       // Uses a remembered value to control
-                      // the visibility of the  dropdown menu
+                      // the visibility of the dropdown menu
                       expanded = showCountries,
                       onDismissRequest = { showCountries = false }
                   ) {
@@ -360,7 +362,7 @@ The app will offer several countries to choose from and display the time in the 
     ```
     {initial-collapse-state="collapsed" collapsible="true" collapsed-title="defaultCountries.forEach { (name, zone) ->"}
    
-4. Follow the IDE's instructions to import the missing dependencies:
+4. Follow the IDE's suggestions to import the missing symbols:
    * When importing `Row()`, pick the `@Composable` version.
    * When importing `Clock`, pick the version from the `kotlin.time` package.
 
@@ -401,10 +403,14 @@ then add code to load and display them:
     <!--3. Build or run the application to generate the `Res` class with accessors for the added resources.-->
     <!-- Doesn't seem to be necessary? -->
 
-3. Update the UI code to use images.
+3. Make sure the image names are exactly as shown above: Compose Multiplatform generates accessors based on the image names.
+
+4. Update the UI code to use the images.
    Replace the entire code in the `commonMain/kotlin/.../App.kt` file (excluding imports) with the following:
 
     ```kotlin
+    // Existing imports
+    // ...
     import composedemo.shared.generated.resources.Res
     import composedemo.shared.generated.resources.eg
     import composedemo.shared.generated.resources.fr
@@ -488,10 +494,10 @@ then add code to load and display them:
     }
     ```
 
-4. Follow the IDE's instructions to import the missing dependencies:
+5. Follow the IDE's suggestions to import the missing symbols:
    * Pick `@Composable` versions of functions where possible.
    * When importing `Alignment`, select the `androidx.compose.ui` version.
-5. Run the application to see the new behavior:
+6. Run the application to see the new behavior:
 
 <tabs>
     <tab id="mobile-flags" title="Android and iOS">

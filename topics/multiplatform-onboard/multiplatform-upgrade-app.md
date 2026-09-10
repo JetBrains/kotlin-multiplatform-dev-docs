@@ -58,7 +58,7 @@ The Kotlin Multiplatform project includes the following modules:
 * **iosApp** is the Xcode project that builds the iOS application.
 * **sharedLogic** is the multiplatform module that contains the logic common for both Android and iOS applications.
 * **sharedUI** is the module with the UI code implemented with Compose Multiplatform.
-  In this project, **sharedUI** is used only by the Android app but can be used by other targets whenever you need that.
+  In this project, **sharedUI** is used only by the Android app but can be extended to other targets whenever you need that.
   On Android, [Compose Multiplatform calls directly translate into Jetpack Compose](compose-multiplatform-jetpack-libraries.md),
   so there is no overhead in this particular setup.
 
@@ -97,8 +97,6 @@ in build configuration code:
 kotlinx-coroutines = "%coroutinesVersion%"
 kotlinx-datetime = "%dateTimeVersion%"
 ktor = "%ktorVersion%"
-# A Kotlin version should already be set in a generated project
-kotlin = "%kotlinVersion%"
 
 [libraries]
 # ...
@@ -163,7 +161,7 @@ Synchronize the Gradle files: press double **Shift**, then find and execute the 
 ## Set up API requests
 
 You'll use the [Launch Library API](https://lldev.thespacedevs.com/docs) to retrieve data,
-specifically the list of all launches from the **/2.3.0/launches** endpoint.
+specifically a list of launches from the **/2.3.0/launches** endpoint.
 
 ### Create a data model
 
@@ -253,8 +251,8 @@ data class LaunchListResponse(
            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
                .toLocalDateTime(TimeZone.currentSystemDefault())
         
-           // Date is displayed in the "MMMM DD, YYYY" format,
-           // for example, "JULY 5, 2026"
+           // Date is displayed in the "MMMM D, YYYY" format,
+           // for example, "JULY 15, 2026"
            return "${date.month} ${date.day}, ${date.year}"
        }
    
@@ -346,9 +344,9 @@ class MainViewModel: ViewModel() {
 
     // Collects all strings emitted by a Greeting().greet() call
     init {
-        // Wraps the call to the suspending Flow.collect() function.
-        // The launch() coroutine is used within the ViewModel scope,
-        // so it will run only in correct phases of the lifecycle
+        // Starts collection in a coroutine owned by this ViewModel.
+        // It remains active while the ViewModel is retained and is
+        // cancelled automatically when the ViewModel is cleared.
         viewModelScope.launch {
             // Appends each new phrase to greetingList
             Greeting().greet().collect { phrase ->
@@ -407,7 +405,7 @@ add the following permission to the `androidApp/src/main/AndroidManifest.xml` fi
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
-    ...
+    <!-- The rest of the manifest -->
 </manifest>
 ```
 
@@ -433,8 +431,7 @@ The code for the iOS app is contained in the `iosApp/iosApp` directory:
 ### Introducing a ViewModel
 
 In the `iosApp/ContentView.swift` file, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
-Call the `startObserving()` function within a [`task()`](https://developer.apple.com/documentation/swiftui/view/task(name:priority:file:line:_:))
-modifier to support concurrency:
+Replace the entire file with the following code:
 
 ```swift
 import SwiftUI
@@ -447,6 +444,8 @@ struct ContentView: View {
 
     var body: some View {
         ListView(phrases: viewModel.greetings)
+            // Calls the startObserving() function
+            // with the .task modifier to support concurrency
             .task { await self.viewModel.startObserving() }
     }
 }
@@ -504,15 +503,13 @@ Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, witho
 cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
-  > SKIE may not support the latest stable Kotlin version.
+  > The latest SKIE may not support the latest stable Kotlin version.
+  > Check the [changelog for the latest version]https://skie.touchlab.co/category/changelog)
+  > to see which Kotlin version to downgrade to.
 
 ### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
 
-> We recommend using the latest version of the library.
-> Check the [KMP-NativeCoroutines repository](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
-> to see whether a newer version of the plugin is available and whether it's compatible with your Kotlin version.
->
-{style="note"}
+Update the build scripts to include KMP-NativeCoroutines dependencies:
 
 1. Add the KMP-NativeCoroutines version and plugin reference to the Gradle [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
 
@@ -559,7 +556,7 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
     }
     ```
 
-5. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command..
+5. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
 
 #### Mark the flow with KMP-NativeCoroutines
 
@@ -580,9 +577,9 @@ including bridging various Kotlin types to Swift equivalents. It also doesn’t 
     }
     ```
 
-#### Import the library using SwiftPM in XCode
+#### Import the library using SwiftPM in Xcode
 
-Installs the parts of the KMP-NativeCoroutines Swift package necessary to work with the `async/await` mechanism.
+Install the parts of the KMP-NativeCoroutines Swift package necessary to work with the `async/await` mechanism:
 
 1. Go to **File | Open Project in Xcode**.
 2. In Xcode, right-click the `iosApp` project in the left-hand menu and select **Add Package Dependencies**.
@@ -600,17 +597,18 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
 
    ![Add KMP-NativeCoroutines packages](multiplatform-add-package.png){width=500}
 7. Return to IntelliJ IDEA and select **Tools | Swift Package Manager | Resolve Dependencies**.
-   This creates a `Package.resolved` lock file that is used by the Kotlin build
+   This creates a `Package.resolved` lock file that is used by the Kotlin Multiplatform build task
    and can be committed to the repository to keep the versions of Swift packages consistent.  
 
 #### Consume the flow using the KMP-NativeCoroutines library
 
-1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using KMP-NativeCoroutine's
-   `asyncSequence()` function for the `Greeting().greet()` function:
+1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using the `asyncSequence()` function
+   from KMP-NativeCoroutines:
 
     ```Swift
     func startObserving() async {
         do {
+            // Consumes the flow emitted by Greeting().greet() from Kotlin
             let sequence = asyncSequence(for: Greeting().greet())
             for try await phrase in sequence {
                 self.greetings.append(phrase)
@@ -621,8 +619,8 @@ Installs the parts of the KMP-NativeCoroutines Swift package necessary to work w
     }
     ```
 
-   The loop and the `await` mechanism here are used here to iterate through the flow and update the `greetings` property
-every time the flow emits a value.
+   The loop and the `await` mechanism are used here to iterate through the flow and update the `greetings` property
+   every time the flow emits a value.
 
 2. Make sure `ViewModel` is marked with the `@MainActor` annotation:
 
@@ -653,8 +651,8 @@ every time the flow emits a value.
     }
     ```
 
-`@MainActor` can produce unresolved reference errors until you build the project, which brings the Kotlin dependencies
-in sync with the iOS project dependencies.
+`@MainActor` here can produce unresolved reference errors until you build the project,
+which brings the Kotlin symbols (specifically, `greeting()`) in sync with the iOS project dependencies.
 
 > If you're getting build errors, make sure the versions of Kotlin and KMP-NativeCoroutines are compatible:
 > both the Gradle plugin version and the Swift package version should be set
