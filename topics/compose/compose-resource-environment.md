@@ -75,7 +75,6 @@ provide the corresponding declarations for each platform using the platform-spec
 3. In the iOS source set, add the `actual` implementation that modifies `NSLocale.preferredLanguages`:
  
     ```kotlin
-    @OptIn(InternalComposeUiApi::class)
     actual object LocalAppLocale {
         private const val LANG_KEY = "AppleLanguages"
         private val default = NSLocale.preferredLanguages.first() as String
