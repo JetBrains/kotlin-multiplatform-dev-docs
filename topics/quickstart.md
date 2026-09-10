@@ -78,7 +78,7 @@ Use the IDE wizard to create a new KMP project:
 
    **Kotlin Toolchain** is an experimental build system created with Kotlin Multiplatform in mind
    and well suited for new projects and AI workflows.
-   See [the Kotlin Toolchain get started page](kotlin-toolchain-get-started.md) for a dedicated guide.
+   See [the Kotlin Toolchain get started page](kotlin-toolchain.md) for a dedicated guide.
    
 5. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
