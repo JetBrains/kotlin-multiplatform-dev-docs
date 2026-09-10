@@ -1,4 +1,4 @@
-[//]: # (title: Creating and building a Kotlin Multiplatform project with Kotlin Toolchain)
+[//]: # (title: Create a Kotlin Multiplatform project with Kotlin Toolchain)
 
 [Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool created by JetBrains to help you configure projects
 for building, packaging, publishing, and more. With Kotlin Toolchain, you can spend less time dealing with build systems and focus
@@ -61,7 +61,7 @@ If you intend to build and run iOS applications, make sure to install Xcode and 
 to accept terms of use as well as select and download an iOS SDK.
 
 To build and run Android applications, make sure to have [Android SDK Tools](https://developer.android.com/tools/releases/platform-tools)
-installed.
+installed. 
 
 ### JDK
 
@@ -155,8 +155,7 @@ TODO link to the Toolchain page on multiplatform app publishing -->
 
 ## What's next
 
-* For more on what Kotlin Toolchain is and what purpose it serves, check out the [product FAQ](https://kotlin-toolchain.org/dev/faq/).
 * A [from-scratch tutorial](https://kotlin-toolchain.org/dev/getting-started/tutorial/)
   shows how to create a Kotlin Toolchain "Hello, World!" and gradually transform it into a multiplatform project
   with a complex templated configuration.
-* For a deep dive into Kotlin Toolchain, check out the [user guide](https://kotlin-toolchain.org/%kotlinToolchainVersion%/getting-started/).
+* To learn more about how Kotlin Toolchain works, see the [User guide](https://kotlin-toolchain.org/dev/user-guide/).

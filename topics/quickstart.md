@@ -74,10 +74,12 @@ Use the IDE wizard to create a new KMP project:
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. Set the name, location, and other base attributes of the project as needed.
-4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR) as the JDK for your project, as it provides important fixes, particularly for improving the compatibility
-   of desktop KMP apps.
-   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
+4. The rest of this page describes a **Gradle** project: make sure it is selected in the **Build system** switch to continue.
+
+   **Kotlin Toolchain** is an experimental build system created with Kotlin Multiplatform in mind
+   and well suited for new projects and AI workflows.
+   See [the Kotlin Toolchain get started page](kotlin-toolchain.md) for a dedicated guide.
+   
 5. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
    for the corresponding target.

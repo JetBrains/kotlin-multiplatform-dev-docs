@@ -10,6 +10,7 @@
     <var name="kmpLatestUrl" value="https://github.com/JetBrains/compose-multiplatform/releases"/>
     <var name="languageVersion" value="2.4"/>
     <var name="apiVersion" value="2.4"/>
+    <var name="kotlinToolchainVersion" value="0.12"/>
 
     <!-- Compose Multiplatform -->
     <var name="org.jetbrains.compose" value="1.12.0"/>
