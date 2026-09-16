@@ -18,12 +18,10 @@ it is focused on providing a smooth CLI experience that helps AI agents to inter
 predictably and transparently.
 
 This page guides you through setting up a Kotlin Multiplatform project from scratch,
-referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/%kotlinToolchainVersion%/user-guide/)
+referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/)
 for further information.
 
 ## Prerequisites
-
-<!--<include from="kotlin-toolchain.md" element-id="toolchain-script-install"/>-->
 
 ### CLI {id="toolchain-script-install"}
 
@@ -55,24 +53,17 @@ powershell -ExecutionPolicy ByPass -c "irm 'https://kotl.in/install.ps1' | iex"
 
 This adds `kotlin` as a command-line tool.
 
-### Simulators and emulators
+### Building iOS apps
 
-If you intend to build and run iOS applications, make sure to install Xcode and run it at least once
-to accept terms of use as well as select and download an iOS SDK.
+If you intend to build and run iOS applications, make sure to install [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
+and run it at least once to accept terms of use as well as select and download an iOS SDK.
 
-To build and run Android applications, make sure to have [Android SDK Tools](https://developer.android.com/tools/releases/platform-tools)
-installed.
-
-### JDK
-
-Kotlin Toolchain automatically provisions JDK 25 if it's not available in your `JAVA_HOME`,
-so you don't need to do anything to run the tool.
-
-You can, however, [customize the provisioning behavior when necessary](https://kotlin-toolchain.org/0.12/user-guide/advanced/jdk-provisioning/).
+<!-- May becoma more straightforward after https://youtrack.jetbrains.com/issue/KTC-679 -->
 
 ## Generate a new project
 
 1. Create a new empty directory and open it in your terminal.
+   <!-- Should change after https://youtrack.jetbrains.com/issue/KTC-5478 -->
 2. Run the following command to initialize a new Kotlin Toolchain project:
 
     ```shell
@@ -121,9 +112,9 @@ Multiple modules are available to run, please choose:
 
 Kotlin Toolchain runs the appropriate build task and launches the application on the corresponding platform.
 
-## Refine the project in the IDE
+## Work with the project in the IDE
 
-To fine-tune the project directly, you can open it in IntelliJ IDEA or Android Studio.
+To  the project directly, you can open it in IntelliJ IDEA or Android Studio.
 You can pre-install the necessary plugins:
 
 * [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
