@@ -138,7 +138,8 @@ you can also create a new project directly in the IDE:
 3. Select **Kotlin Multiplatform** and choose **Kotlin Toolchain** in the **Build system** switch.
 4. Fill in the rest of the project details and click **Create**.
 
-The resulting project is similar to the one created with the [`kotlin init` command](#generate-a-new-project).
+The resulting project is a little richer than a simple "Hello, World!":
+it has a base Compose layout and an example of integrating resources.
 
 When the project is created and imported, the IDE automatically registers run configuration for all declared modules
 so you can run corresponding applications from the IDE toolbar.
