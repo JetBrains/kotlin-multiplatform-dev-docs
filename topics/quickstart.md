@@ -5,7 +5,18 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
-In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform (KMP) app with a Compose Multiplatform UI.
+## Choose a foundation: Kotlin Toolchain or Gradle
+
+Kotlin Multiplatform was initially developed to use Gradle, like most Android projects.
+This quickstart is designed for Gradle users who want to introduce Kotlin Multiplatform into their projects
+or simply use a familiar environment.
+
+However, if you're looking to start a brand-new project with Kotlin Multiplatform,
+check out Kotlin Toolchain,
+a build system created by JetBrains with Kotlin Multiplatform in mind.
+It offers a CLI and a transparent configuration format which makes it well suited for AI workflows.
+
+<a href="kotlin-toolchain.md" as="button" mode="rock" icon="arrow-right" icon-position="right">Get started with KMP using Kotlin Toolchain</a>
 
 ## Set up the environment
 
