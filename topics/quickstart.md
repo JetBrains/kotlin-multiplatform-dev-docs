@@ -4,6 +4,19 @@
 
 In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform app with a Compose Multiplatform UI.
 
+## Choose a foundation: Kotlin Toolchain or Gradle
+
+Kotlin Multiplatform was initially developed to use Gradle, like most Android projects.
+This quickstart is designed for Gradle users who want to introduce Kotlin Multiplatform into their projects
+or simply use a familiar environment.
+
+However, if you're looking to start a brand-new project with Kotlin Multiplatform,
+check out Kotlin Toolchain,
+a build system created by JetBrains with Kotlin Multiplatform in mind.
+It offers a CLI and a transparent configuration format which makes it well suited for AI workflows.
+
+<a href="kotlin-toolchain.md" as="button" mode="rock" icon="arrow-right" icon-position="right">Get started with KMP using Kotlin Toolchain</a>
+
 ## Set up the environment
 
 Start with an IDE and necessary plugins:
@@ -74,10 +87,12 @@ Use the IDE wizard to create a new KMP project:
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
 3. Set the name, location, and other base attributes of the project as needed.
-4. We recommend selecting a version of [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)
-   (JBR) as the JDK for your project, as it provides important fixes, particularly for improving the compatibility
-   of desktop KMP apps.
-   Relevant versions of JBR are included in every IntelliJ IDEA distribution, so no additional setup is required.
+4. The rest of this page describes a **Gradle** project: make sure it is selected in the **Build system** switch to continue.
+
+   **Kotlin Toolchain** is a build system created with Kotlin Multiplatform in mind
+   and well suited for new projects and AI workflows.
+   See [the Kotlin Toolchain FAQ](https://kotlin-toolchain.org/latest/faq/) to learn more.
+   
 5. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
    for the corresponding target.
