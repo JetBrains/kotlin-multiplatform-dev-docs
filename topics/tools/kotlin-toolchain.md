@@ -1,25 +1,16 @@
-[//]: # (title: Creating and building a Kotlin Multiplatform project with Kotlin Toolchain)
+[//]: # (title: Creating and building a Kotlin Multiplatform application with Kotlin Toolchain)
 
-[Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool created by JetBrains to help you configure projects
-for building, packaging, publishing, and more. With Kotlin Toolchain, you can spend less time dealing with build systems and focus
-on addressing real business challenges instead.
+[Kotlin Toolchain](https://kotlin-toolchain.org/) supports the full project lifecycle out of the box, from creation to publication, so you can focus on real business challenges. It is optimized for the agentic and CLI workflows and helps AI agents to interact with the build system reliably. It also provides traditional IDE support with plugins for IntelliJ IDEA and Android Studio.
 
-Kotlin Toolchain is designed to support Kotlin Multiplatform applications as well,
-aware of all platforms supported by the framework and making cross-platform configuration simple.
+This page guides you through setting up a Kotlin Multiplatform project from scratch,
+referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/)
+for further information.
 
 > Kotlin Toolchain is in [Alpha](supported-platforms.md#general-kotlin-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
 > We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KTC).
 >
 {style="note"}
-
-Kotlin Toolchain is focused on providing a smooth CLI experience that helps AI agents to interact with the build system
-predictably and transparently.
-It also provides traditional IDE support with plugins for IntelliJ IDEA and Android Studio.
-
-This page guides you through setting up a Kotlin Multiplatform project from scratch,
-referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/)
-for further information.
 
 ## Prerequisites
 
