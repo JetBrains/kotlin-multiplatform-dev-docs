@@ -104,13 +104,11 @@ $ kotlin run -m android-app
 # When no module is specified,
 # the tool lists the available application modules
 $ kotlin run
-
-ERROR: There are several matching application modules in the project. Please specify one with the '--platform' or '--module' option.
-
-Runnable application modules:
-  android-app: android
-  ios-app: iosArm64 iosSimulatorArm64 iosX64
-  jvm-app: jvm
+Multiple modules are available to run, please choose:
+❯ androidApp
+  desktopApp
+  iosApp    
+  webApp
 ```
 
 Kotlin Toolchain runs the appropriate build task and launches the application on the corresponding platform.
