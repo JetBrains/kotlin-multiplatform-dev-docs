@@ -5,6 +5,8 @@
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
 
+In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform app with a Compose Multiplatform UI.
+
 ## Choose a foundation: Kotlin Toolchain or Gradle
 
 Kotlin Multiplatform was initially developed to use Gradle, like most Android projects.
