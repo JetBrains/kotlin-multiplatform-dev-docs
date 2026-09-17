@@ -12,10 +12,10 @@ or simply use a familiar environment.
 
 However, if you're looking to start a brand-new project with Kotlin Multiplatform,
 check out Kotlin Toolchain,
-an experimental build system created by JetBrains with Kotlin Multiplatform in mind.
+a build system created by JetBrains with Kotlin Multiplatform in mind.
 It offers a CLI and a transparent configuration format which makes it well suited for AI workflows.
 
-<a href="https://github.com/Kotlin/kotlin-agent-skills" as="button" mode="rock" icon="arrow-right" icon-position="right">Get started with KMP using Kotlin Toolchain</a>
+<a href="kotlin-toolchain.md" as="button" mode="rock" icon="arrow-right" icon-position="right">Get started with KMP using Kotlin Toolchain</a>
 
 ## Set up the environment
 

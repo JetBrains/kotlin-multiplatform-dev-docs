@@ -9,13 +9,13 @@ aware of all platforms supported by the framework and making cross-platform conf
 
 > Kotlin Toolchain is in [Alpha](supported-platforms.md#general-kotlin-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
-> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/AMPER).
+> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KTC).
 >
 {style="note"}
 
-Kotlin Toolchain provides IDE support with plugins for IntelliJ IDEA and Android Studio,
-it is focused on providing a smooth CLI experience that helps AI agents to interact with the build system
+Kotlin Toolchain is focused on providing a smooth CLI experience that helps AI agents to interact with the build system
 predictably and transparently.
+It also provides traditional IDE support with plugins for IntelliJ IDEA and Android Studio.
 
 This page guides you through setting up a Kotlin Multiplatform project from scratch,
 referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/)
@@ -101,20 +101,23 @@ for example:
 # Build and run the Android app
 $ kotlin run -m android-app
 
-# When no module is specified, the tool asks you to choose one
+# When no module is specified,
+# the tool lists the available application modules
 $ kotlin run
-Multiple modules are available to run, please choose:
-❯ androidApp
-  desktopApp
-  iosApp    
-  webApp 
+
+ERROR: There are several matching application modules in the project. Please specify one with the '--platform' or '--module' option.
+
+Runnable application modules:
+  android-app: android
+  ios-app: iosArm64 iosSimulatorArm64 iosX64
+  jvm-app: jvm
 ```
 
 Kotlin Toolchain runs the appropriate build task and launches the application on the corresponding platform.
 
-## Work with the project in the IDE
+## Work on a project in IntelliJ IDEA or Android Studio
 
-To  the project directly, you can open it in IntelliJ IDEA or Android Studio.
+To work on the project directly, you can open it in IntelliJ IDEA or Android Studio.
 You can pre-install the necessary plugins:
 
 * [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
@@ -122,6 +125,8 @@ You can pre-install the necessary plugins:
 
 They enable code completion and navigation for the Kotlin Toolchain configuration files
 and automatically import declared modules as IDE run configurations.
+
+<!-- TODO clarify the plugin features before the next release --> 
 
 ### Create a project directly in the IDE
 
