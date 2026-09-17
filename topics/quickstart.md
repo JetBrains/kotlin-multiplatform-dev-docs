@@ -89,7 +89,7 @@ Use the IDE wizard to create a new KMP project:
 3. Set the name, location, and other base attributes of the project as needed.
 4. The rest of this page describes a **Gradle** project: make sure it is selected in the **Build system** switch to continue.
 
-   **Kotlin Toolchain** is an experimental build system created with Kotlin Multiplatform in mind
+   **Kotlin Toolchain** is a build system created with Kotlin Multiplatform in mind
    and well suited for new projects and AI workflows.
    See [the Kotlin Toolchain FAQ](https://kotlin-toolchain.org/latest/faq/) to learn more.
    
