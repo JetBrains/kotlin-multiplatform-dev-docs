@@ -1,6 +1,6 @@
 [//]: # (title: Creating and building a Kotlin Multiplatform application with Kotlin Toolchain)
 
-[Kotlin Toolchain](https://kotlin-toolchain.org/) supports the full project lifecycle out of the box, from creation to publication, so you can focus on real business challenges. It is optimized for the agentic and CLI workflows and helps AI agents to interact with the build system reliably. It also provides traditional IDE support with plugins for IntelliJ IDEA and Android Studio.
+[Kotlin Toolchain](https://kotlin-toolchain.org/) supports the full project lifecycle out of the box, from creation to publication, so you can focus on real business challenges. It is optimized for the agentic and CLI workflows, which helps AI agents to interact with the toolchain reliably. Kotlin Toolchain also provides traditional IDE support with plugins for IntelliJ IDEA and Android Studio.
 
 This page guides you through setting up a Kotlin Multiplatform project from scratch,
 referencing the comprehensive [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/)
