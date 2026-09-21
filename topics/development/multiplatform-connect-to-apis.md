@@ -84,11 +84,11 @@ While producing the resulting platform code for Android, the Kotlin compiler aut
 declarations and generates a single `randomUUID()` function with its actual Android-specific implementation. The same
 process is repeated for iOS.
 
-### Further reading on expect/actual declarations
+### Further reading on `expect`/`actual` declarations
 
-* To see expect/actual declarations in action, check out the [basic KMP app example](quickstart.md#create-a-project)
+* To see `expect`/`actual` declarations in action, check out the [basic KMP app example](quickstart.md#create-a-project)
 with a function that returns the platform name for each target.
-* For a deep dive on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
+* For a deep dive on the `expect`/`actual` mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
 
 ## Interfaces in common code
 

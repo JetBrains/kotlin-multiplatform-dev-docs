@@ -54,7 +54,7 @@ When it's set up correctly, it will show up in the list of available devices alo
 ### Run your application on iOS Simulator
 
 If you haven't launched Xcode as part of the initial setup, do that before running the iOS app.
-You need the iOS platform support installed:
+Install the iOS platform support:
 In Xcode, check **Xcode | Settings | Components** to make sure at least one iOS simulator is installed.
 
 In your Kotlin Multiplatform IDE, select the iOS entry in the list of run configurations
@@ -113,7 +113,7 @@ Select **desktopApp [hot] 🔥** in the list of run configurations and click **R
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
 
 By default, the app starts with [Compose Hot Reload](compose-hot-reload.md) running.
-This allows reloading the UI almost instantly as soon as you manually save the file with the changes.
+This allows reloading the UI almost instantly when you manually save the file with the changes.
 
 ### Run your web application
 
