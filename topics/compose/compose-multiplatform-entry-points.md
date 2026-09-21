@@ -49,7 +49,7 @@ that performs the same role as an activity on Android:
 fun MainViewController() = ComposeUIViewController { App() }
 ```
 
-Both the iOS and Android types simply invoke the `App()` composable from common code.
+Both the iOS view controller and Android activity simply invoke the `App()` composable from common code.
 
 For more on Compose Multiplatform integration with iOS UI frameworks,
 see [](compose-swiftui-integration.md) and [](compose-uikit-integration.md).
@@ -71,8 +71,8 @@ fun main() = application {
 }
 ```
 
-Typically, within the `application()` function, you create a `Window` and specify its properties
-as well as instructions for the program that should be executed when the window is closed (`onCloseRequest`).
+Typically, within the `application()` function, you create a `Window`, specify its properties,
+and define with an `onCloseRequest` callback what happens when the window is closed.
 In the default project, the whole application shuts down (`::exitApplication`).
 
 As with Android and iOS, the `App()` composable is responsible for the entire UI layout.
@@ -89,7 +89,7 @@ calls the common `App()` composable from the `main()` function in the `main.kt` 
 // The web API is experimental and requires opt-in
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    // Sets of the Compose environment for the web app
+    // Sets up the Compose environment for the web app
     ComposeViewport {
         // Produces the UI layout
         App()

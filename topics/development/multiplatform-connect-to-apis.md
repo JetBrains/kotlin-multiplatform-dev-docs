@@ -31,7 +31,7 @@ In this example, an expected `platform()` function is defined in the common sour
 implementations in the platform source sets.
 While generating the code for a specific platform, the Kotlin compiler merges
 the expected and actual declarations.
-The result is one `platform()` function with the implementation that is actually going to be run on the target device.
+The result is a `platform()` function with the implementation for the target platform.
 
 The expected and actual declarations must be defined in the same package to be merged into _one declaration_ in the resulting
 platform code.
@@ -92,14 +92,14 @@ with a function that returns the platform name for each target.
 
 ## Interfaces in common code
 
-The [inheritance](https://kotlinlang.org/docs/inheritance.html) mechanism in Kotlin helps implement a more flexible
-code sharing structure.
+[Kotlin's inheritance mechanism](https://kotlinlang.org/docs/inheritance.html)
+enables more flexible code sharing.
 For example, you can define an interface in common code that holds abstract platform-independent declarations 
 and then provide implementations of that interface in the platform source sets.
 
 ![Using interfaces](expect-interfaces.svg){width=700}
 
-A name of the platform is going to be stored as a `String` regardless of the platform:
+A name of the platform is stored as a `String` regardless of the platform:
 
 ```kotlin
 // In the commonMain source set:
@@ -108,7 +108,7 @@ interface Platform {
 }
 ```
 
-Then you can assign a value to that `String` by overriding the declaration with an Android system call: 
+Then you can assign a value to that `String` by overriding the declaration with a call to an Android API: 
 
 ```kotlin
 // In the androidMain source set:

@@ -12,7 +12,7 @@ Kotlin Multiplatform.
 This application is going to:
 
 * Retrieve data over the internet from the public [Launch Library](https://lldev.thespacedevs.com/docs) using [Ktor](https://ktor.io/docs/create-client.html)
-  and [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization).
+  and [`kotlinx.serialization`](https://kotlinlang.org/docs/serialization.html).
 * Save the data in a local database using [SQLDelight](https://github.com/cashapp/sqldelight).
 * Display a list of space rocket launches together with the launch date, results, and a detailed description of the launch.
 * Provide platform-specific database drivers using [Koin](https://insert-koin.io/).
