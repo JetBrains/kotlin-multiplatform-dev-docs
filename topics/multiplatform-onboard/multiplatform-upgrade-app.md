@@ -66,7 +66,7 @@ Every module except for **iosApp** uses Gradle as the build system.
 The **iosApp** module is built with Xcode that invokes the Kotlin Gradle build to create an iOS framework from the **sharedLogic** module.
 This is an example of _direct iOS integration_ in Kotlin Multiplatform.
 
-> To learn more about building Kotlin for iOS, see the [](multiplatform-ios-integration-overview.md).
+> To learn more about building Kotlin for iOS, see [](multiplatform-ios-integration-overview.md).
 > 
 {style="tip"}
 
@@ -77,8 +77,7 @@ Your project requires the following multiplatform libraries:
 * [`kotlinx-datetime`](https://github.com/Kotlin/kotlinx-datetime), to process and format timestamps.
 * [Ktor](https://ktor.io/), a framework for sending and retrieving data over HTTP.
 * [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), to process network calls asynchronously using coroutine flows.
-* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the API into objects of entity classes used to process
-  network operations.
+* [`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization), to deserialize JSON responses of the API into Kotlin objects.
 
 All platform-specific code is wrapped in platform artifacts of the libraries,
 so you don't have to implement platform-specific calls yourself.
@@ -324,7 +323,7 @@ of an [Android activity](https://developer.android.com/guide/components/activiti
 Your application is becoming more complex, so it can benefit from a view model as well.
 The view model will store the data received from the Launch Library API and make it available to the UI.
 
-In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends `ViewModel`
+In the `sharedUI/src/commonMain/.../greetingkmp` directory, create a new `MainViewModel` class that extends `[ViewModel](https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModel)`
 from the multiplatform AndroidX library to use Android's lifecycle mechanism and configuration tracking:
 
 ```kotlin
@@ -484,8 +483,8 @@ SwiftUI connects the view model (`ContentView.ViewModel`) with the view (`Conten
 * Changes to the `greetings` property, which has the `@Published` wrapper, trigger 
   SwiftUI to update `ContentView`.
 
-Now you need to implement the `startObserving()` function to consume flows
-using one of the available KMP libraries that allow that.
+Now you need to implement the `startObserving()` function with one of the available KMP libraries
+that can consume Kotlin flows in Swift.
 
 ### Choose a library for consuming Kotlin flows in Swift
 
@@ -632,7 +631,9 @@ Install the parts of the KMP-NativeCoroutines Swift package necessary to work wi
     // ...
     extension ContentView {
         // Ensures that all asynchronous operations within `ViewModel`
-        // run on the main thread to comply with the Kotlin/Native requirement
+        // run within the main UI context of the app.
+        // This avoids updates to the `@Published` property
+        // that are not reflected in the UI.
         @MainActor
         class ViewModel: ObservableObject {
             @Published var greetings: Array<String> = []

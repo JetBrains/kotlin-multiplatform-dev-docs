@@ -84,7 +84,7 @@ If you decide to pack your shared code into a multiplatform library, check out t
 
 Junie is a JetBrains AI agent.
 For Shipaton participants, JetBrains offers free access to the EAP version of the Junie CLI agent.
-You can also use your Junie agent through the [AI chat feature in IntelliJ IDEs](https://www.jetbrains.com/ai-ides/#getstarted).
+You can also use your Junie agent through the [AI chat feature in JetBrains IDEs](https://www.jetbrains.com/ai-ides/#getstarted).
 
 <a as="button" href="https://surveys.jetbrains.com/s3/Build-with-Junie-at-Shipaton-2026-Application-Form" mode="classic" icon="arrow-right" icon-position="right">Claim your Junie access</a>
 

@@ -8,8 +8,8 @@ If you have experience developing Android apps, adding a multiplatform dependenc
 Gradle dependency to a regular Android project.
 The main difference is that you need to add the dependency to a specific source set rather than to the module as a whole.
 
-This page describes the general management of dependencies in a multiplatform project.
-Some platform specifics are covered in [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md).
+This page describes the overall approach to managing of dependencies in a multiplatform project.
+For some platform specifics, see [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md).
 
 ## Dependency types
 
@@ -126,7 +126,7 @@ kotlinx libraries are multiplatform libraries maintained by the core Kotlin team
 (primary examples are [kotlinx.serialization](https://github.com/kotlin/kotlinx.serialization)
 and [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)).
 
-Just like with any other multiplatform library,
+As with any other multiplatform library,
 to add a dependency, refer to a library artifact in the corresponding source set.
 
 > `kotlinx` libraries sometimes require a more involved setup, for example, for web targets.
@@ -145,7 +145,7 @@ The authors of such libraries usually provide guides for adding their dependenci
 ### Sample Gradle version catalog
 
 When using Gradle, it's recommended to use [version catalogs](#gradle-version-catalogs).
-Below is the version catalog with all libraries used in the examples below:
+Here's the version catalog that defines all libraries used in the examples below:
 
 ```toml
 [versions]
@@ -222,13 +222,13 @@ kotlin {
 ### Libraries to be used in specific source sets
 
 If you want to use a multiplatform library just for specific source sets, you can add it exclusively to them.
-The library declarations will then only be available in those source sets.
+Then the library declarations are only available in those source sets.
 
 Use a common library name in such cases, not a platform-specific one:
 the Kotlin Multiplatform Gradle plugin resolves such references automatically.
+The exact name is likely covered in the library's documentation.
 
 Here's an example that uses `native-driver` instead of `native-driver-iosx64` for platform-specific SQLDelight:
-(find the exact name in the library's documentation):
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -238,19 +238,16 @@ kotlin {
     //...
     sourceSets {
         commonMain.dependencies {
-            // kotlinx.coroutines will be available in all source sets
+            // kotlinx.coroutines is available in all source sets
             implementation(libs.kotlinx.coroutinesCore)
         }
         androidMain.dependencies {
-
+            // Place for Android-specific dependencies
         }
         iosMain.dependencies {
-            // SQLDelight will be available only in the iOS source set,
+            // SQLDelight is available in the iOS source set,
             // but not in Android or common
             implementation(libs.sqldelight.nativeDriver)
-        }
-        wasmJsMain.dependencies {
-            
         }
     }
 }
@@ -265,21 +262,21 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // kotlinx.coroutines will be available in all source sets
+                // kotlinx.coroutines is available in all source sets
                 implementation(libs.kotlinx.coroutinesCore)
             }
         }
         androidMain {
-            dependencies {}
+            dependencies {
+                // Place for Android-specific dependencies
+            }
         }
         iosMain {
             dependencies {
-                // SQLDelight will be available only in the iOS source set, but not in Android or common
+                // SQLDelight is available only in the iOS source set,
+                // but not in Android or common
                 implementation(sqldelight.nativeDriver)
             }
-        }
-        wasmJsMain {
-            dependencies {}
         }
     }
 }
@@ -288,13 +285,12 @@ kotlin {
 </tab>
 </tabs>
 
-
 ## Dependency on another multiplatform project
 
 One multiplatform project can depend on another.
-To set this up, add a project-type dependency to the source set that needs it.
-If you want to use a dependency in all source sets, add it to the common source set.
-In this case, other source sets will get their versions automatically.
+To set this up, add a Gradle project dependency to the source set that needs it.
+If you want to use a project dependency in all source sets, add it to the common source set.
+In this case, the compiler automatically provides platform-specific artifacts of the project to other source sets.
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">

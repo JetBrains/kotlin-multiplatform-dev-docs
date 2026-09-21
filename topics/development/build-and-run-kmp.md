@@ -1,10 +1,8 @@
 [//]: # (title: Build and run Kotlin Multiplatform application)
 
 Kotlin Multiplatform (KMP) uses Gradle as its build system.
-The KMP IDE plugin detects targets declared in the build script and provides run configurations for all supported targets.
-
 The [KMP IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-for IntelliJ IDEs provides further support,
+for IntelliJ IDEA and Android Studio provides further support,
 automatically creating tailored run configurations, handling Compose Hot Reload integration, and so on.
 
 ## Build and run KMP applications
@@ -16,7 +14,8 @@ from managing the environment to writing build scripts and multiplatform code.
 You can run the application on any supported platform using the same IDE:
 
 * The Android app runs on available Android Virtual Devices.
-* The iOS app runs on iOS Simulator (you need a macOS machine with Xcode to be able to run apps on Apple targets).
+* The iOS app runs on an iOS simulator available in the Device Hub
+  (you need a macOS machine with Xcode to be able to run apps on Apple targets).
 * The desktop app runs on the system JVM.
 * The web app runs in the default browser.
 
@@ -39,10 +38,11 @@ or following the [Android Studio guide](https://developer.android.com/studio/run
 The device will be available to the run configuration as soon as it is created.
 
 1. In the list of run configurations, select **androidApp**.
-2. Choose your Android virtual device and then click **Run**: Your IDE starts the selected virtual device if it
-   is powered down and runs the app.
+2. Choose your Android virtual device and then click **Run**:
 
 ![Run the Compose Multiplatform app on Android](compose-run-android.png){width=352}
+
+Your IDE runs the app, starting the selected virtual device if it is powered down.
 
 ### Run on a real Android device
 
