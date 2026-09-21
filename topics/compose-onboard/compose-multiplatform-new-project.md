@@ -1,4 +1,4 @@
-[//]: # (title: Shared UI: Timezone picker app)
+[//]: # (title: Shared UI: Time zone picker app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
@@ -9,12 +9,12 @@ and the functionality is based on multiplatform libraries.
 For an example of sharing only the logic and keeping the UI native, see [](multiplatform-upgrade-app.md).
 
 You'll create an application where users can select a country to see the time in the capital city of that country.
-The app will load and display images within a dropdown menu and employ a typical Compose layout with events, styles, themes, and modifiers.
+The app will load and display images in a dropdown menu and use a typical Compose layout with events, styles, themes, and modifiers.
 
 To get from a wizard-generated project to the final result, you will:
 
 1. [Implement the basic Compose UI layout](#implement-the-basic-layout)
-2. [Try out the Compose Hot Reload](#use-compose-hot-reload-to-quickly-iterate-on-the-ui)
+2. [Try out Compose Hot Reload](#use-compose-hot-reload-to-quickly-iterate-on-the-ui)
 3. [Add the multiplatform library dependency for time calculation](#add-the-kotlinx-datetime-dependency)
 4. Put the app together:
    * [Support user input](#support-user-input)
@@ -33,7 +33,7 @@ But for the same reason you can freely pick and choose only platforms you are in
 With the IDE and the Kotlin Multiplatform IDE plugin installed,
 create a new Compose Multiplatform project:
 
-1. In IntelliJ IDEA, select **File** | **New** | **Project**.
+1. In IntelliJ IDEA, select **File | New | Project**.
 2. In the panel on the left, select **Kotlin Multiplatform**.
 3. Specify the following fields in the **New Project** window:
 
@@ -47,11 +47,11 @@ create a new Compose Multiplatform project:
    ![Create a Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
 The first import takes a couple of minutes.
-After it's done, make sure that preflight checks are all green (**View | Tool Windows | Projects Environment Preflight Checks**).
+After it's done, make sure that all preflight checks have completed successfully (**View | Tool Windows | Projects Environment Preflight Checks**).
 
 ## Implement the basic layout
 
-The template Compose Multiplatform project is organized in platform-specific app modules
+The generated Compose Multiplatform project is organized in platform-specific app modules
 and a shared UI module.
 Each application module defines an entry point that calls the shared `App()` composable.
 
@@ -99,8 +99,8 @@ To get started, implement the basic layout in the common `App()` composable:
     ```
    
     > The `remember` API implements Compose-specific state management.
-    > The state object is wrapped in a `remember()` call, meaning that it's built once and then
-    > retained by the framework.
+    > The state object is wrapped in a `remember()` call, to build the state once and then
+    > retain it across compositions.
     > When the value of the state changes, any composables that observe it are re-invoked and redrawn.
     > This is called a _recomposition_. 
     >
@@ -108,7 +108,7 @@ To get started, implement the basic layout in the common `App()` composable:
     > in Jetpack Compose documentation.  
 
 2. Follow the IDE's suggestions to import the missing symbols.
-   When multiple imports are suggested, choose `@Composable` options.
+   When multiple imports are suggested, choose the one annotated with `@Composable`.
 
 3. Run the application on Android and iOS:
 
@@ -116,7 +116,7 @@ To get started, implement the basic layout in the common `App()` composable:
 
    When you run your application and click the button, the app displays the hardcoded time — 13:30.
 
-4. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the "desktopApp [hot] 🔥"
+4. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the **desktopApp [hot] 🔥**
    run configuration.
    The app works, but the window looks mismatched with the UI:
 
@@ -164,7 +164,7 @@ You can fix the desktop UI and verify the fix without restarting the app:
 
 ## Add the `kotlinx-datetime` dependency
 
-To work with timezones and time calculation, you'll use the [`kotlin.time`](https://kotlinlang.org/docs/time-measurement.html)
+To work with time zones and time calculation, you'll use the [`kotlin.time`](https://kotlinlang.org/docs/time-measurement.html)
 classes together with the multiplatform [`kotlinx-datetime`](https://github.com/Kotlin/kotlinx-datetime)
 library.
 
@@ -186,7 +186,7 @@ Following the instructions from the [library's repository](https://github.com/Ko
     ```
 
 2. Open the `shared/build.gradle.kts` file and add a reference to the version catalog entry
-   to the section that configures the `commonMain` source set:
+   in the `commonMain` source set configuration:
 
     ```kotlin
     kotlin {
@@ -203,7 +203,7 @@ Following the instructions from the [library's repository](https://github.com/Ko
 3. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
 
 Now you can use `kotlinx-datetime` APIs in your common code.
-For the web target, you need to work around the limitations of timezone support in JavaScript and Wasm/JS
+For the web target, you need to work around the limitations of time zone support in JavaScript and Wasm/JS
 as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app).
 
 > For more general information on how to manage multiplatform dependencies,
@@ -213,7 +213,7 @@ as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-a
 
 ### Add `kotlinx-datetime` dependency for a web app
 
-For the web target, timezone support also requires the [`js-joda`](https://js-joda.github.io/js-joda/) npm package:
+For the web target, time zone support also requires the [`js-joda`](https://js-joda.github.io/js-joda/) npm package:
 
 1. Add a reference to the package in the `webApp/build.gradle.kts` file:
 
@@ -230,7 +230,7 @@ For the web target, timezone support also requires the [`js-joda`](https://js-jo
     
     ```
 
-   Adding the dependency to the `webMain` source set makes the library available both to the `wasmJs` and `js` targets.
+   Adding the dependency to the `webMain` source set makes the library available to both the `wasmJs` and `js` targets.
 
 2. Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
 
@@ -269,18 +269,18 @@ For the web target, timezone support also requires the [`js-joda`](https://js-jo
 
 ## Support user input
 
-For simplicity, you won't implement a complicated logic of specifying and validating time zones.
-The app will offer several countries to choose from and display the time in the capital of the country:
+For simplicity, you won't implement complex logic for specifying and validating time zones.
+The app will offer several countries to choose from and display the time in the selected country's capital:
 
 1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file
    and add a data class to hold country information below the `App()` composable:
 
     ```kotlin
-    // Simplified representation of timezones for this example 
+    // Simplified representation of time zones for this example 
     data class Country(val name: String, val zone: TimeZone)
     
     // Hard-codes the list of supported countries
-    // with specific associated timezones
+    // with specific associated time zones
     fun defaultCountries() = listOf(
         Country("Japan", TimeZone.of("Asia/Tokyo")),
         Country("France", TimeZone.of("Europe/Paris")),
@@ -293,7 +293,7 @@ The app will offer several countries to choose from and display the time in the 
 2. In the same `App.kt` file, add a `currentTimeAt()` function that calculates local time for a given time zone:
 
     ```kotlin
-    // Takes TimeZone as a parameter to calculate time with
+    // Takes a TimeZone parameter to calculate time
     fun currentTimeAt(location: String, zone: TimeZone): String {
         fun LocalTime.formatted() = "$hour:$minute:$second"
     
@@ -306,7 +306,7 @@ The app will offer several countries to choose from and display the time in the 
 
 3. Update the `App()` composable to use the added functionality:
    Present the list of countries as a dropdown and calculate time instead of hardcoding it.
-   Replace the entire function with the following:
+   Replace the entire `App()` function with the following:
 
     ```kotlin
     // Now requires a list of countries to display in the dropdown menu
@@ -360,7 +360,7 @@ The app will offer several countries to choose from and display the time in the 
       }
     }
     ```
-    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="defaultCountries.forEach { (name, zone) ->"}
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="countries.forEach { (name, zone) ->"}
    
 4. Follow the IDE's suggestions to import the missing symbols:
    * When importing `Row()`, pick the `@Composable` version.
@@ -386,7 +386,7 @@ Run the application to see the redesigned version:
 
 ## Introduce images
 
-To better present different countries, add flag images to country names in the dropdown.
+To better present different countries, add flag images next to country names in the dropdown.
 
 To do that, place images in the correct directory,
 then add code to load and display them:
@@ -399,9 +399,6 @@ then add code to load and display them:
 2. Move the images to the `shared/src/commonMain/composeResources/drawable` directory so that the same flags are available on all platforms:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
-
-    <!--3. Build or run the application to generate the `Res` class with accessors for the added resources.-->
-    <!-- Doesn't seem to be necessary? -->
 
 3. Make sure the image names are exactly as shown above: Compose Multiplatform generates accessors based on the image names.
 
@@ -536,10 +533,10 @@ Join the community:
 
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
   Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
+  the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
   and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
-* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute.
 * ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
-  the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)
+  the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform).
 * ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos
-  about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C)
+  about [Kotlin Multiplatform](https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C).
