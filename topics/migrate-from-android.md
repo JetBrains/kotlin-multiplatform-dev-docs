@@ -186,36 +186,36 @@ We can transition their usage to be KMP-compatible before configuring the module
 * Migrate from the ROME tools parser to the multiplatform RSS Parser.
   This requires accounting for differences between the APIs, one of which is how they handle dates.
 
-  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2313082c6c350e06964786b9821b81e17e9b4dfb).
+  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/703d670ed82656c761ed2180dc5118b89fc9c805).
 * Migrate from Dagger/Hilt to Koin 4 throughout the entire app, including the Android-only entry point module `mobile`.
   This requires rewriting the dependency injection logic according to the Koin approach, but code outside `*.di` packages
   remains largely unaffected.
 
   When you migrate away from Hilt, make sure to clear `/build` directories to avoid compilation errors in previously generated Hilt code.
 
-  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/713b5846e5be3233874af556d6ada52405723a69).
+  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/9c59808a5e3d74e6a55cd357669b24f77bbcd9c8).
 
 * Upgrade to Coil 3 from Coil 2. Again, relatively little code was modified.
 
-  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/23c0cb7a86feb93dfe4394be1e7c3b74fce13a81).
+  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/826fdd2b87a516d2f0bfe6b13ab8e989a065ee7a).
 
 * Migrate from JUnit to `kotlin-test`. This concerns all modules with tests, but thanks to the `kotlin-test` compatibility,
   there are very few changes needed to implement the migration.
 
-  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/b8fab2a2474b991098a24f2bd77db471d9c508c8).
+  > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/82109598dbfeda9dceecc10b40487f80639c5db4).
 
 ### Rewrite Java-dependent code into Kotlin
 
 Now that the major libraries are all multiplatform, we need to eliminate Java-only dependencies.
 
 A simple example of a Java-only call is `Objects.hash()`, which we re-implemented in Kotlin.
-See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2780fdf7e23712e1ef70d9399d324c0eeea87541).
+See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/29341a430e6c98a4f7deaed1d6863edb98e25659).
 
 But what mostly prevents us from directly commonizing code in the Jetcaster example is the `java.time` package.
 Time calculation is almost everywhere in a podcast app, so we need to migrate that code to `kotlin.time` and `kotlinx-datetime`
 to truly benefit from KMP code sharing.
 
-The rewrite of everything time-related is collected in [this commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/440c0f0049211aae132f50c9a709cc9dae60bbe4).
+The rewrite of everything time-related is collected in [this commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/0cb5b31964991fdfaed7615523bb734b22f9c755).
 
 ## Migrating the business logic
 
@@ -281,7 +281,7 @@ We also add configuration for targets for other platforms (iOS and JVM), to prep
 
 To switch to the multiplatform version of Room, we followed Android's [general setup guide](https://developer.android.com/kotlin/multiplatform/room).
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2220d63412fb976d89902e4f5404ff3af0620ba3).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/ab22fb14e9129087b310a989eb08bcc77b0e12e8).
 
 * Note the new code structure, with `androidMain`, `commonMain`, `iosMain`, and `jvmMain` source sets.
 * Most of the code changes are about creating expect/actual structure for Room and the corresponding DI changes.
@@ -289,7 +289,7 @@ To switch to the multiplatform version of Room, we followed Android's [general s
   on Android. Until we [add an iOS app as a target](#add-an-ios-entry-point), the online checker is going to be a stub.
 
 We can also immediately reconfigure the `:core:data-testing` module to be multiplatform.
-See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/a1b4b8cac83d9e3040fb565b119a9e5ca78e594f).
+See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/098a72a25f07958b90ae8778081ab1c7f2988543).
 It only requires updating the Gradle configuration and moving to the source set
 folder structure.
 
@@ -298,11 +298,11 @@ folder structure.
 If all dependencies are already accounted for and migrated to multiplatform, the only thing we have to do
 is move the code and reconfigure the module.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/9e236c65cbdfd0311c3d6adbf60f979d57020833).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/a8376dc2f0eb29ed8b67c929970dcbe505768612).
 
 Similarly to `:core:data-testing`, we can easily update the `:core:domain-testing` module to be multiplatform as well.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/979245373e1517ff7b643cdeff13339eb519db53).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/a46f0a98b8d95656e664dca0d95da196034f2ec3).
 
 #### Configure and migrate :core:designsystem
 
@@ -311,7 +311,7 @@ and typography.
 Apart from configuring the KMP module and creating the `commonMain` source set, we made the `JetcasterTypography` argument
 for the `MaterialExpressiveTheme` into a composable, encapsulating the calls to multiplatform fonts.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/4d64973e3b631317104db747781f90d74271febb).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/4aa92e3f38d06aa64444163d865753e47e9b2a97).
 
 ## Migrating to multiplatform UI
 
@@ -370,7 +370,7 @@ flowchart TB
 
 Firstly, we created a shared UI module, for the UI code we're going to make common.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2c444f6bb8fecbadb7ba32fd230aa46730c41c0a).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/a48bb1281c63a235fcc1d80e2912e75ddd5cbed4).
 
 To demonstrate migrating the UI gradually, we'll move screen by screen.
 Each step will end in a commit that contains the app in a working state, a little closer to a fully shared UI.
@@ -391,29 +391,29 @@ Guided by the screens diagram above, we started with the podcast details screen:
         After you've moved and adjusted the resource files, regenerate the accessors and replace the imports for each resource
         in your UI code.
       
-   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/548efa9bf1d2a4b0cac32e4a30f9bb2d3d22b3c0).
+   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/801f044e56224398d812eb8fd1c1d46b0e9b0087).
 
 2. Migrate the Compose theme. We also provide stubs for platform-specific implementations of color schemes.
 
-   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/55d12826e97ab0452eb9ac90ac5cb5a0a9522c05).
+   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/07be9bba96a0dd91e4e0761075898b3d5272ca57).
 
 3. Continue with the home screen:
    1. Migrate the ViewModel.
    2. Move code to `commonMain` in the shared UI module.
    3. Move and adjust references to resources.
 
-   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/25e01ede2a0ba5251fb423d3a2ce1866ec0249eb).
+   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/ad0012becc527c1c8cb354bb73b5da9741733a1f).
 
 4. To demonstrate another way to atomize the migration, we partially migrated navigation.
    We can combine screens in common code with an Android native screen.
    The `PlayerScreen` is still located in the `mobile` module, and is included in navigation only for the Android entry point.
    It is injected into the overarching multiplatform navigation.
 
-   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/1fee0bc83a297e1ac49a8340c84358345c6d883c).
+   > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2e0107dd4d217346b38cc9b3d5180fedcc12fb8b).
    
 5. Finish by moving everything that is left over:
-   * Move the rest of navigation over to common code ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/1997f102ce9a5c96e4d49821622366d9af557b0c)).
-   * Migrate the last screen, `PlayerScreen`, to Compose Multiplatform ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/895789bc67ce750cc51f040376af6546dd849409)).
+   * Move the rest of navigation over to common code ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/48f13acc02d3630871e3671114f736cb3db51424)).
+   * Migrate the last screen, `PlayerScreen`, to Compose Multiplatform ([resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/60d5a2f96943705c869b5726622e873925fc2651)).
 
 Now that all the UI code has been made common, we can use it to quickly create apps for other platforms.
 
@@ -427,7 +427,7 @@ This optional step helps to:
 With all the UI code shared, adding a new entry point for a desktop JVM app is a matter
 of creating a `main()` function and integrating it with the DI framework.
 
-> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/0ee1b902109d230df522657f55ee82952691f900).
+> See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/af033dbf39188ef3991466727d155b988c30f1d3).
 
 ## Add an iOS entry point
 
@@ -444,7 +444,7 @@ tutorial.
 In the iOS app, we need to connect the Swift UI code with our Compose Multiplatform code.
 We do that by adding a function that returns a `UIViewController` with the embedded `JetcasterApp` composable to the iOS app.
 
-> See the added iOS project and the corresponding code updates in the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/7c927b2e683217430a8e798a408cde3964b3922b).
+> See the added iOS project and the corresponding code updates in the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/2b2c412596e199b140089efc73de03e46f5c1d77).
 
 ## Run the app
 
