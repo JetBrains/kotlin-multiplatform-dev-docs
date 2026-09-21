@@ -199,8 +199,8 @@ Image(
 Store all string resources in XML files in `composeResources/values` directories.
 A static accessor is generated for each item in each file.
 
-Compose Multiplatform supports an Emmet-like shorthand syntax for adding string resources, 
-string arrays, and plurals directly in XML files.
+[Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) provides support for
+an Emmet-like shorthand syntax for adding string resources, string arrays, and plurals directly in XML files.
 For example, when you type `test{Example}` or `s.test{Example}`
 in `strings.xml` and press **Tab**, it will automatically expand into `<string name="test">Example</string>`.
 
@@ -266,7 +266,7 @@ You can use special symbols in string resources:
 You don't need to escape special XML characters like "@" or "?"
 as you do [for Android strings](https://developer.android.com/guide/topics/resources/string-resource#escaping_quotes). 
 
-> Use Emmet-like syntax and press **Tab** to expand the abbreviation into string tags:
+> IDE tip: You can use Emmet-like syntax and press **Tab** to expand the abbreviation into string tags:
 > * `test` → `<string name="test"></string>`
 > * `test{Example}` → `<string name="test">Example</string>`
 >
@@ -299,7 +299,7 @@ You can put the `%1$s` placeholder in the resource string and use it to display 
 Text(stringResource(Res.string.str_template, "User_name", 100.1f))
 ```
 
-> Instead of manually typing `%1$s` or `%2$d` for placeholders, you can use inline numeric shortcuts. 
+> IDE tip: Instead of manually typing `%1$s` or `%2$d` for placeholders, you can use inline numeric shortcuts. 
 > For example, when you type `1` or `1s` within the string value, it expands into `%1$s`.
 > Similarly, when you type `2d`, it expands into `%2$d`.
 > 
@@ -356,7 +356,7 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-> You can use Emmet-like syntax to quickly define string arrays.
+> IDE tip: You can use Emmet-like syntax to quickly define string arrays.
 > Use `string-array`, `sa`, or the `>` operator to generate an empty array template.
 > For a named array with a predefined number of items and starting text, type `test>2{Hello}` and press **Tab**:
 > ```xml
@@ -438,7 +438,7 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-> You can use Emmet-like syntax to generate plural resources.
+> IDE tip: You can use Emmet-like syntax to generate plural resources.
 > For example, use `plurals`, `p`, or `:` to generate a default empty string template.
 > If you work in `values-en/strings.xml`, the IDE automatically detects locale, the required quantities,
 > and that English only requires `one` and `other`.
