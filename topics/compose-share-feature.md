@@ -2,19 +2,81 @@
 
 In Compose Multiplatform apps, you can share text, URLs, files, and other content with the system or other apps. 
 
-Android and iOS provide native system share dialogs.
-Desktop applications do not generally have a universal system share dialog, 
-so applications use the clipboard, open files or URLs with the default application, or call platform-specific APIs. 
-Web applications can use the Web Share API depending on browser support.
+Sharing capabilities differ across platforms:
+
+* Android and iOS provide native system share dialogs.
+* Desktop applications generally do not have a universal system share dialog. Common alternatives include using the clipboard, opening files or URLs with the default application, or calling platform-specific APIs.
+* Web applications can use the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API), depending on browser support.
+
+To share content in a Compose Multiplatform app, use [community libraries](#community-libraries) or call [platform-specific APIs](#platform-specific-sharing-apis) directly.
+To open a link in the default application on any platform, use the [common `UriHandler` API](#related-features).
+
+## Community libraries
+
+Community libraries wrap native sharing APIs and provide a common API that you can call from shared code.
+
+[KMP Sharing](https://klibs.io/project/software-mansion/kmp-sharing) provides a common API for the system share dialog on Android and iOS.
+It supports sharing text or a URL, optionally with file URIs:
+
+```kotlin
+val share = rememberShare()
+val sharingOptions = SharingOptions(androidDialogTitle = "Share with")
+
+Button(onClick = { share("https://kotlinlang.org", sharingOptions) }) {
+    Text("Share link")
+}
+
+Button(onClick = { share("Kotlin programming language", sharingOptions) }) {
+    Text("Share text")
+}
+```
+
+[FileKit](https://klibs.io/project/vinceglb/FileKit) provides cross-platform file picking, saving, and file operations with native dialogs.
+You can use these libraries together. For example, pick files with FileKit and share them with KMP Sharing:
+
+```kotlin
+val share = rememberShare()
+val sharingOptions = SharingOptions(androidDialogTitle = "Share with")
+
+val photosPicker = rememberFilePickerLauncher(
+    type = FileKitType.Image,
+    mode = FileKitMode.Multiple(),
+    onError = {},
+    onResult = { photos ->
+        photos?.takeIf { it.isNotEmpty() }?.let { selectedPhotos ->
+            share(selectedPhotos.map(PlatformFile::sharingUri), sharingOptions)
+        }
+    },
+)
+
+Button(onClick = photosPicker::launch) {
+    Text("Pick and share photos")
+}
+```
+
+KMP Sharing expects file values as URIs. If you get a local path from FileKit, convert the `PlatformFile` path to a URI before sharing it:
+
+```kotlin
+private fun PlatformFile.sharingUri(): String = path.let { filePath ->
+    when {
+        filePath.startsWith("content://") || filePath.startsWith("file://") -> filePath
+        else -> "file://$filePath"
+    }
+}
+```
+
+Browse other library options on [klibs.io](https://klibs.io/).
+For use cases not covered by the libraries, you can implement sharing with
+[platform-specific APIs](#platform-specific-sharing-apis).
 
 ## Platform-specific sharing APIs
 
-For the system share dialog, use platform-specific APIs or one of the [community libraries](#community-libraries).
-To open a link in the default application on any platform, use the [common `UriHandler` API](#related-features).
+You can implement sharing directly with the native APIs on each platform,
+for example, to control content types, share options, or the sharing flow.
 
 ### Android
 
-Use an `ACTION_SEND` intent to share one text value, URL, or file.
+Use an `ACTION_SEND` intent to share text, a URL, or a file.
 For text or URLs, pass the content with `Intent.EXTRA_TEXT`:
 
 ```kotlin
@@ -51,6 +113,8 @@ val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
 context.startActivity(Intent.createChooser(intent, "Share with"))
 ```
 
+Learn more in the Android Developers documentation: [Sharing data between apps](https://developer.android.com/develop/ui/compose/sharing).
+
 ### iOS
 
 For UIKit-based UIs, present a `UIActivityViewController`:
@@ -68,24 +132,27 @@ viewController.present(controller, animated: true)
 
 In SwiftUI, you can use `ShareLink` for values supported by the `Transferable` protocol. 
 For custom or large files, implement a `Transferable` representation or use `UIActivityViewController`
-through a platform bridge.
+with a platform bridge.
+
+Learn more in the Apple Developer documentation: [Collaborating and sharing copies of your data](https://developer.apple.com/documentation/uikit/collaborating-and-sharing-copies-of-your-data).
 
 ### Desktop
 
 Desktop applications do not have a universal share dialog. Common approaches include:
 
 * copying content to the clipboard,
-* opening a URL in the default browser,
 * opening a file with the default application,
 * using platform-specific APIs, such as native macOS sharing APIs.
 
-For example, you can open a URL with `java.awt.Desktop` when it is supported:
+For example, you can open a file with its default application using `java.awt.Desktop` when it is supported:
 
 ```kotlin
+val file = java.io.File("/path/to/document.pdf")
+
 if (java.awt.Desktop.isDesktopSupported()) {
     val desktop = java.awt.Desktop.getDesktop()
-    if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
-        desktop.browse(java.net.URI("https://kotlinlang.org"))
+    if (desktop.isSupported(java.awt.Desktop.Action.OPEN)) {
+        desktop.open(file)
     }
 }
 ```
@@ -95,6 +162,8 @@ if (java.awt.Desktop.isDesktopSupported()) {
 Web applications can use the Web Share API via JavaScript interop when supported by the browser and operating system. 
 It usually requires HTTPS and a user gesture, such as a button click.
 
+Check for support before calling the API and provide a fallback, for example, copying the content to the clipboard:
+
 ```javascript
 if (navigator.share) {
     await navigator.share({
@@ -102,6 +171,8 @@ if (navigator.share) {
         text: "Kotlin programming language",
         url: "https://kotlinlang.org"
     })
+} else {
+    await navigator.clipboard.writeText("https://kotlinlang.org")
 }
 ```
 
@@ -117,63 +188,8 @@ if (navigator.canShare && navigator.canShare({ files })) {
 ```
 
 Support for file sharing depends on the browser, platform, file types, and file sizes.
-
-## Community libraries
-
-Community libraries can wrap native sharing APIs and simplify integration with Compose Multiplatform.
-
-[KMP Sharing](https://klibs.io/project/software-mansion/kmp-sharing) wraps native sharing features on Android and iOS. 
-It supports sharing a text item or a URL, optionally combined with file URIs:
-
-```kotlin
-val share = rememberShare()
-val sharingOptions = SharingOptions(androidDialogTitle = "Share with")
-
-Button(onClick = { share("https://kotlinlang.org", sharingOptions) }) {
-    Text("Share link")
-}
-
-Button(onClick = { share("Kotlin programming language", sharingOptions) }) {
-    Text("Share text")
-}
-```
-
-[FileKit](https://klibs.io/project/vinceglb/FileKit) provides cross-platform file picking, saving, 
-and file operations with native dialogs.
-
-```kotlin
-val share = rememberShare()
-val sharingOptions = SharingOptions(androidDialogTitle = "Share with")
-
-val photosPicker = rememberFilePickerLauncher(
-    type = FileKitType.Image,
-    mode = FileKitMode.Multiple(),
-    onError = {},
-    onResult = { photos ->
-        photos?.takeIf { it.isNotEmpty() }?.let { selectedPhotos ->
-            share(selectedPhotos.map(PlatformFile::sharingUri), sharingOptions)
-        }
-    },
-)
-
-Button(onClick = photosPicker::launch) {
-    Text("Pick and share photos")
-}
-```
-
-These libraries can be used together. For example, pick files with FileKit, then share them with KMP Sharing.
-Convert the FileKit `PlatformFile` path to a URI that KMP Sharing accepts:
-
-```kotlin
-private fun PlatformFile.sharingUri(): String = path.let { filePath ->
-    when {
-        filePath.startsWith("content://") || filePath.startsWith("file://") -> filePath
-        else -> "file://$filePath"
-    }
-}
-```
-
-Browse other library options on [klibs.io](https://klibs.io/).
+If files cannot be shared, common fallbacks include offering the file as a download
+or copying a link to the content instead.
 
 ## Related features
 
