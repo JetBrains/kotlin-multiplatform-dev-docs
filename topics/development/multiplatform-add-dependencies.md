@@ -247,7 +247,7 @@ kotlin {
         iosMain.dependencies {
             // SQLDelight will be available only in the iOS source set,
             // but not in Android or common
-            implementation(sqldelight.nativeDriver)
+            implementation(libs.sqldelight.nativeDriver)
         }
         wasmJsMain.dependencies {
             
