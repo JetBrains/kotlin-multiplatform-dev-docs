@@ -6,7 +6,7 @@
 This tutorial shows how to share code for certain business logic while implementing separate UIs in native code.
 For an example of sharing both logic and UI, see [](compose-multiplatform-new-project.md).
 
-You'll create an application which retrieves information about the most recent successful space launch
+You'll create an application that retrieves information about the most recent successful space launch
 from the [Launch Library 2](https://lldev.thespacedevs.com/docs) REST API and displays the result.
 The networking and data serialization code will be shared between iOS and Android.
 
@@ -206,7 +206,7 @@ data class LaunchListResponse(
 ### Connect HTTP client
 
 1. In the `sharedLogic/src/commonMain/.../greetingkmp` directory, create a new `RocketComponent` class.
-2. Add the `httpClient` property and use it to build the final string from the result of a HTTP GET request:
+2. Add the `httpClient` property and use it to build the final string from the result of an HTTP GET request:
 
     ```kotlin
     import io.ktor.client.HttpClient
@@ -281,7 +281,7 @@ Flows can emit a sequence of values as the values are produced instead of return
 1. Open the `Greeting.kt` file in the `sharedLogic/src/commonMain/kotlin` directory.
 2. Update the `greet()` function in the `Greeting` class to return a `Flow` of strings,
    primarily to accommodate the network request.
-   As a part of the `Flow`, emit the launch date using a `RocketComponent` property:
+   In the `Flow`, emit the launch date using a `RocketComponent` property:
 
     ```kotlin
     import kotlinx.coroutines.delay
@@ -428,7 +428,7 @@ The module is already imported in the `ContentView.swift` file with the `import 
 The code for the iOS app is contained in the `iosApp/iosApp` directory:
 `ContentView.swift` holds the bulk of the logic, and `iOSApp.swift` holds the app's entry point.
 
-### Introducing a ViewModel
+### Introduce a `ViewModel`
 
 In the `iosApp/ContentView.swift` file, create a `ViewModel` class for `ContentView`, which will prepare and manage data for it.
 Replace the entire file with the following code:
@@ -605,7 +605,7 @@ Install the parts of the KMP-NativeCoroutines Swift package necessary to work wi
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using the `asyncSequence()` function
    from KMP-NativeCoroutines:
 
-    ```Swift
+    
     func startObserving() async {
         do {
             // Consumes the flow emitted by Greeting().greet() from Kotlin

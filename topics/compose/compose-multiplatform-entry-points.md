@@ -15,7 +15,7 @@ This function is then called on each platform:
 
 > In these examples, the `App()` function doesn't take any parameters.
 > In a larger application, you typically pass parameters to platform-specific dependencies.
-> These dependencies could be written manually or passed using a dependency injection library.
+> These dependencies could be provided manually or passed using a dependency injection library.
 >
 {style="tip"}
 
@@ -56,9 +56,9 @@ see [](compose-swiftui-integration.md) and [](compose-uikit-integration.md).
 
 ## On desktop
 
-On desktop Compose Multiplatform is built into a JVM app.
+On desktop, Compose Multiplatform is built into a JVM app.
 The call to the common `App()` composable is made in the `main()` function,
-wrapped into an `application()` (or a `singleWindowApplication()`) call:
+wrapped in an `application()` (or a `singleWindowApplication()`) call:
 
 ```kotlin
 fun main() = application {
@@ -86,12 +86,12 @@ The web application, whose code is located in the `webApp` module in the default
 calls the common `App()` composable from the `main()` function in the `main.kt` file:
 
 ```kotlin
-// The web API is still experimental and requires opt-in
+// The web API is experimental and requires opt-in
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     // Sets of the Compose environment for the web app
     ComposeViewport {
-        // Produce the UI layout
+        // Produces the UI layout
         App()
     }
 }
@@ -103,6 +103,6 @@ For more on the web entry point, see [](compose-css-styles.md).
 
 * **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
   Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
-  [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
+the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
   and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
-* **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
+* **Kotlin issue tracker**: [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).

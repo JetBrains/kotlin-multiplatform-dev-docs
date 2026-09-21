@@ -28,7 +28,7 @@ There are two types of dependencies that you can use in Kotlin Multiplatform pro
   In native projects, you typically manage these libraries through platform-specific tools
   such as Gradle for Android and Swift Package Manager for iOS.
 
-  When you work with a multiplatform project module, typically, you still need native dependencies to use platform APIs
+  When you work with a multiplatform project module, you typically still need native dependencies to use platform APIs
   such as secure storage, system calls, and so on.
   In the build script, you specify native dependencies in the configuration of native source sets, for example, `androidMain` and `iosMain`.
 
@@ -162,11 +162,11 @@ sqldelight-nativeDriver = { module = "com.squareup.sqldelight:native-driver", ve
 ### Library shared for all source sets
 
 If you want to have access to the library from all source sets
-or to write shared code using it, add it only for the common source set.
+or to write shared code using it, add it only to the common source set.
 The Kotlin Multiplatform Gradle plugin automatically resolves the corresponding platform-specific artifacts
 for other declared source sets.
 
-> Common source set cannot depend on platform-specific artifacts:
+> The common source set can't depend on platform-specific artifacts:
 > common code needs to compile for every declared target.
 >
 {style="warning"}
@@ -226,7 +226,8 @@ The library declarations will then only be available in those source sets.
 
 Use a common library name in such cases, not a platform-specific one:
 the Kotlin Multiplatform Gradle plugin resolves such references automatically.
-For example, the example below uses `native-driver`, not `native-driver-iosx64` for platform-specific SQLDelight
+
+Here's an example that uses `native-driver` instead of `native-driver-iosx64` for platform-specific SQLDelight:
 (find the exact name in the library's documentation):
 
 <tabs group="build-script">
@@ -292,7 +293,7 @@ kotlin {
 
 One multiplatform project can depend on another.
 To set this up, add a project-type dependency to the source set that needs it.
-If you want to use a dependency in all source sets, add it to the common one.
+If you want to use a dependency in all source sets, add it to the common source set.
 In this case, other source sets will get their versions automatically.
 
 <tabs group="build-script">
@@ -345,7 +346,7 @@ Check out other resources on adding dependencies in multiplatform projects and l
 
 * [Adding Android dependencies](multiplatform-android-dependencies.md)
 * [Adding iOS dependencies](multiplatform-ios-dependencies.md)
-* Check out the examples of [how to use Android and iOS libraries](multiplatform-samples.md) in sample projects.
+* Using [Android and iOS libraries](multiplatform-samples.md) in sample projects.
 
 ## Get help
 
