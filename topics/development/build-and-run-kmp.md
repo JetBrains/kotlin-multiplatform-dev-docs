@@ -1,6 +1,6 @@
 [//]: # (title: Build and run Kotlin Multiplatform application)
 
-Kotlin Multiplatform (KMP) uses Gradle as a build system.
+Kotlin Multiplatform (KMP) uses Gradle as its build system.
 The KMP IDE plugin detects targets declared in the build script and provides run configurations for all supported targets.
 
 The [KMP IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
@@ -14,13 +14,14 @@ However, IntelliJ IDEA and Android Studio provide a lot of quality-of-life featu
 from managing the environment to writing build scripts and multiplatform code.
 
 You can run the application on any supported platform using the same IDE:
+
 * The Android app runs on available Android Virtual Devices.
 * The iOS app runs on iOS Simulator (you need a macOS machine with Xcode to be able to run apps on Apple targets).
 * The desktop app runs on the system JVM.
 * The web app runs in the default browser.
 
 The run configurations provided by the KMP IDE plugin are more efficient than the general Gradle build task:
-They only trigger builds for corresponding targets while the default Gradle build task
+They only trigger builds for the corresponding targets while the default Gradle build task
 always builds debug and release versions of all targets.
 
 ### Run your application on Android Emulator
@@ -69,14 +70,14 @@ you'll need to set the Team ID associated with your [Apple ID](https://support.a
 
 ##### Set your Team ID
 
-To set new Team ID for your project for the first time, open the project in Xcode
+To set a new Team ID for your project for the first time, open the project in Xcode
 (**File | Open Project in Xcode**):
 
 1. In the Project navigator on the left-hand side, select **iosApp**.
 2. Select **iosApp** under **Targets** and switch to the **Signing & Capabilities** tab.
 3. In the **Team** list, select your team.
 
-   If you haven't set up your team yet, use the **Add an Account** option in the **Team** list and follow Xcode instructions.
+   If you haven't set up your team yet, use the **Add an Account** option in the **Team** list and follow the instructions in Xcode.
 
 4. Make sure that the Bundle Identifier is unique and a Signing Certificate is successfully assigned.
 
@@ -111,21 +112,21 @@ Select **desktopApp [hot] 🔥** in the list of run configurations and click **R
 
 ![Run the Compose Multiplatform app on desktop](compose-run-desktop.png){width=350}
 
-By default, the app starts with a [Compose Hot Reload](compose-hot-reload.md) running.
+By default, the app starts with [Compose Hot Reload](compose-hot-reload.md) running.
 This allows reloading the UI almost instantly as soon as you manually save the file with the changes.
 
 ### Run your web application
 
 The default options for web targets are:
 
-* **webApp[js]**: To run your Kotlin/JS application.
-* **webApp[wasmJs]**: To run your Kotlin/Wasm application.
+* **webApp[js]**: Runs your Kotlin/JS application.
+* **webApp[wasmJs]**: Runs your Kotlin/Wasm application.
 
 The web application opens automatically in your default browser
 and is available by default at [http://localhost:8080/](http://localhost:8080/). 
 
-> Port 8080 may be unavailable, in this case the build picks another one.
-> You can always find the actual port number in the Gradle build console by searching for the phrase "Project is running at".
+> If port 8080 is unavailable, the build uses another one.
+> You can find the actual port in the Gradle build console by searching for `Project is running at`.
 >
 {style="note"}
 
@@ -155,7 +156,7 @@ To enable compatibility mode for your web application:
     ./gradlew composeCompatibilityBrowserDistribution
     ```
 
-Once the Gradle task completes, compatible artifacts are generated in the web application module directory, for example
+Once the Gradle task completes, compatible artifacts are generated in the web application module directory, for example,
 `webApp/build/dist/composeWebCompatibility/productionExecutable`.
 You can use these artifacts to [publish your application](https://kotlinlang.org/docs/wasm-get-started.html#publish-the-application) 
 for both the `js` and `wasmJs` targets.

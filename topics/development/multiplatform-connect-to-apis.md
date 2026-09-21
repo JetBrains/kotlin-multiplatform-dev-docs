@@ -87,7 +87,7 @@ process is repeated for iOS.
 ### Further reading on expect/actual declarations
 
 * To see expect/actual declarations in action, check out the [basic KMP app example](quickstart.md#create-a-project)
-with the example of a function that returns the platform name for each target.
+with a function that returns the platform name for each target.
 * For a deep dive on the expect/actual mechanism, see [Expected and actual declarations](multiplatform-expect-actual.md).
 
 ## Interfaces in common code
@@ -164,7 +164,7 @@ class IOSPlatform : Platform
 actual fun platform() = IOSPlatform()
 ```
 
-Calls of the `platform()` function in the common code work with objects of the `Platform` type.
+Calls to the `platform()` function in the common code work with objects of the `Platform` type.
 When the compiler merges the expected and actual declarations,
 a `platform()` call returns an instance of the `AndroidPlatform` class on Android and 
 an instance of the `IOSPlatform` class on iOS.

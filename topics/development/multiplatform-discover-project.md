@@ -125,7 +125,7 @@ has the following structure:
 ![Shared sources](src-directory-diagram.png){width=350}
 
 When the shared module is built into an Android library, common Kotlin code is treated as Kotlin/JVM.
-When it is built into an iOS framework, common Kotlin is treated as Kotlin/Native:
+When it's built into an iOS framework, common Kotlin is treated as Kotlin/Native:
 
 ![Common Kotlin, Kotlin/JVM, and Kotlin/Native](modules-structure.png)
 
