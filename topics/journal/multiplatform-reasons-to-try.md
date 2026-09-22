@@ -30,13 +30,13 @@ You'll also find case studies from real companies.
 5. [With the Kotlin Multiplatform solution, you can share UI code](#5-with-the-kotlin-multiplatform-solution-you-can-share-ui-code)
 6. [You can use Kotlin Multiplatform in existing and new projects](#6-you-can-use-kotlin-multiplatform-in-existing-and-new-projects)
 7. [With Kotlin Multiplatform, you can start sharing your code gradually](#7-with-kotlin-multiplatform-you-can-start-sharing-your-code-gradually)
-8. [Kotlin Multiplatform is already used by global companies](#8-kotlin-multiplatform-is-already-used-by-global-companies)
-9. [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
-10. [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
+8. [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
+9.  [Kotlin Multiplatform boasts a large and supportive community](#10-kotlin-multiplatform-boasts-a-large-and-supportive-community)
+10. [Kotlin Multiplatform provides powerful tooling support](#9-kotlin-multiplatform-provides-powerful-tooling-support)
 
 ### 1. Kotlin Multiplatform helps you avoid code duplication
 
-Baidu, the largest Chinese language search engine, launched _Wonder App_, an application targeted at a younger audience. 
+[Baidu](https://kotlinlang.org/case-studies/baidu/), the largest Chinese language search engine, launched _Wonder App_, an application targeted at a younger audience. 
 Here are some of the problems they faced with traditional app development:
 
 * Inconsistencies in the app experience: The Android app worked differently from the iOS app.
@@ -58,6 +58,10 @@ The experiment turned out to be very successful, resulting in the following:
 * A reduction in their maintenance and testing costs.
 * Significantly improved productivity within the team.
 
+[Booking.com faced a similar challenge](https://kotlinlang.org/case-studies/#booking) and decided to use KMP to unify their Android and iOS A/B testing logic into a single shared codebase.
+As Diego Gómez Olvera, Principal Android Developer, put it: "KMP performed great on iOS,
+proving it's a viable, long-term solution for our team."
+
 [![Explore real-world Kotlin Multiplatform use cases](kmp-use-cases-1.svg){width="500"}](https://kotlinlang.org/case-studies/)
 
 ### 2. Kotlin Multiplatform supports an extensive list of platforms
@@ -66,7 +70,7 @@ One of the key advantages of Kotlin Multiplatform is its extensive support acros
 making it a versatile choice for developers.
 These platforms include Android, iOS, desktop, web (JavaScript and WebAssembly), and server (Java Virtual Machine).
 
-_Quizlet_, a popular educational platform that aids learning and practice through quizzes, 
+_[Quizlet](https://kotlinlang.org/case-studies/#quizlet)_, a popular educational platform that aids learning and practice through quizzes, 
 serves as another case study highlighting the benefits of Kotlin Multiplatform.
 The platform has approximately 50 million active users per month, with 10 million of them on Android. 
 The app ranks inside the top 10 in the education category on Apple App Store.
@@ -98,7 +102,7 @@ which means it prioritizes the following features:
 
 * **Interoperability over originality**. Rather than reinventing the wheel, 
   Kotlin embraces compatibility with established languages like Java. 
-  This interoperability not only allows seamless integration with the vast Java ecosystem but also facilitates 
+  This [interoperability](https://kotlinlang.org/docs/java-interop.html) not only allows seamless integration with the vast Java ecosystem but also facilitates 
   the adoption of proven practices and lessons learned from previous experiences.
 
 * **Safety and tooling over soundness**. Kotlin enables developers to catch errors early, 
@@ -134,10 +138,12 @@ Now, you can share almost anything, except for platform-specific code.
 
 JetBrains provides [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/), a declarative framework for sharing user interfaces across multiple platforms, 
 including Android (via Jetpack Compose), iOS, desktop, and web (Beta), based on Kotlin and Jetpack Compose.
+Compose Multiplatform for iOS reached Stable status in May 2025, meaning all major APIs are officially production-ready.
 
-_Instabee_, a last-mile logistics platform specialized for e-commerce businesses, 
-started using Compose Multiplatform in their Android and iOS applications, 
-sharing the UI logic, while the technology was still in its alpha state.
+[Sony used Compose Multiplatform](https://kotlinlang.org/case-studies/#sony) to share the UI of their LinkBuds companion app, Sony Sound Connect, 
+across Android and iOS. After switching from React Native, 
+94% of the codebase was migrated to Kotlin,
+with six engineers managing continuous releases across both platforms. The app ships to millions of users globally and [won an iF Design Award in 2026](https://ifdesign.com/en/winner-ranking/project/sony-sound-connect/758473).
 
 There is an official sample of Compose Multiplatform called [ImageViewer App](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer),
 which runs on Android, iOS, desktop, and web and has integration with native components like maps and the camera.
@@ -159,7 +165,7 @@ Let's take a look at the following two scenarios:
 
 * **Using KMP in a new project**
 
-  _9GAG_, an online platform and social media website, tried different technologies, like Flutter and React Native,
+  _[9GAG](https://kotlinlang.org/case-studies/#9gag)_, an online platform and social media website, tried different technologies, like Flutter and React Native,
   but finally opted for Kotlin Multiplatform, which allowed them to align the behavior of their app across both platforms.
   They started by creating an Android app first. Then, they consumed the Kotlin Multiplatform project as a dependency on iOS.
 
@@ -174,8 +180,10 @@ You can also write or migrate your business logic, such as transaction processes
 
 ### 8. Kotlin Multiplatform is already used by global companies
 
-KMP is already used by many large companies all around the world, including Forbes, Philips, Cash App, Meetup, Autodesk,
-and many others. You can read all of their stories on the [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
+KMP is already being used by many large companies all around the world, 
+including Duolingo, Booking.com, Sony, Google, Forbes, Philips, Cash App, Bilibili, Meetup, and many others. 
+You can read all of their stories on the [case studies page](https://kotlinlang.org/case-studies/?type=multiplatform).
+
 
 In November 2023, JetBrains announced that Kotlin Multiplatform is now Stable,
 attracting the interest of more companies and teams in the technology. At Google I/O 2024, Google announced [official support for using Kotlin Multiplatform](https://android-developers.googleblog.com/2024/05/android-support-for-kotlin-multiplatform-to-share-business-logic-across-mobile-web-server-desktop.html) to share business logic between Android and iOS.
@@ -184,8 +192,8 @@ attracting the interest of more companies and teams in the technology. At Google
 
 When working with Kotlin Multiplatform projects, you have powerful tooling at your fingertips.
 
-* **IntelliJ IDEA**. With IntelliJ IDEA 2025.2.2, you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform?_gl=1*1bztzm5*_gcl_au*MTcxNzEyMzc1MS4xNzU5OTM3NDgz*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NjU4MDcyMzckbzkxJGcxJHQxNzY1ODA3MjM4JGo1OSRsMCRoMA..), which offers basic launching and debugging capabilities for iOS apps, preflight environment checks, and other helpful KMP functionality.
-* **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. With Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
+* **IntelliJ IDEA**. Starting with IntelliJ IDEA 2025.2.2, you can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform), which offers basic launching and debugging capabilities for iOS apps, preflight environment checks, and other helpful KMP functionality.
+* **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. Starting with Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
 * **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
 
 ![Compose Hot Reload](compose-hot-reload.animated.gif){width=500 preview-src="compose-hot-reload.png"}
@@ -234,7 +242,7 @@ Here's a breakdown of the key reasons why Kotlin Multiplatform might be the righ
   Java bytecode for Android and native binaries for iOS, ensuring good performance across all platforms.
 * **AI-powered code generation**. You can speed up multiplatform development with code generation powered by [Junie](https://www.jetbrains.com/junie/), the JetBrains coding agent that supports a more efficient workflow across shared and platform-specific code.
 
-If you've already decided to try Kotlin Multiplatform, here are a few tips that will help you get started:
+If you've already decided to try KMP, the fastest way to get started is with the [Kotlin Multiplatform Wizard](https://kmp.jetbrains.com). It helps you set up a new project in minutes with your choice of platforms and targets. Here are a few tips to guide your first steps from there:
 
 * **Start small**. Begin with small shared components or constants to familiarize the team with the workflow and benefits of 
   Kotlin Multiplatform.
@@ -247,8 +255,36 @@ If you've already decided to try Kotlin Multiplatform, here are a few tips that 
 
 [![See Kotlin Multiplatform in action! Get Started now](see-kmp-in-action.svg){width="500"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 
-For those who want to help their team get started with Kotlin Multiplatform, we prepared a [detailed guide](multiplatform-introduce-your-team.md) with practical tips.
+## Where to go next
 
+Depending on how much code you want to share, Kotlin Multiplatform supports two main approaches—each with its own tutorial to help you get started:
+
+- [Shared logic and UI](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-create-first-app.html) — Build your app with shared business logic and UI using Compose Multiplatform.
+- [Shared logic with a native UI](https://kotlinlang.org/docs/multiplatform/multiplatform-create-first-app.html) — Build your app with shared business logic while keeping a native UI on each platform.
+
+If you're working on an existing project, learn how to [migrate from Android to Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform/migrate-from-android.html) gradually, or read the detailed [guide to introducing Kotlin Multiplatform to your team](https://kotlinlang.org/docs/multiplatform/multiplatform-introduce-your-team.html).
 As you can see, Kotlin Multiplatform is already being successfully used by many massive companies to build 
 high-performance cross-platform applications with native-looking UIs, effectively reusing code across them, 
 while maintaining the benefits of native programming.
+
+## Frequently asked questions
+
+### What's the difference between Kotlin Multiplatform and Compose Multiplatform?
+
+Kotlin Multiplatform is the underlying technology that enables you to share code, such as business logic, networking, and data models, across Android, iOS, desktop, web, and server-side platforms. Compose Multiplatform is a separate, optional UI framework built on top of Kotlin Multiplatform that lets you share UI code as well, using the same declarative API as Jetpack Compose.
+
+You can use Kotlin Multiplatform without Compose Multiplatform and keep a fully native UI on each platform.
+
+### Does sharing code hurt performance compared to fully native development?
+
+No. Shared Kotlin code is compiled into platform-native formats: Java bytecode for Android and native binaries for iOS. There is no runtime bridge or interpreter, so performance is comparable to code written natively for each platform.
+
+### Do I need to know Swift or Objective-C to work with Kotlin Multiplatform?
+
+Not for the shared code layer. Shared modules are written entirely in Kotlin, so Android developers can contribute without learning Swift. iOS developers consume the shared module as a regular framework and continue writing their native UI in Swift as usual.
+
+However, someone on the team will need familiarity with iOS for platform-specific integrations and the Xcode side of the project. See the [team introduction guide](https://kotlinlang.org/docs/multiplatform/multiplatform-introduce-your-team.html) for practical advice on dividing responsibilities.
+
+### Is Kotlin Multiplatform mature enough to use in real projects?
+
+Yes. Kotlin Multiplatform reached Stable status in November 2023, and Compose Multiplatform for iOS became Stable in May 2025. Usage among developers more than doubled in a single year—from 7% in 2024 to 18% in 2025—and companies including Duolingo, Booking.com, Sony, Bilibili, Philips, Cash App, Baidu, and Quizlet have been using Kotlin Multiplatform in production for years.
