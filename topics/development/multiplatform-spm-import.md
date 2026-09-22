@@ -454,3 +454,5 @@ and join [#kmp-swift-package-manager](https://kotlinlang.slack.com/archives/C09T
 ## What's next?
 
 Learn more about [switching from CocoaPods to SwiftPM dependencies in your KMP project](multiplatform-cocoapods-spm-migration.md).
+
+To structure a library that keeps iOS code in a local Swift package and remains usable as both a KMP module and a standalone Swift package, see [Build multipurpose shared modules with native platform code](multiplatform-multipurpose-modules.md).
