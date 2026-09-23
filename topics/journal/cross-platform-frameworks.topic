@@ -65,6 +65,25 @@
 ]]>
     </include-in-head>
 
+    <tldr>
+        <p>
+            <b>What cross-platform frameworks do:</b>
+            They enable developers to share code across Android, iOS, web, and desktop instead of maintaining
+            a completely separate codebase for each platform.
+        </p>
+        <p>
+            <b>Frameworks covered:</b>
+            Kotlin Multiplatform, Flutter, React Native, Ionic, .NET MAUI, Uno Platform, and NativeScript.
+            They differ primarily in their programming languages, UI approaches, performance characteristics,
+            and supported platforms.
+        </p>
+        <p>
+            <b>How to choose:</b>
+            Compare your team's language skills, required level of UI control, adoption strategy, performance
+            requirements, ecosystem maturity, long-term support, and target platforms.
+        </p>
+    </tldr>
+
     <p>Over the years, cross-platform app development has become one of the most popular ways to build mobile
         applications.
         A cross-platform, or multiplatform, approach allows developers to create apps that run similarly on different
@@ -143,9 +162,8 @@
                     src="kmp-journey-start.svg" alt="Kick off your Kotlin Multiplatform journey" width="700"/></a></p>
         </chapter>
         <chapter title="Flutter" id="flutter">
-            <p>Released by Google in 2017, Flutter is a popular framework for building mobile, web, and desktop apps
-                from a single codebase.
-                To build applications with Flutter, you will need to use Google's programming language called Dart.</p>
+            <p>Flutter was first previewed by Google as an Alpha at Google I/O in May 2017, with the Stable 1.0 release following in December 2018 (<a href="https://developers.googleblog.com/2018/12/flutter-10-googles-portable-ui-toolkit.html">Flutter 1.0: Google's Portable UI Toolkit</a>, accessed July 2026).
+                It is a popular framework for building mobile, web, and desktop apps from a single codebase.</p>
             <p>
                 <control>Programming language:</control>
                 Dart.
@@ -178,8 +196,9 @@
             </note>
         </chapter>
         <chapter title="React Native" id="react-native">
-            <p>An open-source UI software framework, React Native was developed in 2015 by
-                Meta Platforms, formerly Facebook. It's based on Facebook's JavaScript library React and allows
+            <p>An open-source UI software framework, React Native was open-sourced by Meta Platforms (then Facebook) in March 2015 for iOS
+                (<a href="https://engineering.fb.com/2015/03/26/android/react-native-bringing-modern-web-techniques-to-mobile/">React Native: Bringing modern web techniques to mobile</a>, accessed July 2026), followed by Android support in September 2015 (<a href="https://engineering.fb.com/2015/09/14/developer-tools/react-native-for-android-how-we-built-the-first-cross-platform-react-native-app/">React Native for Android</a>, accessed July 2026).
+                It's based on Facebook's JavaScript library React and allows
                 developers to build natively rendered cross-platform mobile apps.</p>
             <p>
                 <control>Programming language:</control>
@@ -208,7 +227,8 @@
                 support you need when building mobile apps with the framework.</p>
         </chapter>
         <chapter title="Ionic" id="ionic">
-            <p>Ionic is an open-source mobile UI toolkit that was released in 2013. It helps developers build
+            <p>Ionic is an open-source mobile UI toolkit that launched its first Alpha in late 2013
+                (<a href="https://ionicframework.com/docs/v1/overview/">Ionic Framework v1 overview</a>, accessed July 2026), with the Stable v1.0 following in May 2015. It helps developers build
                 cross-platform mobile applications from a single codebase using web technologies, like HTML, CSS, and
                 JavaScript, with integrations for the Angular, React, and Vue frameworks.</p>
             <p>
@@ -234,8 +254,8 @@
                 help each other overcome their development challenges.</p>
         </chapter>
         <chapter title=".NET MAUI" id="net-maui">
-            <p>.NET Multi-platform App UI (.NET MAUI) is a cross-platform framework that was released in May 2022 and is
-                owned by Microsoft. It allows developers to create native mobile and desktop apps with C# and XAML. .NET
+            <p>.NET Multi-platform App UI (.NET MAUI) reached General Availability on May 23, 2022
+                (<a href="https://devblogs.microsoft.com/dotnet/introducing-dotnet-maui-one-codebase-many-platforms/">Introducing .NET MAUI – One Codebase, Many Platforms</a>, accessed July 2026) and is owned by Microsoft. It allows developers to create native mobile and desktop apps with C# and XAML. .NET
                 MAUI is an evolution of Xamarin.Forms, one of the functionalities of Xamarin, which provides native
                 controls for the platforms supported by Xamarin.</p>
             <p>
@@ -292,7 +312,8 @@
                 applications, especially by teams already invested in the .NET ecosystem.</p>
         </chapter>
         <chapter title="NativeScript" id="nativescript">
-            <p>This open-source mobile application development framework was initially released in 2014. NativeScript
+            <p>NativeScript was announced by Telerik in June 2014 (<a href="https://www.telerik.com/blogs/announcing-nativescript---cross-platform-framework-for-building-native-mobile-applications">Announcing NativeScript</a>, accessed July 2026)
+                and reached its first Stable 1.0 release on May 4, 2015 (<a href="https://blog.nativescript.org/nativescript-first-public-release/">NativeScript First Public Beta Release</a>, accessed July 2026). NativeScript
                 allows you to build Android and iOS mobile apps using JavaScript or languages that transpile to
                 JavaScript, like TypeScript, and frameworks like Angular and Vue.js.</p>
             <p>
