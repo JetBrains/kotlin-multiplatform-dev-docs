@@ -384,7 +384,7 @@
                 <td>Share both business logic and UI using Kotlin</td>
                 <td>Kotlin Multiplatform + Compose Multiplatform</td>
                 <td>Build and maintain both the application logic and Compose UI from a single Kotlin codebase.</td>
-            </tr>
+             </tr>
             <tr>
                 <td>Reuse an existing React or JavaScript skill set</td>
                 <td>React Native</td>
