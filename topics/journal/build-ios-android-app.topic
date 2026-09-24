@@ -271,54 +271,54 @@
   </chapter>
   <chapter title="FAQ" id="faq">
 
-    <p><b>Can I create Android and iOS apps from one codebase?</b></p>
+    <p><b>Q: Can I create Android and iOS apps from one codebase?</b></p>
 
-    <p>Yes, depending on the approach you take, you can build for both platforms from the same codebase. Kotlin
-      Multiplatform allows you to choose what to share. You can share both logic and UIs, share logic while
-      keeping the UI fully native, or share a piece of logic.</p>
+    <p><b>A:</b> Yes, depending on the approach you take, you can build for both platforms from the same codebase.
+      Kotlin Multiplatform allows you to choose what to share. You can share both logic and UIs, share logic
+      while keeping the UI fully native, or share a piece of logic.</p>
 
-    <p><b>Is cross-platform better than native?</b></p>
+    <p><b>Q: Is cross-platform better than native?</b></p>
 
-    <p>Neither approach is universally better; they optimize for different goals. Cross-platform solutions often
-      reduce duplication and speed up feature parity, but native development provides full control over platform
-      behavior and user experience. The right choice depends on how important native UX, performance
-      characteristics, and platform-specific integrations are to your project.</p>
+    <p><b>A:</b> Neither approach is universally better; they optimize for different goals. Cross-platform
+      solutions often reduce duplication and speed up feature parity, but native development provides full
+      control over platform behavior and user experience. The right choice depends on how important native UX,
+      performance characteristics, and platform-specific integrations are to your project.</p>
 
-    <p><b>What can you share with Kotlin Multiplatform?</b></p>
+    <p><b>Q: What can you share with Kotlin Multiplatform?</b></p>
 
-    <p>With Kotlin Multiplatform, you can choose what to share. You can use Kotlin with Compose Multiplatform to
-      share up to 100% of your app code – including UI – while still integrating with native APIs. Alternatively,
-      you can share logic but keep UIs native. Kotlin Multiplatform allows you to share everything from small,
-      targeted modules to entire application components. Domain models, business rules, networking, caching, and
-      state management are examples of code that can be shared.</p>
+    <p><b>A:</b> With Kotlin Multiplatform, you can choose what to share. You can use Kotlin with Compose
+      Multiplatform to share up to 100% of your app code – including UI – while still integrating with native
+      APIs. Alternatively, you can share logic but keep UIs native. Kotlin Multiplatform allows you to share
+      everything from small, targeted modules to entire application components. Domain models, business rules,
+      networking, caching, and state management are examples of code that can be shared.</p>
 
-    <p><b>Is Kotlin Multiplatform production-ready?</b></p>
+    <p><b>Q: Is Kotlin Multiplatform production-ready?</b></p>
 
-    <p>Yes, Kotlin Multiplatform is used in production by numerous teams to share business logic and, in certain
-      cases, UI. The core tooling and language support remain stable, while the maturity of specialized libraries
-      and use cases varies. As with any architecture decision, it is critical to test it against your product's
-      technical and organizational needs.</p>
+    <p><b>A:</b> Yes, Kotlin Multiplatform is used in production by numerous teams to share business logic and,
+      in certain cases, UI. The core tooling and language support remain stable, while the maturity of
+      specialized libraries and use cases varies. As with any architecture decision, it is critical to test it
+      against your product's technical and organizational needs.</p>
 
-    <p><b>Can I start with native development and adopt Kotlin Multiplatform later?</b></p>
+    <p><b>Q: Can I start with native development and adopt Kotlin Multiplatform later?</b></p>
 
-    <p>Yes, Kotlin Multiplatform is designed for incremental adoption – you can introduce a shared module into an
-      existing native project without rewriting what's already there, then expand the scope of shared code
-      gradually as your team gains confidence and the benefits become clear.</p>
+    <p><b>A:</b> Yes, Kotlin Multiplatform is designed for incremental adoption – you can introduce a shared
+      module into an existing native project without rewriting what's already there, then expand the scope of
+      shared code gradually as your team gains confidence and the benefits become clear.</p>
 
-    <p><b>Do I need a Mac to build iOS apps with Kotlin Multiplatform?</b></p>
+    <p><b>Q: Do I need a Mac to build iOS apps with Kotlin Multiplatform?</b></p>
 
-    <p>Yes, building and running the iOS part of a Kotlin Multiplatform project requires a macOS machine with Xcode
-      installed due to Apple's tooling requirements. Android, desktop, web, and server targets can be developed
-      on Windows and Linux. For full environment setup instructions, see the
+    <p><b>A:</b> Yes, building and running the iOS part of a Kotlin Multiplatform project requires a macOS machine
+      with Xcode installed due to Apple's tooling requirements. Android, desktop, web, and server targets can be
+      developed on Windows and Linux. For full environment setup instructions, see the
       <a href="https://kotlinlang.org/docs/multiplatform/quickstart.html">Kotlin Multiplatform quickstart</a>
       guide.</p>
 
-    <p><b>How is Kotlin Multiplatform different from cross-platform frameworks like Flutter?</b></p>
+    <p><b>Q: How is Kotlin Multiplatform different from cross-platform frameworks like Flutter?</b></p>
 
-    <p>Cross-platform frameworks like Flutter use a single shared rendering layer for both UI and logic. Kotlin
-      Multiplatform takes a different approach – it lets teams selectively share only what makes sense for their
-      product, so iOS can stay fully native with Swift or SwiftUI while sharing only the business logic written
-      in Kotlin. For a detailed side-by-side comparison, see
+    <p><b>A:</b> Cross-platform frameworks like Flutter use a single shared rendering layer for both UI and logic.
+      Kotlin Multiplatform takes a different approach – it lets teams selectively share only what makes sense for
+      their product, so iOS can stay fully native with Swift or SwiftUI while sharing only the business logic
+      written in Kotlin. For a detailed side-by-side comparison, see
       <a href="https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-flutter.html">Kotlin Multiplatform
         and Flutter</a>.</p>
 
