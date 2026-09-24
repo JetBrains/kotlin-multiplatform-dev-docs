@@ -65,6 +65,83 @@
 ]]>
     </include-in-head>
 
+    <tip>
+        <p><b>TL;DR</b></p>
+
+        <p>
+            A cross-platform app development framework lets developers write a single shared codebase that runs
+            natively on multiple platforms (Android, iOS, web, desktop) instead of maintaining separate apps per
+            platform.
+        </p>
+
+        <p><b>Frameworks covered on this page:</b></p>
+
+        <list type="decimal">
+            <li>
+                <b>Kotlin Multiplatform</b> – Share logic and/or UIs across Android, iOS, web, and desktop using
+                Kotlin; native performance, stable since November 2023.
+            </li>
+            <li>
+                <b>Flutter</b> – Google's widget-based framework that uses Dart; renders its own UI on all platforms
+                via a custom engine.
+            </li>
+            <li>
+                <b>React Native</b> – Meta's JavaScript framework that maps React components to native platform UI
+                elements.
+            </li>
+            <li>
+                <b>Ionic</b> – Web-technology toolkit (HTML/CSS/JS) that packages apps inside a WebView via Cordova
+                or Capacitor.
+            </li>
+            <li>
+                <b>.NET MAUI</b> – Microsoft's C#/XAML framework; evolution of Xamarin.Forms, targeting Android,
+                iOS, macOS, and Windows.
+            </li>
+            <li>
+                <b>Uno Platform</b> – Open-source .NET stack (C#/XAML) that extends WinUI to Android, iOS,
+                WebAssembly, macOS, and Linux.
+            </li>
+            <li>
+                <b>NativeScript</b> – JavaScript/TypeScript framework that renders native Android and iOS UIs
+                without a WebView.
+            </li>
+        </list>
+
+        <p><b>How to choose – key criteria:</b></p>
+
+        <list type="bullet">
+            <li>
+                <b>Team language skills:</b> Match the framework's primary language (Kotlin, Dart, JS, C#) to your
+                team's existing expertise.
+            </li>
+            <li>
+                <b>UI control:</b> Decide between fully custom UI (Flutter, Kotlin Multiplatform with Compose
+                Multiplatform), native component mapping (React Native, NativeScript), or WebView-based (Ionic).
+            </li>
+            <li>
+                <b>Adoption strategy:</b> Kotlin Multiplatform supports incremental adoption; most others require
+                a full-rewrite approach.
+            </li>
+            <li>
+                <b>Performance requirements:</b> Native-compiled frameworks (KMP, NativeScript) outperform
+                WebView-based (Ionic) in CPU- and animation-heavy scenarios.
+            </li>
+            <li>
+                <b>Ecosystem maturity:</b> React Native (2015) and Flutter (2017) have larger plugin ecosystems
+                than newer entrants like .NET MAUI (2022) or Uno Platform.
+            </li>
+            <li>
+                <b>Long-term support:</b> Most leading cross-platform frameworks are backed by established
+                organizations or maintained by dedicated companies and open-source foundations, helping ensure
+                ongoing development and ecosystem stability.
+            </li>
+            <li>
+                <b>Platform targets:</b> If you need Linux or WebAssembly alongside mobile, Uno Platform is
+                currently the only framework on this list that supports all six targets.
+            </li>
+        </list>
+    </tip>
+
     <p>Over the years, cross-platform app development has become one of the most popular ways to build mobile
         applications.
         A cross-platform, or multiplatform, approach allows developers to create apps that run similarly on different
@@ -143,9 +220,8 @@
                     src="kmp-journey-start.svg" alt="Kick off your Kotlin Multiplatform journey" width="700"/></a></p>
         </chapter>
         <chapter title="Flutter" id="flutter">
-            <p>Released by Google in 2017, Flutter is a popular framework for building mobile, web, and desktop apps
-                from a single codebase.
-                To build applications with Flutter, you will need to use Google's programming language called Dart.</p>
+            <p>Flutter was first previewed by Google as an Alpha at Google I/O in May 2017, with the Stable 1.0 release following in December 2018 (<a href="https://developers.googleblog.com/2018/12/flutter-10-googles-portable-ui-toolkit.html">Flutter 1.0: Google's Portable UI Toolkit</a>, accessed July 2026).
+                It is a popular framework for building mobile, web, and desktop apps from a single codebase.</p>
             <p>
                 <control>Programming language:</control>
                 Dart.
@@ -178,8 +254,9 @@
             </note>
         </chapter>
         <chapter title="React Native" id="react-native">
-            <p>An open-source UI software framework, React Native was developed in 2015 by
-                Meta Platforms, formerly Facebook. It's based on Facebook's JavaScript library React and allows
+            <p>An open-source UI software framework, React Native was open-sourced by Meta Platforms (then Facebook) in March 2015 for iOS
+                (<a href="https://engineering.fb.com/2015/03/26/android/react-native-bringing-modern-web-techniques-to-mobile/">React Native: Bringing modern web techniques to mobile</a>, accessed July 2026), followed by Android support in September 2015 (<a href="https://engineering.fb.com/2015/09/14/developer-tools/react-native-for-android-how-we-built-the-first-cross-platform-react-native-app/">React Native for Android</a>, accessed July 2026).
+                It's based on Facebook's JavaScript library React and allows
                 developers to build natively rendered cross-platform mobile apps.</p>
             <p>
                 <control>Programming language:</control>
@@ -208,7 +285,8 @@
                 support you need when building mobile apps with the framework.</p>
         </chapter>
         <chapter title="Ionic" id="ionic">
-            <p>Ionic is an open-source mobile UI toolkit that was released in 2013. It helps developers build
+            <p>Ionic is an open-source mobile UI toolkit that launched its first Alpha in late 2013
+                (<a href="https://ionicframework.com/docs/v1/overview/">Ionic Framework v1 overview</a>, accessed July 2026), with the Stable v1.0 following in May 2015. It helps developers build
                 cross-platform mobile applications from a single codebase using web technologies, like HTML, CSS, and
                 JavaScript, with integrations for the Angular, React, and Vue frameworks.</p>
             <p>
@@ -234,8 +312,8 @@
                 help each other overcome their development challenges.</p>
         </chapter>
         <chapter title=".NET MAUI" id="net-maui">
-            <p>.NET Multi-platform App UI (.NET MAUI) is a cross-platform framework that was released in May 2022 and is
-                owned by Microsoft. It allows developers to create native mobile and desktop apps with C# and XAML. .NET
+            <p>.NET Multi-platform App UI (.NET MAUI) reached General Availability on May 23, 2022
+                (<a href="https://devblogs.microsoft.com/dotnet/introducing-dotnet-maui-one-codebase-many-platforms/">Introducing .NET MAUI – One Codebase, Many Platforms</a>, accessed July 2026) and is owned by Microsoft. It allows developers to create native mobile and desktop apps with C# and XAML. .NET
                 MAUI is an evolution of Xamarin.Forms, one of the functionalities of Xamarin, which provides native
                 controls for the platforms supported by Xamarin.</p>
             <p>
@@ -292,7 +370,8 @@
                 applications, especially by teams already invested in the .NET ecosystem.</p>
         </chapter>
         <chapter title="NativeScript" id="nativescript">
-            <p>This open-source mobile application development framework was initially released in 2014. NativeScript
+            <p>NativeScript was announced by Telerik in June 2014 (<a href="https://www.telerik.com/blogs/announcing-nativescript---cross-platform-framework-for-building-native-mobile-applications">Announcing NativeScript</a>, accessed July 2026)
+                and reached its first Stable 1.0 release on May 4, 2015 (<a href="https://blog.nativescript.org/nativescript-first-public-release/">NativeScript First Public Beta Release</a>, accessed July 2026). NativeScript
                 allows you to build Android and iOS mobile apps using JavaScript or languages that transpile to
                 JavaScript, like TypeScript, and frameworks like Angular and Vue.js.</p>
             <p>
