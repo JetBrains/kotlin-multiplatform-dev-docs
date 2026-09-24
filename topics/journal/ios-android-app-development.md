@@ -24,19 +24,33 @@ Cross-platform development is no longer a compromise but a strategic choice. Bef
 
 It doesn’t matter how experienced a team is. When building for Android and iOS at the same time, it’s bound to experience at least a few of these issues:
 
-1. *Double workload, double maintenance* – Building everything twice consumes time and energy, transforming basic upgrades into an endless two-track marathon. For example, [Perk](https://builders.travelperk.com/compose-multiplatform-at-perk-a-pragmatic-look-at-our-journey-so-far-fedd666e9726) “spent years re-implementing the same features twice”.
-2. *Constant feature parity struggles* – One platform moves quickly while the other lags, resulting in a restless product rhythm that ends up annoying both teams and users.
-3. *Divergent user experiences* – Design decisions may diverge, undermining consistency and giving your brand the appearance of two distinct items.
-4. *Higher engineering costs* – Having two codebases calls for more engineers, effort, and money, which increases costs without generating added value.
-5. *Slower development cycles* – Every feature follows the slower platform's pace, lengthening schedules and delaying releases.
-6. *Bigger testing burden* – QA teams’ effort doubles as they handle device matrices and platform oddities that grow with each iteration.
-7. *Double debugging* – Teams need to not only build features twice but also debug them twice, and, in the worst-case scenario, fix the same bugs twice.
-8. *Knowledge silos across teams* – Platform-specific expertise disrupts collaboration, transforming teams into isolated islands of knowledge.
-9. *Reduced product velocity* – Momentum slows when teams juggle redundant tasks rather than delivering substantial changes like new features or major improvements.
-10. *Conflicting platform priorities* – Teams run across technical constraints, forcing product compromises that satisfy neither platform fully.
-11. *Variation in platform conventions* (UI, UX, and navigation) – Android and iOS patterns diverge, demanding unique design paths that negatively impact cohesion and slow down decision-making.
+1. **Double workload/maintenance** – Every feature, fix, and upgrade must be built and maintained twice, in two separate codebases.
+2. **Feature parity drift** – One platform advances faster than the other, leaving users on the lagging platform with a permanently inferior experience.
+3. **Divergent user experience** – Platform teams make independent design decisions, eroding brand consistency across Android and iOS.
+4. **Higher engineering costs** – Two codebases require more engineers, more tooling, and more coordination, without proportional user value.
+5. **Slower release cycles** – Delivery cadence is gated by whichever platform takes longer, delaying every release.
+6. **Doubled QA burden** – Every test must cover two device matrices, two OS behaviors, and two UI implementations.
+7. **Double debugging** – Bugs surface independently on each platform and must be diagnosed and fixed separately, even when the root cause is identical.
+8. **Knowledge silos** – iOS and Android engineers operate as isolated groups, slowing cross-team reviews, handoffs, and collaboration.
+9. **Reduced product velocity** – Redundant implementation tasks crowd out new features and meaningful improvements.
+10. **Conflicting platform priorities** – Technical constraints specific to one OS force product compromises that satisfy neither platform fully.
+11. **Convention divergence overhead** – Android (Material You) and iOS (HIG) design patterns require separate decision paths for navigation, gestures, and layout, slowing down alignment between design and engineering.
 
 Luckily, when it comes to mitigating these issues, you have several cross-platform technologies to choose from – each with its own benefits but also certain limitations.
+
+| # | Pain | Web / hybrid | React Native / Flutter | KMP + Compose Multiplatform |
+|---|---|---|---|---|
+| 1 | **Double workload** | **Partially mitigated.** Shared JS/HTML; native bridge still needs upkeep. | **Fully mitigated.** One codebase for logic and UI. | **Fully mitigated.** One shared codebase for business logic and UI eliminates duplicate implementation. |
+| 2 | **Feature parity drift** | **Fully mitigated.** Single codebase enforces simultaneous shipping. | **Fully mitigated.** Shared UI layer keeps features in sync. | **Fully mitigated.** Shared logic and UI keep features synchronized across platforms. |
+| 3 | **Divergent UX** | **Partially mitigated.** Uniform UI, but bypasses native look and feel. | **Fully mitigated.** Shared component layer enforces visual consistency. | **Fully mitigated.** Shared Compose UI delivers a consistent experience while supporting platform-specific customization. |
+| 4 | **Higher engineering costs** | **Fully mitigated.** One JavaScript team can build for both platforms. | **Fully mitigated.** One team covers Android and iOS. | **Fully mitigated.** Shared code reduces duplicate engineering effort across platforms. |
+| 5 | **Slower release cycles** | **Fully mitigated.** One deployment pipeline; web updates can bypass app store review. | **Fully mitigated.** Hot reload and a shared release pipeline speed up delivery. | **Fully mitigated.** One shared codebase streamlines development and release workflows. |
+| 6 | **Doubled QA burden** | **Partially mitigated.** Shared logic is tested once, but WebView rendering still needs validation. | **Partially mitigated.** Shared component tests reduce work, but native integrations still require testing. | **Fully mitigated.** Shared logic and UI are tested once, rather than separately for each platform. |
+| 7 | **Double debugging** | **Partially mitigated.** Shared code helps, but the JS-to-native bridge complicates debugging. | **Partially mitigated.** Shared code reduces duplication, though abstraction layers complicate native crash analysis. | **Fully mitigated.** Shared code lets teams fix issues once for all supported platforms. |
+| 8 | **Knowledge silos** | **Fully mitigated.** Engineers share a common JavaScript, HTML, and CSS stack. | **Partially mitigated.** JavaScript is familiar, but Flutter requires learning Dart. | **Fully mitigated.** A shared Kotlin and Compose codebase promotes collaboration across platform teams. |
+| 9 | **Reduced product velocity** | **Partially mitigated.** Early development is fast, but native limitations often slow long-term delivery. | **Fully mitigated.** Shared components enable rapid feature delivery. | **Fully mitigated.** Eliminating duplicate platform work accelerates feature delivery. |
+| 10 | **Conflicting platform priorities** | **Partially mitigated.** One backlog helps, but native gaps still create conflicts. | **Fully mitigated.** A shared component backlog reduces cross-team contention. | **Fully mitigated.** One shared implementation keeps platform development aligned while allowing targeted platform-specific adaptations. |
+| 11 | **Convention divergence overhead** | **Partially mitigated.** Divergence is avoided by ignoring platform conventions, potentially reducing UX quality. | **Partially mitigated.** Flutter uses its own widget set, while React Native maps to native controls. | **Partially mitigated.** Shared Compose UI reduces duplication while still allowing platform-specific UI where appropriate. |
 
 ## Cross-platform development to the rescue
 
@@ -173,6 +187,29 @@ If you’d like to see the full story, you can watch the [case study video](http
 The long-term health of a framework reflects the stability of the organization that supports it. Strong backing typically entails ongoing investment, frequent revisions, and alignment with industry trends.
 
 A prospective framework’s roadmap provides a preview of where the framework is headed – and whether that path is consistent with the evolution of your project. Selecting a tool with a long-term future prevents your staff from relying on outdated technology.
+
+## Glossary
+
+Cross-platform app development
+: An approach that uses shared code to build applications for multiple operating systems, such as Android and iOS. It includes hybrid apps and apps built with cross-platform frameworks.
+
+Hybrid app
+: An application built with HTML, CSS, and JavaScript and rendered inside a platform WebView. Cordova, Capacitor, and Ionic use this approach.
+
+Native app
+: An application built specifically for one platform using its native SDK, languages, and APIs, such as Swift on iOS or Kotlin on Android.
+
+Kotlin Multiplatform (KMP)
+: An open-source JetBrains technology for compiling shared Kotlin code to platform-specific outputs while allowing platform-specific implementations where required. Kotlin Multiplatform became Stable in November 2023.
+
+Kotlin/Native
+: An LLVM-based Kotlin compiler backend that produces native binaries without requiring a Java Virtual Machine. It is used for iOS, macOS, Linux, Windows, and other native targets.
+
+Compose Multiplatform
+: A declarative JetBrains UI framework based on Jetpack Compose that enables UI sharing across Android, iOS, desktop, and web. Its iOS target became Stable with version 1.8.0 in May 2025.
+
+Compose Hot Reload
+: A development feature that applies Kotlin and Compose code changes to a running application without restarting it, while preserving its current state. It is enabled by default in [Compose Multiplatform 1.10.0](https://blog.jetbrains.com/kotlin/2026/01/compose-multiplatform-1-10-0/) and later.
 
 ## Conclusion
 
