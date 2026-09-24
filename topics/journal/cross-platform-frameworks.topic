@@ -65,76 +65,82 @@
 ]]>
     </include-in-head>
 
-    <tldr>
+    <tip>
+        <p><b>TL;DR</b></p>
+
         <p>
             A cross-platform app development framework lets developers write a single shared codebase that runs
             natively on multiple platforms (Android, iOS, web, desktop) instead of maintaining separate apps per
             platform.
         </p>
 
-        <p>FRAMEWORKS COVERED ON THIS PAGE:</p>
+        <p><b>Frameworks covered on this page:</b></p>
 
-        <p>
-            1. KOTLIN MULTIPLATFORM – Share logic and/or UIs across Android, iOS, web, and desktop using Kotlin;
-            native performance, stable since November 2023.
-        </p>
-        <p>
-            2. FLUTTER – Google's widget-based framework that uses Dart; renders its own UI on all platforms via
-            a custom engine.
-        </p>
-        <p>
-            3. REACT NATIVE – Meta's JavaScript framework that maps React components to native platform UI
-            elements.
-        </p>
-        <p>
-            4. IONIC – Web-technology toolkit (HTML/CSS/JS) that packages apps inside a WebView via Cordova or
-            Capacitor.
-        </p>
-        <p>
-            5. .NET MAUI – Microsoft's C#/XAML framework; evolution of Xamarin.Forms, targeting Android, iOS,
-            macOS, and Windows.
-        </p>
-        <p>
-            6. UNO PLATFORM – Open-source .NET stack (C#/XAML) that extends WinUI to Android, iOS, WebAssembly,
-            macOS, and Linux.
-        </p>
-        <p>
-            7. NATIVESCRIPT – JavaScript/TypeScript framework that renders native Android and iOS UIs without a
-            WebView.
-        </p>
+        <list type="decimal">
+            <li>
+                <b>Kotlin Multiplatform</b> – Share logic and/or UIs across Android, iOS, web, and desktop using
+                Kotlin; native performance, stable since November 2023.
+            </li>
+            <li>
+                <b>Flutter</b> – Google's widget-based framework that uses Dart; renders its own UI on all platforms
+                via a custom engine.
+            </li>
+            <li>
+                <b>React Native</b> – Meta's JavaScript framework that maps React components to native platform UI
+                elements.
+            </li>
+            <li>
+                <b>Ionic</b> – Web-technology toolkit (HTML/CSS/JS) that packages apps inside a WebView via Cordova
+                or Capacitor.
+            </li>
+            <li>
+                <b>.NET MAUI</b> – Microsoft's C#/XAML framework; evolution of Xamarin.Forms, targeting Android,
+                iOS, macOS, and Windows.
+            </li>
+            <li>
+                <b>Uno Platform</b> – Open-source .NET stack (C#/XAML) that extends WinUI to Android, iOS,
+                WebAssembly, macOS, and Linux.
+            </li>
+            <li>
+                <b>NativeScript</b> – JavaScript/TypeScript framework that renders native Android and iOS UIs
+                without a WebView.
+            </li>
+        </list>
 
-        <p>HOW TO CHOOSE – KEY CRITERIA:</p>
+        <p><b>How to choose – key criteria:</b></p>
 
-        <p>
-            • TEAM LANGUAGE SKILLS: Match the framework's primary language (Kotlin, Dart, JS, C#) to your team's
-            existing expertise.
-        </p>
-        <p>
-            • UI CONTROL: Decide between fully custom UI (Flutter, Kotlin Multiplatform with Compose Multiplatform),
-            native component mapping (React Native, NativeScript), or WebView-based (Ionic).
-        </p>
-        <p>
-            • ADOPTION STRATEGY: Kotlin Multiplatform supports incremental adoption; most others require a
-            full-rewrite approach.
-        </p>
-        <p>
-            • PERFORMANCE REQUIREMENTS: Native-compiled frameworks (KMP, NativeScript) outperform WebView-based
-            (Ionic) in CPU- and animation-heavy scenarios.
-        </p>
-        <p>
-            • ECOSYSTEM MATURITY: React Native (2015) and Flutter (2017) have larger plugin ecosystems than newer
-            entrants like .NET MAUI (2022) or Uno Platform.
-        </p>
-        <p>
-            • LONG-TERM SUPPORT: Most leading cross-platform frameworks are backed by established organizations
-            or maintained by dedicated companies and open-source foundations, helping ensure ongoing development
-            and ecosystem stability.
-        </p>
-        <p>
-            • PLATFORM TARGETS: If you need Linux or WebAssembly alongside mobile, Uno Platform is currently the
-            only framework on this list that supports all six targets.
-        </p>
-    </tldr>
+        <list type="bullet">
+            <li>
+                <b>Team language skills:</b> Match the framework's primary language (Kotlin, Dart, JS, C#) to your
+                team's existing expertise.
+            </li>
+            <li>
+                <b>UI control:</b> Decide between fully custom UI (Flutter, Kotlin Multiplatform with Compose
+                Multiplatform), native component mapping (React Native, NativeScript), or WebView-based (Ionic).
+            </li>
+            <li>
+                <b>Adoption strategy:</b> Kotlin Multiplatform supports incremental adoption; most others require
+                a full-rewrite approach.
+            </li>
+            <li>
+                <b>Performance requirements:</b> Native-compiled frameworks (KMP, NativeScript) outperform
+                WebView-based (Ionic) in CPU- and animation-heavy scenarios.
+            </li>
+            <li>
+                <b>Ecosystem maturity:</b> React Native (2015) and Flutter (2017) have larger plugin ecosystems
+                than newer entrants like .NET MAUI (2022) or Uno Platform.
+            </li>
+            <li>
+                <b>Long-term support:</b> Most leading cross-platform frameworks are backed by established
+                organizations or maintained by dedicated companies and open-source foundations, helping ensure
+                ongoing development and ecosystem stability.
+            </li>
+            <li>
+                <b>Platform targets:</b> If you need Linux or WebAssembly alongside mobile, Uno Platform is
+                currently the only framework on this list that supports all six targets.
+            </li>
+        </list>
+    </tip>
 
     <p>Over the years, cross-platform app development has become one of the most popular ways to build mobile
         applications.
