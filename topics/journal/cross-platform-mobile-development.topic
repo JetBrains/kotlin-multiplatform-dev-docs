@@ -48,6 +48,55 @@
 
     <web-summary>Explore cross-platform mobile development, including its definition, a framework comparison (Kotlin Multiplatform, Flutter, React Native), and case studies.</web-summary>
 
+    <tip>
+        <p><b>TL;DR</b></p>
+
+        <p>
+            Cross-platform mobile development is an approach to building an app with a single codebase for both iOS
+            and Android, instead of developing and maintaining separate native apps for each platform.
+        </p>
+
+        <p><b>Why teams choose cross-platform development:</b></p>
+
+        <list type="bullet">
+            <li>
+                Development moves faster because large portions of the app's logic only need to be written once.
+            </li>
+            <li>
+                Long-term maintenance is simpler, with one shared codebase to update instead of two.
+            </li>
+            <li>
+                Teams can ship new features to both platforms at the same time instead of staggering releases.
+            </li>
+            <li>
+                Teams can reach wider audiences through a single codebase that targets both Android and iOS.
+            </li>
+            <li>
+                Modern technologies such as Kotlin Multiplatform can deliver native-level performance.
+            </li>
+        </list>
+
+        <p><b>Challenges:</b></p>
+
+        <list type="bullet">
+            <li>
+                Performance can vary depending on the framework and the extent to which UI is shared.
+            </li>
+            <li>
+                Access to native platform features may require additional effort, although modern tools enable
+                direct access to platform-specific APIs.
+            </li>
+            <li>
+                User experience quality depends heavily on the cross-platform tools and frameworks you choose.
+            </li>
+        </list>
+
+        <p>
+            This article compares six widely used cross-platform frameworks: Kotlin Multiplatform, Flutter,
+            React Native, .NET MAUI, Ionic, and NativeScript.
+        </p>
+    </tip>
+
     <p>Nowadays, many companies are facing the challenge of building mobile apps for multiple platforms, specifically for both Android and iOS. This is why cross-platform mobile development solutions have emerged as one of the most popular software development trends.</p>
 
     <p>According to recent <a href="https://42matters.com/stats">app marketplace data</a>, the Google Play Store hosts over 2.3 million apps and the Apple App Store offers around 2.2 million apps, with Android and iOS continuing to dominate <a href="https://gs.statcounter.com/os-market-share/mobile/worldwide">global mobile app distribution and usage</a>.</p>
@@ -65,7 +114,32 @@
 
         <p>By combining code reuse with native integration, cross-platform development provides a balanced solution for companies aiming to reach both Android and iOS users efficiently.</p>
 
-        <chapter title="Different approaches to mobile app development" id="different-approaches-to-mobile-app-development">
+        <chapter title="Key definitions" id="key-definitions">
+            <deflist>
+                <def title="Progressive Web App (PWA)">
+                    A web application that can be installed and used like a mobile app but is accessed through a browser
+                    rather than an app store. PWAs cannot access all device features natively.
+                </def>
+
+                <def title="Hybrid app">
+                    An application that combines native and web technologies by embedding HTML, CSS, and JavaScript inside
+                    a native shell.
+                </def>
+
+                <def title="Kotlin Multiplatform (KMP)">
+                    A cross-platform technology that enables sharing code across Android, iOS, desktop, web, and server
+                    while retaining the advantages of native development.
+                </def>
+
+                <def title="Compose Multiplatform">
+                    A declarative UI framework built on top of Kotlin Multiplatform that enables sharing UI code across
+                    platforms in addition to business logic. Kotlin Multiplatform alone does not share UI – that requires
+                    Compose Multiplatform.
+                </def>
+            </deflist>
+        </chapter>
+
+        <chapter title="What are the different ways to build a mobile app?" id="different-approaches-to-mobile-app-development">
             <p>Cross-platform solutions have evolved significantly over the past decade. Early hybrid tools such as Apache Cordova and Ionic enabled web-based code to be shared across platforms, but often offered limited performance and a poor user experience. Modern compiled frameworks like Kotlin Multiplatform and Flutter deliver near-native performance with broad code reuse while providing deeper access to native platform capabilities.</p>
 
             <p>There are several main ways to create an application for both Android and iOS:</p>
@@ -106,7 +180,7 @@
             </chapter>
         </chapter>
 
-        <chapter title="Native or cross-platform app development: a longstanding debate" id="native-or-cross-platform-app-development-a-longstanding-debate">
+        <chapter title="Native or cross-platform: which should you choose?" id="native-or-cross-platform-app-development-a-longstanding-debate">
             <p><a href="native-and-cross-platform.topic">The debate around native and cross-platform development</a> remains unresolved in the tech community. Both technologies are in constant evolution and come with their own benefits and limitations.</p>
 
             <p>Some experts still prefer native mobile development over multiplatform solutions, identifying the stronger performance and better user experience of native apps as some of the most important benefits.</p>
