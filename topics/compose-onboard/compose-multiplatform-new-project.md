@@ -47,7 +47,7 @@ create a new Compose Multiplatform project:
    ![Create a Compose Multiplatform project](create-compose-multiplatform-project.png){width=800}
 
 The first import takes a couple of minutes.
-After it's done, make sure that all preflight checks have completed successfully (**View | Tool Windows | Projects Environment Preflight Checks**).
+After it's done, make sure that all preflight checks have completed successfully (**View | Tool Windows | Project Environment Preflight Checks**).
 
 ## Implement the basic layout
 
@@ -99,13 +99,13 @@ To get started, implement the basic layout in the common `App()` composable:
     ```
    
     > The `remember` API implements Compose-specific state management.
-    > The state object is wrapped in a `remember()` call, to build the state once and then
+    > The state object is wrapped in a `remember()` call to build the state once and then
     > retain it across compositions.
     > When the value of the state changes, any composables that observe it are re-invoked and redrawn.
     > This is called a _recomposition_. 
     >
     > For an in-depth introduction, see [Managing state](https://developer.android.com/develop/ui/compose/state)
-    > in Jetpack Compose documentation.  
+    > in the Jetpack Compose documentation.  
 
 2. Follow the IDE's suggestions to import the missing symbols.
    When multiple imports are suggested, choose the one annotated with `@Composable`.
@@ -145,7 +145,7 @@ You can fix the desktop UI and verify the fix without restarting the app:
             onCloseRequest = ::exitApplication, 
             state = state,
             // Makes sure that the window is always on top
-            // to make debug and UI iteration easier
+            // to make debugging and UI iteration easier
             alwaysOnTop = true
         ) {
             App()
@@ -171,7 +171,7 @@ library.
 While `kotlin.time` is always available as part of the standard library,
 `kotlinx-datetime` needs to be configured as an explicit dependency.
 It is a multiplatform library, and you'll use it only in common code.
-Therefore, you have to specify the dependency only once, with [additional configuration needed only for web](#add-kotlinx-datetime-dependency-for-a-web-app).
+Therefore, you have to specify the dependency only once, with [additional configuration needed only for web](#add-the-kotlinx-datetime-dependency-for-the-web-app).
 
 Following the instructions from the [library's repository](https://github.com/Kotlin/kotlinx-datetime#gradle):
 
@@ -204,14 +204,14 @@ Following the instructions from the [library's repository](https://github.com/Ko
 
 Now you can use `kotlinx-datetime` APIs in your common code.
 For the web target, you need to work around the limitations of time zone support in JavaScript and Wasm/JS
-as described in the [section below](#add-kotlinx-datetime-dependency-for-a-web-app).
+as described in the [section below](#add-the-kotlinx-datetime-dependency-for-the-web-app).
 
 > For more general information on how to manage multiplatform dependencies,
 > see [](multiplatform-add-dependencies.md).
 >
 {style="tip"}
 
-### Add `kotlinx-datetime` dependency for a web app
+### Add the `kotlinx-datetime` dependency for the web app
 
 For the web target, time zone support also requires the [`js-joda`](https://js-joda.github.io/js-joda/) npm package:
 

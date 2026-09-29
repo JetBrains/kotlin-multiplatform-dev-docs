@@ -99,7 +99,8 @@ Use the wizard to create a new project:
 
     ![First new project step in Android Studio](as-wizard-1.png){width="400"}
 
-3. Set the name, location, and other base attributes of the project as needed, then click **Next**.
+3. Set the project name, package name, and save location as needed, then click **Next**.
+   **Build configuration language** should remain set as Kotlin DSL.
 4. To create a full demo, choose all available platforms: Android, iOS, Desktop, Web, and Server.
    Leave **Share UI** options selected where they are available to use Compose Multiplatform as the UI framework
    for the corresponding target.
@@ -259,8 +260,8 @@ make sure paths to `ANDROID_HOME/tools`, `ANDROID_HOME/tools/bin`, and
 
 ### Xcode
 
-If your iOS run configuration reports that there is no virtual device to run on, or the preflight check fails, make sure to launch Xcode
-and see if there are any updates for the iOS simulator.
+If your iOS run configuration reports that there is no virtual device to run on, or the preflight check fails,
+make sure to launch Xcode and check for iOS SDK updates.
 
 ### Get help
 
