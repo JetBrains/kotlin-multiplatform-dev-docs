@@ -173,7 +173,7 @@ While `kotlin.time` is always available as part of the standard library,
 It is a multiplatform library, and you'll use it only in common code.
 Therefore, you have to specify the dependency only once, with [additional configuration needed only for web](#add-the-kotlinx-datetime-dependency-for-the-web-app).
 
-Following the instructions from the [library's repository](https://github.com/Kotlin/kotlinx-datetime#gradle):
+Follow the instructions from the [library's repository](https://github.com/Kotlin/kotlinx-datetime#gradle):
 
 1. Open the `gradle/libs.versions.toml` file and add the `kotlinx-datetime` dependency to the [version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html):
 
@@ -535,7 +535,7 @@ Join the community:
   Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU)
   and [#compose](https://kotlinlang.slack.com/archives/CJLTWPH7S) channels.
-* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute.
+* ![GitHub](git-hub.svg){width=25}{type="joined"} **Compose Multiplatform GitHub**: Star [the repository](https://github.com/JetBrains/compose-multiplatform) and contribute.
 * ![Stack Overflow](stackoverflow.svg){width=25}{type="joined"} **Stack Overflow**: Subscribe to
   the ["kotlin-multiplatform" tag](https://stackoverflow.com/questions/tagged/kotlin-multiplatform).
 * ![YouTube](youtube.svg){width=25}{type="joined"} **Kotlin YouTube channel**: Subscribe and watch videos

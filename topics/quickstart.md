@@ -9,7 +9,7 @@ In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatfor
 
 ## Set up the environment
 
-Set up the IntelliJ IDEA or Android Studio, the `ANDROID_HOME` variable, and Xcode:
+Set up IntelliJ IDEA or Android Studio, the `ANDROID_HOME` variable, and Xcode:
 
 1. Choose and install the IDE: KMP is fully supported in IntelliJ IDEA and Android Studio.
     
@@ -75,7 +75,7 @@ Use the Kotlin Multiplatform generator to create a project:
 3. Set **Name** and **Location** as you see fit.
    **Project ID** is generated based on the name.
 4. To try out all supported platforms, select Android, iOS, Desktop, Web, and Server.
-   In **UI implementation** options, leave **Share UI** selected to use Compose Multiplatform as the UI framework
+   In the **UI implementation** options, leave **Share UI** selected to use Compose Multiplatform as the UI framework
    for the corresponding target.
 
    > The desktop target automatically includes [](compose-hot-reload.md) functionality which allows you to see UI changes
@@ -123,13 +123,13 @@ You can find the code being shared between platforms in the `shared` module.
 The `Platform.kt` file contains an [`expect`](multiplatform-expect-actual.md) declaration
 for retrieving a platform's name.
 
-When you run the apps for different platforms, you can see the same UI layout with different platform names supplied by the native calls:
+When you run the apps for different platforms, you can see the same UI layout with different platform names supplied by the native calls.
 
 ## Consult the preflight checks
 
 To make sure there are no environment issues with the project setup,
 open the **Project Environment Preflight Checks** tool window:
-click the preflight checks icon on the right sidebar or the bottom bar ![Project Environment Preflight Checks icon with a plane](ide-preflight-checks.png){width="20"}
+click the preflight checks icon on the right sidebar or the bottom bar ![Project Environment Preflight Checks icon with a plane](ide-preflight-checks.png){width="20"}.
 
 In this tool window, you can see which checks passed, rerun them, or change their settings.
 Normally, the window opens automatically when a problem is detected and stays hidden otherwise.
@@ -148,10 +148,10 @@ you can see the following modules after the IDE imports your project:
 * **desktopApp** is the module that builds the desktop JVM application.
 * **iosApp** is an Xcode project that builds the iOS application. It depends on and uses the **shared** module as an iOS
   framework.
-* **shared** is a Kotlin Multiplatform module that contains the code common for the Android, desktop, iOS, and web applications.
+* **shared** is a Kotlin Multiplatform module that contains the common code for the Android, desktop, iOS, and web applications.
 * **webApp** is the module that builds web applications, both Kotlin/JS and Kotlin/Wasm.
 * **server** and **core** modules are created only for the server platform:
-  **core** holds code shared between the server and client apps,
+  **core** holds code shared between the server and client apps;
   **server** configures an endpoint.
 
   > When the server platform is selected, the IDE groups the application entry points under the `app` directory.
@@ -243,9 +243,9 @@ Issues with Kotlin Multiplatform setup usually occur when Java, Android SDK, or 
 
 ### Java and JDK
 
-The most common issues related to Java configuration:
+Here are the most common issues related to Java configuration:
 
-* Some tools may not find a Java installation or use a wrong version.
+* Some tools may not find a Java installation or use the wrong version.
   To solve this, set the `JAVA_HOME` environment variable to the directory where the appropriate JDK is installed
   (we recommend using [JetBrains Runtime](https://github.com/JetBrains/JetBrainsRuntime)),
   then append the path to the `bin` folder inside your `JAVA_HOME` to the `PATH` variable.
@@ -271,16 +271,19 @@ make sure to launch Xcode and check for iOS SDK updates.
 ## What's next
 
 Learn more about the structure of a KMP project and writing shared code:
-* [](compose-multiplatform-new-project.md): A beginner-level tutorial that teaches to work with shared UI code using Compose Multiplatform.
+
+* [](compose-multiplatform-new-project.md): A beginner-level tutorial that teaches you how to work with shared UI code using Compose Multiplatform.
 * [](multiplatform-upgrade-app.md): A beginner-level tutorial that teaches how to work with shared code in a multiplatform project
   with native UI code. 
 
 Take a deep dive into specific Kotlin Multiplatform use cases:
+
 * [Working with multiplatform dependencies](multiplatform-add-dependencies.md)
 * [Organizing code and artifacts around multiplatform artifacts](multiplatform-project-configuration.md)
 * Learn about the Compose Multiplatform UI framework and its place in the Compose ecosystem: [](compose-multiplatform-and-jetpack-compose.md)
 
 Discover code already written for KMP:
+
 * [Samples](multiplatform-samples.md): official JetBrains samples along with a curated list of projects showcasing KMP capabilities.
 * The GitHub topics:
   * [kotlin-multiplatform](https://github.com/topics/kotlin-multiplatform): Projects implemented with Kotlin Multiplatform.
