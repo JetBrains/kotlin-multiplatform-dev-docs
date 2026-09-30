@@ -151,11 +151,10 @@ You can fix the desktop UI and verify the fix without restarting the app:
     ```
 
 2. Follow the IDE's suggestions to import the missing symbols.
+   Pick the `androidx.compose.ui.window` version for the `rememberWindowState()` function.
 
 3. To see the app automatically update, save the modified files (<shortcut>⌘ S</shortcut> / <shortcut>Ctrl+S</shortcut>).
    The window should adjust:
-
-   <!--![Smaller window of the Compose Multiplatform app on desktop](first-compose-project-on-desktop-4.png){width=350}-->
 
    ![Compose Hot Reload](compose-hot-reload-resize.gif)
 
@@ -287,17 +286,28 @@ The app will offer several countries to choose from and display the time in the 
     )
     ```
 
-2. In the same `App.kt` file, add a `currentTimeAt()` function that calculates local time for a given time zone:
+2. In the same `App.kt` file, add a `currentTimeAt()` function that calculates local time for a given time zone.
+   To display the time as `HH:MM:SS`, the function describes the format with the `kotlinx-datetime`
+   [format builder](https://github.com/Kotlin/kotlinx-datetime#working-with-other-string-formats),
+   which pads each component with zeros to two digits:
 
     ```kotlin
     // Takes a TimeZone parameter to calculate time
     fun currentTimeAt(location: String, zone: TimeZone): String {
-        fun LocalTime.formatted() = "$hour:$minute:$second"
-    
+        // Describes the time format: hours, minutes, and seconds,
+        // each zero-padded to two digits and separated by colons
+        val timeFormat = LocalTime.Format {
+            hour()
+            char(':')
+            minute()
+            char(':')
+            second()
+        }
+
         val time = Clock.System.now()
         val localTime = time.toLocalDateTime(zone).time
-    
-        return "The time in $location is ${localTime.formatted()}"
+
+        return "The time in $location is ${localTime.format(timeFormat)}"
     }
     ```
 
@@ -428,6 +438,8 @@ then add code to load and display them:
     import androidx.compose.ui.unit.sp
     import kotlinx.datetime.LocalTime
     import kotlinx.datetime.TimeZone
+    import kotlinx.datetime.format
+    import kotlinx.datetime.format.char
     import kotlinx.datetime.toLocalDateTime
     import kotlin.time.Clock
     import composedemo.shared.generated.resources.Res
@@ -443,12 +455,18 @@ then add code to load and display them:
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
     fun currentTimeAt(location: String, zone: TimeZone): String {
-        fun LocalTime.formatted() = "$hour:$minute:$second"
+        val timeFormat = LocalTime.Format {
+            hour()
+            char(':')
+            minute()
+            char(':')
+            second()
+        }
 
         val time = Clock.System.now()
         val localTime = time.toLocalDateTime(zone).time
 
-        return "The time in $location is ${localTime.formatted()}"
+        return "The time in $location is ${localTime.format(timeFormat)}"
     }
 
     // Initializes the list with imported Compose Multiplatform resources
@@ -477,6 +495,8 @@ then add code to load and display them:
                 Text(
                     timeAtLocation,
                     style = TextStyle(fontSize = 20.sp),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally),
                 )
                 Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                     DropdownMenu(
