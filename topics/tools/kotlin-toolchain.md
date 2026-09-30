@@ -14,7 +14,7 @@ for further information.
 
 ## Prerequisites
 
-### CLI {id="toolchain-script-install"}
+### Install the Kotlin Toolchain CLI {id="toolchain-script-install"}
 
 You can install the Kotlin Toolchain CLI using [SDKMAN!](https://sdkman.io/):
 
@@ -42,7 +42,7 @@ powershell -ExecutionPolicy ByPass -c "irm 'https://kotl.in/install.ps1' | iex"
 </tab>
 </tabs>
 
-This adds `kotlin` as a command-line tool.
+This adds `kotlin` as a command-line tool system-wide.
 
 ### Building iOS apps
 
@@ -55,7 +55,12 @@ Kotlin Toolchain can guide you (or your agent) through that process when it is a
 
 With the `kotlin new` command, Kotlin Toolchain CLI can do the work for you, only asking for necessary input:
 
-1. Run the `kotlin new` command where you would like your project directory to be created.
+1. Run the command where you would like your project directory to be created:
+
+   ```shell
+   kotlin new
+   ```
+
 2. Enter the directory name when prompted for project path.
 3. Select **Compose Multiplatform application** when presented with a choice of templates.
 4. Confirm or alter the default choice of target platforms.
