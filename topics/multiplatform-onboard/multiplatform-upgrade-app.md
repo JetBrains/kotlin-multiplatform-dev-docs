@@ -679,7 +679,7 @@ skie = { id = "co.touchlab.skie", version.ref = "skie" }
 > 
 {style="note"}
 
-Then add it to the list of plugins in the `sharedLogic/build.gradle.kts` file and click the **Sync Gradle Changes** button:
+Then add it to the list of plugins in the `sharedLogic/build.gradle.kts` file:
 
 ```kotlin
 plugins {
@@ -688,15 +688,12 @@ plugins {
 }
 ```
 
+Press double **Shift**, then find and execute the **Sync Project with Gradle Files** command.
+
 #### Consume the flow using SKIE
 
 You'll use a loop and the `await` mechanism to iterate through the `Greeting().greet()` flow and update the `greetings`
 property every time the flow emits a value.
-
-> IntelliJ IDEA and Android Studio can incorrectly report Swift errors in calls to Kotlin code while using SKIE.
-> This is a known issue with the library, which doesn't affect building and running the app.
->
-{style="warning"}
 
 Make sure `ViewModel` is marked with the `@MainActor` annotation.
 The annotation ensures that all asynchronous operations within `ViewModel` run on the main thread
@@ -727,11 +724,11 @@ import SwiftUI
 
 @main
 struct iOSApp: App {
-   var body: some Scene {
-       WindowGroup {
-           ContentView(viewModel: ContentView.ViewModel())
-       }
-   }
+    var body: some Scene {
+        WindowGroup {
+            ContentView(viewModel: ContentView.ViewModel())
+        }
+    }
 }
 ```
 
