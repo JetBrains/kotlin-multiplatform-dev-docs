@@ -25,7 +25,6 @@ To get from a project created by the Kotlin Multiplatform IDE wizard to the fina
 > * the [`main-skie`](https://github.com/kotlin-hands-on/get-started-with-kmp/tree/main-skie) branch includes a SKIE (Kotlin-Swift interoperability library) implementation.
 >
 {style="tip"}
-<!-- TODO the project will be a bit different, but can be synced later -->
 
 ## Create a project
 
