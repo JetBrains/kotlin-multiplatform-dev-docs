@@ -1,4 +1,4 @@
-[//]: # (title: Shared UI: Time zone picker app)
+[//]: # (title: Fully shared code: Time zone picker app)
 
 <secondary-label ref="IntelliJ IDEA"/>
 <secondary-label ref="Android Studio"/>
