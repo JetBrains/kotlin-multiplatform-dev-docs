@@ -20,14 +20,14 @@ You can run the application on any supported platform using the same IDE:
 * The web app runs in the default browser.
 
 The run configurations provided by the KMP IDE plugin are more efficient than the general Gradle build task:
-They only trigger builds for the corresponding targets while the default Gradle build task
+They only trigger builds for the corresponding targets, while the default Gradle build task
 always builds debug and release versions of all targets.
 
 ### Run your application on Android Emulator
 
 The default run configuration automatically suggests the list of available Android virtual devices.
 If there are none, or you'd like to simulate a different device, you can configure one using the Android Device Manager
-(in IDEA, **View | Tool Window | Device Manager**,
+(in IntelliJ IDEA, **View | Tool Window | Device Manager**,
 or following the [Android Studio guide](https://developer.android.com/studio/run/managing-avds)).
 
 > The Device Manager in Android Studio usually offers a wider set of available devices,
