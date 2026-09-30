@@ -182,8 +182,8 @@ kotlin {
             implementation(libs.ktor.clientCore)
         }
         androidMain.dependencies {
-            // Dependency to a platform part of ktor-client
-            // will be resolved automatically at build time
+            // The dependency on a platform-specific part of ktor-client
+            // is resolved at build time
         }
     }
 }
@@ -203,8 +203,8 @@ kotlin {
         }
         androidMain {
             dependencies {
-                // Dependency to a platform part of ktor-client
-                // will be resolved automatically at build time
+              // The dependency on a platform-specific part of ktor-client
+              // is resolved at build time
             }
         }
     }
@@ -246,7 +246,7 @@ kotlin {
         }
         iosMain.dependencies {
             // SQLDelight is available in the iOS source set,
-            // but not in Android or common
+            // but not in the Android or common source sets
             implementation(libs.sqldelight.nativeDriver)
         }
     }
@@ -273,8 +273,8 @@ kotlin {
         }
         iosMain {
             dependencies {
-                // SQLDelight is available only in the iOS source set,
-                // but not in Android or common
+                // SQLDelight is available in the iOS source set,
+                // but not in the Android or common source sets
                 implementation(sqldelight.nativeDriver)
             }
         }
