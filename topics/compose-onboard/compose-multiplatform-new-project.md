@@ -106,17 +106,14 @@ To get started, implement the basic layout in the common `App()` composable:
     >
     > For an in-depth introduction, see [Managing state](https://developer.android.com/develop/ui/compose/state)
     > in the Jetpack Compose documentation.  
-
-2. Follow the IDE's suggestions to import the missing symbols.
-   When multiple imports are suggested, choose the one annotated with `@Composable`.
-
-3. Run the application on Android and iOS:
+   
+2. Run the application on Android and iOS:
 
    ![New Compose Multiplatform app on Android and iOS](first-compose-project-on-android-ios-3.png){width=500}
 
    When you run your application and click the button, the app displays the hardcoded time — 13:30.
 
-4. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the **desktopApp [hot] 🔥**
+3. Run the application on the desktop using [Compose Hot Reload](compose-hot-reload.md) by starting the **desktopApp [hot] 🔥**
    run configuration.
    The app works, but the window looks mismatched with the UI:
 
@@ -406,6 +403,8 @@ then add code to load and display them:
    Replace the entire code in the `commonMain/kotlin/.../App.kt` file with the following:
 
     ```kotlin
+    package compose.project.demo
+
     import androidx.compose.foundation.Image
     import androidx.compose.foundation.layout.Column
     import androidx.compose.foundation.layout.Row
