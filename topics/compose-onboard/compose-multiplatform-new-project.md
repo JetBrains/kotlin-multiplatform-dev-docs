@@ -273,7 +273,7 @@ For simplicity, you won't implement complex logic for specifying and validating 
 The app will offer several countries to choose from and display the time in the selected country's capital:
 
 1. In `shared/src/commonMain/kotlin`, open the `compose.project.demo/App.kt` file
-   and add a data class to hold country information below the `App()` composable:
+   and add a data class to hold country information above the `App()` composable:
 
     ```kotlin
     // Simplified representation of time zones for this example 
@@ -400,20 +400,45 @@ then add code to load and display them:
 
    ![Compose Multiplatform resources project structure](compose-resources-project-structure.png){width=300}
 
-3. Make sure the image names are exactly as shown above: Compose Multiplatform generates accessors based on the image names.
+3. Make sure the image names are exactly as shown above: Compose Multiplatform generates accessors based on file names.
 
 4. Update the UI code to use the images.
-   Replace the entire code in the `commonMain/kotlin/.../App.kt` file (excluding imports) with the following:
+   Replace the entire code in the `commonMain/kotlin/.../App.kt` file with the following:
 
     ```kotlin
-    // Existing imports
-    // ...
+    import androidx.compose.foundation.Image
+    import androidx.compose.foundation.layout.Column
+    import androidx.compose.foundation.layout.Row
+    import androidx.compose.foundation.layout.fillMaxSize
+    import androidx.compose.foundation.layout.fillMaxWidth
+    import androidx.compose.foundation.layout.padding
+    import androidx.compose.foundation.layout.safeContentPadding
+    import androidx.compose.foundation.layout.size
+    import androidx.compose.material3.Button
+    import androidx.compose.material3.DropdownMenu
+    import androidx.compose.material3.DropdownMenuItem
+    import androidx.compose.material3.MaterialTheme
+    import androidx.compose.material3.Text
+    import androidx.compose.runtime.*
+    import androidx.compose.ui.Alignment
+    import androidx.compose.ui.Modifier
+    import androidx.compose.ui.text.TextStyle
+    import androidx.compose.ui.text.style.TextAlign
+    import androidx.compose.ui.tooling.preview.Preview
+    import androidx.compose.ui.unit.dp
+    import androidx.compose.ui.unit.sp
+    import kotlinx.datetime.LocalTime
+    import kotlinx.datetime.TimeZone
+    import kotlinx.datetime.toLocalDateTime
+    import kotlin.time.Clock
     import composedemo.shared.generated.resources.Res
     import composedemo.shared.generated.resources.eg
     import composedemo.shared.generated.resources.fr
     import composedemo.shared.generated.resources.id
     import composedemo.shared.generated.resources.jp
     import composedemo.shared.generated.resources.mx
+    import org.jetbrains.compose.resources.DrawableResource
+    import org.jetbrains.compose.resources.painterResource
     
     // The type now also holds a reference to the flag image
     data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
@@ -490,11 +515,9 @@ then add code to load and display them:
         }
     }
     ```
+    {initial-collapse-state="collapsed" collapsible="true" collapsed-title="import composedemo.shared.generated.resources.Res"}
 
-5. Follow the IDE's suggestions to import the missing symbols:
-   * Pick `@Composable` versions of functions where possible.
-   * When importing `Alignment`, select the `androidx.compose.ui` version.
-6. Run the application to see the new behavior:
+5. Run the application to see the new behavior:
 
 <tabs>
     <tab id="mobile-flags" title="Android and iOS">
