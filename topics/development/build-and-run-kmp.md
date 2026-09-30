@@ -1,4 +1,4 @@
-[//]: # (title: Build and run Kotlin Multiplatform application)
+[//]: # (title: Build and run a Kotlin Multiplatform application)
 
 Kotlin Multiplatform (KMP) uses Gradle as its build system.
 The [KMP IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
