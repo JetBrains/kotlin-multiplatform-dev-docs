@@ -55,7 +55,7 @@ The Kotlin Multiplatform project includes the following modules:
 * **androidApp** is a Kotlin module that builds the Android application. It uses Gradle as the build system.
   The **androidApp** module depends on and uses the **sharedLogic** module as a regular Android library.
 * **iosApp** is the Xcode project that builds the iOS application.
-* **sharedLogic** is the multiplatform module that contains the logic common for both Android and iOS applications.
+* **sharedLogic** is the multiplatform module that contains the logic shared by the Android and iOS applications.
 * **sharedUI** is the module with the UI code implemented with Compose Multiplatform.
   In this project, **sharedUI** is used only by the Android app but can be extended to other targets whenever you need that.
   On Android, [Compose Multiplatform calls directly translate into Jetpack Compose](compose-multiplatform-jetpack-libraries.md),
@@ -242,7 +242,7 @@ data class LaunchListResponse(
             val response: LaunchListResponse =
                 httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
             // Gets the latest successful launch.
-            // In the response launches are sorted from newest to oldest,
+            // In the response, launches are sorted from newest to oldest,
             // and successful launches are marked with 'status.id' 3
             val lastSuccessLaunch = response.results.first { it.status.id == 3 }
             // Converts the launch timestamp to local time
@@ -497,9 +497,9 @@ which the Kotlin/Native compiler doesn't yet provide by default:
   KMP-NativeCoroutines supports Swift's `async`/`await` functionality as well as Combine and RxSwift.
   Using KMP-NativeCoroutines requires adding a SwiftPM or CocoaPod dependency in iOS projects.
 * The SKIE library augments the Objective-C API produced by the Kotlin compiler: SKIE transforms flows into an equivalent of
-Swift’s `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
-cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
-including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
+  Swift's `AsyncSequence`. SKIE directly supports Swift's `async`/`await`, without thread restriction, and with automatic bidirectional
+  cancellation (Combine and RxSwift require adapters). SKIE offers other features to produce a Swift-friendly API from Kotlin,
+  including bridging various Kotlin types to Swift equivalents. It also doesn't require adding additional dependencies in iOS projects.
 
   > The latest SKIE may not support the latest stable Kotlin version.
   > Check the [changelog for the latest version](https://skie.touchlab.co/category/changelog)
