@@ -239,25 +239,25 @@ data class LaunchListResponse(
         // Marked as suspending because it calls
         // the suspending httpClient.get() function
         private suspend fun getDateOfLastSuccessfulLaunch(): String {
-           // Asynchronously retrieves information about rocket launches
-           val response: LaunchListResponse =
-               httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
-           // Gets the latest successful launch.
-           // In the response launches are sorted from newest to oldest,
-           // and successful launches are marked with 'status.id' 3
-           val lastSuccessLaunch = response.results.first { it.status.id == 3 }
-           // Converts the launch timestamp to local time
-           val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
-               .toLocalDateTime(TimeZone.currentSystemDefault())
-        
-           // Date is displayed in the "MMMM D, YYYY" format,
-           // for example, "JULY 15, 2026"
-           return "${date.month} ${date.day}, ${date.year}"
-       }
-   
-       // Builds the final string for the UI using
-       // the suspending getDateOfLastSuccessfulLaunch() function
-       suspend fun launchPhrase(): String =
+            // Asynchronously retrieves information about rocket launches
+            val response: LaunchListResponse =
+                httpClient.get("https://lldev.thespacedevs.com/2.3.0/launches/previous/?mode=list&limit=10&format=json").body()
+            // Gets the latest successful launch.
+            // In the response launches are sorted from newest to oldest,
+            // and successful launches are marked with 'status.id' 3
+            val lastSuccessLaunch = response.results.first { it.status.id == 3 }
+            // Converts the launch timestamp to local time
+            val date = Instant.parse(lastSuccessLaunch.launchDateUTC)
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+
+            // Date is displayed in the "MMMM D, YYYY" format,
+            // for example, "JULY 15, 2026"
+            return "${date.month} ${date.day}, ${date.year}"
+        }
+
+        // Builds the final string for the UI using
+        // the suspending getDateOfLastSuccessfulLaunch() function
+        suspend fun launchPhrase(): String =
             try {
                 "The last successful launch was on ${getDateOfLastSuccessfulLaunch()} 🚀"
             } catch (e: Exception) {
@@ -503,7 +503,7 @@ cancellation (Combine and RxSwift require adapters). SKIE offers other features 
 including bridging various Kotlin types to Swift equivalents. It also doesn’t require adding additional dependencies in iOS projects.
 
   > The latest SKIE may not support the latest stable Kotlin version.
-  > Check the [changelog for the latest version]https://skie.touchlab.co/category/changelog)
+  > Check the [changelog for the latest version](https://skie.touchlab.co/category/changelog)
   > to see which Kotlin version to downgrade to.
 
 ### Option 1. Configure KMP-NativeCoroutines {initial-collapse-state="collapsed" collapsible="true"}
@@ -544,7 +544,7 @@ Update the build scripts to include KMP-NativeCoroutines dependencies:
     ```kotlin
     kotlin {
         // ...
-        sourceSets{
+        sourceSets {
             all {
                 languageSettings {
                     optIn("kotlin.experimental.ExperimentalObjCName")
@@ -604,7 +604,7 @@ Install the parts of the KMP-NativeCoroutines Swift package necessary to work wi
 1. In `iosApp/ContentView.swift`, update the `startObserving()` function to consume the flow using the `asyncSequence()` function
    from KMP-NativeCoroutines:
 
-    
+    ```swift
     func startObserving() async {
         do {
             // Consumes the flow emitted by Greeting().greet() from Kotlin
@@ -636,7 +636,7 @@ Install the parts of the KMP-NativeCoroutines Swift package necessary to work wi
         // that are not reflected in the UI.
         @MainActor
         class ViewModel: ObservableObject {
-            @Published var greetings: Array<String> = []
+            @Published var greetings: [String] = []
     
             func startObserving() async {
                 do {
@@ -653,7 +653,7 @@ Install the parts of the KMP-NativeCoroutines Swift package necessary to work wi
     ```
 
 `@MainActor` here can produce unresolved reference errors until you build the project,
-which brings the Kotlin symbols (specifically, `greeting()`) in sync with the iOS project dependencies.
+which brings the Kotlin symbols (specifically, `greet()`) in sync with the iOS project dependencies.
 
 > If you're getting build errors, make sure the versions of Kotlin and KMP-NativeCoroutines are compatible:
 > both the Gradle plugin version and the Swift package version should be set
@@ -723,6 +723,8 @@ extension ContentView {
 In `iosApp/iOSApp.swift`, update the entry point for your app:
 
 ```swift
+import SwiftUI
+
 @main
 struct iOSApp: App {
    var body: some Scene {
