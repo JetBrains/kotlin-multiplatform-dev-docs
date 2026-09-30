@@ -4,7 +4,7 @@ In this article, you'll learn how to use platform-specific APIs when developing 
 
 <video src="https://www.youtube.com/v/bSNumV04y_w" title="Using Platform-Specific APIs in KMP Apps"/>
 
-## Kotlin multiplatform libraries
+## Kotlin Multiplatform libraries
 
 Before writing code that uses a platform-specific API, check whether you can use a multiplatform library instead.
 This type of library provides a common Kotlin API that has a different implementation for different platforms.
@@ -64,7 +64,7 @@ The following snippets show the implementations for Android and iOS. Platform-sp
 and the same name for the function:
 
 ```kotlin
-// In the android source set:
+// In the Android source set:
 import java.util.*
 
 actual fun randomUUID() = UUID.randomUUID().toString()
@@ -99,7 +99,7 @@ and then provide implementations of that interface in the platform source sets.
 
 ![Using interfaces](expect-interfaces.svg){width=700}
 
-A name of the platform is stored as a `String` regardless of the platform:
+The platform name is stored as a `String` regardless of the platform:
 
 ```kotlin
 // In the commonMain source set:

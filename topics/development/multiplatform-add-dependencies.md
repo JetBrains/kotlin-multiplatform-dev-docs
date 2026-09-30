@@ -8,7 +8,7 @@ If you have experience developing Android apps, adding a multiplatform dependenc
 Gradle dependency to a regular Android project.
 The main difference is that you need to add the dependency to a specific source set rather than to the module as a whole.
 
-This page describes the overall approach to managing of dependencies in a multiplatform project.
+This page describes the overall approach to managing dependencies in a multiplatform project.
 For some platform specifics, see [](multiplatform-android-dependencies.md) and [](multiplatform-ios-dependencies.md).
 
 ## Dependency types

@@ -774,4 +774,4 @@ If you are using Xcode, you may need to clear cached binaries: Try resetting the
 * ![Slack](slack.svg){width=25}{type="joined"} **Kotlin Slack**: Get help and participate in discussions about KMP and Compose Multiplatform.
   Request an [invitation](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) and join
   the [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) channel.
-* **Kotlin issue tracker**. [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
+* **Kotlin issue tracker**: [Report a new issue](https://youtrack.jetbrains.com/newIssue?project=KT).
