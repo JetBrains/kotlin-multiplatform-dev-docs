@@ -13,9 +13,8 @@ Kotlin Multiplatform was initially developed to use Gradle, like most Android pr
 This quickstart is designed for Gradle users who want to introduce Kotlin Multiplatform into their projects
 or simply use a familiar environment.
 
-However, if you're looking to start a brand-new project with Kotlin Multiplatform,
-check out Kotlin Toolchain,
-a build system created by JetBrains with Kotlin Multiplatform in mind.
+For a brand-new project you can also try Kotlin Toolchain,
+a tool created by JetBrains with Kotlin Multiplatform in mind.
 It offers a CLI and a transparent configuration format which makes it well suited for AI workflows.
 
 <a href="kotlin-toolchain.md" as="button" mode="rock" icon="arrow-right" icon-position="right">Get started with KMP using Kotlin Toolchain</a>
@@ -85,8 +84,9 @@ Use the Kotlin Multiplatform generator to create a project:
 
 1. Select **File** | **New** | **Project** in the main menu.
 2. Choose **Kotlin Multiplatform** in the list on the left.
-3. Set **Name** and **Location** as you see fit.
+   Set **Name** and **Location** as you see fit.
    **Project ID** is generated based on the name.
+3. The rest of this page describes a **Gradle** project: make sure it is selected in the **Build system** switch to continue.
 4. To try out all supported platforms, select Android, iOS, Desktop, Web, and Server.
    In the **UI implementation** options, leave **Share UI** selected to use Compose Multiplatform as the UI framework
    for the corresponding target.
