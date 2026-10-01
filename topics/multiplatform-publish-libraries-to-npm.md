@@ -252,7 +252,7 @@ With the workflow and the Trusted Publisher connection set up, you're now ready 
 
    > npm will not allow publishing if the version number is already in use or lower than an already published version.
    > 
-   > {style="note"}
+   {style="note"}
 
 2. Go to your GitHub repository.
 3. In the right sidebar, click **Releases**.

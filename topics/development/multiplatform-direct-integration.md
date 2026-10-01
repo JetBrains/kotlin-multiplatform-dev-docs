@@ -101,7 +101,7 @@ To connect the Kotlin framework generated from the multiplatform project to your
    > ./gradlew --stop
    > ```
    >
-   > {style="tip"}
+   {style="tip"}
 
 9. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
 

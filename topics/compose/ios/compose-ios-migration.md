@@ -43,7 +43,7 @@ For the rationale behind this property and its default value, see the [in-code d
 The `onResize` parameter of the old `UIKitView` and `UIKitViewController` constructors set a custom frame based
 on the `rect` argument but didn't affect the Compose layout itself, so it was not intuitive to use.
 On top of that, the default implementation of the `onResize` parameter needed to properly set the frame of interop view
-and contained some implementation details about properly clipping the view. <!-- TODO: what's wrong with that exactly? -->
+and contained some implementation details about properly clipping the view.
 
 How to make do without `onResize`:
 

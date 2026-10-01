@@ -32,8 +32,8 @@ The basics include:
 There are different ways to share code in a KMP project, with some platform specifics:
 
 * The basic examples of calling common code from app modules are covered in onboarding tutorials:
-    * [for native UI and shared logic](multiplatform-create-first-app.md)
-    * [for shared UI and logic](compose-multiplatform-create-first-app.md)
+    * [for native UI and shared logic](multiplatform-upgrade-app.md)
+    * [for shared UI and logic](compose-multiplatform-new-project.md)
 * [How to access platform-specific APIs](multiplatform-connect-to-apis.md):
     * Use multiplatform libraries when possible.
     * Use the `expect`/`actual` mechanism when no suitable multiplatform library is available.
@@ -44,7 +44,7 @@ There are different ways to share code in a KMP project, with some platform spec
       > and is not something we recommend using in new projects.
       >
       {style="note"}   
-    * Check out the [sample and tutorial](multiplatform-upgrade-app.md#add-more-dependencies) that includes making Kotlin coroutines work with iOS.
+    * Check out the [sample and tutorial](multiplatform-upgrade-app.md) that includes making Kotlin coroutines work with iOS.
     * See the guide on using existing [SPM packages in your KMP iOS app](multiplatform-spm-import.md).
     * Read the [in-depth explanation of calling Swift / ObjC from Kotlin](https://kotlinlang.org/docs/native-objc-interop.html) and vice versa.
     * Learn about the more straightforward [Swift export](https://kotlinlang.org/docs/native-swift-export.html) approach (currently in Alpha).
@@ -84,7 +84,7 @@ If you decide to pack your shared code into a multiplatform library, check out t
 
 Junie is a JetBrains AI agent.
 For Shipaton participants, JetBrains offers free access to the EAP version of the Junie CLI agent.
-You can also use your Junie agent through the [AI chat feature in IntelliJ IDEs](https://www.jetbrains.com/ai-ides/#getstarted).
+You can also use your Junie agent through the [AI chat feature in JetBrains IDEs](https://www.jetbrains.com/ai-ides/#getstarted).
 
 <a as="button" href="https://surveys.jetbrains.com/s3/Build-with-Junie-at-Shipaton-2026-Application-Form" mode="classic" icon="arrow-right" icon-position="right">Claim your Junie access</a>
 

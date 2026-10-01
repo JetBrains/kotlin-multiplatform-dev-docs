@@ -10,6 +10,10 @@ This page can be useful if you:
 * Want to create a Gradle plugin for Kotlin Multiplatform builds, or need to work with low-level abstractions of the Gradle
   build, such as configurations, tasks, publications, and others.
 
+> Before diving into advanced concepts, we recommend learning [the basics of the multiplatform project structure](multiplatform-discover-project.md).
+>
+{style="tip"}
+
 One of the crucial things to understand about dependency management in a multiplatform project is the difference between
 Gradle-style project or library dependencies and the `dependsOn` relation between source sets that is specific to Kotlin:
 
@@ -19,10 +23,6 @@ Gradle-style project or library dependencies and the `dependsOn` relation betwee
 * Library and project dependencies in general work as usual, but to properly manage them in a multiplatform project
   you should understand [how Gradle dependencies are resolved](#dependencies-on-other-libraries-or-projects)
   into granular **source set → source set** dependencies used for compilation.
-
-> Before diving into advanced concepts, we recommend learning [the basics of the multiplatform project structure](multiplatform-discover-project.md).
->
-{style="tip"}
 
 ## dependsOn and source set hierarchies
 
