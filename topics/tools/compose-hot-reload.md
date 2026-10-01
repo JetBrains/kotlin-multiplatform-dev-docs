@@ -55,7 +55,7 @@ The steps refer to the project from the [quickstart](quickstart.md) tutorial as 
 1. Introduce the desktop target: create the `desktopApp` directory, define a `main()` function,
    and provide the `actual` implementations.
    If your project already includes a desktop target, you can skip this step.
-   For reference, see the sample in [Add a JVM entry point](migrate-from-android.md#optional-add-a-jvm-entry-point).
+   For reference, see the sample in [Add a JVM entry point](migrate-from-android.md#add-a-jvm-entry-point).
  
 2. Update the version catalog with the latest version of Compose Hot Reload (see [Releases](https://github.com/JetBrains/compose-hot-reload/releases)).
    In `gradle/libs.versions.toml`, add the following code:
