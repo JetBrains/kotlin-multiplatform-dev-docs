@@ -1,4 +1,4 @@
-[//]: # (title: Creating and building a Kotlin Multiplatform application with Kotlin Toolchain)
+[//]: # (title: Create and build a Kotlin Multiplatform application with Kotlin Toolchain)
 
 
 [Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for creating, building, testing,
@@ -52,13 +52,13 @@ Check that CLI is available by running `kotlin --versioin`.
 
 ### Building iOS apps
 
-If you intend to build and run iOS applications, you will need to install [Xcode](https://apps.apple.com/us/app/xcode/id497799835),
-accept its license agreement, and install the necessary iOS SDK.
+To build and run iOS applications, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835),
+and the necessary SDK.
 
 When it is actually required to build or run a module,
 Kotlin Toolchain CLI displays instructions on how to set Xcode up.
 
-## Generate a new project
+## Create a project
 
 To generate a new project using Kotlin Toolchain:
 
@@ -73,8 +73,10 @@ To generate a new project using Kotlin Toolchain:
 4. Select **Compose Multiplatform application** when presented with a choice of templates.
 5. Press **Enter** to confirm the default selection of targets.
 6. Provide a project ID that will be used across the project to identify the app (a default is generated based on the directory name).
+   This ID is used for Kotlin package names, the Android namespace and application ID, and the iOS bundle ID.
 
-Kotlin Toolchain generates the final project and initializes a Git repository.
+Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
+By default, it also initializes a Git repository.
 
 The resulting project has several `*App` modules with application entry points for each platform and a `shared` module with common code.
 Each module is listed in the overall `project.yaml` file and configured with its own `module.yaml` file.

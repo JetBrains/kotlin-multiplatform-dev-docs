@@ -7,9 +7,10 @@
 
 In this tutorial, you'll learn how to build and run a simple Kotlin Multiplatform app with a Compose Multiplatform UI.
 
-## Choose a foundation: Kotlin Toolchain or Gradle
+## Choose a build tool
 
-Kotlin Multiplatform was initially developed to use Gradle, like most Android projects.
+This quickstart uses Gradle to create and run a new Kotlin Multiplatform project in an IDE.
+Gradle supports both new projects and projects that already use it.
 This quickstart is designed for Gradle users who want to introduce Kotlin Multiplatform into their projects
 or simply use a familiar environment.
 
