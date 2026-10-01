@@ -138,11 +138,16 @@ you can also create a new project directly in the IDE:
 When the project is created and imported, the IDE automatically registers run configuration for all declared modules
 so you can run corresponding applications from the IDE toolbar.
 
-<!-- ## Publish the artifacts
+## Publish the applications
 
 When you're satisfied with how the app runs, you can publish the applications.
 
-TODO link to the Toolchain page on multiplatform app publishing -->
+See the full instructions on producing artifacts in Kotlin Toolchain documentation:
+
+* [Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing)
+* [Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing)
+
+You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet. 
 
 ## What's next
 
