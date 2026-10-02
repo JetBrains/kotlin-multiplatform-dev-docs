@@ -156,8 +156,8 @@ When you're satisfied with how the app runs, you can publish the applications.
 
 See the full instructions on producing artifacts in Kotlin Toolchain documentation:
 
-* [Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing)
-* [Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing)
+* [Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing)
+* [Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing)
 
 You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet. 
 
