@@ -14,7 +14,7 @@ Gradle supports both new projects and projects that already use it.
 This quickstart is designed for Gradle users who want to introduce Kotlin Multiplatform into their projects
 or simply use a familiar environment.
 
-For a brand-new project you can also try Kotlin Toolchain,
+For a brand-new project, you can also try Kotlin Toolchain,
 a tool created by JetBrains with Kotlin Multiplatform in mind.
 It offers a CLI and a transparent configuration format which makes it well suited for AI workflows.
 

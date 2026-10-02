@@ -48,11 +48,11 @@ powershell -ExecutionPolicy ByPass -c "irm 'https://kotl.in/install.ps1' | iex"
 </tab>
 </tabs>
 
-Check that CLI is available by running `kotlin --versioin`.
+Check that the CLI is available by running `kotlin --version`.
 
 ### Building iOS apps
 
-To build and run iOS applications, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835),
+To build and run iOS applications, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
 and the necessary SDK.
 
 When it is actually required to build or run a module,
@@ -69,7 +69,7 @@ To generate a new project using Kotlin Toolchain:
    kotlin new
    ```
 
-3. Enter the directory name when prompted for project path, for example, `ktc-kmp`.
+3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
 4. Select **Compose Multiplatform application** when presented with a choice of templates.
 5. Press **Enter** to confirm the default selection of targets.
 6. Provide a project ID that will be used across the project to identify the app (a default is generated based on the directory name).
@@ -135,7 +135,7 @@ Install the following plugins to make your IDE recognize Kotlin Toolchain and Ko
 * [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
   is necessary for a KMP project to be supported properly.
 * [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
-  helps IDE recognize the Kotlin Toolchain project structure, generate run configurations, and so on.
+  helps the IDE recognize the Kotlin Toolchain project structure, generate run configurations, and so on.
 
 ### Create a project directly in the IDE
 
