@@ -82,21 +82,24 @@ An important step is to build a list of dependencies used in the code you plan t
 While the multiplatform ecosystem isn't as large as the Java ecosystem, it is expanding rapidly.
 Use [klibs.io](https://klibs.io) as a starting point to evaluate potential options.
 
+#### Libraries
+
 For Jetcaster, the list of these libraries was as follows:
 
-* Dagger/Hilt, a popular dependency injection solution (replaced with [Koin](https://insert-koin.io/))
+* **Dagger/Hilt**, a popular dependency injection solution (replaced with [Koin](https://insert-koin.io/))
 
   Koin is a reliable multiplatform DI framework. If it doesn't meet your needs or the required rewrite
   is too extensive, there are other solutions.
   The [Metro](https://zacsweers.github.io/metro/latest/) framework is also multiplatform.
   It can help ease the migration by supporting [interop with other annotations](https://zacsweers.github.io/metro/latest/interop/),
   including Dagger and Kotlin Inject.
-* Coil 2, an image loading library (which [became multiplatform in version 3](https://coil-kt.github.io/coil/upgrading_to_coil3/)).
-* ROME, an RSS framework (replaced with the multiplatform [RSS Parser](https://github.com/prof18/RSS-Parser)).
-* JUnit, a test framework (replaced with [kotlin-test](https://kotlinlang.org/api/core/kotlin-test/)).
-* OkHttp, an HTTP client (no longer needed directly: RSS Parser and Coil 3 make their own calls,
+* **Coil 2**, an image loading library (which [became multiplatform in version 3](https://coil-kt.github.io/coil/upgrading_to_coil3/)).
+* **ROME**, an RSS framework (replaced with the multiplatform [RSS Parser](https://github.com/prof18/RSS-Parser)).
+* **JUnit**, a test framework (replaced with [kotlin-test](https://kotlinlang.org/api/core/kotlin-test/)).
+* **OkHttp**, an HTTP client (no longer needed directly: RSS Parser and Coil 3 make their own calls,
   and Coil 3 has a [Ktor-based](https://ktor.io/) network layer for platforms where OkHttp isn't available).
 
+#### API
 As you go along, you may find small pieces of code that stop working in multiplatform because no cross-platform
 implementation exists yet.
 For example, in Jetcaster we had to replace two Android-only APIs with third-party multiplatform libraries:
@@ -157,7 +160,7 @@ After the initial preparations and evaluations are done, the general process is:
    straightforward.
    For Jetcaster, we show incremental migration by migrating screen by screen. We also show how to adjust the navigation graph
    when some screens have been migrated and some have not.
-4. [Add entry points](#add-a-jvm-entry-point) for the platforms you want to support.
+4. [Add entry points](#add-application-entry-points) for the platforms you want to support.
 
 To simplify the example, we removed Android-specific Glance, TV, and wearable targets
 from the start since they don't interact with multiplatform code anyway and won't need to be migrated.
@@ -536,7 +539,9 @@ We renamed them to `:sharedLogic` and `:androidApp`.
 
 > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/ac13e72b16a77276ca5fa46b6c71e903c57bf087).
 
-## Add a JVM entry point
+## Add application entry points
+
+### Add a JVM entry point
 
 This step helps to:
 * Show how little effort it takes to create a desktop app out of an Android app that's been made completely multiplatform.
@@ -549,7 +554,7 @@ The JVM implementations that the shared modules need are already in place from t
 
 > See the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/32dc94085c5163e5b830a7e95e2b2b6baa6591a0).
 
-## Add an iOS entry point
+### Add an iOS entry point
 
 The iOS entry point requires an iOS project linked with the KMP code.
 
@@ -568,6 +573,7 @@ Now that there's an iOS app to run, the `OnlineChecker` stub is replaced with a 
 multiplatform [konnectivity](https://github.com/plusmobileapps/konnectivity) library.
 
 <!-- this probably needs more rigorous verification -->
+
 > Commit a *shared* Xcode scheme (`YourApp.xcodeproj/xcshareddata/xcschemes/`) rather than relying on
 > the one Xcode generates for you.
 > Generated schemes land in `xcuserdata`, which is normally set to be ignored by Git,
@@ -578,16 +584,16 @@ multiplatform [konnectivity](https://github.com/plusmobileapps/konnectivity) lib
 
 > See the added iOS project and the corresponding code updates in the [resulting commit](https://github.com/kotlin-hands-on/jetcaster-kmp-migration/commit/1da471dfba711a4386e5ba1a9db49892c8a7e255).
 
-## Add a web entry point
+### Add a web entry point
 
-The browser is the target that asks for the most platform-specific work: it has no JVM, no file system,
-and it enforces the same-origin policy. Each of these constraints is a good illustration of how far a single
-`expect`/`actual` pair can take you:
+The web target asks for the most platform-specific work: it has no JVM, no file system,
+and it enforces the same-origin policy.
+Each of these constraints is a good illustration of how the `expect`/`actual` mechanism can work around platform limitations:
 
-* **Database.** SQLite can't touch the file system directly, so it runs inside a web worker backed by the
+* **Database.** SQLite can't access the file system directly, so it runs inside a web worker backed by the
   [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system).
-  The module gains an npm package with the worker, uses `androidx.sqlite:sqlite-web`, and creating the driver
-  becomes an expect/actual function instead of always returning the bundled driver.
+  The module gains an npm package with the worker, uses `androidx.sqlite:sqlite-web`,
+  and you can create the driver in an expect/actual function instead of always returning the bundled driver.
   OPFS also needs cross-origin isolation headers, which the webpack configuration adds.
 * **Dispatchers.** `Dispatchers.IO` doesn't exist on Kotlin/Wasm, so obtaining the IO dispatcher becomes
   an expect/actual function too.
