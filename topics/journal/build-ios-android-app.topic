@@ -45,27 +45,6 @@
   <tip>
     <p><b>TL;DR</b></p>
 
-    <p>
-      When targeting both Android and iOS, teams typically choose between three architectural approaches:
-    </p>
-
-    <list type="bullet">
-      <li>
-        <b>Fully native development:</b> Separate codebases for iOS and Android provide full platform
-        fidelity and immediate access to new OS APIs, but result in higher maintenance costs.
-      </li>
-      <li>
-        <b>Cross-platform frameworks (Flutter and React Native):</b> One shared codebase and UI layer
-        provide faster feature parity and simpler releases, but offer less control over native UX and
-        create a dependency on the framework's plugin ecosystem.
-      </li>
-      <li>
-        <b>Flexible code sharing (Kotlin Multiplatform):</b> Teams can share only business logic or add
-        Compose Multiplatform to share UI as well. This approach requires clear architectural boundaries
-        and coordination around shared code.
-      </li>
-    </list>
-
     <p><b>Consider these factors when choosing an approach:</b></p>
 
     <list type="bullet">
