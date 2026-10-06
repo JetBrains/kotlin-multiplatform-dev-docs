@@ -55,104 +55,32 @@
         <p><b>TL;DR</b></p>
 
         <p>
-            Cross-platform development lets a single codebase target multiple operating systems. In 2026, the best
-            language choice depends primarily on your team's existing skills and target platforms – there is no
-            universal winner. In practice, each language's cross-platform capabilities come from its primary
-            frameworks and tooling ecosystem. The guide below highlights the most common language and framework
-            combinations to help you compare your options.
+            There is no universally best language for cross-platform development. The right choice depends on your
+            team's existing skills, target platforms, UI requirements, and performance needs. Each language's
+            cross-platform capabilities also depend on its frameworks and tooling ecosystem.
         </p>
 
-        <p><b>Ranked shortlist:</b></p>
-
-        <list type="decimal">
-            <li>
-                <b>Kotlin</b>
-                <list type="bullet">
-                    <li>
-                        <b>Best for:</b> Teams building applications for multiple platforms while staying in the
-                        Kotlin ecosystem and sharing code across projects.
-                    </li>
-                    <li><b>Framework:</b> Kotlin Multiplatform.</li>
-                    <li>
-                        <b>Less suitable if:</b> The team has zero JVM experience and no time to ramp up.
-                    </li>
-                </list>
-            </li>
-            <li>
-                <b>JavaScript</b>
-                <list type="bullet">
-                    <li>
-                        <b>Best for:</b> Web-first teams extending to mobile applications and rapid prototyping.
-                    </li>
-                    <li><b>Frameworks:</b> React Native and Ionic.</li>
-                    <li>
-                        <b>Less suitable if:</b> The application requires extensive native API access or peak
-                        animation performance.
-                    </li>
-                </list>
-            </li>
-            <li>
-                <b>Dart</b>
-                <list type="bullet">
-                    <li>
-                        <b>Best for:</b> Teams that need a fully custom UI with a consistent look and behavior
-                        across platforms.
-                    </li>
-                    <li><b>Framework:</b> Flutter.</li>
-                    <li>
-                        <b>Less suitable if:</b> The team is invested in an existing language ecosystem and
-                        unwilling to adopt Dart exclusively.
-                    </li>
-                </list>
-            </li>
-            <li>
-                <b>C#</b>
-                <list type="bullet">
-                    <li>
-                        <b>Best for:</b> Microsoft/.NET teams building enterprise desktop and mobile applications.
-                    </li>
-                    <li><b>Framework:</b> .NET MAUI.</li>
-                    <li>
-                        <b>Less suitable if:</b> The primary target platforms are Linux or WebAssembly, where
-                        .NET MAUI support is limited.
-                    </li>
-                </list>
-            </li>
-            <li>
-                <b>C++</b>
-                <list type="bullet">
-                    <li>
-                        <b>Best for:</b> Performance-critical applications, embedded systems, and desktop software
-                        with complex rendering requirements.
-                    </li>
-                    <li><b>Framework:</b> Qt.</li>
-                    <li>
-                        <b>Less suitable if:</b> You're building a standard consumer mobile application without
-                        performance-critical constraints.
-                    </li>
-                </list>
-            </li>
-        </list>
-
-        <p><b>Selection criteria:</b></p>
+        <p><b>Quick guide:</b></p>
 
         <list type="bullet">
             <li>
-                <b>JavaScript usage:</b> JavaScript is the most widely used language globally: 66% of developers
-                according to Stack Overflow 2025 and 61% according to JetBrains’ State of Developer Ecosystem
-                Report 2025.
+                <b>Kotlin:</b> Best suited to teams in the Kotlin ecosystem that want to share application logic and,
+                with Compose Multiplatform, UI across platforms.
             </li>
             <li>
-                <b>Kotlin growth:</b> Kotlin is the fifth-fastest-growing language on GitHub according to
-                Octoverse 2024.
+                <b>JavaScript:</b> Best suited to web-first teams using React Native or Ionic to expand into mobile
+                development.
             </li>
             <li>
-                <b>Open-source governance:</b> All five languages are open source and are either maintained by
-                established organizations or governed through international standards bodies.
+                <b>Dart:</b> Best suited to teams using Flutter to build a fully shared, consistently rendered UI.
             </li>
             <li>
-                <b>Dart and Flutter:</b> Dart ranks #19 in Stack Overflow 2025, with 5.9% usage, but powers Flutter,
-                the second-most-used cross-platform framework.
+                <b>C#:</b> Best suited to Microsoft and .NET teams building enterprise desktop and mobile
+                applications with .NET MAUI.
+            </li>
+            <li>
+                <b>C++:</b> Best suited to performance-critical applications, embedded systems, and desktop software
+                with complex rendering requirements.
             </li>
         </list>
     </tip>
@@ -425,66 +353,75 @@
             typically combines transparent governance, active community contributions, and long-term commitment from its
             maintainers, assuring teams that their technological choices will be viable for many years to come.</p>
     </chapter>
-    <chapter title="How to choose a cross-platform technology"
+    <chapter title="Quick recommendations by language and technology"
              id="how-to-choose-a-cross-platform-technology">
-        <p>Choosing a cross-platform technology often comes down to balancing team expertise, UI requirements,
-            performance, and long-term maintainability. The following tables summarize these trade-offs and can help
-            you quickly identify the option that best fits your project.</p>
 
-        <p>The best cross-platform technology depends on your team's experience, your UI strategy, and your long-term
-            product goals. Use the guide below to identify the option that best matches your priorities.</p>
+        <p>
+            The preceding section explains the main factors to consider when selecting a cross-platform programming
+            language. The table below applies those criteria to common project requirements and maps each language to
+            the technology or framework that provides its cross-platform capabilities.
+        </p>
 
-        <p>Quick recommendations:</p>
+        <p>
+            These recommendations are based on team expertise, target platforms, UI strategy, performance requirements,
+            adoption flexibility, and ecosystem maturity. For a more detailed analysis of the frameworks themselves,
+            see the <a href="cross-platform-frameworks.topic">cross-platform framework comparison</a>.
+        </p>
 
-        <table>
+        <table style="header-row">
             <tr>
                 <td>If you want to...</td>
-                <td>Recommended technology</td>
+                <td>Recommended language and technology</td>
                 <td>Why</td>
             </tr>
             <tr>
-                <td>Share business logic while keeping fully native Android and iOS UIs</td>
-                <td>Kotlin Multiplatform</td>
-                <td>Share application logic while preserving the native user experience on each platform.</td>
+                <td>Share business logic while keeping native Android and iOS UIs</td>
+                <td>Kotlin with Kotlin Multiplatform</td>
+                <td>
+                    Share application logic while retaining SwiftUI or UIKit on iOS and native Android UI.
+                </td>
             </tr>
             <tr>
-                <td>Share both business logic and UI using Kotlin</td>
-                <td>Kotlin Multiplatform + Compose Multiplatform</td>
-                <td>Build and maintain both the application logic and Compose UI from a single Kotlin codebase.</td>
-             </tr>
+                <td>Share both application logic and UI using Kotlin</td>
+                <td>Kotlin Multiplatform with Compose Multiplatform</td>
+                <td>
+                    Build and maintain application logic and Compose UI in a shared Kotlin codebase.
+                </td>
+            </tr>
             <tr>
-                <td>Reuse an existing React or JavaScript skill set</td>
-                <td>React Native</td>
-                <td>Leverage the React ecosystem and JavaScript expertise to build cross-platform mobile
-                    applications.</td>
+                <td>Reuse an existing React skill set for mobile development</td>
+                <td>JavaScript or TypeScript with React Native</td>
+                <td>
+                    Apply React and JavaScript experience while sharing application logic and UI components.
+                </td>
+            </tr>
+            <tr>
+                <td>Build a hybrid application using web technologies</td>
+                <td>JavaScript or TypeScript with Ionic</td>
+                <td>
+                    Reuse HTML, CSS, and JavaScript to build applications rendered through a WebView.
+                </td>
             </tr>
             <tr>
                 <td>Build a fully shared custom UI across platforms</td>
-                <td>Flutter</td>
-                <td>Flutter renders its own widget tree, providing a consistent experience across Android and
-                    iOS.</td>
+                <td>Dart with Flutter</td>
+                <td>
+                    Use Flutter's widget and rendering system to provide a consistent interface across platforms.
+                </td>
             </tr>
             <tr>
-                <td>Maximize native performance and platform API access</td>
-                <td>Kotlin Multiplatform</td>
-                <td>Shared Kotlin code integrates directly with native platform APIs without requiring a JavaScript
-                    bridge.</td>
+                <td>Build enterprise desktop and mobile apps in the Microsoft ecosystem</td>
+                <td>C# with .NET MAUI</td>
+                <td>
+                    Reuse existing .NET skills, libraries, and tooling across supported platforms.
+                </td>
             </tr>
             <tr>
-                <td>Reduce the learning curve for a Kotlin team</td>
-                <td>Kotlin Multiplatform</td>
-                <td>Existing Kotlin knowledge transfers directly to multiplatform development.</td>
-            </tr>
-            <tr>
-                <td>Prioritize the largest JavaScript ecosystem</td>
-                <td>React Native</td>
-                <td>Access a mature ecosystem of JavaScript libraries, tools, and community resources.</td>
-            </tr>
-            <tr>
-                <td>Start by sharing business logic and decide on UI sharing later</td>
-                <td>Kotlin Multiplatform</td>
-                <td>Teams can begin with shared logic and adopt Compose Multiplatform incrementally if it fits their
-                    roadmap.</td>
+                <td>Build performance-critical, embedded, or complex desktop software</td>
+                <td>C++ with Qt</td>
+                <td>
+                    Combine low-level performance control with a mature cross-platform application framework.
+                </td>
             </tr>
         </table>
     </chapter>
