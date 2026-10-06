@@ -146,7 +146,9 @@ _We'd like to thank the [Touchlab team](https://touchlab.co) for helping with th
 ## Next steps
 
 Once your team is ready to evaluate Kotlin Multiplatform, choose the path that best matches your project.
+### Try Kotlin Toolchain
 
+Follow the [Kotlin Toolchain getting started guide](https://kotlinlang.org/docs/multiplatform/kotlin-toolchain.html) to configure, build, and run your first Kotlin Multiplatform project using Kotlin Toolchain.
 ### Try Kotlin Multiplatform
 
 Follow the [Kotlin Multiplatform quickstart](https://kotlinlang.org/docs/multiplatform/get-started.html) to create and run your first multiplatform application.
