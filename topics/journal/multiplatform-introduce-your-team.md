@@ -18,7 +18,8 @@ Software development is a team game, with each critical decision needing the app
 Understanding the people who work on your project is the first step to successful integration. Your boss is responsible for delivering features with the best quality in the shortest time possible. To them, any new technology is a risk. Your colleagues have a different perspective, as well. They have experience building apps with the "native" technology stack. They know how to write the UI and business logic, work with dependencies, test, and debug code in the IDE, and they are already familiar with the language. Switching to a different ecosystem is always inconvenient, as it always means leaving your comfort zone.
 
 Given all that, be ready to face lots of biases and answer a lot of questions when advocating for the move to Kotlin Multiplatform. As you do, never lose sight of what your team needs. Some of the advice below might be useful for preparing your pitch.
-> **Takeaway:** Successful Kotlin Multiplatform adoption begins with understanding the concerns of Android developers, iOS developers, technical leaders, and product stakeholders before changing established workflows.
+
+**Takeaway:** Successful Kotlin Multiplatform adoption begins with understanding the concerns of Android developers, iOS developers, technical leaders, and product stakeholders before changing established workflows.
 ## Explain how Kotlin Multiplatform works
 
 At this stage, you need to show that using Kotlin Multiplatform could bring value to your project and eliminate any biased opinions and doubts about cross-platform mobile applications that your team might have.
@@ -29,11 +30,11 @@ KMP has been widely used in production since its Alpha release. As a result, Jet
 * **Seamless performance** – Shared code written in Kotlin is compiled into different output formats for different targets: Java bytecode for Android and [native binaries](https://kotlinlang.org/docs/multiplatform/multiplatform-build-native-binaries.html) for iOS. Thus, there is no additional runtime overhead when it comes to executing this code on platforms, and the performance is comparable to [native apps](native-and-cross-platform.topic).
 * **Compatibility with legacy code** – No matter how large your project is, your existing code will not prevent you from integrating Kotlin Multiplatform. You can start writing cross-platform code at any moment and connect it to your iOS and Android apps as a regular dependency, or you can use the code you've already written and modify it to be compatible with iOS.
 
-Kotlin Multiplatform can also improve collaboration between platform teams. According to the KMP Survey Q2 2024, 55% of users reported improved collaboration after adopting Kotlin Multiplatform, while 65% reported improvements in performance and quality.
+Kotlin Multiplatform can also improve collaboration between platform teams. According to the [KMP Survey Q2 2024](https://kotlinlang.org/docs/multiplatform/kmp-overview.html), 55% of users reported improved collaboration after adopting Kotlin Multiplatform, while 65% reported improvements in performance and quality.
 
-**Source:** [KMP Survey Q2 2024](https://kotlinlang.org/docs/multiplatform/kmp-overview.html)
 
-Being able to explain _how_ a technology works is crucial, as nobody likes it when a discussion seems to rely on magic. People might think the worst if anything is unclear to them, so be careful not to make the mistake of thinking something is too obvious to warrant an explanation. Instead, try to explain all the basic concepts before moving on to the next stage. This document on [multiplatform programming](get-started.topic) could help you systemize your knowledge to prepare for this experience.
+Being able to explain _how_ a technology works is crucial, as nobody likes it when an argument seems to rely on magic. People might think the worst if anything is unclear to them, so be careful not to make the mistake of thinking something is too obvious to warrant an explanation. Instead, try to explain all the basic concepts before moving on to the next stage. This document on [multiplatform programming](get-started.topic) could help you systemize your knowledge to prepare for this experience.
+
 > **Takeaway:** Kotlin Multiplatform lets teams adopt code sharing gradually while retaining direct platform API access, native performance, and their existing Android and iOS codebases.
 ## Use case studies to demonstrate the value of multiplatform development
 
@@ -42,25 +43,25 @@ Understanding how the multiplatform technology works is necessary, but not enoug
 At this stage, you need to explain the main gains of using Kotlin Multiplatform in your product. One way is to share stories of other companies who already benefit from cross-platform mobile development. The successful experience of these teams, especially ones with similar product objectives, could become a key factor in the final decision.
 
 Citing case studies of different companies who already use Kotlin Multiplatform in production could significantly help you make a compelling argument:
-* **Booking.com** – By adopting Kotlin Multiplatform for its experimentation library, Booking.com keeps experiment behavior consistent across Android and iOS while reducing duplicated implementation work.  
+* **Booking.com**. By adopting Kotlin Multiplatform for its experimentation library, Booking.com keeps experiment behavior consistent across Android and iOS while reducing duplicated implementation work.  
   [Read more about the case study](https://kotlinlang.org/case-studies/#booking)
 
-* **Duolingo** – Kotlin Multiplatform helps Duolingo accelerate development and ship features consistently across Android and iOS.  
+* **Duolingo**. Kotlin Multiplatform helps Duolingo accelerate development and ship features consistently across Android and iOS.  
   [Read more about the case study](https://kotlinlang.org/case-studies/#duolingo)
 
-* **Sony** – Sony moved from separate native development plans to Kotlin Multiplatform with Compose Multiplatform to build a shared companion application.  
+* **Sony**. Sony moved from separate native development plans to Kotlin Multiplatform with Compose Multiplatform to build a shared companion application.  
   [Read more about the case study](https://kotlinlang.org/case-studies/#sony)
 
-* **McDonald's** – By leveraging Kotlin Multiplatform for the Global Mobile App, McDonald's built a codebase that can be shared across platforms, removing the need for codebase redundancies.  
+* **McDonald's**. By leveraging Kotlin Multiplatform for the Global Mobile App, McDonald's built a codebase that can be shared across platforms, removing the need for codebase redundancies.  
   [Read more about the case study](https://kotlinlang.org/case-studies/#mcdonalds-umain)
 
-* **Netflix** – With the help of Kotlin Multiplatform, Netflix optimizes product reliability and delivery speed, which is crucial for serving its customers' needs.  
+* **Netflix**. With the help of Kotlin Multiplatform, Netflix optimizes product reliability and delivery speed, which is crucial for serving its customers' needs.  
   [Read more about the case study](https://netflixtechblog.com/netflix-android-and-ios-studio-apps-kotlin-multiplatform-d6d4d8d25d23)
 
-* **Forbes** – By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms while retaining flexibility for platform-specific customization.  
+* **Forbes**. By sharing over 80% of logic across iOS and Android, Forbes now rolls out new features simultaneously on both platforms while retaining flexibility for platform-specific customization.  
   [Read more about the case study](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/)
 
-* **9GAG** – After trying both Flutter and React Native, 9GAG gradually adopted Kotlin Multiplatform, which now helps the team ship features faster while providing a consistent experience to users.  
+* **9GAG**. After trying both Flutter and React Native, 9GAG gradually adopted Kotlin Multiplatform, which now helps the team ship features faster while providing a consistent experience to users.  
   [Read more about the case study](https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04)
 [![Learn from Kotlin Multiplatform success stories](kmp-success-stories.svg){width="700"}](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 > **Takeaway:** Production examples from Booking.com, Duolingo, Sony, and 9GAG help teams evaluate Kotlin Multiplatform using real-world evidence rather than theoretical benefits alone.
@@ -101,7 +102,7 @@ A: Not necessarily. Your team can set up the project so that Android or Kotlin d
 
 ### Q: Can iOS developers continue using SwiftUI or UIKit with Kotlin Multiplatform?
 
-A: Yes. [Kotlin Multiplatform does not require teams to replace native iOS UI frameworks](https://kotlinlang.org/docs/multiplatform/kmp-for-ios.html). You can share business and data logic with Kotlin while continuing to build the iOS interface entirely with SwiftUI or UIKit. Teams that want to share UI also have the option of using Compose Multiplatform.
+A: Yes. [Kotlin Multiplatform does not require teams to replace native iOS UI frameworks](https://kotlinlang.org/docs/multiplatform/kmp-for-ios.html#myth-adopting-kotlin-multiplatform-means-no-more-swift). You can share business and data logic with Kotlin while continuing to build the iOS interface entirely with SwiftUI or UIKit. Teams that want to share UI also have the option of using Compose Multiplatform.
 
 ### Q: How do iOS developers debug problems in shared Kotlin code?
 
