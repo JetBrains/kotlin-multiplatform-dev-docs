@@ -60,19 +60,10 @@
 
         <list type="bullet">
             <li>
-                Development moves faster because large portions of the app's logic only need to be written once.
-            </li>
-            <li>
-                Long-term maintenance is simpler, with one shared codebase to update instead of two.
-            </li>
+                Teams develop faster because large portions of the app's logic only need to be written once.            </li>
+
             <li>
                 Teams can ship new features to both platforms at the same time instead of staggering releases.
-            </li>
-            <li>
-                Teams can reach wider audiences through a single codebase that targets both Android and iOS.
-            </li>
-            <li>
-                Modern technologies such as Kotlin Multiplatform can deliver native-level performance.
             </li>
         </list>
 
@@ -86,15 +77,8 @@
                 Access to native platform features may require additional effort, although modern tools enable
                 direct access to platform-specific APIs.
             </li>
-            <li>
-                User experience quality depends heavily on the cross-platform tools and frameworks you choose.
-            </li>
         </list>
 
-        <p>
-            This article compares six widely used cross-platform frameworks: Kotlin Multiplatform, Flutter,
-            React Native, .NET MAUI, Ionic, and NativeScript.
-        </p>
     </tip>
 
     <p>Nowadays, many companies are facing the challenge of building mobile apps for multiple platforms, specifically for both Android and iOS. This is why cross-platform mobile development solutions have emerged as one of the most popular software development trends.</p>
