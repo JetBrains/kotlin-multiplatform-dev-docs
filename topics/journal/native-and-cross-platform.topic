@@ -59,14 +59,6 @@
     <tip>
         <p><b>TL;DR</b></p>
 
-        <p>
-            Choosing how to build applications for iOS and Android comes down to one trade-off: how much performance
-            and platform-native feel you need versus how much time and cost you can save by sharing code. There are
-            three main development approaches: native, cross-platform, and hybrid.
-        </p>
-
-        <p><b>Which approach should you choose?</b></p>
-
         <list type="bullet">
             <li>
                 <b>Choose native</b> if you're targeting a single platform, your app is hardware-intensive
@@ -83,10 +75,6 @@
             </li>
         </list>
 
-        <p>
-            Most teams don't have to choose “all or nothing” – Kotlin Multiplatform lets you share business logic
-            while keeping a native UI, or share UI as well by adding Compose Multiplatform.
-        </p>
     </tip>
 
     <p>Mobile app development in 2025–2026 is defined by rising user expectations, multiplatform demand, and the need
@@ -136,13 +124,13 @@
             </def>
 
             <def title="Shared UI">
-                Interface code reused across platforms rather than built natively for each operating system. In
+                UI code reused across platforms rather than built natively for each operating system. In
                 Kotlin Multiplatform, sharing UI requires adding Compose Multiplatform.
             </def>
 
             <def title="Near-native performance">
-                Performance close to that of a fully native app, typical of modern compiled cross-platform
-                technologies such as Kotlin Multiplatform and Flutter.
+                Performance that is comparable to a platform-native implementation for typical application workloads.
+                Actual results depend on the framework, workload, UI architecture, and use of platform interoperability.
             </def>
 
             <def title="Incremental adoption">
@@ -152,7 +140,7 @@
         </deflist>
     </chapter>
     <chapter title="Comparing development approaches" id="comparing-development-approaches">
-        <table>
+        <table style="both">
             <tr>
                 <td>Criterion</td>
                 <td>Native</td>
@@ -160,37 +148,37 @@
                 <td>Hybrid</td>
             </tr>
             <tr>
-                <td><b>Performance</b></td>
+                <td>Performance</td>
                 <td>Highest level of performance; smooth, responsive experience</td>
                 <td>Near-native; varies by framework and how much UI is shared</td>
                 <td>Weakest – often lacks responsiveness</td>
             </tr>
             <tr>
-                <td><b>Device API access</b></td>
+                <td>Device API access</td>
                 <td>Full access to all platform APIs</td>
                 <td>Generally strong; direct access is possible through platform-specific APIs if needed</td>
                 <td>Limited; often requires plugins</td>
             </tr>
             <tr>
-                <td><b>UI fidelity</b></td>
+                <td>UI fidelity</td>
                 <td>Fully integrated with the operating system</td>
                 <td>Varies by framework; can range from native-feeling UI to a custom rendering layer</td>
                 <td>Limited fidelity</td>
             </tr>
             <tr>
-                <td><b>Team skills needed</b></td>
+                <td>Team skills needed</td>
                 <td>Separate Swift and Kotlin or Java expertise required</td>
                 <td>Framework-dependent</td>
                 <td>Web development skills: HTML, CSS, and JavaScript</td>
             </tr>
             <tr>
-                <td><b>Time to market</b></td>
+                <td>Time to market</td>
                 <td>Slower – duplicate builds for each platform</td>
                 <td>Faster – single shared codebase</td>
                 <td>Fast for simple apps and prototypes</td>
             </tr>
             <tr>
-                <td><b>Maintenance</b></td>
+                <td>Maintenance</td>
                 <td>Two separate codebases to maintain</td>
                 <td>One shared codebase with fewer duplicate bugs</td>
                 <td>Plugin dependencies can add maintenance overhead</td>
