@@ -50,6 +50,41 @@
     <web-summary>Explore key considerations in choosing a language for cross-platform development, comparisons of
         popular technologies, and real-life case studies.
     </web-summary>
+
+    <tip>
+        <p><b>TL;DR</b></p>
+
+        <p>
+            There is no universally best language for cross-platform development. The right choice depends on your
+            team's existing skills, target platforms, UI requirements, and performance needs. Each language's
+            cross-platform capabilities also depend on its frameworks and tooling ecosystem.
+        </p>
+
+        <p><b>Quick guide:</b></p>
+
+        <list type="bullet">
+            <li>
+                <b>Kotlin:</b> Best suited to teams in the Kotlin ecosystem that want to share application logic and,
+                with Compose Multiplatform, UI across platforms.
+            </li>
+            <li>
+                <b>JavaScript:</b> Best suited to web-first teams using React Native or Ionic to expand into mobile
+                development.
+            </li>
+            <li>
+                <b>Dart:</b> Best suited to teams using Flutter to build a fully shared, consistently rendered UI.
+            </li>
+            <li>
+                <b>C#:</b> Best suited to Microsoft and .NET teams building enterprise desktop and mobile
+                applications with .NET MAUI.
+            </li>
+            <li>
+                <b>C++:</b> Best suited to performance-critical applications, embedded systems, and desktop software
+                with complex rendering requirements.
+            </li>
+        </list>
+    </tip>
+
     <p>You’ve probably started to notice the term <a href="cross-platform-mobile-development.topic">cross-platform
         development</a> popping up more and more frequently these days. Indeed, cross-platform programming is becoming
         increasingly popular in the context of software development. It is particularly prevalent in the area of mobile
@@ -317,6 +352,78 @@
             progress faster and receive more frequent upgrades. Balancing these aspects is critical. A strong project
             typically combines transparent governance, active community contributions, and long-term commitment from its
             maintainers, assuring teams that their technological choices will be viable for many years to come.</p>
+    </chapter>
+    <chapter title="Quick recommendations by language and technology"
+             id="how-to-choose-a-cross-platform-technology">
+
+        <p>
+            The preceding section explains the main factors to consider when selecting a cross-platform programming
+            language. The table below applies those criteria to common project requirements and maps each language to
+            the technology or framework that provides its cross-platform capabilities.
+        </p>
+
+        <p>
+            These recommendations are based on team expertise, target platforms, UI strategy, performance requirements,
+            adoption flexibility, and ecosystem maturity. For a more detailed analysis of the frameworks themselves,
+            see the <a href="cross-platform-frameworks.topic">cross-platform framework comparison</a>.
+        </p>
+
+        <table style="header-row">
+            <tr>
+                <td>If you want to...</td>
+                <td>Recommended language and technology</td>
+                <td>Why</td>
+            </tr>
+            <tr>
+                <td>Share business logic while keeping native Android and iOS UIs</td>
+                <td>Kotlin with Kotlin Multiplatform</td>
+                <td>
+                    Share application logic while retaining SwiftUI or UIKit on iOS and native Android UI.
+                </td>
+            </tr>
+            <tr>
+                <td>Share both application logic and UI using Kotlin</td>
+                <td>Kotlin Multiplatform with Compose Multiplatform</td>
+                <td>
+                    Build and maintain application logic and Compose UI in a shared Kotlin codebase.
+                </td>
+            </tr>
+            <tr>
+                <td>Reuse an existing React skill set for mobile development</td>
+                <td>JavaScript or TypeScript with React Native</td>
+                <td>
+                    Apply React and JavaScript experience while sharing application logic and UI components.
+                </td>
+            </tr>
+            <tr>
+                <td>Build a hybrid application using web technologies</td>
+                <td>JavaScript or TypeScript with Ionic</td>
+                <td>
+                    Reuse HTML, CSS, and JavaScript to build applications rendered through a WebView.
+                </td>
+            </tr>
+            <tr>
+                <td>Build a fully shared custom UI across platforms</td>
+                <td>Dart with Flutter</td>
+                <td>
+                    Use Flutter's widget and rendering system to provide a consistent interface across platforms.
+                </td>
+            </tr>
+            <tr>
+                <td>Build enterprise desktop and mobile apps in the Microsoft ecosystem</td>
+                <td>C# with .NET MAUI</td>
+                <td>
+                    Reuse existing .NET skills, libraries, and tooling across supported platforms.
+                </td>
+            </tr>
+            <tr>
+                <td>Build performance-critical, embedded, or complex desktop software</td>
+                <td>C++ with Qt</td>
+                <td>
+                    Combine low-level performance control with a mature cross-platform application framework.
+                </td>
+            </tr>
+        </table>
     </chapter>
     <chapter title="The future of cross-platform development" id="the-future-of-cross-platform-development">
         <p>As cross-platform development advances, several emerging trends are influencing its future, pushing it beyond
