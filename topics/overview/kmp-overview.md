@@ -55,7 +55,7 @@ This helps achieve near-native performance while writing platform-agnostic code:
 ### Seamless tooling
 
 IntelliJ IDEA and Android Studio provide smart IDE support for KMP with the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
-which includes common UI previews and [hot reload for Compose Multiplatform](compose-hot-reload.md).
+which includes common UI previews, [Compose Hot Reload](compose-hot-reload.md), and other quality-of-life features.
 
 <video src="https://youtu.be/ACmerPEQAWA" width="700"/>
 
