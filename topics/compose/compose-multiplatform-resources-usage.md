@@ -266,11 +266,12 @@ You can use special symbols in string resources:
 You don't need to escape special XML characters like "@" or "?"
 as you do [for Android strings](https://developer.android.com/guide/topics/resources/string-resource#escaping_quotes). 
 
-> IDE tip: You can use Emmet-like syntax and press **Tab** to expand the abbreviation into string tags:
+> In the IDE with the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform), 
+> you can press **Tab** to expand the Emmet-like abbreviation use into string tags:
 > * `test` → `<string name="test"></string>`
 > * `test{Example}` → `<string name="test">Example</string>`
 >
-{style="note"}
+{style="tip"}
 
 #### String templates
 
@@ -299,11 +300,12 @@ You can put the `%1$s` placeholder in the resource string and use it to display 
 Text(stringResource(Res.string.str_template, "User_name", 100.1f))
 ```
 
-> IDE tip: Instead of manually typing `%1$s` or `%2$d` for placeholders, you can use inline numeric shortcuts. 
+> In the IDE with the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+> instead of manually typing `%1$s` or `%2$d` for placeholders, you can use inline numeric shortcuts. 
 > For example, when you type `1` or `1s` within the string value, it expands into `%1$s`.
 > Similarly, when you type `2d`, it expands into `%2$d`.
 > 
-{style="note"}
+{style="tip"}
 
 #### String arrays
 
@@ -356,7 +358,8 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-> IDE tip: You can use Emmet-like syntax to quickly define string arrays.
+> In the IDE with the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+> you can use Emmet-like syntax to quickly define string arrays.
 > Use `string-array`, `sa`, or the `>` operator to generate an empty array template.
 > For a named array with a predefined number of items and starting text, type `test>2{Hello}` and press **Tab**:
 > ```xml
@@ -366,7 +369,7 @@ coroutineScope.launch {
 > </string-array>
 > ```
 >
-{style="note"}
+{style="tip"}
 
 #### Plurals
 
@@ -438,7 +441,8 @@ coroutineScope.launch {
 </tab>
 </tabs>
 
-> IDE tip: You can use Emmet-like syntax to generate plural resources.
+> In the IDE with the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform),
+> you can use Emmet-like syntax to generate plural resources.
 > For example, use `plurals`, `p`, or `:` to generate a default empty string template.
 > If you work in `values-en/strings.xml`, the IDE automatically detects locale, the required quantities,
 > and that English only requires `one` and `other`.
@@ -450,7 +454,7 @@ coroutineScope.launch {
 > </plurals>
 > ```
 >
-{style="note"}
+{style="tip"}
 
 ### Fonts
 
