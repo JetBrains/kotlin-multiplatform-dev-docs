@@ -5,15 +5,16 @@ In Compose Multiplatform apps, you can share text, URLs, files, and other conten
 Sharing capabilities differ across platforms:
 
 * Android and iOS provide native system share dialogs.
-* Desktop applications generally do not have a universal system share dialog. Common alternatives include using the clipboard, opening files or URLs with the default application, or calling platform-specific APIs.
+* Desktop applications generally don't have a universal system share dialog. Common alternatives include using the clipboard, 
+opening files or URLs with the default application, or calling platform-specific APIs.
 * Web applications can use the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API), depending on browser support.
 
 To share content in a Compose Multiplatform app, use [community libraries](#community-libraries) or call [platform-specific APIs](#platform-specific-sharing-apis) directly.
-To open a link in the default application on any platform, use the [common `UriHandler` API](#related-features).
+To open a link in the default associated application on any platform, use the [common `UriHandler` API](#related-features).
 
 ## Community libraries
 
-Community libraries wrap native sharing APIs and provide a common API that you can call from shared code.
+Community libraries wrap native sharing APIs and provide a common API that you can call from common code.
 
 [KMP Sharing](https://klibs.io/project/software-mansion/kmp-sharing) provides a common API for the system share dialog on Android and iOS.
 It supports sharing text or a URL, optionally with file URIs:
@@ -32,7 +33,7 @@ Button(onClick = { share("Kotlin programming language", sharingOptions) }) {
 ```
 
 [FileKit](https://klibs.io/project/vinceglb/FileKit) provides cross-platform file picking, saving, and file operations with native dialogs.
-You can use these libraries together. For example, pick files with FileKit and share them with KMP Sharing:
+You can use these libraries together, for example, pick files with FileKit and share them with KMP Sharing:
 
 ```kotlin
 val share = rememberShare()
@@ -76,7 +77,7 @@ for example, to control content types, share options, or the sharing flow.
 
 ### Android
 
-Use an `ACTION_SEND` intent to share text, a URL, or a file.
+In the `androidMain` source set, use an `ACTION_SEND` intent to share text, a URL, or a file.
 For text or URLs, pass the content with `Intent.EXTRA_TEXT`:
 
 ```kotlin
@@ -113,11 +114,11 @@ val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
 context.startActivity(Intent.createChooser(intent, "Share with"))
 ```
 
-Learn more in the Android Developers documentation: [Sharing data between apps](https://developer.android.com/develop/ui/compose/sharing).
+For more information, see the Android Developers page [Sharing data between apps](https://developer.android.com/develop/ui/compose/sharing).
 
 ### iOS
 
-For UIKit-based UIs, present a `UIActivityViewController`:
+For [UIKit-based UIs](compose-uikit-integration.md), present a `UIActivityViewController` in the `iOSApp` source set:
 
 ```swift
 let items: [Any] = [URL(string: "https://kotlinlang.org")!]
@@ -130,21 +131,22 @@ let controller = UIActivityViewController(
 viewController.present(controller, animated: true)
 ```
 
-In SwiftUI, you can use `ShareLink` for values supported by the `Transferable` protocol. 
+In [SwiftUI](compose-swiftui-integration.md), you can use `ShareLink` for values supported by the `Transferable` protocol. 
 For custom or large files, implement a `Transferable` representation or use `UIActivityViewController`
 with a platform bridge.
 
-Learn more in the Apple Developer documentation: [Collaborating and sharing copies of your data](https://developer.apple.com/documentation/uikit/collaborating-and-sharing-copies-of-your-data).
+For more information, see the Apple Developer page [Collaborating and sharing copies of your data](https://developer.apple.com/documentation/uikit/collaborating-and-sharing-copies-of-your-data).
 
 ### Desktop
 
 Desktop applications do not have a universal share dialog. Common approaches include:
 
-* copying content to the clipboard,
-* opening a file with the default application,
-* using platform-specific APIs, such as native macOS sharing APIs.
+* Copying content to the clipboard.
+* Opening a file with the default application.
+* Using platform-specific APIs, such as `NSSharingServicePicker` class on macOS with the list of available sharing services.
 
-For example, you can open a file with its default application using `java.awt.Desktop` when it is supported:
+For example, you can open a file in the application associated with the file type using `java.awt.Desktop` 
+when there is such an application:
 
 ```kotlin
 val file = java.io.File("/path/to/document.pdf")
@@ -159,7 +161,8 @@ if (java.awt.Desktop.isDesktopSupported()) {
 
 ### Web
 
-Web applications can use the Web Share API via JavaScript interop when supported by the browser and operating system. 
+Web applications can use the Web Share API via [JavaScript interop](https://kotlinlang.org/docs/wasm-js-interop.html) 
+when supported by the browser and operating system. 
 It usually requires HTTPS and a user gesture, such as a button click.
 
 Check for support before calling the API and provide a fallback, for example, copying the content to the clipboard:
@@ -204,5 +207,7 @@ or copying a link to the content instead.
       Text("Send email")
   }
   ```
-* **Drag and drop.** Compose Multiplatform provides a common API for sharing content by dragging it to a destination. See [Drag and drop](https://kotlinlang.org/docs/multiplatform/compose-drag-drop.html).
-* **Clipboard.** A common Compose Multiplatform clipboard API is coming soon. Track progress in [CMP-7624](https://youtrack.jetbrains.com/issue/CMP-7624).
+  
+* **Drag and drop.** Compose Multiplatform provides a common API for sharing content by dragging it to a destination. See [Drag and drop](compose-drag-drop.md).
+* **Clipboard.** Compose Multiplatform supports Jetpack Compose’s [Clipboard](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/Clipboard) interface. 
+However, clipboard interactions from common code are currently limited. Track progress in [CMP-7624](https://youtrack.jetbrains.com/issue/CMP-7624).
