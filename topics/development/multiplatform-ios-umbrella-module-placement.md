@@ -6,7 +6,8 @@ An iOS app should consume these libraries through a single [umbrella framework](
 so the location of the umbrella module that produces this framework determines how changes reach the iOS app.
 
 This page compares the options for placing the umbrella module and describes the approach we recommend for multi-team
-setups: keeping the umbrella module in the iOS app repository.
+setups: keeping an umbrella module in each iOS app repository.
+This applies whether you have one iOS app or several.
 
 ## The problem with a separately published umbrella framework
 
@@ -53,7 +54,7 @@ The following table summarizes where the umbrella module can be located in diffe
   <tr>
      <td>The repository with the shared code</td>
      <td>Published as a prebuilt XCFramework</td>
-     <td>One team that owns all of the shared code and ships it to one iOS app</td>
+     <td>One team that owns all of the shared code, for one iOS app or for several apps that use the same libraries and update them together</td>
      <td>All shared modules are released together; serving different subsets to different iOS apps requires a separate umbrella module and framework release for each app</td>
   </tr>
   <tr>
@@ -74,7 +75,7 @@ The following table summarizes where the umbrella module can be located in diffe
 
 In this setup, the shared code is split into libraries that are published as regular Kotlin Multiplatform artifacts,
 for example, to an internal Maven repository.
-The iOS app repository contains a small Gradle project with a single umbrella module.
+Each iOS app repository contains a small Gradle project with a single umbrella module.
 The umbrella module has no feature code of its own: it declares the libraries and the versions that the iOS app uses.
 
 When the iOS app is built, Xcode runs a Gradle task that resolves the library versions, builds the umbrella framework
@@ -111,6 +112,9 @@ Keep the following in mind:
 * Exporting a dependency to the framework disables dead code elimination for it.
   Export only the libraries whose API is used from Swift and add other libraries as regular dependencies.
   See [Export dependencies to binaries](multiplatform-build-native-binaries.md#export-dependencies-to-binaries).
+* With several iOS apps, each app adopts a library update separately, and the apps can end up on different library
+  versions. Library teams may need to support older versions for longer.
+  If all apps use the same libraries and update them together, a single shared umbrella framework can be simpler.
 
 ### Set up the umbrella module
 

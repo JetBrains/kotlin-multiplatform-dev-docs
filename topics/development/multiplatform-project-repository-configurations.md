@@ -1,10 +1,7 @@
 [//]: # (title: Repository configurations)
 
-This page describes how to distribute the apps and the shared code between repositories.
-For an overview of all project configuration aspects, see [](multiplatform-project-configuration.md).
-
-There are a number of repository configuration options that you can use in new and existing Kotlin Multiplatform
-projects, using one repository or a combination of several repositories.
+This page describes ways to distribute the code of apps and shared modules between repositories
+along with use cases for each approach.
 
 ## Monorepo: everything in one repository
 
@@ -81,16 +78,17 @@ repositories with Kotlin Multiplatform code. For example, you can store a loggin
 product, in a separate repository with its own versioning.
 
 In this case, you have multiple Kotlin Multiplatform library repositories, and each library is versioned and
-published separately, including the iOS (klib) artifacts.
+published separately, including the iOS (.klib) artifacts.
 If several iOS apps use different subsets of these libraries, each app needs its own umbrella module that depends on
 the libraries the app uses.
 
-We recommend placing this umbrella module in the iOS app repository.
+The recommended approach is to place this umbrella module in the iOS app repository.
 The umbrella module contains no feature code: it lists the libraries and their versions and builds the iOS framework
 locally as part of the iOS build.
-This way, each library can be updated in the iOS app separately, and each app chooses its own set of libraries:
+This way, each library can be updated in the iOS app separately,
+and if there are multiple iOS apps, each app can receive its own set of libraries:
 
-<!-- TODO: replace with a diagram showing the umbrella module inside each iOS app repository -->
+![](umbrella-module-ios-repo.svg)
 
 Alternatively, each app can have an additional repository containing the umbrella module, which publishes a prebuilt
 umbrella framework for the app:
@@ -104,7 +102,8 @@ For a detailed comparison and the recommended setup, see [](multiplatform-ios-um
 Each library must also be versioned and published for the Android or JVM platforms.
 The apps and each library can be versioned separately.
 
-## What's next
+## See also
 
+* [Overview of all project configuration aspects](multiplatform-project-configuration.md)
 * [Learn about code sharing workflows](multiplatform-project-code-sharing-workflow.md)
 * [Choose where to place the umbrella module](multiplatform-ios-umbrella-module-placement.md)

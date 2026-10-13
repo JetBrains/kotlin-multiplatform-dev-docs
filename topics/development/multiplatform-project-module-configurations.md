@@ -1,10 +1,7 @@
 [//]: # (title: Module configurations)
 
-This page describes how to organize the shared code into Kotlin Multiplatform modules.
-For an overview of all project configuration aspects, see [](multiplatform-project-configuration.md).
-
-There are two module configuration options that you can use in Kotlin Multiplatform projects: single module or several
-shared modules.
+This page describes two ways to organize shared code into Kotlin Multiplatform modules:
+keep it all in a single module or distribute between several shared modules.
 
 ## Single shared module
 
@@ -91,7 +88,7 @@ describe your case in [KT-42247](https://youtrack.jetbrains.com/issue/KT-42247)
 and [KT-42250](https://youtrack.jetbrains.com/issue/KT-42250).
 
 > When you see that an iOS app depends on an umbrella module in the examples on the [](multiplatform-project-repository-configurations.md)
-> page, it means that it also depends on the umbrella framework generated from this module.
+> page, it means that it depends on the umbrella framework generated from this module.
 >
 {style="tip"}
 
@@ -124,8 +121,9 @@ The solution to this problem is to use an umbrella framework. It prevents the bl
 dependencies, helps optimize the resulting artifact, and eliminates the frustrations caused by incompatibilities between
 dependencies.
 
-## What's next
+## See also
 
+* [Overview of all project configuration aspects](multiplatform-project-configuration.md)
 * [Learn about repository configurations](multiplatform-project-repository-configurations.md)
 * [Learn about code sharing workflows](multiplatform-project-code-sharing-workflow.md)
 * [Choose where to place the umbrella module](multiplatform-ios-umbrella-module-placement.md)

@@ -32,12 +32,12 @@ To review all available options for iOS integration, see [](multiplatform-ios-in
 
 You can keep all of the shared code in a single Kotlin Multiplatform module or split it into several feature modules.
 
-A single module is the simplest design and works great as a starting point. As the shared code grows, splitting it
-into feature modules improves separation of concerns and scalability.
+A single module is the simplest design and works great as a starting point.
+As the shared code grows, you can make your project setup clearer and more scalable by splitting it into feature modules.
 
-With several modules, the iOS app still consumes a single framework: you add an _umbrella module_ that depends on all
+With several modules, the iOS app still consumes a single framework: you create an _umbrella module_ that depends on all
 of the feature modules and generate an _umbrella framework_ from it. Including several Kotlin frameworks in one iOS app
-isn't recommended because each of them duplicates the shared dependencies and the Kotlin runtime.
+is inefficient because it duplicates the Kotlin runtime and dependencies shared between the frameworks.
 
 For pros and cons of each option and details on umbrella frameworks, see [](multiplatform-project-module-configurations.md).
 
@@ -45,19 +45,20 @@ For pros and cons of each option and details on umbrella frameworks, see [](mult
 
 You can store the apps and the shared code in a single repository or spread them across several repositories:
 
-* **Monorepo**: the Android app, the iOS app, and the shared modules are in one repository.
-* **Two repositories**: the Android app and the shared modules are in one repository, the iOS app is in another.
-* **Three repositories**: the Android app, the iOS app, and the shared modules each have their own repository.
-* **Many repositories**: the shared code is split into several library repositories that are versioned
-  independently and consumed by one or more apps.
+* **Monorepo**. The Android app, the iOS app, and the shared modules are in the same repository.
+* **Two repositories**. The Android app and the shared modules are in one repository, the iOS app is in another.
+* **Three repositories**. A separate repository for the Android app, the iOS app, and the shared modules.
+* **Many repositories**. The shared code is split into several library repositories that are versioned
+  independently and consumed by the apps.
 
 For details on each configuration, see [](multiplatform-project-repository-configurations.md).
 
 ## Code sharing workflow
 
-The iOS app can consume a framework generated from the Kotlin Multiplatform shared modules as a _local_ dependency, which
-is built from source as part of the iOS build, or as a _remote_ dependency, which is published and consumed like any other
-third-party package.
+The iOS app can consume a framework generated from the Kotlin Multiplatform shared modules as a _local_ dependency,
+which is built from source as part of the iOS build,
+or as a _remote_ dependency,
+which is published and consumed like any other third-party package.
 
 Local distribution makes it easier for the whole team to work on shared code. Remote distribution keeps the iOS
 workflow unchanged but makes changes to shared code slower to reach the iOS app.
@@ -68,10 +69,11 @@ For pros and cons of each workflow and how to combine them, see [](multiplatform
 ## Umbrella module placement
 
 When the shared code is split into independently versioned libraries maintained by several teams,
-the location of the umbrella module determines how much coordination each update requires.
-Publishing a prebuilt umbrella framework from a separate repository forces all library updates through a single
-artifact.
-For multi-team setups, we recommend placing the umbrella module in the iOS app repository instead:
-it lets each library be updated separately and each iOS app choose its own set of libraries.
+where you place the umbrella module determines how much effort you need to coordinate each update.
+
+For example,
+publishing a prebuilt umbrella framework from a separate repository forces all library updates through a single artifact.
+For multi-team setups, a better approach can be to place the umbrella module in each iOS app's repository instead:
+library updates reach each app separately, and each app chooses its own set of libraries and versions.
 
 For a comparison of the options and the recommended setup, see [](multiplatform-ios-umbrella-module-placement.md).
