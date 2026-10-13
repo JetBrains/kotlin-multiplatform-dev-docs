@@ -1,30 +1,30 @@
 [//]: # (title: Code sharing workflow)
 
-This page describes how the iOS app can consume shared code during development.
+This page describes how apps can consume shared code during development.
 For an overview of all project configuration aspects, see [](multiplatform-project-configuration.md).
 For the available ways to connect a framework to an Xcode project, see [](multiplatform-ios-integration-overview.md).
 
-The iOS app can consume a framework generated from the Kotlin Multiplatform shared modules as a _local_ or _remote_
-dependency. You can use a local dependency by providing a local path to the framework in the iOS build. In this case,
-you don't need to publish the framework. Alternatively, you can publish an artifact with the framework somewhere and
-make the iOS app consume it as a remote dependency, like any other third-party dependency.
+An app can consume the code of Kotlin Multiplatform shared modules as a _local_ or _remote_
+dependency. You can use a local dependency by building the shared code from source as part of the app build. In this case,
+you don't need to publish the shared code. Alternatively, you can publish an artifact with the shared code somewhere and
+make the app consume it as a remote dependency, like any other third-party dependency.
+
+<!-- TODO: placeholder platform comparison, to be reviewed and expanded -->
+How much each workflow costs depends on the platform. Android and desktop JVM apps consume the shared code through Gradle,
+and published artifacts usually include sources, so a remote dependency stays easy to browse and debug, while iOS apps
+consume the shared code as a binary framework, which makes both workflows more involved; see [](multiplatform-ios-integration-overview.md).
 
 ## Local: source distribution
 
-Local distribution is where the iOS app consumes a Kotlin Multiplatform module framework without the
-need for publishing. The iOS app can either integrate the framework directly or by using CocoaPods.
+Local distribution is where an app consumes the code of Kotlin Multiplatform modules without the
+need for publishing.
 
 This workflow is typically used when both Android and iOS team members want to edit the shared Kotlin Multiplatform
-code. The iOS developers need to install IntelliJ IDEA or Android Studio and have a basic knowledge of Kotlin and Gradle.
-
-In the local distribution scheme, the iOS app build triggers the generation of the iOS framework. This means that iOS
-developers can observe their changes to Kotlin Multiplatform code right away:
-
-![Local source distribution](local-source-distribution.svg){width=700}
+code.
 
 This scenario is typically used in two cases. First, it can be used in monorepo project configurations as the default
 workflow, without the need to publish artifacts. Second, it can be used for local development, in addition to the remote
-workflow. See [Setting up a local dependency for local development](#setting-up-a-local-dependency-for-local-development) for more
+workflow. See [Use a local dependency during development](#use-a-local-dependency-during-development) for more
 details.
 
 This workflow is most effective when all of the team members are ready to edit code in the whole project. It includes both
@@ -47,7 +47,6 @@ Xcode installed to open and run both Android and iOS apps after making changes t
 <td>
   <list>
     <li>Team members need to set up a full development environment on their machines.</li>
-    <li>iOS developers have to learn how to use IntelliJ IDEA or Android Studio and Gradle.</li>
     <li>Managing changes becomes difficult as more code is shared and the team grows.</li>
   </list>
 </td>
@@ -56,17 +55,12 @@ Xcode installed to open and run both Android and iOS apps after making changes t
 
 ## Remote: artifact distribution
 
-Remote distribution means that the framework artifact is published using Swift Package Manager or as a CocoaPod and consumed
-by the iOS app. The Android app may consume the binary dependency either locally or remotely.
+Remote distribution means that the shared code is published as an artifact, for example, to a Maven repository, and consumed
+by the apps like any other dependency. Apps can use different workflows: for example, the Android app may consume the
+shared code locally and the iOS app remotely.
 
-Remote distribution is often used to gradually introduce the technology to existing projects. It doesn't significantly
-change the workflow and build processes for iOS developers. Teams with two or more repositories mainly use remote
-distribution to store project code.
-
-As a start, you may want to use [KMMBridge](https://touchlab.co/trykmmbridge) – a set of build tools that greatly simplifies the
-remote distribution workflow. Alternatively, you can always set up a similar workflow on your own:
-
-![Remote artifact distribution](remote-artifact-distribution.svg){width=700}
+Remote distribution is often used to gradually introduce the technology to existing projects.
+Teams with two or more repositories mainly use remote distribution to store project code.
 
 <table>
   <tr>
@@ -74,51 +68,27 @@ remote distribution workflow. Alternatively, you can always set up a similar wor
      <th>Cons</th>
   </tr>
   <tr>
-  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like IntelliJ IDEA/Android Studio or Gradle.
-      This lowers the barrier of entry for the team significantly.</td>
+  <td>App teams don't need to build or edit the shared code, and each app can stay on a version until it's ready to update.</td>
 <td>
   <list>
-    <li>Slower workflow for iOS developers, as the process of editing and building the shared code involves publishing and versioning.</li>
-   <li>Debugging shared Kotlin code is difficult on iOS.</li>
-   <li>The likelihood of iOS team members contributing to shared code significantly decreases.</li>
+    <li>Slower workflow for app developers, as the process of editing and building the shared code involves publishing and versioning.</li>
    <li>The maintenance of the shared code rests entirely on participating team members.</li>
-   <li>When several modules are published as one prebuilt umbrella framework, every change to any module requires a new
-       umbrella release. If releases are batched, iOS developers have to adopt changes from several modules at once.</li>
   </list>
 </td>
 </tr>
 </table>
 
-### Setting up a local dependency for local development
+## Use a local dependency during development
 
-Many teams choose remote distribution workflows when adopting Kotlin Multiplatform technology to keep the development
-process the same for iOS developers. However, it's hard for them to change Kotlin Multiplatform code in this workflow.
-We recommend setting up an additional "local development" workflow with a local dependency on a framework
-generated from the Kotlin Multiplatform module.
+When apps consume the shared code remotely, you can still switch to a local dependency while you develop a change,
+and switch back to the published version when the change is released.
 
-When developers add new functionality, they switch to consuming the Kotlin Multiplatform module as a local dependency.
-That allows making changes to common Kotlin code, immediately observing the behavior from iOS, and debugging Kotlin
-code. When the functionality is ready, they can switch back to the remote dependency and publish their changes
-accordingly. First, they publish changes to the shared modules, and only after that do they make changes to the apps.
+For apps built with Gradle, such as Android and desktop JVM apps, include the project with the shared code as a
+[composite build](https://docs.gradle.org/current/userguide/composite_builds.html) with `includeBuild()`.
+If the included project has the same group and name as the published artifact, Gradle builds it from source instead
+of downloading the published version.
 
-For remote distribution workflows, use Swift Package Manager. For local distribution workflow, integrate
-the framework directly.
-
-<!-- This tutorial [TODO] describes how to switch workflows by choosing the corresponding scheme in Xcode:
-[TODO screenshot] -->
-
-If you use CocoaPods, you can alternatively use CocoaPods for local distribution workflow. You switch between them by
-changing the environmental variable as described in the [TouchLab documentation](https://touchlab.co/kmmbridgecocoapodslocal).
-
-## Combining remote libraries with a local framework build
-
-The local and remote workflows can also be combined differently: the Kotlin Multiplatform libraries are published
-remotely as regular Kotlin artifacts, while the iOS framework is built locally in the iOS app repository by a small
-umbrella module that depends on the published versions.
-iOS developers don't edit Kotlin code in this setup, but the iOS build runs Gradle to produce the framework.
-
-This approach is useful when several teams contribute shared libraries to one or more iOS apps.
-To learn more, see [](multiplatform-ios-umbrella-module-placement.md).
+For iOS apps, see [Setting up a local dependency for local development](multiplatform-ios-integration-overview.md#setting-up-a-local-dependency-for-local-development).
 
 ## What's next
 

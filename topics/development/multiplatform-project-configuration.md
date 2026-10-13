@@ -55,13 +55,13 @@ For details on each configuration, see [](multiplatform-project-repository-confi
 
 ## Code sharing workflow
 
-The iOS app can consume a framework generated from the Kotlin Multiplatform shared modules as a _local_ dependency,
-which is built from source as part of the iOS build,
+An app can consume the code of Kotlin Multiplatform shared modules as a _local_ dependency,
+which is built from source as part of the app build,
 or as a _remote_ dependency,
 which is published and consumed like any other third-party package.
 
-Local distribution makes it easier for the whole team to work on shared code. Remote distribution keeps the iOS
-workflow unchanged but makes changes to shared code slower to reach the iOS app.
+Local distribution makes it easier for the whole team to work on shared code. Remote distribution keeps the app teams'
+workflow unchanged but makes changes to shared code slower to reach the apps.
 Many teams combine the two: they consume a remote dependency by default and switch to a local one while developing.
 
 For pros and cons of each workflow and how to combine them, see [](multiplatform-project-code-sharing-workflow.md).
