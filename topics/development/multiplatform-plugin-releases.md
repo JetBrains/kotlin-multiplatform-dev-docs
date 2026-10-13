@@ -17,19 +17,14 @@ and the [Compatibility guide](multiplatform-compatibility-guide.md).
 
 Your IDE suggests updating to a new Kotlin Multiplatform plugin release as soon as it's available.
 If you accept the suggestion, the plugin is updated to the latest version.
-To complete the plugin installation, restart the IDE.
+You can check the plugin version and update it manually in **Settings | Plugins**.
 
-You can check the plugin version and update it manually in **Settings** | **Plugins**.
+The Kotlin Multiplatform IDE plugin is updated for each IntelliJ IDEA and Android Studio release
+and has its major version aligned with the corresponding IDE version.
 
-You need a compatible version of Kotlin for the plugin to work correctly. You can find compatible versions in the [release details](#release-details).
-To check your Kotlin version and update it, go to **Settings** | **Plugins** or in **Tools** | **Kotlin** | **Configure Kotlin in Project**.
+Below are the details of major releases published before the tooling was stabilized.
 
-> If you don't have a compatible version of Kotlin installed, the Kotlin Multiplatform plugin will be disabled.
-> Update your Kotlin version and then enable the plugin again in **Settings** | **Plugins**.
->
-{style="note"}
-
-## Release details
+## Previous release details {collapsible="true"}
 
 The following table lists the releases of the Kotlin Multiplatform IDE plugin: 
 
