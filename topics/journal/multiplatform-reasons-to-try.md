@@ -193,8 +193,7 @@ attracting the interest of more companies and teams in the technology. At Google
 When working with Kotlin Multiplatform projects, you have powerful tooling at your fingertips.
 
 * **IntelliJ IDEA**. You can install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform), which offers basic launching and debugging capabilities for iOS apps, preflight environment checks, and other helpful KMP functionality.
-* **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. Starting with Android Studio Otter 2025.2.1, you can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.
-* **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
+* **Android Studio**. Android Studio is another stable solution for Kotlin Multiplatform development. You can install the same Kotlin Multiplatform IDE plugin to get basic iOS launching and debugging support, preflight environment checks, and additional multiplatform tooling.* **Compose Hot Reload**: [Compose Hot Reload](compose-hot-reload.md) lets you quickly iterate and experiment with UI changes while working on Compose Multiplatform projects. It is currently available for projects that include a desktop target and are compatible with Java 21 or earlier.
 
 ![Compose Hot Reload](compose-hot-reload.animated.gif){width=500 preview-src="compose-hot-reload.png"}
 
