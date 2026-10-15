@@ -8,6 +8,29 @@ Explore practical use cases with examples.</web-summary>
 > 
 {style="note"}
 
+## TL;DR
+
+Companies use Kotlin Multiplatform in production to share code, reduce duplicated work, and deliver features consistently across platforms. Depending on their needs, they share business logic, SDK functionality, or both logic and UI:
+
+* [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app) shares business logic between Android and iOS while keeping the UI native.
+
+* [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8) uses Kotlin Multiplatform to maintain a shared mobile SDK and accelerate feature development.
+
+* [McDonald's](https://kotlinlang.org/case-studies/#mcdonalds-umain) adopted Kotlin Multiplatform incrementally without rewriting its existing applications.
+
+* [Duolingo](https://youtu.be/RJtiFt5pbfs) shares core business logic while preserving native user interfaces.
+
+* [Booking.com](https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d) shares experimentation logic between Android and iOS to keep feature rollouts consistent.
+
+* [Sony](https://kotlinlang.org/case-studies/#sony) uses Kotlin Multiplatform with Compose Multiplatform to share logic and UI while retaining access to native device capabilities.
+
+These examples show that teams can adopt Kotlin Multiplatform gradually and choose how much code to share based on their project requirements.
+
+Kotlin Multiplatform is used in production by startups and global enterprises across fintech, healthcare, media, logistics, education, 
+retail, and e-commerce. Companies such as [Duolingo](https://youtu.be/RJtiFt5pbfs), [Booking.com](https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d), 
+[Sony](https://kotlinlang.org/case-studies/#sony), [McDonald's](https://kotlinlang.org/case-studies/#mcdonalds-umain), [Forbes](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app), [Instabee](https://www.youtube.com/watch?v=YsQ-2lQYQ8M), and [9GAG](https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04) 
+use it to share business logic, develop cross-platform SDKs, adopt code sharing incrementally, and reduce duplicated engineering work while preserving native user experiences.
+
 From integrating into existing apps and sharing app logic to building new cross-platform applications, 
 [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/) has become the technology of choice for many companies. These teams are capitalizing on the 
 advantages that KMP provides to roll out their products faster and reduce development costs.
@@ -23,6 +46,7 @@ As adoption grows, this article examines how Kotlin Multiplatform is used in pro
 Here are several ways different teams are applying Kotlin Multiplatform to meet various project needs:
 
 ### Startups starting a new greenfield project
+Why should startups consider Kotlin Multiplatform for their next greenfield project?
 
 Startups often operate with limited resources and tight deadlines. To maximize development efficiency and cost-effectiveness, 
 they benefit from targeting multiple platforms using a shared codebase — especially in early-stage products or MVPs, 
@@ -46,6 +70,7 @@ flexibility, and a high-quality native experience.
 {style="tip"}
 
 ### Small and medium-sized businesses
+How can Kotlin Multiplatform help a small mobile team maintain a mature product?
 
 Small and medium-sized businesses often have compact teams while maintaining mature, feature-rich products. 
 Kotlin Multiplatform allows them to share core logic while keeping the native look-and-feel users expect. 
@@ -64,14 +89,24 @@ and maintain platform-specific customizations where needed.
   and iOS to ensure consistent behavior and streamline development. It adopted KMP incrementally, starting with internal libraries.
 
 ### Enterprises that need consistent behavior across devices for their applications
+Can enterprises adopt Kotlin Multiplatform without rewriting large existing applications?
 
 Large applications usually have extensive codebases, with new features constantly being added, and complex business logic 
 that must work the same way on all platforms. Kotlin Multiplatform provides gradual integration, 
 allowing teams to adopt it incrementally. And since developers can reuse their existing Kotlin skills, 
 using KMP also saves them from introducing new tech stacks.
 
-**Case studies:** [Forbes](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/), [McDonald’s](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc), [Google Docs](https://www.youtube.com/watch?v=5lkZj4v4-ks), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [VMware](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app?_gl=1*1qc1ixl*_gcl_aw*R0NMLjE3NTEzNTcwMDguRUFJYUlRb2JDaE1JblBLRmc0cWJqZ01WZ0VnZENSM3pYQkVWRUFFWUFTQUFFZ0ltOVBEX0J3RQ..*_gcl_au*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*FPAU*MTE5NzY3MzgyLjE3NDk3MDk0NjI.*_ga*MTM4NjAyOTM0NS4xNzM2ODUwMzA5*_ga_9J976DJZ68*czE3NTE1MjQ2MDUkbzcxJGcxJHQxNzUxNTI3Njc5JGozJGwwJGgw), 
-[Wonder App by Baidu](https://kotlinlang.org/lp/multiplatform/case-studies/baidu)
+**Case studies:** [Duolingo](https://youtu.be/RJtiFt5pbfs), [Booking.com](https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d), [Sony](https://kotlinlang.org/case-studies/#sony), [Bilibili](https://kotlinlang.org/case-studies/#bilibili), [Forbes](https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/), [McDonald's](https://medium.com/mcdonalds-technical-blog/mobile-multiplatform-development-at-mcdonalds-3b72c8d44ebc), [Google Docs](https://www.youtube.com/watch?v=5lkZj4v4-ks), [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8), [VMware](https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0), [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app), and [Wonder by Baidu](https://kotlinlang.org/lp/multiplatform/case-studies/baidu).
+
+> “After a successful initial test with the payments feature, we expanded Kotlin Multiplatform to our entire McDonald's application.”
+>
+> — **Varsha Singh**, Project Manager for the McDonald's app at Umain  
+> [Read the McDonald's story](https://kotlinlang.org/case-studies/#mcdonalds-umain)
+
+> “One exciting trend for Duolingo is that the more that we use Kotlin Multiplatform internally, the more we find ourselves speeding up in terms of shipping.”
+>
+> — **John Rodriguez**, Client Platform team at Duolingo  
+> [Watch the full Duolingo story](https://youtu.be/RJtiFt5pbfs)
 
 [![Learn from KMP success stories](kmp-success-stories.svg){width="700"}{style="block"}](https://kotlinlang.org/case-studies/?type=multiplatform)
 
@@ -106,6 +141,7 @@ KMP could be the ideal long-term solution.
 This allowed the company to enter the iOS market quickly by reusing much of its existing Android codebase.
 
 ### Teams developing software development kits (SDK)
+Can Kotlin Multiplatform be used to build an SDK for both Android and iOS?
 
 Shared Kotlin code compiles to platform-specific binaries (JVM for Android, native for iOS) and integrates seamlessly into any project. 
 It offers flexibility, in that you can use platform-specific APIs without limitations, while also giving you a choice 
@@ -113,9 +149,12 @@ between native and cross-platform UI. These features make Kotlin Multiplatform a
 From a consumer's perspective, your Kotlin Multiplatform SDK will behave like any regular platform-specific dependency, 
 while still providing the benefit of shared code.
 
-**Case study:** [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8) uses Kotlin Multiplatform in its HealthSuite Digital Platform mobile SDK, 
-enabling faster development of new features and enhancing collaboration between Android and iOS developers.
+**Case study:** [Philips](https://www.youtube.com/watch?v=hZPL8QqiLi8) uses Kotlin Multiplatform in its HealthSuite Digital Platform mobile SDK, enabling faster development of new features and improving collaboration between Android and iOS developers.
 
+> “We consolidated all our business logic into shared code, which means we can now develop once and deploy more.”
+>
+> — **Jeroen Brosens**, Software Architect at Philips  
+> [Explore the Philips story](https://www.youtube.com/watch?v=hZPL8QqiLi8)
 ## Kotlin Multiplatform use cases by industry
 
 Kotlin Multiplatform’s versatility is evident from the wide range of industries where it’s used in production. 
@@ -123,14 +162,19 @@ From fintech to education, KMP with Compose Multiplatform has been adopted in ma
 Here are a few industry-specific examples:
 
 ### Financial technology
+Why is Kotlin Multiplatform useful for fintech applications?
 
 Fintech applications often involve complex business logic, secure workflows, and strict compliance requirements, 
 all of which must be implemented consistently across platforms. Kotlin Multiplatform helps unify this core logic in one codebase, 
 reducing the risk of platform-specific inconsistencies. It ensures faster feature parity between iOS and Android, 
 which is crucial for apps like wallets and payments.
 
-**Case studies:** [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app), [Bitkey by Block](https://engineering.block.xyz/blog/how-bitkey-uses-cross-platform-development), [Worldline](https://blog.worldline.tech/2022/01/26/kotlin_multiplatform.html)
+**Case studies:** [Cash App](https://kotlinlang.org/lp/multiplatform/case-studies/cash-app), [Bitkey by Block](https://engineering.block.xyz/blog/how-bitkey-uses-cross-platform-development), and [Worldline](https://blog.worldline.tech/2022/01/26/kotlin_multiplatform.html).
 
+> “We loved the ‘shared business, native UI’ idea that Kotlin Multiplatform promoted.”
+>
+> — **Alec Strong**, Mobile Developer at Cash App  
+> [Read the Cash App case study](https://kotlinlang.org/case-studies/cash-app/)
 ### Media and publishing
 
 Media and content-driven apps depend on fast feature rollout, consistent user experiences, and the flexibility to 
@@ -159,6 +203,7 @@ or in-app chat can be written once and used on both Android and iOS, guaranteein
 [Feres](https://kotlinlang.org/case-studies/#case-study-feres)
 
 ### Educational technology
+How can educational applications keep learning behavior consistent across platforms?
 
 Education apps must deliver a seamless and consistent learning experience on both mobile and web, especially when supporting large, 
 distributed audiences. By centralizing study algorithms, quizzes, and other business logic with Kotlin Multiplatform, 
@@ -208,3 +253,35 @@ Whether you are building a fintech app, a mobility solution, an education platfo
 Kotlin Multiplatform provides the flexibility to share as much code as makes sense for your project, 
 without sacrificing the native experience. You can also check out an extensive list of [KMP case studies](https://kotlinlang.org/case-studies/?type=multiplatform), 
 showcasing many other companies that use the technology in production.
+
+## Frequently asked questions
+
+### What is Kotlin Multiplatform used for in production?
+
+Kotlin Multiplatform is used to share business logic, UI, and core functionality across Android, iOS, desktop, and web platforms. Companies across industries such as fintech, education, media, and e-commerce rely on it to reduce development costs and accelerate feature delivery.
+
+### Is Kotlin Multiplatform suitable for startups?
+
+Yes. Kotlin Multiplatform allows startups to target multiple platforms from a shared codebase, which is especially valuable for MVPs where time to market is critical. Pairing Kotlin Multiplatform with Compose Multiplatform also enables UI sharing for faster prototyping.
+
+### Can large enterprises adopt Kotlin Multiplatform incrementally?
+
+Yes. Kotlin Multiplatform supports gradual integration. Teams can start by sharing a single layer, such as business logic, networking, or data, while keeping their existing native code and UI in place. They can then expand the amount of shared code over time without rewriting the entire application.
+
+Companies such as Duolingo, Booking.com, Sony, and Google Docs have successfully integrated Kotlin Multiplatform into large, complex applications.
+
+### Can Kotlin Multiplatform be used to build SDKs?
+
+Yes. Shared Kotlin code compiles to platform-specific binaries and integrates as a native dependency on each platform. Philips, for example, uses Kotlin Multiplatform to develop its HealthSuite Digital Platform mobile SDK.
+
+### Does Kotlin Multiplatform require sharing all code across platforms?
+
+No. Kotlin Multiplatform lets teams decide how much code to share—from core business logic to the entire UI. Teams can also combine shared and native UIs based on their project requirements.
+
+### What is Compose Multiplatform, and how does it relate to Kotlin Multiplatform?
+
+Compose Multiplatform is a declarative UI framework powered by Kotlin Multiplatform and based on Google's Jetpack Compose. It enables teams to share UI code across Android, iOS, desktop, and web platforms. Its iOS support reached Stable status in 2025, making Kotlin Multiplatform with Compose Multiplatform a complete solution for cross-platform mobile development.
+
+### Can agencies use Kotlin Multiplatform across multiple client projects?
+
+Yes. Agencies can reuse Kotlin Multiplatform code across projects while working under tight delivery timelines. Companies such as Touchlab, IceRock, and Mirego specialize in Kotlin Multiplatform development and use it across diverse client engagements.
