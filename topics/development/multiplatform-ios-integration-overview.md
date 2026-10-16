@@ -31,6 +31,10 @@ direct integration is applied by default.
 
 For more information, see [Direct integration](multiplatform-direct-integration.md).
 
+Direct integration also works when the Kotlin Multiplatform code is stored in other repositories and published as
+libraries: the iOS app repository can contain a small Gradle project with an umbrella module that depends on the
+published libraries. For details, see [](multiplatform-ios-umbrella-module-placement.md).
+
 ### SwiftPM integration with a local package
 
 Your KMP iOS framework can depend on a local Swift package through the [Swift Package Manager](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/).

@@ -125,7 +125,12 @@
 		<toc-element toc-title="Understanding dependencies between source sets" topic="multiplatform-advanced-project-structure.md"/>
 
         <toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
-		<toc-element toc-title="Project organization options" topic="multiplatform-project-configuration.md"/>
+		<toc-element toc-title="Project organization options" topic="multiplatform-project-configuration.md">
+			<toc-element topic="multiplatform-project-module-configurations.md"/>
+			<toc-element topic="multiplatform-project-repository-configurations.md"/>
+			<toc-element topic="multiplatform-project-code-sharing-workflow.md"/>
+			<toc-element toc-title="Umbrella module placement" topic="multiplatform-ios-umbrella-module-placement.md"/>
+		</toc-element>
 	</toc-element>
 	<toc-element toc-title="Share code">
 		<toc-element topic="multiplatform-share-on-platforms.md"/>
