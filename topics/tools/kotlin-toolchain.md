@@ -130,6 +130,8 @@ To run the project:
 ## Work on a project in IntelliJ IDEA or Android Studio
 
 You can work on the project and run it in IntelliJ IDEA or Android Studio.
+To enjoy full functionality on Android Studio, use the latest stable version, Android Studio Rabbit.
+
 Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
 
 * [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
