@@ -130,7 +130,7 @@ To run the project:
 ## Work on a project in IntelliJ IDEA or Android Studio
 
 You can work on the project and run it in IntelliJ IDEA or Android Studio.
-To enjoy full functionality on Android Studio, use the latest stable version, Android Studio Rabbit.
+To enjoy the full Kotlin Toolchain functionality on Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
 
 Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
 
@@ -156,7 +156,7 @@ so you can run corresponding applications from the IDE toolbar.
 
 When you're satisfied with how the app runs, you can publish the applications.
 
-See the full instructions on producing artifacts in Kotlin Toolchain documentation:
+See the full instructions on producing artifacts in the Kotlin Toolchain documentation:
 
 * [Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing)
 * [Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing)
