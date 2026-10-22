@@ -405,7 +405,7 @@ Isolate the corresponding code in a `sharedLogic` module:
                     implementation("org.jetbrains.kotlinx:kotlinx-datetime:%dateTimeVersion%")
                 }
                 webMain.dependencies {
-                    implementation(npm("@js-joda/timezone", "2.22.0"))
+                    implementation(npm("@js-joda/timezone", "%js-joda-timezone%"))
                 }
             }
         }
