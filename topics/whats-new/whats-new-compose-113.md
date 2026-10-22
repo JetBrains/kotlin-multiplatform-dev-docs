@@ -5,7 +5,7 @@ Here are the highlights for this EAP release:
 * [Content-based sizing of Compose Multiplatform views in SwiftUI and UIKit](#content-based-sizing-for-compose-multiplatform-views-in-swiftui-and-uikit)
 * [Saving and autofilling passwords on iOS](#saving-and-autofilling-passwords)
 * [WebGL interop](#webgl-interop)
-* [Faster desktop startup with AppCDS and AOT](#faster-desktop-startup-with-appcds-and-aot)
+* [Faster desktop startup with AppCDS and AOT options](#faster-desktop-startup-with-appcds-or-aot)
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.13.0-beta01).
 For details about specific component versions, refer to the [Dependencies](#dependencies) section.
@@ -204,10 +204,11 @@ createComposeWindow(
 
 ## Desktop
 
-### Faster desktop startup with AppCDS and AOT
+### Faster desktop startup with AppCDS or AOT
 
-Compose Multiplatform now supports [AppCDS](https://dev.java/learn/jvm/cds-appcds/) and [AOT](https://openjdk.org/jeps/514)
-for desktop applications. These JVM features store class data in an archive to reduce startup time.
+Compose Multiplatform now supports [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) and 
+[Ahead-of-Time (AOT) caching](https://openjdk.org/jeps/514)
+for desktop applications. Both options use an archive to reduce startup time.
 
 In benchmarks on a small demo application, prebuilt AOT caches reduced cold startup time:
 
@@ -215,8 +216,8 @@ In benchmarks on a small demo application, prebuilt AOT caches reduced cold star
 * On Windows (Dell Precision 5690), from 1356 ms to 650 ms — 2.1× faster.
 
 These measurements cover the time from launching the process to displaying the window.
-Results depend on the application and environment. In a separate Windows test, when the original build-time JAR paths
-were unavailable, AOT startup took 919 ms, which is still 1.5× faster than startup without an archive.
+Results depend on the application and environment. 
+For AOT startup optimization, we recommend the latest [JetBrains Runtime (JBR) 25](https://github.com/JetBrains/JetBrainsRuntime) release.
 
 To enable these startup options, configure the `aot {}` block in your `build.gradle.kts` file:
 
@@ -243,6 +244,19 @@ Both prebuild modes run your application during packaging to create the archive.
 During this cache-generation run, the plugin sets the `compose.aot.training-run` system property to `true`.
 
 Note that the prebuild modes increase the distributable size because the application includes the archives.
+
+### Smoother window resizing on macOS and Windows
+
+Compose Multiplatform now supports smoother interactive window resizing when using Metal on macOS or DirectX on Windows.
+Rendering stays synchronized with window resizing, reducing stutter and preventing white bars along the window edges.
+
+To enable this behavior, set the system property for your renderer to `true` before showing any windows.
+Set it with `System.setProperty()` or a JVM `-D` flag:
+
+* macOS with Metal: `skiko.rendering.macos.metalSynchronousLiveResize`
+* Windows with DirectX: `skiko.rendering.windows.direct3DSynchronousLiveResize`
+
+The feature requires Compose content to fill the entire window.
 
 ## Dependencies
 
