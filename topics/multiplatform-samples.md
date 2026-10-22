@@ -360,6 +360,48 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
             </list>
         </td>
     </tr>
+<tr>
+        <td>
+            <strong><a href="https://github.com/razaghimahdi/Shopping-By-KMP">Shopping By KMP</a></strong>
+        </td>
+        <td>A full-stack, cross-platform application built using Jetpack Compose Multiplatform for the UI and a Ktor backend server. 
+            The application allows users to browse, search, and purchase products from a shopping catalog on Android, iOS, web, desktop, Android Automotive, and Android TV, all powered by an integrated Kotlin backend and MySQL database.
+        </td>
+        <td>
+            <list>
+                <li>Model & API DTOs</li>
+                <li>Networking</li>
+                <li>Data Storage</li>
+                <li>UI & UI state</li>
+                <li>ViewModel</li>
+                <li>Animation</li>
+                <li>Navigation</li>
+                <li>Use Case</li>
+                <li>Unit & UI Tests</li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li><code>kotlinx-coroutines</code></li>
+                <li><code>kotlinx-serialization</code></li>
+                <li><code>ktor-client</code></li>
+                <li><code>ktor-server</code></li>
+                <li><code>exposed</code></li>
+                <li><code>koin</code></li>
+                <li><code>coil3</code></li>
+                <li><code>datastore</code></li>
+                <li><code>google-map</code></li>
+                <li><code>navigation-compose</code></li>
+                <li><code>kotest</code></li>
+            </list>
+        </td>
+        <td>
+            <list>
+                <li>Compose Multiplatform on Android, iOS, web, desktop, automotive, and Android TV</li>
+                <li><strong>Backend:</strong> Ktor Server API</li>
+            </list>
+        </td>
+    </tr>
 </table>
 
 ### Other community samples
@@ -547,49 +589,6 @@ To explore the ecosystem as a whole, check out the [kotlin-multiplatform](https:
         <td>
             <list>
                 <li>Compose Multiplatform on Android and iOS</li>
-            </list>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <strong><a href="https://github.com/razaghimahdi/Shopping-By-KMP">Shopping By KMP</a></strong>
-        </td>
-        <td>A cross-platform application that is built using Jetpack Compose Multiplatform, a declarative framework for
-            sharing UIs across multiple platforms with Kotlin. The application allows users to browse, search, and
-            purchase products from a shopping catalog on Android, iOS, web, desktop, Android Automotive, and Android TV.
-        </td>
-        <td>
-            <list>
-                <li>Model</li>
-                <li>Networking</li>
-                <li>Data Storage</li>
-                <li>UI</li>
-                <li>ViewModel</li>
-                <li>Animation</li>
-                <li>Navigation</li>
-                <li>UI state</li>
-                <li>Use Case</li>
-                <li>Unit Test</li>
-                <li>UI Test</li>
-            </list>
-        </td>
-        <td>
-            <list>
-                <li><code>kotlinx-coroutines</code></li>
-                <li><code>kotlinx-serialization</code></li>
-                <li><code>kotlinx-datetime</code></li>
-                <li><code>ktor-client</code></li>
-                <li><code>datastore</code></li>
-                <li><code>koin</code></li>
-                <li><code>google-map</code></li>
-                <li><code>navigation-compose</code></li>
-                <li><code>coil</code></li>
-                <li><code>kotest</code></li>
-            </list>
-        </td>
-        <td>
-            <list>
-                <li>Compose Multiplatform on Android, iOS, web, desktop, automotive, and Android TV</li>
             </list>
         </td>
     </tr>
