@@ -101,7 +101,8 @@
         <chapter title="Key definitions" id="key-definitions">
             <deflist>
                 <def title="Progressive Web App (PWA)">
-                    A web application that can be installed and used like a mobile app but is accessed through a browser
+                    A <a href="https://web.dev/explore/progressive-web-apps">progressive web app (PWA)</a>
+                    is a web application that can be installed and used like a mobile app but is accessed through a browser
                     rather than an app store. PWAs cannot access all device features natively.
                 </def>
 
