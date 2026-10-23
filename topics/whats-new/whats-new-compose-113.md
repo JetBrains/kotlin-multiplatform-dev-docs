@@ -16,7 +16,7 @@ Several features that were Experimental in previous Compose Multiplatform releas
 You no longer need to opt in to use them:
 
 * Creating a `ComposeUIView()` on iOS and configuring it with `ComposeUIViewportConfiguration`.
-* [Configuring `ComposeView()` for web with `ComposeViewportConfiguration`](compose-css-styles.md).
+* [Configuring `ComposeViewport()` for web with `ComposeViewportConfiguration`](compose-css-styles.md).
 * [Preloading resources for web with `preload` API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api).
 
 ## iOS
