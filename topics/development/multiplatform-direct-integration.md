@@ -71,6 +71,9 @@ To connect the Kotlin framework generated from the multiplatform project to your
 
    * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
    * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:sharedUI`.
+
+     If the shared code is published as libraries from other repositories, this can be an umbrella module stored in the
+     iOS app repository. See [](multiplatform-ios-umbrella-module-placement.md).
    
    When you start an iOS run configuration, IntelliJ IDEA and Android Studio build the Kotlin framework dependency
      before starting the Xcode build and set the `OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED` environment variable to "YES".

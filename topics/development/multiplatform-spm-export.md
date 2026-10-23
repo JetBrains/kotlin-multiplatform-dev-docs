@@ -51,6 +51,13 @@ However, you can configure your project differently. Consider the following opti
     publishing the updated `Package.swift` file to the consumer repository. This may lead to conflicting updates of the
     consumer repository and so such a phase in CI can be difficult to maintain.
 
+> If your shared code consists of several libraries maintained by different teams, publishing a single umbrella
+> XCFramework requires a new framework release for every library update.
+> Consider building the umbrella framework in the iOS app repository instead.
+> For details, see [](multiplatform-ios-umbrella-module-placement.md).
+>
+{style="tip"}
+
 ### Configure your multiplatform project
 
 In the following example, the shared code of a Kotlin Multiplatform project is stored locally in the `shared` module.
@@ -303,3 +310,10 @@ For example, you have a `network` and a `database` module, which you combine in 
 
 Now, you can import the dependency into an Xcode project. After adding the `import together` directive,
 you should have classes from both the `network` and `database` modules available for import in Swift code.
+
+> When the exported modules are developed and released independently, every update of a single module requires
+> a new release of the umbrella XCFramework.
+> To learn about the alternative of building the umbrella framework in the iOS app repository,
+> see [](multiplatform-ios-umbrella-module-placement.md).
+>
+{style="note"}
