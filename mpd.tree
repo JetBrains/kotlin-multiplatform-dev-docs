@@ -30,7 +30,8 @@
         <toc-element topic="compose-multiplatform.topic"/>
 		<toc-element toc-title="What's new">
             <toc-element topic="whats-new-compose-112.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.12.2"/>
-            <toc-element toc-title="Earlier versions">
+			<toc-element topic="whats-new-compose-113.md" accepts-web-file-names="whats-new-compose-eap.html" toc-title="Compose Multiplatform %org.jetbrains.compose-eap%"/>
+			<toc-element toc-title="Earlier versions">
                 <toc-element topic="whats-new-compose-111.md" toc-title="Compose Multiplatform 1.11.1"/>
                 <toc-element topic="whats-new-compose-110.md" toc-title="Compose Multiplatform 1.10.3"/>
                 <toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3"/>

@@ -40,14 +40,13 @@ For example, to enable in-browser preloading of a font:
 ```
 
 ### Preload resources using the Compose Multiplatform preload API
-<primary-label ref="Experimental"/>
 
 Even if you preloaded the resources in the browser, they are cached as raw bytes that still need to be converted into a
 format suitable for rendering, such as `FontResource` and `DrawableResource`. When the application requests the resource
 for the first time, the conversion is done asynchronously, which may again result in flickering. To further optimize the experience,
 Compose Multiplatform resources have their own internal cache for higher-level representations of the resources, which can also be preloaded.
 
-Compose Multiplatform 1.8.0 introduced an experimental API for preloading font and image resources on
+Compose Multiplatform 1.8.0 introduced an API for preloading font and image resources on
 web targets: `preloadFont()`, `preloadImageBitmap()`, and `preloadImageVector()`.
 
 When unresolved characters are encountered during rendering, a fallback font containing the missing 
@@ -61,7 +60,6 @@ Web targets support TTF, OTF, TTC, variable, and WOFF/WOFF2 font formats.
 The following example demonstrates how to use preloading of a vector image:
 
 ```kotlin
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class)
 @Composable
 fun App() {
     val icon by preloadImageVector(Res.drawable.heavy_vector_icon)
