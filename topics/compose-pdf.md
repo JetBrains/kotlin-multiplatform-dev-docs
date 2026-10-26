@@ -1,53 +1,27 @@
 [//]: # (title: Display PDF files in a Compose Multiplatform app)
 
-To display PDF files in a Compose Multiplatform app, you can use a community library or a platform-native viewer. 
-Choose an approach based on how users work with PDFs in your app:
+You can use third-party libraries to display, edit, or generate PDFs in a Compose Multiplatform app.
+Platform support and version requirements may change over time, so check each library’s documentation for 
+supported platforms and required Kotlin and Compose Multiplatform versions.
 
-* For document-centric apps, use a document engine. See [Display a PDF with a document engine](#display-a-pdf-with-a-document-engine).
-* For PDFs that support another app feature, use a simple PDF viewer. See [Add a PDF viewer](#add-a-pdf-viewer).
-* For basic open, print, download, or share actions, use the platform-native viewer.
+Choose an approach based on what users need to do with PDFs in your app:
 
-If you also need to create PDFs, see [Generate and display a PDF](#generate-and-display-a-pdf).
+* To display existing PDFs, use a [PDF viewer](#add-a-pdf-viewer).
+* To create and edit PDFs, use a [document engine](#display-a-pdf-with-a-document-engine).
+* To generate PDFs from app data, use a [PDF generator](#generate-and-display-a-pdf).
+
+For PDFs that users can open outside your Compose UI, [use a platform viewer](#use-a-platform-viewer).
 
 ## Display an existing PDF
 
-To display existing PDFs, you can use libraries such as [Nucleus PDF reader](https://nucleusframework.dev/en/docs/pdf/) 
-and [KitePDF](https://github.com/yuroyami/KitePDF).
-
-Nucleus PDF Reader provides a ready-made PDF viewer component. 
-KitePDF provides a document engine and a Compose viewer, and can create and edit PDF documents.
+To display an existing PDF, use a ready-made viewer or a document engine with a viewer component.
 
 ### Add a PDF viewer
 
-To display a PDF file with [Nucleus PDF reader](https://nucleusframework.dev/en/docs/pdf/), add `PdfReader()` to your app layout:
+[Nucleus PDF reader](https://nucleusframework.dev/en/docs/pdf/) uses PDFium on Android, iOS, desktop,
+and web. It integrates through native binaries, or through a WebAssembly module running in a Web Worker on web.
 
-```kotlin
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import dev.nucleusframework.pdfium.PdfReader
-import dev.nucleusframework.pdfium.rememberPdfReaderState
-import nucleuspdfdemo.sharedui.generated.resources.Res
-
-@Composable
-fun App() {
-    val reader = rememberPdfReaderState()
-
-    LaunchedEffect(Unit) {
-        reader.open(Res.readBytes("files/kotlin-reference.pdf"))
-    }
-
-    PdfReader(
-        state = reader,
-        modifier = Modifier.fillMaxSize(),
-    )
-}
-```
-
-![PDF file in a Compose Multiplatform app](compose-pdf.png){width=300 style="block"}
-
-You can also display a PDF from a byte array:
+To display a PDF that’s already loaded into memory, pass its bytes to the reader state and add `PdfReader()` to your layout:
 
 ```kotlin
 import androidx.compose.foundation.layout.fillMaxSize
@@ -72,11 +46,14 @@ fun PdfScreen(bytes: ByteArray) {
 }
 ```
 
+![PDF file in a Compose Multiplatform app](compose-pdf.png){width=300 style="block"}
+
 For more information, see the [Nucleus PDF reader documentation](https://nucleusframework.dev/en/docs/pdf/).
 
 ### Display a PDF with a document engine
 
 [KitePDF](https://github.com/yuroyami/KitePDF) provides a document engine and Compose viewer for reading, creating, and editing PDFs.
+It supports Android, iOS, web, and desktop targets.
 
 Open a PDF with `PdfDocument.open(bytes)`, then pass the document to the viewer:
 
@@ -85,9 +62,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import io.github.yuroyami.kitepdf.compose.KiteDocView
-import io.github.yuroyami.kitepdf.compose.rememberKiteDocViewState
-import io.github.yuroyami.kitepdf.pdf.PdfDocument
+import io.github.yuroyami.kitepdf.PdfDocument
+import io.github.yuroyami.kitepdf.compose.PdfView
+import io.github.yuroyami.kitepdf.compose.rememberPdfViewState
 
 @Composable
 fun PdfScreen(bytes: ByteArray) {
@@ -95,23 +72,25 @@ fun PdfScreen(bytes: ByteArray) {
         PdfDocument.open(bytes)
     }
 
-    KiteDocView(
-        state = rememberKiteDocViewState(document),
+    PdfView(
+        state = rememberPdfViewState(document),
         modifier = Modifier.fillMaxSize(),
     )
 }
 ```
 
-KitePDF can also open documents from file paths, `File` objects, `InputStream` instances, 
-Android content `Uri` values, Apple `NSData` or `NSURL` objects, and Base64 text or `data:` URIs.
-
+Available document inputs depend on the library version and target platform.
 For more information, see the [KitePDF documentation](https://yuroyami.github.io/KitePDF/).
 
 ## Generate and display a PDF
 
-[PdfKmp](https://github.com/ConaMobileDev/PdfKmp) creates PDF documents and provides an optional Compose Multiplatform viewer module.
+[PdfKmp](https://github.com/ConaMobileDev/PdfKmp) can create PDFs from app data, such as recipes, invoices, or receipts.
+It supports Android, iOS, desktop, and web via Kotlin/Wasm.
 
-The following example creates a simple document and displays it:
+The optional `pdfkmp-viewer` module embeds a Compose viewer on Android, iOS, and desktop. 
+This viewer module is currently not available on web. For web apps, see the browser [viewing and saving](https://conamobiledev.github.io/PdfKmp/guides/web/#viewing-saving) guidance.
+
+The following example generates a PDF from app data and displays it with the Compose viewer:
 
 ```kotlin
 import androidx.compose.runtime.Composable
@@ -120,28 +99,43 @@ import com.conamobile.pdfkmp.pdf
 import com.conamobile.pdfkmp.viewer.KmpPdfViewer
 
 @Composable
-fun PdfScreen(onBack: () -> Unit) {
-    val document = remember {
+fun RecipePdfScreen(
+    recipeTitle: String,
+    ingredients: String,
+    instructions: String,
+    onBack: () -> Unit,
+) {
+    val document = remember(recipeTitle, ingredients, instructions) {
         pdf {
             page {
-                text("Hello, PDF!")
+                text(recipeTitle)
+                text(ingredients)
+                text(instructions)
             }
         }
     }
 
     KmpPdfViewer(
         document = document,
-        title = "Greeting",
-        fileName = "greeting.pdf",
+        title = recipeTitle,
+        fileName = "recipe.pdf",
         onBack = onBack,
     )
 }
 ```
 
-PdfKmp is focused on generating documents such as reports, invoices, forms, and receipts. 
-Its viewer can display the generated document, but it is not intended as a general-purpose PDF editor.
-
 For more information, see the [PdfKmp viewer documentation](https://conamobiledev.github.io/PdfKmp/guides/viewer/).
+
+## Use a platform viewer
+
+For PDFs that don’t require an embedded Compose viewer, use platform APIs to present, open, or share the document.
+
+For example, a desktop app can open a saved PDF with `java.awt.Desktop.open()`.
+On mobile, use platform APIs to present or share the document, such as PDFKit on iOS or a file-sharing intent on Android.
+A web app can offer the PDF for the browser to open or download. 
+
+For platform-specific examples, see [PdfKmp's save and share guide](https://conamobiledev.github.io/PdfKmp/getting-started/#save-share-per-platform).
+These examples hand a document to platform APIs and do not require PdfKmp's Compose viewer.
 
 ## What's next
 
