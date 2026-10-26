@@ -14,7 +14,7 @@ To open a link in the default associated application on any platform, use the [c
 
 ## Community libraries
 
-Community libraries wrap native sharing APIs and provide a common API that you can call from common code.
+Community libraries wrap native sharing APIs and provide a common API that you can call from the `commonMain` source set.
 
 [KMP Sharing](https://klibs.io/project/software-mansion/kmp-sharing) provides a common API for the system share dialog on Android and iOS.
 It supports sharing text or a URL, optionally with file URIs:
@@ -56,6 +56,7 @@ Button(onClick = photosPicker::launch) {
 ```
 
 KMP Sharing expects file values as URIs. If you get a local path from FileKit, convert the `PlatformFile` path to a URI before sharing it:
+Define this helper at the top level in `commonMain`:
 
 ```kotlin
 private fun PlatformFile.sharingUri(): String = path.let { filePath ->
@@ -118,7 +119,7 @@ For more information, see the Android Developers page [Sharing data between apps
 
 ### iOS
 
-For [UIKit-based UIs](compose-uikit-integration.md), present a `UIActivityViewController` in the `iOSApp` source set:
+For [UIKit-based UIs](compose-uikit-integration.md), present a `UIActivityViewController` in the native `iosApp` project:
 
 ```swift
 let items: [Any] = [URL(string: "https://kotlinlang.org")!]
@@ -131,7 +132,8 @@ let controller = UIActivityViewController(
 viewController.present(controller, animated: true)
 ```
 
-In [SwiftUI](compose-swiftui-integration.md), you can use `ShareLink` for values supported by the `Transferable` protocol. 
+In the native app’s [SwiftUI](compose-swiftui-integration.md) code, you can use `ShareLink` for values supported by the `Transferable` protocol.
+
 For custom or large files, implement a `Transferable` representation or use `UIActivityViewController`
 with a platform bridge.
 
