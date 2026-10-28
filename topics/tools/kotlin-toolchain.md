@@ -1,5 +1,4 @@
 [//]: # (title: Create and build a Kotlin Multiplatform application with Kotlin Toolchain)
-<primary-label ref="alpha"/>
 
 [Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for creating, building, testing,
 and running Kotlin projects.
@@ -25,10 +24,6 @@ You can install the Kotlin Toolchain CLI using the installer script:
 
 ```shell
 curl -fsSL https://kotl.in/install.sh | sh
-
-# Restart your terminal or run this command
-# to make 'kotlin' available
-exec $SHELL
 ```
 
 </tab>
@@ -52,16 +47,15 @@ Check that the CLI is available by running `kotlin --version`.
 With Kotlin Toolchain, you can handle most of the iOS development workflow, including editing, building, and running
 apps directly from the CLI or your IDE, without opening Xcode.
 
-[Installing Xcode](https://apps.apple.com/us/app/xcode/id497799835) and the necessary SDK is primarily needed for the
-initial setup and for occasional specific workflows, rather than as part of your regular development process.
-
-When Xcode is actually required to build or run a module, the Kotlin Toolchain CLI instructs you how to set it up.
+You need to [install Xcode](https://apps.apple.com/us/app/xcode/id497799835) and the necessary SDK primarily for the
+initial setup and occasional specific workflows.
+When Xcode is actually required to build or run a module, the Kotlin Toolchain CLI explains how to set it up.
 
 ## Create a project
 
 To generate a new project using Kotlin Toolchain:
 
-1. Navigate to the directory where you would like your project directory to be created.
+1. Navigate to the directory where you'd like Kotlin Toolchain to create your project, for example, **Projects**.
 2. Run the following command:
 
    ```shell
@@ -70,7 +64,7 @@ To generate a new project using Kotlin Toolchain:
 
 3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
 4. Select **Compose Multiplatform application** when presented with a choice of templates.
-5. By default, all target are selected. You can remove extra targets with the **Space** button.
+5. By default, all targets are selected. You can remove extra targets with the **Space** button.
    Press **Enter** to confirm the selection.
 
    > Consider adding the desktop target, even if your final app targets only Android and iOS.
@@ -138,12 +132,39 @@ To run the project:
     kotlin run -m desktopApp
     ```
 
+## Publish the applications
+
+When you're satisfied with how the app runs, you can publish the applications.
+
+### For iOS
+
+Kotlin Toolchain helps you streamline the setup process for publishing to [TestFlight](https://developer.apple.com/testflight/).
+To publish your iOS app, run:
+
+```shell
+kotlin publish testflight
+```
+
+The command includes a detailed wizard with instructions. It guides you through setting up the publishing process
+using [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
+For subsequent releases, publishing works automatically with the same command.
+
+Alternatively, you can follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/ios-application).
+
+### For Android
+
+To set up and publish your Android app, follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/android-application).
+
+### Other targets
+
+You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet.
+
 ## Work on a project in IntelliJ IDEA or Android Studio
 
 You can work on the project and run it in IntelliJ IDEA or Android Studio.
 
-> To enjoy the full Kotlin Toolchain functionality on Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
-> 
+> To access the full Kotlin Toolchain functionality in Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
+>
 {style="tip"}
 
 Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
@@ -165,38 +186,6 @@ you can also create a new project directly in the IDE:
 
 When the project is created and imported, the IDE automatically registers run configuration for all declared modules
 so you can run corresponding applications from the IDE toolbar.
-
-## Publish the applications
-
-When you're satisfied with how the app runs, you can publish the applications.
-
-### For iOS
-
-Kotlin Toolchain helps you streamline the setup process for publishing to [TestFlight](https://developer.apple.com/testflight/).
-To publish your iOS app, run:
-
-```shell
-kotlin publish testflight
-```
-
-A wizard then guides you through the process.
-
-> The first time, you need to manually get a team API key from [App Store Connect](https://appstoreconnect.apple.com/login).
-> After that, publishing works automatically.
-> 
-{style="note"}
-
-Alternatively, you can follow the manual setup and publishing instructions in the Kotlin Toolchain documentation:
-[Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing).
-
-### For Android
-
-To set up and publish your Android app, follow the manual setup and publishing instructions in the Kotlin Toolchain documentation:
-[Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing).
-
-### Other targets
-
-You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet.
 
 ## What's next
 
