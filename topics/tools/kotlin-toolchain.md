@@ -64,7 +64,7 @@ To generate a new project using Kotlin Toolchain:
 
 3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
 4. Select **Compose Multiplatform application** when presented with a choice of templates.
-5. By default, all targets are selected. You can remove extra targets with the **Space** button.
+5. By default, all targets are selected. You can remove extra targets with the **Space** key.
    Press **Enter** to confirm the selection.
 
    > Consider adding the desktop target, even if your final app targets only Android and iOS.
@@ -73,7 +73,7 @@ To generate a new project using Kotlin Toolchain:
    >
    {style="tip"}
 
-6. Provide a project ID. Without it, a default is generated based on the directory name.
+6. Enter a project ID or leave it blank to generate a default ID based on the directory name.
 
    This ID is used across the project to identify the app: in Kotlin package names, the Android namespace and application
    ID, and the iOS bundle ID.
@@ -81,9 +81,9 @@ To generate a new project using Kotlin Toolchain:
 Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
 By default, it also initializes a Git repository.
 
-The resulting project has several `*App` modules with application entry points for each platform and a `shared` module with common code.
-Each module is listed in the overall `project.yaml` file and configured with its own `module.yaml` file.
-Every application module explicitly depends on the shared module, for example for the Android module:
+The resulting project has several `*App` modules with application entry points for each platform and a `shared` module
+with common code. Each module is listed in the overall `project.yaml` file and configured with its own `module.yaml` file.
+Each application module explicitly depends on the `shared` module. For example for the Android module:
 
 ```yaml
 # androidApp/module.yaml
@@ -145,8 +145,8 @@ To publish your iOS app, run:
 kotlin publish testflight
 ```
 
-The command includes a detailed wizard with instructions. It guides you through setting up the publishing process
-using [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
+The command starts a wizard with detailed instructions. It guides you through setting up the publishing process
+with [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
 For subsequent releases, publishing works automatically with the same command.
 
 Alternatively, you can follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/ios-application).
@@ -170,7 +170,7 @@ You can work on the project and run it in IntelliJ IDEA or Android Studio.
 Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
 
 * [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-  is necessary for a KMP project to be supported properly.
+  provides IDE support for Kotlin Multiplatform projects.
 * [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
   helps the IDE recognize the Kotlin Toolchain project structure, generate run configurations, and so on.
 
@@ -184,7 +184,7 @@ you can also create a new project directly in the IDE:
 3. Select **Kotlin Multiplatform** and choose **Kotlin Toolchain** in the **Build system** switch.
 4. Fill in the rest of the project details and click **Create**.
 
-When the project is created and imported, the IDE automatically registers run configuration for all declared modules
+When the project is created and imported, the IDE automatically registers run configurations for all declared modules
 so you can run corresponding applications from the IDE toolbar.
 
 ## What's next
