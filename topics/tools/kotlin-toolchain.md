@@ -63,9 +63,8 @@ To generate a new project using Kotlin Toolchain:
    ```
 
 3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
-4. Select **Compose Multiplatform application** when presented with a choice of templates.
-5. By default, all targets are selected. You can remove extra targets with the **Space** key.
-   Press **Enter** to confirm the selection.
+4. In the template list, select **Kotlin Multiplatform application**.
+5. Use the **Space** key to select or deselect targets. Press **Enter** to confirm.
 
    > Consider adding the desktop target, even if your final app targets only Android and iOS.
    > It enables faster development and iteration loops and supports [Compose Hot Reload](compose-hot-reload.md),
@@ -77,6 +76,8 @@ To generate a new project using Kotlin Toolchain:
 
    This ID is used across the project to identify the app: in Kotlin package names, the Android namespace and application
    ID, and the iOS bundle ID.
+
+7. For this tutorial, you can skip AI agent installation.
 
 Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
 By default, it also initializes a Git repository.
