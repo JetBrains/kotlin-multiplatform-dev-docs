@@ -1,6 +1,5 @@
 [//]: # (title: Create and build a Kotlin Multiplatform application with Kotlin Toolchain)
 
-
 [Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for creating, building, testing,
 and running Kotlin projects.
 It provides a CLI and declarative configuration, so you can work from a terminal, an IDE,
@@ -18,23 +17,13 @@ This page guides you through setting up a Kotlin Multiplatform project from scra
 
 ### Install the Kotlin Toolchain CLI {id="toolchain-script-install"}
 
-You can install the Kotlin Toolchain CLI using [SDKMAN!](https://sdkman.io/):
-
-```shell
-sdk install kotlintoolchain
-```
-
-Or via the installer script:
+You can install the Kotlin Toolchain CLI using the installer script:
 
 <tabs>
 <tab title="macOS or Linux">
 
 ```shell
 curl -fsSL https://kotl.in/install.sh | sh
-
-# Restart your terminal or run this command
-# to make 'kotlin' available
-exec $SHELL
 ```
 
 </tab>
@@ -48,21 +37,25 @@ powershell -ExecutionPolicy ByPass -c "irm 'https://kotl.in/install.ps1' | iex"
 </tab>
 </tabs>
 
+The installer script downloads the Kotlin Toolchain CLI, places it in `~/.local/bin`, and ensures it's on your `PATH`.
+No `sudo` command is required.
+
 Check that the CLI is available by running `kotlin --version`.
 
 ### Building iOS apps
 
-To build and run iOS applications, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
-and the necessary SDK.
+With Kotlin Toolchain, you can handle most of the iOS development workflow, including editing, building, and running
+apps directly from the CLI or your IDE, without opening Xcode.
 
-When it is actually required to build or run a module,
-Kotlin Toolchain CLI displays instructions on how to set Xcode up.
+You need to [install Xcode](https://apps.apple.com/us/app/xcode/id497799835) and the necessary SDK primarily for the
+initial setup and occasional specific workflows.
+When Xcode is actually required to build or run a module, the Kotlin Toolchain CLI explains how to set it up.
 
 ## Create a project
 
 To generate a new project using Kotlin Toolchain:
 
-1. Navigate to the directory where you would like your project directory to be created.
+1. Navigate to the directory where you'd like Kotlin Toolchain to create your project, for example, **Projects**.
 2. Run the following command:
 
    ```shell
@@ -70,17 +63,28 @@ To generate a new project using Kotlin Toolchain:
    ```
 
 3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
-4. Select **Compose Multiplatform application** when presented with a choice of templates.
-5. Press **Enter** to confirm the default selection of targets.
-6. Provide a project ID that will be used across the project to identify the app (a default is generated based on the directory name).
-   This ID is used for Kotlin package names, the Android namespace and application ID, and the iOS bundle ID.
+4. In the template list, select **Kotlin Multiplatform application**.
+5. Use the **Space** key to select or deselect targets. Press **Enter** to confirm.
+
+   > Consider adding the desktop target, even if your final app targets only Android and iOS.
+   > It enables faster development and iteration loops and supports [Compose Hot Reload](compose-hot-reload.md),
+   > which lets you see UI changes without restarting the app.
+   >
+   {style="tip"}
+
+6. Enter a project ID or leave it blank to generate a default ID based on the directory name.
+
+   This ID is used across the project to identify the app: in Kotlin package names, the Android namespace and application
+   ID, and the iOS bundle ID.
+
+7. Continue with the installation of AI agent configurations or press **Enter**.
 
 Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
 By default, it also initializes a Git repository.
 
-The resulting project has several `*App` modules with application entry points for each platform and a `shared` module with common code.
-Each module is listed in the overall `project.yaml` file and configured with its own `module.yaml` file.
-Every application module explicitly depends on the shared module, for example:
+The resulting project has several `*App` modules with application entry points for each platform and a `shared` module
+with common code. Each module is listed in the overall `project.yaml` file and configured with its own `module.yaml` file.
+Each application module explicitly depends on the `shared` module. For example for the Android module:
 
 ```yaml
 # androidApp/module.yaml
@@ -91,12 +95,14 @@ dependencies:
   - //shared
   # Android-specific dependency
   - $libs.androidx.activity.compose
+  - $compose.preview
+  - $compose.uiTooling
 
 settings:
   compose: enabled
   android:
-    namespace: org.example.toolchainfirst
-    applicationId: org.example.toolchainfirst
+    namespace: org.example.ktckmp
+    applicationId: org.example.ktckmp
 ```
 
 The basic structure of each module follows the [KMP source set model](multiplatform-discover-project.md#source-sets),
@@ -127,15 +133,45 @@ To run the project:
     kotlin run -m desktopApp
     ```
 
+## Publish the applications
+
+When you're satisfied with how the app runs, you can publish the applications.
+
+### For iOS
+
+Kotlin Toolchain helps you streamline the setup process for publishing to [TestFlight](https://developer.apple.com/testflight/).
+To publish your iOS app, run:
+
+```shell
+kotlin publish testflight
+```
+
+The command starts a wizard with detailed instructions. It guides you through setting up the publishing process
+with [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
+For subsequent releases, publishing works automatically with the same command.
+
+Alternatively, you can follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/ios-application).
+
+### For Android
+
+To set up and publish your Android app, follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/android-application).
+
+### Other targets
+
+You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet.
+
 ## Work on a project in IntelliJ IDEA or Android Studio
 
 You can work on the project and run it in IntelliJ IDEA or Android Studio.
-To enjoy the full Kotlin Toolchain functionality on Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
+
+> To access the full Kotlin Toolchain functionality in Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
+>
+{style="tip"}
 
 Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
 
 * [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-  is necessary for a KMP project to be supported properly.
+  provides IDE support for Kotlin Multiplatform projects.
 * [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
   helps the IDE recognize the Kotlin Toolchain project structure, generate run configurations, and so on.
 
@@ -149,19 +185,8 @@ you can also create a new project directly in the IDE:
 3. Select **Kotlin Multiplatform** and choose **Kotlin Toolchain** in the **Build system** switch.
 4. Fill in the rest of the project details and click **Create**.
 
-When the project is created and imported, the IDE automatically registers run configuration for all declared modules
+When the project is created and imported, the IDE automatically registers run configurations for all declared modules
 so you can run corresponding applications from the IDE toolbar.
-
-## Publish the applications
-
-When you're satisfied with how the app runs, you can publish the applications.
-
-See the full instructions on producing artifacts in the Kotlin Toolchain documentation:
-
-* [Publishing an Android app](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing)
-* [Publishing an iOS app](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing)
-
-You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet. 
 
 ## What's next
 
