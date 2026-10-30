@@ -77,7 +77,7 @@ To generate a new project using Kotlin Toolchain:
    This ID is used across the project to identify the app: in Kotlin package names, the Android namespace and application
    ID, and the iOS bundle ID.
 
-7. For this tutorial, you can skip AI agent installation.
+7. For this tutorial, you can skip the AI agent installation step.
 
 Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
 By default, it also initializes a Git repository.
