@@ -50,7 +50,7 @@ struct ComposeViewController: UIViewControllerRepresentable {
 }
 ```
 
-Now you can use the `ComposeView` structure in other SwiftUI code.
+Now you can use the `ComposeViewController` structure in other SwiftUI code.
 
 `Main_iosKt.MainViewController` is a generated
 name. You can learn more about accessing Kotlin code from Swift on the [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html#top-level-functions-and-properties)
@@ -60,11 +60,126 @@ In the end, your application should look like this:
 
 ![ComposeView](compose-view.png){width=300}
 
-You can use this `ComposeView` in any SwiftUI view hierarchy and control its size from within SwiftUI code.
-
-If you want to embed Compose Multiplatform into your existing applications, use the `ComposeView` structure wherever
-SwiftUI is used.
 For an example, see our [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-swiftui).
+
+### Size Compose views to fit their content
+
+In Compose Multiplatform %org.jetbrains.compose-eap%, a Compose view can report its preferred size in response to a sizing proposal from SwiftUI. When you pass this proposal to the Compose view, use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified. If the preferred size changes, the hosting view invalidates its intrinsic content size so SwiftUI can run layout again.
+
+The sizing examples use a Kotlin function `MainComposeView()` defined in `main.ios.kt`:
+
+```kotlin
+fun MainComposeView(): UIView = ComposeUIView {
+    Text(
+        "This Compose view wraps text to fit the available width",
+        modifier = Modifier.fillMaxWidth().padding(16.dp)
+    )
+}
+```
+
+#### On iOS 16 and later
+
+In your Swift code, pass SwiftUI's sizing proposal to the Compose view's `sizeThatFits()` method.
+You don't need to configure sizing separately.
+
+Use Compose content that wraps its height, such as the `Text` in this section.
+If you adapt the example from
+[Use Compose Multiplatform inside a SwiftUI application](#use-compose-multiplatform-inside-a-swiftui-application),
+replace its `Box(Modifier.fillMaxSize())` with this content.
+
+This `UIViewRepresentable` example constrains the width and lets the Compose content determine the height:
+
+```swift
+struct ComposeView: UIViewRepresentable {
+    let makeComposeUIView: () -> UIView
+
+    func makeUIView(context: Context) -> UIView {
+        makeComposeUIView()
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
+
+    @available(iOS 16.0, *)
+    func sizeThatFits(
+        _ proposal: ProposedViewSize,
+        uiView: UIView,
+        context: Context
+    ) -> CGSize? {
+        uiView.sizeThatFits(
+            CGSize(
+                width: proposal.width ?? UIView.noIntrinsicMetric,
+                height: proposal.height ?? UIView.noIntrinsicMetric
+            )
+        )
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        // Uses the bridge name generated for your Kotlin file
+        ComposeView(makeComposeUIView: { Main_iosKt.MainComposeView() })
+            .frame(width: 240)
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIView, context: Context)"}
+
+> If your Kotlin function returns a `UIViewController`, use `UIViewControllerRepresentable`.
+> Implement `sizeThatFits(_:uiViewController:context:)` and pass the sizing proposal to the controller's hosting view
+> through `uiViewController.view.sizeThatFits()`.
+>
+{style="note"}
+
+#### Before iOS 16
+
+When your SwiftUI app runs on an iOS version earlier than 16, update `MainComposeView()` in `main.ios.kt` to report its intrinsic content size:
+
+```kotlin
+fun MainComposeView(): UIView = ComposeUIView(
+    configure = {
+        preferredSizeReportingStrategy = PreferredSizeReportingStrategy.IntrinsicContentSize
+    }
+) {
+    Text(
+        "This Compose view wraps text to fit the available width",
+        modifier = Modifier.fillMaxWidth().padding(16.dp)
+    )
+}
+```
+
+In your Swift code, pass the width to `sizeThatFits()` in `updateUIView()` and use the same width for the SwiftUI frame.
+SwiftUI reads the intrinsic content size and runs layout again when Compose invalidates it.
+
+```swift
+struct IntrinsicComposeView: UIViewRepresentable {
+    let makeComposeUIView: () -> UIView
+    let width: CGFloat
+
+    func makeUIView(context: Context) -> UIView {
+        makeComposeUIView()
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        _ = uiView.sizeThatFits(
+            CGSize(width: width, height: UIView.noIntrinsicMetric)
+        )
+    }
+}
+
+struct ContentView: View {
+    private let width: CGFloat = 240
+
+    var body: some View {
+        // Uses the bridge name generated for your Kotlin file
+        IntrinsicComposeView(
+            makeComposeUIView: { Main_iosKt.MainComposeView() },
+            width: width
+        )
+        .frame(width: width)
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="uiView.sizeThatFits(CGSize(width: width, height: UIView.noIntrinsicMetric)"}
 
 ## Use SwiftUI inside Compose Multiplatform
 
