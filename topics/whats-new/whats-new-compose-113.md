@@ -8,7 +8,9 @@ Here are the highlights for this EAP release:
 * [Faster desktop startup with AppCDS and AOT options](#faster-desktop-startup-with-appcds-or-aot)
 
 You can find the full list of changes for this release on [GitHub](https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.13.0-beta01).
+
 For details about specific component versions, refer to the [Dependencies](#dependencies) section.
+For changes in the AndroidX Compose runtime version included in this release, see the [`androidx.compose.runtime` release notes](https://developer.android.com/jetpack/androidx/releases/compose-runtime#version_113_2).
 
 ## Across platforms
 
@@ -262,11 +264,11 @@ The feature requires Compose content to fill the entire window.
 
 | Library            | Maven coordinates                                                      | Based on Jetpack version                                                                                                             |
 |--------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-beta01`                 | [Runtime 1.13.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-beta01)                       |
-| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-beta01`                           | [UI 1.13.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-beta01)                                 |
-| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-beta01`           | [Foundation 1.13.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-beta01)                 |
-| Material           | `org.jetbrains.compose.material:material*:1.13.0-beta01`               | [Material 1.13.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-beta01)                     |
-| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-beta01`             | [Material3 1.5.0-beta01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-beta01)                     |
+| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-beta02`                 | [Runtime 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-beta02)                       |
+| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-beta02`                           | [UI 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-beta02)                                 |
+| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-beta02`           | [Foundation 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-beta02)                 |
+| Material           | `org.jetbrains.compose.material:material*:1.13.0-beta02`               | [Material 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-beta02)                     |
+| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-beta02`             | [Material3 1.5.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-beta02)                     |
 | Material3 Adaptive | `org.jetbrains.compose.material3.adaptive:adaptive*:1.4.0-alpha01`     | [Material3 Adaptive 1.4.0-alpha03](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.4.0-alpha03) |
 | Lifecycle          | `org.jetbrains.androidx.lifecycle:lifecycle-*:2.11.0`                  | [Lifecycle 2.11.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0)                                         |
 | Navigation         | `org.jetbrains.androidx.navigation:navigation-*:2.10.0`                | [Navigation 2.10.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.10.0)                                       |
