@@ -83,7 +83,6 @@ fun MainComposeView(): UIView = ComposeUIView {
 
 In your Swift code, pass SwiftUI's sizing proposal to the Compose view's `sizeThatFits()` method.
 Use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified.
-You don't need to configure sizing separately.
 
 Use Compose content that wraps the dimension you want to fit, such as the `Text` in this section.
 If you adapt the example from
@@ -153,9 +152,7 @@ fun MainComposeView(): UIView = ComposeUIView(
 
 This example uses a fixed width and lets the Compose content determine the height.
 In your Swift code, pass the width to `sizeThatFits()` in `updateUIView()` and use the same width for the SwiftUI frame.
-For a fixed height, swap width and height in the sizing proposal and SwiftUI frame.
-
-SwiftUI reads the resulting size through `intrinsicContentSize`.
+SwiftUI reads the resulting size through `intrinsicContentSize`:
 
 ```swift
 struct IntrinsicComposeView: UIViewRepresentable {
@@ -187,6 +184,8 @@ struct ContentView: View {
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="uiView.sizeThatFits(CGSize(width: width, height: UIView.noIntrinsicMetric)"}
+
+For a fixed height, swap width and height in the sizing proposal and SwiftUI frame.
 
 ## Use SwiftUI inside Compose Multiplatform
 
