@@ -64,7 +64,9 @@ For an example, see our [sample project](https://github.com/JetBrains/compose-mu
 
 ### Size Compose views to fit their content
 
-In Compose Multiplatform %org.jetbrains.compose-eap%, a Compose view can report its preferred size in response to a sizing proposal from SwiftUI. When you pass this proposal to the Compose view, use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified. If the preferred size changes, the hosting view invalidates its intrinsic content size so SwiftUI can run layout again.
+In Compose Multiplatform %org.jetbrains.compose-eap%, a Compose view can measure its content using a sizing proposal from SwiftUI
+and report its preferred size. If that size changes, the hosting `UIView` invalidates its intrinsic content size
+so SwiftUI can run layout again and apply the updated size.
 
 The sizing examples use a Kotlin function `MainComposeView()` defined in `main.ios.kt`:
 
@@ -80,14 +82,16 @@ fun MainComposeView(): UIView = ComposeUIView {
 #### On iOS 16 and later
 
 In your Swift code, pass SwiftUI's sizing proposal to the Compose view's `sizeThatFits()` method.
+Use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified.
 You don't need to configure sizing separately.
 
-Use Compose content that wraps its height, such as the `Text` in this section.
+Use Compose content that wraps the dimension you want to fit, such as the `Text` in this section.
 If you adapt the example from
 [Use Compose Multiplatform inside a SwiftUI application](#use-compose-multiplatform-inside-a-swiftui-application),
 replace its `Box(Modifier.fillMaxSize())` with this content.
 
-This `UIViewRepresentable` example constrains the width and lets the Compose content determine the height:
+This `UIViewRepresentable` example uses a fixed width and content-based height.
+For a fixed height, use `.frame(height: 100)` and remove `Modifier.fillMaxWidth()`.
 
 ```swift
 struct ComposeView: UIViewRepresentable {
@@ -125,7 +129,7 @@ struct ContentView: View {
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIView, context: Context)"}
 
 > If your Kotlin function returns a `UIViewController`, use `UIViewControllerRepresentable`.
-> Implement `sizeThatFits(_:uiViewController:context:)` and pass the sizing proposal to the controller's hosting view
+> Implement `sizeThatFits(_:uiViewController:context:)` and pass the sizing proposal to the controller's view
 > through `uiViewController.view.sizeThatFits()`.
 >
 {style="note"}
@@ -147,8 +151,11 @@ fun MainComposeView(): UIView = ComposeUIView(
 }
 ```
 
+This example uses a fixed width and lets the Compose content determine the height.
 In your Swift code, pass the width to `sizeThatFits()` in `updateUIView()` and use the same width for the SwiftUI frame.
-SwiftUI reads the intrinsic content size and runs layout again when Compose invalidates it.
+For a fixed height, swap width and height in the sizing proposal and SwiftUI frame.
+
+SwiftUI reads the resulting size through `intrinsicContentSize`.
 
 ```swift
 struct IntrinsicComposeView: UIViewRepresentable {

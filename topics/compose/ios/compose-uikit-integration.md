@@ -68,7 +68,9 @@ In your Swift code, constrain the view's width with [Auto Layout](https://develo
 Use `UIView.noIntrinsicMetric` for the height to let Compose determine it from the content,
 then apply the returned height through the view's height constraint.
 
-When the width or content changes, schedule another layout pass to measure again and update the constraint.
+For a fixed height, swap width and height in the sizing proposal and constraints.
+
+When the available space or content changes, schedule another layout pass to measure again and update the constraint.
 If your app changes Compose content, call `view.setNeedsLayout()` after Compose processes the change.
 
 ```swift

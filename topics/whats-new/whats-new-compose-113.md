@@ -25,9 +25,9 @@ You no longer need to opt in to use them:
 
 Compose Multiplatform views embedded in SwiftUI or UIKit can now report a preferred size based on the available space.
 Native containers can use this size to fit Compose content, for example,
-to adjust a view's height while keeping its width fixed.
+to adjust a view's height while keeping its width fixed, or vice versa.
 
-Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits()` by default.
+Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits` by default.
 In UIKit, you don't need additional sizing configuration.
 
 In SwiftUI, keep this default on devices running iOS 16 or later.
