@@ -117,33 +117,31 @@ separately from mobile apps through CocoaPods.
 
 For more information, see [Build final native binaries](multiplatform-build-native-binaries.md#build-xcframeworks).
 
-## Setting up a local dependency for local development
+## Direct dependency for local development, remote for publishing
 
-Many teams choose remote distribution workflows when adopting Kotlin Multiplatform technology to keep the development
-process the same for iOS developers. However, it's hard for them to change Kotlin Multiplatform code in this workflow.
-We recommend setting up an additional "local development" workflow with a local dependency on a framework
+Many teams choose remote integration workflows when adopting Kotlin Multiplatform technology to keep the development
+process unchanged for iOS developers. However, this makes developing the Kotlin Multiplatform code more cumbersome.
+One solution is to set up an additional workflow for local development, with a direct iOS dependency on the framework
 generated from the Kotlin Multiplatform module.
 
-When developers add new functionality, they switch to consuming the Kotlin Multiplatform module as a local dependency.
-That allows making changes to common Kotlin code, immediately observing the behavior from iOS, and debugging Kotlin
-code. When the functionality is ready, they can switch back to the remote dependency and publish their changes
-accordingly. First, they publish changes to the shared modules, and only after that do they make changes to the apps.
+The local workflow allows to immediately observe changes on iOS after rebuilding common Kotlin code.
+When a feature is ready, the developer can switch back to the remote workflow and publish their changes:
+first, the shared modules, then the apps with the updated dependency.
 
-For remote distribution workflows, use Swift Package Manager. For local distribution workflow, integrate
+For remote integration workflows, use Swift Package Manager. For local integration workflow, integrate
 the framework directly.
 
 <!-- This tutorial [TODO] describes how to switch workflows by choosing the corresponding scheme in Xcode:
 [TODO screenshot] -->
 
-If you use CocoaPods, you can alternatively use CocoaPods for local distribution workflow. You switch between them by
-changing the environmental variable as described in the [TouchLab documentation](https://touchlab.co/kmmbridgecocoapodslocal).
+## Umbrella frameworks: when there are several shared modules
 
-## Combining remote libraries with a local framework build
+When there are several shared libraries (contributed by separate teams, for example),
+the umbrella framework approach can ease integration.
 
-The local and remote workflows can also be combined differently: the Kotlin Multiplatform libraries are published
-remotely as regular Kotlin artifacts, while the iOS framework is built locally in the iOS app repository by a small
-umbrella module that depends on the published versions.
-iOS developers don't edit Kotlin code in this setup, but the iOS build runs Gradle to produce the framework.
+In this approach, the Kotlin Multiplatform libraries are published remotely as regular Kotlin artifacts.
+The umbrella iOS framework is built in the iOS app repository:
+it depends on all the Kotlin artifacts and combines them into a single framework for the iOS app to consume.
+iOS developers don't edit Kotlin code in this setup, but the iOS build runs the Gradle task to produce the umbrella framework.
 
-This approach is useful when several teams contribute shared libraries to one or more iOS apps.
-To learn more, see [](multiplatform-ios-umbrella-module-placement.md).
+To learn more about this setup, see [](multiplatform-ios-umbrella-module-placement.md).

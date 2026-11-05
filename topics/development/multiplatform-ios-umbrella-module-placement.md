@@ -1,29 +1,28 @@
 [//]: # (title: Umbrella module placement for iOS apps)
 
-When Kotlin Multiplatform code is developed by several teams, it's usually split into libraries that are stored in
+When code is developed by several teams, it's usually split into libraries that are stored in
 different repositories and released on their own schedules.
-An iOS app should consume these libraries through a single [umbrella framework](multiplatform-project-module-configurations.md#several-shared-modules),
-so the location of the umbrella module that produces this framework determines how changes reach the iOS app.
+Same is true for Kotlin Multiplatform,
+but for iOS apps the produced dependencies need to be combined into a single framework,
+an [umbrella framework](multiplatform-project-module-configurations.md#several-shared-modules) that depends on all shared modules.
+The location of the umbrella module that produces this framework determines how changes reach the iOS app.
 
-This page compares the options for placing the umbrella module and describes the approach we recommend for multi-team
-setups: keeping an umbrella module in each iOS app repository.
-This applies whether you have one iOS app or several.
+This page compares the options for placing the umbrella module and describes the recommended approach
+for multi-team setups: keeping an umbrella module in each iOS app repository.
 
 ## The problem with a separately published umbrella framework
 
-An iOS app should link only one framework produced by Kotlin/Native.
-Each Kotlin framework includes the Kotlin runtime and all of its dependencies, so linking several of them duplicates
-code and breaks state shared through common dependencies.
-For more details, see [Why do you need an umbrella framework?](multiplatform-project-module-configurations.md#why-do-you-need-an-umbrella-framework)
+An iOS app should link only one framework produced by Kotlin/Native to avoid duplicating Kotlin runtime and its dependencies
+(see [Why do you need an umbrella framework?](multiplatform-project-module-configurations.md#why-do-you-need-an-umbrella-framework)).
 
-A common way to provide this single framework is to build it in the repository with the shared code, or in a separate
+A common way to provide a single framework is to build it in the repository with the shared code, or in a separate
 repository, and publish it as a binary XCFramework through SwiftPM or CocoaPods.
 In this setup, the umbrella repository effectively acts as a lock file for the versions of all libraries in the iOS app.
 With several independent libraries, this causes the following problems:
 
 * **Every change requires several steps**. To deliver an update of a single library, you need to update the umbrella
   module, build and publish a new umbrella framework, and then update the framework version in the iOS app.
-* **Updates get batched**. To reduce this overhead, teams tend to release the umbrella framework less often, with changes
+* **Updates get batched**. To reduce the overhead, teams tend to release the umbrella framework less often, with changes
   from several libraries at once.
 * **iOS changes get larger**. When a new umbrella version contains changes from several libraries, iOS developers have to
   adapt to all of them in one change, even if they work on an unrelated feature.
@@ -54,14 +53,14 @@ The following table summarizes where the umbrella module can be located in diffe
   <tr>
      <td>The repository with the shared code</td>
      <td>Published as a prebuilt XCFramework</td>
-     <td>One team that owns all of the shared code, for one iOS app or for several apps that use the same libraries and update them together</td>
+     <td>One team that owns all the shared code, for one iOS app or for several apps that use the same libraries and update them together</td>
      <td>All shared modules are released together; serving different subsets to different iOS apps requires a separate umbrella module and framework release for each app</td>
   </tr>
   <tr>
      <td>A separate umbrella repository for each iOS app</td>
      <td>Published as a prebuilt XCFramework</td>
      <td>iOS teams that can't run Gradle in their builds</td>
-     <td>Two changes per library update, batched updates, XCFramework distribution, as described above</td>
+     <td>Two changes per library update, batched updates, XCFramework distribution, as described <a href="#the-problem-with-a-separately-published-umbrella-framework">above</a></td>
   </tr>
   <tr>
      <td>The iOS app repository</td>
@@ -80,12 +79,11 @@ The umbrella module has no feature code of its own: it declares the libraries an
 
 When the iOS app is built, Xcode runs a Gradle task that resolves the library versions, builds the umbrella framework
 for the current build configuration, and embeds it into the app.
-This is the same mechanism as [direct integration](multiplatform-direct-integration.md), applied to a Gradle project
-that contains only the umbrella module.
+This is essentially [direct integration](multiplatform-direct-integration.md) used with only the umbrella module.
 
-<!-- TODO: diagram of the umbrella module in the iOS app repository, see the KEDOC-337 report -->
+![](umbrella-module-ios-repo.svg)
 
-This setup has the following benefits:
+This setup solves the common problems described at the top:
 
 * **Independent library updates**. Updating a library means changing one version in the iOS repository.
   Each library can be updated in a separate change, several updates can be prepared in parallel,
@@ -93,15 +91,15 @@ This setup has the following benefits:
 * **Smaller iOS changes**. Each update brings changes from one library, so iOS developers adapt to one set of API changes
   at a time.
 * **No XCFramework distribution**. You don't need to build, publish, host, or version an umbrella XCFramework.
-  The library repositories publish klib artifacts, which, in most cases, can be built on any host.
-  For details, see [Host requirements](multiplatform-publish-lib-setup.md#host-requirements).
+  The library repositories publish KLIB artifacts, which, in most cases,
+  [can be built on any host](multiplatform-publish-lib-setup.md#host-requirements).
 * **Faster delivery of library updates**. A new library version reaches the iOS app as soon as it's published, without
-  waiting for a release build of the whole umbrella framework. During development, the framework is linked in the debug
+  waiting for a release build of the whole umbrella framework. During development, the framework can be linked in the debug
   configuration, which is faster than a release build.
 * **Different subsets for different apps**. Each iOS app repository has its own umbrella module, so it includes only the
   libraries the app needs. See [Multiple iOS apps with different sets of libraries](#multiple-ios-apps-with-different-sets-of-libraries).
 
-Keep the following in mind:
+This approach has the following limitations to keep in mind:
 
 * The iOS app build runs Gradle, so developer machines and CI agents that build the iOS app need to be able to run
   the Gradle wrapper committed to the iOS repository.
@@ -110,7 +108,7 @@ Keep the following in mind:
   libraries, and release builds link an optimized framework, which takes noticeably longer than a debug build.
   Account for this in iOS CI, which now builds the release framework as part of the app build.
 * Exporting a dependency to the framework disables dead code elimination for it.
-  Export only the libraries whose API is used from Swift and add other libraries as regular dependencies.
+  To alleviate this, export only the libraries whose API is used from Swift and add other libraries as regular dependencies.
   See [Export dependencies to binaries](multiplatform-build-native-binaries.md#export-dependencies-to-binaries).
 * With several iOS apps, each app adopts a library update separately, and the apps can end up on different library
   versions. Library teams may need to support older versions for longer.
@@ -120,6 +118,7 @@ Keep the following in mind:
 
 The following steps describe the general setup. For a complete example project with a library repository
 and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13/ios-side-umbrella) sample.
+<!--TODO the sample is in a personal repo, is it worth moving somewhere? -->
 
 1. In the library repositories, publish each library with its iOS targets, for example, `iosArm64` and
    `iosSimulatorArm64`. See [](multiplatform-publish-lib-setup.md).
@@ -131,9 +130,10 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
     ```kotlin
     dependencyResolutionManagement {
         repositories {
+            mavenCentral()
+
             // Your internal repository with the published libraries
             maven("https://maven.example.com/releases")
-            mavenCentral()
         }
     }
 
@@ -190,9 +190,9 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
 
 5. Add an empty Kotlin file to the umbrella module, for example, `umbrella/src/commonMain/kotlin/Umbrella.kt`.
    Gradle can't assemble a framework from a module that doesn't contain any source code.
-6. Connect the framework to the Xcode project as described in [](multiplatform-direct-integration.md#connect-the-framework-to-your-project).
-   In the run script, specify the path to the root of the Gradle project in your repository in the `cd` command,
-   and the umbrella module in the `./gradlew` command, for example:
+6. Connect the framework to the Xcode project (as described in [](multiplatform-direct-integration.md#connect-the-framework-to-your-project)).
+   To do that, in the run script, specify the path to the root of the Gradle project in your repository in the `cd` command,
+   and the name of the umbrella module in the `./gradlew` command, for example:
 
     ```bash
     if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
@@ -203,7 +203,7 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
     ./gradlew :umbrella:embedAndSignAppleFrameworkForXcode
     ```
 
-After that, Swift code can use the API of all exported libraries through `import Shared`.
+After that, Swift code can use the API of all exported libraries through `import umbrella`.
 
 ## Manage changes and versions
 
@@ -212,11 +212,7 @@ When libraries are updated independently, clear versioning rules help library te
 ### Version libraries semantically
 
 Use [semantic versioning](https://semver.org/) for each library, and treat any change to the public API that is
-visible from Swift as part of the library's API contract:
-
-* Increase the major version when you remove or change public API in an incompatible way.
-* Before removing an API, deprecate it in a minor release and give consuming teams time to migrate.
-* Describe changes that affect iOS consumers in the release notes of the library.
+visible from Swift as part of the library's API contract.
 
 To detect accidental changes to the Kotlin API before a release, you can enable
 [binary compatibility validation](https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html)
@@ -246,19 +242,19 @@ library version is published.
 
 ### Align shared dependencies and the Kotlin version
 
-Libraries often depend on common libraries, such as a shared platform module, kotlinx.coroutines, or Ktor.
+Libraries often depend on common libraries, such as a shared platform module, `kotlinx.coroutines`, or Ktor.
 The umbrella module resolves a single version of each such dependency for the whole framework.
 By default, Gradle picks the highest requested version, so an update of one library can also update a dependency used by
 other libraries.
 To avoid unexpected changes, agree on versions of common dependencies across teams, for example, by publishing a shared
 version catalog that all library projects use.
 
-Also keep the Kotlin version in mind.
+The version of Kotlin itself should also be tracked.
 The Kotlin compiler can consume klib artifacts produced by the same or an earlier Kotlin version, but it isn't guaranteed
-to read klibs produced by a later version. For cinterop klibs, there are no compatibility guarantees between
+to read klib produced by a later version. For cinterop klib, there are no compatibility guarantees between
 Kotlin versions, so libraries with cinterop dependencies should use the same Kotlin version as the umbrella module.
-Make sure that the Kotlin version in the umbrella module is the same as or later than the Kotlin version of all
-libraries, and update it in the umbrella module first.
+Make sure that the Kotlin version in the umbrella module is the same or newer than for all libraries,
+and when updating Kotlin, update it in the umbrella module first.
 For details, see [Kotlin klib binaries](https://kotlinlang.org/docs/kotlin-evolution-principles.html#kotlin-klib-binaries).
 
 ## Multiple iOS apps with different sets of libraries
@@ -276,7 +272,7 @@ Don't add several umbrella frameworks to one app. If an app consists of several 
 Kotlin code, connect a single umbrella framework to the app and make it available to these modules.
 For local Swift packages, see [](multiplatform-spm-local-integration.md).
 
-## Workflows that reduce coordination between teams
+## Workflows that help coordination between teams
 
 With the umbrella module in the iOS app repository, a typical update looks like this:
 
@@ -304,6 +300,8 @@ When a change spans a library and the iOS app, you can test it in the iOS app be
 Keep these changes local and don't commit them to the iOS app repository.
 
 ### Continuous integration
+
+When the umbrella module is placed in apps' repositories:
 
 * In the library repositories, CI builds and tests the library for all of its targets, including iOS, and publishes
   new versions.
