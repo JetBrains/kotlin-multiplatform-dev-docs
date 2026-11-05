@@ -3,9 +3,19 @@
 [Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for creating, building, testing,
 and running Kotlin projects.
 It provides a CLI and declarative configuration, so you can work from a terminal, an IDE,
-or with AI-assisted development tools.
+or with AI-assisted development tools:
+The Kotlin Toolchain allows your coding agent go from a new project to a published app with minimal setup and configuration.
+
+The [official repository of Kotlin AI skills](https://github.com/Kotlin/kotlin-agent-skills/tree/main)
+includes skills dedicated Kotlin Toolchain. 
 
 This page guides you through setting up a Kotlin Multiplatform project from scratch using Kotlin Toolchain.
+
+You can also simply ask your agent:
+
+```text
+Create a new Kotlin Multiplatform app for Android, iOS, desktop, and web with the Kotlin Toolchain CLI (https://kotlin-toolchain.org/latest).
+```
 
 > Kotlin Toolchain is in [Alpha](supported-platforms.md#general-kotlin-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
@@ -77,7 +87,9 @@ To generate a new project using Kotlin Toolchain:
    This ID is used across the project to identify the app: in Kotlin package names, the Android namespace and application
    ID, and the iOS bundle ID.
 
-7. Continue with the installation of AI agent configurations or press **Enter**.
+7. Confirm installing AI agent configuration: this will create project-specific AGENTS.md with general recommendations
+   and MCP server configurations.
+8. Use the **Space** key to select your preferred AI agents. Press **Enter** to confirm.
 
 Kotlin Toolchain generates the project, including configuration files, source code, and wrapper scripts.
 By default, it also initializes a Git repository.
@@ -150,11 +162,11 @@ The command starts a wizard with detailed instructions. It guides you through se
 with [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
 For subsequent releases, publishing works automatically with the same command.
 
-Alternatively, you can follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/ios-application).
+For the manual setup and publishing instructions, see the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing).
 
 ### For Android
 
-To set up and publish your Android app, follow the manual setup and publishing instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/android-application).
+To set up and publish your Android app, follow the instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing).
 
 ### Other targets
 
@@ -164,7 +176,8 @@ You can also package a JVM app or a Wasm app, but publishing for these targets i
 
 You can work on the project and run it in IntelliJ IDEA or Android Studio.
 
-> To access the full Kotlin Toolchain functionality in Android Studio, use the latest stable version, [Android Studio Rabbit](https://developer.android.com/studio/releases).
+> To access the full Kotlin Toolchain functionality in Android Studio, use the [latest stable version](https://developer.android.com/studio/releases),
+> at least Android Studio Rabbit.
 >
 {style="tip"}
 
@@ -190,8 +203,8 @@ so you can run corresponding applications from the IDE toolbar.
 
 ## What's next
 
-* For more on what Kotlin Toolchain is and what purpose it serves, check out the [product FAQ](https://kotlin-toolchain.org/dev/faq/).
-* A [from-scratch tutorial](https://kotlin-toolchain.org/dev/getting-started/tutorial/)
+* For more on what Kotlin Toolchain is and what purpose it serves, check out the [product FAQ](https://kotlin-toolchain.org/latest/faq/).
+* A [from-scratch tutorial](https://kotlin-toolchain.org/latest/getting-started/tutorial/)
   shows how to create a Kotlin Toolchain "Hello, World!" and gradually transform it into a multiplatform project
   with a complex templated configuration.
 * For a deep dive into Kotlin Toolchain, check out the [user guide](https://kotlin-toolchain.org/latest/user-guide/).
