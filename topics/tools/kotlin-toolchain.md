@@ -162,11 +162,11 @@ The command starts a wizard with detailed instructions. It guides you through se
 with [App Store Connect](https://appstoreconnect.apple.com/login) API keys with minimal manual effort.
 For subsequent releases, publishing works automatically with the same command.
 
-For the manual setup and publishing instructions, see the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/product-types/ios-app/#publishing).
+For the manual setup and publishing instructions, see the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/ios-application).
 
 ### For Android
 
-To set up and publish your Android app, follow the instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/product-types/android-app/#publishing).
+To set up and publish your Android app, follow the instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/android-application).
 
 ### Other targets
 
