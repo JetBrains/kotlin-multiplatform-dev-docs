@@ -133,7 +133,7 @@ struct ContentView: View {
 >
 {style="note"}
 
-#### Before iOS 16
+#### Before iOS 16 {collapsible="true"}
 
 When your SwiftUI app runs on an iOS version earlier than 16, update `MainComposeView()` in `main.ios.kt` to report its intrinsic content size:
 
