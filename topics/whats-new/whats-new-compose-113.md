@@ -23,7 +23,7 @@ You no longer need to opt in to use them:
 
 ### Content-based sizing for Compose Multiplatform views in SwiftUI and UIKit
 
-Compose Multiplatform views embedded in SwiftUI or UIKit can now report a preferred size based on the available space.
+Compose Multiplatform views embedded in SwiftUI or UIKit layouts can now report a preferred size based on the available space.
 Native containers can use this size to fit Compose content, for example,
 to adjust a view's height while keeping its width fixed, or vice versa.
 

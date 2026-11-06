@@ -49,8 +49,9 @@ Explore this code in
 the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
 
 ### Size Compose views to fit their content
+<primary-label ref="EAP"/>
 
-In Compose Multiplatform %org.jetbrains.compose-eap%, a Compose view can report its preferred size through `sizeThatFits()`.
+A Compose view can report its preferred size through `sizeThatFits()`.
 You don't need to configure sizing separately.
 
 This sizing example uses a Kotlin function `MainComposeView()` defined in `main.ios.kt`:
@@ -68,8 +69,6 @@ In your Swift code, constrain the view's width with [Auto Layout](https://develo
 Use `UIView.noIntrinsicMetric` for the height to let Compose determine it from the content,
 then apply the returned height through the view's height constraint.
 
-For a fixed height, swap width and height in the sizing proposal and constraints.
-
 When the available space or content changes, schedule another layout pass to measure again and update the constraint.
 If your app changes Compose content, call `view.setNeedsLayout()` after Compose processes the change.
 
@@ -78,6 +77,7 @@ import UIKit
 
 class ComposeContentViewController: UIViewController {
     // Uses the bridge name generated for your Kotlin file
+    // for example, main.ios.kt -> Main_iosKt
     private let composeView = Main_iosKt.MainComposeView()
     private var heightConstraint: NSLayoutConstraint!
 
@@ -105,6 +105,7 @@ class ComposeContentViewController: UIViewController {
         // The initial result may be a fallback; measure again on subsequent layout passes
         let preferredSize = composeView.sizeThatFits(
             CGSize(
+                // For a fixed height, swap width and height here and in the layout constraints
                 width: composeView.bounds.width,
                 height: UIView.noIntrinsicMetric
             )
