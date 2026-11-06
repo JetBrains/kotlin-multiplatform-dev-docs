@@ -119,35 +119,12 @@ Column {
 ### WebGL interop
 <primary-label ref="Experimental"/>
 
-Compose Multiplatform now provides an experimental API for rendering [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) textures.
-`WebGLRenderTarget` exposes a Compose `Painter` that displays WebGL graphics alongside other Compose UI elements.
+Compose Multiplatform now offers an experimental API for integrating [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+graphics into the Compose UI of your web app.
+You can add custom visual effects, display 3D scenes, or integrate existing JavaScript WebGL renderers.
+Compose modifiers let you size and clip the WebGL content.
 
-Use `rememberWebGLRenderTarget()` to create a target, draw into it with `render {}`, and display its `painter` in an `Image`.
-For example, this fragment renders a blue texture inside a composable with `@OptIn(ExperimentalComposeUiApi::class)`:
-
-```kotlin
-val target = rememberWebGLRenderTarget(IntSize(64, 64))
-
-if (target != null) {
-    LaunchedEffect(target) {
-        target.render {
-            with(target.webGLContext) {
-                disable(WebGLRenderingContext.SCISSOR_TEST)
-                clearColor(0.15f, 0.55f, 1f, 1f)
-                clear(WebGLRenderingContext.COLOR_BUFFER_BIT)
-            }
-        }
-    }
-
-    Image(
-        painter = target.painter,
-        contentDescription = "A blue WebGL texture",
-        modifier = Modifier.size(200.dp),
-    )
-}
-```
-
-For more advanced use cases, the `target` also provides access to the underlying WebGL rendering context.
+For details, see [WebGL interoperability](compose-webgl-interop.md).
 
 ### System window insets on web
 <primary-label ref="Experimental"/>
