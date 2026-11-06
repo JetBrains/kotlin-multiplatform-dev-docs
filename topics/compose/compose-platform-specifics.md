@@ -65,6 +65,9 @@ For iOS, there are separate guides for interop code with [SwiftUI](compose-swift
 
 For desktop, Compose Multiplatform supports [](compose-desktop-swing-interoperability.md).
 
+For web, you can render WebGL textures using the experimental
+[WebGL interop API](compose-webgl-interop.md).
+
 ### Back gesture
 
 Android devices have back gesture support by default, and every screen reacts to the **Back** button in some fashion.

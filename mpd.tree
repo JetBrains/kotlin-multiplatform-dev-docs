@@ -108,6 +108,7 @@
 		<toc-element toc-title="Web-specific features">
             <toc-element topic="compose-web-resources.md"/>
             <toc-element topic="compose-css-styles.md"/>
+            <toc-element topic="compose-webgl-interop.md"/>
             <toc-element toc-title="WebAssembly (Wasm)" href="/docs/wasm-get-started.html"/>
         </toc-element>
 		<toc-element topic="compose-compiler.md"/>
