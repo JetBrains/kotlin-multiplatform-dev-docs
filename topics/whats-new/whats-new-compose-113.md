@@ -25,54 +25,21 @@ You no longer need to opt in to use them:
 
 ### Content-based sizing for Compose Multiplatform views in SwiftUI and UIKit
 
-Compose Multiplatform views embedded in SwiftUI or UIKit can now report a preferred size based on the available parent space.
-Native containers can use this size to fit Compose content, for example, 
-to adjusting a view’s height while keeping its width fixed.
+Compose Multiplatform views embedded in SwiftUI or UIKit layouts can now report a preferred size based on the available space.
+Native containers can use this size to fit Compose content, for example,
+to adjust a view's height while keeping its width fixed, or vice versa.
 
-On iOS 16 and later, Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits` by default,
-so no additional sizing configuration is needed.
+Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits` by default.
+In UIKit, you don't need additional sizing configuration.
 
-Create a Compose view on the Kotlin side:
+In SwiftUI, keep this default on devices running iOS 16 or later.
+For SwiftUI on earlier iOS versions, use `PreferredSizeReportingStrategy.IntrinsicContentSize`
+and supply sizing proposals manually.
 
-```kotlin
-val view = ComposeUIView {
-    Text("Hello from Compose")
-}
-```
+For setup instructions and examples, see:
 
-Then, in the SwiftUI `UIViewRepresentable` wrapper, pass the sizing proposal to `sizeThatFits()`.
-Use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified:
-
-```swift
-@available(iOS 16.0, *)
-func sizeThatFits(
-    _ proposal: ProposedViewSize,
-    uiView: UIView,
-    context: Context
-) -> CGSize? {
-    uiView.sizeThatFits(
-        CGSize(
-            width: proposal.width ?? UIView.noIntrinsicMetric,
-            height: proposal.height ?? UIView.noIntrinsicMetric
-        )
-    )
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="func sizeThatFits( _ proposal: ProposedViewSize, uiView: UIView, "}
-
-In UIKit, after Auto Layout sets the Compose Multiplatform view’s width,
-use `sizeThatFits()` to get its preferred height and update its height constraint:
-
-```swift
-let preferredSize = uiView.sizeThatFits(
-    CGSize(
-        width: uiView.bounds.width,
-        height: UIView.noIntrinsicMetric
-    )
-)
-heightConstraint.constant = preferredSize.height
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="let preferredSize = uiView.sizeThatFits("}
+* [Content-based sizing in SwiftUI](compose-swiftui-integration.md#size-compose-views-to-fit-their-content)
+* [Content-based sizing in UIKit](compose-uikit-integration.md#size-compose-views-to-fit-their-content)
 
 ### Saving and autofilling passwords
 <primary-label ref="Experimental"/>
