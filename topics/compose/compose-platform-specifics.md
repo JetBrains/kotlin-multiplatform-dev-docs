@@ -65,8 +65,8 @@ For iOS, there are separate guides for interop code with [SwiftUI](compose-swift
 
 For desktop, Compose Multiplatform supports [](compose-desktop-swing-interoperability.md).
 
-For web, you can render WebGL textures using the experimental
-[WebGL interop API](compose-webgl-interop.md).
+For web, Compose Multiplatform supports [HTML element embedding](whats-new-compose-190.md#new-api-for-embedding-html-content)
+and [WebGL interoperability](compose-webgl-interop.md).
 
 ### Back gesture
 

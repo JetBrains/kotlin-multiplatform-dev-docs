@@ -256,6 +256,11 @@ You can remove the `<script src="skiko.js">` tag from your `index.html` file.
 
 ### New API for embedding HTML content
 
+> In Compose Multiplatform 1.11.0, `WebElementView()` was renamed to `HtmlElementView()` and deprecated in favor of the new name.
+> See the [deprecation notice](whats-new-compose-111.md#deprecations) for details.
+>
+{style="note"}
+
 With the new `WebElementView()` composable function, you can seamlessly integrate HTML elements 
 into your web application.
 

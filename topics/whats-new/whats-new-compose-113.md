@@ -121,8 +121,13 @@ Column {
 
 Compose Multiplatform now offers an experimental API for integrating [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 graphics into the Compose UI of your web app.
-You can add custom visual effects, display 3D scenes, or integrate existing JavaScript WebGL renderers.
-Compose modifiers let you size and clip the WebGL content.
+Use it to draw custom shader effects and animations, or integrate an existing JavaScript renderer such as three.js
+to display 3D scenes.
+
+The API introduces `WebGLRenderTarget`, a target for rendering WebGL graphics into a texture that Compose can display. 
+You draw into this texture using a WebGL context shared with Compose.
+The rendered graphics appear alongside Compose controls and overlays and can update on each animation frame. 
+Compose modifiers let you manage and customize the displaying of the content as part of your UI.
 
 For details, see [WebGL interoperability](compose-webgl-interop.md).
 
