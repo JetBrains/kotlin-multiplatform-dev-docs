@@ -147,8 +147,8 @@ fun MainViewController(): UIViewController = ComposeUIViewController {
 }
 ```
 
-In your Swift code, update the `ComposeViewController` wrapper from that example.
-It uses `UIViewControllerRepresentable` to embed the controller in SwiftUI.
+In your Swift code, update the `ComposeViewController` wrapper from the example that uses `UIViewControllerRepresentable`
+to embed the controller in SwiftUI.
 Add `sizeThatFits(_:uiViewController:context:)` to this wrapper and forward SwiftUI's sizing proposal
 to the controller's Compose view:
 
