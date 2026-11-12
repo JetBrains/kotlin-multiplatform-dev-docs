@@ -86,35 +86,17 @@ Column {
 ### WebGL interop
 <primary-label ref="Experimental"/>
 
-Compose Multiplatform now provides an experimental API for rendering [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) textures.
-`WebGLRenderTarget` exposes a Compose `Painter` that displays WebGL graphics alongside other Compose UI elements.
+Compose Multiplatform now offers an experimental API for integrating [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+graphics into the Compose UI of your web app.
+Use it to draw custom shader effects and animations, or integrate an existing JavaScript renderer such as three.js
+to display 3D scenes.
 
-Use `rememberWebGLRenderTarget()` to create a target, draw into it with `render {}`, and display its `painter` in an `Image`.
-For example, this fragment renders a blue texture inside a composable with `@OptIn(ExperimentalComposeUiApi::class)`:
+The API introduces `WebGLRenderTarget`, a target for rendering WebGL graphics into a texture that Compose can display. 
+You draw into this texture using a WebGL context shared with Compose.
+The rendered graphics appear alongside Compose controls and overlays and can update on each animation frame. 
+Compose modifiers let you manage and customize the displaying of the content as part of your UI.
 
-```kotlin
-val target = rememberWebGLRenderTarget(IntSize(64, 64))
-
-if (target != null) {
-    LaunchedEffect(target) {
-        target.render {
-            with(target.webGLContext) {
-                disable(WebGLRenderingContext.SCISSOR_TEST)
-                clearColor(0.15f, 0.55f, 1f, 1f)
-                clear(WebGLRenderingContext.COLOR_BUFFER_BIT)
-            }
-        }
-    }
-
-    Image(
-        painter = target.painter,
-        contentDescription = "A blue WebGL texture",
-        modifier = Modifier.size(200.dp),
-    )
-}
-```
-
-For more advanced use cases, the `target` also provides access to the underlying WebGL rendering context.
+For details, see [WebGL interoperability](compose-webgl-interop.md).
 
 ### System window insets on web
 <primary-label ref="Experimental"/>
