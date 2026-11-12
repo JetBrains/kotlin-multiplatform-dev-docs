@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 <instance-profile id="mpd" name="Kotlin Multiplatform" status="release" start-page="get-started.topic">
+	<toc-element toc-title="Onboarding"></toc-element>
 	<toc-element toc-title="Get started" topic="get-started.topic"/>
     <toc-element accepts-web-file-names="compose-multiplatform-setup.html,multiplatform-setup.html" topic="quickstart.md"/>
 	<toc-element toc-title="Kotlin Multiplatform overview">
@@ -16,106 +17,28 @@
                      accepts-web-file-names="kotlin-multiplatform-roadmap.html"
                      target-for-accept-web-file-names="https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/"/>
 	</toc-element>
-	<toc-element toc-title="Create KMP apps">
+
+	<toc-element toc-title="Proof of Concept"></toc-element>
+
+	<toc-element toc-title="Example KMP apps">
 		<toc-element topic="compose-multiplatform-new-project.md" accepts-web-file-names="compose-multiplatform-getting-started.html,compose-multiplatform-create-first-app.html,compose-multiplatform-modify-project.html"/> <!-- from the wizard to the final CMP sample -->
-		<toc-element topic="multiplatform-upgrade-app.md" accepts-web-file-names="multiplatform-getting-started.html,multiplatform-create-first-app.html,multiplatform-update-ui.html,multiplatform-wrap-up.html"/> <!-- from the wizard to the final KMP sample -->
+		<toc-element toc-title="Shared logic, native UI: Space launch REST API" topic="multiplatform-upgrade-app.md" accepts-web-file-names="multiplatform-getting-started.html,multiplatform-create-first-app.html,multiplatform-update-ui.html,multiplatform-wrap-up.html"/> <!-- from the wizard to the final KMP sample -->
+		<toc-element toc-title="Shared data access layer: Ktor and SQLDelight" topic="multiplatform-ktor-sqldelight.md"/>
 		<toc-element toc-title="Migrate to KMP from Android">
 			<toc-element toc-title="Make your app multiplatform" topic="multiplatform-integrate-in-existing-app.md"/>
 			<toc-element toc-title="Migrate advanced Android app to KMP" topic="migrate-from-android.md"/>
 		</toc-element>
-		<toc-element toc-title="Share data access layer" topic="multiplatform-ktor-sqldelight.md"/>
 		<toc-element toc-title="Create Kotlin Multiplatform library" topic="create-kotlin-multiplatform-library.md"/>
 	</toc-element>
-	<toc-element toc-title="Compose Multiplatform UI framework">
-		<toc-element topic="compose-multiplatform.topic"/>
-		<toc-element toc-title="What's new">
-            <toc-element topic="whats-new-compose-112.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.12.2"/>
-			<toc-element topic="whats-new-compose-113.md" accepts-web-file-names="whats-new-compose-eap.html" toc-title="Compose Multiplatform %org.jetbrains.compose-eap%"/>
-			<toc-element toc-title="Earlier versions">
-                <toc-element topic="whats-new-compose-111.md" toc-title="Compose Multiplatform 1.11.1"/>
-                <toc-element topic="whats-new-compose-110.md" toc-title="Compose Multiplatform 1.10.3"/>
-                <toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3"/>
-                <toc-element topic="whats-new-compose-180.md" toc-title="Compose Multiplatform 1.8.2"/>
-                <toc-element topic="whats-new-compose-170.md" toc-title="Compose Multiplatform 1.7.3"/>
-                <toc-element topic="whats-new-compose-1610.md" toc-title="Compose Multiplatform 1.6.10"/>
-                <toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
-            </toc-element>
-        </toc-element>
-        <toc-element toc-title="Compose Multiplatform and Jetpack Compose">
-            <toc-element topic="compose-multiplatform-and-jetpack-compose.md" toc-title="Relationship between frameworks"/>
-            <toc-element topic="compose-multiplatform-jetpack-libraries.md" toc-title="Multiplatform artifacts for Compose libraries"/>
-        </toc-element>
-        <toc-element toc-title="Platform differences" topic="compose-platform-specifics.md"/>
-		<toc-element toc-title="App entry points" topic="compose-multiplatform-entry-points.md" accepts-web-file-names="compose-multiplatform-explore-composables.html"/>
-		<toc-element toc-title="Implementing layouts">
-			<toc-element topic="compose-layout.md"/>
-			<toc-element topic="compose-layout-modifiers.md"/>
-			<toc-element topic="compose-adaptive-layouts.md"/>
-		</toc-element>
-		<toc-element topic="compose-previews.md"/>
-		<toc-element toc-title="Multiplatform resources">
-			<toc-element accepts-web-file-names="compose-images-resources.html" topic="compose-multiplatform-resources.md"/>
-			<toc-element toc-title="Setup and configuration" topic="compose-multiplatform-resources-setup.md"/>
-			<toc-element toc-title="Access and usage" topic="compose-multiplatform-resources-usage.md"/>
-			<toc-element toc-title="Local resource environment" topic="compose-resource-environment.md"/>
-		</toc-element>
-		<toc-element topic="compose-lifecycle.md"/>
-		<toc-element topic="compose-viewmodel.md"/>
-		<toc-element toc-title="Navigation">
-			<toc-element topic="compose-navigation.md"/>
-			<toc-element toc-title="Navigation 3 in Compose" topic="compose-navigation-3.md"/>
-			<toc-element topic="compose-navigation-routing.md"/>
-      <toc-element topic="compose-navigation-deep-links.md"/>
-		</toc-element>
-		<toc-element topic="compose-drag-drop.md"/>
-        <toc-element topic="compose-popups.md"/>
-		<toc-element topic="compose-pdf.md" toc-title="Display PDF files"/>
-		<toc-element topic="compose-test.md"/>
-		<toc-element toc-title="Localization">
-			<toc-element topic="compose-localize-strings.md"/>
-			<toc-element toc-title="Regional format settings" topic="compose-regional-format.md"/>
-			<toc-element toc-title="RTL languages" topic="compose-rtl.md"/>
-			<toc-element topic="compose-localization-tests.md"/>
-		</toc-element>
-		<toc-element topic="compose-accessibility.md"/>
-		<toc-element topic="compose-share-feature.md" toc-title="Sharing content"/>
-		<toc-element toc-title="iOS-specific features">
-			<toc-element toc-title="Integration with SwiftUI" accepts-web-file-names="compose-ios-ui-integration.html" topic="compose-swiftui-integration.md"/>
-			<toc-element toc-title="Integration with UIKit" topic="compose-uikit-integration.md"/>
-            <toc-element toc-title="Liquid Glass" topic="ios-liquid-glass.md"/>
-            <toc-element toc-title="Handling touch with native UI elements" topic="compose-ios-touch.md"/>
-			<toc-element toc-title="Accessibility support" topic="compose-ios-accessibility.md"/>
-			<toc-element topic="compose-ios-migration.md"/>
-		</toc-element>
-		<toc-element toc-title="Android-specific features" topic="compose-android-only-components.md"/>
-		<toc-element toc-title="Desktop-specific features">
-			<toc-element toc-title="Overview" topic="compose-desktop-components.md"/>
-			<toc-element topic="compose-desktop-images.md"/>
-			<toc-element topic="compose-desktop-top-level-windows-management.md"/>
-			<toc-element topic="compose-desktop-scrollbars.md"/>
-			<toc-element topic="compose-desktop-tooltips.md"/>
-			<toc-element topic="compose-desktop-context-menus.md"/>
-			<toc-element topic="compose-desktop-tray.md"/>
-			<toc-element topic="compose-desktop-menu-bar.md"/>
-			<toc-element toc-title="Mouse events" topic="compose-desktop-mouse-events.md"/>
-			<toc-element topic="compose-desktop-keyboard.md"/>
-			<toc-element toc-title="Tab navigation" topic="compose-desktop-tabbing.md"/>
-			<toc-element topic="compose-native-distribution.md"/>
-			<toc-element toc-title="Accessibility support" topic="compose-desktop-accessibility.md"/>
-			<toc-element toc-title="Testing UI with JUnit" topic="compose-desktop-ui-testing.md"/>
-			<toc-element topic="compose-desktop-swing-interoperability.md"/>
-		</toc-element>
-		<toc-element toc-title="Web-specific features">
-            <toc-element topic="compose-web-resources.md"/>
-            <toc-element topic="compose-css-styles.md"/>
-            <toc-element toc-title="WebAssembly (Wasm)" href="/docs/wasm-get-started.html"/>
-        </toc-element>
-		<toc-element topic="compose-compiler.md"/>
-		<toc-element topic="compose-compatibility-and-versioning.md"/>
-		<toc-element toc-title="Releases" href="https://github.com/JetBrains/compose-multiplatform/blob/master/CHANGELOG.md"/>
+	<toc-element toc-title="Deciding which code to share">
+		<toc-element topic="multiplatform-share-on-platforms.md"/>
+		<toc-element toc-title="Use platform-specific APIs" topic="multiplatform-connect-to-apis.md"/>
+		<toc-element topic="multiplatform-expect-actual.md"/>
 	</toc-element>
 
-	<toc-element toc-title="Manage project structure">
+	<toc-element toc-title="Infrastructure Organization"></toc-element>
+
+	<toc-element toc-title="Figure out project structure">
 		<toc-element toc-title="Targets and source sets" topic="multiplatform-discover-project.md"/>
 		<toc-element topic="multiplatform-hierarchy.md"/>
 		<toc-element toc-title="Multiplatform dependencies">
@@ -127,15 +50,9 @@
 
 		<toc-element toc-title="Understanding dependencies between source sets" topic="multiplatform-advanced-project-structure.md"/>
 
-        <toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
+		<toc-element toc-title="Module structure recommendations" topic="multiplatform-project-recommended-structure.md"/>
 		<toc-element toc-title="Project organization options" topic="multiplatform-project-configuration.md"/>
 	</toc-element>
-	<toc-element toc-title="Share code">
-		<toc-element topic="multiplatform-share-on-platforms.md"/>
-		<toc-element toc-title="Use platform-specific APIs" topic="multiplatform-connect-to-apis.md"/>
-		<toc-element topic="multiplatform-expect-actual.md"/>
-	</toc-element>
-
 	<toc-element toc-title="Set up iOS integration">
 		<toc-element toc-title="Choose integration method" topic="multiplatform-ios-integration-overview.md"/>
 		<toc-element topic="multiplatform-direct-integration.md"/>
@@ -158,13 +75,18 @@
 		<toc-element topic="multiplatform-build-native-binaries.md"/>
 	</toc-element>
 	<toc-element toc-title="Test your multiplatform app" topic="multiplatform-run-tests.md"/>
-	<toc-element toc-title="Publish your multiplatform project">
-		<toc-element topic="multiplatform-publish-apps.md"/>
-		<toc-element toc-title="Set up library publication" topic="multiplatform-publish-lib-setup.md"/>
-		<toc-element topic="multiplatform-publish-libraries-to-maven.md" accepts-web-file-names="multiplatform-publish-libraries.html"/>
-		<toc-element topic="multiplatform-publish-libraries-to-npm.md"/>
-		<toc-element toc-title="App Store privacy manifest" topic="multiplatform-privacy-manifest.md"/>
+
+	<toc-element toc-title="Publish the project"></toc-element>
+
+	<toc-element toc-title="Publish an app" topic="multiplatform-publish-apps.md"/>
+	<toc-element toc-title="Publish a library">
+		<toc-element toc-title="To local" topic="multiplatform-publish-lib-setup.md"/>
+		<toc-element toc-title="To Maven Central" topic="multiplatform-publish-libraries-to-maven.md" accepts-web-file-names="multiplatform-publish-libraries.html"/>
+		<toc-element toc-title="To npm" topic="multiplatform-publish-libraries-to-npm.md"/>
 	</toc-element>
+	<toc-element toc-title="App Store privacy manifest" topic="multiplatform-privacy-manifest.md"/>
+
+	<toc-element toc-title="Miscellaneous"></toc-element>
 	<toc-element toc-title="Kotlin Multiplatform tooling">
 		<toc-element topic="recommended-ides.md"/>
 		<toc-element topic="build-and-run-kmp.md"/>
@@ -184,22 +106,26 @@
 		<toc-element topic="multiplatform-plugin-releases.md"/>
         <toc-element toc-title="Upgrading to AGP 9" topic="multiplatform-project-agp-9-migration.md"/>
 	</toc-element>
-	<toc-element toc-title="Multiplatform journal">
-		<toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.topic"/>
-		<toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.topic"/>
-		<toc-element toc-title="Six popular cross-platform app development frameworks" topic="cross-platform-frameworks.topic"/>
-		<toc-element topic="multiplatform-introduce-your-team.md"/>
-		<toc-element toc-title="iOS and Android app development" topic="ios-android-app-development.md"/>
-		<toc-element toc-title="How to build Android and iOS apps" topic="build-ios-android-app.topic"/>
-		<toc-element toc-title="How teams use Kotlin Multiplatform in production" topic="use-cases-examples.md"/>
-		<toc-element toc-title="Reasons to adopt Kotlin Multiplatform" topic="multiplatform-reasons-to-try.md"/>
-		<toc-element toc-title="Kotlin Multiplatform and Flutter" topic="kotlin-multiplatform-flutter.md"/>
-		<toc-element toc-title="Kotlin Multiplatform and React Native" topic="kotlin-multiplatform-react-native.topic"/>
-		<toc-element toc-title="Programming languages for cross-platform development" topic="programming-languages-cross-platform.topic"/>
-		<toc-element toc-title="Kotlin Multiplatform for iOS" topic="kmp-for-ios.topic"/>
-	</toc-element>
 	<toc-element toc-title="Redirect the old tutorial to Fleet" hidden="true"
 				 accepts-web-file-names="fleet.html"
 				 target-for-accept-web-file-names="https://www.jetbrains.com/help/fleet/getting-started.html"/>
 	<toc-element hidden="true" topic="shipathon-starter-guide.md"/>
+
+	<toc-element toc-title="Compose UI">
+3
+	<toc-element topic="compose-multiplatform.topic" toc-title="Something Something"/>
+	<toc-element toc-title="What's new">
+		<toc-element topic="whats-new-compose-112.md" accepts-web-file-names="whats-new-compose.html" toc-title="Compose Multiplatform 1.12.2"/>
+		<toc-element topic="whats-new-compose-113.md" accepts-web-file-names="whats-new-compose-eap.html" toc-title="Compose Multiplatform %org.jetbrains.compose-eap%"/>
+		<toc-element toc-title="Earlier versions">
+			<toc-element topic="whats-new-compose-111.md" toc-title="Compose Multiplatform 1.11.1"/>
+			<toc-element topic="whats-new-compose-110.md" toc-title="Compose Multiplatform 1.10.3"/>
+			<toc-element topic="whats-new-compose-190.md" toc-title="Compose Multiplatform 1.9.3"/>
+			<toc-element topic="whats-new-compose-180.md" toc-title="Compose Multiplatform 1.8.2"/>
+			<toc-element topic="whats-new-compose-170.md" toc-title="Compose Multiplatform 1.7.3"/>
+			<toc-element topic="whats-new-compose-1610.md" toc-title="Compose Multiplatform 1.6.10"/>
+			<toc-element topic="whats-new-compose-160.md" toc-title="Compose Multiplatform 1.6.0"/>
+		</toc-element>
+	</toc-element>
+
 </instance-profile>
