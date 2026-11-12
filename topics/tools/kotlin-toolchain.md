@@ -10,7 +10,8 @@ This page guides you through setting up a Kotlin Multiplatform project from scra
 
 > Kotlin Toolchain is in [Alpha](supported-platforms.md#general-kotlin-stability-levels).
 > You're welcome to try it in your Kotlin Multiplatform projects.
-> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KTC).
+> We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KTC)
+> and in the [dedicated Slack channel](https://kotlinlang.slack.com/archives/C062WG3A7T8).
 >
 {style="note"}
 
