@@ -377,7 +377,10 @@ When working with tests in your future projects, remember:
 ## What's next?
 
 * Explore the layout of multiplatform projects in [Understand Multiplatform project structure](multiplatform-discover-project.md).
-* Check out [Kotest](https://kotest.io/), another multiplatform testing framework provided by the Kotlin ecosystem.
-  Kotest allows writing tests in a range of styles and supports complementary approaches to regular testing.
+* [TestBalloon](https://infix-de.github.io/testBalloon/latest/) is a multiplatform testing framework that supports
+  all Kotlin Multiplatform targets as well as [Kotlin Power Assert](https://kotlinlang.org/docs/power-assert.html)
+  and other assertion libraries. 
+* [Kotest](https://kotest.io/) is another multiplatform testing framework that allows writing tests in a range of styles
+  and supports complementary approaches to regular testing.
   These include [data-driven](https://kotest.io/docs/framework/datatesting/data-driven-testing.html)
   and [property-based](https://kotest.io/docs/proptest/property-based-testing.html) testing.
