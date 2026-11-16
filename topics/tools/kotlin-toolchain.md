@@ -1,7 +1,7 @@
-[//]: # (title: Create and build a Kotlin Multiplatform application with Kotlin Toolchain)
+[//]: # (title: Create and publish a Kotlin Multiplatform application with Kotlin Toolchain)
 
-[Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for creating, building, testing,
-and running Kotlin projects.
+[Kotlin Toolchain](https://kotlin-toolchain.org/) is a tool from JetBrains for building, testing,
+running, and publishing Kotlin projects.
 It provides a CLI and declarative configuration, so you can work from a terminal, an IDE,
 or with AI-assisted development tools:
 The Kotlin Toolchain allows your coding agent go from a new project to a published app with minimal setup and configuration.
@@ -27,7 +27,7 @@ Create a new Kotlin Multiplatform app for Android, iOS, desktop, and web with th
 
 ### Install the Kotlin Toolchain CLI {id="toolchain-script-install"}
 
-You can install the Kotlin Toolchain CLI using the installer script:
+Your agent can install Kotlin Toolchain by itself, but you can also install it manually with the installer script:
 
 <tabs>
 <tab title="macOS or Linux">
@@ -54,12 +54,13 @@ Check that the CLI is available by running `kotlin --version`.
 
 ### Building iOS apps
 
-With Kotlin Toolchain, you can handle most of the iOS development workflow, including editing, building, and running
+With Kotlin Toolchain, you can handle most of the iOS development workflow, including building, running, and publishing
 apps directly from the CLI or your IDE, without opening Xcode.
 
-You need to [install Xcode](https://apps.apple.com/us/app/xcode/id497799835) and the necessary SDK primarily for the
-initial setup and occasional specific workflows.
-When Xcode is actually required to build or run a module, the Kotlin Toolchain CLI explains how to set it up.
+When Xcode is required, Kotlin Toolchain requests installing it and explains how to set it up.
+The recommended way is to install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835).
+
+Xcode installation is necessary to provide CLIs for iOS build to Kotlin Toolchain and occasional project-specific workflows.
 
 ## Create a project
 
@@ -74,7 +75,7 @@ To generate a new project using Kotlin Toolchain:
 
 3. Enter the directory name when prompted for the project path, for example, `ktc-kmp`.
 4. In the template list, select **Kotlin Multiplatform application**.
-5. Use the **Space** key to select or deselect targets. Press **Enter** to confirm.
+5. Use the **Space** key to select or deselect target platforms. Press **Enter** to confirm.
 
    > Consider adding the desktop target, even if your final app targets only Android and iOS.
    > It enables faster development and iteration loops and supports [Compose Hot Reload](compose-hot-reload.md),
@@ -126,7 +127,7 @@ To run the project:
 
 1. Navigate to the project directory (`ktc-kmp` in the example above).
 2. Run `kotlin run` to bring up the list of available applications to run.
-   The available modules correspond to the targets you selected when generating the project:
+   The available modules correspond to the target platforms you selected when generating the project:
 
     ```shell
     $ kotlin run
@@ -168,9 +169,11 @@ For the manual setup and publishing instructions, see the [Kotlin Toolchain docu
 
 To set up and publish your Android app, follow the instructions in the [Kotlin Toolchain documentation](https://kotlin-toolchain.org/latest/user-guide/publishing/android-application).
 
-### Other targets
+### Other target platforms
 
-You can also package a JVM app or a Wasm app, but publishing for these targets is not fully supported yet.
+You can also package a [JVM app](https://kotlin-toolchain.org/latest/user-guide/product-types/jvm-app/#packaging)
+or a [Wasm app](https://kotlin-toolchain.org/latest/user-guide/product-types/wasm-js-app/#packaging),
+but publishing for these platforms is not fully supported yet.
 
 ## Work on a project in IntelliJ IDEA or Android Studio
 
@@ -181,12 +184,8 @@ You can work on the project and run it in IntelliJ IDEA or Android Studio.
 >
 {style="tip"}
 
-Install the following plugins to make your IDE recognize Kotlin Toolchain and Kotlin Multiplatform projects:
-
-* [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
-  provides IDE support for Kotlin Multiplatform projects.
-* [Kotlin Toolchain plugin](https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain)
-  helps the IDE recognize the Kotlin Toolchain project structure, generate run configurations, and so on.
+Install the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) to add IDE support for Kotlin Multiplatform projects
+as well as support for Kotlin Toolchain project structure and run configurations.
 
 ### Create a project directly in the IDE
 
