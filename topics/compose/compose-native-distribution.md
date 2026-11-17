@@ -8,6 +8,7 @@ Read on for the details about the following topics:
 * [What is Compose Multiplatform Gradle plugin](#gradle-plugin)?
 * [Details on basic tasks](#basic-tasks) such as running an application locally, and [advanced tasks](#minification-and-obfuscation) like minification and obfuscation.
 * [How to include JDK modules](#including-jdk-modules) and deal with `ClassNotFoundException`.
+* [How to improve desktop startup time](#improving-startup-time-with-appcds-and-aot) with AppCDS and AOT.
 * [How to specify distribution properties](#specifying-distribution-properties): package version, JDK version, output directory, launcher properties, and metadata.
 * [How to manage resources](#managing-resources) using resources library, JVM resource loading, or adding files to packaged applications.
 * [How to customize source sets](#custom-source-sets) using Gradle source set, Kotlin JVM target, or manually.
@@ -142,6 +143,82 @@ Note that the tool's output might be incomplete or list unnecessary modules.
 
 If the size of the distributable is not a crucial factor and can be ignored, you may opt to include all runtime modules by using the `includeAllModules` DSL property.
 
+## Improving startup time with AppCDS and AOT
+
+You can reduce desktop application startup time with
+[Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) or
+[ahead-of-time (AOT) caching](https://openjdk.org/jeps/514).
+These options let the JVM reuse class data from an archive when your application starts.
+See the [Compose Multiplatform 1.13.0 release notes](whats-new-compose-113.md#faster-desktop-startup-with-appcds-or-aot)
+for benchmark results.
+
+### Configure startup optimization
+
+Add an `aot {}` block inside the `application {}` block in the `build.gradle.kts` file:
+
+```kotlin
+import org.jetbrains.compose.desktop.application.dsl.AotMode
+
+compose.desktop {
+    application {
+        aot {
+            mode = AotMode.AotPrebuild
+        }
+    }
+}
+```
+
+This example uses `AotPrebuild`, which requires JDK 25 or later.
+Make sure the [JDK used for packaging](#jdk-version) meets the requirements of the selected mode.
+
+To print AOT-related messages when the application runs, add `logging = true` to the `aot {}` block.
+
+### Choose a mode
+
+Choose a mode based on your JDK version and whether you need faster startup from the first launch:
+
+| Mode             | Minimum JDK | Description                                                                 | Archiving and packaging                                                      |
+|------------------|-------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `None`           | —           | Default behavior, without AppCDS or AOT optimization.                       | —                                                                            |
+| `AppCdsAuto`     | 19          | First launch may be slower; later launches are fast.                        | Creates an archive during a longer first shutdown; no training run.          |
+| `AppCdsPrebuild` | 21          | Faster startup from the first launch.                                       | Requires a training run and includes the application archive in the package. |
+| `AotPrebuild`    | 25          | Faster startup from the first launch, with improved linking and JIT warmup. | Requires a training run and includes the application cache in the package.   |
+
+All modes except `None` increase the distributable size because they include an archive of Java runtime classes.
+The prebuild modes also include application class data in the distributable.
+
+### Prepare a training run
+
+With `AppCdsPrebuild` and `AotPrebuild`, the Gradle plugin launches your application during packaging to create the
+archive. This launch is a training run. Packaging continues after the application exits.
+
+If you package the application in CI/CD, the build environment must provide a graphical environment for the training run.
+
+During a training run, wait until the application displays its initial window.
+To also optimize the first use of other features, open the corresponding screens or use those features.
+Then close the application. The archive includes the classes used during the training run.
+
+For an automated build, configure the application to wait until the initial window appears,
+perform any additional actions you want to include in the archive, and then exit automatically.
+The plugin sets the `compose.aot.training-run` system property to `true` so your application can identify this run.
+
+For example, add the following code to your application's `application {}` block to automatically exit
+after a ten-second delay during a training run:
+
+```kotlin
+application {
+    if (System.getProperty("compose.aot.training-run") == "true") {
+        LaunchedEffect(Unit) {
+            delay(10.seconds)
+            exitApplication()
+        }
+    }
+}
+```
+
+The ten-second delay is an example of allowing time for the application to load.
+For a reliable automated build, wait for a signal that the initial window is displayed and any additional actions
+are complete before calling `exitApplication()`.
 
 ## Specifying distribution properties
 
