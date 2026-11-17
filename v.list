@@ -28,13 +28,13 @@
     <var name="foojayResolverConventionVersion" value="1.2.0"/>
 
     <!-- KGP, AGP, Xcode -->
-    <var name="minGradleVersion" value="7.6.3"/>
-    <var name="maxGradleVersion" value="9.7.0"/>
+    <var name="minGradleVersion" value="8.14"/>
+    <var name="maxGradleVersion" value="9.8.1"/>
 
-    <var name="minAndroidGradleVersion" value="8.5.2"/>
-    <var name="maxAndroidGradleVersion" value="9.3.1"/>
+    <var name="minAndroidGradleVersion" value="8.8.2"/>
+    <var name="maxAndroidGradleVersion" value="9.4.1"/>
 
-    <var name="xcode" value="26.4"/>
+    <var name="xcode" value="27.0"/>
 
     <!-- Libraries and Frameworks -->
     <var name="coroutinesVersion" value="1.11.0"/>
