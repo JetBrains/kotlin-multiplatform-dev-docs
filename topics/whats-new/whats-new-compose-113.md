@@ -14,7 +14,8 @@ For changes in the AndroidX Compose runtime version included in this release, se
 
 ## Across platforms
 
-Several features that were Experimental in previous Compose Multiplatform releases are now Stable.
+Several features that were [Experimental](supported-platforms.md#general-kotlin-stability-levels) in previous 
+Compose Multiplatform releases are now [Stable](supported-platforms.md#general-kotlin-stability-levels).
 You no longer need to opt in to use them:
 
 * Creating a `ComposeUIView()` on iOS and configuring it with `ComposeUIViewportConfiguration`.
@@ -89,7 +90,7 @@ Column {
 Compose Multiplatform now provides an experimental API for rendering [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) textures.
 `WebGLRenderTarget` exposes a Compose `Painter` that displays WebGL graphics alongside other Compose UI elements.
 
-Use `rememberWebGLRenderTarget()` to create a target, draw into it with `render {}`, and display its `painter` in an `Image`.
+Use `rememberWebGLRenderTarget()` to create a target, draw on it with `render {}`, and display its `painter` in an `Image`.
 For example, this fragment renders a blue texture inside a composable with `@OptIn(ExperimentalComposeUiApi::class)`:
 
 ```kotlin
@@ -231,11 +232,11 @@ The feature requires Compose content to fill the entire window.
 
 | Library            | Maven coordinates                                                      | Based on Jetpack version                                                                                                             |
 |--------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-beta02`                 | [Runtime 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-beta02)                       |
-| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-beta02`                           | [UI 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-beta02)                                 |
-| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-beta02`           | [Foundation 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-beta02)                 |
-| Material           | `org.jetbrains.compose.material:material*:1.13.0-beta02`               | [Material 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-beta02)                     |
-| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-beta02`             | [Material3 1.5.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-beta02)                     |
+| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-rc01`                   | [Runtime 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-rc01)                           |
+| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-rc01`                             | [UI 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-rc01)                                     |
+| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-rc01`             | [Foundation 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-rc01)                     |
+| Material           | `org.jetbrains.compose.material:material*:1.13.0-rc01`                 | [Material 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-rc01)                         |
+| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-rc01`               | [Material3 1.5.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-rc01)                         |
 | Material3 Adaptive | `org.jetbrains.compose.material3.adaptive:adaptive*:1.4.0-alpha01`     | [Material3 Adaptive 1.4.0-alpha03](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.4.0-alpha03) |
 | Lifecycle          | `org.jetbrains.androidx.lifecycle:lifecycle-*:2.11.0`                  | [Lifecycle 2.11.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0)                                         |
 | Navigation         | `org.jetbrains.androidx.navigation:navigation-*:2.10.0`                | [Navigation 2.10.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.10.0)                                       |
