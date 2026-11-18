@@ -148,7 +148,6 @@ If the size of the distributable is not a crucial factor and can be ignored, you
 You can improve desktop application startup time with
 [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) or
 [ahead-of-time (AOT) caching](https://openjdk.org/jeps/514).
-These options let the JVM reuse class data from an archive when your application starts.
 See the [Compose Multiplatform 1.13.0 release notes](whats-new-compose-113.md#faster-desktop-startup-with-appcds-or-aot)
 for benchmark results.
 
