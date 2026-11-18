@@ -145,7 +145,7 @@ If the size of the distributable is not a crucial factor and can be ignored, you
 
 ## Improving startup time with AppCDS and AOT
 
-You can reduce desktop application startup time with
+You can improve desktop application startup time with
 [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) or
 [ahead-of-time (AOT) caching](https://openjdk.org/jeps/514).
 These options let the JVM reuse class data from an archive when your application starts.
@@ -180,12 +180,12 @@ Choose a mode based on your JDK version and whether you need faster startup from
 | Mode             | Minimum JDK | Description                                                                 | Archiving and packaging                                                      |
 |------------------|-------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | `None`           | —           | Default behavior, without AppCDS or AOT optimization.                       | —                                                                            |
-| `AppCdsAuto`     | 19          | First launch may be slower; later launches are fast.                        | Creates an archive during a longer first shutdown; no training run.          |
+| `AppCdsAuto`     | 19          | First launch may be slower; later launches are faster.                      | Creates an archive during a longer first shutdown; no training run.          |
 | `AppCdsPrebuild` | 21          | Faster startup from the first launch.                                       | Requires a training run and includes the application archive in the package. |
 | `AotPrebuild`    | 25          | Faster startup from the first launch, with improved linking and JIT warmup. | Requires a training run and includes the application cache in the package.   |
 
-All modes except `None` increase the distributable size because they include an archive of Java runtime classes.
-The prebuild modes also include application class data in the distributable.
+All modes except `None` increase the distributable size by including additional data that helps 
+the application start faster.
 
 ### Prepare a training run
 
@@ -199,7 +199,7 @@ To also optimize the first use of other features, open the corresponding screens
 Then close the application. The archive includes the classes used during the training run.
 
 For an automated build, configure the application to wait until the initial window appears,
-perform any additional actions you want to include in the archive, and then exit automatically.
+perform any additional actions you want the training run to cover, and then exit automatically.
 The plugin sets the `compose.aot.training-run` system property to `true` so your application can identify this run.
 
 For example, add the following code to your application's `application {}` block to automatically exit
