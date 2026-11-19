@@ -1,6 +1,11 @@
 [//]: # (title: WebGL interoperability)
 <primary-label ref="EAP"/>
 
+<web-summary>
+   Learn how to use WebGL with Compose Multiplatform:
+   draw WebGL content into a texture, display it alongside Compose UI, and integrate JavaScript WebGL renderers in web apps.
+</web-summary>
+
 [//]: # (TODO After release change label to Experimental) 
 
 <tldr>
@@ -15,22 +20,24 @@ hardware-accelerated 2D and 3D graphics. In a Compose Multiplatform app, you can
 * [JavaScript renderers](#integrate-a-javascript-webgl-renderer): integrate existing JavaScript WebGL renderers to display 
 3D scenes or animated characters.
 
-Other use cases include displaying video frames with Compose controls and overlays, 
+Other use cases include displaying video frames alongside Compose controls and overlays,
 or experimenting with HTML content as a texture through the [HTML-in-Canvas](https://developer.chrome.com/docs/web-platform/html-in-canvas)
 API where the browser supports it.
 
 ## Render a WebGL texture
 
-A `WebGLRenderTarget` lets you draw into a texture with WebGL and display the result in Compose through a `Painter`.
+A `WebGLRenderTarget` class lets you draw into a texture with WebGL and display the result in Compose through a `Painter` object.
 To render a WebGL texture:
 
-1. Create a target with `rememberWebGLRenderTarget()`. Specify the texture size using an `IntSize` in pixels 
+1. Create a `WebGLRenderTarget` instance with `rememberWebGLRenderTarget()`.
+   Specify the texture size using an `IntSize` in pixels
    or a `DpSize` in density-independent pixels.
 2. Draw using the target's `webGLContext` inside a `target.render()` block.
 3. Pass `target.painter` to an `Image()` composable to display the result.
 
-The following example updates a texture on each animation frame to produce a pulsing color
-and displays it inside an `Image()` composable. Add it to the `wasmJsMain` source set and call `ColorPulse()` from your UI:
+The API works with both Kotlin/Wasm and Kotlin/JS web targets. The following example updates a texture on each animation frame
+to produce a pulsing color and displays it inside an `Image()` composable. Add it to the `wasmJsMain` or `jsMain` source set,
+or to a shared `webMain` source set, and call `ColorPulse()` from your UI:
 
 ```kotlin
 import androidx.compose.foundation.Image
@@ -100,14 +107,16 @@ You can use an existing JavaScript WebGL renderer, such as [three.js](https://th
 The renderer shares the WebGL context with Compose and draws into the target's framebuffer.
 To use the renderer with a `WebGLRenderTarget`:
 
-1. Define Kotlin bindings for the library using
-   [Kotlin/Wasm–JavaScript interoperability](https://kotlinlang.org/docs/wasm-js-interop.html).
+1. Define Kotlin bindings for the library using JavaScript interoperability for your web target:
+   [Kotlin/Wasm](https://kotlinlang.org/docs/wasm-js-interop.html) or
+   [Kotlin/JS](https://kotlinlang.org/docs/js-interop.html).
 2. Initialize the renderer with the target's `htmlCanvas` and `webGLContext`.
    Let Compose manage the canvas size and context lifetime.
 3. Draw into `target.framebuffer` inside a `target.render()` block.
    If the renderer caches graphics state, reset that cache before drawing.
    For example, three.js provides `renderer.resetState()` for this purpose.
-4. Use `DisposableEffect()` to release the renderer's resources when its composable leaves the composition.
+4. In the composable that owns the renderer, use `DisposableEffect()` to release the renderer's resources when the composable
+   leaves the composition.
    If cleanup modifies the shared WebGL context, call `target.markGLStateStale()` afterward.
 
 The following example draws a frame using an initialized three.js renderer.
@@ -124,6 +133,17 @@ target.render {
     } finally {
         // Restores the default framebuffer for Compose
         renderer.setRenderTarget(null)
+    }
+}
+```
+
+Clean up the renderer in the same composable:
+
+```kotlin
+DisposableEffect(renderer, target) {
+    onDispose {
+        renderer.dispose()
+        target.markGLStateStale()
     }
 }
 ```

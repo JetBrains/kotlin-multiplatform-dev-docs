@@ -126,8 +126,8 @@ to display 3D scenes.
 
 The API introduces `WebGLRenderTarget`, a target for rendering WebGL graphics into a texture that Compose can display. 
 You draw into this texture using a WebGL context shared with Compose.
-The rendered graphics appear alongside Compose controls and overlays and can update on each animation frame. 
-Compose modifiers let you manage and customize the displaying of the content as part of your UI.
+The rendered graphics appear alongside Compose controls and overlays and can update on each animation frame.
+Compose modifiers let you manage and customize how the content is displayed as part of your UI.
 
 For details, see [WebGL interoperability](compose-webgl-interop.md).
 
