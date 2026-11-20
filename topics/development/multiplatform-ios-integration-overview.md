@@ -12,6 +12,49 @@ If you want to explicitly separate the code base of your final application from 
 integration. In this case, the shared code will be integrated into final applications like a regular third-party
 dependency.
 
+For the trade-offs of each workflow for the whole team, see [](multiplatform-project-code-sharing-workflow.md).
+
+## What local and remote integration mean for iOS developers
+
+Local and remote integration have the following specifics for iOS developers.
+
+### With local integration
+
+In the local distribution scheme, the iOS app build triggers the generation of the iOS framework. This means that iOS
+developers can observe their changes to Kotlin Multiplatform code right away:
+
+![Local source distribution](local-source-distribution.svg){width=700}
+
+The iOS developers need to install IntelliJ IDEA or Android Studio and have a basic knowledge of Kotlin and Gradle.
+
+### With remote integration
+
+Remote integration doesn't significantly change the workflow and build processes for iOS developers.
+
+<table>
+  <tr>
+     <th>Pros</th>
+     <th>Cons</th>
+  </tr>
+  <tr>
+  <td>Non-participating iOS team members don't have to code in Kotlin or learn how to use tools like IntelliJ IDEA/Android Studio or Gradle.
+      This lowers the barrier of entry for the team significantly.</td>
+<td>
+  <list>
+   <li>Debugging shared Kotlin code is difficult on iOS.</li>
+   <li>The likelihood of iOS team members contributing to shared code significantly decreases.</li>
+   <li>When several modules are published as one prebuilt umbrella framework, every change to any module requires a new
+       umbrella release. If releases are batched, iOS developers have to adopt changes from several modules at once.</li>
+  </list>
+</td>
+</tr>
+</table>
+
+As a start, you may want to use [KMMBridge](https://touchlab.co/trykmmbridge) – a set of build tools that greatly simplifies the
+remote distribution workflow. Alternatively, you can always set up a similar workflow on your own:
+
+![Remote artifact distribution](remote-artifact-distribution.svg){width=700}
+
 ## Local integration
 
 In a local setup, there are two main integration options. You can use direct integration through a special script, which
@@ -73,3 +116,32 @@ You can build XCFrameworks with the Kotlin CocoaPods Gradle plugin and then dist
 separately from mobile apps through CocoaPods.
 
 For more information, see [Build final native binaries](multiplatform-build-native-binaries.md#build-xcframeworks).
+
+## Direct dependency for local development, remote for publishing
+
+Many teams choose remote integration workflows when adopting Kotlin Multiplatform technology to keep the development
+process unchanged for iOS developers. However, this makes developing the Kotlin Multiplatform code more cumbersome.
+One solution is to set up an additional workflow for local development, with a direct iOS dependency on the framework
+generated from the Kotlin Multiplatform module.
+
+The local workflow allows to immediately observe changes on iOS after rebuilding common Kotlin code.
+When a feature is ready, the developer can switch back to the remote workflow and publish their changes:
+first, the shared modules, then the apps with the updated dependency.
+
+For remote integration workflows, use Swift Package Manager. For local integration workflow, integrate
+the framework directly.
+
+<!-- This tutorial [TODO] describes how to switch workflows by choosing the corresponding scheme in Xcode:
+[TODO screenshot] -->
+
+## Umbrella frameworks: when there are several shared modules
+
+When there are several shared libraries (contributed by separate teams, for example),
+the umbrella framework approach can ease integration.
+
+In this approach, the Kotlin Multiplatform libraries are published remotely as regular Kotlin artifacts.
+The umbrella iOS framework is built in the iOS app repository:
+it depends on all the Kotlin artifacts and combines them into a single framework for the iOS app to consume.
+iOS developers don't edit Kotlin code in this setup, but the iOS build runs the Gradle task to produce the umbrella framework.
+
+To learn more about this setup, see [](multiplatform-ios-umbrella-module-placement.md).
