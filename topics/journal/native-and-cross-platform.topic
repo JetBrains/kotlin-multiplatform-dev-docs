@@ -55,6 +55,28 @@
     <web-summary>Learn when to choose native or cross-platform development. See how Kotlin Multiplatform combines shared
         logic with native performance.
     </web-summary>
+
+    <tip>
+        <p><b>TL;DR</b></p>
+
+        <list type="bullet">
+            <li>
+                <b>Choose native</b> if you're targeting a single platform, your app is hardware-intensive
+                (AR, gaming, or real-time processing), or it depends heavily on platform-specific features and
+                frequent OS updates.
+            </li>
+            <li>
+                <b>Choose cross-platform</b> if you're targeting both platforms, time to market matters, or your app
+                relies on business logic that doesn't need to differ between platforms.
+            </li>
+            <li>
+                <b>Choose hybrid</b> for simple content or informational apps, prototypes, or internal tools that
+                require minimal native interaction.
+            </li>
+        </list>
+
+    </tip>
+
     <p>Mobile app development in 2025–2026 is defined by rising user expectations, multiplatform demand, and the need
         for high-performance experiences. Users expect apps to be fast, responsive, and seamlessly integrated with their
         devices, regardless of whether they’re using iOS or Android.</p>
@@ -94,7 +116,74 @@
         <p>The choice ultimately depends on your priorities: whether you value performance, faster time to market, or
             the expertise within your team.</p>
     </chapter>
+    <chapter title="Key definitions" id="key-definitions">
+        <deflist>
+            <def title="Shared business logic">
+                Application code, such as network requests, data processing, and storage, that behaves identically
+                across platforms. This is what Kotlin Multiplatform shares by default.
+            </def>
+
+            <def title="Shared UI">
+                UI code reused across platforms rather than built natively for each operating system. In
+                Kotlin Multiplatform, sharing UI requires adding Compose Multiplatform.
+            </def>
+
+            <def title="Near-native performance">
+                Performance that is comparable to a platform-native implementation for typical application workloads.
+                Actual results depend on the framework, workload, UI architecture, and use of platform interoperability.
+            </def>
+
+            <def title="Incremental adoption">
+                Starting with a small shared module and expanding the amount of shared code over time instead of
+                committing to a complete architecture rewrite upfront.
+            </def>
+        </deflist>
+    </chapter>
     <chapter title="Comparing development approaches" id="comparing-development-approaches">
+        <table style="both">
+            <tr>
+                <td>Criterion</td>
+                <td>Native</td>
+                <td>Cross-platform</td>
+                <td>Hybrid</td>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>Highest level of performance; smooth, responsive experience</td>
+                <td>Near-native; varies by framework and how much UI is shared</td>
+                <td>Weakest – often lacks responsiveness</td>
+            </tr>
+            <tr>
+                <td>Device API access</td>
+                <td>Full access to all platform APIs</td>
+                <td>Generally strong; direct access is possible through platform-specific APIs if needed</td>
+                <td>Limited; often requires plugins</td>
+            </tr>
+            <tr>
+                <td>UI fidelity</td>
+                <td>Fully integrated with the operating system</td>
+                <td>Varies by framework; can range from native-feeling UI to a custom rendering layer</td>
+                <td>Limited fidelity</td>
+            </tr>
+            <tr>
+                <td>Team skills needed</td>
+                <td>Separate Swift and Kotlin or Java expertise required</td>
+                <td>Framework-dependent</td>
+                <td>Web development skills: HTML, CSS, and JavaScript</td>
+            </tr>
+            <tr>
+                <td>Time to market</td>
+                <td>Slower – duplicate builds for each platform</td>
+                <td>Faster – single shared codebase</td>
+                <td>Fast for simple apps and prototypes</td>
+            </tr>
+            <tr>
+                <td>Maintenance</td>
+                <td>Two separate codebases to maintain</td>
+                <td>One shared codebase with fewer duplicate bugs</td>
+                <td>Plugin dependencies can add maintenance overhead</td>
+            </tr>
+        </table>
         <p>Choosing between native, cross-platform, and hybrid development comes down to how each approach balances
             performance, development speed, and long-term maintenance.</p>
         <chapter title="Native development" id="native-development">
