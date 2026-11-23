@@ -65,11 +65,13 @@ This was a temporary solution while the Android team at Google developed a separ
 Initially, we used the `android` block, but later transitioned to the `androidTarget` block so that the `android` name could be
 reserved for use by the new plugin.
 
-Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.android.com/kotlin/multiplatform/plugin) is available from the Android team, and you can use it with the
-original `android` blocks.
+Now, the [`com.android.kotlin.multiplatform.library` plugin](https://developer.android.com/kotlin/multiplatform/plugin)
+is available from the Android team, and you can use it with the original `android` blocks.
 
-Kotlin 2.3.0 introduces a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects. If you
-need more time to migrate to the `android` block, use Kotlin 2.3.10 with AGP 8.x, where the warning doesn't appear.
+Kotlin 2.3.0 introduced a deprecation warning when the `androidTarget` name was used in Kotlin Multiplatform projects,
+and Kotlin 2.3.10 temporarily suppressed this warning for Android Gradle plugin (AGP) 8.x. Starting with Kotlin 2.5.0,
+direct integration with the `com.android.application` and `com.android.library` plugins through the `androidTarget` block
+is unconditionally deprecated, and the warning is reported regardless of the AGP version.
 
 **What's the best practice now?**
 
@@ -85,6 +87,8 @@ Here's the deprecation cycle for the Kotlin Multiplatform Gradle plugin:
 * 2.2.0: remove the `android` target DSL from the Kotlin Multiplatform Gradle plugin
 * 2.3.0: the new Android plugin is available; introduce a deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects.
 * 2.3.10: revert the deprecation warning when the `androidTarget` name is used in Kotlin Multiplatform projects.
+* 2.5.0: unconditionally report a deprecation warning for direct integration with AGP through `androidTarget`,
+  regardless of the AGP version
 
 ### Deprecated bitcode embedding
 
@@ -113,9 +117,10 @@ Here's the planned deprecation cycle:
 
 **What's changed?**
 
-To align Kotlin Multiplatform with upcoming changes in Gradle, we are phasing out the `withJava()` function. The `withJava()`
-function enabled integration with Gradle's Java plugins by creating the necessary Java source sets. From Kotlin 2.1.20,
-these Java source sets are created by default.
+To align Kotlin Multiplatform with changes in Gradle, we are phasing out the `withJava()` function on the `jvm` target.
+The `withJava()` function enabled integration with Gradle's Java plugins by creating the necessary Java source sets.
+From Kotlin 2.1.20, these Java source sets are created by default, and starting with Kotlin 2.5.0, calling `withJava()`
+produces a compilation error (the API only remained functional on Gradle 8.14 before being disallowed in Gradle 9.0+).
 
 **What's the best practice now?**
 
@@ -129,7 +134,11 @@ kotlin {
 }
 ``` 
 
-From Kotlin 2.1.20, you can remove the `withJava()` function from your build script.
+You can now remove the `withJava()` function from your build script and move any existing Java sources to the default
+JVM source set directories:
+
+* Move main Java sources from `src/main/java` to `src/jvmMain/java`.
+* Move test Java sources from `src/test/java` to `src/jvmTest/java`.
 
 In addition, Gradle now only runs Java compile tasks if Java sources are present, triggering a JVM validation 
 diagnostic that previously didn't run before. This diagnostic fails if you explicitly configure an incompatible JVM target
@@ -160,6 +169,7 @@ Here's the planned deprecation cycle:
 * Gradle >8.6: introduce a deprecation warning for any previous version of Kotlin in multiplatform projects using the `withJava()` function.
 * Gradle 9.0: raise this warning to an error.
 * 2.1.20: introduce a deprecation warning when using the `withJava()` function with any version of Gradle.
+* 2.5.0: raise this warning to an error when using the withJava() function.
 
 <anchor name="declaring-multiple-targets"/>
 ### Declaring several similar targets
@@ -717,6 +727,7 @@ Here's the deprecation cycle for the `kotlin-js` Gradle plugin:
 
 * 1.9.0: produce a deprecation warning when the `kotlin-js` plugin is used
 * 2.4.0: [raise the warning to an error](https://youtrack.jetbrains.com/issue/KT-59305)
+* * 2.5.0: [remove the `kotlin-js` Gradle plugin](https://youtrack.jetbrains.com/issue/KT-85440)
 
 <anchor name="jvmWithJava-preset-deprecation"/>
 ### Deprecated `jvmWithJava` preset {initial-collapse-state="collapsed" collapsible="true"}
