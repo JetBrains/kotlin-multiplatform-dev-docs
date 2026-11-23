@@ -14,7 +14,8 @@ For changes in the AndroidX Compose runtime version included in this release, se
 
 ## Across platforms
 
-Several features that were Experimental in previous Compose Multiplatform releases are now Stable.
+Several features that were [Experimental](supported-platforms.md#general-kotlin-stability-levels) in previous 
+Compose Multiplatform releases are now [Stable](supported-platforms.md#general-kotlin-stability-levels).
 You no longer need to opt in to use them:
 
 * Creating a `ComposeUIView()` on iOS and configuring it with `ComposeUIViewportConfiguration`.
@@ -25,54 +26,21 @@ You no longer need to opt in to use them:
 
 ### Content-based sizing for Compose Multiplatform views in SwiftUI and UIKit
 
-Compose Multiplatform views embedded in SwiftUI or UIKit can now report a preferred size based on the available parent space.
-Native containers can use this size to fit Compose content, for example, 
-to adjusting a view’s height while keeping its width fixed.
+Compose Multiplatform views embedded in SwiftUI or UIKit layouts can now report a preferred size based on the available space.
+Native containers can use this size to fit Compose content, for example,
+to adjust a view's height while keeping its width fixed, or vice versa.
 
-On iOS 16 and later, Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits` by default,
-so no additional sizing configuration is needed.
+Compose Multiplatform views use `PreferredSizeReportingStrategy.SizeThatFits` by default.
+In UIKit, you don't need additional sizing configuration.
 
-Create a Compose view on the Kotlin side:
+In SwiftUI, keep this default on devices running iOS 16 or later.
+For SwiftUI on earlier iOS versions, use `PreferredSizeReportingStrategy.IntrinsicContentSize`
+and supply sizing proposals manually.
 
-```kotlin
-val view = ComposeUIView {
-    Text("Hello from Compose")
-}
-```
+For setup instructions and examples, see:
 
-Then, in the SwiftUI `UIViewRepresentable` wrapper, pass the sizing proposal to `sizeThatFits()`.
-Use `UIView.noIntrinsicMetric` for dimensions that SwiftUI leaves unspecified:
-
-```swift
-@available(iOS 16.0, *)
-func sizeThatFits(
-    _ proposal: ProposedViewSize,
-    uiView: UIView,
-    context: Context
-) -> CGSize? {
-    uiView.sizeThatFits(
-        CGSize(
-            width: proposal.width ?? UIView.noIntrinsicMetric,
-            height: proposal.height ?? UIView.noIntrinsicMetric
-        )
-    )
-}
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="func sizeThatFits( _ proposal: ProposedViewSize, uiView: UIView, "}
-
-In UIKit, after Auto Layout sets the Compose Multiplatform view’s width,
-use `sizeThatFits()` to get its preferred height and update its height constraint:
-
-```swift
-let preferredSize = uiView.sizeThatFits(
-    CGSize(
-        width: uiView.bounds.width,
-        height: UIView.noIntrinsicMetric
-    )
-)
-heightConstraint.constant = preferredSize.height
-```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="let preferredSize = uiView.sizeThatFits("}
+* [Content-based sizing in SwiftUI](compose-swiftui-integration.md#size-compose-views-to-fit-their-content)
+* [Content-based sizing in UIKit](compose-uikit-integration.md#size-compose-views-to-fit-their-content)
 
 ### Saving and autofilling passwords
 <primary-label ref="Experimental"/>
@@ -246,11 +214,11 @@ The feature requires Compose content to fill the entire window.
 
 | Library            | Maven coordinates                                                      | Based on Jetpack version                                                                                                             |
 |--------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-beta02`                 | [Runtime 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-beta02)                       |
-| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-beta02`                           | [UI 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-beta02)                                 |
-| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-beta02`           | [Foundation 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-beta02)                 |
-| Material           | `org.jetbrains.compose.material:material*:1.13.0-beta02`               | [Material 1.13.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-beta02)                     |
-| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-beta02`             | [Material3 1.5.0-beta02](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-beta02)                     |
+| Runtime            | `org.jetbrains.compose.runtime:runtime*:1.13.0-rc01`                   | [Runtime 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.13.0-rc01)                           |
+| UI                 | `org.jetbrains.compose.ui:ui*:1.13.0-rc01`                             | [UI 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-ui#1.13.0-rc01)                                     |
+| Foundation         | `org.jetbrains.compose.foundation:foundation*:1.13.0-rc01`             | [Foundation 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.13.0-rc01)                     |
+| Material           | `org.jetbrains.compose.material:material*:1.13.0-rc01`                 | [Material 1.13.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material#1.13.0-rc01)                         |
+| Material3          | `org.jetbrains.compose.material3:material3*:1.13.0-rc01`               | [Material3 1.5.0-rc01](https://developer.android.com/jetpack/androidx/releases/compose-material3#1.5.0-rc01)                         |
 | Material3 Adaptive | `org.jetbrains.compose.material3.adaptive:adaptive*:1.4.0-alpha01`     | [Material3 Adaptive 1.4.0-alpha03](https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive#1.4.0-alpha03) |
 | Lifecycle          | `org.jetbrains.androidx.lifecycle:lifecycle-*:2.11.0`                  | [Lifecycle 2.11.0](https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0)                                         |
 | Navigation         | `org.jetbrains.androidx.navigation:navigation-*:2.10.0`                | [Navigation 2.10.0](https://developer.android.com/jetpack/androidx/releases/navigation#2.10.0)                                       |

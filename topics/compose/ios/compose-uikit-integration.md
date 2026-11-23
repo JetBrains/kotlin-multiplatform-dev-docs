@@ -48,6 +48,83 @@ With this code, your application should look like this:
 Explore this code in
 the [sample project](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/interop/ios-compose-in-uikit).
 
+### Size Compose views to fit their content
+<primary-label ref="EAP"/>
+
+A Compose view can report its preferred size through `sizeThatFits()`.
+You don't need to configure sizing separately.
+
+This sizing example uses a Kotlin function `MainComposeView()` defined in `main.ios.kt`:
+
+```kotlin
+fun MainComposeView(): UIView = ComposeUIView {
+    Text(
+        "This Compose view wraps text to fit the available width",
+        modifier = Modifier.fillMaxWidth().padding(16.dp)
+    )
+}
+```
+
+In your Swift code, constrain the view's width with [Auto Layout](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html) and pass that width to `sizeThatFits()`.
+Use `UIView.noIntrinsicMetric` for the height to let Compose determine it from the content,
+then apply the returned height through the view's height constraint.
+
+When the available space or content changes, schedule another layout pass to measure again and update the constraint.
+If your app changes Compose content, call `view.setNeedsLayout()` after Compose processes the change.
+
+```swift
+import UIKit
+
+class ComposeContentViewController: UIViewController {
+    // Uses the bridge name generated for your Kotlin file
+    // for example, main.ios.kt -> Main_iosKt
+    private let composeView = Main_iosKt.MainComposeView()
+    private var heightConstraint: NSLayoutConstraint!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        composeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(composeView)
+
+        // Provisional height until Compose has measured its content
+        heightConstraint = composeView.heightAnchor.constraint(equalToConstant: 1)
+
+        NSLayoutConstraint.activate([
+            composeView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            composeView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            composeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heightConstraint
+        ])
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard composeView.bounds.width > 0 else { return }
+
+        // The initial result may be a fallback; measure again on subsequent layout passes
+        let preferredSize = composeView.sizeThatFits(
+            CGSize(
+                // For a fixed height, swap width and height here and in the layout constraints
+                width: composeView.bounds.width,
+                height: UIView.noIntrinsicMetric
+            )
+        )
+
+        if heightConstraint.constant != preferredSize.height {
+            heightConstraint.constant = preferredSize.height
+            view.setNeedsLayout()
+        }
+    }
+}
+```
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="override func viewDidLayoutSubviews()"}
+
+> If your Kotlin function returns a `UIViewController`, add it to a container view controller
+> and call `sizeThatFits()` on its `view`.
+>
+{style="note"}
+
 ## Use UIKit inside Compose Multiplatform
 
 To use UIKit elements inside Compose Multiplatform, add the UIKit elements that you want to use to a
