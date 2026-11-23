@@ -46,11 +46,10 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 
 ## Add and use SwiftPM dependencies
 
-> For working examples, see our sample projects.
-> On the `master` branch, each project is set up using CocoaPods, while the `spm_import` branch uses SwiftPM:
+> For working examples, see our sample projects:
 > 
-> * [SwiftUI and Firebase example app](https://github.com/Kotlin/kmp-with-cocoapods-firebase-sample/tree/spm_import)
-> * [Compose Multiplatform iOS example app](https://github.com/Kotlin/kmp-with-cocoapods-compose-sample/tree/spm_import)
+> * [SwiftUI and Firebase example app](https://github.com/Kotlin/kmp-with-swiftpm-firebase-sample), `master` branch with SwiftPM, `cocoapods` with CocoaPods.
+> * [Compose Multiplatform iOS example app](https://github.com/Kotlin/kmp-with-cocoapods-compose-sample/tree/spm_import), `master` branch with CocoaPods, `spm_import` with SwiftPM.
 >
 {type="tip"}
 
