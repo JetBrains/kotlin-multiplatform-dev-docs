@@ -727,7 +727,7 @@ Here's the deprecation cycle for the `kotlin-js` Gradle plugin:
 
 * 1.9.0: produce a deprecation warning when the `kotlin-js` plugin is used
 * 2.4.0: [raise the warning to an error](https://youtrack.jetbrains.com/issue/KT-59305)
-* * 2.5.0: [remove the `kotlin-js` Gradle plugin](https://youtrack.jetbrains.com/issue/KT-85440)
+* 2.5.0: [remove the `kotlin-js` Gradle plugin](https://youtrack.jetbrains.com/issue/KT-85440)
 
 <anchor name="jvmWithJava-preset-deprecation"/>
 ### Deprecated `jvmWithJava` preset {initial-collapse-state="collapsed" collapsible="true"}
