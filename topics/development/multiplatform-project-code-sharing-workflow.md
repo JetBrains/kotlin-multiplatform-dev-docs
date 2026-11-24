@@ -73,12 +73,31 @@ Teams with two or more repositories mainly use remote distribution to store proj
   <list>
     <li>Slower workflow for app developers, as the process of editing and building the shared code involves publishing and versioning.</li>
    <li>The maintenance of the shared code rests entirely on participating team members.</li>
+   <li>Library teams need to keep the versions of shared dependencies and Kotlin compatible across libraries. See <a anchor="keeping-track-of-versions-of-consumed-libraries">Keeping track of versions of consumed libraries</a>.</li>
   </list>
 </td>
 </tr>
 </table>
 
-## Use a local dependency during development
+### Keeping track of versions of consumed libraries
+
+When an app consumes several Kotlin Multiplatform libraries that are published separately, the app's build resolves a
+single version of each dependency they share, such as a common platform module, `kotlinx.coroutines`, or Ktor.
+By default, Gradle picks the highest requested version, so updating one library can also update a dependency that
+other libraries use.
+To avoid unexpected changes, agree on versions of common dependencies across library teams,
+for example, by publishing a shared version catalog that all library projects use.
+
+The versions of Kotlin itself used to build each library is also important.
+The Kotlin compiler can consume klib artifacts produced by the same or an earlier Kotlin version,
+but it isn't guaranteed to read klibs produced by a later version,
+and klibs produced by cinterop have no compatibility guarantees between Kotlin versions.
+Build the consuming project, for example,
+the module that produces the iOS framework, with the same or a newer Kotlin version than any of the libraries,
+and update Kotlin there first. For details, see
+[Kotlin klib binaries](https://kotlinlang.org/docs/kotlin-evolution-principles.html#kotlin-klib-binaries).
+
+## Speed up local development by switching to a local dependency
 
 When apps consume the shared code remotely, you can still switch to a local dependency while you develop a change,
 and switch back to the published version when the change is released.

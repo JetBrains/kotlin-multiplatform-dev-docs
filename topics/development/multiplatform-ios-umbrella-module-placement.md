@@ -256,22 +256,9 @@ This keeps each change small, makes it clear which library introduced a problem,
 Dependency update tools that support Gradle version catalogs can propose these changes automatically when a new
 library version is published.
 
-### Align shared dependencies and the Kotlin version
-
-Libraries often depend on common libraries, such as a shared platform module, `kotlinx.coroutines`, or Ktor.
-The umbrella module resolves a single version of each such dependency for the whole framework.
-By default, Gradle picks the highest requested version, so an update of one library can also update a dependency used by
-other libraries.
-To avoid unexpected changes, agree on versions of common dependencies across teams, for example, by publishing a shared
-version catalog that all library projects use.
-
-The version of Kotlin itself should also be tracked.
-The Kotlin compiler can consume klib artifacts produced by the same or an earlier Kotlin version, but it isn't guaranteed
-to read klib produced by a later version. For cinterop klib, there are no compatibility guarantees between
-Kotlin versions, so libraries with cinterop dependencies should use the same Kotlin version as the umbrella module.
-Make sure that the Kotlin version in the umbrella module is the same or newer than for all libraries,
-and when updating Kotlin, update it in the umbrella module first.
-For details, see [Kotlin klib binaries](https://kotlinlang.org/docs/kotlin-evolution-principles.html#kotlin-klib-binaries).
+The umbrella module also resolves a single version of each dependency that the libraries share, and it must be built
+with a Kotlin version that can read all of the libraries. For how to keep these versions compatible, see
+[](multiplatform-project-code-sharing-workflow.md#keeping-track-of-versions-of-consumed-libraries).
 
 ## Multiple iOS apps with different sets of libraries
 
