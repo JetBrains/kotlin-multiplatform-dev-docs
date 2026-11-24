@@ -93,10 +93,8 @@ This setup solves the common problems described at the top:
   compiles the active architecture and reuses Kotlin/Native debug caches.
 * **Different subsets for different apps**. Each iOS app repository has its own umbrella module, so it includes only the
   libraries the app needs. See [Multiple iOS apps with different sets of libraries](#multiple-ios-apps-with-different-sets-of-libraries).
-  <!-- task 7: add the SDK-vendor use case the reviewer raised: publishing klibs lets KMP consumers avoid multiple-framework problems. -->
 * **Easier composition for KMP-based SDKs**. If you publish a KMP-based SDK, consumers that also use KMP can add your
   klibs to their own umbrella module and combine them with their own code instead of managing multiple XCFrameworks.
-  <!-- /task 7 -->
 
 This approach has the following limitations to keep in mind:
 
@@ -194,12 +192,12 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
     }
     ```
 
-  > Exporting a dependency to the framework disables dead code elimination for that dependency.
-  > This is general Kotlin/Native behavior, not a limitation of placing the umbrella module in the iOS app repository.
-  > To reduce the effect, export only the libraries whose API is used from Swift and add other libraries as regular dependencies.
-  > See [Export dependencies to binaries](multiplatform-build-native-binaries.md#export-dependencies-to-binaries).
-  >
-  {style="note"}
+    > Exporting a dependency to the framework disables dead code elimination for that dependency.
+    > This is general Kotlin/Native behavior.
+    > To reduce the effect, export only the libraries whose API is used from Swift and add other libraries as regular dependencies.
+    > See [Export dependencies to binaries](multiplatform-build-native-binaries.md#export-dependencies-to-binaries).
+    >
+    {style="note"}
 
 5. Add an empty Kotlin file to the umbrella module, for example, `umbrella/src/commonMain/kotlin/Umbrella.kt`.
    Gradle can't assemble a framework from a module that doesn't contain any source code.
@@ -289,7 +287,7 @@ and each iOS app adopts it on its own schedule.
 
 ### Develop against unpublished library changes
 
-When a change spans a library and the iOS app, you can test it in the iOS app before publishing a new library version:
+When a change spans a library and the iOS app, you can test it in the iOS app without publishing a new library version:
 
 * Publish the library to your local Maven repository with the `publishToMavenLocal` task, add `mavenLocal()`
   to the repositories in the iOS app's Gradle project, and set the local version in the version catalog.
@@ -300,11 +298,9 @@ When a change spans a library and the iOS app, you can test it in the iOS app be
   Gradle configures the whole included build, so your machine needs everything that build requires,
   for example, the Android SDK if the library targets Android.
 
-Keep these changes local and don't commit them to the iOS app repository.
-  
-This doesn't mean tracking temporary edits by hand. For example, a debug-only Gradle init script or a local version
-catalog can add `mavenLocal()` and override the library version only while you're developing, while the committed build
-keeps using the published versions.
+You don't need to keep these changes out of commits by hand: a Gradle property set in ` ~/.gradle/gradle.properties`,
+or Gradle init script that Xcode passes only for the debug configuration can override the library versions for development specifically.
+Builds that don't see these options, like CI and release builds, keep using the published versions.
 
 ### Continuous integration
 
