@@ -37,7 +37,7 @@ You can also customize the input interface displayed when a field gains focus:
 * `inputView()` replaces the default system keyboard with a custom input view.
 * `inputAccessoryView()` attaches a custom accessory view to the system keyboard or a custom input view.
 
-## Control the editing experience
+## Use native text input
 
 The default Compose Multiplatform text input implementation provides consistent behavior across platforms.
 On iOS, it supports native-like caret interaction: a single tap positions the caret, while a long press and drag moves it.
@@ -74,7 +74,7 @@ and is compatible with the context menu API enabled with the `isNewContextMenuEn
 Compose Multiplatform can show native prompts to save login credentials and autofill Compose text fields.
 Keep both the username and password fields on screen so iOS can recognize the form as a login form.
 
-<img src="compose-ios-autofill.png" alt="iOS AutoFill menu" width="400"/>
+<img src="compose-ios-autofill.png" alt="iOS AutoFill menu" width="400" border-effect="line"/>
 
 Use `PlatformImeOptions` in your iOS source set to configure the fields.
 Set `textContentType(UITextContentTypeUsername)` for the username and `isSecureTextEntry(true)` for the password.
