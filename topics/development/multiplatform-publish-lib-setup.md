@@ -129,7 +129,7 @@ This guarantees that all artifacts are available and correctly referenced.
 <primary-label ref="Experimental"/>
 
 By default, Kotlin Multiplatform publishes platform artifacts separately. You can opt in to a format that publishes platform
-artifacts, except for JVM and Android, as a single `.kar` archive. A `.kar` file is a ZIP archive additionally compressed
+artifacts as a single `.kar` archive (except for JVM and Android). A `.kar` file is a ZIP archive additionally compressed
 with XZ.
 
 This format reduces the number and size of published files, helping libraries stay within [Maven Central's publication
