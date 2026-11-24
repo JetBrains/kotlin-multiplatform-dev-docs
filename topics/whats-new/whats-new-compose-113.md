@@ -179,7 +179,7 @@ Compose Multiplatform now supports [Application Class-Data Sharing (AppCDS)](htt
 [Ahead-of-Time (AOT) caching](https://openjdk.org/jeps/514)
 for desktop applications. Both options use an archive to reduce startup time.
 
-In benchmarks on a small demo application, `AotPrebuild` reduced startup time compared with no AOT:
+In benchmarks on a small demo application, `AotPrebuild` mode reduced startup time compared with no AOT:
 
 | Platform                      | Cold start                     | Warm start (second run)        |
 |-------------------------------|--------------------------------|--------------------------------|

@@ -8,7 +8,7 @@ Read on for the details about the following topics:
 * [What is Compose Multiplatform Gradle plugin](#gradle-plugin)?
 * [Details on basic tasks](#basic-tasks) such as running an application locally, and [advanced tasks](#minification-and-obfuscation) like minification and obfuscation.
 * [How to include JDK modules](#including-jdk-modules) and deal with `ClassNotFoundException`.
-* [How to improve desktop startup time](#improving-startup-time-with-appcds-and-aot) with AppCDS and AOT.
+* [How to improve desktop startup time](#improving-startup-time-with-appcds-and-aot) with AppCDS or AOT.
 * [How to specify distribution properties](#specifying-distribution-properties): package version, JDK version, output directory, launcher properties, and metadata.
 * [How to manage resources](#managing-resources) using resources library, JVM resource loading, or adding files to packaged applications.
 * [How to customize source sets](#custom-source-sets) using Gradle source set, Kotlin JVM target, or manually.
@@ -148,33 +148,13 @@ If the size of the distributable is not a crucial factor and can be ignored, you
 You can improve desktop application startup time with
 [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) or
 [ahead-of-time (AOT) caching](https://openjdk.org/jeps/514).
-See the [Compose Multiplatform 1.13.0 release notes](whats-new-compose-113.md#faster-desktop-startup-with-appcds-or-aot)
+See the [Compose Multiplatform %org.jetbrains.compose-eap% release notes](whats-new-compose-113.md#faster-desktop-startup-with-appcds-or-aot)
 for benchmark results.
-
-### Configure startup optimization
-
-Add an `aot {}` block inside the `application {}` block in the `build.gradle.kts` file:
-
-```kotlin
-import org.jetbrains.compose.desktop.application.dsl.AotMode
-
-compose.desktop {
-    application {
-        aot {
-            mode = AotMode.AotPrebuild
-        }
-    }
-}
-```
-
-This example uses `AotPrebuild`, which requires JDK 25 or later.
-Make sure the [JDK used for packaging](#jdk-version) meets the requirements of the selected mode.
-
-To print AOT-related messages when the application runs, add `logging = true` to the `aot {}` block.
 
 ### Choose a mode
 
-Choose a mode based on your JDK version and whether you need faster startup from the first launch:
+Choose a mode based on whether you need faster startup from the first launch and the version of the
+[JDK used for packaging](#jdk-version):
 
 | Mode             | Minimum JDK | Description                                                                 | Archiving and packaging                                                      |
 |------------------|-------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|
@@ -183,33 +163,57 @@ Choose a mode based on your JDK version and whether you need faster startup from
 | `AppCdsPrebuild` | 21          | Faster startup from the first launch.                                       | Requires a training run and includes the application archive in the package. |
 | `AotPrebuild`    | 25          | Faster startup from the first launch, with improved linking and JIT warmup. | Requires a training run and includes the application cache in the package.   |
 
-All modes except `None` increase the distributable size by including additional data that helps 
+All modes except `None` increase the distributable size by including additional data that helps
 the application start faster.
+
+### Configure startup optimization
+
+After choosing a mode, add an `aot {}` block inside the `application {}` block in the `build.gradle.kts` file.
+The following example configures the `AotPrebuild` mode:
+
+```kotlin
+import org.jetbrains.compose.desktop.application.dsl.AotMode
+
+compose.desktop {
+    application {
+        aot {
+            mode = AotMode.AotPrebuild
+            // Enables AOT logging
+            logging = true
+        }
+    }
+}
+```
 
 ### Prepare a training run
 
 With `AppCdsPrebuild` and `AotPrebuild`, the Gradle plugin launches your application during packaging to create the
 archive. This launch is a training run. Packaging continues after the application exits.
 
-If you package the application in CI/CD, the build environment must provide a graphical environment for the training run.
+If you package the application as part of a CI/CD pipeline, 
+the build environment must provide a graphical environment for the training run.
 
 During a training run, wait until the application displays its initial window.
-To also optimize the first use of other features, open the corresponding screens or use those features.
+To also optimize the first use of specific features, open the corresponding screens or use those features.
 Then close the application. The archive includes the classes used during the training run.
 
 For an automated build, configure the application to wait until the initial window appears,
 perform any additional actions you want the training run to cover, and then exit automatically.
 The plugin sets the `compose.aot.training-run` system property to `true` so your application can identify this run.
 
-For example, add the following code to your application's `application {}` block to automatically exit
-after a ten-second delay during a training run:
+The following example checks the property in the Compose application entry point 
+and exits after a ten-second delay during a training run:
 
 ```kotlin
-application {
-    if (System.getProperty("compose.aot.training-run") == "true") {
-        LaunchedEffect(Unit) {
-            delay(10.seconds)
-            exitApplication()
+fun main() = application {
+    Window(onCloseRequest = ::exitApplication) {
+        App()
+
+        if (System.getProperty("compose.aot.training-run") == "true") {
+            LaunchedEffect(Unit) {
+                delay(10.seconds)
+                exitApplication()
+            }
         }
     }
 }
