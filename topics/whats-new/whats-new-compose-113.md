@@ -158,17 +158,19 @@ createComposeWindow(
 
 ### Faster desktop startup with AppCDS or AOT
 
-Compose Multiplatform now supports [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) and 
+Compose Multiplatform now supports [Application Class-Data Sharing (AppCDS)](https://openjdk.org/jeps/310) and
 [Ahead-of-Time (AOT) caching](https://openjdk.org/jeps/514)
 for desktop applications. Both options use an archive to reduce startup time.
 
-In benchmarks on a small demo application, prebuilt AOT caches reduced cold startup time:
+In benchmarks on a small demo application, `AotPrebuild` mode reduced startup time compared with no AOT:
 
-* On macOS (M1 Ultra), from 2017 ms to 424 ms — 4.8× faster.
-* On Windows (Dell Precision 5690), from 1356 ms to 650 ms — 2.1× faster.
+| Platform                      | Cold start                     | Warm start (second run)        |
+|-------------------------------|--------------------------------|--------------------------------|
+| macOS (M1 Ultra)              | 2017 ms → 424 ms (4.8× faster) | 936 ms → 437 ms (2.1× faster)  |
+| Windows (Dell Precision 5690) | 1356 ms → 650 ms (2.1× faster) | 1330 ms → 656 ms (2.0× faster) |
 
 These measurements cover the time from launching the process to displaying the window.
-Results depend on the application and environment. 
+Results depend on the application and environment.
 For AOT startup optimization, we recommend the latest [JetBrains Runtime (JBR) 25](https://github.com/JetBrains/JetBrainsRuntime) release.
 
 To enable these startup options, configure the `aot {}` block in your `build.gradle.kts` file:
@@ -183,19 +185,8 @@ compose.desktop {
 }
 ```
 
-Choose a mode based on your JDK version and packaging requirements:
-
-| Mode             | Minimum JDK | Behavior                                                                                       |
-|------------------|-------------|------------------------------------------------------------------------------------------------|
-| `None`           | —           | Default, no startup optimizations.                                                             |
-| `AppCdsAuto`     | 19          | Creates an AppCDS archive when the user's first session ends, speeding up subsequent launches. |
-| `AppCdsPrebuild` | 21          | Creates an AppCDS archive before packaging, speeding up startup from the first launch.         |
-| `AotPrebuild`    | 25          | Creates an AOT cache before packaging, also improving linking and JIT warmup.                  |
-
-Both prebuild modes run your application during packaging to create the archive.
-During this cache-generation run, the plugin sets the `compose.aot.training-run` system property to `true`.
-
-Note that the prebuild modes increase the distributable size because the application includes the archives.
+For available modes, JDK requirements, and training runs, see
+[Improving startup time with AppCDS and AOT](compose-native-distribution.md#improving-startup-time-with-appcds-and-aot).
 
 ### Smoother window resizing on macOS and Windows
 
