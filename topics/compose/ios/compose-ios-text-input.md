@@ -8,7 +8,9 @@
 
 Compose Multiplatform supports text input on all platforms through the shared `TextField` and `BasicTextField` APIs.
 This page describes additional options available specifically for iOS. In your iOS source set, use `PlatformImeOptions`
-alongside the common `KeyboardOptions` to configure the system keyboard, editing behavior, and services such as credential autofill.
+alongside the common `KeyboardOptions` to configure the system keyboard and editing behavior.
+
+Using `PlatformImeOptions` requires opting in with `@OptIn(ExperimentalComposeUiApi::class)`.
 
 ## Configure keyboard and input traits
 
@@ -19,11 +21,10 @@ settings from the enclosing `ImeOptions`.
 The following text field displays a keyboard layout optimized for entering email addresses:
 
 ```kotlin
-var email by remember { mutableStateOf("") }
+val email = rememberTextFieldState()
 
 BasicTextField(
-    value = email,
-    onValueChange = { email = it },
+    state = email,
     keyboardOptions = KeyboardOptions(
         platformImeOptions = PlatformImeOptions {
             keyboardType(UIKeyboardTypeEmailAddress)
@@ -52,11 +53,10 @@ To enable native text input, use `usingNativeTextInput` in your iOS source set:
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NativeTextInputField() {
-    var text by remember { mutableStateOf("") }
+    val text = rememberTextFieldState()
 
     BasicTextField(
-        value = text,
-        onValueChange = { text = it },
+        state = text,
         keyboardOptions = KeyboardOptions(
             platformImeOptions = PlatformImeOptions {
                 usingNativeTextInput(true)
@@ -66,8 +66,7 @@ fun NativeTextInputField() {
 }
 ```
 
-Native text input supports both the `BasicTextField(TextFieldValue)` and `BasicTextField(TextFieldState)` APIs
-and is compatible with the context menu API enabled with the `isNewContextMenuEnabled` flag.
+Native text input is compatible with the context menu API enabled with the `isNewContextMenuEnabled` flag.
 
 ## Save and autofill passwords
 
@@ -76,35 +75,39 @@ Keep both the username and password fields on screen so iOS can recognize the fo
 
 <img src="compose-ios-autofill.png" alt="iOS AutoFill menu" width="400" border-effect="line"/>
 
-Use `PlatformImeOptions` in your iOS source set to configure the fields.
-Set `textContentType(UITextContentTypeUsername)` for the username and `isSecureTextEntry(true)` for the password.
-For example, inside a composable annotated with `@OptIn(ExperimentalComposeUiApi::class)`:
+A simple login form with `TextField()` and `SecureTextField()` can look like this:
 
 ```kotlin
-var username by remember { mutableStateOf("") }
-var password by remember { mutableStateOf("") }
+val email = rememberTextFieldState()
+val password = rememberTextFieldState()
 
 Column {
-    TextField(
-        value = username,
-        onValueChange = { username = it },
+    TextField(state = email)
+    SecureTextField(state = password)
+}
+```
+
+For `BasicTextField()`, set `keyboardType` to `KeyboardType.Password` or `KeyboardType.NumberPassword`:
+
+```kotlin
+val email = rememberTextFieldState()
+val password = rememberTextFieldState()
+
+Column {
+    BasicTextField(
+        state = email,
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email,
-            platformImeOptions = PlatformImeOptions {
-                textContentType(UITextContentTypeUsername)
-            }
+            keyboardType = KeyboardType.Email
         )
     )
 
-    TextField(
-        value = password,
-        onValueChange = { password = it },
-        visualTransformation = PasswordVisualTransformation(),
+    BasicTextField(
+        state = password,
+        outputTransformation = remember {
+            OutputTransformation { replace(0, length, "*".repeat(length)) }
+        },
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password,
-            platformImeOptions = PlatformImeOptions {
-                isSecureTextEntry(true)
-            }
+            keyboardType = KeyboardType.Password
         )
     )
 }
