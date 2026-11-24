@@ -10,15 +10,15 @@ The location of the umbrella module that produces this framework determines how 
 This page compares the options for placing the umbrella module and describes the recommended approach
 for multi-team setups: keeping an umbrella module in each iOS app repository.
 
-## The problem with a separately published umbrella framework
+## The problems with a separately published umbrella framework
 
-An iOS app should link only one framework produced by Kotlin/Native to avoid duplicating Kotlin runtime and its dependencies
+An iOS app should link only one framework produced by Kotlin/Native to avoid duplicating the Kotlin runtime and its dependencies
 (see [Why do you need an umbrella framework?](multiplatform-project-module-configurations.md#why-do-you-need-an-umbrella-framework)).
 
 A common way to provide a single framework is to build it in the repository with the shared code, or in a separate
 repository, and publish it as a binary XCFramework through SwiftPM or CocoaPods.
 In this setup, the umbrella repository effectively acts as a lock file for the versions of all libraries in the iOS app.
-With several independent libraries, this causes the following problems:
+This causes the following problems:
 
 * **Every change requires several steps**. To deliver an update of a single library, you need to update the umbrella
   module, build and publish a new umbrella framework, and then update the framework version in the iOS app.
@@ -29,6 +29,9 @@ With several independent libraries, this causes the following problems:
   A problem in one library blocks the update of all others.
 * **Distribution costs**. CI has to build release versions of the umbrella framework for all Apple targets, and you need
   to host, version, and clean up the XCFramework artifacts.
+* **Consuming KMP-based SDKs is hard**. When a KMP-based SDK is published as an XCFramework,
+  an app that already links its own Kotlin framework or another KMP-based SDK ends up with several Kotlin/Native
+  frameworks, which duplicate the Kotlin runtime and shared dependencies.
 
 <!-- TODO: diagram of the separate umbrella repository workflow, see the KEDOC-337 report -->
 
@@ -93,8 +96,11 @@ This setup solves the common problems described at the top:
   compiles the active architecture and reuses Kotlin/Native debug caches.
 * **Different subsets for different apps**. Each iOS app repository has its own umbrella module, so it includes only the
   libraries the app needs. See [Multiple iOS apps with different sets of libraries](#multiple-ios-apps-with-different-sets-of-libraries).
-* **Easier composition for KMP-based SDKs**. If you publish a KMP-based SDK, consumers that also use KMP can add your
-  klibs to their own umbrella module and combine them with their own code instead of managing multiple XCFrameworks.
+* **KMP-based SDKs can be consumed as klibs**. If a vendor publishes klibs along with an XCFramework,
+  consumers who use Kotlin Multiplatform can add the SDK's klibs to their own umbrella module
+  and build one framework for the whole app. Consumers who don't use KMP keep using the XCFramework.
+
+  The consumer's umbrella module must use a Kotlin version that is compatible with the SDK's klibs.
 
 This approach has the following limitations to keep in mind:
 
@@ -298,10 +304,10 @@ When a change spans a library and the iOS app, you can test it in the iOS app wi
   Gradle configures the whole included build, so your machine needs everything that build requires,
   for example, the Android SDK if the library targets Android.
 
-These settings can be applied automatically for local development and left out for publishing:
-for example, a Gradle init script that Xcode passes only for the debug configuration
-or a Gradle property set in local `~/.gradle/gradle.properties` can help override the library versions.
-Builds that don't see these debug-only options, like CI and release, keep using the published versions.
+You don't have to manage these adjustments separately. Put them in a Gradle
+[init script](https://docs.gradle.org/current/userguide/init_scripts.html) and make the Xcode build phase pass it
+with `--init-script` only for the Debug configuration.
+Builds without this init script, such as release builds, will keep using the published versions.
 
 ### Continuous integration
 
