@@ -298,9 +298,10 @@ When a change spans a library and the iOS app, you can test it in the iOS app wi
   Gradle configures the whole included build, so your machine needs everything that build requires,
   for example, the Android SDK if the library targets Android.
 
-You don't need to keep these changes out of commits by hand: a Gradle property set in ` ~/.gradle/gradle.properties`,
-or Gradle init script that Xcode passes only for the debug configuration can override the library versions for development specifically.
-Builds that don't see these options, like CI and release builds, keep using the published versions.
+These settings can be applied automatically for local development and left out for publishing:
+for example, a Gradle init script that Xcode passes only for the debug configuration
+or a Gradle property set in local `~/.gradle/gradle.properties` can help override the library versions.
+Builds that don't see these debug-only options, like CI and release, keep using the published versions.
 
 ### Continuous integration
 
