@@ -25,7 +25,7 @@ when both Android and iOS team members want to edit the shared Kotlin Multiplatf
 Local distribution can be used in monorepo project configurations as the default
 workflow, without the need to publish artifacts, or for local development,
 in addition to the remote workflow.
-See [Use a local dependency during development](#use-a-local-dependency-during-development) for more details.
+See [](#speed-up-local-development-by-switching-to-a-local-dependency) for more details.
 
 This workflow is most effective when all the team members are ready to edit code in the whole project. It includes both
 Android and iOS parts after making changes to the common parts. Ideally, every team member can have IntelliJ IDEA/Android Studio and
