@@ -22,6 +22,16 @@ You no longer need to opt in to use them:
 * [Configuring `ComposeViewport()` for web with `ComposeViewportConfiguration`](compose-css-styles.md).
 * [Preloading resources for web with `preload` API](compose-web-resources.md#preload-resources-using-the-compose-multiplatform-preload-api).
 
+### Smaller distribution sizes for web and desktop
+
+With version 1.13.0, Compose Multiplatform makes further optimizations to distribution sizes:
+* For web, the build uses a smaller `skiko.wasm` runtime, each copy shrinks from 8.6 MB to 7.4 MB.
+* For desktop:
+  * Non-target desktop binaries (for example, x86_64 for macOS) are removed during packaging.
+  * When using a JRE with bundled fonts for packaging, these fonts are stripped.
+    You can opt out of this by setting `stripJreFonts` to `false`
+    in the `compose.desktop.application.nativeDistributions {}` block of your Gradle configuration.
+
 ## iOS
 
 ### Content-based sizing for Compose Multiplatform views in SwiftUI and UIKit
