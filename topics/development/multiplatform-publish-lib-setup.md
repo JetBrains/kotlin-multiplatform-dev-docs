@@ -125,6 +125,38 @@ remain unpublished. To complete the process, publish each target-specific public
 
 This guarantees that all artifacts are available and correctly referenced.
 
+## Publication format
+<primary-label ref="Experimental"/>
+
+By default, Kotlin Multiplatform publishes platform artifacts separately. You can opt in to a format that publishes platform
+artifacts as a single `.kar` archive (except for JVM and Android). A `.kar` file is a ZIP archive additionally compressed
+with XZ.
+
+This format reduces the number and size of published files, helping libraries stay within [Maven Central's publication
+size limits](https://central.sonatype.org/publish/maven-central-publishing-limits/). Adding a target no longer creates
+additional files, and the total publication can be smaller than a previous single-target publication.
+
+To enable the `.kar` format publication for a specific module, configure it in the module's build script:
+
+```kotlin
+kotlin {
+    publishing {
+        publicationFormat.set(KotlinPublicationFormat.KOTLIN_ARCHIVE)
+    }
+}
+```
+
+To enable it for all modules in your project, add this property to `gradle.properties`:
+
+```properties
+kotlin.publicationFormat=KOTLIN_ARCHIVE
+```
+
+> Publishing in the `.kar` format is [Experimental](supported-platforms.md#compose-multiplatform-ui-framework-stability-levels),
+> while consumption of such artifacts is already available for all projects.
+>
+{style="note"}
+
 ## Host requirements
 
 Kotlin/Native supports cross-compilation, allowing any host to produce the necessary `.klib` artifacts.
