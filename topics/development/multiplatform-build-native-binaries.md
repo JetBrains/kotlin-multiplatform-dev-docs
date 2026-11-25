@@ -347,9 +347,9 @@ import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 
 kotlin {
     // Create and configure the targets.
-    val watchos32 = watchosArm32("watchos32")
+    val watchossimulator64 = watchosSimulatorArm64("watchossimulator64")
     val watchos64 = watchosArm64("watchos64")
-    configure(listOf(watchos32, watchos64)) {
+    configure(listOf(watchossimulator64, watchos64)) {
         binaries.framework {
             baseName = "MyFramework"
         }
@@ -362,7 +362,7 @@ kotlin {
         destinationDirProperty.set(layout.buildDirectory.dir("fat-framework/debug"))
         // Specify the frameworks to be merged.
         from(
-            watchos32.binaries.getFramework("DEBUG"),
+            watchossimulator64.binaries.getFramework("DEBUG"),
             watchos64.binaries.getFramework("DEBUG")
         )
     }
@@ -378,9 +378,9 @@ import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 kotlin {
     // Create and configure the targets.
     targets {
-        watchosArm32("watchos32")
+        watchosSimulatorArm64("watchossimulator64")
         watchosArm64("watchos64")
-        configure([watchos32, watchos64]) {
+        configure([watchossimulator64, watchos64]) {
             binaries.framework {
                 baseName = "MyFramework"
             }
@@ -394,7 +394,7 @@ kotlin {
         destinationDirProperty.set(layout.buildDirectory.dir("fat-framework/debug"))
         // Specify the frameworks to be merged.
         from(
-            targets.watchos32.binaries.getFramework("DEBUG"),
+            targets.watchossimulator64.binaries.getFramework("DEBUG"),
             targets.watchos64.binaries.getFramework("DEBUG")
         )
     }
