@@ -29,7 +29,7 @@ This causes the following problems:
   A problem in one library blocks the update of all others.
 * **Distribution costs**. CI has to build release versions of the umbrella framework for all Apple targets, and you need
   to host, version, and clean up the XCFramework artifacts.
-* **Consuming KMP-based SDKs is hard**. When a KMP-based SDK is published as an XCFramework,
+* **Several Kotlin frameworks can end up in one app**. When a KMP-based SDK is published as an XCFramework,
   an app that already links its own Kotlin framework or another KMP-based SDK ends up with several Kotlin/Native
   frameworks, which duplicate the Kotlin runtime and shared dependencies.
 
@@ -120,7 +120,8 @@ This approach has the following limitations to keep in mind:
   iOS developers don't need to edit Kotlin code or work in IntelliJ IDEA or Android Studio.
 
   The setup is usually manageable: the wrapper handles Gradle itself, and JDK tools such as SDKMAN! or mise can provide the required Java runtime.
-  > Using Kotlin Toolchain can also mitigate a lot of Gradle-related issues.
+  
+  > Using [Kotlin Toolchain](https://kotlin-toolchain.org) can also mitigate a lot of Gradle-related issues.
   >
   {style="tip"}
 
@@ -168,7 +169,11 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
     kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
     ```
 
-4. In the `umbrella/build.gradle.kts` file, declare the libraries as `api` dependencies and export them to the framework:
+4. In the `umbrella/build.gradle.kts` file, declare the libraries as dependencies and export the ones whose API Swift code uses.
+   In this example, `feature-a` is fully exported and `feature-b` is not:
+
+    <tabs group="ios-export">
+    <tab title="Objective-C export" group-key="objc">
 
     ```kotlin
     plugins {
@@ -184,19 +189,61 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
                 // Name of the module imported in Swift code
                 baseName = "Shared"
                 isStatic = true
+                // Only exported libraries are fully available in Swift
                 export(libs.feature.a)
-                export(libs.feature.b)
             }
         }
 
         sourceSets {
             commonMain.dependencies {
+                // Exported libraries must be api() dependencies
                 api(libs.feature.a)
-                api(libs.feature.b)
+                // Not exported
+                implementation(libs.feature.b)
             }
         }
     }
     ```
+
+    </tab>
+    <tab title="Swift export (Beta)" group-key="swift">
+
+    ```kotlin
+    plugins {
+        alias(libs.plugins.kotlin.multiplatform)
+    }
+
+    kotlin {
+        iosArm64()
+        iosSimulatorArm64()
+
+        export {
+            @OptIn(ExperimentalSwiftExportDsl::class)
+            swift {
+                // Name of the module imported in Swift code
+                moduleName = "Shared"
+
+                xcodeIntegration {
+                    reconfigureDependencies()
+                }
+            }
+        }
+
+        sourceSets {
+            commonMain.dependencies {
+                // api() dependencies are fully exported to Swift
+                api(libs.feature.a)
+                // implementation() dependencies are not fully exported
+                implementation(libs.feature.b)
+            }
+        }
+    }
+    ```
+
+    For details, see [Interoperability with Swift using Swift export](https://kotlinlang.org/docs/native-swift-export.html).
+
+    </tab>
+    </tabs>
 
     > Exporting a dependency to the framework disables dead code elimination for that dependency.
     > This is general Kotlin/Native behavior.
@@ -211,6 +258,9 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
    To do that, in the run script, specify the path to the root of the Gradle project in your repository in the `cd` command,
    and the name of the umbrella module in the `./gradlew` command, for example:
 
+    <tabs group="ios-export">
+    <tab title="Objective-C export" group-key="objc">
+
     ```bash
     if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
         echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
@@ -220,7 +270,22 @@ and an iOS app repository, see the [ios-side-umbrella](https://github.com/zsmb13
     ./gradlew :umbrella:embedAndSignAppleFrameworkForXcode
     ```
 
-After that, Swift code can use the API of all exported libraries through `import umbrella`.
+    </tab>
+    <tab title="Swift export (Beta)" group-key="swift">
+
+    ```bash
+    if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+        echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
+        exit 0
+    fi
+    cd "$SRCROOT/.."
+    ./gradlew :umbrella:embedSwiftExportForXcode
+    ```
+
+    </tab>
+    </tabs>
+
+After that, Swift code can use the API of all exported libraries through `import Shared`.
 
 ## Manage changes and versions
 
