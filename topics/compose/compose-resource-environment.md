@@ -1,4 +1,8 @@
-# Manage local resource environment
+[//]: # (title: Manage local resource environment)
+<web-summary>Learn how to change the locale, theme, and screen density used for resources at runtime in a 
+Compose Multiplatform app.</web-summary>
+
+<show-structure depth="2"/>
 
 You may need to manage in-app settings that allow users to customize their experience, such as changing the language or theme.
 To dynamically update the application's resource environment, you can configure the following resource-related 
@@ -8,6 +12,9 @@ settings used by the application:
 * [Theme](#theme)
 * [Resolution density](#density)
 
+Each setting in the examples below is controlled by a variable, such as `customAppLocale`, and applied by an `AppEnvironment()` composable.
+If you need several settings, [combine them in a single `AppEnvironment()` composable](#combine-the-settings).
+
 ## Locale
 
 Each platform handles locale settings such as language and region differently. As a temporary workaround, until a common 
@@ -16,7 +23,7 @@ provide the corresponding declarations for each platform using the platform-spec
 
 * **Android**: [`context.resources.configuration.locale`](https://developer.android.com/reference/android/content/res/Configuration#setLocale(java.util.Locale))
 * **iOS**: [`NSLocale.preferredLanguages`](https://developer.apple.com/documentation/foundation/nslocale/preferredlanguages)
-* **desktop**: [`Locale.getDefault()`](https://developer.android.com/reference/java/util/Locale#getDefault(java.util.Locale.Category))
+* **desktop**: [`Locale.getDefault()`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Locale.html#getDefault())
 * **web**: [`window.navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages)
 
 1. In the common source set, define the expected `LocalAppLocale` object with the `expect` keyword.
@@ -42,25 +49,41 @@ provide the corresponding declarations for each platform using the platform-spec
     }
     ```
 
+   The platform implementations of `provides()` change the platform locale settings, which Compose can't observe.
+   The `key(customAppLocale)` call recreates the content when the locale changes, so the resources are loaded again
+   with the new locale.
+
+   > Expected and actual classes are in Beta, so the compiler reports a warning when using them.
+   > To suppress it, add the `-Xexpect-actual-classes` compiler option, as described in 
+   > [Expected and actual classes](multiplatform-expect-actual.md#expected-and-actual-classes).
+   >
+   {style="note"}
+
 2. In the Android source set, add the `actual` implementation that uses `context.resources.configuration.locale`:
 
     ```kotlin
+    import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.ProvidedValue
+    import androidx.compose.ui.platform.LocalConfiguration
+    import androidx.compose.ui.platform.LocalContext
+    import java.util.Locale
+
     actual object LocalAppLocale {
         private var default: Locale? = null
         actual val current: String
-            @Composable get() = Locale.getDefault().toString()
+            @Composable get() = LocalConfiguration.current.locales[0].toLanguageTag()
     
         @Composable
         actual infix fun provides(value: String?): ProvidedValue<*> {
             val configuration = LocalConfiguration.current
     
             if (default == null) {
-                default = Locale.getDefault()
+                default = configuration.locales[0]
             }
     
             val new = when(value) {
                 null -> default!!
-                else -> Locale(value)
+                else -> Locale.forLanguageTag(value.replace('_', '-'))
             }
             Locale.setDefault(new)
             configuration.setLocale(new)
@@ -71,6 +94,14 @@ provide the corresponding declarations for each platform using the platform-spec
         }
     }
     ```
+   
+   > `Resources.updateConfiguration()` is deprecated, so this code produces a deprecation warning.
+   > Its replacement, `Context.createConfigurationContext()`, returns a new `Context` instead of changing the current one.
+   > If you provide the new context through `LocalContext`, resources switch the language, but `LocalConfiguration` 
+   > keeps the system locale. As a result, `LocalAppLocale.current` returns the system locale instead of the selected one.
+   > For production apps, consider the Android [per-app language preferences](https://developer.android.com/guide/topics/resources/app-languages) API.
+   >
+   {style="note"}
 
 3. In the iOS source set, add the `actual` implementation that modifies `NSLocale.preferredLanguages`:
  
@@ -100,7 +131,7 @@ provide the corresponding declarations for each platform using the platform-spec
     ```kotlin
     actual object LocalAppLocale {
         private var default: Locale? = null
-        private val LocalAppLocale = staticCompositionLocalOf { Locale.getDefault().toString() }
+        private val LocalAppLocale = staticCompositionLocalOf { Locale.getDefault().toLanguageTag() }
         actual val current: String
             @Composable get() = LocalAppLocale.current
     
@@ -111,16 +142,16 @@ provide the corresponding declarations for each platform using the platform-spec
             }
             val new = when(value) {
                 null -> default!!
-                else -> Locale(value)
+                else -> Locale.forLanguageTag(value.replace('_', '-'))
             }
             Locale.setDefault(new)
-            return LocalAppLocale.provides(new.toString())
+            return LocalAppLocale.provides(new.toLanguageTag())
         }
     }
     ```
 
 5. For the web platform, bypass the read-only restriction of the `window.navigator.languages` property to introduce 
- a custom locale logic:
+   a custom locale logic. Add the following implementation to the `webMain`/`wasmJsMain` source set:
 
     ```kotlin
     actual object LocalAppLocale {
@@ -148,7 +179,16 @@ provide the corresponding declarations for each platform using the platform-spec
     }
     ```
 
-    Then, in your browser's `index.html`, put the following code before loading the application scripts:
+   Compose caches the browser locale and reads it again only when the `languagechange` event is dispatched.
+   Without the event, the custom locale is ignored.
+
+   > Starting with Compose Multiplatform 1.13.0, setting `window.__customLocale` without dispatching the `languagechange` event
+   > no longer changes the locale. If you used an earlier version of this workaround, update it as shown above.
+   >
+   {style="warning"}
+
+   In your browser's `index.html`, put the following code before loading the application scripts, so that the 
+   application reads the overridden `navigator.languages` property:
 
     ```html    
     <html lang="en">
@@ -169,13 +209,21 @@ provide the corresponding declarations for each platform using the platform-spec
         
                 Object.defineProperty(Navigator.prototype, "languages", newLanguagesImplementation)
             </script>
-            <script src="skiko.js"></script>
             ...
         </head>
-        <body></body>
-        <script src="webApp.js"></script>
+        <body>
+            <script src="webApp.js"></script>
+        </body>
     </html>
-    ```  
+    ```
+
+To change the locale, assign a language tag to the `customAppLocale` variable, for example, from a settings screen:
+
+```kotlin
+Button(onClick = { customAppLocale = "de" }) {
+    Text("Deutsch")
+}
+```
 
 ## Theme 
 
@@ -183,13 +231,12 @@ Compose Multiplatform defines the current theme via `isSystemInDarkTheme()`.
 Themes are handled differently across platforms:
 
 * Android defines the theme via the following bitwise operation: 
-    ```kotlin
-        Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK
-    ```
-* iOS, desktop, and web platforms use `LocalSystemTheme.current`.
+  `Resources.getConfiguration().uiMode and Configuration.UI_MODE_NIGHT_MASK`.
+* iOS, desktop, and web platforms don't provide a public API for overriding the theme. 
+  The workaround below relies on the internal `LocalSystemTheme` property.
 
 As a temporary workaround, until a common public API is implemented, 
-you can address this difference using the `expect-actual` mechanism to manage platform-specific theme customization:
+you can address this difference using the `expect`/`actual` mechanism to manage platform-specific theme customization:
 
 1. In the common code, define the expected `LocalAppTheme` object with the `expect` keyword:
  
@@ -215,6 +262,14 @@ you can address this difference using the `expect-actual` mechanism to manage pl
 2. In Android code, add the actual implementation that uses the `LocalConfiguration` API:
 
    ```kotlin
+    import android.content.res.Configuration
+    import android.content.res.Configuration.UI_MODE_NIGHT_MASK
+    import android.content.res.Configuration.UI_MODE_NIGHT_NO
+    import android.content.res.Configuration.UI_MODE_NIGHT_YES
+    import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.ProvidedValue
+    import androidx.compose.ui.platform.LocalConfiguration
+
     actual object LocalAppTheme {
         actual val current: Boolean
             @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
@@ -239,6 +294,10 @@ you can address this difference using the `expect-actual` mechanism to manage pl
 3. On iOS, desktop, and web platforms, you can change `LocalSystemTheme` directly:
 
     ```kotlin
+    import androidx.compose.ui.InternalComposeUiApi
+    import androidx.compose.ui.LocalSystemTheme
+    import androidx.compose.ui.SystemTheme
+
     @OptIn(InternalComposeUiApi::class)
     actual object LocalAppTheme {
         actual val current: Boolean
@@ -263,25 +322,50 @@ To change the application's resolution `Density`, you can use the common `LocalD
 
 ```kotlin
 var customAppDensity by mutableStateOf<Density?>(null)
-object LocalAppDensity {
-    val current: Density
-        @Composable get() = LocalDensity.current
-
-    @Composable
-    infix fun provides(value: Density?): ProvidedValue<*> {
-        val new = value ?: LocalDensity.current
-        return LocalDensity.provides(new)
-    }
-}
 
 @Composable
 fun AppEnvironment(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalAppDensity provides customAppDensity,
+        LocalDensity provides (customAppDensity ?: LocalDensity.current),
     ) {
-        key(customAppDensity) {
+        content()
+    }
+}
+```
+
+When `customAppDensity` is `null`, `AppEnvironment()` passes on the `LocalDensity` value that it receives.
+This is the system density, unless you override `LocalDensity` higher in the composition.
+
+Compose observes changes of `LocalDensity`, so unlike locale and theme, the content doesn't need to be wrapped in `key()`.
+
+## Combine the settings
+
+Each of the sections above defines its own `AppEnvironment()` composable. If you need several settings in one project,
+don't copy all of these definitions, as they conflict with each other.
+Instead, define a single `AppEnvironment()` composable that provides all the values:
+
+```kotlin
+@Composable
+fun AppEnvironment(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalAppLocale provides customAppLocale,
+        LocalAppTheme provides customAppThemeIsDark,
+        LocalDensity provides (customAppDensity ?: LocalDensity.current),
+    ) {
+        key(customAppLocale, customAppThemeIsDark) {
             content()
         }
+    }
+}
+```
+
+Wrap the content of your app in `AppEnvironment()` to apply the settings:
+
+```kotlin
+@Composable
+fun App() {
+    AppEnvironment {
+        // Your app's content
     }
 }
 ```
