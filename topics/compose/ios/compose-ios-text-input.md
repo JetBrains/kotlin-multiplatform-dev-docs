@@ -70,6 +70,11 @@ Native text input is compatible with the context menu API enabled with the `isNe
 
 ## Save and autofill passwords
 
+> Due to a known issue, this feature is only partially available in Compose Multiplatform 1.13.0.
+> Full support is coming in Compose Multiplatform 1.13.1.
+>
+{style="note"}
+
 Compose Multiplatform can show native prompts to save login credentials and autofill Compose text fields.
 Keep both the username and password fields on screen so iOS can recognize the form as a login form.
 

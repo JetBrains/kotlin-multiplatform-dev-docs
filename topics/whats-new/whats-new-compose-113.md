@@ -45,6 +45,11 @@ For setup instructions and examples, see:
 ### Saving and autofilling passwords
 <primary-label ref="Experimental"/>
 
+> Due to a known issue, this feature is only partially available in Compose Multiplatform 1.13.0.
+> Full support is coming in Compose Multiplatform 1.13.1.
+>
+{style="note"}
+
 On iOS, Compose Multiplatform can now show native prompts to save login credentials and autofill Compose text fields.
 Keep both the username and password fields on screen so iOS can recognize the form as a login form.
 
