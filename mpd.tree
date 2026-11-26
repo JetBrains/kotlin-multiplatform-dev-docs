@@ -60,6 +60,7 @@
 			<toc-element toc-title="Local resource environment" topic="compose-resource-environment.md"/>
 		</toc-element>
 		<toc-element topic="compose-lifecycle.md"/>
+		<toc-element toc-title="Background tasks" topic="compose-background-tasks.md"/>
 		<toc-element topic="compose-viewmodel.md"/>
 		<toc-element toc-title="Navigation">
 			<toc-element topic="compose-navigation.md"/>
