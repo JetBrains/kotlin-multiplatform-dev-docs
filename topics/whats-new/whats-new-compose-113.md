@@ -45,42 +45,27 @@ For setup instructions and examples, see:
 ### Saving and autofilling passwords
 <primary-label ref="Experimental"/>
 
+> Due to a known issue, this feature is only partially available in Compose Multiplatform 1.13.0.
+> Full support is coming in Compose Multiplatform 1.13.1.
+>
+{style="note"}
+
 On iOS, Compose Multiplatform can now show native prompts to save login credentials and autofill Compose text fields.
 Keep both the username and password fields on screen so iOS can recognize the form as a login form.
 
-To configure the fields, use `PlatformImeOptions` in your iOS source set.
-Set `textContentType(UITextContentTypeUsername)` for the username and `isSecureTextEntry(true)` for the password.
-For example, inside a composable annotated with `@OptIn(ExperimentalComposeUiApi::class)`:
+For example, the following code creates a simple login form that enables iOS password saving and autofill:
 
 ```kotlin
-var username by remember { mutableStateOf("") }
-var password by remember { mutableStateOf("") }
+val email = rememberTextFieldState()
+val password = rememberTextFieldState()
 
 Column {
-    TextField(
-        value = username,
-        onValueChange = { username = it },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email,
-            platformImeOptions = PlatformImeOptions {
-                textContentType(UITextContentTypeUsername)
-            }
-        )
-    )
-
-    TextField(
-        value = password,
-        onValueChange = { password = it },
-        visualTransformation = PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password,
-            platformImeOptions = PlatformImeOptions {
-                isSecureTextEntry(true)
-            }
-        )
-    )
+    TextField(state = email)
+    SecureTextField(state = password)
 }
 ```
+
+For details, see [iOS-specific text input options](compose-ios-text-input.md#save-and-autofill-login-credentials).
 
 ## Web
 
