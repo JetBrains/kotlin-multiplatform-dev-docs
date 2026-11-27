@@ -65,7 +65,7 @@ Column {
 }
 ```
 
-For details, see [iOS-specific text input options](compose-ios-text-input.md#save-and-autofill-passwords).
+For details, see [iOS-specific text input options](compose-ios-text-input.md#save-and-autofill-login-credentials).
 
 ## Web
 

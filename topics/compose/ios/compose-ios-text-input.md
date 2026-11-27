@@ -7,27 +7,27 @@
 </web-summary>
 
 Compose Multiplatform supports text input on all platforms through the shared `TextField` and `BasicTextField` APIs.
-This page describes additional options available specifically for iOS. In your iOS source set, use `PlatformImeOptions`
-alongside the common `KeyboardOptions` to configure the system keyboard and editing behavior.
+In shared (`commonMain`) code, use `KeyboardOptions` to configure multiplatform input behavior. In iOS-specific (`iosMain`)
+code, add `PlatformImeOptions` to `KeyboardOptions` to configure native iOS traits or override common settings.
+If both APIs configure the same trait, the value from `PlatformImeOptions` takes precedence on iOS.
 
 Using `PlatformImeOptions` requires opting in with `@OptIn(ExperimentalComposeUiApi::class)`.
 
 ## Configure keyboard and input traits
 
-`PlatformImeOptions` provides options for the keyboard type and appearance, return key behavior, autocapitalization,
-autocorrection, and other native text input traits. Values specified in `PlatformImeOptions` override the corresponding
-settings from the enclosing `ImeOptions`.
+`PlatformImeOptions` lets you configure native iOS text input traits, including keyboard type, autocapitalization,
+autocorrection, and Return key behavior.
 
-The following text field displays a keyboard layout optimized for entering email addresses:
+For example, the following option keeps the keyboard's Return key disabled until the user enters text:
 
 ```kotlin
-val email = rememberTextFieldState()
+val text = rememberTextFieldState()
 
 BasicTextField(
-    state = email,
+    state = text,
     keyboardOptions = KeyboardOptions(
         platformImeOptions = PlatformImeOptions {
-            keyboardType(UIKeyboardTypeEmailAddress)
+            enablesReturnKeyAutomatically(true)
         }
     )
 )
@@ -68,7 +68,7 @@ fun NativeTextInputField() {
 
 Native text input is compatible with the context menu API enabled with the `isNewContextMenuEnabled` flag.
 
-## Save and autofill passwords
+## Save and autofill login credentials
 
 > Due to a known issue, this feature is only partially available in Compose Multiplatform 1.13.0.
 > Full support is coming in Compose Multiplatform 1.13.1.
